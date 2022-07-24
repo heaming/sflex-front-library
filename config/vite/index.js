@@ -19,9 +19,10 @@ const normalizeConfig = (config = {}) => ({
   configDir: config.configDir || context,
   envDir: config.envDir || context,
   quasarOptions: config.quasarOptions || {},
-  openVisualizer: config.openVisualizer === true,
   define: config.define || {},
   alias: config.alias || {},
+  openVisualizer: config.openVisualizer === true,
+  sourcemap: config.sourcemap === true,
 });
 
 exports.defineConfig = (config) => {
@@ -112,7 +113,11 @@ exports.defineConfig = (config) => {
       },
 
       build: {
-        sourcemap: true,
+        sourcemap: config.sourcemap,
+      },
+
+      css: {
+        devSourcemap: config.sourcemap,
       },
     };
   });
