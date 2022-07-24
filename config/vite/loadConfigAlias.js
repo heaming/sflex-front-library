@@ -10,12 +10,8 @@ const context = process.cwd();
 function resolveAlias(configDir) {
   const absolutePath = resolve(context, configDir || '');
 
-  try {
-    return getConfigAlias(absolutePath)
-      .reduce((a, [k, v]) => { a[k] = v; return a; }, {});
-  } catch (e) {
-    return {};
-  }
+  return getConfigAlias(absolutePath)
+    .reduce((a, [k, v]) => { a[k] = v; return a; }, {});
 }
 
 module.exports = ({ configDir }) => {

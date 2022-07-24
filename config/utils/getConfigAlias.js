@@ -16,7 +16,7 @@ function getConfigFilePath(configDir) {
     }
   }
 
-  throw new Error(`The file '${configFiles.join(' or ')}' does not exist.`);
+  throw new Error(`The file "${configFiles.join('" or "')}" does not exist.`);
 }
 
 function getConfigCompilerOptions(configDir) {
