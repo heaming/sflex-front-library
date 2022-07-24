@@ -68,7 +68,6 @@
     "realgrid": "^2.5.1",
     "rollup-plugin-visualizer": "^5.6.0",
     "sass": "1.32.0",
-    "sort-package-json": "^1.57.0",
     "stylelint": "^14.8.2",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-config-standard-scss": "^3.0.0",
@@ -90,6 +89,7 @@
   "devDependencies": {
     "husky": "^8.0.0",
     "lint-staged": "^12.4.1",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "sort-package-json": "^1.57.0"
   }
 }
