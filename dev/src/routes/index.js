@@ -20,24 +20,24 @@ function createRoutesByGlobImport(modules, match) {
 export default [
   {
     path: '/',
-    component: () => import('~/pages/IndexPage.vue'),
+    component: () => import('@/pages/IndexPage.vue'),
   },
 
   // publish
   ...createRoutesByGlobImport(
-    import.meta.glob('~/pages/publish/**/*.vue'),
+    import.meta.glob('@/pages/publish/**/*.vue'),
     (key) => key.match(/(\/publish)((\/\w+)*)\/(\w+)\.vue$/),
   ),
 
   // templates
   ...createRoutesByGlobImport(
-    import.meta.glob('~/pages/templates/**/*.vue'),
+    import.meta.glob('@/pages/templates/**/*.vue'),
     (key) => key.match(/(\/templates)((\/\w+)*)\/(\w+)\.vue$/),
   ),
 
   // tests
   ...createRoutesByGlobImport(
-    import.meta.glob('~/pages/tests/**/*.vue'),
+    import.meta.glob('@/pages/tests/**/*.vue'),
     (key) => key.match(/(\/tests)((\/\w+)*)\/(\w+)\.vue$/),
   ),
 
@@ -46,6 +46,6 @@ export default [
   {
     name: 'ErrorNotFound',
     path: '/:catchAll(.*)*',
-    component: () => import('~/pages/ErrorNotFound.vue'),
+    component: () => import('@/pages/ErrorNotFound.vue'),
   },
 ];

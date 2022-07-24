@@ -33,7 +33,7 @@
 
 <script>
 import { gridUtil, alert } from '~lib';
-import { createTreeData } from '~/utils/data';
+import { createTreeData } from '@/utils/data';
 
 export default {
   setup() {

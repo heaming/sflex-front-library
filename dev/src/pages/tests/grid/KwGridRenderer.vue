@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { createGridData } from '~/utils/data';
+import { createGridData } from '@/utils/data';
 
 export default {
   setup() {

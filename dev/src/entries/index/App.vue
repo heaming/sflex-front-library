@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import AppGnb from '~/components/app/AppGnb.vue';
-import AppLnb from '~/components/app/AppLnb.vue';
+import AppGnb from '@/components/app/AppGnb.vue';
+import AppLnb from '@/components/app/AppLnb.vue';
 
 </script>

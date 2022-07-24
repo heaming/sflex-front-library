@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { createGridData } from '~/utils/data';
 import { gridUtil } from '~lib';
+import { createGridData } from '@/utils/data';
 
 export default {
   setup() {
