@@ -9,9 +9,6 @@
       "~/*": [
         "dev/src/*"
       ],
-      "~lib/*": [
-        "src/*"
-      ],
       "~lib": [
         "src/index"
       ]
