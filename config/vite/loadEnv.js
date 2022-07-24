@@ -1,9 +1,11 @@
 const { loadEnv } = require('vite');
 const { resolve } = require('path');
 const isInternalContext = require('../utils/isInternalContext');
+const getPackageJson = require('../utils/getPackageJson');
 
 const context = process.cwd();
 const isOuterContext = !isInternalContext();
+const { name } = getPackageJson();
 
 function configPlugin(mode, command, envDir, shouldTransform) {
   const absolutePath = resolve(context, envDir || '');
@@ -17,7 +19,7 @@ function configPlugin(mode, command, envDir, shouldTransform) {
       if (shouldTransform) {
         return {
           optimizeDeps: {
-            exclude: ['kw-lib/dist/env'],
+            exclude: [`${name}/dist/env`],
           },
         };
       }
@@ -39,15 +41,15 @@ function configPlugin(mode, command, envDir, shouldTransform) {
 function transformPlugin(pages, pagesDir) {
   const isMPA = Object.keys(pages).length > 0;
 
-  const entryRegex = isMPA ? new RegExp(`${pagesDir}/\\w+/main\\.js$`) : /src\/main\.js$/;
-  const envRegex = /node_modules\/kw-lib\/dist\/env\.js/;
+  const entryRegex = isMPA ? new RegExp(`${pagesDir}/\\w+/main\\.js$`) : /src\/main.js$/;
+  const envRegex = new RegExp(`node_modules/${name}/dist/env\\.js`);
 
   return {
     name: 'load-env:transform',
     transform(src, id) {
       if (entryRegex.test(id)) {
         return {
-          code: `import "kw-lib/dist/env"\n${src}`,
+          code: `import "${name}/dist/env"\n${src}`,
           map: null,
         };
       }

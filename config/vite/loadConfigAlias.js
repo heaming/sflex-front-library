@@ -9,7 +9,6 @@ const context = process.cwd();
 
 function resolveAlias(configDir) {
   const absolutePath = resolve(context, configDir || '');
-
   return getConfigAlias(absolutePath)
     .reduce((a, [k, v]) => { a[k] = v; return a; }, {});
 }

@@ -112,12 +112,12 @@ exports.defineConfig = (config) => {
         },
       },
 
-      build: {
-        sourcemap: config.sourcemap,
-      },
-
       css: {
         devSourcemap: config.sourcemap,
+      },
+
+      build: {
+        sourcemap: config.sourcemap,
       },
     };
   });
