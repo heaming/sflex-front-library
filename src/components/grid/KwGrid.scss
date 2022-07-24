@@ -1,0 +1,107 @@
+@import "realgrid/dist/realgrid-style.css";
+@import "bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css";
+
+/*
+  Bootstrap datepicker
+  */
+.datepicker table tr td.day:not(.today):not(.active):not(.disabled):not(.old):not(.new) {
+  &.sunday { color: #e74c3c; }
+  &.saturday { color: #2f86c1; }
+}
+
+/*
+  RealGrid2
+  https://docs.realgrid.com/guides/grid-style/realgrid-2-custom-styles-0-intro
+  */
+.rg-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rg-header-focus {
+  background-color: inherit;
+}
+
+.rg-header-select {
+  background-color: inherit;
+}
+
+.rg-rowbarcontainer .rg-table tr td {
+  &.rg-rowindicator-focus {
+    background-color: #f6f6f8;
+  }
+
+  &.rg-rowindicator-select {
+    background-color: #f6f6f8;
+  }
+}
+
+.rg-data-row {
+  &.rg-focused-row {
+    background: #e8eef5;
+  }
+}
+
+.rg-selection {
+  background: rgb(62 100 157 / 20%) !important;
+  border: 1px solid rgb(62 100 157 / 67%);
+}
+
+.rg-focus {
+  border: 2px solid #3e649d;
+}
+
+.rg-editor-container {
+  border: 2px solid #3e649d;
+}
+
+.rg-empty-grid {
+  padding: 0;
+}
+
+/*
+  Renderer
+  */
+.rg-align-left .rg-renderer {
+  text-align: left;
+}
+
+.rg-align-center .rg-renderer {
+  text-align: center;
+}
+
+.rg-align-right .rg-renderer {
+  text-align: right;
+}
+
+// .rg-editable {
+//   .rg-renderer {
+//     max-width: 100%;
+//     border: 1px solid black;
+//     height: 26px;
+//   }
+// }
+
+/*
+  Button
+  */
+.rg-button-link {
+  .rg-button-renderer-button {
+    width: auto;
+    border: none;
+    background: inherit;
+    color: -webkit-link;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: -webkit-activelink;
+    }
+  }
+
+  &.rg-button-disabled .rg-button-renderer-button {
+    color: inherit;
+    text-decoration: none;
+  }
+}

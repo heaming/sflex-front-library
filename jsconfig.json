@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "paths": {
+      "~/*": [
+        "dev/src/*"
+      ],
+      "~lib/*": [
+        "src/*"
+      ],
+      "~lib": [
+        "src/index"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "./"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/public"
+  ]
+}

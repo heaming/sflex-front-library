@@ -1,0 +1,260 @@
+import { defaultsDeep, map } from 'lodash-es';
+import { ButtonVisibility, ValueType } from 'realgrid';
+import { wrapMethod, execOriginal } from './overrideWrap';
+import { createCellIndexByDataColumn, dateTextFormat, isCellEditable } from '../../../utils/private/gridShared';
+import { normalizeRules } from '../../../utils/private/validate';
+
+const setColumns = 'setColumns';
+const setCellStyleCallback = 'setCellStyleCallback';
+const destroy = 'destroy';
+
+function setColumnCustomDefaults(column) {
+  const { options } = column;
+
+  if (Array.isArray(options)) {
+    defaultsDeep(column, {
+      lookupDisplay: true,
+      values: map(options, column.optionsValue || 'codeId'),
+      labels: map(options, column.optionsLabel || 'codeName'),
+    });
+  }
+}
+
+function setColumnHeaderDefaults(column) {
+  if (column.header) {
+    column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
+    column.header.tooltip = column.header.tooltip || column.header.text;
+  }
+}
+
+function setColumnStyleNameDefaults(column) {
+  defaultsDeep(column, {
+    styleName: '',
+  });
+
+  const alignClass = ['rg-align-left', 'rg-align-center', 'rg-align-right'];
+  const colClass = column.styleName.split(/\s+/).filter((e) => !!e);
+
+  if (!alignClass.some((e) => colClass.includes(e))) {
+    if (column.renderer?.type) {
+      switch (column.renderer.type) {
+        case 'button': {
+          if (column.styleName.includes('rg-button-link')) {
+            colClass.push(alignClass[0]);
+          }
+          break;
+        }
+      }
+    } else {
+      switch (column.editor?.type) {
+        case undefined:
+        case 'text':
+        case 'line':
+        case 'multiline':
+        case 'list':
+        case 'dropdown':
+        case 'btdate':
+          colClass.push(alignClass[0]);
+          break;
+        case 'number':
+          colClass.push(alignClass[2]);
+          break;
+        // default:
+        //   colClass.push(alignClass[1]);
+        //   break;
+      }
+    }
+  }
+
+  column.styleName = colClass.join(' ');
+}
+
+function setColumnRendererDefaults(column, { dataType }) {
+  defaultsDeep(column, {
+    renderer: { showTooltip: true },
+  });
+
+  switch (column.renderer?.type) {
+    case 'check':
+      defaultsDeep(column, {
+        editable: false,
+        renderer: {
+          ...(dataType === ValueType.TEXT ? {
+            trueValues: 'Y',
+            falseValues: 'N',
+          } : {}),
+          useImages: true,
+          setCheckedCallback(g, itemIndex, dataColumn, oldValue, newValue) {
+            const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
+            if (g.onCellEditable(g, index) === false) {
+              return oldValue;
+            }
+            if (dataColumn.valueType === ValueType.TEXT) {
+              const { trueValues, falseValues } = dataColumn.renderer;
+              return (newValue ? trueValues : falseValues)?.split(',')[0] || newValue;
+            }
+            return newValue;
+          },
+        },
+      });
+      break;
+    case 'button': {
+      const { styleName } = column;
+
+      defaultsDeep(column, {
+        editable: false,
+        sortable: styleName.includes('rg-button-link'),
+        renderer: {
+          hideWhenEmpty: !styleName.includes('rg-button-icon'),
+        },
+      });
+      break;
+    }
+    case 'image':
+    case 'icon':
+    case 'bar':
+      defaultsDeep(column, {
+        editable: false,
+        sortable: false,
+      });
+      break;
+    default:
+      defaultsDeep(column, {
+        ...(dataType === ValueType.TEXT && column.datetimeFormat ? {
+          textFormat: dateTextFormat(column.datetimeFormat),
+        } : {}),
+      });
+      break;
+  }
+}
+
+function setColumnEditorDefaults(column, { dataType }) {
+  const { editor } = column;
+
+  switch (editor?.type) {
+    case 'list':
+    case 'dropdown':
+      defaultsDeep(column, {
+        lookupDisplay: true,
+        editButtonVisibility: ButtonVisibility.ALWAYS,
+        editor: {
+          commitOnSelect: true,
+          domainOnly: true,
+          dropDownWhenClick: false,
+        },
+      });
+      break;
+    case 'btdate':
+      defaultsDeep(column, {
+        editButtonVisibility: ButtonVisibility.ALWAYS,
+        datetimeFormat: 'yyyy-MM-dd',
+        editor: {
+          commitOnSelect: true,
+          dropDownWhenClick: false,
+          datetimeFormat: 'yyyyMMdd',
+          btOptions: {
+            startView: 0,
+            minViewMode: 0,
+            maxViewMode: 2,
+            todayHighlight: true,
+            beforeShowDay(value) {
+              switch (value.getDay()) {
+                case 0: return 'sunday';
+                case 6: return 'saturday';
+              }
+            },
+          },
+        },
+      });
+
+      defaultsDeep(column, {
+        ...(dataType === ValueType.TEXT ? {
+          textFormat: dateTextFormat(column.datetimeFormat),
+        } : {}),
+        editor: {
+          mask: {
+            editMask: column.editor.datetimeFormat.replace(/[ymdhms]/gi, '9'),
+            includedFormat: true,
+            showInvalidFormatMessage: false,
+          },
+        },
+      });
+
+      break;
+  }
+}
+
+function setColumnCellButtonDefaults(column) {
+  if (column.button) {
+    defaultsDeep(column, {
+      buttonVisibility: ButtonVisibility.ALWAYS,
+    });
+  }
+}
+
+/*
+  기존에 설정된 컬럼들을 모두 제거하고 새로운 컬럼들로 그리드를 재구성한다.
+  */
+export function overrideSetColumns(view) {
+  wrapMethod(view, setColumns, (columns) => {
+    const data = view.getDataSource();
+
+    columns.forEach((e) => {
+      const field = data.fieldByName(e.fieldName);
+      setColumnCustomDefaults(e, field);
+      setColumnHeaderDefaults(e, field);
+      setColumnStyleNameDefaults(e, field);
+      setColumnRendererDefaults(e, field);
+      setColumnEditorDefaults(e, field);
+      setColumnCellButtonDefaults(e, field);
+    });
+
+    view.__metas__ = map(columns, (e) => ({
+      fieldName: e.fieldName,
+      column: e.column || e.fieldName,
+      rules: normalizeRules(e.rules),
+      customMessages: e.customMessages,
+      preventCellItemFocus: e.preventCellItemFocus === true,
+    }));
+
+    execOriginal(view, setColumns, columns);
+  });
+}
+
+/*
+  셀 스타일을 변경하는 콜백
+  */
+export function overrideSetCellStyleCallback(view) {
+  wrapMethod(view, setCellStyleCallback, (styleCallback) => {
+    execOriginal(view, setCellStyleCallback, (g, model) => {
+      const { column } = model.index;
+      const index = createCellIndexByDataColumn(g, model.index.itemIndex, model.dataColumn);
+
+      // TODO: something..
+      if (isCellEditable(view, model.index.column, index)) {
+        return `${column.styleName} rg-editable`;
+      }
+
+      if (typeof styleCallback === 'function') {
+        return styleCallback(g, model);
+      }
+    });
+  });
+
+  view.setCellStyleCallback(null);
+}
+
+/*
+  그리드를 해제한다.
+  */
+export function overrideDestory(view) {
+  wrapMethod(view, destroy, () => {
+    execOriginal(view, destroy);
+
+    // private attributes
+    delete view.__originalFns__;
+    delete view.__registeredEvents__;
+    delete view.__metas__;
+    delete view.__mouseEventTarget__;
+  });
+}

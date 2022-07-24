@@ -1,0 +1,123 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+.kw-select {
+  .q-select__dropdown-icon {
+    padding-left: 16px;
+    margin-right: 12px;
+    width: 0;
+    color: transparent;
+    background: url(~assets/images/ic_arrodw-down_16.svg) no-repeat center;
+    background-size: 16px auto;
+  }
+
+  // 셀렉트 포커스
+  &.q-field--focused {
+    .q-field__control {
+      border-color: $black-h1;
+    }
+  }
+
+  // 셀렉트 에러
+  &.q-field--error {
+    .q-field__control {
+      border-color: $error;
+    }
+
+    &[aria-readonly="true"],
+    &[aria-disabled="true"] {
+      .q-field__control {
+        border-color: $line-stroke;
+      }
+    }
+  }
+
+  &.q-field--disabled {
+    .q-field__control {
+      background-color: $line-bg;
+      color: $black-h3;
+
+      span {
+        color: $black-h3;
+      }
+
+      .q-field__input {
+        padding-left: 0;
+        width: 100%;
+        height: 100%;
+
+        &::placeholder {
+          font-size: 0;
+        }
+      }
+
+      .q-select__dropdown-icon {
+        background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+      }
+    }
+  }
+
+  &.q-field--readonly {
+    .q-field__native span {
+      color: $black-h3;
+    }
+
+    & .q-field__control {
+      &::before {
+        background-color: $line-bg;
+        border-color: $line-stroke;
+      }
+
+      .q-select__dropdown-icon {
+        background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+      }
+    }
+  }
+
+  .q-field__control {
+    border: 1px solid $line-stroke;
+    height: 40px;
+
+    &:hover:not(:disabled,:read-only) {
+      border-color: $black-h1;
+    }
+  }
+
+  .q-field__native {
+    padding: 0;
+    padding-left: 12px;
+    color: $black-h1;
+
+    & > span {
+      font-size: 16px;
+      color: $black-h1;
+      font-weight: 500;
+    }
+  }
+
+  .q-field__input {
+    padding-left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // placeholder css
+  &.q-field--float {
+    .q-field__input {
+      padding-left: 0;
+      width: 100%;
+      height: 100%;
+
+      &::placeholder {
+        font-size: 0;
+      }
+    }
+  }
+
+  .q-field__marginal {
+    height: auto;
+  }
+}

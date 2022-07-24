@@ -1,0 +1,31 @@
+{
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": [
+    "source.fixAll.eslint",
+    "source.fixAll.stylelint"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "vue"
+  ],
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "vue"
+  ],
+  "files.associations": {
+    ".env.*": "env"
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

@@ -1,0 +1,117 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+.q-field {
+  &.kw-date-picker {
+    .material-icons {
+      padding-left: 16px;
+      margin-right: 12px;
+      width: 0;
+      color: transparent;
+      background: url(~assets/images/icon_calendar.svg) no-repeat center;
+      background-size: 16px auto;
+    }
+  }
+}
+
+.kw-date-picker {
+  &.q-field--focused {
+    .q-field__control {
+      border-color: $black-h1;
+    }
+  }
+
+  &.q-field--error {
+    .q-field__control {
+      border-color: $error;
+
+      &:hover {
+        border-color: $error !important;
+      }
+    }
+
+    &[aria-readonly="true"],
+    &[aria-disabled="true"] {
+      .q-field__control {
+        border-color: $line-stroke;
+      }
+    }
+  }
+
+  &.q-field--disabled {
+    .q-field__control {
+      background-color: $line-bg;
+    }
+
+    .q-field__native {
+      color: $black-h3;
+
+      &::placeholder {
+        font-size: 0;
+      }
+    }
+  }
+
+  .q-field__control {
+    border: 1px solid $line-stroke;
+    height: 40px;
+
+    &:hover:not(:disabled) {
+      border-color: $black-h1;
+    }
+  }
+
+  .q-field__native {
+    padding: 0 12px;
+    font-size: 16px;
+    color: $black-h1;
+    font-weight: 500;
+  }
+
+  .q-field__append {
+    padding-left: 0;
+  }
+
+  .q-field__marginal {
+    height: auto;
+  }
+}
+
+.kw-multi-date-picker {
+  &.q-field--error {
+    .q-field__control {
+      border-color: $error;
+
+      &:hover {
+        border-color: $error !important;
+      }
+    }
+
+    &[aria-readonly="true"],
+    &[aria-disabled="true"] {
+      .q-field__control {
+        border-color: $line-stroke;
+      }
+    }
+  }
+
+  .q-field__control-container {
+    font-size: 16px;
+    color: $black-h1;
+
+    // line-height: 18px;
+    font-weight: 500;
+    align-items: center;
+  }
+
+  .kw-date-picker:nth-of-type(1) {
+    padding-right: 4px;
+  }
+
+  .kw-date-picker:nth-of-type(2) {
+    padding-left: 4px;
+  }
+}

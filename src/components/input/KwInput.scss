@@ -1,0 +1,64 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+
+.kw-input {
+  // 인풋 포커스
+  &.q-field--focused {
+    .q-field__native {
+      border-color: $black-h1;
+    }
+  }
+
+  // 인풋 에러
+  &.q-field--error {
+    .q-field__native {
+      border-color: $error;
+
+      &:hover {
+        border-color: $error !important;
+      }
+    }
+
+    &[aria-readonly="true"],
+    &[aria-disabled="true"] {
+      .q-field__native {
+        border-color: $line-stroke;
+      }
+    }
+  }
+
+  // 인풋 높이
+  .q-field__control {
+    height: 40px;
+  }
+
+  .q-field__native {
+    padding: 10px 12px 9px;
+    border: 1px solid $line-stroke;
+    font-size: 16px;
+    color: $black-h1;
+    font-weight: 500;
+
+    &:hover:not(:disabled,:read-only) {
+      border-color: $black-h1;
+    }
+
+    &:disabled {
+      background-color: $line-bg;
+      color: $black-h3;
+    }
+
+    &:disabled::placeholder {
+      font-size: 0;
+    }
+
+    &:read-only {
+      background-color: $line-bg;
+      color: $black-h3;
+    }
+  }
+}

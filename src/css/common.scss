@@ -1,0 +1,37 @@
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+@use "./variables";
+@use "./quasar-based-palette" with (
+// Add override color variables. for example,
+  $primary: $primary
+);
+@forward "./functions" with ($-palette: quasar-based-palette.$palette);
+@forward "./mixins" with ($-palette: quasar-based-palette.$palette);
+
+$palette: quasar-based-palette.$palette;
+$colors: quasar-based-palette.$colors;
+$state-palette: quasar-based-palette.$state-palette;
+
+// fonts
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 700;
+  src: url("~assets/fonts/SpoqaHanSansNeo-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 500;
+  src: url("~assets/fonts/SpoqaHanSansNeo-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 400;
+  src: url("~assets/fonts/SpoqaHanSansNeo-Regular.woff2") format("woff2");
+}
+
+body {
+  font-size: 16px;
+  color: #222;
+  font-family: "Spoqa Han Sans Neo";
+}

@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "EditorConfig.EditorConfig",
+    "IronGeek.vscode-env",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "oderwat.indent-rainbow",
+    "xabikos.JavaScriptSnippets",
+    "ms-vscode.vscode-typescript-next",
+    "christian-kohler.npm-intellisense",
+    "esbenp.prettier-vscode",
+    "2gua.rainbow-brackets",
+    "jasonnutter.search-node-modules",
+    "stylelint.vscode-stylelint",
+    "wayou.vscode-todo-highlight",
+    "vscode-icons-team.vscode-icons",
+    "Vue.volar"
+  ]
+}

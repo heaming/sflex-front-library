@@ -1,0 +1,27 @@
+$-palette: () !default;
+
+@function get-color($hue, $lightness: 0) {
+  $-colors: map-get($-palette, $hue);
+
+  @if type-of($-colors) == "color" {
+    @return $-colors;
+  } @else if type-of($-colors) == "list" {
+    @return nth($-colors, $lightness + 1);
+  } @else {
+    @error "There is such color in the pallete.";
+  }
+}
+
+@function get-random-color() {
+  $-hues: map-keys($-palette);
+  $-random-hue: nth($-hues, random(length($-hues)));
+  $-colors: map-get($-palette, $-random-hue);
+
+  @if type-of($-colors) == "color" {
+    @return $-colors;
+  } @else if type-of($-colors) == "list" {
+    @return nth($-colors, random(length($-colors)));
+  } @else {
+    @error "There is such color in the pallete.";
+  }
+}

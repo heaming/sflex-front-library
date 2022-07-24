@@ -1,0 +1,21 @@
+@use "sass:color" as *;
+
+$-chart-colors: (
+  color-1: $blue-5,
+  color-2: $red-5,
+  color-3: $amber-5,
+  color-4: $green-5,
+  color-5: $purple-4,
+  color-6: $brown-5,
+);
+
+@mixin set-css-var-from($color-map) {
+  :root {
+    @each $key, $color in $color-map {
+      --q-chart-#{$key}: #{$color};
+      --q-chart-#{$key}-alpha50: #{adjust($color, $alpha: -0.5)};
+    }
+  }
+}
+
+@include set-css-var-from($-chart-colors);

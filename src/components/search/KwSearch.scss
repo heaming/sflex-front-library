@@ -1,0 +1,88 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+.kw-search {
+  padding: 20px 40px;
+  border: 1px solid $line-line;
+  box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
+
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 14px;
+  }
+
+  & > .kw-form-row {
+    padding: 6px 0;
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+
+    &:first-child {
+      margin-top: -6px;
+    }
+  }
+
+  // 더보기 버튼 영역
+  &--bottom {
+    padding-top: 10px;
+  }
+
+  &--view-more {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  // input style override
+  .kw-input {
+    .q-field__control {
+      height: 32px;
+    }
+
+    .q-field__native {
+      padding: 7px 12px;
+      font-size: 14px;
+    }
+  }
+
+  // select style override
+  .kw-select {
+    .q-field__control {
+      height: 32px;
+    }
+
+    .q-field__native {
+      & > span {
+        font-size: 14px;
+      }
+    }
+  }
+
+  // date-picker style override
+  .kw-date-picker {
+    .q-field__control {
+      height: 32px;
+    }
+
+    .q-field__native {
+      font-size: 14px;
+    }
+  }
+
+  // multi-date-picker style override
+  .kw-multi-date-picker {
+    .q-field__control-container {
+      font-size: 16px;
+    }
+  }
+
+  // validation message 임시 스타일
+  .q-field__bottom {
+    .q-field__messages {
+      display: none !important;
+    }
+  }
+}

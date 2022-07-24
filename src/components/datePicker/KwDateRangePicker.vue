@@ -1,0 +1,121 @@
+<template>
+  <q-field
+    v-bind="styleClassAttrs"
+    :label="$q.platform.is.desktop ? null : label"
+    :error="error"
+    :error-message="errorMessage"
+    no-error-icon
+    class="kw-multi-date-picker"
+  >
+    <date-picker
+      ref="inputRef"
+      :model-value="value[0]"
+      v-bind="inheritedAttrs"
+      class="col"
+      :readonly="readonly"
+      :disable="disable"
+      :unmasked-value="unmaskedValue"
+      :navigation-min-year-month="navigationMinYearMonth"
+      :navigation-max-year-month="navigationMaxYearMonth"
+      hide-bottom-space
+      @update:model-value="onChangeDate($event, 0)"
+    /> ~
+    <date-picker
+      :model-value="value[1]"
+      v-bind="inheritedAttrs"
+      class="col"
+      :readonly="readonly"
+      :disable="disable"
+      :unmasked-value="unmaskedValue"
+      :navigation-min-year-month="navigationMinYearMonth"
+      :navigation-max-year-month="navigationMaxYearMonth"
+      hide-bottom-space
+      @update:model-value="onChangeDate($event, 1)"
+    />
+  </q-field>
+</template>
+
+<script>
+import DatePicker from './DatePicker.vue';
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useField, { useFieldProps } from '../../composables/private/useField';
+
+export default {
+  name: 'KwDateRangePicker',
+  components: {
+    DatePicker,
+  },
+  inheritAttrs: false,
+
+  props: {
+    ...useFieldProps,
+
+    from: {
+      type: String,
+      default: undefined,
+    },
+    to: {
+      type: String,
+      default: undefined,
+    },
+    unmaskedValue: {
+      type: Boolean,
+      default: true,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    disable: {
+      type: Boolean,
+      default: false,
+    },
+    navigationMinYearMonth: {
+      type: String,
+      default: '1000/01',
+    },
+    navigationMaxYearMonth: {
+      type: String,
+      default: '9999/12',
+    },
+  },
+
+  emits: [
+    'update:from',
+    'update:to',
+  ],
+
+  setup(props, { emit }) {
+    const fieldCtx = useField({
+      bindValueRef: computed(() => [
+        props.from, props.to,
+      ]),
+      onUpdateValue(val) {
+        emit('update:from', val[0]);
+        emit('update:to', val[1]);
+      },
+    });
+    const { value } = fieldCtx;
+
+    const checkPair = (val, index, otherVal) => !val || !otherVal
+      || (index === 0 ? val <= otherVal : val >= otherVal);
+
+    function onChangeDate(val, index) {
+      const otherIndex = index === 0 ? 1 : 0;
+      const otherVal = value.value[otherIndex];
+
+      value.value[index] = val;
+
+      if (!checkPair(val, index, otherVal)) {
+        value.value[otherIndex] = val;
+      }
+    }
+
+    return {
+      ...useInheritAttrs(),
+      ...fieldCtx,
+      onChangeDate,
+    };
+  },
+};
+</script>

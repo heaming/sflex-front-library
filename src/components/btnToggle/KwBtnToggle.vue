@@ -1,0 +1,50 @@
+<template>
+  <q-field
+    ref="inputRef"
+    class="kw-btn-toggle"
+    v-bind="styleClassAttrs"
+    :label="$q.platform.is.desktop ? null : label"
+    :error="error"
+    :error-message="errorMessage"
+    no-error-icon
+  >
+    <template #control>
+      <q-btn-toggle
+        v-model="value"
+        v-bind="inheritedAttrs"
+        class="kw-btn"
+        :options="normalizedOptions"
+      />
+    </template>
+  </q-field>
+</template>
+
+<script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useField, { useFieldProps } from '../../composables/private/useField';
+import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
+
+export default {
+  name: 'KwBtnToggle',
+
+  props: {
+    ...useFieldProps,
+    ...useOptionsProps,
+
+    modelValue: {
+      type: [String, Number, Boolean],
+      default: undefined,
+    },
+  },
+
+  emits: ['update:modelValue'],
+
+  setup() {
+    return {
+      ...useInheritAttrs(),
+      ...useField(),
+      ...useOptions(),
+    };
+  },
+};
+</script>

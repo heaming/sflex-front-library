@@ -1,0 +1,134 @@
+@use "./functions" as *;
+
+$-palette: () !default;
+
+@mixin color-base-generator($selector) {
+  $-selector: null;
+  $-available-prefix: (".", "#", ">", "~", "+");
+  $-hue-interpolation: "<color>";
+  $-lightness-interpolation: "<i>";
+
+  @if index($-available-prefix, str-slice($selector, 1, 1)) {
+    $-selector: $selector;
+  } @else {
+    $-selector: "." + $selector;
+  }
+
+  @if str-index($-selector, $-hue-interpolation) {
+    @each $hue, $list in $-palette {
+      $-colored-selector: str-replace(
+        str-slice(
+          $-selector,
+          0,
+          str-index($-selector, $-hue-interpolation) + str-length($-hue-interpolation) - 1
+        ),
+        $-hue-interpolation,
+        $hue
+      );
+      $-color-interpolated-selector: str-replace($-selector, $-hue-interpolation, $hue);
+
+      #{$-colored-selector} {
+        $color: get-color($hue);
+        @content($color);
+      }
+
+      @if type-of($list) == "list" and length($list) > 1 {
+        @for $i from 2 through length($list) {
+          $-completed-selector: null;
+
+          @if str-index($-selector, $-lightness-interpolation) {
+            $-completed-selector: str-replace($-color-interpolated-selector, $-lightness-interpolation, $i - 1);
+          } @else {
+            $-completed-selector: #{$-color-interpolated-selector}-#{$i - 1};
+          }
+
+          #{$-completed-selector} {
+            $color: get-color($hue, $i - 1);
+            @content($color);
+          }
+        }
+      }
+    }
+  } @else {
+    $-prefix: $-selector;
+
+    @each $hue, $list in $-palette {
+
+      #{$-prefix}-#{$hue} {
+        $color: get-color($hue);
+        @content($color);
+      }
+
+      @for $i from 2 through length($list) {
+        #{$-prefix}-#{$hue}-#{$i - 1} {
+          $color: get-color($hue, $i - 1);
+          @content($color);
+        }
+      }
+    }
+  }
+}
+
+@mixin set-css-variable-from($scss-var-list) {
+  :root {
+    // todo
+    // --css-var: #{$scss-var};
+  }
+}
+
+$sides: (t, b, l, r, x, y, a);
+$unit: px;
+
+@for $space from 1 through 50 {
+  @each $side in $sides {
+    @if $side == "a" {
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding: #{$space * 10} + $unit !important;
+      }
+    } @else if $side == "x" {
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-left: #{$space * 10} + $unit !important;
+        margin-right: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-left: #{$space * 10} + $unit !important;
+        padding-right: #{$space * 10} + $unit !important;
+      }
+    } @else if $side == "y" {
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-top: #{$space * 10} + $unit !important;
+        margin-bottom: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-top: #{$space * 10} + $unit !important;
+        padding-bottom: #{$space * 10} + $unit !important;
+      }
+    } @else {
+      $origin: top !default;
+
+      @if $side == "r" {
+        $origin: right;
+      } @else if $side == "b" {
+        $origin: bottom;
+      } @else if $side == "l" {
+        $origin: left;
+      } @else {
+        $origin: top;
+      }
+
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-#{$origin}: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-#{$origin}: #{$space * 10} + $unit !important;
+      }
+    }
+  }
+}

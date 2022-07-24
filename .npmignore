@@ -1,0 +1,6 @@
+dev
+
+# Config directories and files
+.*
+*.config.js
+jsconfig.json

@@ -1,0 +1,61 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+.q-radio__inner {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  position: relative;
+
+  &::before {
+    display: none;
+  }
+
+  & .q-radio__bg {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(~assets/images/radio_off.svg) no-repeat center;
+    background-size: 18px;
+
+    path {
+      display: none;
+    }
+  }
+
+  &.q-radio__inner--truthy .q-radio__bg {
+    background: url(~assets/images/radio_on.svg) no-repeat center;
+    background-size: 18px;
+  }
+}
+
+.q-radio {
+  margin-right: 20px;
+  height: 32px;
+
+  &__label {
+    margin-left: 4px;
+  }
+}
+
+.q-radio.disabled {
+  .q-radio__bg {
+    background: url(~assets/images/radio_disable.svg) no-repeat center;
+    background-size: 18px;
+  }
+
+  .q-radio__inner--truthy .q-radio__bg {
+    background: url(~assets/images/radio_selected_disable.svg) no-repeat center;
+    background-size: 18px;
+  }
+
+  .q-radio__label {
+    color: $placeholder;
+  }
+}
