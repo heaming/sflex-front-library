@@ -6,6 +6,7 @@
 );
 @forward "./functions" with ($-palette: quasar-based-palette.$palette);
 @forward "./mixins" with ($-palette: quasar-based-palette.$palette);
+@use "./guide";
 
 $palette: quasar-based-palette.$palette;
 $colors: quasar-based-palette.$colors;

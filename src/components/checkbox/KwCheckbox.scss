@@ -4,60 +4,61 @@
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable selector-class-pattern */
-// checkbox
-.q-checkbox__inner {
-  position: relative;
-  width: 18px;
-  min-width: 18px;
-  height: 18px;
 
-  &::before,
-  .q-checkbox__svg {
-    display: none;
-  }
+.kw-checkbox {
+  $root: ".q-checkbox";
 
-  .q-checkbox__bg {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: url(~assets/images/checkbox_off.svg) no-repeat center;
-    background-size: 18px;
-    border-radius: 0;
-    border: none;
-  }
-
-  &.q-checkbox__inner--truthy .q-checkbox__bg,
-  &.q-checkbox__inner--indet .q-checkbox__bg {
-    background: url(~assets/images/checkbox_on.svg) no-repeat center;
-    background-size: 18px;
-    border: none;
-  }
-}
-
-.q-checkbox {
   margin-right: 20px;
   height: 32px;
 
-  &__label {
+  #{$root}__label {
     margin-left: 4px;
   }
-}
+  #{$root}__inner {
+    position: relative;
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
 
-.q-checkbox.disabled {
-  .q-checkbox__label {
-    color: $placeholder;
+    &::before,
+    #{$root}__svg {
+      display: none;
+    }
+
+    #{$root}__bg {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: url(~assets/images/checkbox_off.svg) no-repeat center;
+      background-size: 22px;
+      border-radius: 0;
+      border: none;
+    }
+
+    &#{$root}__inner--truthy #{$root}__bg,
+    &#{$root}__inner--indet #{$root}__bg {
+      background: url(~assets/images/checkbox_on.svg) no-repeat center;
+      background-size: 22px;
+      border: none;
+    }
   }
 
-  .q-checkbox__bg {
-    background: url(~assets/images/checkbox_disable.svg) no-repeat center;
-    background-size: 18px;
-  }
+  &.disabled {
+    #{$root}__label {
+      color: $placeholder;
+    }
 
-  .q-checkbox__inner--truthy .q-checkbox__bg {
-    background: url(~assets/images/checkbox_selected_disable.svg) no-repeat center;
-    background-size: 18px;
+    #{$root}__bg {
+      background: url(~assets/images/checkbox_disable.svg) no-repeat center;
+      background-size: 22px;
+    }
+
+    #{$root}__inner--truthy #{$root}__bg {
+      background: url(~assets/images/checkbox_selected_disable.svg) no-repeat center;
+      background-size: 22px;
+    }
   }
 }
