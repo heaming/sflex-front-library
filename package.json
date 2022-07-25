@@ -1,6 +1,7 @@
 {
-  "name": "@kw/lib",
+  "name": "kw-lib",
   "version": "0.1.0",
+  "private": false,
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -92,5 +93,8 @@
     "lint-staged": "^12.4.1",
     "prettier": "^2.7.1",
     "sort-package-json": "^1.57.0"
+  },
+  "publishConfig": {
+    "registry": "http://nexus-dev.kyowon.co.kr/repository/npm-sflex-releases/"
   }
 }
