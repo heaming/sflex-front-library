@@ -54,30 +54,33 @@ export default {
     const fieldCtx = useField();
     const { value } = fieldCtx;
     const editorRef = ref(null);
-    const editor = ref(null);
+    let editor;
 
     function focus() {
-      editor.value.core.focus();
+      editor.core.focus();
     }
 
     function blur() {
-      editor.value.core.blur();
+      editor.core.blur();
     }
 
     function enable() {
-      editor.value.enable();
+      editor.enable();
     }
 
     function disable() {
-      console.log('disable');
-      editor.value.disable();
+      editor.disable();
+    }
+
+    function getEditor() {
+      return editor;
     }
 
     const isEmptyContents = (contents) => !/^<[^p]>*/.test(contents)
-      && editor.value.util.onlyZeroWidthSpace(editor.value.getText());
+      && editor.util.onlyZeroWidthSpace(editor.getText());
 
     onMounted(() => {
-      editor.value = createEditor(editorRef.value, {
+      editor = createEditor(editorRef.value, {
         value: value.value,
         ...props.options,
       });
@@ -95,19 +98,19 @@ export default {
       }, { immediate: true });
 
       watch(() => props.readonly, (newVal) => {
-        editor.value.readOnly(newVal);
+        editor.readOnly(newVal);
       });
 
       watch(() => props.modelValue, (val) => {
-        if (editor.value.getContents() !== val) {
-          editor.value.setContents(val);
+        if (editor.getContents() !== val) {
+          editor.setContents(val);
         }
       });
     });
 
     onBeforeUnmount(() => {
-      editor.value.destroy();
-      editor.value = null;
+      editor.destroy();
+      editor = null;
     });
 
     return {
@@ -118,6 +121,7 @@ export default {
       focus,
       blur,
       disable,
+      getEditor,
     };
   },
 };
