@@ -30,6 +30,14 @@ export default {
       type: String,
       default: '',
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     options: {
       type: Object,
       default: () => ({}),
@@ -43,24 +51,33 @@ export default {
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
-    const { value, ...fieldCtx } = useField();
+    const fieldCtx = useField();
+    const { value } = fieldCtx;
     const editorRef = ref(null);
-
-    let editor;
+    const editor = ref(null);
 
     function focus() {
-      editor.core.focus();
+      editor.value.core.focus();
     }
 
     function blur() {
-      editor.core.blur();
+      editor.value.core.blur();
+    }
+
+    function enable() {
+      editor.value.enable();
+    }
+
+    function disable() {
+      console.log('disable');
+      editor.value.disable();
     }
 
     const isEmptyContents = (contents) => !/^<[^p]>*/.test(contents)
-      && editor.util.onlyZeroWidthSpace(editor.getText());
+      && editor.value.util.onlyZeroWidthSpace(editor.value.getText());
 
     onMounted(() => {
-      editor = createEditor(editorRef.value, {
+      editor.value = createEditor(editorRef.value, {
         value: value.value,
         ...props.options,
       });
@@ -68,25 +85,39 @@ export default {
       editor.onChange = (contents) => {
         emit('update:modelValue', isEmptyContents(contents) ? '' : contents);
       };
-    });
 
-    watch(() => props.modelValue, (val) => {
-      if (editor.getContents() !== val) {
-        editor.setContents(val);
-      }
+      watch(() => props.disabled, (disabled) => {
+        if (disabled) {
+          disable();
+        } else {
+          enable();
+        }
+      }, { immediate: true });
+
+      watch(() => props.readonly, (newVal) => {
+        editor.value.readOnly(newVal);
+      });
+
+      watch(() => props.modelValue, (val) => {
+        if (editor.value.getContents() !== val) {
+          editor.value.setContents(val);
+        }
+      });
     });
 
     onBeforeUnmount(() => {
-      editor.destroy();
-      editor = null;
+      editor.value.destroy();
+      editor.value = null;
     });
 
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
+      editor,
       editorRef,
       focus,
       blur,
+      disable,
     };
   },
 };
