@@ -1,5 +1,5 @@
 .kw-guide {
-  padding: 40px 80px;
+  padding: 40px;
 
   h2 {
     margin-bottom: 0;
@@ -31,8 +31,11 @@
     }
   }
 
-  &-highlight {
-    color: #ff5353;
+  &-subTitle {
+    margin: 10px 0 0;
+    line-height: 20px;
+    font-size: 16px;
+    color: rgb(109 108 108);
   }
 
   &-description {
@@ -43,6 +46,11 @@
 
     &::first-letter {
       text-transform: uppercase;
+    }
+
+    b {
+      font-weight: 500;
+      color: #ff5353;
     }
   }
 
