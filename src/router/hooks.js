@@ -26,12 +26,12 @@ async function throwIfNotAuthorized(to) {
 
 function assignParamsIfIsLinkPage(to) {
   const {
-    pageTypeCode,
     pageId,
+    pageTypeCode,
     linkPageId,
   } = store.getters['meta/getMenu'](to.name);
 
-  if (pageTypeCode === 'L') {
+  if (pageId && pageTypeCode === 'L') {
     const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
 
     Object.assign(to.params, {
