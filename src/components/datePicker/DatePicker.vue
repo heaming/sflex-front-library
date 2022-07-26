@@ -10,6 +10,7 @@
     :readonly="readonly"
     :disable="disable"
     mask="####-##-##"
+    fill-mask="_"
     :unmasked-value="unmaskedValue"
     :hide-bottom-space="hideBottomSpace"
     no-error-icon
@@ -169,12 +170,12 @@ export default {
     }
 
     async function onChangeInput(e) {
-      if (!e) {
-        emit('update:modelValue', e);
+      if (e === '____-__-__') {
+        emit('update:modelValue', '');
         return;
       }
 
-      const n = Date.parse(e);
+      const n = Date.parse(e.replace(/_/g, ''));
 
       if (!Number.isNaN(n)) {
         let value = date.formatDate(n, 'YYYY-MM-DD').padStart(10, '0');
