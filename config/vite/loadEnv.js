@@ -41,7 +41,7 @@ function configPlugin(mode, command, envDir, shouldTransform) {
 function transformPlugin(pages, pagesDir) {
   const isMPA = Object.keys(pages).length > 0;
 
-  const entryRegex = isMPA ? new RegExp(`${pagesDir}/\\w+/main\\.js$`) : /src\/main.js$/;
+  const entryRegex = isMPA ? new RegExp(`${pagesDir}/\\w+/main\\.js$`) : /src\/main\.js$/;
   const envRegex = new RegExp(`node_modules/${name}/dist/env\\.js`);
 
   return {
