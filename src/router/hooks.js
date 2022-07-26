@@ -29,7 +29,7 @@ function assignParamsIfIsLinkPage(to) {
     pageId,
     pageTypeCode,
     linkPageId,
-  } = store.getters['meta/getMenu'](to.name);
+  } = store.getters['meta/getMenu'](to.name) || {};
 
   if (pageId && pageTypeCode === 'L') {
     const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
