@@ -24,4 +24,5 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+*.eslintrc.js
 .gitattributes
