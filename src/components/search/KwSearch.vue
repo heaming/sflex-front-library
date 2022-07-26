@@ -11,27 +11,27 @@
         v-if="isExpandable"
         class="kw-search--view-more"
       >
-        <kw-btn
+        <q-btn
           :class="{'q-btn--append': isExpanded}"
           @click="toggleExpand()"
         >
           <span class="block">
-            <kw-tooltip v-if="isExpanded">
+            <q-tooltip v-if="isExpanded">
               {{ $t('MSG_BTN_COLLAPSE', null, '접기') }}
-            </kw-tooltip>
-            <kw-tooltip v-else>
+            </q-tooltip>
+            <q-tooltip v-else>
               {{ $t('MSG_BTN_EXPAND', null, '펼치기') }}
-            </kw-tooltip>
+            </q-tooltip>
           </span>
-        </kw-btn>
+        </q-btn>
       </div>
       <div class="row justify-end">
         <slot name="action">
-          <kw-btn
+          <q-btn
             :label="$t('MSG_BTN_RESET', null, '초기화')"
             type="reset"
           />
-          <kw-btn
+          <q-btn
             :label="$t('MSG_BTN_SEARCH', null, '검색')"
             type="submit"
           />

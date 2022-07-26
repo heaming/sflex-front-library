@@ -13,7 +13,7 @@
         class="row justify-between"
       >
         <span class="text-bold">{{ popupTitle && $t(popupTitle) }}</span>
-        <kw-btn
+        <q-btn
           flat
           rounded
           icon="close"
