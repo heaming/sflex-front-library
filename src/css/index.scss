@@ -2,11 +2,10 @@
   Quasar
   */
 @import "@quasar/extras/material-icons/material-icons";
-/* stylelint-disable-next-line scss/at-import-partial-extension */
 @import "quasar/src/css/index.sass";
 
 /*
- Common
+  Common
  */
 @import "./common";
 
@@ -24,6 +23,7 @@
 @import "../components/btnToggle/KwBtnToggle";
 @import "../components/chart/KwChart";
 @import "../components/checkbox/KwCheckbox";
+@import "../components/chip/KwChip";
 @import "../components/datePicker/KwDatePicker";
 @import "../components/editor/KwEditor";
 @import "../components/field/KwField";
@@ -41,3 +41,4 @@
 @import "../components/tabPanels/KwTabPanels";
 @import "../components/timePicker/KwTimePicker";
 @import "../components/toggle/KwToggle";
+@import "../components/tooltip/KwTooltip";
