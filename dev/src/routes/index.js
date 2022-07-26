@@ -40,12 +40,4 @@ export default [
     import.meta.glob('@/pages/tests/**/*.vue'),
     (key) => key.match(/(\/tests)((\/\w+)*)\/(\w+)\.vue$/),
   ),
-
-  // always leave this as last one,
-  // but you can also remove it
-  {
-    name: 'ErrorNotFound',
-    path: '/:catchAll(.*)*',
-    component: () => import('@/pages/ErrorNotFound.vue'),
-  },
 ];
