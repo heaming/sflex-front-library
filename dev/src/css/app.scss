@@ -1,7 +1,1 @@
 @import "~css/index";
-
-$-test-color: get-color("red", 3);
-
-.test-bg-1 {
-  background-color: $-test-color;
-}
