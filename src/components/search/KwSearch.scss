@@ -33,6 +33,44 @@
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+
+    .q-btn {
+      padding: 0 9px 0 12px;
+      border: 0;
+      width: 80px;
+      min-width: 80px;
+      color: $black-h3;
+
+      .block {
+        padding-right: 20px;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+          background-size: 16px;
+          transition: transform 0.28s;
+        }
+      }
+
+      &--append {
+        .block {
+          &::after {
+            transform: translateY(-50%) rotate(180deg);
+          }
+        }
+      }
+
+      .q-ripple {
+        display: none;
+      }
+    }
   }
 
   // input style override
@@ -75,6 +113,53 @@
   .kw-multi-date-picker {
     .q-field__control-container {
       font-size: 16px;
+    }
+  }
+
+  // search button
+  .q-btn {
+    padding: 0 12px;
+    border: 1px solid $black-h2;
+    min-width: 90px;
+    height: 32px;
+    min-height: 32px;
+    background-color: #fff;
+    font-size: 14px;
+    color: $black-h2;
+    font-weight: 400;
+    line-height: 18px;
+
+    /* default style override [s] */
+    &::before {
+      box-shadow: none !important;
+      transition: none !important;
+    }
+
+    &--active::before {
+      box-shadow: none !important;
+      transition: none !important;
+    }
+
+    &--rectangle {
+      border-radius: 0;
+    }
+
+    .q-focus-helper {
+      display: none;
+    }
+
+    /* default style override [e] */
+    &[type="reset"] {
+      & + .q-btn[type="submit"] {
+        margin-left: 8px;
+      }
+    }
+
+    &[type="submit"] {
+      border-color: $secondary;
+      background-color: $secondary;
+      color: #fff;
+      font-weight: 500;
     }
   }
 

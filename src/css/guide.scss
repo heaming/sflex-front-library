@@ -51,6 +51,8 @@
     padding: 0 50px 40px;
     border: 1px solid #d9d9d9;
     box-shadow: none;
+    overflow: hidden;
+    border-radius: 0;
 
     .kw-guide {
       &-example {
