@@ -1,0 +1,12 @@
+<svg id="more" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(6.998 2)">
+    <circle id="타원_5176" data-name="타원 5176" cx="1" cy="1" r="1" transform="translate(0 0)" fill="#222"/>
+    <circle id="타원_5187" data-name="타원 5187" cx="1" cy="1" r="1" transform="translate(0 5)" fill="#222"/>
+    <circle id="타원_5188" data-name="타원 5188" cx="1" cy="1" r="1" transform="translate(0 10)" fill="#222"/>
+  </g>
+</svg>

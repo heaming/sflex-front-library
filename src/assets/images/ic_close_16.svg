@@ -1,0 +1,11 @@
+<svg id="close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(-1802.045 -373.975)">
+    <line id="선_2820" data-name="선 2820" y1="10" x2="10" transform="translate(1805.045 376.975)" fill="none" stroke="#222" stroke-width="1.5"/>
+    <line id="선_2821" data-name="선 2821" x1="10" y1="10" transform="translate(1805.045 376.975)" fill="none" stroke="#222" stroke-width="1.5"/>
+  </g>
+</svg>

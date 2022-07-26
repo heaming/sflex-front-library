@@ -1,0 +1,14 @@
+<svg id="seach" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="keyline_24px" data-name="keyline/24px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(-1798.5 -369.646)">
+    <path id="패스_210085" data-name="패스 210085" d="M1809.5,380.922l6.375,5.884" transform="translate(3.813 3.783)" fill="none" stroke="#222" stroke-width="1.5"/>
+    <g id="타원_5175" data-name="타원 5175" transform="translate(1800.5 371.646)" fill="none" stroke="#222" stroke-width="1.5">
+      <circle cx="8" cy="8" r="8" stroke="none"/>
+      <circle cx="8" cy="8" r="7.25" fill="none"/>
+    </g>
+  </g>
+</svg>

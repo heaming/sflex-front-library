@@ -1,0 +1,15 @@
+<svg id="price" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="keyline_24px" data-name="keyline/24px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(4 2)">
+    <g id="타원_5193" data-name="타원 5193" transform="translate(-2)" fill="none" stroke="#222" stroke-width="1.5">
+      <circle cx="10" cy="10" r="10" stroke="none"/>
+      <circle cx="10" cy="10" r="9.25" fill="none"/>
+    </g>
+    <text id="w" transform="translate(3 14)" fill="#222" stroke="#222" stroke-width="0.3" font-size="12" font-family="SpoqaHanSansNeo-Medium, Spoqa Han Sans Neo" font-weight="500"><tspan x="0" y="0">w</tspan></text>
+    <line id="선_3149" data-name="선 3149" x2="11" y2="0.097" transform="translate(2.5 10.5)" fill="none" stroke="#222" stroke-width="1.5"/>
+  </g>
+</svg>
