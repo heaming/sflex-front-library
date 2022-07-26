@@ -1,24 +1,24 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Search Form</h2>
+    <h2>Form</h2>
     <p class="kw-guide-description">
-      kw-form-row > kw-form-item > "CheckBox, Input, Radio , Select"
+      kw-form > kw-form-row > kw-form-item > "CheckBox, Input, Radio , Select"
     </p>
     <div class="kw-guide-section">
       <h3
         id="columns"
         class="kw-guide-title"
       >
-        columns
+        the columns
       </h3>
       <p class="kw-guide-description">
         There are the 4 types of column.<br>
-        Add the tags of kw-form-item(which inclunde kw-input, kw-search,
-        kw-radio and so on) as many as it needs until 4 in
-        kw-form-row<br>
-        Add the columns number cols="3" in the tag of "kw-form-row" (default: three columns)<br>
-        Add the columns number colspan="2" in the tag of "kw-form-item"<br>
-        The example below is kw-form cols="4"
+        Add the tags of <b> kw-form-item </b> (which include
+        kw-input, kw-search,
+        kw-radio and so on) as many as it needs until <b>4 columns in kw-form-row</b><br>
+        Add the columns number in <b>cols = "" </b> in the tag of kw-form-row (default: three columns)<br>
+        Add the columns number in <b>colspan = "" </b> in the tag of kw-form-item<br>
+        The example is kw-form cols="4"
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -131,10 +131,10 @@
         id=""
         class="kw-guide-title"
       >
-        column of kw-form-item
+        the columns of kw-form-item
       </h3>
       <p class="kw-guide-description">
-        if kw-form is cols="3" and kw-form-item is colspan="2",
+        if <b>&lt;kw-form&gt; is cols="3" and &lt;kw-form-item&gt; is colspan="2"</b>,
         kw-form-item's size would be one third of kw-form's columns.
       </p>
       <q-card>
@@ -275,18 +275,20 @@
         id="example"
         class="kw-guide-title"
       >
-        Form example
+        the Form example
       </h3>
       <p class="kw-guide-description">
-        the example below
+        the example is as below<br>
+        kw-form cols="2",<br>
+        kw-form-item colspan="1" in kw-form-item except of the second line(second line's kw-form-item is colspan"2" )
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-form cols="3">
+          <kw-form cols="2">
             <kw-form-row>
               <kw-form-item
                 label="항목명 기본 2줄일 경우"
-                colspan="2"
+                colspan="1"
               >
                 <kw-input
                   name="input"
@@ -311,7 +313,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
-                label="DateRangePicker"
+                label="프로모션기간"
                 class="essential"
               >
                 <kw-date-range-picker
@@ -322,7 +324,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
-                label="DatePicker"
+                label="프로모션적용월"
                 class="essential"
               >
                 <kw-date-picker
@@ -362,6 +364,5 @@
 <script setup>
 </script>
 <style lang="scss">
-// .q-field__native { max-width: 310px; }
-// .mw100 > div > div > div > input { max-width: 100% !important; }
+
 </style>

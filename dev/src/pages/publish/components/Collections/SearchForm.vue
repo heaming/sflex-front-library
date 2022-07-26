@@ -2,359 +2,206 @@
   <kw-page class="kw-guide">
     <h2>Search Form</h2>
     <p class="kw-guide-description">
-      kw-form-row > kw-form-item > "CheckBox, Input, Radio , Select"
+      kw-search-form > kw-form-row > kw-form-item > "CheckBox, Input, Radio , Select"
     </p>
     <div class="kw-guide-section">
       <h3
         id="columns"
         class="kw-guide-title"
       >
-        columns
+        the &lt;kw-search&gt; form
       </h3>
       <p class="kw-guide-description">
-        There are the 4 types of column.<br>
-        Add the tags of kw-form-item(which inclunde kw-input, kw-search,
-        kw-radio and so on) as many as it needs until 4 in
-        kw-form-row<br>
-        Add the columns number cols="3" in the tag of "kw-form-row" (default: three columns)<br>
-        Add the columns number colspan="2" in the tag of "kw-form-item"<br>
-        The example below is kw-form cols="4"
+        The "kw-search" example is as below.<br>
+        when kw-search is used, it is including the border of outside.<br>
+        Instead of kw-form, &lt;Kw-search&gt; form wrap kw-form-row.<br>
+        Add the columns number cols="4" in the tag of "kw-search" (default: three columns)<br>
       </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form cols="4">
-            <kw-form-row>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <div class="kw-guide-codeButton">
-          <button>
-            Show code &darr;
-          </button>
-        </div>
-        <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
-        </div>
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id=""
-        class="kw-guide-title"
+      <kw-search
+        :key="formKey"
+        ref="formRef"
+        :autofocus="autofocus"
+        :no-reset-focus="noResetFocus"
+        :cols="4"
+        class="kw-py-2 kw-px-4 kw-my-4"
       >
-        column of kw-form-item
-      </h3>
-      <p class="kw-guide-description">
-        if kw-form is cols="3" and kw-form-item is colspan="2",
-        kw-form-item's size would be one third of kw-form's columns.
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form cols="4">
-            <kw-form-row>
-              <kw-form-item
-                label="colspan-1"
-                colspan="1"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
+        <kw-form-row>
+          <kw-form-item label="지점명">
+            <kw-input
+              name="input"
+              rules="required"
+              placeholder="입력해주세요"
+            />
+          </kw-form-item>
+          <kw-form-item
+            label="담당자명"
+            class="essential"
+          >
+            <!-- 필수 입력의 경우 essential 클래스 추가-->
+            <kw-input
+              name="input"
+              rules="required"
+              placeholder="입력해주세요"
+            />
+          </kw-form-item>
+          <kw-form-item label="지역명">
+            <kw-input
+              v-model="readonlyValue"
+              name="input"
+              readonly
+              rules="required"
+              placeholder="입력해주세요"
+            />
+          </kw-form-item>
+          <kw-form-item label="권역명">
+            <kw-input
+              name="input"
+              rules="required"
+              placeholder="입력해주세요"
+              disable
+            />
+          </kw-form-item>
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-form-item
+            label="선택 샘플"
+            class="essential"
+          >
+            <kw-select
+              :model-value="[]"
+              :options="['A', 'B', 'C', 'D']"
+              placeholder="선택해 주세요."
+              name="select"
+              rules="required"
+            />
+          </kw-form-item>
+          <kw-form-item label="다중선택 샘플 (readonly)">
+            <kw-select
+              :model-value="readonlySelect"
+              :options="['A', 'B', 'C', 'D']"
+              multiple
+              name="selectMultiple"
+              rules="required"
+              readonly
+            />
+          </kw-form-item>
+          <kw-form-item label="다중선택 샘플 (disable)">
+            <kw-select
+              :model-value="[]"
+              :options="['A', 'B', 'C', 'D']"
+              multiple
+              name="selectMultiple"
+              rules="required"
+              disable="disable"
+            />
+          </kw-form-item>
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-form-item label="Radio">
+            <kw-field
+              name="radio"
+              rules="required"
+            >
+              <template #default="{ field }">
+                <kw-radio
+                  v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                  :key="i"
+                  v-bind="field"
+                  :val="item"
                 />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                label="colspan-1"
-                colspan="1"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
+              </template>
+            </kw-field>
+          </kw-form-item>
+
+          <kw-form-item label="OptionGroup (readonly)">
+            <kw-option-group
+              :model-value="readonlyRadio"
+              name="radioOptionGroup"
+              rules="required"
+              type="radio"
+              :options="['김엄마', '김마', '마']"
+              disable
+            />
+          </kw-form-item>
+          <kw-form-item label="optiongroup (disable)">
+            <kw-option-group
+              name="radioOptionGroup"
+              rules="required"
+              type="radio"
+              :options="['김엄마', '김마', '마']"
+              disable
+            />
+          </kw-form-item>
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-form-item label="Checkbox">
+            <kw-field
+              :model-value="[]"
+              name="checkbox"
+              rules="required"
+            >
+              <template #default="{ field }">
+                <kw-checkbox
+                  v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                  :key="i"
+                  v-bind="field"
+                  :val="item"
                 />
-              </kw-form-item>
-              <kw-form-item
-                label="colspan-2"
-                colspan="2"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-          <kw-form cols="3">
-            <kw-form-row>
-              <kw-form-item
-                label="colspan-1"
-                colspan="1"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item label="colspan-1">
-                <kw-option-group
-                  :model-value="[]"
-                  name="checkboxOptionGroup"
-                  rules="required"
-                  type="checkbox"
-                  :options="['A', 'B', 'C', 'D']"
-                  disable
-                />
-              </kw-form-item>
-              <kw-form-item
-                label="colspan-2"
-                colspan="2"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-          <kw-form cols="2">
-            <kw-form-row>
-              <kw-form-item label="colspan-2">
-                <kw-select
-                  :model-value="[]"
-                  :options="['A', 'B', 'C', 'D']"
-                  multiple
-                  name="selectMultiple"
-                  rules="required"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                label="colspan-1"
-                colspan="1"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-              <kw-form-item
-                label="colspan-2"
-                colspan="2"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <div class="kw-guide-codeButton">
-          <button>
-            Show code &darr;
-          </button>
-        </div>
-        <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
-        </div>
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="example"
-        class="kw-guide-title"
-      >
-        Form example
-      </h3>
-      <p class="kw-guide-description">
-        the example below
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form cols="3">
-            <kw-form-row>
-              <kw-form-item
-                label="항목명 기본 2줄일 경우"
-                colspan="2"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                class="essential"
-                label="프로모션명"
-                colspan="3"
-              >
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="초등 올인원 패키지"
-                />
-                <span class="kw-text-counter">(10/30)</span>
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                label="DateRangePicker"
-                class="essential"
-              >
-                <kw-date-range-picker
-                  name="dateRangePicker"
-                  rules="date_range_required|date_range_months:1"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                label="DatePicker"
-                class="essential"
-              >
-                <kw-date-picker
-                  name="datePicker"
-                  rules="required"
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <div class="kw-guide-codeButton">
-          <button>
-            Show code &darr;
-          </button>
-        </div>
-        <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
-        </div>
-      </q-card>
+              </template>
+            </kw-field>
+          </kw-form-item>
+          <kw-form-item label="OptionGroup (readonly)">
+            <kw-option-group
+              :model-value="readonlyCheckbox"
+              name="checkboxOptionGroup"
+              rules="required"
+              type="checkbox"
+              :options="['A', 'B', 'C', 'D']"
+              disable
+            />
+          </kw-form-item>
+          <kw-form-item label="OptionGroup (disable)">
+            <kw-option-group
+              :model-value="[]"
+              name="checkboxOptionGroup"
+              rules="required"
+              type="checkbox"
+              :options="['A', 'B', 'C', 'D']"
+              disable
+            />
+          </kw-form-item>
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-form-item label="DatePicker">
+            <kw-date-picker
+              name="datePicker"
+              rules="required"
+            />
+          </kw-form-item>
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-form-item label="DateRangePicker">
+            <kw-date-range-picker
+              name="dateRangePicker"
+              rules="date_range_required|date_range_months:1"
+            />
+          </kw-form-item>
+          <kw-form-item
+            label="DateRangePicker"
+            cols="2"
+          >
+            <kw-date-range-picker
+              name="dateRangePicker"
+              rules="date_range_required|date_range_months:1"
+            />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-search>
     </div>
   </kw-page>
 </template>
