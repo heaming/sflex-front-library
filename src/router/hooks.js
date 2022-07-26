@@ -24,8 +24,26 @@ async function throwIfNotAuthorized(to) {
   }
 }
 
+function assignParamsIfIsLinkPage(to) {
+  const {
+    pageTypeCode,
+    pageId,
+    linkPageId,
+  } = store.getters['meta/getMenu'](to.name);
+
+  if (pageTypeCode === 'L') {
+    const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
+
+    Object.assign(to.params, {
+      ...linkPage?.pageParameter
+        .reduce((a, v) => { a[v.pageParameterName] = v.pageParameterValue; return a; }, {}),
+    });
+  }
+}
+
 async function beforeResolve(to) {
   await throwIfNotAuthorized(to);
+  assignParamsIfIsLinkPage(to);
 }
 
 export function registerHooks(router) {
