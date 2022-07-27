@@ -358,6 +358,129 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="example"
+        class="kw-guide-title"
+      >
+        Required/Essential for kw-form-item
+      </h3>
+      <p class="kw-guide-description">
+        if it is the essential elements(such as "input,checkbox,datapicker,
+        radio,select"), add the class <b>"essential"</b> in the tag of kw-form-item.
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form cols="2">
+            <kw-form-row>
+              <kw-form-item
+                label="input"
+                colspan="1"
+                class="essential"
+              >
+                <kw-input
+                  name="input"
+                  rules="required"
+                  placeholder="입력해주세요"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="select"
+                class="essential"
+              >
+                <kw-select
+                  :model-value="[]"
+                  :options="['A', 'B', 'C', 'D']"
+                  placeholder="선택해 주세요."
+                  name="select"
+                  rules="required"
+                />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item
+                label="Radio"
+                class="essential"
+              >
+                <kw-field
+                  name="radio"
+                  rules="required"
+                >
+                  <template #default="{ field }">
+                    <kw-radio
+                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                      :key="i"
+                      v-bind="field"
+                      :val="item"
+                    />
+                  </template>
+                </kw-field>
+              </kw-form-item>
+              <kw-form-item
+                label="Checkbox"
+                class="essential"
+              >
+                <kw-field
+                  :model-value="[]"
+                  name="checkbox"
+                  rules="required"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                      :key="i"
+                      v-bind="field"
+                      :val="item"
+                    />
+                  </template>
+                </kw-field>
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item
+                label="DateRangePicker"
+                class="essential"
+              >
+                <kw-date-range-picker
+                  name="dateRangePicker"
+                  rules="date_range_required|date_range_months:1"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="dateRangePicker"
+                class="essential"
+              >
+                <kw-date-picker
+                  name="datePicker"
+                  rules="required"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <div class="kw-guide-codeButton">
+          <button>
+            Show code &darr;
+          </button>
+        </div>
+        <div class="kw-guide-code">
+          <code>
+            &lt;kw-form> <br>
+            &lt;kw-form-row><br>
+            &lt;kw-form-item  label="담당자명"><br>
+            &lt;kw-input<br>
+            name="input"<br>
+            rules="required"<br>
+            placeholder="입력해주세요"
+            disable<br>
+            /><br>
+            &lt;/kw-form-item>
+            &lt;/kw-form-row><br>
+            &lt;/kw-form><br>
+          </code>
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
