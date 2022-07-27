@@ -2,8 +2,90 @@
   <kw-page class="kw-guide">
     <h2>Form</h2>
     <p class="kw-guide-description">
-      kw-form > kw-form-row > kw-form-item > "CheckBox, Input, Radio , Select"
+      kw-form > kw-form-row > kw-form-item > the elements (CheckBox, Input, Radio , Select)<br>
+      - This is the sequence to be wrapped<br>
+      it is necessary to be wrapped for using the element's tags from kw-form to the element.
     </p>
+    <div class="kw-guide-section">
+      <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              the Element(tag name)
+            </th>
+            <th>
+              attribute(class)
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form-item
+            </td>
+            <td>
+              essential - class
+            </td>
+            <td>
+              add the class "essential" in the tag of kw-form-item.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              the element in kw-form-item
+            </td>
+            <td>
+              readonly
+            </td>
+            <td>
+              add the attribute "disable" in the tag of any element in kw-form-item.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              the element in kw-form-item
+            </td>
+            <td>
+              disable
+            </td>
+            <td>
+              add the attribute "disable" in the tag of any element in kw-form-item
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-form / kw-search
+            </td>
+            <td>
+              cols=""
+            </td>
+            <td>
+              add the number in cols="" and it belongs to kw-form / kw-search's tag as attribute
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-form-item
+            </td>
+            <td>
+              colspan=""
+            </td>
+            <td>
+              add the number in colspan="" and it belongs to kw-form-item's tag as attribute
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
     <div class="kw-guide-section">
       <h3
         id="columns"
@@ -16,8 +98,9 @@
         Add the tags of <b> kw-form-item </b> (which include
         kw-input, kw-search,
         kw-radio and so on) as many as it needs until <b>4 columns in kw-form-row</b><br>
-        Add the columns number in <b>cols = "" </b> in the tag of kw-form-row (default: three columns)<br>
-        Add the columns number in <b>colspan = "" </b> in the tag of kw-form-item<br>
+        Add the columns number in <b>cols = "" </b> in the tag of <b> kw-form or kw-search</b> (default: three
+        columns)<br>
+        Add the columns number in <b>colspan = "" </b> in the tag of <b>kw-form-item</b><br>
         The example is kw-form cols="4"
       </p>
       <q-card>
@@ -128,14 +211,18 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id=""
+        id="columnsFormItem"
         class="kw-guide-title"
       >
         the columns of kw-form-item
       </h3>
       <p class="kw-guide-description">
         if <b>&lt;kw-form&gt; is cols="3" and &lt;kw-form-item&gt; is colspan="2"</b>,
-        kw-form-item's size would be one third of kw-form's columns.
+        kw-form-item's size would be one third of kw-form's columns. <br>
+        The columns example are as below <br>
+        - kw-form is cols="4" from 1st line to 3rd line <br>
+        - kw-form is cols="3" from 4th line to 5th line <br>
+        - kw-form is cols="2" from 6th line to 7th line
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -174,6 +261,43 @@
                 />
               </kw-form-item>
             </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="colspan-1">
+                <kw-field
+                  name="radio"
+                  rules="required"
+                >
+                  <template #default="{ field }">
+                    <kw-radio
+                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                      :key="i"
+                      v-bind="field"
+                      :val="item"
+                    />
+                  </template>
+                </kw-field>
+              </kw-form-item>
+              <kw-form-item
+                label="colspan-1"
+                colspan="1"
+              >
+                <kw-input
+                  name="input"
+                  rules="required"
+                  placeholder="입력해주세요"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="colspan-2"
+                colspan="2"
+              >
+                <kw-input
+                  name="input"
+                  rules="required"
+                  placeholder="입력해주세요"
+                />
+              </kw-form-item>
+            </kw-form-row>
           </kw-form>
           <kw-form cols="3">
             <kw-form-row>
@@ -189,14 +313,16 @@
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
-              <kw-form-item label="colspan-1">
+              <kw-form-item
+                label="colspan-1"
+                colspan="1"
+              >
                 <kw-option-group
                   :model-value="[]"
                   name="checkboxOptionGroup"
                   rules="required"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
-                  disable
                 />
               </kw-form-item>
               <kw-form-item
@@ -213,17 +339,6 @@
           </kw-form>
           <kw-form cols="2">
             <kw-form-row>
-              <kw-form-item label="colspan-2">
-                <kw-select
-                  :model-value="[]"
-                  :options="['A', 'B', 'C', 'D']"
-                  multiple
-                  name="selectMultiple"
-                  rules="required"
-                />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
               <kw-form-item
                 label="colspan-1"
                 colspan="1"
@@ -235,13 +350,27 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="colspan-2"
-                colspan="2"
+                label="colspan-1"
+                colspan="1"
               >
                 <kw-input
                   name="input"
                   rules="required"
                   placeholder="입력해주세요"
+                />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item
+                label="colspan-2"
+                colspan="2"
+              >
+                <kw-select
+                  :model-value="[]"
+                  :options="['A', 'B', 'C', 'D']"
+                  multiple
+                  name="selectMultiple"
+                  rules="required"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -272,7 +401,7 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="example"
+        id="columnsExample"
         class="kw-guide-title"
       >
         the Form example
@@ -360,14 +489,14 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="example"
+        id="EssentialExample"
         class="kw-guide-title"
       >
-        Required/Essential for kw-form-item
+        Essential for the elements
       </h3>
       <p class="kw-guide-description">
         if it is the essential elements(such as "input,checkbox,datapicker,
-        radio,select"), add the class <b>"essential"</b> in the tag of kw-form-item.
+        radio,select"), add the class <b>"essential"</b> in the tag of <b> kw-form-item.</b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -393,6 +522,27 @@
                   :options="['A', 'B', 'C', 'D']"
                   placeholder="선택해 주세요."
                   name="select"
+                  rules="required"
+                />
+              </kw-form-item>
+            </kw-form-row>
+
+            <kw-form-row>
+              <kw-form-item
+                label="DateRangePicker"
+                class="essential"
+              >
+                <kw-date-range-picker
+                  name="dateRangePicker"
+                  rules="date_range_required|date_range_months:1"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="dateRangePicker"
+                class="essential"
+              >
+                <kw-date-picker
+                  name="datePicker"
                   rules="required"
                 />
               </kw-form-item>
@@ -434,26 +584,6 @@
                     />
                   </template>
                 </kw-field>
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                label="DateRangePicker"
-                class="essential"
-              >
-                <kw-date-range-picker
-                  name="dateRangePicker"
-                  rules="date_range_required|date_range_months:1"
-                />
-              </kw-form-item>
-              <kw-form-item
-                label="dateRangePicker"
-                class="essential"
-              >
-                <kw-date-picker
-                  name="datePicker"
-                  rules="required"
-                />
               </kw-form-item>
             </kw-form-row>
           </kw-form>

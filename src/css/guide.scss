@@ -12,6 +12,27 @@
     margin-top: 40px;
   }
 
+  &-table {
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    box-shadow: none;
+
+    th {
+      text-transform: capitalize;
+      color: #333;
+    }
+
+    td {
+      text-align: center;
+      text-transform: capitalize;
+      color: #555;
+
+      &:last-child {
+        text-align: left;
+      }
+    }
+  }
+
   &-title {
     display: inline-block;
     margin: 0;
@@ -60,7 +81,7 @@
     border: 1px solid #d9d9d9;
     box-shadow: none;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 10px;
 
     .kw-guide {
       &-example {
