@@ -84,7 +84,7 @@
       font-size: 14px;
       line-height: 18px;
       color: $black-h3;
-      word-break: break-all;
+      word-break: break-word;
 
       & + label {
         @media (min-width: 0) {
