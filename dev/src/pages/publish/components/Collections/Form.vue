@@ -17,7 +17,7 @@
         <thead>
           <tr>
             <th>
-              the Element(tag name)
+              the Element(tag's name)
             </th>
             <th>
               attribute(class)
@@ -47,7 +47,7 @@
               readonly
             </td>
             <td>
-              add the attribute "disable" in the tag of any element in kw-form-item.
+              add the attribute "disable" in the tag of element which is wrapped for kw-form-item.
             </td>
           </tr>
           <tr>
@@ -58,7 +58,7 @@
               disable
             </td>
             <td>
-              add the attribute "disable" in the tag of any element in kw-form-item
+              add the attribute "disable" in the tag of element which is wrapped for kw-form-item
             </td>
           </tr>
           <tr>
