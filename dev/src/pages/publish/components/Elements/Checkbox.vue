@@ -2,7 +2,7 @@
   <kw-page class="kw-guide">
     <h2>Checkbox</h2>
     <p class="kw-guide-description">
-      in the search form or table, checkbox is 18px / default is 22px
+      in the search form or table, checkbox's height is 18px / default is 22px
     </p>
     <div class="kw-guide-section">
       <h3
@@ -64,8 +64,8 @@
         disable
       </h3>
       <p class="kw-guide-description">
-        add <span class="kw-guide-highlight"> "disable" </span> in the tag of <span class="kw-guide-highlight">
-          &lt;kw-checkbox&gt; </span>
+        add the attribute<b> "disable" </b> in the tag of <b>
+          &lt;kw-checkbox&gt; </b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -118,8 +118,8 @@
         readonly
       </h3>
       <p class="kw-guide-description">
-        add <span class="kw-guide-highlight"> "disable" </span> in the tag of <span class="kw-guide-highlight">
-          &lt;kw-checkbox&gt; </span>
+        add the attribute <b> "disable" </b> in the tag of <b>
+          &lt;kw-checkbox&gt; </b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -215,8 +215,8 @@
         disable
       </h3>
       <p class="kw-guide-description">
-        add <span class="kw-guide-highlight"> "disable" </span> in the tag of <span class="kw-guide-highlight">
-          &lt;kw-option-group&gt; </span>
+        add the attribute <b> "disable" </b> in the tag of <b>
+          &lt;kw-option-group&gt; </b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -260,8 +260,8 @@
         readonly
       </h3>
       <p class="kw-guide-description">
-        add <span class="kw-guide-highlight"> "disable" </span> in the tag of <span class="kw-guide-highlight">
-          &lt;kw-option-group&gt; </span>
+        add the attribute <b> "disable" </b> in the tag of <b>
+          &lt;kw-option-group&gt; </b>
       </p>
       <q-card>
         <div class="kw-guide-example">

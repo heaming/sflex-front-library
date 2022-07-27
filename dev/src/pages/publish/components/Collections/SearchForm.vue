@@ -2,7 +2,9 @@
   <kw-page class="kw-guide">
     <h2>Search Form</h2>
     <p class="kw-guide-description">
-      kw-search-form > kw-form-row > kw-form-item > "CheckBox, Input, Radio , Select"
+      kw-search-form > kw-form-row > kw-form-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
+      - This is the sequence to be wrapped<br>
+      it is necessary to be wrapped for using the element's tags from kw-form to the element.
     </p>
     <div class="kw-guide-section">
       <h3
@@ -13,7 +15,7 @@
       </h3>
       <p class="kw-guide-description">
         The "kw-search" example is as below.<br>
-        when kw-search is used, it is including the border of outside.<br>
+        when kw-search is used, it is included in the border of outside.<br>
         Instead of kw-form, &lt;Kw-search&gt; form wrap kw-form-row.<br>
         Add the columns number cols="4" in the tag of "kw-search" (default: three columns)<br>
       </p>
