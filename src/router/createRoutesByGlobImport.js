@@ -3,7 +3,8 @@ import { kebabCase } from 'lodash-es';
 export default (modules) => {
   const keys = Object.keys(modules);
   return keys.map((key) => {
-    const matched = key.match(/\/pages((\/\w+)*)\/(\w+)M\.vue$/);
+    // becare when fix this line
+    const matched = key.match(/\/pages((\/\w+)*)\/(\w+M)\.vue$/);
 
     if (!matched) {
       throw new Error(`Invalid path, could not parse "${key}"`);
