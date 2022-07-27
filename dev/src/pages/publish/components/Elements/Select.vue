@@ -40,7 +40,7 @@
         select(Multiple)
       </h3>
       <p class="kw-guide-description">
-        add <span class="kw-guide-highlight"> multiple </span> attribute in the tag of "kw-select"
+        add <b> multiple </b> attribute in the tag of "kw-select"
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -83,7 +83,7 @@
         readonly
       </h3>
       <p class="kw-guide-description">
-        add attribute <span class="kw-guide-highlight">readonly</span> in the tag of "kw-select"
+        add attribute <b>readonly</b> in the tag of "kw-select"
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -113,7 +113,7 @@
         disable
       </h3>
       <p class="kw-guide-description">
-        Add attribute <span class="kw-guide-highlight">disable</span> in the tag of "kw-select"
+        Add attribute <b>disable</b> in the tag of "kw-select"
       </p>
       <q-card>
         <div>
