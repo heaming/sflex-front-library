@@ -187,25 +187,21 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button>
+          <button @click="toggleShow">
             Show code &darr;
           </button>
         </div>
-        <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+        <div
+          v-if="show"
+          class="kw-guide-code"
+        >
+          <HighCode
+            :code-value="theColumnsCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -382,20 +378,13 @@
           </button>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+          <HighCode
+            :code-value="theColumnsOfKwFormItemCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -470,20 +459,13 @@
           </button>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+          <HighCode
+            :code-value="theFormExampleCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -594,20 +576,13 @@
           </button>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            disable<br>
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+          <HighCode
+            :code-value="essentialForTheElememtsCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -615,7 +590,401 @@
 </template>
 
 <script setup>
-</script>
-<style lang="scss">
+import { HighCode } from 'vue-highlight-code';
+import 'vue-highlight-code/dist/style.css';
 
-</style>
+const vue = 'vue';
+const theColumnsCode = `
+<kw-form cols="4">
+  <kw-form-row>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="colspan">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const theColumnsOfKwFormItemCode = `
+<kw-form cols="4">
+  <kw-form-row>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="colspan-2"
+      colspan="2"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="colspan-1">
+      <kw-field
+        name="radio"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="colspan-2"
+      colspan="2"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+<kw-form cols="3">
+  <kw-form-row>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-option-group
+        :model-value="[]"
+        name="checkboxOptionGroup"
+        rules="required"
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="colspan-2"
+      colspan="2"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+<kw-form cols="2">
+  <kw-form-row>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="colspan-1"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="colspan-2"
+      colspan="2"
+    >
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const theFormExampleCode = `
+<kw-form cols="2">
+  <kw-form-row>
+    <kw-form-item
+      label="항목명 기본 2줄일 경우"
+      colspan="1"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      class="essential"
+      label="프로모션명"
+      colspan="3"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="초등 올인원 패키지"
+      />
+      <span class="kw-text-counter">(10/30)</span>
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="프로모션기간"
+      class="essential"
+    >
+      <kw-date-range-picker
+        name="dateRangePicker"
+        rules="date_range_required|date_range_months:1"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="프로모션적용월"
+      class="essential"
+    >
+      <kw-date-picker
+        name="datePicker"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const essentialForTheElememtsCode = `
+<kw-form cols="2">
+  <kw-form-row>
+    <kw-form-item
+      label="input"
+      colspan="1"
+      class="essential"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="select"
+      class="essential"
+    >
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        placeholder="선택해 주세요."
+        name="select"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+
+  <kw-form-row>
+    <kw-form-item
+      label="DateRangePicker"
+      class="essential"
+    >
+      <kw-date-range-picker
+        name="dateRangePicker"
+        rules="date_range_required|date_range_months:1"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="dateRangePicker"
+      class="essential"
+    >
+      <kw-date-picker
+        name="datePicker"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="Radio"
+      class="essential"
+    >
+      <kw-field
+        name="radio"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+    <kw-form-item
+      label="Checkbox"
+      class="essential"
+    >
+      <kw-field
+        :model-value="[]"
+        name="checkbox"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      show: false,
+    };
+  },
+  methods: {
+    toggleShow() {
+      this.show = !this.show;
+    },
+  },
+};
+</script>
