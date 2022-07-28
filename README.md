@@ -73,8 +73,10 @@ code --install-extension vscode-icons-team.vscode-icons
 - https://github.com/git-for-windows/git/releases/download/v2.37.0.windows.1/Git-2.37.0-64-bit.exe
 - Set configuration
 ``` bash
-git config core.autocrlf false
-
+# set up name and email address
 git config --global user.name "Your Name"
 git config --global user.email you@example.com
+
+# Git can handle this by auto-converting CRLF line endings into LF when you add a file to the index, and vice versa when it checks out code onto your filesystem. You can turn on this functionality with the core.autocrlf setting. If you’re on a Windows machine, set it to true — this converts LF endings into CRLF when you check out code
+git config --global core.autocrlf true
 ```
