@@ -1,6 +1,7 @@
 <template>
   <div
     class="kw-form-item"
+    :class="itemClass"
     :style="{ 'max-width': colWidth }"
   >
     <div class="row">
