@@ -1,11 +1,11 @@
 <template>
   <q-field
     v-bind="styleClassAttrs"
+    class="kw-multi-date-picker"
     :label="$q.platform.is.desktop ? null : label"
     :error="error"
     :error-message="errorMessage"
     no-error-icon
-    class="kw-multi-date-picker"
   >
     <date-picker
       ref="inputRef"
