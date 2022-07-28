@@ -28,21 +28,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-field
-            name="radio"<br>
-            rules="required"<br>
-            &gt;
-            &lt;template #default="{ field }"&gt;<br>
-            &lt;kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"<br>
-            :key="i"
-            v-bind="field"<br>
-            :val="item"
-            /&gt;<br>
-            &lt;/template&gt;<br>
-            &lt;/kw-field&gt;<br>
-          </code>
+          <HighCode
+            :code-value="datePickerCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -70,25 +62,48 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-field
-            name="radio"<br>
-            rules="required"<br>
-            &gt;
-            &lt;template #default="{ field }"&gt;<br>
-            &lt;kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"<br>
-            :key="i"
-            v-bind="field"<br>
-            :val="item"
-            /&gt;<br>
-            &lt;/template&gt;<br>
-            &lt;/kw-field&gt;<br>
-          </code>
+          <HighCode
+            :code-value="dateRangePickerCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
+import { HighCode } from 'vue-highlight-code';
+import 'vue-highlight-code/dist/style.css';
+
+const vue = 'vue';
+
+const datePickerCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="DatePicker">
+      <kw-date-picker
+        name="datePicker"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const dateRangePickerCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="DateRangePicker">
+      <kw-date-range-picker
+        name="dateRangePicker"
+        rules="date_range_required|date_range_months:1"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
 </script>
