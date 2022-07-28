@@ -93,6 +93,7 @@ module.exports = {
     'consistent-return': 'off',
     'default-case': 'off',
     'import/prefer-default-export': 'off',
+    'linebreak-style': 'off',
     'no-param-reassign': 'off',
     'no-return-await': 'off',
     'object-curly-newline': 'off',
