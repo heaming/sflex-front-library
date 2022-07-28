@@ -373,11 +373,14 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button>
+          <button @click="toggleShow">
             Show code &darr;
           </button>
         </div>
-        <div class="kw-guide-code">
+        <div
+          v-if="show"
+          class="kw-guide-code"
+        >
           <HighCode
             :code-value="theColumnsOfKwFormItemCode"
             :lang="vue"
@@ -454,11 +457,14 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button>
+          <button @click="toggleShow">
             Show code &darr;
           </button>
         </div>
-        <div class="kw-guide-code">
+        <div
+          v-if="show"
+          class="kw-guide-code"
+        >
           <HighCode
             :code-value="theFormExampleCode"
             :lang="vue"
@@ -571,11 +577,14 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button>
+          <button @click="toggleShow">
             Show code &darr;
           </button>
         </div>
-        <div class="kw-guide-code">
+        <div
+          v-if="show"
+          class="kw-guide-code"
+        >
           <HighCode
             :code-value="essentialForTheElememtsCode"
             :lang="vue"
