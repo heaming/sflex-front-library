@@ -1,0 +1,10 @@
+<svg id="bookmark_on" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(-1802.045 -373.975)">
+    <path id="패스_210110" data-name="패스 210110" d="M7,0,9.345,4.345l4.655,1L10.794,9.035,11.326,14,7,11.934,2.674,14l.532-4.965L0,5.348l4.655-1Z" transform="translate(1803.045 374.975)" fill="#ff8f1f"/>
+  </g>
+</svg>

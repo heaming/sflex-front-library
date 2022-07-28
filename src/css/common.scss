@@ -5,6 +5,7 @@
 );
 @forward "./functions" with ($-palette: quasar-based-palette.$palette);
 @forward "./mixins" with ($-palette: quasar-based-palette.$palette);
+@use "./guide";
 
 $palette: quasar-based-palette.$palette;
 $colors: quasar-based-palette.$colors;
@@ -29,8 +30,22 @@ $state-palette: quasar-based-palette.$state-palette;
   src: url("~assets/fonts/SpoqaHanSansNeo-Regular.woff2") format("woff2");
 }
 
+#app > .q-layout { min-width: 1900px; }
+
 body {
   font-size: 16px;
   color: #222;
   font-family: "Spoqa Han Sans Neo", sans-serif;
+}
+
+[disabled] {
+  opacity: 1 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: 16px;
+  color: $placeholder !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
 }

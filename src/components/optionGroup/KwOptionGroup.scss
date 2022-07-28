@@ -1,16 +1,62 @@
-.q-option-group {
-  display: flex;
-  flex-wrap: wrap;
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
 
-  &.q-gutter-x-sm {
+.kw-option-group {
+  $root: ".q-option-group";
+
+  #{$root} {
+    margin-right: 0;
     margin-left: 0;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
     & > div {
+      margin-right: 20px;
       margin-left: 0;
     }
   }
-}
 
-.q-checkbox.row.inline.no-wrap {
-  display: flex;
+  // checkbox
+  .q-checkbox.disabled {
+    .q-checkbox__label {
+      color: $placeholder;
+    }
+
+    .q-checkbox__bg {
+      background: url(~assets/images/checkbox_disable.svg) no-repeat center;
+      background-size: 22px;
+    }
+
+    .q-checkbox__inner--truthy .q-checkbox__bg {
+      background: url(~assets/images/checkbox_selected_disable.svg) no-repeat center;
+      background-size: 22px;
+    }
+  }
+
+  // radio
+  .q-radio {
+    height: 32px;
+  }
+
+  .q-radio.disabled {
+    .q-radio__bg {
+      background: url(~assets/images/radio_disable.svg) no-repeat center;
+      background-size: 22px;
+    }
+
+    .q-radio__inner--truthy .q-radio__bg {
+      background: url(~assets/images/radio_selected_disable.svg) no-repeat center;
+      background-size: 22px;
+    }
+
+    .q-radio__label {
+      color: $placeholder;
+    }
+  }
 }
