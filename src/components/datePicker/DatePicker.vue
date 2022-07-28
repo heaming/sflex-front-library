@@ -4,16 +4,17 @@
     v-bind="styleClassAttrs"
     v-model="innerValue"
     class="kw-date-picker"
+    :class="{'q-field--focused': showing}"
     :label="label"
-    :error-message="errorMessage"
     :error="error"
+    :error-message="errorMessage"
     :readonly="readonly"
     :disable="disable"
     mask="####-##-##"
+    fill-mask="_"
     :unmasked-value="unmaskedValue"
-    :hide-bottom-space="hideBottomSpace"
     no-error-icon
-    @click="toggleDate()"
+    @click="toggleView()"
     @blur="onBlurInput"
     @change="onChangeInput"
   >
@@ -22,11 +23,12 @@
         ref="iconRef"
         name="event"
         class="cursor-pointer"
-        @click.prevent="toggleDate()"
+        @click.prevent="toggleView()"
       />
     </template>
     <q-menu
       v-model="showing"
+      class="kw-date-picker"
       no-parent-event
       no-focus
       no-refocus
@@ -35,7 +37,6 @@
         ref="dateRef"
         :model-value="modelValue"
         v-bind="inheritedAttrs"
-        class="kw-date-picker"
         minimal
         :mask="unmaskedValue ? 'YYYYMMDD' : 'YYYY-MM-DD'"
         :navigation-min-year-month="navigationMinYearMonth"
@@ -112,10 +113,6 @@ export default {
       type: [Array, Function],
       default: undefined,
     },
-    hideBottomSpace: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   emits: ['update:modelValue'],
@@ -128,6 +125,10 @@ export default {
     const showing = ref(false);
     const modelValue = toRef(props, 'modelValue');
     const innerValue = ref(modelValue.value);
+
+    watch(modelValue, (val) => {
+      innerValue.value = val;
+    });
 
     function eventsFn(e) {
       const { events } = e;
@@ -155,7 +156,7 @@ export default {
       ) ?? true;
     }
 
-    function toggleDate(e) {
+    function toggleView(e) {
       showing.value = e ?? !showing.value;
 
       if (showing.value) {
@@ -168,27 +169,37 @@ export default {
       }
     }
 
+    function onBlurInput() {
+      const el = dateRef.value?.$el;
+
+      if (!el?.contains(document.activeElement)) {
+        toggleView(false);
+      }
+    }
+
     async function onChangeInput(e) {
+      e = e.replace(/_/g, '').replace(/(-)\1/, '');
+
       if (!e) {
-        emit('update:modelValue', e);
+        emit('update:modelValue', '');
         return;
       }
 
       const n = Date.parse(e);
 
       if (!Number.isNaN(n)) {
-        let value = date.formatDate(n, 'YYYY-MM-DD').padStart(10, '0');
+        let val = date.formatDate(n, 'YYYY-MM-DD').padStart(10, '0');
 
-        if (optionsFn(value)) {
-          if (value > props.maxDate) {
-            value = props.maxDate;
-          } else if (value < props.minDate) {
-            value = props.minDate;
+        if (optionsFn(val)) {
+          if (val > props.maxDate) {
+            val = props.maxDate;
+          } else if (val < props.minDate) {
+            val = props.minDate;
           }
 
-          value = props.unmaskedValue ? value.replace(/-/g, '') : value;
+          val = props.unmaskedValue ? val.replace(/-/g, '') : val;
 
-          emit('update:modelValue', value);
+          emit('update:modelValue', val);
           await nextTick();
         }
       }
@@ -196,20 +207,14 @@ export default {
       innerValue.value = modelValue.value;
 
       const el = inputRef.value.getNativeElement();
-      const shouldChangeSelection = e.length < 10 && document.activeElement === el;
+      const shouldChangeSelection = document.activeElement === el && e.length < 10;
 
       if (shouldChangeSelection) {
+        const i = !innerValue.value ? 0 : 10;
+
         setTimeout(() => {
-          el.setSelectionRange(10, 10);
+          el.setSelectionRange(i, i);
         });
-      }
-    }
-
-    function onBlurInput() {
-      const el = dateRef.value?.$el;
-
-      if (!el?.contains(document.activeElement)) {
-        toggleDate(false);
       }
     }
 
@@ -226,17 +231,13 @@ export default {
         el.setSelectionRange(10, 10);
       }
 
-      toggleDate(false);
+      toggleView(false);
     }
-
-    watch(modelValue, (val) => {
-      innerValue.value = val;
-    });
 
     const clickOutsideProps = {
       innerRefs: [inputRef, iconRef, dateRef],
       onClickOutside() {
-        toggleDate(false);
+        toggleView(false);
       },
     };
 
@@ -269,10 +270,10 @@ export default {
       eventsFn,
       eventColorFn,
       optionsFn,
+      toggleView,
       onBlurInput,
       onChangeInput,
       onChangeDate,
-      toggleDate,
       focus,
       navigationMaxYearMonth,
       navigationMinYearMonth,
