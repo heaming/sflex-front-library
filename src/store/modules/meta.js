@@ -54,7 +54,7 @@ export default {
     getConfigs: (state) => state.configs,
     getConfig: (state) => (configId) => find(state.configs, ['configurationId', configId]),
     getNotices: (state) => state.notices,
-    getLinkPage: (state) => (pageId) => find(state.linkPages, ['pageId', pageId]),
+    getLinkPage: (state) => (pageId, linkPageId) => find(state.linkPages, ['pageId', pageId, 'linkPageId', linkPageId]),
     getApps: (state) => state.apps,
     getApp: (state) => (appId) => find(state.apps, ['applicationId', appId]),
     getAppMenus: (state) => (appId) => filter(state.menus, ['applicationId', appId]),

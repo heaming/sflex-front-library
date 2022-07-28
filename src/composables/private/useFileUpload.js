@@ -217,10 +217,6 @@ export const useMultiFileUpload = (values, options) => {
       // console.log('fileLikes_set', newFiles);
       await syncUploadings(newFiles);
       if (values.value !== newFiles && !isReadonly(values)) {
-        // console.log(values);
-        // console.log(values.value);
-        // console.log(isReadonly(values.value));
-        // console.log(values.value.value);
         values.value = newFiles;
       }
       trigger();

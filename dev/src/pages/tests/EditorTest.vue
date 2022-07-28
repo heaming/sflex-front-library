@@ -12,6 +12,8 @@
           v-model="testValue"
           label="test"
           rules="required"
+          :disabled="disabled"
+          :readonly="readonly"
         />
       </q-card-section>
       <q-card-actions>
@@ -21,45 +23,15 @@
         <q-btn @click="focus">
           focus
         </q-btn>
+        <q-btn @click="toggleDisabled">
+          disable
+        </q-btn>
+        <q-btn @click="toggleReadonly">
+          readonly
+        </q-btn>
       </q-card-actions>
     </q-card>
   </q-expansion-item>
-
-  <div style="width: 100%;">
-    <div
-      class="row"
-      style="flex-wrap: nowrap; height: 10px;"
-    >
-      <div
-        class="bg-cyan-1 col-3"
-        style="flex-shrink: 1;"
-      />
-      <div
-        class="bg-cyan-2"
-        style="width: 50px;"
-      />
-      <div
-        class="bg-cyan-3"
-        style="width: 50px;"
-      />
-      <div
-        class="bg-cyan-4"
-        style="width: 50px;"
-      />
-      <div
-        class="bg-cyan-5"
-        style="width: 50px;"
-      />
-      <div
-        class="bg-cyan-6"
-        style="width: 50px;"
-      />
-      <div
-        class="bg-cyan-7 col-3"
-        style="flex: 1 1 auto;"
-      />
-    </div>
-  </div>
 </template>
 
 <script>
@@ -68,6 +40,17 @@ export default {
   setup() {
     const testValue = ref('');
     const kwEditorRef = ref(null);
+    const disabled = ref(false);
+    const readonly = ref(false);
+
+    function toggleDisabled() {
+      disabled.value = !disabled.value;
+    }
+
+    function toggleReadonly() {
+      disabled.value = !readonly.value;
+    }
+
     function randomizeText() {
       testValue.value = Math.random().toString();
     }
@@ -81,6 +64,9 @@ export default {
       testValue,
       randomizeText,
       focus,
+      toggleDisabled,
+      toggleReadonly,
+      disabled,
     };
   },
 };

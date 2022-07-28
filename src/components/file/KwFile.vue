@@ -1,181 +1,261 @@
 <template>
-  <div v-bind="styleClassAttrs">
-    <div
-      v-if="multiple"
-      class="button-area"
+  <template v-if="multiple">
+    <q-file
+      ref="fileRef"
+      v-model="files"
+      v-bind="$attrs"
+      append
+      multiple
+      :accept="accept"
+      :counter-label="counterLabel"
+      :error="error"
+      :counter="!error"
+      :error-message="errorMessage"
+      :max-file-size="maxFileSize"
+      :max-files="maxFiles"
+      :max-total-size="maxTotalSize"
+      :clearable="false"
+      @rejected="onRejected"
     >
-      <q-btn
-        icon="add"
-        dense
-        @click="pickFiles"
-      />
-      <q-btn
-        icon="remove"
-        dense
-        @click="removeSelected"
-      />
-    </div>
-    <div class="file-area">
-      <file-picker
-        ref="inputRef"
-        v-model="value"
-        instance-update
-        v-bind="inheritedAttrs"
-        :disable="!accept"
-        :accept="accept"
-        :counter="!error"
-        :error="error"
-        :error-message="errorMessage"
-        :multiple="multiple"
-        :max-total-size="maxTotalSize"
-      />
-    </div>
-  </div>
+      <template
+        v-if="!$slots.selected"
+        #file="{ file, ref, index }"
+      >
+        <slot
+          :ref="ref"
+          name="file"
+          :file="file"
+          :index="index"
+        >
+          <div
+            class="row full-width no-wrap"
+            style="align-items: center;"
+          >
+            <q-checkbox
+              v-model="selectedFiles"
+              :val="file"
+            />
+            <div class="ellipsis">
+              {{ `${file.name} (${fileSizeToString(file.size)})` }}
+            </div>
+            <div
+              class="flex no-wrap"
+              style="margin-left: auto;"
+            >
+              <q-btn
+                v-if="isRemovable(file)"
+                icon="download"
+                dense
+                flat
+                @click.prevent="downloadFile(file)"
+              />
+              <q-btn
+                v-if="isRemovable(file)"
+                icon="delete"
+                dense
+                flat
+                @click.prevent="removeFile(file)"
+              />
+            </div>
+          </div>
+        </slot>
+      </template>
+      <template
+        #selected="{files, ref}"
+      >
+        <slot
+          :ref="ref"
+          name="selected"
+          :files="files"
+        />
+      </template>
+    </q-file>
+  </template>
+  <template v-else>
+    <q-input
+      v-bind="$attrs"
+      readonly
+      :model-value="files[0]?.name"
+      :error="error"
+      :error-message="errorMessage"
+      :counter="false"
+      :clearable="false"
+      @click="pickFiles"
+    >
+      <template
+        v-if="files[0]"
+        #append
+      >
+        <q-btn
+          icon="download"
+          dense
+          flat
+          @click="downloadFile(files[0])"
+        />
+        <q-btn
+          icon="delete"
+          dense
+          flat
+          @click="removeFile(files[0])"
+        />
+      </template>
+    </q-input>
+
+    <q-file
+      v-show="false"
+      ref="fileRef"
+      :model-value="null"
+      v-bind="$attrs"
+      :accept="accept"
+      :max-file-size="maxFileSize"
+      :max-total-size="maxTotalSize"
+      @update:model-value="syncWithUploading"
+    />
+  </template>
 </template>
 
 <script>
-import { warn } from 'vue';
-import { http } from '../../plugins/http';
-import { getConfig } from '../../plugins/meta';
+import { STATE, useMultiFileUpload } from '../../composables/private/useFileUpload';
 import useField, { useFieldProps } from '../../composables/private/useField';
-import FilePicker from './FilePicker.vue';
-import useInheritAttrs from '../../composables/private/useInheritAttrs';
-
-const toFileLike = (attachFile) => ({
-  name: attachFile.fileName,
-  size: Number.parseInt(attachFile.fileSize, 10) || 0,
-  type: undefined,
-  targetPath: 'storage',
-  serverFileName: attachFile.realityFilePath,
-  fileUid: attachFile.fileUid,
-  myFileYn: attachFile.myFileYn,
-});
-const getExtension = (fileName) => {
-  const dotIndex = fileName.indexOf('.');
-  if (dotIndex > 0 && dotIndex < fileName.length - 1) {
-    return fileName.slice(dotIndex + 1);
-  }
-};
-const toAttachFiles = (uploadedFileLike, attachFileGroup, attachDocumentId, arrayalOrder) => ({
-  fileUid: uploadedFileLike.fileUid,
-  attachDocumentId,
-  attachGroupId: attachFileGroup.attachGroupId,
-  realityFilePath: uploadedFileLike.serverFileName,
-  fileName: uploadedFileLike.name,
-  fileExtensionName: getExtension(uploadedFileLike.name),
-  fileSize: uploadedFileLike.size,
-  arrayalOrder,
-  representativeImageYn: undefined, // todo check
-});
-const mapToAttachFiles = (uploadedFileLikes, attachFileGroup, attachDocumentId) => {
-  const attachFiles = [];
-  uploadedFileLikes.forEach((uploadedFileLike, index) => {
-    attachFiles.push(toAttachFiles(uploadedFileLike, attachFileGroup, attachDocumentId, index + 1));
-  });
-  return attachFiles;
-};
-const getFileExtWhiteList = (extCode) => {
-  // todo remove fallback value
-  const configValue = getConfig(`CFG_CMD_ATTH_PSBL_EXTS_${extCode}`, 'word, ppt, doc, docx, pptx, txt, xlsx, xls, pdf, xlsm, png, eml, dwg, mht, jpg, cts, apk');
-
-  if (!configValue) {
-    warn('첨부가능 확장자에 대한 config 를 찾을 수 없습니다.');
-    return;
-  }
-  return configValue
-    .split(',')
-    .map((ext) => `.${ext.trim()}`)
-    .join(', ');
-};
+import { alert } from '../../plugins/dialog';
 
 export default {
   name: 'KwFile',
-  components: { FilePicker },
-  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
 
     modelValue: { type: Array, default: () => [] },
-    attachGroupId: { type: String, default: '' },
-    attachDocumentId: { type: String, default: '' },
-    showAddDeleteBtn: { type: Boolean, default: false },
-    showUpDownArrowBtn: { type: Boolean, default: false },
-    myFileYn: { type: String, default: 'N' },
 
-    multiple: { type: Boolean, default: false },
+    error: { type: Boolean, required: false, default: false },
+    errorMessage: { type: String, required: false, default: undefined },
+
+    multiple: { type: Boolean, required: false, default: false },
+    accept: { type: String, required: false, default: undefined },
+    capture: { type: String, required: false, default: undefined },
+    maxFileSize: { type: [Number, String], required: false, default: undefined },
+    maxTotalSize: { type: [Number, String], required: false, default: undefined },
+    maxFiles: { type: [Number, String], required: false, default: undefined },
+    filter: { type: Function, required: false, default: undefined },
+    instanceUpdate: { type: Boolean, default: false },
+    rejectMessage: { type: [Function, String], default: undefined },
   },
 
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'rejected'],
 
-  async setup(props) {
-    const attrsCtx = useInheritAttrs();
+  setup(props, { emit }) {
+    const fileRef = ref();
+
     const fieldCtx = useField();
-    const { value, inputRef, init } = fieldCtx;
+    const { value } = fieldCtx;
 
-    const initFiles = ref([]);
-    const attachFileGroup = ref({});
-    const maxTotalSize = computed(() => {
-      const serverSetting = attachFileGroup?.value?.attachRestrictionSize;
-      if (serverSetting) {
-        return serverSetting * 1024 * 1024;
-      }
-    });
-    const accept = computed(() => {
-      const serverSetting = attachFileGroup?.value?.attachPossibilityExtensionCode || 'ALL'; // todo check white list key
-      if (serverSetting) {
-        return getFileExtWhiteList(serverSetting);
-      }
+    const uploadCtx = useMultiFileUpload(value, {
+      instanceUpdate: props.instanceUpdate,
     });
 
-    async function setInitFiles(attachDocumentId) {
-      if (attachDocumentId) {
-        const response = await http.get(`/api/v1/common/attach-files/${attachDocumentId}`);
-        initFiles.value = response.data;
-      }
-      value.value = initFiles.value.map(toFileLike);
-      await init();
+    const { files } = uploadCtx;
+
+    function syncWithUploading(file) {
+      files.value = [file];
     }
 
-    async function setAttachFileGroup(attachGroupId) {
-      if (attachGroupId) {
-        const response = await http.get(`/api/v1/common/attach-file-groups/${attachGroupId}`);
-        attachFileGroup.value = response.data;
-      }
-    }
-
-    await setAttachFileGroup(props.attachGroupId);
-    await setInitFiles(props.attachDocumentId);
-    await init();
-
-    watch(() => props.attachDocumentId, setInitFiles);
-    watch(() => props.attachGroupId, setAttachFileGroup);
-
-    const getAttachFiles = () => mapToAttachFiles(
-      value.value,
-      attachFileGroup.value,
-      props.attachDocumentId,
-    );
+    // if you want use q-file for single FilePicker,
+    // ignoring warning which is occurred when bind modelvalue with FileLike.
+    // use this files override
+    // const files = computed({
+    //   get() {
+    //     return props.multiple ? files.value : files.value[0];
+    //   },
+    //   set(fileOrFiles) {
+    //     files.value = fileOrFiles.length ? fileOrFiles : [fileOrFiles];
+    //   },
+    // });
 
     const pickFiles = () => {
-      inputRef.value.pickFiles();
+      fileRef.value.pickFiles();
+    };
+
+    const selectedFiles = ref([]);
+
+    const isRemovable = (file) => {
+      const uploading = uploadCtx.findUploading(file);
+      return [STATE.UPLOADED, STATE.UPLOAD].includes(uploading?.state);
+    };
+
+    const updateSelected = () => {
+      selectedFiles.value.forEach(uploadCtx.updateFile);
     };
 
     const removeSelected = () => {
-      inputRef.value.removeSelected();
+      selectedFiles.value.forEach(uploadCtx.removeFile);
+    };
+
+    const getSelectedFilesName = () => selectedFiles.value.map((file) => file.name);
+
+    const getIcon = (file) => {
+      if (file.type.indexOf('video/') === 0) return 'movie';
+      if (file.type.indexOf('image/') === 0) return 'photo';
+      if (file.type.indexOf('audio/') === 0) return 'audiotrack';
+      return 'insert_drive_file';
+    };
+
+    const fileSizeToString = (fileSize, fractionDigits = 1) => {
+      const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'BB'];
+      let unitIndex = 0;
+      while (fileSize > 1024 && unitIndex < units.length) {
+        fileSize /= 1024;
+        unitIndex += 1;
+      }
+      return fileSize.toFixed(fractionDigits) + units[unitIndex];
+    };
+
+    const counterLabel = ({ totalSize, filesNumber, maxFiles }) => {
+      const counters = [];
+      if (props.maxFiles) {
+        counters.push(`${filesNumber} files of ${maxFiles}`);
+      }
+      if (props.maxTotalSize) {
+        counters.push(`${totalSize} / ${fileSizeToString(props.maxTotalSize, 0)}`);
+      }
+      return counters.join(' | ');
+    };
+
+    const getRejectMessage = ({ failedPropValidation, file }) => {
+      if (typeof props.rejectMessage === 'function') {
+        return props.rejectMessage(failedPropValidation, file);
+      }
+      if (typeof props.rejectMessage === 'string') {
+        return props.rejectMessage;
+      }
+      return `${failedPropValidation} : ${file.name}`;
+    };
+
+    const onRejected = (rejectedEntries) => {
+      const rejectMessage = rejectedEntries.map(getRejectMessage).join('\n');
+      emit('rejected', rejectMessage, rejectedEntries);
+      alert(rejectMessage);
     };
 
     return {
-      ...attrsCtx,
+      fileRef,
       ...fieldCtx,
-      attachFileGroup,
-      initFiles,
-      accept,
-      maxTotalSize,
+      selectedFiles,
+      ...uploadCtx,
+      syncWithUploading,
+      onRejected,
+
+      // contents
+      fileSizeToString,
+      counterLabel,
+
+      // style
+      isRemovable,
+      getIcon,
 
       // ref
+      getSelectedFilesName,
       pickFiles,
-      getAttachFiles,
+      updateSelected,
       removeSelected,
     };
   },

@@ -30,6 +30,14 @@ export default {
       type: String,
       default: '',
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     options: {
       type: Object,
       default: () => ({}),
@@ -43,9 +51,9 @@ export default {
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
-    const { value, ...fieldCtx } = useField();
+    const fieldCtx = useField();
+    const { value } = fieldCtx;
     const editorRef = ref(null);
-
     let editor;
 
     function focus() {
@@ -54,6 +62,18 @@ export default {
 
     function blur() {
       editor.core.blur();
+    }
+
+    function enable() {
+      editor.enable();
+    }
+
+    function disable() {
+      editor.disable();
+    }
+
+    function getEditor() {
+      return editor;
     }
 
     const isEmptyContents = (contents) => !/^<[^p]>*/.test(contents)
@@ -68,12 +88,24 @@ export default {
       editor.onChange = (contents) => {
         emit('update:modelValue', isEmptyContents(contents) ? '' : contents);
       };
-    });
 
-    watch(() => props.modelValue, (val) => {
-      if (editor.getContents() !== val) {
-        editor.setContents(val);
-      }
+      watch(() => props.disabled, (disabled) => {
+        if (disabled) {
+          disable();
+        } else {
+          enable();
+        }
+      }, { immediate: true });
+
+      watch(() => props.readonly, (newVal) => {
+        editor.readOnly(newVal);
+      });
+
+      watch(() => props.modelValue, (val) => {
+        if (editor.getContents() !== val) {
+          editor.setContents(val);
+        }
+      });
     });
 
     onBeforeUnmount(() => {
@@ -84,9 +116,12 @@ export default {
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
+      editor,
       editorRef,
       focus,
       blur,
+      disable,
+      getEditor,
     };
   },
 };

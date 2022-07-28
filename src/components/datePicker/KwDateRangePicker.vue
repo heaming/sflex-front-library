@@ -15,8 +15,8 @@
       :readonly="readonly"
       :disable="disable"
       :unmasked-value="unmaskedValue"
-      :navigation-min-year-month="navigationMinYearMonth"
-      :navigation-max-year-month="navigationMaxYearMonth"
+      :min-date="minDate"
+      :max-date="maxDate"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
     /> ~
@@ -27,8 +27,8 @@
       :readonly="readonly"
       :disable="disable"
       :unmasked-value="unmaskedValue"
-      :navigation-min-year-month="navigationMinYearMonth"
-      :navigation-max-year-month="navigationMaxYearMonth"
+      :min-date="minDate"
+      :max-date="maxDate"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 1)"
     />
@@ -70,13 +70,13 @@ export default {
       type: Boolean,
       default: false,
     },
-    navigationMinYearMonth: {
+    minDate: {
       type: String,
-      default: '1000/01',
+      default: undefined,
     },
-    navigationMaxYearMonth: {
+    maxDate: {
       type: String,
-      default: '9999/12',
+      default: undefined,
     },
   },
 
