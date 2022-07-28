@@ -91,7 +91,10 @@
       &-code {
         padding: 15px;
         font-size: 14px;
-        background-color: #f8f8f8;
+
+        .code_area {
+          padding-bottom: 30px;
+        }
       }
 
       &-codeButton {

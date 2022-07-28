@@ -40,18 +40,15 @@
       border-color: $black-h1;
     }
 
+    &:read-only,
     &:disabled {
       background-color: $line-bg;
       color: $black-h3;
     }
 
+    &:read-only::placeholder,
     &:disabled::placeholder {
       font-size: 0;
-    }
-
-    &:read-only {
-      background-color: $line-bg;
-      color: $black-h3;
     }
   }
 }

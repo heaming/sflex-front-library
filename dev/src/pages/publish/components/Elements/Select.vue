@@ -12,7 +12,7 @@
         select(default)
       </h3>
       <p class="kw-guide-description">
-        select default( height:40px)
+        select default(height:40px)
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -29,7 +29,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code" />
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="selectDefaultCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -59,19 +67,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명" class="essential"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+          <HighCode
+            :code-value="selectMultipleDefaultCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -91,7 +93,7 @@
             <kw-form-row>
               <kw-form-item label="다중선택 샘플 (readonly)">
                 <kw-select
-                  :model-value="readonlySelect"
+                  :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
                   name="selectMultiple"
@@ -102,7 +104,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code" />
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="selectReadonlyCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -134,20 +144,13 @@
             </kw-form>
           </div>
           <div class="kw-guide-code">
-            <code>
-              &lt;kw-form> <br>
-              &lt;kw-form-row><br>
-              &lt;kw-form-item  label="담당자명"><br>
-              &lt;kw-input<br>
-              name="input"<br>
-              rules="required"<br>
-              placeholder="입력해주세요"
-              disable<br>
-              /><br>
-              &lt;/kw-form-item>
-              &lt;/kw-form-row><br>
-              &lt;/kw-form><br>
-            </code>
+            <HighCode
+              :code-value="selectDisableCode"
+              :lang="vue"
+              theme="light"
+              width="100%"
+              height="auto"
+            />
           </div>
         </div>
       </q-card>
@@ -155,4 +158,73 @@
   </kw-page>
 </template>
 <script setup>
+import { HighCode } from 'vue-highlight-code';
+import 'vue-highlight-code/dist/style.css';
+
+const vue = 'vue';
+
+const selectDefaultCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="Select">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        name="select"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const selectMultipleDefaultCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="Select (Multiple)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const selectReadonlyCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="다중선택 샘플 (readonly)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+        readonly
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const selectDisableCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="다중선택 샘플 (disable)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+        disable
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
 </script>

@@ -37,21 +37,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-field
-            name="radio"<br>
-            rules="required"<br>
-            &gt;
-            &lt;template #default="{ field }"&gt;<br>
-            &lt;kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"<br>
-            :key="i"
-            v-bind="field"<br>
-            :val="item"
-            /&gt;<br>
-            &lt;/template&gt;<br>
-            &lt;/kw-field&gt;<br>
-          </code>
+          <HighCode
+            :code-value="radioDefaultCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -73,7 +65,7 @@
                 <kw-field
                   name="radio"
                   rules="required"
-                  :model-value="disableRadio"
+                  :model-value="[]"
                 >
                   <template #default="{ field }">
                     <kw-radio
@@ -90,21 +82,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-field
-            name="radio"<br>
-            rules="required"<br>
-            &gt;
-            &lt;template #default="{ field }"&gt;<br>
-            &lt;kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"<br>
-            :key="i"
-            v-bind="field"<br>
-            :val="item"
-            /&gt;<br>
-            &lt;/template&gt;<br>
-            &lt;/kw-field&gt;<br>
-          </code>
+          <HighCode
+            :code-value="radioDisableCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
@@ -126,7 +110,7 @@
                 <kw-field
                   name="radio"
                   rules="required"
-                  :model-value="readonlyRadio"
+                  :model-value="[]"
                 >
                   <template #default="{ field }">
                     <kw-radio
@@ -143,30 +127,22 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-field
-            name="radio"<br>
-            rules="required"<br>
-            &gt;
-            &lt;template #default="{ field }"&gt;<br>
-            &lt;kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"<br>
-            :key="i"
-            v-bind="field"<br>
-            :val="item"
-            /&gt;<br>
-            &lt;/template&gt;<br>
-            &lt;/kw-field&gt;<br>
-          </code>
+          <HighCode
+            :code-value="radioReadonlyCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
     <div class="kw-guide-section">
       <h3
-        id="defaultOption"
+        id="defaultOptionGroup"
         class="kw-guide-title"
       >
-        default(optiongroup)
+        default(optionGroup)
       </h3>
       <p class="kw-guide-description">
         default(optiongroup)
@@ -175,7 +151,7 @@
         <div class="kw-guide-example">
           <kw-form>
             <kw-form-row>
-              <kw-form-item label="optiongroup(default)">
+              <kw-form-item label="optiongroup (default)">
                 <kw-option-group
                   name="radioOptionGroup"
                   rules="required"
@@ -187,25 +163,19 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명" class="essential"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+          <HighCode
+            :code-value="groupRadioDefaultCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
     <div class="kw-guide-section">
       <h3
-        id="disable"
+        id="disableOptionGroup"
         class="kw-guide-title"
       >
         disable(OptionGroup)
@@ -219,7 +189,7 @@
             <kw-form-row>
               <kw-form-item label="optiongroup (disable)">
                 <kw-option-group
-                  :model-value="readonlyRadio"
+                  :model-value="[]"
                   name="radioOptionGroup"
                   rules="required"
                   type="radio"
@@ -232,34 +202,26 @@
         </div>
         <div class="kw-guide-code">
           <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명" class="essential"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
+            <HighCode
+              :code-value="groupRadioDisableCode"
+              :lang="vue"
+              theme="light"
+              width="100%"
+              height="auto"
+            />
           </code>
         </div>
       </q-card>
     </div>
     <div class="kw-guide-section">
       <h3
-        id="readonly"
+        id="readonlyOptionGroup"
         class="kw-guide-title"
       >
         readonly(OptionGroup)
       </h3>
       <p class="kw-guide-description">
-        Add the attribute <b> "disable"
-          in the tag of </b>
-        <b>
-          &lt;kw-option-group&gt;
-        </b>
+        Add the attribute <b>"disable"</b> in the tag of <b>"kw-option-group"</b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -267,7 +229,7 @@
             <kw-form-row>
               <kw-form-item label="OptionGroup (readonly)">
                 <kw-option-group
-                  :model-value="readonlyRadio"
+                  :model-value="[]"
                   name="radioOptionGroup"
                   rules="required"
                   type="radio"
@@ -279,26 +241,143 @@
           </kw-form>
         </div>
         <div class="kw-guide-code">
-          <code>
-            &lt;kw-form> <br>
-            &lt;kw-form-row><br>
-            &lt;kw-form-item  label="담당자명"><br>
-            &lt;kw-input<br>
-            name="input"<br>
-            v-model="readonlyValue"<br>
-            rules="required"<br>
-            placeholder="입력해주세요"
-            /><br>
-            &lt;/kw-form-item>
-            &lt;/kw-form-row><br>
-            &lt;/kw-form><br>
-          </code>
+          <HighCode
+            :code-value="groupRadioReadonlyCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
         </div>
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-const readonlyRadio = ref('A');
-const disableRadio = ref('A');
+import { HighCode } from 'vue-highlight-code';
+import 'vue-highlight-code/dist/style.css';
+
+const vue = 'vue';
+
+const radioDefaultCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const radioDisableCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+        :model-value="[]"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+            disable
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const radioReadonlyCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+        :model-value="[]"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+            disable
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const groupRadioDefaultCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="optiongroup (default)">
+      <kw-option-group
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C', 'D']"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const groupRadioDisableCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="optiongroup (disable)">
+      <kw-option-group
+        :model-value="[]"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C']"
+        disable
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const groupRadioReadonlyCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="optiongroup (disable)">
+      <kw-option-group
+        :model-value="[]"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C']"
+        disable
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+// const readonlyRadio = ref('A');
+// const disableRadio = ref('A');
 </script>
