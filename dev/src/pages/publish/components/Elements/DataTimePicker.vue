@@ -72,6 +72,44 @@
         </div>
       </q-card>
     </div>
+    <h2>Time Picker</h2>
+    <p class="kw-guide-description">
+      Time picker/ Time range picker
+    </p>
+    <div class="kw-guide-section">
+      <h3
+        id="defaultTimePicker"
+        class="kw-guide-title"
+      >
+        default(Time picker)
+      </h3>
+      <p class="kw-guide-description">
+        Time picker
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item label="TimePicker">
+                <kw-time-picker
+                  name="timePicker"
+                  rules="required"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="datePickerCode"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 <script setup>
