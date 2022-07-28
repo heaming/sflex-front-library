@@ -370,6 +370,33 @@ const groupCheckboxDisableCode = `
 const groupCheckboxReadonlyCode = `
 <kw-form>
   <kw-form-row>
+    <kw-form-item label="Checkbox">
+      <kw-field
+        :model-value="[]"
+        name="checkbox"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+
+
+
+
+
+
+
+<kw-form>
+  <kw-form-row>
     <kw-form-item label="OptionGroup (disable)">
       <kw-option-group
         :model-value="[]"
@@ -384,6 +411,5 @@ const groupCheckboxReadonlyCode = `
 </kw-form>
 `;
 
-// const readonlyCheckbox = ref(['A']);
-// const checkboxOptionGroup = ref(['A']);
+// const readonlyCheckbox = ref(['A']);eckboxOptionGroup = ref(['A']);
 </script>
