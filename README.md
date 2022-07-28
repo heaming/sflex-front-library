@@ -73,7 +73,7 @@ code --install-extension vscode-icons-team.vscode-icons
 - https://github.com/git-for-windows/git/releases/download/v2.37.0.windows.1/Git-2.37.0-64-bit.exe
 - Set configuration
 ``` bash
-git config --global core.autocrlf false
+git config core.autocrlf false
 
 git config --global user.name "Your Name"
 git config --global user.email you@example.com
