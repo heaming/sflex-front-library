@@ -3,10 +3,10 @@ const registeredList = [];
 let timer;
 
 function registerHandler(clickOutsideProps) {
-  function handler(evt) {
+  function handler(e) {
     clearTimeout(timer);
 
-    const { target } = evt;
+    const { target } = e;
 
     if (
       target === undefined
@@ -22,12 +22,12 @@ function registerHandler(clickOutsideProps) {
       return;
     }
 
-    const innerEls = innerRefs?.map((e) => e.value?.$el || e.value);
-    const isOutside = !innerEls.some((e) => e?.contains(target));
+    const innerEls = innerRefs?.map((v) => v.value?.getNativeElement?.() || v.value?.$el || v.value);
+    const isOutside = !innerEls.some((v) => v?.contains(target));
 
     if (isOutside) {
-      evt.__ClickOutside__ = true;
-      onClickOutside(evt);
+      e.__ClickOutside__ = true;
+      onClickOutside(e);
     }
   }
 
@@ -45,7 +45,7 @@ export function addClickOutside(clickOutsideProps) {
 }
 
 export function removeClickOutside(clickOutsideProps) {
-  const index = registeredList.findIndex((e) => e[0] === clickOutsideProps);
+  const index = registeredList.findIndex((v) => v[0] === clickOutsideProps);
 
   if (index > -1) {
     const [, handler] = registeredList.splice(index, 1)[0];

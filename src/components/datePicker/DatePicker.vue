@@ -54,7 +54,7 @@
 import { date } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
-import { preventSubmitEnter } from '../../utils/private/preventSubmit';
+import { preventSubmitEnter } from '../../utils/private/event';
 
 const dateStringValidator = (v) => v?.length === 10 && !Number.isNaN(Date.parse(v));
 
