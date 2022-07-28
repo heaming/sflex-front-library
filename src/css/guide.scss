@@ -108,14 +108,10 @@
           font-size: 14px;
           border: none;
           border-radius: 20px;
-          color: #ff5353;
           background: none;
-
-          &:hover {
-            background-color: #ff5353;
-            color: #f8f8f8;
-            transition: all 0.2s;
-          }
+          cursor: pointer;
+          background-color: #ff5353;
+          color: #f8f8f8;
         }
 
         &::before {
