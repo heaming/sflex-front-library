@@ -1,3 +1,5 @@
+import getElement from './getElement';
+
 const registeredList = [];
 
 let timer;
@@ -22,7 +24,7 @@ function registerHandler(clickOutsideProps) {
       return;
     }
 
-    const innerEls = innerRefs?.map((v) => v.value?.getNativeElement?.() || v.value?.$el || v.value);
+    const innerEls = innerRefs?.map((v) => getElement(v));
     const isOutside = !innerEls.some((v) => v?.contains(target));
 
     if (isOutside) {

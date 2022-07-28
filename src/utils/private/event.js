@@ -1,3 +1,5 @@
+import getElement from './getElement';
+
 export function stop(e) {
   e.stopPropagation();
 }
@@ -11,8 +13,18 @@ export function stopAndPrevent(e) {
   e.stopPropagation();
 }
 
+export function addEvt(target, eventName, event, options) {
+  const el = getElement(target);
+  el.addEventListener(eventName, event, options);
+}
+
+export function removeEvt(target, eventName, event, options) {
+  const el = getElement(target);
+  el.removeEventListener(eventName, event, options);
+}
+
 export function preventSubmitEnter(target) {
-  const input = target.value?.getNativeElement?.() || target.value?.$el || target.value;
+  const input = getElement(target);
 
   input.addEventListener('focus', (e) => {
     e.target.__oldValue__ = e.target.value;
