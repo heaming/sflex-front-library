@@ -100,7 +100,7 @@
         readonly
       </h3>
       <p class="kw-guide-description">
-        add <b>v-model="readonlyValue"</b> in the tag of "kw-input"
+        add the attribute <b>"readonly"</b> in the tag of "kw-input"
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -108,7 +108,6 @@
             <kw-form-row>
               <kw-form-item label="지역명">
                 <kw-input
-                  v-model="readonlyValue"
                   name="input"
                   readonly
                   rules="required"
@@ -125,7 +124,6 @@
             &lt;kw-form-item  label="담당자명"><br>
             &lt;kw-input<br>
             name="input"<br>
-            v-model="readonlyValue"<br>
             rules="required"<br>
             placeholder="입력해주세요"
             /><br>
