@@ -23,7 +23,9 @@ export function preventSubmitEnter(inputRef) {
         });
       }
 
-      evt.preventDefault();
+      if (evt.cancelable !== false) {
+        evt.preventDefault();
+      }
     }
   });
 }
