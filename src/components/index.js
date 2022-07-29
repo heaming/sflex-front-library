@@ -1,3 +1,4 @@
+export * from './actionBar';
 export * from './btn';
 export * from './btnToggle';
 export * from './chart';
@@ -12,6 +13,7 @@ export * from './input';
 export * from './observer';
 export * from './optionGroup';
 export * from './page';
+export * from './pagination';
 export * from './popup';
 export * from './radio';
 export * from './search';
