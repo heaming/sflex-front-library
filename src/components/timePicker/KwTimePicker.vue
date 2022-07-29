@@ -14,8 +14,8 @@
     :unmasked-value="unmaskedValue"
     no-error-icon
     @click="toggleView()"
-    @blur="onBlurInput"
-    @change="onChangeInput"
+    @blur="onBlur"
+    @change="onChange"
   >
     <template #append>
       <q-icon
@@ -50,9 +50,10 @@
             :key="item"
             clickable
             manual-focus
-            :focused="isSelectedItem(i, j)"
-            @mousemove="onMousemoveItem(i, j)"
-            @click="onSelectItem(i, j)"
+            :active="isActive(i, j)"
+            :focused="isSelected(i, j)"
+            @mousemove="onMousemove(i, j)"
+            @click="onSelect(i, j)"
           >
             <q-item-section>
               {{ item }}
@@ -145,7 +146,7 @@ export default {
       }
     }
 
-    function onBlurInput() {
+    function onBlur() {
       const el = timeRef.value;
 
       if (!el?.contains(document.activeElement)) {
@@ -153,7 +154,7 @@ export default {
       }
     }
 
-    function onChangeInput(e) {
+    function onChange(e) {
       if (!e) {
         value.value = '';
         return;
@@ -182,20 +183,20 @@ export default {
       }
     }
 
-    function onSelectItem(listIndex, itemIndex) {
+    function onSelect(i, j) {
       const el = inputRef.value.getNativeElement();
 
-      const val = timeLists[listIndex][itemIndex];
-      const h = (listIndex === 0 ? val : getHourValue()) || '00';
-      const m = (listIndex === 0 ? getMinValue() : val) || '00';
-      const otherIndex = listIndex === 0 ? 1 : 0;
+      const val = timeLists[i][j];
+      const h = (i === 0 ? val : getHourValue()) || '00';
+      const m = (i === 0 ? getMinValue() : val) || '00';
+      const otherIndex = i === 0 ? 1 : 0;
 
       value.value = props.unmaskedValue ? `${h}${m}` : `${h}:${m}`;
       el.__oldValue__ = props.unmaskedValue ? `${h}:${m}` : value.value;
       innerValue.value = value.value;
 
-      timeClickCount[listIndex] += 1;
-      selectedItemIndex.value[listIndex] = itemIndex;
+      timeClickCount[i] += 1;
+      selectedItemIndex.value[i] = j;
 
       if (timeClickCount[otherIndex] > 0) {
         toggleView(false);
@@ -205,7 +206,7 @@ export default {
       setTimeout(() => el.setSelectionRange(5, 5));
     }
 
-    function onKeydownInput(e) {
+    function onKeydown(e) {
       // enter
       if (e.keyCode === 13 && (e.target.value === e.target.__oldValue__)) {
         stopAndPrevent(e);
@@ -213,7 +214,7 @@ export default {
       }
     }
 
-    function onKeydownInputWhenShowing(e) {
+    function onKeydownWhenShowing(e) {
       // home, end - 36, 35
       if (e.keyCode === 35 || e.keyCode === 36) {
         stopAndPrevent(e);
@@ -272,7 +273,7 @@ export default {
           const i = selectedListIndex.value;
           const j = selectedItemIndex.value[i];
 
-          if (j > -1) onSelectItem(i, j);
+          if (j > -1) onSelect(i, j);
           else toggleView(false);
 
           selectedListIndex.value = i === 0 ? 1 : 0;
@@ -283,14 +284,19 @@ export default {
       toggleView(false);
     }
 
-    function isSelectedItem(listIndex, itemIndex) {
-      return selectedListIndex.value === listIndex
-        && selectedItemIndex.value[listIndex] === itemIndex;
+    function isActive(i, j) {
+      const val = timeLists[i][j];
+      return i === 0 ? value.value.startsWith(val) : value.value.endsWith(val);
     }
 
-    function onMousemoveItem(listIndex, itemIndex) {
-      selectedListIndex.value = listIndex;
-      selectedItemIndex.value[listIndex] = itemIndex;
+    function isSelected(i, j) {
+      return selectedListIndex.value === i
+        && selectedItemIndex.value[i] === j;
+    }
+
+    function onMousemove(i, j) {
+      selectedListIndex.value = i;
+      selectedItemIndex.value[i] = j;
     }
 
     function focus() {
@@ -313,8 +319,8 @@ export default {
           el.setSelectionRange(5, 5);
         }
 
-        removeEvt(inputRef, 'keydown', onKeydownInput, true);
-        addEvt(inputRef, 'keydown', onKeydownInputWhenShowing, true);
+        removeEvt(inputRef, 'keydown', onKeydown, true);
+        addEvt(inputRef, 'keydown', onKeydownWhenShowing, true);
         addClickOutside(clickOutsideProps);
 
         timeClickCount[0] = 0;
@@ -325,14 +331,14 @@ export default {
         await nextTick();
         scrollToSelected();
       } else {
-        removeEvt(inputRef, 'keydown', onKeydownInputWhenShowing, true);
+        removeEvt(inputRef, 'keydown', onKeydownWhenShowing, true);
         removeClickOutside(clickOutsideProps);
-        addEvt(inputRef, 'keydown', onKeydownInput, true);
+        addEvt(inputRef, 'keydown', onKeydown, true);
       }
     });
 
     onMounted(() => {
-      addEvt(inputRef, 'keydown', onKeydownInput, true);
+      addEvt(inputRef, 'keydown', onKeydown, true);
       preventSubmitEnter(inputRef);
     });
 
@@ -349,11 +355,12 @@ export default {
       innerValue,
       toggleView,
       scrollToSelected,
-      onBlurInput,
-      onChangeInput,
-      isSelectedItem,
-      onMousemoveItem,
-      onSelectItem,
+      onBlur,
+      onChange,
+      isActive,
+      isSelected,
+      onMousemove,
+      onSelect,
       focus,
     };
   },
