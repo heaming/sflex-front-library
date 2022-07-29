@@ -11,7 +11,6 @@
     :readonly="readonly"
     :disable="disable"
     mask="##:##"
-    fill-mask="_"
     :unmasked-value="unmaskedValue"
     no-error-icon
     @click="toggleView()"
@@ -117,7 +116,7 @@ export default {
 
     const showing = ref(false);
     const selectedListIndex = ref(-1);
-    const selectedItemIndex = reactive([-1, -1]);
+    const selectedItemIndex = ref([-1, -1]);
 
     const fieldCtx = useField();
     const { value, inputRef } = fieldCtx;
@@ -140,7 +139,7 @@ export default {
           const val = i === 0 ? getHourValue() : getMinValue();
           const index = timeLists[i].findIndex((v) => v === val);
 
-          selectedItemIndex[i] = index;
+          selectedItemIndex.value[i] = index;
           if (index > -1) vm.scrollTo(index);
         });
       }
@@ -155,14 +154,14 @@ export default {
     }
 
     function onChangeInput(e) {
-      e = e.replace(/_/g, '');
-
-      if (e === ':') {
+      if (!e) {
         value.value = '';
         return;
       }
 
-      const n = Date.parse(`1970-01-01 ${e}`);
+      const h = e.substring(0, 2);
+      const m = e.substring(3, 5);
+      const n = Date.parse(`1970-01-01 ${h}:${m}`);
 
       if (!Number.isNaN(n)) {
         const val = date.formatDate(n, 'YYYY-MM-DD HH:mm').split(' ')[1];
@@ -172,11 +171,10 @@ export default {
       innerValue.value = value.value;
 
       const el = inputRef.value.getNativeElement();
-      const shouldChangeSelection = document.activeElement === el && el.selectionEnd < 5;
+      const shouldChangeSelection = document.activeElement === el && e.length < 5;
 
       if (shouldChangeSelection) {
-        const i = !innerValue.value ? 0 : 5;
-        el.setSelectionRange(i, i);
+        setTimeout(() => el.setSelectionRange(5, 5));
       }
 
       if (showing.value) {
@@ -197,14 +195,14 @@ export default {
       innerValue.value = value.value;
 
       timeClickCount[listIndex] += 1;
-      selectedItemIndex[listIndex] = itemIndex;
+      selectedItemIndex.value[listIndex] = itemIndex;
 
       if (timeClickCount[otherIndex] > 0) {
         toggleView(false);
       }
 
       el.focus();
-      el.setSelectionRange(5, 5);
+      setTimeout(() => el.setSelectionRange(5, 5));
     }
 
     function onKeydownInput(e) {
@@ -223,7 +221,7 @@ export default {
         const i = selectedListIndex.value;
         const j = e.keyCode === 36 ? 0 : timeLists[i].length - 1;
 
-        selectedItemIndex[i] = j;
+        selectedItemIndex.value[i] = j;
         timeListRefs.value[i].scrollTo(j);
         return;
       }
@@ -240,10 +238,10 @@ export default {
           vm.$el.clientHeight / vm.$el.querySelector('.q-virtual-scroll__content > .q-item').clientHeight,
         );
 
-        let j = selectedItemIndex[i];
+        let j = selectedItemIndex.value[i];
         j = e.keyCode === 33 ? Math.max(0, j - size) : Math.min(last, j + size);
 
-        selectedItemIndex[i] = j;
+        selectedItemIndex.value[i] = j;
         vm.scrollTo(j);
         return;
       }
@@ -255,11 +253,11 @@ export default {
         const i = selectedListIndex.value;
         const last = timeLists[i].length - 1;
 
-        let j = selectedItemIndex[i] + (e.keyCode === 38 ? -1 : 1);
+        let j = selectedItemIndex.value[i] + (e.keyCode === 38 ? -1 : 1);
         // eslint-disable-next-line no-nested-ternary
         j = j < -1 ? last : (j > last ? 0 : j);
 
-        selectedItemIndex[i] = j;
+        selectedItemIndex.value[i] = j;
         if (j > -1) timeListRefs.value[i].scrollTo(j);
         return;
       }
@@ -272,7 +270,7 @@ export default {
           stopAndPrevent(e);
 
           const i = selectedListIndex.value;
-          const j = selectedItemIndex[i];
+          const j = selectedItemIndex.value[i];
 
           if (j > -1) onSelectItem(i, j);
           else toggleView(false);
@@ -287,12 +285,12 @@ export default {
 
     function isSelectedItem(listIndex, itemIndex) {
       return selectedListIndex.value === listIndex
-        && selectedItemIndex[listIndex] === itemIndex;
+        && selectedItemIndex.value[listIndex] === itemIndex;
     }
 
     function onMousemoveItem(listIndex, itemIndex) {
       selectedListIndex.value = listIndex;
-      selectedItemIndex[listIndex] = itemIndex;
+      selectedItemIndex.value[listIndex] = itemIndex;
     }
 
     function focus() {
@@ -322,6 +320,7 @@ export default {
         timeClickCount[0] = 0;
         timeClickCount[1] = 0;
         selectedListIndex.value = 0;
+        selectedItemIndex.value = [-1, -1];
 
         await nextTick();
         scrollToSelected();
