@@ -2,7 +2,7 @@
   <kw-page class="kw-guide">
     <h2>Btn</h2>
     <p class="kw-guide-description">
-      description
+      작업 진행중
     </p>
     <div class="kw-guide-section">
       <h3
@@ -48,15 +48,369 @@
         default
       </h3>
       <p class="kw-guide-description">
-        description
+        button height 42px
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn>test</kw-btn>
+          <kw-btn>프로모션등록</kw-btn>
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="testCode"
+            :code-value="primaryPositive"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--negative">
+            취소
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="primaryNegative"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn disable>
+            확인
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="primaryDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="popupBottomButton"
+        class="kw-guide-title"
+      >
+        popup bottom button
+      </h3>
+      <p class="kw-guide-description">
+        button height 36px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--popup">
+            확인
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="primaryPopupPositive"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--popup kw-btn--negative">
+            취소
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="primaryPopupNegative"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--popup"
+            disable
+          >
+            확인
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="primaryPopupDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--popup kw-btn--reset">
+            초기화
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="primaryPopupReset"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="secondary"
+        class="kw-guide-title"
+      >
+        Secondary
+      </h3>
+      <p class="kw-guide-description">
+        button height 40px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--secondaray">
+            신규등록
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="secondaryDefault"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--secondaray"
+            disable
+          >
+            신규등록
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="secondaryDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="Contents"
+        class="kw-guide-title"
+      >
+        Contents
+      </h3>
+      <p class="kw-guide-description">
+        button height 32px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--contents kw-btn--add">
+            학습자 추가
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="contentsAddIcon"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--contents"
+          >
+            수정
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="contentsDefault"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--contents kw-btn--add"
+            disable
+          >
+            학습자 추가
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="contentsAddIconDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--contents"
+            disable
+          >
+            수정
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="contentsDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="step-cta"
+        class="kw-guide-title"
+      >
+        Step_CTA
+      </h3>
+      <p class="kw-guide-description">
+        button height 42px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--step">
+            이전
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="stepDefault"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--step"
+            disable
+          >
+            이전
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="stepDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--step"
+          >
+            임시저장
+          </kw-btn>
+          <kw-btn
+            class="kw-btn--step kw-btn--primary"
+          >
+            다음
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="stepTwoBtn"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--step"
+            disable
+          >
+            임시저장
+          </kw-btn>
+          <kw-btn
+            class="kw-btn--step kw-btn--primary"
+            disable
+          >
+            다음
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="stepTwoBtnDisable"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="Contents"
+        class="kw-guide-title"
+      >
+        Etc
+      </h3>
+      <p class="kw-guide-description">
+        button height 32px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--more"
+          >
+            더보기
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="moreBtn"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--more q-btn--append"
+          >
+            더보기
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="moreAppendBtn"
             :lang="vue"
             theme="light"
             width="100%"
@@ -74,17 +428,108 @@ import 'vue-highlight-code/dist/style.css';
 
 const vue = 'vue';
 
-const testCode = `
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="label">
-      <kw-input
-        name="input"
-        rules="required"
-        placeholder="입력해주세요"
-      />
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
+const primaryPositive = `
+<kw-btn>프로모션등록</kw-btn>
+`;
+
+const primaryNegative = `
+<kw-btn class="kw-btn--negative">취소</kw-btn>
+`;
+
+const primaryDisable = `
+<kw-btn disable>확인</kw-btn>
+`;
+
+const primaryPopupPositive = `
+<kw-btn class="kw-btn--popup">확인</kw-btn>
+`;
+
+const primaryPopupNegative = `
+<kw-btn class="kw-btn--popup kw-btn--negative">취소</kw-btn>
+`;
+
+const primaryPopupDisable = `
+<kw-btn class="kw-btn--popup" disable>확인</kw-btn>
+`;
+
+const primaryPopupReset = `
+<kw-btn class="kw-btn--popup kw-btn--reset">초기화</kw-btn>
+`;
+
+const secondaryDefault = `
+<kw-btn class="kw-btn--secondary">프로모션등록</kw-btn>
+`;
+
+const secondaryDisable = `
+<kw-btn class="kw-btn--secondary" disable>프로모션등록</kw-btn>
+`;
+
+const contentsAddIcon = `
+<kw-btn class="kw-btn--contents kw-btn--add">학습자 추가</kw-btn>
+`;
+
+const contentsDefault = `
+<kw-btn class="kw-btn--contents">수정</kw-btn>
+`;
+
+const contentsAddIconDisable = `
+<kw-btn class="kw-btn--contents kw-btn--add" disable>학습자 추가</kw-btn>
+`;
+
+const contentsDisable = `
+<kw-btn class="kw-btn--contents" disable>수정</kw-btn>
+`;
+
+const stepDefault = `
+<kw-btn class="kw-btn--step">이전</kw-btn>
+`;
+
+const stepDisable = `
+<kw-btn class="kw-btn--step" disable>이전</kw-btn>
+`;
+
+const stepTwoBtn = `
+<kw-btn
+  class="kw-btn--step"
+>
+  임시저장
+</kw-btn>
+<kw-btn
+  class="kw-btn--step kw-btn--primary"
+>
+  다음
+</kw-btn>
+`;
+
+const stepTwoBtnDisable = `
+<kw-btn
+  class="kw-btn--step"
+  disable
+>
+  임시저장
+</kw-btn>
+<kw-btn
+  class="kw-btn--step kw-btn--primary"
+  disable
+>
+  다음
+</kw-btn>
+`;
+
+const moreBtn = `
+<kw-btn
+  class="kw-btn--more"
+>
+  더보기
+</kw-btn>
+`;
+
+const moreAppendBtn = `
+<kw-btn
+  class="kw-btn--more q-btn--append"
+>
+  더보기
+</kw-btn>
+
 `;
 </script>
