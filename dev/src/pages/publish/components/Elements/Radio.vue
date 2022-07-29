@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Radio</h2>
+    <h2 class="kw-guide-h2">
+      Radio
+    </h2>
     <p class="kw-guide-description">
       in search form and table, radio is 18px / default is 22px
     </p>

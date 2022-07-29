@@ -49,3 +49,44 @@ textarea::placeholder {
   font-weight: 400 !important;
   opacity: 1 !important;
 }
+
+// global settings
+.kw-page {
+  background: #f4f5f6;
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+  color: $black-h1;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+h2 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: $black-h1;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+h3 {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  color: $black-h1;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+h4 {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  color: $black-h3;
+  letter-spacing: 0;
+  margin: 0;
+}

@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Search Form</h2>
+    <h2 class="kw-guide-h2">
+      Search Form
+    </h2>
     <p class="kw-guide-description">
       kw-search-form > kw-form-row > kw-form-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
       - This is the sequence to be wrapped<br>

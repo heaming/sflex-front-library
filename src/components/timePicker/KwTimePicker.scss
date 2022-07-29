@@ -7,13 +7,14 @@
 
 .kw-time-picker {
   border-right: 0;
+  border-top: 0;
 
   .q-field__append .q-icon {
     padding-left: 16px;
     margin-right: 12px;
     width: 0;
     color: transparent;
-    background: url(~assets/images/icon_calendar.svg) no-repeat center;
+    background: url(~assets/images/ic_clock_16.svg) no-repeat center;
     background-size: 16px auto;
   }
 
@@ -142,10 +143,6 @@ body.desktop .kw-time-picker {
     color: $black-h1;
     font-weight: 500;
   }
-}
-
-.q-position-engine {
-  margin-top: var(--q-pe-top, -1px) !important;
 }
 
 .kw-multi-time-picker {

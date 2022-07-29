@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Data Picker</h2>
+    <h2 class="kw-guide-h2">
+      Data Picker
+    </h2>
     <p class="kw-guide-description">
       Data picker/ Data range picker
     </p>

@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Chart</h2>
+    <h2 class="kw-guide-h2">
+      Chart
+    </h2>
     <p class="kw-guide-description">
       description
     </p>

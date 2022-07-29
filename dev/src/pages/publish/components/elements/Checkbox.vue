@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Checkbox</h2>
+    <h2 class="kw-guide-h2">
+      Checkbox
+    </h2>
     <p class="kw-guide-description">
       in the search form or table, checkbox's height is 18px / default is 22px
     </p>

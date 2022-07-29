@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Select(40px)</h2>
+    <h2 class="kw-guide-h2">
+      Select(40px)
+    </h2>
     <p class="kw-guide-description">
       default-height:40px, searchform- 32px;
     </p>
