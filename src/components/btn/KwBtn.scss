@@ -4,3 +4,278 @@
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable selector-class-pattern */
+
+.kw-btn {
+  padding: 0 28px;
+  min-height: auto;
+  height: 42px;
+  line-height: 1;
+  background-color: $primary;
+  font-size: 16px;
+  color: #fff;
+  text-transform: none;
+  border-radius: 0;
+
+  &::before {
+    display: none;
+  }
+
+  .q-focus-helper {
+    display: none;
+  }
+
+  // hover
+  &:hover {
+    background-color: #2a7bd9;
+  }
+
+  // pressed
+  &.q-btn--active {
+    background-color: #256dbf;
+  }
+
+  // disabled
+  &:disabled {
+    background-color: $line-line;
+
+    &:hover {
+      background-color: $line-line;
+    }
+
+    &.q-btn--active {
+      background-color: $line-line;
+    }
+  }
+
+  // negative
+  &--negative {
+    background-color: $black-h3;
+
+    &:hover {
+      background-color: #5e5e5e;
+    }
+
+    &.q-btn--active {
+      background-color: #454545;
+    }
+  }
+
+  // popup size
+  &--popup {
+    height: 36px;
+
+    &.kw-btn--reset {
+      border: 1px solid $black-btn-line;
+      background-color: #fff;
+      color: $black-h2;
+    }
+  }
+
+  // secondary
+  &--secondaray {
+    padding: 0 12px;
+    height: 40px;
+    border: 1px solid $black-btn-line;
+    background-color: $bg-box;
+    font-size: 14px;
+    color: $black-h2;
+    font-weight: 400;
+
+    &:hover {
+      border-color: $black-h1;
+      background-color: #fff;
+    }
+
+    &.q-btn--active {
+      border-color: $black-btn-line;
+      background-color: $bg-box;
+    }
+
+    &:disabled {
+      border-color: $line-stroke;
+      background-color: $line-bg;
+      color: #bbb;
+
+      &:hover {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+
+      &.q-btn--active {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+    }
+  }
+
+  // contents
+  &--contents {
+    padding: 0 12px;
+    height: 32px;
+    border: 1px solid $black-h1;
+    background-color: #fff;
+    font-size: 14px;
+    color: $black-h2;
+    font-weight: 400;
+
+    &:hover {
+      border-color: $black-h1;
+      background-color: #fff;
+    }
+
+    &.q-btn--active {
+      border-color: $black-btn-line;
+      background-color: $bg-box;
+    }
+
+    &:disabled {
+      border-color: $line-stroke;
+      background-color: $line-bg;
+      color: #bbb;
+
+      &:hover {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+
+      &.q-btn--active {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+    }
+
+    &.kw-btn--add {
+      border-color: $line-stroke;
+      padding-left: 32px;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        background: url(~assets/images/ic_plus_16.svg) no-repeat center;
+        background-size: 16px 16px;
+        display: block;
+      }
+
+      &:disabled {
+        &::after {
+          content: "";
+          background: url(~assets/images/ic_plus_16_disabled.svg) no-repeat center;
+          background-size: 16px 16px;
+        }
+      }
+    }
+  }
+
+  // step
+  &--step {
+    padding: 0 20px;
+    border: 1px solid $black-btn-line;
+    height: 42px;
+    background-color: #fff;
+    color: $black-h2;
+    font-weight: 400;
+
+    & + & {
+      margin-left: 8px;
+    }
+
+    &:hover {
+      border-color: $black-h1;
+      background-color: #fff;
+    }
+
+    &.q-btn--active {
+      border-color: $line-stroke;
+      background-color: $bg-box;
+    }
+
+    &:disabled {
+      border-color: $line-stroke;
+      background-color: $line-bg;
+      color: #bbb;
+
+      &:hover {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+
+      &.q-btn--active {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+    }
+
+    &.kw-btn--primary {
+      border: 0;
+      max-width: 182px;
+      width: 100%;
+      background-color: $primary;
+      color: #fff;
+      font-weight: 500;
+
+      &:hover {
+        background-color: #2a7bd9;
+      }
+
+      &.q-btn--active {
+        background-color: #256dbf;
+      }
+
+      &:disabled {
+        background-color: $line-line;
+
+        &:hover {
+          background-color: $line-line;
+        }
+
+        &.q-btn--active {
+          background-color: $line-line;
+        }
+      }
+    }
+  }
+
+  // more
+  &--more {
+    // border: 1px solid #000;
+    padding: 0 28px 0 12px;
+    height: 32px;
+    background-color: #fff;
+    font-size: 14px;
+    color: $black-h3;
+    font-weight: 400;
+    position: relative;
+
+    &:hover {
+      background-color: inherit;
+    }
+
+    &.q-btn--active {
+      background-color: inherit;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 9px;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%);
+      background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+      background-size: 16px 16px;
+    }
+
+    &.q-btn--append {
+      &::after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+  }
+}
