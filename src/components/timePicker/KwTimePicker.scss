@@ -6,6 +6,8 @@
 /* stylelint-disable selector-class-pattern */
 
 .kw-time-picker {
+  border-right: 0;
+
   .q-field__append .q-icon {
     padding-left: 16px;
     margin-right: 12px;
@@ -91,6 +93,7 @@
     height: 200px;
     overflow: auto;
     box-sizing: border-box;
+    border-right: 1px solid $black-h1;
   }
 
   .q-item__section.column.q-item__section--main.justify-center {
@@ -102,18 +105,24 @@
 
   /* width */
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 8px;
+    border-left: 2px solid $line-bg;
+    border-right: 2px solid $line-bg;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: $line-bg;
+    width: 8px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
+    width: 4px;
     background: #999;
-    border-radius: 10px;
+    background-clip: padding-box;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
   }
 
   /* Handle on hover */
@@ -122,10 +131,22 @@
   }
 }
 
-// body.desktop .q-hoverable:hover > .q-focus-helper {
-//   background: #000;
-//   opacity: 0.07;
-// }
+body.desktop .kw-time-picker {
+  .q-hoverable:hover > .q-focus-helper,
+  .q-manual-focusable--focused > .q-focus-helper {
+    background: #000;
+    opacity: 0.07;
+  }
+
+  .q-manual-focusable--selected .q-item__section.column.q-item__section--main.justify-center {
+    color: $black-h1;
+    font-weight: 500;
+  }
+}
+
+.q-position-engine {
+  margin-top: var(--q-pe-top, -1px) !important;
+}
 
 .kw-multi-time-picker {
   &.q-field--error {
