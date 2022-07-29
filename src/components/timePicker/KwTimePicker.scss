@@ -1,11 +1,168 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+
 .kw-time-picker {
-  .kw-time-picker__view {
-    width: 200px;
+  .q-field__append .q-icon {
+    padding-left: 16px;
+    margin-right: 12px;
+    width: 0;
+    color: transparent;
+    background: url(~assets/images/icon_calendar.svg) no-repeat center;
+    background-size: 16px auto;
   }
 
-  .kw-time-picker__list {
+  &.q-field--focused {
+    .q-field__control {
+      border-color: $black-h1;
+    }
+  }
+
+  &.q-field--error {
+    .q-field__control {
+      border-color: $error;
+
+      &:hover {
+        border-color: $error !important;
+      }
+    }
+
+    &[aria-readonly="true"],
+    &[aria-disabled="true"] {
+      .q-field__control {
+        border-color: $line-stroke;
+      }
+    }
+  }
+
+  &.q-field--readonly,
+  &.q-field--disabled {
+    .q-field__control {
+      background-color: $line-bg;
+    }
+
+    .q-field__native {
+      color: $black-h3;
+
+      &::placeholder {
+        font-size: 0;
+      }
+    }
+  }
+
+  .q-field__inner {
+    max-width: 180px; // todo - 화면 사이즈따라, 그리드 따라 어떻게 변경해야할지 확인 필요
+  }
+
+  .q-field__control {
+    border: 1px solid $line-stroke;
+    height: 40px;
+
+    &:hover:not(:disabled) {
+      border-color: $black-h1;
+    }
+  }
+
+  .q-field__native {
+    padding: 0 12px;
+    font-size: 16px;
+    color: $black-h1;
+    font-weight: 500;
+  }
+
+  .q-field__append {
+    padding-left: 0;
+  }
+
+  .q-field__marginal {
+    height: auto;
+  }
+
+  &__view {
+    width: 178px;
+    box-sizing: border-box;
+  }
+
+  &__list {
     width: 50%;
     height: 200px;
     overflow: auto;
+    box-sizing: border-box;
+  }
+
+  .q-item__section.column.q-item__section--main.justify-center {
+    font-size: 14px;
+    color: $black-h2;
+  }
+
+  // scrollbar
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+// body.desktop .q-hoverable:hover > .q-focus-helper {
+//   background: #000;
+//   opacity: 0.07;
+// }
+
+.kw-multi-time-picker {
+  &.q-field--error {
+    .q-field__control {
+      border-color: $error;
+
+      &:hover {
+        border-color: $error !important;
+      }
+    }
+
+    &[aria-readonly="true"],
+    &[aria-disabled="true"] {
+      .q-field__control {
+        border-color: $line-stroke;
+      }
+    }
+  }
+
+  .q-field__control-container {
+    font-size: 16px;
+    color: $black-h1;
+
+    // line-height: 18px;
+    font-weight: 500;
+    align-items: center;
+  }
+
+  .kw-time-picker:nth-of-type(1) {
+    padding-right: 4px;
+  }
+
+  .kw-time-picker:nth-of-type(2) {
+    padding-left: 4px;
+  }
+
+  .q-field__inner {
+    max-width: none;
   }
 }
