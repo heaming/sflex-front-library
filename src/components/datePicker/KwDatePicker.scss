@@ -38,6 +38,7 @@
     }
   }
 
+  &.q-field--readonly,
   &.q-field--disabled {
     .q-field__control {
       background-color: $line-bg;

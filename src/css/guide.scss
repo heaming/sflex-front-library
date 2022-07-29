@@ -18,13 +18,14 @@
     box-shadow: none;
 
     th {
-      text-transform: capitalize;
+      // text-transform: capitalize;
       color: #333;
     }
 
     td {
       text-align: center;
-      text-transform: capitalize;
+
+      // text-transform: capitalize;
       color: #555;
 
       &:last-child {
@@ -85,13 +86,18 @@
 
     .kw-guide {
       &-example {
-        padding: 20px 0 50px;
+        padding: 20px 0;
       }
 
       &-code {
-        padding: 15px;
-        font-size: 14px;
-        background-color: #f8f8f8;
+        & * {
+          font-size: 14px !important;
+          line-height: 18px;
+        }
+
+        pre {
+          margin: -30px 0 -20px;
+        }
       }
 
       &-codeButton {
@@ -102,14 +108,10 @@
           font-size: 14px;
           border: none;
           border-radius: 20px;
-          color: #ff5353;
           background: none;
-
-          &:hover {
-            background-color: #ff5353;
-            color: #f8f8f8;
-            transition: all 0.2s;
-          }
+          cursor: pointer;
+          background-color: #ff5353;
+          color: #f8f8f8;
         }
 
         &::before {
