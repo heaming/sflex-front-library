@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Btn</h2>
+    <h2 class="kw-guide-h2">
+      Btn
+    </h2>
     <p class="kw-guide-description">
       작업 진행중
     </p>

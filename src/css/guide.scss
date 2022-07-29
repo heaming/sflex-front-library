@@ -1,9 +1,10 @@
 .kw-guide {
   padding: 40px;
 
-  h2 {
-    margin-bottom: 0;
+  .kw-guide-h2 {
+    margin-bottom: 10px;
     font-size: 30px;
+    line-height: 35px;
     font-weight: bold;
     color: #333;
   }
@@ -66,9 +67,9 @@
     font-size: 16px;
     color: #929292;
 
-    &::first-letter {
-      text-transform: uppercase;
-    }
+    // &::first-letter {
+    //   text-transform: uppercase;
+    // }
 
     b {
       font-weight: 500;
@@ -128,5 +129,18 @@
         }
       }
     }
+  }
+}
+
+.gutter-exam-el {
+  display: inline-block;
+  border: 1px solid #333;
+
+  div {
+    background: #ff5353;
+    width: 200px;
+    height: 100px;
+    font-size: 14px;
+    color: #fff;
   }
 }

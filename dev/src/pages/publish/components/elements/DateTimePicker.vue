@@ -1,18 +1,20 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>Data Picker</h2>
+    <h2 class="kw-guide-h2">
+      Date Picker
+    </h2>
     <p class="kw-guide-description">
-      Data picker/ Data range picker
+      Date picker/ Date range picker
     </p>
     <div class="kw-guide-section">
       <h3
-        id="defaultDataPicker"
+        id="defaultDatePicker"
         class="kw-guide-title"
       >
-        default(Data picker)
+        default(Date picker)
       </h3>
       <p class="kw-guide-description">
-        Data picker
+        Date picker
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -40,13 +42,13 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="defaultDataRange"
+        id="defaultDateRange"
         class="kw-guide-title"
       >
-        default(Data Range picker)
+        default(Date Range picker)
       </h3>
       <p class="kw-guide-description">
-        Data Range picker
+        Date Range picker
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -72,7 +74,9 @@
         </div>
       </q-card>
     </div>
-    <h2>Time Picker</h2>
+    <h2 class="kw-guide-h2 kw-mt-5">
+      Time Picker
+    </h2>
     <p class="kw-guide-description">
       Time picker/ Time range picker
     </p>
@@ -101,7 +105,7 @@
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="datePickerCode"
+            :code-value="timePickerCode"
             :lang="vue"
             theme="light"
             width="100%"
@@ -138,6 +142,18 @@ const dateRangePickerCode = `
       <kw-date-range-picker
         name="dateRangePicker"
         rules="date_range_required|date_range_months:1"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+const timePickerCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="TimePicker">
+      <kw-time-picker
+        name="timePicker"
+        rules="required"
       />
     </kw-form-item>
   </kw-form-row>
