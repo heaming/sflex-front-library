@@ -28,7 +28,7 @@ function registerHandler(clickOutsideProps) {
     const isOutside = !innerEls.some((v) => v?.contains(target));
 
     if (isOutside) {
-      e.__ClickOutside__ = true;
+      e.__clickOutside__ = true;
       onClickOutside(e);
     }
   }
