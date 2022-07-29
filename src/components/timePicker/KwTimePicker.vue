@@ -50,8 +50,8 @@
             :key="item"
             clickable
             manual-focus
-            :focused="selectedItemIndex[i] === j"
-            @mousemove="selectedItemIndex[i] = j"
+            :focused="isSelectedItem(i, j)"
+            @mousemove="onMousemoveItem(i, j)"
             @click="onSelectItem(i, j)"
           >
             <q-item-section>
@@ -69,7 +69,7 @@ import { date } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
-import { preventSubmitEnter } from '../../utils/private/event';
+import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
 
 function createOptions(n) {
   const { length } = n.toString();
@@ -115,6 +115,7 @@ export default {
     ];
 
     const showing = ref(false);
+    const selectedListIndex = ref(-1);
     const selectedItemIndex = reactive([-1, -1]);
 
     const fieldCtx = useField();
@@ -204,6 +205,92 @@ export default {
       el.setSelectionRange(5, 5);
     }
 
+    function onKeydownInput(e) {
+      // enter
+      if (e.keyCode === 13 && (
+        value.value === (props.unmaskedValue ? e.target.value.replace(/[^\d]/g, '') : e.target.value)
+      )) {
+        stopAndPrevent(e);
+        toggleView(true);
+      }
+    }
+
+    function onKeydownInputWhenShowing(e) {
+      // home, end - 36, 35
+      if (e.keyCode === 35 || e.keyCode === 36) {
+        stopAndPrevent(e);
+
+        const i = selectedListIndex.value;
+        const j = e.keyCode === 36 ? 0 : timeLists[i].length - 1;
+
+        selectedItemIndex[i] = j;
+        timeListRefs.value[i].scrollTo(j);
+        return;
+      }
+
+      // pg up, pg down - 33, 34
+      if (e.keyCode === 33 || e.keyCode === 34) {
+        stopAndPrevent(e);
+
+        const i = selectedListIndex.value;
+        const last = timeLists[i].length - 1;
+
+        const vm = timeListRefs.value[i];
+        const size = Math.floor(
+          vm.$el.clientHeight / vm.$el.querySelector('.q-virtual-scroll__content > .q-item').clientHeight,
+        );
+
+        let j = selectedItemIndex[i];
+        j = e.keyCode === 33 ? Math.max(0, j - size) : Math.min(last, j + size);
+
+        selectedItemIndex[i] = j;
+        vm.scrollTo(j);
+        return;
+      }
+
+      // up, down
+      if (e.keyCode === 38 || e.keyCode === 40) {
+        stopAndPrevent(e);
+
+        const i = selectedListIndex.value;
+        const last = timeLists[i].length - 1;
+
+        let j = selectedItemIndex[i] + (e.keyCode === 38 ? -1 : 1);
+        // eslint-disable-next-line no-nested-ternary
+        j = j < -1 ? last : (j > last ? 0 : j);
+
+        selectedItemIndex[i] = j;
+        if (j > -1) timeListRefs.value[i].scrollTo(j);
+        return;
+      }
+
+      // enter
+      if (e.keyCode === 13) {
+        if (value.value !== (props.unmaskedValue ? e.target.value.replace(/[^\d]/g, '') : e.target.value)) {
+          toggleView(false);
+        } else {
+          stopAndPrevent(e);
+
+          const i = selectedListIndex.value;
+          selectedListIndex.value = i === 0 ? 1 : 0;
+          onSelectItem(i, selectedItemIndex[i]);
+        }
+        return;
+      }
+
+      toggleView(false);
+    }
+
+    function isSelectedItem(listIndex, itemIndex) {
+      return selectedListIndex.value === listIndex
+        && selectedItemIndex[listIndex] === itemIndex;
+    }
+
+    function onMousemoveItem(listIndex, itemIndex) {
+      selectedListIndex.value = listIndex;
+      selectedItemIndex[listIndex] = itemIndex;
+    }
+
     function focus() {
       inputRef.value?.focus();
     }
@@ -224,19 +311,25 @@ export default {
           el.setSelectionRange(5, 5);
         }
 
+        removeEvt(inputRef, 'keydown', onKeydownInput, true);
+        addEvt(inputRef, 'keydown', onKeydownInputWhenShowing, true);
         addClickOutside(clickOutsideProps);
 
         timeClickCount[0] = 0;
         timeClickCount[1] = 0;
+        selectedListIndex.value = 0;
 
         await nextTick();
         scrollToSelected();
       } else {
+        removeEvt(inputRef, 'keydown', onKeydownInputWhenShowing, true);
         removeClickOutside(clickOutsideProps);
+        addEvt(inputRef, 'keydown', onKeydownInput, true);
       }
     });
 
     onMounted(() => {
+      addEvt(inputRef, 'keydown', onKeydownInput, true);
       preventSubmitEnter(inputRef);
     });
 
@@ -248,12 +341,15 @@ export default {
       timeListRefs,
       timeLists,
       showing,
+      selectedListIndex,
       selectedItemIndex,
       innerValue,
       toggleView,
       scrollToSelected,
       onBlurInput,
       onChangeInput,
+      isSelectedItem,
+      onMousemoveItem,
       onSelectItem,
       focus,
     };
