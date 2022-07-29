@@ -187,13 +187,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button @click="toggleShow">
+          <button @click="toggleShow('code01')">
             Show code &darr;
           </button>
         </div>
         <div
-          v-if="show"
           class="kw-guide-code"
+          :class="{'active': isActive}"
         >
           <HighCode
             :code-value="theColumnsCode"
@@ -373,13 +373,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button @click="toggleShow">
+          <button @click="toggleShow('code02')">
             Show code &darr;
           </button>
         </div>
         <div
-          v-if="show"
           class="kw-guide-code"
+          :class="{'active': isActive02}"
         >
           <HighCode
             :code-value="theColumnsOfKwFormItemCode"
@@ -457,13 +457,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button @click="toggleShow">
+          <button @click="toggleShow('code03')">
             Show code &darr;
           </button>
         </div>
         <div
-          v-if="show"
           class="kw-guide-code"
+          :class="{'active': isActive03}"
         >
           <HighCode
             :code-value="theFormExampleCode"
@@ -577,13 +577,13 @@
           </kw-form>
         </div>
         <div class="kw-guide-codeButton">
-          <button @click="toggleShow">
+          <button @click="toggleShow('code04')">
             Show code &darr;
           </button>
         </div>
         <div
-          v-if="show"
           class="kw-guide-code"
+          :class="{'active': isActive04}"
         >
           <HighCode
             :code-value="essentialForTheElememtsCode"
@@ -987,13 +987,38 @@ const essentialForTheElememtsCode = `
 export default {
   data() {
     return {
-      show: false,
+      isActive: false,
+      isActive02: false,
+      isActive03: false,
+      isActive04: false,
     };
   },
   methods: {
-    toggleShow() {
-      this.show = !this.show;
+    toggleShow(e) {
+      switch (e) {
+        case 'code01':
+          this.isActive = !this.isActive;
+          break;
+        case 'code02':
+          this.isActive02 = !this.isActive02;
+          break;
+        case 'code03':
+          this.isActive03 = !this.isActive03;
+          break;
+        case 'code04':
+          this.isActive04 = !this.isActive04;
+          break;
+      }
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+.kw-guide-code {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+</style>
