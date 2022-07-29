@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
@@ -85,16 +85,17 @@
     "vite-plugin-mpa": "^1.1.3",
     "vue": "^3.2.25",
     "vue-chartjs": "^4.1.1",
-    "vue-highlight-code": "^0.1.16",
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.15",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "highlight.js": "^11.6.0",
     "husky": "^8.0.0",
     "lint-staged": "^12.4.1",
     "prettier": "^2.7.1",
-    "sort-package-json": "^1.57.0"
+    "sort-package-json": "^1.57.0",
+    "vue-highlight-code": "^0.1.16"
   },
   "publishConfig": {
     "registry": "http://nexus-dev.kyowon.co.kr/repository/npm-sflex-releases/"

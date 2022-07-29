@@ -49,8 +49,10 @@
           <q-item
             :key="item"
             clickable
-            :active="isSelectedItem(i, j, item)"
-            @click="onSelectItem(i, j, item)"
+            manual-focus
+            :focused="isSelectedItem(i, j)"
+            @mousemove="onMousemoveItem(i, j)"
+            @click="onSelectItem(i, j)"
           >
             <q-item-section>
               {{ item }}
@@ -67,7 +69,7 @@ import { date } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
-import { preventSubmitEnter } from '../../utils/private/preventSubmit';
+import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
 
 function createOptions(n) {
   const { length } = n.toString();
@@ -113,6 +115,8 @@ export default {
     ];
 
     const showing = ref(false);
+    const selectedListIndex = ref(-1);
+    const selectedItemIndex = reactive([-1, -1]);
 
     const fieldCtx = useField();
     const { value, inputRef } = fieldCtx;
@@ -121,6 +125,10 @@ export default {
     watch(value, (val) => {
       innerValue.value = val;
     });
+
+    async function toggleView(e) {
+      showing.value = e ?? !showing.value;
+    }
 
     const getHourValue = () => value.value.substring(0, 2);
     const getMinValue = () => (props.unmaskedValue ? value.value.substring(2, 4) : value.value.substring(3, 5));
@@ -131,27 +139,11 @@ export default {
           const val = i === 0 ? getHourValue() : getMinValue();
           const index = timeLists[i].findIndex((v) => v === val);
 
-          if (index > -1) vm.scrollTo(index);
+          if (index > -1) {
+            vm.scrollTo(index);
+            selectedItemIndex[i] = index;
+          }
         });
-      }
-    }
-
-    async function toggleView(e) {
-      showing.value = e ?? !showing.value;
-
-      if (showing.value) {
-        const el = inputRef.value.getNativeElement();
-
-        if (el !== document.activeElement) {
-          el.focus();
-          el.setSelectionRange(5, 5);
-        }
-
-        timeClickCount[0] = 0;
-        timeClickCount[1] = 0;
-
-        await nextTick();
-        scrollToSelected();
       }
     }
 
@@ -163,7 +155,7 @@ export default {
       }
     }
 
-    async function onChangeInput(e) {
+    function onChangeInput(e) {
       e = e.replace(/_/g, '');
 
       if (e === ':') {
@@ -193,35 +185,15 @@ export default {
       }
     }
 
-    // eslint-disable-next-line no-unused-vars
-    function onKeydownInput(evt) {
-      // home, end - 36, 35
-      // if (evt.keyCode === 35 || evt.keyCode === 36) {
-      //   stopAndPrevent(evt);
-      // }
-
-      // // pg up, pg down - 33, 34
-      // if (evt.keyCode === 33 || evt.keyCode === 34) {
-      //   stopAndPrevent(evt);
-      // }
-
-      // up, down
-      // if (evt.keyCode === 38 || evt.keyCode === 40) {
-      //   stopAndPrevent(evt)
-      // }
-    }
-
-    function isSelectedItem(index, val) {
-      return !!value.value && (index === 0 ? val === getHourValue() : val === getMinValue());
-    }
-
-    function onSelectItem(listIndex, itemIndex, val) {
+    function onSelectItem(listIndex, itemIndex) {
+      const val = timeLists[listIndex][itemIndex];
       const h = (listIndex === 0 ? val : getHourValue()) || '00';
       const m = (listIndex === 0 ? getMinValue() : val) || '00';
       const otherIndex = listIndex === 0 ? 1 : 0;
 
       value.value = props.unmaskedValue ? `${h}${m}` : `${h}:${m}`;
       timeClickCount[listIndex] += 1;
+      selectedItemIndex[listIndex] = itemIndex;
 
       if (timeClickCount[otherIndex] > 0) {
         toggleView(false);
@@ -231,6 +203,92 @@ export default {
 
       el.focus();
       el.setSelectionRange(5, 5);
+    }
+
+    function onKeydownInput(e) {
+      // enter
+      if (e.keyCode === 13 && (
+        value.value === (props.unmaskedValue ? e.target.value.replace(/[^\d]/g, '') : e.target.value)
+      )) {
+        stopAndPrevent(e);
+        toggleView(true);
+      }
+    }
+
+    function onKeydownInputWhenShowing(e) {
+      // home, end - 36, 35
+      if (e.keyCode === 35 || e.keyCode === 36) {
+        stopAndPrevent(e);
+
+        const i = selectedListIndex.value;
+        const j = e.keyCode === 36 ? 0 : timeLists[i].length - 1;
+
+        selectedItemIndex[i] = j;
+        timeListRefs.value[i].scrollTo(j);
+        return;
+      }
+
+      // pg up, pg down - 33, 34
+      if (e.keyCode === 33 || e.keyCode === 34) {
+        stopAndPrevent(e);
+
+        const i = selectedListIndex.value;
+        const last = timeLists[i].length - 1;
+
+        const vm = timeListRefs.value[i];
+        const size = Math.floor(
+          vm.$el.clientHeight / vm.$el.querySelector('.q-virtual-scroll__content > .q-item').clientHeight,
+        );
+
+        let j = selectedItemIndex[i];
+        j = e.keyCode === 33 ? Math.max(0, j - size) : Math.min(last, j + size);
+
+        selectedItemIndex[i] = j;
+        vm.scrollTo(j);
+        return;
+      }
+
+      // up, down
+      if (e.keyCode === 38 || e.keyCode === 40) {
+        stopAndPrevent(e);
+
+        const i = selectedListIndex.value;
+        const last = timeLists[i].length - 1;
+
+        let j = selectedItemIndex[i] + (e.keyCode === 38 ? -1 : 1);
+        // eslint-disable-next-line no-nested-ternary
+        j = j < -1 ? last : (j > last ? 0 : j);
+
+        selectedItemIndex[i] = j;
+        if (j > -1) timeListRefs.value[i].scrollTo(j);
+        return;
+      }
+
+      // enter
+      if (e.keyCode === 13) {
+        if (value.value !== (props.unmaskedValue ? e.target.value.replace(/[^\d]/g, '') : e.target.value)) {
+          toggleView(false);
+        } else {
+          stopAndPrevent(e);
+
+          const i = selectedListIndex.value;
+          selectedListIndex.value = i === 0 ? 1 : 0;
+          onSelectItem(i, selectedItemIndex[i]);
+        }
+        return;
+      }
+
+      toggleView(false);
+    }
+
+    function isSelectedItem(listIndex, itemIndex) {
+      return selectedListIndex.value === listIndex
+        && selectedItemIndex[listIndex] === itemIndex;
+    }
+
+    function onMousemoveItem(listIndex, itemIndex) {
+      selectedListIndex.value = listIndex;
+      selectedItemIndex[listIndex] = itemIndex;
     }
 
     function focus() {
@@ -245,18 +303,33 @@ export default {
     };
 
     watch(showing, async (val) => {
-      const el = inputRef.value.getNativeElement();
-
       if (val) {
-        el.addEventListener('keydown', onKeydownInput);
+        const el = inputRef.value.getNativeElement();
+
+        if (el !== document.activeElement) {
+          el.focus();
+          el.setSelectionRange(5, 5);
+        }
+
+        removeEvt(inputRef, 'keydown', onKeydownInput, true);
+        addEvt(inputRef, 'keydown', onKeydownInputWhenShowing, true);
         addClickOutside(clickOutsideProps);
+
+        timeClickCount[0] = 0;
+        timeClickCount[1] = 0;
+        selectedListIndex.value = 0;
+
+        await nextTick();
+        scrollToSelected();
       } else {
-        el.removeEventListener('keydown', onKeydownInput);
+        removeEvt(inputRef, 'keydown', onKeydownInputWhenShowing, true);
         removeClickOutside(clickOutsideProps);
+        addEvt(inputRef, 'keydown', onKeydownInput, true);
       }
     });
 
     onMounted(() => {
+      addEvt(inputRef, 'keydown', onKeydownInput, true);
       preventSubmitEnter(inputRef);
     });
 
@@ -268,13 +341,15 @@ export default {
       timeListRefs,
       timeLists,
       showing,
+      selectedListIndex,
+      selectedItemIndex,
       innerValue,
       toggleView,
       scrollToSelected,
       onBlurInput,
       onChangeInput,
-      onKeydownInput,
       isSelectedItem,
+      onMousemoveItem,
       onSelectItem,
       focus,
     };

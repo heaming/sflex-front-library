@@ -6,6 +6,42 @@
     </p>
     <div class="kw-guide-section">
       <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              the Element(tag's name)
+            </th>
+            <th>
+              attribute(class)
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form-item (sample)
+            </td>
+            <td>
+              essential - class (sample)
+            </td>
+            <td>
+              add the class "essential" in the tag of kw-form-item. (sample)
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="default"
         class="kw-guide-title"
       >
