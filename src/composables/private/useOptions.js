@@ -20,6 +20,10 @@ export const useOptionsProps = {
     type: String,
     default: 'codeName',
   },
+  optionSeperator: {
+    type: String,
+    default: 'seperator',
+  },
   firstOption: {
     type: [Boolean, String],
     default: false,
@@ -35,20 +39,20 @@ export const useOptionsProps = {
   },
 };
 
-const normalizeOption = (option, { optionValue, optionLabel }) => (
+const normalizeOption = (option, { optionValue, optionLabel, optionSeperator }) => (
   option && typeof option === 'object' ? {
     ...option,
     value: option[optionValue],
     label: option[optionLabel] ?? String(option[optionValue]),
-    [optionValue]: undefined,
-    [optionLabel]: undefined,
+    seperator: option[optionSeperator] === true,
   } : {
     value: option,
     label: String(option),
+    seperator: false,
   }
 );
 
-export default () => {
+export default (valueRef, emitValue = true) => {
   const { props } = getCurrentInstance();
   const { t } = useI18n();
 
@@ -70,7 +74,27 @@ export default () => {
     );
   });
 
+  const isArrayValue = () => isRef(valueRef) && Array.isArray(valueRef.value);
+
+  const selectedAll = computed(() => {
+    if (isArrayValue()) {
+      const selectedValues = valueRef.value
+        .reduce((a, v) => { a[emitValue ? v : v.value] = true; return a; }, {});
+      return normalizedOptions.value.every((v) => selectedValues[v.value]);
+    }
+    return false;
+  });
+
+  function toggleAll() {
+    if (isArrayValue()) {
+      valueRef.value = selectedAll.value
+        ? [] : normalizedOptions.value.map((v) => (emitValue ? v.value : { ...v }));
+    }
+  }
+
   return {
     normalizedOptions,
+    selectedAll,
+    toggleAll,
   };
 };
