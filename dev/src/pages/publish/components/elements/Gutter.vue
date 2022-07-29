@@ -62,7 +62,7 @@
         example
       </h3>
       <p class="kw-guide-description">
-        kw-mr-3
+        kw-mr-3(margin-right:30px), kw-pa-2(padding:20px)
       </p>
       <q-card>
         <div class="kw-guide-example">
