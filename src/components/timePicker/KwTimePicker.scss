@@ -7,7 +7,10 @@
 
 .kw-time-picker {
   border-right: 0;
-  border-top: 0;
+
+  &.q-position-engine {
+    margin-top: var(--q-pe-top, -1px) !important;
+  }
 
   .q-field__append .q-icon {
     padding-left: 16px;
