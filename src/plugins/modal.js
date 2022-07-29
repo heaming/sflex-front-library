@@ -7,13 +7,14 @@ const popups = {};
 
 export function registerPopupsByGlobImport(modules) {
   Object.keys(modules).forEach((key) => {
-    const [,, name] = key.match(/\/pages(\/\w+)+\/(\w+P)\.vue$/) || [];
+    // becare when fix this line
+    const matched = key.match(/\/pages((\/\w+)*)\/(\w+P)\.vue$/);
 
-    if (!name) {
-      throw new Error(
-        `Invalid glob import, could not found page name. (imported file: ${key})`,
-      );
+    if (!matched) {
+      throw new Error(`Invalid path, could not parse "${key}"`);
     }
+
+    const name = matched.pop();
 
     popups[name] = {
       name,
