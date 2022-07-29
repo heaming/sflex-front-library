@@ -32,6 +32,7 @@
       no-parent-event
       no-focus
       no-refocus
+      fit
     >
       <div
         ref="timeRef"
@@ -139,10 +140,8 @@ export default {
           const val = i === 0 ? getHourValue() : getMinValue();
           const index = timeLists[i].findIndex((v) => v === val);
 
-          if (index > -1) {
-            vm.scrollTo(index);
-            selectedItemIndex[i] = index;
-          }
+          selectedItemIndex[i] = index;
+          if (index > -1) vm.scrollTo(index);
         });
       }
     }
@@ -186,12 +185,17 @@ export default {
     }
 
     function onSelectItem(listIndex, itemIndex) {
+      const el = inputRef.value.getNativeElement();
+
       const val = timeLists[listIndex][itemIndex];
       const h = (listIndex === 0 ? val : getHourValue()) || '00';
       const m = (listIndex === 0 ? getMinValue() : val) || '00';
       const otherIndex = listIndex === 0 ? 1 : 0;
 
       value.value = props.unmaskedValue ? `${h}${m}` : `${h}:${m}`;
+      el.__oldValue__ = props.unmaskedValue ? `${h}:${m}` : value.value;
+      innerValue.value = value.value;
+
       timeClickCount[listIndex] += 1;
       selectedItemIndex[listIndex] = itemIndex;
 
@@ -199,17 +203,13 @@ export default {
         toggleView(false);
       }
 
-      const el = inputRef.value.getNativeElement();
-
       el.focus();
       el.setSelectionRange(5, 5);
     }
 
     function onKeydownInput(e) {
       // enter
-      if (e.keyCode === 13 && (
-        value.value === (props.unmaskedValue ? e.target.value.replace(/[^\d]/g, '') : e.target.value)
-      )) {
+      if (e.keyCode === 13 && (e.target.value === e.target.__oldValue__)) {
         stopAndPrevent(e);
         toggleView(true);
       }
@@ -266,14 +266,18 @@ export default {
 
       // enter
       if (e.keyCode === 13) {
-        if (value.value !== (props.unmaskedValue ? e.target.value.replace(/[^\d]/g, '') : e.target.value)) {
+        if (e.target.value !== e.target.__oldValue__) {
           toggleView(false);
         } else {
           stopAndPrevent(e);
 
           const i = selectedListIndex.value;
+          const j = selectedItemIndex[i];
+
+          if (j > -1) onSelectItem(i, j);
+          else toggleView(false);
+
           selectedListIndex.value = i === 0 ? 1 : 0;
-          onSelectItem(i, selectedItemIndex[i]);
         }
         return;
       }
