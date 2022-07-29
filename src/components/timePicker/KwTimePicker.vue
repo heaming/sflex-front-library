@@ -32,6 +32,9 @@
       no-parent-event
       no-focus
       no-refocus
+      fit
+      anchor="bottom left"
+      self="top left"
     >
       <div
         ref="timeRef"
