@@ -3,6 +3,7 @@ import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 import { createCellIndexByDataColumn, dateTextFormat, isCellEditable } from '../../../utils/private/gridShared';
 import { normalizeRules } from '../../../utils/private/validate';
+import i18n from '../../../i18n';
 
 const setColumns = 'setColumns';
 const setCellStyleCallback = 'setCellStyleCallback';
@@ -153,10 +154,11 @@ function setColumnEditorDefaults(column, { dataType }) {
           dropDownWhenClick: false,
           datetimeFormat: 'yyyyMMdd',
           btOptions: {
-            startView: 0,
+            language: i18n.locale,
+            keyboardNavigation: false,
+            todayHighlight: true,
             minViewMode: 0,
             maxViewMode: 2,
-            todayHighlight: true,
             beforeShowDay(value) {
               switch (value.getDay()) {
                 case 0: return 'sunday';
