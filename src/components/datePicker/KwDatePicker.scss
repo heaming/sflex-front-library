@@ -76,6 +76,10 @@
   .q-field__marginal {
     height: auto;
   }
+
+  .q-field__inner {
+    max-width: 180px;
+  }
 }
 
 .kw-multi-date-picker {
@@ -111,5 +115,9 @@
 
   .kw-date-picker:nth-of-type(2) {
     padding-left: 4px;
+  }
+
+  .q-field__inner {
+    max-width: none;
   }
 }

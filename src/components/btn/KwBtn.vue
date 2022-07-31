@@ -1,5 +1,8 @@
 <template>
-  <q-btn class="kw-btn">
+  <q-btn
+    class="kw-btn"
+    :ripple="false"
+  >
     <slot />
   </q-btn>
 </template>

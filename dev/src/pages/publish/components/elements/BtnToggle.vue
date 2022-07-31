@@ -1,6 +1,8 @@
 <template>
   <kw-page class="kw-guide">
-    <h2>BtnToggle</h2>
+    <h2 class="kw-guide-h2">
+      BtnToggle
+    </h2>
     <p class="kw-guide-description">
       description
     </p>
