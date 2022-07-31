@@ -1,13 +1,4 @@
 @import "realgrid/dist/realgrid-style.css";
-@import "bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css";
-
-/*
-  Bootstrap datepicker
-  */
-.datepicker table tr td.day:not(.today):not(.active):not(.disabled):not(.old):not(.new) {
-  &.sunday { color: #e74c3c; }
-  &.saturday { color: #2f86c1; }
-}
 
 /*
   RealGrid2

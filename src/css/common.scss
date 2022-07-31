@@ -1,16 +1,3 @@
-@use "./variables";
-@use "./quasar-based-palette" with (
-// Add override color variables. for example,
-  $primary: $primary
-);
-@forward "./functions" with ($-palette: quasar-based-palette.$palette);
-@forward "./mixins" with ($-palette: quasar-based-palette.$palette);
-@use "./guide";
-
-$palette: quasar-based-palette.$palette;
-$colors: quasar-based-palette.$colors;
-$state-palette: quasar-based-palette.$state-palette;
-
 // fonts
 @font-face {
   font-family: "Spoqa Han Sans Neo";
