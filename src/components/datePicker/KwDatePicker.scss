@@ -1,3 +1,10 @@
+.kw-date {
+  width: 221px;
+  height: 250px;
+  padding: 16px;
+  box-sizing: content-box;
+}
+
 .kw-date-picker {
   .q-field__append .q-icon {
     padding-left: 16px;
@@ -75,7 +82,7 @@
   }
 }
 
-.kw-multi-date-picker {
+.kw-date-range-picker {
   &.q-field--error {
     .q-field__control {
       border-color: $error;

@@ -3,7 +3,7 @@
 /*
   Bootstrap datepicker
   */
-.datepicker table tr td.day:not(.disabled):not(.old):not(.new) {
+.datepicker table tr td.day:not(.today):not(.active):not(.disabled):not(.old):not(.new) {
   &.sunday { color: #e74c3c; }
   &.saturday { color: #2f86c1; }
 }

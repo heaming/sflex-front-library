@@ -1,34 +1,32 @@
 <template>
   <q-field
     v-bind="styleClassAttrs"
-    class="kw-multi-date-picker"
+    class="kw-date-range-picker"
     :label="$q.platform.is.desktop ? null : label"
     :error="error"
     :error-message="errorMessage"
     no-error-icon
   >
-    <date-picker
+    <kw-date-picker
       ref="inputRef"
       :model-value="value[0]"
-      v-bind="inheritedAttrs"
-      class="col"
       :readonly="readonly"
       :disable="disable"
       :unmasked-value="unmaskedValue"
       :min-date="minDate"
       :max-date="maxDate"
+      :before-show-day="beforeShowDay"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
     /> ~
-    <date-picker
+    <kw-date-picker
       :model-value="value[1]"
-      v-bind="inheritedAttrs"
-      class="col"
       :readonly="readonly"
       :disable="disable"
       :unmasked-value="unmaskedValue"
       :min-date="minDate"
       :max-date="maxDate"
+      :before-show-day="beforeShowDay"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 1)"
     />
@@ -36,15 +34,11 @@
 </template>
 
 <script>
-import DatePicker from './DatePicker.vue';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 
 export default {
   name: 'KwDateRangePicker',
-  components: {
-    DatePicker,
-  },
   inheritAttrs: false,
 
   props: {
@@ -76,6 +70,10 @@ export default {
     },
     maxDate: {
       type: String,
+      default: undefined,
+    },
+    beforeShowDay: {
+      type: Function,
       default: undefined,
     },
   },
