@@ -33,7 +33,7 @@ function setColumnStyleNameDefaults(column) {
     styleName: '',
   });
 
-  const alignClass = ['rg-align-left', 'rg-align-center', 'rg-align-right'];
+  const alignClass = ['text-left', 'text-center', 'text-right'];
   const colClass = column.styleName.split(/\s+/).filter((e) => !!e);
 
   if (!alignClass.some((e) => colClass.includes(e))) {
