@@ -5,7 +5,6 @@
         flat
         dense
         round
-        icon="menu"
         aria-label="Menu"
         @click="dispatch('app/toggleLnb')"
       />
