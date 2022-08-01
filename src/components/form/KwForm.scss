@@ -1,21 +1,13 @@
-// global
-#app > .q-layout { min-width: 1900px; }
-
-// common form style
-[disabled] {
-  opacity: 1 !important;
-}
-
-input::placeholder,
-textarea::placeholder {
-  font-size: 16px;
-  color: $placeholder !important;
-  font-weight: 400 !important;
-  opacity: 1 !important;
-}
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
 
 // defalut style init
-.q-form {
+.kw-form,
+.kw-search {
   .q-field {
     &__inner {
       display: flex;
@@ -59,39 +51,65 @@ textarea::placeholder {
       padding-bottom: 0;
     }
   }
-}
 
-body.desktop {
-  .q-manual-focusable--focused {
-    & > .q-focus-helper {
-      &::before,
-      &::after {
-        display: none;
+  .q-field--auto-height .q-field__control,
+  .q-field--auto-height .q-field__native,
+  .q-textarea .q-field__control {
+    min-height: auto;
+  }
+
+  .kw-form-row {
+    margin: 0 -20px;
+    padding: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    .kw-form-item {
+      padding-left: 20px;
+      padding-right: 20px;
+      width: auto;
+      min-width: 0;
+      max-width: 100%;
+      display: flex;
+
+      & > .row {
+        align-items: center;
+        width: 100%;
       }
-
-      background-color: $bg-box;
-      transition: none;
-      opacity: 1;
     }
 
-    .q-item__label {
-      font-weight: 700;
-      color: $black-h1;
+    .kw-form-title {
+      padding-right: 16px;
+      width: 120px;
+      font-size: 14px;
+      line-height: 18px;
+      color: $black-h3;
+      word-break: break-word;
+
+      & + label {
+        @media (min-width: 0) {
+          width: auto;
+          min-width: 0;
+          max-width: 100%;
+          flex: 10000 1 0%;
+        }
+      }
     }
   }
 
-  .q-item__label {
-    font-size: 14px;
-    color: $black-h2;
-    font-weight: 400;
-    z-index: 1;
+  .kw-form-item {
+    flex: 10000 1 0%;
   }
 }
 
-.q-card {
-  overflow: hidden;
+// essential
+.essential .kw-form-title::after {
+  content: "*";
+  display: inline;
+  color: $info;
 }
 
+// quasar dropdown style override
 .q-menu {
   border: 1px solid $black-h1;
   border-radius: 0;
@@ -100,69 +118,39 @@ body.desktop {
   &--square {
     border-top: 0;
   }
-}
 
-.q-date {
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.q-item {
-  min-height: 34px;
-  padding: 0 12px;
-}
-
-.q-field--auto-height .q-field__control,
-.q-field--auto-height .q-field__native,
-.q-textarea .q-field__control {
-  min-height: auto;
-}
-
-// form layout style
-.kw-form-row {
-  padding: 12px 0;
-  display: flex;
-  flex-wrap: wrap;
-
-  .kw-form-item {
-    padding-left: 20px;
-    padding-right: 20px;
-    width: auto;
-    min-width: 0;
-    max-width: 100%;
-    display: flex;
-
-    & > .row {
-      align-items: center;
-      width: 100%;
-    }
+  .q-date {
+    box-shadow: none;
+    border-radius: 0;
   }
 
-  .kw-form-title {
-    padding-right: 16px;
-    width: 120px;
-    font-size: 14px;
-    line-height: 18px;
-    color: $black-h3;
+  .q-item {
+    min-height: 34px;
+    padding: 0 12px;
 
-    & + label {
-      @media (min-width: 0) {
-        width: auto;
-        min-width: 0;
-        max-width: 100%;
-        flex: 10000 1 0%;
+    &.q-manual-focusable--focused {
+      & > .q-focus-helper {
+        &::before,
+        &::after {
+          display: none;
+        }
+
+        background-color: $bg-box;
+        transition: none;
+        opacity: 1;
+      }
+
+      .q-item__label {
+        font-weight: 700;
+        color: $black-h1;
       }
     }
+
+    .q-item__label {
+      font-size: 14px;
+      color: $black-h2;
+      font-weight: 400;
+      z-index: 1;
+    }
   }
-}
-
-.kw-form-item {
-  flex: 10000 1 0%;
-}
-
-// essential
-.essential .kw-form-title::after {
-  content: "*";
-  display: inline;
-  color: $info;
 }

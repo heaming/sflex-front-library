@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="kw-page-header">
     <q-breadcrumbs
       align="right"
       separator=">"
@@ -22,7 +22,10 @@ function creataBreadcrumbs(menus, menuUid) {
   if (matched) {
     return [
       ...creataBreadcrumbs(menus, matched.parentsMenuUid),
-      { key: menuUid, label: matched.menuName },
+      {
+        key: menuUid,
+        label: matched.menuName,
+      },
     ];
   }
 
@@ -32,22 +35,41 @@ function creataBreadcrumbs(menus, menuUid) {
 export default {
   name: 'KwPageHeader',
 
-  setup() {
+  props: {
+    options: {
+      type: Array,
+      default: undefined,
+    },
+  },
+
+  setup(props) {
     const { getters } = useStore();
     const { currentRoute } = useRouter();
 
     const breadcrumbs = ref([]);
+    const options = toRef(props, 'options');
 
-    const menus = getters['meta/getMenus'];
-    const { applicationId, menuUid } = find(menus, ['menuUid', currentRoute.value.name]) || {};
+    if (Array.isArray(options.value)) {
+      breadcrumbs.value = options.value.map((v) => ({ key: v, label: v }));
+    } else {
+      const menus = getters['meta/getMenus'];
 
-    if (applicationId) {
-      const app = getters['meta/getApp'](applicationId);
+      const {
+        applicationId,
+        menuUid,
+      } = find(menus, ['menuUid', currentRoute.value.name]) || {};
 
-      breadcrumbs.value = [
-        { key: applicationId, label: app.applicationName },
-        ...creataBreadcrumbs(menus, menuUid),
-      ];
+      if (applicationId) {
+        const app = getters['meta/getApp'](applicationId);
+
+        breadcrumbs.value = [
+          {
+            key: applicationId,
+            label: app.applicationName,
+          },
+          ...creataBreadcrumbs(menus, menuUid),
+        ];
+      }
     }
 
     return {

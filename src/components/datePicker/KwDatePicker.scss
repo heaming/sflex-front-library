@@ -1,17 +1,20 @@
-.q-field {
-  &.kw-date-picker {
-    .material-icons {
-      padding-left: 16px;
-      margin-right: 12px;
-      width: 0;
-      color: transparent;
-      background: url(~assets/images/icon_calendar.svg) no-repeat center;
-      background-size: 16px auto;
-    }
-  }
+.kw-date {
+  width: 221px;
+  height: 250px;
+  padding: 16px;
+  box-sizing: content-box;
 }
 
 .kw-date-picker {
+  .q-field__append .q-icon {
+    padding-left: 16px;
+    margin-right: 12px;
+    width: 0;
+    color: transparent;
+    background: url(~assets/images/icon_calendar.svg) no-repeat center;
+    background-size: 16px auto;
+  }
+
   &.q-field--focused {
     .q-field__control {
       border-color: $black-h1;
@@ -35,6 +38,7 @@
     }
   }
 
+  &.q-field--readonly,
   &.q-field--disabled {
     .q-field__control {
       background-color: $line-bg;
@@ -72,9 +76,13 @@
   .q-field__marginal {
     height: auto;
   }
+
+  .q-field__inner {
+    max-width: 180px;
+  }
 }
 
-.kw-multi-date-picker {
+.kw-date-range-picker {
   &.q-field--error {
     .q-field__control {
       border-color: $error;
@@ -107,5 +115,9 @@
 
   .kw-date-picker:nth-of-type(2) {
     padding-left: 4px;
+  }
+
+  .q-field__inner {
+    max-width: none;
   }
 }

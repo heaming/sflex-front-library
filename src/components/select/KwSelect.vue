@@ -7,6 +7,7 @@
     :error="error"
     :error-message="errorMessage"
     :options="filteredOptions"
+    :multiple="multiple"
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="useInput"
@@ -22,6 +23,50 @@
           {{ $t('MSG_TXT_NO_RESULT', null, '검색된 항목이 없습니다.') }}
         </q-item-section>
       </q-item>
+    </template>
+    <template
+      v-if="multiple"
+      #before-options
+    >
+      <q-item
+        clickable
+        @click="toggleAll"
+      >
+        <q-item-section side>
+          <q-checkbox
+            :model-value="selectedAll"
+            @update:model-value="toggleAll"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>
+            {{ $t('MSG_TXT_ALL', null, '전체') }}
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+      <q-separator />
+    </template>
+    <template #option="{ itemProps, opt, selected, toggleOption }">
+      <q-item
+        :active="selected"
+        v-bind="itemProps"
+      >
+        <q-item-section
+          v-if="multiple"
+          side
+        >
+          <q-checkbox
+            :model-value="selected"
+            @update:model-value="toggleOption(opt)"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>
+            {{ opt.label }}
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+      <q-separator v-if="opt.seperator" />
     </template>
   </q-select>
 </template>
@@ -41,13 +86,17 @@ export default {
       type: [String, Number, Array],
       default: undefined,
     },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
     emitValue: {
       type: Boolean,
       default: true,
     },
     useInput: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     onFilter: {
       type: Function,
@@ -65,7 +114,8 @@ export default {
       value.value = val ?? '';
     }
 
-    const { normalizedOptions } = useOptions();
+    const optionsCtx = useOptions(value, props.emitValue);
+    const { normalizedOptions } = optionsCtx;
     const filteredOptions = ref([...normalizedOptions.value]);
 
     watch(normalizedOptions, (val) => {
@@ -89,6 +139,7 @@ export default {
     return {
       ...fieldCtx,
       onUpdateValue,
+      ...optionsCtx,
       filteredOptions,
       filter,
       onBlur,

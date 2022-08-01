@@ -16,6 +16,7 @@
           @click="toggleExpand()"
         >
           <span class="block">
+            더보기
             <q-tooltip v-if="isExpanded">
               {{ $t('MSG_BTN_COLLAPSE', null, '접기') }}
             </q-tooltip>

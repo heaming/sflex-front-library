@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ic_arrow_back_16" data-name="ic_arrow/back_16" transform="translate(0 0)">
+    <g id="arrow_left" transform="translate(0 0)">
+      <g id="keyline_16px" data-name="keyline/16px">
+        <g id="bounding-box">
+          <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+        </g>
+      </g>
+      <g id="icon" transform="translate(5.334 2.667)">
+        <path id="패스_202519" data-name="패스 202519" d="M18277.213-3412.96l-5,5,5,5" transform="translate(-18272.047 3413.294)" fill="none" stroke="#222" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

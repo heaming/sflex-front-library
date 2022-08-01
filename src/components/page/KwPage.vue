@@ -1,8 +1,11 @@
 <template>
   <q-page class="kw-page">
-    <kw-page-header
+    <slot
       v-if="!noHeader"
-    />
+      name="header"
+    >
+      <kw-page-header />
+    </slot>
 
     <slot />
   </q-page>

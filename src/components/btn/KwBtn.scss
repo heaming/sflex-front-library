@@ -1,87 +1,280 @@
-.kw-search {
-  .q-btn {
+/* stylelint-disable declaration-block-single-line-max-declarations */
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable scss/double-slash-comment-whitespace-inside */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable selector-class-pattern */
+
+.kw-btn {
+  padding: 0 28px;
+  min-height: auto;
+  height: 42px;
+  line-height: 1;
+  background-color: $primary;
+  font-size: 16px;
+  color: #fff;
+  text-transform: none;
+  border-radius: 0;
+
+  &::before {
+    display: none;
+  }
+
+  .q-focus-helper {
+    display: none;
+  }
+
+  // hover
+  &:hover {
+    background-color: #2a7bd9;
+  }
+
+  // pressed
+  &.q-btn--active {
+    background-color: #256dbf;
+  }
+
+  // disabled
+  &:disabled {
+    background-color: $line-line;
+
+    &:hover {
+      background-color: $line-line;
+    }
+
+    &.q-btn--active {
+      background-color: $line-line;
+    }
+  }
+
+  // negative
+  &--negative {
+    background-color: $black-h3;
+
+    &:hover {
+      background-color: #5e5e5e;
+    }
+
+    &.q-btn--active {
+      background-color: #454545;
+    }
+  }
+
+  // popup size
+  &--popup {
+    height: 36px;
+
+    &.kw-btn--reset {
+      border: 1px solid $black-btn-line;
+      background-color: #fff;
+      color: $black-h2;
+    }
+  }
+
+  // secondary
+  &--secondaray {
     padding: 0 12px;
-    border: 1px solid $black-h2;
-    min-width: 90px;
+    height: 40px;
+    border: 1px solid $black-btn-line;
+    background-color: $bg-box;
+    font-size: 14px;
+    color: $black-h2;
+    font-weight: 400;
+
+    &:hover {
+      border-color: $black-h1;
+      background-color: #fff;
+    }
+
+    &.q-btn--active {
+      border-color: $black-btn-line;
+      background-color: $bg-box;
+    }
+
+    &:disabled {
+      border-color: $line-stroke;
+      background-color: $line-bg;
+      color: #bbb;
+
+      &:hover {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+
+      &.q-btn--active {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+    }
+  }
+
+  // contents
+  &--contents {
+    padding: 0 12px;
     height: 32px;
-    min-height: 32px;
+    border: 1px solid $black-h1;
     background-color: #fff;
     font-size: 14px;
     color: $black-h2;
     font-weight: 400;
-    line-height: 18px;
 
-    /* default style override [s] */
-    &::before {
-      box-shadow: none;
-      transition: none !important;
+    &:hover {
+      border-color: $black-h1;
+      background-color: #fff;
     }
 
-    &--active::before {
-      box-shadow: none !important;
-      transition: none !important;
+    &.q-btn--active {
+      border-color: $black-btn-line;
+      background-color: $bg-box;
     }
 
-    &--rectangle {
-      border-radius: 0;
-    }
+    &:disabled {
+      border-color: $line-stroke;
+      background-color: $line-bg;
+      color: #bbb;
 
-    .q-focus-helper {
-      display: none;
-    }
+      &:hover {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
 
-    /* default style override [e] */
-    &[type="reset"] {
-      & + .q-btn[type="submit"] {
-        margin-left: 8px;
+      &.q-btn--active {
+        border-color: $line-stroke;
+        background-color: $line-bg;
       }
     }
 
-    &[type="submit"] {
-      border-color: $secondary;
-      background-color: $secondary;
-      color: #fff;
-      font-weight: 500;
+    &.kw-btn--add {
+      border-color: $line-stroke;
+      padding-left: 32px;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        background: url(~assets/images/ic_plus_16.svg) no-repeat center;
+        background-size: 16px 16px;
+        display: block;
+      }
+
+      &:disabled {
+        &::after {
+          content: "";
+          background: url(~assets/images/ic_plus_16_disabled.svg) no-repeat center;
+          background-size: 16px 16px;
+        }
+      }
     }
   }
 
-  /* 더보기 버튼 */
-  .kw-search--view-more {
-    .q-btn {
-      padding: 0 9px 0 12px;
+  // step
+  &--step {
+    padding: 0 20px;
+    border: 1px solid $black-btn-line;
+    height: 42px;
+    background-color: #fff;
+    color: $black-h2;
+    font-weight: 400;
+
+    & + & {
+      margin-left: 8px;
+    }
+
+    &:hover {
+      border-color: $black-h1;
+      background-color: #fff;
+    }
+
+    &.q-btn--active {
+      border-color: $line-stroke;
+      background-color: $bg-box;
+    }
+
+    &:disabled {
+      border-color: $line-stroke;
+      background-color: $line-bg;
+      color: #bbb;
+
+      &:hover {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+
+      &.q-btn--active {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+      }
+    }
+
+    &.kw-btn--primary {
       border: 0;
-      width: 80px;
-      min-width: 80px;
-      color: $black-h3;
+      max-width: 182px;
+      width: 100%;
+      background-color: $primary;
+      color: #fff;
+      font-weight: 500;
 
-      .block {
-        padding-right: 20px;
-        position: relative;
-
-        &::after {
-          content: "";
-          position: absolute;
-          width: 16px;
-          height: 16px;
-          top: 50%;
-          right: 0;
-          transform: translateY(-50%);
-          background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
-          background-size: 16px;
-          transition: transform 0.28s;
-        }
+      &:hover {
+        background-color: #2a7bd9;
       }
 
-      &--append {
-        .block {
-          &::after {
-            transform: translateY(-50%) rotate(180deg);
-          }
-        }
+      &.q-btn--active {
+        background-color: #256dbf;
       }
 
-      .q-ripple {
-        display: none;
+      &:disabled {
+        background-color: $line-line;
+
+        &:hover {
+          background-color: $line-line;
+        }
+
+        &.q-btn--active {
+          background-color: $line-line;
+        }
+      }
+    }
+  }
+
+  // more
+  &--more {
+    // border: 1px solid #000;
+    padding: 0 28px 0 12px;
+    height: 32px;
+    background-color: #fff;
+    font-size: 14px;
+    color: $black-h3;
+    font-weight: 400;
+    position: relative;
+
+    &:hover {
+      background-color: inherit;
+    }
+
+    &.q-btn--active {
+      background-color: inherit;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 9px;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%);
+      background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+      background-size: 16px 16px;
+    }
+
+    &.q-btn--append {
+      &::after {
+        transform: translateY(-50%) rotate(180deg);
       }
     }
   }

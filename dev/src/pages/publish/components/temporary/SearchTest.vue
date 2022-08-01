@@ -78,14 +78,14 @@
               rules="required"
             />
           </kw-search-item>
-          <kw-search-item label="Input (TextArea)">
+          <!-- <kw-search-item label="Input (TextArea)">
             <kw-input
               name="textarea"
               type="textarea"
               autogrow
               rules="required"
             />
-          </kw-search-item>
+          </kw-search-item> -->
         </kw-search-row>
 
         <kw-search-row>
@@ -158,7 +158,7 @@
           </kw-search-item>
         </kw-search-row>
 
-        <kw-search-row>
+        <!-- <kw-search-row>
           <kw-search-item label="Toggle">
             <kw-field
               :model-value="[]"
@@ -194,7 +194,7 @@
               :options="['A', 'B', 'C', 'D']"
             />
           </kw-search-item>
-        </kw-search-row>
+        </kw-search-row> -->
 
         <kw-search-row>
           <kw-search-item label="DatePicker">

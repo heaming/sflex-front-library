@@ -1,3 +1,7 @@
+import { camelCase, toUpper } from 'lodash-es';
+
+const pascalCase = (s) => camelCase(s).replace(/^(.)/, toUpper);
+
 function createRoutesByGlobImport(modules, match) {
   return Object.keys(modules).map((key) => {
     const matched = match(key);
@@ -9,8 +13,14 @@ function createRoutesByGlobImport(modules, match) {
     const [, rootDir, subDirs] = matched;
     const name = matched.pop();
 
+    const paths = [
+      ...rootDir.split('/').map(pascalCase),
+      ...subDirs.split('/').splice(1).map(pascalCase),
+      pascalCase(name),
+    ];
+
     return {
-      path: `${rootDir}${subDirs}/${name}`,
+      path: paths.join('/'),
       meta: { name, isGlobImport: true },
       component: modules[key],
     };
