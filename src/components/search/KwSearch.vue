@@ -92,7 +92,6 @@ export default {
 
     async function onReset() {
       await formCtx.reset();
-      await nextTick();
       emit('reset');
     }
 

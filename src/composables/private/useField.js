@@ -157,6 +157,7 @@ export default (options) => {
 
     if (!props.ignoreOnReset) {
       value.value = deepCopy(initialValue.value);
+      await nextTick();
     }
 
     setState({
