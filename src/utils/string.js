@@ -17,3 +17,7 @@ export function getMaxByteString(string, maxBytes = 0, bytesPerKoChar = 3) {
 export function isOverByte(string, maxBytes = 0, bytesPerKoChar = 3) {
   return maxBytes > 0 && getByte(string, bytesPerKoChar) > maxBytes;
 }
+
+export function isEmpty(str) {
+  return (str === '' || str === undefined || str === null || str.length === 0);
+}
