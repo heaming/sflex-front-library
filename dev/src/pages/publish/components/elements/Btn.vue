@@ -396,7 +396,7 @@
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="moreBtn"
+            :code-value="more"
             :lang="vue"
             theme="light"
             width="100%"
@@ -412,7 +412,7 @@
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="moreAppendBtn"
+            :code-value="moreExpand"
             :lang="vue"
             theme="light"
             width="100%"
@@ -518,7 +518,7 @@ const stepTwoBtnDisable = `
 </kw-btn>
 `;
 
-const moreBtn = `
+const more = `
 <kw-btn
   class="kw-btn--more"
 >
@@ -526,12 +526,12 @@ const moreBtn = `
 </kw-btn>
 `;
 
-const moreAppendBtn = `
+const moreExpand = `
 <kw-btn
   class="kw-btn--more q-btn--append"
 >
   더보기
 </kw-btn>
-
 `;
+
 </script>
