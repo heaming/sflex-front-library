@@ -5,7 +5,7 @@
     v-model="innerValue"
     class="kw-date-picker"
     :class="{'q-field--focused': showing}"
-    :label="label"
+    :label="$q.platform.is.desktop ? null : label"
     :error="error"
     :error-message="errorMessage"
     :readonly="readonly"
