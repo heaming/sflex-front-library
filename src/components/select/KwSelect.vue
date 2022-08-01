@@ -92,11 +92,11 @@ export default {
     },
     emitValue: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     useInput: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     onFilter: {
       type: Function,
