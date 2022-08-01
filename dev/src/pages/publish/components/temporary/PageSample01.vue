@@ -1,8 +1,5 @@
 <template>
-  <kw-page
-    style="padding: 40px;"
-    no-header
-  >
+  <kw-page>
     <template #header>
       <kw-page-header
         :options="['1','2','3']"

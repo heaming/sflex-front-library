@@ -4,7 +4,8 @@
       gutter
     </h2>
     <p class="kw-guide-description">
-      gutter는 레이아웃 상 각 컴퍼넌트간의 마진과 내부 패딩을 쉽게 정의하기 위해 사용한다. 클래스 형태로 제공된다.<br>10px, 20px, 30px ... 500px
+      Gutter is used to easily define the 'margin' and 'padding' between each component.
+      <br>It is provided in the form of a 'class'.10px, 20px, 30px ... 500px
     </p>
     <div class="kw-guide-section">
       <h3
