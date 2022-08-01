@@ -17,7 +17,7 @@ export default () => {
 
   const itemClass = computed(() => (props.required ? 'essential' : null));
   const colWidth = computed(() => `${(100 / cols.value).toFixed(1) * props.colspan}%`);
-  const labelWidth = computed(() => (typeof labelSize === 'number' ? `${labelSize.value}px` : labelSize.value));
+  const labelWidth = computed(() => (typeof labelSize.value === 'number' ? `${labelSize.value}px` : labelSize.value));
 
   return {
     itemClass,
