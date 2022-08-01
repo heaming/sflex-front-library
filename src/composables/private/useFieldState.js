@@ -1,3 +1,5 @@
+import { klona as deepCopy } from 'klona/full';
+
 export const useFieldStateProps = {
   name: {
     type: String,
@@ -15,7 +17,7 @@ export default (val) => {
   const name = computed(() => props.label || props.name);
   const valueKey = computed(() => props.name || uid);
   const value = ref(val);
-  const initialValue = ref(val);
+  const initialValue = ref(deepCopy(val));
 
   const pending = ref(false);
   const validated = ref(false);
