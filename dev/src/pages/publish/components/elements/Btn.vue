@@ -4,7 +4,7 @@
       Btn
     </h2>
     <p class="kw-guide-description">
-      작업 진행중
+      작업 완료 (추후 주석 추가)
     </p>
     <div class="kw-guide-section">
       <h3
@@ -213,7 +213,7 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="Contents"
+        id="contents"
         class="kw-guide-title"
       >
         Contents
@@ -378,7 +378,7 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="Contents"
+        id="etc"
         class="kw-guide-title"
       >
         Etc
@@ -421,6 +421,36 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="toggleButton"
+        class="kw-guide-title"
+      >
+        Toggle
+      </h3>
+      <p class="kw-guide-description">
+        toggle button
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-toggle
+            v-model="dummyData"
+            label="text"
+            :true-value="true"
+            :false-value="false"
+          />
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="toggle"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -429,6 +459,8 @@ import { HighCode } from 'vue-highlight-code';
 import 'vue-highlight-code/dist/style.css';
 
 const vue = 'vue';
+
+const dummyData = ref(true);
 
 const primaryPositive = `
 <kw-btn>프로모션등록</kw-btn>
@@ -532,6 +564,17 @@ const moreExpand = `
 >
   더보기
 </kw-btn>
+`;
+
+const toggle = `
+<kw-toggle
+  v-model="dummyData"
+  label="text"
+  :true-value="true"
+  :false-value="false"
+/>
+
+const dummyData = ref(true);
 `;
 
 </script>
