@@ -51,7 +51,7 @@
 <script>
 import { debounce } from 'lodash-es';
 import { confirm } from '../../plugins/dialog';
-import { ObserverContextKey, FormTypeContextKey } from '../../consts/private/symbols';
+import { ObserverContextKey, FormTypeContextKey, PageSearchContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useForm, { useFormProps } from '../../composables/private/useForm';
 import useFormExpandable, { useFormExpandableProps } from '../../composables/private/useFormExpandable';
@@ -104,6 +104,24 @@ export default {
       emit('reset');
     }
 
+    const {
+      register: registerSearch,
+      unregister: unregisterSearch,
+    } = inject(PageSearchContextKey, {});
+
+    const searchCtx = {
+      uid: getCurrentInstance().uid,
+      name: computed(() => props.name),
+      confirmIfTargetsModified,
+    };
+
+    registerSearch?.(searchCtx);
+
+    onBeforeUnmount(() => {
+      unregisterSearch?.(searchCtx);
+    });
+
+    // form type injection
     provide(FormTypeContextKey, FORM_TYPE.SEARCH);
 
     // ignore observe

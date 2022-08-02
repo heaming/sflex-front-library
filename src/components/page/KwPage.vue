@@ -14,14 +14,10 @@
 <script>
 import usePage from '../../composables/private/usePage';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
-
-import KwPageHeader from './KwPageHeader.vue';
+import usePageSearch from '../../composables/private/usePageSearch';
 
 export default {
   name: 'KwPage',
-  components: {
-    KwPageHeader,
-  },
 
   props: {
     ...useObserverProps,
@@ -34,6 +30,7 @@ export default {
 
   setup() {
     usePage();
+    usePageSearch();
 
     return {
       ...useObserver(),
