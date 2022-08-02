@@ -1,10 +1,10 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      pagination
+      Pagination
     </h2>
     <p class="kw-guide-description">
-      description
+      default current page '1', total list count '100'
     </p>
     <div class="kw-guide-section">
       <h3
@@ -50,7 +50,7 @@
         default
       </h3>
       <p class="kw-guide-description">
-        description
+        default pagination
       </p>
       <q-card>
         <div class="kw-guide-example">
