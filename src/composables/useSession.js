@@ -57,7 +57,7 @@ export default () => {
 
   async function login(loginId, password) {
     await http.post('/certification/simple-login', { loginId, password });
-    window.location.replace('/index');
+    window.location.replace('/');
   }
 
   async function logout() {
