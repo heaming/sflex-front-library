@@ -193,13 +193,6 @@
     }
   }
 
-  // validation message 임시 스타일
-  .q-field__bottom {
-    .q-field__messages {
-      display: none !important;
-    }
-  }
-
   // Checkbox (검색/테이블 내 사용 18px)
   .q-checkbox__inner {
     width: 18px;
