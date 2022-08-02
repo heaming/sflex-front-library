@@ -100,6 +100,8 @@ declare interface GridUtil {
   map<TResult = any>(view: View, iteratee: ListIteratee<RowValue, TResult>): TResult[];
   reduce<TResult>(view: View, iteratee: MemoListIterator<RowValue, TResult, Array<RowValue>>, accumulator: TResult): TResult;
   some(view: View, predicate: ListIteratee<RowValue, boolean>): boolean;
+  deleteSelectedRows(view: View, isIncludeCreated: boolean): RowValue[];
+  confirmDeleteSelectedRows(view: View, isIncludeCreated: boolean): Promise<RowValue[]>;
   deleteCheckedRows(view: View, isIncludeCreated: boolean): RowValue[];
   confirmDeleteCheckedRows(view: View, isIncludeCreated: boolean): Promise<RowValue[]>;
   init(view: View): void;

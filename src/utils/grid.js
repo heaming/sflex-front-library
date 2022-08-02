@@ -220,6 +220,26 @@ export function some(view, predicate) {
   return _some(getAllRowValues(view, false), predicate);
 }
 
+export function deleteSelectedRows(view, isIncludeCreated = false) {
+  const selectedRows = view.getSelectedRows().sort((a, b) => a - b);
+  const deletedRowValues = getRowValues(view, selectedRows)
+    .filter((v) => isIncludeCreated || v.rowState !== consts.ROWSTATE_CREATED);
+
+  view.getDataSource().removeRows(selectedRows);
+  return deletedRowValues;
+}
+
+export async function confirmDeleteSelectedRows(view, isIncludeCreated = false) {
+  if (!view.getSelectedRows().length) {
+    await alert(i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+    return [];
+  }
+  if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
+    return deleteSelectedRows(view, isIncludeCreated);
+  }
+  return [];
+}
+
 export function deleteCheckedRows(view, isIncludeCreated = false) {
   const checkedRows = view.getCheckedRows();
   const deletedRowValues = getRowValues(view, checkedRows)
