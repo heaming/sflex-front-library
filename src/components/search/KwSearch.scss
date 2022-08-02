@@ -119,7 +119,7 @@
   // search button
   .q-btn {
     padding: 0 12px;
-    border: 1px solid $black-h2;
+    border: 1px solid $black-btn-line;
     min-width: 90px;
     height: 32px;
     min-height: 32px;
@@ -150,6 +150,21 @@
 
     /* default style override [e] */
     &[type="reset"] {
+      &:hover {
+        border-color: $black-h1;
+      }
+
+      &.q-btn--active {
+        border-color: $black-h2;
+        background-color: $bg-box;
+      }
+
+      &.disabled {
+        border-color: $line-stroke;
+        background-color: $line-bg;
+        color: #bbb;
+      }
+
       & + .q-btn[type="submit"] {
         margin-left: 8px;
       }
@@ -159,7 +174,22 @@
       border-color: $secondary;
       background-color: $secondary;
       color: #fff;
-      font-weight: 500;
+
+      &:hover {
+        border-color: #252f5e;
+        background-color: #252f5e;
+      }
+
+      &.q-btn--active {
+        border-color: #1b2245;
+        background-color: #1b2245;
+      }
+
+      &.disabled {
+        border-color: $line-line;
+        background-color: $line-line;
+        font-weight: 500;
+      }
     }
   }
 
