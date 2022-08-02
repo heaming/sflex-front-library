@@ -4,7 +4,7 @@
       Pagination
     </h2>
     <p class="kw-guide-description">
-      default current page '1', total list count '100'
+      default current status '1', total list count '100'
     </p>
     <div class="kw-guide-section">
       <h3
