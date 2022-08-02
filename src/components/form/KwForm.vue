@@ -41,6 +41,7 @@ export default {
       emit('reset');
     }
 
+    // form type injection
     provide(FormTypeContextKey, FORM_TYPE.FORM);
 
     return {
