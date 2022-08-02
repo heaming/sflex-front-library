@@ -37,7 +37,7 @@
 
   &-title {
     display: inline-block;
-    margin: 0;
+    margin: 0 0 10px;
     font-size: 20px;
 
     // text-transform: capitalize;
@@ -79,7 +79,7 @@
   }
 
   .q-card {
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 0 50px 40px;
     border: 1px solid #d9d9d9;
     box-shadow: none;
@@ -143,5 +143,39 @@
     height: 100px;
     font-size: 14px;
     color: #fff;
+  }
+}
+
+.q-tree.q-tree--standard {
+  .q-focus-helper + i {
+    text-indent: -100000px;
+    position: relative;
+
+    &::after {
+      display: block !important;
+      content: "▶";
+      font-size: 5px;
+      font-style: normal;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: #b8b8b8 !important;
+      text-indent: 0;
+      line-height: 1.5;
+    }
+  }
+}
+
+.q-header.q-layout__section--marginal.fixed-top {
+  .q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-focusable {
+    .q-focus-helper + .q-btn__content.text-center.q-anchor--skip::after {
+      display: inline-block !important;
+      content: "";
+      width: 24px;
+      height: 24px;
+      background: url(~assets/images/ic_menu.svg) no-repeat 0 0;
+    }
   }
 }

@@ -21,196 +21,397 @@
         Instead of kw-form, &lt;Kw-search&gt; form wrap kw-form-row.<br>
         Add the columns number cols="4" in the tag of "kw-search" (default: three columns)<br>
       </p>
-      <kw-search
-        :key="formKey"
-        ref="formRef"
-        :autofocus="autofocus"
-        :no-reset-focus="noResetFocus"
-        :cols="4"
-        class="kw-py-2 kw-px-4 kw-my-4"
-      >
-        <kw-form-row>
-          <kw-form-item label="지점명">
-            <kw-input
-              name="input"
-              rules="required"
-              placeholder="입력해주세요"
-            />
-          </kw-form-item>
-          <kw-form-item
-            label="담당자명"
-            class="essential"
-          >
-            <!-- 필수 입력의 경우 essential 클래스 추가-->
-            <kw-input
-              name="input"
-              rules="required"
-              placeholder="입력해주세요"
-            />
-          </kw-form-item>
-          <kw-form-item label="지역명">
-            <kw-input
-              v-model="readonlyValue"
-              name="input"
-              readonly
-              rules="required"
-              placeholder="입력해주세요"
-            />
-          </kw-form-item>
-          <kw-form-item label="권역명">
-            <kw-input
-              name="input"
-              rules="required"
-              placeholder="입력해주세요"
-              disable
-            />
-          </kw-form-item>
-        </kw-form-row>
-
-        <kw-form-row>
-          <kw-form-item
-            label="선택 샘플"
-            class="essential"
-          >
-            <kw-select
-              :model-value="[]"
-              :options="['A', 'B', 'C', 'D']"
-              placeholder="선택해 주세요."
-              name="select"
-              rules="required"
-            />
-          </kw-form-item>
-          <kw-form-item label="다중선택 샘플 (readonly)">
-            <kw-select
-              :model-value="readonlySelect"
-              :options="['A', 'B', 'C', 'D']"
-              multiple
-              name="selectMultiple"
-              rules="required"
-              readonly
-            />
-          </kw-form-item>
-          <kw-form-item label="다중선택 샘플 (disable)">
-            <kw-select
-              :model-value="[]"
-              :options="['A', 'B', 'C', 'D']"
-              multiple
-              name="selectMultiple"
-              rules="required"
-              disable="disable"
-            />
-          </kw-form-item>
-        </kw-form-row>
-
-        <kw-form-row>
-          <kw-form-item label="Radio">
-            <kw-field
-              name="radio"
-              rules="required"
+      <q-card>
+        <kw-search
+          :key="formKey"
+          ref="formRef"
+          :autofocus="autofocus"
+          :no-reset-focus="noResetFocus"
+          :cols="4"
+          class="kw-py-2 kw-px-4 kw-my-4"
+        >
+          <kw-form-row>
+            <kw-form-item label="지점명">
+              <kw-input
+                name="input"
+                rules="required"
+                placeholder="입력해주세요"
+              />
+            </kw-form-item>
+            <kw-form-item
+              label="담당자명"
+              class="essential"
             >
-              <template #default="{ field }">
-                <kw-radio
-                  v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                  :key="i"
-                  v-bind="field"
-                  :val="item"
-                />
-              </template>
-            </kw-field>
-          </kw-form-item>
+              <!-- 필수 입력의 경우 essential 클래스 추가-->
+              <kw-input
+                name="input"
+                rules="required"
+                placeholder="입력해주세요"
+              />
+            </kw-form-item>
+            <kw-form-item label="지역명">
+              <kw-input
+                v-model="readonlyValue"
+                name="input"
+                readonly
+                rules="required"
+                placeholder="입력해주세요"
+              />
+            </kw-form-item>
+            <kw-form-item label="권역명">
+              <kw-input
+                name="input"
+                rules="required"
+                placeholder="입력해주세요"
+                disable
+              />
+            </kw-form-item>
+          </kw-form-row>
 
-          <kw-form-item label="OptionGroup (readonly)">
-            <kw-option-group
-              :model-value="readonlyRadio"
-              name="radioOptionGroup"
-              rules="required"
-              type="radio"
-              :options="['김엄마', '김마', '마']"
-              disable
-            />
-          </kw-form-item>
-          <kw-form-item label="optiongroup (disable)">
-            <kw-option-group
-              name="radioOptionGroup"
-              rules="required"
-              type="radio"
-              :options="['김엄마', '김마', '마']"
-              disable
-            />
-          </kw-form-item>
-        </kw-form-row>
-
-        <kw-form-row>
-          <kw-form-item label="Checkbox">
-            <kw-field
-              :model-value="[]"
-              name="checkbox"
-              rules="required"
+          <kw-form-row>
+            <kw-form-item
+              label="선택 샘플"
+              class="essential"
             >
-              <template #default="{ field }">
-                <kw-checkbox
-                  v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                  :key="i"
-                  v-bind="field"
-                  :val="item"
-                />
-              </template>
-            </kw-field>
-          </kw-form-item>
-          <kw-form-item label="OptionGroup (readonly)">
-            <kw-option-group
-              :model-value="readonlyCheckbox"
-              name="checkboxOptionGroup"
-              rules="required"
-              type="checkbox"
-              :options="['A', 'B', 'C', 'D']"
-              disable
-            />
-          </kw-form-item>
-          <kw-form-item label="OptionGroup (disable)">
-            <kw-option-group
-              :model-value="[]"
-              name="checkboxOptionGroup"
-              rules="required"
-              type="checkbox"
-              :options="['A', 'B', 'C', 'D']"
-              disable
-            />
-          </kw-form-item>
-        </kw-form-row>
+              <kw-select
+                :model-value="[]"
+                :options="['A', 'B', 'C', 'D']"
+                placeholder="선택해 주세요."
+                name="select"
+                rules="required"
+              />
+            </kw-form-item>
+            <kw-form-item label="다중선택 샘플 (readonly)">
+              <kw-select
+                :model-value="readonlySelect"
+                :options="['A', 'B', 'C', 'D']"
+                multiple
+                name="selectMultiple"
+                rules="required"
+                readonly
+              />
+            </kw-form-item>
+            <kw-form-item label="다중선택 샘플 (disable)">
+              <kw-select
+                :model-value="[]"
+                :options="['A', 'B', 'C', 'D']"
+                multiple
+                name="selectMultiple"
+                rules="required"
+                disable="disable"
+              />
+            </kw-form-item>
+          </kw-form-row>
 
-        <kw-form-row>
-          <kw-form-item label="DatePicker">
-            <kw-date-picker
-              name="datePicker"
-              rules="required"
-            />
-          </kw-form-item>
-        </kw-form-row>
+          <kw-form-row>
+            <kw-form-item label="Radio">
+              <kw-field
+                name="radio"
+                rules="required"
+              >
+                <template #default="{ field }">
+                  <kw-radio
+                    v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                    :key="i"
+                    v-bind="field"
+                    :val="item"
+                  />
+                </template>
+              </kw-field>
+            </kw-form-item>
 
-        <kw-form-row>
-          <kw-form-item label="DateRangePicker">
-            <kw-date-range-picker
-              name="dateRangePicker"
-              rules="date_range_required|date_range_months:1"
-            />
-          </kw-form-item>
-          <kw-form-item
-            label="DateRangePicker"
-            cols="2"
-          >
-            <kw-date-range-picker
-              name="dateRangePicker"
-              rules="date_range_required|date_range_months:1"
-            />
-          </kw-form-item>
-        </kw-form-row>
-      </kw-search>
+            <kw-form-item label="OptionGroup (readonly)">
+              <kw-option-group
+                :model-value="readonlyRadio"
+                name="radioOptionGroup"
+                rules="required"
+                type="radio"
+                :options="['김엄마', '김마', '마']"
+                disable
+              />
+            </kw-form-item>
+            <kw-form-item label="optiongroup (disable)">
+              <kw-option-group
+                name="radioOptionGroup"
+                rules="required"
+                type="radio"
+                :options="['김엄마', '김마', '마']"
+                disable
+              />
+            </kw-form-item>
+          </kw-form-row>
+
+          <kw-form-row>
+            <kw-form-item label="Checkbox">
+              <kw-field
+                :model-value="[]"
+                name="checkbox"
+                rules="required"
+              >
+                <template #default="{ field }">
+                  <kw-checkbox
+                    v-for="(item, i) of ['A', 'B', 'C', 'D']"
+                    :key="i"
+                    v-bind="field"
+                    :val="item"
+                  />
+                </template>
+              </kw-field>
+            </kw-form-item>
+            <kw-form-item label="OptionGroup (readonly)">
+              <kw-option-group
+                :model-value="readonlyCheckbox"
+                name="checkboxOptionGroup"
+                rules="required"
+                type="checkbox"
+                :options="['A', 'B', 'C', 'D']"
+                disable
+              />
+            </kw-form-item>
+            <kw-form-item label="OptionGroup (disable)">
+              <kw-option-group
+                :model-value="[]"
+                name="checkboxOptionGroup"
+                rules="required"
+                type="checkbox"
+                :options="['A', 'B', 'C', 'D']"
+                disable
+              />
+            </kw-form-item>
+          </kw-form-row>
+
+          <kw-form-row>
+            <kw-form-item label="DatePicker">
+              <kw-date-picker
+                name="datePicker"
+                rules="required"
+              />
+            </kw-form-item>
+          </kw-form-row>
+
+          <kw-form-row>
+            <kw-form-item label="DateRangePicker">
+              <kw-date-range-picker
+                name="dateRangePicker"
+                rules="date_range_required|date_range_months:1"
+              />
+            </kw-form-item>
+            <kw-form-item
+              label="DateRangePicker"
+              cols="2"
+            >
+              <kw-date-range-picker
+                name="dateRangePicker"
+                rules="date_range_required|date_range_months:1"
+              />
+            </kw-form-item>
+          </kw-form-row>
+        </kw-search>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="searchCode"
+            lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
+import { HighCode } from 'vue-highlight-code';
+import 'vue-highlight-code/dist/style.css';
+
+const searchCode = `
+<kw-search
+  :key="formKey"
+  ref="formRef"
+  :autofocus="autofocus"
+  :no-reset-focus="noResetFocus"
+  :cols="4"
+  class="kw-py-2 kw-px-4 kw-my-4"
+>
+  <kw-form-row>
+    <kw-form-item label="지점명">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="담당자명"
+      class="essential"
+    >
+      <!-- 필수 입력의 경우 essential 클래스 추가-->
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="지역명">
+      <kw-input
+        v-model="readonlyValue"
+        name="input"
+        readonly
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-form-item>
+    <kw-form-item label="권역명">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+        disable
+      />
+    </kw-form-item>
+  </kw-form-row>
+
+  <kw-form-row>
+    <kw-form-item
+      label="선택 샘플"
+      class="essential"
+    >
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        placeholder="선택해 주세요."
+        name="select"
+        rules="required"
+      />
+    </kw-form-item>
+    <kw-form-item label="다중선택 샘플 (readonly)">
+      <kw-select
+        :model-value="readonlySelect"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+        readonly
+      />
+    </kw-form-item>
+    <kw-form-item label="다중선택 샘플 (disable)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+        disable="disable"
+      />
+    </kw-form-item>
+  </kw-form-row>
+
+  <kw-form-row>
+    <kw-form-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+
+    <kw-form-item label="OptionGroup (readonly)">
+      <kw-option-group
+        :model-value="readonlyRadio"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['김엄마', '김마', '마']"
+        disable
+      />
+    </kw-form-item>
+    <kw-form-item label="optiongroup (disable)">
+      <kw-option-group
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['김엄마', '김마', '마']"
+        disable
+      />
+    </kw-form-item>
+  </kw-form-row>
+
+  <kw-form-row>
+    <kw-form-item label="Checkbox">
+      <kw-field
+        :model-value="[]"
+        name="checkbox"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+    <kw-form-item label="OptionGroup (readonly)">
+      <kw-option-group
+        :model-value="readonlyCheckbox"
+        name="checkboxOptionGroup"
+        rules="required"
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+        disable
+      />
+    </kw-form-item>
+    <kw-form-item label="OptionGroup (disable)">
+      <kw-option-group
+        :model-value="[]"
+        name="checkboxOptionGroup"
+        rules="required"
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+        disable
+      />
+    </kw-form-item>
+  </kw-form-row>
+
+  <kw-form-row>
+    <kw-form-item label="DatePicker">
+      <kw-date-picker
+        name="datePicker"
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+
+  <kw-form-row>
+    <kw-form-item label="DateRangePicker">
+      <kw-date-range-picker
+        name="dateRangePicker"
+        rules="date_range_required|date_range_months:1"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="DateRangePicker"
+      cols="2"
+    >
+      <kw-date-range-picker
+        name="dateRangePicker"
+        rules="date_range_required|date_range_months:1"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-search>
+`;
 </script>
 <style lang="scss">
 // .q-field__native { max-width: 310px; }

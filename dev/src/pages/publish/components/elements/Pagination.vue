@@ -1,10 +1,10 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Grid
+      Pagination
     </h2>
     <p class="kw-guide-description">
-      description
+      default current status '1', total list count '100'
     </p>
     <div class="kw-guide-section">
       <h3
@@ -50,15 +50,18 @@
         default
       </h3>
       <p class="kw-guide-description">
-        description
+        default pagination
       </p>
       <q-card>
         <div class="kw-guide-example">
-          component area
+          <kw-pagination
+            :model-value="1"
+            :total-count="100"
+          />
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="testCode"
+            :code-value="pagination"
             :lang="vue"
             theme="light"
             width="100%"
@@ -76,17 +79,10 @@ import 'vue-highlight-code/dist/style.css';
 
 const vue = 'vue';
 
-const testCode = `
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="label">
-      <kw-input
-        name="input"
-        rules="required"
-        placeholder="입력해주세요"
-      />
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
+const pagination = `
+<kw-pagination
+  :model-value="1"
+  :total-count="100"
+/>
 `;
 </script>

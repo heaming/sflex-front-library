@@ -4,7 +4,7 @@
       Btn
     </h2>
     <p class="kw-guide-description">
-      작업 진행중
+      button set
     </p>
     <div class="kw-guide-section">
       <h3
@@ -213,7 +213,7 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="Contents"
+        id="contents"
         class="kw-guide-title"
       >
         Contents
@@ -378,7 +378,7 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="Contents"
+        id="etc"
         class="kw-guide-title"
       >
         Etc
@@ -396,7 +396,7 @@
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="moreBtn"
+            :code-value="more"
             :lang="vue"
             theme="light"
             width="100%"
@@ -412,7 +412,37 @@
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="moreAppendBtn"
+            :code-value="moreExpand"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="toggleButton"
+        class="kw-guide-title"
+      >
+        Toggle
+      </h3>
+      <p class="kw-guide-description">
+        toggle button
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-toggle
+            v-model="dummyData"
+            label="text"
+            :true-value="true"
+            :false-value="false"
+          />
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="toggle"
             :lang="vue"
             theme="light"
             width="100%"
@@ -429,6 +459,8 @@ import { HighCode } from 'vue-highlight-code';
 import 'vue-highlight-code/dist/style.css';
 
 const vue = 'vue';
+
+const dummyData = ref(true);
 
 const primaryPositive = `
 <kw-btn>프로모션등록</kw-btn>
@@ -518,7 +550,7 @@ const stepTwoBtnDisable = `
 </kw-btn>
 `;
 
-const moreBtn = `
+const more = `
 <kw-btn
   class="kw-btn--more"
 >
@@ -526,12 +558,23 @@ const moreBtn = `
 </kw-btn>
 `;
 
-const moreAppendBtn = `
+const moreExpand = `
 <kw-btn
   class="kw-btn--more q-btn--append"
 >
   더보기
 </kw-btn>
-
 `;
+
+const toggle = `
+<kw-toggle
+  v-model="dummyData"
+  label="text"
+  :true-value="true"
+  :false-value="false"
+/>
+
+const dummyData = ref(true); // select default value (true or false)
+`;
+
 </script>

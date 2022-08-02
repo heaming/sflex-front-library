@@ -1,7 +1,7 @@
 .kw-date {
   width: 221px;
   height: 250px;
-  padding: 16px;
+  padding: 16px 16px 21px;
   box-sizing: content-box;
 }
 
@@ -120,4 +120,11 @@
   .q-field__inner {
     max-width: none;
   }
+}
+
+.datepicker.datepicker-inline td,
+.datepicker.datepicker-inline th,
+.datepicker.dropdown-menu td,
+.datepicker.dropdown-menu th {
+  padding: 0;
 }
