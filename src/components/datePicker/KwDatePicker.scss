@@ -121,3 +121,10 @@
     max-width: none;
   }
 }
+
+.datepicker.datepicker-inline td,
+.datepicker.datepicker-inline th,
+.datepicker.dropdown-menu td,
+.datepicker.dropdown-menu th {
+  padding: 0;
+}
