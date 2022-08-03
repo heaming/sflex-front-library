@@ -1,4 +1,5 @@
 const fg = require('fast-glob');
+const shelljs = require('shelljs');
 const { resolve } = require('path');
 const { loadEnv } = require('vite');
 const { default: mpa } = require('vite-plugin-mpa');
@@ -20,6 +21,23 @@ function scanPages(pagesDir) {
     .reduce((a, v) => { a[getEntryName(v)] = {}; return a; }, {});
 }
 
+function moveTemplateIndex() {
+  return {
+    name: 'vite-plugin-move-template-index',
+
+    closeBundle() {
+      const absoluteDistPath = resolve(context, 'dist');
+
+      shelljs.mv(
+        resolve(absoluteDistPath, 'index/index.html'),
+        absoluteDistPath,
+      );
+
+      shelljs.rm('-rf', resolve(absoluteDistPath, 'index'));
+    },
+  };
+}
+
 module.exports = ({
   mode, command, pages, pagesDir, envDir,
 }) => {
@@ -30,10 +48,11 @@ module.exports = ({
   pages = Object.keys(pages)
     .reduce((a, v) => { a[v] = normalizePage(v, pages[v]); return a; }, {});
 
+  const isBuild = command === 'build';
   const absoluteEnvPath = resolve(context, envDir || '');
   const env = loadEnv(mode, absoluteEnvPath);
 
-  return [
+  const plugins = [
     mpa({ scanDir: pagesDir, open: false }),
 
     htmlTemplate({
@@ -47,4 +66,12 @@ module.exports = ({
       },
     }),
   ];
+
+  if (isBuild) {
+    plugins.push(
+      moveTemplateIndex(),
+    );
+  }
+
+  return plugins;
 };
