@@ -1,37 +1,41 @@
 <template>
   <div class="kw-page-header">
-    <div
-      v-if="heading"
-      class="kw-page-header-title_area"
-    >
+    <div class="kw-page-header-title_area">
       <button
         type="button"
         class="kw-page-header-btn_back"
+        @click="onClickBack"
       >
-        이전
+        <kw-tooltip>
+          {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
+        </kw-tooltip>
       </button>
-      <h1>{{ breadcrumbs[Object.keys(breadcrumbs).length - 1].label }}</h1>
+      <h1>{{ heading }}</h1>
       <button
         type="button"
         class="kw-page-header-favorite kw-page-header-favorite_on"
+        @click="onClickFavorites"
       >
-        즐겨찾기
+        <kw-tooltip>
+          {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
+        </kw-tooltip>
       </button>
     </div>
-    <q-breadcrumbs
-      align="right"
-    >
+    <q-breadcrumbs align="right">
       <q-breadcrumbs-el
         v-for="(breadcrumb, i) of breadcrumbs"
         :key="breadcrumb.key"
         :label="breadcrumb.label"
       >
         <button
-          v-if="Object.keys(breadcrumbs).length - 1 == i"
+          v-if="i === breadcrumbs.length - 1"
           type="button"
           class="breadcrumbs-hint"
+          @click="onClickHint"
         >
-          Hint
+          <kw-tooltip>
+            {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
+          </kw-tooltip>
         </button>
       </q-breadcrumbs-el>
     </q-breadcrumbs>
@@ -39,7 +43,7 @@
 </template>
 
 <script>
-import { find } from 'lodash-es';
+import { find, last } from 'lodash-es';
 
 function creataBreadcrumbs(menus, menuUid) {
   const matched = find(menus, ['menuUid', menuUid]);
@@ -65,32 +69,19 @@ export default {
       type: Array,
       default: undefined,
     },
-    heading: {
-      type: Boolean,
-      default: false,
-    },
   },
-
   setup(props) {
     const { getters } = useStore();
     const { currentRoute } = useRouter();
-
     const breadcrumbs = ref([]);
     const options = toRef(props, 'options');
-
     if (Array.isArray(options.value)) {
       breadcrumbs.value = options.value.map((v) => ({ key: v, label: v }));
     } else {
       const menus = getters['meta/getMenus'];
-
-      const {
-        applicationId,
-        menuUid,
-      } = find(menus, ['menuUid', currentRoute.value.name]) || {};
-
+      const { applicationId, menuUid } = find(menus, ['menuUid', currentRoute.value.name]) || {};
       if (applicationId) {
         const app = getters['meta/getApp'](applicationId);
-
         breadcrumbs.value = [
           {
             key: applicationId,
@@ -100,9 +91,29 @@ export default {
         ];
       }
     }
+    const heading = computed(() => last(breadcrumbs.value)?.label);
+    const isAuthenticated = getters['meta/isAuthenticated'];
+
+    function onClickBack() {
+      //
+    }
+
+    function onClickFavorites() {
+      if (isAuthenticated) {
+        //
+      }
+    }
+
+    function onClickHint() {
+      //
+    }
 
     return {
       breadcrumbs,
+      heading,
+      onClickBack,
+      onClickFavorites,
+      onClickHint,
     };
   },
 };
