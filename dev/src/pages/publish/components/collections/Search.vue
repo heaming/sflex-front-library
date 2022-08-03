@@ -4,7 +4,7 @@
       Search Form
     </h2>
     <p class="kw-guide-description">
-      kw-search-form > kw-form-row > kw-form-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
+      kw-search-form > kw-search-row > kw-search-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
       - This is the sequence to be wrapped<br>
       it is necessary to be wrapped for using the element's tags from kw-form to the element.
     </p>
@@ -18,7 +18,7 @@
       <p class="kw-guide-description">
         The "kw-search" example is as below.<br>
         when kw-search is used, it is included in the border of outside.<br>
-        Instead of kw-form, &lt;Kw-search&gt; form wrap kw-form-row.<br>
+        Instead of kw-form, &lt;kw-search&gt; form wrap kw-search-row.<br>
         Add the columns number cols="4" in the tag of "kw-search" (default: three columns)<br>
       </p>
       <q-card>
@@ -30,15 +30,15 @@
           :cols="4"
           class="kw-py-2 kw-px-4 kw-my-4"
         >
-          <kw-form-row>
-            <kw-form-item label="지점명">
+          <kw-search-row>
+            <kw-search-item label="지점명">
               <kw-input
                 name="input"
                 rules="required"
                 placeholder="입력해주세요"
               />
-            </kw-form-item>
-            <kw-form-item
+            </kw-search-item>
+            <kw-search-item
               label="담당자명"
               class="essential"
             >
@@ -48,8 +48,8 @@
                 rules="required"
                 placeholder="입력해주세요"
               />
-            </kw-form-item>
-            <kw-form-item label="지역명">
+            </kw-search-item>
+            <kw-search-item label="지역명">
               <kw-input
                 v-model="readonlyValue"
                 name="input"
@@ -57,19 +57,19 @@
                 rules="required"
                 placeholder="입력해주세요"
               />
-            </kw-form-item>
-            <kw-form-item label="권역명">
+            </kw-search-item>
+            <kw-search-item label="권역명">
               <kw-input
                 name="input"
                 rules="required"
                 placeholder="입력해주세요"
                 disable
               />
-            </kw-form-item>
-          </kw-form-row>
+            </kw-search-item>
+          </kw-search-row>
 
-          <kw-form-row>
-            <kw-form-item
+          <kw-search-row>
+            <kw-search-item
               label="선택 샘플"
               class="essential"
             >
@@ -80,8 +80,8 @@
                 name="select"
                 rules="required"
               />
-            </kw-form-item>
-            <kw-form-item label="다중선택 샘플 (readonly)">
+            </kw-search-item>
+            <kw-search-item label="다중선택 샘플 (readonly)">
               <kw-select
                 :model-value="readonlySelect"
                 :options="['A', 'B', 'C', 'D']"
@@ -90,8 +90,8 @@
                 rules="required"
                 readonly
               />
-            </kw-form-item>
-            <kw-form-item label="다중선택 샘플 (disable)">
+            </kw-search-item>
+            <kw-search-item label="다중선택 샘플 (disable)">
               <kw-select
                 :model-value="[]"
                 :options="['A', 'B', 'C', 'D']"
@@ -100,11 +100,11 @@
                 rules="required"
                 disable="disable"
               />
-            </kw-form-item>
-          </kw-form-row>
+            </kw-search-item>
+          </kw-search-row>
 
-          <kw-form-row>
-            <kw-form-item label="Radio">
+          <kw-search-row>
+            <kw-search-item label="Radio">
               <kw-field
                 name="radio"
                 rules="required"
@@ -118,9 +118,9 @@
                   />
                 </template>
               </kw-field>
-            </kw-form-item>
+            </kw-search-item>
 
-            <kw-form-item label="OptionGroup (readonly)">
+            <kw-search-item label="OptionGroup (readonly)">
               <kw-option-group
                 :model-value="readonlyRadio"
                 name="radioOptionGroup"
@@ -129,8 +129,8 @@
                 :options="['김엄마', '김마', '마']"
                 disable
               />
-            </kw-form-item>
-            <kw-form-item label="optiongroup (disable)">
+            </kw-search-item>
+            <kw-search-item label="optiongroup (disable)">
               <kw-option-group
                 name="radioOptionGroup"
                 rules="required"
@@ -138,11 +138,11 @@
                 :options="['김엄마', '김마', '마']"
                 disable
               />
-            </kw-form-item>
-          </kw-form-row>
+            </kw-search-item>
+          </kw-search-row>
 
-          <kw-form-row>
-            <kw-form-item label="Checkbox">
+          <kw-search-row>
+            <kw-search-item label="Checkbox">
               <kw-field
                 :model-value="[]"
                 name="checkbox"
@@ -157,8 +157,8 @@
                   />
                 </template>
               </kw-field>
-            </kw-form-item>
-            <kw-form-item label="OptionGroup (readonly)">
+            </kw-search-item>
+            <kw-search-item label="OptionGroup (readonly)">
               <kw-option-group
                 :model-value="readonlyCheckbox"
                 name="checkboxOptionGroup"
@@ -167,8 +167,8 @@
                 :options="['A', 'B', 'C', 'D']"
                 disable
               />
-            </kw-form-item>
-            <kw-form-item label="OptionGroup (disable)">
+            </kw-search-item>
+            <kw-search-item label="OptionGroup (disable)">
               <kw-option-group
                 :model-value="[]"
                 name="checkboxOptionGroup"
@@ -177,26 +177,26 @@
                 :options="['A', 'B', 'C', 'D']"
                 disable
               />
-            </kw-form-item>
-          </kw-form-row>
+            </kw-search-item>
+          </kw-search-row>
 
-          <kw-form-row>
-            <kw-form-item label="DatePicker">
+          <kw-search-row>
+            <kw-search-item label="DatePicker">
               <kw-date-picker
                 name="datePicker"
                 rules="required"
               />
-            </kw-form-item>
-          </kw-form-row>
+            </kw-search-item>
+          </kw-search-row>
 
-          <kw-form-row>
-            <kw-form-item label="DateRangePicker">
+          <kw-search-row>
+            <kw-search-item label="DateRangePicker">
               <kw-date-range-picker
                 name="dateRangePicker"
                 rules="date_range_required|date_range_months:1"
               />
-            </kw-form-item>
-            <kw-form-item
+            </kw-search-item>
+            <kw-search-item
               label="DateRangePicker"
               cols="2"
             >
@@ -204,8 +204,8 @@
                 name="dateRangePicker"
                 rules="date_range_required|date_range_months:1"
               />
-            </kw-form-item>
-          </kw-form-row>
+            </kw-search-item>
+          </kw-search-row>
         </kw-search>
         <div class="kw-guide-code">
           <HighCode
@@ -234,15 +234,15 @@ const searchCode = `
   :cols="4"
   class="kw-py-2 kw-px-4 kw-my-4"
 >
-  <kw-form-row>
-    <kw-form-item label="지점명">
+  <kw-search-row>
+    <kw-search-item label="지점명">
       <kw-input
         name="input"
         rules="required"
         placeholder="입력해주세요"
       />
-    </kw-form-item>
-    <kw-form-item
+    </kw-search-item>
+    <kw-search-item
       label="담당자명"
       class="essential"
     >
@@ -252,8 +252,8 @@ const searchCode = `
         rules="required"
         placeholder="입력해주세요"
       />
-    </kw-form-item>
-    <kw-form-item label="지역명">
+    </kw-search-item>
+    <kw-search-item label="지역명">
       <kw-input
         v-model="readonlyValue"
         name="input"
@@ -261,19 +261,19 @@ const searchCode = `
         rules="required"
         placeholder="입력해주세요"
       />
-    </kw-form-item>
-    <kw-form-item label="권역명">
+    </kw-search-item>
+    <kw-search-item label="권역명">
       <kw-input
         name="input"
         rules="required"
         placeholder="입력해주세요"
         disable
       />
-    </kw-form-item>
-  </kw-form-row>
+    </kw-search-item>
+  </kw-search-row>
 
-  <kw-form-row>
-    <kw-form-item
+  <kw-search-row>
+    <kw-search-item
       label="선택 샘플"
       class="essential"
     >
@@ -284,8 +284,8 @@ const searchCode = `
         name="select"
         rules="required"
       />
-    </kw-form-item>
-    <kw-form-item label="다중선택 샘플 (readonly)">
+    </kw-search-item>
+    <kw-search-item label="다중선택 샘플 (readonly)">
       <kw-select
         :model-value="readonlySelect"
         :options="['A', 'B', 'C', 'D']"
@@ -294,8 +294,8 @@ const searchCode = `
         rules="required"
         readonly
       />
-    </kw-form-item>
-    <kw-form-item label="다중선택 샘플 (disable)">
+    </kw-search-item>
+    <kw-search-item label="다중선택 샘플 (disable)">
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
@@ -304,11 +304,11 @@ const searchCode = `
         rules="required"
         disable="disable"
       />
-    </kw-form-item>
-  </kw-form-row>
+    </kw-search-item>
+  </kw-search-row>
 
-  <kw-form-row>
-    <kw-form-item label="Radio">
+  <kw-search-row>
+    <kw-search-item label="Radio">
       <kw-field
         name="radio"
         rules="required"
@@ -322,9 +322,9 @@ const searchCode = `
           />
         </template>
       </kw-field>
-    </kw-form-item>
+    </kw-search-item>
 
-    <kw-form-item label="OptionGroup (readonly)">
+    <kw-search-item label="OptionGroup (readonly)">
       <kw-option-group
         :model-value="readonlyRadio"
         name="radioOptionGroup"
@@ -333,8 +333,8 @@ const searchCode = `
         :options="['김엄마', '김마', '마']"
         disable
       />
-    </kw-form-item>
-    <kw-form-item label="optiongroup (disable)">
+    </kw-search-item>
+    <kw-search-item label="optiongroup (disable)">
       <kw-option-group
         name="radioOptionGroup"
         rules="required"
@@ -342,11 +342,11 @@ const searchCode = `
         :options="['김엄마', '김마', '마']"
         disable
       />
-    </kw-form-item>
-  </kw-form-row>
+    </kw-search-item>
+  </kw-search-row>
 
-  <kw-form-row>
-    <kw-form-item label="Checkbox">
+  <kw-search-row>
+    <kw-search-item label="Checkbox">
       <kw-field
         :model-value="[]"
         name="checkbox"
@@ -361,8 +361,8 @@ const searchCode = `
           />
         </template>
       </kw-field>
-    </kw-form-item>
-    <kw-form-item label="OptionGroup (readonly)">
+    </kw-search-item>
+    <kw-search-item label="OptionGroup (readonly)">
       <kw-option-group
         :model-value="readonlyCheckbox"
         name="checkboxOptionGroup"
@@ -371,8 +371,8 @@ const searchCode = `
         :options="['A', 'B', 'C', 'D']"
         disable
       />
-    </kw-form-item>
-    <kw-form-item label="OptionGroup (disable)">
+    </kw-search-item>
+    <kw-search-item label="OptionGroup (disable)">
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
@@ -381,26 +381,26 @@ const searchCode = `
         :options="['A', 'B', 'C', 'D']"
         disable
       />
-    </kw-form-item>
-  </kw-form-row>
+    </kw-search-item>
+  </kw-search-row>
 
-  <kw-form-row>
-    <kw-form-item label="DatePicker">
+  <kw-search-row>
+    <kw-search-item label="DatePicker">
       <kw-date-picker
         name="datePicker"
         rules="required"
       />
-    </kw-form-item>
-  </kw-form-row>
+    </kw-search-item>
+  </kw-search-row>
 
-  <kw-form-row>
-    <kw-form-item label="DateRangePicker">
+  <kw-search-row>
+    <kw-search-item label="DateRangePicker">
       <kw-date-range-picker
         name="dateRangePicker"
         rules="date_range_required|date_range_months:1"
       />
-    </kw-form-item>
-    <kw-form-item
+    </kw-search-item>
+    <kw-search-item
       label="DateRangePicker"
       cols="2"
     >
@@ -408,8 +408,8 @@ const searchCode = `
         name="dateRangePicker"
         rules="date_range_required|date_range_months:1"
       />
-    </kw-form-item>
-  </kw-form-row>
+    </kw-search-item>
+  </kw-search-row>
 </kw-search>
 `;
 </script>

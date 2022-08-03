@@ -3,7 +3,6 @@
     <template #header>
       <kw-page-header
         :options="['홈','고객','고객관리']"
-        :heading="true"
       />
     </template>
 
