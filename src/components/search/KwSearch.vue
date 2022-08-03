@@ -5,6 +5,7 @@
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
+    <h3>{{ title }}</h3>
     <input
       type="submit"
       hidden
@@ -70,6 +71,10 @@ export default {
     modifiedTargets: {
       type: Array,
       default: () => [],
+    },
+    title: {
+      type: String,
+      default: '조회조건',
     },
   },
 

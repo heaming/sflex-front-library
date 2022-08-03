@@ -52,6 +52,17 @@ h1 {
 }
 
 h2 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+  color: $black-h1;
+  letter-spacing: 0;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid $black-h1;
+}
+
+h3 {
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;
@@ -60,20 +71,11 @@ h2 {
   margin: 0;
 }
 
-h3 {
+h4 {
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
   color: $black-h1;
-  letter-spacing: 0;
-  margin: 0;
-}
-
-h4 {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  color: $black-h3;
   letter-spacing: 0;
   margin: 0;
 }
