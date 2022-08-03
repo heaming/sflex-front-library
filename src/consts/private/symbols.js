@@ -1,5 +1,6 @@
 export const GlobalKey = Symbol.for('__GlobalKey__');
 export const PageContextKey = Symbol.for('__PageContextKey__');
+export const PageSearchContextKey = Symbol.for('__PageSearchContextKey__');
 export const ObserverContextKey = Symbol.for('__ObserverContextKey__');
 export const FormContextKey = Symbol.for('__FormContextKey__');
 export const FormItemContextKey = Symbol.for('__FormItemContextKey__');

@@ -136,7 +136,7 @@ function setColumnEditorDefaults(column, { dataType }) {
     case 'list':
     case 'dropdown':
       defaultsDeep(column, {
-        lookupDisplay: true,
+        lookupDisplay: typeof column.displayCallback !== 'function',
         editButtonVisibility: ButtonVisibility.ALWAYS,
         editor: {
           commitOnSelect: true,

@@ -21,4 +21,8 @@ export default (app) => {
       );
     },
   });
+
+  // disable icon class
+  const { $q } = app.config.globalProperties;
+  $q.iconMapFn = () => ({ icon: false });
 };

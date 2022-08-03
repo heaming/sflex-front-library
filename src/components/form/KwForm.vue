@@ -38,10 +38,10 @@ export default {
 
     async function onReset() {
       await formCtx.reset();
-      await nextTick();
       emit('reset');
     }
 
+    // form type injection
     provide(FormTypeContextKey, FORM_TYPE.FORM);
 
     return {

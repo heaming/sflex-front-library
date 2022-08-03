@@ -15,9 +15,7 @@
 </template>
 
 <script>
-import { ObserverContextKey } from '../../consts/private/symbols';
-import { confirm } from '../../plugins/dialog';
-import i18n from '../../i18n';
+import { PageSearchContextKey } from '../../consts/private/symbols';
 
 export default {
   name: 'KwPagination',
@@ -35,10 +33,6 @@ export default {
       type: Number,
       default: 1,
     },
-    modifiedTargets: {
-      type: Array,
-      default: () => [],
-    },
   },
 
   emits: [
@@ -50,17 +44,13 @@ export default {
     const max = computed(() => Math.ceil(props.totalCount / props.pageSize));
 
     const {
-      getRegisteredChild,
-    } = inject(ObserverContextKey, {});
+      getRegisteredSearch,
+    } = inject(PageSearchContextKey, {});
 
-    async function confirmIfTargetsModified() {
-      const targets = props.modifiedTargets.map(getRegisteredChild);
-      const isModified = targets.some((e) => e?.ctx.isModified());
-      return !isModified || await confirm(i18n.t('MSG_ALT_CHG_CNTN'));
-    }
+    const confirmIfTargetsModified = getRegisteredSearch?.().confirmIfTargetsModified || (() => true);
 
     async function onUpdateValue(val) {
-      if (await confirmIfTargetsModified()) {
+      if (await confirmIfTargetsModified?.()) {
         emit('update:modelValue', val);
         emit('change', {
           pageNo: val,

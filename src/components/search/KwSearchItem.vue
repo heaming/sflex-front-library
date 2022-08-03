@@ -6,6 +6,7 @@
   >
     <div class="row">
       <span
+        v-if="!noLabel"
         class="kw-form-title"
         :style="{ width: labelWidth }"
       >
@@ -31,6 +32,10 @@ export default {
     label: {
       type: String,
       default: undefined,
+    },
+    noLabel: {
+      type: Boolean,
+      default: false,
     },
   },
 

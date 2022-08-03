@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { FormContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 
@@ -46,11 +47,11 @@ export default {
 
     from: {
       type: String,
-      default: undefined,
+      default: '',
     },
     to: {
       type: String,
-      default: undefined,
+      default: '',
     },
     unmaskedValue: {
       type: Boolean,
@@ -108,6 +109,9 @@ export default {
         value.value[otherIndex] = val;
       }
     }
+
+    // prevent register children fields
+    provide(FormContextKey, {});
 
     return {
       ...useInheritAttrs(),

@@ -6,6 +6,10 @@
     @reset="onReset"
   >
     <h3>{{ title }}</h3>
+    <input
+      type="submit"
+      hidden
+    >
     <slot />
     <div class="kw-search--bottom">
       <div
@@ -46,12 +50,14 @@
 </template>
 
 <script>
+import { debounce } from 'lodash-es';
 import { confirm } from '../../plugins/dialog';
-import { ObserverContextKey, FormTypeContextKey } from '../../consts/private/symbols';
+import { ObserverContextKey, FormTypeContextKey, PageSearchContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useForm, { useFormProps } from '../../composables/private/useForm';
 import useFormExpandable, { useFormExpandableProps } from '../../composables/private/useFormExpandable';
 import { FORM_TYPE } from '../../composables/private/useFormType';
+import useLibConfig from '../../composables/private/useLibConfig';
 import i18n from '../../i18n';
 
 export default {
@@ -76,6 +82,7 @@ export default {
 
   setup(props, { emit }) {
     const formCtx = useForm();
+    const { DEFAULT_DEBOUNCE_WAIT } = useLibConfig();
 
     const {
       getRegisteredChild,
@@ -88,21 +95,38 @@ export default {
       return !isModified || await confirm(i18n.t('MSG_ALT_CHG_CNTN'));
     }
 
-    async function onSubmit() {
+    const onSubmit = debounce(async () => {
       const shouldFocus = !props.noErrorFocus;
 
       if (await formCtx.validate(shouldFocus, true)
         && await confirmIfTargetsModified()) {
         emit('search', formCtx.values);
       }
-    }
+    }, DEFAULT_DEBOUNCE_WAIT, { leading: true });
 
     async function onReset() {
       await formCtx.reset();
-      await nextTick();
       emit('reset');
     }
 
+    const {
+      register: registerSearch,
+      unregister: unregisterSearch,
+    } = inject(PageSearchContextKey, {});
+
+    const searchCtx = {
+      uid: getCurrentInstance().uid,
+      name: computed(() => props.name),
+      confirmIfTargetsModified,
+    };
+
+    registerSearch?.(searchCtx);
+
+    onBeforeUnmount(() => {
+      unregisterSearch?.(searchCtx);
+    });
+
+    // form type injection
     provide(FormTypeContextKey, FORM_TYPE.SEARCH);
 
     // ignore observe
