@@ -5,7 +5,9 @@
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
-    <h3>{{ title }}</h3>
+    <h3 v-if="!noTitle">
+      {{ title }}
+    </h3>
     <input
       type="submit"
       hidden
@@ -16,29 +18,23 @@
         v-if="isExpandable"
         class="kw-search--view-more"
       >
-        <q-btn
+        <kw-btn
           :class="{'q-btn--append': isExpanded}"
           @click="toggleExpand()"
         >
           <span class="block">
-            더보기
-            <q-tooltip v-if="isExpanded">
-              {{ $t('MSG_BTN_COLLAPSE', null, '접기') }}
-            </q-tooltip>
-            <q-tooltip v-else>
-              {{ $t('MSG_BTN_EXPAND', null, '펼치기') }}
-            </q-tooltip>
+            {{ $t('MSG_BTN_VIEW_MORE', null, '더보기') }}
           </span>
-        </q-btn>
+        </kw-btn>
       </div>
       <div class="row justify-end">
         <slot name="action">
-          <q-btn
+          <kw-btn
             :label="$t('MSG_BTN_RESET', null, '초기화')"
             :ripple="false"
             type="reset"
           />
-          <q-btn
+          <kw-btn
             :label="$t('MSG_BTN_SEARCH', null, '검색')"
             :ripple="false"
             type="submit"
@@ -68,13 +64,17 @@ export default {
     ...useFormProps,
     ...useFormExpandableProps,
 
+    title: {
+      type: String,
+      default: i18n.t('MSG_TIT_SEARCH', null, '조회조건'),
+    },
+    noTitle: {
+      type: Boolean,
+      default: false,
+    },
     modifiedTargets: {
       type: Array,
       default: () => [],
-    },
-    title: {
-      type: String,
-      default: '조회조건',
     },
   },
 
