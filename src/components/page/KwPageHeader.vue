@@ -1,14 +1,39 @@
 <template>
   <div class="kw-page-header">
+    <div
+      v-if="heading"
+      class="kw-page-header-title_area"
+    >
+      <button
+        type="button"
+        class="kw-page-header-btn_back"
+      >
+        이전
+      </button>
+      <h1>{{ breadcrumbs[Object.keys(breadcrumbs).length - 1].label }}</h1>
+      <button
+        type="button"
+        class="kw-page-header-favorite kw-page-header-favorite_on"
+      >
+        즐겨찾기
+      </button>
+    </div>
     <q-breadcrumbs
       align="right"
-      separator=">"
     >
       <q-breadcrumbs-el
-        v-for="breadcrumb of breadcrumbs"
+        v-for="(breadcrumb, i) of breadcrumbs"
         :key="breadcrumb.key"
         :label="breadcrumb.label"
-      />
+      >
+        <button
+          v-if="Object.keys(breadcrumbs).length - 1 == i"
+          type="button"
+          class="breadcrumbs-hint"
+        >
+          Hint
+        </button>
+      </q-breadcrumbs-el>
     </q-breadcrumbs>
   </div>
 </template>
@@ -39,6 +64,10 @@ export default {
     options: {
       type: Array,
       default: undefined,
+    },
+    heading: {
+      type: Boolean,
+      default: false,
     },
   },
 

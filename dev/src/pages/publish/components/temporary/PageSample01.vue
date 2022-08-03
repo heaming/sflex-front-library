@@ -2,11 +2,15 @@
   <kw-page>
     <template #header>
       <kw-page-header
-        :options="['1','2','3']"
+        :options="['홈','고객','고객관리']"
+        :heading="true"
       />
     </template>
 
-    <kw-search :label-size="108">
+    <kw-search
+      :label-size="108"
+      title="조회조건"
+    >
       <kw-search-row>
         <kw-search-item label="고객 유형">
           <kw-select
@@ -41,31 +45,32 @@
       </kw-search-row>
     </kw-search>
 
-    <!-- KwActionBar로 대체 -->
+    <div class="result-area">
+      <h3>조회결과</h3>
+      <kw-action-bar>
+        <template #left>
+          총 156
+          <!--  -->
+        </template>
 
-    <kw-action-bar>
-      <template #left>
-        총 156
-        <!--  -->
-      </template>
+        <kw-btn
+          label="엑셀 다운로드"
+          icon="events"
+        />
+        <kw-btn label="개인 고객 등록 URL 전송" />
+        <kw-btn label="개인 고객 등록" />
+        <kw-btn label="법인 고객 등록" />
+      </kw-action-bar>
 
-      <kw-btn
-        label="엑셀 다운로드"
-        icon="events"
+      <kw-grid
+        :visible-rows="7"
+        @init="initGrid"
       />
-      <kw-btn label="개인 고객 등록 URL 전송" />
-      <kw-btn label="개인 고객 등록" />
-      <kw-btn label="법인 고객 등록" />
-    </kw-action-bar>
-
-    <kw-grid
-      :visible-rows="7"
-      @init="initGrid"
-    />
-    <kw-pagination
-      :model-value="1"
-      :total-count="100"
-    />
+      <kw-pagination
+        :model-value="1"
+        :total-count="100"
+      />
+    </div>
   </kw-page>
 </template>
 
