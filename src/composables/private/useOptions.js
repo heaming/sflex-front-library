@@ -20,9 +20,9 @@ export const useOptionsProps = {
     type: String,
     default: 'codeName',
   },
-  optionSeperator: {
+  optionSeparator: {
     type: String,
-    default: 'seperator',
+    default: 'separator',
   },
   firstOption: {
     type: [Boolean, String],
@@ -39,16 +39,16 @@ export const useOptionsProps = {
   },
 };
 
-const normalizeOption = (option, { optionValue, optionLabel, optionSeperator }) => (
+const normalizeOption = (option, { optionValue, optionLabel, optionSeparator }) => (
   option && typeof option === 'object' ? {
     ...option,
     value: option[optionValue],
     label: option[optionLabel] ?? String(option[optionValue]),
-    seperator: option[optionSeperator] === true,
+    separator: option[optionSeparator] === true,
   } : {
     value: option,
     label: String(option),
-    seperator: false,
+    separator: false,
   }
 );
 
