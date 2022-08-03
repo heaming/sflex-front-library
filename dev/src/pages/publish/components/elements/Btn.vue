@@ -179,7 +179,7 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn class="kw-btn--secondaray">
+          <kw-btn class="kw-btn--secondary">
             신규등록
           </kw-btn>
         </div>
@@ -194,7 +194,7 @@
         </div>
         <div class="kw-guide-example">
           <kw-btn
-            class="kw-btn--secondaray"
+            class="kw-btn--secondary"
             disable
           >
             신규등록
