@@ -5,6 +5,7 @@
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
+    <h3>{{ title }}</h3>
     <slot />
     <div class="kw-search--bottom">
       <div
@@ -62,6 +63,10 @@ export default {
     modifiedTargets: {
       type: Array,
       default: () => [],
+    },
+    title: {
+      type: String,
+      default: '조회조건',
     },
   },
 
