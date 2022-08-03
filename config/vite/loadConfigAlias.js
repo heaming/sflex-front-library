@@ -1,8 +1,9 @@
 const { resolve } = require('path');
 const getConfigAlias = require('../utils/getConfigAlias');
 
-const RESERVED_ALIAS_KEYS = [
+const reservedAliasKeys = [
   '~assets',
+  '~css',
 ];
 
 const context = process.cwd();
@@ -16,7 +17,7 @@ function resolveAlias(configDir) {
 module.exports = ({ configDir }) => {
   const alias = resolveAlias(configDir);
 
-  RESERVED_ALIAS_KEYS.forEach((key) => {
+  reservedAliasKeys.forEach((key) => {
     if (key in alias) {
       throw new Error(`The alias '${key}' is reserved, do not use this.`);
     }
