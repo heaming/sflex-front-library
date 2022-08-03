@@ -4,7 +4,7 @@
       Btn
     </h2>
     <p class="kw-guide-description">
-      작업 완료 (추후 주석 추가)
+      button set
     </p>
     <div class="kw-guide-section">
       <h3
@@ -574,7 +574,7 @@ const toggle = `
   :false-value="false"
 />
 
-const dummyData = ref(true);
+const dummyData = ref(true); // select default value (true or false)
 `;
 
 </script>

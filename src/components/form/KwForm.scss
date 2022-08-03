@@ -30,7 +30,15 @@
 
     &__bottom--animated {
       transform: translateY(0) !important;
-      bottom: -16px;
+      bottom: -13px;
+    }
+
+    &__messages {
+      & > div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     &--disabled .q-field__control {

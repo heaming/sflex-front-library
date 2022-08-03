@@ -31,10 +31,12 @@
         <slot name="action">
           <q-btn
             :label="$t('MSG_BTN_RESET', null, '초기화')"
+            :ripple="false"
             type="reset"
           />
           <q-btn
             :label="$t('MSG_BTN_SEARCH', null, '검색')"
+            :ripple="false"
             type="submit"
           />
         </slot>

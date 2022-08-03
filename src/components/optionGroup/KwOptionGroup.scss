@@ -6,9 +6,7 @@
 /* stylelint-disable selector-class-pattern */
 
 .kw-option-group {
-  $root: ".q-option-group";
-
-  #{$root} {
+  .q-option-group {
     margin-right: 0;
     margin-left: 0;
     height: auto;
@@ -23,6 +21,10 @@
   }
 
   // checkbox
+  .q-checkbox {
+    height: 32px;
+  }
+
   .q-checkbox.disabled {
     .q-checkbox__label {
       color: $placeholder;
