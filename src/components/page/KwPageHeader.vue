@@ -1,25 +1,26 @@
 <template>
   <div class="kw-page-header">
     <div class="kw-page-header-title_area">
-      <button
-        type="button"
-        class="kw-page-header-btn_back"
+      <q-icon
+        size="24px"
+        class="mr6"
+        name="arrow_left_breadcrumbs"
         @click="onClickBack"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
         </kw-tooltip>
-      </button>
+      </q-icon>
       <h1>{{ heading }}</h1>
-      <button
-        type="button"
-        class="kw-page-header-favorite kw-page-header-favorite_on"
-        @click="onClickFavorites"
+      <kw-checkbox
+        model-value="Y"
+        checked-icon="bookmark_on"
+        unchecked-icon="bookmark_off"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
         </kw-tooltip>
-      </button>
+      </kw-checkbox>
     </div>
     <q-breadcrumbs align="right">
       <q-breadcrumbs-el
