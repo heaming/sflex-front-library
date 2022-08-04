@@ -24,40 +24,46 @@
   &--description {
     padding-left: 16px;
     margin: 0;
-    display: flex;
-    align-items: center;
     font-size: 11px;
     color: $black-h3;
+    display: flex;
+    align-items: center;
   }
 
-  .kw-select {
-    padding-bottom: 0;
+  &-menu {
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 14px;
+    color: $black-h3;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
 
-    .q-field__control {
-      border: 0;
-      height: 100%;
-      min-height: auto;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+      background-size: 16px auto;
+      transition: transform 0.28s;
+    }
 
-      &::before,
+    &--append {
       &::after {
-        display: none;
+        transform: translateY(-50%) rotate(180deg);
       }
     }
 
-    .q-field__control-container {
-      padding-top: 0;
-    }
-
-    .q-field__native > span {
-      font-size: 14px;
-    }
-
-    .q-field__append {
-      padding-left: 7px;
-    }
-
-    .q-select__dropdown-icon {
-      margin-right: 0;
+    & &--value {
+      padding-right: 4px;
+      color: $black-h1;
+      font-weight: 700;
     }
   }
 
