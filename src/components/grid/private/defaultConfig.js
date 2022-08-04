@@ -13,19 +13,11 @@ const viewConfig = {
   header: {
     visible: true,
     showTooltip: true,
-    minRowHeight: 35,
+    minRowHeight: 36,
   },
 
   footers: {
     visible: false,
-  },
-
-  rowIndicator: {
-    visible: false,
-    width: 40,
-    displayValue: IndicatorValue.ROW,
-    zeroBase: (view) => view instanceof TreeView,
-    footText: '',
   },
 
   stateBar: {
@@ -35,13 +27,23 @@ const viewConfig = {
 
   checkBar: {
     visible: false,
-    width: 40,
+    width: 50,
     useImages: true,
     footText: '',
   },
 
+  rowIndicator: {
+    visible: false,
+    width: 50,
+    displayValue: IndicatorValue.ROW,
+    displayOrder: 1,
+    zeroBase: (view) => view instanceof TreeView,
+    headText: 'NO',
+    footText: '',
+  },
+
   displayOptions: {
-    minTableRowHeight: 33,
+    minTableRowHeight: 42,
     columnMovable: true,
     useFocusClass: true,
     showEmptyMessage: true,
@@ -56,6 +58,7 @@ const viewConfig = {
   editOptions: {
     editable: false,
     editWhenFocused: false,
+    columnEditableFirst: false,
     commitByCell: true,
     commitWhenLeave: true,
     commitLevel: ValidationLevel.ERROR,
