@@ -67,6 +67,10 @@
     }
   }
 
+  & + .kw-grid {
+    margin-top: 12px;
+  }
+
   .kw-btn {
     padding: 0 14px;
     height: 32px;
