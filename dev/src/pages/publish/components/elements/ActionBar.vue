@@ -4,7 +4,7 @@
       Action Bar
     </h2>
     <p class="kw-guide-description">
-      description
+      table Action bar
     </p>
     <div class="kw-guide-section">
       <h3
@@ -50,7 +50,7 @@
         default
       </h3>
       <p class="kw-guide-description">
-        description
+        case 01
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -138,14 +138,27 @@ const testCode = `
     <div class="kw-action-bar--count kw-action-bar--separator">
       총 <span class="kw-action-bar--number">156</span>
     </div>
-    <kw-select
-      v-model="model"
-      :options="options"
-      :display-value="model + '개씩보기'"
-      name="select"
-      rules="required"
-    />
-
+    <div
+      class="kw-action-bar-menu"
+      :class="{'kw-action-bar-menu--append': selectMenu === true }"
+    >
+      <span class="kw-action-bar-menu--value">{{ selectData.model }}</span><span>개씩보기</span>
+      <q-menu
+        v-model="selectMenu"
+      >
+        <q-list>
+          <q-item
+            v-for="i in selectData.items"
+            :key="i"
+            v-close-popup
+            clickable
+            @click="selectData.model=i"
+          >
+            <q-item-section>{{ i }}</q-item-section>
+          </q-item>
+        </q-list>
+      </q-menu>
+    </div>
     <div class="kw-action-bar--send">
       <kw-btn
         class="kw-btn kw-btn--search"
@@ -167,5 +180,16 @@ const testCode = `
   <kw-btn label="개인 고객 등록" />
   <kw-btn label="법인 고객 등록" />
 </kw-action-bar>
+
+const selectMenu = ref(false);
+
+const selectData = {
+  model: '10',
+  items: [
+    '10', '20', '30', '40',
+  ],
+  itemArr: [...Array(10)].map((v, i) => i),
+};
+
 `;
 </script>
