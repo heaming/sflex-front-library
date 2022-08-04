@@ -105,7 +105,9 @@ export function createCellIndexByDataColumn(view, itemIndex, dataColumn) {
 }
 
 export function isCellEditable(view, column, index) {
-  if (view.editOptions.editable === false
+  const { columnEditableFirst, editable } = view.editOptions;
+
+  if ((columnEditableFirst === false && editable === false)
     || column.readOnly === true) {
     return false;
   }
