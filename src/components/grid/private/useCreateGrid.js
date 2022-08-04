@@ -8,16 +8,20 @@ import useObserverChild, { useObserverChildProps } from '../../../composables/pr
 export const useCreateGridProps = {
   ...useObserverChildProps,
 
+  onInit: {
+    type: Function,
+    default: undefined,
+  },
   createViewOnly: {
     type: Boolean,
     default: false,
   },
 };
 
-export const useCreateGridEmits = ['init'];
-
 export default (DataClass, ViewClass) => {
   const vm = getCurrentInstance();
+  const onInit = toRaw(vm.props.onInit);
+
   const isCreateData = vm.props.createViewOnly !== true;
   const containerRef = ref();
 
@@ -42,10 +46,9 @@ export default (DataClass, ViewClass) => {
 
     defaultConfig(view);
     override(view, vm);
-
     syncHeadCheckIfAble(view);
 
-    vm.emit('init', data, view);
+    onInit?.(data, view);
   });
 
   onBeforeUnmount(() => {

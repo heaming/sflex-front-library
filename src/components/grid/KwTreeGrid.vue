@@ -16,7 +16,7 @@
 
 <script>
 import { LocalTreeDataProvider, TreeView } from 'realgrid';
-import useCreateGrid, { useCreateGridProps, useCreateGridEmits } from './private/useCreateGrid';
+import useCreateGrid, { useCreateGridProps } from './private/useCreateGrid';
 import useResizeGrid, { useResizeGridProps } from './private/useResizeGrid';
 
 export default {
@@ -26,10 +26,6 @@ export default {
     ...useCreateGridProps,
     ...useResizeGridProps,
   },
-
-  emits: [
-    ...useCreateGridEmits,
-  ],
 
   setup() {
     return {
