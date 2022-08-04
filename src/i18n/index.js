@@ -1,14 +1,25 @@
+import { warn } from 'vue';
 import { createI18n } from 'vue-i18n';
-import { reduce, words } from 'lodash-es';
 import consts from '../consts';
 import { defineGetters } from '../utils/private/globalProperty';
 
 function loadLocaleMessages() {
-  return reduce(
-    Object.entries(import.meta.globEager('./locales/*.js')),
-    (a, [key, module]) => { a[words(key)[1].toLowerCase()] = module.default; return a; },
-    {},
-  );
+  const imported = import.meta.globEager('./locales/*.js');
+  const keys = Object.keys(imported);
+
+  return keys.reduce((messages, key) => {
+    const matched = key.match(/\/(\w+)\.js$/);
+
+    if (!matched) {
+      warn(`Invalid locale file, could not parse "${key}"`);
+      return;
+    }
+
+    const locale = matched.pop();
+    messages[locale] = imported[key].default;
+
+    return messages;
+  }, {});
 }
 
 const i18n = createI18n({

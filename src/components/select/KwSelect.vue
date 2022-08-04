@@ -66,7 +66,7 @@
           </q-item-label>
         </q-item-section>
       </q-item>
-      <q-separator v-if="opt.seperator" />
+      <q-separator v-if="opt.separator" />
     </template>
   </q-select>
 </template>

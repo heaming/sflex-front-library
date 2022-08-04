@@ -1,14 +1,25 @@
+import { warn } from 'vue';
 import { createStore } from 'vuex';
-import { reduce, words } from 'lodash-es';
 import { defineGetters } from '../utils/private/globalProperty';
 import env from '../consts/private/env';
 
 function loadStoreModules() {
-  return reduce(
-    Object.entries(import.meta.globEager('./modules/*.js')),
-    (a, [key, module]) => { a[words(key)[1]] = module.default; return a; },
-    {},
-  );
+  const imported = import.meta.globEager('./modules/*.js');
+  const keys = Object.keys(imported);
+
+  return keys.reduce((modules, key) => {
+    const matched = key.match(/\/(\w+)\.js$/);
+
+    if (!matched) {
+      warn(`Invalid module file, could not parse "${key}"`);
+      return;
+    }
+
+    const name = matched.pop();
+    modules[name] = imported[key].default;
+
+    return modules;
+  }, {});
 }
 
 const store = createStore({
