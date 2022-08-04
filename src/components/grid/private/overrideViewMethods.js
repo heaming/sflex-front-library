@@ -1,4 +1,4 @@
-import { defaultsDeep, map } from 'lodash-es';
+import { defaultsDeep, map, merge } from 'lodash-es';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 import { createCellIndexByDataColumn, dateTextFormat, isCellEditable } from '../../../utils/private/gridShared';
@@ -76,7 +76,7 @@ function setColumnRendererDefaults(column, { dataType }) {
   });
 
   switch (column.renderer?.type) {
-    case 'check':
+    case 'check': {
       defaultsDeep(column, {
         editable: false,
         renderer: {
@@ -85,20 +85,33 @@ function setColumnRendererDefaults(column, { dataType }) {
             falseValues: 'N',
           } : {}),
           useImages: true,
-          setCheckedCallback(g, itemIndex, dataColumn, oldValue, newValue) {
-            const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
-            if (g.onCellEditable(g, index) === false) {
-              return oldValue;
-            }
-            if (dataColumn.valueType === ValueType.TEXT) {
-              const { trueValues, falseValues } = dataColumn.renderer;
-              return (newValue ? trueValues : falseValues)?.split(',')[0] || newValue;
-            }
-            return newValue;
-          },
         },
       });
+
+      const { setCheckedCallback } = column.renderer;
+
+      merge(column.renderer, {
+        setCheckedCallback(g, itemIndex, dataColumn, oldValue, newValue) {
+          const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
+          if (g.onCellEditable(g, index) === false) {
+            return oldValue;
+          }
+
+          if (setCheckedCallback) {
+            return setCheckedCallback(g, itemIndex, dataColumn, oldValue, newValue);
+          }
+
+          if (dataColumn.valueType === ValueType.TEXT) {
+            const { trueValues, falseValues } = dataColumn.renderer;
+            return (newValue ? trueValues : falseValues)?.split(',')[0] || newValue;
+          }
+
+          return newValue;
+        },
+      });
+
       break;
+    }
     case 'button': {
       const { styleName } = column;
 
@@ -142,6 +155,7 @@ function setColumnEditorDefaults(column, { dataType }) {
           commitOnSelect: true,
           domainOnly: true,
           dropDownWhenClick: false,
+          textReadOnly: true,
         },
       });
       break;
@@ -154,7 +168,7 @@ function setColumnEditorDefaults(column, { dataType }) {
           dropDownWhenClick: false,
           datetimeFormat: 'yyyyMMdd',
           btOptions: {
-            language: i18n.locale,
+            language: i18n.locale.value,
             keyboardNavigation: false,
             todayHighlight: true,
             minViewMode: 0,
