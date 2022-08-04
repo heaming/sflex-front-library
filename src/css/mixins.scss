@@ -54,3 +54,57 @@ $unit: px;
     }
   }
 }
+
+@for $space from 1 through 500 {
+  @each $side in $sides {
+    @if $side == "a" {
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding: #{$space} + $unit !important;
+      }
+    } @else if $side == "x" {
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin-left: #{$space} + $unit !important;
+        margin-right: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding-left: #{$space} + $unit !important;
+        padding-right: #{$space} + $unit !important;
+      }
+    } @else if $side == "y" {
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin-top: #{$space} + $unit !important;
+        margin-bottom: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding-top: #{$space} + $unit !important;
+        padding-bottom: #{$space} + $unit !important;
+      }
+    } @else {
+      $origin: top !default;
+
+      @if $side == "r" {
+        $origin: right;
+      } @else if $side == "b" {
+        $origin: bottom;
+      } @else if $side == "l" {
+        $origin: left;
+      } @else {
+        $origin: top;
+      }
+
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin-#{$origin}: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding-#{$origin}: #{$space} + $unit !important;
+      }
+    }
+  }
+}
