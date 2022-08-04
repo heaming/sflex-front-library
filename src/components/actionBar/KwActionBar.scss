@@ -1,0 +1,162 @@
+.kw-action-bar {
+  height: 32px;
+
+  &--count {
+    height: 100%;
+    color: $black-h3;
+    font-size: 14px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  &--number {
+    padding-left: 4px;
+    color: $black-h1;
+    font-weight: 700;
+  }
+
+  &--send {
+    margin-left: 40px;
+    display: flex;
+  }
+
+  &--description {
+    padding-left: 16px;
+    margin: 0;
+    font-size: 11px;
+    color: $black-h3;
+    display: flex;
+    align-items: center;
+  }
+
+  &-menu {
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 14px;
+    color: $black-h3;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+      background-size: 16px auto;
+      transition: transform 0.28s;
+    }
+
+    &--append {
+      &::after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+
+    & &--value {
+      padding-right: 4px;
+      color: $black-h1;
+      font-weight: 700;
+    }
+  }
+
+  & + .kw-grid {
+    margin-top: 12px;
+  }
+
+  .kw-btn {
+    padding: 0 14px;
+    height: 32px;
+    font-size: 14px;
+    font-weight: 400;
+
+    & + .kw-btn {
+      margin-left: 10px;
+    }
+
+    &.kw-btn--excel {
+      padding: 0;
+      padding-left: 22px;
+      background-color: #fff;
+      font-size: 14px;
+      color: $black-h1;
+      text-decoration: underline;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        background: url(~assets/images/ic_excel_off_16_3x.png) no-repeat center;
+        background-size: 16px 16px;
+        display: block;
+        box-shadow: none;
+        transition: none;
+      }
+    }
+
+    &.kw-btn--search {
+      padding: 0 12px;
+      border: 1px solid $line-line;
+      background-color: $bg-box;
+      font-size: 12px;
+      color: $black-h2;
+
+      &:hover {
+        border-color: $black-h1;
+        background-color: $bg-box;
+      }
+
+      &.q-btn--active {
+        border-color: $line-line;
+        background-color: #dbdbdb;
+      }
+
+      // disabled
+      &:disabled {
+        color: #bbb;
+        border-color: $line-line;
+        background-color: $bg-box;
+
+        &:hover {
+          color: #bbb;
+          border-color: $line-line;
+          background-color: $bg-box;
+        }
+
+        &.q-btn--active {
+          color: #bbb;
+          border-color: $line-line;
+          background-color: $bg-box;
+        }
+      }
+    }
+  }
+}
+
+.kw-action-bar--separator {
+  margin-right: 10px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 18px;
+    background-color: $line-bg;
+  }
+}

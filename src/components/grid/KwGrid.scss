@@ -102,3 +102,56 @@
     margin-bottom: 20px;
   }
 }
+
+.rg-grid {
+  border: 0;
+  border-top: 1px solid $black-h1;
+
+  * {
+    color: $black-h1;
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .rg-rowbarcontainer .rg-table tr td {
+    border-right: 0;
+    border-bottom-color: $line-bg;
+    background: #fff;
+  }
+
+  .rg-head,
+  .rg-header .rg-table tr td {
+    background: #f8f8f8;
+    border-bottom: 1px solid $line-line;
+    border-right: 1px solid $line-bg;
+
+    & div,
+    span {
+      color: $black-h3;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .rg-head .rg-table tr td {
+    border-right: 1px solid $line-bg;
+  }
+
+  .rg-body .rg-table tr td,
+  .rg-fixed-body .rg-table tr td {
+    border-right: 0;
+    border-bottom-color: $line-bg;
+  }
+
+  .rg-alternate-row,
+  .rg-data-row.rg-focused-row {
+    background: #fff;
+  }
+
+  .rg-fixed-row td {
+    border-right: 1px solid $black-h1;
+  }
+}
