@@ -5,11 +5,11 @@ import langEn from 'quasar/lang/en-US';
 import consts from './consts';
 
 function loadIcons() {
-  const imported = import.meta.globEager('./assets/images/ic_*.svg');
+  const imported = import.meta.globEager('./assets/icons/*.svg');
   const keys = Object.keys(imported);
 
   return keys.reduce((icons, key) => {
-    const matched = key.match(/\/ic_([-\w]+)\.svg$/);
+    const matched = key.match(/\/([-\w]+)\.svg$/);
 
     if (!matched) {
       warn(`Invalid icon file, could not parse "${key}"`);
