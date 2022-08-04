@@ -48,13 +48,33 @@
       <h3>조회결과</h3>
       <kw-action-bar>
         <template #left>
-          총 156
-          <!--  -->
+          <div class="kw-action-bar--count kw-action-bar--separator">
+            총 <span class="kw-action-bar--number">156</span>
+          </div>
+          <kw-select
+            v-model="selectData.model"
+            :options="selectData.options"
+            :display-value="selectData.model + ' 개씩보기'"
+            name="select"
+            rules="required"
+          />
+
+          <div class="kw-action-bar--send">
+            <kw-btn
+              class="kw-btn kw-btn--search"
+            >
+              URL 전송
+            </kw-btn>
+            <p class="kw-action-bar--description">
+              고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
+            </p>
+          </div>
         </template>
 
         <kw-btn
+
+          class="kw-btn--excel kw-action-bar--separator"
           label="엑셀 다운로드"
-          icon="events"
         />
         <kw-btn label="개인 고객 등록 URL 전송" />
         <kw-btn label="개인 고객 등록" />
@@ -74,6 +94,11 @@
 </template>
 
 <script setup>
+
+const selectData = { model: '10',
+  options: [
+    '10', '20', '30', '40', '50',
+  ] };
 
 function initGrid(data, view) {
   const fields = [
