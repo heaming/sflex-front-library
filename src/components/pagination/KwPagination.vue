@@ -1,7 +1,7 @@
 <template>
   <q-pagination
     class="kw-pagination justify-center"
-    :model-value="modelValue"
+    :model-value="pageIndex"
     :max="max"
     :max-pages="9"
     unelevated
@@ -21,7 +21,7 @@ export default {
   name: 'KwPagination',
 
   props: {
-    modelValue: {
+    pageIndex: {
       type: Number,
       default: 0,
     },
@@ -31,12 +31,13 @@ export default {
     },
     totalCount: {
       type: Number,
-      default: 1,
+      default: 0,
     },
   },
 
   emits: [
-    'update:modelValue',
+    'update:pageIndex',
+    'update:pageSize',
     'change',
   ],
 
@@ -51,13 +52,18 @@ export default {
 
     async function onUpdateValue(val) {
       if (await confirmIfTargetsModified?.()) {
-        emit('update:modelValue', val);
-        emit('change', {
-          pageNo: val,
-          pageSize: props.pageSize,
-        });
+        emit('update:pageIndex', val);
+        emit('change', val, props.pageSize);
       }
     }
+
+    watch(() => props.pageSize, async (val, oldVal) => {
+      if (await confirmIfTargetsModified?.()) {
+        emit('change', props.pageIndex, val);
+      } else {
+        emit('update:pageSize', oldVal);
+      }
+    });
 
     return {
       max,
