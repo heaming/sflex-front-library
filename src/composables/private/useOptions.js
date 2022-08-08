@@ -1,3 +1,5 @@
+import i18n from '../../i18n';
+
 const firstOptionValues = [
   true, false, 'all', 'select',
 ];
@@ -39,38 +41,40 @@ export const useOptionsProps = {
   },
 };
 
-const normalizeOption = (option, { optionValue, optionLabel, optionSeparator }) => (
-  option && typeof option === 'object' ? {
-    ...option,
-    value: option[optionValue],
-    label: option[optionLabel] ?? String(option[optionValue]),
-    separator: option[optionSeparator] === true,
-  } : {
-    value: option,
-    label: String(option),
-    separator: false,
-  }
-);
-
-export default (valueRef, emitValue = true) => {
+export default (valueRef, isSelect = false) => {
   const { props } = getCurrentInstance();
-  const { t } = useI18n();
+
+  const emitValue = !isSelect || props.emitValue;
+  const value = isSelect ? props.optionValue : 'value';
+  const label = isSelect ? props.optionLabel : 'label';
+  const separator = isSelect ? props.optionSeparator : 'separator';
 
   const normalizedOptions = computed(() => {
     const options = [];
 
     if (props.firstOption) {
       const defaultLabel = firstOptionLabels[props.firstOption]
-        && t(...firstOptionLabels[props.firstOption]);
+        && i18n.t(...firstOptionLabels[props.firstOption]);
 
       options.push({
-        value: props.firstOptionValue,
-        label: props.firstOptionLabel || defaultLabel,
+        [value]: props.firstOptionValue,
+        [label]: props.firstOptionLabel || defaultLabel,
       });
     }
 
     return options.concat(
-      props.options.map((e) => normalizeOption(e, props)),
+      props.options.map((e) => (
+        e && typeof e === 'object' ? {
+          ...e,
+          [value]: e[props.optionValue],
+          [label]: e[props.optionLabel] ?? String(e[props.optionValue]),
+          [separator]: e[props.optionSeparator],
+        } : {
+          [value]: e,
+          [label]: String(e),
+          [separator]: false,
+        }
+      )),
     );
   });
 
@@ -79,8 +83,8 @@ export default (valueRef, emitValue = true) => {
   const selectedAll = computed(() => {
     if (isArrayValue()) {
       const selectedValues = valueRef.value
-        .reduce((a, v) => { a[emitValue ? v : v.value] = true; return a; }, {});
-      return normalizedOptions.value.every((v) => selectedValues[v.value]);
+        .reduce((a, v) => { a[emitValue ? v : v[value]] = true; return a; }, {});
+      return normalizedOptions.value.every((v) => selectedValues[v[value]]);
     }
     return false;
   });
@@ -88,7 +92,7 @@ export default (valueRef, emitValue = true) => {
   function toggleAll() {
     if (isArrayValue()) {
       valueRef.value = selectedAll.value
-        ? [] : normalizedOptions.value.map((v) => (emitValue ? v.value : { ...v }));
+        ? [] : normalizedOptions.value.map((v) => (emitValue ? v[value] : v));
     }
   }
 
