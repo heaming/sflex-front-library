@@ -1,6 +1,6 @@
 import { ValueType } from 'realgrid';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
-import { isOverByte, getMaxByteString } from '../../../utils/string';
+import { isOverByte, getMaxByteLength, getMaxByteString } from '../../../utils/string';
 import {
   fixTopIndexIfInvalid, registerEvent, createCellIndexByDataColumn, getCellClickEvent, isCellPastable,
 } from '../../../utils/private/gridShared';
@@ -16,6 +16,7 @@ const onCellButtonClicked = 'onCellButtonClicked';
 const onCellEditable = 'onCellEditable'; // custom
 const onShowEditor = 'onShowEditor';
 const onValidate = 'onValidate'; // custom
+const onEditChange = 'onEditChange';
 const onGetEditValue = 'onGetEditValue';
 const onCellPasting = 'onCellPasting';
 
@@ -235,6 +236,32 @@ export function customOnValidate(view) {
       const index = createCellIndexByDataColumn(g, itemIndex, column);
       // eslint-disable-next-line no-return-await
       return await execOriginal(g, onValidate, index, g, value);
+    }
+  });
+}
+
+/**
+  아이템이 사용자의 Key 입력 등으로 값이 변경되었음을 알리는 콜백
+  */
+export function overrideOnEditChange(view) {
+  wrapEvent(view, onEditChange, (g, index, value) => {
+    const { editor } = g.columnByName(index.column);
+    const type = editor?.type;
+
+    // text
+    if ([undefined, 'text', 'line', 'multiline'].includes(type)) {
+      if (editor?.maxLength) {
+        const length = getMaxByteLength(value, editor.maxLength);
+
+        if (length < value.length) {
+          g.setEditValue(value.substring(0, length));
+          return;
+        }
+      }
+    }
+
+    if (hasOriginal(g, onEditChange)) {
+      execOriginal(g, onEditChange, g, index, value);
     }
   });
 }
