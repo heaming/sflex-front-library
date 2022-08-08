@@ -15,8 +15,8 @@ function setColumnCustomDefaults(column) {
   if (Array.isArray(options)) {
     defaultsDeep(column, {
       lookupDisplay: true,
-      values: map(options, column.optionsValue || 'codeId'),
-      labels: map(options, column.optionsLabel || 'codeName'),
+      values: map(options, column.optionValue || 'codeId'),
+      labels: map(options, column.optionLabel || 'codeName'),
     });
   }
 }
