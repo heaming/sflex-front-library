@@ -9,14 +9,35 @@ const setColumns = 'setColumns';
 const setCellStyleCallback = 'setCellStyleCallback';
 const destroy = 'destroy';
 
+const firstOptionLabels = {
+  all: ['MSG_TXT_ALL', null, '전체'],
+  select: ['MSG_TXT_SEL', null, '선택'],
+};
+
 function setColumnCustomDefaults(column) {
   const { options } = column;
 
   if (Array.isArray(options)) {
+    const copyOptions = [];
+    const optionValue = column.optionValue || 'codeId';
+    const optionLabel = column.optionLabel || 'codeName';
+
+    if (column.firstOption) {
+      const defaultLabel = firstOptionLabels[column.firstOption]
+        && i18n.t(...firstOptionLabels[column.firstOption]);
+
+      copyOptions.push({
+        [optionValue]: column.firstOptionValue || '',
+        [optionLabel]: column.firstOptionLabel || defaultLabel,
+      });
+    }
+
+    copyOptions.push(...options);
+
     defaultsDeep(column, {
       lookupDisplay: true,
-      values: map(options, column.optionValue || 'codeId'),
-      labels: map(options, column.optionLabel || 'codeName'),
+      values: map(copyOptions, optionValue),
+      labels: map(copyOptions, optionLabel),
     });
   }
 }
