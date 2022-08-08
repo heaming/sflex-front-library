@@ -28,7 +28,7 @@ function setColumnHeaderDefaults(column) {
   }
 }
 
-function setColumnStyleNameDefaults(column) {
+function setColumnStyleNameDefaults(column, { dataType }) {
   defaultsDeep(column, {
     styleName: '',
   });
@@ -46,6 +46,8 @@ function setColumnStyleNameDefaults(column) {
           break;
         }
       }
+    } else if (dataType === ValueType.NUMBER) {
+      colClass.push(alignClass[2]);
     } else {
       switch (column.editor?.type) {
         case undefined:
@@ -132,13 +134,18 @@ function setColumnRendererDefaults(column, { dataType }) {
         sortable: false,
       });
       break;
-    default:
-      defaultsDeep(column, {
-        ...(dataType === ValueType.TEXT && column.datetimeFormat ? {
+    default: {
+      if (dataType === ValueType.TEXT && column.datetimeFormat) {
+        defaultsDeep(column, {
           textFormat: dateTextFormat(column.datetimeFormat),
-        } : {}),
-      });
+        });
+      } else if (dataType === ValueType.NUMBER) {
+        defaultsDeep(column, {
+          numberFormat: '#,##0.######',
+        });
+      }
       break;
+    }
   }
 }
 
@@ -146,6 +153,14 @@ function setColumnEditorDefaults(column, { dataType }) {
   const { editor } = column;
 
   switch (editor?.type) {
+    case 'number':
+      defaultsDeep(column, {
+        editor: {
+          maxIntegerLength: 13,
+          // editFormat: '#,##0.######',
+        },
+      });
+      break;
     case 'list':
     case 'dropdown':
       defaultsDeep(column, {
