@@ -4,7 +4,7 @@
       Chip
     </h2>
     <p class="kw-guide-description">
-      description
+      It is in progress. Please wait for it to complete.
     </p>
     <div class="kw-guide-section">
       <h3
@@ -54,7 +54,7 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          component area
+          It is in progress. Please wait for it to complete.
         </div>
         <div class="kw-guide-code">
           <HighCode
@@ -77,16 +77,6 @@ import 'vue-highlight-code/dist/style.css';
 const vue = 'vue';
 
 const testCode = `
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="label">
-      <kw-input
-        name="input"
-        rules="required"
-        placeholder="입력해주세요"
-      />
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
+It is in progress. Please wait for it to complete.
 `;
 </script>
