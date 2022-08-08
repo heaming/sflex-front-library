@@ -3,6 +3,6 @@ export default (app, components) => {
     ? components : Object.values(components);
 
   components.forEach((component) => {
-    app.component(component.name, component);
+    app.component(component.name || component.__name, component);
   });
 };
