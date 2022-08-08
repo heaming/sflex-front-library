@@ -33,9 +33,18 @@ const grdRef = ref();
 
 function initGrd(data, view) {
   const fields = [
-    { fieldName: 'number01', dataType: 'number' },
-    { fieldName: 'number02', dataType: 'number' },
-    { fieldName: 'number03', dataType: 'number' },
+    {
+      fieldName: 'number01',
+      dataType: 'number',
+    },
+    {
+      fieldName: 'number02',
+      dataType: 'number',
+    },
+    {
+      fieldName: 'number03',
+      dataType: 'number',
+    },
   ];
 
   const columns = [
@@ -100,9 +109,18 @@ function checkCurrentRowValue() {
 
 const sampleCodes = `
   const fields = [
-    { fieldName: 'number01', dataType: 'number' },
-    { fieldName: 'number02', dataType: 'number' },
-    { fieldName: 'number03', dataType: 'number' },
+    {
+      fieldName: 'number01',
+      dataType: 'number',
+    },
+    {
+      fieldName: 'number02',
+      dataType: 'number',
+    },
+    {
+      fieldName: 'number03',
+      dataType: 'number',
+    },
   ];
 
   const columns = [
