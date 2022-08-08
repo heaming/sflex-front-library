@@ -35,7 +35,7 @@ function setColumnCustomDefaults(column) {
     copyOptions.push(...options);
 
     defaultsDeep(column, {
-      lookupDisplay: true,
+      lookupDisplay: typeof column.displayCallback !== 'function',
       values: map(copyOptions, optionValue),
       labels: map(copyOptions, optionLabel),
     });
