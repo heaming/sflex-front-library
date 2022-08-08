@@ -84,6 +84,7 @@ export default defineConfig(({ mode }) => {
           'bootstrap-datepicker',
           'chart.js',
           'chartjs-plugin-datalabels',
+          'dayjs',
           'fast-deep-equal',
           'jquery',
           'jszip',
