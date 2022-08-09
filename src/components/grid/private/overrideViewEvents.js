@@ -1,5 +1,6 @@
 import { ValueType } from 'realgrid';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
+import { sanitize } from '../../../plugins/sanitize';
 import { isOverByte, getMaxByteLength, getMaxByteString } from '../../../utils/string';
 import {
   fixTopIndexIfInvalid, registerEvent, createCellIndexByDataColumn, getCellClickEvent, isCellPastable,
@@ -44,8 +45,7 @@ export function overrideOnShowTooltip(view) {
       }
     }
 
-    // TODO: return should be sanitized
-    return returnValue || value;
+    return sanitize(returnValue || value);
   });
 }
 
