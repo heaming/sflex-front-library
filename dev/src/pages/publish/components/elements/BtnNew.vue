@@ -335,50 +335,6 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="secondary"
-        class="kw-guide-title"
-      >
-        Secondary
-      </h3>
-      <p class="kw-guide-description">
-        button height 40px
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-btn class="kw-btn--secondary">
-            신규등록
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="secondaryDefault"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-        <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--secondary"
-            disable
-          >
-            신규등록
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="secondaryDisable"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
         id="contents"
         class="kw-guide-title"
       >
@@ -389,7 +345,19 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn class="kw-btn--contents kw-btn--add">
+          <kw-btn
+            class="kw-btn--line-black kw-btn--h32"
+            icon="plus_16|0 0 16 16"
+          >
+            학습자 추가
+          </kw-btn>
+          <kw-btn class="kw-btn--contents kw-btn--add ml8">
+            학습자 추가
+          </kw-btn>
+          <kw-btn
+            class="kw-btn--contents kw-btn--add ml8"
+            disable
+          >
             학습자 추가
           </kw-btn>
         </div>
@@ -408,36 +376,8 @@
           >
             수정
           </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="contentsDefault"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-        <div class="kw-guide-example">
           <kw-btn
-            class="kw-btn--contents kw-btn--add"
-            disable
-          >
-            학습자 추가
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="contentsAddIconDisable"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-        <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--contents"
+            class="kw-btn--contents ml8"
             disable
           >
             수정
@@ -445,95 +385,7 @@
         </div>
         <div class="kw-guide-code">
           <HighCode
-            :code-value="contentsDisable"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="step-cta"
-        class="kw-guide-title"
-      >
-        Step_CTA
-      </h3>
-      <p class="kw-guide-description">
-        button height 42px
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-btn class="kw-btn--step">
-            이전
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="stepDefault"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-        <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--step"
-            disable
-          >
-            이전
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="stepDisable"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-        <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--step"
-          >
-            임시저장
-          </kw-btn>
-          <kw-btn
-            class="kw-btn--step kw-btn--primary"
-          >
-            다음
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="stepTwoBtn"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
-        <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--step"
-            disable
-          >
-            임시저장
-          </kw-btn>
-          <kw-btn
-            class="kw-btn--step kw-btn--primary"
-            disable
-          >
-            다음
-          </kw-btn>
-        </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="stepTwoBtnDisable"
+            :code-value="contentsDefault"
             :lang="vue"
             theme="light"
             width="100%"
@@ -759,64 +611,14 @@ const grayLineBg = `
 </kw-btn>
 `;
 
-const secondaryDefault = `
-<kw-btn class="kw-btn--secondary">프로모션등록</kw-btn>
-`;
-
-const secondaryDisable = `
-<kw-btn class="kw-btn--secondary" disable>프로모션등록</kw-btn>
-`;
-
 const contentsAddIcon = `
 <kw-btn class="kw-btn--contents kw-btn--add">학습자 추가</kw-btn>
+<kw-btn class="kw-btn--contents kw-btn--add ml8" disable>학습자 추가</kw-btn>
 `;
 
 const contentsDefault = `
 <kw-btn class="kw-btn--contents">수정</kw-btn>
-`;
-
-const contentsAddIconDisable = `
-<kw-btn class="kw-btn--contents kw-btn--add" disable>학습자 추가</kw-btn>
-`;
-
-const contentsDisable = `
-<kw-btn class="kw-btn--contents" disable>수정</kw-btn>
-`;
-
-const stepDefault = `
-<kw-btn class="kw-btn--step">이전</kw-btn>
-`;
-
-const stepDisable = `
-<kw-btn class="kw-btn--step" disable>이전</kw-btn>
-`;
-
-const stepTwoBtn = `
-<kw-btn
-  class="kw-btn--step"
->
-  임시저장
-</kw-btn>
-<kw-btn
-  class="kw-btn--step kw-btn--primary"
->
-  다음
-</kw-btn>
-`;
-
-const stepTwoBtnDisable = `
-<kw-btn
-  class="kw-btn--step"
-  disable
->
-  임시저장
-</kw-btn>
-<kw-btn
-  class="kw-btn--step kw-btn--primary"
-  disable
->
-  다음
-</kw-btn>
+<kw-btn class="kw-btn--contents ml8" disable>수정</kw-btn>
 `;
 
 const more = `
