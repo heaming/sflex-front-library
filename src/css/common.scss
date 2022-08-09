@@ -40,6 +40,14 @@ textarea::placeholder {
 // global settings
 .kw-page {
   background: #f4f5f6;
+
+  &--md {
+    width: 1536px;
+  }
+
+  &--sm {
+    width: 1212px;
+  }
 }
 
 h1 {
