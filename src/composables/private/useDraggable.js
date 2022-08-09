@@ -3,7 +3,7 @@ const { min, max } = Math;
 export const useDraggableProps = {
   draggable: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 };
 
