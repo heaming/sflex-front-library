@@ -6,7 +6,8 @@
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
   "workspaces": [
-    "dev"
+    "dev",
+    "test"
   ],
   "scripts": {
     "build": "npm run -w dev build",
@@ -17,7 +18,8 @@
     "prettier": "prettier --write **/*.ts **/*.html",
     "preview": "npm run -w dev preview",
     "serve": "npm run -w dev serve",
-    "sort-package-json": "sort-package-json package.json dev/package.json"
+    "sort-package-json": "sort-package-json package.json dev/package.json",
+    "test": "npm run -w test serve"
   },
   "lint-staged": {
     "*.{js,jsx,vue}": [
