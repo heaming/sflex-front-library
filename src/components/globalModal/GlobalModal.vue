@@ -27,13 +27,9 @@
 import { GlobalModalVmKey } from '../../consts/private/symbols';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVms';
 import { getGlobalDatas, removeGlobalDatas } from '../../utils/private/globalDatas';
-import KwPopupContainer from '../popup/KwPopupContainer.vue';
 
 export default {
   name: 'GlobalModal',
-  components: {
-    KwPopupContainer,
-  },
 
   setup() {
     const vm = getCurrentInstance();
