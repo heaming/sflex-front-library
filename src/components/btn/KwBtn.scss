@@ -37,6 +37,7 @@
   // disabled
   &:disabled {
     background-color: $line-line;
+    color: #bbb;
 
     &:hover {
       background-color: $line-line;
@@ -115,18 +116,17 @@
   &--line-gray {
     border: 1px solid $line-line;
     background: #fff;
-    color: $primary;
+    color: #555;
 
     &:hover {
-      background: #fff;
+      background: #f5f5f5;
     }
 
     &:active {
-      background: #fff;
+      background: #f5f5f5;
     }
 
     &.kw-btn--line-bg {
-      color: #555;
       background: #f5f5f5;
 
       &:hover {
@@ -418,6 +418,12 @@
     //   transition: none;
     // }
   }
+}
+
+.kw-btn.q-btn .q-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 }
 
 svg[viewBox$="16"] {
