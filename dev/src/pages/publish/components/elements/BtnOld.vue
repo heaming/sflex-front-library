@@ -1,10 +1,10 @@
 <template>
   <kw-page class="kw-guide">
-    <h2 class="kw-guide-h2">
-      Btn
+    <h2 class="kw-guide-h2 throughline">
+      Btn Old
     </h2>
-    <p class="kw-guide-description">
-      button set
+    <p class="kw-guide-description notice">
+      This page will be deleted! Don't take note!
     </p>
     <div class="kw-guide-section">
       <h3

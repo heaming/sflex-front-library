@@ -99,11 +99,11 @@ const layoutCode1 = `
 </kw-page>
 `;
 const layoutCode2 = `
-<kw-page>
+<kw-page class="kw-page--md">
 </kw-page>
 `;
 const layoutCode3 = `
-<kw-page>
+<kw-page class="kw-page--sm">
 </kw-page>
 `;
 </script>

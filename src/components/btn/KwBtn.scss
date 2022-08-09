@@ -60,6 +60,85 @@
     }
   }
 
+  &--line-black {
+    border: 1px solid $black-btn-line;
+    background-color: #fff;
+    color: $black-h2;
+
+    &:hover {
+      background-color: #fff;
+    }
+
+    &:active {
+      background-color: #f5f5f5;
+    }
+
+    &.kw-btn--line-bg {
+      background: #f5f5f5;
+
+      &:hover {
+        background: #f5f5f5;
+      }
+
+      &:active {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+
+  &--line-blue {
+    border: 1px solid $primary;
+    background: #fff;
+    color: $primary;
+
+    &:hover {
+      background: #fff;
+    }
+
+    &:active {
+      background: #fff;
+    }
+
+    &.kw-btn--line-bg {
+      background: rgb(56 144 246 / 8%);
+
+      &:hover {
+        background: rgb(56 144 246 / 18%);
+      }
+
+      &:active {
+        background-color: rgb(56 144 246 / 28%);
+      }
+    }
+  }
+
+  &--line-gray {
+    border: 1px solid $line-line;
+    background: #fff;
+    color: $primary;
+
+    &:hover {
+      background: #fff;
+    }
+
+    &:active {
+      background: #fff;
+    }
+
+    &.kw-btn--line-bg {
+      color: #555;
+      background: #f5f5f5;
+
+      &:hover {
+        background: #f5f5f5;
+      }
+
+      &:active {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+
   // popup size
   &--popup {
     height: 36px;
@@ -69,6 +148,34 @@
       background-color: #fff;
       color: $black-h2;
     }
+  }
+
+  // button size별 추가
+  &--h40 {
+    height: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 12px;
+  }
+
+  &--h36 {
+    height: 36px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  &--h32 {
+    height: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 12px;
+  }
+
+  &--h24 {
+    height: 24px;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 12px;
   }
 
   // secondary
@@ -277,5 +384,36 @@
         transform: translateY(-50%) rotate(180deg);
       }
     }
+  }
+
+  &--excel {
+    padding: 0;
+    padding-left: 22px;
+    background-color: rgb(56 144 246 / 0%) !important;
+    font-size: 14px;
+    color: $black-h1;
+    height: 32px;
+    text-decoration: underline;
+    position: relative;
+    font-weight: 400;
+
+    & .on-left {
+      margin-right: 6px;
+    }
+
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 0;
+    //   transform: translateY(-50%);
+    //   width: 16px;
+    //   height: 16px;
+    //   background: url(~assets/images/ic_excel_off_16_3x.png) no-repeat center;
+    //   background-size: 16px 16px;
+    //   display: block;
+    //   box-shadow: none;
+    //   transition: none;
+    // }
   }
 }

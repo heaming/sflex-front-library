@@ -49,7 +49,7 @@
       <kw-action-bar>
         <template #left>
           <div class="kw-action-bar--count kw-action-bar--separator">
-            총 <span class="kw-action-bar--number">156</span>
+            총 <span class="kw-action-bar--number pl4">156</span>
           </div>
           <kw-select
             v-model="selectData.model"
@@ -57,30 +57,38 @@
             :display-value="selectData.model + ' 개씩보기'"
             name="select"
             rules="required"
+            :borderless="true"
           />
-
-          <div class="kw-action-bar--send">
+          <div class="kw-action-bar--send ml40">
             <kw-btn
-              class="kw-btn kw-btn--search"
+              class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
             >
               URL 전송
             </kw-btn>
-            <p class="kw-action-bar--description">
+            <p class="kw-action-bar--description ml16">
               고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
             </p>
           </div>
         </template>
 
         <kw-btn
-
+          icon="excel|0 0 16 16"
           class="kw-btn--excel kw-action-bar--separator"
           label="엑셀 다운로드"
         />
-        <kw-btn label="개인 고객 등록 URL 전송" />
-        <kw-btn label="개인 고객 등록" />
-        <kw-btn label="법인 고객 등록" />
+        <kw-btn
+          label="개인 고객 등록 URL 전송"
+          class="kw-btn--h32"
+        />
+        <kw-btn
+          label="개인 고객 등록"
+          class="kw-btn--h32 ml10"
+        />
+        <kw-btn
+          label="법인 고객 등록"
+          class="kw-btn--h32 ml10"
+        />
       </kw-action-bar>
-
       <kw-grid
         :visible-rows="7"
         @init="initGrid"
