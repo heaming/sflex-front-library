@@ -11,21 +11,23 @@ function removeGlobImportedRoutes() {
 
 export default (apps, menus) => {
   router.getRoutes().forEach((route) => {
-    apps.forEach((x) => {
-      const matched = find(menus, [
-        'applicationId', x.applicationId,
-        'pageDestinationValue', route.name,
-      ]);
+    if (route.meta.isGlobImport) {
+      apps.forEach((x) => {
+        const matched = find(menus, [
+          'applicationId', x.applicationId,
+          'pageDestinationValue', route.name,
+        ]);
 
-      if (matched) {
-        router.addRoute({
-          ...route,
-          name: matched.menuUid,
-          path: `/${matched.applicationId.toLowerCase()}${route.path}`,
-          meta: { requiresAuth: true },
-        });
-      }
-    });
+        if (matched) {
+          router.addRoute({
+            ...route,
+            name: matched.menuUid,
+            path: `/${matched.applicationId.toLowerCase()}${route.path}`,
+            meta: { requiresAuth: true },
+          });
+        }
+      });
+    }
   });
 
   removeGlobImportedRoutes();
