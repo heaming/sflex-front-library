@@ -62,10 +62,7 @@
               <kw-select
                 v-model="selectData.model"
                 :options="selectData.options"
-                :display-value="selectData.model + ' 개씩보기'"
-                name="select"
-                rules="required"
-                :borderless="true"
+                suffix="개씩보기"
               />
               <div class="kw-action-bar--send ml40">
                 <kw-btn
@@ -120,10 +117,9 @@ const vue = 'vue';
 
 const selectData = {
   model: '10',
-  items: [
-    '10', '20', '30', '40',
+  options: [
+    '10', '20', '30', '40', '50',
   ],
-  itemArr: [...Array(10)].map((v, i) => i),
 };
 
 const testCode = `
@@ -135,10 +131,7 @@ const testCode = `
     <kw-select
       v-model="selectData.model"
       :options="selectData.options"
-      :display-value="selectData.model + ' 개씩보기'"
-      name="select"
-      rules="required"
-      :borderless="true"
+      suffix="개씩보기"
     />
     <div class="kw-action-bar--send ml40">
       <kw-btn
@@ -170,6 +163,5 @@ const testCode = `
     class="kw-btn--h32 ml10"
   />
 </kw-action-bar>
-
 `;
 </script>
