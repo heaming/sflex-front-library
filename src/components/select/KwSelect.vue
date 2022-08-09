@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <q-select
     ref="inputRef"
@@ -14,12 +15,16 @@
     :map-options="emitValue"
     :use-input="useInput"
     :input-debounce="100"
+    borderless
     no-error-icon
     @update:model-value="onUpdateValue"
     @filter="filter"
     @blur="onBlur"
   >
-    <template #no-option>
+    <template
+      v-if="useInput"
+      #no-option
+    >
       <q-item>
         <q-item-section class="text-italic text-grey">
           {{ $t('MSG_TXT_NO_RESULT', null, '검색된 항목이 없습니다.') }}
@@ -128,7 +133,7 @@ export default {
       update(() => {
         const needle = val.toLowerCase();
         filteredOptions.value = normalizedOptions.value
-          .filter((v) => !val || v.label.toLowerCase().indexOf(needle) > -1);
+          .filter((v) => !val || v[props.optionLabel].toLowerCase().indexOf(needle) > -1);
       });
     }
 
