@@ -55,7 +55,7 @@ $unit: px;
   }
 }
 
-@for $space from 1 through 500 {
+@for $space from 0 through 500 {
   @each $side in $sides {
     @if $side == "a" {
       .m#{str-slice($side, 0, 1)}#{$space} {
