@@ -46,5 +46,14 @@ export default (app) => {
 
   // override icon mapping
   const { $q } = app.config.globalProperties;
-  $q.iconMapFn = (icon) => ({ icon: `svguse:${icons[icon]}#${icon}` });
+  const defaultViewBox = '0 0 24 24';
+
+  $q.iconMapFn = (s) => {
+    const [def, viewBox = defaultViewBox] = s.split('|');
+    const icon = `${icons[def]}#${def}`;
+
+    return {
+      icon: `svguse:${icon}|${viewBox}`,
+    };
+  };
 };
