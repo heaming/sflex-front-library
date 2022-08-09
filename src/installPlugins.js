@@ -6,6 +6,7 @@ import http from './plugins/http';
 import loading from './plugins/loading';
 import meta from './plugins/meta';
 import modal from './plugins/modal';
+import sanitize from './plugins/sanitize';
 import storage from './plugins/storage';
 
 export default (app, plugins) => {
@@ -17,6 +18,7 @@ export default (app, plugins) => {
     loading,
     meta,
     modal,
+    sanitize,
     storage,
     ...plugins,
   ];

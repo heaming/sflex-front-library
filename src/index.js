@@ -25,6 +25,7 @@ export * from './plugins/http';
 export * from './plugins/loading';
 export * from './plugins/meta';
 export * from './plugins/modal';
+export * from './plugins/sanitize';
 export * from './plugins/storage';
 
 /*

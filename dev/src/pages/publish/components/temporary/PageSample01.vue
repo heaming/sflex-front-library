@@ -53,10 +53,7 @@
           <kw-select
             v-model="selectData.model"
             :options="selectData.options"
-            :display-value="selectData.model + ' 개씩보기'"
-            name="select"
-            rules="required"
-            :borderless="true"
+            suffix="개씩보기"
           />
           <div class="kw-action-bar--send ml40">
             <kw-btn

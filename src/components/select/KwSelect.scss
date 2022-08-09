@@ -98,6 +98,21 @@
     height: 100%;
   }
 
+  .q-field__prefix,
+  .q-field__suffix {
+    padding: 0;
+    font-size: 16px;
+    color: $black-h1;
+  }
+
+  .q-field__prefix {
+    padding-right: 2px;
+  }
+
+  .q-field__suffix {
+    padding-left: 2px;
+  }
+
   // placeholder css
   &.q-field--float {
     .q-field__input {

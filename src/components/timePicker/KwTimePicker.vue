@@ -207,8 +207,9 @@ export default {
     }
 
     function onKeydown(e) {
-      // enter
-      if (e.keyCode === 13 && (e.target.value === e.target.__oldValue__)) {
+      // enter, down
+      if ((e.keyCode === 13 || e.keyCode === 40)
+        && (e.target.value === e.target.__oldValue__)) {
         stopAndPrevent(e);
         toggleView(true);
       }

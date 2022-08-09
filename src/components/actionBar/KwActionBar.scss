@@ -84,6 +84,12 @@
       }
     }
 
+    .q-field__prefix,
+    .q-field__suffix {
+      font-size: 14px;
+      color: $black-h3;
+    }
+
     &.q-field--with-bottom {
       padding: 0;
     }
