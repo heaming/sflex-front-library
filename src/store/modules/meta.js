@@ -86,11 +86,13 @@ export default {
 
       commit('setApps', apps);
     },
-    async fetchMenus({ commit }) {
+    async fetchMenus({ commit, getters }) {
       const response = await http.get('/api/v1/common/portal/menus');
+
+      const apps = getters.getApps;
       const menus = response.data;
 
-      replaceRoutesByMenus(menus);
+      replaceRoutesByMenus(apps, menus);
       commit('setMenus', menus);
     },
     async fetchPage({ commit, getters }, pageId) {
