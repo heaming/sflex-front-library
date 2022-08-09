@@ -9,14 +9,35 @@ const setColumns = 'setColumns';
 const setCellStyleCallback = 'setCellStyleCallback';
 const destroy = 'destroy';
 
+const firstOptionLabels = {
+  all: ['MSG_TXT_ALL', null, '전체'],
+  select: ['MSG_TXT_SEL', null, '선택'],
+};
+
 function setColumnCustomDefaults(column) {
   const { options } = column;
 
   if (Array.isArray(options)) {
+    const copyOptions = [];
+    const optionValue = column.optionValue || 'codeId';
+    const optionLabel = column.optionLabel || 'codeName';
+
+    if (column.firstOption) {
+      const defaultLabel = firstOptionLabels[column.firstOption]
+        && i18n.t(...firstOptionLabels[column.firstOption]);
+
+      copyOptions.push({
+        [optionValue]: column.firstOptionValue || '',
+        [optionLabel]: column.firstOptionLabel || defaultLabel,
+      });
+    }
+
+    copyOptions.push(...options);
+
     defaultsDeep(column, {
-      lookupDisplay: true,
-      values: map(options, column.optionsValue || 'codeId'),
-      labels: map(options, column.optionsLabel || 'codeName'),
+      lookupDisplay: typeof column.displayCallback !== 'function',
+      values: map(copyOptions, optionValue),
+      labels: map(copyOptions, optionLabel),
     });
   }
 }
@@ -28,7 +49,7 @@ function setColumnHeaderDefaults(column) {
   }
 }
 
-function setColumnStyleNameDefaults(column) {
+function setColumnStyleNameDefaults(column, { dataType }) {
   defaultsDeep(column, {
     styleName: '',
   });
@@ -46,6 +67,8 @@ function setColumnStyleNameDefaults(column) {
           break;
         }
       }
+    } else if (dataType === ValueType.NUMBER) {
+      colClass.push(alignClass[2]);
     } else {
       switch (column.editor?.type) {
         case undefined:
@@ -132,13 +155,18 @@ function setColumnRendererDefaults(column, { dataType }) {
         sortable: false,
       });
       break;
-    default:
-      defaultsDeep(column, {
-        ...(dataType === ValueType.TEXT && column.datetimeFormat ? {
+    default: {
+      if (dataType === ValueType.TEXT && column.datetimeFormat) {
+        defaultsDeep(column, {
           textFormat: dateTextFormat(column.datetimeFormat),
-        } : {}),
-      });
+        });
+      } else if (dataType === ValueType.NUMBER) {
+        defaultsDeep(column, {
+          numberFormat: '#,##0.######',
+        });
+      }
       break;
+    }
   }
 }
 
@@ -146,6 +174,14 @@ function setColumnEditorDefaults(column, { dataType }) {
   const { editor } = column;
 
   switch (editor?.type) {
+    case 'number':
+      defaultsDeep(column, {
+        editor: {
+          maxIntegerLength: 13,
+          // editFormat: '#,##0.######',
+        },
+      });
+      break;
     case 'list':
     case 'dropdown':
       defaultsDeep(column, {

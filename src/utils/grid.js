@@ -330,7 +330,7 @@ async function validateRow(view, data, dataRow, metas) {
     const { fieldName, rules, customMessages } = metas[i];
     const column = view.columnByName(fieldName);
     const name = column.header.text || column.name;
-    const value = values[fieldName];
+    const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
     let errorMessage;
     const result = await validateValue(value, rules, name, values, customMessages);

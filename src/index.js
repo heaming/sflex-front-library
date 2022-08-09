@@ -31,6 +31,7 @@ export * from './plugins/storage';
   Utils
  */
 export * as codeUtil from './utils/code';
-export * as gridUtil from './utils/grid';
-export * as stringUtil from './utils/string';
 export * as fileUtil from './utils/file';
+export * as gridUtil from './utils/grid';
+export * as popupUtil from './utils/popup';
+export * as stringUtil from './utils/string';

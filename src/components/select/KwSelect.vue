@@ -7,6 +7,8 @@
     :error="error"
     :error-message="errorMessage"
     :options="filteredOptions"
+    :option-value="optionValue"
+    :option-label="optionLabel"
     :multiple="multiple"
     :emit-value="emitValue"
     :map-options="emitValue"
@@ -62,11 +64,11 @@
         </q-item-section>
         <q-item-section>
           <q-item-label>
-            {{ opt.label }}
+            {{ opt[optionLabel] }}
           </q-item-label>
         </q-item-section>
       </q-item>
-      <q-separator v-if="opt.separator" />
+      <q-separator v-if="opt[optionSeparator]" />
     </template>
   </q-select>
 </template>
@@ -83,7 +85,7 @@ export default {
     ...useOptionsProps,
 
     modelValue: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Object],
       default: undefined,
     },
     multiple: {
@@ -114,7 +116,7 @@ export default {
       value.value = val ?? '';
     }
 
-    const optionsCtx = useOptions(value, props.emitValue);
+    const optionsCtx = useOptions(value, true);
     const { normalizedOptions } = optionsCtx;
     const filteredOptions = ref([...normalizedOptions.value]);
 

@@ -1,6 +1,9 @@
 <template>
   <div class="kw-page-header">
-    <div class="kw-page-header-title_area">
+    <div
+      v-if="heading"
+      class="kw-page-header-title_area"
+    >
       <q-icon
         size="24px"
         class="mr6"
