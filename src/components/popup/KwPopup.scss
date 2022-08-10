@@ -1,0 +1,21 @@
+.kw-popup {
+  &--size-sm {
+    width: 440px;
+    max-width: 440px !important;
+  }
+
+  &--size-md {
+    width: 860px;
+    max-width: 860px !important;
+  }
+
+  &--size-lg {
+    width: 1000px;
+    max-width: 1000px !important;
+  }
+
+  &--size-xl {
+    width: 1200px;
+    max-width: 1200px !important;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <guide-popup-view>
     <kw-popup
-      style="min-width: 900px;"
+      class="kw-popup--size-md"
       title="조회 팝업"
     >
       <kw-search

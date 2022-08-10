@@ -2,7 +2,7 @@
   <q-card
     ref="containerRef"
     :style="[popupStyle, { transform }]"
-    :class="[popupClass]"
+    :class="['kw-popup', popupClass]"
   >
     <q-card-section
       v-bind="events"
