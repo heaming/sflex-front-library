@@ -48,7 +48,7 @@ export default {
       getRegisteredSearch,
     } = inject(PageSearchContextKey, {});
 
-    const confirmIfTargetsModified = getRegisteredSearch?.().confirmIfTargetsModified || (() => true);
+    const confirmIfTargetsModified = getRegisteredSearch?.()?.confirmIfTargetsModified || (() => true);
 
     async function onUpdateValue(val) {
       if (await confirmIfTargetsModified?.()) {
