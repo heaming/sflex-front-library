@@ -657,8 +657,19 @@ const grayLineBg = `
 `;
 
 const contentsAddIcon = `
-<kw-btn class="kw-btn--contents kw-btn--add">학습자 추가</kw-btn>
-<kw-btn class="kw-btn--contents kw-btn--add ml8" disable>학습자 추가</kw-btn>
+<kw-btn
+  class="kw-btn--line-black kw-btn--h32"
+  icon="plus_16|0 0 16 16"
+>
+  학습자 추가
+</kw-btn>
+<kw-btn
+  class="kw-btn--line-black kw-btn--h32 ml8"
+  icon="plus_16|0 0 16 16"
+  disable
+>
+  학습자 추가
+</kw-btn>
 `;
 
 const contentsDefault = `
