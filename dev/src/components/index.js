@@ -1,1 +1,3 @@
-export { default as GuideCodeView } from './guide/GuideCodeView.vue';
+const modules = import.meta.globEager('@/components/**/*.vue');
+
+export default modules;

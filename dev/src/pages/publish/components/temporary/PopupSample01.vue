@@ -1,7 +1,7 @@
 <template>
-  <kw-popup-container>
+  <guide-popup-view>
     <kw-popup
-      style="width: 900px; height: 700px; margin: 40px auto; overflow: auto;"
+      style="min-width: 900px;"
       title="조회 팝업"
     >
       <kw-search
@@ -19,7 +19,9 @@
 
         <kw-search-row>
           <kw-search-item label="이름/대표자/담당자">
-            <kw-input placeholder="입력해주세요" />
+            <kw-input
+              placeholder="입력해주세요"
+            />
           </kw-search-item>
         </kw-search-row>
 
@@ -54,7 +56,7 @@
         />
       </div>
     </kw-popup>
-  </kw-popup-container>
+  </guide-popup-view>
 </template>
 
 <script setup>

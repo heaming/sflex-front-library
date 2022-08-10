@@ -1,3 +1,4 @@
+import { find } from 'lodash-es';
 import router from './index';
 
 function removeGlobImportedRoutes() {
@@ -8,16 +9,21 @@ function removeGlobImportedRoutes() {
   });
 }
 
-export default (menus) => {
+export default (apps, menus) => {
   router.getRoutes().forEach((route) => {
-    const matched = menus.find((v) => v.pageDestinationValue === route.name);
+    if (route.meta.isGlobImport) {
+      apps.forEach(({ applicationId }) => {
+        const pageDestinationValue = route.name;
+        const matched = find(menus, { applicationId, pageDestinationValue });
 
-    if (matched) {
-      router.addRoute({
-        ...route,
-        name: matched.menuUid,
-        path: `/${matched.applicationId.toLowerCase()}${route.path}`,
-        meta: { requiresAuth: true },
+        if (matched) {
+          router.addRoute({
+            ...route,
+            name: matched.menuUid,
+            path: `/${matched.applicationId.toLowerCase()}${route.path}`,
+            meta: { requiresAuth: true },
+          });
+        }
       });
     }
   });

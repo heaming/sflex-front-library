@@ -50,7 +50,7 @@
 import { find, last } from 'lodash-es';
 
 function creataBreadcrumbs(menus, menuUid) {
-  const matched = find(menus, ['menuUid', menuUid]);
+  const matched = find(menus, { menuUid });
 
   if (matched) {
     return [
@@ -77,13 +77,16 @@ export default {
   setup(props) {
     const { getters } = useStore();
     const { currentRoute } = useRouter();
+
     const breadcrumbs = ref([]);
     const options = toRef(props, 'options');
+
     if (Array.isArray(options.value)) {
       breadcrumbs.value = options.value.map((v) => ({ key: v, label: v }));
     } else {
       const menus = getters['meta/getMenus'];
       const { applicationId, menuUid } = find(menus, ['menuUid', currentRoute.value.name]) || {};
+
       if (applicationId) {
         const app = getters['meta/getApp'](applicationId);
         breadcrumbs.value = [

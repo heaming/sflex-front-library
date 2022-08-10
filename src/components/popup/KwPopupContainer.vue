@@ -63,9 +63,9 @@ export default {
 
   setup(props, { emit }) {
     const popupCtx = shallowRef({});
+    const popupStyle = computed(() => popupCtx.value.style);
+    const popupClass = computed(() => popupCtx.value.class);
     const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
-    const popupStyle = computed(() => popupCtx.value.style?.value);
-    const popupClass = computed(() => popupCtx.value.class?.value);
 
     function register(ctx) {
       popupCtx.value = ctx;

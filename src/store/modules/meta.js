@@ -52,14 +52,14 @@ export default {
     getUserInfo: (state) => state.userInfo,
     getLastLoginInfo: (state) => state.lastLoginInfo,
     getConfigs: (state) => state.configs,
-    getConfig: (state) => (configId) => find(state.configs, ['configurationId', configId]),
+    getConfig: (state) => (configurationId) => find(state.configs, { configurationId }),
     getNotices: (state) => state.notices,
-    getLinkPage: (state) => (pageId, linkPageId) => find(state.linkPages, ['pageId', pageId, 'linkPageId', linkPageId]),
+    getLinkPage: (state) => (pageId, linkPageId) => find(state.linkPages, { pageId, linkPageId }),
     getApps: (state) => state.apps,
-    getApp: (state) => (appId) => find(state.apps, ['applicationId', appId]),
-    getAppMenus: (state) => (appId) => filter(state.menus, ['applicationId', appId]),
+    getApp: (state) => (applicationId) => find(state.apps, { applicationId }),
+    getAppMenus: (state) => (applicationId) => filter(state.menus, { applicationId }),
     getMenus: (state) => state.menus,
-    getMenu: (state) => (menuUid) => find(state.menus, ['menuUid', menuUid]),
+    getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
     getPages: (state) => state.pages,
     getPage: (state) => (key) => find(state.pages, (v) => v.pageId === key || v.pageDestinationValue === key),
   },
@@ -86,11 +86,13 @@ export default {
 
       commit('setApps', apps);
     },
-    async fetchMenus({ commit }) {
+    async fetchMenus({ commit, getters }) {
       const response = await http.get('/api/v1/common/portal/menus');
+
+      const apps = getters.getApps;
       const menus = response.data;
 
-      replaceRoutesByMenus(menus);
+      replaceRoutesByMenus(apps, menus);
       commit('setMenus', menus);
     },
     async fetchPage({ commit, getters }, pageId) {
