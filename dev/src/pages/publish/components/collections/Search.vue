@@ -6,7 +6,7 @@
     <p class="kw-guide-description">
       kw-search-form > kw-search-row > kw-search-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
       - This is the sequence to be wrapped<br>
-      it is necessary to be wrapped for using the element's tags from kw-form to the element.
+      it is necessary to be wrapped for using the element's tags from 'kw-form' to the element.
     </p>
     <div class="kw-guide-section">
       <h3
@@ -16,10 +16,12 @@
         the &lt;kw-search&gt; form
       </h3>
       <p class="kw-guide-description">
-        The "kw-search" example is as below.<br>
-        when kw-search is used, it is included in the border of outside.<br>
-        Instead of kw-form, &lt;kw-search&gt; form wrap kw-search-row.<br>
-        Add the columns number cols="4" in the tag of "kw-search" (default: three columns)<br>
+        The 'kw-search' example is as below.<br>
+        when 'kw-search' is used, it is included in the border of outside.<br>
+        Instead of 'kw-form', &lt;kw-search&gt; form wrap 'kw-search-row'.<br>
+        Add the columns number cols="4" in the tag of 'kw-search' (default: three columns)<br><br>
+        If there are more than 3 'rows', only two are exposed and the rest are hidden.
+        And the 'More' button will appear automatically.
       </p>
       <q-card>
         <kw-search
@@ -28,7 +30,6 @@
           :autofocus="autofocus"
           :no-reset-focus="noResetFocus"
           :cols="4"
-          class="kw-py-2 kw-px-4 kw-my-4"
         >
           <kw-search-row>
             <kw-search-item label="지점명">
@@ -207,7 +208,7 @@
             </kw-search-item>
           </kw-search-row>
         </kw-search>
-        <div class="kw-guide-code">
+        <div class="kw-guide-code mt30">
           <HighCode
             :code-value="searchCode"
             lang="vue"
@@ -232,7 +233,6 @@ const searchCode = `
   :autofocus="autofocus"
   :no-reset-focus="noResetFocus"
   :cols="4"
-  class="kw-py-2 kw-px-4 kw-my-4"
 >
   <kw-search-row>
     <kw-search-item label="지점명">
