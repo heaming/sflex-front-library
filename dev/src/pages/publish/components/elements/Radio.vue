@@ -317,6 +317,27 @@ const radioDefaultCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const radioDisableCode = `
@@ -341,6 +362,29 @@ const radioDisableCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+        :model-value="[]"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+            disable
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const radioReadonlyCode = `
@@ -365,6 +409,29 @@ const radioReadonlyCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Radio">
+      <kw-field
+        name="radio"
+        rules="required"
+        :model-value="[]"
+      >
+        <template #default="{ field }">
+          <kw-radio
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+            disable
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const groupRadioDefaultCode = `
@@ -380,6 +447,20 @@ const groupRadioDefaultCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="optiongroup (default)">
+      <kw-option-group
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C', 'D']"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const groupRadioDisableCode = `
@@ -397,6 +478,22 @@ const groupRadioDisableCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="optiongroup (disable)">
+      <kw-option-group
+        :model-value="[]"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C']"
+        disable
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const groupRadioReadonlyCode = `
@@ -414,6 +511,22 @@ const groupRadioReadonlyCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="optiongroup (disable)">
+      <kw-option-group
+        :model-value="[]"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C']"
+        disable
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 // const readonlyRadio = ref('A');

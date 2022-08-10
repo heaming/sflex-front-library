@@ -246,6 +246,35 @@
         </div>
         <div class="kw-guide-example">
           <h4 class="mb20">
+            Line type - Gray
+          </h4>
+          <kw-btn class="kw-btn--line-gray">
+            추가
+          </kw-btn>
+          <kw-btn class="kw-btn--line-gray kw-btn--h40 ml8">
+            추가
+          </kw-btn>
+          <kw-btn class="kw-btn--line-gray kw-btn--h36 ml8">
+            추가
+          </kw-btn>
+          <kw-btn class="kw-btn--line-gray kw-btn--h32 ml8">
+            추가
+          </kw-btn>
+          <kw-btn class="kw-btn--line-gray kw-btn--h24 ml8">
+            추가
+          </kw-btn>
+        </div>
+        <div class="kw-guide-code">
+          <HighCode
+            :code-value="grayLine"
+            :lang="vue"
+            theme="light"
+            width="100%"
+            height="auto"
+          />
+        </div>
+        <div class="kw-guide-example">
+          <h4 class="mb20">
             Line type - Gray & gray bg
           </h4>
           <kw-btn class="kw-btn--line-gray kw-btn--line-bg">
@@ -351,11 +380,9 @@
           >
             학습자 추가
           </kw-btn>
-          <kw-btn class="kw-btn--contents kw-btn--add ml8">
-            학습자 추가
-          </kw-btn>
           <kw-btn
-            class="kw-btn--contents kw-btn--add ml8"
+            class="kw-btn--line-black kw-btn--h32 ml8"
+            icon="plus_16|0 0 16 16"
             disable
           >
             학습자 추가
@@ -593,6 +620,24 @@ const blueLineBg = `
 </kw-btn>
 `;
 
+const grayLine = `
+<kw-btn class="kw-btn--line-gray">
+  추가
+</kw-btn>
+<kw-btn class="kw-btn--line-gray kw-btn--h40 ml8">
+  추가
+</kw-btn>
+<kw-btn class="kw-btn--line-gray kw-btn--h36 ml8">
+  추가
+</kw-btn>
+<kw-btn class="kw-btn--line-gray kw-btn--h32 ml8">
+  추가
+</kw-btn>
+<kw-btn class="kw-btn--line-gray kw-btn--h24 ml8">
+  추가
+</kw-btn>
+`;
+
 const grayLineBg = `
 <kw-btn class="kw-btn--line-gray kw-btn--line-bg">
   삭제
@@ -612,8 +657,19 @@ const grayLineBg = `
 `;
 
 const contentsAddIcon = `
-<kw-btn class="kw-btn--contents kw-btn--add">학습자 추가</kw-btn>
-<kw-btn class="kw-btn--contents kw-btn--add ml8" disable>학습자 추가</kw-btn>
+<kw-btn
+  class="kw-btn--line-black kw-btn--h32"
+  icon="plus_16|0 0 16 16"
+>
+  학습자 추가
+</kw-btn>
+<kw-btn
+  class="kw-btn--line-black kw-btn--h32 ml8"
+  icon="plus_16|0 0 16 16"
+  disable
+>
+  학습자 추가
+</kw-btn>
 `;
 
 const contentsDefault = `

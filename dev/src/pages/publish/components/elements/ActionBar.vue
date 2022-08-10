@@ -4,7 +4,8 @@
       Action Bar
     </h2>
     <p class="kw-guide-description">
-      table Action bar
+      Table Action bar.<br>
+      'kw-action-bar' uses 'flex'. '&lt;template #left&gt;' is left-aligned, the rest are right-aligned.
     </p>
     <div class="kw-guide-section">
       <h3
@@ -17,10 +18,10 @@
         <thead>
           <tr>
             <th>
-              the Element(tag's name)
+              Tag
             </th>
             <th>
-              attribute(class)
+              Class
             </th>
             <th>
               Description
@@ -30,13 +31,35 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              div
             </td>
             <td>
-              essential - class (sample)
+              kw-action-bar--count
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Count area
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Any tag in ActionBar
+            </td>
+            <td>
+              kw-action-bar--separator
+            </td>
+            <td>
+              Separator between elements
+            </td>
+          </tr>
+          <tr>
+            <td>
+              p
+            </td>
+            <td>
+              kw-action-bar--description
+            </td>
+            <td>
+              description, etc.
             </td>
           </tr>
         </tbody>
@@ -62,10 +85,7 @@
               <kw-select
                 v-model="selectData.model"
                 :options="selectData.options"
-                :display-value="selectData.model + ' 개씩보기'"
-                name="select"
-                rules="required"
-                :borderless="true"
+                suffix="개씩보기"
               />
               <div class="kw-action-bar--send ml40">
                 <kw-btn
@@ -101,10 +121,18 @@
         <div class="kw-guide-code">
           <HighCode
             :code-value="testCode"
-            :lang="vue"
+            lang="vue"
             theme="light"
             width="100%"
             height="auto"
+          />
+          <HighCode
+            :code-value="testData"
+            lang="javascript"
+            theme="light"
+            width="100%"
+            height="auto"
+            class="mt30"
           />
         </div>
       </q-card>
@@ -116,14 +144,11 @@
 import { HighCode } from 'vue-highlight-code';
 import 'vue-highlight-code/dist/style.css';
 
-const vue = 'vue';
-
 const selectData = {
   model: '10',
-  items: [
-    '10', '20', '30', '40',
+  options: [
+    '10', '20', '30', '40', '50',
   ],
-  itemArr: [...Array(10)].map((v, i) => i),
 };
 
 const testCode = `
@@ -135,10 +160,7 @@ const testCode = `
     <kw-select
       v-model="selectData.model"
       :options="selectData.options"
-      :display-value="selectData.model + ' 개씩보기'"
-      name="select"
-      rules="required"
-      :borderless="true"
+      suffix="개씩보기"
     />
     <div class="kw-action-bar--send ml40">
       <kw-btn
@@ -170,6 +192,13 @@ const testCode = `
     class="kw-btn--h32 ml10"
   />
 </kw-action-bar>
-
+`;
+const testData = `
+const selectData = {
+  model: '10',
+  options: [
+    '10', '20', '30', '40', '50',
+  ],
+};
 `;
 </script>

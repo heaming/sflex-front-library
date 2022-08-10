@@ -322,6 +322,28 @@ const checkboxDefaultCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Checkbox">
+      <kw-field
+        :model-value="[]"
+        name="checkbox"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const checkboxDisableCode = `
@@ -346,6 +368,29 @@ const checkboxDisableCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Checkbox">
+      <kw-field
+        :model-value="[]"
+        name="checkbox"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+            disable
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const checkboxReadonlyCode = `
@@ -370,6 +415,29 @@ const checkboxReadonlyCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Checkbox">
+      <kw-field
+        :model-value="[]"
+        name="checkbox"
+        rules="required"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-for="(item, i) of ['A', 'B', 'C', 'D']"
+            :key="i"
+            v-bind="field"
+            :val="item"
+            disable
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const groupCheckboxDefaultCode = `
@@ -386,6 +454,21 @@ const groupCheckboxDefaultCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="OptionGroup">
+      <kw-option-group
+        :model-value="[]"
+        name="checkboxOptionGroup"
+        rules="required"
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const groupCheckboxDisableCode = `
@@ -403,39 +486,28 @@ const groupCheckboxDisableCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="OptionGroup (disable)">
+      <kw-option-group
+        :model-value="[]"
+        name="checkboxOptionGroup"
+        rules="required"
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+        disable
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const groupCheckboxReadonlyCode = `
 <kw-form>
   <kw-form-row>
-    <kw-form-item label="Checkbox">
-      <kw-field
-        :model-value="[]"
-        name="checkbox"
-        rules="required"
-      >
-        <template #default="{ field }">
-          <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
-
-
-
-
-
-
-
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="OptionGroup (disable)">
+    <kw-form-item label="OptionGroup (readonly)">
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
@@ -447,6 +519,22 @@ const groupCheckboxReadonlyCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="OptionGroup (readonly)">
+      <kw-option-group
+        :model-value="[]"
+        name="checkboxOptionGroup"
+        rules="required"
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+        disable
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 // const readonlyCheckbox = ref(['A']);eckboxOptionGroup = ref(['A']);

@@ -103,12 +103,16 @@
   }
 }
 
+.rg-body .rg-table tr td,
+.rg-fixed-body .rg-table tr td {
+  color: $black-h1;
+}
+
 .rg-grid {
   border: 0;
   border-top: 1px solid $black-h1;
 
   * {
-    color: $black-h1;
     font-family: "Spoqa Han Sans Neo", sans-serif;
     font-size: 14px;
     font-weight: 400;
