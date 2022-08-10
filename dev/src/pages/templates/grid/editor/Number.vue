@@ -5,12 +5,10 @@
     </h2>
     <q-card>
       <kw-action-bar>
-        <kw-btn>
-          <kw-btn
-            label="선택된 행 값 확인"
-            @click="checkCurrentRowValue"
-          />
-        </kw-btn>
+        <kw-btn
+          label="선택된 행 값 확인"
+          @click="checkCurrentRowValue"
+        />
       </kw-action-bar>
       <kw-grid
         ref="grdRef"
