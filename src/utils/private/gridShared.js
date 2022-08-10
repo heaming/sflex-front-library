@@ -142,15 +142,18 @@ export function getCellClickEvent(view, el) {
 }
 
 export async function waitUntilShowEditor(view, dropdown = false) {
+  view.__ignoreWaitUntilShowEditor__ = false;
   view.showEditor(dropdown);
 
+  if (view.__ignoreWaitUntilShowEditor__ === true) { return; }
+
+  await processWait();
   const isEditing = view.isEditing();
 
-  if (typeof isEditing !== 'boolean') {
-    await processWait();
-    await waitUntilShowEditor(view, dropdown);
-  } else if (isEditing) {
+  if (isEditing) {
     document.activeElement.select();
+  } else {
+    await waitUntilShowEditor(view, dropdown);
   }
 }
 
