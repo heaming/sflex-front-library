@@ -154,7 +154,7 @@ const sampleCode = `
   view.setColumns(columns);
 
   view.onCellItemClicked = (g, index) => {
-    alert(JSON.stringify(index, null, '\t'));
+    alert(JSON.stringify(index, null, '\\t'));
   };
 
   data.setRows([
