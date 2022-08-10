@@ -1,6 +1,6 @@
 import { createApp } from '~lib';
 import routes from '@/routes';
-import * as components from '@/components';
+import components from '@/components';
 import '@/css/app.scss';
 
 import App from './App.vue';
