@@ -213,6 +213,19 @@ const inputCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="label">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const essentialCode = `
@@ -230,6 +243,22 @@ const essentialCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item
+      label="label"
+      class="essential"
+    >
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const inputReadonlyCode = `
@@ -245,6 +274,20 @@ const inputReadonlyCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="label">
+      <kw-input
+        name="input"
+        readonly
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const inputDisableCode = `
@@ -260,5 +303,19 @@ const inputDisableCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="label">
+      <kw-input
+        name="input"
+        disable
+        rules="required"
+        placeholder="입력해주세요"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 </script>

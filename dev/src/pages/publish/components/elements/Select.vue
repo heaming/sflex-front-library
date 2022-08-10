@@ -214,6 +214,20 @@ const selectDefaultCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Select">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        name="select"
+        rules="required"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const selectMultipleDefaultCode = `
@@ -230,6 +244,21 @@ const selectMultipleDefaultCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="Select (Multiple)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const selectReadonlyCode = `
@@ -247,6 +276,22 @@ const selectReadonlyCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="다중선택 샘플 (readonly)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+        readonly
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const selectDisableCode = `
@@ -264,5 +309,21 @@ const selectDisableCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="다중선택 샘플 (disable)">
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        name="selectMultiple"
+        rules="required"
+        disable
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 </script>

@@ -133,6 +133,18 @@ const datePickerCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="DatePicker">
+      <kw-date-picker
+        name="datePicker"
+        rules="required"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const dateRangePickerCode = `
@@ -146,6 +158,18 @@ const dateRangePickerCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="DateRangePicker">
+      <kw-date-range-picker
+        name="dateRangePicker"
+        rules="date_range_required|date_range_months:1"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 const timePickerCode = `
 <kw-form>
@@ -158,6 +182,18 @@ const timePickerCode = `
     </kw-form-item>
   </kw-form-row>
 </kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item label="TimePicker">
+      <kw-time-picker
+        name="timePicker"
+        rules="required"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 </script>
