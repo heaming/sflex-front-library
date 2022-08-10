@@ -42,9 +42,12 @@ export default {
     const popupCtx = {
       page: pageCtx,
       observer: observerCtx,
-      title: toRef(props, 'title'),
-      style: toRef(props, 'style'),
-      class: toRef(props, 'class'),
+
+      // do not set style to reactive
+      // this occur maximum recursive updates exceeded
+      style: props.style,
+      class: props.class,
+      title: computed(() => props.title),
     };
 
     registerPopup(popupCtx);
