@@ -95,15 +95,47 @@ import { HighCode } from 'vue-highlight-code';
 import 'vue-highlight-code/dist/style.css';
 
 const layoutCode1 = `
-<kw-page>
-</kw-page>
+<template>
+  <kw-page>
+    <!-- Your code -->
+  </kw-page>
+</template>
+< script setup>
+// Your script
+// Only 'const', never 'return'
+</ script>
+<style lang="scss" scoped>
+  // Your scss
+</style>
 `;
+
 const layoutCode2 = `
-<kw-page class="kw-page--md">
-</kw-page>
+<template>
+  <kw-page class="kw-page--md">
+    <!-- Your code -->
+  </kw-page>
+</template>
+< script setup>
+// Your script
+// Only 'const', never 'return'
+</ script>
+<style lang="scss" scoped>
+  // Your scss
+</style>
 `;
+
 const layoutCode3 = `
-<kw-page class="kw-page--sm">
-</kw-page>
+<template>
+  <kw-page class="kw-page--sm">
+    <!-- Your code -->
+  </kw-page>
+</template>
+< script setup>
+// Your script
+// Only 'const', never 'return'
+</ script>
+<style lang="scss" scoped>
+  // Your scss
+</style>
 `;
 </script>
