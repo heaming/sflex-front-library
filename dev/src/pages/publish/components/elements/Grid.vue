@@ -9,13 +9,78 @@
     </p> -->
     <div class="kw-guide-section">
       <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              Tag
+            </th>
+            <th>Attribute</th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">
+              kw-grid
+            </td>
+            <td>
+              :visible-rows="10"
+            </td>
+            <td>
+              default 10. <br>
+              The height setting for drawing the 'grid'. 1 means 1 row. <br>
+              Just use 10, unless there are special cases.(No headers included.)
+            </td>
+          </tr>
+          <tr>
+            <td>
+              @init
+            </td>
+            <td>
+              Initializing function
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>
+          <a
+            href="https://docs.realgrid.com/start/overview"
+            target="_blank"
+          >https://docs.realgrid.com/start/overview</a>
+        </li>
+        <li class="notice">
+          The first(checkbox) and second columns(number) are created automatically.
+          It is not included in the script's data.
+        </li>
+        <li>'Grid' that are not visible in the cases are replaced by the empty boxes below.</li>
+      </ul>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="default"
         class="kw-guide-title"
       >
         Case #1
       </h3>
       <p class="kw-guide-description">
-        1 row header & 1 row body
+        1 row header & 1 row body<br>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -27,7 +92,7 @@
           <div class="kw-guide-code">
             <HighCode
               :code-value="testCode"
-              :lang="vue"
+              lang="vue"
               theme="light"
               width="100%"
               height="auto"
@@ -44,14 +109,38 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        No Case
+      </h3>
+      <p class="kw-guide-description">
+        'Grid' that are not visible in the cases are replaced by the empty boxes below.<br>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <div class="grid-blank" />
+          <div class="kw-guide-code mt30">
+            <HighCode
+              :code-value="testNoCase"
+              lang="vue"
+              theme="light"
+              width="100%"
+              height="auto"
+              class="kw-mb-3"
+            />
+          </div>
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
 <script setup>
 import { HighCode } from 'vue-highlight-code';
 import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const testCode = `
 <kw-grid
@@ -75,11 +164,10 @@ function initGrid(data, view) {
     { fieldName: 'col11' },
     { fieldName: 'col12' },
     { fieldName: 'col13' },
-    { fieldName: 'col14' },
   ];
 
   const columns = [
-    { fieldName: 'col1', header: '고객 유형', width: '100', styleName: 'text-center' },
+    { fieldName: 'col1', header: '고객 번호', width: '100', styleName: 'text-center' },
     { fieldName: 'col2', header: '고객 유형', width: '100', styleName: 'text-center' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '180' },
     { fieldName: 'col4', header: '이름/담당자', width: '080', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
@@ -115,6 +203,10 @@ function initGrid(data, view) {
 }
 `;
 
+const testNoCase = `
+<div class="grid-blank" />
+`;
+
 function initGrid(data, view) {
   const fields = [
     { fieldName: 'col1' },
@@ -130,11 +222,10 @@ function initGrid(data, view) {
     { fieldName: 'col11' },
     { fieldName: 'col12' },
     { fieldName: 'col13' },
-    { fieldName: 'col14' },
   ];
 
   const columns = [
-    { fieldName: 'col1', header: '고객 유형', width: '100', styleName: 'text-center' },
+    { fieldName: 'col1', header: '고객 번호', width: '100', styleName: 'text-center' },
     { fieldName: 'col2', header: '고객 유형', width: '100', styleName: 'text-center' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '180' },
     { fieldName: 'col4', header: '이름/담당자', width: '080', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
