@@ -1,7 +1,7 @@
 <template>
   <guide-popup-view>
     <kw-popup
-      class="kw-popup--size-md"
+      class="kw-popup--md"
       title="조회 팝업"
     >
       <kw-search

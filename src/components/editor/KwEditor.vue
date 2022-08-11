@@ -30,7 +30,7 @@ export default {
       type: String,
       default: '',
     },
-    disabled: {
+    disable: {
       type: Boolean,
       default: false,
     },
@@ -51,9 +51,10 @@ export default {
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
+    const editorRef = ref();
     const fieldCtx = useField();
     const { value } = fieldCtx;
-    const editorRef = ref(null);
+
     let editor;
 
     function focus() {
@@ -62,14 +63,6 @@ export default {
 
     function blur() {
       editor.core.blur();
-    }
-
-    function enable() {
-      editor.enable();
-    }
-
-    function disable() {
-      editor.disable();
     }
 
     function getEditor() {
@@ -89,22 +82,22 @@ export default {
         emit('update:modelValue', isEmptyContents(contents) ? '' : contents);
       };
 
-      watch(() => props.disabled, (disabled) => {
-        if (disabled) {
-          disable();
-        } else {
-          enable();
-        }
-      }, { immediate: true });
-
-      watch(() => props.readonly, (newVal) => {
-        editor.readOnly(newVal);
-      });
-
       watch(() => props.modelValue, (val) => {
         if (editor.getContents() !== val) {
           editor.setContents(val);
         }
+      });
+
+      watch(() => props.disable, (val) => {
+        if (val) {
+          editor.disable();
+        } else {
+          editor.enable();
+        }
+      }, { immediate: true });
+
+      watch(() => props.readonly, (val) => {
+        editor.readOnly(val);
       });
     });
 
@@ -120,7 +113,6 @@ export default {
       editorRef,
       focus,
       blur,
-      disable,
       getEditor,
     };
   },

@@ -1,13 +1,15 @@
 import { defaultsDeep, map, merge } from 'lodash-es';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
-import { createCellIndexByDataColumn, dateTextFormat, isCellEditable } from '../../../utils/private/gridShared';
+import {
+  createCellIndexByDataColumn, dateTextFormat, isCellEditable, isCellItemClickable,
+} from '../../../utils/private/gridShared';
 import { normalizeRules } from '../../../utils/private/validate';
 import i18n from '../../../i18n';
 
 const setColumns = 'setColumns';
-const setColumnLayout = 'setColumnLayout';
 const setCellStyleCallback = 'setCellStyleCallback';
+const setColumnLayout = 'setColumnLayout';
 const destroy = 'destroy';
 
 const firstOptionLabels = {
@@ -15,7 +17,7 @@ const firstOptionLabels = {
   select: ['MSG_TXT_SEL', null, '선택'],
 };
 
-function setColumnCustomDefaults(column) {
+function setColumnCustom(column) {
   const { options } = column;
 
   if (Array.isArray(options)) {
@@ -43,14 +45,14 @@ function setColumnCustomDefaults(column) {
   }
 }
 
-function setColumnHeaderDefaults(column) {
+function setColumnHeader(column) {
   if (column.header) {
     column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
     column.header.tooltip = column.header.tooltip || column.header.text;
   }
 }
 
-function setColumnStyleNameDefaults(column, { dataType }) {
+function setColumnStyleName(column, { dataType }) {
   defaultsDeep(column, {
     styleName: '',
   });
@@ -94,7 +96,7 @@ function setColumnStyleNameDefaults(column, { dataType }) {
   column.styleName = colClass.join(' ');
 }
 
-function setColumnRendererDefaults(column, { dataType }) {
+function setColumnRenderer(column, { dataType }) {
   defaultsDeep(column, {
     renderer: { showTooltip: true },
   });
@@ -171,7 +173,7 @@ function setColumnRendererDefaults(column, { dataType }) {
   }
 }
 
-function setColumnEditorDefaults(column, { dataType }) {
+function setColumnEditor(column, { dataType }) {
   const { editor } = column;
 
   switch (editor?.type) {
@@ -237,11 +239,41 @@ function setColumnEditorDefaults(column, { dataType }) {
   }
 }
 
-function setColumnCellButtonDefaults(column) {
+function setColumnCellButton(column) {
   if (column.button) {
     defaultsDeep(column, {
       buttonVisibility: ButtonVisibility.ALWAYS,
     });
+  }
+}
+
+function overrideStyleCallback(styleCallback, isGlobal = false) {
+  const normalizeReturnValue = (val) => (typeof val === 'string' ? { styleName: val } : (val || {}));
+
+  return (g, model) => {
+    const { column, itemIndex } = model.index;
+    const shouldIgnore = isGlobal && typeof column.styleCallback === 'function';
+
+    if (shouldIgnore) return;
+
+    const returnValue = normalizeReturnValue(styleCallback?.(g, model));
+    const classes = [(returnValue.styleName || column.styleName).trim()];
+    const mergedColumn = { ...column, ...returnValue };
+
+    const { dataColumn } = model;
+    const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
+
+    if (isCellEditable(g, mergedColumn, index)) classes.push('rg-editable');
+    if (isCellItemClickable(g, mergedColumn, index)) classes.push('rg-button-enabled');
+
+    returnValue.styleName = classes.join(' ');
+    return returnValue;
+  };
+}
+
+function setColumnStyleCallback(column) {
+  if (typeof column.styleCallback === 'function') {
+    column.styleCallback = overrideStyleCallback(column.styleCallback);
   }
 }
 
@@ -254,12 +286,13 @@ export function overrideSetColumns(view) {
 
     columns.forEach((e) => {
       const field = data.fieldByName(e.fieldName);
-      setColumnCustomDefaults(e, field);
-      setColumnHeaderDefaults(e, field);
-      setColumnStyleNameDefaults(e, field);
-      setColumnRendererDefaults(e, field);
-      setColumnEditorDefaults(e, field);
-      setColumnCellButtonDefaults(e, field);
+      setColumnCustom(e, field);
+      setColumnHeader(e, field);
+      setColumnStyleName(e, field);
+      setColumnRenderer(e, field);
+      setColumnEditor(e, field);
+      setColumnCellButton(e, field);
+      setColumnStyleCallback(e);
     });
 
     view.__metas__ = map(columns, (e) => ({
@@ -275,6 +308,18 @@ export function overrideSetColumns(view) {
 }
 
 /*
+  셀 스타일을 변경하는 콜백
+  column.styleCallback이 있는 경우, 호출되지 않는다.
+  */
+export function overrideSetCellStyleCallback(view) {
+  wrapMethod(view, setCellStyleCallback, (styleCallback) => {
+    execOriginal(view, setCellStyleCallback, overrideStyleCallback(styleCallback, true));
+  });
+
+  view.setCellStyleCallback(null);
+}
+
+/*
   그리드의 컬럼 레이아웃을 설정한다.
   */
 export function overrideSetColumnLayout(view, vm) {
@@ -285,29 +330,6 @@ export function overrideSetColumnLayout(view, vm) {
       vm.proxy.onResize?.();
     });
   });
-}
-
-/*
-  셀 스타일을 변경하는 콜백
-  */
-export function overrideSetCellStyleCallback(view) {
-  wrapMethod(view, setCellStyleCallback, (styleCallback) => {
-    execOriginal(view, setCellStyleCallback, (g, model) => {
-      const { column } = model.index;
-      const index = createCellIndexByDataColumn(g, model.index.itemIndex, model.dataColumn);
-
-      // TODO: something..
-      if (isCellEditable(view, model.index.column, index)) {
-        return `${column.styleName} rg-editable`;
-      }
-
-      if (typeof styleCallback === 'function') {
-        return styleCallback(g, model);
-      }
-    });
-  });
-
-  view.setCellStyleCallback(null);
 }
 
 /*
