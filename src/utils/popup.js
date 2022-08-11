@@ -54,8 +54,8 @@ export function open(url, options, useReturnPromise = true) {
   const {
     origin,
     pathname,
-    hash,
     search,
+    hash,
   } = new URL(url, /^https?:\/\//.test(url) ? undefined : window.location.origin);
 
   const pid = uid();
@@ -66,6 +66,8 @@ export function open(url, options, useReturnPromise = true) {
   if (useReturnPromise && openedWindow) {
     return new Promise((resolve) => { registerOpened(pid, resolve); });
   }
+
+  return openedWindow;
 }
 
 function close(result, payload, forceClose = true) {
