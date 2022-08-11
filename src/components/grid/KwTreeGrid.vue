@@ -1,14 +1,11 @@
 <template>
   <div
+    ref="containerRef"
     class="kw-grid"
     :style="{ height: resizedHeight }"
   >
-    <div
-      ref="containerRef"
-      class="rg-container"
-    />
     <q-resize-observer
-      debounce="100"
+      :debounce="100"
       @resize="onResize"
     />
   </div>

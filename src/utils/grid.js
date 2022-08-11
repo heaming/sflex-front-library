@@ -56,10 +56,10 @@ export const defineTreeData = (data) => data;
 /*
   Common
  */
-export async function focusCellInput(view, dataRow, fieldName) {
+export async function focusCellInput(view, dataRow, fieldName, dropdown = false) {
   view._view._dom.scrollIntoView();
   view.setCurrent({ dataRow, fieldName });
-  await waitUntilShowEditor(view);
+  await waitUntilShowEditor(view, dropdown);
 }
 
 /*

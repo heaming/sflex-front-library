@@ -91,8 +91,12 @@ export default {
       }
     }
 
+    const isModifiersTrim = useAttrs().modelModifiers?.trim === true;
+
     function onChange() {
-      value.value = props.modelValue;
+      if (isModifiersTrim) {
+        value.value = props.modelValue;
+      }
     }
 
     const regex = computed(() => {

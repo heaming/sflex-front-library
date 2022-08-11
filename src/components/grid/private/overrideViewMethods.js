@@ -6,6 +6,7 @@ import { normalizeRules } from '../../../utils/private/validate';
 import i18n from '../../../i18n';
 
 const setColumns = 'setColumns';
+const setColumnLayout = 'setColumnLayout';
 const setCellStyleCallback = 'setCellStyleCallback';
 const destroy = 'destroy';
 
@@ -270,6 +271,19 @@ export function overrideSetColumns(view) {
     }));
 
     execOriginal(view, setColumns, columns);
+  });
+}
+
+/*
+  그리드의 컬럼 레이아웃을 설정한다.
+  */
+export function overrideSetColumnLayout(view, vm) {
+  wrapMethod(view, setColumnLayout, (layout) => {
+    execOriginal(view, setColumnLayout, layout);
+
+    setTimeout(() => {
+      vm.proxy.onResize?.();
+    });
   });
 }
 
