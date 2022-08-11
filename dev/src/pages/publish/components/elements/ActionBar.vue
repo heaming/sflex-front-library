@@ -118,31 +118,18 @@
             />
           </kw-action-bar>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="testCode"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-          <HighCode
-            :code-value="testData"
-            lang="javascript"
-            theme="light"
-            width="100%"
-            height="auto"
-            class="mt30"
-          />
-        </div>
+        <guide-code-view
+          :code-value="[testCode,testData]"
+          :lang="['vue','javascript']"
+          :multi="true"
+          :button="false"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
 
 const selectData = {
   model: '10',

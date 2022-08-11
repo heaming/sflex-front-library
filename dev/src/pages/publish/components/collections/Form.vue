@@ -188,23 +188,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-codeButton">
-          <button @click="toggleShow('code01')">
-            Show code &darr;
-          </button>
-        </div>
-        <div
-          class="kw-guide-code"
-          :class="{'active': isActive}"
-        >
-          <HighCode
-            :code-value="theColumnsCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="theColumnsCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -374,23 +361,11 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-codeButton">
-          <button @click="toggleShow('code02')">
-            Show code &darr;
-          </button>
-        </div>
-        <div
-          class="kw-guide-code"
-          :class="{'active': isActive02}"
-        >
-          <HighCode
-            :code-value="theColumnsOfKwFormItemCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+
+        <guide-code-view
+          :code-value="theColumnsOfKwFormItemCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
