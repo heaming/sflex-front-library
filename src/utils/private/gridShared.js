@@ -132,6 +132,11 @@ export function isCellPastable(view, column, index) {
   return !textReadOnlyTypes.includes(editor?.type) || editor?.textReadOnly !== true;
 }
 
+export function isCellItemClickable(view, column, index) {
+  const isCellItem = column.button === 'action' || column.renderer?.type === 'button';
+  return isCellItem && view.onCellItemClickable(view, index) !== false;
+}
+
 export function getCellClickEvent(view, el) {
   switch (el.className) {
     case 'rg-button-renderer-button':

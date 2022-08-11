@@ -320,8 +320,8 @@ export function overrideOnCellPasting(view) {
       return false;
     }
 
-    const { editor } = column;
-    const type = editor?.type;
+    const { editor = {} } = column;
+    const { type } = editor;
 
     // text
     if ([undefined, 'text', 'line', 'multiline'].includes(type)) {
