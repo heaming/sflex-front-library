@@ -1,20 +1,42 @@
 <template>
-  <div class="kw-guide-codeButton">
+  <div
+    v-if="button"
+    class="kw-guide-codeButton"
+  >
     <button @click="active = !active">
-      Show code &darr;
+      <span v-if="!active">
+        Show code &darr;
+      </span>
+      <span v-else>
+        Hide code &uarr;
+      </span>
     </button>
   </div>
   <div
     class="kw-guide-code"
-    :class="{'active': active}"
+    :class="{'active': active || !button}"
   >
-    <HighCode
-      :code-value="codeValue"
-      :lang="lang"
-      theme="light"
-      width="100%"
-      height="auto"
-    />
+    <template v-if="multi">
+      <HighCode
+        v-for="(code,index) in codeValue"
+        :key="index"
+        :code-value="code"
+        :lang="lang[index]"
+        theme="light"
+        width="100%"
+        height="auto"
+        :class="!index[0] ? 'mt30' : ''"
+      />
+    </template>
+    <template v-else>
+      <HighCode
+        :code-value="codeValue"
+        :lang="lang"
+        theme="light"
+        width="100%"
+        height="auto"
+      />
+    </template>
   </div>
 </template>
 
@@ -23,16 +45,23 @@ import { HighCode } from 'vue-highlight-code';
 import 'vue-highlight-code/dist/style.css';
 
 defineProps({
+  multi: {
+    type: Boolean,
+    default: false,
+  },
   lang: {
-    type: String,
-    default: 'vue',
+    type: [String, Array],
+    default: null,
   },
   codeValue: {
-    type: String,
-    default: '',
+    type: [String, Array],
+    default: null,
+  },
+  button: {
+    type: Boolean,
+    default: true,
   },
 });
-
 const active = ref(false);
 </script>
 

@@ -208,23 +208,16 @@
             </kw-search-item>
           </kw-search-row>
         </kw-search>
-        <div class="kw-guide-code mt30">
-          <HighCode
-            :code-value="searchCode"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="searchCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
 
 const searchCode = `
 <kw-search

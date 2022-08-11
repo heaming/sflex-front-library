@@ -106,15 +106,11 @@
             확인
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="primary"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="primary"
+          lang="vue"
+          :button="false"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -148,15 +144,10 @@
             확인
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="primaryPositive"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="primaryPositive"
+          lang="vue"
+        />
         <div class="kw-guide-example">
           <h4 class="mb20">
             Primary/negative color
@@ -180,7 +171,7 @@
         <div class="kw-guide-code">
           <HighCode
             :code-value="primaryNegative"
-            :lang="vue"
+            lang="vue"
             theme="light"
             width="100%"
             height="auto"
