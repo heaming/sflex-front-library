@@ -11,7 +11,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -47,7 +47,7 @@
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <p class="kw-guide-description">
         Radio
@@ -74,15 +74,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="radioDefaultCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="radioDefaultCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -90,7 +85,7 @@
         id="disable"
         class="kw-guide-title"
       >
-        disable
+        Disable
       </h3>
       <p class="kw-guide-description">
         Add the attribute <b>"disable"</b> in the tag of <b>"kw-radio"</b>
@@ -119,15 +114,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="radioDisableCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="radioDisableCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -135,7 +125,7 @@
         id="readonly"
         class="kw-guide-title"
       >
-        readonly
+        Readonly
       </h3>
       <p class="kw-guide-description">
         Add the attribute <b>"disable"</b> in the tag of <b>"kw-radio"</b>
@@ -164,15 +154,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="radioReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="radioReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -180,10 +165,10 @@
         id="defaultOptionGroup"
         class="kw-guide-title"
       >
-        default(optionGroup)
+        Default(optionGroup)
       </h3>
       <p class="kw-guide-description">
-        default(optiongroup)
+        Default(optiongroup)
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -200,15 +185,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupRadioDefaultCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupRadioDefaultCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -216,7 +196,7 @@
         id="disableOptionGroup"
         class="kw-guide-title"
       >
-        disable(OptionGroup)
+        Disable(OptionGroup)
       </h3>
       <p class="kw-guide-description">
         Add the attribute <b>"disable"</b> in the tag of <b>"kw-option-group"</b>
@@ -238,17 +218,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <code>
-            <HighCode
-              :code-value="groupRadioDisableCode"
-              :lang="vue"
-              theme="light"
-              width="100%"
-              height="auto"
-            />
-          </code>
-        </div>
+        <guide-code-view
+          :code-value="groupRadioDisableCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -256,7 +229,7 @@
         id="readonlyOptionGroup"
         class="kw-guide-title"
       >
-        readonly(OptionGroup)
+        Readonly(OptionGroup)
       </h3>
       <p class="kw-guide-description">
         Add the attribute <b>"disable"</b> in the tag of <b>"kw-option-group"</b>
@@ -278,24 +251,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupRadioReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupRadioReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const radioDefaultCode = `
 <kw-form>
@@ -499,7 +463,7 @@ const groupRadioDisableCode = `
 const groupRadioReadonlyCode = `
 <kw-form>
   <kw-form-row>
-    <kw-form-item label="optiongroup (disable)">
+    <kw-form-item label="optiongroup (readonly)">
       <kw-option-group
         :model-value="[]"
         name="radioOptionGroup"
@@ -515,7 +479,7 @@ const groupRadioReadonlyCode = `
 <!-- if Search Form -->
 <kw-search>
   <kw-search-row>
-    <kw-search-item label="optiongroup (disable)">
+    <kw-search-item label="optiongroup (readonly)">
       <kw-option-group
         :model-value="[]"
         name="radioOptionGroup"

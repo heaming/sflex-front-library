@@ -12,7 +12,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -67,14 +67,10 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="default"
         class="kw-guide-title"
       >
-        default
+        Case 01
       </h3>
-      <p class="kw-guide-description">
-        case 01
-      </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-action-bar>
@@ -122,7 +118,6 @@
           :code-value="[testCode,testData]"
           :lang="['vue','javascript']"
           :multi="true"
-          :button="false"
         />
       </q-card>
     </div>

@@ -11,7 +11,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -47,7 +47,7 @@
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <p class="kw-guide-description">
         checkbox
@@ -75,15 +75,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="checkboxDefaultCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="checkboxDefaultCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -91,7 +86,7 @@
         id="disable"
         class="kw-guide-title"
       >
-        disable
+        Disable
       </h3>
       <p class="kw-guide-description">
         add the attribute<b> "disable" </b> in the tag of <b>
@@ -121,15 +116,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="checkboxDisableCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="checkboxDisableCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -137,7 +127,7 @@
         id="readonly"
         class="kw-guide-title"
       >
-        readonly
+        Readonly
       </h3>
       <p class="kw-guide-description">
         add the attribute <b> "disable" </b> in the tag of <b>
@@ -167,15 +157,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="checkboxReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="checkboxReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -183,7 +168,7 @@
         id="defaultOptionGroup"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <p class="kw-guide-description">
         default of kw-option-group
@@ -204,15 +189,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupCheckboxDefaultCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupCheckboxDefaultCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -220,7 +200,7 @@
         id="disableOptionGroup"
         class="kw-guide-title"
       >
-        disable
+        Disable
       </h3>
       <p class="kw-guide-description">
         add the attribute <b> "disable" </b> in the tag of <b>
@@ -243,15 +223,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupCheckboxDisableCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupCheckboxDisableCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -259,7 +234,7 @@
         id="readonlyOptionGroup"
         class="kw-guide-title"
       >
-        readonly
+        Readonly
       </h3>
       <p class="kw-guide-description">
         add the attribute <b> "disable" </b> in the tag of <b>
@@ -282,24 +257,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupCheckboxReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupCheckboxReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const checkboxDefaultCode = `
 <kw-form>

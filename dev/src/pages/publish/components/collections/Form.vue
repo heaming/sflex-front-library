@@ -433,23 +433,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-codeButton">
-          <button @click="toggleShow('code03')">
-            Show code &darr;
-          </button>
-        </div>
-        <div
-          class="kw-guide-code"
-          :class="{'active': isActive03}"
-        >
-          <HighCode
-            :code-value="theFormExampleCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="theFormExampleCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -460,7 +447,7 @@
         Essential for the elements
       </h3>
       <p class="kw-guide-description">
-        if it is the essential elements(such as "input,checkbox,datapicker,
+        If it is the essential elements(such as "input,checkbox,datapicker,
         radio,select"), add the class <b>"essential"</b> in the tag of <b> kw-form-item.</b>
       </p>
       <q-card>
@@ -553,33 +540,18 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-codeButton">
-          <button @click="toggleShow('code04')">
-            Show code &darr;
-          </button>
-        </div>
-        <div
-          class="kw-guide-code"
-          :class="{'active': isActive04}"
-        >
-          <HighCode
-            :code-value="essentialForTheElememtsCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+
+        <guide-code-view
+          :code-value="essentialForTheElememtsCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
 
-const vue = 'vue';
 const theColumnsCode = `
 <kw-form cols="4">
   <kw-form-row>

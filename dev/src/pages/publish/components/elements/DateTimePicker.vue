@@ -29,15 +29,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="datePickerCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="datePickerCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -45,7 +40,7 @@
         id="defaultDateRange"
         class="kw-guide-title"
       >
-        default(Date Range picker)
+        Default(Date Range picker)
       </h3>
       <p class="kw-guide-description">
         Date Range picker
@@ -63,15 +58,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="dateRangePickerCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="dateRangePickerCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <h2 class="kw-guide-h2 kw-mt-5">
@@ -85,7 +75,7 @@
         id="defaultTimePicker"
         class="kw-guide-title"
       >
-        default(Time picker)
+        Default(Time picker)
       </h3>
       <p class="kw-guide-description">
         Time picker
@@ -103,24 +93,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="timePickerCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="timePickerCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const datePickerCode = `
 <kw-form>

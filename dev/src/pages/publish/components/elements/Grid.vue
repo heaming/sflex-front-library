@@ -89,23 +89,11 @@
             class="kw-mb-3"
             @init="initGrid"
           />
-          <div class="kw-guide-code">
-            <HighCode
-              :code-value="testCode"
-              lang="vue"
-              theme="light"
-              width="100%"
-              height="auto"
-              class="kw-mb-3"
-            />
-            <HighCode
-              :code-value="testData"
-              lang="javascript"
-              theme="light"
-              width="100%"
-              height="auto"
-            />
-          </div>
+          <guide-code-view
+            :code-value="[testCode,testData]"
+            :lang="['vue','javascript']"
+            multi="true"
+          />
         </div>
       </q-card>
     </div>
@@ -122,16 +110,10 @@
       <q-card>
         <div class="kw-guide-example">
           <div class="grid-blank" />
-          <div class="kw-guide-code mt30">
-            <HighCode
-              :code-value="testNoCase"
-              lang="vue"
-              theme="light"
-              width="100%"
-              height="auto"
-              class="kw-mb-3"
-            />
-          </div>
+          <guide-code-view
+            :code-value="testNoCase"
+            lang="vue"
+          />
         </div>
       </q-card>
     </div>
@@ -139,9 +121,6 @@
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
 const testCode = `
 <kw-grid
   :visible-rows="10"

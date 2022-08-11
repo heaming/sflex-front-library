@@ -11,7 +11,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -66,15 +66,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="inputCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="inputCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -82,7 +77,7 @@
         id="essential"
         class="kw-guide-title"
       >
-        essential
+        Essential
       </h3>
       <p class="kw-guide-description">
         add <b> "essential" </b> of the classes in <b>
@@ -107,15 +102,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="essentialCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="essentialCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -123,7 +113,7 @@
         id="readonly"
         class="kw-guide-title"
       >
-        readonly
+        Readonly
       </h3>
       <p class="kw-guide-description">
         add the attribute <b>"readonly"</b> in the tag of "kw-input"
@@ -143,15 +133,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="inputReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="inputReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -159,7 +144,7 @@
         id="disable"
         class="kw-guide-title"
       >
-        disable
+        Disable
       </h3>
       <p class="kw-guide-description">
         add the attribute <b>"disable"</b> in the tag of "kw-input"
@@ -180,15 +165,10 @@
               </kw-form-row>
             </kw-form>
           </div>
-          <div class="kw-guide-code">
-            <HighCode
-              :code-value="inputDisableCode"
-              :lang="vue"
-              theme="light"
-              width="100%"
-              height="auto"
-            />
-          </div>
+          <guide-code-view
+            :code-value="inputDisableCode"
+            lang="vue"
+          />
         </div>
       </q-card>
     </div>
@@ -196,10 +176,6 @@
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const inputCode = `
 <kw-form>

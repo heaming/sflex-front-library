@@ -1,14 +1,10 @@
 <template>
   <kw-page>
     <template #header>
-      <kw-page-header
-        :options="['홈','고객','고객관리']"
-      />
+      <kw-page-header :options="['홈','고객','고객관리']" />
     </template>
 
-    <kw-search
-      title="조회조건"
-    >
+    <kw-search title="조회조건">
       <kw-search-row>
         <kw-search-item label="고객 유형">
           <kw-select
@@ -56,9 +52,7 @@
             suffix="개씩보기"
           />
           <div class="kw-action-bar--send ml40">
-            <kw-btn
-              class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
-            >
+            <kw-btn class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg">
               URL 전송
             </kw-btn>
             <p class="kw-action-bar--description ml16">
@@ -99,42 +93,17 @@
         <h3 class="center mb20">
           This is the source code for this page. This part is not included in the coding.
         </h3>
-        <div class="kw-guide-codeButton">
-          <button @click="isActive01 = !isActive01">
-            <span v-if="isActive01">Hide code &uarr;</span>
-            <span v-else>Show code &darr;</span>
-          </button>
-        </div>
-        <div
-          v-if="isActive01"
-          class="kw-guide-code"
-        >
-          <HighCode
-            :code-value="sampleVueCode"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-          <HighCode
-            :code-value="sampleJsCode"
-            lang="javascript"
-            theme="light"
-            width="100%"
-            height="auto"
-            class="mt40"
-          />
-        </div>
+        <guide-code-view
+          :code-value="[sampleVueCode, sampleJsCode]"
+          :lang="['vue','javascript']"
+          multi="true"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-// code control
-const isActive01 = ref(false);
 
 const selectData = { model: '10',
   options: [
