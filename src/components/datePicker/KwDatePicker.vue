@@ -10,7 +10,7 @@
     :error-message="errorMessage"
     :readonly="readonly"
     :disable="disable"
-    mask="####-##-##"
+    :mask="innerValueMask"
     :unmasked-value="unmaskedValue"
     no-error-icon
     :hide-bottom-space="hideBottomSpace"
@@ -38,10 +38,12 @@
         tabindex="-1"
         :model-value="value"
         :unmasked-value="unmaskedValue"
+        :min-view="minView"
+        :max-view="2"
         :min-date="minDate"
         :max-date="maxDate"
         :disable="disable"
-        :before-show-day="beforeShowDay"
+        :before-show="beforeShow"
         @update:model-value="onChangeDate"
       />
     </q-menu>
@@ -55,6 +57,9 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
 
+const typeValues = ['date', 'month', 'year'];
+const typeFormats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
+
 const dateStringValidator = (v) => v?.length === 10 && !Number.isNaN(Date.parse(v));
 
 export default {
@@ -67,6 +72,11 @@ export default {
     modelValue: {
       type: String,
       default: undefined,
+    },
+    type: {
+      type: String,
+      default: 'date',
+      validator: (v) => typeValues.includes(v),
     },
     unmaskedValue: {
       type: Boolean,
@@ -90,7 +100,7 @@ export default {
       default: '9999-12-31',
       validator: dateStringValidator,
     },
-    beforeShowDay: {
+    beforeShow: {
       type: Function,
       default: undefined,
     },
@@ -113,6 +123,11 @@ export default {
     const { value } = fieldCtx;
     const innerValue = ref(value.value);
 
+    const i = typeValues.findIndex((v) => v === props.type);
+    const typeFormat = typeFormats[i];
+    const innerValueMask = typeFormat.replace(/[YMD]/g, '#');
+    const minView = i;
+
     watch(value, (val) => {
       innerValue.value = val;
     });
@@ -129,10 +144,13 @@ export default {
       }
     }
 
-    function isInvalid(v) {
-      if (props.minDate < v || props.maxDate > v) { return false; }
+    const minDate = computed(() => props.minDate.substring(0, typeFormat.length));
+    const maxDate = computed(() => props.maxDate.substring(0, typeFormat.length));
 
-      const r = props.beforeShowDay?.(v);
+    function isInvalid(v) {
+      if (v < minDate.value || v > maxDate.value) { return true; }
+
+      const r = props.beforeShow?.(minView, v);
       return (r?.enabled ?? r) === false;
     }
 
@@ -142,18 +160,13 @@ export default {
         return;
       }
 
+      const { length } = typeFormat;
       const n = Date.parse(e);
 
       if (!Number.isNaN(n)) {
-        let val = date.formatDate(n, 'YYYY-MM-DD').padStart(10, '0');
+        const val = date.formatDate(n, typeFormat).padStart(length, '0');
 
         if (!isInvalid(val)) {
-          if (val > props.maxDate) {
-            val = props.maxDate;
-          } else if (val < props.minDate) {
-            val = props.minDate;
-          }
-
           value.value = props.unmaskedValue ? val.replace(/-/g, '') : val;
         }
       }
@@ -161,10 +174,10 @@ export default {
       innerValue.value = value.value;
 
       const el = inputRef.value.getNativeElement();
-      const shouldChangeSelection = document.activeElement === el && e.length < 10;
+      const shouldChangeSelection = document.activeElement === el && e.length < length;
 
       if (shouldChangeSelection) {
-        setTimeout(() => el.setSelectionRange(10, 10));
+        setTimeout(() => el.setSelectionRange(length, length));
       }
     }
 
@@ -173,9 +186,10 @@ export default {
       await nextTick();
 
       const el = inputRef.value.getNativeElement();
+      const { length } = typeFormat;
 
       el.focus();
-      el.setSelectionRange(10, 10);
+      el.setSelectionRange(length, length);
 
       toggleView(false);
     }
@@ -204,8 +218,10 @@ export default {
         const el = inputRef.value.getNativeElement();
 
         if (el !== document.activeElement) {
+          const { length } = typeFormat;
+
           el.focus();
-          el.setSelectionRange(10, 10);
+          el.setSelectionRange(length, length);
         }
 
         removeEvt(inputRef, 'keydown', onKeydown, true);
@@ -235,6 +251,8 @@ export default {
       dateRef,
       showing,
       innerValue,
+      innerValueMask,
+      minView,
       toggleView,
       onBlur,
       onChangeInput,

@@ -10,6 +10,7 @@
     <kw-date-picker
       ref="inputRef"
       :model-value="value[0]"
+      :type="type"
       :readonly="readonly"
       :disable="disable"
       :unmasked-value="unmaskedValue"
@@ -21,6 +22,7 @@
     /> ~
     <kw-date-picker
       :model-value="value[1]"
+      :type="type"
       :readonly="readonly"
       :disable="disable"
       :unmasked-value="unmaskedValue"
@@ -52,6 +54,10 @@ export default {
     to: {
       type: String,
       default: '',
+    },
+    type: {
+      type: String,
+      default: 'date',
     },
     unmaskedValue: {
       type: Boolean,

@@ -1,12 +1,25 @@
 <template>
-  <div class="kw-date" />
+  <div
+    :style="resizedStyle"
+    class="kw-date"
+  >
+    <div ref="containerRef">
+      <q-resize-observer
+        :debounce="0"
+        @resize="onResize"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 import { date } from 'quasar';
 
-const viewModeValues = [0, 1, 2];
+const viewValues = [0, 1, 2];
+const viewFormats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
 const dateStringValidator = (v) => [4, 7, 10].includes(v.length) && !Number.isNaN(Date.parse(v));
+
+const formatDate = (e, format) => date.formatDate(e, format).padStart(format.length, '0');
 
 export default {
   name: 'KwDate',
@@ -20,15 +33,15 @@ export default {
       type: Boolean,
       default: true,
     },
-    minViewMode: {
+    minView: {
       type: Number,
       default: 0,
-      validator: (v) => viewModeValues.includes(v),
+      validator: (v) => viewValues.includes(v),
     },
-    maxViewMode: {
+    maxView: {
       type: Number,
       default: 2,
-      validator: (v) => viewModeValues.includes(v),
+      validator: (v) => viewValues.includes(v),
     },
     minDate: {
       type: String,
@@ -53,15 +66,20 @@ export default {
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
+    const containerRef = ref();
+
+    const viewFormat = computed(() => viewFormats[props.minView]);
+    const valueFormat = computed(() => (props.unmaskedValue ? viewFormat.value.replace(/-/g, '') : viewFormat.value));
+
     let el;
 
-    const valueFormat = computed(() => (props.unmaskedValue ? 'YYYYMMDD' : 'YYYY-MM-DD'));
-
     function updateDate(val) {
-      el.datepicker(
-        'update',
-        val ? date.extractDate(val, valueFormat.value) : null,
-      );
+      if (!val) {
+        el.datepicker('update', null);
+      } else {
+        const formatValue = formatDate(date.extractDate(val, valueFormat.value), 'YYYY-MM-DD');
+        el.datepicker('update', formatValue);
+      }
     }
 
     let unwatchValue;
@@ -73,8 +91,34 @@ export default {
 
     function onChange(e) {
       unwatchValue();
-      emit('update:modelValue', date.formatDate(e.date, valueFormat.value));
+      emit('update:modelValue', formatDate(e.date, valueFormat.value));
       nextTick(watchValue);
+    }
+
+    function createBeforeShow(view) {
+      const format = viewFormats[view];
+      const minDate = computed(() => props.minDate.substring(0, format.length));
+      const maxDate = computed(() => props.maxDate.substring(0, format.length));
+
+      const isInvalidRange = (s) => s.length < minDate.value.length || s < minDate.value
+        || s.length > maxDate.value.length || s > maxDate.value;
+
+      return (e) => {
+        if (props.disable) return false;
+
+        const s = formatDate(e, format);
+        if (isInvalidRange(s)) return false;
+
+        const r = props.beforeShow?.(view, s);
+        if (r !== undefined) return r;
+
+        if (view === 0) {
+          switch (e.getDay()) {
+            case 0: return 'sunday';
+            case 6: return 'saturday';
+          }
+        }
+      };
     }
 
     onMounted(() => {
@@ -82,41 +126,23 @@ export default {
         language: useI18n().locale.value,
         keyboardNavigation: false,
         todayHighlight: true,
-        minViewMode: props.minViewMode,
-        maxViewMode: props.maxViewMode,
+        minViewMode: props.minView,
+        maxViewMode: props.maxView,
       };
 
-      const isViewModeEnabled = (v) => props.minViewMode <= v && props.maxViewMode >= v;
-      const isInvalidRange = (s) => s < props.minDate || s > props.maxDate;
+      const isViewEnabled = (v) => props.minView <= v && props.maxView >= v;
 
-      if (isViewModeEnabled(0)) {
-        options.beforeShowDay = (e) => {
-          if (props.disable) return false;
-
-          const s = e instanceof Date ? date.formatDate(e, 'YYYY-MM-DD') : e;
-          if (isInvalidRange(s)) return false;
-
-          const r = props.beforeShow?.(s);
-          if (r !== undefined) return r;
-
-          switch (e.getDay()) {
-            case 0: return 'sunday';
-            case 6: return 'saturday';
-          }
-        };
+      if (isViewEnabled(0)) {
+        options.beforeShowDay = createBeforeShow(0);
       }
-      if (isViewModeEnabled(1)) {
-        options.beforeShowMonth = (e) => !(
-          props.disable || isInvalidRange(e instanceof Date ? date.formatDate(e, 'YYYY-MM-DD') : e)
-        );
+      if (isViewEnabled(1)) {
+        options.beforeShowMonth = createBeforeShow(1);
       }
-      if (isViewModeEnabled(2)) {
-        options.beforeShowYear = (e) => !(
-          props.disable || isInvalidRange(e instanceof Date ? date.formatDate(e, 'YYYY-MM-DD') : e)
-        );
+      if (isViewEnabled(2)) {
+        options.beforeShowYear = createBeforeShow(2);
       }
 
-      el = window.$(getCurrentInstance().proxy.$el);
+      el = window.$(containerRef.value);
       el.datepicker(options);
       el.on('changeDate', onChange);
 
@@ -127,6 +153,18 @@ export default {
       el?.datepicker('destroy');
       el = null;
     });
+
+    const resizedStyle = ref({});
+
+    function onResize(e) {
+      resizedStyle.value = `width: ${e.width}px; height: ${e.height}px`;
+    }
+
+    return {
+      containerRef,
+      resizedStyle,
+      onResize,
+    };
   },
 };
 </script>
