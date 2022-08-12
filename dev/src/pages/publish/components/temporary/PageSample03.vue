@@ -139,7 +139,7 @@ function initGrid(data, view) {
     { fieldName: 'col3', header: '지국', width: '100', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
     { fieldName: 'col4', header: '성명', width: '100', styleName: 'text-center' },
     { fieldName: 'col5', header: '사번', width: '100', styleName: 'text-center' },
-    { fieldName: 'col6', header: '교육과정', width: '240', styleName: 'text-left' },
+    { fieldName: 'col6', header: '교육과정', width: '283', styleName: 'text-left' },
     { fieldName: 'col7', header: '수료', width: '60', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
   ];
 
