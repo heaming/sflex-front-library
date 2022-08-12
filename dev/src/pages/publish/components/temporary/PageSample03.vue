@@ -72,6 +72,7 @@
               icon="excel|0 0 16 16"
               class="kw-btn--excel kw-action-bar--separator"
               label="엑셀 다운로드"
+              @click="onClickExcelDownload"
             />
             <kw-btn
               class="kw-btn--h32"
@@ -83,6 +84,7 @@
             />
           </kw-action-bar>
           <kw-grid
+            ref="grdRef"
             :visible-rows="13"
             @init="initGrid"
           />
@@ -93,6 +95,18 @@
 </template>
 
 <script setup>
+import { gridUtil } from '~lib';
+
+const grdRef = ref();
+
+function onClickExcelDownload() {
+  const view = grdRef.value.getView();
+
+  gridUtil.exportView(view, {
+    fileName: '교육수료 실적현황',
+    timePostfix: true,
+  });
+}
 
 function initGrid(data, view) {
   const fields = [
