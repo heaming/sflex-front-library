@@ -17,7 +17,6 @@
         disable
       />
     </kw-tabs>
-
     <kw-tab-panels model-value="1">
       <kw-tab-panel name="1">
         <kw-search title="조회조건">
@@ -106,9 +105,9 @@ function initGrid(data, view) {
   ];
 
   function valueCallback(g, column, groupFooterIndex, group) {
-    const children = group.level === 1
-      ? group.children.map((v) => (v.type === 'group' ? v.children : [])).flat()
-      : group.children.filter((v) => v.type === 'row');
+    const children = group.children
+      .map((v) => (v.type === 'group' ? v.children : v)).flat()
+      .filter((v) => v.type === 'row');
 
     return children.reduce((a, v) => a + (g.getValue(v.index, column.name) === 'Y' ? 1 : 0), 0);
   }
