@@ -106,22 +106,22 @@ function initGrid(data, view) {
   ];
 
   function valueCallback(g, column, groupFooterIndex, group) {
-    if (column.name === 'col7') {
-      const children = group.children
-        .map((v) => (v.type === 'group' ? v.children : v)).flat()
-        .filter((v) => v.type === 'row');
+    const children = group.children
+      .map((v) => (v.type === 'group' ? v.children : v)).flat()
+      .filter((v) => v.type === 'row');
 
+    if (column.name === 'col7') {
       return children.reduce((a, v) => a + (g.getValue(v.index, column.name) === 'Y' ? 1 : 0), 0);
     }
 
     const first = group.first.children?.[0] || group.first;
     const groupValue = g.getValue(first.index, group.level === 1 ? 'col1' : 'col2');
 
-    return `${groupValue} 총수료인원 (대상자 ${group.count})`;
+    return `${groupValue} 총수료인원 (대상자 ${children.length})`;
   }
   const columns = [
     { fieldName: 'col1', header: '총괄단', width: '100', styleName: 'text-center' },
-    { fieldName: 'col2', header: '센터', width: '100', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
+    { fieldName: 'col2', header: '센터', width: '100', styleName: 'text-center' },
     { fieldName: 'col3', header: '지국', width: '100', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
     { fieldName: 'col4', header: '성명', width: '100', styleName: 'text-center' },
     { fieldName: 'col5', header: '사번', width: '100', styleName: 'text-center' },
@@ -129,7 +129,7 @@ function initGrid(data, view) {
     { fieldName: 'col7', header: '수료', width: '60', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
   ];
 
-  const layouts = ['col1', { column: 'col2', groupFooterSpans: [5] }, { column: 'col3', groupFooterSpans: [4] }, 'col4', 'col5', 'col6', 'col7'];
+  const layouts = ['col1', 'col2', { column: 'col3', groupFooterSpans: [4] }, 'col4', 'col5', 'col6', 'col7'];
   const groupFields = ['col1', 'col2'];
 
   data.setFields(fields);
