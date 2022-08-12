@@ -1,6 +1,6 @@
 import {
   RestoreMode, IndicatorValue, GridFitStyle, ExitGridWhenTab, SortMode,
-  SelectionStyle, ValidationLevel, GridBase, TreeView,
+  SelectionStyle, ValidationLevel, GridBase, TreeView, RowGroupAdornments, ExpanderVisibility,
 } from 'realgrid';
 
 const dataConfig = {
@@ -15,7 +15,6 @@ const viewConfig = {
     showTooltip: true,
     minRowHeight: 36,
   },
-
   footers: {
     visible: false,
   },
@@ -24,18 +23,16 @@ const viewConfig = {
     visible: false,
     footText: '',
   },
-
   checkBar: {
     visible: false,
     width: 50,
     useImages: true,
     footText: '',
   },
-
   rowIndicator: {
     visible: false,
     width: 50,
-    displayValue: IndicatorValue.ROW,
+    displayValue: IndicatorValue.INDEX,
     displayOrder: 1,
     zeroBase: (view) => view instanceof TreeView,
     headText: 'NO',
@@ -54,7 +51,6 @@ const viewConfig = {
     rowChangeDelay: 100,
     hintDelay: 100,
   },
-
   editOptions: {
     editable: false,
     editWhenFocused: false,
@@ -66,9 +62,20 @@ const viewConfig = {
     exitGridWhenTab: ExitGridWhenTab.GRID,
     viewGridInside: false,
   },
-
   editorOptions: {
     viewGridInside: false,
+  },
+
+  rowGroup: {
+    mergeMode: false,
+    mergeExpanderVisibility: ExpanderVisibility.NONE,
+    indentVisible: false,
+    expandedAdornments: RowGroupAdornments.FOOTER,
+    collapsedAdornments: RowGroupAdornments.NONE,
+    sorting: true,
+  },
+  groupPanel: {
+    visible: false,
   },
 
   sortMode: SortMode.EXPLICIT,
