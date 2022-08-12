@@ -8,6 +8,81 @@
     </p>
     <div class="kw-guide-section">
       <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        Summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              The Element(tag's name)
+            </th>
+            <th>
+              Attribute(class)
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form-item / kw-search-item
+            </td>
+            <td>
+              label
+            </td>
+            <td>
+              Add the title of content
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-date-range-picker
+            </td>
+            <td>
+              name="dateRangePicker"<br>
+              rules="date_range_required|date_range_months:1"<br>
+            </td>
+            <td>
+              Required, Default : "dateRangePicker" <br>
+              Add the number when it is required date range<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-date-picker
+            </td>
+            <td>
+              name="datePicker"<br>
+              rules="required"<br>
+            </td>
+            <td>
+              Required, Default : "datePicker"<br>
+              Required, Default : "required"<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-time-picker
+            </td>
+            <td>
+              name="timePicker"<br>
+              rules="required"<br>
+            </td>
+            <td>
+              Required, Default : "timePicker" <br>
+              Required, Default : "required"<br>
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="defaultDatePicker"
         class="kw-guide-title"
       >

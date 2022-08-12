@@ -3,9 +3,6 @@
     <h2 class="kw-guide-h2">
       Pagination
     </h2>
-    <p class="kw-guide-description">
-      default current status '1', total list count '100'
-    </p>
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -30,13 +27,15 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-pagination
             </td>
             <td>
-              essential - class (sample)
+              :model-value="1"<br>
+              :total-count="100"
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Required, Default : "1"<br>
+              Required, Default : "100"<br>
             </td>
           </tr>
         </tbody>
