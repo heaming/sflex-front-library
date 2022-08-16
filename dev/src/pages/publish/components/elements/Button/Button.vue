@@ -377,9 +377,10 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn class="kw-btn--underline">
-            목록으로
-          </kw-btn>
+          <kw-btn
+            class="kw-btn--underline"
+            label="목록으로"
+          />
         </div>
         <guide-code-view
           :code-value="underline"
@@ -638,9 +639,10 @@ const moreExpand = `
 `;
 
 const underline = `
-<kw-btn class="kw-btn--underline">
-  목록으로
-</kw-btn>
+<kw-btn
+  class="kw-btn--underline"
+  label="목록으로"
+/>
 `;
 
 const toggle = `

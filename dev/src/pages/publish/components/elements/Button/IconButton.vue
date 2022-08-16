@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Icon
+      Icon Button & Button with Icon
     </h2>
     <p class="kw-guide-description">
       It is in progress. Please wait for it to complete.
