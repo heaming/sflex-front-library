@@ -3,7 +3,10 @@
     class="kw-grid"
     :style="{ height: resizedHeight }"
   >
-    <div ref="containerRef" />
+    <div
+      ref="containerRef"
+      class="rg-container"
+    />
     <q-resize-observer
       :debounce="100"
       @resize="onResize"
