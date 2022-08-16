@@ -121,9 +121,10 @@
                 suffix="개씩보기"
               />
               <div class="kw-action-bar--send ml40">
-                <kw-btn class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg">
-                  URL 전송
-                </kw-btn>
+                <kw-btn
+                  class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
+                  label="URL 전송"
+                />
                 <p class="kw-action-bar--description ml16">
                   고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
                 </p>
@@ -182,9 +183,8 @@ const testCode = `
     <div class="kw-action-bar--send ml40">
       <kw-btn
         class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
-      >
-        URL 전송
-      </kw-btn>
+        label="URL 전송"
+      />
       <p class="kw-action-bar--description ml16">
         고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
       </p>
