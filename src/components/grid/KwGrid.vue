@@ -1,9 +1,9 @@
 <template>
   <div
-    ref="containerRef"
     class="kw-grid"
     :style="{ height: resizedHeight }"
   >
+    <div ref="containerRef" />
     <q-resize-observer
       :debounce="100"
       @resize="onResize"
