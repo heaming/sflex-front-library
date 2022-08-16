@@ -6,6 +6,7 @@
     :error="error"
     :error-message="errorMessage"
     no-error-icon
+    @focus="$emit('focus')"
   >
     <template #control>
       <slot :field="fieldBinding" />
@@ -33,11 +34,12 @@ export default {
     },
   },
 
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'focus'],
 
   setup(props) {
     const fieldCtx = useField();
     const { value } = fieldCtx;
+
     const fieldBinding = ref({
       [props.fieldKey]: value,
       [`onUpdate:${props.fieldKey}`](e) { value.value = e; },

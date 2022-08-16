@@ -95,10 +95,15 @@ export function overrideOnCurrentChanging(view) {
       return;
     }
 
+    if (g.__blockOnCurrentChanging__ === true) {
+      return false;
+    }
+
     if (hasOriginal(g, onCurrentChanging)) {
       const returnValue = execOriginal(g, onCurrentChanging, g, oldIndex, newIndex);
+      const isPromise = returnValue instanceof Promise;
 
-      if (returnValue instanceof Promise) {
+      if (isPromise) {
         g._view._layoutManager._topIndex = oldIndex.itemIndex;
 
         returnValue.then((value) => {
@@ -112,11 +117,12 @@ export function overrideOnCurrentChanging(view) {
             }
           }
         });
-
-        return false;
       }
 
-      return returnValue;
+      g.__blockOnCurrentChanging__ = true;
+      setTimeout(() => { g.__blockOnCurrentChanging__ = false; });
+
+      return isPromise ? false : returnValue;
     }
   });
 }
