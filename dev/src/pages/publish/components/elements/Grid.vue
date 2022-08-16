@@ -12,7 +12,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -70,6 +70,13 @@
           It is not included in the script's data.
         </li>
         <li>'Grid' that are not visible in the cases are replaced by the empty boxes below.</li>
+        <li>
+          Every cell's width in Grid is used 'px'
+        </li>
+        <li>
+          In GDC, Please ensure apply the width that is aligned with design or planning from zeplin.
+          The programmer will review later on to finalise
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -89,23 +96,11 @@
             class="kw-mb-3"
             @init="initGrid"
           />
-          <div class="kw-guide-code">
-            <HighCode
-              :code-value="testCode"
-              lang="vue"
-              theme="light"
-              width="100%"
-              height="auto"
-              class="kw-mb-3"
-            />
-            <HighCode
-              :code-value="testData"
-              lang="javascript"
-              theme="light"
-              width="100%"
-              height="auto"
-            />
-          </div>
+          <guide-code-view
+            :code-value="[testCode,testData]"
+            :lang="['vue','javascript']"
+            multi="true"
+          />
         </div>
       </q-card>
     </div>
@@ -122,16 +117,10 @@
       <q-card>
         <div class="kw-guide-example">
           <div class="grid-blank" />
-          <div class="kw-guide-code mt30">
-            <HighCode
-              :code-value="testNoCase"
-              lang="vue"
-              theme="light"
-              width="100%"
-              height="auto"
-              class="kw-mb-3"
-            />
-          </div>
+          <guide-code-view
+            :code-value="testNoCase"
+            lang="vue"
+          />
         </div>
       </q-card>
     </div>
@@ -139,9 +128,6 @@
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
 const testCode = `
 <kw-grid
   :visible-rows="10"

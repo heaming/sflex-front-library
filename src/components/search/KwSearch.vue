@@ -5,9 +5,9 @@
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
-    <h3 v-if="!noTitle">
+    <!-- <h3 v-if="!noTitle">
       {{ title }}
-    </h3>
+    </h3> -->
     <input
       type="submit"
       hidden
@@ -64,14 +64,14 @@ export default {
     ...useFormProps,
     ...useFormExpandableProps,
 
-    title: {
-      type: String,
-      default: i18n.t('MSG_TIT_SEARCH', null, '조회조건'),
-    },
-    noTitle: {
-      type: Boolean,
-      default: false,
-    },
+    // title: {
+    //   type: String,
+    //   default: i18n.t('MSG_TIT_SEARCH', null, '조회조건'),
+    // },
+    // noTitle: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     modifiedTargets: {
       type: Array,
       default: () => [],

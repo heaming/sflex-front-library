@@ -11,7 +11,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -47,7 +47,7 @@
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <p class="kw-guide-description">
         description
@@ -56,25 +56,16 @@
         <div class="kw-guide-example">
           It is in progress. Please wait for it to complete.
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="testCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="testCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const testCode = `
 It is in progress. Please wait for it to complete.

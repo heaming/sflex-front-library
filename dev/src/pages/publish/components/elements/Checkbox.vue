@@ -4,23 +4,23 @@
       Checkbox
     </h2>
     <p class="kw-guide-description">
-      in the search form or table, checkbox's height is 18px / default is 22px
+      In the search form or table, checkbox's height is 18px / default is 22px
     </p>
     <div class="kw-guide-section">
       <h3
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
           <tr>
             <th>
-              the Element(tag's name)
+              The Element(tag's name)
             </th>
             <th>
-              attribute(class)
+              Attribute(class)
             </th>
             <th>
               Description
@@ -30,27 +30,106 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-form-item
             </td>
             <td>
-              essential - class (sample)
+              label
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Add the title of content
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-field
+            </td>
+            <td>
+              :model-value="[]"<br>
+              name="checkbox"<br>
+              rules="required"<br>
+            </td>
+            <td>
+              Required, Default : "[]"<br>
+              Required, Default : "checkbox"<br>
+              Required, Default : "required"<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              template
+            </td>
+            <td>
+              template #default="{ field }"<br>
+            </td>
+            <td>
+              Required, Default : "{ field }"<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-checkbox
+            </td>
+            <td>
+              v-bind="field"<br>
+              label=""<br>
+              val=""<br>
+              disable
+            </td>
+            <td>
+              Required, Default : "field"<br>
+              Copy the text from zeplin if there is something to write in<br>
+              Required, Default : ""<br>
+              Add the attribue "disable" when it is required to be readonly or disable
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-option-group
+            </td>
+            <td>
+              :model-value="[]"<br>
+              name="checkboxOptionGroup"<br>
+              rules="required"<br>
+              type="checkbox"<br>
+              :options="['A', 'B', 'C', 'D']"<br>
+              disable
+            </td>
+            <td>
+              Required, Default : "[]" <br>
+              Required, Default : "checkboxOptionGroup" <br>
+              Required, Default : "required" <br>
+              Required, Default : "checkbox" <br>
+              Add the option lists in [ ]<br>
+              Add the attribue "disable" when it is required to be readonly or disable
             </td>
           </tr>
         </tbody>
       </q-markup-table>
+      <p class="kw-guide-description" />
     </div>
     <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
       >
-        default
+        Notice
+      </h3>
+      <ul>
+        <li>
+          If there is only one option in checkbox, kw-checkbox is required to be wrapped by <b>kw-field</b>.<br>
+        </li>
+        <li>If there are more than two options, it is required to use <b>kw-option-group</b></li>
+      </ul>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Default
       </h3>
       <p class="kw-guide-description">
-        checkbox
+        checkbox - If there is <b> only one option </b> in checkbox, it is required to use
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -64,10 +143,9 @@
                 >
                   <template #default="{ field }">
                     <kw-checkbox
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
                       v-bind="field"
-                      :val="item"
+                      label=""
+                      val=""
                     />
                   </template>
                 </kw-field>
@@ -75,15 +153,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="checkboxDefaultCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="checkboxDefaultCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -91,10 +164,10 @@
         id="disable"
         class="kw-guide-title"
       >
-        disable
+        Disable
       </h3>
       <p class="kw-guide-description">
-        add the attribute<b> "disable" </b> in the tag of <b>
+        Add the attribute<b> "disable" </b> in the tag of <b>
           &lt;kw-checkbox&gt; </b>
       </p>
       <q-card>
@@ -109,10 +182,9 @@
                 >
                   <template #default="{ field }">
                     <kw-checkbox
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
                       v-bind="field"
-                      :val="item"
+                      label=""
+                      val=""
                       disable
                     />
                   </template>
@@ -121,15 +193,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="checkboxDisableCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="checkboxDisableCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -137,10 +204,10 @@
         id="readonly"
         class="kw-guide-title"
       >
-        readonly
+        Readonly
       </h3>
       <p class="kw-guide-description">
-        add the attribute <b> "disable" </b> in the tag of <b>
+        Add the attribute <b> "disable" </b> in the tag of <b>
           &lt;kw-checkbox&gt; </b>
       </p>
       <q-card>
@@ -155,10 +222,9 @@
                 >
                   <template #default="{ field }">
                     <kw-checkbox
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
                       v-bind="field"
-                      :val="item"
+                      label=""
+                      val=""
                       disable
                     />
                   </template>
@@ -167,15 +233,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="checkboxReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="checkboxReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -183,10 +244,10 @@
         id="defaultOptionGroup"
         class="kw-guide-title"
       >
-        default
+        Default(OptionGroup)
       </h3>
       <p class="kw-guide-description">
-        default of kw-option-group
+        kw-option-group - If there are <b> more than two options</b>, it is required to use kw-option-group
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -204,15 +265,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupCheckboxDefaultCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupCheckboxDefaultCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -220,7 +276,7 @@
         id="disableOptionGroup"
         class="kw-guide-title"
       >
-        disable
+        Disable(OptionGroup)
       </h3>
       <p class="kw-guide-description">
         add the attribute <b> "disable" </b> in the tag of <b>
@@ -243,15 +299,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupCheckboxDisableCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupCheckboxDisableCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -259,7 +310,7 @@
         id="readonlyOptionGroup"
         class="kw-guide-title"
       >
-        readonly
+        Readonly(OptionGroup)
       </h3>
       <p class="kw-guide-description">
         add the attribute <b> "disable" </b> in the tag of <b>
@@ -282,24 +333,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="groupCheckboxReadonlyCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="groupCheckboxReadonlyCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const checkboxDefaultCode = `
 <kw-form>
@@ -312,10 +354,9 @@ const checkboxDefaultCode = `
       >
         <template #default="{ field }">
           <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
             v-bind="field"
-            :val="item"
+            label=""
+            val=""
           />
         </template>
       </kw-field>
@@ -334,10 +375,9 @@ const checkboxDefaultCode = `
       >
         <template #default="{ field }">
           <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
             v-bind="field"
-            :val="item"
+            label=""
+            val=""
           />
         </template>
       </kw-field>
@@ -357,10 +397,9 @@ const checkboxDisableCode = `
       >
         <template #default="{ field }">
           <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
             v-bind="field"
-            :val="item"
+            label=""
+            val=""
             disable
           />
         </template>
@@ -380,10 +419,9 @@ const checkboxDisableCode = `
       >
         <template #default="{ field }">
           <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
             v-bind="field"
-            :val="item"
+            label=""
+            val=""
             disable
           />
         </template>
@@ -404,10 +442,9 @@ const checkboxReadonlyCode = `
       >
         <template #default="{ field }">
           <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
             v-bind="field"
-            :val="item"
+            label=""
+            val=""
             disable
           />
         </template>
@@ -427,10 +464,9 @@ const checkboxReadonlyCode = `
       >
         <template #default="{ field }">
           <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
             v-bind="field"
-            :val="item"
+            label=""
+            val=""
             disable
           />
         </template>

@@ -11,7 +11,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -46,33 +46,24 @@
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <q-card>
         <div class="kw-guide-example">
           <!-- <template #header> -->
-          <kw-page-header
-            :options="['홈','상품','상품관리']"
-          />
+          <kw-page-header :options="['홈','상품','상품관리']" />
           <!-- </template> -->
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="testCode"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="testCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
 
 const testCode = `
 <template #header>

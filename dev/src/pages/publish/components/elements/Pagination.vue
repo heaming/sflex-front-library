@@ -3,15 +3,12 @@
     <h2 class="kw-guide-h2">
       Pagination
     </h2>
-    <p class="kw-guide-description">
-      default current status '1', total list count '100'
-    </p>
     <div class="kw-guide-section">
       <h3
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -30,13 +27,15 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-pagination
             </td>
             <td>
-              essential - class (sample)
+              :model-value="1"<br>
+              :total-count="100"
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Required, Default : "1"<br>
+              Required, Default : "100"<br>
             </td>
           </tr>
         </tbody>
@@ -59,25 +58,16 @@
             :total-count="100"
           />
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="pagination"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="pagination"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const pagination = `
 <kw-pagination

@@ -12,7 +12,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -21,7 +21,7 @@
               Tag
             </th>
             <th>
-              Class
+              Class(attribue)
             </th>
             <th>
               Description
@@ -62,19 +62,52 @@
               description, etc.
             </td>
           </tr>
+          <tr>
+            <td>
+              kw-select
+            </td>
+            <td>
+              v-model="selectData.model"<br>
+              :options="selectData.options"<br>
+              suffix=""<br>
+            </td>
+            <td>
+              const's name in javascript(const's name.model)<br>
+              const's name in javascript(const's name.option)<br>
+              Copy the text from zeplin
+            </td>
+          </tr>
+          <tr>
+            <td>
+              option in javascript
+            </td>
+            <td>
+              options: [
+              '10', '20', '30', '40', '50',
+              ],
+            </td>
+            <td>
+              Copy the numbers from zeplin
+            </td>
+          </tr>
+          <tr>
+            <td>
+              template
+            </td>
+            <td>
+              #left or #right
+            </td>
+            <td>
+              The template is aligned left side or right side
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
     <div class="kw-guide-section">
-      <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        default
+      <h3 class="kw-guide-title">
+        Case 01
       </h3>
-      <p class="kw-guide-description">
-        case 01
-      </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-action-bar>
@@ -88,9 +121,7 @@
                 suffix="개씩보기"
               />
               <div class="kw-action-bar--send ml40">
-                <kw-btn
-                  class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
-                >
+                <kw-btn class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg">
                   URL 전송
                 </kw-btn>
                 <p class="kw-action-bar--description ml16">
@@ -122,7 +153,6 @@
           :code-value="[testCode,testData]"
           :lang="['vue','javascript']"
           :multi="true"
-          :button="false"
         />
       </q-card>
     </div>

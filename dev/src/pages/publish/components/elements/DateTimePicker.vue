@@ -8,6 +8,81 @@
     </p>
     <div class="kw-guide-section">
       <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        Summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              The Element(tag's name)
+            </th>
+            <th>
+              Attribute(class)
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form-item / kw-search-item
+            </td>
+            <td>
+              label
+            </td>
+            <td>
+              Add the title of content
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-date-range-picker
+            </td>
+            <td>
+              name="dateRangePicker"<br>
+              rules="date_range_required|date_range_months:1"<br>
+            </td>
+            <td>
+              Required, Default : "dateRangePicker" <br>
+              Add the number when it is required date range<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-date-picker
+            </td>
+            <td>
+              name="datePicker"<br>
+              rules="required"<br>
+            </td>
+            <td>
+              Required, Default : "datePicker"<br>
+              Required, Default : "required"<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-time-picker
+            </td>
+            <td>
+              name="timePicker"<br>
+              rules="required"<br>
+            </td>
+            <td>
+              Required, Default : "timePicker" <br>
+              Required, Default : "required"<br>
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="defaultDatePicker"
         class="kw-guide-title"
       >
@@ -29,15 +104,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="datePickerCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="datePickerCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -45,7 +115,7 @@
         id="defaultDateRange"
         class="kw-guide-title"
       >
-        default(Date Range picker)
+        Default(Date Range picker)
       </h3>
       <p class="kw-guide-description">
         Date Range picker
@@ -63,15 +133,10 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="dateRangePickerCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="dateRangePickerCode"
+          lang="vue"
+        />
       </q-card>
     </div>
     <h2 class="kw-guide-h2 kw-mt-5">
@@ -85,7 +150,7 @@
         id="defaultTimePicker"
         class="kw-guide-title"
       >
-        default(Time picker)
+        Default(Time picker)
       </h3>
       <p class="kw-guide-description">
         Time picker
@@ -103,24 +168,15 @@
             </kw-form-row>
           </kw-form>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="timePickerCode"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="timePickerCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const datePickerCode = `
 <kw-form>

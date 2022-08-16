@@ -19,9 +19,7 @@
 
         <kw-search-row>
           <kw-search-item label="이름/대표자/담당자">
-            <kw-input
-              placeholder="입력해주세요"
-            />
+            <kw-input placeholder="입력해주세요" />
           </kw-search-item>
         </kw-search-row>
 
@@ -56,6 +54,18 @@
         />
       </div>
     </kw-popup>
+    <div class="kw-guide pa0">
+      <q-card>
+        <h3 class="center mb20">
+          This is the source code for this page. This part is not included in the coding.
+        </h3>
+        <guide-code-view
+          :code-value="[sampleVueCode, sampleJsCode]"
+          :lang="['vue','javascript']"
+          multi="true"
+        />
+      </q-card>
+    </div>
   </guide-popup-view>
 </template>
 
@@ -111,4 +121,10 @@ function initGrid(data, view) {
   ]);
 }
 
+const sampleVueCode = `
+It is in progress. Please wait for it to complete`;
+
+const sampleJsCode = `
+It is in progress. Please wait for it to complete
+`;
 </script>

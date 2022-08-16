@@ -20,15 +20,10 @@
             alt="Layout Type 1"
           >
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="layoutCode1"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="layoutCode1"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -48,15 +43,10 @@
             alt="Layout Type 1"
           >
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="layoutCode2"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="layoutCode2"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -76,23 +66,16 @@
             alt="Layout Type 1"
           >
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="layoutCode3"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="layoutCode3"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
 
 const layoutCode1 = `
 <template>

@@ -12,7 +12,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -88,7 +88,7 @@
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <p class="kw-guide-description">
         button height 42px
@@ -109,7 +109,6 @@
         <guide-code-view
           :code-value="primary"
           lang="vue"
-          :button="false"
         />
       </q-card>
     </div>
@@ -168,15 +167,11 @@
             취소
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="primaryNegative"
-            lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="primaryNegative"
+          lang="vue"
+        />
+        primary
         <div class="kw-guide-example">
           <h4 class="mb20">
             Line type - Black
@@ -197,15 +192,10 @@
             초기화
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="blackLine"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="blackLine"
+          lang="vue"
+        />
         <div class="kw-guide-example">
           <h4 class="mb20">
             Line type - Black & gray bg
@@ -226,15 +216,10 @@
             수정
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="blackLineBg"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="blackLineBg"
+          lang="vue"
+        />
         <div class="kw-guide-example">
           <h4 class="mb20">
             Line type - Gray
@@ -255,15 +240,10 @@
             추가
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="grayLine"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="grayLine"
+          lang="vue"
+        />
         <div class="kw-guide-example">
           <h4 class="mb20">
             Line type - Gray & gray bg
@@ -284,15 +264,10 @@
             삭제
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="grayLineBg"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="grayLineBg"
+          lang="vue"
+        />
         <div class="kw-guide-example">
           <h4 class="mb20">
             Line type - Blue
@@ -313,15 +288,10 @@
             결제요청
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="blueLine"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="blueLine"
+          lang="vue"
+        />
         <div class="kw-guide-example">
           <h4 class="mb20">
             Line type - Blue & blue bg
@@ -342,15 +312,10 @@
             오늘
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="blueLineBg"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="blueLineBg"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -379,19 +344,12 @@
             학습자 추가
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="contentsAddIcon"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="contentsAddIcon"
+          lang="vue"
+        />
         <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--contents"
-          >
+          <kw-btn class="kw-btn--contents">
             수정
           </kw-btn>
           <kw-btn
@@ -401,15 +359,10 @@
             수정
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="contentsDefault"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="contentsDefault"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -424,37 +377,23 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--more"
-          >
+          <kw-btn class="kw-btn--more">
             더보기
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="more"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="more"
+          lang="vue"
+        />
         <div class="kw-guide-example">
-          <kw-btn
-            class="kw-btn--more q-btn--append"
-          >
+          <kw-btn class="kw-btn--more q-btn--append">
             더보기
           </kw-btn>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="moreExpand"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="moreExpand"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -476,25 +415,17 @@
             :false-value="false"
           />
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="toggle"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="[toggle,toggleScript]"
+          :lang="['vue','javascript']"
+          :multi="true"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const dummyData = ref(true);
 
@@ -691,6 +622,9 @@ const toggle = `
   :true-value="true"
   :false-value="false"
 />
+
+`;
+const toggleScript = `
 
 const dummyData = ref(true); // select default value (true or false)
 `;

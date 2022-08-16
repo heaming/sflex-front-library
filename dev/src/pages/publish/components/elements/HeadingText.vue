@@ -17,24 +17,15 @@
           <h3>h3 Heading-text</h3>
           <h4>h4 Heading-text</h4>
         </div>
-        <div class="kw-guide-code">
-          <HighCode
-            :code-value="headingText"
-            :lang="vue"
-            theme="light"
-            width="100%"
-            height="auto"
-          />
-        </div>
+        <guide-code-view
+          :code-value="headingText"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
 </template>
 <script setup>
-import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
-
-const vue = 'vue';
 
 const headingText = `
 <h1>h1 Heading-text</h1>
