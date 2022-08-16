@@ -20,7 +20,7 @@
 
     <kw-tab-panels model-value="1">
       <kw-tab-panel name="1">
-        <kw-search title="조회조건">
+        <kw-search>
           <kw-search-row>
             <kw-search-item label="교육년월">
               <kw-date-picker
