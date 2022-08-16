@@ -52,9 +52,10 @@
             suffix="개씩보기"
           />
           <div class="kw-action-bar--send ml40">
-            <kw-btn class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg">
-              URL 전송
-            </kw-btn>
+            <kw-btn
+              class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
+              label="URL 전송"
+            />
             <p class="kw-action-bar--description ml16">
               고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
             </p>
@@ -63,7 +64,7 @@
 
         <kw-btn
           icon="excel|0 0 16 16"
-          class="kw-btn--excel kw-action-bar--separator"
+          class="kw-btn--underline kw-action-bar--separator"
           label="엑셀 다운로드"
         />
         <kw-btn
@@ -228,9 +229,8 @@ const sampleVueCode = `
           <div class="kw-action-bar--send ml40">
             <kw-btn
               class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
-            >
-              URL 전송
-            </kw-btn>
+              label="URL 전송"
+            />
             <p class="kw-action-bar--description ml16">
               고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
             </p>
@@ -239,7 +239,7 @@ const sampleVueCode = `
 
         <kw-btn
           icon="excel|0 0 16 16"
-          class="kw-btn--excel kw-action-bar--separator"
+          class="kw-btn--underline kw-action-bar--separator"
           label="엑셀 다운로드"
         />
         <kw-btn
