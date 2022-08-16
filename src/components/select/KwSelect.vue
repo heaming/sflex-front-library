@@ -21,16 +21,35 @@
     @filter="filter"
     @blur="onBlur"
   >
+    <!-- no-option (override slots) -->
     <template
-      v-if="useInput"
-      #no-option
+      v-if="useInput || $slots['no-option']"
+      #no-option="slotProps"
     >
-      <q-item>
+      <slot
+        v-if="$slots['no-option']"
+        name="no-option"
+        v-bind="slotProps"
+      />
+      <q-item v-else>
         <q-item-section class="text-italic text-grey">
           {{ $t('MSG_TXT_NO_RESULT', null, '검색된 항목이 없습니다.') }}
         </q-item-section>
       </q-item>
     </template>
+
+    <!-- selected-item (override slots) -->
+    <template
+      v-if="$slots['selected-item']"
+      #selected-item="slotProps"
+    >
+      <slot
+        name="selected-item"
+        v-bind="slotProps"
+      />
+    </template>
+
+    <!--before-options -->
     <template
       v-if="multiple"
       #before-options
@@ -53,6 +72,8 @@
       </q-item>
       <q-separator />
     </template>
+
+    <!-- options -->
     <template #option="{ itemProps, opt, selected, toggleOption }">
       <q-item
         :active="selected"
