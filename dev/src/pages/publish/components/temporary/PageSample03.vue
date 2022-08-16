@@ -70,7 +70,7 @@
             </template>
             <kw-btn
               icon="excel|0 0 16 16"
-              class="kw-btn--excel kw-action-bar--separator"
+              class="kw-btn--underline kw-action-bar--separator"
               label="엑셀 다운로드"
               @click="onClickExcelDownload"
             />
