@@ -4,7 +4,7 @@
       Radio
     </h2>
     <p class="kw-guide-description">
-      in search form and table, radio is 18px / default is 22px
+      In search form and table, radio is 18px / default is 22px
     </p>
     <div class="kw-guide-section">
       <h3
@@ -17,10 +17,10 @@
         <thead>
           <tr>
             <th>
-              the Element(tag's name)
+              The Element(Tag's name)
             </th>
             <th>
-              attribute(class)
+              Attribute(Class)
             </th>
             <th>
               Description
@@ -30,13 +30,34 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-form-item
             </td>
             <td>
-              essential - class (sample)
+              label=" "
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Add the title of content
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-option-group
+            </td>
+            <td>
+              name="radioOptionGroup"<br>
+              rules="required"<br>
+              type="radio"<br>
+              :options="['A', 'B', 'C', 'D']"<br>
+              disable<br>
+              :model-value="[]"
+            </td>
+            <td>
+              Required, Default : "radioOptionGroup"<br>
+              Required, Default : "required"<br>
+              Required, Default : "radio"<br>
+              Add the option lists in [ ]<br>
+              Add the attribue "disable" when it is required to be readonly or disable<br>
+              Required, Default : "[]"
             </td>
           </tr>
         </tbody>
@@ -44,131 +65,13 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="default"
+        id="defaultOptionGroup"
         class="kw-guide-title"
       >
         Default
       </h3>
       <p class="kw-guide-description">
-        Radio
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form>
-            <kw-form-row>
-              <kw-form-item label="Radio">
-                <kw-field
-                  name="radio"
-                  rules="required"
-                >
-                  <template #default="{ field }">
-                    <kw-radio
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
-                      v-bind="field"
-                      :val="item"
-                    />
-                  </template>
-                </kw-field>
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <guide-code-view
-          :code-value="radioDefaultCode"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="disable"
-        class="kw-guide-title"
-      >
-        Disable
-      </h3>
-      <p class="kw-guide-description">
-        Add the attribute <b>"disable"</b> in the tag of <b>"kw-radio"</b>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form>
-            <kw-form-row>
-              <kw-form-item label="Radio">
-                <kw-field
-                  name="radio"
-                  rules="required"
-                  :model-value="[]"
-                >
-                  <template #default="{ field }">
-                    <kw-radio
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
-                      v-bind="field"
-                      :val="item"
-                      disable
-                    />
-                  </template>
-                </kw-field>
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <guide-code-view
-          :code-value="radioDisableCode"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="readonly"
-        class="kw-guide-title"
-      >
-        Readonly
-      </h3>
-      <p class="kw-guide-description">
-        Add the attribute <b>"disable"</b> in the tag of <b>"kw-radio"</b>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form>
-            <kw-form-row>
-              <kw-form-item label="Radio">
-                <kw-field
-                  name="radio"
-                  rules="required"
-                  :model-value="[]"
-                >
-                  <template #default="{ field }">
-                    <kw-radio
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
-                      v-bind="field"
-                      :val="item"
-                      disable
-                    />
-                  </template>
-                </kw-field>
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <guide-code-view
-          :code-value="radioReadonlyCode"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="defaultOptionGroup"
-        class="kw-guide-title"
-      >
-        Default(optionGroup)
-      </h3>
-      <p class="kw-guide-description">
-        Default(optiongroup)
+        Default
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -196,7 +99,7 @@
         id="disableOptionGroup"
         class="kw-guide-title"
       >
-        Disable(OptionGroup)
+        Disable
       </h3>
       <p class="kw-guide-description">
         Add the attribute <b>"disable"</b> in the tag of <b>"kw-option-group"</b>
@@ -229,7 +132,7 @@
         id="readonlyOptionGroup"
         class="kw-guide-title"
       >
-        Readonly(OptionGroup)
+        Readonly
       </h3>
       <p class="kw-guide-description">
         Add the attribute <b>"disable"</b> in the tag of <b>"kw-option-group"</b>
@@ -261,148 +164,12 @@
 </template>
 <script setup>
 
-const radioDefaultCode = `
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="Radio">
-      <kw-field
-        name="radio"
-        rules="required"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
-
-<!-- if Search Form -->
-<kw-search>
-  <kw-search-row>
-    <kw-search-item label="Radio">
-      <kw-field
-        name="radio"
-        rules="required"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
-    </kw-search-item>
-  </kw-search-row>
-</kw-search>
-`;
-
-const radioDisableCode = `
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="Radio">
-      <kw-field
-        name="radio"
-        rules="required"
-        :model-value="[]"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-            disable
-          />
-        </template>
-      </kw-field>
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
-
-<!-- if Search Form -->
-<kw-search>
-  <kw-search-row>
-    <kw-search-item label="Radio">
-      <kw-field
-        name="radio"
-        rules="required"
-        :model-value="[]"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-            disable
-          />
-        </template>
-      </kw-field>
-    </kw-search-item>
-  </kw-search-row>
-</kw-search>
-`;
-
-const radioReadonlyCode = `
-<kw-form>
-  <kw-form-row>
-    <kw-form-item label="Radio">
-      <kw-field
-        name="radio"
-        rules="required"
-        :model-value="[]"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-            disable
-          />
-        </template>
-      </kw-field>
-    </kw-form-item>
-  </kw-form-row>
-</kw-form>
-
-<!-- if Search Form -->
-<kw-search>
-  <kw-search-row>
-    <kw-search-item label="Radio">
-      <kw-field
-        name="radio"
-        rules="required"
-        :model-value="[]"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-            disable
-          />
-        </template>
-      </kw-field>
-    </kw-search-item>
-  </kw-search-row>
-</kw-search>
-`;
-
 const groupRadioDefaultCode = `
 <kw-form>
   <kw-form-row>
     <kw-form-item label="optiongroup (default)">
       <kw-option-group
+        :model-value="[]"
         name="radioOptionGroup"
         rules="required"
         type="radio"
@@ -417,6 +184,7 @@ const groupRadioDefaultCode = `
   <kw-search-row>
     <kw-search-item label="optiongroup (default)">
       <kw-option-group
+        :model-value="[]"
         name="radioOptionGroup"
         rules="required"
         type="radio"

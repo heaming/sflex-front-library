@@ -12,7 +12,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -70,6 +70,13 @@
           It is not included in the script's data.
         </li>
         <li>'Grid' that are not visible in the cases are replaced by the empty boxes below.</li>
+        <li>
+          Every cell's width in Grid is used 'px'
+        </li>
+        <li>
+          In GDC, Please ensure apply the width that is aligned with design or planning from zeplin.
+          The programmer will review later on to finalise
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">

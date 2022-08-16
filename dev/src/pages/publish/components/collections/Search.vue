@@ -10,6 +10,48 @@
     </p>
     <div class="kw-guide-section">
       <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        Summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              Tag
+            </th>
+            <th>
+              Class(attribue)
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-search
+            </td>
+            <td>
+              :key="formKey"<br>
+              ref="formRef"<br>
+              :autofocus="autofocus"<br>
+              :no-reset-focus="noResetFocus"<br>
+            </td>
+            <td>
+              Required,Default : "formKey"<br>
+              Required,Default : "formRef"<br>
+              Required,Default : "autofocus"<br>
+              Required,Default : "noResetFocus"<br>
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="columns"
         class="kw-guide-title"
       >
@@ -106,22 +148,16 @@
 
           <kw-search-row>
             <kw-search-item label="Radio">
-              <kw-field
-                name="radio"
+              <kw-option-group
+                :model-value="readonlyRadio"
+                name="radioOptionGroup"
                 rules="required"
-              >
-                <template #default="{ field }">
-                  <kw-radio
-                    v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                    :key="i"
-                    v-bind="field"
-                    :val="item"
-                  />
-                </template>
-              </kw-field>
+                type="radio"
+                :options="['김엄마', '김마', '마']"
+              />
             </kw-search-item>
 
-            <kw-search-item label="OptionGroup (readonly)">
+            <kw-search-item label="readonly">
               <kw-option-group
                 :model-value="readonlyRadio"
                 name="radioOptionGroup"
@@ -131,7 +167,7 @@
                 disable
               />
             </kw-search-item>
-            <kw-search-item label="optiongroup (disable)">
+            <kw-search-item label="disable">
               <kw-option-group
                 name="radioOptionGroup"
                 rules="required"
@@ -143,21 +179,14 @@
           </kw-search-row>
 
           <kw-search-row>
-            <kw-search-item label="Checkbox">
-              <kw-field
+            <kw-search-item label="Optiongroup (Checkbox)">
+              <kw-option-group
                 :model-value="[]"
-                name="checkbox"
+                name="checkboxOptionGroup"
                 rules="required"
-              >
-                <template #default="{ field }">
-                  <kw-checkbox
-                    v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                    :key="i"
-                    v-bind="field"
-                    :val="item"
-                  />
-                </template>
-              </kw-field>
+                type="checkbox"
+                :options="['A', 'B', 'C', 'D']"
+              />
             </kw-search-item>
             <kw-search-item label="OptionGroup (readonly)">
               <kw-option-group

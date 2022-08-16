@@ -13,16 +13,16 @@
         id="summary"
         class="kw-guide-title"
       >
-        summary
+        Summary
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
           <tr>
             <th>
-              the Element(tag's name)
+              The Element(tag's name)
             </th>
             <th>
-              attribute(class)
+              Attribute(class)
             </th>
             <th>
               Description
@@ -49,7 +49,9 @@
               readonly
             </td>
             <td>
-              add the attribute "disable" in the tag of element which is wrapped for kw-form-item.
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item.<br>
+              (Except of the tags of kw-select or kw-input,
+              It is required to add attribute 'readonly' Instead of 'disable')
             </td>
           </tr>
           <tr>
@@ -60,7 +62,7 @@
               disable
             </td>
             <td>
-              add the attribute "disable" in the tag of element which is wrapped for kw-form-item
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item
             </td>
           </tr>
           <tr>
@@ -71,7 +73,7 @@
               cols=""
             </td>
             <td>
-              add the number in cols="" and it belongs to kw-form / kw-search's tag as attribute
+              Add the number in cols="" and it belongs to kw-form / kw-search's tag as attribute
             </td>
           </tr>
           <tr>
@@ -82,7 +84,7 @@
               colspan=""
             </td>
             <td>
-              add the number in colspan="" and it belongs to kw-form-item's tag as attribute
+              Add the number in colspan="" and it belongs to kw-form-item's tag as attribute
             </td>
           </tr>
         </tbody>
@@ -93,7 +95,7 @@
         id="columns"
         class="kw-guide-title"
       >
-        the columns
+        Columns
       </h3>
       <p class="kw-guide-description">
         There are the 4 types of column.<br>
@@ -199,7 +201,7 @@
         id="columnsFormItem"
         class="kw-guide-title"
       >
-        the columns of kw-form-item
+        The columns of kw-form-item
       </h3>
       <p class="kw-guide-description">
         if <b>&lt;kw-form&gt; is cols="3" and &lt;kw-form-item&gt; is colspan="2"</b>,
@@ -248,19 +250,12 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="colspan-1">
-                <kw-field
-                  name="radio"
+                <kw-option-group
+                  name="radioOptionGroup"
                   rules="required"
-                >
-                  <template #default="{ field }">
-                    <kw-radio
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
-                      v-bind="field"
-                      :val="item"
-                    />
-                  </template>
-                </kw-field>
+                  type="radio"
+                  :options="['A', 'B', 'C', 'D']"
+                />
               </kw-form-item>
               <kw-form-item
                 label="colspan-1"
@@ -373,10 +368,10 @@
         id="columnsExample"
         class="kw-guide-title"
       >
-        the Form example
+        Form example
       </h3>
       <p class="kw-guide-description">
-        the example is as below<br>
+        The example is as below<br>
         kw-form cols="2",<br>
         kw-form-item colspan="1" in kw-form-item except of the second line(second line's kw-form-item is colspan"2" )
       </p>
@@ -504,38 +499,24 @@
                 label="Radio"
                 class="essential"
               >
-                <kw-field
-                  name="radio"
+                <kw-option-group
+                  name="radioOptionGroup"
                   rules="required"
-                >
-                  <template #default="{ field }">
-                    <kw-radio
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
-                      v-bind="field"
-                      :val="item"
-                    />
-                  </template>
-                </kw-field>
+                  type="radio"
+                  :options="['A', 'B', 'C', 'D']"
+                />
               </kw-form-item>
               <kw-form-item
                 label="Checkbox"
                 class="essential"
               >
-                <kw-field
+                <kw-option-group
                   :model-value="[]"
-                  name="checkbox"
+                  name="checkboxOptionGroup"
                   rules="required"
-                >
-                  <template #default="{ field }">
-                    <kw-checkbox
-                      v-for="(item, i) of ['A', 'B', 'C', 'D']"
-                      :key="i"
-                      v-bind="field"
-                      :val="item"
-                    />
-                  </template>
-                </kw-field>
+                  type="checkbox"
+                  :options="['A', 'B', 'C', 'D']"
+                />
               </kw-form-item>
             </kw-form-row>
           </kw-form>
@@ -673,19 +654,12 @@ const theColumnsOfKwFormItemCode = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="colspan-1">
-      <kw-field
-        name="radio"
+      <kw-option-group
+        name="radioOptionGroup"
         rules="required"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
+        type="radio"
+        :options="['A', 'B', 'C', 'D']"
+      />
     </kw-form-item>
     <kw-form-item
       label="colspan-1"
@@ -893,38 +867,24 @@ const essentialForTheElememtsCode = `
       label="Radio"
       class="essential"
     >
-      <kw-field
-        name="radio"
+      <kw-option-group
+        name="radioOptionGroup"
         rules="required"
-      >
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
+        type="radio"
+        :options="['A', 'B', 'C', 'D']"
+      />
     </kw-form-item>
     <kw-form-item
       label="Checkbox"
       class="essential"
     >
-      <kw-field
+      <kw-option-group
         :model-value="[]"
-        name="checkbox"
+        name="checkboxOptionGroup"
         rules="required"
-      >
-        <template #default="{ field }">
-          <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+      />
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -932,36 +892,6 @@ const essentialForTheElememtsCode = `
 
 </script>
 
-<script>
-export default {
-  data() {
-    return {
-      isActive: false,
-      isActive02: false,
-      isActive03: false,
-      isActive04: false,
-    };
-  },
-  methods: {
-    toggleShow(e) {
-      switch (e) {
-        case 'code01':
-          this.isActive = !this.isActive;
-          break;
-        case 'code02':
-          this.isActive02 = !this.isActive02;
-          break;
-        case 'code03':
-          this.isActive03 = !this.isActive03;
-          break;
-        case 'code04':
-          this.isActive04 = !this.isActive04;
-          break;
-      }
-    },
-  },
-};
-</script>
 <style lang="scss" scoped>
 .kw-guide-code {
   display: none;

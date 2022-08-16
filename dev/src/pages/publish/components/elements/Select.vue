@@ -30,13 +30,36 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-form-item
             </td>
             <td>
-              essential - class (sample)
+              label=""
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Add the title of content
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-select
+            </td>
+            <td>
+              :model-value="[]"<br>
+              name="select"<br>
+              rules="required"<br>
+              :options="['A', 'B', 'C', 'D']"<br>
+              readonly<br>
+              disable<br>
+              multiple
+            </td>
+            <td>
+              Required, Default : "[]"<br>
+              Required, Default : "select" <br>
+              Required, Default : "required"<br>
+              Add the option lists in [ ]<br>
+              Add the attribute "readonly" when it's required to be readonly<br>
+              Add the attribute "disable" when it's required to be disable<br>
+              Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select
             </td>
           </tr>
         </tbody>

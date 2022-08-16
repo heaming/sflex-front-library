@@ -30,13 +30,32 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-input
             </td>
             <td>
-              essential - class (sample)
+              name="input"<br>
+              rules="required"<br>
+              placeholder="입력해주세요"<br>
+              readonly<br>
+              disable
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Required, Default : "input" <br>
+              Required, Default : "required"<br>
+              Copy the text from zeplin<br>
+              Add the attribute "readonly" in the tag of kw-input<br>
+              Add the attribute "disable" in the tag of kw-input<br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-form-item / kw-search-item
+            </td>
+            <td>
+              essential - class
+            </td>
+            <td>
+              Add the class "essential" in the tags of kw-form-item or kw-search-item.
             </td>
           </tr>
         </tbody>
@@ -47,7 +66,7 @@
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <p class="kw-guide-description">
         input default(height:40px)
