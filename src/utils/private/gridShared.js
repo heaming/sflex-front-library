@@ -185,6 +185,7 @@ export function cloneView(view, options) {
   copyView.setRowIndicator(cloneDeep(view.getRowIndicator()));
   copyView.setCheckBar(cloneDeep(view.getCheckBar()));
   copyView.setFooters(cloneDeep(view.getFooters()));
+  copyView.setRowGroup(cloneDeep(view.getRowGroup()));
 
   return copyView;
 }

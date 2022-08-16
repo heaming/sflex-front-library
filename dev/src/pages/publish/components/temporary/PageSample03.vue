@@ -17,9 +17,10 @@
         disable
       />
     </kw-tabs>
+
     <kw-tab-panels model-value="1">
       <kw-tab-panel name="1">
-        <kw-search>
+        <kw-search title="조회조건">
           <kw-search-row>
             <kw-search-item label="교육년월">
               <kw-date-picker
@@ -123,19 +124,26 @@ function initGrid(data, view) {
       .map((v) => (v.type === 'group' ? v.children : v)).flat()
       .filter((v) => v.type === 'row');
 
-    return children.reduce((a, v) => a + (g.getValue(v.index, column.name) === 'Y' ? 1 : 0), 0);
+    if (column.name === 'col7') {
+      return children.reduce((a, v) => a + (g.getValue(v.index, column.name) === 'Y' ? 1 : 0), 0);
+    }
+
+    const first = group.first.children?.[0] || group.first;
+    const groupValue = g.getValue(first.index, group.level === 1 ? 'col1' : 'col2');
+
+    return `${groupValue} 총수료인원 (대상자 ${children.length})`;
   }
   const columns = [
-    { fieldName: 'col1', header: '총괄단', width: '100', styleName: 'text-center', groupFooter: { styleName: 'text-center' } },
+    { fieldName: 'col1', header: '총괄단', width: '100', styleName: 'text-center' },
     { fieldName: 'col2', header: '센터', width: '100', styleName: 'text-center' },
-    { fieldName: 'col3', header: '지국', width: '100' },
+    { fieldName: 'col3', header: '지국', width: '100', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
     { fieldName: 'col4', header: '성명', width: '100', styleName: 'text-center' },
     { fieldName: 'col5', header: '사번', width: '100', styleName: 'text-center' },
     { fieldName: 'col6', header: '교육과정', width: '283', styleName: 'text-left' },
     { fieldName: 'col7', header: '수료', width: '60', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
   ];
 
-  const layouts = [{ column: 'col1', groupFooterSpans: [6] }, 'col2', 'col3', 'col4', 'col5', 'col6', 'col7'];
+  const layouts = ['col1', 'col2', { column: 'col3', groupFooterSpans: [4] }, 'col4', 'col5', 'col6', 'col7'];
   const groupFields = ['col1', 'col2'];
 
   data.setFields(fields);
@@ -143,8 +151,7 @@ function initGrid(data, view) {
   view.setColumnLayout(layouts);
   view.groupBy(groupFields);
   view.rowIndicator.visible = true;
-  // eslint-disable-next-line no-template-curly-in-string
-  view.rowGroup.footerStatement = '${groupValue} 총수료인원 (대상자 ${rowCount}명)';
+  view.rowGroup.mergeMode = true;
 
   data.setRows([
     { col1: '강남', col2: '강남센터', col3: 'B014223', col4: '김교원', col5: '1234567', col6: '플래너전문가(1차월)(1차수)', col7: 'Y' },
