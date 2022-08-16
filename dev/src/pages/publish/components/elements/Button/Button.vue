@@ -370,6 +370,28 @@
         id="etc"
         class="kw-guide-title"
       >
+        Link(Underline)
+      </h3>
+      <p class="kw-guide-description">
+        Simple underline button
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn class="kw-btn--underline">
+            목록으로
+          </kw-btn>
+        </div>
+        <guide-code-view
+          :code-value="underline"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="etc"
+        class="kw-guide-title"
+      >
         Etc
       </h3>
       <p class="kw-guide-description">
@@ -612,6 +634,12 @@ const moreExpand = `
   class="kw-btn--more q-btn--append"
 >
   더보기
+</kw-btn>
+`;
+
+const underline = `
+<kw-btn class="kw-btn--underline">
+  목록으로
 </kw-btn>
 `;
 
