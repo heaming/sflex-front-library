@@ -22,7 +22,7 @@
       </h3>
       <ul>
         <li>
-          Ensure to learn flex system from Quasar Please ( The link of flex system: <a
+          Ensure how to use flex system from Quasar Please ( The link of flex system: <a
             href="https://quasar.dev/layout/grid/flex-playground"
             target="_blank"
           >https://quasar.dev/layout/grid/flex-playground</a> )
@@ -112,7 +112,7 @@
 <script setup>
 const testCode = `
 <!-- justify-between -->
-<!-- The class of item is for decorating the example, ignore this class when you copy the code or using the flex -->
+<!-- The class of item is for decorating the example, ignore this class when you copy the code or using the flex system-->
 <div class="row justify-between items-center">
   <div class="item">
     Box
