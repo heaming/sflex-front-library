@@ -448,19 +448,17 @@ export function getParent(view, dataRow) {
 export function getAncestors(view, dataRow, isAscending = false) {
   const data = view.getDataSource();
   const compareFn = isAscending ? (a, b) => a - b : (a, b) => b - a;
-
-  return data.hasData(dataRow)
-    ? data.getAncestors(dataRow).sort(compareFn) : [];
+  return (data.hasData(dataRow) && data.getAncestors(dataRow)?.sort(compareFn)) || [];
 }
 
 export function getChildren(view, dataRow) {
   const data = view.getDataSource();
-  return data.hasData(dataRow) ? data.getChildren(dataRow) : [];
+  return (data.hasData(dataRow) && data.getChildren(dataRow)) || [];
 }
 
 export function getDescendants(view, dataRow) {
   const data = view.getDataSource();
-  return data.hasData(dataRow) ? data.getDescendants(dataRow) : [];
+  return (data.hasData(dataRow) && data.getDescendants(dataRow)) || [];
 }
 
 export function getSiblings(view, dataRow, isIncludeSelf = true) {
