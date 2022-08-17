@@ -20,6 +20,11 @@
     display: none;
   }
 
+  &:disabled {
+    background-color: $line-line;
+    color: #fff;
+  }
+
   .q-focus-helper {
     display: none;
   }
@@ -37,7 +42,8 @@
   // disabled
   &:disabled {
     background-color: $line-line;
-    color: #bbb;
+
+    // color: #bbb;
 
     &:hover {
       background-color: $line-line;
@@ -77,6 +83,7 @@
     &:disabled {
       border: 1px solid $line-stroke;
       background-color: $line-bg;
+      color: $placeholder;
 
       &:hover {
         border: 1px solid $line-stroke;
@@ -110,6 +117,18 @@
       background: #fff;
     }
 
+    &:disabled {
+      background: $line-bg;
+      border: 1px solid $line-stroke;
+      color: #999;
+
+      &:hover {
+        background: $line-bg;
+        border: 1px solid $line-stroke;
+        color: #999;
+      }
+    }
+
     &.kw-btn--line-bg {
       background: rgb(56 144 246 / 8%);
 
@@ -119,6 +138,18 @@
 
       &:active {
         background-color: rgb(56 144 246 / 28%);
+      }
+
+      &:disabled {
+        background: $line-bg;
+        border: 1px solid $line-stroke;
+        color: #999;
+
+        &:hover {
+          background: $line-bg;
+          border: 1px solid $line-stroke;
+          color: #999;
+        }
       }
     }
   }
