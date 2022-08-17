@@ -1,7 +1,7 @@
 <template>
   <kw-page>
     <template #header>
-      <kw-page-header :options="['홈','고객','고객관리']" />
+      <kw-page-header :options="['홈','고객','Search Result(Normal)']" />
     </template>
 
     <kw-search title="조회조건">
@@ -52,9 +52,10 @@
             suffix="개씩보기"
           />
           <div class="kw-action-bar--send ml40">
-            <kw-btn class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg">
-              URL 전송
-            </kw-btn>
+            <kw-btn
+              class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
+              label="URL 전송"
+            />
             <p class="kw-action-bar--description ml16">
               고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
             </p>
@@ -63,7 +64,7 @@
 
         <kw-btn
           icon="excel|0 0 16 16"
-          class="kw-btn--excel kw-action-bar--separator"
+          class="kw-btn--underline kw-action-bar--separator"
           label="엑셀 다운로드"
         />
         <kw-btn
@@ -165,106 +166,106 @@ function initGrid(data, view) {
 }
 
 const sampleVueCode = `
-  <kw-page>
-    <template #header>
-      <kw-page-header
-        :options="['홈','고객','고객관리']"
+<kw-page>
+  <template #header>
+    <kw-page-header
+      :options="['홈','고객','Search Result(Normal)']"
+    />
+  </template>
+
+  <kw-search
+    :label-size="108"
+    title="조회조건"
+  >
+    <kw-search-row>
+      <kw-search-item label="고객 유형">
+        <kw-select
+          first-option="all"
+          :options="['A','B','C']"
+        />
+      </kw-search-item>
+
+      <kw-search-item label="교원키">
+        <kw-input placeholder="입력해주세요" />
+      </kw-search-item>
+
+      <kw-search-item label="이름/대표자/담당자">
+        <kw-input placeholder="입력해주세요" />
+      </kw-search-item>
+    </kw-search-row>
+
+    <kw-search-row>
+      <kw-search-item label="휴대전화번호">
+        <kw-input
+          placeholder="입력해주세요"
+          mask="###-####-####"
+        />
+      </kw-search-item>
+
+      <kw-search-item label="통합 고객">
+        <kw-select
+          first-option="all"
+          :options="['A','B','C']"
+        />
+      </kw-search-item>
+    </kw-search-row>
+  </kw-search>
+
+  <div class="result-area">
+    <h3>조회결과</h3>
+    <kw-action-bar>
+      <template #left>
+        <div class="kw-action-bar--count kw-action-bar--separator">
+          총 <span class="kw-action-bar--number pl4">156</span>
+        </div>
+        <kw-select
+          v-model="selectData.model"
+          :options="selectData.options"
+          :display-value="selectData.model + ' 개씩보기'"
+          name="select"
+          rules="required"
+          :borderless="true"
+        />
+        <div class="kw-action-bar--send ml40">
+          <kw-btn
+            class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
+            label="URL 전송"
+          />
+          <p class="kw-action-bar--description ml16">
+            고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
+          </p>
+        </div>
+      </template>
+
+      <kw-btn
+        icon="excel|0 0 16 16"
+        class="kw-btn--underline kw-action-bar--separator"
+        label="엑셀 다운로드"
       />
-    </template>
-
-    <kw-search
-      :label-size="108"
-      title="조회조건"
-    >
-      <kw-search-row>
-        <kw-search-item label="고객 유형">
-          <kw-select
-            first-option="all"
-            :options="['A','B','C']"
-          />
-        </kw-search-item>
-
-        <kw-search-item label="교원키">
-          <kw-input placeholder="입력해주세요" />
-        </kw-search-item>
-
-        <kw-search-item label="이름/대표자/담당자">
-          <kw-input placeholder="입력해주세요" />
-        </kw-search-item>
-      </kw-search-row>
-
-      <kw-search-row>
-        <kw-search-item label="휴대전화번호">
-          <kw-input
-            placeholder="입력해주세요"
-            mask="###-####-####"
-          />
-        </kw-search-item>
-
-        <kw-search-item label="통합 고객">
-          <kw-select
-            first-option="all"
-            :options="['A','B','C']"
-          />
-        </kw-search-item>
-      </kw-search-row>
-    </kw-search>
-
-    <div class="result-area">
-      <h3>조회결과</h3>
-      <kw-action-bar>
-        <template #left>
-          <div class="kw-action-bar--count kw-action-bar--separator">
-            총 <span class="kw-action-bar--number pl4">156</span>
-          </div>
-          <kw-select
-            v-model="selectData.model"
-            :options="selectData.options"
-            :display-value="selectData.model + ' 개씩보기'"
-            name="select"
-            rules="required"
-            :borderless="true"
-          />
-          <div class="kw-action-bar--send ml40">
-            <kw-btn
-              class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
-            >
-              URL 전송
-            </kw-btn>
-            <p class="kw-action-bar--description ml16">
-              고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-            </p>
-          </div>
-        </template>
-
-        <kw-btn
-          icon="excel|0 0 16 16"
-          class="kw-btn--excel kw-action-bar--separator"
-          label="엑셀 다운로드"
-        />
-        <kw-btn
-          label="개인 고객 등록 URL 전송"
-          class="kw-btn--h32"
-        />
-        <kw-btn
-          label="개인 고객 등록"
-          class="kw-btn--h32 ml10"
-        />
-        <kw-btn
-          label="법인 고객 등록"
-          class="kw-btn--h32 ml10"
-        />
-      </kw-action-bar>
-      <kw-grid
-        :visible-rows="10"
-        @init="initGrid"
+      <kw-btn
+        label="개인 고객 등록 URL 전송"
+        class="kw-btn--h32"
       />
-      <kw-pagination
-        :model-value="1"
-        :total-count="100"
+      <kw-btn
+        label="개인 고객 등록"
+        class="kw-btn--h32 ml10"
       />
-    </div>
-  </kw-page>`;
+      <kw-btn
+        label="법인 고객 등록"
+        class="kw-btn--h32 ml10"
+      />
+    </kw-action-bar>
+    <kw-grid
+      :visible-rows="10"
+      @init="initGrid"
+    />
+    <kw-pagination
+      :model-value="1"
+      :total-count="100"
+    />
+  </div>
+</kw-page>`;
+
 const sampleJsCode = `
 const selectData = { model: '10',
   options: [

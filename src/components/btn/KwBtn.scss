@@ -388,7 +388,6 @@
 
   &--excel {
     padding: 0;
-    padding-left: 22px;
     background-color: rgb(56 144 246 / 0%) !important;
     font-size: 14px;
     color: $black-h1;
@@ -417,6 +416,23 @@
     //   box-shadow: none;
     //   transition: none;
     // }
+  }
+
+  &--underline {
+    padding: 0;
+    background-color: rgb(56 144 246 / 0%) !important;
+    font-size: 14px;
+    color: $black-h1;
+    height: 32px;
+    text-decoration: underline;
+    position: relative;
+    font-weight: 400;
+
+    & .on-left {
+      margin-right: 6px;
+      width: 16px;
+      height: 16px;
+    }
   }
 }
 
