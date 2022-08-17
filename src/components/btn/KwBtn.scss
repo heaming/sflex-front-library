@@ -74,6 +74,16 @@
       background-color: #f5f5f5;
     }
 
+    &:disabled {
+      border: 1px solid $line-stroke;
+      background-color: $line-bg;
+
+      &:hover {
+        border: 1px solid $line-stroke;
+        background-color: $line-bg;
+      }
+    }
+
     &.kw-btn--line-bg {
       background: #f5f5f5;
 
@@ -436,12 +446,25 @@
   }
 }
 
-.kw-btn.q-btn .q-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
-}
-
 svg[viewBox$="16"] {
   width: 16px !important;
+}
+
+.kw-btn {
+  &.q-btn .q-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+  }
+
+  &.kw-btn-reverse {
+    .q-btn__content {
+      flex-direction: row-reverse;
+    }
+
+    .q-icon {
+      margin-right: 0;
+      margin-left: 4px;
+    }
+  }
 }
