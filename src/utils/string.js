@@ -1,3 +1,5 @@
+import { uid } from 'quasar';
+
 export function getByte(s, bytesPerKoChar = 3) {
   return Array.from(s).reduce((a, v) => a + (v.charCodeAt() > 127 ? bytesPerKoChar : 1), 0);
 }
@@ -30,4 +32,9 @@ export function getNumberWithComma(s, decimalLimit = -1) {
   }
 
   return x.join('.');
+}
+
+export function getUid(prefix) {
+  const id = uid().toUpperCase();
+  return prefix ? `${prefix}-${id}` : id;
 }
