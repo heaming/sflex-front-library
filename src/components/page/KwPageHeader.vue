@@ -16,14 +16,20 @@
       </q-icon>
       <h1>{{ heading }}</h1>
       <kw-checkbox
+        size="46px"
         model-value="Y"
         checked-icon="bookmark_on"
         unchecked-icon="bookmark_off"
+        class="mr0 mt3"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
         </kw-tooltip>
       </kw-checkbox>
+      <kw-btn
+        icon="alert_16|0 0 16 16"
+        class="btn-icon--bell pa0"
+      />
     </div>
     <q-breadcrumbs align="right">
       <q-breadcrumbs-el
@@ -48,6 +54,7 @@
 
 <script>
 import { find, last } from 'lodash-es';
+import KwBtn from '../btn/KwBtn.vue';
 
 function creataBreadcrumbs(menus, menuUid) {
   const matched = find(menus, { menuUid });
@@ -67,6 +74,7 @@ function creataBreadcrumbs(menus, menuUid) {
 
 export default {
   name: 'KwPageHeader',
+  components: { KwBtn },
 
   props: {
     options: {
