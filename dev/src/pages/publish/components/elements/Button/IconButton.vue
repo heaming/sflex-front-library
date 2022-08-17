@@ -59,7 +59,7 @@
         <li>
           5.There is <b>icon=""</b>.
           Add ID name of the img file and Add the values of width and height<br>
-          (<b>ex- icon="plus_16|0 0 16 16 "</b>)
+          (<b>ex:  icon="plus_16|0 0 16 16 "</b>)
         </li>
       </ul>
     </div>
