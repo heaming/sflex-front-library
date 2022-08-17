@@ -1,5 +1,5 @@
 <template>
-  <q-separator />
+  <q-separator class="kw-separator" />
 </template>
 
 <script>
