@@ -99,7 +99,7 @@
               label="파트너과정 수료이관"
             />
             <kw-btn
-              class="kw-btn--h32 ml10"
+              class="kw-btn--h32 ml4"
               label="엑셀업로드"
             />
           </kw-action-bar>
@@ -187,118 +187,118 @@ function initGrid(data, view) {
 
 const sampleVueCode = `
 <kw-page>
-    <template #header>
-      <kw-page-header
-        :options="['홈', '역량/총무', '역량관리', 'Tabs Sample #2(Tab in Tab)']"
-      />
-    </template>
+  <template #header>
+    <kw-page-header
+      :options="['홈', '역량/총무', '역량관리', 'Tabs Sample #2(Tab in Tab)']"
+    />
+  </template>
 
-    <kw-tabs model-value="1">
-      <kw-tab
-        name="1"
-        label="조직별"
-      />
-      <kw-tab
-        name="2"
-        label="개인별"
-        disable
-      />
-    </kw-tabs>
-    <kw-tab-panels model-value="1">
-      <kw-tab-panel name="1">
-        <kw-tabs model-value="1">
-          <kw-tab
-            name="1"
-            label="일반조회"
+  <kw-tabs model-value="1">
+    <kw-tab
+      name="1"
+      label="조직별"
+    />
+    <kw-tab
+      name="2"
+      label="개인별"
+      disable
+    />
+  </kw-tabs>
+  <kw-tab-panels model-value="1">
+    <kw-tab-panel name="1">
+      <kw-tabs model-value="1">
+        <kw-tab
+          name="1"
+          label="일반조회"
+        />
+        <kw-tab
+          name="2"
+          label="주문번호 조회"
+        />
+        <kw-tab
+          name="3"
+          label="계약자 정보(교원키 조회)"
+        />
+        <kw-tab
+          name="4"
+          label="설치자 정보 조회"
+        />
+      </kw-tabs>
+      <kw-tab-panels model-value="1">
+        <kw-tab-panel name="1">
+          <kw-search>
+            <kw-search-row>
+              <kw-search-item label="교육년월">
+                <kw-date-picker
+                  type="month"
+                />
+              </kw-search-item>
+              <kw-search-item label="조직">
+                <kw-select
+                  class="col mr8"
+                  placeholder="총괄단 선택"
+                  :options="['강남']"
+                  use-input
+                />
+                <kw-select
+                  class="col"
+                  placeholder="센터 선택"
+                  :options="['강남센터', '광진센터']"
+                  use-input
+                />
+              </kw-search-item>
+              <kw-search-item label="수료여부">
+                <kw-option-group
+                  model-value=""
+                  type="radio"
+                  :options="['수료', '미수료']"
+                  first-option="all"
+                />
+              </kw-search-item>
+            </kw-search-row>
+            <kw-search-row>
+              <kw-search-item label="수료여부">
+                <kw-select
+                  :options="['플래너전문가(1차월)(1차수)']"
+                  first-option="all"
+                />
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+        </kw-tab-panel>
+      </kw-tab-panels>
+      <div class="result-area">
+        <h3>조회결과</h3>
+        <kw-action-bar>
+          <template #left>
+            <div class="kw-action-bar--count">
+              총 <span class="kw-action-bar--number pl4">1,247</span>
+            </div>
+          </template>
+          <kw-btn
+            icon="excel|0 0 16 16"
+            class="kw-btn--underline kw-action-bar--separator"
+            label="엑셀 다운로드"
+            @click="onClickExcelDownload"
           />
-          <kw-tab
-            name="2"
-            label="주문번호 조회"
+          <kw-btn
+            class="kw-btn--h32"
+            label="파트너과정 수료이관"
           />
-          <kw-tab
-            name="3"
-            label="계약자 정보(교원키 조회)"
+          <kw-btn
+            class="kw-btn--h32 ml4"
+            label="엑셀업로드"
           />
-          <kw-tab
-            name="4"
-            label="설치자 정보 조회"
-          />
-        </kw-tabs>
-        <kw-tab-panels model-value="1">
-          <kw-tab-panel name="1">
-            <kw-search>
-              <kw-search-row>
-                <kw-search-item label="교육년월">
-                  <kw-date-picker
-                    type="month"
-                  />
-                </kw-search-item>
-                <kw-search-item label="조직">
-                  <kw-select
-                    class="col mr8"
-                    placeholder="총괄단 선택"
-                    :options="['강남']"
-                    use-input
-                  />
-                  <kw-select
-                    class="col"
-                    placeholder="센터 선택"
-                    :options="['강남센터', '광진센터']"
-                    use-input
-                  />
-                </kw-search-item>
-                <kw-search-item label="수료여부">
-                  <kw-option-group
-                    model-value=""
-                    type="radio"
-                    :options="['수료', '미수료']"
-                    first-option="all"
-                  />
-                </kw-search-item>
-              </kw-search-row>
-              <kw-search-row>
-                <kw-search-item label="수료여부">
-                  <kw-select
-                    :options="['플래너전문가(1차월)(1차수)']"
-                    first-option="all"
-                  />
-                </kw-search-item>
-              </kw-search-row>
-            </kw-search>
-          </kw-tab-panel>
-        </kw-tab-panels>
-        <div class="result-area">
-          <h3>조회결과</h3>
-          <kw-action-bar>
-            <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">1,247</span>
-              </div>
-            </template>
-            <kw-btn
-              icon="excel|0 0 16 16"
-              class="kw-btn--underline kw-action-bar--separator"
-              label="엑셀 다운로드"
-              @click="onClickExcelDownload"
-            />
-            <kw-btn
-              class="kw-btn--h32"
-              label="파트너과정 수료이관"
-            />
-            <kw-btn
-              class="kw-btn--h32 ml10"
-              label="엑셀업로드"
-            />
-          </kw-action-bar>
-          <kw-grid
-            ref="grdRef"
-            :visible-rows="13"
-            @init="initGrid"
-          />
-        </div>
-      </kw-tab-panel>
-    </kw-tab-panels>
-  </kw-page>
+        </kw-action-bar>
+        <kw-grid
+          ref="grdRef"
+          :visible-rows="13"
+          @init="initGrid"
+        />
+      </div>
+    </kw-tab-panel>
+  </kw-tab-panels>
+</kw-page>
 `;
 
 const sampleJsCode = `

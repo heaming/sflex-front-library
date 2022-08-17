@@ -142,11 +142,11 @@
             />
             <kw-btn
               label="개인 고객 등록"
-              class="kw-btn--h32 ml10"
+              class="kw-btn--h32 ml4"
             />
             <kw-btn
               label="법인 고객 등록"
-              class="kw-btn--h32 ml10"
+              class="kw-btn--h32 ml4"
             />
           </kw-action-bar>
         </div>
@@ -202,11 +202,11 @@ const testCode = `
   />
   <kw-btn
     label="개인 고객 등록"
-    class="kw-btn--h32 ml10"
+    class="kw-btn--h32 ml4"
   />
   <kw-btn
     label="법인 고객 등록"
-    class="kw-btn--h32 ml10"
+    class="kw-btn--h32 ml4"
   />
 </kw-action-bar>
 `;

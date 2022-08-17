@@ -78,7 +78,7 @@
               label="파트너과정 수료이관"
             />
             <kw-btn
-              class="kw-btn--h32 ml10"
+              class="kw-btn--h32 ml4"
               label="엑셀업로드"
             />
           </kw-action-bar>
@@ -252,7 +252,7 @@ const sampleVueCode = `
             label="파트너과정 수료이관"
           />
           <kw-btn
-            class="kw-btn--h32 ml10"
+            class="kw-btn--h32 ml4"
             label="엑셀업로드"
           />
         </kw-action-bar>

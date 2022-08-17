@@ -73,17 +73,28 @@
         />
         <kw-btn
           label="개인 고객 등록"
-          class="kw-btn--h32 ml10"
+          class="kw-btn--h32 ml4"
         />
         <kw-btn
           label="법인 고객 등록"
-          class="kw-btn--h32 ml10"
+          class="kw-btn--h32 ml4"
         />
       </kw-action-bar>
       <kw-grid
         :visible-rows="10"
         @init="initGrid"
       />
+      <div class="row justify-start items-center mt12">
+        <!-- 'the helper classes' from Quasar & gutter -->
+        <kw-btn
+          class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32"
+          label="삭제"
+        />
+        <kw-btn
+          class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 ml4"
+          label="저장"
+        />
+      </div>
       <kw-pagination
         :model-value="1"
         :total-count="100"
@@ -248,17 +259,28 @@ const sampleVueCode = `
       />
       <kw-btn
         label="개인 고객 등록"
-        class="kw-btn--h32 ml10"
+        class="kw-btn--h32 ml4"
       />
       <kw-btn
         label="법인 고객 등록"
-        class="kw-btn--h32 ml10"
+        class="kw-btn--h32 ml4"
       />
     </kw-action-bar>
     <kw-grid
       :visible-rows="10"
       @init="initGrid"
     />
+    <div class="row justify-start items-center mt12">
+      <!-- 'the helper classes' from Quasar & gutter -->
+      <kw-btn
+        class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32"
+        label="삭제"
+      />
+      <kw-btn
+        class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 ml4"
+        label="저장"
+      />
+    </div>
     <kw-pagination
       :model-value="1"
       :total-count="100"
