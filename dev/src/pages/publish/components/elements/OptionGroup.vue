@@ -4,7 +4,7 @@
       OptionGroup(radio,checkbox)
     </h2>
     <p class="kw-guide-description">
-      OptionGroup's reference pages go to 'publish/components/Elements/ Checkbox and Radio'.
+      OptionGroup's reference pages go to 'publish/components/Elements/ Checkbox'.
     </p>
   </kw-page>
 </template>
