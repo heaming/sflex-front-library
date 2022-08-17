@@ -95,7 +95,7 @@ const viewConfig = {
   },
 
   treeOptions: {
-    lineVisible: false,
+    lineVisible: true,
   },
 
   hideDeletedRows: true,
