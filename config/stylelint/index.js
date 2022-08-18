@@ -21,6 +21,7 @@ module.exports = {
     'function-url-quotes': null,
     'no-empty-source': null,
     'no-descending-specificity': null,
+    'no-duplicate-selectors': null,
     'order/order': ['custom-properties', 'declarations'],
     'order/properties-order': ['width', 'height'],
     'scss/no-global-function-names': null,
