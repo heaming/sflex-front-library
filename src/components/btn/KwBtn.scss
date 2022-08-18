@@ -12,12 +12,17 @@
   line-height: 1;
   background-color: $primary;
   font-size: 16px;
-  color: #fff;
+  color: $bg-white;
   text-transform: none;
   border-radius: 0;
 
   &::before {
     display: none;
+  }
+
+  &:disabled {
+    background-color: $line-line;
+    color: $bg-white;
   }
 
   .q-focus-helper {
@@ -37,7 +42,6 @@
   // disabled
   &:disabled {
     background-color: $line-line;
-    color: #bbb;
 
     &:hover {
       background-color: $line-line;
@@ -63,20 +67,23 @@
 
   &--line-black {
     border: 1px solid $black-btn-line;
-    background-color: #fff;
+    background-color: $bg-white;
     color: $black-h2;
 
     &:hover {
-      background-color: #fff;
+      border: 1px solid $black-h1;
+      background-color: $bg-white;
     }
 
     &:active {
-      background-color: #f5f5f5;
+      background-color: $bg-box;
+      border: 1px solid #666;
     }
 
     &:disabled {
       border: 1px solid $line-stroke;
       background-color: $line-bg;
+      color: $placeholder;
 
       &:hover {
         border: 1px solid $line-stroke;
@@ -85,29 +92,41 @@
     }
 
     &.kw-btn--line-bg {
-      background: #f5f5f5;
+      background: $bg-box;
 
       &:hover {
-        background: #f5f5f5;
+        background: $bg-box;
       }
 
       &:active {
-        background-color: #f5f5f5;
+        background-color: $bg-box;
       }
     }
   }
 
   &--line-blue {
     border: 1px solid $primary;
-    background: #fff;
+    background: $bg-white;
     color: $primary;
 
     &:hover {
-      background: #fff;
+      background: $bg-white;
     }
 
     &:active {
-      background: #fff;
+      background: $bg-white;
+    }
+
+    &:disabled {
+      background: $line-bg;
+      border: 1px solid $line-stroke;
+      color: $placeholder;
+
+      &:hover {
+        background: $line-bg;
+        border: 1px solid $line-stroke;
+        color: $placeholder;
+      }
     }
 
     &.kw-btn--line-bg {
@@ -120,31 +139,73 @@
       &:active {
         background-color: rgb(56 144 246 / 28%);
       }
+
+      &:disabled {
+        background: $line-bg;
+        border: 1px solid $line-stroke;
+        color: $placeholder;
+
+        &:hover {
+          background: $line-bg;
+          border: 1px solid $line-stroke;
+          color: $placeholder;
+        }
+      }
     }
   }
 
   &--line-gray {
     border: 1px solid $line-line;
-    background: #fff;
-    color: #555;
+    background: $bg-white;
+    color: $black-h2;
 
     &:hover {
-      background: #f5f5f5;
+      border: 1px solid $black-h1;
+      background-color: $bg-white;
     }
 
     &:active {
-      background: #f5f5f5;
+      border: 1px solid $black-btn-line;
+      background-color: $bg-box;
+    }
+
+    &:disabled {
+      background: $line-bg;
+      border: 1px solid $line-stroke;
+      color: $placeholder;
+
+      &:hover {
+        background: $line-bg;
+        border: 1px solid $line-stroke;
+        color: $placeholder;
+      }
     }
 
     &.kw-btn--line-bg {
-      background: #f5f5f5;
+      background: $bg-box;
+      border: 1px solid $line-line;
+      color: $black-h2;
 
       &:hover {
-        background: #f5f5f5;
+        border: 1px solid $black-h1;
+        background-color: $bg-box;
       }
 
       &:active {
-        background-color: #f5f5f5;
+        border: 1px solid $line-line;
+        background-color: $line-line;
+      }
+
+      &:disabled {
+        background: $bg-box;
+        border: 1px solid $line-line;
+        color: $placeholder;
+
+        &:hover {
+          background: $bg-box;
+          border: 1px solid $line-line;
+          color: $placeholder;
+        }
       }
     }
   }
@@ -155,7 +216,7 @@
 
     &.kw-btn--reset {
       border: 1px solid $black-btn-line;
-      background-color: #fff;
+      background-color: $bg-white;
       color: $black-h2;
     }
   }
@@ -200,7 +261,7 @@
 
     &:hover {
       border-color: $black-h1;
-      background-color: #fff;
+      background-color: $bg-white;
     }
 
     &.q-btn--active {
@@ -229,15 +290,15 @@
   &--contents {
     padding: 0 12px;
     height: 32px;
-    border: 1px solid $black-h1;
-    background-color: #fff;
+    border: 1px solid $black-btn-line;
+    background-color: $bg-white;
     font-size: 14px;
     color: $black-h2;
     font-weight: 400;
 
     &:hover {
       border-color: $black-h1;
-      background-color: #fff;
+      background-color: $bg-white;
     }
 
     &.q-btn--active {
@@ -248,7 +309,7 @@
     &:disabled {
       border-color: $line-stroke;
       background-color: $line-bg;
-      color: #bbb;
+      color: $placeholder;
 
       &:hover {
         border-color: $line-stroke;
@@ -294,7 +355,7 @@
     padding: 0 20px;
     border: 1px solid $black-btn-line;
     height: 42px;
-    background-color: #fff;
+    background-color: $bg-white;
     color: $black-h2;
     font-weight: 400;
 
@@ -304,7 +365,7 @@
 
     &:hover {
       border-color: $black-h1;
-      background-color: #fff;
+      background-color: $bg-white;
     }
 
     &.q-btn--active {
@@ -333,7 +394,7 @@
       max-width: 182px;
       width: 100%;
       background-color: $primary;
-      color: #fff;
+      color: $bg-white;
       font-weight: 500;
 
       &:hover {
@@ -363,7 +424,7 @@
     // border: 1px solid #000;
     padding: 0 28px 0 12px;
     height: 32px;
-    background-color: #fff;
+    background-color: $bg-white;
     font-size: 14px;
     color: $black-h3;
     font-weight: 400;
@@ -479,6 +540,21 @@ svg[viewBox$="16"] {
 
     &:hover {
       background: none;
+    }
+  }
+}
+
+.admin-arrow-box {
+  display: flex;
+  flex-direction: column;
+
+  .kw-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+
+    .q-icon {
+      margin-right: 0;
     }
   }
 }
