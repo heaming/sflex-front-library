@@ -2,7 +2,7 @@
   // 인풋 포커스
   &.q-field--focused {
     .q-field__native {
-      border-color: $black-h1;
+      border-color: $black1;
     }
   }
 
@@ -33,17 +33,17 @@
     padding: 10px 12px 9px;
     border: 1px solid $line-stroke;
     font-size: 16px;
-    color: $black-h1;
+    color: $black1;
     font-weight: 500;
 
     &:hover:not(:disabled,:read-only) {
-      border-color: $black-h1;
+      border-color: $black1;
     }
 
     &:read-only,
     &:disabled {
       background-color: $line-bg;
-      color: $black-h3;
+      color: $black3;
     }
 
     &:read-only::placeholder,
