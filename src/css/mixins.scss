@@ -108,3 +108,10 @@ $unit: px;
     }
   }
 }
+
+@for $width from 1 through 1000 {
+  .fw#{$width} {
+    width: #{$width} + $unit !important;
+    max-width: #{$width} + $unit !important;
+  }
+}

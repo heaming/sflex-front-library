@@ -65,6 +65,16 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>For 'label' width, refer to 'Collections/Form'.</li>
+      </ul>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="defaultOptionGroup"
         class="kw-guide-title"
       >
