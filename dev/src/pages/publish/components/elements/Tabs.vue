@@ -4,7 +4,11 @@
       Tabs
     </h2>
     <p class="kw-guide-description">
-      It is in progress. Please wait for it to complete.
+      You can check how to use 'Tab' through the sample page.<br>
+      <span class="notice">
+        Check 'page tab' : PageSample02<br>
+        Check 'tab in tab' : PageSample03
+      </span>
     </p>
     <div class="kw-guide-section">
       <h3
@@ -30,19 +34,19 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-tabs
             </td>
             <td>
-              essential - class (sample)
+              model-value="1"
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              active tab of the same &lt;kw-tab&gt;'s name value
             </td>
           </tr>
         </tbody>
       </q-markup-table>
     </div>
-    <div class="kw-guide-section">
+    <!-- <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
@@ -61,12 +65,12 @@
           lang="vue"
         />
       </q-card>
-    </div>
+    </div> -->
   </kw-page>
 </template>
 
 <script setup>
-const testCode = `
-It is in progress. Please wait for it to complete.
-`;
+// const testCode = `
+// It is in progress. Please wait for it to complete.
+// `;
 </script>
