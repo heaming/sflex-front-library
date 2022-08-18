@@ -68,6 +68,13 @@ module.exports = {
       tsx: 'never',
     }],
 
+    'import/no-extraneous-dependencies': ['error', {
+      'packageDir': ['./'],
+      'devDependencies': false,
+      'optionalDependencies': false,
+      'peerDependencies': false,
+    }],
+
     // disabled for convenience
     'prefer-destructuring': ['error', {
       VariableDeclarator: {
