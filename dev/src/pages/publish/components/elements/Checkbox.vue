@@ -20,7 +20,7 @@
               The Element(tag's name)
             </th>
             <th>
-              Attribute(class)
+              Attr or Class
             </th>
             <th>
               Description

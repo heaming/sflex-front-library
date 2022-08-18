@@ -22,7 +22,7 @@
               The Element(tag's name)
             </th>
             <th>
-              Attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -35,7 +35,7 @@
               kw-form-item
             </td>
             <td>
-              essential - class
+              essential
             </td>
             <td>
               add the class "essential" in the tag of kw-form-item.
@@ -103,7 +103,7 @@
               The Element(tag's name)
             </th>
             <th>
-              Attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -127,13 +127,12 @@
               kw-input / kw-select
             </td>
             <td>
-              fw1, fw2, fw3......fw1000
+              w1, w2, w3......w1000
             </td>
             <td>
               In general, the width of 'input' is set to 100% according to the column width.<br>
               However, in some cases, the size may be flexible.<br>
-              In this case, the size must be defined through the helper class.<br>
-              'fw' is the initial of 'form width', and can be used from 1 to 1000.
+              In this case, the size must be defined through the helper class.
             </td>
           </tr>
         </tbody>

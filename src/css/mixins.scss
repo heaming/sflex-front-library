@@ -110,8 +110,13 @@ $unit: px;
 }
 
 @for $width from 1 through 1000 {
-  .fw#{$width} {
+  .w#{$width} {
     width: #{$width} + $unit !important;
     max-width: #{$width} + $unit !important;
+
+    &.kw-date-picker .q-field__inner {
+      width: #{$width} + $unit !important;
+      max-width: #{$width} + $unit !important;
+    }
   }
 }
