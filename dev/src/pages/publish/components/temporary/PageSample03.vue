@@ -2,7 +2,7 @@
   <kw-page>
     <template #header>
       <kw-page-header
-        :options="['홈', '역량/총무', '역량관리', 'Tabs Sample #1']"
+        :options="['홈', '역량/총무', '역량관리', 'Tabs Sample #2(Tab in Tab)']"
       />
     </template>
 
@@ -19,46 +19,67 @@
     </kw-tabs>
     <kw-tab-panels model-value="1">
       <kw-tab-panel name="1">
-        <kw-search>
-          <kw-search-row>
-            <kw-search-item label="교육년월">
-              <kw-date-picker
-                type="month"
-              />
-            </kw-search-item>
-            <kw-search-item label="조직">
-              <kw-select
-                class="col mr8"
-                placeholder="총괄단 선택"
-                :options="['강남']"
-                use-input
-              />
-              <kw-select
-                class="col"
-                placeholder="센터 선택"
-                :options="['강남센터', '광진센터']"
-                use-input
-              />
-            </kw-search-item>
-            <kw-search-item label="수료여부">
-              <kw-option-group
-                model-value=""
-                type="radio"
-                :options="['수료', '미수료']"
-                first-option="all"
-              />
-            </kw-search-item>
-          </kw-search-row>
-          <kw-search-row>
-            <kw-search-item label="수료여부">
-              <kw-select
-                :options="['플래너전문가(1차월)(1차수)']"
-                first-option="all"
-              />
-            </kw-search-item>
-          </kw-search-row>
-        </kw-search>
-
+        <kw-tabs model-value="1">
+          <kw-tab
+            name="1"
+            label="일반조회"
+          />
+          <kw-tab
+            name="2"
+            label="주문번호 조회"
+          />
+          <kw-tab
+            name="3"
+            label="계약자 정보(교원키 조회)"
+          />
+          <kw-tab
+            name="4"
+            label="설치자 정보 조회"
+          />
+        </kw-tabs>
+        <kw-tab-panels model-value="1">
+          <kw-tab-panel name="1">
+            <kw-search>
+              <kw-search-row>
+                <kw-search-item label="교육년월">
+                  <kw-date-picker
+                    type="month"
+                  />
+                </kw-search-item>
+                <kw-search-item label="조직">
+                  <kw-select
+                    class="col mr8"
+                    placeholder="총괄단 선택"
+                    :options="['강남']"
+                    use-input
+                  />
+                  <kw-select
+                    class="col"
+                    placeholder="센터 선택"
+                    :options="['강남센터', '광진센터']"
+                    use-input
+                  />
+                </kw-search-item>
+                <kw-search-item label="수료여부">
+                  <kw-option-group
+                    model-value=""
+                    type="radio"
+                    :options="['수료', '미수료']"
+                    first-option="all"
+                  />
+                </kw-search-item>
+              </kw-search-row>
+              <kw-search-row>
+                <kw-search-item label="수료여부">
+                  <kw-select
+                    :options="['플래너전문가(1차월)(1차수)']"
+                    first-option="all"
+                  />
+                </kw-search-item>
+              </kw-search-row>
+            </kw-search>
+          </kw-tab-panel>
+        </kw-tab-panels>
         <div class="result-area">
           <h3>조회결과</h3>
           <kw-action-bar>
@@ -147,16 +168,8 @@ function initGrid(data, view) {
     { fieldName: 'col7', header: '수료', width: '60', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
   ];
 
-  const layouts = [{ column: 'col1', groupFooterSpans: [6] }, 'col2', 'col3', 'col4', 'col5', 'col6', 'col7'];
-  const groupFields = ['col1', 'col2'];
-
   data.setFields(fields);
   view.setColumns(columns);
-  view.setColumnLayout(layouts);
-  view.groupBy(groupFields);
-  view.rowIndicator.visible = true;
-  // eslint-disable-next-line no-template-curly-in-string
-  view.rowGroup.footerStatement = '${groupValue} 총수료인원 (대상자 ${rowCount}명)';
 
   data.setRows([
     { col1: '강남', col2: '강남센터', col3: 'B014223', col4: '김교원', col5: '1234567', col6: '플래너전문가(1차월)(1차수)', col7: 'Y' },
@@ -176,7 +189,7 @@ const sampleVueCode = `
 <kw-page>
   <template #header>
     <kw-page-header
-      :options="['홈', '역량/총무', '역량관리', 'Tabs Sample #1']"
+      :options="['홈', '역량/총무', '역량관리', 'Tabs Sample #2(Tab in Tab)']"
     />
   </template>
 
@@ -193,46 +206,67 @@ const sampleVueCode = `
   </kw-tabs>
   <kw-tab-panels model-value="1">
     <kw-tab-panel name="1">
-      <kw-search>
-        <kw-search-row>
-          <kw-search-item label="교육년월">
-            <kw-date-picker
-              type="month"
-            />
-          </kw-search-item>
-          <kw-search-item label="조직">
-            <kw-select
-              class="col mr8"
-              placeholder="총괄단 선택"
-              :options="['강남']"
-              use-input
-            />
-            <kw-select
-              class="col"
-              placeholder="센터 선택"
-              :options="['강남센터', '광진센터']"
-              use-input
-            />
-          </kw-search-item>
-          <kw-search-item label="수료여부">
-            <kw-option-group
-              model-value=""
-              type="radio"
-              :options="['수료', '미수료']"
-              first-option="all"
-            />
-          </kw-search-item>
-        </kw-search-row>
-        <kw-search-row>
-          <kw-search-item label="수료여부">
-            <kw-select
-              :options="['플래너전문가(1차월)(1차수)']"
-              first-option="all"
-            />
-          </kw-search-item>
-        </kw-search-row>
-      </kw-search>
-
+      <kw-tabs model-value="1">
+        <kw-tab
+          name="1"
+          label="일반조회"
+        />
+        <kw-tab
+          name="2"
+          label="주문번호 조회"
+        />
+        <kw-tab
+          name="3"
+          label="계약자 정보(교원키 조회)"
+        />
+        <kw-tab
+          name="4"
+          label="설치자 정보 조회"
+        />
+      </kw-tabs>
+      <kw-tab-panels model-value="1">
+        <kw-tab-panel name="1">
+          <kw-search>
+            <kw-search-row>
+              <kw-search-item label="교육년월">
+                <kw-date-picker
+                  type="month"
+                />
+              </kw-search-item>
+              <kw-search-item label="조직">
+                <kw-select
+                  class="col mr8"
+                  placeholder="총괄단 선택"
+                  :options="['강남']"
+                  use-input
+                />
+                <kw-select
+                  class="col"
+                  placeholder="센터 선택"
+                  :options="['강남센터', '광진센터']"
+                  use-input
+                />
+              </kw-search-item>
+              <kw-search-item label="수료여부">
+                <kw-option-group
+                  model-value=""
+                  type="radio"
+                  :options="['수료', '미수료']"
+                  first-option="all"
+                />
+              </kw-search-item>
+            </kw-search-row>
+            <kw-search-row>
+              <kw-search-item label="수료여부">
+                <kw-select
+                  :options="['플래너전문가(1차월)(1차수)']"
+                  first-option="all"
+                />
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+        </kw-tab-panel>
+      </kw-tab-panels>
       <div class="result-area">
         <h3>조회결과</h3>
         <kw-action-bar>
@@ -296,16 +330,8 @@ function initGrid(data, view) {
     { fieldName: 'col7', header: '수료', width: '60', styleName: 'text-center', groupFooter: { styleName: 'text-center', valueCallback } },
   ];
 
-  const layouts = [{ column: 'col1', groupFooterSpans: [6] }, 'col2', 'col3', 'col4', 'col5', 'col6', 'col7'];
-  const groupFields = ['col1', 'col2'];
-
   data.setFields(fields);
   view.setColumns(columns);
-  view.setColumnLayout(layouts);
-  view.groupBy(groupFields);
-  view.rowIndicator.visible = true;
-  // eslint-disable-next-line no-template-curly-in-string
-  view.rowGroup.footerStatement = '$ {groupValue} 총수료인원 (대상자 $ {rowCount}명)';
 
   data.setRows([
     { col1: '강남', col2: '강남센터', col3: 'B014223', col4: '김교원', col5: '1234567', col6: '플래너전문가(1차월)(1차수)', col7: 'Y' },

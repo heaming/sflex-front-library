@@ -67,18 +67,20 @@
   }
 
   .kw-form-row {
-    margin: 0 -20px;
-    padding: 12px 0;
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -20px;
+    padding: 10px 0;
+    min-height: 60px;
 
     .kw-form-item {
+      display: flex;
+      width: auto;
+      max-width: 100%;
+      min-width: 0;
+      min-height: 40px;
       padding-left: 20px;
       padding-right: 20px;
-      width: auto;
-      min-width: 0;
-      max-width: 100%;
-      display: flex;
 
       & > .row {
         align-items: center;
