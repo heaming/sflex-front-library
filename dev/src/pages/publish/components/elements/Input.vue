@@ -20,7 +20,7 @@
               the Element(tag's name)
             </th>
             <th>
-              attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -52,7 +52,7 @@
               kw-form-item / kw-search-item
             </td>
             <td>
-              essential - class
+              essential
             </td>
             <td>
               Add the class "essential" in the tags of kw-form-item or kw-search-item.
@@ -60,6 +60,16 @@
           </tr>
         </tbody>
       </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>For 'label' width & 'input' width, refer to 'Collections/Form'.</li>
+      </ul>
     </div>
     <div class="kw-guide-section">
       <h3

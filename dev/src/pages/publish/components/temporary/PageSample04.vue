@@ -1,0 +1,79 @@
+<template>
+  <kw-page class="kw-page--md">
+    <template #header>
+      <kw-page-header
+        :options="['홈', '고객', '거래처 마스터 관리', '거래처 마스터 상세/수정']"
+      />
+    </template>
+
+    <div class="normal-area">
+      <h3>거래처 정보</h3>
+      <kw-form cols="1">
+        <kw-form-row>
+          <kw-form-item
+            label="이름"
+            class="essential"
+          >
+            <kw-input
+              name="input"
+              rules="required"
+              placeholder="입력해주세요"
+              disable
+              model-value="김사랑"
+              class="w498"
+            />
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row>
+          <kw-form-item
+            label="성별"
+            class="essential"
+          >
+            <kw-option-group
+              :model-value="'여성'"
+              name="radioOptionGroup"
+              rules="required"
+              type="radio"
+              :options="['남성', '여성']"
+            />
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row>
+          <kw-form-item
+            label="생년월일"
+            class="essential"
+          >
+            <kw-date-picker
+              name="datePicker"
+              rules="required"
+              disable
+              class="w244"
+            />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+    </div>
+    <div class="kw-guide pa0">
+      <q-card>
+        <h3 class="center mb20">
+          This is the source code for this page. This part is not included in the coding.
+        </h3>
+        <guide-code-view
+          :code-value="[sampleVueCode, sampleJsCode]"
+          :lang="['vue','javascript']"
+          multi="true"
+        />
+      </q-card>
+    </div>
+  </kw-page>
+</template>
+
+<script setup>
+const sampleVueCode = `
+test
+`;
+
+const sampleJsCode = `
+test
+`;
+</script>

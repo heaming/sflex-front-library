@@ -12,7 +12,7 @@ export const useFormProps = {
   },
   labelSize: {
     type: [String, Number],
-    default: 120,
+    default: 150,
   },
   autofocus: {
     type: Boolean,

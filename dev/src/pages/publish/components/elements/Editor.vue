@@ -20,7 +20,7 @@
               the Element(tag's name)
             </th>
             <th>
-              attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -33,7 +33,7 @@
               kw-form-item (sample)
             </td>
             <td>
-              essential - class (sample)
+              essential (sample)
             </td>
             <td>
               add the class "essential" in the tag of kw-form-item. (sample)

@@ -22,7 +22,7 @@
               The Element(tag's name)
             </th>
             <th>
-              Attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -35,7 +35,7 @@
               kw-form-item
             </td>
             <td>
-              essential - class
+              essential
             </td>
             <td>
               add the class "essential" in the tag of kw-form-item.
@@ -85,6 +85,54 @@
             </td>
             <td>
               Add the number in colspan="" and it belongs to kw-form-item's tag as attribute
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Width
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              The Element(tag's name)
+            </th>
+            <th>
+              Attr or Class
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form / kw-search
+            </td>
+            <td>
+              :label-size="200"
+            </td>
+            <td>
+              Defines the size of all labels inside 'kw-form(kw-search)'.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-input / kw-select
+            </td>
+            <td>
+              w1, w2, w3......w1000
+            </td>
+            <td>
+              In general, the width of 'input' is set to 100% according to the column width.<br>
+              However, in some cases, the size may be flexible.<br>
+              In this case, the size must be defined through the helper class.
             </td>
           </tr>
         </tbody>
@@ -216,7 +264,7 @@
           <kw-form cols="4">
             <kw-form-row>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/4"
                 colspan="1"
               >
                 <kw-input
@@ -228,7 +276,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/4"
                 colspan="1"
               >
                 <kw-input
@@ -238,7 +286,7 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="colspan-2"
+                label="colspan-2/4"
                 colspan="2"
               >
                 <kw-input
@@ -249,7 +297,7 @@
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
-              <kw-form-item label="colspan-1">
+              <kw-form-item label="colspan-1/4">
                 <kw-option-group
                   name="radioOptionGroup"
                   rules="required"
@@ -258,7 +306,7 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/4"
                 colspan="1"
               >
                 <kw-input
@@ -268,7 +316,7 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="colspan-2"
+                label="colspan-2/4"
                 colspan="2"
               >
                 <kw-input
@@ -282,7 +330,7 @@
           <kw-form cols="3">
             <kw-form-row>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/3"
                 colspan="1"
               >
                 <kw-input
@@ -294,7 +342,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/3"
                 colspan="1"
               >
                 <kw-option-group
@@ -306,7 +354,7 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="colspan-2"
+                label="colspan-2/3"
                 colspan="2"
               >
                 <kw-input
@@ -320,7 +368,7 @@
           <kw-form cols="2">
             <kw-form-row>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/2"
                 colspan="1"
               >
                 <kw-input
@@ -330,7 +378,7 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="colspan-1"
+                label="colspan-1/2"
                 colspan="1"
               >
                 <kw-input
@@ -342,7 +390,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
-                label="colspan-2"
+                label="colspan-2/2"
                 colspan="2"
               >
                 <kw-select

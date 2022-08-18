@@ -20,7 +20,7 @@
               the Element(tag's name)
             </th>
             <th>
-              attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -64,6 +64,16 @@
           </tr>
         </tbody>
       </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>For 'label' width & 'select' width, refer to 'Collections/Form'.</li>
+      </ul>
     </div>
     <div class="kw-guide-section">
       <h3

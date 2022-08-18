@@ -24,7 +24,7 @@
               the Element(tag's name)
             </th>
             <th>
-              attribute(class)
+              Attr or Class
             </th>
             <th>
               Description

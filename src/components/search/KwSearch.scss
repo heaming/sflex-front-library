@@ -24,6 +24,10 @@
 
     .kw-form-item {
       min-height: 32px;
+
+      .kw-form-title {
+        max-width: 120px;
+      }
     }
   }
 
