@@ -1,5 +1,15 @@
 .kw-page {
   padding: 30px 40px 30px 64px;
+
+  &--md {
+    width: 1536px;
+    margin: 0 auto;
+  }
+
+  &--sm {
+    width: 1212px;
+    margin: 0 auto;
+  }
 }
 
 .kw-page-header {

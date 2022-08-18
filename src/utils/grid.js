@@ -388,7 +388,7 @@ export async function validate(view, isChangedOnly = true, alertMessage = true) 
   */
 const normalizeExportOptions = (options = {}) => ({
   ...options,
-  type: ExportType.EXCEL,
+  type: options.exportType || ExportType.EXCEL,
   target: ExportTarget.LOCAL,
   indicator: options.indicator || 'hidden',
   checkBar: options.checkBar || 'hidden',
