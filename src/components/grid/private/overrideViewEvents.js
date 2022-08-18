@@ -369,7 +369,6 @@ export function overrideOnCellPasting(view) {
   */
 export function overrideDataDropOptionsDragCallback(view) {
   wrapEvent(view, dataDropOptionsDragCallback, (source, sourceItems, target, targetItem) => {
-    console.log('dragCallback');
     if (hasOriginal(view, dataDropOptionsDragCallback)) {
       return execOriginal(view, dataDropOptionsDragCallback, source, sourceItems, target, targetItem);
     }
