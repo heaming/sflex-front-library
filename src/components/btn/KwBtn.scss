@@ -543,3 +543,18 @@ svg[viewBox$="16"] {
     }
   }
 }
+
+.admin-arrow-box {
+  display: flex;
+  flex-direction: column;
+
+  .kw-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+
+    .q-icon {
+      margin-right: 0;
+    }
+  }
+}
