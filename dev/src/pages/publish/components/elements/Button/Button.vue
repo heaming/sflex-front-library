@@ -50,6 +50,19 @@
           </tr>
           <tr>
             <td>
+              width
+            </td>
+            <td>
+              Default<br>
+              w1, w2, w3...w1000
+            </td>
+            <td>
+              width : auto<br>
+              If you need a specific width rather than 'auto', use a helper class. px
+            </td>
+          </tr>
+          <tr>
+            <td>
               color or type
             </td>
             <td>

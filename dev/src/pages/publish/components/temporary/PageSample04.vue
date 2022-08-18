@@ -53,6 +53,24 @@
         </kw-form-row>
       </kw-form>
     </div>
+    <!-- <div class="fix-bottom-area row justify-between">
+      <div class="row justify-start items-center">
+        <kw-btn
+          class="kw-btn--line-black"
+          label="목록"
+        />
+      </div>
+      <div class="row justify-end items-center">
+        <kw-btn
+          class="kw-btn--line-black mr8"
+          label="초기화"
+        />
+        <kw-btn
+          class="w184"
+          label="등록"
+        />
+      </div>
+    </div> -->
     <div class="kw-guide pa0">
       <q-card>
         <h3 class="center mb20">

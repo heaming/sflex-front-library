@@ -24,7 +24,7 @@
 
     &__bottom--animated {
       transform: translateY(0) !important;
-      bottom: -13px;
+      bottom: -15px;
     }
 
     &__messages {
@@ -87,7 +87,7 @@
       width: 150px;
       font-size: 14px;
       line-height: 18px;
-      color: $black-h3;
+      color: $black3;
       word-break: break-word;
 
       & + label {
@@ -115,7 +115,7 @@
 
 // quasar dropdown style override
 .q-menu {
-  border: 1px solid $black-h1;
+  border: 1px solid $black1;
   border-radius: 0;
   box-shadow: none;
 
@@ -146,13 +146,13 @@
 
       .q-item__label {
         font-weight: 700;
-        color: $black-h1;
+        color: $black1;
       }
     }
 
     .q-item__label {
       font-size: 14px;
-      color: $black-h2;
+      color: $black2;
       font-weight: 400;
       z-index: 1;
     }
