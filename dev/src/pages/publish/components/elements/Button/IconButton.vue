@@ -17,10 +17,10 @@
         <thead>
           <tr>
             <th>
-              the Element(tag's name)
+              Element(tag's name)
             </th>
             <th>
-              Attr or Class
+              Attribute(class)
             </th>
             <th>
               Description
@@ -69,6 +69,19 @@
           ( <b> ex: icon="plus_16|0 0 16 16 </b>) : The last two numbers are each of width and height.
         </li>
       </ol>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>
+          mr10 is for the styling the guide.Remove it after copying the code.<br>
+          (The reference page of Gutter in publishing guide: Publish / Components / Element / Gutter)
+        </li>
+      </ul>
     </div>
     <div class="kw-guide-section">
       <h3
@@ -167,7 +180,7 @@
         id="default"
         class="kw-guide-title"
       >
-        arrow button
+       admin-arrow button
       </h3>
       <q-card>
         <div class="kw-guide-example">
@@ -184,18 +197,43 @@
         </div>
       </q-card>
     </div> -->
+    <!-- <div class="kw-guide-section">
+      <div class="kw-guide-section">
+        <h3
+          id="default"
+          class="kw-guide-title"
+        >
+          icon button size(width & height: 40px)
+        </h3>
+        <q-card>
+          <div class="kw-guide-example">
+            <div>
+              <kw-btn
+                class="kw-btn--line-gray kw-btn--size40"
+                icon="search_24|0 0 24 24"
+              />
+              <kw-btn
+                class="kw-btn--line-gray kw-btn--size40"
+                icon="double_check_24|0 0 24 24"
+              />
+            </div>
+          </div>
+        </q-card>
+      </div>
+    </div> -->
   </kw-page>
 </template>
 
 <script setup>
 
 const testCode = `
+<!--  mr10:gutter margin-right:10px  -->
 <kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32"
+  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
   icon="arrow_down|0 0 16 16"
   label="상태변경"
 />
-<!-- Add the class of 'kw-btn-reverse'. The icon is right side, and the text is left side -->
+<!-- The label is left side and The icon is right side. It is swapped by the class of 'kw-btn-reverse' -->
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
   icon="arrow_down|0 0 16 16"
@@ -205,7 +243,7 @@ const testCode = `
 const excelCode = `
 <kw-btn
   icon="excel_download|0 0 16 16"
-  class="kw-btn--excel"
+  class="kw-btn--excel mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
@@ -217,7 +255,7 @@ const excelCode = `
 const excelCode02 = `
 <kw-btn
   icon="excel_download|0 0 16 16"
-  class="kw-btn--line-black kw-btn--h32"
+  class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
@@ -230,7 +268,7 @@ const excelCode02 = `
 const excelCode03 = `
 <kw-btn
   icon="excel_upload|0 0 16 16"
-  class="kw-btn--line-black kw-btn--h32"
+  class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 업로드"
 />
 <kw-btn

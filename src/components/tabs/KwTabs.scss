@@ -17,7 +17,7 @@
   background: #fff;
 
   .q-tabs__content {
-    border-bottom: 1px solid $black-h1;
+    border-bottom: 1px solid $black1;
     height: 40px;
     overflow: visible;
   }
@@ -28,7 +28,7 @@
     padding: 0 28px;
     background: $bg-box;
     border: 1px solid $placeholder;
-    border-bottom: 1px solid $black-h1;
+    border-bottom: 1px solid $black1;
     opacity: 1;
 
     .q-tab__label {
@@ -41,7 +41,7 @@
 
     &.q-tab--active {
       background: #fff;
-      border-color: $black-h1;
+      border-color: $black1;
       border-bottom: none;
 
       .q-tab__label {
@@ -54,7 +54,7 @@
       }
 
       & + .kw-tab {
-        border-left: 1px solid $black-h1;
+        border-left: 1px solid $black1;
       }
     }
 
@@ -105,7 +105,7 @@
         }
 
         & + .kw-tab {
-          border-left: 1px solid $black-h1;
+          border-left: 1px solid $black1;
         }
       }
 
