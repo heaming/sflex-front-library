@@ -462,7 +462,7 @@ export function getDescendants(view, dataRow) {
 }
 
 export function getSiblings(view, dataRow, isIncludeSelf = true) {
-  const parentRow = getParent(view);
+  const parentRow = getParent(view, dataRow);
   const predicate = (e) => isIncludeSelf || e !== dataRow;
 
   return parentRow > -1

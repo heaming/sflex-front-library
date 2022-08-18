@@ -68,7 +68,7 @@ module.exports = {
       tsx: 'never',
     }],
 
-    // disabled for convenience
+    // disable for convenience
     'prefer-destructuring': ['error', {
       VariableDeclarator: {
         array: false,
