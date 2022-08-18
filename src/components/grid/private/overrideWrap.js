@@ -2,7 +2,11 @@ function wrap(obj, key, fn, isEvent = false) {
   obj.__originalFns__ ||= {};
   obj.__originalFns__[key] = obj[key];
 
-  Object.defineProperty(obj, key, {
+  const chains = key.split('.');
+  const targetKey = chains.pop();
+  const target = chains.reduce((o, k) => o[k], obj);
+
+  Object.defineProperty(target, targetKey, {
     get() {
       return fn;
     },
@@ -15,7 +19,7 @@ function wrap(obj, key, fn, isEvent = false) {
 }
 
 export function wrapMethod(obj, key, fn) {
-  wrap(obj, key, fn);
+  wrap(obj, key, fn, false);
 }
 
 export function wrapEvent(obj, key, fn) {
