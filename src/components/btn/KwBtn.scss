@@ -54,7 +54,7 @@
 
   // negative
   &--negative {
-    background-color: $black-h3;
+    background-color: $black3;
 
     &:hover {
       background-color: #5e5e5e;
@@ -68,10 +68,10 @@
   &--line-black {
     border: 1px solid $black-btn-line;
     background-color: $bg-white;
-    color: $black-h2;
+    color: $black2;
 
     &:hover {
-      border: 1px solid $black-h1;
+      border: 1px solid $black1;
       background-color: $bg-white;
     }
 
@@ -157,10 +157,10 @@
   &--line-gray {
     border: 1px solid $line-line;
     background: $bg-white;
-    color: $black-h2;
+    color: $black2;
 
     &:hover {
-      border: 1px solid $black-h1;
+      border: 1px solid $black1;
       background-color: $bg-white;
     }
 
@@ -184,10 +184,10 @@
     &.kw-btn--line-bg {
       background: $bg-box;
       border: 1px solid $line-line;
-      color: $black-h2;
+      color: $black2;
 
       &:hover {
-        border: 1px solid $black-h1;
+        border: 1px solid $black1;
         background-color: $bg-box;
       }
 
@@ -217,7 +217,7 @@
     &.kw-btn--reset {
       border: 1px solid $black-btn-line;
       background-color: $bg-white;
-      color: $black-h2;
+      color: $black2;
     }
   }
 
@@ -256,11 +256,11 @@
     border: 1px solid $black-btn-line;
     background-color: $bg-box;
     font-size: 14px;
-    color: $black-h2;
+    color: $black2;
     font-weight: 400;
 
     &:hover {
-      border-color: $black-h1;
+      border-color: $black1;
       background-color: $bg-white;
     }
 
@@ -293,11 +293,11 @@
     border: 1px solid $black-btn-line;
     background-color: $bg-white;
     font-size: 14px;
-    color: $black-h2;
+    color: $black2;
     font-weight: 400;
 
     &:hover {
-      border-color: $black-h1;
+      border-color: $black1;
       background-color: $bg-white;
     }
 
@@ -356,7 +356,7 @@
     border: 1px solid $black-btn-line;
     height: 42px;
     background-color: $bg-white;
-    color: $black-h2;
+    color: $black2;
     font-weight: 400;
 
     & + & {
@@ -364,7 +364,7 @@
     }
 
     &:hover {
-      border-color: $black-h1;
+      border-color: $black1;
       background-color: $bg-white;
     }
 
@@ -426,7 +426,7 @@
     height: 32px;
     background-color: $bg-white;
     font-size: 14px;
-    color: $black-h3;
+    color: $black3;
     font-weight: 400;
     position: relative;
 
@@ -461,7 +461,7 @@
     padding: 0;
     background-color: rgb(56 144 246 / 0%) !important;
     font-size: 14px;
-    color: $black-h1;
+    color: $black1;
     height: 32px;
     text-decoration: underline;
     position: relative;
@@ -493,7 +493,7 @@
     padding: 0;
     background-color: rgb(56 144 246 / 0%) !important;
     font-size: 14px;
-    color: $black-h1;
+    color: $black1;
     height: 32px;
     text-decoration: underline;
     position: relative;

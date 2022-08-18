@@ -106,12 +106,12 @@
 
 .rg-body .rg-table tr td,
 .rg-fixed-body .rg-table tr td {
-  color: $black-h1;
+  color: $black1;
 }
 
 .rg-grid {
   border: 0;
-  border-top: 1px solid $black-h1;
+  border-top: 1px solid $black1;
 
   * {
     font-family: "Spoqa Han Sans Neo", sans-serif;
@@ -133,7 +133,7 @@
 
     & div,
     span {
-      color: $black-h3;
+      color: $black3;
     }
 
     &:last-child {
@@ -157,6 +157,6 @@
   }
 
   .rg-fixed-row td {
-    border-right: 1px solid $black-h1;
+    border-right: 1px solid $black1;
   }
 }

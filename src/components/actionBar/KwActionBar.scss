@@ -3,7 +3,7 @@
 
   &--count {
     height: 100%;
-    color: $black-h3;
+    color: $black3;
     font-size: 14px;
     line-height: 1;
     display: flex;
@@ -11,7 +11,7 @@
   }
 
   &--number {
-    color: $black-h1;
+    color: $black1;
     font-weight: 700;
   }
 
@@ -23,14 +23,14 @@
   &--description {
     margin: 0;
     font-size: 11px;
-    color: $black-h3;
+    color: $black3;
     display: flex;
     align-items: center;
   }
 
   &-menu {
     font-size: 14px;
-    color: $black-h3;
+    color: $black3;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@
     }
 
     & &--value {
-      color: $black-h1;
+      color: $black1;
       font-weight: 700;
     }
   }
@@ -87,7 +87,7 @@
     .q-field__prefix,
     .q-field__suffix {
       font-size: 14px;
-      color: $black-h3;
+      color: $black3;
     }
 
     &.q-field--with-bottom {
@@ -122,7 +122,7 @@
     //   padding-left: 22px;
     //   background-color: #fff;
     //   font-size: 14px;
-    //   color: $black-h1;
+    //   color: $black1;
     //   text-decoration: underline;
     //   position: relative;
 
@@ -147,10 +147,10 @@
       border: 1px solid $line-line;
       background-color: $bg-box;
       font-size: 12px;
-      color: $black-h2;
+      color: $black2;
 
       &:hover {
-        border-color: $black-h1;
+        border-color: $black1;
         background-color: $bg-box;
       }
 
