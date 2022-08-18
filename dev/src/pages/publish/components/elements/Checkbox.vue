@@ -20,7 +20,7 @@
               The Element(tag's name)
             </th>
             <th>
-              Attribute(class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -119,6 +119,7 @@
           If there is only one option in checkbox, kw-checkbox is required to be wrapped by <b>kw-field</b>.<br>
         </li>
         <li>If there are more than two options, it is required to use <b>kw-option-group</b></li>
+        <li>For 'label' width, refer to 'Collections/Form'.</li>
       </ul>
     </div>
     <div class="kw-guide-section">

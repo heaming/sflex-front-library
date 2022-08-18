@@ -20,7 +20,7 @@
               The Element(Tag's name)
             </th>
             <th>
-              Attribute(Class)
+              Attr or Class
             </th>
             <th>
               Description
@@ -65,6 +65,16 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>For 'label' width, refer to 'Collections/Form'.</li>
+      </ul>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="defaultOptionGroup"
         class="kw-guide-title"
       >
@@ -79,6 +89,7 @@
             <kw-form-row>
               <kw-form-item label="optiongroup (default)">
                 <kw-option-group
+                  :model-value="'A'"
                   name="radioOptionGroup"
                   rules="required"
                   type="radio"
@@ -110,7 +121,7 @@
             <kw-form-row>
               <kw-form-item label="optiongroup (disable)">
                 <kw-option-group
-                  :model-value="[]"
+                  :model-value="'B'"
                   name="radioOptionGroup"
                   rules="required"
                   type="radio"
@@ -143,7 +154,7 @@
             <kw-form-row>
               <kw-form-item label="OptionGroup (readonly)">
                 <kw-option-group
-                  :model-value="[]"
+                  :model-value="'C'"
                   name="radioOptionGroup"
                   rules="required"
                   type="radio"
@@ -169,7 +180,7 @@ const groupRadioDefaultCode = `
   <kw-form-row>
     <kw-form-item label="optiongroup (default)">
       <kw-option-group
-        :model-value="[]"
+        :model-value="'A'"
         name="radioOptionGroup"
         rules="required"
         type="radio"
@@ -184,7 +195,7 @@ const groupRadioDefaultCode = `
   <kw-search-row>
     <kw-search-item label="optiongroup (default)">
       <kw-option-group
-        :model-value="[]"
+        :model-value="'A'"
         name="radioOptionGroup"
         rules="required"
         type="radio"
@@ -200,7 +211,7 @@ const groupRadioDisableCode = `
   <kw-form-row>
     <kw-form-item label="optiongroup (disable)">
       <kw-option-group
-        :model-value="[]"
+        :model-value="'B'"
         name="radioOptionGroup"
         rules="required"
         type="radio"
@@ -216,7 +227,7 @@ const groupRadioDisableCode = `
   <kw-search-row>
     <kw-search-item label="optiongroup (disable)">
       <kw-option-group
-        :model-value="[]"
+        :model-value="'B'"
         name="radioOptionGroup"
         rules="required"
         type="radio"
@@ -233,7 +244,7 @@ const groupRadioReadonlyCode = `
   <kw-form-row>
     <kw-form-item label="optiongroup (readonly)">
       <kw-option-group
-        :model-value="[]"
+        :model-value="'C'"
         name="radioOptionGroup"
         rules="required"
         type="radio"
@@ -249,7 +260,7 @@ const groupRadioReadonlyCode = `
   <kw-search-row>
     <kw-search-item label="optiongroup (readonly)">
       <kw-option-group
-        :model-value="[]"
+        :model-value="'C'"
         name="radioOptionGroup"
         rules="required"
         type="radio"

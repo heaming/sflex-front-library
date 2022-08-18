@@ -50,10 +50,11 @@
       </h3>
       <q-card>
         <div class="kw-guide-example">
-          <div class="result-area">
-            <h3>조회결과</h3>
-            <p>&lt;!-- Maybe 'grid' is here. --&gt;</p>
-          </div>
+          <img
+            src="../../../../../assets/images/block_type1.png"
+            alt="block_type1"
+            style="width: 50%;"
+          >
         </div>
         <guide-code-view
           :code-value="testCode"
