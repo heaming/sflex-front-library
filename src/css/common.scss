@@ -38,15 +38,19 @@ textarea::placeholder {
 }
 
 // global settings
-.kw-page {
+.q-page-container {
   background: #f4f5f6;
+}
 
+.kw-page {
   &--md {
     width: 1536px;
+    margin: 0 auto;
   }
 
   &--sm {
     width: 1212px;
+    margin: 0 auto;
   }
 }
 
@@ -90,4 +94,20 @@ h4 {
 
 p {
   margin: 0;
+}
+
+// block box
+// grid result is in Kwgrid.scss
+.kw-page-header + div {
+  min-height: 500px;
+}
+
+.normal-area {
+  padding: 30px 40px;
+  background: #fff;
+  border: 1px solid $line-bg;
+
+  h3 {
+    margin-bottom: 10px;
+  }
 }
