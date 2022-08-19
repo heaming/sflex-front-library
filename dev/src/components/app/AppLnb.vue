@@ -3,6 +3,7 @@
     :model-value="lnbExpanded"
     show-if-above
     bordered
+    class="kw-lnb"
   >
     <div class="q-pa-md q-gutter-sm">
       <kw-input
@@ -21,9 +22,18 @@
         no-selection-unset
         node-key="key"
         selected-color="primary"
+        class="kw-lnb-tree"
         @update:selected="onSelect"
       />
     </div>
+    <q-btn
+      flat
+      dense
+      round
+      label="Menu"
+      class="kw-lnb-switch"
+      @click="dispatch('app/toggleLnb')"
+    />
   </q-drawer>
 </template>
 
@@ -95,4 +105,5 @@ async function onSelect(key) {
     lnbRef.value.setExpanded(key, state);
   }
 }
+const { dispatch } = useStore();
 </script>
