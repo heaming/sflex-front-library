@@ -10,6 +10,7 @@ export * from './field';
 export * from './file';
 export * from './form';
 export * from './grid';
+export * from './icon';
 export * from './input';
 export * from './observer';
 export * from './optionGroup';
