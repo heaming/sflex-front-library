@@ -20,6 +20,9 @@ const onValidate = 'onValidate'; // custom
 const onEditChange = 'onEditChange';
 const onGetEditValue = 'onGetEditValue';
 const onCellPasting = 'onCellPasting';
+const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
+const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
+const dataDropOptionsDropCallback = 'dataDropOptions._callback';
 
 /*
   데이터 셀의 툴팁이 표시되었음을 알리는 콜백
@@ -357,6 +360,53 @@ export function overrideOnCellPasting(view) {
 
     if (hasOriginal(g, onCellPasting)) {
       return execOriginal(g, onCellPasting, g, index, value);
+    }
+  });
+}
+
+/*
+  그리드 간 drag and drop 을 시작할 때 발생하는 콜백
+  */
+export function overrideDataDropOptionsDragCallback(view) {
+  wrapEvent(view, dataDropOptionsDragCallback, (source, sourceItems, target, targetItem) => {
+    if (!hasOriginal(view, dataDropOptionsDropCallback)) {
+      return false;
+    }
+
+    if (hasOriginal(view, dataDropOptionsDragCallback)) {
+      return execOriginal(view, dataDropOptionsDragCallback, source, sourceItems, target, targetItem);
+    }
+  });
+}
+
+/*
+  drag 중인 item 의 label 텍스트를 결정하기 위한 콜백
+  */
+export function overrideDataDropOptionsLabelCallback(view) {
+  wrapEvent(view, dataDropOptionsLabelCallback, (source, sourceItems, target, targetItem) => {
+    if (hasOriginal(view, dataDropOptionsLabelCallback)) {
+      return execOriginal(view, dataDropOptionsLabelCallback, source, sourceItems, target, targetItem);
+    }
+
+    if (view.dataDropOptions.dragCallback(source, sourceItems, target, targetItem) === false) {
+      return '🚫';
+    }
+
+    return '✅';
+  });
+}
+
+/*
+  그리드 간 drag and drop 했을 때 발생하는 콜백
+  */
+export function overrideDataDropOptionsDropCallback(view) {
+  wrapEvent(view, dataDropOptionsDropCallback, (source, sourceItems, target, targetItem) => {
+    if (view.dataDropOptions.dragCallback(source, sourceItems, target, targetItem) === false) {
+      return;
+    }
+
+    if (hasOriginal(view, dataDropOptionsDropCallback)) {
+      execOriginal(view, dataDropOptionsDropCallback, source, sourceItems, target, targetItem);
     }
   });
 }
