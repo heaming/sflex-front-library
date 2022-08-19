@@ -1,6 +1,7 @@
 .kw-form,
 .kw-search {
-  overflow: hidden;
+  overflow-y: visible;
+  overflow-x: clip;
 
   .q-field {
     &__inner {
@@ -24,7 +25,9 @@
 
     &__bottom--animated {
       transform: translateY(0) !important;
-      bottom: -15px;
+      bottom: -16px;
+      font-size: 14px;
+      color: $error;
     }
 
     &__messages {
