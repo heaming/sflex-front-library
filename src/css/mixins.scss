@@ -109,14 +109,18 @@ $unit: px;
   }
 }
 
-@for $width from 1 through 1000 {
-  .w#{$width} {
-    width: #{$width} + $unit !important;
-    max-width: #{$width} + $unit !important;
+@for $size from 1 through 1000 {
+  .w#{$size} {
+    width: #{$size} + $unit !important;
+    max-width: #{$size} + $unit !important;
 
     &.kw-date-picker .q-field__inner {
-      width: #{$width} + $unit !important;
-      max-width: #{$width} + $unit !important;
+      width: #{$size} + $unit !important;
+      max-width: #{$size} + $unit !important;
     }
+  }
+  .h#{$size} {
+    height: #{$size} + $unit !important;
+    max-height: #{$size} + $unit !important;
   }
 }
