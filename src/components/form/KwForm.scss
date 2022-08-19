@@ -1,6 +1,7 @@
 .kw-form,
 .kw-search {
-  overflow: hidden;
+  overflow-y: visible;
+  overflow-x: clip;
 
   .q-field {
     &__inner {
