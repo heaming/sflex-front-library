@@ -85,12 +85,12 @@
             </div>
           </div>
           <div class="flex-exam row justify-between">
-            <div class="flex-exam row justify-start items-center">
-              <div class="item mr10">
+            <div class="flex-exam row justify-start items-center item-wrap">
+              <div class="item">
                 Left side: justify-start
               </div>
             </div>
-            <div class="flex-exam row justify-end items-center">
+            <div class="flex-exam row justify-end items-center item-wrap">
               <div class="item mr10">
                 Right side: justify-end
               </div>
@@ -148,14 +148,14 @@ const testCode = `
     Box
   </div>
 </div>
-<!-- two inner rows are wrapped by the outside of row. The one of inner rows is justify-start(left side), The other one is justify-end(right side) -->
-<div class="row justify-between">
-  <div class="row justify-start items-center">
-    <div class="item mr10">
+<!-- Two inner rows are wrapped by the outside of row. The one of inner rows is justify-start(left side), The other one is justify-end(right side) -->
+<div class="flex-exam row justify-between">
+  <div class="flex-exam row justify-start items-center item-wrap">
+    <div class="item">
       Left side: justify-start
     </div>
   </div>
-  <div class="row justify-end items-center">
+  <div class="flex-exam row justify-end items-center item-wrap">
     <div class="item mr10">
       Right side: justify-end
     </div>
@@ -164,6 +164,7 @@ const testCode = `
     </div>
   </div>
 </div>
+
 `;
 
 </script>
