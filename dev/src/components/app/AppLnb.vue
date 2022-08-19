@@ -26,15 +26,12 @@
         @update:selected="onSelect"
       />
     </div>
-    <q-btn
-      flat
-      dense
-      round
-      label="Menu"
-      class="kw-lnb-switch"
-      @click="dispatch('app/toggleLnb')"
-    />
   </q-drawer>
+  <kw-btn
+    icon="lnb_arrow| 0 0 16 16"
+    class="kw-lnb-switch"
+    @click="dispatch('app/toggleLnb')"
+  />
 </template>
 
 <script setup>
