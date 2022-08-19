@@ -28,7 +28,7 @@
     </div>
   </q-drawer>
   <kw-btn
-    icon="lnb_arrow| 0 0 16 16"
+    icon="lnb_arrow|0 0 16 16"
     class="kw-lnb-switch"
     @click="dispatch('app/toggleLnb')"
   />
