@@ -98,24 +98,25 @@
         The size of width & Height
       </h3>
       <p class="kw-guide-description">
-        w30(width:30px) h30(height:30px)
+        w30(width:30px) h30(height:30px)<br>
+        it is able to put from 1px to 1000px
       </p>
       <q-card>
         <div class="kw-guide-example">
           <div class="size-exam-el">
-            <div class="w100 h100 mr10">
-              w30 h30
-            </div>
             <div class="w150 h100 mr10">
-              w150 h100
+              w150 * h100
             </div>
-            <div class="w250 h100">
-              w250 * h100
+            <div class="w250 h120 mr10">
+              w250 * h120
+            </div>
+            <div class="w250 h150">
+              w250 * h150
             </div>
           </div>
         </div>
         <guide-code-view
-          :code-value="testCode"
+          :code-value="size"
           lang="vue"
         />
       </q-card>
@@ -137,6 +138,20 @@ const testCode = `
       200px * 100px
     </div>
   </div>
+</div>
+`;
+const size = `
+<!-- width:150px height:100px -->
+<div class="w150 h100 mr10">
+  w150 * h100
+</div>
+<!-- width:250px height:120px -->
+<div class="w250 h120 mr10">
+  w250 * h120
+</div>
+<!-- width:250px height:150px -->
+<div class="w250 h150">
+  w250 * h150
 </div>
 `;
 </script>
