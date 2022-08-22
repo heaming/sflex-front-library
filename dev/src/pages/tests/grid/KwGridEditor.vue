@@ -37,8 +37,8 @@ import { createGridData } from '@/utils/data';
 
 export default {
   setup() {
-    let gridData = gridUtil.defineGridData();
-    let gridView = gridUtil.defineGridView();
+    let gridData;
+    let gridView;
 
     let onClickExport;
 

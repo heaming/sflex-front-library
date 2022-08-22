@@ -45,14 +45,6 @@ function getOutputRow(data, dataRow) {
 }
 
 /*
-  Define
- */
-export const defineGridView = (view) => view;
-export const defineGridData = (data) => data;
-export const defineTreeView = (view) => view;
-export const defineTreeData = (data) => data;
-
-/*
   Common
  */
 export async function focusCellInput(view, dataRow, fieldName, dropdown = false) {
