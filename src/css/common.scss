@@ -2,19 +2,19 @@
 @font-face {
   font-family: "Spoqa Han Sans Neo";
   font-weight: 700;
-  src: url("~assets/fonts/SpoqaHanSansNeo-Bold.woff2") format("woff2");
+  src: url("~assets/fonts/NotoSansKR-Bold.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Spoqa Han Sans Neo";
   font-weight: 500;
-  src: url("~assets/fonts/SpoqaHanSansNeo-Medium.woff2") format("woff2");
+  src: url("~assets/fonts/NotoSansKR-Medium.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Spoqa Han Sans Neo";
   font-weight: 400;
-  src: url("~assets/fonts/SpoqaHanSansNeo-Regular.woff2") format("woff2");
+  src: url("~assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
 }
 
 #app > .q-layout { min-width: 1900px; }
@@ -22,7 +22,9 @@
 body {
   font-size: 16px;
   color: #222;
-  font-family: "Spoqa Han Sans Neo", sans-serif;
+
+  // font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 [disabled] {
@@ -45,19 +47,31 @@ textarea::placeholder {
     z-index: 1000;
   }
 
-  &-switch {
+  &-switch.kw-btn {
     position: fixed;
-    right: -20px;
-    width: 24px;
-    min-width: 24px !important;
-    height: 58.8px;
-    top: calc(50vh + 70px);
+    left: 300px;
+    width: 32px;
+    height: 74px;
+    top: 50vh;
     transform: translateY(-50%);
-    background: #555;
-    border-radius: 0% 100% 100% 0% / 100% 50% 50% 0%;
-    font-size: 1px;
-    box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 35%);
+    background: url(~assets/images/lnb_back.png) no-repeat center;
+    border-radius: 0;
     z-index: 990;
+    padding: 0;
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+    }
+
+    svg {
+      margin-left: -7px;
+    }
   }
 }
 
