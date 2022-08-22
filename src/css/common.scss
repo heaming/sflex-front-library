@@ -1,18 +1,18 @@
 // fonts
 @font-face {
-  font-family: "Spoqa Han Sans Neo";
+  font-family: "Noto Sans KR";
   font-weight: 700;
   src: url("~assets/fonts/NotoSansKR-Bold.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Spoqa Han Sans Neo";
+  font-family: "Noto Sans KR";
   font-weight: 500;
   src: url("~assets/fonts/NotoSansKR-Medium.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Spoqa Han Sans Neo";
+  font-family: "Noto Sans KR";
   font-weight: 400;
   src: url("~assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
 }
@@ -37,6 +37,86 @@ textarea::placeholder {
   color: $placeholder !important;
   font-weight: 400 !important;
   opacity: 1 !important;
+}
+
+// gnb 관련
+.kw-gnb {
+  border-bottom: 1px solid #e5e5e5;
+
+  &.q-layout__section--marginal {
+    color: $black2;
+  }
+
+  .q-toolbar {
+    padding: 0 40px;
+    height: 70px;
+    background: #fff;
+
+    .q-avatar {
+      width: 120px;
+      height: 24px;
+      margin-right: 80px;
+      border-radius: 0;
+    }
+
+    .kw-gnb--link {
+      display: inline-block;
+      color: $black2;
+      font-size: 18px;
+      margin-right: 40px;
+      text-decoration: none;
+      font-weight: 500;
+      height: 100%;
+      line-height: 70px;
+      position: relative;
+
+      &.active {
+        font-weight: 700;
+
+        &::after {
+          content: "";
+          position: absolute;
+          display: block;
+          bottom: -1px;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: $primary;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .gnb-search {
+      &.q-field {
+        padding-bottom: 0;
+      }
+
+      .q-field__bottom--animated {
+        display: none;
+      }
+
+      .q-field__native {
+        border: none;
+        border-bottom: 1px solid $placeholder;
+        height: 32px;
+        padding: 0;
+        font-size: 14px;
+      }
+
+      .q-field__control {
+        height: 32px;
+
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 // lnb 관련
