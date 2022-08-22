@@ -68,7 +68,9 @@
         Notice
       </h3>
       <ul>
-        <li>For 'label' width & 'input' width, refer to 'Collections/Form'.</li>
+        <li class="notice">
+          For 'label' width & 'input' width, refer to 'Collections/Form'.
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">
