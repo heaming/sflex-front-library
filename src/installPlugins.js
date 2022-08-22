@@ -1,5 +1,4 @@
 /* eslint-disable import/no-named-as-default */
-import consts from './plugins/consts';
 import cookies from './plugins/cookies';
 import dialog from './plugins/dialog';
 import http from './plugins/http';
@@ -11,7 +10,6 @@ import storage from './plugins/storage';
 
 export default (app, plugins) => {
   plugins = [
-    consts,
     cookies,
     dialog,
     http,
