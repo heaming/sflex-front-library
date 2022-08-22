@@ -19,7 +19,7 @@
         <thead>
           <tr>
             <th>
-              Name
+              Name(css-value)
             </th>
             <th>
               Color info (HEX)
