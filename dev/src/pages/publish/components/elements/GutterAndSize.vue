@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      gutter
+      Gutter and Size
     </h2>
     <p class="kw-guide-description">
       Gutter is used to easily define the 'margin' and 'padding' between each component.
@@ -81,6 +81,36 @@
           <div class="gutter-exam-el">
             <div class="pa20">
               200px * 100px
+            </div>
+          </div>
+        </div>
+        <guide-code-view
+          :code-value="testCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="example"
+        class="kw-guide-title"
+      >
+        The size of width & Height
+      </h3>
+      <p class="kw-guide-description">
+        w30(width:30px) h30(height:30px)
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <div class="size-exam-el">
+            <div class="w100 h100 mr10">
+              w30 h30
+            </div>
+            <div class="w150 h100 mr10">
+              w150 h100
+            </div>
+            <div class="w250 h100">
+              w250 * h100
             </div>
           </div>
         </div>
