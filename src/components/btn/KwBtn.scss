@@ -9,6 +9,19 @@
   text-transform: none;
   border-radius: 0;
 
+  &--icon-only {
+    width: auto;
+    height: auto;
+    padding: 0;
+
+    &.kw-btn.q-btn .q-icon {
+      width: 1em;
+      height: 1em;
+      margin: 0;
+      font-size: 1em;
+    }
+  }
+
   &::before {
     display: none;
   }
@@ -242,7 +255,7 @@
     padding: 0 12px;
   }
 
-  //button size
+  // button size
   &--size40 {
     width: 40px;
     height: 40px;

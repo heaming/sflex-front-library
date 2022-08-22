@@ -88,6 +88,41 @@
         id="default"
         class="kw-guide-title"
       >
+        Icon Button
+      </h3>
+      <p class="kw-guide-description">
+        Making only icon in the button.<br> Add the class of
+        <b>'kw-btn--icon-only'</b> and Add the size of width and height as helper classes in 'kw-btn'.<br>
+        (ex - <b>h40 means height: 40px  / w40 means width: 40px </b>
+        - The reference page (Components/Elements/Gutter&size ))<br>
+        Add the size of the icon<b>(ex: size="16px")</b> as the attribute of the <b>'kw-btn'</b>.
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            class="kw-btn--line-gray kw-btn--icon-only h40 w40 mr10"
+            size="16px"
+          >
+            <kw-icon name="search_24|0 0 24 24" />
+          </kw-btn>
+          <kw-btn
+            class="kw-btn--line-gray kw-btn--icon-only h50 w50 mr10"
+            size="24px"
+          >
+            <kw-icon name="search_24|0 0 24 24" />
+          </kw-btn>
+        </div>
+        <guide-code-view
+          :code-value="iconButton"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
         Button with icon
       </h3>
       <p class="kw-guide-description">
@@ -226,8 +261,23 @@
 
 <script setup>
 
-const testCode = `
+const iconButton = `
 <!--  mr10:gutter margin-right:10px  -->
+<!--  The size of icon is 16px, and The button's size is width:40px and height:40px -->
+<kw-btn
+  class="kw-btn--line-gray kw-btn--icon-only h40 w40 mr10"
+  size="16px"
+>
+  <kw-icon name="search_24|0 0 24 24" />
+</kw-btn>
+<kw-btn
+  class="kw-btn--line-gray kw-btn--icon-only h50 w50 mr10"
+  size="24px"
+>
+  <kw-icon name="search_24|0 0 24 24" />
+</kw-btn>
+`;
+const testCode = `
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
   icon="arrow_down|0 0 16 16"
