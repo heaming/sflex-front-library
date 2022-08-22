@@ -2,6 +2,7 @@
   Core
  */
 export { default as createApp } from './createApp';
+export { default as getComponentType } from './getComponentType';
 export { default as i18n } from './i18n';
 export { default as store } from './store';
 export { default as router } from './router';
