@@ -30,6 +30,7 @@
   <kw-btn
     icon="lnb_arrow|0 0 16 16"
     class="kw-lnb-switch"
+    :class="{ 'kw-lnb-switch--active': lnbExpanded }"
     @click="dispatch('app/toggleLnb')"
   />
 </template>

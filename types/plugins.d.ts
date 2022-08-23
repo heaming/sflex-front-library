@@ -1,76 +1,62 @@
-// Quasar
-import { Cookies, LocalStorage, SessionStorage } from 'quasar';
-export { Cookies, LocalStorage, SessionStorage };
-export declare const cookies: Cookies;
-export declare const localStorage: LocalStorage;
-export declare const sessionStorage: SessionStorage;
+// Cookies
+import { Cookies } from 'quasar';
+export { Cookies };
+export const cookies: Cookies;
 
 // Dialog
-declare function DialogFunction(
+interface DialogOptions {
   /**
-   * 다이얼로그에 표시할 내용
+   * 표시할 타이틀
    */
-  message: string,
+  title?: string;
 
   /**
-   * 다이얼로그에 표시할 타이틀
+   * 이전 포커스 객체로 다시 포커스할지 여부
+   * @defaultValue `true`
    */
-  options?: {
-    /**
-     * 다이얼로그에 표시할 타이틀
-     */
-    title?: string;
+  refocus?: boolean;
+}
 
-    /**
-     * 다이얼로그가 닫힌 후 이전 포커스 객체로 다시 포커스할지 여부
-     */
-    refocus?: false;
-  },
-): Promise<boolean>;
-export declare const alert: DialogFunction;
-export declare const confirm: DialogFunction;
+export interface DialogFunction {
+  (message: string, options: DialogOptions): Promise<boolean>;
+}
+
+export const alert: DialogFunction;
+export const confirm: DialogFunction;
 
 // HTTP
-import { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
-export declare interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+import { AxiosPromise, AxiosResponse, AxiosRequestConfig } from 'axios';
+
+export interface CustomAxiosRequestConfig<D = any> extends AxiosRequestConfig<D> {
   /**
    * API 호출 시 스피너 표시 여부
-   * @defaultValue true
+   * @defaultValue `true`
    */
   spinner?: boolean;
 
   /**
    * API 호출 결과가 에러 시 다이얼로그 표시 여부, 서버에서 발생한 에러에만 적용 된다.
-   * @defaultValue true
+   * @defaultValue `true`
    */
   alert?: boolean;
 }
-export declare interface CustomAxiosInstance {
+
+export interface CustomAxiosInstance {
   (config: CustomAxiosRequestConfig): AxiosPromise;
   (url: string, config?: CustomAxiosRequestConfig): AxiosPromise;
   getUri(config?: CustomAxiosRequestConfig): string;
   request<T = any, R = AxiosResponse<T>, D = any>(config: CustomAxiosRequestConfig<D>): Promise<R>;
-  get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRCustomAxiosRequestConfigequestConfig<D>): Promise<R>;
+  get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: CustomAxiosRequestConfig<D>): Promise<R>;
   delete<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: CustomAxiosRequestConfig<D>): Promise<R>;
   post<T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: CustomAxiosRequestConfig<D>): Promise<R>;
   put<T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: CustomAxiosRequestConfig<D>): Promise<R>;
 }
-export declare const http: CustomAxiosInstance;
+
+export const http: CustomAxiosInstance;
 
 // Loading
-export declare function loadSpinner(
-  /**
-   * 스피너를 표시할지 여부
-   */
-  value: boolean,
-): void;
-export declare function loadProgress(
-  /**
-   * 프로그래스 진행 값
-   * 0이면 프로그래스를 해제한다.
-   */
-  value: number,
-): void;
+export function loadSpinner(value: boolean): void;
+export function loadProgress(value: number): void;
 
 // Meta
 export declare function getConfig<T = any>(
@@ -87,8 +73,9 @@ export declare function getConfig<T = any>(
 
 // Modal
 import { Component } from 'vue';
-declare type AsyncComponent = () => Promise<Component>;
-export declare function modal(options: {
+type AsyncComponent = () => Promise<Component>;
+
+export function modal(options: {
   /**
    * 호출할 컴포넌트명 또는 AsyncComponent
    * 컴포넌트명으로 호출할 시에 권한체크한다.
@@ -116,4 +103,36 @@ export declare function modal(options: {
    */
   payload?: any;
 }>;
-export declare function registerPopupsByImportGlob(modules: { [key: string]: any }[]): void;
+
+export function registerPopupsByImportGlob(modules: { [key: string]: any }[]): void;
+
+// Sanitize
+import DOMPurify from 'dompurify';
+export const sanitize: typeof DOMPurify.sanitize;
+
+// Storage
+import { LocalStorage, SessionStorage } from 'quasar';
+export { LocalStorage, SessionStorage };
+export const localStorage: LocalStorage;
+export const sessionStorage: SessionStorage;
+
+// Component Custom Properties for plugins
+import { QVueGlobals } from 'quasar';
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $g: {
+      q: QVueGlobals;
+      cookies: typeof cookies;
+      alert: typeof alert;
+      confirm: typeof confirm;
+      http: typeof http;
+      loadSpinner: typeof loadSpinner;
+      loadProgress: typeof loadProgress;
+      getConfig: typeof getConfig;
+      modal: typeof modal;
+      sanitize: typeof sanitize;
+      localStorage: typeof localStorage;
+      sessionStorage: typeof sessionStorage;
+    };
+  }
+}

@@ -45,14 +45,6 @@ function getOutputRow(data, dataRow) {
 }
 
 /*
-  Define
- */
-export const defineGridView = (view) => view;
-export const defineGridData = (data) => data;
-export const defineTreeView = (view) => view;
-export const defineTreeData = (data) => data;
-
-/*
   Common
  */
 export async function focusCellInput(view, dataRow, fieldName, dropdown = false) {
@@ -186,21 +178,8 @@ export function find(view, predicate, fromDataRow = -1) {
   return _find(allRowValues, predicate);
 }
 
-export function findAll(view, predicate, fromDataRow = -1) {
-  const allRowValues = getAllRowValues(view, false);
-  const fromIndex = allRowValues.findIndex((e) => e.dataRow === fromDataRow);
-
-  if (fromIndex > -1) allRowValues.splice(fromIndex);
-
-  return _filter(allRowValues, predicate);
-}
-
-export function findDataRow(view, predicate) {
-  return _find(getAllRowValues(view, false), predicate)?.dataRow ?? -1;
-}
-
-export function findDataRows(view, predicate) {
-  return findAll(getAllRowValues(view, false), predicate).map((e) => e.dataRow);
+export function findDataRow(view, predicate, fromDataRow = -1) {
+  return find(view, predicate, fromDataRow)?.dataRow ?? -1;
 }
 
 export function forEach(view, iteratee) {
@@ -352,7 +331,7 @@ async function validateRow(view, data, dataRow, metas) {
   return { valid: true };
 }
 
-export async function validate(view, isChangedOnly = true, alertMessage = true) {
+export async function validate(view, isChangedOnly = true, isAlertMessage = true) {
   const data = view.getDataSource();
   const metas = view.__metas__.filter((e) => !isEmpty(e.rules));
 
@@ -369,7 +348,7 @@ export async function validate(view, isChangedOnly = true, alertMessage = true) 
       const result = await validateRow(view, data, i, metas);
 
       if (!result.valid) {
-        if (alertMessage) {
+        if (isAlertMessage) {
           await alert(result.errorMessage);
           await focusCellInput(view, result.dataRow, result.fieldName);
         }
