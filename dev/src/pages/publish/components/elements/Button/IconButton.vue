@@ -53,8 +53,9 @@
           Download icon img
           (It should be a "<b>svg</b>" as filename extention) from zeplin
           and Save the file to <b>src\assets\icons</b>.<br>
-          The naming for the svg file follows the name in zeplin.<br>
-          <b>(If the name is 'price2(h24)' in zeplin, svg's file name have to be changed to price2_24)</b>
+          1-1. The svg's file is already existed in the icons folder, Use it.<br>
+          1-2. The naming for the svg file follows the name in zeplin.<br>
+          <b>(If the name is 'price2(h24)' in zeplin, svg's file name have to be changed to price2_24)</b><br>
         </li>
         <li>Open the file and change the ID name in the file. and it should be same name with file name.</li>
         <li>
@@ -64,12 +65,12 @@
         <li> Copy the code below the example.</li>
         <li>
           Add ID name in svg's tag which is included in the Svg file. <br>
-          (<b>ex: id="plus"</b>)
+          (<b>ex: id="price2_24"</b>)
         </li>
         <li>
           Copy the kw-btn's tag in vue file.
           And add attribute 'icon' which is included the values of width and height <br>
-          ( <b> ex: icon="plus_16|0 0 16 16 </b>) : The last two numbers are each of width and height.
+          ( <b> ex: icon="price2_24|0 0 16 16 </b>) : The last two numbers are each of width and height.
         </li>
       </ol>
     </div>
@@ -166,7 +167,8 @@
         Excel button
       </h3>
       <p class="kw-guide-description">
-        It is Excel download button
+        It is Excel download button.<br>If the icon is the diffrent with example,
+        having a look above the part '<b>#how to make the button</b>' of the page.
       </p>
       <q-card>
         <div class="kw-guide-example">
