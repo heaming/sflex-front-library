@@ -6,7 +6,8 @@
     <p class="kw-guide-description">
       kw-search-form > kw-search-row > kw-search-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
       - This is the sequence to be wrapped<br>
-      it is necessary to be wrapped for using the element's tags from 'kw-form' to the element.
+      It is only for "search form". form is diffrent with form. Go to the reference page for form <br>
+      (The roots for the Search form: components/collections/form)
     </p>
     <div class="kw-guide-section">
       <h3
@@ -143,7 +144,7 @@
         id="columns"
         class="kw-guide-title"
       >
-        the &lt;kw-search&gt; form
+        &lt;kw-search&gt; form
       </h3>
       <p class="kw-guide-description">
         The 'kw-search' example is as below.<br>
