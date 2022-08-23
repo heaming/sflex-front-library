@@ -1,5 +1,26 @@
 import { ComponentPublicInstance } from 'vue';
 
+interface ObserverProps {}
+
+interface ObserverChildProps {
+  /**
+   * Observer에 등록할 떄 key 값으로 사용된다.
+   */
+  name?: string;
+
+  /**
+   * Observer에서 하위 ObserverChild의 변경여부를 확인할 때, 무시할지 여부
+   * @defaultValue `false`
+   */
+  ignoreOnModified?: boolean;
+
+  /**
+   * Observer에서 하위 ObserverChild를 reset할 때, 무시할지 여부
+   * @defaultValue `false`
+   */
+  ignoreOnReset?: boolean;
+}
+
 // KwActionBar
 interface KwActionBarProps {}
 interface KwActionBarSlots {}
@@ -76,14 +97,37 @@ interface KwFormItemSlots {}
 interface KwFormItem extends ComponentPublicInstance<KwFormItemProps> {}
 
 // KwGrid
-interface KwGridProps {}
-interface KwGridSlots {}
-interface KwGrid extends ComponentPublicInstance<KwGridProps> {}
+import { LocalDataProvider, GridView } from 'realgrid';
+interface KwGridProps<D = LocalDataProvider, V = GridView> extends ObserverChildProps {
+  /**
+   * View만 생성할지 여부
+   * @defaultValue `false`
+   */
+  createViewOnly?: boolean;
+
+  /**
+   * 표시할 그리드 행 갯수
+   */
+  visibleRows?: number;
+
+  /**
+   * onMounted 이후에 그리드가 생성되고 난 후에 발생하는 이벤트
+   */
+  onInit?: (data: D, view: V) => void;
+}
+interface KwGridSlots {
+  default: () => VNode[];
+}
+interface KwGrid<D = LocalDataProvider, V = GridView> extends ComponentPublicInstance<KwGridProps<D, V>> {
+  getData: () => D;
+  getView: () => V;
+}
 
 // KwTreeGrid
-interface KwTreeGridProps {}
-interface KwTreeGridSlots {}
-interface KwTreeGrid extends ComponentPublicInstance<KwTreeGridProps> {}
+import { LocalTreeDataProvider, TreeView } from 'realgrid';
+interface KwTreeGridProps<D = LocalTreeDataProvider, V = TreeView> extends KwGridProps<D, V> {}
+interface KwTreeGridSlots extends KwGridSlots {}
+interface KwTreeGrid<D = LocalTreeDataProvider, V = TreeView> extends KwGrid<D, V> {}
 
 // KwInput
 interface KwInputProps {}
