@@ -20,7 +20,7 @@
             <th>padding/margin</th>
             <th>position</th>
             <th>pixel</th>
-            <th>class sample</th>
+            <th>Class's name Sample</th>
           </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
           <tr>
             <th>Width/Height</th>
             <th>pixel</th>
-            <th>class sample</th>
+            <th>Class's name sample</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +76,7 @@
             <td>
               <span style="color: #999;">
                 [</span> 1 <span style="color: #999;">|</span> 2 <span style="color: #999;">
-                |</span> ... <span style="color: #999;">|</span> 500
+                |</span> ... <span style="color: #999;">|</span> 1000
               <span style="color: #999;">]</span>
             </td>
             <td>w30(width:30px), h30(height:30px)</td>
@@ -122,7 +122,7 @@
       </h3>
       <p class="kw-guide-description">
         w30(width:30px) h30(height:30px)<br>
-        it is able to put from 1px to 1000px
+        It is able to put from 1px to 1000px
       </p>
       <q-card>
         <div class="kw-guide-example">
