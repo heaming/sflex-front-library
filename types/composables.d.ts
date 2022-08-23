@@ -1,20 +1,32 @@
-/*
-  useGlobal
-  */
-declare interface KwVueGlobals {}
+// useDataService
+import { CustomAxiosInstance } from './plugins';
+export function useDataService(pageId: string): CustomAxiosInstance;
 
-export function useGlobal(): KwVueGlobals;
+// useGlobal
+import { QVueGlobals } from 'quasar';
+import { cookies, alert, confirm, http, loadSpinner, loadProgress, getConfig, modal, sanitize, localStorage, sessionStorage } from './plugins';
+export function useGlobal(): {
+  q: QVueGlobals;
+  cookies: typeof cookies;
+  alert: typeof alert;
+  confirm: typeof confirm;
+  http: typeof http;
+  loadSpinner: typeof loadSpinner;
+  loadProgress: typeof loadProgress;
+  getConfig: typeof getConfig;
+  modal: typeof modal;
+  sanitize: typeof sanitize;
+  localStorage: typeof localStorage;
+  sessionStorage: typeof sessionStorage;
+};
 
-/*
-  useDataService
-  */
-import { AxiosInstance } from 'axios';
+// useModal
+export function useModal(): {
+  ok(payload: any): void;
+  cancel(payload: any): void;
+};
 
-export function useDataService(): AxiosInstance;
-
-/*
-  useSession
-  */
+// useSession
 export function useSession(): {
   isReady(): Promise<void>;
   login(loginId: string, password: string): Promise<void>;
