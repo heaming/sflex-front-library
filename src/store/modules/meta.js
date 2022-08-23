@@ -1,9 +1,12 @@
 import { filter, find } from 'lodash-es';
+import consts from '../../consts';
 import { http } from '../../plugins/http';
+import { localStorage } from '../../plugins/storage';
 import replaceRoutesByMenus from '../../router/replaceRoutesByMenus';
 
 const normalizeState = () => ({
   isAuthenticated: false,
+  accessToken: null,
   userInfo: {},
   lastLoginInfo: {},
   configs: [],
@@ -19,8 +22,9 @@ export default {
   state: normalizeState(),
 
   mutations: {
-    setLoginInfo(state, { userInfo, lastLoginInfo }) {
+    setLoginInfo(state, { accessToken, userInfo, lastLoginInfo }) {
       state.isAuthenticated = true;
+      state.accessToken = accessToken;
       state.userInfo = Object.freeze(userInfo);
       state.lastLoginInfo = Object.freeze(lastLoginInfo);
     },
@@ -49,6 +53,7 @@ export default {
 
   getters: {
     isAuthenticated: (state) => state.isAuthenticated,
+    getAccessToken: (state) => state.accessToken,
     getUserInfo: (state) => state.userInfo,
     getLastLoginInfo: (state) => state.lastLoginInfo,
     getConfigs: (state) => state.configs,
@@ -66,14 +71,15 @@ export default {
 
   actions: {
     async fetchLoginInfo({ commit }) {
-      const response = await http.post('/api/v1/security/login-info');
+      const accessToken = localStorage.getItem(consts.LOCAL_STORAGE_ACCESS_TOKEN) || null;
+      const response = await http.post('/api/v1/security/login-info', null, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+
       const loginInfo = response.data;
+      const { userInfo, lastLoginInfo, configs, notices, linkPages } = loginInfo;
 
-      const {
-        userInfo, lastLoginInfo, configs, notices, linkPages,
-      } = loginInfo;
-
-      commit('setLoginInfo', { userInfo, lastLoginInfo });
+      commit('setLoginInfo', { accessToken, userInfo, lastLoginInfo });
       commit('setConfigs', configs);
       commit('setNotices', notices);
       commit('setLinkPages', linkPages);
