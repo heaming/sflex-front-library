@@ -129,7 +129,7 @@ textarea::placeholder {
 
   &-switch.kw-btn {
     position: fixed;
-    left: 300px;
+    left: 0;
     width: 32px;
     height: 74px;
     top: 50vh;
@@ -138,6 +138,10 @@ textarea::placeholder {
     border-radius: 0;
     z-index: 990;
     padding: 0;
+
+    &.kw-lnb-switch--active {
+      left: 300px;
+    }
 
     &:hover,
     &:active {
