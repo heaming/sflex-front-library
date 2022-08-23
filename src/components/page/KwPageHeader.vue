@@ -7,7 +7,7 @@
       <q-icon
         size="24px"
         class="mr6"
-        name="arrow_left_breadcrumbs"
+        name="arrow_left_breadcrumbs_24"
         @click="onClickBack"
       >
         <kw-tooltip>
@@ -18,8 +18,8 @@
       <kw-checkbox
         size="46px"
         model-value="Y"
-        checked-icon="bookmark_on"
-        unchecked-icon="bookmark_off"
+        checked-icon="bookmark_on_16"
+        unchecked-icon="bookmark_off_16"
         class="mr0 mt3"
       >
         <kw-tooltip>
