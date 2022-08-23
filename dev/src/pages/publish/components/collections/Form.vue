@@ -6,10 +6,139 @@
     <p class="kw-guide-description">
       kw-form > kw-form-row > kw-form-item > the elements (CheckBox, Input, Radio , Select)<br>
       - This is the sequence to be wrapped<br>
-      it is necessary to be wrapped for using the element's tags from kw-form to the element.<br>
-      it is only for "Form". Search form is diffrent with form. Go to the reference page for search <br>
+      It is only for "Form". Search form is diffrent with form. Go to the reference page for search <br>
       (The roots for the Search form: components/collections/Search)
     </p>
+    <div class="kw-guide-section">
+      <h3
+        id="summary"
+        class="kw-guide-title"
+      >
+        Summary
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              Tag
+            </th>
+            <th>
+              Class(attribue)
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form-item
+            </td>
+            <td>
+              essential
+            </td>
+            <td>
+              Add the class "essential" in the tag of kw-form-item.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              The element in kw-form-item
+            </td>
+            <td>
+              readonly
+            </td>
+            <td>
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item.<br>
+              (Except of the tags of kw-select or kw-input,
+              It is required to add attribute 'readonly' Instead of 'disable')
+            </td>
+          </tr>
+          <tr>
+            <td>
+              The element in kw-form-item
+            </td>
+            <td>
+              disable
+            </td>
+            <td>
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-form
+            </td>
+            <td>
+              cols=""
+            </td>
+            <td>
+              Add the number in cols="" and it belongs to kw-form's tag as attribute
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-form-item
+            </td>
+            <td>
+              colspan=""
+            </td>
+            <td>
+              Add the number in colspan="" and it belongs to kw-form-item's tag as attribute
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Width
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              The Element(tag's name)
+            </th>
+            <th>
+              Attr or Class
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-form
+            </td>
+            <td>
+              :label-size="200"
+            </td>
+            <td>
+              Defines the size of all labels inside 'kw-form'.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-input / kw-select
+            </td>
+            <td>
+              w1, w2, w3......w1000
+            </td>
+            <td>
+              In general, the width of 'input' is set to 100% according to the column width.<br>
+              However, in some cases, the size may be flexible.<br>
+              In this case, the size must be defined through the helper class.
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
     <div class="kw-guide-section">
       <h3
         id="columns"
@@ -18,7 +147,7 @@
         1column/ width:1212px
       </h3>
       <p class="kw-guide-description">
-        Add the column's value as <b>cols="2"</b> in the tag of <b>kw-form</b>.
+        Add the column's value as <b>cols="1"</b> in the tag of <b>kw-form</b>.
       </p>
       <q-card>
         <div class="kw-guide-example">
