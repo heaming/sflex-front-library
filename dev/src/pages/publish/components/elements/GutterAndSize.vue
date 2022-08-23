@@ -79,7 +79,7 @@
                 |</span> ... <span style="color: #999;">|</span> 500
               <span style="color: #999;">]</span>
             </td>
-            <td>w30(w30px ), h30(height:30px)</td>
+            <td>w30(width:30px), h30(height:30px)</td>
           </tr>
         </tbody>
       </q-markup-table>
