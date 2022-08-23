@@ -9,10 +9,42 @@
     </p> -->
     <div class="kw-guide-section">
       <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>
+          <a
+            href="https://docs.realgrid.com/start/overview"
+            target="_blank"
+          >https://docs.realgrid.com/start/overview</a>
+        </li>
+        <li class="notice">
+          The first(checkbox) and second columns(number) are created automatically.
+          It is not included in the script's data.
+        </li>
+        <li>'Grid' that are not visible in the cases are replaced by the empty box(#No Case) below.</li>
+        <li>
+          Every cell's width in script is used 'px'
+        </li>
+        <li>
+          You don't mind the this scripts(rg-button-link, type: 'button', datetimeFormat, text-red, text-blue...)<br>
+          So you only need to care about width, alignment and text.
+        </li>
+        <li>In GDC, Please ensure apply the width that is aligned with design or planning from zeplin.</li>
+        <li class="notice">
+          The final is decorated by a Korean programmer, so don't worry :)
+        </li>
+      </ul>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="summary"
         class="kw-guide-title"
       >
-        Summary
+        Vue Code
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -53,35 +85,65 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="default"
         class="kw-guide-title"
       >
-        Notice
+        Script Data
       </h3>
-      <ul>
-        <li>
-          <a
-            href="https://docs.realgrid.com/start/overview"
-            target="_blank"
-          >https://docs.realgrid.com/start/overview</a>
-        </li>
-        <li class="notice">
-          The first(checkbox) and second columns(number) are created automatically.
-          It is not included in the script's data.
-        </li>
-        <li>'Grid' that are not visible in the cases are replaced by the empty box(#No Case) below.</li>
-        <li>
-          Every cell's width in script is used 'px'
-        </li>
-        <li>
-          You don't mind the this scripts(rg-button-link, type: 'button', datetimeFormat, text-red, text-blue...)<br>
-          So you only need to care about width, alignment and text.
-        </li>
-        <li>In GDC, Please ensure apply the width that is aligned with design or planning from zeplin.</li>
-        <li class="notice">
-          The final is decorated by a Korean programmer, so don't worry :)
-        </li>
-      </ul>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>key</th>
+            <th>Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              fieldName
+            </td>
+            <td>
+              'col1' ~
+            </td>
+            <td>
+              'col1', 'col2', 'col3'...<br>according to the total number of columns
+            </td>
+          </tr>
+          <tr>
+            <td>
+              header
+            </td>
+            <td>
+              '고객 번호'
+            </td>
+            <td>
+              Enter as shown in the Zeplin
+            </td>
+          </tr>
+          <tr>
+            <td>
+              width
+            </td>
+            <td>
+              '150'
+            </td>
+            <td>
+              As the width of the Zeplin, without 'px' units
+            </td>
+          </tr>
+          <tr>
+            <td>
+              styleName
+            </td>
+            <td>
+              'text-left', 'text-center', 'text-right'
+            </td>
+            <td>
+              If no value is entered, default left alignment
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
     </div>
     <div class="kw-guide-section">
       <h3
