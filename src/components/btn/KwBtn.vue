@@ -1,5 +1,6 @@
 <template>
   <q-btn
+    ref="btnRef"
     class="kw-btn"
     :ripple="false"
   >
@@ -13,7 +14,16 @@ export default {
   name: 'KwBtn',
 
   setup() {
+    const btnRef = ref();
 
+    function click(evt) {
+      btnRef.value.click(evt);
+    }
+
+    return {
+      btnRef,
+      click,
+    };
   },
 };
 </script>
