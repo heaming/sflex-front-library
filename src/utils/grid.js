@@ -10,9 +10,8 @@ import {
   some as _some,
 } from 'lodash-es';
 import { date } from 'quasar';
-import { TreeView, ExportTarget, ExportType } from 'realgrid';
+import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
 import { waitUntilShowEditor, cloneView, destroyCloneView } from './private/gridShared';
-import consts from '../consts';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
@@ -81,22 +80,22 @@ export function getCurrentRowValue(view) {
 }
 
 export function getCreatedRowValues(view) {
-  const createdRows = view.getDataSource().getStateRows(consts.ROWSTATE_CREATED);
+  const createdRows = view.getDataSource().getStateRows(RowState.CREATED);
   return getRowValues(view, createdRows);
 }
 
 export function getReadRowValues(view) {
-  const readRows = view.getDataSource().getStateRows(consts.ROWSTATE_NONE);
+  const readRows = view.getDataSource().getStateRows(RowState.NONE);
   return getRowValues(view, readRows);
 }
 
 export function getUpdatedRowValues(view) {
-  const updatedRows = view.getDataSource().getStateRows(consts.ROWSTATE_UPDATED);
+  const updatedRows = view.getDataSource().getStateRows(RowState.UPDATED);
   return getRowValues(view, updatedRows);
 }
 
 export function getDeletedRowValues(view) {
-  const deletedRows = view.getDataSource().getStateRows(consts.ROWSTATE_DELETED);
+  const deletedRows = view.getDataSource().getStateRows(RowState.DELETED);
   return getRowValues(view, deletedRows);
 }
 
@@ -114,13 +113,13 @@ export function getAllRowValues(view, isIncludeDeleted = true) {
   const allRows = Array.from({ length }, (v, i) => i + startRow);
 
   return getRowValues(view, allRows)
-    .filter((e) => isIncludeDeleted || e.rowState !== consts.ROWSTATE_DELETED);
+    .filter((e) => isIncludeDeleted || e.rowState !== RowState.DELETED);
 }
 
 export function getCheckedRowValues(view, isChangedOnly = false) {
   const checkedRows = view.getCheckedRows().sort((a, b) => a - b);
   return getRowValues(view, checkedRows)
-    .filter((e) => !isChangedOnly || e.rowState !== consts.ROWSTATE_NONE);
+    .filter((e) => !isChangedOnly || e.rowState !== RowState.NONE);
 }
 
 export function getSelectedRowValues(view) {
@@ -223,7 +222,7 @@ export function some(view, predicate) {
 export function deleteSelectedRows(view, isIncludeCreated = false) {
   const selectedRows = view.getSelectedRows().sort((a, b) => a - b);
   const deletedRowValues = getRowValues(view, selectedRows)
-    .filter((v) => isIncludeCreated || v.rowState !== consts.ROWSTATE_CREATED);
+    .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
 
   view.getDataSource().removeRows(selectedRows);
   return deletedRowValues;
@@ -243,7 +242,7 @@ export async function confirmDeleteSelectedRows(view, isIncludeCreated = false) 
 export function deleteCheckedRows(view, isIncludeCreated = false) {
   const checkedRows = view.getCheckedRows();
   const deletedRowValues = getRowValues(view, checkedRows)
-    .filter((v) => isIncludeCreated || v.rowState !== consts.ROWSTATE_CREATED);
+    .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
 
   view.getDataSource().removeRows(checkedRows);
   return deletedRowValues;
@@ -279,11 +278,11 @@ export function init(view) {
 
 export function reset(view) {
   const data = view.getDataSource();
-  const createdRows = data.getStateRows(consts.ROWSTATE_CREATED);
-  const deletedRows = data.getStateRows(consts.ROWSTATE_DELETED);
+  const createdRows = data.getStateRows(RowState.CREATED);
+  const deletedRows = data.getStateRows(RowState.DELETED);
 
   data.removeRows(createdRows);
-  data.setRowStates(deletedRows, consts.ROWSTATE_UPDATED);
+  data.setRowStates(deletedRows, RowState.UPDATED);
   data.restoreUpdatedRows();
 
   if (view.checkBar.visible) {
@@ -301,9 +300,9 @@ export async function confirmReset(view) {
 
 export function isModified(view) {
   const data = view.getDataSource();
-  return data.getStateRows(consts.ROWSTATE_CREATED).length > 0
-      || data.getStateRows(consts.ROWSTATE_UPDATED).length > 0
-      || data.getStateRows(consts.ROWSTATE_DELETED).length > 0;
+  return data.getStateRows(RowState.CREATED).length > 0
+      || data.getStateRows(RowState.UPDATED).length > 0
+      || data.getStateRows(RowState.DELETED).length > 0;
 }
 
 export async function alertIfIsNotModified(view, message) {
@@ -359,8 +358,8 @@ export async function validate(view, isChangedOnly = true, alertMessage = true) 
 
   const rowCount = data.getRowCount();
   const ignoreStates = [
-    consts.ROWSTATE_DELETED,
-    ...(isChangedOnly ? [consts.ROWSTATE_NONE] : []),
+    RowState.DELETED,
+    ...(isChangedOnly ? [RowState.NONE] : []),
   ];
 
   for (let i = 0; i < rowCount; i += 1) {

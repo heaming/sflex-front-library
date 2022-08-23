@@ -1,5 +1,3 @@
-import { RowState } from 'realgrid';
-
 export default {
   // App
   LOCALE_KO: 'ko',
@@ -17,10 +15,4 @@ export default {
 
   // Storage
   LOCAL_STORAGE_ACCESS_TOKEN: '__ACCESS_TOKEN__',
-
-  // Grid
-  ROWSTATE_NONE: RowState.NONE,
-  ROWSTATE_CREATED: RowState.CREATED,
-  ROWSTATE_UPDATED: RowState.UPDATED,
-  ROWSTATE_DELETED: RowState.DELETED,
 };

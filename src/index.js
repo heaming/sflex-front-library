@@ -2,6 +2,8 @@
   Core
  */
 export { default as createApp } from './createApp';
+export { default as getComponentType } from './getComponentType';
+export { default as consts } from './consts';
 export { default as i18n } from './i18n';
 export { default as store } from './store';
 export { default as router } from './router';
@@ -18,7 +20,6 @@ export { default as useSession } from './composables/useSession';
 /*
   Plugins
  */
-export * from './plugins/consts';
 export * from './plugins/cookies';
 export * from './plugins/dialog';
 export * from './plugins/http';
