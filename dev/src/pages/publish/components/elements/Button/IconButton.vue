@@ -143,12 +143,12 @@
         <div class="kw-guide-example">
           <kw-btn
             class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-            icon="arrow_down|0 0 16 16"
+            icon="arrow_down_16|0 0 16 16"
             label="상태변경"
           />
           <kw-btn
             class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-            icon="arrow_down|0 0 16 16"
+            icon="arrow_down_16|0 0 16 16"
             label="상태변경"
           />
         </div>
@@ -171,12 +171,12 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download|0 0 16 16"
+            icon="excel_download_16|0 0 16 16"
             class="kw-btn--excel mr10"
             label="엑셀 다운로드"
           />
           <kw-btn
-            icon="excel_upload|0 0 16 16"
+            icon="excel_upload_16|0 0 16 16"
             class="kw-btn--excel"
             label="엑셀 업로드"
           />
@@ -187,12 +187,12 @@
         />
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download|0 0 16 16"
+            icon="excel_download_16|0 0 16 16"
             class="kw-btn--line-black kw-btn--h32 mr10"
             label="엑셀 다운로드"
           />
           <kw-btn
-            icon="excel_download|0 0 16 16"
+            icon="excel_download_16|0 0 16 16"
             class="kw-btn--line-black kw-btn--h32"
             label="엑셀 다운로드"
             disable
@@ -204,12 +204,12 @@
         />
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_upload|0 0 16 16"
+            icon="excel_upload_16|0 0 16 16|0 0 16 16"
             class="kw-btn--line-black kw-btn--h32 mr10"
             label="엑셀 업로드"
           />
           <kw-btn
-            icon="excel_upload|0 0 16 16"
+            icon="excel_upload_16|0 0 16 16|0 0 16 16"
             class="kw-btn--line-black kw-btn--h32"
             label="엑셀 업로드"
             disable
@@ -297,36 +297,36 @@ const iconButton = `
 const testCode = `
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-  icon="arrow_down|0 0 16 16"
+  icon="arrow_down_16|0 0 16 16"
   label="상태변경"
 />
 <!-- The label is left side and The icon is right side. It is swapped by the class of 'kw-btn-reverse' -->
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-  icon="arrow_down|0 0 16 16"
+  icon="arrow_down_16|0 0 16 16"
   label="상태변경"
 />
 `;
 const excelCode = `
 <kw-btn
-  icon="excel_download|0 0 16 16"
+  icon="excel_download_16|0 0 16 16"
   class="kw-btn--excel mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
-  icon="excel_upload|0 0 16 16"
+  icon="excel_upload_16|0 0 16 16|0 0 16 16"
   class="kw-btn--excel"
   label="엑셀 업로드"
 />
 `;
 const excelCode02 = `
 <kw-btn
-  icon="excel_download|0 0 16 16"
+  icon="excel_download_16|0 0 16 16"
   class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
-  icon="excel_download|0 0 16 16"
+  icon="excel_download_16|0 0 16 16"
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 다운로드"
   disable
@@ -334,12 +334,12 @@ const excelCode02 = `
 `;
 const excelCode03 = `
 <kw-btn
-  icon="excel_upload|0 0 16 16"
+  icon="excel_upload_16|0 0 16 16|0 0 16 16"
   class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 업로드"
 />
 <kw-btn
-  icon="excel_upload|0 0 16 16"
+  icon="excel_upload_16|0 0 16 16|0 0 16 16"
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 업로드"
   disable
