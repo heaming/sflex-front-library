@@ -14,7 +14,7 @@ import { KwComponentNameMap } from './components';
 export function getComponentType<K extends keyof KwComponentNameMap>(componentName: K): KwComponentNameMap[K];
 
 declare module '@vue/runtime-core' {
-  export function ref<K extends keyof KwComponentNameMap, T = KwComponentNameMap[K]>(component: T): Ref<T>;
+  export function ref<T extends KwComponentNameMap[keyof KwComponentNameMap]>(kwComponent: T): Ref<T>;
 }
 
 // Consts
