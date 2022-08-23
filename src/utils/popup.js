@@ -39,6 +39,7 @@ function registerOpened(pid, resolve) {
 }
 
 const normalizeOptions = (options = {}) => ({
+  ...options,
   width: options.width,
   height: options.height,
   popup: options.popup !== false,
@@ -48,7 +49,7 @@ const normalizeOptions = (options = {}) => ({
   toolbar: options.toolbar === true,
 });
 
-export function open(url, options, useReturnPromise = true) {
+export function open(url, options) {
   options = normalizeOptions(options);
 
   const {
@@ -60,14 +61,15 @@ export function open(url, options, useReturnPromise = true) {
 
   const pid = uid();
   const urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
-
   const openedWindow = openURL(urlWithUid, null, options);
 
-  if (useReturnPromise && openedWindow) {
-    return new Promise((resolve) => { registerOpened(pid, resolve); });
-  }
-
-  return openedWindow;
+  return new Promise((resolve) => {
+    if (openedWindow) {
+      registerOpened(pid, resolve);
+    } else {
+      resolve({ result: false });
+    }
+  });
 }
 
 function close(result, payload, forceClose = true) {
