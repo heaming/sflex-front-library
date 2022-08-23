@@ -1,4 +1,4 @@
-import { ComponentPublicInstance } from 'vue';
+import { ComponentPublicInstance, VNode } from 'vue';
 
 interface ObserverProps {}
 
