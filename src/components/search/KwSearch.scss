@@ -3,10 +3,119 @@
   border: 1px solid $line-line;
   box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
   background-color: $bg-white;
+  overflow-y: visible;
+  overflow-x: clip;
 
   input::placeholder,
   textarea::placeholder {
     font-size: 14px;
+  }
+
+  .q-field {
+    &__inner {
+      display: flex;
+      align-items: center;
+    }
+
+    &__control {
+      align-items: center;
+      width: 100%;
+
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        border-bottom: 0;
+        transition: initial;
+      }
+    }
+
+    &__bottom--animated {
+      transform: translateY(0) !important;
+      bottom: -16px;
+      font-size: 14px;
+      color: $error;
+    }
+
+    &__messages {
+      & > div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &--disabled .q-field__control {
+      div {
+        opacity: 1 !important;
+      }
+    }
+
+    &--auto-height.q-field--labeled {
+      .q-field__native {
+        padding-bottom: 0;
+      }
+
+      .q-field__control-container {
+        padding-top: 0;
+      }
+    }
+
+    &--with-bottom {
+      padding-bottom: 0;
+    }
+  }
+
+  .q-field--auto-height .q-field__control,
+  .q-field--auto-height .q-field__native,
+  .q-textarea .q-field__control {
+    min-height: auto;
+  }
+
+  .kw-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -20px;
+    padding: 10px 0;
+    min-height: 60px;
+
+    .kw-form-item {
+      display: flex;
+      width: auto;
+      max-width: 100%;
+      min-width: 0;
+      min-height: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      & > .row {
+        align-items: center;
+        width: 100%;
+      }
+    }
+
+    .kw-form-title {
+      padding-right: 16px;
+      width: 150px;
+      font-size: 14px;
+      line-height: 18px;
+      color: $black3;
+      word-break: break-word;
+
+      & + label {
+        @media (min-width: 0) {
+          width: auto;
+          min-width: 0;
+          max-width: 100%;
+          flex: 10000 1 0%;
+        }
+      }
+    }
+  }
+
+  .kw-form-item {
+    flex: 10000 1 0%;
   }
 
   .q-field__messages {

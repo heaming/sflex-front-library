@@ -58,3 +58,46 @@
     }
   }
 }
+
+.kw-search {
+  .kw-checkbox {
+    $root: ".q-checkbox";
+
+    #{$root}__inner {
+      position: relative;
+      width: 18px;
+      min-width: 18px;
+      height: 18px;
+
+      #{$root}__bg {
+        width: 18px;
+        height: 18px;
+        background: url(~assets/images/checkbox_off.svg) no-repeat center;
+        background-size: 18px;
+      }
+
+      &#{$root}__inner--truthy #{$root}__bg,
+      &#{$root}__inner--indet #{$root}__bg {
+        background: url(~assets/images/checkbox_on.svg) no-repeat center;
+        background-size: 18px;
+        border: none;
+      }
+    }
+
+    &.disabled {
+      #{$root}__label {
+        color: $placeholder;
+      }
+
+      #{$root}__bg {
+        background: url(~assets/images/checkbox_disable.svg) no-repeat center;
+        background-size: 18px;
+      }
+
+      #{$root}__inner--truthy #{$root}__bg {
+        background: url(~assets/images/checkbox_selected_disable.svg) no-repeat center;
+        background-size: 18px;
+      }
+    }
+  }
+}

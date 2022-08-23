@@ -16,22 +16,14 @@
       <q-markup-table class="kw-guide-table">
         <thead>
           <tr>
-            <th>
-              the Element(tag's name)
-            </th>
-            <th>
-              Attr or Class
-            </th>
-            <th>
-              Description
-            </th>
+            <th>the Element(tag's name)</th>
+            <th>Attr or Class</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
-              kw-input
-            </td>
+            <td>kw-input</td>
             <td>
               name="input"<br>
               rules="required"<br>
@@ -48,23 +40,15 @@
             </td>
           </tr>
           <tr>
-            <td>
-              kw-form-item / kw-search-item
-            </td>
-            <td>
-              essential
-            </td>
-            <td>
-              Add the class "essential" in the tags of kw-form-item or kw-search-item.
-            </td>
+            <td>kw-form-item / kw-search-item</td>
+            <td>essential</td>
+            <td>Add the class "essential" in the tags of kw-form-item or kw-search-item.</td>
           </tr>
         </tbody>
       </q-markup-table>
     </div>
     <div class="kw-guide-section">
-      <h3
-        class="kw-guide-title"
-      >
+      <h3 class="kw-guide-title">
         Notice
       </h3>
       <ul>
@@ -111,10 +95,8 @@
         Essential
       </h3>
       <p class="kw-guide-description">
-        add <b> "essential" </b> of the classes in <b>
-          &lt;kw-form-item&gt; </b>
-        when it needs to be essential to
-        input
+        add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        when it needs to be essential to input
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -203,11 +185,75 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="disable"
+        class="kw-guide-title"
+      >
+        Hypen with Input
+      </h3>
+      <p class="kw-guide-description">
+        Three kw-input or Two kw-input are wrapped by the class of " <b> kw-hypen-input </b>".<br>
+        and Add span with the hypen between the kw-input in kw-hypen-input.<br>
+        <b>( ex: '&lt;span&gt;-&lt;/span&gt;')</b>
+      </p>
+      <q-card>
+        <div>
+          <div class="kw-guide-example">
+            <kw-form>
+              <kw-form-row>
+                <kw-form-item label="input">
+                  <div class="kw-hypen-input">
+                    <kw-input
+                      name="input"
+                      rules="required"
+                      placeholder="입력해주세요"
+                    />
+                    <span>-</span>
+                    <kw-input
+                      name="input"
+                      rules="required"
+                      placeholder="입력해주세요"
+                    />
+                  </div>
+                </kw-form-item>
+              </kw-form-row>
+              <kw-form-row>
+                <kw-form-item label="input">
+                  <div class="kw-hypen-input">
+                    <kw-input
+                      name="input"
+                      rules="required"
+                      placeholder="입력해주세요"
+                    />
+                    <span>-</span>
+                    <kw-input
+                      name="input"
+                      rules="required"
+                      placeholder="입력해주세요"
+                    />
+                    <span>-</span>
+                    <kw-input
+                      name="input"
+                      rules="required"
+                      placeholder="입력해주세요"
+                    />
+                  </div>
+                </kw-form-item>
+              </kw-form-row>
+            </kw-form>
+          </div>
+          <guide-code-view
+            :code-value="hypenInput"
+            lang="vue"
+          />
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
 <script setup>
-
 const inputCode = `
 <kw-form>
   <kw-form-row>
@@ -324,5 +370,51 @@ const inputDisableCode = `
     </kw-search-item>
   </kw-search-row>
 </kw-search>
+`;
+const hypenInput = `
+<kw-form>
+<!-- Two kw-input and one hypen  -->
+  <kw-form-row>
+    <kw-form-item label="input">
+      <div class="kw-hypen-input">
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+      </div>
+    </kw-form-item>
+  </kw-form-row>
+  <!-- Three kw-input and Two hypen  -->
+  <kw-form-row>
+    <kw-form-item label="input">
+      <div class="kw-hypen-input">
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+      </div>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
 `;
 </script>
