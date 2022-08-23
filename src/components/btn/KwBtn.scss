@@ -14,6 +14,12 @@
     width: auto;
     height: auto;
     padding: 0;
+    background: none;
+
+    &:hover.kw-btn,
+    &:active.kw-btn {
+      background-color: unset;
+    }
 
     &.kw-btn.q-btn .q-icon {
       width: 1em;
