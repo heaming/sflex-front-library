@@ -4,28 +4,28 @@
     show-if-above
     bordered
     class="kw-lnb"
+    :width="280"
   >
-    <div class="q-pa-md q-gutter-sm">
-      <kw-input
-        v-model="lnbFilter"
-        clearable
-      />
+    <kw-input
+      v-model="lnbFilter"
+      class="ma10 pa0"
+      clearable
+    />
 
-      <q-tree
-        :key="selectedAppId"
-        ref="lnbRef"
-        :selected="selectedLnbKey"
-        :nodes="lnbItems"
-        :filter="lnbFilter"
-        :duration="100"
-        default-expand-all
-        no-selection-unset
-        node-key="key"
-        selected-color="primary"
-        class="kw-lnb-tree"
-        @update:selected="onSelect"
-      />
-    </div>
+    <q-tree
+      :key="selectedAppId"
+      ref="lnbRef"
+      :selected="selectedLnbKey"
+      :nodes="lnbItems"
+      :filter="lnbFilter"
+      :duration="100"
+      default-expand-all
+      no-selection-unset
+      node-key="key"
+      selected-color="primary"
+      class="kw-lnb-tree"
+      @update:selected="onSelect"
+    />
   </q-drawer>
   <kw-btn
     icon="lnb_arrow|0 0 16 16"
