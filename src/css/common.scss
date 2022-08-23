@@ -138,6 +138,11 @@ textarea::placeholder {
     border-radius: 0;
     z-index: 990;
     padding: 0;
+    transition: left 0.1s;
+
+    // --animate-duration: 0.3s;
+    // --animate-delay: 0.3s;
+    // --animate-repeat: 1;
 
     &.kw-lnb-switch--active {
       left: 300px;
