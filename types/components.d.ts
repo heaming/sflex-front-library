@@ -8,7 +8,7 @@ interface KwActionBar extends ComponentPublicInstance<KwActionBarProps> {}
 // KwBtn
 interface KwBtnProps {}
 interface KwBtnSlots {}
-interface KwBtnBar extends ComponentPublicInstance<KwBtnProps> {}
+interface KwBtn extends ComponentPublicInstance<KwBtnProps> {}
 
 // KwBtnToggle
 interface KwBtnToggleProps {}
@@ -18,172 +18,172 @@ interface KwBtnToggle extends ComponentPublicInstance<KwBtnToggleProps> {}
 // KwChart
 interface KwChartProps {}
 interface KwChartSlots {}
-interface KwChartBar extends ComponentPublicInstance<KwChartProps> {}
+interface KwChart extends ComponentPublicInstance<KwChartProps> {}
 
 // KwCheckbox
 interface KwCheckboxProps {}
 interface KwCheckboxSlots {}
-interface KwCheckboxBar extends ComponentPublicInstance<KwCheckboxProps> {}
+interface KwCheckbox extends ComponentPublicInstance<KwCheckboxProps> {}
 
 // KwChip
 interface KwChipProps {}
 interface KwChipSlots {}
-interface KwChipBar extends ComponentPublicInstance<KwChipProps> {}
+interface KwChip extends ComponentPublicInstance<KwChipProps> {}
 
 // KwDate
 interface KwDateProps {}
 interface KwDateSlots {}
-interface KwDateBar extends ComponentPublicInstance<KwDateProps> {}
+interface KwDate extends ComponentPublicInstance<KwDateProps> {}
 
 // KwDatePicker
 interface KwDatePickerProps {}
 interface KwDatePickerSlots {}
-interface KwDatePickerBar extends ComponentPublicInstance<KwDatePickerProps> {}
+interface KwDatePicker extends ComponentPublicInstance<KwDatePickerProps> {}
 
 // KwDatePickerRange
 interface KwDatePickerRangeProps {}
 interface KwDatePickerRangeSlots {}
-interface KwDatePickerRangeBar extends ComponentPublicInstance<KwDatePickerRangeProps> {}
+interface KwDatePickerRange extends ComponentPublicInstance<KwDatePickerRangeProps> {}
 
 // KwEditor
 interface KwEditorProps {}
 interface KwEditorSlots {}
-interface KwEditorBar extends ComponentPublicInstance<KwEditorProps> {}
+interface KwEditor extends ComponentPublicInstance<KwEditorProps> {}
 
 // KwField
 interface KwFieldProps {}
 interface KwFieldSlots {}
-interface KwFieldBar extends ComponentPublicInstance<KwFieldProps> {}
+interface KwField extends ComponentPublicInstance<KwFieldProps> {}
 
 // KwFile
 interface KwFileProps {}
 interface KwFileSlots {}
-interface KwFileBar extends ComponentPublicInstance<KwFileProps> {}
+interface KwFile extends ComponentPublicInstance<KwFileProps> {}
 
 // KwForm
 interface KwFormProps {}
 interface KwFormSlots {}
-interface KwFormBar extends ComponentPublicInstance<KwFormProps> {}
+interface KwForm extends ComponentPublicInstance<KwFormProps> {}
 
 // KwFormRow
 interface KwFormRowProps {}
 interface KwFormRowSlots {}
-interface KwFormRowBar extends ComponentPublicInstance<KwFormRowProps> {}
+interface KwFormRow extends ComponentPublicInstance<KwFormRowProps> {}
 
 // KwFormItem
 interface KwFormItemProps {}
 interface KwFormItemSlots {}
-interface KwFormItemBar extends ComponentPublicInstance<KwFormItemProps> {}
+interface KwFormItem extends ComponentPublicInstance<KwFormItemProps> {}
 
 // KwGrid
 interface KwGridProps {}
 interface KwGridSlots {}
-interface KwGridBar extends ComponentPublicInstance<KwGridProps> {}
+interface KwGrid extends ComponentPublicInstance<KwGridProps> {}
 
 // KwTreeGrid
 interface KwTreeGridProps {}
 interface KwTreeGridSlots {}
-interface KwTreeGridBar extends ComponentPublicInstance<KwTreeGridProps> {}
+interface KwTreeGrid extends ComponentPublicInstance<KwTreeGridProps> {}
 
 // KwInput
 interface KwInputProps {}
 interface KwInputSlots {}
-interface KwInputBar extends ComponentPublicInstance<KwInputProps> {}
+interface KwInput extends ComponentPublicInstance<KwInputProps> {}
 
 // KwObserver
 interface KwObserverProps {}
 interface KwObserverSlots {}
-interface KwObserverBar extends ComponentPublicInstance<KwObserverProps> {}
+interface KwObserver extends ComponentPublicInstance<KwObserverProps> {}
 
 // KwOptionGroup
 interface KwOptionGroupProps {}
 interface KwOptionGroupSlots {}
-interface KwOptionGroupBar extends ComponentPublicInstance<KwOptionGroupProps> {}
+interface KwOptionGroup extends ComponentPublicInstance<KwOptionGroupProps> {}
 
 // KwPage
 interface KwPageProps {}
 interface KwPageSlots {}
-interface KwPageBar extends ComponentPublicInstance<KwPageProps> {}
+interface KwPage extends ComponentPublicInstance<KwPageProps> {}
 
 // KwPageHeader
 interface KwPageHeaderProps {}
 interface KwPageHeaderSlots {}
-interface KwPageHeaderBar extends ComponentPublicInstance<KwPageHeaderProps> {}
+interface KwPageHeader extends ComponentPublicInstance<KwPageHeaderProps> {}
 
 // KwPagination
 interface KwPaginationProps {}
 interface KwPaginationSlots {}
-interface KwPaginationBar extends ComponentPublicInstance<KwPaginationProps> {}
+interface KwPagination extends ComponentPublicInstance<KwPaginationProps> {}
 
 // KwPopupContainer
 interface KwPopupContainerProps {}
 interface KwPopupContainerSlots {}
-interface KwPopupContainerBar extends ComponentPublicInstance<KwPopupContainerProps> {}
+interface KwPopupContainer extends ComponentPublicInstance<KwPopupContainerProps> {}
 
 // KwPopup
 interface KwPopupProps {}
 interface KwPopupSlots {}
-interface KwPopupBar extends ComponentPublicInstance<KwPopupProps> {}
+interface KwPopup extends ComponentPublicInstance<KwPopupProps> {}
 
 // KwRadio
 interface KwRadioProps {}
 interface KwRadioSlots {}
-interface KwRadioBar extends ComponentPublicInstance<KwRadioProps> {}
+interface KwRadio extends ComponentPublicInstance<KwRadioProps> {}
 
 // KwSearch
 interface KwSearchProps {}
 interface KwSearchSlots {}
-interface KwSearchBar extends ComponentPublicInstance<KwSearchProps> {}
+interface KwSearch extends ComponentPublicInstance<KwSearchProps> {}
 
 // KwSearchRow
 interface KwSearchRowProps {}
 interface KwSearchRowSlots {}
-interface KwSearchRowBar extends ComponentPublicInstance<KwSearchRowProps> {}
+interface KwSearchRow extends ComponentPublicInstance<KwSearchRowProps> {}
 
 // KwSearchItem
 interface KwSearchItemProps {}
 interface KwSearchItemSlots {}
-interface KwSearchItemBar extends ComponentPublicInstance<KwSearchItemProps> {}
+interface KwSearchItem extends ComponentPublicInstance<KwSearchItemProps> {}
 
 // KwSeparator
 interface KwSeparatorProps {}
 interface KwSeparatorSlots {}
-interface KwSeparatorBar extends ComponentPublicInstance<KwSeparatorProps> {}
+interface KwSeparator extends ComponentPublicInstance<KwSeparatorProps> {}
 
 // KwTabPanels
 interface KwTabPanelsProps {}
 interface KwTabPanelsSlots {}
-interface KwTabPanelsBar extends ComponentPublicInstance<KwTabPanelsProps> {}
+interface KwTabPanels extends ComponentPublicInstance<KwTabPanelsProps> {}
 
 // KwTabPanel
 interface KwTabPanelProps {}
 interface KwTabPanelSlots {}
-interface KwTabPanelBar extends ComponentPublicInstance<KwTabPanelProps> {}
+interface KwTabPanel extends ComponentPublicInstance<KwTabPanelProps> {}
 
 // KwTabs
 interface KwTabsProps {}
 interface KwTabsSlots {}
-interface KwTabsBar extends ComponentPublicInstance<KwTabsProps> {}
+interface KwTabs extends ComponentPublicInstance<KwTabsProps> {}
 
 // KwTab
 interface KwTabProps {}
 interface KwTabSlots {}
-interface KwTabBar extends ComponentPublicInstance<KwTabProps> {}
+interface KwTab extends ComponentPublicInstance<KwTabProps> {}
 
 // KwTimePicker
 interface KwTimePickerProps {}
 interface KwTimePickerSlots {}
-interface KwTimePickerBar extends ComponentPublicInstance<KwTimePickerProps> {}
+interface KwTimePicker extends ComponentPublicInstance<KwTimePickerProps> {}
 
 // KwToggle
 interface KwToggleProps {}
 interface KwToggleSlots {}
-interface KwToggleBar extends ComponentPublicInstance<KwToggleProps> {}
+interface KwToggle extends ComponentPublicInstance<KwToggleProps> {}
 
 // KwTooltip
 interface KwTooltipProps {}
 interface KwTooltipSlots {}
-interface KwTooltipBar extends ComponentPublicInstance<KwTooltipProps> {}
+interface KwTooltip extends ComponentPublicInstance<KwTooltipProps> {}
 
 export interface KwComponentNameMap {
   KwActionBar: KwActionBar;
@@ -225,12 +225,13 @@ export interface KwComponentNameMap {
   KwTooltip: KwTooltip;
 }
 
+import { GlobalComponentConstructor } from 'quasar';
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
     KwActionBar: GlobalComponentConstructor<KwActionBarProps, KwActionBarSlots>;
     KwBtn: GlobalComponentConstructor<KwBtnProps, KwBtnSlots>;
     KwBtnToggle: GlobalComponentConstructor<KwBtnToggleProps, KwBtnToggleSlots>;
-    KwChart: GlobalComponentConstructor<kwChartProps, kwChartSlots>;
+    KwChart: GlobalComponentConstructor<KwChartProps, KwChartSlots>;
     KwCheckbox: GlobalComponentConstructor<KwCheckboxProps, KwCheckboxSlots>;
     KwChip: GlobalComponentConstructor<KwChipProps, KwChipSlots>;
     KwDate: GlobalComponentConstructor<KwDateProps, KwDateSlots>;
@@ -242,7 +243,7 @@ declare module '@vue/runtime-core' {
     KwForm: GlobalComponentConstructor<KwFormProps, KwFormSlots>;
     KwFormRow: GlobalComponentConstructor<KwFormRowProps, KwFormRowSlots>;
     KwFormItem: GlobalComponentConstructor<KwFormItemProps, KwFormItemSlots>;
-    KwGrid: GlobalComponentConstructor<KwGridrops, KwGridSlots>;
+    KwGrid: GlobalComponentConstructor<KwGridProps, KwGridSlots>;
     KwTreeGrid: GlobalComponentConstructor<KwTreeGridProps, KwTreeGridSlots>;
     KwInput: GlobalComponentConstructor<KwInputProps, KwInputSlots>;
     KwObserver: GlobalComponentConstructor<KwObserverProps, KwObserverSlots>;

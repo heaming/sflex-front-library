@@ -25,9 +25,9 @@ export const alert: DialogFunction;
 export const confirm: DialogFunction;
 
 // HTTP
-import { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+import { AxiosPromise, AxiosResponse, AxiosRequestConfig } from 'axios';
 
-export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+export interface CustomAxiosRequestConfig<D = any> extends AxiosRequestConfig<D> {
   /**
    * API 호출 시 스피너 표시 여부
    * @defaultValue `true`
@@ -46,7 +46,7 @@ export interface CustomAxiosInstance {
   (url: string, config?: CustomAxiosRequestConfig): AxiosPromise;
   getUri(config?: CustomAxiosRequestConfig): string;
   request<T = any, R = AxiosResponse<T>, D = any>(config: CustomAxiosRequestConfig<D>): Promise<R>;
-  get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRCustomAxiosRequestConfigequestConfig<D>): Promise<R>;
+  get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: CustomAxiosRequestConfig<D>): Promise<R>;
   delete<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: CustomAxiosRequestConfig<D>): Promise<R>;
   post<T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: CustomAxiosRequestConfig<D>): Promise<R>;
   put<T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: CustomAxiosRequestConfig<D>): Promise<R>;
@@ -107,8 +107,8 @@ export function modal(options: {
 export function registerPopupsByImportGlob(modules: { [key: string]: any }[]): void;
 
 // Sanitize
-import { sanitize } from 'dompurify';
-export const sanitize = sanitize;
+import DOMPurify from 'dompurify';
+export const sanitize: typeof DOMPurify.sanitize;
 
 // Storage
 import { LocalStorage, SessionStorage } from 'quasar';

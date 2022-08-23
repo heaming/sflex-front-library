@@ -51,24 +51,30 @@ declare interface FileInfo {
 interface FileUtil {
   /**
    * Blob을 다운로드 한다.
+   * @param blob
+   * @param fileName 파일명
    */
   downloadBlob(blob: Blob, fileName: string): void;
 
   /**
    * 파일을 업로드한다.
+   * @param file
+   * @param targetPath default `temp`
    */
-  upload(file: File, targetPath?: TargetPath = 'temp'): Promise<FileInfo>;
+  upload(file: File, targetPath?: TargetPath): Promise<FileInfo>;
 
   /**
    * 파일 정보로 부터 파일을 다운로드 한다.
+   * @param fileInfo
+   * @param targetPath default `temp`
    */
-  download(fileInfo: FileInfo, targetPath = 'temp'): Promise<void>;
+  download(fileInfo: FileInfo, targetPath?: TargetPath): Promise<void>;
 }
 
 export const fileUtil: FileUtil;
 
 // Grid
-import { GridView, TreeView, LocalDataProvider, LocalTreeDataProvider, RowState, GridExportOptions, DataValues } from 'realgrid';
+import { GridView, TreeView, GridExportOptions, DataValues } from 'realgrid';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
@@ -173,23 +179,23 @@ interface GridUtil {
   /**
    * 데이터 상태가 변경된(NONE이 아닌) 행들의 데이터를 가져온다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeDeleted 데이터 상태 DELETED 포함 여부
+   * @param isIncludeDeleted 데이터 상태 DELETED 포함 여부, default `true`
    */
-  getChangedRowValues(view: GridView | TreeView, isIncludeDeleted = true): RowValue[];
+  getChangedRowValues(view: GridView | TreeView, isIncludeDeleted?: boolean): RowValue[];
 
   /**
    * 전체 행들의 데이터를 가져온다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeDeleted 데이터 상태 DELETED 포함 여부
+   * @param isIncludeDeleted 데이터 상태 DELETED 포함 여부, default `true`
    */
-  getAllRowValues(view: GridView | TreeView, isIncludeDeleted = true): RowValue[];
+  getAllRowValues(view: GridView | TreeView, isIncludeDeleted?: boolean): RowValue[];
 
   /**
    * 체크박스가 선택된 행들의 데이터를 가져온다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isChangedOnly 데이터 상태가 변경된(NONE이 아닌) 값만 가져올지 여부
+   * @param isChangedOnly 데이터 상태가 변경된(NONE이 아닌) 값만 가져올지 여부, default `false`
    */
-  getCheckedRowValues(view: GridView | TreeView, isChangedOnly = false): RowValue[];
+  getCheckedRowValues(view: GridView | TreeView, isChangedOnly?: boolean): RowValue[];
 
   /**
    * 선택된 영역 행들의 데이터를 가져온다.
@@ -248,18 +254,18 @@ interface GridUtil {
    * {@link https://lodash.com/docs/4.17.15#find}
    * @param view 그리드 뷰 또는 트리 뷰
    * @param predicate 조건자
-   * @param fromDataRow 시작 행
+   * @param fromDataRow 시작 행, default `-1`
    */
-  find(view: GridView | TreeView, predicate: ListIteratee<RowValue, boolean>, fromDataRow = -1): RowValue;
+  find(view: GridView | TreeView, predicate: ListIteratee<RowValue, boolean>, fromDataRow?: number): RowValue;
 
   /**
    * 시작 행부터 전체 행에 대하여 조건자가 truthy인 첫번째 행을 반환한다.
    * {@link https://lodash.com/docs/4.17.15#findIndex}
    * @param view 그리드 뷰 또는 트리 뷰
    * @param predicate 조건자
-   * @param fromDataRow 시작 행
+   * @param fromDataRow 시작 행, default `-1`
    */
-  findDataRow(view: GridView | TreeView, predicate: ListIteratee<RowValue, boolean>, fromDataRow = -1): number;
+  findDataRow(view: GridView | TreeView, predicate: ListIteratee<RowValue, boolean>, fromDataRow?: number): number;
 
   /**
    * 전체 데이터 행에 대하여 반복자를 실행한다.
@@ -284,7 +290,7 @@ interface GridUtil {
    * @param iteratee 반복자
    * @param accumulator 초기 값, 지정하지 않으면 컬렉션의 첫 번째 요소를 초기 값으로 사용.
    */
-  reduce<TResult>(view: GridView | TreeView, iteratee: MemoListIterator<RowValue, TResult, Array<RowValue>>, accumulator: TResult): TResult;
+  reduce<TResult>(view: GridView | TreeView, iteratee: MemoListIterator<RowValue, TResult, Array<RowValue>>, accumulator?: TResult): TResult;
 
   /**
    * 전체 데이터 행에 대하여 조건자가 하나라도 참을 반환하는지 확인한다.
@@ -297,30 +303,30 @@ interface GridUtil {
   /**
    * 선택된 영역의 행들을 삭제하고 데이터 행 목록을 반환한다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부
+   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부, default `false`
    */
-  deleteSelectedRows(view: GridView | TreeView, isIncludeCreated = false): RowValue[];
+  deleteSelectedRows(view: GridView | TreeView, isIncludeCreated?: boolean): RowValue[];
 
   /**
    * confirm 다이얼로그를 호출하고, 확인을 누르면 선택된 행들을 삭제하고 데이터 행 목록을 반환한다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부
+   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부, default `false`
    */
-  confirmDeleteSelectedRows(view: GridView | TreeView, isIncludeCreated = false): Promise<RowValue[]>;
+  confirmDeleteSelectedRows(view: GridView | TreeView, isIncludeCreated?: boolean): Promise<RowValue[]>;
 
   /**
    * 체크박스가 선택된 행들을 삭제하고 데이터 행 목록을 반환한다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부
+   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부, default `false`
    */
-  deleteCheckedRows(view: GridView | TreeView, isIncludeCreated = false): RowValue[];
+  deleteCheckedRows(view: GridView | TreeView, isIncludeCreated?: boolean): RowValue[];
 
   /**
    * confirm 다이얼로그를 호출하고, 확인을 누르면 체크박스가 선택된 행들을 삭제하고 데이터 행 목록을 반환한다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부
+   * @param isIncludeCreated 데이터 상태가 CREATED인 데이터 행을 포함할지 여부, default `false`
    */
-  confirmDeleteCheckedRows(view: GridView | TreeView, isIncludeCreated = false): Promise<RowValue[]>;
+  confirmDeleteCheckedRows(view: GridView | TreeView, isIncludeCreated?: boolean): Promise<RowValue[]>;
 
   /**
    * 현재 데이터를 초기 값으로 지정한다.
@@ -365,10 +371,10 @@ interface GridUtil {
   /**
    * 그리드의 유효성 검사를 수행한다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isChangedOnly 변경된 행들에 대해서만 유효성 검사를 수행할지 여부
-   * @param isAlertMessage 유효성 검사를 수행하고 다이얼로그로 표시할지 여부
+   * @param isChangedOnly 변경된 행들에 대해서만 유효성 검사를 수행할지 여부, default `true`
+   * @param isAlertMessage 유효성 검사를 수행하고 다이얼로그로 표시할지 여부, default `true`
    */
-  validate(view: GridView | TreeView, isChangedOnly = true, isAlertMessage = true): boolean;
+  validate(view: GridView | TreeView, isChangedOnly?: boolean, isAlertMessage?: boolean): boolean;
 
   /**
    * 그리드를 엑셀이나 CSV 내보낸다.
@@ -388,9 +394,9 @@ interface GridUtil {
    * 지정된 행의 조상 행들을 반환한다.
    * @param view 트리 뷰
    * @param dataRow 데이터 행
-   * @param isAscending 오름차순으로 반환할지 여부
+   * @param isAscending 오름차순으로 반환할지 여부, default `false`
    */
-  getAncestors(view: TreeView, dataRow: number, isAscending = false): number[];
+  getAncestors(view: TreeView, dataRow: number, isAscending?: boolean): number[];
 
   /**
    * 지정된 행의 자식 행들을 반환한다
@@ -410,25 +416,25 @@ interface GridUtil {
    * 지정된 행의 형제 행들을 반환한다
    * @param view 트리 뷰
    * @param dataRow 데이터 행
-   * @param isIncludeSelf 자신을 포함할지 여부
+   * @param isIncludeSelf 자신을 포함할지 여부, default `true`
    */
-  getSiblings(view: TreeView, dataRow: number, isIncludeSelf = true): number[];
+  getSiblings(view: TreeView, dataRow: number, isIncludeSelf?: boolean): number[];
 
   /**
    * 지정된 행을 접는다.
    * @param view 트리 뷰
    * @param dataRow 데이터 행
-   * @param isCollapseDescendants 자손 행 접힘 여부
+   * @param isCollapseDescendants 자손 행 접힘 여부, default `false`
    */
-  collapse(view: TreeView, dataRow: number, isCollapseDescendants = false): void;
+  collapse(view: TreeView, dataRow: number, isCollapseDescendants?: boolean): void;
 
   /**
    * 지정된 행을 펼친다.
    * @param view 트리 뷰
    * @param dataRow 데이터 행
-   * @param isCollapseDescendants 자손 행 펼침 여부
+   * @param isCollapseDescendants 자손 행 펼침 여부, default `false`
    */
-  expand(view: TreeView, dataRow: number, isExpandDescendants = false): void;
+  expand(view: TreeView, dataRow: number, isExpandDescendants?: boolean): void;
 }
 
 export const gridUtil: GridUtil;
@@ -475,32 +481,32 @@ interface StringUtil {
   /**
    * 입력 문자열의 바이트 합을 반환한다.
    * @param s 입력 문자열
-   * @param bytesPerKoChar 한글당 바이트 값
+   * @param bytesPerKoChar 한글당 바이트 값, default `3`
    */
-  getByte(s: string, bytePerKoChar = 3): number;
+  getByte(s: string, bytesPerKoChar?: number): number;
 
   /**
    * 입력 문자열을 최대 바이트까지 잘라서 반환한다.
    * @param s 입력 문자열
    * @param maxBytes 최대 바이트
-   * @param bytesPerKoChar 한글당 바이트 값
+   * @param bytesPerKoChar 한글당 바이트 값, default `3`
    */
-  getMaxByteString(s: string, maxBytes: number, bytesPerKoChar = 3): string;
+  getMaxByteString(s: string, maxBytes: number, bytesPerKoChar?: number): string;
 
   /**
    * 입력 문자열이 최대 바이트를 초과하는지 여부 반환한다.
    * @param s 입력 문자열
    * @param maxBytes 최대 바이트
-   * @param bytesPerKoChar 한글당 바이트 값
+   * @param bytesPerKoChar 한글당 바이트 값, default `3`
    */
-  isOverByte(s: string, maxBytes: number, bytesPerKoChar = 3): boolean;
+  isOverByte(s: string, maxBytes: number, bytesPerKoChar?: number): boolean;
 
   /**
    * `1234567`을 `1,234,567`과 같은 형식으로 변환한다.
    * @param s 숫자 문자열
-   * @param decimalLimit 소숫점 자리 제한, -1인 경우 제한 없음.
+   * @param decimalLimit 소숫점 자리 제한(-1인 경우 제한 없음), default `-1`
    */
-  getNumberWithComma(s: string, decimalLimit = -1): boolean;
+  getNumberWithComma(s: string, decimalLimit?: number): boolean;
 
   /**
    * 유니크한 36자리 문자열 반환한다.

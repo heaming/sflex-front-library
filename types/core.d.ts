@@ -9,8 +9,13 @@ interface CreateAppOptions {
 export function createApp(rootComponent: Component, options?: CreateAppOptions): App<Element>;
 
 // getComponentType
+import { Ref } from 'vue';
 import { KwComponentNameMap } from './components';
 export function getComponentType<K extends keyof KwComponentNameMap>(componentName: K): KwComponentNameMap[K];
+
+declare module '@vue/runtime-core' {
+  export function ref<K extends keyof KwComponentNameMap, T = KwComponentNameMap[K]>(component: T): Ref<T>;
+}
 
 // Consts
 export const consts: {
