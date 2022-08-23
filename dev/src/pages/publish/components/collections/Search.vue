@@ -47,6 +47,111 @@
               Required,Default : "noResetFocus"<br>
             </td>
           </tr>
+          <tr>
+            <td>
+              kw-form-item
+            </td>
+            <td>
+              essential
+            </td>
+            <td>
+              add the class "essential" in the tag of kw-form-item.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              the element in kw-form-item
+            </td>
+            <td>
+              readonly
+            </td>
+            <td>
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item.<br>
+              (Except of the tags of kw-select or kw-input,
+              It is required to add attribute 'readonly' Instead of 'disable')
+            </td>
+          </tr>
+          <tr>
+            <td>
+              the element in kw-form-item
+            </td>
+            <td>
+              disable
+            </td>
+            <td>
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-search
+            </td>
+            <td>
+              cols=""
+            </td>
+            <td>
+              Add the number in cols="" and it belongs to kw-search's tag as attribute
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-form-item
+            </td>
+            <td>
+              colspan=""
+            </td>
+            <td>
+              Add the number in colspan="" and it belongs to kw-form-item's tag as attribute
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Width
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              The Element(tag's name)
+            </th>
+            <th>
+              Attr or Class
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-search
+            </td>
+            <td>
+              :label-size="200"
+            </td>
+            <td>
+              Defines the size of all labels inside 'kw-form(kw-search)'.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-input / kw-select
+            </td>
+            <td>
+              w1, w2, w3......w1000
+            </td>
+            <td>
+              In general, the width of 'input' is set to 100% according to the column width.<br>
+              However, in some cases, the size may be flexible.<br>
+              In this case, the size must be defined through the helper class.
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -85,7 +190,6 @@
               label="담당자명"
               class="essential"
             >
-              <!-- 필수 입력의 경우 essential 클래스 추가-->
               <kw-input
                 name="input"
                 rules="required"

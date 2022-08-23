@@ -1,8 +1,4 @@
-.kw-form,
-.kw-search {
-  overflow-y: visible;
-  overflow-x: clip;
-
+.kw-form {
   .q-field {
     &__inner {
       display: flex;
@@ -66,7 +62,7 @@
   .kw-form-row {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -20px;
+    margin: 0;
     padding: 10px 0;
     min-height: 60px;
 
@@ -74,14 +70,35 @@
       display: flex;
       width: auto;
       max-width: 100%;
-      min-width: 0;
+      min-width: 648px;
       min-height: 40px;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 0;
 
       & > .row {
         align-items: center;
         width: 100%;
+      }
+
+      & .row .kw-hypen-input {
+        display: flex;
+
+        .kw-input {
+          width: 144px;
+        }
+
+        span {
+          display: inline-block;
+          width: 15px;
+          height: 18px;
+          font-size: 14px;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 40px;
+          letter-spacing: normal;
+          text-align: center;
+          color: $black3;
+        }
       }
     }
 
@@ -95,17 +112,17 @@
 
       & + label {
         @media (min-width: 0) {
-          width: auto;
-          min-width: 0;
-          max-width: 100%;
+          width: 498px;
+          min-width: 498px;
+          max-width: 498px;
           flex: 10000 1 0%;
+
+          &.kw-date-picker .q-field__inner {
+            max-width: 498px !important;
+          }
         }
       }
     }
-  }
-
-  .kw-form-item {
-    flex: 10000 1 0%;
   }
 }
 
@@ -160,4 +177,8 @@
       z-index: 1;
     }
   }
+}
+
+.kw-form .kw-form-row .kw-form-item:nth-child(2) {
+  margin-left: 100px;
 }
