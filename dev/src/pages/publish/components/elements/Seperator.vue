@@ -4,7 +4,7 @@
       Seperator
     </h2>
     <p class="kw-guide-description">
-      Seperator's margin top & bottom are 30px
+      Seperator's margin top & bottom are 30px | color code: $line-line(#ddd)
     </p>
     <div class="kw-guide-section">
       <h3
