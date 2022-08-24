@@ -1,5 +1,7 @@
 import { Quasar } from 'quasar';
+import consts from '../consts';
 import { http } from '../plugins/http';
+import { localStorage } from '../plugins/storage';
 import { INITIAL_LOCATION } from '../router';
 
 export default () => {
@@ -56,7 +58,9 @@ export default () => {
   }
 
   async function login(loginId, password) {
-    await http.post('/certification/simple-login', { loginId, password });
+    const response = await http.post('/certification/simple-login', { loginId, password });
+    const { token } = response.data;
+    localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, token);
     window.location.replace('/');
   }
 

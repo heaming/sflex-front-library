@@ -70,7 +70,7 @@ textarea::placeholder {
       line-height: 70px;
       position: relative;
 
-      &.active {
+      &.kw-gnb--link-active {
         font-weight: 700;
 
         &::after {
@@ -121,12 +121,6 @@ textarea::placeholder {
 
 // lnb 관련
 .kw-lnb {
-  &-tree {
-    background: #fff;
-    position: relative;
-    z-index: 1000;
-  }
-
   &-switch.kw-btn {
     position: fixed;
     left: 0;
@@ -140,12 +134,8 @@ textarea::placeholder {
     padding: 0;
     transition: left 0.08s;
 
-    // --animate-duration: 0.3s;
-    // --animate-delay: 0.3s;
-    // --animate-repeat: 1;
-
     &.kw-lnb-switch--active {
-      left: 300px;
+      left: 280px;
 
       svg {
         transform: rotate(180deg);
@@ -164,6 +154,169 @@ textarea::placeholder {
 
     svg {
       margin-left: -7px;
+    }
+  }
+
+  // menu depth
+  &-tree {
+    background: #fff;
+    position: relative;
+    z-index: 1000;
+
+    .q-icon,
+    .q-tree__node-header::before,
+    .q-tree__node::after,
+    .q-focus-helper {
+      display: none;
+    }
+
+    .q-tree__node-header,
+    .q-tree__children,
+    .q-tree__node--parent,
+    .q-tree__node {
+      padding: 0;
+      margin: 0;
+    }
+
+    .q-tree__node-header-content > div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      color: $black3;
+      font-weight: 400;
+
+      &:hover {
+        font-weight: 700;
+        color: $black1;
+      }
+    }
+
+    .q-tree__node-header-content.text-primary > div {
+      font-weight: 700;
+      color: $black1;
+    }
+
+    & > .q-tree__node--parent {
+      padding-top: 28px;
+
+      // depth1
+      & > .q-tree__node-header {
+        & > .q-tree__node-header-content {
+          padding: 0 20px;
+
+          & > div {
+            min-height: 45px;
+            border-bottom: 2px solid $black1;
+            font-weight: 700;
+            font-size: 18px;
+            color: $black1;
+          }
+        }
+      }
+
+      // depth2
+      & > .q-tree__node-collapsible {
+        & > .q-tree__children {
+          & > .q-tree__node {
+            & > .q-tree__node-header {
+              & > .q-tree__node-header-content {
+                padding: 0 20px;
+
+                & > div {
+                  min-height: 45px;
+                  display: flex;
+                  align-items: center;
+                  border-bottom: 1px solid $line-bg;
+                }
+              }
+            }
+
+            // depth3
+            & > .q-tree__node-collapsible {
+              margin-top: -1px;
+
+              & > .q-tree__children {
+                & > .q-tree__node {
+                  background: $bg-box;
+                  padding: 14px 20px;
+
+                  & > .q-tree__node-header {
+                    & > .q-tree__node-header-content {
+                      & > div {
+                        min-height: 30px;
+                        display: flex;
+                        align-items: center;
+                        font-size: 14px;
+
+                        &::before {
+                          content: "-";
+                          display: inline-block;
+                          margin-right: 2px;
+                          font-weight: 700;
+                        }
+                      }
+                    }
+                  }
+
+                  // depth4
+                  & > .q-tree__node-collapsible {
+                    & > .q-tree__children {
+                      & > .q-tree__node {
+                        & > .q-tree__node-header {
+                          & > .q-tree__node-header-content {
+                            padding: 0 20px;
+
+                            & > div {
+                              min-height: 20px;
+                              display: flex;
+                              align-items: center;
+                              font-size: 14px;
+
+                              &::before {
+                                content: "·";
+                                display: inline-block;
+                                margin-right: 5px;
+                                font-weight: 700;
+                              }
+                            }
+                          }
+                        }
+
+                        // depth5
+                        & > .q-tree__node-collapsible {
+                          & > .q-tree__children {
+                            & > .q-tree__node {
+                              & > .q-tree__node-header {
+                                & > .q-tree__node-header-content {
+                                  padding: 0 40px;
+
+                                  & > div {
+                                    min-height: 20px;
+                                    display: flex;
+                                    align-items: center;
+                                    font-size: 14px;
+
+                                    &::before {
+                                      content: "‥";
+                                      display: inline-block;
+                                      margin-right: 4px;
+                                      font-weight: 700;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

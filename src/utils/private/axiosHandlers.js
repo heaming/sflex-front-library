@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { omitBy, isNil } from 'lodash-es';
 import consts from '../../consts';
+import store from '../../store';
 import { loadSpinner } from '../../plugins/loading';
 import { alert } from '../../plugins/dialog';
 import { isServerError } from './axiosShared';
@@ -33,6 +34,14 @@ export function handleConfig(config) {
 
   if (config.spinner) {
     loadSpinner(true);
+  }
+
+  // set header Authorization
+  const isAuthenticated = store.getters['meta/isAuthenticated'];
+  const accessToken = store.getters['meta/getAccessToken'];
+
+  if (isAuthenticated) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   return config;
