@@ -48,6 +48,9 @@
       >
         Case #1 - Search Results Box
       </h3>
+      <p class="kw-guide-description">
+        The search result box is used after search result
+      </p>
       <q-card>
         <div class="kw-guide-example">
           <img
@@ -62,6 +65,30 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Case #2 - Normal case
+      </h3>
+      <p class="kw-guide-description">
+        The Normal case box is used after the title.
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <img
+            src="../../../../../assets/images/normal_case.png"
+            alt="normal_case"
+            style="width: 50%;"
+          >
+        </div>
+        <guide-code-view
+          :code-value="normalArea"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -71,6 +98,11 @@ const testCode = `
 <div class="result-area">
   <h3>조회결과</h3>
   <!-- Maybe 'grid' is here. -->
+</div>
+`;
+const normalArea = `
+<div class="normal-area">
+  <h3>거래처 정보</h3>
 </div>
 `;
 </script>
