@@ -117,6 +117,12 @@
           max-width: 498px;
           flex: 10000 1 0%;
 
+          &.kw-date-picker {
+            width: 244px;
+            min-width: 244px;
+            max-width: 244px;
+          }
+
           &.kw-date-picker .q-field__inner {
             max-width: 498px !important;
           }
