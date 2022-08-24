@@ -4,7 +4,7 @@
       Radio
     </h2>
     <p class="kw-guide-description">
-      In search form and table, radio is 18px / default is 22px
+      Default size is 22px / In search form and table, radio size is 18px
     </p>
     <div class="kw-guide-section">
       <h3
