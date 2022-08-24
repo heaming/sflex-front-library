@@ -122,11 +122,11 @@ textarea::placeholder {
 // lnb 관련
 .kw-lnb {
   &-switch.kw-btn {
-    position: fixed;
-    left: 0;
+    position: absolute;
+    left: 280px;
     width: 32px;
     height: 74px;
-    top: 50vh;
+    top: 50%;
     transform: translateY(-50%);
     background: url(~assets/images/lnb_back.png) no-repeat center;
     border-radius: 0;
@@ -135,8 +135,6 @@ textarea::placeholder {
     transition: left 0.08s;
 
     &.kw-lnb-switch--active {
-      left: 280px;
-
       svg {
         transform: rotate(180deg);
       }
