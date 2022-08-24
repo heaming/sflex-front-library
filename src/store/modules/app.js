@@ -12,7 +12,7 @@ export default {
     setLnbExpanded(state, value) {
       state.lnbExpanded = value;
     },
-    setSelectedAppkey(state, appKey) {
+    setSelectedAppKey(state, appKey) {
       state.selectedAppKey = appKey;
     },
     setSeletedLnbKey(state, lnbKey) {
