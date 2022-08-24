@@ -53,6 +53,14 @@ export default {
       type: Number,
       default: 0,
     },
+    upperCase: {
+      type: Boolean,
+      default: false,
+    },
+    lowerCase: {
+      type: Boolean,
+      default: false,
+    },
     icon: {
       type: String,
       default: undefined,
@@ -105,15 +113,25 @@ export default {
     });
 
     function onUpdateValue(val) {
+      const inputEl = inputRef.value.getNativeElement();
       val ??= '';
 
-      if (regex.value && !regex.value.test(val)) {
+      if (regex.value?.test(val) === false) {
         val = value.value;
-        inputRef.value.getNativeElement().value = val;
+        inputEl.value = val;
       }
+
       if (props.maxlength) {
         val = getMaxByteString(val, props.maxlength);
-        inputRef.value.getNativeElement().value = val;
+        inputEl.value = val;
+      }
+
+      if (props.upperCase) {
+        val = val.toUpperCase();
+        inputEl.value = val;
+      } else if (props.lowerCase) {
+        val = val.toLowerCase();
+        inputEl.value = val;
       }
 
       value.value = val;
