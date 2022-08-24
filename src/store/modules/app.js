@@ -1,7 +1,7 @@
 const normalizeState = () => ({
   lnbExpanded: true,
-  selectedAppId: null,
-  selectedMenuId: null,
+  selectedAppKey: null,
+  selectedLnbKey: null,
 });
 
 export default {
@@ -12,28 +12,23 @@ export default {
     setLnbExpanded(state, value) {
       state.lnbExpanded = value;
     },
-    setSelectedAppId(state, applicationId) {
-      state.selectedAppId = applicationId;
+    setSelectedAppkey(state, appKey) {
+      state.selectedAppKey = appKey;
     },
-    setSelectedMenuId(state, menuUid) {
-      state.selectedMenuId = menuUid;
+    setSeletedLnbKey(state, lnbKey) {
+      state.selectedLnbKey = lnbKey;
     },
   },
 
   getters: {
     getLnbExpanded: (state) => state.lnbExpanded,
-    getSelectedAppId: (state) => state.selectedAppId,
+    getSelectedAppKey: (state) => state.selectedAppKey,
+    getSelectedLnbKey: (state) => state.selectedLnbKey,
   },
 
   actions: {
     toggleLnb({ state, commit }) {
       commit('setLnbExpanded', !state.lnbExpanded);
-    },
-    selectApp({ commit }, { applicationId }) {
-      commit('setSelectedAppId', applicationId);
-    },
-    selectMenu({ commit }, { menuUid }) {
-      commit('setSelectedMenuId', menuUid);
     },
   },
 };
