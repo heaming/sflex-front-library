@@ -238,7 +238,15 @@ textarea::placeholder {
               & > .q-tree__children {
                 & > .q-tree__node {
                   background: $bg-box;
-                  padding: 14px 20px;
+                  padding: 0 20px;
+
+                  &:first-child {
+                    padding-top: 14px;
+                  }
+
+                  &:last-child {
+                    padding-bottom: 14px;
+                  }
 
                   & > .q-tree__node-header {
                     & > .q-tree__node-header-content {

@@ -179,15 +179,10 @@ function initGrid(data, view) {
 const sampleVueCode = `
 <kw-page>
   <template #header>
-    <kw-page-header
-      :options="['홈','고객','Search Result(Normal)']"
-    />
+    <kw-page-header :options="['홈','고객','Search Result(Normal)']" />
   </template>
 
-  <kw-search
-    :label-size="108"
-    title="조회조건"
-  >
+  <kw-search title="조회조건">
     <kw-search-row>
       <kw-search-item label="고객 유형">
         <kw-select
@@ -232,10 +227,7 @@ const sampleVueCode = `
         <kw-select
           v-model="selectData.model"
           :options="selectData.options"
-          :display-value="selectData.model + ' 개씩보기'"
-          name="select"
-          rules="required"
-          :borderless="true"
+          suffix="개씩보기"
         />
         <div class="kw-action-bar--send ml40">
           <kw-btn
@@ -285,6 +277,18 @@ const sampleVueCode = `
       :model-value="1"
       :total-count="100"
     />
+  </div>
+  <div class="kw-guide pa0">
+    <q-card>
+      <h3 class="center mb20">
+        This is the source code for this page. This part is not included in the coding.
+      </h3>
+      <guide-code-view
+        :code-value="[sampleVueCode, sampleJsCode]"
+        :lang="['vue','javascript']"
+        multi="true"
+      />
+    </q-card>
   </div>
 </kw-page>`;
 
