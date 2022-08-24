@@ -40,9 +40,6 @@ export default {
     setApps(state, apps) {
       state.apps = Object.freeze(apps);
     },
-    setSelectedAppId(state, applicationId) {
-      state.selectedAppId = applicationId;
-    },
     setMenus(state, menus) {
       state.menus = Object.freeze(menus);
     },
