@@ -50,7 +50,9 @@
               :options="['A', 'B', 'C', 'D']"<br>
               readonly<br>
               disable<br>
-              multiple
+              multiple <br>
+              placeholder="placeholder"<br>
+              use-input
             </td>
             <td>
               Required, Default : "[]"<br>
@@ -59,7 +61,9 @@
               Add the option lists in [ ]<br>
               Add the attribute "readonly" when it's required to be readonly<br>
               Add the attribute "disable" when it's required to be disable<br>
-              Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select
+              Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select <br>
+              Add the attribute "placeholder='text'" with "use-input" in need <br>
+              (please be aware can't use together with "disable")
             </td>
           </tr>
         </tbody>
@@ -72,7 +76,8 @@
         Notice
       </h3>
       <ul>
-        <li>For 'label' width & 'select' width, refer to 'Collections/Form'.</li>
+        <li>Usually, 'label' width is fixed but 'select' have flexible width(depending on column)</li>
+        <li>If you have to set the width of select or label, please find the details in 'Collections/Form' page.</li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -93,8 +98,10 @@
                 <kw-select
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
+                  placeholder="placeholder"
                   name="select"
                   rules="required"
+                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -125,8 +132,10 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
+                  placeholder="placeholder"
                   name="selectMultiple"
                   rules="required"
+                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -146,7 +155,7 @@
         Readonly
       </h3>
       <p class="kw-guide-description">
-        add attribute <b>readonly</b> in the tag of "kw-select"
+        Add attribute <b>readonly</b> in the tag of "kw-select"
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -157,9 +166,11 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
+                  placeholder="placeholder"
                   name="selectMultiple"
                   rules="required"
                   readonly
+                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -190,10 +201,10 @@
                   <kw-select
                     :model-value="[]"
                     :options="['A', 'B', 'C', 'D']"
-                    multiple
                     name="selectMultiple"
                     rules="required"
                     disable
+                    use-input
                   />
                 </kw-form-item>
               </kw-form-row>
@@ -217,8 +228,10 @@ const selectDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
+        placeholder="placeholder"
         name="select"
         rules="required"
+        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -231,8 +244,10 @@ const selectDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
+        placeholder="placeholder"
         name="select"
         rules="required"
+        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -246,9 +261,11 @@ const selectMultipleDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
+        placeholder="placeholder"
         multiple
         name="selectMultiple"
         rules="required"
+        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -262,8 +279,10 @@ const selectMultipleDefaultCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
+        placeholder="placeholder"
         name="selectMultiple"
         rules="required"
+        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -278,9 +297,11 @@ const selectReadonlyCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
+        placeholder="placeholder"
         name="selectMultiple"
         rules="required"
         readonly
+        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -297,6 +318,8 @@ const selectReadonlyCode = `
         name="selectMultiple"
         rules="required"
         readonly
+        placeholder="placeholder"
+        use-input
       />
     </kw-search-item>
   </kw-search-row>
