@@ -65,7 +65,7 @@
             </td>
             <td>
               Required, Default : "datePicker"<br>
-              Required, Default : "required"<br>
+              Add this when Essential Case<br>
               Add the attribute "placeholder='text'" in need
             </td>
           </tr>
@@ -80,7 +80,7 @@
             </td>
             <td>
               Required, Default : "timePicker" <br>
-              Required, Default : "required"<br>
+              Add this when Essential Case<br>
               Add the attribute "placeholder='text'" in need
             </td>
           </tr>
@@ -114,8 +114,17 @@
               <kw-form-item label="DatePicker">
                 <kw-date-picker
                   name="datePicker"
-                  rules="required"
                   placeholder="placeholder"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="DatePicker"
+                class="essential"
+              >
+                <kw-date-picker
+                  name="datePicker"
+                  placeholder="placeholder"
+                  rules="required"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -142,6 +151,17 @@
           <kw-form>
             <kw-form-row>
               <kw-form-item label="DateRangePicker">
+                <kw-date-range-picker
+                  name="dateRangePicker"
+                  rules="date_range_months:1"
+                  from-placeholder="시작일선택"
+                  to-placeholder="종료일선택"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="DateRangePicker"
+                class="essential"
+              >
                 <kw-date-range-picker
                   name="dateRangePicker"
                   rules="date_range_required|date_range_months:1"
@@ -181,8 +201,17 @@
               <kw-form-item label="TimePicker">
                 <kw-time-picker
                   name="timePicker"
-                  rules="required"
                   placeholder="시간선택"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="TimePicker"
+                class="essential"
+              >
+                <kw-time-picker
+                  name="timePicker"
+                  placeholder="시간선택"
+                  rules="required"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -204,9 +233,9 @@ const datePickerCode = `
     <kw-form-item label="DatePicker">
       <kw-date-picker
         name="datePicker"
-        rules="required"
         placeholder="placeholder"
       />
+      <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -217,9 +246,9 @@ const datePickerCode = `
     <kw-search-item label="DatePicker">
       <kw-date-picker
         name="datePicker"
-        rules="required"
         placeholder="placeholder"
       />
+      <!-- if essential case please add "rules='required'" -->
     </kw-search-item>
   </kw-search-row>
 </kw-search>
@@ -231,10 +260,11 @@ const dateRangePickerCode = `
     <kw-form-item label="DateRangePicker">
       <kw-date-range-picker
         name="dateRangePicker"
-        rules="date_range_required|date_range_months:1"
+        rules="date_range_months:1"
         from-placeholder="시작일선택"
         to-placeholder="종료일선택"
       />
+      <!-- if essential case please add 'date_range_required' ex.rules="date_range_required|date_range_months:1"   -->
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -245,10 +275,11 @@ const dateRangePickerCode = `
     <kw-search-item label="DateRangePicker">
       <kw-date-range-picker
         name="dateRangePicker"
-        rules="date_range_required|date_range_months:1"
+        rules="date_range_months:1"
         from-placeholder="시작일선택"
         to-placeholder="종료일선택"
       />
+      <!-- if essential case please add 'date_range_required' ex.rules="date_range_required|date_range_months:1"   -->
     </kw-search-item>
   </kw-search-row>
 </kw-search>
@@ -259,9 +290,9 @@ const timePickerCode = `
     <kw-form-item label="TimePicker">
       <kw-time-picker
         name="timePicker"
-        rules="required"
         placeholder="placeholder"
       />
+      <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -272,9 +303,9 @@ const timePickerCode = `
     <kw-search-item label="TimePicker">
       <kw-time-picker
         name="timePicker"
-        rules="required"
         placeholder="placeholder"
       />
+      <!-- if essential case please add "rules='required'" -->
     </kw-search-item>
   </kw-search-row>
 </kw-search>

@@ -156,7 +156,6 @@
               <kw-form-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-form-item>
@@ -167,7 +166,6 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   name="select"
-                  rules="required"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -176,13 +174,11 @@
                 <div class="kw-hypen-input">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                 </div>
@@ -193,19 +189,16 @@
                 <div class="kw-hypen-input">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                 </div>
@@ -216,7 +209,6 @@
                 <kw-option-group
                   :model-value="'A'"
                   name="radioOptionGroup"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -227,7 +219,6 @@
                 <kw-option-group
                   :model-value="[]"
                   name="checkboxOptionGroup"
-                  rules="required"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -236,11 +227,9 @@
             <kw-form-row>
               <kw-form-item
                 label="DatePicker"
-                class="essential"
               >
                 <kw-date-picker
                   name="datePicker"
-                  rules="required"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -266,17 +255,19 @@
         <div class="kw-guide-example">
           <kw-form cols="2">
             <kw-form-row>
-              <kw-form-item label="colspan">
+              <kw-form-item
+                label="colspan"
+                class="essential"
+              >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
+                  rules="required"
                 />
               </kw-form-item>
               <kw-form-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-form-item>
@@ -287,7 +278,8 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   name="select"
-                  rules="required"
+                  placeholder="placeholder"
+                  use-input
                 />
               </kw-form-item>
               <kw-form-item label="Select">
@@ -295,7 +287,8 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   name="select"
-                  rules="required"
+                  placeholder="placeholder"
+                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -304,19 +297,16 @@
                 <div class="kw-hypen-input">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                 </div>
@@ -325,19 +315,16 @@
                 <div class="kw-hypen-input">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                 </div>
@@ -348,13 +335,11 @@
                 <div class="kw-hypen-input">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                 </div>
@@ -363,13 +348,11 @@
                 <div class="kw-hypen-input">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                   <span>-</span>
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                   />
                 </div>
@@ -380,7 +363,6 @@
                 <kw-option-group
                   :model-value="'A'"
                   name="radioOptionGroup"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -389,7 +371,6 @@
                 <kw-option-group
                   :model-value="'A'"
                   name="radioOptionGroup"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -400,7 +381,6 @@
                 <kw-option-group
                   :model-value="[]"
                   name="checkboxOptionGroup"
-                  rules="required"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -409,7 +389,6 @@
                 <kw-option-group
                   :model-value="[]"
                   name="checkboxOptionGroup"
-                  rules="required"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -418,20 +397,16 @@
             <kw-form-row>
               <kw-form-item
                 label="DatePicker"
-                class="essential"
               >
                 <kw-date-picker
                   name="datePicker"
-                  rules="required"
                 />
               </kw-form-item>
               <kw-form-item
                 label="DatePicker"
-                class="essential"
               >
                 <kw-date-picker
                   name="datePicker"
-                  rules="required"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -454,7 +429,6 @@ const oneColumns = `
     <kw-form-item label="colspan">
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-form-item>
@@ -465,7 +439,6 @@ const oneColumns = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         name="select"
-        rules="required"
       />
     </kw-form-item>
   </kw-form-row>
@@ -474,13 +447,11 @@ const oneColumns = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
@@ -491,19 +462,16 @@ const oneColumns = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
@@ -514,7 +482,6 @@ const oneColumns = `
       <kw-option-group
         :model-value="'A'"
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -525,7 +492,6 @@ const oneColumns = `
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -534,11 +500,9 @@ const oneColumns = `
   <kw-form-row>
     <kw-form-item
       label="DatePicker"
-      class="essential"
     >
       <kw-date-picker
         name="datePicker"
-        rules="required"
       />
     </kw-form-item>
   </kw-form-row>
@@ -548,17 +512,18 @@ const twoColumns = `
 <!-- Add the column's value as cols="2" in the tag of kw-form -->
 <kw-form cols="2">
   <kw-form-row>
-    <kw-form-item label="colspan">
+    <kw-form-item
+      label="colspan"
+      class="essential"
+    >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-form-item>
     <kw-form-item label="colspan">
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-form-item>
@@ -569,7 +534,6 @@ const twoColumns = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         name="select"
-        rules="required"
       />
     </kw-form-item>
     <kw-form-item label="Select">
@@ -577,7 +541,6 @@ const twoColumns = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         name="select"
-        rules="required"
       />
     </kw-form-item>
   </kw-form-row>
@@ -586,19 +549,16 @@ const twoColumns = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
@@ -607,19 +567,16 @@ const twoColumns = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
@@ -630,13 +587,11 @@ const twoColumns = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
@@ -645,13 +600,11 @@ const twoColumns = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
@@ -662,7 +615,6 @@ const twoColumns = `
       <kw-option-group
         :model-value="'A'"
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -671,7 +623,6 @@ const twoColumns = `
       <kw-option-group
         :model-value="'A'"
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -682,7 +633,6 @@ const twoColumns = `
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -691,7 +641,6 @@ const twoColumns = `
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -700,20 +649,16 @@ const twoColumns = `
   <kw-form-row>
     <kw-form-item
       label="DatePicker"
-      class="essential"
     >
       <kw-date-picker
         name="datePicker"
-        rules="required"
       />
     </kw-form-item>
     <kw-form-item
       label="DatePicker"
-      class="essential"
     >
       <kw-date-picker
         name="datePicker"
-        rules="required"
       />
     </kw-form-item>
   </kw-form-row>
