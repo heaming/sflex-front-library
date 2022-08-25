@@ -18,7 +18,13 @@
       no-selection-unset
       selected-color="primary"
       @update:selected="updateSelected"
-    />
+    >
+      <template #default-header="{node}">
+        <div :class="{'kw-lnb--selected': isSelected(node.key)}">
+          {{ node.label }}
+        </div>
+      </template>
+    </q-tree>
 
     <kw-btn
       icon="lnb_arrow|0 0 16 16"
@@ -38,8 +44,9 @@ const {
   selectedGnbKey,
   selectedLnbKey,
   hierarchyedLnbs,
-  toggleLnb,
+  isSelected,
   updateSelected,
+  toggleLnb,
 } = useLnb();
 
 </script>

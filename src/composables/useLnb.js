@@ -16,7 +16,7 @@ export default () => {
   const isExpanded = computed(() => getters['app/getLnbExpanded']);
   const selectedGnbKey = computed(() => getters['app/getSelectedGnbKey']);
   const selectedLnbKey = computed(() => getters['app/getSelectedLnbKey']);
-
+  const selectedLnbKeys = ref([]);
   const hierarchyedLnbs = ref([]);
 
   function createHierarchy(targetLnbs, nodes, root = true) {
@@ -47,23 +47,30 @@ export default () => {
   }
 
   onMounted(() => {
-    function initExpanded(gnbKey) {
-      const lnbKey = selectedLnbKey.value;
-      const isIncludedLnbKey = !!lnbKey && lnbs.some((v) => v.gnbKey === gnbKey && v.key === lnbKey);
-      const expandedTargetKey = isIncludedLnbKey ? lnbKey : gnbKey;
-      setExpanded(expandedTargetKey, true, true);
-    }
-
     watch(selectedGnbKey, async (gnbKey) => {
       hierarchyedLnbs.value = createHierarchyedLnbs(gnbKey);
       await nextTick();
-      initExpanded(gnbKey);
+
+      const lnbKey = selectedLnbKey.value;
+      const isIncludedLnbKey = !!lnbKey && lnbs.some((v) => v.gnbKey === gnbKey && v.key === lnbKey);
+      const expandedTargetKey = isIncludedLnbKey ? lnbKey : gnbKey;
+
+      setExpanded(expandedTargetKey, true, true);
+    }, { immediate: true });
+
+    watch(selectedLnbKey, async (lnbKey) => {
+      selectedLnbKeys.value = [];
+      await nextTick();
+
+      let key = lnbKey;
+      while (key) {
+        selectedLnbKeys.value.push(key);
+        key = lnbRef.value.getNodeByKey(key).parentsKey;
+      }
     }, { immediate: true });
   });
 
-  function toggleLnb() {
-    commit('app/setLnbExpanded', !isExpanded.value);
-  }
+  const isSelected = (lnbKey) => selectedLnbKeys.value.includes(lnbKey);
 
   const isRoot = (lnbKey) => lnbRef.value.getNodeByKey(lnbKey).key === selectedGnbKey.value;
   const isLeaf = (lnbKey) => !lnbRef.value.getNodeByKey(lnbKey).children.length;
@@ -83,13 +90,18 @@ export default () => {
     if (!isRoot(lnbKey)) { setExpanded(lnbKey); }
   }
 
+  function toggleLnb() {
+    commit('app/setLnbExpanded', !isExpanded.value);
+  }
+
   return {
     lnbRef,
     hierarchyedLnbs,
     isExpanded,
     selectedGnbKey,
     selectedLnbKey,
-    toggleLnb,
+    isSelected,
     updateSelected,
+    toggleLnb,
   };
 };
