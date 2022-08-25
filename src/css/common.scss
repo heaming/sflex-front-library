@@ -161,7 +161,6 @@ textarea::placeholder {
     position: relative;
     z-index: 1000;
 
-    .q-icon,
     .q-tree__node-header::before,
     .q-tree__node::after,
     .q-focus-helper {
@@ -174,6 +173,61 @@ textarea::placeholder {
     .q-tree__node {
       padding: 0;
       margin: 0;
+    }
+
+    .q-tree__node-header {
+      flex-direction: row-reverse;
+
+      .q-focus-helper + i {
+        margin-left: -20px;
+        margin-right: 20px;
+        width: 20px;
+        text-indent: -100000px;
+        position: relative;
+
+        &::after {
+          display: block !important;
+          content: "";
+          font-size: 5px;
+          font-style: normal;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          text-indent: 0;
+          line-height: 1.5;
+          background: url(~assets/icons/arrow_down_16.svg) no-repeat center center;
+        }
+
+        &.q-tree__arrow.q-tree__arrow--rotate {
+          transform: rotate3d(0, 0, 1, 180deg);
+        }
+      }
+    }
+
+    & > .q-tree__node > .q-tree__node-header > .q-focus-helper + i::after {
+      display: none !important;
+    }
+
+    /* This line is too long for my rule */
+    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {/* stylelint-disable-line */
+      margin-left: 0;
+
+      &::after {
+        display: block !important;
+        content: "▽";
+        font-size: 5px;
+        font-style: normal;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-indent: 0;
+        line-height: 1.5;
+        background: none;
+      }
     }
 
     .q-tree__node-header-content > div {
@@ -200,7 +254,7 @@ textarea::placeholder {
       // depth1
       & > .q-tree__node-header {
         & > .q-tree__node-header-content {
-          padding: 0 20px;
+          padding: 0 0 0 20px;
 
           & > div {
             min-height: 45px;
@@ -218,7 +272,7 @@ textarea::placeholder {
           & > .q-tree__node {
             & > .q-tree__node-header {
               & > .q-tree__node-header-content {
-                padding: 0 20px;
+                padding: 0 0 0 20px;
 
                 & > div {
                   min-height: 45px;
