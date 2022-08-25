@@ -139,8 +139,8 @@
                 <kw-date-range-picker
                   name="dateRangePicker"
                   rules="date_range_required|date_range_months:1"
-                  start-placeholder="시작일선택"
-                  end-placeholder="종료일선택"
+                  from-placeholder="시작일선택"
+                  to-placeholder="종료일선택"
                 />
               </kw-form-item>
             </kw-form-row>
