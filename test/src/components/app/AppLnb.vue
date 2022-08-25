@@ -16,7 +16,6 @@
       node-key="key"
       label-key="label"
       no-selection-unset
-      selected-color="primary"
       @update:selected="updateSelected"
     >
       <template #default-header="{node}">
