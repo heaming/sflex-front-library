@@ -83,20 +83,22 @@ export default {
 
       return loginInfo;
     },
-    async fetchApps({ commit }) {
+    async fetchApps({ commit, dispatch }) {
       const response = await http.get('/api/v1/common/portal/applications');
       const apps = response.data;
 
       commit('setApps', apps);
+      dispatch('app/createGnbs', apps, { root: true });
     },
-    async fetchMenus({ commit, getters }) {
+    async fetchMenus({ commit, getters, dispatch }) {
       const response = await http.get('/api/v1/common/portal/menus');
 
       const apps = getters.getApps;
       const menus = response.data;
 
-      replaceRoutesByMenus(apps, menus);
       commit('setMenus', menus);
+      dispatch('app/createLnbs', menus, { root: true });
+      replaceRoutesByMenus(apps, menus);
     },
     async fetchPage({ commit, getters }, pageId) {
       const isCached = !!getters.getPage(pageId);

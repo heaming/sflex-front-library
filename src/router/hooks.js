@@ -46,9 +46,22 @@ async function beforeResolve(to) {
   assignParamsIfIsLinkPage(to);
 }
 
+function setSelectedGnbLnb(to) {
+  if (to.meta?.requiresAuth) {
+    const { applicationId, menuUid } = store.getters['meta/getMenu'](to.name);
+    store.commit('app/setSelectedGnbKey', applicationId);
+    store.commit('app/setSelectedLnbKey', menuUid);
+  }
+}
+
+function afterEach(to) {
+  setSelectedGnbLnb(to);
+}
+
 export function registerHooks(router) {
   if (!__VUE_TEST_APP__) {
     router.beforeEach(beforeEach);
     router.beforeResolve(beforeResolve);
+    router.afterEach(afterEach);
   }
 }

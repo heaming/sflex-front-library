@@ -22,8 +22,8 @@ export function useGlobal(): {
 
 // useModal
 export function useModal(): {
-  ok(payload: any): void;
-  cancel(payload: any): void;
+  ok(payload?: any): void;
+  cancel(payload?: any): void;
 };
 
 // useSession

@@ -14,6 +14,8 @@ export * from './router';
  */
 export { default as useDataService } from './composables/useDataService';
 export { default as useGlobal } from './composables/useGlobal';
+export { default as useGnb } from './composables/useGnb';
+export { default as useLnb } from './composables/useLnb';
 export { default as useModal } from './composables/useModal';
 export { default as useSession } from './composables/useSession';
 
