@@ -12,6 +12,7 @@
     :disable="disable"
     :mask="innerValueMask"
     :unmasked-value="unmaskedValue"
+    :placeholder="placeholder"
     no-error-icon
     :hide-bottom-space="hideBottomSpace"
     @click="toggleView()"
@@ -107,6 +108,10 @@ export default {
     hideBottomSpace: {
       type: Boolean,
       default: false,
+    },
+    placeholder: {
+      type: String,
+      default: undefined,
     },
   },
 
