@@ -33,7 +33,7 @@
             </td>
             <td>
               Required, Default : "input" <br>
-              Required, Default : "required"<br>
+              Add this when Essential Case<br>
               Copy the text from zeplin<br>
               Add the attribute "readonly" in the tag of kw-input<br>
               Add the attribute "disable" in the tag of kw-input<br>
@@ -74,7 +74,6 @@
               <kw-form-item label="label">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-form-item>
@@ -95,8 +94,9 @@
         Essential
       </h3>
       <p class="kw-guide-description">
-        add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
-        when it needs to be essential to input
+        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        when it needs to be essential to input <br>
+        - add attribute <b>rules="required"</b> in <b>&lt;kw-input&gt;</b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -139,7 +139,6 @@
                 <kw-input
                   name="input"
                   readonly
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-form-item>
@@ -170,7 +169,6 @@
                 <kw-form-item label="label">
                   <kw-input
                     name="input"
-                    rules="required"
                     placeholder="입력해주세요"
                     disable
                   />
@@ -190,7 +188,7 @@
         id="disable"
         class="kw-guide-title"
       >
-        Hypen with Input
+        Input with hypen
       </h3>
       <p class="kw-guide-description">
         Three kw-input or Two kw-input are wrapped by the class of " <b> kw-hypen-input </b>".<br>
@@ -206,13 +204,11 @@
                   <div class="kw-hypen-input">
                     <kw-input
                       name="input"
-                      rules="required"
                       placeholder="입력해주세요"
                     />
                     <span>-</span>
                     <kw-input
                       name="input"
-                      rules="required"
                       placeholder="입력해주세요"
                     />
                   </div>
@@ -223,19 +219,16 @@
                   <div class="kw-hypen-input">
                     <kw-input
                       name="input"
-                      rules="required"
                       placeholder="입력해주세요"
                     />
                     <span>-</span>
                     <kw-input
                       name="input"
-                      rules="required"
                       placeholder="입력해주세요"
                     />
                     <span>-</span>
                     <kw-input
                       name="input"
-                      rules="required"
                       placeholder="입력해주세요"
                     />
                   </div>
@@ -260,7 +253,6 @@ const inputCode = `
     <kw-form-item label="label">
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-form-item>
@@ -273,7 +265,6 @@ const inputCode = `
     <kw-search-item label="label">
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -321,7 +312,6 @@ const inputReadonlyCode = `
       <kw-input
         name="input"
         readonly
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-form-item>
@@ -335,7 +325,6 @@ const inputReadonlyCode = `
       <kw-input
         name="input"
         readonly
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -350,7 +339,6 @@ const inputDisableCode = `
       <kw-input
         name="input"
         disable
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-form-item>
@@ -364,7 +352,6 @@ const inputDisableCode = `
       <kw-input
         name="input"
         disable
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -379,7 +366,6 @@ const hypenInput = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
@@ -397,19 +383,16 @@ const hypenInput = `
       <div class="kw-hypen-input">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
         <span>-</span>
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </div>
