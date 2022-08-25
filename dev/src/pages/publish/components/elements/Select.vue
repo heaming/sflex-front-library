@@ -57,7 +57,7 @@
             <td>
               Required, Default : "[]"<br>
               Required, Default : "select" <br>
-              Required, Default : "required"<br>
+              Add this when Essential Case<br>
               Add the option lists in [ ]<br>
               Add the attribute "readonly" when it's required to be readonly<br>
               Add the attribute "disable" when it's required to be disable<br>
@@ -100,7 +100,6 @@
                   :options="['A', 'B', 'C', 'D']"
                   placeholder="placeholder"
                   name="select"
-                  rules="required"
                   use-input
                 />
               </kw-form-item>
@@ -134,7 +133,6 @@
                   multiple
                   placeholder="placeholder"
                   name="selectMultiple"
-                  rules="required"
                   use-input
                 />
               </kw-form-item>
@@ -168,7 +166,6 @@
                   multiple
                   placeholder="placeholder"
                   name="selectMultiple"
-                  rules="required"
                   readonly
                   use-input
                 />
@@ -202,7 +199,6 @@
                     :model-value="[]"
                     :options="['A', 'B', 'C', 'D']"
                     name="selectMultiple"
-                    rules="required"
                     disable
                     use-input
                   />
@@ -215,6 +211,46 @@
             lang="vue"
           />
         </div>
+      </q-card>
+    </div>
+
+    <div class="kw-guide-section">
+      <h3
+        id="essential"
+        class="kw-guide-title"
+      >
+        Essential
+      </h3>
+      <p class="kw-guide-description">
+        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        when it needs to be essential to input <br>
+        - add attribute <b>rules="required"</b> in <b>&lt;kw-select&gt;</b>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item
+                label="Essential(multiple)"
+                class="essential"
+              >
+                <kw-select
+                  :model-value="[]"
+                  :options="['A', 'B', 'C', 'D']"
+                  multiple
+                  rules="required"
+                  placeholder="placeholder"
+                  name="select"
+                  use-input
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="essentialCode"
+          lang="vue"
+        />
       </q-card>
     </div>
   </kw-page>
@@ -230,7 +266,6 @@ const selectDefaultCode = `
         :options="['A', 'B', 'C', 'D']"
         placeholder="placeholder"
         name="select"
-        rules="required"
         use-input
       />
     </kw-form-item>
@@ -246,7 +281,7 @@ const selectDefaultCode = `
         :options="['A', 'B', 'C', 'D']"
         placeholder="placeholder"
         name="select"
-        rules="required"
+
         use-input
       />
     </kw-search-item>
@@ -264,7 +299,7 @@ const selectMultipleDefaultCode = `
         placeholder="placeholder"
         multiple
         name="selectMultiple"
-        rules="required"
+
         use-input
       />
     </kw-form-item>
@@ -281,7 +316,7 @@ const selectMultipleDefaultCode = `
         multiple
         placeholder="placeholder"
         name="selectMultiple"
-        rules="required"
+
         use-input
       />
     </kw-search-item>
@@ -299,7 +334,6 @@ const selectReadonlyCode = `
         multiple
         placeholder="placeholder"
         name="selectMultiple"
-        rules="required"
         readonly
         use-input
       />
@@ -316,7 +350,6 @@ const selectReadonlyCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         name="selectMultiple"
-        rules="required"
         readonly
         placeholder="placeholder"
         use-input
@@ -335,7 +368,6 @@ const selectDisableCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         name="selectMultiple"
-        rules="required"
         disable
       />
     </kw-form-item>
@@ -351,11 +383,31 @@ const selectDisableCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         name="selectMultiple"
-        rules="required"
         disable
       />
     </kw-search-item>
   </kw-search-row>
 </kw-search>
+`;
+
+const essentialCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item
+      label="Essential(multiple)"
+      class="essential"
+    >
+      <kw-select
+        :model-value="[]"
+        :options="['A', 'B', 'C', 'D']"
+        multiple
+        rules="required"
+        placeholder="placeholder"
+        name="select"
+        use-input
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
 `;
 </script>
