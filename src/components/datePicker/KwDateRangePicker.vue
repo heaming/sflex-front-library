@@ -18,6 +18,7 @@
       :max-date="maxDate"
       :before-show-day="beforeShowDay"
       hide-bottom-space
+      :placeholder="startPlaceholder"
       @update:model-value="onChangeDate($event, 0)"
     /> ~
     <kw-date-picker
@@ -30,6 +31,7 @@
       :max-date="maxDate"
       :before-show-day="beforeShowDay"
       hide-bottom-space
+      :placeholder="endPlaceholder"
       @update:model-value="onChangeDate($event, 1)"
     />
   </q-field>
@@ -76,6 +78,14 @@ export default {
       default: undefined,
     },
     maxDate: {
+      type: String,
+      default: undefined,
+    },
+    startPlaceholder: {
+      type: String,
+      default: undefined,
+    },
+    endPlaceholder: {
       type: String,
       default: undefined,
     },
