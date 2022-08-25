@@ -35,6 +35,10 @@ export const consts: {
 
   // Storage
   LOCAL_STORAGE_ACCESS_TOKEN: '__ACCESS_TOKEN__';
+
+  // Paging
+  PAGING_DEFAULT_PAGE_SIZE: 10;
+  PAGING_DEFAULT_SCROLL_SIZE: 10;
 };
 
 // I18n
