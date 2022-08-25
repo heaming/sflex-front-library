@@ -5,27 +5,27 @@
         <div class="item">
           <q-avatar>
             <img
-              src="../../../../src/assets/images/logo_redpen.svg"
+              src="~~assets/images/logo_redpen.svg"
               alt="KSS빨간펜"
             >
           </q-avatar>
         </div>
         <div class="item full-height">
           <a
-            v-for="app of apps"
-            :key="app"
+            v-for="{key, label} of gnbs"
+            :key="key"
             href="javascript:void(0)"
-            class="text-uppercase kw-gnb--link full-height"
-            @click="updateSelected(app)"
+            class="kw-gnb--link"
+            :class="{'kw-gnb--link-active': isSelected(key)}"
+            @click="updateSelected(key)"
           >
-            {{ app }}
+            {{ label }}
           </a>
         </div>
       </div>
       <div class="row justify-end items-center item-wrap">
         <div class="item">
           <kw-input
-            name="input"
             placeholder="메뉴검색"
             class="gnb-search w220"
           />
@@ -45,27 +45,26 @@
           />
         </div>
       </div>
-
-      <!-- <div class="row items-center no-wrap kw-gnb--link-wrap">
-
-      </div> -->
     </q-toolbar>
   </q-header>
 </template>
 
 <script setup>
+import { useGnb } from '~lib';
 
-const { dispatch } = useStore();
 const { getRoutes } = useRouter();
+const { commit } = useStore();
 
-const apps = Object.keys(
-  getRoutes().filter((e) => e.meta.isGlobImport)
-    .reduce((a, e) => { a[e.path.split('/')[1]] = null; return a; }, {}),
-);
+(function createDevGnbs() {
+  const globImportedRoutes = getRoutes().filter((e) => e.meta.isGlobImport);
+  const appKeys = Object.keys(globImportedRoutes.reduce((a, e) => { a[e.path.split('/')[1]] = null; return a; }, {}));
+  const gnbs = appKeys.map((v) => ({ key: v, label: v }));
+  commit('app/setGnbs', gnbs);
+}());
 
-function updateSelected(app) {
-  dispatch('app/selectApp', { applicationId: app });
-}
-
-updateSelected(apps[0]);
+const {
+  gnbs,
+  isSelected,
+  updateSelected,
+} = useGnb();
 </script>

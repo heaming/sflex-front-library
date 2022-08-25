@@ -1,107 +1,73 @@
 <template>
   <q-drawer
-    :model-value="lnbExpanded"
+    class="kw-lnb"
+    :model-value="isExpanded"
+    :width="280"
     show-if-above
     bordered
-    class="kw-lnb"
-    :width="280"
   >
-    <kw-input
-      v-model="lnbFilter"
-      class="ma10 pa0"
-      clearable
+    <q-tree
+      ref="lnbRef"
+      :key="selectedGnbKey"
+      class="kw-lnb-tree"
+      :selected="selectedLnbKey"
+      :nodes="hierarchyedLnbs"
+      :duration="100"
+      node-key="key"
+      label-key="label"
+      no-selection-unset
+      selected-color="primary"
+      @update:selected="updateSelected"
     />
 
-    <q-tree
-      :key="selectedAppId"
-      ref="lnbRef"
-      :selected="selectedLnbKey"
-      :nodes="lnbItems"
-      :filter="lnbFilter"
-      :duration="100"
-      default-expand-all
-      no-selection-unset
-      node-key="key"
-      selected-color="primary"
-      class="kw-lnb-tree"
-      @update:selected="onSelect"
-    />
     <kw-btn
       icon="lnb_arrow|0 0 16 16"
       class="kw-lnb-switch"
-      :class="{ 'kw-lnb-switch--active': lnbExpanded }"
-      @click="dispatch('app/toggleLnb')"
+      :class="{'kw-lnb-switch--active': isExpanded}"
+      @click="toggleLnb"
     />
   </q-drawer>
 </template>
 
 <script setup>
+import { useLnb } from '~lib';
 
-const { getters } = useStore();
+const { getRoutes } = useRouter();
+const { commit } = useStore();
 
-const lnbExpanded = computed(() => getters['app/getLnbExpanded']);
-const selectedAppId = computed(() => getters['app/getSelectedAppId']);
+function fillIncompleteLnbs(nodes, index = 0) {
+  if (index === nodes.length) return nodes;
 
-const lnbRef = ref();
-const lnbItems = ref([]);
-const lnbFilter = ref('');
-const selectedLnbKey = ref(null);
+  const splited = nodes[index].key.split('/');
+  const key = splited.slice(0, splited.length - 1).join('/');
+  const depth = splited.length - 3;
 
-function fillNodes(nodes, i = 0) {
-  if (i === nodes.length) return nodes;
+  nodes[index].gnbKey = splited[1];
+  nodes[index].depth = depth;
+  nodes[index].parentsKey = key;
 
-  const arr = nodes[i].key.split('/');
-  const key = arr.slice(0, arr.length - 1).join('/');
-  const level = arr.length - 2;
-
-  nodes[i].level = level;
-  nodes[i].parentKey = key;
-
-  if (level > 0 && !nodes.some((e) => e.key === key)) {
-    const preNodes = nodes.splice(0, i);
-    const newNode = { key, label: arr[arr.length - 2] };
-    return fillNodes([...preNodes, newNode, ...nodes], i);
+  if (depth > 0 && !nodes.some((e) => e.key === key)) {
+    return fillIncompleteLnbs([
+      ...nodes.splice(0, index), { key, label: splited[splited.length - 2] }, ...nodes,
+    ], index);
   }
 
-  return fillNodes(nodes, i + 1);
+  return fillIncompleteLnbs(nodes, index + 1);
 }
 
-function createHierarchy(nodes, currents) {
-  currents ||= nodes.filter((e) => e.level === 0);
+(function createDevLnbs() {
+  const globImportedRoutes = getRoutes().filter((e) => e.meta.isGlobImport);
+  const incompleteLnbs = globImportedRoutes.map((v) => ({ gnbKey: v.path.split('/')[1], key: v.name, label: v.meta.label }));
+  commit('app/setLnbs', fillIncompleteLnbs(incompleteLnbs));
+}());
 
-  return currents.map((e) => {
-    const nexts = nodes.filter((x) => x.parentKey === e.key);
-    const children = createHierarchy(nodes, nexts);
-
-    return { ...e, children };
-  });
-}
-
-const router = useRouter();
-
-watch(selectedAppId, async (val) => {
-  const nodes = fillNodes(
-    router.getRoutes()
-      .filter((e) => e.path.startsWith(`/${val}`))
-      .map((e) => ({ key: e.path, label: e.meta.name })),
-  );
-
-  lnbItems.value = createHierarchy(nodes);
-  lnbFilter.value = '';
-  selectedLnbKey.value = null;
-}, { immediate: true });
-
-async function onSelect(key) {
-  const node = lnbRef.value.getNodeByKey(key);
-  const isLeaf = !node.children.length;
-
-  if (isLeaf) {
-    await router.push({ path: key });
-    selectedLnbKey.value = key;
-  } else {
-    const state = !lnbRef.value.isExpanded(key);
-    lnbRef.value.setExpanded(key, state);
-  }
-}
-const { dispatch } = useStore();
+const {
+  lnbRef,
+  isExpanded,
+  selectedGnbKey,
+  selectedLnbKey,
+  hierarchyedLnbs,
+  toggleLnb,
+  updateSelected,
+} = useLnb();
 </script>
