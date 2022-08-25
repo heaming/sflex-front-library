@@ -10,6 +10,7 @@
     :error-message="errorMessage"
     :readonly="readonly"
     :disable="disable"
+    :placeholder="placeholder"
     mask="##:##"
     :unmasked-value="unmaskedValue"
     no-error-icon
@@ -99,6 +100,10 @@ export default {
     disable: {
       type: Boolean,
       default: false,
+    },
+    placeholder: {
+      type: String,
+      default: undefined,
     },
   },
 
