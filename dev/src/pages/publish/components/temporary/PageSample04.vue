@@ -47,7 +47,6 @@
               name="datePicker"
               rules="required"
               disable
-              class="w244"
             />
           </kw-form-item>
         </kw-form-row>
