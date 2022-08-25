@@ -146,30 +146,33 @@
         Readonly
       </h3>
       <p class="kw-guide-description">
-        add attribute <b>readonly</b> in the tag of "kw-select"
+        Add attribute <b>readonly</b> in the tag of "kw-select"<br>
+        Using the placeholder in the attribute readonly, It should be included '<b>use-input</b>' in kw-select.
+        <q-card>
+          <div class="kw-guide-example">
+            <kw-form>
+              <kw-form-row>
+                <kw-form-item label="다중선택 샘플 (readonly)">
+                  <kw-select
+                    :model-value="[]"
+                    :options="['A', 'B', 'C', 'D']"
+                    multiple
+                    placeholder="placeholder"
+                    name="selectMultiple"
+                    rules="required"
+                    readonly
+                    use-input
+                  />
+                </kw-form-item>
+              </kw-form-row>
+            </kw-form>
+          </div>
+          <guide-code-view
+            :code-value="selectReadonlyCode"
+            lang="vue"
+          />
+        </q-card>
       </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form>
-            <kw-form-row>
-              <kw-form-item label="다중선택 샘플 (readonly)">
-                <kw-select
-                  :model-value="[]"
-                  :options="['A', 'B', 'C', 'D']"
-                  multiple
-                  name="selectMultiple"
-                  rules="required"
-                  readonly
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <guide-code-view
-          :code-value="selectReadonlyCode"
-          lang="vue"
-        />
-      </q-card>
     </div>
     <div class="kw-guide-section">
       <h3
@@ -179,7 +182,8 @@
         Disable
       </h3>
       <p class="kw-guide-description">
-        Add attribute <b>disable</b> in the tag of "kw-select"
+        Add attribute <b>disable</b> in the tag of "kw-select"<br>
+        Using the placeholder in the attribute disable, It should be included '<b>use-input</b>' in kw-select.
       </p>
       <q-card>
         <div>
@@ -190,10 +194,11 @@
                   <kw-select
                     :model-value="[]"
                     :options="['A', 'B', 'C', 'D']"
-                    multiple
+                    placeholder="placeholder"
                     name="selectMultiple"
                     rules="required"
                     disable
+                    use-input
                   />
                 </kw-form-item>
               </kw-form-row>
@@ -278,9 +283,11 @@ const selectReadonlyCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
+        placeholder="placeholder"
         name="selectMultiple"
         rules="required"
         readonly
+        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -297,6 +304,8 @@ const selectReadonlyCode = `
         name="selectMultiple"
         rules="required"
         readonly
+        placeholder="placeholder"
+        use-input
       />
     </kw-search-item>
   </kw-search-row>
