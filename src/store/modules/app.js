@@ -27,8 +27,6 @@ export default {
   },
 
   actions: {
-    toggleLnb({ state, commit }) {
-      commit('setLnbExpanded', !state.lnbExpanded);
-    },
+
   },
 };
