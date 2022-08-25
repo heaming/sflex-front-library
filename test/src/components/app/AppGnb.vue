@@ -1,38 +1,61 @@
 <template>
-  <q-header>
-    <q-toolbar>
-      <q-btn
-        flat
-        dense
-        round
-        icon="menu"
-        aria-label="Menu"
-        @click="store.dispatch('app/toggleLnb')"
-      />
-
-      <q-toolbar-title>
-        <div class="q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap">
+  <q-header class="kw-gnb">
+    <q-toolbar class="row justify-between">
+      <div class="row justify-start items-center">
+        <div>
+          <q-avatar>
+            <img
+              src="~~assets/images/logo_redpen.svg"
+              alt="KSS빨간펜"
+            >
+          </q-avatar>
+        </div>
+        <div>
           <a
-            v-for="app of apps"
-            :key="app.applicationId"
+            v-for="{key, label} of gnbs"
+            :key="key"
             href="javascript:void(0)"
-            class="text-white"
-            @click="store.dispatch('app/selectApp', app)"
+            class="kw-gnb--link"
+            :class="{'kw-gnb--link-active': isSelected(key)}"
+            @click="updateSelected(key)"
           >
-            {{ app.applicationName }}
+            {{ label }}
           </a>
         </div>
-      </q-toolbar-title>
+      </div>
+      <div class="row justify-end items-center">
+        <div>
+          <kw-input
+            name="input"
+            placeholder="메뉴검색"
+            class="gnb-search w220"
+          />
+        </div>
+        <div>
+          <kw-btn
+            icon="search_24|0 0 24 24"
+            class="kw-btn--icon-only ml-24"
+            size="24px"
+          />
+        </div>
+        <div>
+          <kw-btn
+            icon="alert_24|0 0 24 24"
+            class="kw-btn--icon-only ml20"
+            size="24px"
+          />
+        </div>
+      </div>
     </q-toolbar>
   </q-header>
 </template>
 
 <script setup>
+import { useGnb } from '~lib';
 
-const store = useStore();
-const apps = store.getters['meta/getApps'];
-
-if (apps.length) {
-  store.dispatch('app/selectApp', apps[0]);
-}
+const {
+  gnbs,
+  isSelected,
+  updateSelected,
+} = useGnb();
 </script>
