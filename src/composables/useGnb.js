@@ -1,4 +1,4 @@
-export default (shouldSelectDefault = true) => {
+export default () => {
   const { getters, commit } = useStore();
 
   const gnbs = getters['app/getGnbs'];
@@ -11,10 +11,8 @@ export default (shouldSelectDefault = true) => {
     commit('app/setSelectedLnbKey', null);
   }
 
-  const shouldSelect = shouldSelectDefault && !selectedGnbKey.value;
-
-  if (shouldSelect) {
-    const gnbKey = gnbs[0]?.key;
+  if (!selectedGnbKey.value) {
+    const gnbKey = gnbs[0]?.key || null;
     updateSelected(gnbKey);
   }
 

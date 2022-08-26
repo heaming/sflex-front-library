@@ -32,14 +32,14 @@
         </div>
         <div class="item">
           <kw-btn
-            icon="search_24|0 0 24 24"
+            icon="search_24"
             class="kw-btn--icon-only ml-24"
             size="24px"
           />
         </div>
         <div class="item">
           <kw-btn
-            icon="alert_24|0 0 24 24"
+            icon="alert_24"
             class="kw-btn--icon-only ml20"
             size="24px"
           />
@@ -66,5 +66,5 @@ const {
   gnbs,
   isSelected,
   updateSelected,
-} = useGnb(false);
+} = useGnb();
 </script>
