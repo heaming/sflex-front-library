@@ -667,6 +667,83 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="EssentialExample"
+        class="kw-guide-title"
+      >
+        Ratio input in kw-search-item
+      </h3>
+      <p class="kw-guide-description">
+        Ratio in kw-search-item should be wrapped by the tag which is
+        included in ratio class(kw-input-ratio73,kw-input-ratio37,kw-input-ratio55)
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-search>
+            <kw-search-row>
+              <kw-search-item
+                label="7:3"
+              >
+                <div class="kw-input-layout--ratio73">
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="입력해주세요"
+                  />
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="입력"
+                  />
+                </div>
+              </kw-search-item>
+              <kw-search-item
+                label="3:7"
+              >
+                <div class="kw-input-layout--ratio37">
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="입력"
+                  />
+                  <kw-select
+                    :model-value="[]"
+                    :options="['A', 'B', 'C', 'D']"
+                    placeholder="선택해 주세요."
+                    name="select"
+                    rules="required"
+                  />
+                </div>
+              </kw-search-item>
+              <kw-search-item
+                label="5:5"
+              >
+                <div class="kw-input-layout--ratio55">
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="입력해주세요"
+                  />
+                  <kw-select
+                    :model-value="[]"
+                    :options="['A', 'B', 'C', 'D']"
+                    placeholder="선택해 주세요."
+                    name="select"
+                    rules="required"
+                  />
+                </div>
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+        </div>
+
+        <guide-code-view
+          :code-value="inputRatio"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -1122,6 +1199,68 @@ const EssentialExample = `
         :options="['A', 'B', 'C', 'D']"
         rules="required"
       />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
+`;
+
+const inputRatio = `
+<kw-search>
+  <kw-search-row>
+    <!-- Ratio: 7 : 3  -->
+    <kw-search-item
+      label="7:3"
+    >
+      <div class="kw-input-layout--ratio73">
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력"
+        />
+      </div>
+    </kw-search-item>
+    <!-- Ratio: 3 : 7  -->
+    <kw-search-item
+      label="3:7"
+    >
+      <div class="kw-input-layout--ratio37">
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력"
+        />
+        <kw-select
+          :model-value="[]"
+          :options="['A', 'B', 'C', 'D']"
+          placeholder="선택해 주세요."
+          name="select"
+          rules="required"
+        />
+      </div>
+    </kw-search-item>
+    <!-- Ratio: 5 : 5  -->
+    <kw-search-item
+      label="5:5"
+    >
+      <div class="kw-input-layout--ratio55">
+        <kw-input
+          name="input"
+          rules="required"
+          placeholder="입력해주세요"
+        />
+        <kw-select
+          :model-value="[]"
+          :options="['A', 'B', 'C', 'D']"
+          placeholder="선택해 주세요."
+          name="select"
+          rules="required"
+        />
+      </div>
     </kw-search-item>
   </kw-search-row>
 </kw-search>

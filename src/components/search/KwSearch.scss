@@ -93,6 +93,56 @@
         align-items: center;
         width: 100%;
       }
+
+      %ratio {
+        display: flex;
+        width: calc(100% - 120px);
+      }
+
+      .kw-input-layout--ratio73 {
+        @extend %ratio;
+
+        label {
+          &:nth-child(1) {
+            width: 70%;
+          }
+
+          &:nth-child(2) {
+            width: calc(30% - 10px);
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .kw-input-layout--ratio37 {
+        @extend %ratio;
+
+        label {
+          &:nth-child(1) {
+            width: 30%;
+          }
+
+          &:nth-child(2) {
+            width: calc(70% - 10px);
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .kw-input-layout--ratio55 {
+        @extend %ratio;
+
+        label {
+          &:nth-child(1) {
+            width: 50%;
+          }
+
+          &:nth-child(2) {
+            width: 50%;
+            margin-left: 10px;
+          }
+        }
+      }
     }
 
     .kw-form-title {
@@ -242,6 +292,15 @@
     }
   }
 
+  // date-range-picker style ovverride in search Form
+  .kw-date-range-picker {
+    .q-field__control-container {
+      label {
+        flex: 1 1 auto;
+      }
+    }
+  }
+
   // search button
   .q-btn {
     padding: 0 12px;
@@ -382,25 +441,3 @@
     }
   }
 }
-
-// .kw-search {
-//   .kw-form-row {
-//     .kw-form-item {
-//       .kw-input-ratio73 {
-//         display: flex;
-//         width: calc(100% - 120px);
-
-//         label {
-//           &:nth-child(1) {
-//             width: 70%;
-//           }
-
-//           &:nth-child(2) {
-//             width: calc(30% - 10px);
-//             margin-left: 10px;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }

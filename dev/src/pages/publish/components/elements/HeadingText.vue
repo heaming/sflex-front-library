@@ -15,6 +15,7 @@
           <h1>h1 Heading-text</h1>
           <h2>h2 Heading-text</h2>
           <h3>h3 Heading-text</h3>
+          <h3>h3 Heading-text<span class="kw-title-refrence">&#8251; 필수(&#42;)를 제외한 항목만 변경 가능합니다.</span></h3>
           <h4>h4 Heading-text</h4>
         </div>
         <guide-code-view
