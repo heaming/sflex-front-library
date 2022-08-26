@@ -153,7 +153,7 @@
         <div class="kw-guide-example">
           <kw-form cols="1">
             <kw-form-row>
-              <kw-form-item label="colspan">
+              <kw-form-item label="label">
                 <kw-input
                   name="input"
                   placeholder="입력해주세요"
@@ -171,7 +171,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="kw-hypen-input">
+                <div class="row items-center">
                   <kw-input
                     name="input"
                     placeholder="입력해주세요"
@@ -186,7 +186,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="kw-hypen-input">
+                <div class="row items-center w498">
                   <kw-input
                     name="input"
                     placeholder="입력해주세요"
@@ -300,7 +300,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="row items-center w462">
+                <div class="row items-center w464">
                   <kw-input
                     name="input"
                     placeholder="입력해주세요"
@@ -426,7 +426,7 @@ const oneColumns = `
 <!-- Add the column's value as cols="1" in the tag of kw-form -->
 <kw-form cols="1">
   <kw-form-row>
-    <kw-form-item label="colspan">
+    <kw-form-item label="label">
       <kw-input
         name="input"
         placeholder="입력해주세요"
@@ -444,7 +444,7 @@ const oneColumns = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input">
-      <div class="kw-hypen-input">
+      <div class="row items-center">
         <kw-input
           name="input"
           placeholder="입력해주세요"
@@ -459,7 +459,7 @@ const oneColumns = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input">
-      <div class="kw-hypen-input">
+      <div class="row items-center w498">
         <kw-input
           name="input"
           placeholder="입력해주세요"
@@ -514,8 +514,15 @@ const twoColumns = `
   <kw-form-row>
     <kw-form-item
       label="colspan"
-      class="essential"
+      required
+      hint-message="힌트입니다."
     >
+      <kw-input
+        name="input"
+        class="w400"
+        placeholder="입력해주세요"
+        rules="required"
+      />
       <kw-input
         name="input"
         placeholder="입력해주세요"
@@ -534,6 +541,8 @@ const twoColumns = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         name="select"
+        placeholder="placeholder"
+        use-input
       />
     </kw-form-item>
     <kw-form-item label="Select">
@@ -541,73 +550,69 @@ const twoColumns = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         name="select"
+        placeholder="placeholder"
+        use-input
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="input">
+      <div class="row items-center w464">
+        <kw-input
+          name="input"
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          name="input"
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          name="input"
+          placeholder="입력해주세요"
+        />
+      </div>
+    </kw-form-item>
+    <kw-form-item label="input2">
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
       />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input2">
-      <div class="kw-hypen-input">
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
     <kw-form-item label="input2">
-      <div class="kw-hypen-input">
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-      </div>
-    </kw-form-item>
-  </kw-form-row>
-  <kw-form-row>
-    <kw-form-item label="input2">
-      <div class="kw-hypen-input">
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-      </div>
-    </kw-form-item>
-    <kw-form-item label="input2">
-      <div class="kw-hypen-input">
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          name="input"
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        name="input"
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>

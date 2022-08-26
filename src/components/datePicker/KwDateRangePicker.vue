@@ -20,7 +20,7 @@
       hide-bottom-space
       :placeholder="fromPlaceholder"
       @update:model-value="onChangeDate($event, 0)"
-    /> ~
+    /> <span>~</span>
     <kw-date-picker
       :model-value="value[1]"
       :type="type"
