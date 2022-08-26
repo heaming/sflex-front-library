@@ -71,7 +71,6 @@ export default (options) => {
     initialValue,
     pending,
     validated,
-    errorMessage,
     setState,
   } = fieldState;
 
@@ -193,10 +192,6 @@ export default (options) => {
     }
   }
 
-  function getErrorMessage() {
-    return errorMessage.value;
-  }
-
   onMounted(() => {
     if (props.validateOnMount) {
       validate();
@@ -213,7 +208,6 @@ export default (options) => {
     isModified,
     focus,
     blur,
-    getErrorMessage,
   };
 
   registerField?.(fieldCtx);

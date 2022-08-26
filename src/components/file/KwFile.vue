@@ -8,9 +8,9 @@
       multiple
       :accept="accept"
       :counter-label="counterLabel"
-      :error="error"
-      :counter="!error"
-      :error-message="errorMessage"
+      :error="invalid"
+      :counter="!invalid"
+      :error-message="invalidMessage"
       :max-file-size="maxFileSize"
       :max-files="maxFiles"
       :max-total-size="maxTotalSize"
@@ -126,10 +126,6 @@ export default {
     ...useFieldProps,
 
     modelValue: { type: Array, default: () => [] },
-
-    error: { type: Boolean, required: false, default: false },
-    errorMessage: { type: String, required: false, default: undefined },
-
     multiple: { type: Boolean, required: false, default: false },
     accept: { type: String, required: false, default: undefined },
     capture: { type: String, required: false, default: undefined },

@@ -3,13 +3,16 @@
     ref="inputRef"
     class="kw-field"
     :label="$q.platform.is.desktop ? null : label"
-    :error="error"
-    :error-message="errorMessage"
+    :error="invalid"
+    :error-message="invalidMessage"
     no-error-icon
     @focus="$emit('focus')"
   >
     <template #control>
-      <slot :field="fieldBinding" />
+      <slot
+        :field="fieldBinding"
+        :invalid="invalid"
+      />
     </template>
   </q-field>
 </template>
