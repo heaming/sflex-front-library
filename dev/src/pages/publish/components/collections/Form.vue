@@ -257,12 +257,18 @@
             <kw-form-row>
               <kw-form-item
                 label="colspan"
-                class="essential"
+                required
+                hint-message="힌트입니다."
               >
                 <kw-input
                   name="input"
+                  class="w400"
                   placeholder="입력해주세요"
                   rules="required"
+                />
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
                 />
               </kw-form-item>
               <kw-form-item label="colspan">
@@ -294,7 +300,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="kw-hypen-input">
+                <div class="row items-center w462">
                   <kw-input
                     name="input"
                     placeholder="입력해주세요"
@@ -312,50 +318,44 @@
                 </div>
               </kw-form-item>
               <kw-form-item label="input2">
-                <div class="kw-hypen-input">
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input2">
-                <div class="kw-hypen-input">
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
               <kw-form-item label="input2">
-                <div class="kw-hypen-input">
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    name="input"
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>

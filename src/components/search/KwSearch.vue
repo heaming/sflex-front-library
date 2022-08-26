@@ -61,6 +61,10 @@ export default {
     ...useFormProps,
     ...useFormExpandableProps,
 
+    labelSize: {
+      type: Number,
+      default: 120,
+    },
     modifiedTargets: {
       type: Array,
       default: () => [],

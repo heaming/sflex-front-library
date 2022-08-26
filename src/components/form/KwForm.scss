@@ -61,79 +61,63 @@
 
   .kw-form-row {
     display: flex;
-    flex-wrap: wrap;
     margin: 0;
     padding: 10px 0;
     min-height: 60px;
+  }
 
-    .kw-form-item {
-      display: flex;
-      width: auto;
-      max-width: 100%;
-      min-width: 648px;
-      min-height: 40px;
-      padding: 0;
+  .kw-form-item {
+    display: flex;
+    flex: 10000 0 1%;
+    min-height: 40px;
+  }
 
-      & > .row {
-        align-items: center;
-        width: 100%;
+  .kw-form-item__label {
+    display: flex;
+    position: relative;
+    padding-right: 16px;
+    width: 150px;
+    max-height: 40px;
+    font-size: 14px;
+    line-height: 18px;
+    color: $black3;
+    word-break: break-word;
+    align-items: center;
+  }
+
+  // 임시
+  .kw-form-item__hint {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 16px;
+    color: rgb(255 255 255 / 0%);
+    background: url(~assets/images/ic_info_default_16.svg) no-repeat center center;
+    background-size: 16px;
+  }
+
+  .kw-form-item__field {
+    display: flex;
+    flex: 10000 0 1%;
+    align-items: center;
+
+    .q-field {
+      flex: 10000 0 1%;
+      max-width: 498px;
+
+      & + .q-field {
+        margin-left: 10px;
       }
 
-      & .row .kw-hypen-input {
-        display: flex;
-
-        .kw-input {
-          width: 144px;
-        }
-
-        span {
-          display: inline-block;
-          width: 15px;
-          height: 18px;
-          font-size: 14px;
-          font-weight: 500;
-          font-stretch: normal;
-          font-style: normal;
-          line-height: 40px;
-          letter-spacing: normal;
-          text-align: center;
-          color: $black3;
-        }
-      }
-    }
-
-    .kw-form-title {
-      padding-right: 16px;
-      width: 150px;
-      font-size: 14px;
-      line-height: 18px;
-      color: $black3;
-      word-break: break-word;
-
-      & + label {
-        @media (min-width: 0) {
-          width: 498px;
-          min-width: 498px;
-          max-width: 498px;
-          flex: 10000 1 0%;
-
-          &.kw-date-picker {
-            width: 244px;
-            min-width: 244px;
-            max-width: 244px;
-          }
-
-          &.kw-date-picker .q-field__inner {
-            max-width: 498px !important;
-          }
-        }
+      & + span {
+        margin: 0 5px;
       }
     }
   }
 }
 
 // essential
-.essential .kw-form-title::after {
+.essential .kw-form-item__label::after {
   content: "*";
   display: inline;
   color: $info;
