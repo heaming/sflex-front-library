@@ -1,4 +1,4 @@
-<svg data-name="info(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<svg data-name="info(h24)" id="info_24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
     <g data-name="타원 5062" transform="translate(2 2)" style="stroke:#222;stroke-width:1.5px;fill:none">
         <circle cx="10" cy="10" r="10" style="stroke:none"/>
