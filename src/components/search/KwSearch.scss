@@ -292,6 +292,15 @@
     }
   }
 
+  // date-range-picker style ovverride in search Form
+  .kw-date-range-picker {
+    .q-field__control-container {
+      label {
+        flex: 1 1 auto;
+      }
+    }
+  }
+
   // search button
   .q-btn {
     padding: 0 12px;
