@@ -14,6 +14,7 @@ export default () => {
   const lnbs = getters['app/getLnbs'];
 
   const isExpanded = computed(() => getters['app/getLnbExpanded']);
+  const expandedKeys = ref([]);
   const selectedGnbKey = computed(() => getters['app/getSelectedGnbKey']);
   const selectedLnbKey = computed(() => getters['app/getSelectedLnbKey']);
   const selectedLnbKeys = ref([]);
@@ -36,72 +37,72 @@ export default () => {
     return nHierarchyedLnbs;
   }
 
-  function setExpanded(lnbKey, value, recursive = false) {
-    value ??= !lnbRef.value.isExpanded(lnbKey);
-    lnbRef.value.setExpanded(lnbKey, value);
-
-    if (recursive) {
-      const { parentsKey } = lnbRef.value.getNodeByKey(lnbKey);
-      if (parentsKey) setExpanded(parentsKey, value, recursive);
-    }
+  function recursiveGetKeys(gnbKey, lnbKey) {
+    const matched = lnbKey ? lnbs.find((v) => v.gnbKey === gnbKey && v.key === lnbKey) : null;
+    return matched ? [...recursiveGetKeys(gnbKey, matched.parentsKey), lnbKey] : [gnbKey];
   }
 
-  onMounted(() => {
-    watch(selectedGnbKey, async (gnbKey) => {
-      hierarchyedLnbs.value = createHierarchyedLnbs(gnbKey);
-      await nextTick();
+  watch(selectedGnbKey, (gnbKey) => {
+    hierarchyedLnbs.value = createHierarchyedLnbs(gnbKey);
+    expandedKeys.value = recursiveGetKeys(gnbKey, selectedLnbKey.value);
+  }, { immediate: true });
 
-      const lnbKey = selectedLnbKey.value;
-      const isIncludedLnbKey = !!lnbKey && lnbs.some((v) => v.gnbKey === gnbKey && v.key === lnbKey);
-      const expandedTargetKey = isIncludedLnbKey ? lnbKey : gnbKey;
+  watch(selectedLnbKey, (lnbKey) => {
+    selectedLnbKeys.value = recursiveGetKeys(selectedGnbKey.value, lnbKey);
+  }, { immediate: true });
 
-      setExpanded(expandedTargetKey, true, true);
-    }, { immediate: true });
-
-    watch(selectedLnbKey, async (lnbKey) => {
-      selectedLnbKeys.value = [];
-      await nextTick();
-
-      let key = lnbKey;
-      while (key) {
-        selectedLnbKeys.value.push(key);
-        key = lnbRef.value.getNodeByKey(key).parentsKey;
-      }
-    }, { immediate: true });
-  });
-
-  const isSelected = (lnbKey) => selectedLnbKeys.value.includes(lnbKey);
+  async function onUpdateSelectedLeaf(lnbKey) {
+    try {
+      await push({ name: lnbKey });
+    } catch (e) {
+      if (isNavigationFailure(e, MATCHER_NOT_FOUND)) { await alert(t('MSG_ALT_PAGE_NOT_FOUND')); }
+      throw e;
+    }
+  }
 
   const isRoot = (lnbKey) => lnbRef.value.getNodeByKey(lnbKey).key === selectedGnbKey.value;
-  const isLeaf = (lnbKey) => !lnbRef.value.getNodeByKey(lnbKey).children.length;
+  const isLeaf = (lnbKey) => lnbRef.value.getNodeByKey(lnbKey).children.length === 0;
 
-  async function updateSelected(lnbKey) {
-    if (isLeaf(lnbKey)) {
-      try {
-        await push({ name: lnbKey });
-        commit('app/setSelectedLnbKey', lnbKey);
-      } catch (e) {
-        if (isNavigationFailure(e, MATCHER_NOT_FOUND)) { await alert(t('MSG_ALT_PAGE_NOT_FOUND')); }
-        throw e;
-      }
-      return;
+  function onUpdateSelectedGroup(lnbKey) {
+    if (isRoot(lnbKey)) return;
+
+    const expanded = expandedKeys.value;
+    const index = expanded.findIndex((v) => v === lnbKey);
+
+    if (index > 0) {
+      expanded.splice(index, 1);
+    } else {
+      expanded.push(lnbKey);
     }
-
-    if (!isRoot(lnbKey)) { setExpanded(lnbKey); }
   }
 
-  function toggleLnb() {
-    commit('app/setLnbExpanded', !isExpanded.value);
+  function onUpdateSelected(lnbKey) {
+    if (isLeaf(lnbKey)) {
+      onUpdateSelectedLeaf(lnbKey);
+    } else {
+      onUpdateSelectedGroup(lnbKey);
+    }
   }
+
+  function onUpdateExpanded(exapnded) {
+    const hasRoot = exapnded.length > 0 && isRoot(exapnded[0]);
+    if (hasRoot) expandedKeys.value = exapnded;
+  }
+
+  const isSelected = (lnbKey) => selectedLnbKeys.value.includes(lnbKey);
+  const toggleLnb = () => { commit('app/setLnbExpanded', !isExpanded.value); };
 
   return {
     lnbRef,
     hierarchyedLnbs,
     isExpanded,
+    expandedKeys,
     selectedGnbKey,
     selectedLnbKey,
+    selectedLnbKeys,
     isSelected,
-    updateSelected,
     toggleLnb,
+    onUpdateSelected,
+    onUpdateExpanded,
   };
 };

@@ -13,15 +13,15 @@ function createRoutesByGlobImport(modules, match) {
     const [, rootDir, subDirs] = matched;
     const label = matched.pop();
 
-    const path = [
+    const name = [
       ...rootDir.split('/').map(pascalCase),
       ...subDirs.split('/').splice(1).map(pascalCase),
       pascalCase(label),
     ].join('/');
 
     return {
-      name: path,
-      path,
+      name,
+      path: name,
       meta: { label, isGlobImport: true },
       component: modules[key],
     };
