@@ -4,26 +4,13 @@
     :style="[popupStyle, { transform }]"
     :class="['kw-popup', popupClass]"
   >
-    <q-card-section
-      v-bind="events"
-      style="background: grey; touch-action: none;"
+    <h1
+      v-if="popupTitle"
+      class="mt20"
     >
-      <div
-        ref="headerRef"
-        class="row justify-between"
-      >
-        <span class="text-bold">{{ popupTitle && $t(popupTitle) }}</span>
-        <q-btn
-          flat
-          rounded
-          icon="close"
-          @mousedown.stop
-          @touchstart.stop
-          @click="close(false)"
-        />
-      </div>
-    </q-card-section>
-    <q-card-section>
+      {{ popupTitle && $t(popupTitle) }}
+    </h1>
+    <q-card-section class="popup-content">
       <div v-if="error">
         Failed to load
       </div>
@@ -40,6 +27,26 @@
         </template>
       </suspense>
     </q-card-section>
+    <div class="row justify-center popup-action--wrap">
+      <kw-btn
+        class="kw-btn--negative kw-btn--h36"
+        label="취소"
+      />
+      <kw-btn
+        class="kw-btn--h36 ml8"
+        label="확인"
+      />
+      <q-btn
+        flat
+        rounded
+        icon="close_24"
+        class="absolute-top-right popup-closer"
+        :ripple="false"
+        @mousedown.stop
+        @touchstart.stop
+        @click="close(false)"
+      />
+    </div>
   </q-card>
 </template>
 
