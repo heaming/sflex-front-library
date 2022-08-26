@@ -11,8 +11,6 @@
   border-radius: 0;
 
   &--icon-only {
-    width: auto;
-    height: auto;
     padding: 0;
     background: none;
 
@@ -22,8 +20,6 @@
     }
 
     &.kw-btn.q-btn .q-icon {
-      width: 1em;
-      height: 1em;
       margin: 0;
       font-size: 1em;
     }
@@ -531,15 +527,14 @@
   }
 }
 
-svg[viewBox$="16"] {
-  width: 16px !important;
-}
+// svg[viewBox$="16"] {
+//   width: 16px !important;
+// }
 
 .kw-btn {
   &.q-btn .q-icon {
-    width: 16px;
-    height: 16px;
     margin-right: 4px;
+    font-size: 1em;
   }
 
   &.kw-btn-reverse {
