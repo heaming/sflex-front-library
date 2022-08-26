@@ -191,17 +191,30 @@
         Input with hypen
       </h3>
       <p class="kw-guide-description">
-        Three kw-input or Two kw-input are wrapped by the class of " <b> kw-hypen-input </b>".<br>
-        and Add span with the hypen between the kw-input in kw-hypen-input.<br>
-        <b>( ex: '&lt;span&gt;-&lt;/span&gt;')</b>
+        If you need the case of input with hypen,
+        kindly ask to add the <b>( ex: '&lt;span&gt;-&lt;/span&gt;')</b> between input tag. <br>
+        Please find the detail abouth input width in 'collections/searchform' section.
       </p>
       <q-card>
         <div>
           <div class="kw-guide-example">
-            <kw-form>
+            <kw-form cols="2">
               <kw-form-row>
-                <kw-form-item label="input">
-                  <div class="kw-hypen-input">
+                <kw-form-item label="input(flex/2columns)">
+                  <kw-input
+                    name="input"
+                    placeholder="입력해주세요"
+                  />
+                  <span>-</span>
+                  <kw-input
+                    name="input"
+                    placeholder="입력해주세요"
+                  />
+                </kw-form-item>
+              </kw-form-row>
+              <kw-form-row>
+                <kw-form-item label="input(fixed/2columns)">
+                  <div class="row items-center w296">
                     <kw-input
                       name="input"
                       placeholder="입력해주세요"
@@ -214,9 +227,29 @@
                   </div>
                 </kw-form-item>
               </kw-form-row>
+
+              <kw-separator />
               <kw-form-row>
-                <kw-form-item label="input">
-                  <div class="kw-hypen-input">
+                <kw-form-item label="input(flex/3columns)">
+                  <kw-input
+                    name="input"
+                    placeholder="입력해주세요"
+                  />
+                  <span>-</span>
+                  <kw-input
+                    name="input"
+                    placeholder="입력해주세요"
+                  />
+                  <span>-</span>
+                  <kw-input
+                    name="input"
+                    placeholder="입력해주세요"
+                  />
+                </kw-form-item>
+              </kw-form-row>
+              <kw-form-row>
+                <kw-form-item label="input(fixed/3columns)">
+                  <div class="row items-center w464">
                     <kw-input
                       name="input"
                       placeholder="입력해주세요"

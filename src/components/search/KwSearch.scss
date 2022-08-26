@@ -168,6 +168,38 @@
     flex: 10000 1 0%;
   }
 
+  .kw-form-item__label {
+    display: flex;
+    position: relative;
+    padding-right: 12px;
+    width: 120px;
+    max-height: 40px;
+    font-size: 14px;
+    line-height: 18px;
+    color: $black3;
+    word-break: break-word;
+    align-items: center;
+  }
+
+  .kw-form-item__field {
+    display: flex;
+    flex: 10000 0 1%;
+    align-items: center;
+
+    .q-field {
+      flex: 10000 0 1%;
+      max-width: 498px;
+
+      & + .q-field {
+        margin-left: 10px;
+      }
+
+      & + span {
+        margin: 0 5px;
+      }
+    }
+  }
+
   .q-field__messages {
     display: none;
   }
@@ -289,15 +321,6 @@
   .kw-multi-date-picker {
     .q-field__control-container {
       font-size: 16px;
-    }
-  }
-
-  // date-range-picker style ovverride in search Form
-  .kw-date-range-picker {
-    .q-field__control-container {
-      label {
-        flex: 1 1 auto;
-      }
     }
   }
 
