@@ -53,7 +53,7 @@
             </td>
             <td>
               Required, Default : "radioOptionGroup"<br>
-              Required, Default : "required"<br>
+              Add this when Essential Case<br>
               Required, Default : "radio"<br>
               Add the option lists in [ ]<br>
               Add the attribue "disable" when it is required to be readonly or disable<br>
@@ -156,7 +156,6 @@
                 <kw-option-group
                   :model-value="'C'"
                   name="radioOptionGroup"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C']"
                   disable
@@ -167,6 +166,43 @@
         </div>
         <guide-code-view
           :code-value="groupRadioReadonlyCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="essential"
+        class="kw-guide-title"
+      >
+        Essential
+      </h3>
+      <p class="kw-guide-description">
+        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        when it needs to be essential to input <br>
+        - add attribute <b>rules="required"</b> in <b>&lt;kw-radio&gt;</b>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item
+                label="OptionGroup"
+                class="essential"
+              >
+                <kw-option-group
+                  :model-value="'C'"
+                  name="radioOptionGroup"
+                  rules="required"
+                  type="radio"
+                  :options="['A', 'B', 'C']"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="essentialCode"
           lang="vue"
         />
       </q-card>
@@ -266,6 +302,43 @@ const groupRadioReadonlyCode = `
         type="radio"
         :options="['A', 'B', 'C']"
         disable
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
+`;
+
+const essentialCode = `
+ <kw-form>
+  <kw-form-row>
+    <kw-form-item
+      label="OptionGroup"
+      class="essential"
+    >
+      <kw-option-group
+        :model-value="'C'"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C']"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item
+      label="optiongroup"
+      class="essential"
+    >
+      <kw-option-group
+        :model-value="'C'"
+        name="radioOptionGroup"
+        rules="required"
+        type="radio"
+        :options="['A', 'B', 'C']"
       />
     </kw-search-item>
   </kw-search-row>

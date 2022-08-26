@@ -165,7 +165,6 @@
             <kw-search-item label="지점명">
               <kw-input
                 name="input"
-                rules="required"
                 placeholder="입력해주세요"
               />
             </kw-search-item>
@@ -175,8 +174,8 @@
             >
               <kw-input
                 name="input"
-                rules="required"
                 placeholder="입력해주세요"
+                rules="required"
               />
             </kw-search-item>
             <kw-search-item label="지역명">
@@ -184,14 +183,12 @@
                 v-model="readonlyValue"
                 name="input"
                 readonly
-                rules="required"
                 placeholder="입력해주세요"
               />
             </kw-search-item>
             <kw-search-item label="권역명">
               <kw-input
                 name="input"
-                rules="required"
                 placeholder="입력해주세요"
                 disable
               />
@@ -201,14 +198,12 @@
           <kw-search-row>
             <kw-search-item
               label="선택 샘플"
-              class="essential"
             >
               <kw-select
                 :model-value="[]"
                 :options="['A', 'B', 'C', 'D']"
                 placeholder="선택해 주세요."
                 name="select"
-                rules="required"
               />
             </kw-search-item>
             <kw-search-item label="다중선택 샘플 (readonly)">
@@ -217,7 +212,6 @@
                 :options="['A', 'B', 'C', 'D']"
                 multiple
                 name="selectMultiple"
-                rules="required"
                 readonly
               />
             </kw-search-item>
@@ -227,7 +221,6 @@
                 :options="['A', 'B', 'C', 'D']"
                 multiple
                 name="selectMultiple"
-                rules="required"
                 disable="disable"
               />
             </kw-search-item>
@@ -238,7 +231,6 @@
               <kw-option-group
                 :model-value="readonlyRadio"
                 name="radioOptionGroup"
-                rules="required"
                 type="radio"
                 :options="['김엄마', '김마', '마']"
               />
@@ -248,7 +240,6 @@
               <kw-option-group
                 :model-value="readonlyRadio"
                 name="radioOptionGroup"
-                rules="required"
                 type="radio"
                 :options="['김엄마', '김마', '마']"
                 disable
@@ -257,7 +248,6 @@
             <kw-search-item label="disable">
               <kw-option-group
                 name="radioOptionGroup"
-                rules="required"
                 type="radio"
                 :options="['김엄마', '김마', '마']"
                 disable
@@ -270,7 +260,6 @@
               <kw-option-group
                 :model-value="[]"
                 name="checkboxOptionGroup"
-                rules="required"
                 type="checkbox"
                 :options="['A', 'B', 'C', 'D']"
               />
@@ -279,7 +268,6 @@
               <kw-option-group
                 :model-value="readonlyCheckbox"
                 name="checkboxOptionGroup"
-                rules="required"
                 type="checkbox"
                 :options="['A', 'B', 'C', 'D']"
                 disable
@@ -289,7 +277,6 @@
               <kw-option-group
                 :model-value="[]"
                 name="checkboxOptionGroup"
-                rules="required"
                 type="checkbox"
                 :options="['A', 'B', 'C', 'D']"
                 disable
@@ -301,7 +288,6 @@
             <kw-search-item label="DatePicker">
               <kw-date-picker
                 name="datePicker"
-                rules="required"
               />
             </kw-search-item>
           </kw-search-row>
@@ -354,7 +340,6 @@
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -363,37 +348,12 @@
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-search-item>
-            </kw-search-row>
-            <kw-search-row>
-              <kw-search-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-search-item>
-              <kw-search-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
-                  placeholder="입력해주세요"
-                />
-              </kw-search-item>
-              <kw-search-item label="colspan">
-                <kw-input
-                  name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -402,28 +362,44 @@
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
+                  placeholder="입력해주세요"
+                />
+              </kw-search-item>
+            </kw-search-row>
+            <kw-search-row>
+              <kw-search-item label="colspan">
+                <kw-input
+                  name="input"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
               <kw-search-item label="colspan">
                 <kw-input
                   name="input"
-                  rules="required"
+                  placeholder="입력해주세요"
+                />
+              </kw-search-item>
+              <kw-search-item label="colspan">
+                <kw-input
+                  name="input"
+                  placeholder="입력해주세요"
+                />
+              </kw-search-item>
+              <kw-search-item label="colspan">
+                <kw-input
+                  name="input"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -461,7 +437,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -473,7 +448,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -483,7 +457,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -492,7 +465,6 @@
               <kw-search-item label="colspan-1/4">
                 <kw-option-group
                   name="radioOptionGroup"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -503,7 +475,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -513,7 +484,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -530,7 +500,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -543,7 +512,6 @@
                 <kw-option-group
                   :model-value="[]"
                   name="checkboxOptionGroup"
-                  rules="required"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -554,7 +522,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -571,7 +538,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -581,7 +547,6 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
                 />
               </kw-search-item>
@@ -596,7 +561,6 @@
                   :options="['A', 'B', 'C', 'D']"
                   multiple
                   name="selectMultiple"
-                  rules="required"
                 />
               </kw-search-item>
             </kw-search-row>
@@ -631,8 +595,8 @@
               >
                 <kw-input
                   name="input"
-                  rules="required"
                   placeholder="입력해주세요"
+                  rules="required"
                 />
               </kw-search-item>
               <kw-search-item
@@ -660,7 +624,7 @@
                 />
               </kw-search-item>
               <kw-search-item
-                label="dateRangePicker"
+                label="Date Picker"
                 class="essential"
               >
                 <kw-date-picker
@@ -676,9 +640,9 @@
               >
                 <kw-option-group
                   name="radioOptionGroup"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C', 'D']"
+                  rules="required"
                 />
               </kw-search-item>
               <kw-search-item
@@ -688,9 +652,9 @@
                 <kw-option-group
                   :model-value="[]"
                   name="checkboxOptionGroup"
-                  rules="required"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
+                  rules="required"
                 />
               </kw-search-item>
             </kw-search-row>
@@ -797,7 +761,6 @@ const searchCode = `
     <kw-search-item label="지점명">
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -805,11 +768,10 @@ const searchCode = `
       label="담당자명"
       class="essential"
     >
-      <!-- 필수 입력의 경우 essential 클래스 추가-->
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
+        rules="required"
       />
     </kw-search-item>
     <kw-search-item label="지역명">
@@ -817,14 +779,12 @@ const searchCode = `
         v-model="readonlyValue"
         name="input"
         readonly
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
     <kw-search-item label="권역명">
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
         disable
       />
@@ -834,14 +794,12 @@ const searchCode = `
   <kw-search-row>
     <kw-search-item
       label="선택 샘플"
-      class="essential"
     >
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         placeholder="선택해 주세요."
         name="select"
-        rules="required"
       />
     </kw-search-item>
     <kw-search-item label="다중선택 샘플 (readonly)">
@@ -850,7 +808,6 @@ const searchCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         name="selectMultiple"
-        rules="required"
         readonly
       />
     </kw-search-item>
@@ -860,7 +817,6 @@ const searchCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         name="selectMultiple"
-        rules="required"
         disable="disable"
       />
     </kw-search-item>
@@ -870,7 +826,6 @@ const searchCode = `
     <kw-search-item label="Radio">
       <kw-field
         name="radio"
-        rules="required"
       >
         <template #default="{ field }">
           <kw-radio
@@ -887,7 +842,6 @@ const searchCode = `
       <kw-option-group
         :model-value="readonlyRadio"
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['김엄마', '김마', '마']"
         disable
@@ -896,7 +850,6 @@ const searchCode = `
     <kw-search-item label="optiongroup (disable)">
       <kw-option-group
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['김엄마', '김마', '마']"
         disable
@@ -909,7 +862,6 @@ const searchCode = `
       <kw-field
         :model-value="[]"
         name="checkbox"
-        rules="required"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -925,7 +877,6 @@ const searchCode = `
       <kw-option-group
         :model-value="readonlyCheckbox"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -935,7 +886,6 @@ const searchCode = `
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -947,7 +897,6 @@ const searchCode = `
     <kw-search-item label="DatePicker">
       <kw-date-picker
         name="datePicker"
-        rules="required"
       />
     </kw-search-item>
   </kw-search-row>
@@ -977,7 +926,6 @@ const theColumnsCode = `
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </kw-search-item>
@@ -986,37 +934,12 @@ const theColumnsCode = `
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </kw-search-item>
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
-          placeholder="입력해주세요"
-        />
-      </kw-search-item>
-    </kw-search-row>
-    <kw-search-row>
-      <kw-search-item label="colspan">
-        <kw-input
-          name="input"
-          rules="required"
-          placeholder="입력해주세요"
-        />
-      </kw-search-item>
-      <kw-search-item label="colspan">
-        <kw-input
-          name="input"
-          rules="required"
-          placeholder="입력해주세요"
-        />
-      </kw-search-item>
-      <kw-search-item label="colspan">
-        <kw-input
-          name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </kw-search-item>
@@ -1025,28 +948,44 @@ const theColumnsCode = `
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </kw-search-item>
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
           placeholder="입력해주세요"
         />
       </kw-search-item>
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
+          placeholder="입력해주세요"
+        />
+      </kw-search-item>
+    </kw-search-row>
+    <kw-search-row>
+      <kw-search-item label="colspan">
+        <kw-input
+          name="input"
           placeholder="입력해주세요"
         />
       </kw-search-item>
       <kw-search-item label="colspan">
         <kw-input
           name="input"
-          rules="required"
+          placeholder="입력해주세요"
+        />
+      </kw-search-item>
+      <kw-search-item label="colspan">
+        <kw-input
+          name="input"
+          placeholder="입력해주세요"
+        />
+      </kw-search-item>
+      <kw-search-item label="colspan">
+        <kw-input
+          name="input"
           placeholder="입력해주세요"
         />
       </kw-search-item>
@@ -1063,7 +1002,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1075,7 +1013,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1085,7 +1022,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1094,7 +1030,6 @@ const theColumnsOfKwFormItemCode = `
     <kw-search-item label="colspan-1/4">
       <kw-option-group
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -1105,7 +1040,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1115,7 +1049,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1130,7 +1063,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1143,7 +1075,6 @@ const theColumnsOfKwFormItemCode = `
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -1154,7 +1085,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1169,7 +1099,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1179,7 +1108,6 @@ const theColumnsOfKwFormItemCode = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
       />
     </kw-search-item>
@@ -1194,7 +1122,6 @@ const theColumnsOfKwFormItemCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         name="selectMultiple"
-        rules="required"
       />
     </kw-search-item>
   </kw-search-row>
@@ -1211,8 +1138,8 @@ const EssentialExample = `
     >
       <kw-input
         name="input"
-        rules="required"
         placeholder="입력해주세요"
+        rules="required"
       />
     </kw-search-item>
     <kw-search-item
@@ -1240,7 +1167,7 @@ const EssentialExample = `
       />
     </kw-search-item>
     <kw-search-item
-      label="dateRangePicker"
+      label="Date Picker"
       class="essential"
     >
       <kw-date-picker
@@ -1256,9 +1183,9 @@ const EssentialExample = `
     >
       <kw-option-group
         name="radioOptionGroup"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
+        rules="required"
       />
     </kw-search-item>
     <kw-search-item
@@ -1268,9 +1195,9 @@ const EssentialExample = `
       <kw-option-group
         :model-value="[]"
         name="checkboxOptionGroup"
-        rules="required"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
+        rules="required"
       />
     </kw-search-item>
   </kw-search-row>
