@@ -372,12 +372,12 @@
         <div class="kw-guide-example">
           <kw-btn
             class="kw-btn--line-black kw-btn--h32"
-            icon="plus_16|0 0 16 16"
+            icon="plus_16"
             label="학습자 추가"
           />
           <kw-btn
             class="kw-btn--line-black kw-btn--h32 ml8"
-            icon="plus_16|0 0 16 16"
+            icon="plus_16"
             disable
             label="학습자 추가"
           />
@@ -688,12 +688,12 @@ const grayLineBg = `
 const contentsAddIcon = `
 <kw-btn
   class="kw-btn--line-black kw-btn--h32"
-  icon="plus_16|0 0 16 16"
+  icon="plus_16"
   label="학습자 추가"
 />
 <kw-btn
   class="kw-btn--line-black kw-btn--h32 ml8"
-  icon="plus_16|0 0 16 16"
+  icon="plus_16"
   disable
   label="학습자 추가"
 />

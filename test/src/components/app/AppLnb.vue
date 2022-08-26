@@ -29,7 +29,7 @@
     </q-tree>
 
     <kw-btn
-      icon="lnb_arrow|0 0 16 16"
+      icon="lnb_arrow"
       class="kw-lnb-switch"
       :class="{'kw-lnb-switch--active': isExpanded}"
       @click="toggleLnb"
@@ -46,8 +46,6 @@ const {
   expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
-  // eslint-disable-next-line no-unused-vars
-  selectedLnbKeys,
   hierarchyedLnbs,
   isSelected,
   toggleLnb,

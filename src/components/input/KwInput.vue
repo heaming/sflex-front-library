@@ -4,8 +4,8 @@
     :model-value="value"
     class="kw-input"
     :label="$q.platform.is.desktop ? null : label"
-    :error="error"
-    :error-message="errorMessage"
+    :error="invalid"
+    :error-message="invalidMessage"
     no-error-icon
     @keydown.enter="onEnter"
     @change="onChange"

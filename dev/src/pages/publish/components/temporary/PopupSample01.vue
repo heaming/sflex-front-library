@@ -1,7 +1,7 @@
 <template>
   <guide-popup-view>
     <kw-popup
-      class="kw-popup--lg"
+      class="kw-popup--md"
       title="조회 팝업"
     >
       내용(Content)<br>

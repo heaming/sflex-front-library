@@ -3,8 +3,8 @@
     v-bind="styleClassAttrs"
     class="kw-date-range-picker"
     :label="$q.platform.is.desktop ? null : label"
-    :error="error"
-    :error-message="errorMessage"
+    :error="invalid"
+    :error-message="invalidMessage"
     no-error-icon
   >
     <kw-date-picker
@@ -20,7 +20,7 @@
       hide-bottom-space
       :placeholder="fromPlaceholder"
       @update:model-value="onChangeDate($event, 0)"
-    /> ~
+    /> <span>~</span>
     <kw-date-picker
       :model-value="value[1]"
       :type="type"

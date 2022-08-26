@@ -27,7 +27,7 @@
         </kw-tooltip>
       </kw-checkbox>
       <kw-btn
-        icon="alert_16|0 0 16 16"
+        icon="alert_16"
         class="btn-icon--bell pa0"
       />
     </div>

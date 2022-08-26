@@ -3,8 +3,9 @@
     class="kw-editor"
     v-bind="styleClassAttrs"
     :label="$q.platform.is.desktop ? null : label"
-    :error="error"
-    :error-message="errorMessage"
+    :error="invalid"
+    :error-message="invalidMessage"
+    :disable="disable"
     no-error-icon
   >
     <div
@@ -50,7 +51,7 @@ export default {
 
   emits: ['update:modelValue'],
 
-  setup(props, { emit }) {
+  setup(props) {
     const editorRef = ref();
     const fieldCtx = useField();
     const { value } = fieldCtx;
@@ -78,22 +79,20 @@ export default {
         ...props.options,
       });
 
-      editor.onChange = (contents) => {
-        emit('update:modelValue', isEmptyContents(contents) ? '' : contents);
+      editor.onInput = () => {
+        const contents = editor.getContents();
+        value.value = isEmptyContents(contents) ? '' : contents;
       };
 
-      watch(() => props.modelValue, (val) => {
+      watch(value, (val) => {
         if (editor.getContents() !== val) {
           editor.setContents(val);
         }
       });
 
       watch(() => props.disable, (val) => {
-        if (val) {
-          editor.disable();
-        } else {
-          editor.enable();
-        }
+        // eslint-disable-next-line no-unused-expressions
+        val ? editor.disable() : editor.enable();
       }, { immediate: true });
 
       watch(() => props.readonly, (val) => {

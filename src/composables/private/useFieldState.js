@@ -9,6 +9,14 @@ export const useFieldStateProps = {
     type: String,
     default: undefined,
   },
+  error: {
+    type: Boolean,
+    default: false,
+  },
+  errorMessage: {
+    type: String,
+    default: undefined,
+  },
 };
 
 export default (val) => {
@@ -23,8 +31,8 @@ export default (val) => {
   const validated = ref(false);
 
   const errors = ref([]);
-  const error = computed(() => !pending.value && validated.value && !!errors.value.length);
-  const errorMessage = computed(() => (error.value ? errors.value[0] : null));
+  const invalid = computed(() => !pending.value && (props.error || (validated.value && !!errors.value.length)));
+  const invalidMessage = computed(() => (invalid.value ? (props.errorMessage || errors.value[0]) : null));
 
   function setState(options = {}) {
     if ('initialValue' in options) {
@@ -53,8 +61,8 @@ export default (val) => {
     errors,
     pending,
     validated,
-    error,
-    errorMessage,
+    invalid,
+    invalidMessage,
     setState,
   };
 };
