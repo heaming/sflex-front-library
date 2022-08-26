@@ -129,7 +129,7 @@ export default () => {
       ctx.focus();
 
       if (alertMessage) {
-        await alert(ctx.getErrorMessage());
+        await alert(ctx.invalidMessage.value);
       }
     }
 
