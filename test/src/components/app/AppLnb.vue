@@ -11,12 +11,15 @@
       :key="selectedGnbKey"
       class="kw-lnb-tree"
       :selected="selectedLnbKey"
+      :expanded="expandedKeys"
       :nodes="hierarchyedLnbs"
       :duration="100"
       node-key="key"
       label-key="label"
       no-selection-unset
-      @update:selected="updateSelected"
+      no-nodes-label=" "
+      @update:selected="onUpdateSelected"
+      @update:expanded="onUpdateExpanded"
     >
       <template #default-header="{node}">
         <div :class="{'kw-lnb--selected': isSelected(node.key)}">
@@ -40,12 +43,15 @@ import { useLnb } from '~lib';
 const {
   lnbRef,
   isExpanded,
+  expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
+  // eslint-disable-next-line no-unused-vars
+  selectedLnbKeys,
   hierarchyedLnbs,
   isSelected,
-  updateSelected,
   toggleLnb,
+  onUpdateSelected,
+  onUpdateExpanded,
 } = useLnb();
-
 </script>

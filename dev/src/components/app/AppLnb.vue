@@ -9,16 +9,25 @@
     <q-tree
       ref="lnbRef"
       :key="selectedGnbKey"
-      class="kw-lnb-tree"
+      class="py20 pl10"
       :selected="selectedLnbKey"
+      :expanded="expandedKeys"
       :nodes="hierarchyedLnbs"
+      icon="arrow_right_24"
       :duration="100"
       node-key="key"
       label-key="label"
       no-selection-unset
-      selected-color="primary"
-      @update:selected="updateSelected"
-    />
+      no-nodes-label=" "
+      @update:selected="onUpdateSelected"
+      @update:expanded="onUpdateExpanded"
+    >
+      <template #default-header="{node}">
+        <div :class="{'text-bold text-black': isSelected(node.key)}">
+          {{ node.label }}
+        </div>
+      </template>
+    </q-tree>
 
     <kw-btn
       icon="lnb_arrow|0 0 16 16"
@@ -32,42 +41,53 @@
 <script setup>
 import { useLnb } from '~lib';
 
-const { getRoutes } = useRouter();
 const { commit } = useStore();
+const { getRoutes, currentRoute } = useRouter();
 
-function fillIncompleteLnbs(nodes, index = 0) {
-  if (index === nodes.length) return nodes;
+(function createDevGnbs() {
+  function fillIncompleteLnbs(nodes, index = 0) {
+    if (index === nodes.length) return nodes;
 
-  const splited = nodes[index].key.split('/');
-  const key = splited.slice(0, splited.length - 1).join('/');
-  const depth = splited.length - 3;
+    const splited = nodes[index].key.split('/');
+    const key = splited.slice(0, splited.length - 1).join('/');
+    const depth = splited.length - 3;
 
-  nodes[index].gnbKey = splited[1];
-  nodes[index].depth = depth;
-  nodes[index].parentsKey = key;
+    nodes[index].gnbKey = splited[1];
+    nodes[index].depth = depth;
+    nodes[index].parentsKey = key;
 
-  if (depth > 0 && !nodes.some((e) => e.key === key)) {
-    return fillIncompleteLnbs([
-      ...nodes.splice(0, index), { key, label: splited[splited.length - 2] }, ...nodes,
-    ], index);
+    const hasParent = depth > 0 && !nodes.some((e) => e.key === key);
+
+    if (hasParent) {
+      const insNode = { key, label: splited[splited.length - 2] };
+      return fillIncompleteLnbs([...nodes.splice(0, index), insNode, ...nodes], index);
+    }
+
+    return fillIncompleteLnbs(nodes, index + 1);
   }
 
-  return fillIncompleteLnbs(nodes, index + 1);
-}
-
-(function createDevLnbs() {
   const globImportedRoutes = getRoutes().filter((e) => e.meta.isGlobImport);
-  const incompleteLnbs = globImportedRoutes.map((v) => ({ gnbKey: v.path.split('/')[1], key: v.name, label: v.meta.label }));
+  const incompleteLnbs = globImportedRoutes.map((v) => ({ gnbKey: v.name.split('/')[1], key: v.name, label: v.meta.label }));
   commit('app/setLnbs', fillIncompleteLnbs(incompleteLnbs));
 }());
+
+watch(currentRoute, async (val) => {
+  if (val.meta.isGlobImport) {
+    commit('app/setSelectedGnbKey', val.name.split('/')[1]);
+    commit('app/setSelectedLnbKey', val.name);
+  }
+});
 
 const {
   lnbRef,
   isExpanded,
+  expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
   hierarchyedLnbs,
+  isSelected,
   toggleLnb,
-  updateSelected,
+  onUpdateSelected,
+  onUpdateExpanded,
 } = useLnb();
 </script>
