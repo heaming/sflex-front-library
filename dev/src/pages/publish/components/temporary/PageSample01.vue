@@ -65,7 +65,7 @@
         </template>
 
         <kw-btn
-          icon="excel_16|0 0 16 16"
+          icon="excel_16"
           class="kw-btn--underline kw-action-bar--separator"
           label="엑셀 다운로드"
         />
@@ -243,7 +243,7 @@ const sampleVueCode = `
       </template>
 
       <kw-btn
-        icon="excel_16|0 0 16 16"
+        icon="excel_16"
         class="kw-btn--underline kw-action-bar--separator"
         label="엑셀 다운로드"
       />

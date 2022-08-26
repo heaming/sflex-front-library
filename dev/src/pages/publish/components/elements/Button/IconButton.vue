@@ -33,10 +33,15 @@
               kw-btn
             </td>
             <td>
-              kw-btn-reverse
+              kw-btn-reverse <br>
+              icon="icon file name" <br>
+              size="px"
             </td>
             <td>
-              Add the class of 'kw-btn-reverse' when the icon is located in right side and text is located in left side.
+              Add the class of 'kw-btn-reverse'
+              when the icon is located in right side and text is located in left side. <br>
+              Add this attribute in need <br>
+              Add this attribute in need <br>
             </td>
           </tr>
         </tbody>
@@ -57,20 +62,25 @@
           1-2. The naming for the svg file follows the name in zeplin.<br>
           <b>(If the name is 'price2(h24)' in zeplin, svg's file name have to be changed to price2_24)</b><br>
         </li>
-        <li>Open the file and change the ID name in the file. and it should be same name with file name.</li>
+        <li>
+          Then, open the file. <b>Change the ID name and remove width and height</b> in svg line. <br>
+          (ID name should be same width file name)
+        </li>
         <li>
           Ensure to restart "npm run serve" after saving the icon file,
           otherwise the file may not be working well.
         </li>
         <li> Copy the code below the example.</li>
         <li>
-          Add ID name in svg's tag which is included in the Svg file. <br>
-          (<b>ex: id="price2_24"</b>)
+          Add ID name in svg's tag which is included in the Svg file. (<b>ex: id="price2_24"</b>)
         </li>
         <li>
           Copy the kw-btn's tag in vue file.
-          And add attribute 'icon' which is included the values of width and height <br>
-          ( <b> ex: icon="price2_24|0 0 16 16 </b>) : The last two numbers are each of width and height.
+          Add attribute 'icon' (value is icon name) <br>
+          ( <b> ex: icon="price2_24" </b>)
+        </li>
+        <li>
+          In case of, you need to control the size of Icon, you cand add attribute size
         </li>
       </ol>
     </div>
@@ -107,22 +117,23 @@
         <div class="kw-guide-example">
           <kw-btn
             class="kw-btn--icon-only kw-btn--line-gray h40 w40 mr10"
+            icon="search_24"
             size="16px"
-          >
-            <kw-icon name="search_24|0 0 24 24" />
-          </kw-btn>
+          />
           <kw-btn
             class="kw-btn--icon-only kw-btn--line-gray h50 w50 mr10"
+            icon="search_24"
             size="24px"
-          >
-            <kw-icon name="search_24|0 0 24 24" />
-          </kw-btn>
+          />
           <kw-btn
             class="kw-btn--icon-only h50 w50 mr10"
+            icon="search_24"
             size="24px"
-          >
-            <kw-icon name="search_24|0 0 24 24" />
-          </kw-btn>
+          />
+          <kw-btn
+            class="kw-btn--icon-only h50 w50 mr10"
+            icon="info_24"
+          />
         </div>
         <guide-code-view
           :code-value="iconButton"
@@ -144,12 +155,12 @@
         <div class="kw-guide-example">
           <kw-btn
             class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-            icon="arrow_down_16|0 0 16 16"
+            icon="arrow_down_16"
             label="상태변경"
           />
           <kw-btn
             class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-            icon="arrow_down_16|0 0 16 16"
+            icon="arrow_down_16"
             label="상태변경"
           />
         </div>
@@ -173,12 +184,12 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download_16|0 0 16 16"
+            icon="excel_download_16"
             class="kw-btn--excel mr10"
             label="엑셀 다운로드"
           />
           <kw-btn
-            icon="excel_upload_16|0 0 16 16"
+            icon="excel_upload_16"
             class="kw-btn--excel"
             label="엑셀 업로드"
           />
@@ -189,12 +200,12 @@
         />
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download_16|0 0 16 16"
+            icon="excel_download_16"
             class="kw-btn--line-black kw-btn--h32 mr10"
             label="엑셀 다운로드"
           />
           <kw-btn
-            icon="excel_download_16|0 0 16 16"
+            icon="excel_download_16"
             class="kw-btn--line-black kw-btn--h32"
             label="엑셀 다운로드"
             disable
@@ -206,12 +217,12 @@
         />
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_upload_16|0 0 16 16|0 0 16 16"
+            icon="excel_upload_16"
             class="kw-btn--line-black kw-btn--h32 mr10"
             label="엑셀 업로드"
           />
           <kw-btn
-            icon="excel_upload_16|0 0 16 16|0 0 16 16"
+            icon="excel_upload_16"
             class="kw-btn--line-black kw-btn--h32"
             label="엑셀 업로드"
             disable
@@ -279,56 +290,52 @@ const iconButton = `
 <!--  The size of icon is 16px, and The button's size is width:40px and height:40px -->
 <kw-btn
   class="kw-btn--icon-only kw-btn--line-gray h40 w40 mr10"
+  icon="search_24"
   size="16px"
->
-  <kw-icon name="search_24|0 0 24 24" />
-</kw-btn>
+/>
 <kw-btn
   class="kw-btn--icon-only kw-btn--line-gray h50 w50 mr10"
+  icon="search_24"
   size="24px"
->
-  <kw-icon name="search_24|0 0 24 24" />
-</kw-btn>
+/>
 <kw-btn
-  class="kw-btn--icon-only h50 w50"
+  class="kw-btn--icon-only h50 w50 mr10"
+  icon="search_24"
   size="24px"
->
-  <kw-icon name="search_24|0 0 24 24" />
-</kw-btn>
+/>
 `;
 const testCode = `
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-  icon="arrow_down_16|0 0 16 16"
+  icon="arrow_down_16"
   label="상태변경"
 />
-<!-- The label is left side and The icon is right side. It is swapped by the class of 'kw-btn-reverse' -->
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-  icon="arrow_down_16|0 0 16 16"
+  icon="arrow_down_16"
   label="상태변경"
 />
 `;
 const excelCode = `
 <kw-btn
-  icon="excel_download_16|0 0 16 16"
+  icon="excel_download_16"
   class="kw-btn--excel mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
-  icon="excel_upload_16|0 0 16 16|0 0 16 16"
+  icon="excel_upload_16"
   class="kw-btn--excel"
   label="엑셀 업로드"
 />
 `;
 const excelCode02 = `
 <kw-btn
-  icon="excel_download_16|0 0 16 16"
+  icon="excel_download_16"
   class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
-  icon="excel_download_16|0 0 16 16"
+  icon="excel_download_16"
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 다운로드"
   disable
@@ -336,12 +343,12 @@ const excelCode02 = `
 `;
 const excelCode03 = `
 <kw-btn
-  icon="excel_upload_16|0 0 16 16|0 0 16 16"
+  icon="excel_upload_16"
   class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 업로드"
 />
 <kw-btn
-  icon="excel_upload_16|0 0 16 16|0 0 16 16"
+  icon="excel_upload_16"
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 업로드"
   disable
