@@ -43,7 +43,7 @@
           </template>
 
           <kw-btn
-            icon="excel_16|0 0 16 16"
+            icon="excel_16"
             class="kw-btn--excel kw-action-bar--separator"
             label="엑셀 다운로드"
           />
