@@ -40,7 +40,9 @@
     </kw-search>
 
     <div class="result-area">
-      <h3>조회결과</h3>
+      <h3>
+        조회결과<span class="kw-title-refrence">&#8251;필수(&#42;)를 제외한 항목만 변경 가능합니다.</span>
+      </h3>
       <kw-action-bar>
         <template #left>
           <div class="kw-action-bar--count kw-action-bar--separator">
