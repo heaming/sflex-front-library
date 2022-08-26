@@ -685,15 +685,16 @@
           Please, Ensure not to put size's class in all of the elements.<br>
           Recommend to add the size class as the high priority elements.<br>
           <b>※ The high priority elements</b><br>
-          1. search box<br>
+          1. select box<br>
           2. shorter size of elements in kw-search-item<br>
           - The other element which has no size class will be flexible as much as the rest size of kw-search-item<br>
         </li>
         <li>
           <em>The bigger column or the smaller column</em><br>
           - If the general size's different compared to
-          kw-form-item's size except of label's size, The elements should be
-          wrapped with the size class , row , items-center.<br>
+          kw-form-item's size except of label's size,<br>
+          The elements should be wrapped with the classes
+          ( <b>size's class , row , items-center </b> )<br>
           - Also add the element's size as much as required size<br>
           <b>※ The elements mean input, select, radio, checkbox and so on</b>
         </li>
@@ -1360,7 +1361,7 @@ const differentSize = `
   </kw-search-item>
 </kw-search-row>
 <kw-search-row>
-<!-- search-item: colspan="2" and width:600px. Shortest input's width:100px -->
+<!-- search-item: colspan="2" and width:600px. Shortest input's width:100px the other one is flexible-->
   <kw-search-item
     label="600px"
     colspan="2"
