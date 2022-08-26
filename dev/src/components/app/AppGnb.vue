@@ -66,5 +66,5 @@ const {
   gnbs,
   isSelected,
   updateSelected,
-} = useGnb(false);
+} = useGnb();
 </script>

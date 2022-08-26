@@ -46,8 +46,6 @@ const {
   expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
-  // eslint-disable-next-line no-unused-vars
-  selectedLnbKeys,
   hierarchyedLnbs,
   isSelected,
   toggleLnb,

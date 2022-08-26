@@ -99,7 +99,6 @@ export default () => {
     expandedKeys,
     selectedGnbKey,
     selectedLnbKey,
-    selectedLnbKeys,
     isSelected,
     toggleLnb,
     onUpdateSelected,
