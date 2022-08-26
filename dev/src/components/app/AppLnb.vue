@@ -44,7 +44,7 @@ import { useLnb } from '~lib';
 const { commit } = useStore();
 const { getRoutes, currentRoute } = useRouter();
 
-(function createDevGnbs() {
+(function createDevLnbs() {
   function fillIncompleteLnbs(nodes, index = 0) {
     if (index === nodes.length) return nodes;
 
@@ -71,12 +71,22 @@ const { getRoutes, currentRoute } = useRouter();
   commit('app/setLnbs', fillIncompleteLnbs(incompleteLnbs));
 }());
 
-watch(currentRoute, async (val) => {
-  if (val.meta.isGlobImport) {
-    commit('app/setSelectedGnbKey', val.name.split('/')[1]);
-    commit('app/setSelectedLnbKey', val.name);
+function updateSelectedGnbLnb(route) {
+  const { meta, name } = route;
+
+  if (meta.isGlobImport) {
+    commit('app/setSelectedGnbKey', name.split('/')[1]);
+    commit('app/setSelectedLnbKey', name);
   }
-});
+}
+
+(function initSelectedGnbLnb() {
+  const hash = window.location.hash.split('#')[1];
+  const route = getRoutes().find((v) => v.name === hash);
+  if (route) updateSelectedGnbLnb(route);
+}());
+
+watch(currentRoute, updateSelectedGnbLnb);
 
 const {
   lnbRef,
@@ -90,4 +100,5 @@ const {
   onUpdateSelected,
   onUpdateExpanded,
 } = useLnb();
+
 </script>
