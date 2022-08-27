@@ -12,7 +12,7 @@
       class="py20 pl10"
       :selected="selectedLnbKey"
       :expanded="expandedKeys"
-      :nodes="hierarchyedLnbs"
+      :nodes="hierarchyedLnbItems"
       icon="arrow_right_24"
       :duration="100"
       node-key="key"
@@ -45,7 +45,7 @@ const { commit } = useStore();
 const { getRoutes, currentRoute } = useRouter();
 
 (function createDevLnbs() {
-  function fillIncompleteLnbs(nodes, index = 0) {
+  function fillIncompleteLnbItems(nodes, index = 0) {
     if (index === nodes.length) return nodes;
 
     const splited = nodes[index].key.split('/');
@@ -60,15 +60,15 @@ const { getRoutes, currentRoute } = useRouter();
 
     if (hasParent) {
       const insNode = { key, label: splited[splited.length - 2] };
-      return fillIncompleteLnbs([...nodes.splice(0, index), insNode, ...nodes], index);
+      return fillIncompleteLnbItems([...nodes.splice(0, index), insNode, ...nodes], index);
     }
 
-    return fillIncompleteLnbs(nodes, index + 1);
+    return fillIncompleteLnbItems(nodes, index + 1);
   }
 
   const globImportedRoutes = getRoutes().filter((e) => e.meta.isGlobImport);
-  const incompleteLnbs = globImportedRoutes.map((v) => ({ gnbKey: v.name.split('/')[1], key: v.name, label: v.meta.label }));
-  commit('app/setLnbs', fillIncompleteLnbs(incompleteLnbs));
+  const incompleteLnbItems = globImportedRoutes.map((v) => ({ gnbKey: v.name.split('/')[1], key: v.name, label: v.meta.label }));
+  commit('app/setLnbItems', fillIncompleteLnbItems(incompleteLnbItems));
 }());
 
 function updateSelectedGnbLnb(route) {
@@ -94,7 +94,7 @@ const {
   expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
-  hierarchyedLnbs,
+  hierarchyedLnbItems,
   isSelected,
   toggleLnb,
   onUpdateSelected,

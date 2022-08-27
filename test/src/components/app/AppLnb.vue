@@ -12,7 +12,7 @@
       class="kw-lnb-tree"
       :selected="selectedLnbKey"
       :expanded="expandedKeys"
-      :nodes="hierarchyedLnbs"
+      :nodes="hierarchyedLnbItems"
       :duration="100"
       node-key="key"
       label-key="label"
@@ -46,7 +46,7 @@ const {
   expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
-  hierarchyedLnbs,
+  hierarchyedLnbItems,
   isSelected,
   toggleLnb,
   onUpdateSelected,

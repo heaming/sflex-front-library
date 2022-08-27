@@ -12,7 +12,7 @@
         </div>
         <div>
           <a
-            v-for="{key, label} of gnbs"
+            v-for="{key, label} of gnbItems"
             :key="key"
             href="javascript:void(0)"
             class="kw-gnb--link"
@@ -54,7 +54,7 @@
 import { useGnb } from '~kw-lib';
 
 const {
-  gnbs,
+  gnbItems,
   isSelected,
   updateSelected,
 } = useGnb();

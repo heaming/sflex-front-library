@@ -1,10 +1,10 @@
 const normalizeState = () => ({
   lnbExpanded: true,
 
-  gnbs: [],
+  gnbItems: [],
   selectedGnbKey: null,
 
-  lnbs: [],
+  lnbItems: [],
   selectedLnbKey: null,
 });
 
@@ -16,14 +16,14 @@ export default {
     setLnbExpanded(state, value) {
       state.lnbExpanded = value;
     },
-    setGnbs(state, gnbs) {
-      state.gnbs = gnbs;
+    setGnbItems(state, gnbItems) {
+      state.gnbItems = gnbItems;
     },
     setSelectedGnbKey(state, gnbKey) {
       state.selectedGnbKey = gnbKey;
     },
-    setLnbs(state, lnbs) {
-      state.lnbs = lnbs;
+    setLnbItems(state, lnbItems) {
+      state.lnbItems = lnbItems;
     },
     setSelectedLnbKey(state, lnbKey) {
       state.selectedLnbKey = lnbKey;
@@ -32,23 +32,23 @@ export default {
 
   getters: {
     getLnbExpanded: (state) => state.lnbExpanded,
-    getGnbs: (state) => state.gnbs,
+    getGnbItems: (state) => state.gnbItems,
     getSelectedGnbKey: (state) => state.selectedGnbKey,
-    getLnbs: (state) => state.lnbs,
+    getLnbItems: (state) => state.lnbItems,
     getSelectedLnbKey: (state) => state.selectedLnbKey,
   },
 
   actions: {
-    createGnbs({ commit }, apps) {
-      const normalizedGnbs = apps.map((v) => ({
+    createGnbItems({ commit }, apps) {
+      const normalizedGnbItems = apps.map((v) => ({
         key: v.key || v.applicationId,
         label: v.label || v.applicationName,
       }));
 
-      commit('setGnbs', normalizedGnbs);
+      commit('setGnbItems', normalizedGnbItems);
     },
-    createLnbs({ commit }, menus) {
-      const normalizedLnbs = menus.map((v) => ({
+    createLnbItems({ commit }, menus) {
+      const normalizedLnbItems = menus.map((v) => ({
         gnbKey: v.gnbKey || v.applicationId,
         key: v.key || v.menuUid,
         parentsKey: v.parentsKey || v.parentsMenuUid,
@@ -56,7 +56,7 @@ export default {
         depth: v.depth || v.menuLevel,
       }));
 
-      commit('setLnbs', normalizedLnbs);
+      commit('setLnbItems', normalizedLnbItems);
     },
   },
 };
