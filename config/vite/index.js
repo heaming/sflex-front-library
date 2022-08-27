@@ -7,6 +7,7 @@ const { default: visualizer } = require('rollup-plugin-visualizer');
 const autoImport = require('unplugin-auto-import/vite');
 const { resolve } = require('path');
 
+const isInternalContext = require('../utils/isInternalContext');
 const loadEnv = require('./loadEnv');
 const loadConfigAlias = require('./loadConfigAlias');
 const loadPages = require('./loadPages');
@@ -23,6 +24,7 @@ const normalizeConfig = (config = {}) => ({
   alias: config.alias || {},
   openVisualizer: config.openVisualizer === true,
   sourcemap: config.sourcemap === true,
+  optimizeDepsInclude: config.optimizeDepsInclude || [],
 });
 
 exports.defineConfig = (config) => {
@@ -32,6 +34,18 @@ exports.defineConfig = (config) => {
   return defineConfig(({ mode, command }) => {
     const isBuild = command === 'build';
     const pluginArgs = { mode, command, ...config };
+
+    const defaultOptimizeDepsInclude = isInternalContext() ? [] : [
+      'axios',
+      'dayjs',
+      'kw-lib',
+      'lodash-es',
+      'realgrid',
+      'vue',
+      'vue-i18n',
+      'vue-router',
+      'vuex',
+    ];
 
     return {
       plugins: [
@@ -118,6 +132,13 @@ exports.defineConfig = (config) => {
 
       build: {
         sourcemap: config.sourcemap,
+      },
+
+      optimizeDeps: {
+        include: [
+          ...config.optimizeDepsInclude,
+          ...defaultOptimizeDepsInclude,
+        ],
       },
     };
   });

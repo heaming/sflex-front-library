@@ -68,6 +68,12 @@ declare interface CustomConfigExport {
    * https://github.com/rollup/plugins/tree/master/packages/alias#entries
    */
   alias?: AliasOptions;
+
+  /**
+   * Force optimize listed dependencies (must be resolvable import paths,
+   * cannot be globs).
+   */
+  optimizeDepsInclude?: string[];
 }
 
 export function defineConfig(config: CustomConfigExport): UserConfigExport;
