@@ -1,4 +1,4 @@
-import { createApp } from '~lib';
+import { createApp } from '~kw-lib';
 import routes from '@/routes';
 import components from '@/components';
 import '@/css/app.scss';

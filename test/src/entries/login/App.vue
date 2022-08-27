@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { useSession, alert } from '~lib';
+import { useSession, alert } from '~kw-lib';
 
 const { login } = useSession();
 const { locale } = useI18n();

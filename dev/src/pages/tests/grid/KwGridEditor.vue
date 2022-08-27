@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { gridUtil, alert } from '~lib';
+import { gridUtil, alert } from '~kw-lib';
 import { createGridData } from '@/utils/data';
 
 export default {

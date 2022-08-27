@@ -21,7 +21,7 @@
 
 <script setup>
 // eslint-disable-next-line no-unused-vars
-import { alert } from '~lib';
+import { alert } from '~kw-lib';
 
 const grdRef = ref();
 

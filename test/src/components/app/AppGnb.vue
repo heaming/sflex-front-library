@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { useGnb } from '~lib';
+import { useGnb } from '~kw-lib';
 
 const {
   gnbs,

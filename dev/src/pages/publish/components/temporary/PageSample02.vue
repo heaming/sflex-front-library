@@ -106,7 +106,7 @@
 </template>
 
 <script setup>
-import { gridUtil } from '~lib';
+import { gridUtil } from '~kw-lib';
 
 const grdRef = ref();
 

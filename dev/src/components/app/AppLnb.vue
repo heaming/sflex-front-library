@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { useLnb } from '~lib';
+import { useLnb } from '~kw-lib';
 
 const { commit } = useStore();
 const { getRoutes, currentRoute } = useRouter();

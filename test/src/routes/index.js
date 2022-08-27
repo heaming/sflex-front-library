@@ -1,6 +1,6 @@
 import {
   createRoutesByGlobImport, registerPopupsByGlobImport,
-} from '~lib';
+} from '~kw-lib';
 
 const routesGlobImport = import.meta.glob('../modules/**/pages/*/*M.vue');
 const popupsGlobImport = import.meta.glob('../modules/**/pages/*/*P.vue');

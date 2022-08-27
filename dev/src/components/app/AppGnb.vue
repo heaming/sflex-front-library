@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { useGnb } from '~lib';
+import { useGnb } from '~kw-lib';
 
 const { getRoutes } = useRouter();
 const { commit } = useStore();

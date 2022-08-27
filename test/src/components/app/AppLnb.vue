@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { useLnb } from '~lib';
+import { useLnb } from '~kw-lib';
 
 const {
   lnbRef,
