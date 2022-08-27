@@ -46,7 +46,7 @@ exports.defineConfig = (config) => {
 
         quasar({
           autoImportComponentCase: 'kebab',
-          sassVariables: '@/css/variables.scss',
+          sassVariables: '~/css/variables.scss',
           ...config.quasarOptions,
         }),
 
