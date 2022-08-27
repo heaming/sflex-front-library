@@ -153,7 +153,7 @@
         <guide-code-view
           :code-value="[testCode,testData]"
           :lang="['vue','javascript']"
-          :multi="true"
+          multi
         />
       </q-card>
     </div>

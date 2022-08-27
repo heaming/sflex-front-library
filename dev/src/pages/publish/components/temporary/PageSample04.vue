@@ -8,7 +8,7 @@
 
     <div class="normal-area">
       <h3>거래처 정보</h3>
-      <kw-form cols="1">
+      <kw-form :cols="1">
         <kw-form-row>
           <kw-form-item
             label="이름"
@@ -78,7 +78,7 @@
         <guide-code-view
           :code-value="[sampleVueCode, sampleJsCode]"
           :lang="['vue','javascript']"
-          multi="true"
+          multi
         />
       </q-card>
     </div>

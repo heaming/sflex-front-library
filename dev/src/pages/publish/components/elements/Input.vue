@@ -198,7 +198,7 @@
       <q-card>
         <div>
           <div class="kw-guide-example">
-            <kw-form cols="2">
+            <kw-form :cols="2">
               <kw-form-row>
                 <kw-form-item label="input(flex/2columns)">
                   <kw-input
