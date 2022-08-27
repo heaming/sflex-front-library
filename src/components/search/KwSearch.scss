@@ -93,74 +93,6 @@
         align-items: center;
         width: 100%;
       }
-
-      %ratio {
-        display: flex;
-        width: calc(100% - 120px);
-      }
-
-      .kw-input-layout--ratio73 {
-        @extend %ratio;
-
-        label {
-          &:nth-child(1) {
-            width: 70%;
-          }
-
-          &:nth-child(2) {
-            width: calc(30% - 10px);
-            margin-left: 10px;
-          }
-        }
-      }
-
-      .kw-input-layout--ratio37 {
-        @extend %ratio;
-
-        label {
-          &:nth-child(1) {
-            width: 30%;
-          }
-
-          &:nth-child(2) {
-            width: calc(70% - 10px);
-            margin-left: 10px;
-          }
-        }
-      }
-
-      .kw-input-layout--ratio55 {
-        @extend %ratio;
-
-        label {
-          &:nth-child(1) {
-            width: 50%;
-          }
-
-          &:nth-child(2) {
-            width: 50%;
-            margin-left: 10px;
-          }
-        }
-      }
-    }
-
-    .kw-form-title {
-      width: 120px;
-      padding-right: 16px;
-      font-size: 14px;
-      line-height: 18px;
-      color: $black3;
-      word-break: break-word;
-
-      & + label {
-        @media (min-width: 0) {
-          width: auto;
-          min-width: 0;
-          max-width: 100%;
-          flex: 10000 1 0%;
-        }
-      }
     }
   }
 
@@ -173,6 +105,7 @@
     position: relative;
     padding-right: 12px;
     width: 120px;
+    min-width: 120px;
     max-height: 40px;
     font-size: 14px;
     line-height: 18px;
@@ -222,6 +155,21 @@
 
       .kw-form-title {
         max-width: 120px;
+        width: 120px;
+        padding-right: 16px;
+        font-size: 14px;
+        line-height: 18px;
+        color: $black3;
+        word-break: break-word;
+
+        & + label {
+          @media (min-width: 0) {
+            width: auto;
+            min-width: 0;
+            max-width: 100%;
+            flex: 10000 1 0%;
+          }
+        }
       }
     }
   }

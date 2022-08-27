@@ -672,65 +672,136 @@
         id="EssentialExample"
         class="kw-guide-title"
       >
-        Ratio input in kw-search-item
+        Different Sizes in kw-search-item
       </h3>
-      <p class="kw-guide-description">
-        Ratio in kw-search-item should be wrapped by the tag which is
-        included in ratio class(kw-input-ratio73,kw-input-ratio37,kw-input-ratio55)
-      </p>
+      <ol class="kw-guide-description">
+        <li>
+          <em>Half size</em><br>
+          - Add the nessesary elements in kw-search-item. It's half size and 10px between the elements.<br>
+        </li>
+        <li>
+          <em>Different size</em><br>
+          - Add the size class in one of the elements.<br>
+          Please, Ensure not to put size's class in all of the elements.<br>
+          Recommend to add the size class as the high priority elements.<br>
+          <b>※ The high priority elements</b><br>
+          1. select box<br>
+          2. shorter size of elements in kw-search-item<br>
+          - The other element which has no size class will be flexible as much as the rest size of kw-search-item<br>
+        </li>
+        <li>
+          <em>The bigger column or the smaller column</em><br>
+          - If the general size's different compared to
+          kw-form-item's size except of label's size,<br>
+          The elements should be wrapped with the classes
+          ( <b>size's class , row , items-center </b> )<br>
+          - Also add the element's size as much as required size<br>
+          <b>※ The elements mean input, select, radio, checkbox and so on</b>
+        </li>
+      </ol>
       <q-card>
         <div class="kw-guide-example">
           <kw-search>
             <kw-search-row>
               <kw-search-item
-                label="7:3"
+                label="Half size"
               >
-                <div class="kw-input-layout--ratio73">
-                  <kw-input
-                    name="input"
-                    rules="required"
-                    placeholder="입력해주세요"
-                  />
-                  <kw-input
-                    name="input"
-                    rules="required"
-                    placeholder="입력"
-                  />
-                </div>
+                <kw-input
+                  name="input"
+                  rules="required"
+                  placeholder="Half"
+                />
+                <kw-input
+                  name="input"
+                  rules="required"
+                  placeholder="Half"
+                />
               </kw-search-item>
               <kw-search-item
-                label="3:7"
+                label="Flexible"
               >
-                <div class="kw-input-layout--ratio37">
+                <kw-input
+                  name="input"
+                  rules="required"
+                  placeholder="Flexible"
+                />
+                <kw-select
+                  :model-value="['190px']"
+                  :options="['190px']"
+                  placeholder="190px"
+                  name="select"
+                  rules="required"
+                  class="w190"
+                />
+              </kw-search-item>
+              <kw-search-item
+                label="width:250"
+              >
+                <div class="row items-center w250">
                   <kw-input
                     name="input"
                     rules="required"
-                    placeholder="입력"
+                    placeholder="Flexible"
                   />
                   <kw-select
-                    :model-value="[]"
-                    :options="['A', 'B', 'C', 'D']"
+                    :model-value="['100px']"
+                    :options="['100px', 'B']"
                     placeholder="선택해 주세요."
                     name="select"
                     rules="required"
+                    class="w100"
                   />
                 </div>
               </kw-search-item>
+            </kw-search-row>
+            <kw-search-row>
               <kw-search-item
-                label="5:5"
+                label="600px"
+                colspan="2"
               >
-                <div class="kw-input-layout--ratio55">
+                <div class="row items-center w600">
                   <kw-input
                     name="input"
                     rules="required"
-                    placeholder="입력해주세요"
+                    placeholder="Flexible"
+                  />
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="Flexible"
                   />
                   <kw-select
-                    :model-value="[]"
-                    :options="['A', 'B', 'C', 'D']"
+                    :model-value="['400px']"
+                    :options="['400px']"
                     placeholder="선택해 주세요."
                     name="select"
                     rules="required"
+                    class="w400"
+                  />
+                </div>
+              </kw-search-item>
+            </kw-search-row>
+            <kw-search-row>
+              <kw-search-item
+                label="600px"
+                colspan="2"
+              >
+                <div class="row items-center w600">
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="100px"
+                    class="w100"
+                  />
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="Flexible"
+                  />
+                  <kw-input
+                    name="input"
+                    rules="required"
+                    placeholder="Flexible"
                   />
                 </div>
               </kw-search-item>
@@ -739,7 +810,7 @@
         </div>
 
         <guide-code-view
-          :code-value="inputRatio"
+          :code-value="differentSize"
           lang="vue"
         />
       </q-card>
@@ -1204,65 +1275,116 @@ const EssentialExample = `
 </kw-search>
 `;
 
-const inputRatio = `
-<kw-search>
-  <kw-search-row>
-    <!-- Ratio: 7 : 3  -->
-    <kw-search-item
-      label="7:3"
-    >
-      <div class="kw-input-layout--ratio73">
-        <kw-input
-          name="input"
-          rules="required"
-          placeholder="입력해주세요"
-        />
-        <kw-input
-          name="input"
-          rules="required"
-          placeholder="입력"
-        />
-      </div>
-    </kw-search-item>
-    <!-- Ratio: 3 : 7  -->
-    <kw-search-item
-      label="3:7"
-    >
-      <div class="kw-input-layout--ratio37">
-        <kw-input
-          name="input"
-          rules="required"
-          placeholder="입력"
-        />
-        <kw-select
-          :model-value="[]"
-          :options="['A', 'B', 'C', 'D']"
-          placeholder="선택해 주세요."
-          name="select"
-          rules="required"
-        />
-      </div>
-    </kw-search-item>
-    <!-- Ratio: 5 : 5  -->
-    <kw-search-item
-      label="5:5"
-    >
-      <div class="kw-input-layout--ratio55">
-        <kw-input
-          name="input"
-          rules="required"
-          placeholder="입력해주세요"
-        />
-        <kw-select
-          :model-value="[]"
-          :options="['A', 'B', 'C', 'D']"
-          placeholder="선택해 주세요."
-          name="select"
-          rules="required"
-        />
-      </div>
-    </kw-search-item>
-  </kw-search-row>
-</kw-search>
+const differentSize = `
+
+<kw-search-row>
+  <!-- half sizes  -->
+  <kw-search-item
+    label="Half sizes"
+  >
+    <kw-input
+      name="input"
+      rules="required"
+      placeholder="Half"
+    />
+    <kw-input
+      name="input"
+      rules="required"
+      placeholder="Half"
+    />
+  </kw-search-item>
+  <!-- one of the elements has 'width' -->
+  <kw-search-item
+    label="Flexible"
+  >
+    <kw-input
+      name="input"
+      rules="required"
+      placeholder="Flexible"
+    />
+    <kw-select
+      :model-value="['190px']"
+      :options="['190px']"
+      placeholder="190px"
+      name="select"
+      rules="required"
+      class="w190"
+    />
+  </kw-search-item>
+  <!-- search-item's width:250. Select's width : 100px -->
+  <kw-search-item
+    label="width:250"
+  >
+    <div class="row items-center w250">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="Flexible"
+      />
+      <kw-select
+        :model-value="['100px']"
+        :options="['100px', 'B']"
+        placeholder="선택해 주세요."
+        name="select"
+        rules="required"
+        class="w100"
+      />
+    </div>
+  </kw-search-item>
+</kw-search-row>
+<kw-search-row>
+<!-- search-item: colspan="2" and width:600px. select's width:400px -->
+  <kw-search-item
+    label="600px"
+    colspan="2"
+  >
+    <div class="row items-center w600">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="Flexible"
+      />
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="Flexible"
+      />
+      <kw-select
+        :model-value="['400px']"
+        :options="['400px']"
+        placeholder="선택해 주세요."
+        name="select"
+        rules="required"
+        class="w400"
+      />
+    </div>
+  </kw-search-item>
+</kw-search-row>
+<kw-search-row>
+<!-- search-item: colspan="2" and width:600px. Shortest input's width:100px the other one is flexible-->
+  <kw-search-item
+    label="600px"
+    colspan="2"
+  >
+    <div class="row items-center w600">
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="100px"
+        class="w100"
+      />
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="Flexible"
+      />
+      <kw-input
+        name="input"
+        rules="required"
+        placeholder="Flexible"
+      />
+    </div>
+  </kw-search-item>
+</kw-search-row>
 `;
 </script>

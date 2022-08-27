@@ -193,7 +193,7 @@
       <p class="kw-guide-description">
         If you need the case of input with hypen,
         kindly ask to add the <b>( ex: '&lt;span&gt;-&lt;/span&gt;')</b> between input tag. <br>
-        Please find the detail abouth input width in 'collections/searchform' section.
+        Please find the detail about input width in 'collections/searchform' section.
       </p>
       <q-card>
         <div>
