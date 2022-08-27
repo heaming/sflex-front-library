@@ -26,7 +26,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: url(~assets/images/radio_off.svg) no-repeat center;
+      background: url(~@assets/images/radio_off.svg) no-repeat center;
       background-size: 22px;
 
       path {
@@ -35,19 +35,19 @@
     }
 
     &.q-radio__inner--truthy .q-radio__bg {
-      background: url(~assets/images/radio_on.svg) no-repeat center;
+      background: url(~@assets/images/radio_on.svg) no-repeat center;
       background-size: 22px;
     }
   }
 
   &.disabled {
     .q-radio__bg {
-      background: url(~assets/images/radio_disable.svg) no-repeat center;
+      background: url(~@assets/images/radio_disable.svg) no-repeat center;
       background-size: 22px;
     }
 
     .q-radio__inner--truthy .q-radio__bg {
-      background: url(~assets/images/radio_selected_disable.svg) no-repeat center;
+      background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
       background-size: 22px;
     }
 
@@ -66,24 +66,24 @@
     & .q-radio__bg {
       width: 18px;
       height: 18px;
-      background: url(~assets/images/radio_off.svg) no-repeat center;
+      background: url(~@assets/images/radio_off.svg) no-repeat center;
       background-size: 18px;
     }
 
     &.q-radio__inner--truthy .q-radio__bg {
-      background: url(~assets/images/radio_on.svg) no-repeat center;
+      background: url(~@assets/images/radio_on.svg) no-repeat center;
       background-size: 18px;
     }
   }
 
   &.disabled {
     .q-radio__bg {
-      background: url(~assets/images/radio_disable.svg) no-repeat center;
+      background: url(~@assets/images/radio_disable.svg) no-repeat center;
       background-size: 18px;
     }
 
     .q-radio__inner--truthy .q-radio__bg {
-      background: url(~assets/images/radio_selected_disable.svg) no-repeat center;
+      background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
       background-size: 18px;
     }
   }

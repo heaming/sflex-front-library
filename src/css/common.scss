@@ -2,19 +2,19 @@
 @font-face {
   font-family: "Noto Sans KR";
   font-weight: 700;
-  src: url("~assets/fonts/NotoSansKR-Bold.woff2") format("woff2");
+  src: url("~@assets/fonts/NotoSansKR-Bold.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Noto Sans KR";
   font-weight: 500;
-  src: url("~assets/fonts/NotoSansKR-Medium.woff2") format("woff2");
+  src: url("~@assets/fonts/NotoSansKR-Medium.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Noto Sans KR";
   font-weight: 400;
-  src: url("~assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
+  src: url("~@assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
 }
 
 #app > .q-layout { min-width: 1900px; }
@@ -128,7 +128,7 @@ textarea::placeholder {
     height: 74px;
     top: 50%;
     transform: translateY(-50%);
-    background: url(~assets/images/lnb_back.png) no-repeat center;
+    background: url(~@assets/images/lnb_back.png) no-repeat center;
     border-radius: 0;
     z-index: 990;
     padding: 0;
@@ -197,7 +197,7 @@ textarea::placeholder {
           bottom: 0;
           text-indent: 0;
           line-height: 1.5;
-          background: url(~assets/icons/arrow_down_16.svg) no-repeat center center;
+          background: url(~@assets/icons/arrow_down_16.svg) no-repeat center center;
         }
 
         &.q-tree__arrow.q-tree__arrow--rotate {

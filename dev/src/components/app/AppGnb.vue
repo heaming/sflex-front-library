@@ -5,7 +5,7 @@
         <div class="item">
           <q-avatar>
             <img
-              src="~~assets/images/logo_redpen.svg"
+              src="~~@assets/images/logo_redpen.svg"
               alt="KSS빨간펜"
             >
           </q-avatar>

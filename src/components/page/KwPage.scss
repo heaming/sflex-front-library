@@ -34,7 +34,7 @@
 
   &-btn_back {
     color: rgb(255 255 255 / 0%);
-    background: url(~assets/images/ic_arrow_left_breadcrumbs_24.svg) no-repeat center center;
+    background: url(~@assets/images/ic_arrow_left_breadcrumbs_24.svg) no-repeat center center;
     width: 24px;
     height: 24px;
     margin-right: 6px;
@@ -69,7 +69,7 @@
 
     &__separator {
       color: rgb(255 255 255 / 0%);
-      background: url(~assets/images/ic_step_arrow_16.svg) no-repeat center center;
+      background: url(~@assets/images/ic_step_arrow_16.svg) no-repeat center center;
       width: 16px;
       height: 16px;
     }
@@ -79,7 +79,7 @@
     width: 16px;
     height: 16px;
     color: rgb(255 255 255 / 0%);
-    background: url(~assets/images/ic_info_default_16.svg) no-repeat center center;
+    background: url(~@assets/images/ic_info_default_16.svg) no-repeat center center;
     background-size: 16px;
     margin-left: 4px;
     border: 0;
@@ -87,14 +87,14 @@
 
   .kw-page-header-favorite {
     color: rgb(255 255 255 / 0%);
-    background: url(~assets/images/ic_bookmark_default_16.svg) no-repeat center 1px;
+    background: url(~@assets/images/ic_bookmark_default_16.svg) no-repeat center 1px;
     width: 16px;
     height: 24px;
     margin-right: 6px;
     border: 0;
 
     &.kw-page-header-favorite {
-      background: url(~assets/images/ic_bookmark_on_16.svg) no-repeat center 1px;
+      background: url(~@assets/images/ic_bookmark_on_16.svg) no-repeat center 1px;
     }
   }
 }

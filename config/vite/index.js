@@ -107,8 +107,8 @@ exports.defineConfig = (config) => {
       resolve: {
         alias: {
           ...config.alias,
-          '~assets': resolve(__dirname, '../../src/assets'),
-          '~css': resolve(__dirname, '../../src/css'),
+          '~@assets': resolve(__dirname, '../../src/assets'),
+          '~@css': resolve(__dirname, '../../src/css'),
         },
       },
 
