@@ -195,6 +195,7 @@
             </kw-search-item>
             <kw-search-item label="다중선택 샘플 (readonly)">
               <kw-select
+                :model-value="[]"
                 :options="['A', 'B', 'C', 'D']"
                 multiple
                 readonly
@@ -202,6 +203,7 @@
             </kw-search-item>
             <kw-search-item label="다중선택 샘플 (disable)">
               <kw-select
+                :model-value="[]"
                 :options="['A', 'B', 'C', 'D']"
                 multiple
                 disable="disable"
@@ -507,6 +509,7 @@
                 :colspan="2"
               >
                 <kw-select
+                  :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
                 />
@@ -563,7 +566,9 @@
                 label="DateRangePicker"
                 required
               >
-                <kw-date-range-picker />
+                <kw-date-range-picker
+                  rules="date_range_required|date_range_months:1"
+                />
               </kw-search-item>
               <kw-search-item
                 label="Date Picker"
@@ -789,6 +794,7 @@ const searchCode = `
     </kw-search-item>
     <kw-search-item label="다중선택 샘플 (readonly)">
       <kw-select
+        :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
         readonly
@@ -796,6 +802,7 @@ const searchCode = `
     </kw-search-item>
     <kw-search-item label="다중선택 샘플 (disable)">
       <kw-select
+        :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
         disable="disable"
@@ -872,13 +879,17 @@ const searchCode = `
 
   <kw-search-row>
     <kw-search-item label="DateRangePicker">
-      <kw-date-range-picker />
+      <kw-date-range-picker
+        rules="date_range_required|date_range_months:1"
+      />
     </kw-search-item>
     <kw-search-item
       label="DateRangePicker"
       :cols="2"
     >
-      <kw-date-range-picker />
+      <kw-date-range-picker
+        rules="date_range_required|date_range_months:1"
+      />
     </kw-search-item>
   </kw-search-row>
 </kw-search>
@@ -1060,6 +1071,7 @@ const theColumnsOfKwFormItemCode = `
       :colspan="2"
     >
       <kw-select
+        :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
       />
@@ -1098,7 +1110,9 @@ const EssentialExample = `
       label="DateRangePicker"
       required
     >
-      <kw-date-range-picker />
+      <kw-date-range-picker
+        rules="date_range_required|date_range_months:1"
+      />
     </kw-search-item>
     <kw-search-item
       label="Date Picker"

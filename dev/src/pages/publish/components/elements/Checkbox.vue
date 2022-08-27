@@ -45,12 +45,10 @@
             </td>
             <td>
               :model-value="[]"<br>
-              name="checkbox"<br>
               rules="required"<br>
             </td>
             <td>
               Required, Default : "[]"<br>
-              Required, Default : "checkbox"<br>
               Add this when Essential Case<br>
             </td>
           </tr>
@@ -88,7 +86,6 @@
             </td>
             <td>
               :model-value="[]"<br>
-              name="checkboxOptionGroup"<br>
               rules="required"<br>
               type="checkbox"<br>
               :options="['A', 'B', 'C', 'D']"<br>
@@ -96,7 +93,6 @@
             </td>
             <td>
               Required, Default : "[]" <br>
-              Required, Default : "checkboxOptionGroup" <br>
               Add this when Essential Case <br>
               Required, Default : "checkbox" <br>
               Add the option lists in [ ]<br>
@@ -139,7 +135,6 @@
               <kw-form-item label="Checkbox">
                 <kw-field
                   :model-value="[]"
-                  name="checkbox"
                 >
                   <template #default="{ field }">
                     <kw-checkbox
@@ -177,7 +172,6 @@
               <kw-form-item label="Checkbox">
                 <kw-field
                   :model-value="[]"
-                  name="checkbox"
                 >
                   <template #default="{ field }">
                     <kw-checkbox
@@ -216,7 +210,6 @@
               <kw-form-item label="Checkbox">
                 <kw-field
                   :model-value="[]"
-                  name="checkbox"
                 >
                   <template #default="{ field }">
                     <kw-checkbox
@@ -254,7 +247,6 @@
               <kw-form-item label="OptionGroup">
                 <kw-option-group
                   :model-value="[]"
-                  name="checkboxOptionGroup"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -286,7 +278,6 @@
               <kw-form-item label="OptionGroup (disable)">
                 <kw-option-group
                   :model-value="[]"
-                  name="checkboxOptionGroup"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                   disable
@@ -319,7 +310,6 @@
               <kw-form-item label="OptionGroup (readonly)">
                 <kw-option-group
                   :model-value="[]"
-                  name="checkboxOptionGroup"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                   disable
@@ -356,7 +346,6 @@
               >
                 <kw-option-group
                   :model-value="[]"
-                  name="checkboxOptionGroup"
                   type="checkbox"
                   :options="['A', 'B', 'C', 'D']"
                   rules="required"
@@ -381,7 +370,6 @@ const checkboxDefaultCode = `
     <kw-form-item label="Checkbox">
       <kw-field
         :model-value="[]"
-        name="checkbox"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -401,7 +389,6 @@ const checkboxDefaultCode = `
     <kw-search-item label="Checkbox">
       <kw-field
         :model-value="[]"
-        name="checkbox"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -422,7 +409,6 @@ const checkboxDisableCode = `
     <kw-form-item label="Checkbox">
       <kw-field
         :model-value="[]"
-        name="checkbox"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -443,7 +429,6 @@ const checkboxDisableCode = `
     <kw-search-item label="Checkbox">
       <kw-field
         :model-value="[]"
-        name="checkbox"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -465,7 +450,6 @@ const checkboxReadonlyCode = `
     <kw-form-item label="Checkbox">
       <kw-field
         :model-value="[]"
-        name="checkbox"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -486,7 +470,6 @@ const checkboxReadonlyCode = `
     <kw-search-item label="Checkbox">
       <kw-field
         :model-value="[]"
-        name="checkbox"
       >
         <template #default="{ field }">
           <kw-checkbox
@@ -508,7 +491,6 @@ const groupCheckboxDefaultCode = `
     <kw-form-item label="OptionGroup">
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -522,7 +504,6 @@ const groupCheckboxDefaultCode = `
     <kw-search-item label="OptionGroup">
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -537,7 +518,6 @@ const groupCheckboxDisableCode = `
     <kw-form-item label="OptionGroup (disable)">
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -552,7 +532,6 @@ const groupCheckboxDisableCode = `
     <kw-search-item label="OptionGroup (disable)">
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -568,7 +547,6 @@ const groupCheckboxReadonlyCode = `
     <kw-form-item label="OptionGroup (readonly)">
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -583,7 +561,6 @@ const groupCheckboxReadonlyCode = `
     <kw-search-item label="OptionGroup (readonly)">
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -602,7 +579,6 @@ const essentialCode = `
     >
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         rules="required"
@@ -620,7 +596,6 @@ const essentialCode = `
     >
       <kw-option-group
         :model-value="[]"
-        name="checkboxOptionGroup"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         rules="required"
