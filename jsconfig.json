@@ -9,7 +9,7 @@
       "~kw-lib": [
         "src/index"
       ],
-      "@/*": [
+      "~dev/*": [
         "dev/src/*"
       ]
     },

@@ -15,7 +15,7 @@
 
 <script>
 import { gridUtil } from '~kw-lib';
-import { createGridData } from '@/utils/data';
+import { createGridData } from '~dev/utils/data';
 
 export default {
   setup() {

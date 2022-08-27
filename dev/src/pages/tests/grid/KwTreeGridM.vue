@@ -33,7 +33,7 @@
 
 <script>
 import { gridUtil, alert } from '~kw-lib';
-import { createTreeData } from '@/utils/data';
+import { createTreeData } from '~dev/utils/data';
 
 export default {
   setup() {
