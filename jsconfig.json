@@ -11,6 +11,9 @@
       ],
       "~dev/*": [
         "dev/src/*"
+      ],
+      "~test/*": [
+        "test/src/*"
       ]
     },
     "lib": [
