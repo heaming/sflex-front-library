@@ -19,11 +19,12 @@ const normalizeConfig = (config = {}) => ({
   pagesDir: config.pagesDir || 'src/entries',
   configDir: config.configDir || context,
   envDir: config.envDir || context,
-  quasarOptions: config.quasarOptions || {},
+  quasarSassVariables: config.quasarSassVariables || '~/css/variables.scss',
   define: config.define || {},
   alias: config.alias || {},
   openVisualizer: config.openVisualizer === true,
-  sourcemap: config.sourcemap === true,
+  cssDevSourcemap: config.cssDevSourcemap === true,
+  buildSourcemap: config.buildSourcemap === true,
   optimizeDepsInclude: config.optimizeDepsInclude || [],
 });
 
@@ -60,8 +61,7 @@ exports.defineConfig = (config) => {
 
         quasar({
           autoImportComponentCase: 'kebab',
-          sassVariables: '~/css/variables.scss',
-          ...config.quasarOptions,
+          sassVariables: config.quasarSassVariables,
         }),
 
         eslint(),
@@ -127,11 +127,11 @@ exports.defineConfig = (config) => {
       },
 
       css: {
-        devSourcemap: config.sourcemap,
+        devSourcemap: config.cssDevSourcemap,
       },
 
       build: {
-        sourcemap: config.sourcemap,
+        sourcemap: config.buildSourcemap,
       },
 
       optimizeDeps: {

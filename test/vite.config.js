@@ -2,8 +2,6 @@ import { defineConfig } from '../config/vite';
 
 export default defineConfig({
   configDir: '../',
+  quasarSassVariables: '~test/css/variables.scss',
   openVisualizer: false,
-  quasarOptions: {
-    sassVariables: '~test/css/variables.scss',
-  },
 });
