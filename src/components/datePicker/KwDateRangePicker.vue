@@ -17,7 +17,7 @@
         :unmasked-value="unmaskedValue"
         :min-date="minDate"
         :max-date="maxDate"
-        :before-show-day="beforeShowDay"
+        :before-show="beforeShow"
         hide-bottom-space
         :placeholder="fromPlaceholder"
         @update:model-value="onChangeDate($event, 0)"
@@ -31,7 +31,7 @@
         :unmasked-value="unmaskedValue"
         :min-date="minDate"
         :max-date="maxDate"
-        :before-show-day="beforeShowDay"
+        :before-show="beforeShow"
         hide-bottom-space
         :placeholder="toPlaceholder"
         @update:model-value="onChangeDate($event, 1)"
@@ -92,7 +92,7 @@ export default {
       type: String,
       default: undefined,
     },
-    beforeShowDay: {
+    beforeShow: {
       type: Function,
       default: undefined,
     },
