@@ -377,6 +377,47 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        class="kw-guide-title"
+      >
+        1 or 2 Columns in 1 row
+      </h3>
+      <p class="kw-guide-description">
+        If there is only one row in the searchForm and there are only 1 or 2 columns in it
+        , the button should be on the right side. Because it looks too empty.<br>
+        In this case,
+        <ol>
+          <li>define cols as 4 by default.</li>
+          <li>add 'kw-search--onerow' class</li>
+        </ol>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-search
+            :cols="4"
+            class="kw-search--onerow"
+          >
+            <kw-search-row>
+              <kw-search-item label="colspan">
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+              </kw-search-item>
+              <kw-search-item label="colspan">
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+        </div>
+        <guide-code-view
+          :code-value="theOneRowCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="columnsFormItem"
         class="kw-guide-title"
       >
@@ -1248,5 +1289,25 @@ const differentSize = `
     </div>
   </kw-search-item>
 </kw-search-row>
+`;
+
+const theOneRowCode = `
+<kw-search
+  :cols="4"
+  class="kw-search--onerow"
+>
+  <kw-search-row>
+    <kw-search-item label="colspan">
+      <kw-input
+        placeholder="입력해주세요"
+      />
+    </kw-search-item>
+    <kw-search-item label="colspan">
+      <kw-input
+        placeholder="입력해주세요"
+      />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 </script>
