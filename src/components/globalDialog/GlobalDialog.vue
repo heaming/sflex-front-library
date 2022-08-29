@@ -1,41 +1,37 @@
 <template>
   <q-dialog
     ref="dialogRef"
-    class="global-dialog"
     :model-value="isActive"
     :transition-duration="$g.libConfig.DIALOG_TRANSITION_DURATION"
+    square
     persistent
     no-shake
     :no-refocus="dialog?.refocus === false"
     @keydown.esc="onClick(false)"
   >
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">
-          {{ dialog.title }}
-        </div>
+    <q-card class="global-dialog">
+      <q-card-section class="global-dialog__content">
+        <p>
+          {{ dialog.message }}
+        </p>
+        <p v-if="dialog.subMessage">
+          {{ dialog.subMessage }}
+        </p>
       </q-card-section>
-
-      <q-card-section class="q-pt-none">
-        {{ dialog.message }}
-      </q-card-section>
-
-      <q-card-actions align="right">
-        <q-btn
+      <q-card-section class="global-dialog__action">
+        <kw-btn
           v-if="dialog.isConfirm"
-          flat
-          :label="$t('MSG_BTN_NO', null, '아니오')"
-          color="primary"
+          class="kw-btn--h36 kw-btn--negative"
+          :label="$t('MSG_BTN_NO', null, '취소')"
           @click="onClick(false)"
         />
-        <q-btn
+        <kw-btn
           ref="okRef"
-          flat
-          :label="dialog.isConfirm ? $t('MSG_BTN_YES', null, '예') : $t('MSG_BTN_CONFIRM', null, '확인')"
-          color="primary"
+          class="kw-btn--h36"
+          :label="$t('MSG_BTN_CONFIRM', null, '확인')"
           @click="onClick(true)"
         />
-      </q-card-actions>
+      </q-card-section>
     </q-card>
   </q-dialog>
 </template>
