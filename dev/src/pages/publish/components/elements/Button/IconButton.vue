@@ -40,8 +40,8 @@
             <td>
               Add the class of 'kw-btn-reverse'
               when the icon is located in right side and text is located in left side. <br>
-              Add this attribute in need <br>
-              Add this attribute in need <br>
+              Add this attribute when necessary <br>
+              Add this attribute when necessary <br>
             </td>
           </tr>
         </tbody>
