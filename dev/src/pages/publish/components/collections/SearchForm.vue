@@ -9,7 +9,7 @@
       It is only for "search form". form is diffrent with form. Go to the reference page for form <br>
       (The roots for the Search form: components/collections/form)
     </p>
-    <guide-history
+    <guide-history-view
       :items="guideHistory"
     />
     <div class="kw-guide-section">
@@ -795,6 +795,7 @@
 </template>
 
 <script setup>
+
 const searchCode = `
 <kw-search :cols="4">
   <kw-search-row>
