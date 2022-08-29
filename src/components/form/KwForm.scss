@@ -1,11 +1,11 @@
 .kw-form {
-  .q-field {
-    &__inner {
+  .q-field:not(.kw-input) {
+    .q-field__inner {
       display: flex;
       align-items: center;
     }
 
-    &__control {
+    .q-field__control {
       align-items: center;
       width: 100%;
 
@@ -19,14 +19,14 @@
       }
     }
 
-    &__bottom--animated {
+    .q-field__bottom--animated {
       transform: translateY(0) !important;
       bottom: -16px;
       font-size: 14px;
       color: $error;
     }
 
-    &__messages {
+    .q-field__messages {
       & > div {
         white-space: nowrap;
         overflow: hidden;
@@ -34,11 +34,11 @@
       }
     }
 
-    &--disabled .q-field__control {
+    .q-field--disabled .q-field__control {
       div { opacity: 1 !important; }
     }
 
-    &--auto-height.q-field--labeled {
+    .q-field--auto-height.q-field--labeled {
       .q-field__native {
         padding-bottom: 0;
       }
@@ -48,7 +48,7 @@
       }
     }
 
-    &--with-bottom {
+    .q-field--with-bottom {
       padding-bottom: 0;
     }
   }

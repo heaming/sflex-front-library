@@ -1,60 +1,21 @@
 .kw-input {
-  // 인풋 포커스
-  &.q-field--focused {
-    .q-field__native {
-      border-color: $black1;
-    }
-  }
-
-  // 인풋 에러
-  &.q-field--error {
-    .q-field__native {
-      border-color: $error;
-
-      &:hover {
-        border-color: $error !important;
+  // default
+  &.q-field--outlined {
+    &.q-textarea {
+      .q-field__control {
+        min-height: 40px;
+        height: auto;
       }
-    }
 
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
+      .q-field__control-container {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
       .q-field__native {
-        border-color: $line-stroke;
+        min-height: 40px;
+        padding: 10px 0;
       }
     }
   }
-
-  // 인풋 높이
-  .q-field__control {
-    height: 40px;
-  }
-
-  .q-field__native {
-    padding: 8px 12px;
-    border: 1px solid $line-stroke;
-    font-size: 16px;
-    color: $black1;
-    font-weight: 500;
-
-    &:hover:not(:disabled,:read-only) {
-      border-color: $black1;
-    }
-
-    &:read-only,
-    &:disabled {
-      background-color: $line-bg;
-      color: $black3;
-    }
-
-    &:read-only::placeholder,
-    &:disabled::placeholder {
-      font-size: 0;
-    }
-  }
-}
-
-.kw-text-counter {
-  padding-left: 8px;
-  font-size: 12px;
-  color: $placeholder;
 }

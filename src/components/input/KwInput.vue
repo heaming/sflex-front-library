@@ -2,7 +2,8 @@
   <q-input
     ref="inputRef"
     :model-value="value"
-    class="kw-input"
+    class="kw-field kw-input"
+    outlined
     :label="$q.platform.is.desktop ? null : label"
     :error="invalid"
     :error-message="invalidMessage"
