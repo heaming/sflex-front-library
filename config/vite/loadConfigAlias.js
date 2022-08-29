@@ -2,8 +2,8 @@ const { resolve } = require('path');
 const getConfigAlias = require('../utils/getConfigAlias');
 
 const reservedAliasKeys = [
-  '~assets',
-  '~css',
+  '~@assets',
+  '~@css',
 ];
 
 const context = process.cwd();

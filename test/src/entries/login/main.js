@@ -1,5 +1,5 @@
-import { createApp } from '~lib';
-import '../../css/app.scss';
+import { createApp } from '~kw-lib';
+import '~test/css/app.scss';
 
 import App from './App.vue';
 

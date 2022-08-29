@@ -164,7 +164,7 @@
           <guide-code-view
             :code-value="[testCode1,testData1]"
             :lang="['vue','javascript']"
-            multi="true"
+            multi
           />
         </div>
       </q-card>
@@ -188,7 +188,7 @@
           <guide-code-view
             :code-value="[testCode2,testData2]"
             :lang="['vue','javascript']"
-            multi="true"
+            multi
           />
         </div>
       </q-card>
@@ -212,7 +212,7 @@
           <guide-code-view
             :code-value="[testCode3,testDate3]"
             :lang="['vue','javascript']"
-            multi="true"
+            multi
           />
         </div>
       </q-card>

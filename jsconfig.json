@@ -6,11 +6,14 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "paths": {
-      "@/*": [
+      "~kw-lib": [
+        "src/index"
+      ],
+      "~dev/*": [
         "dev/src/*"
       ],
-      "~lib": [
-        "src/index"
+      "~test/*": [
+        "test/src/*"
       ]
     },
     "lib": [

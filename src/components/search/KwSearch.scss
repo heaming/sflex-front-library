@@ -204,7 +204,7 @@
           top: 50%;
           right: 0;
           transform: translateY(-50%);
-          background: url(~assets/images/ic_arrow_b_16.svg) no-repeat center;
+          background: url(~@assets/images/ic_arrow_b_16.svg) no-repeat center;
           background-size: 16px;
           transition: transform 0.28s;
         }
@@ -359,24 +359,24 @@
       position: absolute;
       width: 18px;
       height: 18px;
-      background: url(~assets/images/checkbox_off.svg) no-repeat center;
+      background: url(~@assets/images/checkbox_off.svg) no-repeat center;
     }
 
     &.q-checkbox__inner--truthy .q-checkbox__bg,
     &.q-checkbox__inner--indet .q-checkbox__bg {
-      background: url(~assets/images/checkbox_on.svg) no-repeat center;
+      background: url(~@assets/images/checkbox_on.svg) no-repeat center;
       background-size: 18px;
     }
   }
 
   .q-checkbox.disabled {
     .q-checkbox__bg {
-      background: url(~assets/images/checkbox_disable.svg) no-repeat center;
+      background: url(~@assets/images/checkbox_disable.svg) no-repeat center;
       background-size: 18px;
     }
 
     .q-checkbox__inner--truthy .q-checkbox__bg {
-      background: url(~assets/images/checkbox_selected_disable.svg) no-repeat center;
+      background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
       background-size: 18px;
     }
   }
@@ -390,24 +390,24 @@
     & .q-radio__bg {
       width: 18px;
       height: 18px;
-      background: url(~assets/images/radio_off.svg) no-repeat center;
+      background: url(~@assets/images/radio_off.svg) no-repeat center;
       background-size: 18px;
     }
 
     &.q-radio__inner--truthy .q-radio__bg {
-      background: url(~assets/images/radio_on.svg) no-repeat center;
+      background: url(~@assets/images/radio_on.svg) no-repeat center;
       background-size: 18px;
     }
   }
 
   .q-radio.disabled {
     .q-radio__bg {
-      background: url(~assets/images/radio_disable.svg) no-repeat center;
+      background: url(~@assets/images/radio_disable.svg) no-repeat center;
       background-size: 18px;
     }
 
     .q-radio__inner--truthy .q-radio__bg {
-      background: url(~assets/images/radio_selected_disable.svg) no-repeat center;
+      background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
       background-size: 18px;
     }
   }

@@ -110,7 +110,7 @@
         <guide-code-view
           :code-value="[sampleVueCode, sampleJsCode]"
           :lang="['vue','javascript']"
-          multi="true"
+          multi
         />
       </q-card>
     </div>
@@ -288,7 +288,7 @@ const sampleVueCode = `
       <guide-code-view
         :code-value="[sampleVueCode, sampleJsCode]"
         :lang="['vue','javascript']"
-        multi="true"
+        multi
       />
     </q-card>
   </div>

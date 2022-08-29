@@ -7,33 +7,36 @@
     :error-message="invalidMessage"
     no-error-icon
   >
-    <kw-date-picker
-      ref="inputRef"
-      :model-value="value[0]"
-      :type="type"
-      :readonly="readonly"
-      :disable="disable"
-      :unmasked-value="unmaskedValue"
-      :min-date="minDate"
-      :max-date="maxDate"
-      :before-show-day="beforeShowDay"
-      hide-bottom-space
-      :placeholder="fromPlaceholder"
-      @update:model-value="onChangeDate($event, 0)"
-    /> <span>~</span>
-    <kw-date-picker
-      :model-value="value[1]"
-      :type="type"
-      :readonly="readonly"
-      :disable="disable"
-      :unmasked-value="unmaskedValue"
-      :min-date="minDate"
-      :max-date="maxDate"
-      :before-show-day="beforeShowDay"
-      hide-bottom-space
-      :placeholder="toPlaceholder"
-      @update:model-value="onChangeDate($event, 1)"
-    />
+    <template #control>
+      <kw-date-picker
+        ref="inputRef"
+        :model-value="value[0]"
+        :type="type"
+        :readonly="readonly"
+        :disable="disable"
+        :unmasked-value="unmaskedValue"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :before-show-day="beforeShowDay"
+        hide-bottom-space
+        :placeholder="fromPlaceholder"
+        @update:model-value="onChangeDate($event, 0)"
+      />
+      <span>~</span>
+      <kw-date-picker
+        :model-value="value[1]"
+        :type="type"
+        :readonly="readonly"
+        :disable="disable"
+        :unmasked-value="unmaskedValue"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :before-show-day="beforeShowDay"
+        hide-bottom-space
+        :placeholder="toPlaceholder"
+        @update:model-value="onChangeDate($event, 1)"
+      />
+    </template>
   </q-field>
 </template>
 

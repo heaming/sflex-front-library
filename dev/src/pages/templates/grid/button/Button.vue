@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { alert } from '~lib';
+import { alert } from '~kw-lib';
 
 const grdRef = ref();
 

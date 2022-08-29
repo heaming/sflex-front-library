@@ -98,7 +98,7 @@
         <guide-code-view
           :code-value="[sampleVueCode, sampleJsCode]"
           :lang="['vue','javascript']"
-          multi="true"
+          multi
         />
       </q-card>
     </div>
@@ -106,7 +106,7 @@
 </template>
 
 <script setup>
-import { gridUtil } from '~lib';
+import { gridUtil } from '~kw-lib';
 
 const grdRef = ref();
 

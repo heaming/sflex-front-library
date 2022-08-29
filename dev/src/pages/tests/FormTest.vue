@@ -250,7 +250,7 @@
 </template>
 
 <script setup>
-import { alert } from '~lib';
+import { alert } from '~kw-lib';
 
 const formKey = ref(0);
 const formRef = ref();

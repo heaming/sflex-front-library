@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { gridUtil } from '~lib';
-import { createGridData } from '@/utils/data';
+import { gridUtil } from '~kw-lib';
+import { createGridData } from '~dev/utils/data';
 
 export default {
   setup() {

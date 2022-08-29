@@ -12,7 +12,7 @@
       class="kw-lnb-tree"
       :selected="selectedLnbKey"
       :expanded="expandedKeys"
-      :nodes="hierarchyedLnbs"
+      :nodes="hierarchyedLnbItems"
       :duration="100"
       node-key="key"
       label-key="label"
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { useLnb } from '~lib';
+import { useLnb } from '~kw-lib';
 
 const {
   lnbRef,
@@ -46,7 +46,7 @@ const {
   expandedKeys,
   selectedGnbKey,
   selectedLnbKey,
-  hierarchyedLnbs,
+  hierarchyedLnbItems,
   isSelected,
   toggleLnb,
   onUpdateSelected,

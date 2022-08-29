@@ -1,5 +1,4 @@
 import { AliasOptions, UserConfigExport } from 'vite';
-import { QuasarPluginOpts } from '@quasar/vite-plugin';
 import { HtmlTemplateOptions } from 'vite-plugin-html-template';
 
 declare interface Pages {
@@ -32,25 +31,22 @@ declare interface CustomConfigExport {
   /**
    * config files directory. Can be an absolute path, or a path relative from
    * the location of the config file itself.
+   * @default process.cwd()
    */
   configDir?: string;
 
   /**
    * enviroment files directory. Can be an absolute path, or a path relative from
    * the location of the config file itself.
+   * @default process.cwd()
    */
   envDir?: string;
 
   /**
-   * Quasar plugin options.
+   * quasar's SCSS/Sass variables
+   * @default '~/css/variables.scss'
    */
-  quasarOptions?: QuasarPluginOpts;
-
-  /**
-   * If true, generate dist/visualizer.html, and open it.
-   * apply at build time only.
-   */
-  openVisualizer?: true;
+  quasarSassVariables?: string;
 
   /**
    * Define global variable replacements.
@@ -68,6 +64,34 @@ declare interface CustomConfigExport {
    * https://github.com/rollup/plugins/tree/master/packages/alias#entries
    */
   alias?: AliasOptions;
+
+  /**
+   * If true, generate dist/visualizer.html, and open it.
+   * apply at build time only.
+   * @default false
+   */
+  openVisualizer?: true;
+
+  /**
+   * Enables css sourcemaps during dev
+   * @default false
+   */
+  cssDevSourceMap?: boolean;
+
+  /**
+   * If `true`, a separate sourcemap file will be created. If 'inline', the
+   * sourcemap will be appended to the resulting output file as data URI.
+   * 'hidden' works like `true` except that the corresponding sourcemap
+   * comments in the bundled files are suppressed.
+   * @default false
+   */
+  buildSourceMap?: boolean;
+
+  /**
+   * Force optimize listed dependencies (must be resolvable import paths,
+   * cannot be globs).
+   */
+  optimizeDepsInclude?: string[];
 }
 
 export function defineConfig(config: CustomConfigExport): UserConfigExport;

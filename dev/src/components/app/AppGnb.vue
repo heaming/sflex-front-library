@@ -5,14 +5,14 @@
         <div class="item">
           <q-avatar>
             <img
-              src="~~assets/images/logo_redpen.svg"
+              src="~~@assets/images/logo_redpen.svg"
               alt="KSS빨간펜"
             >
           </q-avatar>
         </div>
         <div class="item full-height">
           <a
-            v-for="{key, label} of gnbs"
+            v-for="{key, label} of gnbItems"
             :key="key"
             href="javascript:void(0)"
             class="kw-gnb--link"
@@ -50,20 +50,20 @@
 </template>
 
 <script setup>
-import { useGnb } from '~lib';
+import { useGnb } from '~kw-lib';
 
 const { getRoutes } = useRouter();
 const { commit } = useStore();
 
-(function createDevGnbs() {
+(function createDevGnbItems() {
   const globImportedRoutes = getRoutes().filter((e) => e.meta.isGlobImport);
   const appKeys = Object.keys(globImportedRoutes.reduce((a, e) => { a[e.path.split('/')[1]] = null; return a; }, {}));
-  const gnbs = appKeys.map((v) => ({ key: v, label: v }));
-  commit('app/setGnbs', gnbs);
+  const gnbItems = appKeys.map((v) => ({ key: v, label: v }));
+  commit('app/setGnbItems', gnbItems);
 }());
 
 const {
-  gnbs,
+  gnbItems,
   isSelected,
   updateSelected,
 } = useGnb();

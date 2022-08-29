@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { alert, gridUtil } from '~lib';
+import { alert, gridUtil } from '~kw-lib';
 
 const grdRef = ref();
 

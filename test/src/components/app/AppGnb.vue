@@ -5,14 +5,14 @@
         <div>
           <q-avatar>
             <img
-              src="~~assets/images/logo_redpen.svg"
+              src="~~@assets/images/logo_redpen.svg"
               alt="KSS빨간펜"
             >
           </q-avatar>
         </div>
         <div>
           <a
-            v-for="{key, label} of gnbs"
+            v-for="{key, label} of gnbItems"
             :key="key"
             href="javascript:void(0)"
             class="kw-gnb--link"
@@ -51,10 +51,10 @@
 </template>
 
 <script setup>
-import { useGnb } from '~lib';
+import { useGnb } from '~kw-lib';
 
 const {
-  gnbs,
+  gnbItems,
   isSelected,
   updateSelected,
 } = useGnb();

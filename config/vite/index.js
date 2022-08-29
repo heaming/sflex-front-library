@@ -7,6 +7,7 @@ const { default: visualizer } = require('rollup-plugin-visualizer');
 const autoImport = require('unplugin-auto-import/vite');
 const { resolve } = require('path');
 
+const isInternalContext = require('../utils/isInternalContext');
 const loadEnv = require('./loadEnv');
 const loadConfigAlias = require('./loadConfigAlias');
 const loadPages = require('./loadPages');
@@ -18,11 +19,13 @@ const normalizeConfig = (config = {}) => ({
   pagesDir: config.pagesDir || 'src/entries',
   configDir: config.configDir || context,
   envDir: config.envDir || context,
-  quasarOptions: config.quasarOptions || {},
+  quasarSassVariables: config.quasarSassVariables || '~/css/variables.scss',
   define: config.define || {},
   alias: config.alias || {},
   openVisualizer: config.openVisualizer === true,
-  sourcemap: config.sourcemap === true,
+  cssDevSourcemap: config.cssDevSourcemap === true,
+  buildSourcemap: config.buildSourcemap === true,
+  optimizeDepsInclude: config.optimizeDepsInclude || [],
 });
 
 exports.defineConfig = (config) => {
@@ -32,6 +35,18 @@ exports.defineConfig = (config) => {
   return defineConfig(({ mode, command }) => {
     const isBuild = command === 'build';
     const pluginArgs = { mode, command, ...config };
+
+    const defaultOptimizeDepsInclude = isInternalContext() ? [] : [
+      'axios',
+      'dayjs',
+      'kw-lib',
+      'lodash-es',
+      'realgrid',
+      'vue',
+      'vue-i18n',
+      'vue-router',
+      'vuex',
+    ];
 
     return {
       plugins: [
@@ -46,8 +61,7 @@ exports.defineConfig = (config) => {
 
         quasar({
           autoImportComponentCase: 'kebab',
-          sassVariables: '@/css/variables.scss',
-          ...config.quasarOptions,
+          sassVariables: config.quasarSassVariables,
         }),
 
         eslint(),
@@ -107,17 +121,24 @@ exports.defineConfig = (config) => {
       resolve: {
         alias: {
           ...config.alias,
-          '~assets': resolve(__dirname, '../../src/assets'),
-          '~css': resolve(__dirname, '../../src/css'),
+          '~@assets': resolve(__dirname, '../../src/assets'),
+          '~@css': resolve(__dirname, '../../src/css'),
         },
       },
 
       css: {
-        devSourcemap: config.sourcemap,
+        devSourcemap: config.cssDevSourcemap,
       },
 
       build: {
-        sourcemap: config.sourcemap,
+        sourcemap: config.buildSourcemap,
+      },
+
+      optimizeDeps: {
+        include: [
+          ...config.optimizeDepsInclude,
+          ...defaultOptimizeDepsInclude,
+        ],
       },
     };
   });

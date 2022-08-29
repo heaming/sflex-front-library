@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { createGridData } from '@/utils/data';
+import { createGridData } from '~dev/utils/data';
 
 const grdRef = ref();
 

@@ -9,10 +9,10 @@
 </template>
 
 <script setup>
-import { useSession } from '~lib';
-import AppLnb from '../../components/app/AppLnb.vue';
-import AppGnb from '../../components/app/AppGnb.vue';
-import AppRouterView from '../../components/app/AppRouterView.vue';
+import { useSession } from '~kw-lib';
+import AppLnb from '~test/components/app/AppLnb.vue';
+import AppGnb from '~test/components/app/AppGnb.vue';
+import AppRouterView from '~test/components/app/AppRouterView.vue';
 
 await useSession().isReady();
 </script>

@@ -481,7 +481,7 @@
         <guide-code-view
           :code-value="[toggle,toggleScript]"
           :lang="['vue','javascript']"
-          :multi="true"
+          multi
         />
       </q-card>
     </div>

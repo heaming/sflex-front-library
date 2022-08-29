@@ -88,7 +88,7 @@ export default {
       const apps = response.data;
 
       commit('setApps', apps);
-      dispatch('app/createGnbs', apps, { root: true });
+      dispatch('app/createGnbItems', apps, { root: true });
     },
     async fetchMenus({ commit, getters, dispatch }) {
       const response = await http.get('/api/v1/common/portal/menus');
@@ -97,7 +97,7 @@ export default {
       const menus = response.data;
 
       commit('setMenus', menus);
-      dispatch('app/createLnbs', menus, { root: true });
+      dispatch('app/createLnbItems', menus, { root: true });
       replaceRoutesByMenus(apps, menus);
     },
     async fetchPage({ commit, getters }, pageId) {

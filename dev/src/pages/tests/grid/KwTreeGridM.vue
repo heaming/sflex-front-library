@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { gridUtil, alert } from '~lib';
-import { createTreeData } from '@/utils/data';
+import { gridUtil, alert } from '~kw-lib';
+import { createTreeData } from '~dev/utils/data';
 
 export default {
   setup() {

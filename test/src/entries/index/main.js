@@ -1,6 +1,6 @@
-import { createApp } from '~lib';
-import routes from '../../routes';
-import '../../css/app.scss';
+import { createApp } from '~kw-lib';
+import routes from '~test/routes';
+import '~test/css/app.scss';
 
 import App from './App.vue';
 

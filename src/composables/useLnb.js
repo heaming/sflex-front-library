@@ -10,15 +10,15 @@ export default () => {
   const { t } = useI18n();
 
   const lnbRef = ref();
-  const gnbs = getters['app/getGnbs'];
-  const lnbs = getters['app/getLnbs'];
+  const gnbItems = getters['app/getGnbItems'];
+  const lnbItems = getters['app/getLnbItems'];
 
   const isExpanded = computed(() => getters['app/getLnbExpanded']);
   const expandedKeys = ref([]);
   const selectedGnbKey = computed(() => getters['app/getSelectedGnbKey']);
   const selectedLnbKey = computed(() => getters['app/getSelectedLnbKey']);
   const selectedLnbKeys = ref([]);
-  const hierarchyedLnbs = ref([]);
+  const hierarchyedLnbItems = ref([]);
 
   function createHierarchy(targetLnbs, nodes, root = true) {
     nodes.forEach((n) => {
@@ -30,20 +30,20 @@ export default () => {
     });
   }
 
-  function createHierarchyedLnbs(gnbKey) {
-    const targetLnbs = cloneDeep(lnbs.filter((v) => v.gnbKey === gnbKey));
-    const nHierarchyedLnbs = cloneDeep(gnbs.filter((v) => v.key === gnbKey));
-    createHierarchy(targetLnbs, nHierarchyedLnbs);
-    return nHierarchyedLnbs;
+  function createHierarchyedLnbItems(gnbKey) {
+    const targetLnbs = cloneDeep(lnbItems.filter((v) => v.gnbKey === gnbKey));
+    const hierarchyedItems = cloneDeep(gnbItems.filter((v) => v.key === gnbKey));
+    createHierarchy(targetLnbs, hierarchyedItems);
+    return hierarchyedItems;
   }
 
   function recursiveGetKeys(gnbKey, lnbKey) {
-    const matched = lnbKey ? lnbs.find((v) => v.gnbKey === gnbKey && v.key === lnbKey) : null;
+    const matched = lnbKey ? lnbItems.find((v) => v.gnbKey === gnbKey && v.key === lnbKey) : null;
     return matched ? [...recursiveGetKeys(gnbKey, matched.parentsKey), lnbKey] : [gnbKey];
   }
 
   watch(selectedGnbKey, (gnbKey) => {
-    hierarchyedLnbs.value = createHierarchyedLnbs(gnbKey);
+    hierarchyedLnbItems.value = createHierarchyedLnbItems(gnbKey);
     expandedKeys.value = recursiveGetKeys(gnbKey, selectedLnbKey.value);
   }, { immediate: true });
 
@@ -94,7 +94,7 @@ export default () => {
 
   return {
     lnbRef,
-    hierarchyedLnbs,
+    hierarchyedLnbItems,
     isExpanded,
     expandedKeys,
     selectedGnbKey,
