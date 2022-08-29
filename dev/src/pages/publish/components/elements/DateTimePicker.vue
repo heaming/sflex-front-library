@@ -49,7 +49,7 @@
             </td>
             <td>
               Add the number when it is required date range<br>
-              Add the attribute "from-placeholder='text'", "to-placeholder='text'" in need
+              Add the attribute "from-placeholder='text'", "to-placeholder='text'" when necessary
             </td>
           </tr>
           <tr>
@@ -62,7 +62,7 @@
             </td>
             <td>
               Add this when Essential Case<br>
-              Add the attribute "placeholder='text'" in need
+              Add the attribute "placeholder='text'" when necessary
             </td>
           </tr>
           <tr>
@@ -75,7 +75,7 @@
             </td>
             <td>
               Add this when Essential Case<br>
-              Add the attribute "placeholder='text'" in need
+              Add the attribute "placeholder='text'" when necessary
             </td>
           </tr>
         </tbody>

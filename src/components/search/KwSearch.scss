@@ -1,5 +1,5 @@
 .kw-search {
-  padding: 30px 40px;
+  padding: 20px 40px 30px;
   border: 1px solid $line-line;
   box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
   background-color: $bg-white;
@@ -177,6 +177,10 @@
   // 더보기 버튼 영역
   &--bottom {
     padding-top: 10px;
+  }
+
+  &--onerow &--bottom {
+    margin-top: -49px;
   }
 
   & &--view-more {
