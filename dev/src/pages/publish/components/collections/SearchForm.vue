@@ -9,6 +9,9 @@
       It is only for "search form". form is diffrent with form. Go to the reference page for form <br>
       (The roots for the Search form: components/collections/form)
     </p>
+    <guide-history
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -792,7 +795,6 @@
 </template>
 
 <script setup>
-
 const searchCode = `
 <kw-search :cols="4">
   <kw-search-row>
@@ -1310,4 +1312,11 @@ const theOneRowCode = `
   </kw-search-row>
 </kw-search>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022.08.29',
+    text: 'Add case - 1 or 2 Columns in 1 row',
+  },
+];
 </script>
