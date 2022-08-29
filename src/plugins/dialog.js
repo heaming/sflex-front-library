@@ -3,20 +3,16 @@ import { GlobalDialogVmKey } from '../consts/private/symbols';
 import { addGlobalDatas } from '../utils/private/globalDatas';
 import { defineGetters } from '../utils/private/globalProperty';
 
-const DIALOG_TYPE = {
-  ALERT: 'Alert',
-  CONFIRM: 'Confirm',
-};
-
-const normalizeOptions = (type, options = {}) => ({
-  title: options.title || type,
+const normalizeOptions = (options = {}) => ({
+  icon: options.icon,
+  subMessage: options.subMessage,
   refocus: options.refocus !== false,
 });
 
 export function alert(message, options = {}) {
   return new Promise((resolve) => {
     addGlobalDatas({
-      ...normalizeOptions(DIALOG_TYPE.ALERT, options),
+      ...normalizeOptions(options),
       message,
       isConfirm: false,
       vmKey: GlobalDialogVmKey,
@@ -28,7 +24,7 @@ export function alert(message, options = {}) {
 export function confirm(message, options) {
   return new Promise((resolve) => {
     addGlobalDatas({
-      ...normalizeOptions(DIALOG_TYPE.CONFIRM, options),
+      ...normalizeOptions(options),
       message,
       isConfirm: true,
       vmKey: GlobalDialogVmKey,

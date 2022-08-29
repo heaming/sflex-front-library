@@ -26,6 +26,30 @@
     h1 {
       margin-right: 7px;
     }
+
+    .kw-checkbox {
+      margin: 3px 0 0;
+      display: inline-block;
+      align-self: start;
+      width: 16px;
+      height: 16px;
+
+      .q-checkbox__inner {
+        width: inherit;
+        min-width: initial;
+        height: inherit;
+      }
+    }
+
+    .q-checkbox__icon {
+      font-size: 1em;
+    }
+
+    .btn-icon--bell {
+      margin: 3px 0 0 7px;
+      display: inline-block;
+      align-self: start;
+    }
   }
 
   button {

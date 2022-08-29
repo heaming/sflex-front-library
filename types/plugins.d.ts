@@ -6,9 +6,14 @@ export const cookies: Cookies;
 // Dialog
 interface DialogOptions {
   /**
-   * 표시할 타이틀
+   * 표시할 icon
    */
-  title?: string;
+  icon?: string;
+
+  /**
+   * 표시할 서브메세지
+   */
+  subMessage?: string;
 
   /**
    * 이전 포커스 객체로 다시 포커스할지 여부
@@ -18,7 +23,7 @@ interface DialogOptions {
 }
 
 export interface DialogFunction {
-  (message: string, options: DialogOptions): Promise<boolean>;
+  (message: string, options?: DialogOptions): Promise<boolean>;
 }
 
 export const alert: DialogFunction;

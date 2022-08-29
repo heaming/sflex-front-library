@@ -149,3 +149,47 @@
     border-right: 1px solid $black1;
   }
 }
+
+// table 정의 - 필요에 따라 본 정의는 이동될 수 있음.
+.kw-table--normal {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid $black1;
+  border-spacing: 0;
+  text-align: center;
+
+  thead tr {
+    th {
+      height: 36px;
+      line-height: 36px;
+      color: $black3;
+      background: #f8f8f8;
+      border-left: 1px solid $line-bg;
+      border-bottom: 1px solid $line-line;
+      font-weight: 400;
+
+      &:first-child {
+        border-left: 0;
+      }
+    }
+  }
+
+  tbody tr {
+    td {
+      height: 43px;
+      border-left: 1px solid $line-bg;
+      border-bottom: 1px solid $line-bg;
+      padding: 0 10px;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 1px;
+    bottom: 0;
+    background: #fff;
+  }
+}

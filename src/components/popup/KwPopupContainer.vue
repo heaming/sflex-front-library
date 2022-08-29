@@ -1,52 +1,44 @@
 <template>
   <q-card
     ref="containerRef"
-    :style="[popupStyle, { transform }]"
-    :class="['kw-popup', popupClass]"
+    class="kw-popup"
+    :style="popupStyle"
+    :class="popupClass"
   >
-    <h1
-      v-if="popupTitle"
-      class="mt20"
+    <q-card-section
+      v-bind="draggableEvents"
+      :class="popupHeaderClass"
     >
-      {{ popupTitle && $t(popupTitle) }}
-    </h1>
-    <q-card-section class="popup-content">
-      <div v-if="error">
-        Failed to load
-      </div>
-      <suspense
-        v-else
-        :timeout="0"
-        @resolve="resolve"
+      <h1
+        v-if="popupTitle"
+        class="kw-popup__header-title"
       >
-        <template #default>
-          <slot />
-        </template>
-        <template #fallback>
-          Loading...
-        </template>
-      </suspense>
-    </q-card-section>
-    <div class="row justify-center popup-action--wrap">
-      <kw-btn
-        class="kw-btn--negative kw-btn--h36"
-        label="취소"
-      />
-      <kw-btn
-        class="kw-btn--h36 ml8"
-        label="확인"
-      />
-      <q-btn
-        flat
-        rounded
-        icon="close_24"
-        class="absolute-top-right popup-closer"
-        :ripple="false"
+        {{ $t(popupTitle) }}
+      </h1>
+      <q-icon
+        class="kw-popup__header-close"
+        size="24px"
+        name="close_24"
         @mousedown.stop
         @touchstart.stop
         @click="close(false)"
       />
+    </q-card-section>
+    <div v-if="error">
+      Failed to load
     </div>
+    <suspense
+      v-else
+      :timeout="0"
+      @resolve="resolve"
+    >
+      <template #default>
+        <slot />
+      </template>
+      <template #fallback>
+        Loading...
+      </template>
+    </suspense>
   </q-card>
 </template>
 
@@ -70,9 +62,6 @@ export default {
 
   setup(props, { emit }) {
     const popupCtx = shallowRef({});
-    const popupStyle = computed(() => popupCtx.value.style);
-    const popupClass = computed(() => popupCtx.value.class);
-    const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
 
     function register(ctx) {
       popupCtx.value = ctx;
@@ -108,20 +97,38 @@ export default {
 
     const {
       transform,
-      events,
+      events: draggableEvents,
     } = useDraggable(containerRef);
+
+    const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
+
+    const popupStyle = computed(() => [
+      popupCtx.value.style,
+      `transform: ${transform.value}`,
+    ]);
+
+    const popupClass = computed(() => [
+      'kw-popup',
+      !popupTitle.value && 'kw-popup--no-title',
+      popupCtx.value.class,
+    ]);
+
+    const popupHeaderClass = computed(() => [
+      'kw-popup__header',
+      props.draggable && 'kw-popup__header--draggable',
+    ]);
 
     return {
       ctx: popupCtx,
-      popupTitle,
-      popupStyle,
-      popupClass,
       close,
       error,
       resolve,
       containerRef,
-      transform,
-      events,
+      draggableEvents,
+      popupTitle,
+      popupStyle,
+      popupClass,
+      popupHeaderClass,
     };
   },
 };
