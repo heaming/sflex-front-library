@@ -1,1 +1,19 @@
 @import "suneditor/dist/css/suneditor.min.css";
+
+.kw-editor {
+  &.q-field--outlined {
+    .q-field__control {
+      height: auto !important;
+      padding: 0;
+
+      &::before,
+      &::after {
+        z-index: 1;
+      }
+
+      .q-field__control-container {
+        z-index: 0;
+      }
+    }
+  }
+}

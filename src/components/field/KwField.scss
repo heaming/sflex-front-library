@@ -1,0 +1,46 @@
+.kw-field {
+  // default
+  &.q-field--outlined {
+    .q-field__control {
+      height: 40px;
+      color: $black1;
+      border-radius: 0;
+
+      &::before {
+        transition: initial;
+      }
+
+      &::after {
+        border: 1px solid transparent;
+        transition: initial;
+      }
+
+      .q-field__control-container {
+        padding-top: 0;
+      }
+    }
+
+    &.q-field--highlighted {
+      .q-field__control {
+        &::before,
+        &::after {
+          border: 1px solid currentcolor;
+          transition: initial;
+        }
+      }
+    }
+  }
+
+  &.q-field--labeled {
+    .q-field__native,
+    .q-field__prefix,
+    .q-field__suffix {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .q-field__bottom {
+    padding: 4px 0 0;
+  }
+}

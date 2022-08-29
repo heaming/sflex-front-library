@@ -1,6 +1,7 @@
 <template>
   <q-field
-    class="kw-editor"
+    class="kw-field kw-editor"
+    outlined
     v-bind="styleClassAttrs"
     :label="$q.platform.is.desktop ? null : label"
     :error="invalid"
@@ -8,10 +9,12 @@
     :disable="disable"
     no-error-icon
   >
-    <div
-      ref="editorRef"
-      v-bind="inheritedAttrs"
-    />
+    <template #control>
+      <div
+        ref="editorRef"
+        v-bind="inheritedAttrs"
+      />
+    </template>
   </q-field>
 </template>
 

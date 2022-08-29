@@ -22,7 +22,6 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 
 export default {
   name: 'KwField',
-  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
