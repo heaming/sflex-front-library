@@ -62,7 +62,7 @@
               Add the attribute "readonly" when it's required to be readonly<br>
               Add the attribute "disable" when it's required to be disable<br>
               Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select <br>
-              Add the attribute "placeholder='text'" with "use-input" in need <br>
+              Add the attribute "placeholder='text'" with "use-input" when necessary <br>
               (please be aware can't use together with "disable")
             </td>
           </tr>
