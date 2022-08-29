@@ -1,26 +1,34 @@
 <template>
-  <div class="kw-guide-section">
+  <div class="kw-guide-section guide-history">
     <h3
       id="history"
       class="kw-guide-title"
     >
       History
+      <kw-btn
+        v-if="items.length > 1"
+        class="kw-btn--line-gray kw-btn--h24 ml8"
+        :label="!openBool?'Full history':'Close history'"
+        @click="openBool = !openBool"
+      />
     </h3>
-    <q-markup-table class="kw-guide-table">
-      <tbody>
-        <tr
-          v-for="(item, i) of items"
-          :key="i"
+    <ul>
+      <template
+        v-for="(item, i) of items"
+        :key="i"
+      >
+        <li
+          v-show="i==0 || openBool"
         >
-          <td class="text-left">
-            {{ item.text }}
-          </td>
-          <td class="text-center">
+          <span class="text-left w110">
             {{ item.timestamp }}
-          </td>
-        </tr>
-      </tbody>
-    </q-markup-table>
+          </span>
+          <span class="text-center">
+            {{ item.text }}
+          </span>
+        </li>
+      </template>
+    </ul>
   </div>
 </template>
 
@@ -31,4 +39,6 @@ defineProps({
     default: () => [],
   },
 });
+
+const openBool = ref(false);
 </script>

@@ -240,3 +240,23 @@
     line-height: 26px;
   }
 }
+
+.guide-history {
+  margin-top: 10px;
+
+  h3 {
+    font-size: 14px;
+    padding-top: 10px;
+  }
+
+  ul {
+    margin: 0;
+
+    li {
+      span {
+        display: inline-block;
+        font-size: 12px;
+      }
+    }
+  }
+}
