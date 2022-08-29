@@ -1,13 +1,13 @@
 <template>
   <q-card
     ref="containerRef"
-    :style="[popupStyle, { transform }]"
-    :class="['kw-popup', popupClass]"
+    class="kw-popup"
+    :style="popupStyle"
+    :class="popupClass"
   >
     <q-card-section
-      v-bind="events"
-      class="kw-popup__header"
-      :class="{'kw-popup__header--draggble': draggable}"
+      v-bind="draggableEvents"
+      :class="popupHeaderClass"
     >
       <h1
         v-if="popupTitle"
@@ -62,9 +62,6 @@ export default {
 
   setup(props, { emit }) {
     const popupCtx = shallowRef({});
-    const popupStyle = computed(() => popupCtx.value.style);
-    const popupClass = computed(() => popupCtx.value.class);
-    const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
 
     function register(ctx) {
       popupCtx.value = ctx;
@@ -100,20 +97,38 @@ export default {
 
     const {
       transform,
-      events,
+      events: draggableEvents,
     } = useDraggable(containerRef);
+
+    const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
+
+    const popupStyle = computed(() => [
+      popupCtx.value.style,
+      `transform: ${transform.value}`,
+    ]);
+
+    const popupClass = computed(() => [
+      'kw-popup',
+      !popupTitle.value && 'kw-popup--no-title',
+      popupCtx.value.class,
+    ]);
+
+    const popupHeaderClass = computed(() => [
+      'kw-popup__header',
+      props.draggable && 'kw-popup__header--draggable',
+    ]);
 
     return {
       ctx: popupCtx,
-      popupTitle,
-      popupStyle,
-      popupClass,
       close,
       error,
       resolve,
       containerRef,
-      transform,
-      events,
+      draggableEvents,
+      popupTitle,
+      popupStyle,
+      popupClass,
+      popupHeaderClass,
     };
   },
 };
