@@ -4,49 +4,41 @@
     :style="[popupStyle, { transform }]"
     :class="['kw-popup', popupClass]"
   >
-    <h1
-      v-if="popupTitle"
-      class="mt20"
+    <q-card-section
+      v-bind="events"
+      class="kw-popup__header"
+      :class="{'kw-popup__header--draggble': draggable}"
     >
-      {{ popupTitle && $t(popupTitle) }}
-    </h1>
-    <q-card-section class="popup-content">
-      <div v-if="error">
-        Failed to load
-      </div>
-      <suspense
-        v-else
-        :timeout="0"
-        @resolve="resolve"
+      <h1
+        v-if="popupTitle"
+        class="kw-popup__header-title"
       >
-        <template #default>
-          <slot />
-        </template>
-        <template #fallback>
-          Loading...
-        </template>
-      </suspense>
-    </q-card-section>
-    <div class="row justify-center popup-action--wrap">
-      <kw-btn
-        class="kw-btn--negative kw-btn--h36"
-        label="취소"
-      />
-      <kw-btn
-        class="kw-btn--h36 ml8"
-        label="확인"
-      />
-      <q-btn
-        flat
-        rounded
-        icon="close_24"
-        class="absolute-top-right popup-closer"
-        :ripple="false"
+        {{ $t(popupTitle) }}
+      </h1>
+      <q-icon
+        class="kw-popup__header-close"
+        size="24px"
+        name="close_24"
         @mousedown.stop
         @touchstart.stop
         @click="close(false)"
       />
+    </q-card-section>
+    <div v-if="error">
+      Failed to load
     </div>
+    <suspense
+      v-else
+      :timeout="0"
+      @resolve="resolve"
+    >
+      <template #default>
+        <slot />
+      </template>
+      <template #fallback>
+        Loading...
+      </template>
+    </suspense>
   </q-card>
 </template>
 

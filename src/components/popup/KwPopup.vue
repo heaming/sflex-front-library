@@ -1,5 +1,13 @@
 <template>
-  <slot />
+  <q-card-section class="kw-popup__content">
+    <slot />
+  </q-card-section>
+  <q-card-section
+    v-if="$slots.action"
+    class="kw-popup__action"
+  >
+    <slot name="action" />
+  </q-card-section>
 </template>
 
 <script>
