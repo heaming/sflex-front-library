@@ -16,11 +16,10 @@
       </q-icon>
       <h1>{{ heading }}</h1>
       <kw-checkbox
-        size="46px"
+        size="16px"
         model-value="Y"
         checked-icon="bookmark_on_16"
         unchecked-icon="bookmark_off_16"
-        class="mr0 mt3"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
