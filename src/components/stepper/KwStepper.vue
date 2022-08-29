@@ -4,6 +4,8 @@
     class="kw-stepper"
     keep-alive
     :transition-duration="0"
+    done-icon="checked_16"
+    active-icon="none"
   >
     <slot />
 
