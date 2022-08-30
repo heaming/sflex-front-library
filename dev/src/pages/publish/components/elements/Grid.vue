@@ -7,6 +7,9 @@
       You don't have to publish the grid because of the complexity of interacting with the data.
       <br>Therefore, substitute the blank box below for that area.
     </p> -->
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="default"
@@ -22,8 +25,7 @@
           >https://docs.realgrid.com/start/overview</a>
         </li>
         <li class="notice">
-          The first(checkbox) and second columns(number) are created automatically.
-          It is not included in the script's data.
+          Please refer to #case4 if you need first(checkbox) and second column(number)
         </li>
         <li>'Grid' that are not visible in the cases are replaced by the empty box(#No Case) below.</li>
         <li>
@@ -224,7 +226,9 @@
         Case #4
       </h3>
       <p class="kw-guide-description">
-        multi row header<br>
+        <b>multi row header</b><br>
+        please refer to this guide(#case 4) and publish. <br>
+        If you couldn't publish this type table eventually, replace by the '#no case' code.
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -501,15 +505,15 @@ function initGrid4(data, view) {
 
   data.setFields(fields);
   view.setColumns(columns);
-  view.checkBar.visible = true;
-  view.rowIndicator.visible = true;
+  view.checkBar.visible = true; // create checkbox column
+  view.rowIndicator.visible = true; // create number indicator column
 
   // multi row header setting
   view.setColumnLayout([
-    'col1',
+    'col1', // single
     {
-      header: '사업자정보',
-      direction: 'horizontal',
+      header: '사업자정보', // colspan title
+      direction: 'horizontal', // merge type
       items: ['col2', 'col3', 'col4', 'col5', 'col6'],
     },
     {
@@ -740,4 +744,10 @@ function initGrid4(data, view) {
   data.setRows([{ col1: 'a' }, { col1: 'b' }, { col1: 'c' }]);
 }
 
+const guideHistory = [
+  {
+    timestamp: '2022.08.30',
+    text: 'Add case - multi row header type(case#4) and modified notice area',
+  },
+];
 </script>
