@@ -677,16 +677,16 @@ function initGrid4C1(data, view) {
   ];
 
   const columns = [
-    { fieldName: 'col1' },
-    { fieldName: 'col2' },
-    { fieldName: 'col3' },
-    { fieldName: 'col4' },
-    { fieldName: 'col5' },
-    { fieldName: 'col6' },
-    { fieldName: 'col7' },
-    { fieldName: 'col8' },
-    { fieldName: 'col9' },
-    { fieldName: 'col10' },
+    { fieldName: 'col1', header: '대상구분' },
+    { fieldName: 'col2', header: '사업자구분' },
+    { fieldName: 'col3', header: '사번' },
+    { fieldName: 'col4', header: '성명' },
+    { fieldName: 'col5', header: '업무제약일' },
+    { fieldName: 'col6', header: '은행명' },
+    { fieldName: 'col7', header: '계좌번호' },
+    { fieldName: 'col8', header: '은행명' },
+    { fieldName: 'col9', header: '계좌번호' },
+    { fieldName: 'col10', header: '마지막' },
     { fieldName: 'col11' },
     { fieldName: 'col12' },
     { fieldName: 'col13' },
@@ -705,61 +705,75 @@ function initGrid4C1(data, view) {
 
   data.setFields(fields);
   view.setColumns(columns);
-
+  view.checkBar.visible = true;
+  view.rowIndicator.visible = true;
   // multi row header setting
+
   view.setColumnLayout([
-    '대상구분',
+    'col1',
     {
-      header: false,
-      direction: 'vertical',
-      items: [
-        '사업자 정보',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['사업자구분', '사번', '성명', '업무체약일', '은행명', '계좌번호'],
-        },
-      ],
+      header: '사업자정보',
+      direction: 'horizontal',
+      items: ['col2', 'col3', 'col4', 'col5', 'col6'],
     },
     {
-      header: false,
-      direction: 'vertical',
-      items: [
-        'RDS 처리',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['처리예정일', '지급예정일'],
-        },
-      ],
+      header: 'RDS정보',
+      direction: 'horizontal',
+      items: ['col8', 'col9'],
     },
-    {
-      header: false,
-      direction: 'vertical',
-      items: [
-        'RDS 잔액(RDS 신청대상 시점)',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
-        },
-      ],
-    },
-    {
-      header: false,
-      direction: 'vertical',
-      items: [
-        '가지급금 잔액',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
-        },
-      ],
-    },
-    '오류사유',
-    '통화내용',
-    '수정',
+    'col10',
+    // '대상구분',
+    // {
+    //   header: false,
+    //   direction: 'vertical',
+    //   items: [
+    //     '사업자 정보',
+    //     {
+    //       header: false,
+    //       direction: 'horizontal',
+    //       items: ['사업자구분', '사번', '성명', '업무체약일', '은행명', '계좌번호'],
+    //     },
+    //   ],
+    // },
+    // {
+    //   header: false,
+    //   direction: 'vertical',
+    //   items: [
+    //     'RDS 처리',
+    //     {
+    //       header: false,
+    //       direction: 'horizontal',
+    //       items: ['처리예정일', '지급예정일'],
+    //     },
+    //   ],
+    // },
+    // {
+    //   header: false,
+    //   direction: 'vertical',
+    //   items: [
+    //     'RDS 잔액(RDS 신청대상 시점)',
+    //     {
+    //       header: false,
+    //       direction: 'horizontal',
+    //       items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
+    //     },
+    //   ],
+    // },
+    // {
+    //   header: false,
+    //   direction: 'vertical',
+    //   items: [
+    //     '가지급금 잔액',
+    //     {
+    //       header: false,
+    //       direction: 'horizontal',
+    //       items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
+    //     },
+    //   ],
+    // },
+    // '오류사유',
+    // '통화내용',
+    // '수정',
   ]);
 
   // view.setColumnLayout([
@@ -834,7 +848,7 @@ function initGrid4C2(data, view) {
   view.setColumnLayout([
     { header: 'Group1', direction: 'vertical', items: ['col1'] },
     'col2',
-    { header: 'Group2', direction: 'vertical', items: ['col3'] },
+    { header: 'Group2', direction: 'vertical', items: ['col3', 'col13'] },
     'col4', 'col5',
   ]);
 }
