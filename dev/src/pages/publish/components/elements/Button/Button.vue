@@ -7,6 +7,9 @@
       Define the basic height and color.<br>
       For other special buttons, refer to those included in the corresponding component.
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -788,4 +791,12 @@ const toggleRadio = `
 const toggleRadioScript = `
 const toggleSelected = ref('오늘')
 `;
+
+// History
+const guideHistory = [
+  {
+    timestamp: '2022.08.30',
+    text: 'Add Radio Toggle button case',
+  },
+];
 </script>
