@@ -1,7 +1,7 @@
 <template>
   <q-form
     v-bind="styleClassAttrs"
-    class="kw-search"
+    class="kw-form kw-search"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >

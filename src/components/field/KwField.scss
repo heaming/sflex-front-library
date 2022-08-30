@@ -49,6 +49,10 @@
     display: none;
   }
 
+  &.q-field--with-bottom {
+    padding-bottom: 0;
+  }
+
   .q-field__bottom {
     padding: 4px 0 0;
     font-size: 14px;
@@ -127,6 +131,14 @@
     .q-field__control {
       &::after {
         border-width: 1px;
+      }
+    }
+
+    &.q-field--readonly {
+      .q-field__control {
+        &::before {
+          border-style: solid;
+        }
       }
     }
   }

@@ -1,12 +1,12 @@
 <template>
   <div
     class="kw-form-item"
-    :class="itemClass"
     :style="{'max-width': itemWidth}"
   >
     <div
       v-if="!noLabel"
       class="kw-form-item__label"
+      :class="labelClass"
       :style="{width: labelWidth}"
     >
       <slot name="label">
@@ -14,11 +14,11 @@
       </slot>
 
       <span
-        v-if="hintMessage"
+        v-if="hint"
         class="kw-form-item__hint"
       >
         <kw-tooltip>
-          <slot name="hint">{{ hintMessage }}</slot>
+          <slot name="hint">{{ hint }}</slot>
         </kw-tooltip>
       </span>
     </div>
