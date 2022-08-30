@@ -9,7 +9,7 @@
     margin-right: 12px;
     width: 0;
     color: transparent;
-    background: url(~@assets/images/icon_calendar.svg) no-repeat center;
+    background: url(~@assets/images/calendar.svg) no-repeat center;
     background-size: 16px auto;
   }
 
@@ -48,6 +48,10 @@
       &::placeholder {
         font-size: 0;
       }
+    }
+
+    .q-field__append .q-icon {
+      opacity: 0.4;
     }
   }
 
@@ -105,10 +109,6 @@
     // line-height: 18px;
     font-weight: 500;
     align-items: center;
-  }
-
-  .kw-date-picker + span {
-    margin: 0 4px !important;
   }
 
   .q-field__inner {
