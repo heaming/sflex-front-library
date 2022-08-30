@@ -1,176 +1,65 @@
 .kw-form {
-  .q-field:not(.kw-input) {
-    .q-field__inner {
-      display: flex;
-      align-items: center;
-    }
-
-    .q-field__control {
-      align-items: center;
-      width: 100%;
-
-      &::after {
-        display: none;
-      }
-
-      &::before {
-        border-bottom: 0;
-        transition: initial;
-      }
-    }
-
-    .q-field__bottom--animated {
-      transform: translateY(0) !important;
-      bottom: -16px;
-      font-size: 14px;
-      color: $error;
-    }
-
-    .q-field__messages {
-      & > div {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .q-field--disabled .q-field__control {
-      div { opacity: 1 !important; }
-    }
-
-    .q-field--auto-height.q-field--labeled {
-      .q-field__native {
-        padding-bottom: 0;
-      }
-
-      .q-field__control-container {
-        padding-top: 0;
-      }
-    }
-
-    .q-field--with-bottom {
-      padding-bottom: 0;
-    }
-  }
-
-  .q-field--auto-height .q-field__control,
-  .q-field--auto-height .q-field__native,
-  .q-textarea .q-field__control {
-    min-height: auto;
-  }
-
-  .kw-form-row {
+  &-row {
     display: flex;
     margin: 0;
     padding: 10px 0;
     min-height: 60px;
+    gap: 100px;
   }
 
-  .kw-form-item {
+  &-item {
     display: flex;
     flex: 10000 0 1%;
     min-height: 40px;
-  }
 
-  .kw-form-item__label {
-    display: flex;
-    position: relative;
-    padding-right: 16px;
-    width: 150px;
-    min-width: 150px;
-    max-height: 40px;
-    font-size: 14px;
-    line-height: 18px;
-    color: $black3;
-    word-break: break-word;
-    align-items: center;
-  }
+    &__label {
+      display: flex;
+      position: relative;
+      padding-right: 16px;
+      width: 150px;
+      max-height: 40px;
+      font-size: 14px;
+      line-height: 18px;
+      color: $black3;
+      word-break: break-word;
+      align-items: center;
 
-  // 임시
-  .kw-form-item__hint {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    right: 16px;
-    color: rgb(255 255 255 / 0%);
-    background: url(~@assets/images/ic_info_default_16.svg) no-repeat center center;
-    background-size: 16px;
-  }
-
-  .kw-form-item__field {
-    display: flex;
-    flex: 10000 0 1%;
-
-    .q-field {
-      flex: 10000 0 1%;
-      max-width: 498px;
-
-      & + .q-field {
-        margin-left: 8px;
-      }
-
-      & + span {
-        height: 40px;
-        line-height: 40px;
-        margin: 0 4px;
+      &--required::after {
+        content: "*";
+        display: inline;
+        color: $info;
       }
     }
-  }
-}
 
-// essential
-.essential .kw-form-item__label::after {
-  content: "*";
-  display: inline;
-  color: $info;
-}
+    &__hint {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      right: 16px;
+      color: rgb(255 255 255 / 0%);
+      background: url(~@assets/images/ic_info_default_16.svg) no-repeat center center;  // 임시
+      background-size: 16px;
+    }
 
-// quasar dropdown style override
-.q-menu {
-  border: 1px solid $black1;
-  border-radius: 0;
-  box-shadow: none;
+    &__field {
+      display: flex;
+      flex: 10000 0 1%;
 
-  &--square {
-    border-top: 0;
-  }
+      .q-field {
+        flex: 10000 0 1%;
+        max-width: 498px;
 
-  .q-date {
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .q-item {
-    min-height: 34px;
-    padding: 0 12px;
-
-    &.q-manual-focusable--focused {
-      & > .q-focus-helper {
-        &::before,
-        &::after {
-          display: none;
+        & + .q-field {
+          margin-left: 8px;
         }
 
-        background-color: $bg-box;
-        transition: none;
-        opacity: 1;
+        & + span {
+          height: 40px;
+          line-height: 40px;
+          margin: 0 4px;
+          color: $black3;
+        }
       }
-
-      .q-item__label {
-        font-weight: 700;
-        color: $black1;
-      }
-    }
-
-    .q-item__label {
-      font-size: 14px;
-      color: $black2;
-      font-weight: 400;
-      z-index: 1;
     }
   }
-}
-
-.kw-form .kw-form-row .kw-form-item:nth-child(2) {
-  margin-left: 100px;
 }

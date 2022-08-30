@@ -6,173 +6,34 @@
   overflow-y: visible;
   overflow-x: clip;
 
-  input::placeholder,
-  textarea::placeholder {
-    font-size: 14px;
-  }
-
-  .q-field {
-    &__inner {
-      display: flex;
-      align-items: center;
-    }
-
-    &__control {
-      align-items: center;
-      width: 100%;
-
-      &::after {
-        display: none;
-      }
-
-      &::before {
-        border-bottom: 0;
-        transition: initial;
-      }
-    }
-
-    &__bottom--animated {
-      transform: translateY(0) !important;
-      bottom: -16px;
-      font-size: 14px;
-      color: $error;
-    }
-
-    &__messages {
-      & > div {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    &--disabled .q-field__control {
-      div {
-        opacity: 1 !important;
-      }
-    }
-
-    &--auto-height.q-field--labeled {
-      .q-field__native {
-        padding-bottom: 0;
-      }
-
-      .q-field__control-container {
-        padding-top: 0;
-      }
-    }
-
-    &--with-bottom {
-      padding-bottom: 0;
-    }
-  }
-
-  .q-field--auto-height .q-field__control,
-  .q-field--auto-height .q-field__native,
-  .q-textarea .q-field__control {
-    min-height: auto;
-  }
-
   .kw-form-row {
-    display: flex;
-    flex-wrap: wrap;
     margin: 0 -20px;
-    padding: 10px 0;
-    min-height: 60px;
-
-    .kw-form-item {
-      display: flex;
-      width: auto;
-      max-width: 100%;
-      min-width: 0;
-      min-height: 40px;
-      padding-left: 20px;
-      padding-right: 20px;
-
-      & > .row {
-        align-items: center;
-        width: 100%;
-      }
-    }
+    padding: 6px 0;
+    min-height: 46px;
+    gap: 0;
   }
 
   .kw-form-item {
-    flex: 10000 1 0%;
+    min-height: 32px;
+    padding: 0 20px;
   }
+
+  // .kw-form-item__hint {
+  //   // override
+  // }
 
   .kw-form-item__label {
-    display: flex;
-    position: relative;
     padding-right: 12px;
     width: 120px;
-    min-width: 120px;
-    max-height: 40px;
-    font-size: 14px;
-    line-height: 18px;
-    color: $black3;
-    word-break: break-word;
-    align-items: center;
+    max-height: 32px;
   }
 
-  .kw-form-item__field {
-    display: flex;
-    flex: 10000 0 1%;
-    align-items: center;
-
-    .q-field {
-      flex: 10000 0 1%;
-      max-width: 498px;
-
-      & + .q-field {
-        margin-left: 10px;
-      }
-
-      & + span {
-        margin: 0 4px;
-        color: $black3;
-      }
-    }
-  }
+  // .kw-form-item__field {
+  //   // override
+  // }
 
   .q-field__messages {
     display: none;
-  }
-
-  h3 {
-    margin-bottom: 14px;
-  }
-
-  & > .kw-form-row {
-    padding: 6px 0;
-    width: calc(100% + 40px);
-    min-height: 46px;
-
-    &:first-child {
-      margin-top: -6px;
-    }
-
-    .kw-form-item {
-      min-height: 32px;
-
-      .kw-form-title {
-        max-width: 120px;
-        width: 120px;
-        padding-right: 16px;
-        font-size: 14px;
-        line-height: 18px;
-        color: $black3;
-        word-break: break-word;
-
-        & + label {
-          @media (min-width: 0) {
-            width: auto;
-            min-width: 0;
-            max-width: 100%;
-            flex: 10000 1 0%;
-          }
-        }
-      }
-    }
   }
 
   // 더보기 버튼 영역
@@ -226,54 +87,6 @@
       .q-ripple {
         display: none;
       }
-    }
-  }
-
-  // input style override
-  .kw-input {
-    .q-field__control {
-      height: 32px;
-    }
-
-    .q-field__native {
-      padding: 7px 12px;
-      font-size: 14px;
-    }
-  }
-
-  // select style override
-  .kw-select {
-    .q-field__control {
-      height: 32px;
-    }
-
-    .q-field__native {
-      & > span {
-        font-size: 14px;
-      }
-    }
-  }
-
-  // date-picker style override
-  .kw-date-picker {
-    .q-field__inner {
-      max-width: 100%;
-      width: 100%;
-    }
-
-    .q-field__control {
-      height: 32px;
-    }
-
-    .q-field__native {
-      font-size: 14px;
-    }
-  }
-
-  // multi-date-picker style override
-  .kw-multi-date-picker {
-    .q-field__control-container {
-      font-size: 16px;
     }
   }
 
@@ -351,69 +164,6 @@
         background-color: $line-line;
         font-weight: 500;
       }
-    }
-  }
-
-  // Checkbox (검색/테이블 내 사용 18px)
-  .q-checkbox__inner {
-    width: 18px;
-    min-width: 18px;
-    height: 18px;
-
-    .q-checkbox__bg {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      background: url(~@assets/images/checkbox_off.svg) no-repeat center;
-    }
-
-    &.q-checkbox__inner--truthy .q-checkbox__bg,
-    &.q-checkbox__inner--indet .q-checkbox__bg {
-      background: url(~@assets/images/checkbox_on.svg) no-repeat center;
-      background-size: 18px;
-    }
-  }
-
-  .q-checkbox.disabled {
-    .q-checkbox__bg {
-      background: url(~@assets/images/checkbox_disable.svg) no-repeat center;
-      background-size: 18px;
-    }
-
-    .q-checkbox__inner--truthy .q-checkbox__bg {
-      background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
-      background-size: 18px;
-    }
-  }
-
-  // radio (검색/테이블 내 사용 18px)
-  .q-radio__inner {
-    width: 18px;
-    min-width: 18px;
-    height: 18px;
-
-    & .q-radio__bg {
-      width: 18px;
-      height: 18px;
-      background: url(~@assets/images/radio_off.svg) no-repeat center;
-      background-size: 18px;
-    }
-
-    &.q-radio__inner--truthy .q-radio__bg {
-      background: url(~@assets/images/radio_on.svg) no-repeat center;
-      background-size: 18px;
-    }
-  }
-
-  .q-radio.disabled {
-    .q-radio__bg {
-      background: url(~@assets/images/radio_disable.svg) no-repeat center;
-      background-size: 18px;
-    }
-
-    .q-radio__inner--truthy .q-radio__bg {
-      background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
-      background-size: 18px;
     }
   }
 }

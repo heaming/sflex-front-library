@@ -17,4 +17,15 @@
       padding: 10px 0;
     }
   }
+
+  &.q-field--dense {
+    .q-field__control {
+      min-height: 32px;
+    }
+
+    .q-field__native {
+      min-height: 32px;
+      padding: 7px 0;
+    }
+  }
 }
