@@ -464,10 +464,10 @@
         id="toggleButton"
         class="kw-guide-title"
       >
-        Toggle
+        Toggle(switch)
       </h3>
       <p class="kw-guide-description">
-        toggle button
+        toggle switch button
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -485,12 +485,41 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="toggleButton"
+        class="kw-guide-title"
+      >
+        Toggle(radio)
+      </h3>
+      <p class="kw-guide-description">
+        toggle radio button
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn-toggle
+            v-model="toggleSelected"
+            name="btnToggle"
+            rules="required"
+            :options="['오늘', '주간', '월간']"
+            unelevated
+            outline
+          />
+        </div>
+        <guide-code-view
+          :code-value="[toggleRadio,toggleRadioScript]"
+          :lang="['vue','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
 <script setup>
 
 const dummyData = ref(true);
+const toggleSelected = ref('오늘');
 
 const primary = `
 <kw-btn label="프로모션등록" />
@@ -745,4 +774,18 @@ const toggleScript = `
 const dummyData = ref(true); // select default value (true or false)
 `;
 
+const toggleRadio = `
+<kw-btn-toggle
+  v-model="toggleSelected"
+  name="btnToggle"
+  rules="required"
+  :options="['오늘', '주간', '월간']"
+  unelevated
+  outline
+/>
+`;
+
+const toggleRadioScript = `
+const toggleSelected = ref('오늘')
+`;
 </script>
