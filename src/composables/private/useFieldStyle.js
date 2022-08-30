@@ -7,10 +7,6 @@ export const useFieldStyleProps = {
     type: Boolean,
     default: false,
   },
-  dense: {
-    type: Boolean,
-    default: false,
-  },
 
   // register props to ignore inheritAttrs
   filled: {

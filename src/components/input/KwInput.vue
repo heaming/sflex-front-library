@@ -3,11 +3,11 @@
     ref="inputRef"
     :model-value="value"
     class="kw-field kw-input"
+    v-bind="styleType"
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
     clear-icon="close_24"
-    v-bind="styleType"
     no-error-icon
     @keydown.enter="onEnter"
     @change="onChange"
