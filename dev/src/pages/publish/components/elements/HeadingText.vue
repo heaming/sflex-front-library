@@ -7,6 +7,9 @@
       The reference page of heading-text with stepper is in Stepper's page.<br>
       ※ The root for the reference page of heading-text with stepper: elements / stepper
     </p>
+    <guide-history-view
+      :items="historyData"
+    />
     <div class="kw-guide-section">
       <h3
         id="default"
@@ -109,4 +112,11 @@ const headingText = `
 const testScript = `
 const stepInitNum = ref(1);
 `;
+
+const historyData = [
+  {
+    timestamp: '2022-08-30',
+    text: 'Add heading text with stepper ',
+  },
+];
 </script>

@@ -68,7 +68,7 @@
       <p class="kw-guide-description">
         Stepper's title have to be changed the title's name as the planing in Zeplin.<br>
         Change the attribute of <b>title=""</b> as the title from Zeplin<br>
-        Make sure to change the number of the step in javascript.(ex: <b> ref(1) </b>)
+        Make sure to change the number of the current step in javascript.(ex: <b> ref(1) , ref(2) , ref(3) </b>)
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -126,7 +126,7 @@
         This is h2 heading text with stepper.<br>
         The tags of h2 and kw-stepper should be wrapped by the tag
         which is added "<b>kw-stepper-headingtext</b>" as class<br>
-        Make sure to change the number of the step in javascript.(ex: <b> ref(1) </b>
+        Make sure to change the number of the current step in javascript.(ex: <b> ref(1) , ref(2) , ref(3) </b>)
       </p>
       <q-card>
         <div class="kw-guide-example">
