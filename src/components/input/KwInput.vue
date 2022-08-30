@@ -3,7 +3,7 @@
     ref="inputRef"
     :model-value="value"
     class="kw-field kw-input"
-    :label="$q.platform.is.desktop ? null : label"
+    :label="label"
     :error="invalid"
     :error-message="invalidMessage"
     clear-icon="close_24"
