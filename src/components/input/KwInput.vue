@@ -2,8 +2,8 @@
   <q-input
     ref="inputRef"
     :model-value="value"
+    v-bind="fieldStyles"
     class="kw-field kw-input"
-    v-bind="styleType"
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
@@ -167,8 +167,10 @@ export default {
       value.value = val;
     }
 
+    const fieldStyles = useFieldStyle();
+
     return {
-      ...useFieldStyle(),
+      fieldStyles,
       ...fieldCtx,
       select,
       onEnter,
