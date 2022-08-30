@@ -1,21 +1,20 @@
 .kw-input {
-  // default
-  &.q-field--outlined {
-    &.q-textarea {
-      .q-field__control {
-        min-height: 40px;
-        height: auto;
-      }
+  &.q-textarea {
+    height: auto;
 
-      .q-field__control-container {
-        padding-top: 0;
-        padding-bottom: 0;
-      }
+    .q-field__control {
+      min-height: 40px;
+      height: auto;
+    }
 
-      .q-field__native {
-        min-height: 40px;
-        padding: 10px 0;
-      }
+    .q-field__control-container {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .q-field__native {
+      min-height: 40px;
+      padding: 10px 0;
     }
   }
 }

@@ -1,77 +1,125 @@
 .kw-field {
-  // outlined
-  &.q-field--outlined {
-    .q-field__native,
-    .q-field__prefix,
-    .q-field__suffix {
-      color: $black1;
-      font-size: 16px;
-      font-weight: 500;
-      padding-top: 0;
-      padding-bottom: 0;
+  .q-field__inner {
+    align-self: initial;
+  }
+
+  .q-field__control {
+    height: 40px;
+    color: $black1;
+    border-radius: 0;
+
+    &::before,
+    &::after {
+      transition: initial;
+    }
+  }
+
+  .q-field__prepend,
+  .q-field__append,
+  .q-field__before,
+  .q-field__after {
+    font-size: 16px;
+    height: 40px;
+
+    .q-icon {
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .q-field__control-container {
+    padding-top: 0;
+  }
+
+  .q-field__native,
+  .q-field__prefix,
+  .q-field__suffix {
+    color: $black1;
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 1 !important;
+  }
+
+  .q-field__bottom {
+    padding: 4px 0 0;
+  }
+
+  // focus
+  &.q-field--highlighted {
+    .q-field__control {
+      &::after {
+        border-color: currentcolor;
+      }
+    }
+  }
+
+  // error
+  &.q-field--error {
+    .q-field__control {
+      &::before,
+      &::after {
+        color: $error !important;
+        border-color: $error !important;
+      }
     }
 
     .q-field__bottom {
-      padding: 4px 0 0;
+      color: $error !important;
+    }
+  }
+
+  // readonly, disable
+  &.q-field--readonly,
+  &.q-field--disabled {
+    .q-field__control {
+      &::before {
+        background-color: $line-bg;
+      }
     }
 
+    .q-field__native {
+      color: $black3;
+
+      &::placeholder {
+        color: transparent !important;
+      }
+    }
+  }
+
+  // outlined (default)
+  &.q-field--outlined {
     .q-field__control {
-      height: 40px;
-      color: $black1;
-      border-radius: 0;
-
-      &::before {
-        transition: initial;
-      }
-
       &::after {
-        border: 1px solid transparent;
-        transition: initial;
+        border-width: 1px;
       }
+    }
+  }
 
-      .q-field__control-container {
-        padding-top: 0;
+  // standard
+  &.q-field--standard {
+    .q-field__control {
+      &::after {
+        height: 0;
+        transform: initial;
       }
     }
 
     &.q-field--highlighted {
       .q-field__control {
-        &::before,
         &::after {
-          border-color: currentcolor;
+          height: 1px;
         }
-      }
-    }
-
-    &.q-field--readonly,
-    &.q-field--disabled {
-      .q-field__control {
-        &::before {
-          border-style: solid;
-          background-color: $line-bg;
-        }
-      }
-
-      .q-field__native {
-        color: $black3;
-
-        &::placeholder {
-          color: transparent !important;
-        }
-      }
-    }
-
-    &.q-field--error {
-      .q-field__control {
-        &::before,
-        &::after {
-          border-color: $error;
-        }
-      }
-
-      .q-field__bottom {
-        color: $error;
       }
     }
   }
+
+  // borderless
+  // &.q-field--boderless {
+
+  // }
 }
