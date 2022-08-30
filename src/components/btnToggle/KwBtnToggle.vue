@@ -7,6 +7,7 @@
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon
+    borderless
   >
     <template #control>
       <q-btn-toggle
