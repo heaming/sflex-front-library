@@ -389,14 +389,12 @@
         , the button should be on the right side. Because it looks too empty.<br>
         In this case,
         <ol>
-          <li>define cols as 4 by default.</li>
           <li>add 'kw-search--onerow' class</li>
         </ol>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-search
-            :cols="4"
             class="kw-search--onerow"
           >
             <kw-search-row>
@@ -1296,7 +1294,6 @@ const differentSize = `
 
 const theOneRowCode = `
 <kw-search
-  :cols="4"
   class="kw-search--onerow"
 >
   <kw-search-row>
@@ -1318,6 +1315,10 @@ const guideHistory = [
   {
     timestamp: '2022.08.29',
     text: 'Add case - 1 or 2 Columns in 1 row',
+  },
+  {
+    timestamp: '2022.08.29',
+    text: 'Remove the attribut of :col="4" in 1 or 2 Columns in 1 row',
   },
 ];
 </script>
