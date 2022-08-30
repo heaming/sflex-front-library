@@ -3,12 +3,16 @@
     <h2 class="kw-guide-h2">
       Heading Text (h1, h2, h3, h4)
     </h2>
+    <p class="kw-guide-description">
+      The reference page of heading-text with stepper is in Stepper's page.<br>
+      ※ The root for the reference page of heading-text with stepper: elements / stepper
+    </p>
     <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
       >
-        default
+        Default
       </h3>
       <q-card>
         <div class="kw-guide-example">
@@ -18,7 +22,7 @@
             <h2>h2 Heading-text with stepper</h2>
             <kw-stepper
               ref="stepper"
-              v-model="step"
+              v-model="stepInitNum"
             >
               <kw-step
                 :name="1"
@@ -26,14 +30,12 @@
                 :done="step > 1"
                 prefix="1"
               />
-
               <kw-step
                 :name="2"
                 title="step"
                 :done="step > 2"
                 prefix="2"
               />
-
               <kw-step
                 :name="3"
                 title="step"
@@ -53,8 +55,9 @@
           <h4>h4 Heading-text</h4>
         </div>
         <guide-code-view
-          :code-value="headingText"
-          lang="vue"
+          :code-value="[headingText, testScript]"
+          :lang="['vue', 'javascript']"
+          multi
         />
       </q-card>
     </div>
@@ -70,7 +73,7 @@ const headingText = `
     <h2>h2 Heading-text with stepper</h2>
     <kw-stepper
       ref="stepper"
-      v-model="step"
+      v-model="stepInitNum"
     >
       <kw-step
         :name="1"
@@ -78,14 +81,12 @@ const headingText = `
         :done="step > 1"
         prefix="1"
       />
-
       <kw-step
         :name="2"
         title="step"
         :done="step > 2"
         prefix="2"
       />
-
       <kw-step
         :name="3"
         title="step"
@@ -105,4 +106,7 @@ const headingText = `
   <h4>h4 Heading-text</h4>
 `;
 
+const testScript = `
+const stepInitNum = ref(1);
+`;
 </script>
