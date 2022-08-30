@@ -1,10 +1,15 @@
 .kw-field {
+  .q-field__control,
+  .q-field__native,
+  .q-field__marginal {
+    height: 40px;
+  }
+
   .q-field__inner {
     align-self: initial;
   }
 
   .q-field__control {
-    height: 40px;
     color: $black1;
     border-radius: 0;
 
@@ -29,12 +34,8 @@
     opacity: 1 !important;
   }
 
-  .q-field__prepend,
-  .q-field__append,
-  .q-field__before,
-  .q-field__after {
+  .q-field__marginal {
     font-size: 16px;
-    height: 40px;
 
     .q-icon {
       opacity: 0.6;
@@ -102,21 +103,16 @@
 
   // dense
   &.q-field--dense {
-    .q-field__control {
-      height: 32px;
-    }
-
-    .q-field__prepend,
-    .q-field__append,
-    .q-field__before,
-    .q-field__after {
-      font-size: 14px;
+    .q-field__control,
+    .q-field__native,
+    .q-field__marginal {
       height: 32px;
     }
 
     .q-field__native,
     .q-field__prefix,
-    .q-field__suffix {
+    .q-field__suffix,
+    .q-field__marginal {
       font-size: 14px;
     }
 
@@ -163,6 +159,5 @@
 
   // borderless
   // &.q-field--boderless {
-
   // }
 }
