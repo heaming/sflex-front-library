@@ -1,0 +1,17 @@
+<svg data-name="calendar(h16)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <g data-name="사각형 151162" style="stroke:#222;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h14v13H0z" transform="translate(1 2)"/>
+        <path style="fill:none" d="M.75.75h12.5v11.5H.75z" transform="translate(1 2)"/>
+    </g>
+    <path data-name="사각형 151176" transform="translate(1 5)" style="fill:#222" d="M0 0h11v1.5H0z"/>
+    <g data-name="그룹 147437">
+        <path data-name="패스 210107" d="M0 0h1.5v2H0z" transform="translate(4 1)" style="fill:#222"/>
+        <path data-name="사각형 151178" transform="translate(10.5 1)" style="fill:#222" d="M0 0h1.5v2H0z"/>
+    </g>
+    <g data-name="그룹 147438">
+        <path data-name="사각형 151179" transform="translate(3.998 8.8)" style="fill:#222" d="M0 0h2v2H0z"/>
+        <path data-name="사각형 151491" transform="translate(6.998 8.8)" style="fill:#222" d="M0 0h2v2H0z"/>
+        <path data-name="사각형 151490" transform="translate(9.998 8.8)" style="fill:#222" d="M0 0h2v2H0z"/>
+    </g>
+</svg>

@@ -1,11 +1,122 @@
-// .kw-stepper {
+.kw-stepper {
+  box-shadow: none;
+  background: transparent;
+  border-radius: inherit;
 
-// }
+  .q-stepper__header {
+    justify-content: flex-start;
 
-// .kw-step {
+    &.q-stepper__header--border {
+      border-bottom: inherit;
+    }
 
-// }
+    .col-grow {
+      flex: 0 0 auto;
+    }
 
-// .kw-stepper-navigation {
+    .q-stepper__tab {
+      padding: 0;
+      min-height: initial;
 
-// }
+      &:last-child {
+        &::after {
+          display: none;
+        }
+      }
+
+      &::after {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        width: 16px;
+        height: 20px;
+        margin: 0 8px;
+        background: url(~@assets/images/arrow_stepper.svg) no-repeat center;
+        background-size: 16px auto;
+      }
+
+      .q-stepper__dot {
+        min-width: 20px;
+        width: 20px;
+        height: 20px;
+        margin-right: 4px;
+        border-radius: 100%;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        box-sizing: border-box;
+
+        span {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 1.4;
+          text-align: left;
+          color: #777;
+          text-shadow: none;
+        }
+      }
+
+      .q-stepper__label {
+        .q-stepper__title {
+          font-weight: 400;
+          line-height: 1.57;
+          letter-spacing: normal;
+          color: #777;
+        }
+      }
+
+      .q-stepper__line::before,
+      .q-stepper__line::after {
+        display: none;
+      }
+    }
+
+    .q-stepper__tab--active {
+      .q-stepper__dot {
+        background: #2f3c78;
+        border: none;
+
+        span {
+          color: #fff;
+          font-weight: 500;
+        }
+      }
+
+      .q-stepper__label {
+        .q-stepper__title {
+          font-weight: 500;
+          color: #2f3c78;
+        }
+      }
+    }
+
+    .q-stepper__tab--done {
+      border: none;
+
+      .q-stepper__dot {
+        background: #eee;
+      }
+    }
+
+    .q-stepper__header--standard-labels .q-stepper__tab:first-child,
+    .q-stepper__header--standard-labels .q-stepper__tab:last-child {
+      justify-content: center;
+    }
+  }
+
+  .q-stepper__content {
+    display: none;
+  }
+}
+
+.kw-stepper-headingtext {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0 12px;
+  border-bottom: 2px solid $black1;
+
+  h2 {
+    padding: 0;
+    border-bottom: none;
+  }
+}
