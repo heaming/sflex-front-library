@@ -34,7 +34,7 @@ export default () => {
   const registered = {};
   const values = reactive({});
 
-  function register(fieldCtx) {
+  function registerField(fieldCtx) {
     const { uid, value, valueKey } = fieldCtx;
 
     const unwatchValueKey = watch(valueKey, (newValue, oldValue) => {
@@ -57,7 +57,7 @@ export default () => {
     values[valueKey.value] = value.value;
   }
 
-  function unregister(fieldCtx) {
+  function unregisterField(fieldCtx) {
     const { uid, valueKey } = fieldCtx;
     const { unwatchValueKey, unwatchValue } = registered[uid];
 
@@ -70,8 +70,8 @@ export default () => {
 
   provide(FormContextKey, {
     values,
-    register,
-    unregister,
+    registerField,
+    unregisterField,
   });
 
   const cols = computed(() => props.cols);

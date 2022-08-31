@@ -41,8 +41,8 @@ export default {
     const observerCtx = useObserver();
 
     const {
-      register: registerPopup,
-      unregister: unregisterPopup,
+      registerPopup,
+      unregisterPopup,
     } = inject(PopupContainerContextKey, () => {
       console.error('KwPopup needs to be child of KwPopupContainer');
     });

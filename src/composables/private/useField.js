@@ -57,8 +57,8 @@ export default (options) => {
 
   const {
     values,
-    register: registerField,
-    unregister: unregisterField,
+    registerField,
+    unregisterField,
   } = inject(FormContextKey, {});
 
   const fieldState = useFieldState(

@@ -63,11 +63,11 @@ export default {
   setup(props, { emit }) {
     const popupCtx = shallowRef({});
 
-    function register(ctx) {
+    function registerPopup(ctx) {
       popupCtx.value = ctx;
     }
 
-    function unregister() {
+    function unregisterPopup() {
       popupCtx.value = {};
     }
 
@@ -76,8 +76,8 @@ export default {
     }
 
     provide(PopupContainerContextKey, {
-      register,
-      unregister,
+      registerPopup,
+      unregisterPopup,
       close,
     });
 
