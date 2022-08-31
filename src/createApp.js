@@ -2,6 +2,7 @@ import wrapApp from './wrapApp';
 import installQuasar from './installQuasar';
 import installGlobals from './installGlobals';
 import installComponents from './installComponents';
+import installDirectives from './installDirectives';
 import installPlugins from './installPlugins';
 import { installI18n } from './i18n';
 import { installRouter } from './router';
@@ -42,6 +43,7 @@ export default (App, options) => {
   installQuasar(app);
   installGlobals();
   installComponents(app, components);
+  installDirectives(app);
   installPlugins(app, plugins);
   installI18n(app);
   installRouter(app, routes);
