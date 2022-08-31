@@ -3,6 +3,7 @@
   .q-field__native,
   .q-field__marginal {
     height: 40px;
+    min-height: 40px;
   }
 
   .q-field__inner {
@@ -70,7 +71,8 @@
 
   // error
   &.q-field--error {
-    .q-field__control {
+    .q-field__control,
+    .q-field .q-field__control {
       &::before,
       &::after {
         color: $error !important;
@@ -80,6 +82,12 @@
 
     .q-field__bottom {
       color: $error !important;
+    }
+  }
+
+  .q-field {
+    .q-field__messages {
+      display: none;
     }
   }
 
@@ -107,6 +115,7 @@
     .q-field__native,
     .q-field__marginal {
       height: 32px;
+      min-height: 32px;
     }
 
     .q-field__native,
