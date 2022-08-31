@@ -4,6 +4,7 @@
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon
+    borderless
   >
     <template #control>
       <slot />
