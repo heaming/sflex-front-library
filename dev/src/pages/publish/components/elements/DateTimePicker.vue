@@ -150,8 +150,8 @@
               <kw-form-item label="DateRangePicker">
                 <kw-date-range-picker
                   rules="date_range_months:1"
-                  from-placeholder="시작일선택"
-                  to-placeholder="종료일선택"
+                  from-placeholder="시작일 선택"
+                  to-placeholder="종료일 선택"
                 />
               </kw-form-item>
               <kw-form-item
@@ -160,8 +160,8 @@
               >
                 <kw-date-range-picker
                   rules="date_range_required|date_range_months:1"
-                  from-placeholder="시작일선택"
-                  to-placeholder="종료일선택"
+                  from-placeholder="시작일 선택"
+                  to-placeholder="종료일 선택"
                 />
               </kw-form-item>
             </kw-form-row>
