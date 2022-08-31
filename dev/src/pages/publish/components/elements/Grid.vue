@@ -7,6 +7,9 @@
       You don't have to publish the grid because of the complexity of interacting with the data.
       <br>Therefore, substitute the blank box below for that area.
     </p> -->
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="default"
@@ -22,8 +25,7 @@
           >https://docs.realgrid.com/start/overview</a>
         </li>
         <li class="notice">
-          The first(checkbox) and second columns(number) are created automatically.
-          It is not included in the script's data.
+          Please refer to #case4 if you need first(checkbox) and second column(number)
         </li>
         <li>'Grid' that are not visible in the cases are replaced by the empty box(#No Case) below.</li>
         <li>
@@ -221,47 +223,30 @@
       <h3
         class="kw-guide-title"
       >
-        Case #4-1
+        Case #4
       </h3>
       <p class="kw-guide-description">
-        multi row header #1<br>
+        <b>multi row header</b><br>
+        please refer to this guide(#case 4) and publish. <br>
+        If you couldn't publish this type table eventually, replace by the '#no case' code.
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-grid
             :visible-rows="3"
             class="mb30"
-            @init="initGrid4C1"
+            @init="initGrid4"
           />
-          <!-- <guide-code-view
-            :code-value="[testCode4C1,testDate4C1]"
+          <img
+            src="../../../../../assets/images/grid_case_4.png"
+            alt="block_type1"
+            style="width: 100%;"
+          >
+          <guide-code-view
+            :code-value="[testCode4,testDate4]"
             :lang="['vue','javascript']"
             multi
-          /> -->
-        </div>
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        class="kw-guide-title"
-      >
-        Case #4-2
-      </h3>
-      <p class="kw-guide-description">
-        multi row header<br>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-grid
-            :visible-rows="3"
-            class="mb30"
-            @init="initGrid4C2"
           />
-          <!-- <guide-code-view
-            :code-value="[testCode4C2,testDate4C2]"
-            :lang="['vue','javascript']"
-            multi
-          /> -->
         </div>
       </q-card>
     </div>
@@ -483,6 +468,66 @@ const testNoCase = `
 <div class="grid-blank" />
 `;
 
+const testCode4 = `
+<kw-grid
+  :visible-rows="3"
+  @init="initGrid4"
+/>
+`;
+
+const testDate4 = `
+function initGrid4(data, view) {
+  const fields = [
+    { fieldName: 'col1' },
+    { fieldName: 'col2' },
+    { fieldName: 'col3' },
+    { fieldName: 'col4' },
+    { fieldName: 'col5' },
+    { fieldName: 'col6' },
+    { fieldName: 'col7' },
+    { fieldName: 'col8' },
+    { fieldName: 'col9' },
+    { fieldName: 'col10' },
+  ];
+
+  const columns = [
+    { fieldName: 'col1', header: '대상구분' },
+    { fieldName: 'col2', header: '사업자구분' },
+    { fieldName: 'col3', header: '사번' },
+    { fieldName: 'col4', header: '성명' },
+    { fieldName: 'col5', header: '업무제약일' },
+    { fieldName: 'col6', header: '은행명' },
+    { fieldName: 'col7', header: '계좌번호' },
+    { fieldName: 'col8', header: '은행명' },
+    { fieldName: 'col9', header: '계좌번호' },
+    { fieldName: 'col10', header: '마지막' },
+  ];
+
+  data.setFields(fields);
+  view.setColumns(columns);
+  view.checkBar.visible = true; // create checkbox column
+  view.rowIndicator.visible = true; // create number indicator column
+
+  // multi row header setting
+  view.setColumnLayout([
+    'col1', // single
+    {
+      header: '사업자정보', // colspan title
+      direction: 'horizontal', // merge type
+      items: ['col2', 'col3', 'col4', 'col5', 'col6'],
+    },
+    {
+      header: 'RDS정보',
+      direction: 'horizontal',
+      items: ['col8', 'col9'],
+    },
+    'col10',
+  ]);
+
+  data.setRows([{ col1: 'a' }, { col1: 'b' }, { col1: 'c' }]);
+}
+`;
+
 function initGrid(data, view) {
   const fields = [
     { fieldName: 'col1' },
@@ -648,7 +693,7 @@ function initGrid3(data, view) {
   ]);
 }
 
-function initGrid4C1(data, view) {
+function initGrid4(data, view) {
   const fields = [
     { fieldName: 'col1' },
     { fieldName: 'col2' },
@@ -660,182 +705,49 @@ function initGrid4C1(data, view) {
     { fieldName: 'col8' },
     { fieldName: 'col9' },
     { fieldName: 'col10' },
-    { fieldName: 'col11' },
-    { fieldName: 'col12' },
-    { fieldName: 'col13' },
-    { fieldName: 'col14' },
-    { fieldName: 'col15' },
-    { fieldName: 'col16' },
-    { fieldName: 'col17' },
-    { fieldName: 'col18' },
-    { fieldName: 'col19' },
-    { fieldName: 'col20' },
-    { fieldName: 'col21' },
-    { fieldName: 'col22' },
-    { fieldName: 'col23' },
-    { fieldName: 'col24' },
   ];
 
   const columns = [
-    { fieldName: 'col1' },
-    { fieldName: 'col2' },
-    { fieldName: 'col3' },
-    { fieldName: 'col4' },
-    { fieldName: 'col5' },
-    { fieldName: 'col6' },
-    { fieldName: 'col7' },
-    { fieldName: 'col8' },
-    { fieldName: 'col9' },
-    { fieldName: 'col10' },
-    { fieldName: 'col11' },
-    { fieldName: 'col12' },
-    { fieldName: 'col13' },
-    { fieldName: 'col14' },
-    { fieldName: 'col15' },
-    { fieldName: 'col16' },
-    { fieldName: 'col17' },
-    { fieldName: 'col18' },
-    { fieldName: 'col19' },
-    { fieldName: 'col20' },
-    { fieldName: 'col21' },
-    { fieldName: 'col22' },
-    { fieldName: 'col23' },
-    { fieldName: 'col24' },
+    { fieldName: 'col1', header: '대상구분' },
+    { fieldName: 'col2', header: '사업자구분' },
+    { fieldName: 'col3', header: '사번' },
+    { fieldName: 'col4', header: '성명' },
+    { fieldName: 'col5', header: '업무제약일' },
+    { fieldName: 'col6', header: '은행명' },
+    { fieldName: 'col7', header: '계좌번호' },
+    { fieldName: 'col8', header: '은행명' },
+    { fieldName: 'col9', header: '계좌번호' },
+    { fieldName: 'col10', header: '마지막' },
   ];
 
   data.setFields(fields);
   view.setColumns(columns);
+  view.checkBar.visible = true;
+  view.rowIndicator.visible = true;
 
   // multi row header setting
   view.setColumnLayout([
-    '대상구분',
+    'col1',
     {
-      header: false,
-      direction: 'vertical',
-      items: [
-        '사업자 정보',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['사업자구분', '사번', '성명', '업무체약일', '은행명', '계좌번호'],
-        },
-      ],
+      header: '사업자정보',
+      direction: 'horizontal',
+      items: ['col2', 'col3', 'col4', 'col5', 'col6'],
     },
     {
-      header: false,
-      direction: 'vertical',
-      items: [
-        'RDS 처리',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['처리예정일', '지급예정일'],
-        },
-      ],
+      header: 'RDS정보',
+      direction: 'horizontal',
+      items: ['col8', 'col9'],
     },
-    {
-      header: false,
-      direction: 'vertical',
-      items: [
-        'RDS 잔액(RDS 신청대상 시점)',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
-        },
-      ],
-    },
-    {
-      header: false,
-      direction: 'vertical',
-      items: [
-        '가지급금 잔액',
-        {
-          header: false,
-          direction: 'horizontal',
-          items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
-        },
-      ],
-    },
-    '오류사유',
-    '통화내용',
-    '수정',
+    'col10',
   ]);
-
-  // view.setColumnLayout([
-  //     '대상구분',
-  //     {
-  //       header: '사업자 정보',
-  //       direction: 'horizontal',
-  //       items: ['사업자구분', '사번', '성명', '업무체약일', '은행명', '계좌번호'],
-  //     },
-  //     {
-  //       header: 'RDS 처리',
-  //       direction: 'horizontal',
-  //       items: ['처리예정일', '지급예정일'],
-  //     },
-  //     {
-  //       header: 'RDS 잔액(RDS 신청대상 시점)',
-  //       direction: 'horizontal',
-  //       items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
-  //     },
-  //     {
-  //       header: '가지급금 잔액',
-  //       direction: 'horizontal',
-  //       items: ['(구)교원프라퍼티', '교원프라퍼티', '교원', '교원스타트원', '교원', '합계'],
-  //     },
-  //     '오류사유',
-  //     '통화내용',
-  //     '수정',
-  //   ]);
 
   data.setRows([{ col1: 'a' }, { col1: 'b' }, { col1: 'c' }]);
 }
 
-function initGrid4C2(data, view) {
-  const fields = [
-    { fieldName: 'col1' },
-    { fieldName: 'col2' },
-    { fieldName: 'col3' },
-    { fieldName: 'col4' },
-    { fieldName: 'col5' },
-    { fieldName: 'col6' },
-    { fieldName: 'col7' },
-    { fieldName: 'col8' },
-    { fieldName: 'col9' },
-    { fieldName: 'col10' },
-    { fieldName: 'col11' },
-    { fieldName: 'col12' },
-    { fieldName: 'col13' },
-  ];
-
-  const columns = [
-    { fieldName: 'col1' },
-    { fieldName: 'col2' },
-    { fieldName: 'col3' },
-    { fieldName: 'col4' },
-    { fieldName: 'col5' },
-    { fieldName: 'col6' },
-    { fieldName: 'col7' },
-    { fieldName: 'col8' },
-    { fieldName: 'col9' },
-    { fieldName: 'col10' },
-    { fieldName: 'col11' },
-    { fieldName: 'col12' },
-    { fieldName: 'col13' },
-  ];
-
-  data.setFields(fields);
-  view.setColumns(columns);
-
-  data.setRows([{}, {}, {}]);
-
-  // multi row header setting
-  view.setColumnLayout([
-    { header: 'Group1', direction: 'vertical', items: ['col1'] },
-    'col2',
-    { header: 'Group2', direction: 'vertical', items: ['col3'] },
-    'col4', 'col5',
-  ]);
-}
+const guideHistory = [
+  {
+    timestamp: '2022.08.30',
+    text: 'Add case - multi row header type(case#4) and modified notice area',
+  },
+];
 </script>

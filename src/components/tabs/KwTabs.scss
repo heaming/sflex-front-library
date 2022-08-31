@@ -32,7 +32,10 @@
     opacity: 1;
 
     .q-tab__label {
+      font-size: 16px;
       font-weight: 400;
+      line-height: 1.5;
+      color: $black3;
     }
 
     & + .kw-tab {
@@ -46,6 +49,7 @@
 
       .q-tab__label {
         font-weight: 500;
+        color: $black1;
       }
 
       .q-tab__indicator {
