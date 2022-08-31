@@ -112,6 +112,7 @@ const headingText = `
 const testScript = `
 const stepInitNum = ref(1);
 `;
+const stepInitNum = ref(1);
 
 const historyData = [
   {
