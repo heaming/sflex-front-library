@@ -1,36 +1,31 @@
 .kw-search {
-  padding: 20px 40px 30px;
-  border: 1px solid $line-line;
-  box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
-  background-color: $bg-white;
-  overflow-y: visible;
-  overflow-x: clip;
+  // override kw-form
+  &.kw-form {
+    padding: 20px 40px 30px;
+    border: 1px solid $line-line;
+    box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
+    background-color: $bg-white;
+    overflow-y: visible;
+    overflow-x: clip;
 
-  .kw-form-row {
-    margin: 0 -20px;
-    padding: 6px 0;
-    min-height: 46px;
-    gap: 0;
+    .kw-form-row {
+      margin: 0 -20px;
+      padding: 6px 0;
+      min-height: 46px;
+      gap: 0;
+    }
+
+    .kw-form-item {
+      min-height: 32px;
+      padding: 0 20px;
+
+      &__label {
+        padding-right: 12px;
+        width: 120px;
+        max-height: 32px;
+      }
+    }
   }
-
-  .kw-form-item {
-    min-height: 32px;
-    padding: 0 20px;
-  }
-
-  // .kw-form-item__hint {
-  //   // override
-  // }
-
-  .kw-form-item__label {
-    padding-right: 12px;
-    width: 120px;
-    max-height: 32px;
-  }
-
-  // .kw-form-item__field {
-  //   // override
-  // }
 
   .q-field__messages {
     display: none;
