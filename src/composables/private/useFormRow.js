@@ -13,14 +13,14 @@ export default () => {
   });
 
   const {
-    register,
-    unregister,
+    registerExpandableChild,
+    unregisterExpandableChild,
   } = inject(FormExpandableContextKey, {});
 
-  register(vm);
+  registerExpandableChild(vm);
 
   onBeforeUnmount(() => {
-    unregister(vm);
+    unregisterExpandableChild(vm);
   });
 
   return {

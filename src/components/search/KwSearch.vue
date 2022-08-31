@@ -103,8 +103,8 @@ export default {
     }
 
     const {
-      register: registerSearch,
-      unregister: unregisterSearch,
+      registerSearch,
+      unregisterSearch,
     } = inject(PageSearchContextKey, {});
 
     const searchCtx = {
