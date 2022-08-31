@@ -1,4 +1,5 @@
 import { klona as deepCopy } from 'klona/full';
+import { FieldStateWrapContextKey } from '../../consts/private/symbols';
 
 export const useFieldStateProps = {
   name: {
@@ -51,6 +52,23 @@ export default (val) => {
       validated.value = options.validated;
     }
   }
+
+  const fieldStateCtx = {
+    uid,
+    invalid,
+    invalidMessage,
+  };
+
+  const {
+    registerFieldState,
+    unregisterFieldState,
+  } = inject(FieldStateWrapContextKey, {});
+
+  registerFieldState?.(fieldStateCtx);
+
+  onBeforeUnmount(() => {
+    unregisterFieldState?.(fieldStateCtx);
+  });
 
   return {
     uid,
