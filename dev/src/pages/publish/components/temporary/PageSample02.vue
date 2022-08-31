@@ -23,6 +23,7 @@
           <kw-search-row>
             <kw-search-item label="교육년월">
               <kw-date-picker
+                placeholder="날짜 선택"
                 type="month"
               />
             </kw-search-item>
@@ -197,6 +198,7 @@ const sampleVueCode = `
         <kw-search-row>
           <kw-search-item label="교육년월">
             <kw-date-picker
+              placeholder="날짜 선택"
               type="month"
             />
           </kw-search-item>
