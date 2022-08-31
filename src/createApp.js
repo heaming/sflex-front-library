@@ -3,7 +3,6 @@ import installQuasar from './installQuasar';
 import installPlugins from './installPlugins';
 import registerGlobals from './registerGlobals';
 import registerComponents from './registerComponents';
-import * as globalComponents from './components';
 import { installI18n } from './i18n';
 import { installStore } from './store';
 import { installRouter } from './router';
@@ -41,7 +40,6 @@ export default (App, options) => {
   installQuasar(app);
   installPlugins(app, plugins);
   registerGlobals();
-  registerComponents(app, globalComponents);
   registerComponents(app, components);
   installI18n(app);
   installStore(app, storeModules);
