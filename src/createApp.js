@@ -1,12 +1,12 @@
-import wrap from './wrap';
+import wrapApp from './wrapApp';
 import installQuasar from './installQuasar';
+import installGlobals from './installGlobals';
+import installComponents from './installComponents';
+import installDirectives from './installDirectives';
 import installPlugins from './installPlugins';
-import registerGlobals from './registerGlobals';
-import registerComponents from './registerComponents';
-import * as globalComponents from './components';
 import { installI18n } from './i18n';
-import { installStore } from './store';
 import { installRouter } from './router';
+import { installStore } from './store';
 import { defineRules } from './validate';
 
 import { GlobalKey } from './consts/private/symbols';
@@ -31,21 +31,23 @@ const normalizeOptions = (options = {}) => ({
 });
 
 export default (App, options) => {
-  App = wrap(App);
-
-  const app = createApp(App);
+  const wrappedApp = wrapApp(App);
+  const app = createApp(wrappedApp);
   const {
-    plugins, routes, storeModules, components,
+    components,
+    plugins,
+    storeModules,
+    routes,
   } = normalizeOptions(options);
 
   installQuasar(app);
+  installGlobals();
+  installComponents(app, components);
+  installDirectives(app);
   installPlugins(app, plugins);
-  registerGlobals();
-  registerComponents(app, globalComponents);
-  registerComponents(app, components);
   installI18n(app);
-  installStore(app, storeModules);
   installRouter(app, routes);
+  installStore(app, storeModules);
   defineRules();
   provideGlobal(app);
 
