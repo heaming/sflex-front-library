@@ -14,9 +14,9 @@ export default () => {
     Object.assign(pageCtx, {
       ...getters['meta/getPage'](pageKey),
     });
-  }
 
-  provide(PageContextKey, pageCtx);
+    provide(PageContextKey, pageCtx);
+  }
 
   return pageCtx;
 };
