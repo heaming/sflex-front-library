@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       default-height:40px, searchform- 32px;
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -60,7 +63,7 @@
               Add the attribute "readonly" when it's required to be readonly<br>
               Add the attribute "disable" when it's required to be disable<br>
               Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select <br>
-              Add the attribute "placeholder='text'" with "use-input" when necessary <br>
+              Add the attribute "placeholder='text'" with "use-input"<br>
               (please be aware can't use together with "disable")
             </td>
           </tr>
@@ -96,8 +99,6 @@
                 <kw-select
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
-                  placeholder="placeholder"
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -128,8 +129,6 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
-                  placeholder="placeholder"
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -160,9 +159,7 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
-                  placeholder="placeholder"
                   readonly
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -233,8 +230,6 @@
                   :options="['A', 'B', 'C', 'D']"
                   multiple
                   rules="required"
-                  placeholder="placeholder"
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -257,8 +252,6 @@ const selectDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
-        placeholder="placeholder"
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -271,8 +264,6 @@ const selectDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
-        placeholder="placeholder"
-        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -286,9 +277,7 @@ const selectMultipleDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
-        placeholder="placeholder"
         multiple
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -302,8 +291,6 @@ const selectMultipleDefaultCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
-        placeholder="placeholder"
-        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -318,9 +305,7 @@ const selectReadonlyCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
-        placeholder="placeholder"
         readonly
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -335,8 +320,6 @@ const selectReadonlyCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         readonly
-        placeholder="placeholder"
-        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -384,11 +367,16 @@ const essentialCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         rules="required"
-        placeholder="placeholder"
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
 </kw-form>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-01',
+    text: 'Remove placeholder attribute',
+  },
+];
 </script>

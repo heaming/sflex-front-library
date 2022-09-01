@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       default-height: 40px / searchform - height: 32px
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -32,7 +35,7 @@
             </td>
             <td>
               Add this when Essential Case<br>
-              Copy the text from zeplin<br>
+              placeholder<br>
               Add the attribute "readonly" in the tag of kw-input<br>
               Add the attribute "disable" in the tag of kw-input<br>
             </td>
@@ -70,9 +73,7 @@
           <kw-form>
             <kw-form-row>
               <kw-form-item label="label">
-                <kw-input
-                  placeholder="입력해주세요"
-                />
+                <kw-input />
               </kw-form-item>
             </kw-form-row>
           </kw-form>
@@ -105,7 +106,6 @@
               >
                 <kw-input
                   rules="required"
-                  placeholder="입력해주세요"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -134,7 +134,6 @@
               <kw-form-item label="label">
                 <kw-input
                   readonly
-                  placeholder="입력해주세요"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -163,7 +162,6 @@
               <kw-form-row>
                 <kw-form-item label="label">
                   <kw-input
-                    placeholder="입력해주세요"
                     disable
                   />
                 </kw-form-item>
@@ -195,13 +193,9 @@
             <kw-form :cols="2">
               <kw-form-row>
                 <kw-form-item label="input(flex/2columns)">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
+                  <kw-input />
                   <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
+                  <kw-input />
                 </kw-form-item>
               </kw-form-row>
               <kw-form-row>
@@ -221,17 +215,11 @@
               <kw-separator />
               <kw-form-row>
                 <kw-form-item label="input(flex/3columns)">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
+                  <kw-input />
                   <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
+                  <kw-input />
                   <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
+                  <kw-input />
                 </kw-form-item>
               </kw-form-row>
               <kw-form-row>
@@ -268,9 +256,7 @@ const inputCode = `
 <kw-form>
   <kw-form-row>
     <kw-form-item label="label">
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -279,9 +265,7 @@ const inputCode = `
 <kw-search>
   <kw-search-row>
     <kw-search-item label="label">
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
     </kw-search-item>
   </kw-search-row>
 </kw-search>
@@ -296,7 +280,6 @@ const essentialCode = `
     >
       <kw-input
         rules="required"
-        placeholder="입력해주세요"
       />
     </kw-form-item>
   </kw-form-row>
@@ -311,7 +294,6 @@ const essentialCode = `
     >
       <kw-input
         rules="required"
-        placeholder="입력해주세요"
       />
     </kw-search-item>
   </kw-search-row>
@@ -324,7 +306,6 @@ const inputReadonlyCode = `
     <kw-form-item label="label">
       <kw-input
         readonly
-        placeholder="입력해주세요"
       />
     </kw-form-item>
   </kw-form-row>
@@ -336,7 +317,6 @@ const inputReadonlyCode = `
     <kw-search-item label="label">
       <kw-input
         readonly
-        placeholder="입력해주세요"
       />
     </kw-search-item>
   </kw-search-row>
@@ -349,7 +329,6 @@ const inputDisableCode = `
     <kw-form-item label="label">
       <kw-input
         disable
-        placeholder="입력해주세요"
       />
     </kw-form-item>
   </kw-form-row>
@@ -361,7 +340,6 @@ const inputDisableCode = `
     <kw-search-item label="label">
       <kw-input
         disable
-        placeholder="입력해주세요"
       />
     </kw-search-item>
   </kw-search-row>
@@ -371,61 +349,48 @@ const hypenInput = `
 <kw-form cols="2">
   <kw-form-row>
     <kw-form-item label="input(flex/2columns)">
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
       <span>-</span>
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input(fixed/2columns)">
       <div class="row items-center w296">
-        <kw-input
-          placeholder="입력해주세요"
-        />
+        <kw-input />
         <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
+        <kw-input />
       </div>
     </kw-form-item>
   </kw-form-row>
   <!-- seperator -->
   <kw-form-row>
     <kw-form-item label="input(flex/3columns)">
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
       <span>-</span>
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
       <span>-</span>
-      <kw-input
-        placeholder="입력해주세요"
-      />
+      <kw-input />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input(fixed/3columns)">
       <div class="row items-center w464">
-        <kw-input
-          placeholder="입력해주세요"
-        />
+        <kw-input />
         <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
+        <kw-input />
         <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
+        <kw-input />
       </div>
     </kw-form-item>
   </kw-form-row>
 </kw-form>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-01',
+    text: 'remove placeholder attribute',
+  },
+];
 </script>
