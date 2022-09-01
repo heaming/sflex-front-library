@@ -58,6 +58,15 @@ export function useLnb(): {
   onUpdateExpanded: (expandedKeys: string[]) => void;
 };
 
+// useMeta
+export function useMeta(): {
+  getUserInfo(): any;
+  getPageInfo(): any;
+  getConfig(configurationId: string, fallbackValue?: string): string | undefined;
+  hasPermission(permissionKey: 'read' | 'create' | 'update' | 'delete' | 'download' | 'print'): boolean;
+  hasRoleNickName(roleNickName: string): boolean;
+};
+
 // useModal
 export function useModal(): {
   ok(payload?: any): void;
