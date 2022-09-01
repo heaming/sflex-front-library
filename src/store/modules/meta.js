@@ -104,8 +104,8 @@ export default {
 
       if (!isCached) {
         const response = await http.get(`/api/v1/common/meta/${pageId}`);
-        const { pageInfo, permissions } = response.data;
-        const page = { ...pageInfo, permissions };
+        const { pageInfo, notices, permissions } = response.data;
+        const page = { ...pageInfo, notices, permissions };
 
         commit('addPage', page);
       }
