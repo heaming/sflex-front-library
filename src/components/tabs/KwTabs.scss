@@ -38,6 +38,14 @@
       color: $black3;
     }
 
+    .q-tab__content {
+      padding: 0;
+    }
+
+    &[aria-selected="false"] {
+      height: 38px;
+    }
+
     & + .kw-tab {
       margin-left: -1px;
     }
@@ -81,7 +89,6 @@
     border-bottom: 0;
 
     .q-tabs__content {
-      padding: 0;
       height: 34px;
       border-bottom: none;
       overflow: visible;
@@ -98,6 +105,10 @@
 
       & + .kw-tab {
         margin-left: -1px;
+      }
+
+      .q-tab__content {
+        padding: 0;
       }
 
       .q-tab__label {
