@@ -14,7 +14,6 @@
       <kw-tab
         name="2"
         label="개인별"
-        disable
       />
     </kw-tabs>
     <kw-tab-panels model-value="1">
@@ -187,7 +186,6 @@ const sampleVueCode = `
     <kw-tab
       name="2"
       label="개인별"
-      disable
     />
   </kw-tabs>
   <kw-tab-panels model-value="1">
@@ -196,15 +194,12 @@ const sampleVueCode = `
         <kw-search-row>
           <kw-search-item label="교육년월">
             <kw-date-picker
-              placeholder="날짜 선택"
               type="month"
             />
           </kw-search-item>
           <kw-search-item label="조직">
             <kw-select
-              placeholder="총괄단 선택"
               :options="['강남']"
-              use-input
             />
             <kw-select
               placeholder="센터 선택"

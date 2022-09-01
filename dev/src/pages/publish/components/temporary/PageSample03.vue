@@ -14,7 +14,6 @@
       <kw-tab
         name="2"
         label="개인별"
-        disable
       />
     </kw-tabs>
     <kw-tab-panels model-value="1">
@@ -199,7 +198,6 @@ const sampleVueCode = `
     <kw-tab
       name="2"
       label="개인별"
-      disable
     />
   </kw-tabs>
   <kw-tab-panels model-value="1">

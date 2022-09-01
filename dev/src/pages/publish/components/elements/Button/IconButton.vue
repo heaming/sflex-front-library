@@ -234,6 +234,31 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Print button
+      </h3>
+      <p class="kw-guide-description">
+        It is print button.
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            icon="print_16"
+            class="kw-btn--line-black kw-btn--h32"
+            label="인쇄"
+          />
+        </div>
+        <guide-code-view
+          :code-value="printCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+
     <!-- <div class="kw-guide-section">
       <h3
         id="default"
@@ -352,6 +377,13 @@ const excelCode03 = `
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 업로드"
   disable
+/>
+`;
+const printCode = `
+<kw-btn
+  icon="print_16"
+  class="kw-btn--line-black kw-btn--h32"
+  label="인쇄"
 />
 `;
 </script>

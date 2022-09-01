@@ -1,16 +1,15 @@
-const normalizeState = () => ({
-  lnbExpanded: true,
-
-  gnbItems: [],
-  selectedGnbKey: null,
-
-  lnbItems: [],
-  selectedLnbKey: null,
-});
-
 export default {
   namespaced: true,
-  state: normalizeState(),
+
+  state: () => ({
+    lnbExpanded: true,
+
+    gnbItems: [],
+    selectedGnbKey: null,
+
+    lnbItems: [],
+    selectedLnbKey: null,
+  }),
 
   mutations: {
     setLnbExpanded(state, value) {

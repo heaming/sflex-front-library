@@ -4,22 +4,21 @@ import { http } from '../../plugins/http';
 import { localStorage } from '../../plugins/storage';
 import replaceRoutesByMenus from '../../router/replaceRoutesByMenus';
 
-const normalizeState = () => ({
-  isAuthenticated: false,
-  accessToken: null,
-  userInfo: {},
-  lastLoginInfo: {},
-  configs: [],
-  notices: [],
-  linkPages: [],
-  apps: [],
-  menus: [],
-  pages: [],
-});
-
 export default {
   namespaced: true,
-  state: normalizeState(),
+
+  state: () => ({
+    isAuthenticated: false,
+    accessToken: null,
+    userInfo: {},
+    lastLoginInfo: {},
+    configs: [],
+    notices: [],
+    linkPages: [],
+    apps: [],
+    menus: [],
+    pages: [],
+  }),
 
   mutations: {
     setLoginInfo(state, { accessToken, userInfo, lastLoginInfo }) {
@@ -105,8 +104,8 @@ export default {
 
       if (!isCached) {
         const response = await http.get(`/api/v1/common/meta/${pageId}`);
-        const { pageInfo, permissions } = response.data;
-        const page = { ...pageInfo, permissions };
+        const { pageInfo, notices, permissions } = response.data;
+        const page = { ...pageInfo, notices, permissions };
 
         commit('addPage', page);
       }
