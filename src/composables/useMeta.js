@@ -6,7 +6,7 @@ export default () => {
   const { getters } = useStore();
 
   function getUserInfo() {
-    return getters('meta/getUserInfo');
+    return getters['meta/getUserInfo'];
   }
 
   function getPageInfo() {
