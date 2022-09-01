@@ -94,6 +94,9 @@
         <li>For 'label' width, refer to 'Collections/Form'.</li>
         <li><b>Please do not care about placeholder</b></li>
         <li>If there #222 color text in zeplin, please never mind it will be controlled by dev</li>
+        <li class="notice">
+          Conclude to remove the placeholder attribute in code, because developer will add that.
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">

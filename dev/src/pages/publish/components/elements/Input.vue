@@ -56,6 +56,9 @@
         <li class="notice">
           For 'label' width & 'input' width, refer to 'Collections/Form'.
         </li>
+        <li class="notice">
+          Conclude to remove the placeholder attribute in code, because developer will add that.
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -201,13 +204,9 @@
               <kw-form-row>
                 <kw-form-item label="input(fixed/2columns)">
                   <div class="row items-center w296">
-                    <kw-input
-                      placeholder="입력해주세요"
-                    />
+                    <kw-input />
                     <span>-</span>
-                    <kw-input
-                      placeholder="입력해주세요"
-                    />
+                    <kw-input />
                   </div>
                 </kw-form-item>
               </kw-form-row>
@@ -225,17 +224,11 @@
               <kw-form-row>
                 <kw-form-item label="input(fixed/3columns)">
                   <div class="row items-center w464">
-                    <kw-input
-                      placeholder="입력해주세요"
-                    />
+                    <kw-input />
                     <span>-</span>
-                    <kw-input
-                      placeholder="입력해주세요"
-                    />
+                    <kw-input />
                     <span>-</span>
-                    <kw-input
-                      placeholder="입력해주세요"
-                    />
+                    <kw-input />
                   </div>
                 </kw-form-item>
               </kw-form-row>
@@ -390,7 +383,7 @@ const hypenInput = `
 const guideHistory = [
   {
     timestamp: '2022-09-01',
-    text: 'remove placeholder attribute',
+    text: 'remove the placeholder attribute',
   },
 ];
 </script>
