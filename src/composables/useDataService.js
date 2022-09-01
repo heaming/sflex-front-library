@@ -45,7 +45,7 @@ function getDataService(pageId) {
 }
 
 export default (pageId) => {
-  pageId ||= inject(PageContextKey, null)?.pageId;
+  pageId ||= inject(PageContextKey, {}).pageId;
 
   if (!pageId) {
     const { getters } = useStore();
@@ -53,10 +53,10 @@ export default (pageId) => {
     const vmComponentName = getComponentName(vm);
 
     pageId = getters['meta/getPage'](vmComponentName)?.pageId;
-  }
 
-  if (!pageId) {
-    throw new Error('pageId is required.');
+    if (!pageId) {
+      throw new Error('The page context is empty.\nShould pass pageId to parameter or use useDataService in an appropriate context.');
+    }
   }
 
   return getDataService(pageId);

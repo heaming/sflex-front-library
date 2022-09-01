@@ -1,5 +1,5 @@
-import { lowerCase, isEmpty } from 'lodash-es';
-import { PageContextKey } from '../consts/private/symbols';
+import { lowerCase } from 'lodash-es';
+import { getVm, injectPageContext } from '../utils/private/vm';
 
 // permission value is start at 63
 // if has not permission specific case that below
@@ -16,28 +16,9 @@ const PERMISSIONS = {
 const PERMISSON_KEYS = Object.keys(PERMISSIONS).map(lowerCase);
 const PERMISSON_VALUES = Object.values(PERMISSIONS);
 
-const cachedHasPermissions = {}; // cached permissions to instance
+const cachedPagePermissionKeys = {};
 
-function throwIfInvalidPermissionKey(permissionKey) {
-  if (!PERMISSON_KEYS.includes(permissionKey)) {
-    throw new Error(`Invalid permisson value, use value in '${PERMISSON_KEYS}'`);
-  }
-}
-
-function getInternalInstance(vnode) {
-  return vnode.ref.i;
-}
-
-function injectPageContext(vnode) {
-  const { provides } = getInternalInstance(vnode);
-  const pageCtx = provides[PageContextKey] || {};
-  if (isEmpty(pageCtx)) {
-    throw new Error('The page context is empty. use `v-permisson` in an appropriate place.');
-  }
-  return pageCtx;
-}
-
-const getPermissionKeys = (permissionValue) => {
+function getPermissionKeys(permissionValue) {
   const permissionKeys = [];
   let currentValue = permissionValue;
   PERMISSON_VALUES.forEach((v, i) => {
@@ -45,51 +26,42 @@ const getPermissionKeys = (permissionValue) => {
     if (currentValue >= 0) permissionKeys.push(PERMISSON_KEYS[i]);
   });
   return permissionKeys;
-};
-
-function cacheHasPermissions(vnode, permissionKey) {
-  const pageCtx = injectPageContext(vnode);
-  const permissionValue = pageCtx.permissions;
-  const permissionKeys = getPermissionKeys(permissionValue);
-  const { uid } = getInternalInstance(vnode);
-  cachedHasPermissions[uid] = permissionKeys.includes(permissionKey);
 }
 
-function removeCachedHasPermissions(vnode) {
-  const { uid } = getInternalInstance(vnode);
-  cacheHasPermissions[uid] = null;
-  delete cacheHasPermissions[uid];
+function cacheHasPermissions(pageContext) {
+  const { pageId } = pageContext;
+  const permissionValue = pageContext.permissions;
+  cachedPagePermissionKeys[pageId] = getPermissionKeys(permissionValue);
 }
 
-function hasPermission(el, binding, vnode) {
-  const { uid } = getInternalInstance(vnode);
-  if (cachedHasPermissions[uid] === undefined) {
-    try {
-      const permissionKey = binding.arg;
-      throwIfInvalidPermissionKey(permissionKey);
-      cacheHasPermissions(vnode, permissionKey);
-    } catch (e) {
-      cachedHasPermissions[uid] = false;
-      throw e;
+export function hasPermissionKeyInPage(permissionKey, pageContext) {
+  if (!PERMISSON_KEYS.includes(permissionKey)) {
+    throw new Error(`Invalid permisson value, use value in '${PERMISSON_KEYS}'`);
+  }
+
+  if (pageContext) {
+    const { pageId } = pageContext;
+    if (cachedPagePermissionKeys[pageId] === undefined) {
+      cacheHasPermissions(pageContext);
     }
+
+    return cachedPagePermissionKeys[pageId].includes(permissionKey);
   }
-  return cachedHasPermissions[uid];
+
+  return false;
 }
 
-function hideElementIfHasNoPermissions(el, binding, vnode) {
-  if (!hasPermission(el, binding, vnode)) {
-    el.style.display = 'none';
+function destroyIfHasNoPermissions(binding, vnode) {
+  const permissionKey = binding.arg;
+  const pageCtx = injectPageContext(vnode);
+
+  if (!hasPermissionKeyInPage(permissionKey, pageCtx)) {
+    const { proxy } = getVm(vnode);
+    const manualDestroy = proxy.manualDestroy || proxy.$parent.manualDestroy;
+    manualDestroy?.();
   }
 }
 
-export default {
-  mounted(el, binding, vnode) {
-    hideElementIfHasNoPermissions(el, binding, vnode);
-  },
-  updated(el, binding, vnode) {
-    hideElementIfHasNoPermissions(el, binding, vnode);
-  },
-  beforeUnmount(el, binding, vnode) {
-    removeCachedHasPermissions(vnode);
-  },
+export default (el, binding, vnode) => {
+  destroyIfHasNoPermissions(binding, vnode);
 };

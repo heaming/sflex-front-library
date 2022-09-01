@@ -16,6 +16,7 @@ export { default as useDataService } from './composables/useDataService';
 export { default as useGlobal } from './composables/useGlobal';
 export { default as useGnb } from './composables/useGnb';
 export { default as useLnb } from './composables/useLnb';
+export { default as useMeta } from './composables/useMeta';
 export { default as useModal } from './composables/useModal';
 export { default as useSession } from './composables/useSession';
 
@@ -26,7 +27,6 @@ export * from './plugins/cookies';
 export * from './plugins/dialog';
 export * from './plugins/http';
 export * from './plugins/loading';
-export * from './plugins/meta';
 export * from './plugins/modal';
 export * from './plugins/sanitize';
 export * from './plugins/storage';

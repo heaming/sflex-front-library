@@ -63,19 +63,6 @@ export const http: CustomAxiosInstance;
 export function loadSpinner(value: boolean): void;
 export function loadProgress(value: number): void;
 
-// Meta
-export declare function getConfig<T = any>(
-  /**
-   * configuration ID
-   */
-  configId: string,
-
-  /**
-   * 매핑 값 없을때 설정 값
-   */
-  fallbackValue?: any,
-): string | T;
-
 // Modal
 import { Component } from 'vue';
 type AsyncComponent = () => Promise<Component>;
@@ -133,7 +120,6 @@ declare module '@vue/runtime-core' {
       http: typeof http;
       loadSpinner: typeof loadSpinner;
       loadProgress: typeof loadProgress;
-      getConfig: typeof getConfig;
       modal: typeof modal;
       sanitize: typeof sanitize;
       localStorage: typeof localStorage;
