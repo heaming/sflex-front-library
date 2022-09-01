@@ -4,11 +4,11 @@ export default () => {
   const parentSearchCtx = inject(PageSearchContextKey, {});
   const registeredList = [];
 
-  function register(searchCtx) {
+  function registerSearch(searchCtx) {
     registeredList.push(searchCtx);
   }
 
-  function unregister(searchCtx) {
+  function unregisterSearch(searchCtx) {
     const index = registeredList.findIndex((v) => v.uid === searchCtx.uid);
     if (index > -1) registeredList.splice(index, 1);
   }
@@ -20,8 +20,8 @@ export default () => {
   }
 
   provide(PageSearchContextKey, {
-    register,
-    unregister,
+    registerSearch,
+    unregisterSearch,
     getRegisteredSearch,
   });
 };

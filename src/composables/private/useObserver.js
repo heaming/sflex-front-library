@@ -10,12 +10,12 @@ export const useObserverProps = {
 export default () => {
   const registered = {};
 
-  function register(observerChildctx) {
+  function registerObserverChild(observerChildctx) {
     const { uid } = observerChildctx;
     registered[uid] = observerChildctx;
   }
 
-  function unregister(observerChildctx) {
+  function unregisterObserverChild(observerChildctx) {
     const { uid } = observerChildctx;
     delete registered[uid];
   }
@@ -26,8 +26,8 @@ export default () => {
   }
 
   provide(ObserverContextKey, {
-    register,
-    unregister,
+    registerObserverChild,
+    unregisterObserverChild,
     getRegisteredChild,
   });
 

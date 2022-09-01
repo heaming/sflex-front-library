@@ -23,8 +23,8 @@ export default (ctx) => {
   const ignoreOnReset = toRef(props, 'ignoreOnReset');
 
   const {
-    register: registerObserverChild,
-    unregister: unregisterObserverChild,
+    registerObserverChild,
+    unregisterObserverChild,
   } = inject(ObserverContextKey, {});
 
   const observerChildctx = {

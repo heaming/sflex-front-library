@@ -29,12 +29,12 @@ export default () => {
     });
   }
 
-  function register(vm) {
+  function registerExpandableChild(vm) {
     registeredList.push(vm);
     updateExpand();
   }
 
-  function unregister(vm) {
+  function unregisterExpandableChild(vm) {
     const index = registeredList.findIndex((v) => v === vm);
 
     if (index > -1) {
@@ -45,8 +45,8 @@ export default () => {
   }
 
   provide(FormExpandableContextKey, {
-    register,
-    unregister,
+    registerExpandableChild,
+    unregisterExpandableChild,
   });
 
   function toggleExpand(val) {
