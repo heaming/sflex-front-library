@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       Date picker/ Date range picker
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -49,7 +52,7 @@
             </td>
             <td>
               Add the number when it is required date range<br>
-              Add the attribute "from-placeholder='text'", "to-placeholder='text'" when necessary
+              Add the attribute "from-placeholder='시작일 선택'", "to-placeholder='종료일 선택'"
             </td>
           </tr>
           <tr>
@@ -62,7 +65,7 @@
             </td>
             <td>
               Add this when Essential Case<br>
-              Add the attribute "placeholder='text'" when necessary
+              Add the attribute "placeholder='날짜 선택'"
             </td>
           </tr>
           <tr>
@@ -75,7 +78,7 @@
             </td>
             <td>
               Add this when Essential Case<br>
-              Add the attribute "placeholder='text'" when necessary
+              Add the attribute "placeholder='시간 선택'"
             </td>
           </tr>
         </tbody>
@@ -89,6 +92,11 @@
       </h3>
       <ul>
         <li>For 'label' width, refer to 'Collections/Form'.</li>
+        <li><b>Please do not care about placeholder</b></li>
+        <li>If there #222 color text in zeplin, please never mind it will be controlled by dev</li>
+        <li class="notice">
+          Conclude to remove the placeholder attribute in code, because developer will add that.
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -106,16 +114,13 @@
           <kw-form>
             <kw-form-row>
               <kw-form-item label="DatePicker">
-                <kw-date-picker
-                  placeholder="placeholder"
-                />
+                <kw-date-picker />
               </kw-form-item>
               <kw-form-item
                 label="DatePicker"
                 class="essential"
               >
                 <kw-date-picker
-                  placeholder="placeholder"
                   rules="required"
                 />
               </kw-form-item>
@@ -145,8 +150,6 @@
               <kw-form-item label="DateRangePicker">
                 <kw-date-range-picker
                   rules="date_range_months:1"
-                  from-placeholder="시작일선택"
-                  to-placeholder="종료일선택"
                 />
               </kw-form-item>
               <kw-form-item
@@ -155,8 +158,6 @@
               >
                 <kw-date-range-picker
                   rules="date_range_required|date_range_months:1"
-                  from-placeholder="시작일선택"
-                  to-placeholder="종료일선택"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -189,16 +190,13 @@
           <kw-form>
             <kw-form-row>
               <kw-form-item label="TimePicker">
-                <kw-time-picker
-                  placeholder="시간선택"
-                />
+                <kw-time-picker />
               </kw-form-item>
               <kw-form-item
                 label="TimePicker"
                 class="essential"
               >
                 <kw-time-picker
-                  placeholder="시간선택"
                   rules="required"
                 />
               </kw-form-item>
@@ -219,9 +217,7 @@ const datePickerCode = `
 <kw-form>
   <kw-form-row>
     <kw-form-item label="DatePicker">
-      <kw-date-picker
-        placeholder="placeholder"
-      />
+      <kw-date-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
   </kw-form-row>
@@ -231,9 +227,7 @@ const datePickerCode = `
 <kw-search>
   <kw-search-row>
     <kw-search-item label="DatePicker">
-      <kw-date-picker
-        placeholder="placeholder"
-      />
+      <kw-date-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-search-item>
   </kw-search-row>
@@ -245,10 +239,7 @@ const dateRangePickerCode = `
   <kw-form-row>
     <kw-form-item label="DateRangePicker">
       <kw-date-range-picker
-        rules="date_range_months:1"
-        from-placeholder="시작일선택"
-        to-placeholder="종료일선택"
-      />
+        rules="date_range_months:1" />
       <!-- if essential case please add 'date_range_required' ex.rules="date_range_required|date_range_months:1"   -->
     </kw-form-item>
   </kw-form-row>
@@ -259,10 +250,7 @@ const dateRangePickerCode = `
   <kw-search-row>
     <kw-search-item label="DateRangePicker">
       <kw-date-range-picker
-        rules="date_range_months:1"
-        from-placeholder="시작일선택"
-        to-placeholder="종료일선택"
-      />
+        rules="date_range_months:1" />
       <!-- if essential case please add 'date_range_required' ex.rules="date_range_required|date_range_months:1"   -->
     </kw-search-item>
   </kw-search-row>
@@ -272,9 +260,7 @@ const timePickerCode = `
 <kw-form>
   <kw-form-row>
     <kw-form-item label="TimePicker">
-      <kw-time-picker
-        placeholder="placeholder"
-      />
+      <kw-time-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
   </kw-form-row>
@@ -284,13 +270,21 @@ const timePickerCode = `
 <kw-search>
   <kw-search-row>
     <kw-search-item label="TimePicker">
-      <kw-time-picker
-        placeholder="placeholder"
-      />
+      <kw-time-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-search-item>
   </kw-search-row>
 </kw-search>
 `;
 
+const guideHistory = [
+  {
+    timestamp: '2022-08-31',
+    text: 'Revised the guide about placeholder',
+  },
+  {
+    timestamp: '2022-09-01',
+    text: 'Remove the placeholder attribute',
+  },
+];
 </script>

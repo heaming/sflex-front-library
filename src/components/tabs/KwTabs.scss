@@ -38,6 +38,14 @@
       color: $black3;
     }
 
+    .q-tab__content {
+      padding: 0;
+    }
+
+    &[aria-selected="false"] {
+      height: 38px;
+    }
+
     & + .kw-tab {
       margin-left: -1px;
     }
@@ -81,8 +89,8 @@
     border-bottom: 0;
 
     .q-tabs__content {
-      border-bottom: none;
       height: 34px;
+      border-bottom: none;
       overflow: visible;
     }
 
@@ -99,10 +107,22 @@
         margin-left: -1px;
       }
 
+      .q-tab__content {
+        padding: 0;
+      }
+
+      .q-tab__label {
+        font-size: 14px;
+      }
+
       &.q-tab--active {
         background: $secondary;
-        color: #fff;
         border: none;
+
+        .q-tab__label {
+          font-weight: 500;
+          color: #fff;
+        }
 
         .q-tab__indicator {
           display: none;

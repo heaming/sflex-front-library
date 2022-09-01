@@ -14,7 +14,6 @@
       <kw-tab
         name="2"
         label="개인별"
-        disable
       />
     </kw-tabs>
     <kw-tab-panels model-value="1">
@@ -48,13 +47,11 @@
                 </kw-search-item>
                 <kw-search-item label="조직">
                   <kw-select
-                    class="col mr8"
                     placeholder="총괄단 선택"
                     :options="['강남']"
                     use-input
                   />
                   <kw-select
-                    class="col"
                     placeholder="센터 선택"
                     :options="['강남센터', '광진센터']"
                     use-input
@@ -235,13 +232,11 @@ const sampleVueCode = `
               </kw-search-item>
               <kw-search-item label="조직">
                 <kw-select
-                  class="col mr8"
                   placeholder="총괄단 선택"
                   :options="['강남']"
                   use-input
                 />
                 <kw-select
-                  class="col"
                   placeholder="센터 선택"
                   :options="['강남센터', '광진센터']"
                   use-input
