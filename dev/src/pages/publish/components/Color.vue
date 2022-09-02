@@ -5,8 +5,11 @@
     </h2>
     <p class="kw-guide-description">
       Ensure to add to the color name, if the color's name is existed in the table.<br>
-      Please, Check out the color info below. <br>
-      (ex- background-color: $primary )
+      Please, Check out the color info below.<br>
+      If the font color and background color are not defined, Add the class as below<br>
+      font color : 'kw-fc--'<br>
+      background : 'kw-bc--'<br>
+      Add the color name of list after '--'
     </p>
     <div class="kw-guide-section">
       <h3
@@ -25,6 +28,9 @@
               Color info (HEX)
             </th>
             <th>
+              Font color,Backgorund-color class name
+            </th>
+            <th>
               Color
             </th>
           </tr>
@@ -36,6 +42,10 @@
             </td>
             <td>
               #2f8af3
+            </td>
+            <td>
+              kw-fc--primary<br>
+              kw-bc--primary
             </td>
             <td>
               <div
@@ -51,6 +61,10 @@
               #2f3c78
             </td>
             <td>
+              kw-fc--secondary<br>
+              kw-bc--secondary
+            </td>
+            <td>
               <div
                 class="color-box secondary"
               />
@@ -62,6 +76,10 @@
             </td>
             <td>
               #ed1941
+            </td>
+            <td>
+              kw-fc--info<br>
+              kw-bc--info
             </td>
             <td>
               <div
@@ -77,6 +95,10 @@
               #ed1941
             </td>
             <td>
+              kw-fc--info<br>
+              kw-bc--info
+            </td>
+            <td>
               <div
                 class="color-box error"
               />
@@ -88,6 +110,10 @@
             </td>
             <td>
               #222
+            </td>
+            <td>
+              kw-fc--black1<br>
+              kw-bc--black1
             </td>
             <td>
               <div
@@ -103,6 +129,10 @@
               #555
             </td>
             <td>
+              kw-fc--black2<br>
+              kw-bc--black2
+            </td>
+            <td>
               <div
                 class="color-box black2"
               />
@@ -114,6 +144,10 @@
             </td>
             <td>
               #777
+            </td>
+            <td>
+              kw-fc--black3<br>
+              kw-bc--black3
             </td>
             <td>
               <div
@@ -129,6 +163,10 @@
               #666
             </td>
             <td>
+              kw-fc--black-btn-line<br>
+              kw-bc--black-btn-line
+            </td>
+            <td>
               <div
                 class="color-box black-btn-line"
               />
@@ -140,6 +178,10 @@
             </td>
             <td>
               #999
+            </td>
+            <td>
+              kw-fc--placeholder<br>
+              kw-bc--placeholder
             </td>
             <td>
               <div
@@ -155,6 +197,10 @@
               #ccc
             </td>
             <td>
+              kw-fc--line-stroke<br>
+              kw-bc--line-stroke
+            </td>
+            <td>
               <div
                 class="color-box line-stroke"
               />
@@ -166,6 +212,10 @@
             </td>
             <td>
               #ddd
+            </td>
+            <td>
+              kw-fc--line-line<br>
+              kw-bc--line-line
             </td>
             <td>
               <div
@@ -181,6 +231,10 @@
               #eee
             </td>
             <td>
+              kw-fc--line-bg<br>
+              kw-bc--line-bg
+            </td>
+            <td>
               <div
                 class="color-box line-bg"
               />
@@ -192,6 +246,10 @@
             </td>
             <td>
               #fff
+            </td>
+            <td>
+              kw-fc--bg-white<br>
+              kw-bc--bg-white
             </td>
             <td>
               <div
@@ -207,6 +265,10 @@
               #f5f5f5
             </td>
             <td>
+              kw-fc--bg-box<br>
+              kw-bc--bg-box
+            </td>
+            <td>
               <div
                 class="color-box bg-box"
               />
@@ -218,6 +280,10 @@
             </td>
             <td>
               #f3f4f5
+            </td>
+            <td>
+              kw-fc--bg-body<br>
+              kw-bc--bg-body
             </td>
             <td>
               <div
@@ -233,6 +299,10 @@
               #9c27b0
             </td>
             <td>
+              kw-fc--accent<br>
+              kw-bc--accent
+            </td>
+            <td>
               <div
                 class="color-box accent"
               />
@@ -244,6 +314,10 @@
             </td>
             <td>
               #1d1d1d
+            </td>
+            <td>
+              kw-fc--dark<br>
+              kw-bc--dark
             </td>
             <td>
               <div
@@ -259,6 +333,10 @@
               #21ba45
             </td>
             <td>
+              kw-fc--positive<br>
+              kw-bc--positive
+            </td>
+            <td>
               <div
                 class="color-box positive"
               />
@@ -272,6 +350,10 @@
               #c10015
             </td>
             <td>
+              kw-fc--negative<br>
+              kw-bc--negative
+            </td>
+            <td>
               <div
                 class="color-box negative"
               />
@@ -283,6 +365,10 @@
             </td>
             <td>
               #f2c037
+            </td>
+            <td>
+              kw-fc--warning<br>
+              kw-bc--warning
             </td>
             <td>
               <div
