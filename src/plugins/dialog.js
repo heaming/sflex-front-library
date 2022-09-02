@@ -1,4 +1,3 @@
-/* eslint-disable prefer-rest-params */
 import { GlobalDialogVmKey } from '../consts/private/symbols';
 import { addGlobalDatas } from '../utils/private/globalDatas';
 import { defineGetters } from '../utils/private/globalProperty';
