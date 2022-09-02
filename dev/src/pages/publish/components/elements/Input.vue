@@ -183,10 +183,10 @@
         id="disable"
         class="kw-guide-title"
       >
-        Input with hypen
+        Input with special symbols
       </h3>
       <p class="kw-guide-description">
-        If you need the case of input with hypen,
+        If you need the case of input with hypen or tilde,
         kindly ask to add the <b>( ex: '&lt;span&gt;-&lt;/span&gt;')</b> between input tag. <br>
         Please find the detail about input width in 'collections/searchform' section.
       </p>
@@ -230,6 +230,13 @@
                     <span>-</span>
                     <kw-input />
                   </div>
+                </kw-form-item>
+              </kw-form-row>
+              <kw-form-row>
+                <kw-form-item label="input with tilde">
+                  <kw-input />
+                  <span>~</span>
+                  <kw-input />
                 </kw-form-item>
               </kw-form-row>
             </kw-form>
@@ -377,6 +384,13 @@ const hypenInput = `
       </div>
     </kw-form-item>
   </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="input with tilde">
+      <kw-input />
+      <span>~</span>
+      <kw-input />
+    </kw-form-item>
+  </kw-form-row>
 </kw-form>
 `;
 
@@ -384,6 +398,10 @@ const guideHistory = [
   {
     timestamp: '2022-09-01',
     text: 'remove the placeholder attribute',
+  },
+  {
+    timestamp: '2022-09-02',
+    text: 'add the example of having tilde special symbol',
   },
 ];
 </script>

@@ -32,3 +32,167 @@ $dark: #1d1d1d;
 $positive: #21ba45;
 $negative: #c10015;
 $warning: #f2c037;
+
+.kw-fc-- {
+  &primary {
+    color: $primary;
+  }
+
+  &secondary {
+    color: $secondary;
+  }
+
+  &info {
+    color: $info;
+  }
+
+  &error {
+    color: $error;
+  }
+
+  &black1 {
+    color: $black1;
+  }
+
+  &black2 {
+    color: $black2;
+  }
+
+  &black3 {
+    color: $black3;
+  }
+
+  &black-btn-line {
+    color: $black-btn-line;
+  }
+
+  &placeholder {
+    color: $placeholder;
+  }
+
+  &line-stroke {
+    color: $line-stroke;
+  }
+
+  &line-line {
+    color: $line-line;
+  }
+
+  &line-bg {
+    color: $line-bg;
+  }
+
+  &bg-white {
+    color: $bg-white;
+  }
+
+  &bg-box {
+    color: $bg-box;
+  }
+
+  &bg-body {
+    color: $bg-body;
+  }
+
+  &accent {
+    color: $accent;
+  }
+
+  &dark {
+    color: $dark;
+  }
+
+  &positive {
+    color: $positive;
+  }
+
+  &negative {
+    color: $negative;
+  }
+
+  &warning {
+    color: $warning;
+  }
+}
+
+.kw-bc-- {
+  &primary {
+    background-color: $primary;
+  }
+
+  &secondary {
+    background-color: $secondary;
+  }
+
+  &info {
+    background-color: $info;
+  }
+
+  &error {
+    background-color: $error;
+  }
+
+  &black1 {
+    background-color: $black1;
+  }
+
+  &black2 {
+    background-color: $black2;
+  }
+
+  &black3 {
+    background-color: $black3;
+  }
+
+  &black-btn-line {
+    background-color: $black-btn-line;
+  }
+
+  &placeholder {
+    background-color: $placeholder;
+  }
+
+  &line-stroke {
+    background-color: $line-stroke;
+  }
+
+  &line-line {
+    background-color: $line-line;
+  }
+
+  &line-bg {
+    background-color: $line-bg;
+  }
+
+  &bg-white {
+    background-color: $bg-white;
+  }
+
+  &bg-box {
+    background-color: $bg-box;
+  }
+
+  &bg-body {
+    background-color: $bg-body;
+  }
+
+  &accent {
+    background-color: $accent;
+  }
+
+  &dark {
+    background-color: $dark;
+  }
+
+  &positive {
+    background-color: $positive;
+  }
+
+  &negative {
+    background-color: $negative;
+  }
+
+  &warning {
+    background-color: $warning;
+  }
+}
