@@ -1,10 +1,10 @@
 .kw-input {
-  $kw-input-height: $kw-field-height;
-  $kw-input-height-dense: $kw-field-height-dense;
-  $kw-input-padding-input: $kw-field-padding-input;
-  $kw-input-padding-input-dense: $kw-field-padding-input-dense;
-  $kw-input-line-height: $kw-field-line-height;
-  $kw-input-line-height-dense: $kw-field-line-height-dense;
+  $-kw-input-height: $kw-field-height;
+  $-kw-input-height-dense: $kw-field-height-dense;
+  $-kw-input-padding-input: $kw-field-padding-input;
+  $-kw-input-padding-input-dense: $kw-field-padding-input-dense;
+  $-kw-input-line-height: $kw-field-line-height;
+  $-kw-input-line-height-dense: $kw-field-line-height-dense;
 
   &.q-textarea {
     height: auto;
@@ -15,8 +15,8 @@
     }
 
     .q-field__control-container {
-      padding-top: nth($kw-input-padding-input, 1);
-      padding-bottom: nth($kw-input-padding-input, 3);
+      padding-top: nth($-kw-input-padding-input, 1);
+      padding-bottom: nth($-kw-input-padding-input, 3);
     }
 
     .q-field__shadow {
@@ -27,19 +27,19 @@
     .q-field__native,
     .q-field__prefix,
     .q-field__suffix {
-      line-height: $kw-input-line-height; // default 18px
+      line-height: $-kw-input-line-height; // default 18px
     }
 
     .q-field__native {
       padding-top: 0; // desktop does not use label
-      min-height: $kw-input-line-height;
+      min-height: $-kw-input-line-height;
     }
   }
 
   &.q-field--labeled {
     .q-field__control-container {
-      padding-top: nth($kw-input-padding-input, 1);
-      padding-bottom: nth($kw-input-padding-input, 3);
+      padding-top: nth($-kw-input-padding-input, 1);
+      padding-bottom: nth($-kw-input-padding-input, 3);
     }
 
     .q-field__shadow {
@@ -49,35 +49,35 @@
 
     .q-field__native {
       padding-top: 0; // desktop does not use label
-      min-height: $kw-input-line-height;
+      min-height: $-kw-input-line-height;
     }
   }
 
   &.q-field--dense {
     .q-field__control {
-      min-height: $kw-input-height-dense;
+      min-height: $-kw-input-height-dense;
     }
 
     .q-field__control-container {
-      padding-top: nth($kw-input-padding-input-dense, 1);
-      padding-bottom: nth($kw-input-padding-input-dense, 3);
+      padding-top: nth($-kw-input-padding-input-dense, 1);
+      padding-bottom: nth($-kw-input-padding-input-dense, 3);
     }
 
     .q-field__native,
     .q-field__prefix,
     .q-field__suffix {
-      line-height: $kw-input-line-height-dense;
+      line-height: $-kw-input-line-height-dense;
     }
 
     .q-field__native {
       padding-top: 0;
-      min-height: $kw-input-line-height-dense;
+      min-height: $-kw-input-line-height-dense;
     }
 
     &.q-field--labeled {
       .q-field__control-container {
-        padding-top: nth($kw-input-padding-input-dense, 1);
-        padding-bottom: nth($kw-input-padding-input-dense, 3);
+        padding-top: nth($-kw-input-padding-input-dense, 1);
+        padding-bottom: nth($-kw-input-padding-input-dense, 3);
       }
 
       .q-field__shadow {
@@ -87,7 +87,7 @@
 
       .q-field__native {
         padding-top: 0; // desktop does not use label
-        min-height: $kw-input-line-height-dense;
+        min-height: $-kw-input-line-height-dense;
       }
     }
   }
