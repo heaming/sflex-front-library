@@ -46,9 +46,11 @@
     }
   }
 
-  .q-field__control-container {
-    padding-top: 0; // label 작업 시, 삭제 요망.
-  }
+  /*
+    .q-field__control-container {
+      padding-top: 0; // label 작업 시, 삭제 요망.
+    }
+   */
 
   .q-field__control {
     height: $kw-field-height; // min-height: $_kw-field-height;
@@ -102,9 +104,11 @@
     }
   }
 
-  .q-field__label {
-    display: none; // 우선 안쓰니 통째로 없엠. 모바일 작업 시, 살려서 작업 해야 함.
-  }
+  /*
+    .q-field__label {
+      display: none; // 우선 안쓰니 통째로 없엠. 모바일 작업 시, 살려서 작업 해야 함.
+    }
+  */
 
   // focus
   &.q-field--highlighted {

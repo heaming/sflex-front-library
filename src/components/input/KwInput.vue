@@ -4,7 +4,6 @@
     :model-value="value"
     v-bind="fieldStyles"
     class="kw-field kw-input"
-    :label="label"
     :error="invalid"
     :error-message="invalidMessage"
     clear-icon="close_24"
