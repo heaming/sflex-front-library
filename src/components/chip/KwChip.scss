@@ -1,0 +1,25 @@
+.kw-chip {
+  margin: 0;
+  padding: 0 8px;
+  height: 19px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 19px;
+
+  .q-chip__icon {
+    font-size: 1em;
+  }
+
+  &.kw-chip--icon-only {
+    padding: 0;
+    font-size: 16px;
+
+    .q-chip__icon--left {
+      margin: 0;
+
+      & + .q-chip__content {
+        display: none;
+      }
+    }
+  }
+}
