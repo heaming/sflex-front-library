@@ -148,6 +148,48 @@
   .rg-fixed-row td {
     border-right: 1px solid $black1;
   }
+
+  .rg-scrolltrack {
+    background: $line-bg;
+    border: none;
+  }
+
+  .rg-scrollthumb,
+  .rg-scrollthumb:hover {
+    background: $line-stroke;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .rg-scroll-left,
+  .rg-scroll-right,
+  .rg-scroll-up,
+  .rg-scroll-down {
+    background: url(~@assets/icons/grid_scroll_arrow_left.svg) center center no-repeat;
+    border: none;
+
+    &:hover {
+      background: url(~@assets/icons/grid_scroll_arrow_left.svg) center center no-repeat;
+      border: none;
+    }
+  }
+
+  .rg-scrolledge {
+    border: none;
+  }
+
+  .rg-scroll-right {
+    transform: rotate(180deg);
+  }
+
+  .rg-scroll-up {
+    transform: rotate(90deg);
+  }
+
+  .rg-scroll-down {
+    transform: rotate(270deg);
+  }
 }
 
 // table 정의 - 필요에 따라 본 정의는 이동될 수 있음.
