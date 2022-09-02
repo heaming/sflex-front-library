@@ -1,5 +1,5 @@
 import { GlobalModalVmKey } from '../consts/private/symbols';
-import { addGlobalDatas } from '../utils/private/globalDatas';
+import { addGlobalData } from '../utils/private/globalData';
 import { defineGetters } from '../utils/private/globalProperty';
 import store from '../store';
 
@@ -49,7 +49,7 @@ export async function modal(options) {
   }
 
   return new Promise((resolve) => {
-    addGlobalDatas({
+    addGlobalData({
       ...normalizeOptions(options),
       vmKey: GlobalModalVmKey,
       resolve,

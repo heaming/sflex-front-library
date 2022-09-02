@@ -24,8 +24,8 @@
 
 <script>
 import { GlobalModalVmKey } from '../../consts/private/symbols';
-import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVms';
-import { getGlobalDatas, removeGlobalDatas } from '../../utils/private/globalDatas';
+import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
+import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 
 export default {
   name: 'GlobalModal',
@@ -37,7 +37,7 @@ export default {
     const containerRefs = ref();
 
     registerGlobalVm(GlobalModalVmKey, vm, () => {
-      modals.value = getGlobalDatas(GlobalModalVmKey);
+      modals.value = getGlobalData(GlobalModalVmKey);
     });
 
     onBeforeUnmount(() => {
@@ -64,7 +64,7 @@ export default {
     async function close(modal, { result, payload }) {
       if (!modal.componentResolved || await isClosable(modal, result)) {
         modal.resolve({ result, payload });
-        removeGlobalDatas(modal);
+        removeGlobalData(modal);
       }
     }
 

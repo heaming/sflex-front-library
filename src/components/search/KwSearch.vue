@@ -50,7 +50,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useForm, { useFormProps } from '../../composables/private/useForm';
 import useFormExpandable, { useFormExpandableProps } from '../../composables/private/useFormExpandable';
 import { FORM_TYPE } from '../../composables/private/useFormType';
-import useLibConfig from '../../composables/private/useLibConfig';
+import libConfig from '../../consts/private/libConfig';
 import i18n from '../../i18n';
 
 export default {
@@ -75,7 +75,6 @@ export default {
 
   setup(props, { emit }) {
     const formCtx = useForm();
-    const { DEFAULT_DEBOUNCE_WAIT } = useLibConfig();
 
     const {
       getRegisteredChild,
@@ -95,7 +94,7 @@ export default {
         && await confirmIfTargetsModified()) {
         emit('search', formCtx.values);
       }
-    }, DEFAULT_DEBOUNCE_WAIT, { leading: true });
+    }, libConfig.DEFAULT_DEBOUNCE_WAIT, { leading: true });
 
     async function onReset() {
       await formCtx.reset();

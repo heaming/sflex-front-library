@@ -10,7 +10,7 @@
         show-value
         size="8em"
         :value="progressValue"
-        :animation-speed="$g.libConfig.LOADING_PROGRESS_ANIMATION_SPEED"
+        :animation-speed="LOADING_PROGRESS_ANIMATION_SPEED"
       />
       <q-spinner
         v-else
@@ -22,16 +22,20 @@
 </template>
 
 <script>
-import useLibConfig from '../../composables/private/useLibConfig';
 import { GlobalLoadingVmKey } from '../../consts/private/symbols';
-import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVms';
+import libConfig from '../../consts/private/libConfig';
+import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
+
+const {
+  LOADING_PROGRESS_MAX,
+  LOADING_PROGRESS_ANIMATION_SPEED,
+} = libConfig;
 
 export default {
   name: 'GlobalLoading',
 
   setup() {
     const vm = getCurrentInstance();
-    const { LOADING_PROGRESS_MAX } = useLibConfig();
 
     const loadCount = ref(0);
     const progressValue = ref(-1);
@@ -61,6 +65,8 @@ export default {
     }
 
     return {
+      LOADING_PROGRESS_MAX,
+      LOADING_PROGRESS_ANIMATION_SPEED,
       progressValue,
       isProgress,
       isActive,

@@ -1,5 +1,5 @@
 import { GlobalDialogVmKey } from '../consts/private/symbols';
-import { addGlobalDatas } from '../utils/private/globalDatas';
+import { addGlobalData } from '../utils/private/globalData';
 import { defineGetters } from '../utils/private/globalProperty';
 
 const normalizeOptions = (options = {}) => ({
@@ -10,7 +10,7 @@ const normalizeOptions = (options = {}) => ({
 
 export function alert(message, options = {}) {
   return new Promise((resolve) => {
-    addGlobalDatas({
+    addGlobalData({
       ...normalizeOptions(options),
       message,
       isConfirm: false,
@@ -22,7 +22,7 @@ export function alert(message, options = {}) {
 
 export function confirm(message, options) {
   return new Promise((resolve) => {
-    addGlobalDatas({
+    addGlobalData({
       ...normalizeOptions(options),
       message,
       isConfirm: true,
