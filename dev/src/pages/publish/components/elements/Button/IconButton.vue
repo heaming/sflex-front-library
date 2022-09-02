@@ -328,6 +328,10 @@ const iconButton = `
   icon="search_24"
   size="24px"
 />
+<kw-btn
+  class="kw-btn--icon-only mr10"
+  icon="info_24"
+/>
 `;
 const testCode = `
 <kw-btn
