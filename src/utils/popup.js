@@ -1,4 +1,4 @@
-import { openURL, uid } from 'quasar';
+import { Platform, openURL, uid } from 'quasar';
 
 const openedPopups = {};
 
@@ -38,37 +38,71 @@ function registerOpened(pid, resolve) {
   openedPopups[pid] = resolve;
 }
 
-const normalizeOptions = (options = {}) => ({
-  ...options,
-  width: options.width,
-  height: options.height,
-  popup: options.popup !== false,
-  noopener: options.noopener === true,
-  noreferrer: options.noreferrer === true,
-  menubar: options.menubar === true,
-  toolbar: options.toolbar === true,
-});
+function calculateCenterTopLeft(width, height) {
+  const fullWidth = window.innerWidth || document.documentElement.clientWidth || window.screen.width;
+  const fullHeight = window.innerHeight || document.documentElement.clientHeight || window.screen.height;
+  const zoom = fullWidth / window.screen.availWidth;
+  const otherScreenLeft = window.screenLeft ?? window.screenX;
+  const otherScreenTop = window.screenTop ?? window.screenY;
 
-export function open(url, options) {
-  options = normalizeOptions(options);
+  const left = (fullWidth - Number.parseInt(width, 10)) / 2 / zoom + otherScreenLeft;
+  const top = (fullHeight - Number.parseInt(height, 10)) / 2 / zoom + otherScreenTop;
 
-  const {
-    origin,
-    pathname,
-    search,
-    hash,
-  } = new URL(url, /^https?:\/\//.test(url) ? undefined : window.location.origin);
+  return { left, top };
+}
 
-  const pid = uid();
-  const urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
-  const openedWindow = openURL(urlWithUid, null, options);
+function parseFeatures(windowFeatures) {
+  const parsedFeatures = {};
+  const features = {
+    popup: true,
+    noopener: false,
+    noreferrer: false,
+    menubar: false,
+    status: false,
+    titlebar: false,
+    ...windowFeatures,
+  };
 
-  return new Promise((resolve) => {
-    if (openedWindow) {
-      registerOpened(pid, resolve);
+  const { width, height } = features;
+  const shouldCalculateCenter = Platform.is.desktop && width && height;
+
+  if (shouldCalculateCenter) {
+    Object.assign(features, {
+      ...calculateCenterTopLeft(width, height),
+    });
+  }
+
+  Object.keys(features).forEach((key) => {
+    const value = features[key];
+    if (typeof value === 'boolean') {
+      parsedFeatures[key] = value;
     } else {
-      resolve({ result: false });
+      parsedFeatures[`${key}=${value}`] = true;
     }
+  });
+
+  return parsedFeatures;
+}
+
+export function open(url, windowFeatures) {
+  return new Promise((resolve, reject) => {
+    const {
+      origin,
+      pathname,
+      search,
+      hash,
+    } = new URL(url, /^https?:\/\//.test(url) ? undefined : window.location.origin);
+
+    const pid = uid();
+    const urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
+
+    openURL(urlWithUid, () => {
+      reject(
+        new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
+      );
+    }, parseFeatures(windowFeatures));
+
+    registerOpened(pid, resolve);
   });
 }
 
@@ -76,7 +110,7 @@ function close(result, payload, forceClose = true) {
   const pid = new URLSearchParams(window.location.search).get('pid');
 
   if (!pid) {
-    throw new Error('invalid call, there is no pid in search params.');
+    throw new Error('Invalid call, there is no pid in search parameters.');
   }
 
   window.opener.postMessage({
