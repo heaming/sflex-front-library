@@ -1,5 +1,8 @@
 <template>
-  <q-chip class="kw-chip">
+  <q-chip
+    class="kw-chip"
+    :ripple="false"
+  >
     <slot />
   </q-chip>
 </template>
@@ -8,7 +11,6 @@
 
 export default {
   name: 'KwChip',
-
   setup() {
 
   },

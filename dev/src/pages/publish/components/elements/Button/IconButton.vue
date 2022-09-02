@@ -130,10 +130,6 @@
             icon="search_24"
             size="24px"
           />
-          <kw-btn
-            class="kw-btn--icon-only mr10"
-            icon="info_24"
-          />
         </div>
         <guide-code-view
           :code-value="iconButton"
@@ -327,6 +323,10 @@ const iconButton = `
   class="kw-btn--icon-only h50 w50 mr10"
   icon="search_24"
   size="24px"
+/>
+<kw-btn
+  class="kw-btn--icon-only mr10"
+  icon="info_24"
 />
 `;
 const testCode = `
