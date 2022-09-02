@@ -1,5 +1,10 @@
 const globalVms = {};
 
+export const UPDATE_STATE = {
+  ADDED: 'added',
+  REMOVED: 'removed',
+};
+
 export function registerGlobalVm(vmKey, vm, update) {
   globalVms[vmKey] = { vm, update };
 }
@@ -13,6 +18,6 @@ export function getGlobalVm(vmKey) {
   return globalVms[vmKey].vm;
 }
 
-export function updateGlobalVm(vmKey) {
-  globalVms[vmKey]?.update();
+export function updateGlobalVm(vmKey, updateState, data) {
+  globalVms[vmKey]?.update(updateState, data);
 }

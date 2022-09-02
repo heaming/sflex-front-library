@@ -2,8 +2,9 @@
   <q-card
     ref="containerRef"
     class="kw-popup"
-    :style="popupStyle"
     :class="popupClass"
+    :style="popupStyle"
+    square
   >
     <q-card-section
       v-bind="draggableEvents"

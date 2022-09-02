@@ -8,18 +8,12 @@ import { installI18n } from './i18n';
 import { installRouter } from './router';
 import { installStore } from './store';
 import { defineRules } from './validate';
-
 import { GlobalKey } from './consts/private/symbols';
-import libConfig from './consts/private/libConfig';
 import { g, defineGetters } from './utils/private/globalProperty';
 
 function provideGlobal(app) {
   const q = app.config.globalProperties.$q;
-
-  defineGetters(app, {
-    q, libConfig,
-  });
-
+  defineGetters(app, { q });
   app.provide(GlobalKey, g);
 }
 
