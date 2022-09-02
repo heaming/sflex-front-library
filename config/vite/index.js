@@ -99,10 +99,10 @@ exports.defineConfig = (config) => {
       ],
 
       define: {
-        // flag indicating the app is test only.
+        // flag indicating the app is test only
         __VUE_TEST_APP__: false,
 
-        // flag indicating the app is mobile environment.
+        // flag indicating the app is mobile environment
         __VUE_MOBILE_APP__: false,
 
         // enable/disable Options API support
@@ -111,7 +111,7 @@ exports.defineConfig = (config) => {
         __VUE_PROD_DEVTOOLS__: false,
 
         ...(isBuild ? {} : {
-          // realgrid use `global` that global object of nodejs.
+          // realgrid use `global` that  occur error in dev(serve command)
           global: {},
         }),
 
