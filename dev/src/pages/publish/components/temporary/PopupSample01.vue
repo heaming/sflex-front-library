@@ -1,7 +1,7 @@
 <template>
   <guide-popup-view>
     <kw-popup
-      class="kw-popup--md"
+      class="kw-popup--lg"
       title="은행자동이체 청구 기준"
     >
       <table class="kw-table--normal">
