@@ -30,7 +30,7 @@ function registerMessageEvent() {
   window.addEventListener('message', globalMessageEvent, false);
 }
 
-function registerOpened(pid, resolve) {
+function registerOpenedPopup(pid, resolve) {
   if (!globalMessageEvent) {
     registerMessageEvent();
   }
@@ -102,7 +102,7 @@ export function open(url, windowFeatures) {
       );
     }, parseFeatures(windowFeatures));
 
-    registerOpened(pid, resolve);
+    registerOpenedPopup(pid, resolve);
   });
 }
 
