@@ -1,15 +1,18 @@
 <template>
   <q-dialog
     ref="dialogRef"
+    class="global-dialog"
     :model-value="isActive"
     :transition-duration="$g.libConfig.DIALOG_TRANSITION_DURATION"
-    square
     persistent
     no-shake
     :no-refocus="dialog?.refocus === false"
     @keydown.esc="onClick(false)"
   >
-    <q-card class="global-dialog">
+    <q-card
+      class="global-dialog__inner"
+      square
+    >
       <q-card-section class="global-dialog__content">
         <p>
           {{ dialog.message }}

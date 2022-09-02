@@ -4,7 +4,6 @@
     :key="modal.uid"
     class="global-modal"
     :model-value="true"
-    square
     persistent
     no-shake
     no-refocus

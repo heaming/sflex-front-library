@@ -1,5 +1,13 @@
 .global-dialog {
-  width: 400px;
+  .q-dialog__backdrop {
+    background: transparent;
+  }
+
+  &__inner {
+    width: 400px;
+    border: 1px solid $black-btn-line;
+    box-shadow: 8px 10px 10px 0 rgb(0 0 0 / 12%) !important;
+  }
 
   &__content {
     padding: 40px 0 0;
