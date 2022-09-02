@@ -1,38 +1,4 @@
-$kw-field-font-size: 16px;
-$kw-field-font-size-dense: 14px;
-$kw-field-font-size-marginal: $kw-field-font-size;
-$kw-field-font-size-marginal-dense: $kw-field-font-size-dense;
-$kw-field-font-size-bottom: 14px;
-$kw-field-font-size-bottom-dense: 12px;
-$kw-field-line-height: 24px !global;
-$kw-field-line-height-dense: 20px !global;
-$kw-field-padding-input: 8px 12px 8px 12px;
-$kw-field-padding-input-dense: 6px 12px 6px 12px;
-$kw-field-height: 40px;
-$kw-field-height-dense: 32px;
-$kw-field-border-radius: 0;
-$kw-field-bg-color-disable: $line-bg;
-$kw-field-color: $black1;
-$kw-field-color-disable: $black3;
-
 .kw-field.q-field {
-  $kw-field-font-size: 16px;
-  $kw-field-font-size-dense: 14px;
-  $kw-field-font-size-marginal: $kw-field-font-size;
-  $kw-field-font-size-marginal-dense: $kw-field-font-size-dense;
-  $kw-field-font-size-bottom: 14px;
-  $kw-field-font-size-bottom-dense: 12px;
-  $kw-field-line-height: 24px;
-  $kw-field-line-height-dense: 20px;
-  $kw-field-padding-input: 8px 12px;
-  $kw-field-padding-input-dense: 6px 12px;
-  $kw-field-height: 40px;
-  $kw-field-height-dense: 32px;
-  $kw-field-border-radius: 0;
-  $kw-field-bg-color-disable: $line-bg;
-  $kw-field-color: $black1;
-  $kw-field-color-disable: $black3;
-
   font-size: $kw-field-font-size;
 
   &.q-field--with-bottom {
@@ -86,7 +52,7 @@ $kw-field-color-disable: $black3;
 
   .q-field__control {
     height: $kw-field-height; // min-height: $_kw-field-height;
-    color: $black1;
+    color: $kw-field-color;
 
     &::before,
     &::after {
