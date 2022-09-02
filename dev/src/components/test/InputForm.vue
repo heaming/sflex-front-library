@@ -162,8 +162,9 @@
       <kw-form-item label="textarea">
         <kw-input
           v-model="stringModel"
+          :label="'test'"
           type="textarea"
-          :rows="5"
+          :rows="1"
         />
       </kw-form-item>
       <kw-form-item label="autogrow">
@@ -172,6 +173,27 @@
           label="before"
           type="textarea"
           autogrow
+          rows="5"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="textarea">
+        <kw-input
+          v-model="stringModel"
+          :label="'test'"
+          type="textarea"
+          dense
+          :rows="1"
+        />
+      </kw-form-item>
+      <kw-form-item label="autogrow">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          type="textarea"
+          autogrow
+          dense
           rows="5"
         />
       </kw-form-item>
