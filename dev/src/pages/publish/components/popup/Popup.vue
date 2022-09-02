@@ -72,6 +72,7 @@
 <script setup>
 
 const testCode = `
+// Small & No title
 <kw-popup
   class="kw-popup--sm"
 >
@@ -90,6 +91,7 @@ const testCode = `
   </template>
 </kw-popup>
 
+// Small & Titled type
 <kw-popup
   class="kw-popup--sm"
   title="카테고리 검색"
@@ -109,6 +111,7 @@ const testCode = `
   </template>
 </kw-popup>
 
+// Medium
 <kw-popup
   class="kw-popup--md"
   title="카테고리 검색"
@@ -128,8 +131,69 @@ const testCode = `
   </template>
 </kw-popup>
 
+// Large
 <kw-popup
   class="kw-popup--lg"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// X-Large
+<kw-popup
+  class="kw-popup--xl"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// 2X-Large
+<kw-popup
+  class="kw-popup--2xl"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// 3X-Large
+<kw-popup
+  class="kw-popup--3xl"
   title="상품선택"
 >
   내용<br>
