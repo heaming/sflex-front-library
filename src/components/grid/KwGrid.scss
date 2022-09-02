@@ -236,3 +236,65 @@
     background: #fff;
   }
 }
+
+.table {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 0;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    .item {
+      display: flex;
+      margin-left: 80px;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+
+      p {
+        width: 134px;
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 1.43;
+        color: #777;
+      }
+
+      div {
+        width: 100%;
+        margin-left: 16px;
+        text-align: right;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #222;
+      }
+    }
+  }
+
+  &--col3 {
+    .item {
+      width: calc(100% / 3);
+    }
+  }
+
+  &--col2 {
+    .item {
+      width: calc(100% / 2);
+    }
+  }
+
+  &--col1 {
+    .item {
+      width: 100%;
+    }
+  }
+}
