@@ -19,6 +19,8 @@
     width: 150px;
     min-height: $-kw-form-item-min-height;
     padding-right: 16px;
+    display: flex;
+    align-items: center;
 
     &--required {
       .kw-label-content__label::after {
@@ -52,22 +54,21 @@
 }
 
 .kw-label-content {
+  // use only inline tags
+  font-size: 14px;
+  line-height: 18px;
+  color: $black3;
+  word-break: break-word;
+
   &__label {
     display: contents;
-    align-items: center;
-    font-size: 14px;
-    line-height: 18px;
-    color: $black3;
-    word-break: break-word;
-    padding: 2px 0;
   }
 
   &__hint {
     display: contents;
-    margin-left: 4px;
 
     ::before {
-      content: "";
+      content: " ";
       width: 4px;
     }
   }

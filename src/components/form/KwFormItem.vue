@@ -5,30 +5,31 @@
   >
     <div
       v-if="!noLabel"
-      class="kw-form-item__label kw-label-content"
+      class="kw-form-item__label"
       :class="labelClass"
       :style="{width: labelWidth}"
     >
-      <slot name="label">
-        <span class="kw-label-content__label">
-          {{ label }}
-        </span>
-      </slot>
-
-      <div
-        v-if="hint"
-        class="kw-label-content__hint"
-      >
-        <q-icon
-          size="16px"
-          name="info_16"
+      <div class="kw-label-content">
+        <slot name="label">
+          <span class="kw-label-content__label">
+            {{ label }}
+          </span>
+        </slot>
+        <span
+          v-if="hint"
+          class="kw-label-content__hint"
         >
-          <kw-tooltip>
-            <slot name="hint">
-              {{ hint }}
-            </slot>
-          </kw-tooltip>
-        </q-icon>
+          <q-icon
+            size="16px"
+            name="info_16"
+          >
+            <kw-tooltip>
+              <slot name="hint">
+                {{ hint }}
+              </slot>
+            </kw-tooltip>
+          </q-icon>
+        </span>
       </div>
     </div>
     <div class="kw-form-item__field">
