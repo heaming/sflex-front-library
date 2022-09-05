@@ -4,6 +4,7 @@
     :class="label ? '' : 'kw-checkbox--no-label'"
     :true-value="trueValue"
     :false-value="falseValue"
+    :indeterminate-value="indeterminateValue"
     :val="val"
     :label="label ?? val"
     :checked-icon="checkedIcon"
@@ -28,6 +29,10 @@ export default {
       type: [String, Number, Boolean],
       default: 'N',
     },
+    indeterminateValue: {
+      type: [String, Number, Boolean],
+      default: undefined,
+    },
     val: {
       type: [String, Number, Boolean],
       default: undefined,
@@ -38,15 +43,15 @@ export default {
     },
     checkedIcon: {
       type: String,
-      default: 'checkbox',
+      default: undefined, // 'checkbox',
     },
     uncheckedIcon: {
       type: String,
-      default: 'emptybox',
+      default: undefined, // 'emptybox',
     },
     indeterminateIcon: {
       type: String,
-      default: 'indeterminate',
+      default: undefined, // 'indeterminate',
     },
   },
 
