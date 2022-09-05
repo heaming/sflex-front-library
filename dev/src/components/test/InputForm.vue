@@ -36,7 +36,7 @@
           v-model="stringModel"
           readonly
           label="기본"
-        />
+        /> <span>~</span>
         <kw-input
           v-model="stringModel"
           readonly
@@ -63,18 +63,14 @@
     <kw-form-row>
       <kw-form-item label="error">
         <kw-input
-          :ref="setHoverRefs"
           v-model="stringModel"
-          label="hover"
           :rules="() => false"
           validate-on-mount
         />
       </kw-form-item>
       <kw-form-item label="error & disable">
         <kw-input
-          :ref="setHoverRefs"
           v-model="stringModel"
-          label="hover"
           :rules="() => '길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고'"
           validate-on-mount
           disable
@@ -126,6 +122,22 @@
       </kw-form-item>
     </kw-form-row>
     <kw-form-row>
+      <kw-form-item label="prefix">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          prefix="prefix"
+        />
+      </kw-form-item>
+      <kw-form-item label="suffix">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          suffix="suffix"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
       <kw-form-item label="icon">
         <kw-input
           v-model="stringModel"
@@ -164,16 +176,20 @@
           v-model="stringModel"
           :label="'test'"
           type="textarea"
-          :rows="1"
+          :rows="5"
         />
       </kw-form-item>
-      <kw-form-item label="autogrow">
+      <kw-form-item
+        label="autogrow autogrowautogrowautogrowautogrowautogrowautogrow"
+        required
+        hint="hint"
+      >
         <kw-input
           v-model="stringModel"
           label="before"
           type="textarea"
           autogrow
-          rows="5"
+          rows="1"
         />
       </kw-form-item>
     </kw-form-row>
@@ -342,7 +358,11 @@
           disable
         />
       </kw-form-item>
-      <kw-form-item label="underline error dense">
+      <kw-form-item
+        label="underline error dense"
+        hint="hint"
+        required
+      >
         <kw-input
           v-model="stringModel"
           underline

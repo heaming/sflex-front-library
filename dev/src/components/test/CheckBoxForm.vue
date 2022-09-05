@@ -87,42 +87,42 @@
       <kw-form-item label="old">
         <q-checkbox
           v-model="trueModel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
         <q-checkbox
           v-model="falseModel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
         <q-checkbox
           v-model="indeterminateModel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
         <q-checkbox
           v-model="boolModel"
           :label="boolLabel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
       </kw-form-item>
       <kw-form-item label="old dense">
         <q-checkbox
           v-model="trueModel"
           dense
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
         <q-checkbox
           v-model="falseModel"
           dense
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
         <q-checkbox
           v-model="indeterminateModel"
           dense
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
         />
         <q-checkbox
           v-model="boolModel"
           :label="boolLabel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           dense
         />
       </kw-form-item>
@@ -131,23 +131,23 @@
       <kw-form-item label="old disable">
         <q-checkbox
           v-model="trueModel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
         <q-checkbox
           v-model="falseModel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
         <q-checkbox
           v-model="indeterminateModel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
         <q-checkbox
           v-model="boolModel"
           :label="boolLabel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
       </kw-form-item>
@@ -155,25 +155,25 @@
         <q-checkbox
           v-model="trueModel"
           dense
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
         <q-checkbox
           v-model="falseModel"
           dense
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
         <q-checkbox
           v-model="indeterminateModel"
           dense
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           disable
         />
         <q-checkbox
           v-model="boolModel"
           :label="boolLabel"
-          class="kw-checkbox-old"
+          class="kw-checkbox--old"
           dense
           disable
         />
