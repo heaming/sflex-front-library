@@ -6,6 +6,7 @@
   &--sm {
     width: 460px;
     max-width: 460px !important;
+    min-width: 460px !important;
     min-height: 300px;
     margin-top: 0;
 
@@ -17,26 +18,31 @@
   &--md {
     width: 660px;
     max-width: 660px !important;
+    min-width: 660px !important;
   }
 
   &--lg {
     width: 860px;
     max-width: 860px !important;
+    min-width: 860px !important;
   }
 
   &--xl {
     width: 1060px;
     max-width: 1060px !important;
+    min-width: 1060px !important;
   }
 
   &--2xl {
     width: 1260px;
     max-width: 1260px !important;
+    min-width: 1260px !important;
   }
 
   &--3xl {
     width: 1460px;
     max-width: 1460px !important;
+    min-width: 1460px !important;
   }
 
   .kw-popup__header {
@@ -94,4 +100,29 @@
 
 .q-dialog__inner--minimized > div {
   max-height: calc(100vh - 128px);
+}
+
+// form in popup
+
+.kw-popup {
+  .kw-form .kw-form-row {
+    width: calc(100% + 80px);
+    margin-left: -80px;
+  }
+
+  .kw-form .kw-form-row .kw-form-item[style*="50%"]:nth-child(2) {
+    margin-left: 0;
+  }
+
+  .kw-form .kw-form-row .kw-form-item {
+    padding-left: 80px;
+  }
+
+  .kw-form .kw-form-item__field .q-field {
+    max-width: 100%;
+  }
+
+  .kw-date-picker .q-field__inner {
+    max-width: 100%;
+  }
 }
