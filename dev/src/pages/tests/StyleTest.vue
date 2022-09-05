@@ -1,4 +1,5 @@
 <template>
+  <!-- input -->
   <q-expansion-item
     label="Input"
   >
@@ -14,36 +15,20 @@
       <select-form />
     </div>
   </q-expansion-item>
+  <!-- checkbox -->
   <q-expansion-item
     label="CheckBox"
     default-opened
   >
     <div class="result-area">
-      <q-checkbox
-        v-model="booleanModel"
-        size="22px"
-      />
-      <q-checkbox
-        v-model="booleanModel"
-        size="44px"
-        dense
-      />
-      <q-checkbox
-        v-model="booleanModel"
-        size="18px"
-      />
-      <q-checkbox
-        v-model="booleanModel"
-        size="26px"
-        dense
-      />
+      <check-box-form />
     </div>
   </q-expansion-item>
 </template>
 
 <script setup>
 /* eslint-disable no-unused-vars */
-import { InputForm, SelectForm } from '../../components/test';
+import { InputForm, SelectForm, CheckBoxForm } from '../../components/test';
 
 const formRef = ref();
 const hoverRefs = [];
