@@ -1,29 +1,15 @@
-import { FormExpandableContextKey } from '../../consts/private/symbols';
+import useFormLayout, { useFormLayoutProps } from './useFormLayout';
+
+export const useFormRowProps = {
+  ...useFormLayoutProps,
+};
 
 export default () => {
-  const vm = getCurrentInstance();
-  const showing = ref(true);
+  const { cols } = useFormLayout();
 
-  function toggleShowing(val) {
-    showing.value = val ?? !showing.value;
-  }
-
-  Object.assign(vm.proxy, {
-    toggleShowing,
-  });
-
-  const {
-    registerExpandableChild,
-    unregisterExpandableChild,
-  } = inject(FormExpandableContextKey, {});
-
-  registerExpandableChild(vm);
-
-  onBeforeUnmount(() => {
-    unregisterExpandableChild(vm);
-  });
+  const rowClass = computed(() => (cols.value ? `kw-form-row--cols-${cols.value}` : ''));
 
   return {
-    showing,
+    rowClass,
   };
 };
