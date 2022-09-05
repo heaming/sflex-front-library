@@ -53,6 +53,16 @@
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
+
+    .q-icon {
+      transition: transform 0.28s;
+    }
+
+    &--expanded {
+      .q-icon {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &--onerow {

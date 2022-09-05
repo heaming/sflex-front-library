@@ -13,7 +13,8 @@
     <kw-btn
       v-if="isExpandable"
       class="kw-search__view-more"
-      :icon-right="isExpanded ? 'arrow_up_16' : 'arrow_down_16'"
+      :class="{'kw-search__view-more--expanded' : isExpanded }"
+      icon-right="arrow_down_16"
       :label="$t('MSG_BTN_VIEW_MORE', null, '더보기')"
       flat
       @click="toggleExpand()"
