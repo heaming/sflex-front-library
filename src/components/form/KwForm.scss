@@ -171,6 +171,11 @@
   }
 }
 
-.kw-form .kw-form-row .kw-form-item:nth-child(2) {
-  margin-left: 100px;
+.kw-form .kw-form-row .kw-form-item[style*="max-width: 50%;"]:nth-child(2) {
+  margin-left: 80px;
+}
+
+.kw-form--textright p {
+  width: 100%;
+  text-align: right;
 }
