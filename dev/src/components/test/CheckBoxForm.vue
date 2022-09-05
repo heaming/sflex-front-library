@@ -427,6 +427,19 @@
         />
       </kw-form-item>
     </kw-form-row>
+
+    <kw-form-row>
+      <kw-form-item
+        :colspan="2"
+        label="icon disable"
+      >
+        <kw-option-group
+          :model-value="['A']"
+          type="checkbox"
+          :options="['A', 'B', 'C', 'D']"
+        />
+      </kw-form-item>
+    </kw-form-row>
   </kw-form>
 </template>
 
