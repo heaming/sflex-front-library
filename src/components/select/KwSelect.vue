@@ -3,8 +3,10 @@
   <q-select
     ref="inputRef"
     :model-value="value"
-    class="kw-select"
-    :label="$q.platform.is.desktop ? null : label"
+    v-bind="fieldStyles"
+    class="kw-field kw-select"
+    popup-content-class="kw-select-options-menu"
+    :label="label"
     :error="invalid"
     :error-message="invalidMessage"
     :options="filteredOptions"
@@ -15,7 +17,7 @@
     :map-options="emitValue"
     :use-input="useInput"
     :input-debounce="100"
-    borderless
+    dropdown-icon="arrow_down_16"
     no-error-icon
     @update:model-value="onUpdateValue"
     @filter="filter"
@@ -59,8 +61,12 @@
         @click="toggleAll"
       >
         <q-item-section side>
-          <q-checkbox
+          <kw-checkbox
+            class="kw-checkbox"
             :model-value="selectedAll"
+            :true-value="true"
+            :false-value="false"
+            dense
             @update:model-value="toggleAll"
           />
         </q-item-section>
@@ -83,8 +89,12 @@
           v-if="multiple"
           side
         >
-          <q-checkbox
+          <kw-checkbox
+            class="kw-checkbox"
             :model-value="selected"
+            dense
+            :true-value="true"
+            :false-value="false"
             @update:model-value="toggleOption(opt)"
           />
         </q-item-section>
@@ -102,12 +112,14 @@
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
+import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 
 export default {
   name: 'KwSelect',
 
   props: {
     ...useFieldProps,
+    ...useFieldStyleProps,
     ...useOptionsProps,
 
     modelValue: {
@@ -164,8 +176,11 @@ export default {
       filter.value('', (cb) => cb());
     }
 
+    const fieldStyles = useFieldStyle();
+
     return {
       ...fieldCtx,
+      fieldStyles,
       onUpdateValue,
       ...optionsCtx,
       filteredOptions,
