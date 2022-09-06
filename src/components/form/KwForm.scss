@@ -68,11 +68,11 @@
     &--cols-#{$cols} {
       .kw-form-item {
         width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols}) !important;
-      }
 
-      @for $colspan from 1 through 12 {
-        &.kw-form-item--colspan-#{$colspan} {
-          width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan}) !important;
+        @for $colspan from 1 through 12 {
+          &--colspan-#{$colspan} {
+            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan}) !important;
+          }
         }
       }
     }
