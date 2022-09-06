@@ -1,102 +1,188 @@
-.kw-checkbox {
-  $root: ".q-checkbox";
+.kw-checkbox.q-checkbox {
+  $-kw-checkbox-icon-size: 22px; // maybe calc(#{$kw-field-line-height} - 2px)
+  $-kw-checkbox-icon-size-dense: 18px;
+  $-kw-checkbox-label-font-size: $kw-field-font-size;
+  $-kw-checkbox-label-font-size-dense: $kw-field-font-size-dense;
+  $-kw-checkbox-line-height: $kw-field-line-height;
+  $-kw-checkbox-line-height-dense: $kw-field-line-height-dense;
 
-  margin-right: 20px;
-  height: 32px;
+  .q-checkbox__bg { /* does not appear when using icon */
+    inset: 1px;
+    width: $-kw-checkbox-icon-size;
+    height: $-kw-checkbox-icon-size;
+    border: none;
+    border-radius: 0;
+    background: url(~@assets/images/checkbox_off.svg) no-repeat center;
+    background-size: $-kw-checkbox-icon-size;
+  }
 
-  #{$root}__label {
+  .q-checkbox__icon {
+    font-size: 1em;
+  }
+
+  .q-checkbox__svg {
+    display: none;
+  }
+
+  .q-checkbox__truthy { /* does not appear */ }
+
+  .q-checkbox__indet { /* does not appear */ }
+
+  .q-checkbox__inner {
+    font-size: $-kw-checkbox-icon-size;
+    width: $-kw-checkbox-line-height;
+    min-width: $-kw-checkbox-line-height;
+    height: $-kw-checkbox-line-height;
+
+    &--truthy,
+    &--indet {
+      use {
+        /*
+        If you want use custom icon, you should override this. or use fixed color in your icon svg.
+
+        only appear when using svg-use way what we use.
+        notify, there is <use> does not rendered in main dom,
+        so, if you want styling them, only you can use inherit properties.
+        like, currentColor, or inherit.
+        ref) https://tympanus.net/codrops/2015/07/16/styling-svg-use-content-css/
+       */
+        stroke: $primary; // border color
+        fill: $primary; // background color
+        color: $bg-white; // inner content color, like check path.
+      }
+
+      .q-checkbox__bg {
+        background: url(~@assets/images/checkbox_on.svg) no-repeat center;
+        background-size: $-kw-checkbox-icon-size;
+      }
+    }
+
+    &--falsy {
+      use {
+        stroke: $line-stroke; // border color
+        fill: $bg-white; // background color
+      }
+    }
+  }
+
+  .q-checkbox__label {
     margin-left: 8px;
-    font-size: 16px;
+    font-size: $-kw-checkbox-label-font-size;
+    line-height: $-kw-checkbox-line-height;
     font-weight: 500;
     color: $black1;
   }
-  #{$root}__inner {
-    position: relative;
-    width: 22px;
-    min-width: 22px;
-    height: 22px;
-
-    &::before,
-    #{$root}__svg {
-      display: none;
-    }
-
-    #{$root}__bg {
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: url(~@assets/images/checkbox_off.svg) no-repeat center;
-      background-size: 22px;
-      border-radius: 0;
-      border: none;
-    }
-
-    &#{$root}__inner--truthy #{$root}__bg,
-    &#{$root}__inner--indet #{$root}__bg {
-      background: url(~@assets/images/checkbox_on.svg) no-repeat center;
-      background-size: 22px;
-      border: none;
-    }
-  }
 
   &.disabled {
-    #{$root}__label {
+    opacity: unset !important;
+
+    .q-checkbox__label {
       color: $placeholder;
     }
 
-    #{$root}__bg {
+    .q-checkbox__bg {
       background: url(~@assets/images/checkbox_disable.svg) no-repeat center;
+      background-size: $-kw-checkbox-icon-size;
+    }
+
+    .q-checkbox__inner--truthy .q-checkbox__bg {
+      background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
       background-size: 22px;
     }
 
-    #{$root}__inner--truthy #{$root}__bg {
-      background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
-      background-size: 22px;
+    .q-checkbox__inner {
+      font-size: $-kw-checkbox-icon-size;
+
+      &--truthy,
+      &--indet,
+      &--falsy {
+        use {
+          /*
+          only appear when using svg-use way what we use.
+          notify, there is <use> does not rendered in main dom,
+          so, if you want styling them, only you can use inherit properties.
+          like, currentColor, or inherit.
+          ref) https://tympanus.net/codrops/2015/07/16/styling-svg-use-content-css/
+         */
+          stroke: $line-stroke; // border color
+          fill: $line-bg; // background color
+          color: $line-stroke; // inner content color, like check path.
+        }
+      }
+    }
+  }
+
+  .q-checkbox__label {
+    font-size: $kw-field-font-size;
+    line-height: $kw-field-line-height;
+    margin-left: 8px;
+  }
+
+  &.kw-checkbox--no-label {
+    .q-checkbox__label {
+      display: none;
+    }
+  }
+
+  &--dense {
+    .q-checkbox__inner {
+      font-size: $-kw-checkbox-icon-size-dense;
+      width: $-kw-checkbox-line-height-dense;
+      min-width: $-kw-checkbox-line-height-dense;
+      height: $-kw-checkbox-line-height-dense;
+
+      &--truthy,
+      &--indet {
+        .q-checkbox__bg {
+          background: url(~@assets/images/checkbox_on.svg) no-repeat center;
+          background-size: $-kw-checkbox-line-height-dense;
+        }
+      }
+    }
+
+    .q-checkbox__bg {
+      inset: 1px;
+      width: $-kw-checkbox-icon-size-dense;
+      height: $-kw-checkbox-icon-size-dense;
+      border: none;
+      border-radius: 0;
+      background: url(~@assets/images/checkbox_off.svg) no-repeat center;
+      background-size: $-kw-checkbox-icon-size-dense;
+    }
+
+    .q-checkbox__label {
+      font-size: $-kw-checkbox-label-font-size-dense;
+      line-height: $-kw-checkbox-line-height-dense;
+      padding-left: 4px;
+    }
+
+    &.reverse .q-checkbox__label {
+      padding-left: 0;
+      padding-right: 4px;
     }
   }
 }
 
-.kw-search {
-  .kw-checkbox {
-    $root: ".q-checkbox";
-
-    #{$root}__inner {
-      position: relative;
-      width: 18px;
-      min-width: 18px;
-      height: 18px;
-
-      #{$root}__bg {
-        width: 18px;
-        height: 18px;
-        background: url(~@assets/images/checkbox_off.svg) no-repeat center;
-        background-size: 18px;
-      }
-
-      &#{$root}__inner--truthy #{$root}__bg,
-      &#{$root}__inner--indet #{$root}__bg {
-        background: url(~@assets/images/checkbox_on.svg) no-repeat center;
-        background-size: 18px;
-        border: none;
-      }
+// remove shadow effect
+body.desktop {
+  .q-checkbox:not(.disabled) {
+    .q-checkbox__inner::before {
+      display: none;
     }
 
-    &.disabled {
-      #{$root}__label {
-        color: $placeholder;
+    &:focus,
+    &:hover {
+      .q-checkbox__inner::before {
+        transform: none;
       }
+    }
+  }
 
-      #{$root}__bg {
-        background: url(~@assets/images/checkbox_disable.svg) no-repeat center;
-        background-size: 18px;
-      }
-
-      #{$root}__inner--truthy #{$root}__bg {
-        background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
-        background-size: 18px;
+  .q-checkbox--dense:not(.disabled) {
+    &:focus,
+    &:hover {
+      .q-checkbox__inner::before {
+        transform: none;
       }
     }
   }

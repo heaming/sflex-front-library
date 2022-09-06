@@ -32,31 +32,9 @@
           option-value="codeId"
           dense
           outlined
+          use-input
           label="기본"
         />  <!-- ... 안해놨네...? -->
-      </kw-form-item>
-    </kw-form-row>
-    <!-- test -->
-    <kw-form-row>
-      <kw-form-item label="test">
-        <kw-select
-          v-model="selectModel"
-          :options="testOptionsModel"
-        />
-      </kw-form-item>
-      <kw-form-item label="멀티플">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          multiple
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-        />
       </kw-form-item>
     </kw-form-row>
     <!-- 기본 -->
@@ -472,14 +450,20 @@ const optionsModel = [
   { codeId: 'C', codeName: 'C' },
   { codeId: 'D', codeName: 'D' },
   { codeId: 'E', codeName: 'E' },
+  { codeId: 'F', codeName: 'F' },
+  { codeId: 'G', codeName: 'G' },
+  { codeId: 'H', codeName: 'H' },
+  { codeId: 'I', codeName: 'I' },
 ];
 
 const testOptionsModel = [
-  { codeId: 'A', codeName: 'A' },
-  { codeId: 'B', codeName: 'B' },
-  { codeId: 'C', codeName: 'C' },
-  { codeId: 'D', codeName: 'D' },
-  { codeId: 'E', codeName: 'E982374932847329487239487239487133957691285798gyhu987' },
+  { codeId: 'A', codeName: 'AAAAAA' },
+  { codeId: 'B', codeName: 'BBBBBB' },
+  { codeId: 'C', codeName: 'CCCCCC' },
+  { codeId: 'D', codeName: 'DDDDDD' },
+  { codeId: 'E', codeName: 'EEEEEE' },
+  { codeId: 'F', codeName: 'FFFFFF' },
+  { codeId: 'Z', codeName: 'E982374932847329487239487239487133957691285798gyhu987' },
 ];
 const longOptionsModel = Array.from({ length: 100 }).map((notUse, index) => {
   const str = String.fromCharCode(index + 92);

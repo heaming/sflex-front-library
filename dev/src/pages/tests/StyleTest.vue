@@ -1,4 +1,5 @@
 <template>
+  <!-- input -->
   <q-expansion-item
     label="Input"
   >
@@ -14,36 +15,84 @@
       <select-form />
     </div>
   </q-expansion-item>
+  <!-- checkbox -->
   <q-expansion-item
     label="CheckBox"
+  >
+    <div class="result-area">
+      <check-box-form />
+    </div>
+  </q-expansion-item>
+  <!-- button -->
+  <q-expansion-item
+    label="Button"
     default-opened
   >
     <div class="result-area">
-      <q-checkbox
-        v-model="booleanModel"
-        size="22px"
-      />
-      <q-checkbox
-        v-model="booleanModel"
-        size="44px"
-        dense
-      />
-      <q-checkbox
-        v-model="booleanModel"
-        size="18px"
-      />
-      <q-checkbox
-        v-model="booleanModel"
-        size="26px"
-        dense
-      />
+      <button-form />
+    </div>
+  </q-expansion-item>
+  <!-- search -->
+  <q-expansion-item
+    label="CheckBox"
+  >
+    <div class="result-area">
+      <kw-search :cols="0">
+        <kw-search-row>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+        </kw-search-row>
+        <kw-search-row>
+          <kw-search-item :label="'test test test test test test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+        </kw-search-row>
+        <kw-search-row>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+        </kw-search-row>
+      </kw-search>
+
+      <kw-search class="kw-search--onerow">
+        <kw-search-row>
+          <kw-search-item :label="'test test test test test test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+          <kw-search-item :label="'test'">
+            <kw-input :label="'test'" />
+          </kw-search-item>
+        </kw-search-row>
+      </kw-search>
     </div>
   </q-expansion-item>
 </template>
 
 <script setup>
 /* eslint-disable no-unused-vars */
-import { InputForm, SelectForm } from '../../components/test';
+import { InputForm, SelectForm, CheckBoxForm, ButtonForm } from '../../components/test';
 
 const formRef = ref();
 const hoverRefs = [];
