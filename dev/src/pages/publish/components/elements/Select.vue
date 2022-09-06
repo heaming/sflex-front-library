@@ -36,10 +36,12 @@
               kw-form-item
             </td>
             <td>
-              label=""
+              label="" <br>
+              required
             </td>
             <td>
-              Add the title of content
+              Add the title of content <br>
+              add attribute when essential type
             </td>
           </tr>
           <tr>
@@ -215,7 +217,7 @@
         Essential
       </h3>
       <p class="kw-guide-description">
-        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        - add attribute <b> "required" </b> in <b> &lt;kw-form-item&gt; </b>
         when it needs to be essential to input <br>
         - add attribute <b>rules="required"</b> in <b>&lt;kw-select&gt;</b>
       </p>
@@ -225,7 +227,7 @@
             <kw-form-row>
               <kw-form-item
                 label="Essential(multiple)"
-                class="essential"
+                required
               >
                 <kw-select
                   :model-value="[]"
@@ -362,7 +364,7 @@ const essentialCode = `
   <kw-form-row>
     <kw-form-item
       label="Essential(multiple)"
-      class="essential"
+      required
     >
       <kw-select
         :model-value="[]"
@@ -376,6 +378,10 @@ const essentialCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-06',
+    text: 'change guide content about essential type',
+  },
   {
     timestamp: '2022-09-01',
     text: 'remove the placeholder attribute',
