@@ -69,9 +69,14 @@
     display: flex;
     flex-flow: row nowrap;
 
+    .kw-form-row {
+      flex-grow: 1;
+    }
+
     .kw-search__action {
       padding: $-kw-search-row-padding;
       margin-left: $-kw-search-row-gap;
+      flex: none;
     }
   }
 
