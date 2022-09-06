@@ -25,14 +25,18 @@
     flex: 1 0 1%;
     display: flex;
 
-    > span {
-      margin: auto;
-      color: $black3;
-      padding: 0 4px;
-    }
-
     .kw-field {
       flex: 1 0 1%;  // max-width: 498px; why?
+
+      & + span {
+        margin: auto;
+        color: $black3;
+        padding: 0 4px;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
 
       & + .kw-field {
         margin-left: 8px;
@@ -64,11 +68,11 @@
     &--cols-#{$cols} {
       .kw-form-item {
         width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols}) !important;
-      }
 
-      @for $colspan from 1 through 12 {
-        &.kw-form-item--colspan-#{$colspan} {
-          width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan}) !important;
+        @for $colspan from 1 through 12 {
+          &--colspan-#{$colspan} {
+            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan}) !important;
+          }
         }
       }
     }
