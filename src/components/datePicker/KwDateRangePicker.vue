@@ -1,56 +1,61 @@
 <template>
-  <q-field
-    v-bind="styleClassAttrs"
+  <kw-field-wrap
     class="kw-date-range-picker"
-    :label="$q.platform.is.desktop ? null : label"
+    v-bind="styleClassAttrs"
     :error="invalid"
     :error-message="invalidMessage"
-    no-error-icon
   >
-    <template #control>
-      <kw-date-picker
-        ref="inputRef"
-        :model-value="value[0]"
-        :type="type"
-        :readonly="readonly"
-        :disable="disable"
-        :unmasked-value="unmaskedValue"
-        :min-date="minDate"
-        :max-date="maxDate"
-        :before-show="beforeShow"
-        hide-bottom-space
-        :placeholder="fromPlaceholder"
-        @update:model-value="onChangeDate($event, 0)"
-      />
-      <span>~</span>
-      <kw-date-picker
-        :model-value="value[1]"
-        :type="type"
-        :readonly="readonly"
-        :disable="disable"
-        :unmasked-value="unmaskedValue"
-        :min-date="minDate"
-        :max-date="maxDate"
-        :before-show="beforeShow"
-        hide-bottom-space
-        :placeholder="toPlaceholder"
-        @update:model-value="onChangeDate($event, 1)"
-      />
-    </template>
-  </q-field>
+    <kw-date-picker
+      ref="inputRef"
+      :model-value="value[0]"
+      v-bind="fieldStyles"
+      :type="type"
+      :readonly="readonly"
+      :disable="disable"
+      :unmasked-value="unmaskedValue"
+      :min-date="minDate"
+      :max-date="maxDate"
+      :before-show="beforeShow"
+      :placeholder="fromPlaceholder"
+      :dense="dense"
+      :underline="underline"
+      :borderless="borderless"
+      hide-bottom-space
+      @update:model-value="onChangeDate($event, 0)"
+    />
+    <span>~</span>
+    <kw-date-picker
+      :model-value="value[1]"
+      v-bind="fieldStyles"
+      :type="type"
+      :readonly="readonly"
+      :disable="disable"
+      :unmasked-value="unmaskedValue"
+      :min-date="minDate"
+      :max-date="maxDate"
+      :before-show="beforeShow"
+      :placeholder="toPlaceholder"
+      :dense="dense"
+      :underline="underline"
+      :borderless="borderless"
+      hide-bottom-space
+      @update:model-value="onChangeDate($event, 1)"
+    />
+  </kw-field-wrap>
 </template>
 
 <script>
 import { FormContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useField, { useFieldProps } from '../../composables/private/useField';
 
 export default {
   name: 'KwDateRangePicker',
-  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
+    ...useFieldStyleProps,
 
     from: {
       type: String,

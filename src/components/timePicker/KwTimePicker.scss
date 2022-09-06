@@ -1,182 +1,262 @@
-.kw-time-picker {
-  border-right: 0;
-
-  &.q-position-engine {
-    margin-top: var(--q-pe-top, -1px) !important;
-  }
-
-  .q-field__append .q-icon {
-    padding-left: 16px;
-    margin-right: 12px;
-    width: 0;
-    color: transparent;
-    background: url(~@assets/images/ic_clock_16.svg) no-repeat center;
-    background-size: 16px auto;
-  }
-
-  &.q-field--focused {
-    .q-field__control {
-      border-color: $black1;
-    }
-  }
-
-  &.q-field--error {
-    .q-field__control {
-      border-color: $error;
-
-      &:hover {
-        border-color: $error !important;
-      }
-    }
-
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
-      .q-field__control {
-        border-color: $line-stroke;
-      }
-    }
-  }
-
-  &.q-field--readonly,
-  &.q-field--disabled {
-    .q-field__control {
-      background-color: $line-bg;
-    }
-
-    .q-field__native {
-      color: $black3;
-
-      &::placeholder {
-        font-size: 0;
-      }
-    }
-  }
-
-  .q-field__inner {
-    max-width: 180px; // todo - 화면 사이즈따라, 그리드 따라 어떻게 변경해야할지 확인 필요
-  }
-
+.kw-time-picker.q-field {
   .q-field__control {
-    border: 1px solid $line-stroke;
-    height: 40px;
-
-    &:hover:not(:disabled) {
-      border-color: $black1;
-    }
-  }
-
-  .q-field__native {
-    padding: 0 12px;
-    font-size: 16px;
-    color: $black1;
-    font-weight: 500;
+    cursor: text;
   }
 
   .q-field__append {
     padding-left: 0;
+    cursor: text;
+
+    > div {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 12px;
+    }
   }
 
-  .q-field__marginal {
-    height: auto;
+  .q-field__marginal .q-icon {
+    opacity: 1 !important;
+    cursor: pointer;
   }
 
-  &__view {
+  &--dense {
+    .q-field__append > div {
+      padding-left: 6px;
+    }
+  }
+
+  &--readonly,
+  &--disabled {
+    .q-field__marginal .q-icon {
+      opacity: 0.6 !important;
+      cursor: default;
+    }
+  }
+}
+
+.kw-time-picker-menu.q-menu {
+  border: 1px solid $black1;
+  border-radius: 0;
+  box-shadow: none;
+
+  .kw-time-picker__view {
     // width: 178px;
     box-sizing: border-box;
   }
 
-  &__list {
+  .kw-time-picker__list {
     width: 50%;
     height: 200px;
     overflow: auto;
     box-sizing: border-box;
-    border-right: 1px solid $black1;
+
+    & + .kw-time-picker__list {
+      border-left: 1px solid $black1;
+    }
   }
 
-  .q-item__section.column.q-item__section--main.justify-center {
+  .q-item {
+    min-height: 34px;
+    padding: 7px 12px;
     font-size: 14px;
+    font-weight: 400;
     color: $black2;
+
+    &__section {
+      &--side {
+        .q-checkbox {
+          &__icon {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+
+    .q-focus-helper {
+      transition: none;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    &.q-manual-focusable--focused {
+      font-weight: 700;
+      color: $black1;
+
+      & > .q-focus-helper {
+        background-color: $bg-box;
+        opacity: 1;
+        z-index: -1;
+      }
+    }
   }
 
-  // scrollbar
-
-  /* width */
   ::-webkit-scrollbar {
     width: 8px;
     border-left: 2px solid $line-bg;
     border-right: 2px solid $line-bg;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
     background: $line-bg;
     width: 8px;
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     width: 4px;
     background: #999;
     background-clip: padding-box;
     border-left: 2px solid transparent;
     border-right: 2px solid transparent;
-  }
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-}
-
-body.desktop .kw-time-picker {
-  .q-hoverable:hover > .q-focus-helper,
-  .q-manual-focusable--focused > .q-focus-helper {
-    background: #000;
-    opacity: 0.07;
-  }
-
-  .q-manual-focusable--selected .q-item__section.column.q-item__section--main.justify-center {
-    color: $black1;
-    font-weight: 500;
-  }
-}
-
-.kw-multi-time-picker {
-  &.q-field--error {
-    .q-field__control {
-      border-color: $error;
-
-      &:hover {
-        border-color: $error !important;
-      }
-    }
-
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
-      .q-field__control {
-        border-color: $line-stroke;
-      }
+    &:hover {
+      background: #555;
     }
   }
-
-  .q-field__control-container {
-    font-size: 16px;
-    color: $black1;
-
-    // line-height: 18px;
-    font-weight: 500;
-    align-items: center;
-  }
-
-  .kw-time-picker:nth-of-type(1) {
-    padding-right: 4px;
-  }
-
-  .kw-time-picker:nth-of-type(2) {
-    padding-left: 4px;
-  }
-
-  .q-field__inner {
-    max-width: none;
-  }
 }
+
+// .kw-time-picker {
+//   border-right: 0;
+
+//   &.q-position-engine {
+//     margin-top: var(--q-pe-top, -1px) !important;
+//   }
+
+//   .q-field__append .q-icon {
+//     padding-left: 16px;
+//     margin-right: 12px;
+//     width: 0;
+//     color: transparent;
+//     background: url(~@assets/images/ic_clock_16.svg) no-repeat center;
+//     background-size: 16px auto;
+//   }
+
+//   &.q-field--focused {
+//     .q-field__control {
+//       border-color: $black1;
+//     }
+//   }
+
+//   &.q-field--error {
+//     .q-field__control {
+//       border-color: $error;
+
+//       &:hover {
+//         border-color: $error !important;
+//       }
+//     }
+
+//     &[aria-readonly="true"],
+//     &[aria-disabled="true"] {
+//       .q-field__control {
+//         border-color: $line-stroke;
+//       }
+//     }
+//   }
+
+//   &.q-field--readonly,
+//   &.q-field--disabled {
+//     .q-field__control {
+//       background-color: $line-bg;
+//     }
+
+//     .q-field__native {
+//       color: $black3;
+
+//       &::placeholder {
+//         font-size: 0;
+//       }
+//     }
+//   }
+
+//   .q-field__inner {
+//     max-width: 180px; // todo - 화면 사이즈따라, 그리드 따라 어떻게 변경해야할지 확인 필요
+//   }
+
+//   .q-field__control {
+//     border: 1px solid $line-stroke;
+//     height: 40px;
+
+//     &:hover:not(:disabled) {
+//       border-color: $black1;
+//     }
+//   }
+
+//   .q-field__native {
+//     padding: 0 12px;
+//     font-size: 16px;
+//     color: $black1;
+//     font-weight: 500;
+//   }
+
+//   .q-field__append {
+//     padding-left: 0;
+//   }
+
+//   .q-field__marginal {
+//     height: auto;
+//   }
+
+//   &__view {
+//     // width: 178px;
+//     box-sizing: border-box;
+//   }
+
+//   &__list {
+//     width: 50%;
+//     height: 200px;
+//     overflow: auto;
+//     box-sizing: border-box;
+//     border-right: 1px solid $black1;
+//   }
+
+//   .q-item__section.column.q-item__section--main.justify-center {
+//     font-size: 14px;
+//     color: $black2;
+//   }
+
+//   // scrollbar
+
+//   /* width */
+//   ::-webkit-scrollbar {
+//     width: 8px;
+//     border-left: 2px solid $line-bg;
+//     border-right: 2px solid $line-bg;
+//   }
+
+//   /* Track */
+//   ::-webkit-scrollbar-track {
+//     background: $line-bg;
+//     width: 8px;
+//   }
+
+//   /* Handle */
+//   ::-webkit-scrollbar-thumb {
+//     width: 4px;
+//     background: #999;
+//     background-clip: padding-box;
+//     border-left: 2px solid transparent;
+//     border-right: 2px solid transparent;
+//   }
+
+//   /* Handle on hover */
+//   ::-webkit-scrollbar-thumb:hover {
+//     background: #555;
+//   }
+// }
+
+// body.desktop .kw-time-picker {
+//   .q-hoverable:hover > .q-focus-helper,
+//   .q-manual-focusable--focused > .q-focus-helper {
+//     background: #000;
+//     opacity: 0.07;
+//   }
+
+//   .q-manual-focusable--selected .q-item__section.column.q-item__section--main.justify-center {
+//     color: $black1;
+//     font-weight: 500;
+//   }
+// }

@@ -3,122 +3,51 @@
   box-sizing: content-box;
 }
 
-.kw-date-picker {
-  .q-field__append .q-icon {
-    padding-left: 16px;
-    margin-right: 12px;
-    width: 0;
-    color: transparent;
-    background: url(~@assets/images/calendar.svg) no-repeat center;
-    background-size: 16px auto;
-  }
-
-  &.q-field--focused {
-    .q-field__control {
-      border-color: $black1;
-    }
-  }
-
-  &.q-field--error {
-    .q-field__control {
-      border-color: $error;
-
-      &:hover {
-        border-color: $error !important;
-      }
-    }
-
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
-      .q-field__control {
-        border-color: $line-stroke;
-      }
-    }
-  }
-
-  &.q-field--readonly,
-  &.q-field--disabled {
-    .q-field__control {
-      background-color: $line-bg;
-    }
-
-    .q-field__native {
-      color: $black3;
-
-      &::placeholder {
-        font-size: 0;
-      }
-    }
-
-    .q-field__append .q-icon {
-      opacity: 0.4;
-    }
-  }
-
+.kw-date-picker.q-field {
   .q-field__control {
-    border: 1px solid $line-stroke;
-    height: 40px;
-
-    &:hover:not(:disabled) {
-      border-color: $black1;
-    }
-  }
-
-  .q-field__native {
-    padding: 0 12px;
-    font-size: 16px;
-    color: $black1;
-    font-weight: 500;
+    cursor: text;
   }
 
   .q-field__append {
     padding-left: 0;
+    cursor: text;
+
+    > div {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 12px;
+    }
   }
 
-  .q-field__marginal {
-    height: auto;
+  .q-field__marginal .q-icon {
+    opacity: 1 !important;
+    cursor: pointer;
   }
 
-  .q-field__inner {
-    max-width: 180px;
+  &--dense {
+    .q-field__append > div {
+      padding-left: 6px;
+    }
   }
+
+  &--readonly,
+  &--disabled {
+    .q-field__marginal .q-icon {
+      opacity: 0.6 !important;
+      cursor: default;
+    }
+  }
+}
+
+.kw-date-picker-menu.q-menu {
+  border: 1px solid $black1;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .kw-date-range-picker {
-  &.q-field--error {
-    .q-field__control {
-      border-color: $error;
-
-      &:hover {
-        border-color: $error !important;
-      }
-    }
-
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
-      .q-field__control {
-        border-color: $line-stroke;
-      }
-    }
+  .kw-date-picker + span {
+    padding: 0 4px !important;
   }
-
-  .q-field__control-container {
-    font-size: 16px;
-    color: $black1;
-
-    // line-height: 18px;
-    font-weight: 500;
-    align-items: center;
-  }
-
-  .q-field__inner {
-    max-width: none;
-  }
-}
-
-.datepicker.datepicker-inline td,
-.datepicker.datepicker-inline th,
-.datepicker.dropdown-menu td,
-.datepicker.dropdown-menu th {
-  padding: 0;
 }
