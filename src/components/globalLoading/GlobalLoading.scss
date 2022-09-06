@@ -1,0 +1,9 @@
+.global-loading {
+  .q-loading__backdrop {
+    background: transparent;
+  }
+
+  .q-loading__spinner {
+    color: $primary;
+  }
+}

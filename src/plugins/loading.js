@@ -1,5 +1,5 @@
 import { GlobalLoadingVmKey } from '../consts/private/symbols';
-import { getGlobalVm } from '../utils/private/globalVms';
+import { getGlobalVm } from '../utils/private/globalVm';
 import { defineGetters } from '../utils/private/globalProperty';
 
 export function loadSpinner(value = true) {

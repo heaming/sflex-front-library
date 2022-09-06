@@ -1,6 +1,7 @@
 <template>
   <q-tab
     class="kw-tab"
+    :ripple="false"
   >
     <slot />
   </q-tab>

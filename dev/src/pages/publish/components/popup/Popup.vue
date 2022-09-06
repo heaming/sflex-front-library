@@ -54,7 +54,11 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          It is in progress. Please wait for it to complete.
+          <img
+            src="../../../../../assets/images/pop_sample.png"
+            alt="popup sample"
+            style="width: auto;"
+          >
         </div>
         <guide-code-view
           :code-value="testCode"
@@ -68,6 +72,143 @@
 <script setup>
 
 const testCode = `
-It is in progress. Please wait for it to complete.
+// Small & No title
+<kw-popup
+  class="kw-popup--sm"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// Small & Titled type
+<kw-popup
+  class="kw-popup--sm"
+  title="카테고리 검색"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// Medium
+<kw-popup
+  class="kw-popup--md"
+  title="카테고리 검색"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// Large
+<kw-popup
+  class="kw-popup--lg"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// X-Large
+<kw-popup
+  class="kw-popup--xl"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// 2X-Large
+<kw-popup
+  class="kw-popup--2xl"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
+
+// 3X-Large
+<kw-popup
+  class="kw-popup--3xl"
+  title="상품선택"
+>
+  내용<br>
+  내용이 들어갑니다.
+
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36 ml8"
+      label="확인"
+    />
+  </template>
+</kw-popup>
 `;
 </script>

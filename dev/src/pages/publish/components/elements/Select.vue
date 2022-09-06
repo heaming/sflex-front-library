@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       default-height:40px, searchform- 32px;
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -60,8 +63,7 @@
               Add the attribute "readonly" when it's required to be readonly<br>
               Add the attribute "disable" when it's required to be disable<br>
               Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select <br>
-              Add the attribute "placeholder='text'" with "use-input" when necessary <br>
-              (please be aware can't use together with "disable")
+              placeholder and use-input
             </td>
           </tr>
         </tbody>
@@ -76,6 +78,9 @@
       <ul>
         <li>Usually, 'label' width is fixed but 'select' have flexible width(depending on column)</li>
         <li>If you have to set the width of select or label, please find the details in 'Collections/Form' page.</li>
+        <li class="notice">
+          Conclude to remove the placeholder attribute in code, because developer will add that.
+        </li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -96,8 +101,6 @@
                 <kw-select
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
-                  placeholder="placeholder"
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -128,8 +131,6 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
-                  placeholder="placeholder"
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -160,9 +161,7 @@
                   :model-value="[]"
                   :options="['A', 'B', 'C', 'D']"
                   multiple
-                  placeholder="placeholder"
                   readonly
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -233,8 +232,6 @@
                   :options="['A', 'B', 'C', 'D']"
                   multiple
                   rules="required"
-                  placeholder="placeholder"
-                  use-input
                 />
               </kw-form-item>
             </kw-form-row>
@@ -257,8 +254,6 @@ const selectDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
-        placeholder="placeholder"
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -271,8 +266,6 @@ const selectDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
-        placeholder="placeholder"
-        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -286,9 +279,7 @@ const selectMultipleDefaultCode = `
       <kw-select
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
-        placeholder="placeholder"
         multiple
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -302,8 +293,6 @@ const selectMultipleDefaultCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
-        placeholder="placeholder"
-        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -318,9 +307,7 @@ const selectReadonlyCode = `
         :model-value="[]"
         :options="['A', 'B', 'C', 'D']"
         multiple
-        placeholder="placeholder"
         readonly
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
@@ -335,8 +322,6 @@ const selectReadonlyCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         readonly
-        placeholder="placeholder"
-        use-input
       />
     </kw-search-item>
   </kw-search-row>
@@ -384,11 +369,16 @@ const essentialCode = `
         :options="['A', 'B', 'C', 'D']"
         multiple
         rules="required"
-        placeholder="placeholder"
-        use-input
       />
     </kw-form-item>
   </kw-form-row>
 </kw-form>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-01',
+    text: 'remove the placeholder attribute',
+  },
+];
 </script>

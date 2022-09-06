@@ -440,14 +440,16 @@ interface GridUtil {
 export const gridUtil: GridUtil;
 
 // Popup
-interface PopupOptions {
-  width?: string;
-  height?: string;
+interface WindowFeatures {
+  [key: string]: any;
   popup?: boolean;
   noopener?: boolean;
   noreferrer?: boolean;
   menubar?: boolean;
+  states?: boolean;
   toolbar?: boolean;
+  width?: number;
+  height?: number;
 }
 
 interface PopupUtil {
@@ -456,7 +458,7 @@ interface PopupUtil {
    * @param url 호출할 팝업 URL
    * @param options 팝업 옵션
    */
-  open(url: string, options?: PopupOptions): Promise<boolean>;
+  open(url: string, windowFeatures?: WindowFeatures): Promise<boolean>;
 
   /**
    * 열린 팝업에서 호출하는 함수로, `beforeunload`를 등록한다.

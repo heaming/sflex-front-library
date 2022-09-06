@@ -1,5 +1,6 @@
 <template>
   <q-btn
+    v-if="!isDestroyed"
     ref="btnRef"
     class="kw-btn"
     :ripple="false"
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import usePermissions from '../../composables/private/usePermissions';
 
 export default {
   name: 'KwBtn',
@@ -21,6 +23,7 @@ export default {
     }
 
     return {
+      ...usePermissions(),
       btnRef,
       click,
     };
