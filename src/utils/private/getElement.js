@@ -1,7 +1,7 @@
 export default (target) => {
-  const el = target.value?.getNativeElement?.()
-    || target.value?.$el
-    || target.value;
+  if (target instanceof Element) {
+    return target;
+  }
 
-  return el;
+  return target.value?.$el || target.value;
 };
