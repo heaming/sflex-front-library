@@ -11,14 +11,11 @@ export const useFormLayoutProps = {
   },
 };
 
-export default (isRoot = false) => {
+export default () => {
   const vm = getCurrentInstance();
   const { props } = vm;
 
-  let injected = null;
-  if (!isRoot) {
-    injected = inject(FormLayoutContextKey);
-  }
+  const injected = inject(FormLayoutContextKey, null);
 
   const defaultCols = 3;
   const defaultLabelSize = 150;

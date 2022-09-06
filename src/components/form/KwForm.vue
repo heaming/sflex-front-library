@@ -14,12 +14,14 @@ import { FormTypeContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useForm, { useFormProps } from '../../composables/private/useForm';
 import { FORM_TYPE } from '../../composables/private/useFormType';
+import useFormLayout, { useFormLayoutProps } from '../../composables/private/useFormLayout';
 
 export default {
   name: 'KwForm',
   inheritAttrs: false,
 
   props: {
+    ...useFormLayoutProps,
     ...useFormProps,
   },
 
@@ -43,6 +45,8 @@ export default {
 
     // form type injection
     provide(FormTypeContextKey, FORM_TYPE.FORM);
+
+    useFormLayout();
 
     return {
       ...useInheritAttrs(),
