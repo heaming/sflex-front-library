@@ -25,14 +25,18 @@
     flex: 1 0 1%;
     display: flex;
 
-    > span {
-      margin: auto;
-      color: $black3;
-      padding: 0 4px;
-    }
-
     .kw-field {
       flex: 1 0 1%;  // max-width: 498px; why?
+
+      & + span {
+        margin: auto;
+        color: $black3;
+        padding: 0 4px;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
 
       & + .kw-field {
         margin-left: 8px;
