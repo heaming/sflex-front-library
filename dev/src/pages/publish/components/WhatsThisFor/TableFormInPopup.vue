@@ -17,7 +17,7 @@
       <p class="kw-guide-description">
         Depedning on the design or Planing, The tags would be different.<br>
         Search form has the buttons on the bottom.<br>
-        If there is included both of input or text in planner, It should be form<br>
+        If there is included both of input or text in Planing, It should be form<br>
         Lastly, The data text in form, it should be info list<br>
 
         The reference page for <a href="http://kwlib-dev.kyowon.co.kr/#/Publish/Components/Collections/SearchForm">Search Form</a><br>
