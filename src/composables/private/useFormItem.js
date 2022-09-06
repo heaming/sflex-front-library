@@ -1,4 +1,4 @@
-import { FormItemContextKey } from '../../consts/private/symbols';
+import { FormLayoutContextKey } from '../../consts/private/symbols';
 
 export const useFormItemProps = {
   required: {
@@ -13,7 +13,7 @@ export const useFormItemProps = {
     type: Boolean,
     default: false,
   },
-  hintMessage: {
+  hint: {
     type: String,
     default: undefined,
   },
@@ -21,15 +21,13 @@ export const useFormItemProps = {
 
 export default () => {
   const { props } = getCurrentInstance();
-  const { cols, labelSize } = inject(FormItemContextKey);
+  const { labelSize } = inject(FormLayoutContextKey);
 
-  const itemClass = computed(() => (props.required ? 'essential' : null));
-  const itemWidth = computed(() => `${(100 / cols.value).toFixed(1) * props.colspan}%`);
+  const labelClass = computed(() => (props.required ? 'kw-form-item__label--required' : null));
   const labelWidth = computed(() => `${labelSize.value}px`);
 
   return {
-    itemClass,
-    itemWidth,
+    labelClass,
     labelWidth,
   };
 };

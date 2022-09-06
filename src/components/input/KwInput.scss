@@ -1,60 +1,98 @@
 .kw-input {
-  // 인풋 포커스
-  &.q-field--focused {
+  $-kw-input-height: $kw-field-height;
+  $-kw-input-height-dense: $kw-field-height-dense;
+  $-kw-input-padding-input: $kw-field-padding-input;
+  $-kw-input-padding-input-dense: $kw-field-padding-input-dense;
+  $-kw-input-line-height: $kw-field-line-height;
+  $-kw-input-line-height-dense: $kw-field-line-height-dense;
+
+  &.q-textarea {
+    height: auto;
+
+    .q-field__control {
+      height: auto;
+      min-height: 40px;
+    }
+
+    .q-field__control-container {
+      padding-top: nth($-kw-input-padding-input, 1);
+      padding-bottom: nth($-kw-input-padding-input, 3);
+    }
+
+    .q-field__shadow {
+      top: 0;
+      bottom: 0;
+    }
+
+    .q-field__native,
+    .q-field__prefix,
+    .q-field__suffix {
+      line-height: $-kw-input-line-height; // default 18px
+    }
+
     .q-field__native {
-      border-color: $black1;
+      padding-top: 0; // desktop does not use label
+      min-height: $-kw-input-line-height;
     }
   }
 
-  // 인풋 에러
-  &.q-field--error {
-    .q-field__native {
-      border-color: $error;
-
-      &:hover {
-        border-color: $error !important;
-      }
+  /*
+  &.q-field--labeled {
+    .q-field__control-container {
+      padding-top: nth($-kw-input-padding-input, 1);
+      padding-bottom: nth($-kw-input-padding-input, 3);
     }
 
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
+    .q-field__shadow {
+      top: 0;
+      bottom: 0;
+    }
+
+    .q-field__native {
+      padding-top: 0; // desktop does not use label
+      min-height: $-kw-input-line-height;
+    }
+  }
+  */
+
+  &.q-field--dense {
+    .q-field__control {
+      min-height: $-kw-input-height-dense;
+    }
+
+    .q-field__control-container {
+      padding-top: nth($-kw-input-padding-input-dense, 1);
+      padding-bottom: nth($-kw-input-padding-input-dense, 3);
+    }
+
+    .q-field__native,
+    .q-field__prefix,
+    .q-field__suffix {
+      line-height: $-kw-input-line-height-dense;
+    }
+
+    .q-field__native {
+      padding-top: 0;
+      min-height: $-kw-input-line-height-dense;
+    }
+
+    /*
+    &.q-field--labeled {
+      .q-field__control-container {
+        padding-top: nth($-kw-input-padding-input-dense, 1);
+        padding-bottom: nth($-kw-input-padding-input-dense, 3);
+      }
+
+      .q-field__shadow {
+        top: 0;
+        bottom: 0;
+      }
+
       .q-field__native {
-        border-color: $line-stroke;
+        padding-top: 0; // desktop does not use label
+        min-height: $-kw-input-line-height-dense;
       }
     }
+     */
   }
-
-  // 인풋 높이
-  .q-field__control {
-    height: 40px;
-  }
-
-  .q-field__native {
-    padding: 8px 12px;
-    border: 1px solid $line-stroke;
-    font-size: 16px;
-    color: $black1;
-    font-weight: 500;
-
-    &:hover:not(:disabled,:read-only) {
-      border-color: $black1;
-    }
-
-    &:read-only,
-    &:disabled {
-      background-color: $line-bg;
-      color: $black3;
-    }
-
-    &:read-only::placeholder,
-    &:disabled::placeholder {
-      font-size: 0;
-    }
-  }
-}
-
-.kw-text-counter {
-  padding-left: 8px;
-  font-size: 12px;
-  color: $placeholder;
 }

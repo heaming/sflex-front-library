@@ -2,33 +2,61 @@
   <q-input
     ref="inputRef"
     :model-value="value"
-    class="kw-input"
-    :label="$q.platform.is.desktop ? null : label"
+    v-bind="fieldStyles"
+    class="kw-field kw-input"
     :error="invalid"
     :error-message="invalidMessage"
+    clear-icon="close_24"
     no-error-icon
     @keydown.enter="onEnter"
     @change="onChange"
     @update:model-value="onUpdateValue"
   >
+    <!-- prepend -->
     <template
-      v-if="icon"
+      v-if="$slots.prepend"
+      #prepend
+    >
+      <slot name="prepend" />
+    </template>
+
+    <!-- append -->
+    <template
+      v-if="icon || $slots.append"
       #append
     >
-      <q-btn
+      <q-icon
+        v-if="icon"
+        class="q-field__focusable-action"
         :tabindex="-1"
-        flat
-        round
-        :icon="icon"
+        :name="icon"
         :disable="disableIcon"
         @click="$emit('clickIcon')"
       />
+      <slot name="append" />
+    </template>
+
+    <!-- before -->
+    <template
+      v-if="$slots.before"
+      #before
+    >
+      <slot name="before" />
+    </template>
+
+    <!-- after -->
+    <template
+      v-if="$slots.after"
+      #after
+    >
+      <slot name="after" />
     </template>
   </q-input>
 </template>
 
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
+import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { getMaxByteString } from '../../utils/string';
 
 const NAMED_REGEX = {
@@ -44,6 +72,7 @@ export default {
 
   props: {
     ...useFieldProps,
+    ...useFieldStyleProps,
 
     modelValue: {
       type: [String, Number],
@@ -137,7 +166,10 @@ export default {
       value.value = val;
     }
 
+    const fieldStyles = useFieldStyle();
+
     return {
+      fieldStyles,
       ...fieldCtx,
       select,
       onEnter,

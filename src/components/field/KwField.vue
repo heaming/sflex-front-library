@@ -1,20 +1,15 @@
 <template>
-  <q-field
+  <kw-field-wrap
     ref="inputRef"
-    class="kw-field"
-    :label="$q.platform.is.desktop ? null : label"
     :error="invalid"
     :error-message="invalidMessage"
-    no-error-icon
     @focus="$emit('focus')"
   >
-    <template #control>
-      <slot
-        :field="fieldBinding"
-        :invalid="invalid"
-      />
-    </template>
-  </q-field>
+    <slot
+      :field="fieldBinding"
+      :invalid="invalid"
+    />
+  </kw-field-wrap>
 </template>
 
 <script>

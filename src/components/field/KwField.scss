@@ -1,46 +1,319 @@
-.kw-field {
-  // default
-  &.q-field--outlined {
-    .q-field__control {
-      height: 40px;
-      color: $black1;
-      border-radius: 0;
+.kw-field.q-field {
+  font-size: $kw-field-font-size;
 
+  &.q-field--with-bottom {
+    padding-bottom: 0;
+  }
+
+  .q-field__marginal {
+    height: $kw-field-height; // min-height: $kw-field-height;
+    font-size: $kw-field-font-size-marginal;
+
+    .q-icon {
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .q-field__inner {
+    // align-self: initial;
+  }
+
+  .q-field__bottom {
+    padding: 2px 0 0;
+    font-size: $kw-field-font-size-bottom;
+    line-height: 1;
+    min-height: $kw-field-font-size-bottom;
+  }
+
+  .q-field__messages {
+    > div {
+      word-break: keep-all;
+      word-wrap: normal;
+      overflow-wrap: normal;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  &.q-field--item-aligned {
+    .q-field__before {
+      min-width: $kw-field-height;
+    }
+  }
+
+  /*
+    .q-field__control-container {
+      padding-top: 0; // label 작업 시, 삭제 요망.
+    }
+   */
+
+  .q-field__control {
+    height: $kw-field-height; // min-height: $kw-field-height;
+    color: $kw-field-color;
+
+    &::before,
+    &::after {
+      transition: initial;
+    }
+  }
+
+  .q-field__native,
+  .q-field__prefix,
+  .q-field__suffix,
+  .q-field__input {
+    font-weight: 500;
+    font-size: inherit;
+    line-height: $kw-field-line-height;
+    color: $kw-field-color;
+    padding: 0;
+    opacity: 1 !important; // why?
+  }
+
+  // check adding .q-field__input has no side effect
+
+  &--readonly,
+  &--disabled {
+    .q-field__control {
       &::before {
-        transition: initial;
+        background-color: $kw-field-bg-color-disable;
+      }
+    }
+
+    .q-field__native,
+    .q-field__prefix,
+    .q-field__suffix,
+    .q-field__input {
+      color: $kw-field-color-disable;
+    }
+
+    .q-field__native {
+      &::placeholder {
+        color: transparent !important;
+      }
+    }
+  }
+
+  &--disabled {
+    .q-field__control > div {
+      opacity: 1 !important // control by fixed color : $black3
+    }
+  }
+
+  /*
+    .q-field__label {
+      display: none; // 우선 안쓰니 통째로 없엠. 모바일 작업 시, 살려서 작업 해야 함.
+    }
+  */
+
+  // focus
+  &.q-field--highlighted {
+    // style type 마다 focus 설정이 다름. 공통적으로 적용할 것 만 이 곳에 정의 할 것.
+  }
+
+  &.q-field--filled {
+    // do not use
+  }
+
+  // outlined (default)
+  &--outlined {
+    .q-field__control {
+      border-radius: $kw-field-border-radius;
+
+      &:hover::before {
+        border-color: currentcolor;
       }
 
       &::after {
         border: 1px solid transparent;
-        transition: initial;
       }
+    }
 
-      .q-field__control-container {
-        padding-top: 0;
-      }
+    .q-field--rounded .q-field__control {
+      border-radius: calc(#{$kw-field-height} / 2);
     }
 
     &.q-field--highlighted {
       .q-field__control {
-        &::before,
+        &:hover::before {
+          border-color: transparent;
+        }
+
         &::after {
-          border: 1px solid currentcolor;
-          transition: initial;
+          border-width: 1px;
+          border-color: currentcolor;
+        }
+      }
+    }
+
+    &.q-field--readonly {
+      .q-field__control {
+        &::before {
+          border-style: solid;
         }
       }
     }
   }
 
-  &.q-field--labeled {
-    .q-field__native,
-    .q-field__prefix,
-    .q-field__suffix {
-      padding-top: 0;
-      padding-bottom: 0;
+  // standard == underline
+  &--standard {
+    .q-field__control {
+      &:hover::before {
+        border-color: currentcolor;
+      }
+
+      &::after {
+        height: 0; // notice. transform to height
+        transform: initial; // turn off animation
+      }
+    }
+
+    &.q-field--highlighted {
+      .q-field__control {
+        &:hover::before {
+          border-color: transparent;
+        }
+
+        &::after {
+          height: 1px;
+          border-color: currentcolor;
+        }
+      }
+    }
+
+    &.q-field--readonly {
+      .q-field__control {
+        &::before {
+          border-bottom-style: solid;
+        }
+      }
     }
   }
 
-  .q-field__bottom {
-    padding: 4px 0 0;
+  &--dense {
+    font-size: $kw-field-font-size-dense;
+
+    .q-field__control,
+    .q-field__marginal {
+      height: $kw-field-height-dense;
+    }
+
+    .q-field__bottom {
+      font-size: $kw-field-font-size-bottom-dense;
+    }
+
+    .q-field__native,
+    .q-field__prefix,
+    .q-field__suffix,
+    .q-field__input {
+      line-height: $kw-field-line-height-dense;
+    }
+  }
+
+  // error
+  &.q-field--error {
+    .q-field__control {
+      &::before,
+      &::after {
+        color: $error !important;
+        border-color: $error !important;
+      }
+    }
+
+    .q-field__bottom {
+      color: $error !important;
+    }
+  }
+
+  &.q-field--auto-height {
+    .q-field__control,
+    .q-field__native {
+      height: auto;
+      min-height: $kw-field-height;
+    }
+
+    &.q-field--dense {
+      .q-field__control,
+      .q-field__native {
+        min-height: $kw-field-height-dense;
+      }
+    }
+  }
+}
+
+.kw-field-wrap {
+  position: relative;
+
+  .q-field__messages {
+    display: none; // notice. field 에 속한 field 의 message 영역 무시
+  }
+
+  &__control {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    height: auto;
+    align-items: center;
+  }
+
+  &__bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2px 0 0;
+    min-height: $kw-field-font-size-bottom;
+    font-size: $kw-field-font-size-bottom;
+    line-height: 1;
+    transform: translateY(100%);
+    color: rgb(0 0 0 / 54%);
+  }
+
+  &__messages {
+    > div {
+      word-break: keep-all;
+      word-wrap: normal;
+      overflow-wrap: normal;
+      text-overflow: ellipsis !important;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &--transition {
+      &-enter-active,
+      &-leave-active {
+        transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+      }
+
+      &-enter-from,
+      &-leave-to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+  }
+
+  &--error {
+    .kw-field-wrap__bottom {
+      color: $error !important;
+    }
+
+    .q-field__control {
+      &::before,
+      &::after {
+        color: $error !important;
+        border-color: $error !important;
+      }
+    }
+  }
+
+  &--dense {
+    .kw-field-wrap__bottom {
+      font-size: $kw-field-font-size-bottom-dense;
+    }
   }
 }
