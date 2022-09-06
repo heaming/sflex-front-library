@@ -68,8 +68,6 @@ export default () => {
     unregisterField,
   });
 
-  useFormLayout(true);
-
   function focus() {
     Object.values(registered)[0]?.ctx.focus();
   }
@@ -162,6 +160,8 @@ export default () => {
   };
 
   useObserverChild(formCtx);
+
+  useFormLayout();
 
   return formCtx;
 };

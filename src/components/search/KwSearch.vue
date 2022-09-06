@@ -52,6 +52,7 @@ import useFormExpandable, {
 import { FORM_TYPE } from '../../composables/private/useFormType';
 import useLibConfig from '../../composables/private/useLibConfig';
 import i18n from '../../i18n';
+import useFormLayout, { useFormLayoutProps } from '../../composables/private/useFormLayout';
 
 export default {
   name: 'KwSearch',
@@ -59,6 +60,7 @@ export default {
 
   props: {
     ...useFormProps,
+    ...useFormLayoutProps,
     ...useFormExpandableProps,
 
     labelSize: {
@@ -124,6 +126,8 @@ export default {
 
     // ignore observe
     provide(ObserverContextKey, {});
+
+    useFormLayout();
 
     return {
       ...useInheritAttrs(),
