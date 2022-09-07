@@ -1,7 +1,7 @@
 <template>
   <q-checkbox
-    class="kw-checkbox"
-    :class="label ? '' : 'kw-checkbox--no-label'"
+    class="kw-checkbox spaced-sibling"
+    :class="label || $slots.default ? '' : 'kw-checkbox--no-label'"
     :true-value="trueValue"
     :false-value="falseValue"
     :indeterminate-value="indeterminateValue"
