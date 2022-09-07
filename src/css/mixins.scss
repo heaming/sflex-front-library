@@ -127,3 +127,84 @@ $unit: px;
     min-height: #{$size} + $unit !important;
   }
 }
+
+@mixin kw-item($min-height) {
+  display: flex;
+  min-height: $min-height;
+
+  &__label {
+    flex: none;
+    align-self: start;
+    width: 150px;
+    min-height: $min-height;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+
+    &--required {
+      .kw-label-content__label::after {
+        content: "*";
+        display: contents;
+        color: $info;
+      }
+    }
+  }
+
+  &__field {
+    align-self: center;
+    flex: 1 0 1%;
+    display: flex;
+
+    .kw-field {
+      flex: 1 0 1%;  // max-width: 498px; why?
+
+      & + span {
+        margin: auto;
+        color: $black3;
+        padding: 0 4px;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      & + .kw-field {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+@mixin kw-row($min-height , $gap, $padding) {
+  display: flex;
+  margin: 0;
+  padding: $padding;
+  min-height: #{$min-height + nth($padding, 1) + nth($padding, 3)};
+  gap: $gap;
+  align-items: start;
+
+  .kw-form-item {
+    flex: none;
+  }
+
+  @for $i from 1 through 12 {
+    .kw-form-item:first-child:nth-last-child(#{$i}),
+    .kw-form-item:first-child:nth-last-child(#{$i}) ~ .kw-form-item {
+      width: calc((100% - (#{$gap} * (#{$i} - 1))) / #{$i});
+    }
+  }
+
+  @for $cols from 1 through 12 {
+    &--cols-#{$cols} {
+      .kw-form-item {
+        width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols}) !important;
+
+        @for $colspan from 1 through 12 {
+          &--colspan-#{$colspan} {
+            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan}) !important;
+          }
+        }
+      }
+    }
+  }
+}
