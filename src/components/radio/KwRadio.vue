@@ -1,6 +1,7 @@
 <template>
   <q-radio
-    class="kw-radio"
+    class="kw-radio spaced-sibling"
+    :class="label || $slots.default ? '' : 'kw-radio--no-label'"
     :val="val"
     :label="label ?? val"
   >

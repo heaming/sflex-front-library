@@ -1,34 +1,31 @@
 <template>
   <q-input
     ref="inputRef"
-    v-bind="styleClassAttrs"
     v-model="innerValue"
-    class="kw-time-picker"
-    :class="{'q-field--focused': showing}"
-    :label="$q.platform.is.desktop ? null : label"
+    v-bind="fieldStyles"
+    class="kw-field kw-time-picker"
+    :class="{'q-field--highlighted': showing}"
+    :label="$q.platform.is.desktop ? undefined : label"
     :error="invalid"
     :error-message="invalidMessage"
     :readonly="readonly"
     :disable="disable"
-    :placeholder="placeholder"
     mask="##:##"
     :unmasked-value="unmaskedValue"
+    :placeholder="placeholder"
     no-error-icon
     @click="toggleView()"
-    @blur="onBlur"
-    @change="onChange"
+    @change="onChangeInput"
   >
     <template #append>
-      <q-icon
-        ref="iconRef"
-        name="access_time"
-        class="cursor-pointer"
-        @click.prevent="toggleView()"
-      />
+      <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
+      <div @click="toggleView()">
+        <q-icon name="clock_16" />
+      </div>
     </template>
     <q-menu
-      v-model="showing"
-      class="kw-time-picker"
+      :model-value="showing"
+      class="kw-time-picker-menu"
       no-parent-event
       no-focus
       no-refocus
@@ -43,7 +40,7 @@
           v-for="(timeList, i) of timeLists"
           :key="i"
           ref="timeListRefs"
-          v-slot="{ item, index: j }"
+          v-slot="{item, index: j}"
           class="kw-time-picker__list"
           :items="timeList"
         >
@@ -68,7 +65,7 @@
 
 <script>
 import { date } from 'quasar';
-import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
@@ -80,10 +77,10 @@ function createOptions(n) {
 
 export default {
   name: 'KwTimePicker',
-  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
+    ...useFieldStyleProps,
 
     modelValue: {
       type: String,
@@ -110,7 +107,6 @@ export default {
   emits: ['update:modelValue'],
 
   setup(props) {
-    const iconRef = ref();
     const timeRef = ref();
     const timeListRefs = ref();
 
@@ -120,7 +116,10 @@ export default {
       createOptions(60),
     ];
 
-    const showing = ref(false);
+    const isReadonlyOrDisable = computed(() => props.readonly || props.disable);
+    const isExpanded = ref(false);
+    const showing = computed(() => !isReadonlyOrDisable.value && isExpanded.value);
+
     const selectedListIndex = ref(-1);
     const selectedItemIndex = ref([-1, -1]);
 
@@ -133,7 +132,7 @@ export default {
     });
 
     async function toggleView(e) {
-      showing.value = e ?? !showing.value;
+      isExpanded.value = e ?? !isExpanded.value;
     }
 
     const getHourValue = () => value.value.substring(0, 2);
@@ -151,15 +150,7 @@ export default {
       }
     }
 
-    function onBlur() {
-      const el = timeRef.value;
-
-      if (!el?.contains(document.activeElement)) {
-        toggleView(false);
-      }
-    }
-
-    function onChange(e) {
+    function onChangeInput(e) {
       if (!e) {
         value.value = '';
         return;
@@ -310,23 +301,23 @@ export default {
     }
 
     const clickOutsideProps = {
-      innerRefs: [inputRef, iconRef, timeRef],
+      innerRefs: [inputRef, timeRef],
       onClickOutside() {
         toggleView(false);
       },
     };
 
     watch(showing, async (val) => {
-      if (val) {
-        const el = inputRef.value.getNativeElement();
+      const el = inputRef.value.getNativeElement();
 
+      if (val) {
         if (el !== document.activeElement) {
           el.focus();
           el.setSelectionRange(5, 5);
         }
 
-        removeEvt(inputRef, 'keydown', onKeydown, true);
-        addEvt(inputRef, 'keydown', onKeydownWhenShowing, true);
+        removeEvt(el, 'keydown', onKeydown, true);
+        addEvt(el, 'keydown', onKeydownWhenShowing, true);
         addClickOutside(clickOutsideProps);
 
         timeClickCount[0] = 0;
@@ -337,21 +328,23 @@ export default {
         await nextTick();
         scrollToSelected();
       } else {
-        removeEvt(inputRef, 'keydown', onKeydownWhenShowing, true);
+        removeEvt(el, 'keydown', onKeydownWhenShowing, true);
         removeClickOutside(clickOutsideProps);
-        addEvt(inputRef, 'keydown', onKeydown, true);
+        addEvt(el, 'keydown', onKeydown, true);
       }
     });
 
     onMounted(() => {
-      addEvt(inputRef, 'keydown', onKeydown, true);
-      preventSubmitEnter(inputRef);
+      const el = inputRef.value.getNativeElement();
+      addEvt(el, 'keydown', onKeydown, true);
+      preventSubmitEnter(el);
     });
 
+    const fieldStyles = useFieldStyle();
+
     return {
-      ...useInheritAttrs(),
       ...fieldCtx,
-      iconRef,
+      fieldStyles,
       timeRef,
       timeListRefs,
       timeLists,
@@ -361,8 +354,7 @@ export default {
       innerValue,
       toggleView,
       scrollToSelected,
-      onBlur,
-      onChange,
+      onChangeInput,
       isActive,
       isSelected,
       onMousemove,

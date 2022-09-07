@@ -1,15 +1,28 @@
 <template>
-  <q-separator class="kw-separator" />
+  <q-separator
+    class="kw-separator"
+    :spaced="spaced"
+    :inset="inset"
+    :vertical="vertical"
+    :size="size"
+    :color="color"
+  />
 </template>
 
 <script>
 export default {
   name: 'KwSeparator',
 
-  setup() {
-    return {
+  props: {
+    spaced: { type: [Boolean, String], default: '30px' },
+    inset: { type: [Boolean, String], default: false },
+    vertical: { type: Boolean, default: false },
+    size: { type: String, default: undefined },
+    color: { type: String, default: 'grey-5' }, // can be transparent
+  },
 
-    };
+  setup() {
+    return {};
   },
 };
 </script>

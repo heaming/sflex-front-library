@@ -2,23 +2,30 @@
   <div
     v-show="showing"
     class="kw-form-row"
+    :class="rowClass"
   >
     <slot />
   </div>
 </template>
 
 <script>
-import useFormRow from '../../composables/private/useFormRow';
+import useFormRow, { useFormRowProps } from '../../composables/private/useFormRow';
+import useFormExpanded from '../../composables/private/useFormExpanded';
 import useFormType, { FORM_TYPE } from '../../composables/private/useFormType';
 
 export default {
   name: 'KwSearchRow',
+
+  props: {
+    ...useFormRowProps,
+  },
 
   setup() {
     useFormType(FORM_TYPE.SEARCH);
 
     return {
       ...useFormRow(),
+      ...useFormExpanded(),
     };
   },
 };

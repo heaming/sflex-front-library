@@ -1,7 +1,7 @@
 <template>
   <q-form
     v-bind="styleClassAttrs"
-    class="kw-search"
+    class="kw-form kw-search"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
@@ -10,34 +10,28 @@
       hidden
     >
     <slot />
-    <div class="kw-search--bottom">
-      <div
-        v-if="isExpandable"
-        class="kw-search--view-more"
-      >
+    <kw-btn
+      v-if="isExpandable"
+      class="kw-search__view-more"
+      :class="{'kw-search__view-more--expanded' : isExpanded }"
+      icon-right="arrow_down_16"
+      :label="$t('MSG_BTN_VIEW_MORE', null, '더보기')"
+      flat
+      @click="toggleExpand()"
+    />
+    <div class="kw-search__action">
+      <slot name="action">
         <kw-btn
-          :class="{'q-btn--append': isExpanded}"
-          @click="toggleExpand()"
-        >
-          <span class="block">
-            {{ $t('MSG_BTN_VIEW_MORE', null, '더보기') }}
-          </span>
-        </kw-btn>
-      </div>
-      <div class="row justify-end">
-        <slot name="action">
-          <kw-btn
-            :label="$t('MSG_BTN_RESET', null, '초기화')"
-            :ripple="false"
-            type="reset"
-          />
-          <kw-btn
-            :label="$t('MSG_BTN_SEARCH', null, '검색')"
-            :ripple="false"
-            type="submit"
-          />
-        </slot>
-      </div>
+          :label="$t('MSG_BTN_RESET', null, '초기화')"
+          :ripple="false"
+          type="reset"
+        />
+        <kw-btn
+          :label="$t('MSG_BTN_SEARCH', null, '검색')"
+          :ripple="false"
+          type="submit"
+        />
+      </slot>
     </div>
   </q-form>
 </template>
@@ -45,13 +39,20 @@
 <script>
 import { debounce } from 'lodash-es';
 import { confirm } from '../../plugins/dialog';
-import { ObserverContextKey, FormTypeContextKey, PageSearchContextKey } from '../../consts/private/symbols';
+import {
+  ObserverContextKey,
+  FormTypeContextKey,
+  PageSearchContextKey,
+} from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useForm, { useFormProps } from '../../composables/private/useForm';
-import useFormExpandable, { useFormExpandableProps } from '../../composables/private/useFormExpandable';
+import useFormExpandable, {
+  useFormExpandableProps,
+} from '../../composables/private/useFormExpandable';
 import { FORM_TYPE } from '../../composables/private/useFormType';
 import libConfig from '../../consts/private/libConfig';
 import i18n from '../../i18n';
+import useFormLayout, { useFormLayoutProps } from '../../composables/private/useFormLayout';
 
 export default {
   name: 'KwSearch',
@@ -59,6 +60,7 @@ export default {
 
   props: {
     ...useFormProps,
+    ...useFormLayoutProps,
     ...useFormExpandableProps,
 
     labelSize: {
@@ -123,6 +125,8 @@ export default {
 
     // ignore observe
     provide(ObserverContextKey, {});
+
+    useFormLayout();
 
     return {
       ...useInheritAttrs(),
