@@ -9,7 +9,7 @@
   </q-expansion-item>
   <!-- select -->
   <q-expansion-item
-    v-if="false"
+    v-if="true"
     label="Select"
   >
     <div class="result-area">
@@ -18,7 +18,7 @@
   </q-expansion-item>
   <!-- checkbox -->
   <q-expansion-item
-    v-if="false"
+    v-if="true"
     label="CheckBox"
   >
     <div class="result-area">

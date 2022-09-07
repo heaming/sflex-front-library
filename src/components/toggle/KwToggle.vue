@@ -7,6 +7,7 @@
     :val="val"
     :label="label ?? val"
     :left-label="!rightLabel"
+    :dense="dense"
   >
     <slot />
   </q-toggle>
@@ -37,6 +38,10 @@ export default {
     rightLabel: {
       type: Boolean,
       default: false,
+    },
+    dense: {
+      type: Boolean,
+      default: true,
     },
   },
 
