@@ -19,6 +19,7 @@ module.exports = {
     'at-rule-no-unknown': null,
     'function-no-unknown': null,
     'function-url-quotes': null,
+    'max-line-length': 200,
     'no-empty-source': null,
     'no-descending-specificity': null,
     'no-duplicate-selectors': null,
