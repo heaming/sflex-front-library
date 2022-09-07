@@ -1,26 +1,36 @@
 <template>
   <div
     class="kw-form-item"
-    :class="itemClass"
-    :style="{'max-width': itemWidth}"
+    :class="colspan > 1 && `kw-form-item--colspan-${colspan}`"
   >
     <div
       v-if="!noLabel"
       class="kw-form-item__label"
+      :class="labelClass"
       :style="{width: labelWidth}"
     >
-      <slot name="label">
-        <span>{{ label }}</span>
-      </slot>
-
-      <span
-        v-if="hintMessage"
-        class="kw-form-item__hint"
-      >
-        <kw-tooltip>
-          <slot name="hint">{{ hintMessage }}</slot>
-        </kw-tooltip>
-      </span>
+      <div class="kw-label-content">
+        <slot name="label">
+          <span class="kw-label-content__label">
+            {{ label }}
+          </span>
+        </slot>
+        <span
+          v-if="hint"
+          class="kw-label-content__hint"
+        >
+          <q-icon
+            size="16px"
+            name="info_16"
+          >
+            <kw-tooltip>
+              <slot name="hint">
+                {{ hint }}
+              </slot>
+            </kw-tooltip>
+          </q-icon>
+        </span>
+      </div>
     </div>
     <div class="kw-form-item__field">
       <slot />

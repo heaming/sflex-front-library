@@ -1,132 +1,61 @@
-.kw-select {
-  .q-select__dropdown-icon {
-    padding-left: 16px;
-    margin-right: 12px;
+.kw-select.q-select {
+  .q-field__input {
     width: 0;
-    color: transparent;
-    background: url(~@assets/images/ic_arrodw-down_16.svg) no-repeat center;
-    background-size: 16px auto;
+    min-width: 1px !important; // quasar use !important already...
   }
 
-  // 셀렉트 포커스
-  &.q-field--focused {
-    .q-field__control {
-      border-color: $black1;
-    }
+  .q-select__dropdown-icon {
+    opacity: 1 !important;
   }
 
-  // 셀렉트 에러
-  &.q-field--error {
-    .q-field__control {
-      border-color: $error;
-    }
-
-    &[aria-readonly="true"],
-    &[aria-disabled="true"] {
-      .q-field__control {
-        border-color: $line-stroke;
-      }
-    }
-  }
-
+  &.q-field--readonly,
   &.q-field--disabled {
-    .q-field__control {
-      background-color: $line-bg;
-      color: $black3;
+    .q-select__dropdown-icon {
+      opacity: 0.6 !important;
+    }
+  }
+}
 
-      span {
-        color: $black3;
-      }
+.kw-select-options-menu.q-menu {
+  border: 1px solid $black1;
+  border-radius: 0;
+  box-shadow: none;
 
-      .q-field__input {
-        padding-left: 0;
-        width: 100%;
-        height: 100%;
+  .q-item {
+    min-height: 34px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $black2;
 
-        &::placeholder {
-          font-size: 0;
+    &__section {
+      &--side {
+        .q-checkbox {
+          &__icon {
+            font-size: 1em;
+          }
         }
       }
+    }
 
-      .q-select__dropdown-icon {
-        background: url(~@assets/images/ic_arrow_b_16.svg) no-repeat center;
+    .q-focus-helper {
+      transition: none;
+
+      &::before,
+      &::after {
+        display: none;
       }
     }
-  }
 
-  &.q-field--readonly {
-    .q-field__native span {
-      color: $black3;
-    }
-
-    & .q-field__control {
-      &::before {
-        background-color: $line-bg;
-        border-color: $line-stroke;
-      }
-
-      .q-select__dropdown-icon {
-        background: url(~@assets/images/ic_arrow_b_16.svg) no-repeat center;
-      }
-    }
-  }
-
-  .q-field__control {
-    border: 1px solid $line-stroke;
-    height: 40px;
-
-    &:hover:not(:disabled,:read-only) {
-      border-color: $black1;
-    }
-  }
-
-  .q-field__native {
-    padding: 0;
-    padding-left: 12px;
-    color: $black1;
-
-    & > span {
-      font-size: 16px;
+    &.q-manual-focusable--focused {
+      font-weight: 700;
       color: $black1;
-      font-weight: 500;
-    }
-  }
 
-  .q-field__input {
-    padding-left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .q-field__prefix,
-  .q-field__suffix {
-    padding: 0;
-    font-size: 16px;
-    color: $black1;
-  }
-
-  .q-field__prefix {
-    padding-right: 2px;
-  }
-
-  .q-field__suffix {
-    padding-left: 2px;
-  }
-
-  // placeholder css
-  &.q-field--float {
-    .q-field__input {
-      padding-left: 0;
-      width: 100%;
-      height: 100%;
-
-      &::placeholder {
-        font-size: 0;
+      & > .q-focus-helper {
+        background-color: $bg-box;
+        opacity: 1;
+        z-index: -1;
       }
     }
-  }
-
-  .q-field__marginal {
-    height: auto;
   }
 }

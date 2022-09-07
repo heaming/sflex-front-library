@@ -22,7 +22,6 @@ export default () => {
   const invalidMessage = computed(() => findInvalidCtx()?.invalidMessage);
 
   return {
-    registeredList,
     invalid,
     invalidMessage,
   };

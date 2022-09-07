@@ -1,4 +1,4 @@
-import { FormContextKey, FormItemContextKey } from '../../consts/private/symbols';
+import { FormContextKey } from '../../consts/private/symbols';
 import useObserverChild, { useObserverChildProps } from './useObserverChild';
 import { alert, confirm } from '../../plugins/dialog';
 import i18n from '../../i18n';
@@ -6,14 +6,6 @@ import i18n from '../../i18n';
 export const useFormProps = {
   ...useObserverChildProps,
 
-  cols: {
-    type: Number,
-    default: 3,
-  },
-  labelSize: {
-    type: Number,
-    default: 150,
-  },
   autofocus: {
     type: Boolean,
     default: false,
@@ -72,14 +64,6 @@ export default () => {
     values,
     registerField,
     unregisterField,
-  });
-
-  const cols = computed(() => props.cols);
-  const labelSize = computed(() => props.labelSize);
-
-  provide(FormItemContextKey, {
-    cols,
-    labelSize,
   });
 
   function focus() {

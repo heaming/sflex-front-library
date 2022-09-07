@@ -114,13 +114,8 @@ $unit: px;
     width: #{$size} + $unit !important;
     max-width: #{$size} + $unit !important;
     min-width: #{$size} + $unit !important;
-
-    &.kw-date-picker .q-field__inner {
-      width: #{$size} + $unit !important;
-      max-width: #{$size} + $unit !important;
-      min-width: #{$size} + $unit !important;
-    }
   }
+
   .h#{$size} {
     height: #{$size} + $unit !important;
     max-height: #{$size} + $unit !important;
