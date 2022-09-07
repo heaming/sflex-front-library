@@ -102,27 +102,9 @@
   max-height: calc(100vh - 128px);
 }
 
-// form in popup
-
 .kw-popup {
-  .kw-form .kw-form-row {
-    width: calc(100% + 80px);
-    margin-left: -80px;
-  }
-
-  .kw-form .kw-form-row .kw-form-item[style*="50%"]:nth-child(2) {
-    margin-left: 0;
-  }
-
-  .kw-form .kw-form-row .kw-form-item {
-    padding-left: 80px;
-  }
-
-  .kw-form .kw-form-item__field .q-field {
-    max-width: 100%;
-  }
-
-  .kw-date-picker .q-field__inner {
-    max-width: 100%;
+  .kw-date-picker {
+    min-width: 140px;
+    max-width: none;
   }
 }
