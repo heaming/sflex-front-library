@@ -12,9 +12,8 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary: #2f8af3;
-$secondary: #2f3c78;
-$info: #ed1941;
+// For additional sementic variables.
+// you can't use in quasar props.
 $error: #ed1941;
 $black1: #222;
 $black2: #555;
@@ -27,6 +26,21 @@ $line-bg: #eee;
 $bg-white: #fff;
 $bg-box: #f5f5f5;
 $bg-body: #f3f4f5;
+
+// override quasar color-palette
+// see https://quasar.dev/style/color-palette#introduction
+
+// brand color
+$primary: #2f8af3; // Primary
+$secondary: #2f3c78; // Secondary
+$accent: #ed1941; // Sub
+$dark: #1d1d1d; // dark?
+$positive: $primary; // Positive
+$negative: #ed1941; // Negative
+$info: #6cbf67; // Green
+$warning: #edca19; // Yellow
+
+// Grayscale
 $grey-1: $bg-white;
 $grey-2: $bg-box;
 $grey-3: $bg-body;
@@ -35,14 +49,34 @@ $grey-5: $line-line;
 $grey-6: $line-stroke;
 $grey-7: $placeholder;
 $grey-8: $black-btn-line;
+$grey-9: $dark;
 $grey-10: $black1;
 $grey-11: $black2;
 $grey-12: $black3;
-$accent: #9c27b0;
-$dark: #1d1d1d;
-$positive: #21ba45;
-$negative: #c10015;
-$warning: #f2c037;
+
+// helper list for semantics.
+$semantic-colors: (
+  error :$error,
+  black1 :$black1,
+  black2 :$black2,
+  black3 :$black3,
+  black-btn-line :$black-btn-line,
+  placeholder :$placeholder,
+  line-stroke :$line-stroke,
+  line-line :$line-line,
+  line-bg :$line-bg,
+  bg-white :$bg-white,
+  bg-box :$bg-box,
+  bg-body :$bg-body,
+  primary :$primary,
+  secondary :$secondary,
+  accent :$accent,
+  dark :$dark,
+  positive :$positive,
+  negative :$negative,
+  info :$info,
+  warning :$warning,
+);
 
 // kw variables
 // add global variables for component styling.
@@ -63,167 +97,3 @@ $kw-field-border-radius: 0;
 $kw-field-bg-color-disable: $line-bg;
 $kw-field-color: $black1;
 $kw-field-color-disable: $black3;
-
-.kw-fc-- {
-  &primary {
-    color: $primary;
-  }
-
-  &secondary {
-    color: $secondary;
-  }
-
-  &info {
-    color: $info;
-  }
-
-  &error {
-    color: $error;
-  }
-
-  &black1 {
-    color: $black1;
-  }
-
-  &black2 {
-    color: $black2;
-  }
-
-  &black3 {
-    color: $black3;
-  }
-
-  &black-btn-line {
-    color: $black-btn-line;
-  }
-
-  &placeholder {
-    color: $placeholder;
-  }
-
-  &line-stroke {
-    color: $line-stroke;
-  }
-
-  &line-line {
-    color: $line-line;
-  }
-
-  &line-bg {
-    color: $line-bg;
-  }
-
-  &bg-white {
-    color: $bg-white;
-  }
-
-  &bg-box {
-    color: $bg-box;
-  }
-
-  &bg-body {
-    color: $bg-body;
-  }
-
-  &accent {
-    color: $accent;
-  }
-
-  &dark {
-    color: $dark;
-  }
-
-  &positive {
-    color: $positive;
-  }
-
-  &negative {
-    color: $negative;
-  }
-
-  &warning {
-    color: $warning;
-  }
-}
-
-.kw-bc-- {
-  &primary {
-    background-color: $primary;
-  }
-
-  &secondary {
-    background-color: $secondary;
-  }
-
-  &info {
-    background-color: $info;
-  }
-
-  &error {
-    background-color: $error;
-  }
-
-  &black1 {
-    background-color: $black1;
-  }
-
-  &black2 {
-    background-color: $black2;
-  }
-
-  &black3 {
-    background-color: $black3;
-  }
-
-  &black-btn-line {
-    background-color: $black-btn-line;
-  }
-
-  &placeholder {
-    background-color: $placeholder;
-  }
-
-  &line-stroke {
-    background-color: $line-stroke;
-  }
-
-  &line-line {
-    background-color: $line-line;
-  }
-
-  &line-bg {
-    background-color: $line-bg;
-  }
-
-  &bg-white {
-    background-color: $bg-white;
-  }
-
-  &bg-box {
-    background-color: $bg-box;
-  }
-
-  &bg-body {
-    background-color: $bg-body;
-  }
-
-  &accent {
-    background-color: $accent;
-  }
-
-  &dark {
-    background-color: $dark;
-  }
-
-  &positive {
-    background-color: $positive;
-  }
-
-  &negative {
-    background-color: $negative;
-  }
-
-  &warning {
-    background-color: $warning;
-  }
-}
