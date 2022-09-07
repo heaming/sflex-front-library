@@ -9,6 +9,7 @@
   </q-expansion-item>
   <!-- select -->
   <q-expansion-item
+    v-if="false"
     label="Select"
   >
     <div class="result-area">
@@ -17,6 +18,7 @@
   </q-expansion-item>
   <!-- checkbox -->
   <q-expansion-item
+    v-if="false"
     label="CheckBox"
   >
     <div class="result-area">
@@ -25,6 +27,7 @@
   </q-expansion-item>
   <!-- button -->
   <q-expansion-item
+    v-if="false"
     label="Button"
   >
     <div class="result-area">
@@ -33,11 +36,20 @@
   </q-expansion-item>
   <!-- radio -->
   <q-expansion-item
+    v-if="false"
     label="Radio"
-    default-opened
   >
     <div class="result-area">
       <radio-form />
+    </div>
+  </q-expansion-item>
+  <!-- toggle -->
+  <q-expansion-item
+    label="toggle"
+    default-opened
+  >
+    <div class="result-area">
+      <toggle-form />
     </div>
   </q-expansion-item>
   <!-- search -->
@@ -48,7 +60,9 @@
       <kw-search :cols="0">
         <kw-search-row>
           <kw-search-item :label="'test'">
-            <kw-input :label="'test'" />
+            <div>
+              <kw-input :label="'test'" />
+            </div>
           </kw-search-item>
         </kw-search-row>
         <kw-search-row>
@@ -100,7 +114,7 @@
 
 <script setup>
 /* eslint-disable no-unused-vars */
-import { InputForm, SelectForm, CheckBoxForm, ButtonForm, RadioForm } from '../../components/test';
+import { InputForm, SelectForm, CheckBoxForm, ButtonForm, RadioForm, ToggleForm } from '../../components/test';
 </script>
 
 <style scoped>
