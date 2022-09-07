@@ -1,6 +1,6 @@
 .kw-form-row {
   $-kw-form-row-height: $kw-field-line-height;
-  $-kw-form-row-gap: 100px;
+  $-kw-form-row-gap: 80px;
   $-kw-form-row-padding: 10px 0 10px 0;
 
   @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
