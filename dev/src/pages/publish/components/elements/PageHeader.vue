@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       Use this component if you need headers when composing your page.
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -35,7 +38,11 @@
             </td>
             <td>
               Check the 'Breadcrumb' in Design/Planning.<br>
-              The last value in the array is automatically rendered as the title of the page.
+              The last value in the array is automatically rendered as the title of the page.<br><br>
+              It doesn't matter if it's wrong because the actual data is loaded and input from DB.<br>
+              Please put the contents in the plan/design as they are.<br>
+              However, in this case, the title may not match the last of Breadcrumb.<br>
+              Please put the title at the end of the breadcrumb.
             </td>
           </tr>
         </tbody>
@@ -50,6 +57,12 @@
       <ul>
         <li>
           Please don't care the icons which are located beside the title(ex. bell, star icon)
+        </li>
+        <li>
+          Breadcrumb loads and inputs actual data from the DB, so it doesn't matter if it's wrong.
+          Please put the contents in the plan/design as it is.
+          However, in this case, the title may not match the last breadcrumb.
+          Please put a title on the end of the breadcrumb.
         </li>
       </ul>
     </div>
@@ -84,4 +97,11 @@ const testCode = `
   />
 </template>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022.09.07',
+    text: 'Add notice - Related to Breadcrumb data',
+  },
+];
 </script>

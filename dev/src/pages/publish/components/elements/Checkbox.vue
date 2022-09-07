@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       In the search form or table, checkbox's height is 18px / default is 22px
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -332,7 +335,7 @@
         Essential
       </h3>
       <p class="kw-guide-description">
-        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        - add attribute <b> "required" </b> <b> &lt;kw-form-item&gt; </b>
         when it needs to be essential to input <br>
         - add attribute <b>rules="required"</b> in <b>&lt;kw-checkbox&gt;</b>
       </p>
@@ -342,7 +345,7 @@
             <kw-form-row>
               <kw-form-item
                 label="OptionGroup"
-                class="essential"
+                required
               >
                 <kw-option-group
                   :model-value="[]"
@@ -575,7 +578,7 @@ const essentialCode = `
   <kw-form-row>
     <kw-form-item
       label="OptionGroup"
-      class="essential"
+      required
     >
       <kw-option-group
         :model-value="[]"
@@ -590,9 +593,9 @@ const essentialCode = `
 <!-- if Search Form -->
 <kw-search>
   <kw-search-row>
-    <kw-search-item
+    <kw-form-item
       label="OptionGroup"
-      class="essential"
+      required
     >
       <kw-option-group
         :model-value="[]"
@@ -600,9 +603,24 @@ const essentialCode = `
         :options="['A', 'B', 'C', 'D']"
         rules="required"
       />
-    </kw-search-item>
+    </kw-form-item>
   </kw-search-row>
 </kw-search>
 `;
 // const readonlyCheckbox = ref(['A']);eckboxOptionGroup = ref(['A']);
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-06',
+    text: 'change guide content about essential type',
+  },
+  {
+    timestamp: '2022-09-02',
+    text: 'add the example of having tilde special symbol',
+  },
+  {
+    timestamp: '2022-09-01',
+    text: 'remove the placeholder attribute',
+  },
+];
 </script>

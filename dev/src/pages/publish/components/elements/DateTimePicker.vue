@@ -118,7 +118,7 @@
               </kw-form-item>
               <kw-form-item
                 label="DatePicker"
-                class="essential"
+                required
               >
                 <kw-date-picker
                   rules="required"
@@ -154,7 +154,7 @@
               </kw-form-item>
               <kw-form-item
                 label="DateRangePicker"
-                class="essential"
+                required
               >
                 <kw-date-range-picker
                   rules="date_range_required|date_range_months:1"
@@ -194,7 +194,7 @@
               </kw-form-item>
               <kw-form-item
                 label="TimePicker"
-                class="essential"
+                required
               >
                 <kw-time-picker
                   rules="required"
@@ -279,12 +279,16 @@ const timePickerCode = `
 
 const guideHistory = [
   {
-    timestamp: '2022-08-31',
-    text: 'Revised the guide about placeholder',
+    timestamp: '2022-09-06',
+    text: 'change guide content about essential type',
   },
   {
     timestamp: '2022-09-01',
     text: 'Remove the placeholder attribute',
+  },
+  {
+    timestamp: '2022-08-31',
+    text: 'Revised the guide about placeholder',
   },
 ];
 </script>
