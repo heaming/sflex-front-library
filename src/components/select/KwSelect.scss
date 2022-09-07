@@ -3,6 +3,17 @@
     width: 0;
     min-width: 1px !important; // quasar use !important already...
   }
+
+  .q-select__dropdown-icon {
+    opacity: 1 !important;
+  }
+
+  &.q-field--readonly,
+  &.q-field--disabled {
+    .q-select__dropdown-icon {
+      opacity: 0.6 !important;
+    }
+  }
 }
 
 .kw-select-options-menu.q-menu {

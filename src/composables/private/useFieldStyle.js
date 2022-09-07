@@ -1,16 +1,13 @@
-import { FormTypeContextKey } from '../../consts/private/symbols';
-import { FORM_TYPE } from './useFormType';
+import useFieldDense, { useFieldDenseProps } from './useFieldDense';
 
 export const useFieldStyleProps = {
+  ...useFieldDenseProps,
+
   underline: {
     type: Boolean,
     default: false,
   },
   borderless: {
-    type: Boolean,
-    default: false,
-  },
-  dense: {
     type: Boolean,
     default: false,
   },
@@ -32,18 +29,17 @@ export const useFieldStyleProps = {
 
 export default () => {
   const { props } = getCurrentInstance();
-  const isSearchContext = inject(FormTypeContextKey, null) === FORM_TYPE.SEARCH;
 
   const design = computed(() => {
     if (props.underline) return { };
     if (props.borderless) return { borderless: true };
     return { outlined: true };
   });
-  const dense = computed(() => ({ dense: isSearchContext || props.dense }));
+  const dense = useFieldDense();
 
   const fieldStyles = computed(() => ({
     ...design.value,
-    ...dense.value,
+    dense: dense.value,
   }));
 
   return fieldStyles;

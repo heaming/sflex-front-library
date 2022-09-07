@@ -1,11 +1,11 @@
 <template>
   <q-input
     ref="inputRef"
-    v-bind="styleClassAttrs"
     v-model="innerValue"
-    class="kw-date-picker"
-    :class="{'q-field--focused': showing}"
-    :label="$q.platform.is.desktop ? null : label"
+    v-bind="fieldStyles"
+    class="kw-field kw-date-picker"
+    :class="{'q-field--highlighted': showing}"
+    :label="$q.platform.is.desktop ? undefined : label"
     :error="invalid"
     :error-message="invalidMessage"
     :readonly="readonly"
@@ -14,22 +14,18 @@
     :unmasked-value="unmaskedValue"
     :placeholder="placeholder"
     no-error-icon
-    :hide-bottom-space="hideBottomSpace"
     @click="toggleView()"
-    @blur="onBlur"
     @change="onChangeInput"
   >
     <template #append>
-      <q-icon
-        ref="iconRef"
-        name="event"
-        class="cursor-pointer"
-        @click.prevent="toggleView()"
-      />
+      <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
+      <div @click="toggleView()">
+        <q-icon name="calendar" />
+      </div>
     </template>
     <q-menu
-      v-model="showing"
-      class="kw-date-picker"
+      :model-value="showing"
+      class="kw-date-picker-menu"
       no-parent-event
       no-focus
       no-refocus
@@ -53,8 +49,8 @@
 
 <script>
 import { date } from 'quasar';
-import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
+import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
 
@@ -65,10 +61,10 @@ const dateStringValidator = (v) => v?.length === 10 && !Number.isNaN(Date.parse(
 
 export default {
   name: 'KwDatePicker',
-  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
+    ...useFieldStyleProps,
 
     modelValue: {
       type: String,
@@ -105,10 +101,6 @@ export default {
       type: Function,
       default: undefined,
     },
-    hideBottomSpace: {
-      type: Boolean,
-      default: false,
-    },
     placeholder: {
       type: String,
       default: undefined,
@@ -119,10 +111,11 @@ export default {
 
   setup(props) {
     const inputRef = ref();
-    const iconRef = ref();
     const dateRef = ref();
 
-    const showing = ref(false);
+    const isReadonlyOrDisable = computed(() => props.readonly || props.disable);
+    const isExpanded = ref(false);
+    const showing = computed(() => !isReadonlyOrDisable.value && isExpanded.value);
 
     const fieldCtx = useField();
     const { value } = fieldCtx;
@@ -138,15 +131,7 @@ export default {
     });
 
     function toggleView(e) {
-      showing.value = e ?? !showing.value;
-    }
-
-    function onBlur() {
-      const el = dateRef.value?.$el;
-
-      if (!el?.contains(document.activeElement)) {
-        toggleView(false);
-      }
+      isExpanded.value = e ?? !isExpanded.value;
     }
 
     const minDate = computed(() => props.minDate.substring(0, typeFormat.length));
@@ -212,54 +197,54 @@ export default {
     }
 
     const clickOutsideProps = {
-      innerRefs: [inputRef, iconRef, dateRef],
+      innerRefs: [inputRef, dateRef],
       onClickOutside() {
         toggleView(false);
       },
     };
 
     watch(showing, (val) => {
-      if (val) {
-        const el = inputRef.value.getNativeElement();
+      const el = inputRef.value.getNativeElement();
 
+      if (val) {
         if (el !== document.activeElement) {
           const { length } = typeFormat;
-
           el.focus();
           el.setSelectionRange(length, length);
         }
 
-        removeEvt(inputRef, 'keydown', onKeydown, true);
-        addEvt(inputRef, 'keydown', onKeydownWhenShowing, true);
+        removeEvt(el, 'keydown', onKeydown, true);
+        addEvt(el, 'keydown', onKeydownWhenShowing, true);
         addClickOutside(clickOutsideProps);
       } else {
-        removeEvt(inputRef, 'keydown', onKeydownWhenShowing, true);
+        removeEvt(el, 'keydown', onKeydownWhenShowing, true);
         removeClickOutside(clickOutsideProps);
-        addEvt(inputRef, 'keydown', onKeydown, true);
+        addEvt(el, 'keydown', onKeydown, true);
       }
     });
 
     onMounted(() => {
-      addEvt(inputRef, 'keydown', onKeydown, true);
-      preventSubmitEnter(inputRef);
+      const el = inputRef.value.getNativeElement();
+      addEvt(el, 'keydown', onKeydown, true);
+      preventSubmitEnter(el);
     });
 
     function focus() {
       inputRef.value?.focus();
     }
 
+    const fieldStyles = useFieldStyle();
+
     return {
-      ...useInheritAttrs(),
       ...fieldCtx,
+      fieldStyles,
       inputRef,
-      iconRef,
       dateRef,
       showing,
       innerValue,
       innerValueMask,
       minView,
       toggleView,
-      onBlur,
       onChangeInput,
       onChangeDate,
       focus,

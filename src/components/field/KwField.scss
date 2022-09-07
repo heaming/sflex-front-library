@@ -216,8 +216,7 @@
 
   // error
   &.q-field--error {
-    .q-field__control,
-    .q-field .q-field__control {
+    .q-field__control {
       &::before,
       &::after {
         color: $error !important;
@@ -244,10 +243,77 @@
       }
     }
   }
+}
 
-  .q-field {
-    .q-field__messages {
-      display: none; // notice. field 에 속한 field 의 message 영역 무시
+.kw-field-wrap {
+  position: relative;
+
+  .q-field__messages {
+    display: none; // notice. field 에 속한 field 의 message 영역 무시
+  }
+
+  &__control {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    height: auto;
+    align-items: center;
+  }
+
+  &__bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2px 0 0;
+    min-height: $kw-field-font-size-bottom;
+    font-size: $kw-field-font-size-bottom;
+    line-height: 1;
+    transform: translateY(100%);
+    color: rgb(0 0 0 / 54%);
+  }
+
+  &__messages {
+    > div {
+      word-break: keep-all;
+      word-wrap: normal;
+      overflow-wrap: normal;
+      text-overflow: ellipsis !important;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &--transition {
+      &-enter-active,
+      &-leave-active {
+        transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+      }
+
+      &-enter-from,
+      &-leave-to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+  }
+
+  &--error {
+    .kw-field-wrap__bottom {
+      color: $error !important;
+    }
+
+    .q-field__control {
+      &::before,
+      &::after {
+        color: $error !important;
+        border-color: $error !important;
+      }
+    }
+  }
+
+  &--dense {
+    .kw-field-wrap__bottom {
+      font-size: $kw-field-font-size-bottom-dense;
     }
   }
 }
