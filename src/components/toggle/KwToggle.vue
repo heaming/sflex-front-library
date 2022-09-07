@@ -1,10 +1,13 @@
 <template>
   <q-toggle
-    class="kw-toggle"
+    class="kw-toggle spaced-sibling"
+    :class="label || $slots.default ? '' : 'kw-toggle--no-label'"
     :true-value="trueValue"
     :false-value="falseValue"
     :val="val"
     :label="label ?? val"
+    :left-label="!rightLabel"
+    :dense="dense"
   >
     <slot />
   </q-toggle>
@@ -32,11 +35,18 @@ export default {
       type: String,
       default: undefined,
     },
+    rightLabel: {
+      type: Boolean,
+      default: false,
+    },
+    dense: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   setup() {
     return {
-
     };
   },
 };

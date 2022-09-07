@@ -1,55 +1,186 @@
 .kw-toggle {
-  flex-direction: row-reverse;
+  // notice! we will break em based styling. so, you can use size props.
+  $-kw-toggle-height: $kw-field-line-height;
+  $-kw-toggle-track-height: 17px; // $-kw-toggle-height * 0.7?
+  $-kw-toggle-track-width: 30px; // $-kw-toggle-height * 1.2?
+  $-kw-toggle-thumb-size: 15px;
+  $-kw-toggle-thumb-padding: ($-kw-toggle-track-height - $-kw-toggle-thumb-size) / 2;
+  $-kw-toggle-thumb-color: $bg-white;
+  $-kw-toggle-thumb-slide-length: $-kw-toggle-track-width - $-kw-toggle-track-height;
+  $-kw-toggle-label-color: $black3;
+  $-kw-toggle-label-font-size: $kw-field-font-size-dense;
+  $-kw-toggle-label-line-height: $kw-field-line-height-dense;
 
-  .q-toggle__inner {
-    padding: 0;
-    width: 24px;
-    height: 14px;
-    min-width: auto;
-    min-height: auto;
-
-    &--truthy {
-      color: $primary;
+  &.q-toggle {
+    .q-toggle__track {
+      height: 100%;
+      border-radius: $-kw-toggle-track-height / 2;
+      opacity: 1;
+      background: currentcolor;
     }
 
-    &--falsy {
-      color: $line-line;
+    .q-toggle__thumb {
+      top: $-kw-toggle-thumb-padding;
+      left: $-kw-toggle-thumb-padding;
+      width: $-kw-toggle-thumb-size;
+      height: $-kw-toggle-thumb-size;
+
+      &::after {
+        background: $-kw-toggle-thumb-color;
+        box-shadow: none;
+      }
+
+      .q-icon {
+        font-size: 1em;
+        opacity: 1;
+      }
+    }
+
+    .q-toggle__inner {
+      margin: auto;
+      font-size: $-kw-toggle-thumb-size; // when use icon
+      padding: 0;
+      width: $-kw-toggle-track-width;
+      height: $-kw-toggle-track-height;
+      min-width: auto;
+      min-height: auto;
+
+      &--indet {
+        .q-toggle__thumb {
+          left: $-kw-toggle-thumb-padding + ($-kw-toggle-thumb-slide-length / 2);
+        }
+      }
+
+      &--truthy {
+        color: $primary;
+
+        .q-toggle__track {
+          opacity: 1;
+        }
+
+        .q-toggle__thumb {
+          left: $-kw-toggle-thumb-padding + $-kw-toggle-thumb-slide-length;
+        }
+      }
+
+      &--falsy {
+        color: $line-line;
+      }
+    }
+
+    &.disabled {
+      opacity: 1 !important;
+
+      .q-toggle__inner {
+        &--truthy {
+          color: $line-stroke; // does not defined!
+        }
+
+        &--falsy {
+          color: $line-stroke; // does not defined!
+        }
+      }
+
+      .q-toggle__thumb::after {
+        background: $line-bg;
+      }
+    }
+
+    .q-toggle__label {
+      padding-left: 4px;
+      font-size: $-kw-toggle-label-font-size;
+      line-height: $-kw-toggle-label-line-height;
+      color: $-kw-toggle-label-color;
+      font-weight: 500;
+    }
+
+    &.reverse {
+      .q-toggle__label {
+        padding-left: 0;
+        padding-right: 4px;
+      }
+    }
+
+    &--dense {
+      $-kw-toggle-height-dense: $kw-field-line-height-dense;
+      $-kw-toggle-track-height-dense: 14px; // $-kw-toggle-height * 0.7?
+      $-kw-toggle-track-width-dense: 24px; // $-kw-toggle-height * 1.2?
+      $-kw-toggle-thumb-size-dense: 12px;
+      $-kw-toggle-thumb-padding-dense: ($-kw-toggle-track-height-dense - $-kw-toggle-thumb-size-dense) / 2;
+      $-kw-toggle-thumb-slide-length-dense: $-kw-toggle-track-width-dense - $-kw-toggle-track-height-dense;
+      $-kw-toggle-label-font-size-dense: $kw-field-font-size-dense;
+      $-kw-toggle-label-line-height-dense: $kw-field-line-height-dense;
 
       .q-toggle__thumb {
-        left: 1px;
+        top: $-kw-toggle-thumb-padding-dense;
+        left: $-kw-toggle-thumb-padding-dense;
+        width: $-kw-toggle-thumb-size-dense;
+        height: $-kw-toggle-thumb-size-dense;
+      }
+
+      .q-toggle__inner {
+        margin: 4px 0 2px;
+        font-size: $-kw-toggle-thumb-size-dense; // when use icon
+        padding: 0;
+        width: $-kw-toggle-track-width-dense;
+        height: $-kw-toggle-track-height-dense;
+        min-width: auto;
+
+        &--indet {
+          .q-toggle__thumb {
+            left: $-kw-toggle-thumb-padding-dense + ($-kw-toggle-thumb-slide-length-dense / 2);
+          }
+        }
+
+        &--truthy {
+          .q-toggle__thumb {
+            left: $-kw-toggle-thumb-padding-dense + $-kw-toggle-thumb-slide-length-dense;
+          }
+        }
+      }
+
+      .q-toggle__label {
+        padding-left: 4px;
+        font-size: $-kw-toggle-label-font-size-dense;
+        line-height: $-kw-toggle-label-line-height-dense;
+      }
+
+      &.reverse {
+        .q-toggle__label {
+          padding-left: 0;
+          padding-right: 4px;
+        }
       }
     }
   }
 
-  .q-toggle__label {
-    padding-right: 8px;
-    font-size: 16px;
-    color: $black1;
-    font-weight: 500;
+  &--no-label {
+    .q-toggle__label {
+      display: none;
+    }
   }
+}
 
-  .q-toggle__track {
-    height: 100%;
-    border-radius: 7px;
-    opacity: 1;
-  }
-
-  .q-toggle__thumb {
-    margin-top: 1px;
-    width: 12px;
-    height: 12px;
-    top: 0;
-    right: auto;
-    left: 11px;
-    bottom: auto;
-    color: #fff;
-
-    &::after {
-      box-shadow: none;
+body.desktop {
+  .kw-toggle.q-toggle:not(.disabled) {
+    .q-toggle__thumb::before {
+      display: none;
     }
 
-    &::before {
-      display: none;
+    &:focus,
+    &:hover {
+      .q-toggle__thumb::before {
+        transform: none;
+      }
+    }
+  }
+
+  .kw-toggle.q-toggle--dense:not(.disabled) {
+    &:focus,
+    &:hover {
+      .q-toggle__thumb::before {
+        transform: none;
+      }
     }
   }
 }
