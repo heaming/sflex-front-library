@@ -1,4 +1,4 @@
-s@mixin kw-item($min-height) {
+@mixin kw-item($min-height) {
   display: flex;
   min-height: $min-height;
 
