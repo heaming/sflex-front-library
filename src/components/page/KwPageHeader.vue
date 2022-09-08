@@ -53,7 +53,6 @@
 
 <script>
 import { find, last } from 'lodash-es';
-import KwBtn from '../btn/KwBtn.vue';
 
 function creataBreadcrumbs(menus, menuUid) {
   const matched = find(menus, { menuUid });
@@ -73,7 +72,6 @@ function creataBreadcrumbs(menus, menuUid) {
 
 export default {
   name: 'KwPageHeader',
-  components: { KwBtn },
 
   props: {
     options: {

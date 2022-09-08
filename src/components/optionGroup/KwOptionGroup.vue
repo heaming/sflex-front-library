@@ -1,12 +1,14 @@
 <template>
   <q-field
     ref="inputRef"
-    class="kw-option-group"
+    class="kw-option-group kw-field"
     v-bind="styleClassAttrs"
-    :label="$q.platform.is.desktop ? null : label"
+    :label="$q.platform.is.desktop ? undefined : label"
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon
+    borderless
+    :dense="dense"
   >
     <template #control>
       <q-option-group
@@ -16,6 +18,7 @@
         :type="type"
         :options="normalizedOptions"
         inline
+        :dense="dense"
       />
     </template>
   </q-field>
@@ -41,6 +44,10 @@ export default {
     type: {
       type: String,
       default: 'radio',
+    },
+    dense: {
+      type: Boolean,
+      default: false,
     },
   },
 
