@@ -1,124 +1,92 @@
-$sides: (t, b, l, r, x, y, a);
-$unit: px;
+@mixin kw-item($min-height) {
+  display: flex;
+  min-height: $min-height;
 
-@for $space from 1 through 50 {
-  @each $side in $sides {
-    @if $side == "a" {
-      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
-        margin: #{$space * 10} + $unit !important;
-      }
+  &__label {
+    flex: none;
+    align-self: start;
+    width: 150px;
+    min-height: $min-height;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
 
-      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
-        padding: #{$space * 10} + $unit !important;
+    &--required {
+      .kw-label-content__label::after {
+        content: "*";
+        display: contents;
+        color: $info;
       }
-    } @else if $side == "x" {
-      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
-        margin-left: #{$space * 10} + $unit !important;
-        margin-right: #{$space * 10} + $unit !important;
-      }
+    }
+  }
 
-      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
-        padding-left: #{$space * 10} + $unit !important;
-        padding-right: #{$space * 10} + $unit !important;
-      }
-    } @else if $side == "y" {
-      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
-        margin-top: #{$space * 10} + $unit !important;
-        margin-bottom: #{$space * 10} + $unit !important;
-      }
+  &__field {
+    align-self: center;
+    flex: 1 0 1%;
+    display: flex;
 
-      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
-        padding-top: #{$space * 10} + $unit !important;
-        padding-bottom: #{$space * 10} + $unit !important;
-      }
-    } @else {
-      $origin: top !default;
+    .kw-field {
+      flex: 1 0 1%;  // max-width: 498px; why?
 
-      @if $side == "r" {
-        $origin: right;
-      } @else if $side == "b" {
-        $origin: bottom;
-      } @else if $side == "l" {
-        $origin: left;
-      } @else {
-        $origin: top;
+      & + span {
+        margin: auto;
+        color: $black3;
+        padding: 0 4px;
+
+        &:last-child {
+          padding-right: 0;
+        }
       }
 
-      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
-        margin-#{$origin}: #{$space * 10} + $unit !important;
+      & + .kw-field {
+        margin-left: 8px;
       }
+    }
 
-      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
-        padding-#{$origin}: #{$space * 10} + $unit !important;
+    .kw-field-wrap {
+      flex: 1 0 1%;
+    }
+  }
+}
+
+@mixin kw-row($min-height , $gap, $padding) {
+  display: flex;
+  margin: 0;
+  padding: $padding;
+  min-height: #{$min-height + nth($padding, 1) + nth($padding, 3)};
+  gap: $gap;
+  align-items: start;
+
+  .kw-form-item {
+    flex: none;
+  }
+
+  @for $i from 1 through 12 {
+    .kw-form-item:first-child:nth-last-child(#{$i}),
+    .kw-form-item:first-child:nth-last-child(#{$i}) ~ .kw-form-item {
+      width: calc((100% - (#{$gap} * (#{$i} - 1))) / #{$i});
+    }
+  }
+
+  @for $cols from 1 through 12 {
+    &--cols-#{$cols} {
+      .kw-form-item {
+        width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols}) !important;
+
+        @for $colspan from 1 through 12 {
+          &--colspan-#{$colspan} {
+            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan} + #{$gap} * #{$colspan - 1}) !important;
+          }
+        }
       }
     }
   }
 }
 
-@for $space from -500 through 500 {
-  @each $side in $sides {
-    @if $side == "a" {
-      .m#{str-slice($side, 0, 1)}#{$space} {
-        margin: #{$space} + $unit !important;
-      }
-
-      .p#{str-slice($side, 0, 1)}#{$space} {
-        padding: #{$space} + $unit !important;
-      }
-    } @else if $side == "x" {
-      .m#{str-slice($side, 0, 1)}#{$space} {
-        margin-left: #{$space} + $unit !important;
-        margin-right: #{$space} + $unit !important;
-      }
-
-      .p#{str-slice($side, 0, 1)}#{$space} {
-        padding-left: #{$space} + $unit !important;
-        padding-right: #{$space} + $unit !important;
-      }
-    } @else if $side == "y" {
-      .m#{str-slice($side, 0, 1)}#{$space} {
-        margin-top: #{$space} + $unit !important;
-        margin-bottom: #{$space} + $unit !important;
-      }
-
-      .p#{str-slice($side, 0, 1)}#{$space} {
-        padding-top: #{$space} + $unit !important;
-        padding-bottom: #{$space} + $unit !important;
-      }
-    } @else {
-      $origin: top !default;
-
-      @if $side == "r" {
-        $origin: right;
-      } @else if $side == "b" {
-        $origin: bottom;
-      } @else if $side == "l" {
-        $origin: left;
-      } @else {
-        $origin: top;
-      }
-
-      .m#{str-slice($side, 0, 1)}#{$space} {
-        margin-#{$origin}: #{$space} + $unit !important;
-      }
-
-      .p#{str-slice($side, 0, 1)}#{$space} {
-        padding-#{$origin}: #{$space} + $unit !important;
-      }
+@mixin color-based($prefix, $color-map) {
+  @each $name, $color in $color-map {
+    #{$prefix}#{$name} {
+      @content($color);
     }
-  }
-}
-
-@for $size from 1 through 1000 {
-  .w#{$size} {
-    width: #{$size} + $unit !important;
-    max-width: #{$size} + $unit !important;
-    min-width: #{$size} + $unit !important;
-  }
-
-  .h#{$size} {
-    height: #{$size} + $unit !important;
-    max-height: #{$size} + $unit !important;
-    min-height: #{$size} + $unit !important;
   }
 }

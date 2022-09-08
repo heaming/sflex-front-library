@@ -474,3 +474,162 @@ p {
 .bg-placeholder {
   background-color: #999 !important;
 }
+
+// ul,li
+.list-type1 {
+  font-size: 12px;
+  color: $placeholder;
+  position: relative;
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding-left: 17px;
+
+    &::before {
+      content: "※";
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+  }
+}
+
+.spaced-sibling + .spaced-sibling {
+  margin-left: 20px;
+}
+
+// helpers
+
+$sides: (t, b, l, r, x, y, a);
+$unit: px;
+
+@for $space from 1 through 50 {
+  @each $side in $sides {
+    @if $side == "a" {
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding: #{$space * 10} + $unit !important;
+      }
+    } @else if $side == "x" {
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-left: #{$space * 10} + $unit !important;
+        margin-right: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-left: #{$space * 10} + $unit !important;
+        padding-right: #{$space * 10} + $unit !important;
+      }
+    } @else if $side == "y" {
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-top: #{$space * 10} + $unit !important;
+        margin-bottom: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-top: #{$space * 10} + $unit !important;
+        padding-bottom: #{$space * 10} + $unit !important;
+      }
+    } @else {
+      $origin: top !default;
+
+      @if $side == "r" {
+        $origin: right;
+      } @else if $side == "b" {
+        $origin: bottom;
+      } @else if $side == "l" {
+        $origin: left;
+      } @else {
+        $origin: top;
+      }
+
+      .kw-m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-#{$origin}: #{$space * 10} + $unit !important;
+      }
+
+      .kw-p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-#{$origin}: #{$space * 10} + $unit !important;
+      }
+    }
+  }
+}
+
+@for $space from -500 through 500 {
+  @each $side in $sides {
+    @if $side == "a" {
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding: #{$space} + $unit !important;
+      }
+    } @else if $side == "x" {
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin-left: #{$space} + $unit !important;
+        margin-right: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding-left: #{$space} + $unit !important;
+        padding-right: #{$space} + $unit !important;
+      }
+    } @else if $side == "y" {
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin-top: #{$space} + $unit !important;
+        margin-bottom: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding-top: #{$space} + $unit !important;
+        padding-bottom: #{$space} + $unit !important;
+      }
+    } @else {
+      $origin: top !default;
+
+      @if $side == "r" {
+        $origin: right;
+      } @else if $side == "b" {
+        $origin: bottom;
+      } @else if $side == "l" {
+        $origin: left;
+      } @else {
+        $origin: top;
+      }
+
+      .m#{str-slice($side, 0, 1)}#{$space} {
+        margin-#{$origin}: #{$space} + $unit !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}#{$space} {
+        padding-#{$origin}: #{$space} + $unit !important;
+      }
+    }
+  }
+}
+
+@for $size from 1 through 1000 {
+  .w#{$size} {
+    width: #{$size} + $unit !important;
+    max-width: #{$size} + $unit !important;
+    min-width: #{$size} + $unit !important;
+  }
+
+  .h#{$size} {
+    height: #{$size} + $unit !important;
+    max-height: #{$size} + $unit !important;
+    min-height: #{$size} + $unit !important;
+  }
+}
+
+@include color-based(".kw-fc--", $semantic-colors) using ($color) {
+  color: $color;
+}
+
+@include color-based(".kw-bg--", $semantic-colors) using ($color) {
+  background-color: $color;
+}
