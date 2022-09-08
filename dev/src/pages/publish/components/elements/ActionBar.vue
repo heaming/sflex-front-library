@@ -7,6 +7,9 @@
       Table Action bar.<br>
       'kw-action-bar' uses 'flex'. '&lt;template #left&gt;' is left-aligned, the rest are right-aligned.
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -70,11 +73,15 @@
               v-model="selectData.model"<br>
               :options="selectData.options"<br>
               suffix=""<br>
+              <b>borderless</b><br>
+              <b>dense</b>
             </td>
             <td>
               const's name in javascript(const's name.model)<br>
               const's name in javascript(const's name.option)<br>
-              Copy the text from zeplin
+              Copy the text from zeplin<br>
+              <b>default</b><br>
+              <b>default</b>
             </td>
           </tr>
           <tr>
@@ -222,4 +229,10 @@ const selectData = {
   ],
 };
 `;
+const guideHistory = [
+  {
+    timestamp: '2022.09.08',
+    text: 'Add - select attr',
+  },
+];
 </script>
