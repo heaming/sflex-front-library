@@ -11,7 +11,8 @@
   $-kw-toggle-label-font-size: $kw-field-font-size-dense;
   $-kw-toggle-label-line-height: $kw-field-line-height-dense;
 
-  &.q-toggle {
+  &.q-toggle,
+  .kw-option-group &.q-option-group .q-toggle {
     .q-toggle__track {
       height: 100%;
       border-radius: $-kw-toggle-track-height / 2;
@@ -45,12 +46,6 @@
       min-width: auto;
       min-height: auto;
 
-      &--indet {
-        .q-toggle__thumb {
-          left: $-kw-toggle-thumb-padding + ($-kw-toggle-thumb-slide-length / 2);
-        }
-      }
-
       &--truthy {
         color: $primary;
 
@@ -66,17 +61,23 @@
       &--falsy {
         color: $line-line;
       }
+
+      &--indet {
+        color: $line-line;
+
+        .q-toggle__thumb {
+          left: $-kw-toggle-thumb-padding + ($-kw-toggle-thumb-slide-length / 2);
+        }
+      }
     }
 
     &.disabled {
       opacity: 1 !important;
 
       .q-toggle__inner {
-        &--truthy {
-          color: $line-stroke; // does not defined!
-        }
-
-        &--falsy {
+        &--truthy,
+        &--falsy,
+        &--indet {
           color: $line-stroke; // does not defined!
         }
       }
@@ -87,7 +88,7 @@
     }
 
     .q-toggle__label {
-      padding-left: 4px;
+      padding-left: 8px;
       font-size: $-kw-toggle-label-font-size;
       line-height: $-kw-toggle-label-line-height;
       color: $-kw-toggle-label-color;
@@ -97,7 +98,7 @@
     &.reverse {
       .q-toggle__label {
         padding-left: 0;
-        padding-right: 4px;
+        padding-right: 8px;
       }
     }
 

@@ -4,21 +4,21 @@
     class="kw-option-group kw-field"
     v-bind="styleClassAttrs"
     :label="$q.platform.is.desktop ? undefined : label"
+    :dense="dense"
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon
     borderless
-    :dense="dense"
   >
     <template #control>
       <q-option-group
         v-model="value"
-        v-bind="inheritedAttrs"
-        :class="typeClass"
-        :type="type"
+        :class="`kw-${type}`"
         :options="normalizedOptions"
-        inline
+        :type="type"
+        :left-label="type === 'toggle' ? leftLabel !== false : leftLabel"
         :dense="dense"
+        inline
       />
     </template>
   </q-field>
@@ -45,22 +45,25 @@ export default {
       type: String,
       default: 'radio',
     },
+    leftLabel: {
+      type: Boolean,
+      default: undefined,
+    },
     dense: {
       type: Boolean,
       default: false,
     },
   },
 
-  emits: ['update:modelValue'],
+  emits: [
+    'update:modelValue',
+  ],
 
-  setup(props) {
-    const typeClass = computed(() => `kw-${props.type}`);
-
+  setup() {
     return {
       ...useInheritAttrs(),
       ...useField(),
       ...useOptions(),
-      typeClass,
     };
   },
 };
