@@ -13,6 +13,7 @@
 
   .kw-form-item__field p {
     margin: 8px 0;
+    width: 100%;
   }
 }
 
@@ -51,9 +52,25 @@
     .kw-form-item__label {
       min-height: 24px;
     }
+  }
+}
 
-    .kw-form-item__field p {
-      margin: 0;
+.kw-form {
+  &.kw-form--textright .kw-form-item__field p {
+    text-align: right;
+  }
+
+  .kw-form-item__field p {
+    &.text-left {
+      text-align: left !important;
+    }
+
+    &.text-right {
+      text-align: right !important;
+    }
+
+    &.text-center {
+      text-align: center !important;
     }
   }
 }
