@@ -154,4 +154,10 @@
       }
     }
   }
+
+  .kw-field.q-field.q-field--auto-height .q-field__native,
+  .kw-field.q-field.q-field--auto-height .q-field__control {
+    height: auto;
+    min-height: 32px;
+  }
 }

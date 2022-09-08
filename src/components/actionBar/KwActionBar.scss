@@ -85,12 +85,6 @@
       }
     }
 
-    .q-field__prefix,
-    .q-field__suffix {
-      font-size: 14px;
-      color: $black3;
-    }
-
     &.q-field--with-bottom {
       padding: 0;
     }
@@ -196,4 +190,10 @@
     height: 18px;
     background-color: $line-bg;
   }
+}
+
+.q-field__prefix,
+.q-field__suffix {
+  font-size: 14px;
+  color: $black3 !important;
 }

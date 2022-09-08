@@ -51,6 +51,8 @@
           <kw-select
             v-model="selectData.model"
             :options="selectData.options"
+            borderless
+            dense
             suffix="개씩보기"
           />
           <div class="kw-action-bar--send ml40">
