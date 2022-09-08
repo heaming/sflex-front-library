@@ -248,6 +248,35 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Textarea
+      </h3>
+      <p class="kw-guide-description">
+        Add <b>type="textarea" and :rows="3"</b> in kw-input.
+        default is :row="3"
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item label="textarea">
+                <kw-input
+                  type="textarea"
+                  :rows="3"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="textarea"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -404,6 +433,19 @@ const hypenInput = `
 </kw-form>
 `;
 
+const textarea = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="textarea">
+      <kw-input
+        type="textarea"
+        :rows="3"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
 const guideHistory = [
   {
     timestamp: '2022-09-06',
@@ -416,6 +458,10 @@ const guideHistory = [
   {
     timestamp: '2022-09-01',
     text: 'remove the placeholder attribute',
+  },
+  {
+    timestamp: '2022-09-08',
+    text: 'Add Textarea. the design may be changed later.',
   },
 ];
 </script>
