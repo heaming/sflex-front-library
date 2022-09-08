@@ -75,7 +75,7 @@
 
         @for $colspan from 1 through 12 {
           &--colspan-#{$colspan} {
-            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan}) !important;
+            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan} + #{$gap} * #{$colspan - 1}) !important;
           }
         }
       }
