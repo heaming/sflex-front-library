@@ -2,6 +2,7 @@
   $-kw-input-height: $kw-field-height;
   $-kw-input-height-dense: $kw-field-height-dense;
   $-kw-input-padding-input: $kw-field-padding-input;
+  $-kw-textarea-padding: 9px 0 9px 0;
   $-kw-input-padding-input-dense: $kw-field-padding-input-dense;
   $-kw-input-line-height: $kw-field-line-height;
   $-kw-input-line-height-dense: $kw-field-line-height-dense;
@@ -15,8 +16,8 @@
     }
 
     .q-field__control-container {
-      padding-top: nth($-kw-input-padding-input, 1);
-      padding-bottom: nth($-kw-input-padding-input, 3);
+      padding-top: nth($-kw-textarea-padding, 1);
+      padding-bottom: nth($-kw-textarea-padding, 3);
     }
 
     .q-field__shadow {
