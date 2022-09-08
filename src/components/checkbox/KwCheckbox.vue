@@ -27,9 +27,8 @@
 </template>
 
 <script>
-import { FormTypeContextKey } from '../../consts/private/symbols';
-import { FORM_TYPE } from '../../composables/private/useFormType';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useSearchChild from '../../composables/private/useSearchChild';
 
 export default {
   name: 'KwCheckbox',
@@ -107,12 +106,11 @@ export default {
   ],
 
   setup() {
-    const isSearchContext = inject(FormTypeContextKey, null) === FORM_TYPE.SEARCH;
     const checkRef = ref();
 
     return {
       ...useInheritAttrs(),
-      isSearchContext,
+      ...useSearchChild(),
       checkRef,
       toggle() {
         checkRef.value.toggle();

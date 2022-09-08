@@ -4,7 +4,7 @@
     class="kw-option-group kw-field"
     v-bind="styleClassAttrs"
     :label="$q.platform.is.desktop ? undefined : label"
-    :dense="dense"
+    :dense="isSearchContext || dense"
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon
@@ -17,7 +17,7 @@
         :options="normalizedOptions"
         :type="type"
         :left-label="type === 'toggle' ? leftLabel !== false : leftLabel"
-        :dense="dense"
+        :dense="isSearchContext || dense"
         inline
       />
     </template>
@@ -26,6 +26,7 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useSearchChild from '../../composables/private/useSearchChild';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 
@@ -62,6 +63,7 @@ export default {
   setup() {
     return {
       ...useInheritAttrs(),
+      ...useSearchChild(),
       ...useField(),
       ...useOptions(),
     };
