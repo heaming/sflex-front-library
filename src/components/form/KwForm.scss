@@ -1,6 +1,6 @@
 .kw-form-row {
   $-kw-form-row-height: $kw-field-line-height;
-  $-kw-form-row-gap: 100px;
+  $-kw-form-row-gap: 80px;
   $-kw-form-row-padding: 10px 0 10px 0;
 
   @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
@@ -10,6 +10,11 @@
   $-kw-form-item-min-height: $kw-field-height;
 
   @include kw-item($-kw-form-item-min-height);
+
+  .kw-form-item__field p {
+    margin: 8px 0;
+    width: 100%;
+  }
 }
 
 .kw-label-content {
@@ -30,5 +35,52 @@
       content: " ";
       width: 4px;
     }
+  }
+}
+
+.kw-form:not(:has(input, select, .kw-option-group)) {
+  .kw-form-row {
+    min-height: 24px;
+    padding: 6px 0;
+  }
+
+  .kw-form-item {
+    min-height: 24px;
+    max-height: 24px;
+    align-self: center;
+
+    .kw-form-item__label {
+      min-height: 24px;
+    }
+  }
+}
+
+.kw-form {
+  &.kw-form--textright .kw-form-item__field p {
+    text-align: right;
+  }
+
+  .kw-form-item__field p {
+    &.text-left {
+      text-align: left !important;
+    }
+
+    &.text-right {
+      text-align: right !important;
+    }
+
+    &.text-center {
+      text-align: center !important;
+    }
+  }
+}
+
+h3 + .kw-form {
+  .kw-form-row:first-child {
+    padding-top: 0;
+  }
+
+  .kw-form-row:last-child {
+    padding-bottom: 0;
   }
 }
