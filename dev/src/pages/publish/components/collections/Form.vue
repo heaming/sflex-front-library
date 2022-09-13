@@ -252,7 +252,6 @@
                 hint-message="힌트입니다."
               >
                 <kw-input
-                  class="w400"
                   placeholder="입력해주세요"
                   rules="required"
                 />
@@ -284,7 +283,7 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="row items-center w460">
+                <div class="row items-center">
                   <kw-input
                     placeholder="입력해주세요"
                   />
@@ -299,7 +298,7 @@
                 </div>
               </kw-form-item>
               <kw-form-item label="input2">
-                <div class="row items-center w460">
+                <div class="row items-center">
                   <kw-input
                     placeholder="입력해주세요"
                   />

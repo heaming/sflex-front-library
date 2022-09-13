@@ -6,6 +6,7 @@
   &--sm {
     width: 460px;
     max-width: 460px !important;
+    min-width: 460px !important;
     min-height: 300px;
     margin-top: 0;
 
@@ -17,26 +18,31 @@
   &--md {
     width: 660px;
     max-width: 660px !important;
+    min-width: 660px !important;
   }
 
   &--lg {
     width: 860px;
     max-width: 860px !important;
+    min-width: 860px !important;
   }
 
   &--xl {
     width: 1060px;
     max-width: 1060px !important;
+    min-width: 1060px !important;
   }
 
   &--2xl {
     width: 1260px;
     max-width: 1260px !important;
+    min-width: 1260px !important;
   }
 
   &--3xl {
     width: 1460px;
     max-width: 1460px !important;
+    min-width: 1460px !important;
   }
 
   .kw-popup__header {
@@ -94,4 +100,11 @@
 
 .q-dialog__inner--minimized > div {
   max-height: calc(100vh - 128px);
+}
+
+.kw-popup {
+  .kw-date-picker {
+    min-width: 140px;
+    max-width: none;
+  }
 }

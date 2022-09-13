@@ -4,21 +4,21 @@
     class="kw-option-group kw-field"
     v-bind="styleClassAttrs"
     :label="$q.platform.is.desktop ? undefined : label"
+    :dense="isSearchContext || dense"
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon
     borderless
-    :dense="dense"
   >
     <template #control>
       <q-option-group
         v-model="value"
-        v-bind="inheritedAttrs"
-        :class="typeClass"
-        :type="type"
+        :class="`kw-${type}`"
         :options="normalizedOptions"
+        :type="type"
+        :left-label="type === 'toggle' ? leftLabel !== false : leftLabel"
+        :dense="isSearchContext || dense"
         inline
-        :dense="dense"
       />
     </template>
   </q-field>
@@ -26,6 +26,7 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useSearchChild from '../../composables/private/useSearchChild';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 
@@ -45,22 +46,26 @@ export default {
       type: String,
       default: 'radio',
     },
+    leftLabel: {
+      type: Boolean,
+      default: undefined,
+    },
     dense: {
       type: Boolean,
       default: false,
     },
   },
 
-  emits: ['update:modelValue'],
+  emits: [
+    'update:modelValue',
+  ],
 
-  setup(props) {
-    const typeClass = computed(() => `kw-${props.type}`);
-
+  setup() {
     return {
       ...useInheritAttrs(),
+      ...useSearchChild(),
       ...useField(),
       ...useOptions(),
-      typeClass,
     };
   },
 };

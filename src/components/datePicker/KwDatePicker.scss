@@ -3,6 +3,11 @@
   box-sizing: content-box;
 }
 
+.kw-date-picker {
+  min-width: 140px;
+  max-width: 250px;
+}
+
 .kw-date-picker.q-field {
   .q-field__control {
     cursor: text;
@@ -47,6 +52,11 @@
 }
 
 .kw-date-range-picker {
+  .kw-date-picker {
+    min-width: auto;
+    max-width: none;
+  }
+
   .kw-date-picker + span {
     padding: 0 4px !important;
   }
