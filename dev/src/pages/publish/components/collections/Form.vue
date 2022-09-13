@@ -9,6 +9,9 @@
       It is only for "Form". Search form is diffrent with form. Go to the reference page for search <br>
       (The roots for the Search form: components/collections/Search)
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -523,6 +526,56 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="EmailExample"
+        class="kw-guide-title"
+      >
+        Email form type
+      </h3>
+      <p class="kw-guide-description">
+        please add <em>&lt; zwcm-email-address /&gt;</em> in kw-form-item tag
+        <q-card>
+          <div class="kw-guide-example">
+            <img
+              src="../../../../../assets/images/example_email.png"
+              alt="email example"
+              style="width: 100%;"
+            >
+          </div>
+
+          <guide-code-view
+            :code-value="EmailCode"
+            lang="vue"
+          />
+        </q-card>
+      </p>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="AddressExample"
+        class="kw-guide-title"
+      >
+        Address form type
+      </h3>
+      <p class="kw-guide-description">
+        please add <em>&lt; zwcm-post-code /&gt;</em> in kw-form-item tag
+        <q-card>
+          <div class="kw-guide-example">
+            <img
+              src="../../../../../assets/images/example_address.png"
+              alt="address example"
+              style="width: 65%;"
+            >
+          </div>
+
+          <guide-code-view
+            :code-value="AddressCode"
+            lang="vue"
+          />
+        </q-card>
+      </p>
+    </div>
   </kw-page>
 </template>
 
@@ -847,4 +900,31 @@ const differentSize = `
   </kw-form-row>
 </kw-form>
 `;
+
+const EmailCode = `
+<kw-form-row>
+  <kw-form-item
+    label="email"
+  >
+    <zwcm-email-address />
+  </kw-form-item>
+</kw-form-row>
+`;
+
+const AddressCode = `
+<kw-form-row>
+  <kw-form-item
+    label="postCode"
+  >
+    <zwcm-post-code />
+  </kw-form-item>
+</kw-form-row>
+`;
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-13',
+    text: 'Add example of email and address form case',
+  },
+];
 </script>
