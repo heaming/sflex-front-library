@@ -448,6 +448,10 @@ const textarea = `
 
 const guideHistory = [
   {
+    timestamp: '2022-09-08',
+    text: 'Add Textarea. the design may be changed later.',
+  },
+  {
     timestamp: '2022-09-06',
     text: 'change guide content about essential type',
   },
@@ -459,9 +463,6 @@ const guideHistory = [
     timestamp: '2022-09-01',
     text: 'remove the placeholder attribute',
   },
-  {
-    timestamp: '2022-09-08',
-    text: 'Add Textarea. the design may be changed later.',
-  },
+
 ];
 </script>
