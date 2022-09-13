@@ -110,7 +110,6 @@
 </template>
 
 <script>
-import { pick } from 'lodash-es';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
@@ -157,7 +156,10 @@ export default {
 
     const optionsCtx = useOptions({
       valueRef: value,
-      ...pick(['emitValue', 'optionValue', 'optionLabel', 'optionSeparator']),
+      emitValue: props.emitValue,
+      value: props.optionValue,
+      label: props.optionLabel,
+      separator: props.optionSeparator,
     });
     const { normalizedOptions } = optionsCtx;
     const filteredOptions = ref([...normalizedOptions.value]);
