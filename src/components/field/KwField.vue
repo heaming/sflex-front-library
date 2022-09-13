@@ -31,7 +31,10 @@ export default {
     },
   },
 
-  emits: ['update:modelValue', 'focus'],
+  emits: [
+    'update:modelValue',
+    'focus',
+  ],
 
   setup(props) {
     const fieldCtx = useField();

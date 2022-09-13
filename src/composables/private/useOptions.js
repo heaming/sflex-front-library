@@ -41,13 +41,24 @@ export const useOptionsProps = {
   },
 };
 
-export default (valueRef, isSelect = false) => {
+export default (config) => {
   const { props } = getCurrentInstance();
 
-  const emitValue = !isSelect || props.emitValue;
-  const value = isSelect ? props.optionValue : 'value';
-  const label = isSelect ? props.optionLabel : 'label';
-  const separator = isSelect ? props.optionSeparator : 'separator';
+  const withDefaultConfig = {
+    emitValue: true,
+    value: 'value',
+    label: 'label',
+    separator: 'separator',
+    ...config,
+  };
+
+  const {
+    valueRef,
+    emitValue,
+    value,
+    label,
+    separator,
+  } = withDefaultConfig;
 
   const normalizedOptions = computed(() => {
     const options = [];

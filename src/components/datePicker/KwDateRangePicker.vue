@@ -8,7 +8,6 @@
     <kw-date-picker
       ref="inputRef"
       :model-value="value[0]"
-      v-bind="fieldStyles"
       :type="type"
       :readonly="readonly"
       :disable="disable"
@@ -26,7 +25,6 @@
     <span>~</span>
     <kw-date-picker
       :model-value="value[1]"
-      v-bind="fieldStyles"
       :type="type"
       :readonly="readonly"
       :disable="disable"

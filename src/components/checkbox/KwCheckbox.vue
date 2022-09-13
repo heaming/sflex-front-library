@@ -1,18 +1,20 @@
 <template>
   <q-checkbox
     ref="checkRef"
-    class="kw-checkbox spaced-sibling"
-    :class="label || $slots.default ? '' : 'kw-checkbox--no-label'"
     v-bind="styleClassAttrs"
+    class="kw-checkbox spaced-sibling"
+    :class="{'kw-checkbox--no-label': !(label || $slots.default)}"
     :model-value="modelValue"
     :true-value="trueValue"
     :false-value="falseValue"
     :indeterminate-value="indeterminateValue"
+    :toggle-order="toggleOrder"
+    :toggle-indeterminate="toggleIndeterminate"
     :val="val"
     :label="label ?? val"
     :left-label="leftLabel"
     :size="size"
-    :dense="dense"
+    :dense="isSearchContext || dense"
     :checked-icon="checkedIcon"
     :unchecked-icon="uncheckedIcon"
     :indeterminate-icon="indeterminateIcon"
@@ -26,6 +28,7 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useSearchChild from '../../composables/private/useSearchChild';
 
 export default {
   name: 'KwCheckbox',
@@ -33,7 +36,7 @@ export default {
 
   props: {
     modelValue: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Array],
       default: undefined,
     },
     trueValue: {
@@ -48,6 +51,14 @@ export default {
       type: [String, Number, Boolean],
       default: undefined,
     },
+    toggleOrder: {
+      type: String,
+      default: undefined,
+    },
+    toggleIndeterminate: {
+      type: Boolean,
+      default: false,
+    },
     val: {
       type: [String, Number, Boolean],
       default: undefined,
@@ -58,7 +69,7 @@ export default {
     },
     leftLabel: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     size: {
       type: String,
@@ -66,23 +77,23 @@ export default {
     },
     dense: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     checkedIcon: {
       type: String,
-      default: undefined, // 'checkbox',
+      default: undefined,
     },
     uncheckedIcon: {
       type: String,
-      default: undefined, // 'emptybox',
+      default: undefined,
     },
     indeterminateIcon: {
       type: String,
-      default: undefined, // 'indeterminate',
+      default: undefined,
     },
     disable: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     tabindex: {
       type: [String, Number],
@@ -90,19 +101,20 @@ export default {
     },
   },
 
-  emits: ['update:modelValue'],
+  emits: [
+    'update:modelValue',
+  ],
 
   setup() {
     const checkRef = ref();
 
-    function toggle() {
-      checkRef.value.toggle();
-    }
-
     return {
       ...useInheritAttrs(),
+      ...useSearchChild(),
       checkRef,
-      toggle,
+      toggle() {
+        checkRef.value.toggle();
+      },
     };
   },
 };
