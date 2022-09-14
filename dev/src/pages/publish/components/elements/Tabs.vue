@@ -7,9 +7,13 @@
       You can check how to use 'Tab' through the sample page.<br>
       <span class="notice">
         Check 'page tab' : PageSample02<br>
-        Check 'tab in tab' : PageSample03
+        Check 'tab in tab' : PageSample03<br>
+        Check 'small height tab' : PopupSample02
       </span>
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -43,6 +47,18 @@
               active tab of the same &lt;kw-tab&gt;'s name value
             </td>
           </tr>
+          <tr>
+            <td>
+              kw-tabs
+            </td>
+            <td>
+              .kw-tab--dense
+            </td>
+            <td>
+              When a small-height tab is used alone.<br>
+              Generally, when you put a tab inside tabs, a small height design is automatically applied.
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -70,7 +86,11 @@
 </template>
 
 <script setup>
-// const testCode = `
-// It is in progress. Please wait for it to complete.
-// `;
+
+const guideHistory = [
+  {
+    timestamp: '2022.09.14',
+    text: 'Add summary - small height tab',
+  },
+];
 </script>
