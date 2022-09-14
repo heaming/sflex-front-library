@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Button
+      Button NEW Version
     </h2>
     <p class="kw-guide-description">
       Define the basic height and color.<br>
@@ -98,23 +98,76 @@
         Default
       </h3>
       <p class="kw-guide-description">
-        button height 42px
+        height 40px / padding 8px 20px
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn label="프로모션등록" />
           <kw-btn
-            class="kw-btn--negative ml8"
-            label="취소"
+            primary
+            label="프로모션등록"
+            class="mr8"
           />
           <kw-btn
+            negative
+            label="취소"
+            class="mr8"
+          />
+          <kw-btn
+            secondary
+            label="확인"
+            class="mr8"
+          />
+          <kw-btn
+            secondary
             disable
-            class="ml8"
             label="확인"
           />
         </div>
         <guide-code-view
-          :code-value="primary"
+          :code-value="defaultCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="dense"
+        class="kw-guide-title"
+      >
+        Dense
+      </h3>
+      <p class="kw-guide-description">
+        height 32px / padding 8px 6px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            primary
+            dense
+            label="프로모션등록"
+            class="mr8"
+          />
+          <kw-btn
+            negative
+            dense
+            label="취소"
+            class="mr8"
+          />
+          <kw-btn
+            secondary
+            dense
+            label="확인"
+            class="mr8"
+          />
+          <kw-btn
+            secondary
+            dense
+            disable
+            label="확인"
+          />
+        </div>
+        <guide-code-view
+          :code-value="defaultCode"
           lang="vue"
         />
       </q-card>
@@ -127,28 +180,28 @@
         Height & Color
       </h3>
       <p class="kw-guide-description">
-        40px, 36px, 32px, 24px
+        40px,32px
       </p>
       <q-card>
         <div class="kw-guide-example">
           <h4 class="mb20">
             Primary/positive color
           </h4>
-          <kw-btn label="확인" />
           <kw-btn
-            class="kw-btn--h40 ml8"
+            primary
             label="확인"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--h36 ml8"
+            primary
+            dense
             label="확인"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--h32 ml8"
-            label="확인"
-          />
-          <kw-btn
-            class="kw-btn--h24 ml8"
+            primary
+            dense
+            disable
             label="확인"
           />
         </div>
@@ -158,26 +211,23 @@
         />
         <div class="kw-guide-example">
           <h4 class="mb20">
-            Primary/negative color
+            Negative color | bg-color: #777
           </h4>
           <kw-btn
-            class="kw-btn--negative"
+            negative
             label="취소"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--negative kw-btn--h40 ml8"
+            negative
+            dense
             label="취소"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--negative kw-btn--h36 ml8"
-            label="취소"
-          />
-          <kw-btn
-            class="kw-btn--negative kw-btn--h32 ml8"
-            label="취소"
-          />
-          <kw-btn
-            class="kw-btn--negative kw-btn--h24 ml8"
+            negative
+            dense
+            disable
             label="취소"
           />
         </div>
@@ -187,26 +237,23 @@
         />
         <div class="kw-guide-example">
           <h4 class="mb20">
-            Line type - Black
+            Secondary | border-color: black / bg-color: white
           </h4>
           <kw-btn
-            class="kw-btn--line-black"
+            secondary
             label="초기화"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--line-black kw-btn--h40 ml8"
+            secondary
+            dense
             label="초기화"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--line-black kw-btn--h36 ml8"
-            label="초기화"
-          />
-          <kw-btn
-            class="kw-btn--line-black kw-btn--h32 ml8"
-            label="초기화"
-          />
-          <kw-btn
-            class="kw-btn--line-black kw-btn--h24 ml8"
+            secondary
+            dense
+            disable
             label="초기화"
           />
         </div>
@@ -216,147 +263,23 @@
         />
         <div class="kw-guide-example">
           <h4 class="mb20">
-            Line type - Black & gray bg
+            Form Button : different padding value (8px 12px)
           </h4>
           <kw-btn
-            class="kw-btn--line-black kw-btn--line-bg"
-            label="수정"
+            secondary
+            form
+            label="파일첨부"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--line-black kw-btn--line-bg kw-btn--h40 ml8"
-            label="수정"
-          />
-          <kw-btn
-            class="kw-btn--line-black kw-btn--line-bg kw-btn--h36 ml8"
-            label="수정"
-          />
-          <kw-btn
-            class="kw-btn--line-black kw-btn--line-bg kw-btn--h32 ml8"
-            label="수정"
-          />
-          <kw-btn
-            class="kw-btn--line-black kw-btn--line-bg kw-btn--h24 ml8"
-            label="수정"
+            secondary
+            form
+            disable
+            label="파일첨부"
           />
         </div>
         <guide-code-view
-          :code-value="blackLineBg"
-          lang="vue"
-        />
-        <div class="kw-guide-example">
-          <h4 class="mb20">
-            Line type - Gray
-          </h4>
-          <kw-btn
-            class="kw-btn--line-gray"
-            label="추가"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--h40 ml8"
-            label="추가"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--h36 ml8"
-            label="추가"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--h32 ml8"
-            label="추가"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--h24 ml8"
-            label="추가"
-          />
-        </div>
-        <guide-code-view
-          :code-value="grayLine"
-          lang="vue"
-        />
-        <div class="kw-guide-example">
-          <h4 class="mb20">
-            Line type - Gray & gray bg
-          </h4>
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg"
-            label="삭제"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg kw-btn--h40 ml8"
-            label="삭제"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg kw-btn--h36 ml8"
-            label="삭제"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 ml8"
-            label="삭제"
-          />
-          <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg kw-btn--h24 ml8"
-            label="삭제"
-          />
-        </div>
-        <guide-code-view
-          :code-value="grayLineBg"
-          lang="vue"
-        />
-        <div class="kw-guide-example">
-          <h4 class="mb20">
-            Line type - Blue
-          </h4>
-          <kw-btn
-            class="kw-btn--line-blue"
-            label="결제요청"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--h40 ml8"
-            label="결제요청"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--h36 ml8"
-            label="결제요청"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--h32 ml8"
-            label="결제요청"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--h24 ml8"
-            label="결제요청"
-          />
-        </div>
-        <guide-code-view
-          :code-value="blueLine"
-          lang="vue"
-        />
-        <div class="kw-guide-example">
-          <h4 class="mb20">
-            Line type - Blue & blue bg
-          </h4>
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--line-bg"
-            label="오늘"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--line-bg kw-btn--h40 ml8"
-            label="오늘"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--line-bg kw-btn--h36 ml8"
-            label="오늘"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--line-bg kw-btn--h32 ml8"
-            label="오늘"
-          />
-          <kw-btn
-            class="kw-btn--line-blue kw-btn--line-bg kw-btn--h24 ml8"
-            label="오늘"
-          />
-        </div>
-        <guide-code-view
-          :code-value="blueLineBg"
+          :code-value="formBtn"
           lang="vue"
         />
       </q-card>
@@ -524,36 +447,47 @@
 const dummyData = ref(true);
 const toggleSelected = ref('오늘');
 
-const primary = `
-<kw-btn label="프로모션등록" />
+const defaultCode = `
 <kw-btn
-  class="kw-btn--negative ml8"
-  label="취소"
+  primary
+  label="프로모션등록"
+  class="mr8"
 />
 <kw-btn
-  disable
-  class="ml8"
+  negative
+  label="취소"
+  class="mr8"
+/>
+<kw-btn
+  secondary
   label="확인"
-/> <!-- ml8: gutter margin-left:8px -->
+  class="mr8"
+/>
+<kw-btn
+  secondary
+  disable
+  label="확인"
+/>
+<!-- mr8: gutter margin-left:8px -->
 `;
 
 const primaryPositive = `
-<kw-btn label="확인" />
 <kw-btn
-  class="kw-btn--h40 ml8"
-  label="확인"
+  negative
+  label="취소"
+  class="mr8"
 />
 <kw-btn
-  class="kw-btn--h36 ml8"
-  label="확인"
+  negative
+  dense
+  label="취소"
+  class="mr8"
 />
 <kw-btn
-  class="kw-btn--h32 ml8"
-  label="확인"
-/>
-<kw-btn
-  class="kw-btn--h24 ml8"
-  label="확인"
+  negative
+  dense
+  disable
+  label="취소"
 />
 `;
 
@@ -582,138 +516,36 @@ const primaryNegative = `
 
 const blackLine = `
 <kw-btn
-  class="kw-btn--line-black"
+  secondary
   label="초기화"
+  class="mr8"
 />
 <kw-btn
-  class="kw-btn--line-black kw-btn--h40 ml8"
+  secondary
+  dense
   label="초기화"
+  class="mr8"
 />
 <kw-btn
-  class="kw-btn--line-black kw-btn--h36 ml8"
-  label="초기화"
-/>
-<kw-btn
-  class="kw-btn--line-black kw-btn--h32 ml8"
-  label="초기화"
-/>
-<kw-btn
-  class="kw-btn--line-black kw-btn--h24 ml8"
+  secondary
+  dense
+  disable
   label="초기화"
 />
 `;
 
-const blackLineBg = `
+const formBtn = `
 <kw-btn
-  class="kw-btn--line-black kw-btn--line-bg"
-  label="수정"
+  secondary
+  form
+  label="파일첨부"
+  class="mr8"
 />
 <kw-btn
-  class="kw-btn--line-black kw-btn--line-bg kw-btn--h40 ml8"
-  label="수정"
-/>
-<kw-btn
-  class="kw-btn--line-black kw-btn--line-bg kw-btn--h36 ml8"
-  label="수정"
-/>
-<kw-btn
-  class="kw-btn--line-black kw-btn--line-bg kw-btn--h32 ml8"
-  label="수정"
-/>
-<kw-btn
-  class="kw-btn--line-black kw-btn--line-bg kw-btn--h24 ml8"
-  label="수정"
-/>
-`;
-const blueLine = `
-<kw-btn
-  class="kw-btn--line-blue"
-  label="결제요청"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--h40 ml8"
-  label="결제요청"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--h36 ml8"
-  label="결제요청"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--h32 ml8"
-  label="결제요청"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--h24 ml8"
-  label="결제요청"
-/>
-`;
-
-const blueLineBg = `
-<kw-btn
-  class="kw-btn--line-blue kw-btn--line-bg"
-  label="오늘"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--line-bg kw-btn--h40 ml8"
-  label="오늘"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--line-bg kw-btn--h36 ml8"
-  label="오늘"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--line-bg kw-btn--h32 ml8"
-  label="오늘"
-/>
-<kw-btn
-  class="kw-btn--line-blue kw-btn--line-bg kw-btn--h24 ml8"
-  label="오늘"
-/>
-`;
-
-const grayLine = `
-<kw-btn
-  class="kw-btn--line-gray"
-  label="추가"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--h40 ml8"
-  label="추가"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--h36 ml8"
-  label="추가"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--h32 ml8"
-  label="추가"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--h24 ml8"
-  label="추가"
-/>
-`;
-
-const grayLineBg = `
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg"
-  label="삭제"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h40 ml8"
-  label="삭제"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h36 ml8"
-  label="삭제"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 ml8"
-  label="삭제"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h24 ml8"
-  label="삭제"
+  secondary
+  form
+  disable
+  label="파일첨부"
 />
 `;
 
