@@ -55,7 +55,7 @@
       <kw-form-item label="presets">
         <kw-btn
           :label="'label'"
-          positive
+          primary
         />
         <kw-btn
           :label="'label'"
@@ -80,11 +80,9 @@
           :label="'label wrap test'"
         />
         <kw-btn
-          v-if="false"
           :label="'label wrap test'"
           color="primary"
-          no-wrapk
-          stretch
+          no-wrap
         />
       </kw-form-item>
     </kw-form-row>
