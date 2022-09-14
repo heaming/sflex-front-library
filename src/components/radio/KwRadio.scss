@@ -6,7 +6,8 @@
   $-kw-radio-line-height: $kw-field-line-height;
   $-kw-radio-line-height-dense: $kw-field-line-height-dense;
 
-  &.q-radio {
+  &.q-radio,
+  .kw-option-group &.q-option-group .q-radio {
     .q-radio__bg { /* does not appear when using icon */
       inset: 1px;
       width: $-kw-radio-icon-size;
@@ -29,8 +30,7 @@
       display: none;
     }
 
-    .q-radio__check { /* does not appear */
-    }
+    .q-radio__check { /* does not appear */ }
 
     .q-radio__inner {
       font-size: $-kw-radio-icon-size;
@@ -49,9 +49,9 @@
           like, currentColor, or inherit.
           ref) https://tympanus.net/codrops/2015/07/16/styling-svg-use-content-css/
          */
-          stroke: $primary; // border color
-          fill: $primary; // background color
-          color: $bg-white; // inner content color, like check path.
+          // stroke: $primary; // border color
+          // fill: $primary; // background color
+          // color: $bg-white; // inner content color, like check path.
         }
 
         .q-radio__bg {
@@ -60,12 +60,7 @@
         }
       }
 
-      &--falsy {
-        use {
-          stroke: $line-stroke; // border color
-          fill: $bg-white; // background color
-        }
-      }
+      &--falsy { /* does not appear */ }
     }
 
     .q-radio__label {
@@ -93,28 +88,12 @@
         background-size: $-kw-radio-icon-size;
       }
 
-      .q-radio__inner--truthy .q-radio__bg {
-        background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
-        background-size: 22px;
-      }
-
       .q-radio__inner {
         font-size: $-kw-radio-icon-size;
 
-        &--truthy,
-        &--falsy {
-          use {
-            /*
-            only appear when using svg-use way what we use.
-            notify, there is <use> does not rendered in main dom,
-            so, if you want styling them, only you can use inherit properties.
-            like, currentColor, or inherit.
-            ref) https://tympanus.net/codrops/2015/07/16/styling-svg-use-content-css/
-           */
-            stroke: $line-stroke; // border color
-            fill: $line-bg; // background color
-            color: $line-stroke; // inner content color, like check path.
-          }
+        &--truthy .q-radio__bg {
+          background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
+          background-size: $-kw-radio-icon-size;
         }
       }
     }
@@ -126,7 +105,9 @@
         min-width: $-kw-radio-line-height-dense;
         height: $-kw-radio-line-height-dense;
 
-        &--truthy {
+        &--truthy,
+        &--falsy,
+        &--indet {
           .q-radio__bg {
             background-size: $-kw-radio-icon-size-dense;
           }
@@ -151,6 +132,10 @@
       &.reverse .q-radio__label {
         padding-left: 0;
         padding-right: 4px;
+      }
+
+      &.disabled .q-radio__inner .q-radio__bg {
+        background-size: $-kw-radio-icon-size-dense;
       }
     }
   }

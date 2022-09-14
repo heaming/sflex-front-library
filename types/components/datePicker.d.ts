@@ -1,5 +1,6 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
+import { UseFieldProps, UseFieldInstance } from './private/useField';
 
 // KwDate
 interface KwDateProps {
@@ -69,7 +70,7 @@ interface KwDateSlots {}
 interface KwDate extends ComponentPublicInstance<KwDateProps> {}
 
 // KwDatePicker
-interface KwDatePickerProps extends Omit<KwDateProps, 'minView', 'maxView'> {
+interface KwDatePickerProps extends UseFieldProps, Omit<KwDateProps, 'minView', 'maxView'> {
   /**
    * 데이트피커 유형
    * @defaultValue `date`
@@ -92,7 +93,7 @@ interface KwDatePickerProps extends Omit<KwDateProps, 'minView', 'maxView'> {
   placeholder?: string;
 }
 interface KwDatePickerSlots {}
-interface KwDatePicker extends ComponentPublicInstance<KwDatePickerProps> {}
+interface KwDatePicker extends ComponentPublicInstance<KwDatePickerProps>, UseFieldInstance {}
 
 // KwDatePickerRange
 interface KwDatePickerRangeProps extends Omit<KwDatePickerProps, 'modelValue', 'onUpdate:modelValue', 'placeholder'> {
@@ -129,7 +130,7 @@ interface KwDatePickerRangeProps extends Omit<KwDatePickerProps, 'modelValue', '
   'onUpdate:to'?: (to: string) => void;
 }
 interface KwDatePickerRangeSlots {}
-interface KwDatePickerRange extends ComponentPublicInstance<KwDatePickerRangeProps> {}
+interface KwDatePickerRange extends ComponentPublicInstance<KwDatePickerRangeProps>, UseFieldInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

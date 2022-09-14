@@ -27,14 +27,16 @@
 
 <script>
 import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
-import useFieldDense, { useFieldDenseProps } from '../../composables/private/useFieldDense';
+import useSearchChild from '../../composables/private/useSearchChild';
 
 export default {
   name: 'KwFieldWrap',
 
   props: {
-    ...useFieldDenseProps,
-
+    dense: {
+      type: Boolean,
+      default: false,
+    },
     error: {
       type: Boolean,
       default: undefined,
@@ -51,12 +53,12 @@ export default {
     const controlRef = ref();
 
     const { invalid, invalidMessage } = useFieldStateWrap();
-    const dense = useFieldDense();
+    const { isSearchContext } = useSearchChild();
 
     const showErrorMessage = computed(() => props.error || invalid.value);
     const computedClass = computed(() => ({
       'kw-field-wrap--error': props.error || invalid.value,
-      'kw-field-wrap--dense': dense.value,
+      'kw-field-wrap--dense': isSearchContext || props.dense,
     }));
     const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
 
