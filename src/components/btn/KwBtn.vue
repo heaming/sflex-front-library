@@ -50,7 +50,7 @@ export default {
     // presets for sizing.
     // we will not use quasar btn props, since design break em based styling.
     dense: { type: Boolean, default: false },
-    popup: { type: Boolean, default: false },
+    form: { type: Boolean, default: false },
 
     // outline: { type: Boolean, default: false },
     // flat: { type: Boolean, default: false },
@@ -124,7 +124,7 @@ export default {
     });
 
     const sizeClasses = computed(() => {
-      if (props.popup === true) return 'kw-btn--popup ';
+      if (props.form === true) return 'kw-btn--form ';
       return ''; // no border
     });
 

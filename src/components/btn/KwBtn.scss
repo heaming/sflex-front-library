@@ -6,10 +6,10 @@
     font-weight: $font-weight;
     min-height: calc(#{$line-height} + #{ at($padding, 1) + at($padding, 3) });
 
-    .q-icon,
-    .q-spinner {
-      font-size: $line-height;
-    }
+    // .q-icon,
+    // .q-spinner {
+    //   font-size: $line-height;
+    // }
   }
 }
 
@@ -46,7 +46,7 @@
 
 .kw-btn {
   $-kw-btn-padding: $button-padding;
-  $-kw-btn-padding-popup: 8px 12px 8px 12px;
+  $-kw-btn-padding-form: 8px 12px 8px 12px;
   $-kw-btn-line-height: $button-line-height;
   $-kw-btn-font-size: $button-font-size;
   $-kw-btn-font-weight: $button-font-weight;
@@ -87,8 +87,8 @@
 
   @include kw-btn-height-modifier($-kw-btn-padding, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
 
-  &--popup {
-    @include kw-btn-height-modifier($-kw-btn-padding-popup, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
+  &--form {
+    @include kw-btn-height-modifier($-kw-btn-padding-form, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
   }
 
   &.q-btn {
@@ -100,6 +100,11 @@
 
     .on-right {
       margin-left: 4px;
+    }
+
+    .q-icon,
+    .q-spinner {
+      font-size: 16px; // design concept.
     }
 
     &::before {
