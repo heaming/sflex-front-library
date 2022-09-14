@@ -42,8 +42,14 @@
           </tr>
           <tr>
             <td>kw-form-item / kw-search-item</td>
-            <td>essential</td>
-            <td>Add the class "essential" in the tags of kw-form-item or kw-search-item.</td>
+            <td>
+              essential <br>
+              hint="value"
+            </td>
+            <td>
+              Add the class "essential" in the tags of kw-form-item or kw-search-item. <br>
+              Add the class hint="value" in the tags of kw-form-item or kw-search-item.
+            </td>
           </tr>
         </tbody>
       </q-markup-table>
@@ -75,7 +81,9 @@
         <div class="kw-guide-example">
           <kw-form>
             <kw-form-row>
-              <kw-form-item label="label">
+              <kw-form-item
+                label="label"
+              >
                 <kw-input />
               </kw-form-item>
             </kw-form-row>
@@ -116,6 +124,39 @@
         </div>
         <guide-code-view
           :code-value="essentialCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="essential"
+        class="kw-guide-title"
+      >
+        With Tooltip Icon
+      </h3>
+      <p class="kw-guide-description">
+        - add attribute <b> hint="value" </b>  in <b> &lt;kw-form-item&gt; </b>
+        when it needs to have tooltip icon <br>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item
+                label="label"
+                required
+                hint="tooltiptext"
+              >
+                <kw-input
+                  rules="required"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="tooltipCode"
           lang="vue"
         />
       </q-card>
@@ -191,61 +232,59 @@
         Please find the detail about input width in 'collections/searchform' section.
       </p>
       <q-card>
-        <div>
-          <div class="kw-guide-example">
-            <kw-form :cols="2">
-              <kw-form-row>
-                <kw-form-item label="input(flex/2columns)">
+        <div class="kw-guide-example">
+          <kw-form :cols="2">
+            <kw-form-row>
+              <kw-form-item label="input(flex/2columns)">
+                <kw-input />
+                <span>-</span>
+                <kw-input />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="input(fixed/2columns)">
+                <div class="row items-center w296">
                   <kw-input />
                   <span>-</span>
                   <kw-input />
-                </kw-form-item>
-              </kw-form-row>
-              <kw-form-row>
-                <kw-form-item label="input(fixed/2columns)">
-                  <div class="row items-center w296">
-                    <kw-input />
-                    <span>-</span>
-                    <kw-input />
-                  </div>
-                </kw-form-item>
-              </kw-form-row>
+                </div>
+              </kw-form-item>
+            </kw-form-row>
 
-              <kw-separator />
-              <kw-form-row>
-                <kw-form-item label="input(flex/3columns)">
+            <kw-separator />
+            <kw-form-row>
+              <kw-form-item label="input(flex/3columns)">
+                <kw-input />
+                <span>-</span>
+                <kw-input />
+                <span>-</span>
+                <kw-input />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="input(fixed/3columns)">
+                <div class="row items-center w464">
                   <kw-input />
                   <span>-</span>
                   <kw-input />
                   <span>-</span>
                   <kw-input />
-                </kw-form-item>
-              </kw-form-row>
-              <kw-form-row>
-                <kw-form-item label="input(fixed/3columns)">
-                  <div class="row items-center w464">
-                    <kw-input />
-                    <span>-</span>
-                    <kw-input />
-                    <span>-</span>
-                    <kw-input />
-                  </div>
-                </kw-form-item>
-              </kw-form-row>
-              <kw-form-row>
-                <kw-form-item label="input with tilde">
-                  <kw-input />
-                  <span>~</span>
-                  <kw-input />
-                </kw-form-item>
-              </kw-form-row>
-            </kw-form>
-          </div>
-          <guide-code-view
-            :code-value="hypenInput"
-            lang="vue"
-          />
+                </div>
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="input with tilde">
+                <kw-input />
+                <span>~</span>
+                <kw-input />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
         </div>
+        <guide-code-view
+          :code-value="hypenInput"
+          lang="vue"
+        />
       </q-card>
     </div>
     <div class="kw-guide-section">
@@ -446,7 +485,26 @@ const textarea = `
 </kw-form>
 `;
 
+const tooltipCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item
+      label="label"
+      required
+      hint="tooltiptext"
+    >
+      <kw-input
+        rules="required"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
 const guideHistory = [
+  {
+    timestamp: '2022-09-13',
+    text: 'add label with tooltip case',
+  },
   {
     timestamp: '2022-09-06',
     text: 'change guide content about essential type',
