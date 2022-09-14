@@ -165,7 +165,7 @@ export async function waitUntilShowEditor(view, dropdown = false) {
 /*
   Excel
   */
-export function cloneView(view, options) {
+export async function cloneView(view, options) {
   const isGrid = view instanceof GridView;
 
   const container = document.createElement('div');
@@ -185,7 +185,12 @@ export function cloneView(view, options) {
   copyView.setRowIndicator(cloneDeep(view.getRowIndicator()));
   copyView.setCheckBar(cloneDeep(view.getCheckBar()));
   copyView.setFooters(cloneDeep(view.getFooters()));
-  copyView.setRowGroup(cloneDeep(view.getRowGroup()));
+
+  if (view.isGrouped()) {
+    await processWait();
+    copyView.setRowGroup(cloneDeep(view.getRowGroup()));
+    copyView.groupBy(cloneDeep(view.getGroupFields()));
+  }
 
   return copyView;
 }
