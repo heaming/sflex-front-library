@@ -14,7 +14,8 @@
 }
 
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
-  .kw-btn {
+  .kw-btn--filled,
+  .kw-btn--outlined {
     &.kw-btn--color-#{$name} {
       background-color: $color;
     }
@@ -228,24 +229,24 @@ body.desktop {
           background-color: adjust-color(#fff, $lightness: -20%);
         }
       }
-    }
 
-    &--color-bg-white {
-      &.q-focusable:focus,
-      &.q-manual-focusable--focused,
-      &.q-hoverable:hover {
-        &::before {
-          background-color: adjust-color(#fff, $lightness: -5%);
+      &.kw-btn--color-bg-white {
+        &.q-focusable:focus,
+        &.q-manual-focusable--focused,
+        &.q-hoverable:hover {
+          &::before {
+            background-color: adjust-color(#fff, $lightness: -5%);
+          }
         }
-      }
 
-      &.q-btn.q-btn--active {
-        &::before {
-          background-color: adjust-color(#fff, $lightness: -10%);
+        &.q-btn.q-btn--active {
+          &::before {
+            background-color: adjust-color(#fff, $lightness: -10%);
+          }
         }
       }
     }
   }
 }
 
-@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28));
+@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28)); // notice! this is exception.
