@@ -5,7 +5,7 @@ interface KwCheckboxProps {
   /**
    * 현재 선택된 값
    */
-  modelValue?: string | number | boolean;
+  modelValue?: string | number | boolean | Array;
 
   /**
    * true 상태의 값
@@ -23,6 +23,17 @@ interface KwCheckboxProps {
    * indeterminate 상태의 값
    */
   indeterminateValue?: string | number | boolean;
+
+  /**
+   * 값 변경 순서
+   * @defaultValue `tf`
+   */
+  toggleOrder?: 'tf' | 'ft';
+
+  /**
+   * 값 변경 시 indeterminate 사용 여부
+   */
+  toggleIndeterminate?: boolean;
 
   /**
    * 선택시 설정할 값
@@ -78,9 +89,16 @@ interface KwCheckboxProps {
    * 'v-model:modelValue'에서 값 변경을 위해 사용
    * @param modelValue 선택된 값
    */
-  'onUpdate:modelValue'?: (modelValue: string | number | boolean) => void;
+  'onUpdate:modelValue'?: (modelValue: string | number | boolean | Array) => void;
 }
-interface KwCheckboxSlots {}
+
+interface KwCheckboxSlots {
+  /**
+   * 기본 컨텐츠 영역
+   */
+  default: () => VNode[];
+}
+
 interface KwCheckbox extends ComponentPublicInstance<KwCheckboxProps> {
   /**
    * 선택 값 토글

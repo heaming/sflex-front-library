@@ -4,54 +4,15 @@
     margin-left: 0;
     height: auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
 
     & > div {
-      margin-right: 20px;
       margin-left: 0;
-    }
-  }
 
-  // checkbox
-  .q-checkbox {
-    height: 32px;
-  }
-
-  .q-checkbox.disabled {
-    .q-checkbox__label {
-      color: $placeholder;
-    }
-
-    .q-checkbox__bg {
-      background: url(~@assets/images/checkbox_disable.svg) no-repeat center;
-      background-size: 22px;
-    }
-
-    .q-checkbox__inner--truthy .q-checkbox__bg {
-      background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
-      background-size: 22px;
-    }
-  }
-
-  // radio
-  .q-radio {
-    height: 32px;
-  }
-
-  .q-radio.disabled {
-    .q-radio__bg {
-      background: url(~@assets/images/radio_disable.svg) no-repeat center;
-      background-size: 22px;
-    }
-
-    .q-radio__inner--truthy .q-radio__bg {
-      background: url(~@assets/images/radio_selected_disable.svg) no-repeat center;
-      background-size: 22px;
-    }
-
-    .q-radio__label {
-      color: $placeholder;
+      & + div {
+        margin-left: 20px;
+      }
     }
   }
 }

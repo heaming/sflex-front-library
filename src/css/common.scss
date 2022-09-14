@@ -17,7 +17,7 @@
   src: url("~@assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
 }
 
-#app > .q-layout { min-width: 1536px; }
+#app > .q-layout { min-width: 1900px; }
 
 body {
   font-size: 16px;
@@ -121,37 +121,33 @@ textarea::placeholder {
 
 // lnb 관련
 .kw-lnb {
-  &-switch.kw-btn {
+  &__switch {
     position: absolute;
-    left: 280px;
-    width: 32px;
-    height: 74px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: url(~@assets/images/lnb_back.png) no-repeat center;
-    border-radius: 0;
+    left: calc(100% - 6px);
+    top: calc(50% - 30px);
+    width: 30px;
+    height: 60px;
     z-index: 990;
-    padding: 0;
-    transition: left 0.08s;
+    overflow: hidden;
+    clip-path: inset(-10px -10px -10px 6px);
+    box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 35%);
 
-    &.kw-lnb-switch--active {
+    &--active {
       svg {
         transform: rotate(180deg);
       }
     }
 
-    &:hover,
-    &:active {
-      background-color: transparent;
-    }
+    &.kw-btn.q-btn {
+      padding: 0;
+      transition: left 0.08s;
+      border-bottom-right-radius: 30px;
+      border-top-right-radius: 30px;
 
-    &::after {
-      content: "";
-      position: absolute;
-    }
-
-    svg {
-      margin-left: -7px;
+      .q-icon {
+        font-size: 16px;
+        margin-left: 5px;
+      }
     }
   }
 
@@ -412,7 +408,7 @@ h2 {
 
 h3 {
   margin: 0;
-  padding-top: 30px;
+  margin-top: 30px;
   line-height: 22px;
   font-weight: 500;
   font-size: 18px;
@@ -473,6 +469,26 @@ p {
 
 .bg-placeholder {
   background-color: #999 !important;
+}
+
+// ul,li
+.list-type1 {
+  font-size: 12px;
+  color: $placeholder;
+  position: relative;
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding-left: 17px;
+
+    &::before {
+      content: "※";
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+  }
 }
 
 .spaced-sibling + .spaced-sibling {

@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       Default size is 22px / In search form and table, radio size is 18px
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -173,7 +176,7 @@
         Essential
       </h3>
       <p class="kw-guide-description">
-        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        - add attribute <b> "required" </b> in <b> &lt;kw-form-item&gt; </b>
         when it needs to be essential to input <br>
         - add attribute <b>rules="required"</b> in <b>&lt;kw-radio&gt;</b>
       </p>
@@ -183,7 +186,7 @@
             <kw-form-row>
               <kw-form-item
                 label="OptionGroup"
-                class="essential"
+                required
               >
                 <kw-option-group
                   :model-value="'C'"
@@ -301,7 +304,7 @@ const essentialCode = `
   <kw-form-row>
     <kw-form-item
       label="OptionGroup"
-      class="essential"
+      required
     >
       <kw-option-group
         :model-value="'C'"
@@ -318,7 +321,7 @@ const essentialCode = `
   <kw-search-row>
     <kw-search-item
       label="optiongroup"
-      class="essential"
+      required
     >
       <kw-option-group
         :model-value="'C'"
@@ -330,6 +333,13 @@ const essentialCode = `
   </kw-search-row>
 </kw-search>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-06',
+    text: 'change guide content about essential type',
+  },
+];
 
 // const readonlyRadio = ref('A');
 // const disableRadio = ref('A');

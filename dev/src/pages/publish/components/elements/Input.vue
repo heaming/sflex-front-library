@@ -95,7 +95,7 @@
         Essential
       </h3>
       <p class="kw-guide-description">
-        - add <b> "essential" </b> of the classes in <b> &lt;kw-form-item&gt; </b>
+        - add attribute <b> "required" </b>  in <b> &lt;kw-form-item&gt; </b>
         when it needs to be essential to input <br>
         - add attribute <b>rules="required"</b> in <b>&lt;kw-input&gt;</b>
       </p>
@@ -105,7 +105,7 @@
             <kw-form-row>
               <kw-form-item
                 label="label"
-                class="essential"
+                required
               >
                 <kw-input
                   rules="required"
@@ -248,6 +248,35 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Textarea
+      </h3>
+      <p class="kw-guide-description">
+        Add <b>type="textarea" and :rows="3"</b> in kw-input.
+        default is :row="3"
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item label="textarea">
+                <kw-input
+                  type="textarea"
+                  :rows="3"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="textarea"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -255,8 +284,13 @@
 const inputCode = `
 <kw-form>
   <kw-form-row>
-    <kw-form-item label="label">
-      <kw-input />
+    <kw-form-item
+      label="label"
+      required
+    >
+      <kw-input
+        rules="required"
+      />
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -264,9 +298,14 @@ const inputCode = `
 <!-- if Search Form -->
 <kw-search>
   <kw-search-row>
-    <kw-search-item label="label">
-      <kw-input />
-    </kw-search-item>
+    <kw-form-item
+      label="label"
+      required
+    >
+      <kw-input
+        rules="required"
+      />
+    </kw-form-item>
   </kw-search-row>
 </kw-search>
 `;
@@ -276,7 +315,7 @@ const essentialCode = `
   <kw-form-row>
     <kw-form-item
       label="label"
-      class="essential"
+      required
     >
       <kw-input
         rules="required"
@@ -290,7 +329,7 @@ const essentialCode = `
   <kw-search-row>
     <kw-search-item
       label="label"
-      class="essential"
+      required
     >
       <kw-input
         rules="required"
@@ -394,14 +433,35 @@ const hypenInput = `
 </kw-form>
 `;
 
+const textarea = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="textarea">
+      <kw-input
+        type="textarea"
+        :rows="3"
+      />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
 const guideHistory = [
+  {
+    timestamp: '2022-09-06',
+    text: 'change guide content about essential type',
+  },
+  {
+    timestamp: '2022-09-02',
+    text: 'add the example of having tilde special symbol',
+  },
   {
     timestamp: '2022-09-01',
     text: 'remove the placeholder attribute',
   },
   {
-    timestamp: '2022-09-02',
-    text: 'add the example of having tilde special symbol',
+    timestamp: '2022-09-08',
+    text: 'Add Textarea. the design may be changed later.',
   },
 ];
 </script>

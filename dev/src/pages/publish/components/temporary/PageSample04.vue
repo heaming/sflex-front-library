@@ -12,7 +12,7 @@
         <kw-form-row>
           <kw-form-item
             label="이름"
-            class="essential"
+            required
           >
             <kw-input
               name="input"
@@ -27,7 +27,7 @@
         <kw-form-row>
           <kw-form-item
             label="성별"
-            class="essential"
+            required
           >
             <kw-option-group
               :model-value="'여성'"
@@ -41,7 +41,7 @@
         <kw-form-row>
           <kw-form-item
             label="생년월일"
-            class="essential"
+            required
           >
             <kw-date-picker
               name="datePicker"

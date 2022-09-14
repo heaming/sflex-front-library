@@ -24,6 +24,10 @@ async function throwIfNotAuthorized(to) {
   }
 }
 
+function assignParamsByQuery(to) {
+  Object.assign(to.params, { ...to.query });
+}
+
 function assignParamsIfIsLinkPage(to) {
   const {
     pageId,
@@ -43,6 +47,7 @@ function assignParamsIfIsLinkPage(to) {
 
 async function beforeResolve(to) {
   await throwIfNotAuthorized(to);
+  assignParamsByQuery(to);
   assignParamsIfIsLinkPage(to);
 }
 

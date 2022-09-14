@@ -109,10 +109,12 @@
 
       .q-tab__content {
         padding: 0;
+        height: 32px; // 바깥 border 제외 높이
       }
 
       .q-tab__label {
         font-size: 14px;
+        line-height: 1;
       }
 
       &.q-tab--active {

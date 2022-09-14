@@ -18,7 +18,7 @@
         </kw-form-item>
         <kw-form-item
           label="담당자명"
-          class="essential"
+          required
         >
           <!-- 필수 입력의 경우 essential 클래스 추가-->
           <kw-input
@@ -49,7 +49,7 @@
       <kw-form-row>
         <kw-form-item
           label="선택 샘플"
-          class="essential"
+          required
         >
           <kw-select
             :model-value="[]"

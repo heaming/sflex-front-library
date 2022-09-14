@@ -1,6 +1,7 @@
 <template>
   <!-- input -->
   <q-expansion-item
+    v-if="false"
     label="Input"
   >
     <div class="result-area">
@@ -9,7 +10,7 @@
   </q-expansion-item>
   <!-- select -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="Select"
   >
     <div class="result-area">
@@ -18,7 +19,7 @@
   </q-expansion-item>
   <!-- checkbox -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="CheckBox"
   >
     <div class="result-area">
@@ -27,8 +28,9 @@
   </q-expansion-item>
   <!-- button -->
   <q-expansion-item
-    v-if="false"
+    v-if="true"
     label="Button"
+    default-opened
   >
     <div class="result-area">
       <button-form />
@@ -45,8 +47,8 @@
   </q-expansion-item>
   <!-- toggle -->
   <q-expansion-item
+    v-if="false"
     label="toggle"
-    default-opened
   >
     <div class="result-area">
       <toggle-form />
@@ -54,6 +56,7 @@
   </q-expansion-item>
   <!-- search -->
   <q-expansion-item
+    v-if="false"
     label="CheckBox"
   >
     <div class="result-area">

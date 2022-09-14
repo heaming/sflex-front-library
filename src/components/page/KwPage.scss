@@ -1,5 +1,6 @@
 .kw-page {
   padding: 30px 40px 30px 64px;
+  min-width: 1536px;
 
   &--md {
     width: 1536px;
@@ -7,6 +8,7 @@
   }
 
   &--sm {
+    min-width: 1212px;
     width: 1212px;
     margin: 0 auto;
   }

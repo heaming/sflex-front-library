@@ -58,7 +58,7 @@ export default {
         if (!await ctx?.observer.confirmIfIsModified()) { return false; }
       }
 
-      return await modal.beforeClose(result) !== false;
+      return true;
     }
 
     async function close(modal, { result, payload }) {
