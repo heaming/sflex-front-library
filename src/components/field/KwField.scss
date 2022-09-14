@@ -255,8 +255,7 @@
 .kw-field-wrap {
   position: relative;
 
-  .q-field__messages,
-  .kw-field-wrap__messages {
+  .q-field__messages {
     display: none; // notice. field 에 속한 field 의 message 영역 무시
   }
 
