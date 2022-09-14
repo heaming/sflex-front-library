@@ -1,9 +1,15 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
+import { UseObserverInstance, UseObserverProps } from './private/useObserver';
 
-interface KwObserverProps {}
-interface KwObserverSlots {}
-interface KwObserver extends ComponentPublicInstance<KwObserverProps> {}
+interface KwObserverProps extends UseObserverProps {}
+interface KwObserverSlots {
+  /**
+   * 기본 컨텐츠 영역
+   */
+  default: () => VNode[];
+}
+interface KwObserver extends ComponentPublicInstance<KwObserverProps>, UseObserverInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
