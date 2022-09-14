@@ -3,7 +3,7 @@
     class="kw-field kw-editor"
     outlined
     v-bind="styleClassAttrs"
-    :label="$q.platform.is.desktop ? null : label"
+    :label="undefined"
     :error="invalid"
     :error-message="invalidMessage"
     :disable="disable"

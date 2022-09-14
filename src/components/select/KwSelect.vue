@@ -6,7 +6,7 @@
     v-bind="fieldStyles"
     class="kw-field kw-select"
     popup-content-class="kw-select-options-menu"
-    :label="label"
+    :label="undefined"
     :error="invalid"
     :error-message="invalidMessage"
     :options="filteredOptions"
