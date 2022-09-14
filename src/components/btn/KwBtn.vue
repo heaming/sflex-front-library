@@ -20,7 +20,7 @@
     :loading="loading"
     :disable="disable"
     :no-wrap="noWrap"
-    @click="$emit('click', $event)"
+    @click="onClick"
   >
     <slot />
   </q-btn>
@@ -50,7 +50,7 @@ export default {
     // presets for sizing.
     // we will not use quasar btn props, since design break em based styling.
     dense: { type: Boolean, default: false },
-    popup: { type: Boolean, default: false },
+    form: { type: Boolean, default: false },
 
     // outline: { type: Boolean, default: false },
     // flat: { type: Boolean, default: false },
@@ -88,6 +88,7 @@ export default {
     exact: { type: Boolean, default: undefined },
     href: { type: String, default: undefined },
     target: { type: String, default: undefined },
+    onClick: { type: Function, default: undefined },
   },
 
   emits: [
@@ -101,8 +102,33 @@ export default {
       btnRef.value.click(evt);
     }
 
+    const presets = computed(() => {
+      let pr = {};
+      if (props.primary === true) {
+        pr = {
+          color: 'primary',
+          textColor: 'bg-white',
+          borderColor: undefined,
+        };
+      } else if (props.negative === true) {
+        pr = {
+          color: 'black3',
+          textColor: 'bg-white',
+          borderColor: undefined,
+        };
+      } else if (props.secondary === true) {
+        pr = {
+          color: 'bg-white',
+          textColor: 'normal-text',
+          borderColor: 'black-btn-line',
+          outlined: true,
+        };
+      }
+      return pr;
+    });
+
     const sizeClasses = computed(() => {
-      if (props.popup === true) return 'kw-btn--popup '; // no border, no hover, active, background : transparent
+      if (props.form === true) return 'kw-btn--form ';
       return ''; // no border
     });
 
@@ -110,42 +136,23 @@ export default {
       if (props.borderless === true) return 'kw-btn--borderless '; // no border, no hover, active, background : transparent
       if (props.underline === true) return 'kw-btn--underline '; // no hover, active, border bottom = textColor
       if (props.outlined === true) return 'kw-btn--outlined '; // border = textColor
-      if (props.secondary === true) return 'kw-btn--outlined '; // preset
+      if (presets.value.borderless === true) return 'kw-btn--borderless '; // preset
+      if (presets.value.underline === true) return 'kw-btn--underline '; // preset
+      if (presets.value.outlined === true) return 'kw-btn--outlined '; // preset
       return 'kw-btn--filled '; // no border
     });
 
     const colorClasses = computed(() => {
       let ccs = '';
-      let colorPresets = {};
 
-      if (props.primary === true) {
-        colorPresets = {
-          color: 'primary',
-          textColor: 'bg-white',
-          borderColor: undefined,
-        };
-      } else if (props.negative === true) {
-        colorPresets = {
-          color: 'black3',
-          textColor: 'bg-white',
-          borderColor: undefined,
-        };
-      } else if (props.secondary === true) {
-        colorPresets = {
-          color: 'bg-white',
-          textColor: 'normal-text',
-          borderColor: 'black-btn-line',
-        };
+      if (props.color || presets.value.color) {
+        ccs += `kw-btn--color-${props.color || presets.value.color} `;
       }
-
-      if (props.color || colorPresets.color) {
-        ccs += `kw-btn--color-${props.color || colorPresets.color} `;
+      if (props.textColor || presets.value.textColor) {
+        ccs += `kw-btn--text-color-${props.textColor || presets.value.textColor} `;
       }
-      if (props.textColor || colorPresets.textColor) {
-        ccs += `kw-btn--text-color-${props.textColor || colorPresets.textColor} `;
-      }
-      if (props.borderColor || colorPresets.borderColor) {
-        ccs += `kw-btn--border-color-${props.borderColor || colorPresets.borderColor} `;
+      if (props.borderColor || presets.value.borderColor) {
+        ccs += `kw-btn--border-color-${props.borderColor || presets.value.borderColor} `;
       } else if (typeof props.outlined === 'string') {
         ccs += `kw-btn--border-color-${props.outlined} `;
       }

@@ -6,15 +6,16 @@
     font-weight: $font-weight;
     min-height: calc(#{$line-height} + #{ at($padding, 1) + at($padding, 3) });
 
-    .q-icon,
-    .q-spinner {
-      font-size: $line-height;
-    }
+    // .q-icon,
+    // .q-spinner {
+    //   font-size: $line-height;
+    // }
   }
 }
 
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
-  .kw-btn {
+  .kw-btn--filled,
+  .kw-btn--outlined {
     &.kw-btn--color-#{$name} {
       background-color: $color;
     }
@@ -45,7 +46,7 @@
 
 .kw-btn {
   $-kw-btn-padding: $button-padding;
-  $-kw-btn-padding-popup: 8px 12px 8px 12px;
+  $-kw-btn-padding-form: 8px 12px 8px 12px;
   $-kw-btn-line-height: $button-line-height;
   $-kw-btn-font-size: $button-font-size;
   $-kw-btn-font-weight: $button-font-weight;
@@ -86,8 +87,8 @@
 
   @include kw-btn-height-modifier($-kw-btn-padding, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
 
-  &--popup {
-    @include kw-btn-height-modifier($-kw-btn-padding-popup, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
+  &--form {
+    @include kw-btn-height-modifier($-kw-btn-padding-form, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
   }
 
   &.q-btn {
@@ -99,6 +100,11 @@
 
     .on-right {
       margin-left: 4px;
+    }
+
+    .q-icon,
+    .q-spinner {
+      font-size: 16px; // design concept.
     }
 
     &::before {
@@ -228,24 +234,24 @@ body.desktop {
           background-color: adjust-color(#fff, $lightness: -20%);
         }
       }
-    }
 
-    &--color-bg-white {
-      &.q-focusable:focus,
-      &.q-manual-focusable--focused,
-      &.q-hoverable:hover {
-        &::before {
-          background-color: adjust-color(#fff, $lightness: -5%);
+      &.kw-btn--color-bg-white {
+        &.q-focusable:focus,
+        &.q-manual-focusable--focused,
+        &.q-hoverable:hover {
+          &::before {
+            background-color: adjust-color(#fff, $lightness: -5%);
+          }
         }
-      }
 
-      &.q-btn.q-btn--active {
-        &::before {
-          background-color: adjust-color(#fff, $lightness: -10%);
+        &.q-btn.q-btn--active {
+          &::before {
+            background-color: adjust-color(#fff, $lightness: -10%);
+          }
         }
       }
     }
   }
 }
 
-@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28));
+@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28)); // notice! this is exception.
