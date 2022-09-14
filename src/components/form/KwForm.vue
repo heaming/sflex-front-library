@@ -21,8 +21,8 @@ export default {
   inheritAttrs: false,
 
   props: {
-    ...useFormLayoutProps,
     ...useFormProps,
+    ...useFormLayoutProps,
   },
 
   emits: ['submit', 'reset'],
