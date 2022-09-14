@@ -85,8 +85,18 @@
 
 @mixin color-based($prefix, $color-map) {
   @each $name, $color in $color-map {
-    #{$prefix}#{$name} {
+    $class-name: $prefix + $name;
+    #{$class-name} {
       @content($color);
+    }
+  }
+}
+
+@mixin color-based-with-name($prefix, $color-map) {
+  @each $name, $color in $color-map {
+    $class-name: $prefix + $name;
+    #{$class-name} {
+      @content($color, $name);
     }
   }
 }

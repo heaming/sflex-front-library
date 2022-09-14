@@ -1,578 +1,251 @@
+@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight) {
+  &.q-btn {
+    font-size: $font-size;
+    line-height: $line-height;
+    padding: $padding;
+    font-weight: $font-weight;
+    min-height: calc(#{$line-height} + #{ at($padding, 1) + at($padding, 3) });
+
+    .q-icon,
+    .q-spinner {
+      font-size: $line-height;
+    }
+  }
+}
+
+@mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
+  .kw-btn {
+    &.kw-btn--color-#{$name} {
+      background-color: $color;
+    }
+
+    @at-root body.desktop {
+      .kw-btn.kw-btn--color-#{$name} {
+        &.q-focusable:focus,
+        &.q-manual-focusable--focused,
+        &.q-hoverable:hover {
+          background-color: $hover-color;
+
+          &::before {
+            background-color: #fff;
+          }
+        }
+
+        &.q-btn.q-btn--active {
+          background-color: $action-color;
+
+          &::before {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
 .kw-btn {
-  padding: 0 28px;
-  min-height: auto;
-  height: 42px;
-  line-height: 1;
-  background-color: $primary;
-  font-size: 16px;
-  font-weight: 400;
-  color: $bg-white;
-  text-transform: none;
-  border-radius: 0;
+  $-kw-btn-padding: $button-padding;
+  $-kw-btn-padding-popup: 8px 12px 8px 12px;
+  $-kw-btn-line-height: $button-line-height;
+  $-kw-btn-font-size: $button-font-size;
+  $-kw-btn-font-weight: $button-font-weight;
+  $-kw-btn-padding-dense: $button-dense-padding;
+  $-kw-btn-line-height-dense: $kw-field-line-height-dense;
+  $-kw-btn-font-size-dense: $kw-field-font-size-dense;
+  $-kw-btn-font-weight-dense: $button-font-weight;
 
-  &--icon-only {
-    padding: 0;
-    background: none;
+  // about color
+  $-color-list: $semantic-colors;
 
-    &:hover.kw-btn,
-    &:active.kw-btn {
-      background-color: unset;
-    }
+  align-self: center; // quasar only provide stretch true...!
 
-    &.kw-btn.q-btn .q-icon {
-      margin: 0;
-      font-size: 1em;
+  &.self-stretch {
+    align-self: stretch;
+  }
+
+  // coloring
+  @include color-based("&.kw-btn--border-color-", $-color-list) using($color) {
+    &::after {
+      border-color: $color;
     }
   }
 
-  &::before {
-    display: none;
+  @include color-based("&.kw-btn--color-", $-color-list) using($color) {
+    background-color: $color;
   }
 
-  &:disabled {
-    background-color: $line-line;
-    color: $bg-white;
-  }
+  @include color-based("&.kw-btn--text-color-", $-color-list) using($color) {
+    color: $color; // border default.
 
-  .q-focus-helper {
-    display: none;
-  }
-
-  // hover
-  &:hover {
-    background-color: #2a7bd9;
-  }
-
-  // pressed
-  &.q-btn--active {
-    background-color: #256dbf;
-  }
-
-  // disabled
-  &:disabled {
-    background-color: $line-line;
-
-    &:hover {
-      background-color: $line-line;
-    }
-
-    &.q-btn--active {
-      background-color: $line-line;
-    }
-  }
-
-  // negative
-  &--negative {
-    background-color: $black3;
-
-    &:hover {
-      background-color: #5e5e5e;
-    }
-
-    &.q-btn--active {
-      background-color: #454545;
-    }
-  }
-
-  &--line-black {
-    border: 1px solid $black-btn-line;
-    background-color: $bg-white;
-    color: $black2;
-
-    &:hover {
-      border: 1px solid $black1;
-      background-color: $bg-white;
-    }
-
-    &:active {
-      background-color: $bg-box;
-      border: 1px solid #666;
-    }
-
-    &:disabled {
-      border: 1px solid $line-stroke;
-      background-color: $line-bg;
-      color: $placeholder;
-
-      &:hover {
-        border: 1px solid $line-stroke;
-        background-color: $line-bg;
-      }
-    }
-
-    &.kw-btn--line-bg {
-      background: $bg-box;
-
-      &:hover {
-        background: $bg-box;
-      }
-
-      &:active {
-        background-color: $bg-box;
+    &.q-btn {
+      .q-btn__content {
+        color: $color;
       }
     }
   }
 
-  &--line-blue {
-    border: 1px solid $primary;
-    background: $bg-white;
-    color: $primary;
+  @include kw-btn-height-modifier($-kw-btn-padding, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
 
-    &:hover {
-      background: $bg-white;
-    }
-
-    &:active {
-      background: $bg-white;
-    }
-
-    &:disabled {
-      background: $line-bg;
-      border: 1px solid $line-stroke;
-      color: $placeholder;
-
-      &:hover {
-        background: $line-bg;
-        border: 1px solid $line-stroke;
-        color: $placeholder;
-      }
-    }
-
-    &.kw-btn--line-bg {
-      background: rgb(56 144 246 / 8%);
-
-      &:hover {
-        background: rgb(56 144 246 / 18%);
-      }
-
-      &:active {
-        background-color: rgb(56 144 246 / 28%);
-      }
-
-      &:disabled {
-        background: $line-bg;
-        border: 1px solid $line-stroke;
-        color: $placeholder;
-
-        &:hover {
-          background: $line-bg;
-          border: 1px solid $line-stroke;
-          color: $placeholder;
-        }
-      }
-    }
-  }
-
-  &--line-gray {
-    border: 1px solid $line-line;
-    background: $bg-white;
-    color: $black2;
-
-    &:hover {
-      border: 1px solid $black1;
-      background-color: $bg-white;
-    }
-
-    &:active {
-      border: 1px solid $black-btn-line;
-      background-color: $bg-box;
-    }
-
-    &:disabled {
-      background: $line-bg;
-      border: 1px solid $line-stroke;
-      color: $placeholder;
-
-      &:hover {
-        background: $line-bg;
-        border: 1px solid $line-stroke;
-        color: $placeholder;
-      }
-    }
-
-    &.kw-btn--line-bg {
-      background: $bg-box;
-      border: 1px solid $line-line;
-      color: $black2;
-
-      &:hover {
-        border: 1px solid $black1;
-        background-color: $bg-box;
-      }
-
-      &:active {
-        border: 1px solid $line-line;
-        background-color: $line-line;
-      }
-
-      &:disabled {
-        background: $bg-box;
-        border: 1px solid $line-line;
-        color: $placeholder;
-
-        &:hover {
-          background: $bg-box;
-          border: 1px solid $line-line;
-          color: $placeholder;
-        }
-      }
-    }
-  }
-
-  // popup size
   &--popup {
-    height: 36px;
-
-    &.kw-btn--reset {
-      border: 1px solid $black-btn-line;
-      background-color: $bg-white;
-      color: $black2;
-    }
+    @include kw-btn-height-modifier($-kw-btn-padding-popup, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
   }
 
-  // button size별 추가
-  &--h40 {
-    height: 40px;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 0 12px;
-  }
+  &.q-btn {
+    // the height and width depend on contents line-height and padding.
 
-  &--h36 {
-    height: 36px;
-    font-size: 16px;
-    font-weight: 400;
-  }
-
-  &--h32 {
-    height: 32px;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 0 8px;
-  }
-
-  &--h24 {
-    height: 24px;
-    font-size: 12px;
-    font-weight: 400;
-    padding: 0 12px;
-  }
-
-  // button size
-  &--size40 {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-
-    &.kw-btn.q-btn .q-icon {
-      margin-right: 0;
-    }
-  }
-
-  // secondary
-  &--secondary {
-    padding: 0 12px;
-    height: 40px;
-    border: 1px solid $black-btn-line;
-    background-color: $bg-box;
-    font-size: 14px;
-    color: $black2;
-    font-weight: 400;
-
-    &:hover {
-      border-color: $black1;
-      background-color: $bg-white;
+    .on-left {
+      margin-right: 4px;
     }
 
-    &.q-btn--active {
-      border-color: $black-btn-line;
-      background-color: $bg-box;
+    .on-right {
+      margin-left: 4px;
     }
 
-    &:disabled {
-      border-color: $line-stroke;
-      background-color: $line-bg;
-      color: #bbb;
+    &::before {
+      mix-blend-mode: multiply;
+      background-color: #fff;
+    }
 
-      &:hover {
-        border-color: $line-stroke;
-        background-color: $line-bg;
+    &.disabled {
+      opacity: 1 !important;
+      background-color: $line-line !important;
+
+      .q-btn__content {
+        color: $bg-white !important;
+      }
+    }
+
+    &--dense {
+      @include kw-btn-height-modifier($-kw-btn-padding-dense, $-kw-btn-line-height-dense, $-kw-btn-font-size-dense, $-kw-btn-font-weight-dense);
+
+      &.on-left {
+        margin-right: 4px;
       }
 
-      &.q-btn--active {
-        border-color: $line-stroke;
-        background-color: $line-bg;
+      &.on-right {
+        margin-left: 4px;
       }
     }
   }
 
-  // contents
-  &--contents {
-    padding: 0 12px;
-    height: 32px;
-    border: 1px solid $black-btn-line;
-    background-color: $bg-white;
-    font-size: 14px;
-    color: $black2;
-    font-weight: 400;
-
-    &:hover {
-      border-color: $black1;
-      background-color: $bg-white;
-    }
-
-    &.q-btn--active {
-      border-color: $black-btn-line;
-      background-color: $bg-box;
-    }
-
-    &:disabled {
-      border-color: $line-stroke;
-      background-color: $line-bg;
-      color: $placeholder;
-
-      &:hover {
-        border-color: $line-stroke;
-        background-color: $line-bg;
-      }
-
-      &.q-btn--active {
-        border-color: $line-stroke;
-        background-color: $line-bg;
-      }
-    }
-
-    &.kw-btn--add {
-      border-color: $line-stroke;
-      padding-left: 32px;
-      position: relative;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 12px;
-        transform: translateY(-50%);
-        width: 16px;
-        height: 16px;
-        background: url(~@assets/images/ic_plus_16.svg) no-repeat center;
-        background-size: 16px 16px;
-        display: block;
-      }
-
-      &:disabled {
-        &::after {
-          content: "";
-          background: url(~@assets/images/ic_plus_16_disabled.svg) no-repeat center;
-          background-size: 16px 16px;
-        }
-      }
-    }
-  }
-
-  // step
-  &--step {
-    padding: 0 20px;
-    border: 1px solid $black-btn-line;
-    height: 42px;
-    background-color: $bg-white;
-    color: $black2;
-    font-weight: 400;
-
-    & + & {
-      margin-left: 8px;
-    }
-
-    &:hover {
-      border-color: $black1;
-      background-color: $bg-white;
-    }
-
-    &.q-btn--active {
-      border-color: $line-stroke;
-      background-color: $bg-box;
-    }
-
-    &:disabled {
-      border-color: $line-stroke;
-      background-color: $line-bg;
-      color: #bbb;
-
-      &:hover {
-        border-color: $line-stroke;
-        background-color: $line-bg;
-      }
-
-      &.q-btn--active {
-        border-color: $line-stroke;
-        background-color: $line-bg;
-      }
-    }
-
-    &.kw-btn--primary {
-      border: 0;
-      max-width: 182px;
-      width: 100%;
-      background-color: $primary;
-      color: $bg-white;
-      font-weight: 500;
-
-      &:hover {
-        background-color: #2a7bd9;
-      }
-
-      &.q-btn--active {
-        background-color: #256dbf;
-      }
-
-      &:disabled {
-        background-color: $line-line;
-
-        &:hover {
-          background-color: $line-line;
-        }
-
-        &.q-btn--active {
-          background-color: $line-line;
-        }
-      }
-    }
-  }
-
-  // more
-  &--more {
-    // border: 1px solid #000;
-    padding: 0 28px 0 12px;
-    height: 32px;
-    background-color: $bg-white;
-    font-size: 14px;
-    color: $black3;
-    font-weight: 400;
-    position: relative;
-
-    &:hover {
-      background-color: inherit;
-    }
-
-    &.q-btn--active {
-      background-color: inherit;
+  &--outlined {
+    &::before {
+      mix-blend-mode: multiply;
+      background-color: #fff;
     }
 
     &::after {
       content: "";
+      display: block;
       position: absolute;
-      top: 50%;
-      right: 9px;
-      width: 16px;
-      height: 16px;
-      transform: translateY(-50%);
-      background: url(~@assets/images/ic_arrow_b_16.svg) no-repeat center;
-      background-size: 16px 16px;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: inherit;
+      border: 1px solid currentcolor;
     }
 
-    &.q-btn--append {
-      &::after {
-        transform: translateY(-50%) rotate(180deg);
+    &.q-btn {
+      &.disabled {
+        background-color: $line-bg !important;
+
+        .q-btn__content {
+          color: $placeholder !important;
+        }
+
+        &::after {
+          border-color: $line-stroke !important;
+        }
       }
     }
   }
 
-  &--excel {
-    padding: 0;
-    background-color: rgb(56 144 246 / 0%) !important;
-    font-size: 14px;
-    color: $black1;
-    height: 32px;
-    text-decoration: underline;
-    position: relative;
-    font-weight: 400;
-
-    & .on-left {
-      margin-right: 6px;
-      width: 16px;
-      height: 16px;
-    }
-
-    // &::before {
-    //   content: "";
-    //   position: absolute;
-    //   top: 50%;
-    //   left: 0;
-    //   transform: translateY(-50%);
-    //   width: 16px;
-    //   height: 16px;
-    //   background: url(~@assets/images/ic_excel_off_16_3x.png) no-repeat center;
-    //   background-size: 16px 16px;
-    //   display: block;
-    //   box-shadow: none;
-    //   transition: none;
-    // }
-  }
-
   &--underline {
-    padding: 0;
-    background-color: rgb(56 144 246 / 0%) !important;
-    font-size: 14px;
-    color: $black1;
-    height: 32px;
+    // &::before {
+    //   border-bottom: 1px solid currentcolor;
+    // }
+
     text-decoration: underline;
-    position: relative;
-    font-weight: 400;
 
-    & .on-left {
-      margin-right: 6px;
-      width: 16px;
-      height: 16px;
+    &.q-btn {
+      &.disabled {
+        background-color: transparent !important;
+        color: $placeholder !important;
+
+        .q-btn__content {
+          color: $placeholder !important;
+        }
+      }
+    }
+  }
+
+  &--borderless {
+    background-color: transparent !important;
+
+    &.q-btn {
+      @include kw-btn-height-modifier(0, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
+
+      &.disabled {
+        background-color: transparent !important;
+
+        .q-btn__content {
+          color: $placeholder !important;
+        }
+      }
+
+      &--dense {
+        @include kw-btn-height-modifier(0, $-kw-btn-line-height-dense, $-kw-btn-font-size-dense, $-kw-btn-font-weight-dense);
+      }
     }
   }
 }
 
-// svg[viewBox$="16"] {
-//   width: 16px !important;
-// }
-
-.kw-btn {
-  &.q-btn .q-icon {
-    margin-right: 4px;
-    font-size: 1em;
-  }
-
-  &.kw-btn-reverse {
-    .q-btn__content {
-      flex-direction: row-reverse;
-    }
-
-    .q-icon {
-      margin-right: 0;
-      margin-left: 4px;
-    }
-  }
-}
-
-.btn-icon {
-  &--bell {
-    width: 16px;
-    height: 16px;
-    background: none;
-    border: none;
-
-    &:hover {
-      background: none;
-    }
-  }
-}
-
-.admin-arrow-box {
-  display: flex;
-  flex-direction: column;
-
+body.desktop {
   .kw-btn {
-    width: 30px;
-    height: 30px;
-    padding: 0;
+    .q-focus-helper {
+      /*
+      Since design requirements, we can not use focus helper.
+      Cuase, it affects both the background color and the color at the same time.
+       */
+      display: none;
+    }
 
-    .q-icon {
-      margin-right: 0;
+    transition: box-shadow 300ms;
+
+    &--filled,
+    &--outlined {
+      &.q-focusable:focus,
+      &.q-manual-focusable--focused,
+      &.q-hoverable:hover {
+        &::before {
+          background-color: adjust-color(#fff, $lightness: -10%);
+        }
+      }
+
+      &.q-btn.q-btn--active {
+        &::before {
+          background-color: adjust-color(#fff, $lightness: -20%);
+        }
+      }
+    }
+
+    &--color-bg-white {
+      &.q-focusable:focus,
+      &.q-manual-focusable--focused,
+      &.q-hoverable:hover {
+        &::before {
+          background-color: adjust-color(#fff, $lightness: -5%);
+        }
+      }
+
+      &.q-btn.q-btn--active {
+        &::before {
+          background-color: adjust-color(#fff, $lightness: -10%);
+        }
+      }
     }
   }
 }
+
+@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28));

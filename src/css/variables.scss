@@ -17,7 +17,9 @@
 $error: #ed1941;
 $black1: #222;
 $black2: #555;
+$normal-text: #555;
 $black3: #777;
+$disabled: #777;
 $black-btn-line: #666;
 $placeholder: #999;
 $line-stroke: #ccc;
@@ -59,7 +61,9 @@ $semantic-colors: (
   error :$error,
   black1 :$black1,
   black2 :$black2,
+  normal-text :$normal-text,
   black3 :$black3,
+  disabled :$disabled,
   black-btn-line :$black-btn-line,
   placeholder :$placeholder,
   line-stroke :$line-stroke,
@@ -77,6 +81,12 @@ $semantic-colors: (
   info :$info,
   warning :$warning,
 );
+$button-border-radius: 0;
+$button-padding: 8px 20px 8px 20px;
+$button-dense-padding: 6px 8px 6px 8px;
+$button-font-size: 16px;
+$button-line-height: 1.5em;
+$button-font-weight: 400;
 
 // kw variables
 // add global variables for component styling.
@@ -97,3 +107,20 @@ $kw-field-border-radius: 0;
 $kw-field-bg-color-disable: $line-bg;
 $kw-field-color: $black1;
 $kw-field-color-disable: $black3;
+
+// since there is no area for function. function defined in this place. plz fixme.
+@function at($list, $idx) {
+  @if type-of($list) != "list" {
+    @return $list;
+  }
+
+  @if length($list) == 1 {
+    @return nth($list, 1);
+  }
+
+  @if length($list) < $idx {
+    @return nth($list, $idx % length($list));
+  }
+
+  @return nth($list, $idx);
+}
