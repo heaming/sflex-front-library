@@ -20,6 +20,7 @@
     :loading="loading"
     :disable="disable"
     :no-wrap="noWrap"
+    @click="$emit('click', $event)"
   >
     <slot />
   </q-btn>
@@ -88,6 +89,10 @@ export default {
     href: { type: String, default: undefined },
     target: { type: String, default: undefined },
   },
+
+  emits: [
+    'click',
+  ],
 
   setup(props) {
     const btnRef = ref();
