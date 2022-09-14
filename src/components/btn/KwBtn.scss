@@ -113,11 +113,11 @@
     }
 
     &.disabled {
-      opacity: 1 !important;
-      background-color: $line-line !important;
+      opacity: 1;
+      background-color: $line-line;
 
       .q-btn__content {
-        color: $bg-white !important;
+        color: $bg-white;
       }
     }
 
@@ -154,14 +154,14 @@
 
     &.q-btn {
       &.disabled {
-        background-color: $line-bg !important;
+        background-color: $line-bg;
 
         .q-btn__content {
-          color: $placeholder !important;
+          color: $placeholder;
         }
 
         &::after {
-          border-color: $line-stroke !important;
+          border-color: $line-stroke;
         }
       }
     }
@@ -176,27 +176,27 @@
 
     &.q-btn {
       &.disabled {
-        background-color: transparent !important;
-        color: $placeholder !important;
+        background-color: transparent;
+        color: $placeholder;
 
         .q-btn__content {
-          color: $placeholder !important;
+          color: $placeholder;
         }
       }
     }
   }
 
   &--borderless {
-    background-color: transparent !important;
+    background-color: transparent;
 
     &.q-btn {
       @include kw-btn-height-modifier(0, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
 
       &.disabled {
-        background-color: transparent !important;
+        background-color: transparent;
 
         .q-btn__content {
-          color: $placeholder !important;
+          color: $placeholder;
         }
       }
 
