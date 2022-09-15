@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Button
+      Button Old Version
     </h2>
     <p class="kw-guide-description">
       Define the basic height and color.<br>

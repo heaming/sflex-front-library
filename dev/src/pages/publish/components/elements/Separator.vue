@@ -1,26 +1,26 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Seperator
+      Separator
     </h2>
     <p class="kw-guide-description">
-      Seperator's margin top & bottom are 30px | color code: $line-line(#ddd)
+      Separator's margin top & bottom are 30px | color code: $line-line(#ddd)
     </p>
     <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
       >
-        Seperator
+        Separator
       </h3>
       <p class="kw-guide-description">
-        Seperator
+        Separator
       </p>
       <q-card>
         <div class="kw-guide-example">
           <img
             src="../../../../../assets/images/seperator.png"
-            alt="seperator"
+            alt="separator"
           >
         </div>
         <guide-code-view
