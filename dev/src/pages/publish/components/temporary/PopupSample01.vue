@@ -116,11 +116,12 @@
 
       <template #action>
         <kw-btn
-          class="kw-btn--negative kw-btn--h36"
+          negative
           label="취소"
         />
         <kw-btn
-          class="kw-btn--h36 ml8"
+          primary
+          class="ml8"
           label="확인"
         />
       </template>
@@ -136,6 +137,17 @@ const sampleVueCode = `
   title="은행자동이체 청구 기준"
 >
   Content Area
+  <template #action>
+    <kw-btn
+      negative
+      label="취소"
+    />
+    <kw-btn
+      primary
+      class="ml8"
+      label="확인"
+    />
+  </template>
 </kw-popup>`;
 
 </script>

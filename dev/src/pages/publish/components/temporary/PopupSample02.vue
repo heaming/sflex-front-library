@@ -45,11 +45,12 @@
       </div>
       <template #action>
         <kw-btn
-          class="kw-btn--negative kw-btn--h36"
+          negative
           label="취소"
         />
         <kw-btn
-          class="kw-btn--h36 ml8"
+          primary
+          class="ml8"
           label="확인"
         />
       </template>
@@ -94,11 +95,12 @@ const sampleVueCode = `
   </kw-tab-panels>
   <template #action>
     <kw-btn
-      class="kw-btn--negative kw-btn--h36"
+      negative
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      primary
+      class="ml8"
       label="확인"
     />
   </template>
