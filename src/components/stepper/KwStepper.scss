@@ -104,19 +104,27 @@
   }
 
   .q-stepper__content {
-    display: none;
+    .q-panel {
+      overflow: inherit;
+    }
+  }
+
+  .q-stepper__step-inner {
+    padding: 0;
   }
 }
 
 .kw-stepper-headingtext {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 0 12px;
-  border-bottom: 2px solid $black1;
+  padding-top: 20px;
+
+  .q-stepper__header {
+    margin-bottom: -27px;
+    align-items: center;
+    justify-content: flex-end;
+  }
 
   h2 {
-    padding: 0;
-    border-bottom: none;
+    padding-top: 0;
+    padding-bottom: 20px;
   }
 }

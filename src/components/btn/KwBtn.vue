@@ -21,7 +21,7 @@
     :loading="loading"
     :disable="disable"
     :no-wrap="noWrap"
-    @click="$emit('click', $event)"
+    @click="onClick"
   >
     <slot />
   </q-btn>
