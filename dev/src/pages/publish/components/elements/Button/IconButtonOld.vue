@@ -4,9 +4,14 @@
       Button with Icon
     </h2>
     <p class="kw-guide-description">
-      Here is some example how to make the icon button and text with icon's button
+      <b class="notice">Please do not check this page anymore. Check out 'IconButtonNew'.</b><br>
+      <span class="delete">Here is some example how to make the icon button and text with icon's button</span>
     </p>
-    <div class="kw-guide-section">
+
+    <guide-history-view
+      :items="guideHistory"
+    />
+    <div class="kw-guide-section delete">
       <h3
         id="summary"
         class="kw-guide-title"
@@ -47,7 +52,7 @@
         </tbody>
       </q-markup-table>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         class="kw-guide-title"
       >
@@ -84,7 +89,7 @@
         </li>
       </ol>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         class="kw-guide-title"
       >
@@ -97,7 +102,7 @@
         </li>
       </ul>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="default"
         class="kw-guide-title"
@@ -137,7 +142,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="default"
         class="kw-guide-title"
@@ -166,7 +171,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="default"
         class="kw-guide-title"
@@ -230,7 +235,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="default"
         class="kw-guide-title"
@@ -386,4 +391,10 @@ const printCode = `
   label="인쇄"
 />
 `;
+const guideHistory = [
+  {
+    timestamp: '2022.09.15',
+    text: 'Delete this guide',
+  },
+];
 </script>

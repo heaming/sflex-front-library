@@ -31,9 +31,9 @@
 
     <kw-btn
       icon="lnb_arrow"
-      class="kw-lnb-switch"
+      class="kw-lnb__switch"
       borderless
-      :class="{'kw-lnb-switch--active': isExpanded}"
+      :class="{'kw-lnb__switch--active': isExpanded}"
       @click="toggleLnb"
     />
   </q-drawer>

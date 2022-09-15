@@ -45,11 +45,16 @@
       </h3>
       <kw-action-bar>
         <template #left>
-          <div class="kw-action-bar--count kw-action-bar--separator">
+          <div class="kw-action-bar--count">
             총 <span class="kw-action-bar--number pl4">156</span>
           </div>
-          <kw-select
+          <kw-separator
             v-model="selectData.model"
+            vertical
+            inset
+            spaced="8px"
+          />
+          <kw-select
             :options="selectData.options"
             borderless
             dense
@@ -77,6 +82,7 @@
         <kw-separator
           vertical
           inset
+          spaced="16px"
         />
         <kw-btn
           label="개인 고객 등록 URL 전송"
@@ -240,11 +246,16 @@ const sampleVueCode = `
     </h3>
     <kw-action-bar>
       <template #left>
-        <div class="kw-action-bar--count kw-action-bar--separator">
+        <div class="kw-action-bar--count">
           총 <span class="kw-action-bar--number pl4">156</span>
         </div>
-        <kw-select
+        <kw-separator
           v-model="selectData.model"
+          vertical
+          inset
+          spaced="8px"
+        />
+        <kw-select
           :options="selectData.options"
           borderless
           dense
@@ -272,6 +283,7 @@ const sampleVueCode = `
       <kw-separator
         vertical
         inset
+        spaced="16px"
       />
       <kw-btn
         label="개인 고객 등록 URL 전송"

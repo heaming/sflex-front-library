@@ -4,13 +4,14 @@
       Button Old Version
     </h2>
     <p class="kw-guide-description">
-      Define the basic height and color.<br>
-      For other special buttons, refer to those included in the corresponding component.
+      <b class="notice">Please do not check this page anymore. Check out 'ButtonNew'.</b><br>
+      <span class="delete">Define the basic height and color.<br>
+        For other special buttons, refer to those included in the corresponding component.</span>
     </p>
     <guide-history-view
       :items="guideHistory"
     />
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="summary"
         class="kw-guide-title"
@@ -90,7 +91,7 @@
         </tbody>
       </q-markup-table>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="default"
         class="kw-guide-title"
@@ -119,7 +120,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="popupBottomButton"
         class="kw-guide-title"
@@ -361,7 +362,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="contents"
         class="kw-guide-title"
@@ -406,7 +407,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="etc"
         class="kw-guide-title"
@@ -429,7 +430,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="etc"
         class="kw-guide-title"
@@ -462,7 +463,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="toggleButton"
         class="kw-guide-title"
@@ -488,7 +489,7 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="toggleButton"
         class="kw-guide-title"
@@ -794,6 +795,10 @@ const toggleSelected = ref('오늘')
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.09.15',
+    text: 'Delete this guide',
+  },
   {
     timestamp: '2022.08.30',
     text: 'Add Radio Toggle button case',
