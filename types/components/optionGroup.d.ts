@@ -21,7 +21,7 @@ interface KwOptionGroupProps extends UseFieldProps, UseOptionsProps {
   dense?: string;
 
   /**
-   * 컴포넌트 상태 비활성화
+   * 컴포넌트 비활성화 모드
    */
   disable?: boolean;
 
