@@ -22,6 +22,7 @@
     :color="color"
     :bg-color="bgColor"
     :autofocus="autofocus"
+    :placeholder="placeholder"
     no-error-icon
     clear-icon="close_24"
     @focus="$emit('focus', $event)"
@@ -139,6 +140,7 @@ export default {
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     autofocus: { type: Boolean, default: false },
+    placeholder: { type: String, default: undefined },
 
     // customize props
     icon: { type: String, default: undefined },

@@ -80,6 +80,16 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   bgColor?: string;
 
   /**
+   * 마운트 시 포커스 여부
+   */
+  autofocus?: boolean;
+
+  /**
+   * input placeholder
+   */
+  placeholder?: string;
+
+  /**
    * icon을 append 영역에 표시한다
    */
   icon?: string;
