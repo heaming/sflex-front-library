@@ -4,7 +4,8 @@
     ref="btnRef"
     v-bind="styleClassAttrs"
     class="kw-btn"
-    :class="classes"
+    :class="buttonClasses"
+    :style="buttonStyles"
     no-caps
     unelevated
     rectangle
@@ -13,7 +14,7 @@
     :label="label"
     :icon="icon"
     :icon-right="iconRight"
-    :dense="dense"
+    :dense="buttonDense"
     :tabindex="tabindex"
     :align="align"
     :stretch="stretch"
@@ -30,6 +31,32 @@
 import usePermissions from '../../composables/private/usePermissions';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
+const availablePresets = {
+  primary: {
+    color: 'primary',
+    textColor: 'bg-white',
+    borderColor: undefined,
+  },
+  negative: {
+    color: 'black3',
+    textColor: 'bg-white',
+    borderColor: undefined,
+  },
+  gridAction: {
+    color: 'bg-box',
+    textColor: 'black2',
+    borderColor: 'line-line',
+    outlined: true,
+    dense: true,
+  },
+  secondary: {
+    color: 'bg-white',
+    textColor: 'normal-text',
+    borderColor: 'black-btn-line',
+    outlined: true,
+  },
+};
+
 export default {
   name: 'KwBtn',
   inheritAttrs: false,
@@ -42,29 +69,15 @@ export default {
     loading: { type: Boolean, default: null },
     disable: { type: Boolean, default: false },
 
-    // padding: { type: String, default: undefined },
-    // size: { type: String, default: undefined },
-    // fab: { type: Boolean, default: false },
-    // fabMini: { type: Boolean, default: false },
-
     // presets for sizing.
     // we will not use quasar btn props, since design break em based styling.
-    dense: { type: Boolean, default: false },
-    form: { type: Boolean, default: false },
+    dense: { type: Boolean, default: undefined },
+    padding: { type: String, default: undefined },
 
-    // outline: { type: Boolean, default: false },
-    // flat: { type: Boolean, default: false },
-    // push: { type: Boolean, default: false },
-    // unelevated: { type: Boolean, default: true },
     // design on quasar unelevated style.
     underline: { type: Boolean, default: false },
     borderless: { type: Boolean, default: false },
     outlined: { type: [Boolean, String], default: false },
-
-    // about border-radius.
-    // rectangle: { type: Boolean, default: true },
-    // rounded: { type: Boolean, default: false },
-    // round: { type: Boolean, default: false },
 
     // color props
     color: { type: String, default: undefined }, // this one should be solid color.
@@ -73,9 +86,11 @@ export default {
     // glossy: { type: Boolean, default: false }, // about background tweak. we will not use.
 
     // presets for color and design
+    preset: { type: String, default: 'secondary' },
     primary: { type: Boolean, default: false },
     negative: { type: Boolean, default: false },
-    secondary: { type: Boolean, default: true },
+    secondary: { type: Boolean, default: false },
+    gridAction: { type: Boolean, default: false },
 
     // about innerClasses
     align: { type: String, default: 'center' },
@@ -102,87 +117,72 @@ export default {
       btnRef.value.click(evt);
     }
 
-    const presets = computed(() => {
-      let pr = {};
-      if (props.primary === true) {
-        pr = {
-          color: 'primary',
-          textColor: 'bg-white',
-          borderColor: undefined,
-        };
-      } else if (props.negative === true) {
-        pr = {
-          color: 'black3',
-          textColor: 'bg-white',
-          borderColor: undefined,
-        };
-      } else if (props.secondary === true) {
-        pr = {
-          color: 'bg-white',
-          textColor: 'normal-text',
-          borderColor: 'black-btn-line',
-          outlined: true,
-        };
-      }
-      return pr;
-    });
-
-    const sizeClasses = computed(() => {
-      if (props.form === true) return 'kw-btn--form ';
-      return ''; // no border
+    const stylePreset = computed(() => {
+      let preset = availablePresets[props.preset] ?? {};
+      if (props.primary === true) { preset = availablePresets.primary; }
+      if (props.negative === true) { preset = availablePresets.negative; }
+      if (props.secondary === true) { preset = availablePresets.secondary; }
+      if (props.gridAction === true) { preset = availablePresets.gridAction; }
+      return preset;
     });
 
     const designClasses = computed(() => {
       if (props.borderless === true) return 'kw-btn--borderless '; // no border, no hover, active, background : transparent
       if (props.underline === true) return 'kw-btn--underline '; // no hover, active, border bottom = textColor
       if (props.outlined === true) return 'kw-btn--outlined '; // border = textColor
-      if (presets.value.borderless === true) return 'kw-btn--borderless '; // preset
-      if (presets.value.underline === true) return 'kw-btn--underline '; // preset
-      if (presets.value.outlined === true) return 'kw-btn--outlined '; // preset
+      if (stylePreset.value.borderless === true) return 'kw-btn--borderless '; // preset
+      if (stylePreset.value.underline === true) return 'kw-btn--underline '; // preset
+      if (stylePreset.value.outlined === true) return 'kw-btn--outlined '; // preset
       return 'kw-btn--filled '; // no border
     });
 
     const colorClasses = computed(() => {
       let ccs = '';
 
-      if (props.color || presets.value.color) {
-        ccs += `kw-btn--color-${props.color || presets.value.color} `;
+      if (props.color || stylePreset.value.color) {
+        ccs += `kw-btn--color-${props.color || stylePreset.value.color} `;
       }
-      if (props.textColor || presets.value.textColor) {
-        ccs += `kw-btn--text-color-${props.textColor || presets.value.textColor} `;
+      if (props.textColor || stylePreset.value.textColor) {
+        ccs += `kw-btn--text-color-${props.textColor || stylePreset.value.textColor} `;
       }
-      if (props.borderColor || presets.value.borderColor) {
-        ccs += `kw-btn--border-color-${props.borderColor || presets.value.borderColor} `;
+      if (props.borderColor || stylePreset.value.borderColor) {
+        ccs += `kw-btn--border-color-${props.borderColor || stylePreset.value.borderColor} `;
       } else if (typeof props.outlined === 'string') {
         ccs += `kw-btn--border-color-${props.outlined} `;
       }
       return ccs;
     });
 
-    const classes = computed(() => {
-      let dcs = '';
-
-      if (sizeClasses.value) {
-        dcs += sizeClasses.value;
-      }
+    const buttonClasses = computed(() => {
+      let classes = '';
 
       if (designClasses.value) {
-        dcs += designClasses.value;
+        classes += designClasses.value;
       }
 
       if (colorClasses.value) {
-        dcs += colorClasses.value;
+        classes += colorClasses.value;
       }
 
-      return dcs;
+      return classes;
     });
 
     const { styleClassAttrs } = useInheritAttrs();
 
+    const buttonStyles = computed(() => {
+      let styles = '';
+      styles += props.padding ? `padding-left: ${props.padding}; padding-right: ${props.padding} ` : '';
+      return styles;
+    });
+
+    const buttonDense = computed(() => props.dense ?? stylePreset.value.dense);
+
     return {
       ...usePermissions(),
       styleClassAttrs,
-      classes,
+      buttonClasses,
+      buttonStyles,
+      buttonDense,
       btnRef,
       click,
     };
