@@ -7,7 +7,8 @@
       History
       <kw-btn
         v-if="items.length > 1"
-        class="kw-btn--line-gray kw-btn--h24 ml8"
+        class="ml8 guide-history--btn"
+        dense
         :label="!openBool?'Full history':'Close history'"
         @click="openBool = !openBool"
       />
@@ -42,3 +43,13 @@ defineProps({
 
 const openBool = ref(false);
 </script>
+
+<style scoped>
+.guide-history--btn {
+  font-size: 10px !important;
+  line-height: 12px !important;
+  height: 17px;
+  min-height: 17px !important;
+  padding: 1px 5px !important;
+}
+</style>

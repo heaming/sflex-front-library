@@ -198,3 +198,24 @@
     }
   }
 }
+
+.kw-tab-panel {
+  .normal-area {
+    border: none;
+  }
+}
+
+.kw-tabs {
+  border: none;
+}
+
+.kw-page:has(.kw-search) {
+  .kw-tabs {
+    border: 1px solid #ddd;
+    border-bottom: 0;
+  }
+
+  .kw-tab-panel .kw-tabs {
+    border-top: 0;
+  }
+}

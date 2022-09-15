@@ -3,6 +3,9 @@
     <h2 class="kw-guide-h2">
       Stepper
     </h2>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -27,7 +30,7 @@
         <tbody>
           <tr>
             <td>
-              kw-step
+              kw-steper
             </td>
             <td>
               ref="stepper"<br>
@@ -124,47 +127,140 @@
       </h3>
       <p class="kw-guide-description">
         This is h2 heading text with stepper.<br>
-        The tags of h2 and kw-stepper should be wrapped by the tag
-        which is added "<b>kw-stepper-headingtext</b>" as class<br>
-        Make sure to change the number of the current step in javascript.(ex: <b> ref(1) , ref(2) , ref(3) </b>)
+        <b>div class="kw-guide-example"</b> wrap the all content and title to use stepper.<br>
+        First example, first kw-step has content. and <b>const stepInitNum = ref(1)</b><br>
+        Second example, Second kw-step has content. and <b>const stepInitNum = ref(2)</b><br>
+        It means every content don't need to be included in one page except of active step <br>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <div class="kw-stepper-headingtext">
-            <h2>h2 Heading-text with stepper</h2>
             <kw-stepper
               ref="stepper"
               v-model="stepInitNum"
             >
               <kw-step
                 :name="1"
-                title="step"
+                title="step1"
                 :done="step > 1"
                 prefix="1"
-              />
+              >
+                <h2>Step1 title</h2>
+                <kw-form :cols="2">
+                  <h3>Form</h3>
+                  <kw-form-row>
+                    <kw-form-item
+                      label="기준상품코드"
+                      required
+                      hint-message="abc"
+                    >
+                      <kw-input
+                        placeholder="기준상품코드"
+                        rules="required"
+                      />
+                    </kw-form-item>
+                    <kw-form-item
+                      label="기준상품명"
+                      required
+                      hint-message="abc"
+                    >
+                      <kw-input placeholder="입력" />
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </kw-step>
               <kw-step
                 :name="2"
-                title="step"
+                title="step2"
                 :done="step > 2"
                 prefix="2"
               />
               <kw-step
                 :name="3"
-                title="step"
+                title="step3"
                 :done="step > 3"
                 prefix="3"
-              />
-              <kw-step
-                :name="4"
-                title="step"
-                :done="step > 4"
-                prefix="4"
               />
             </kw-stepper>
           </div>
         </div>
         <guide-code-view
           :code-value="[headingStepper, testScript]"
+          :lang="['vue', 'javascript']"
+          multi
+        />
+      </q-card>
+      <q-card>
+        <div class="kw-guide-example">
+          <div class="kw-stepper-headingtext">
+            <kw-stepper
+              ref="stepper"
+              v-model="stepInitNum2"
+            >
+              <kw-step
+                :name="1"
+                title="step1"
+                :done="step > 1"
+                prefix="1"
+              >
+                <h2>title1</h2>
+                <kw-form :cols="2">
+                  <h3>Form</h3>
+                  <kw-form-row>
+                    <kw-form-item
+                      label="기준상품코드"
+                      required
+                      hint-message="abc"
+                    >
+                      <kw-input
+                        placeholder="기준상품코드"
+                        rules="required"
+                      />
+                    </kw-form-item>
+                    <kw-form-item
+                      label="기준상품명"
+                      required
+                      hint-message="abc"
+                    >
+                      <kw-input placeholder="입력" />
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </kw-step>
+              <kw-step
+                :name="2"
+                title="step2"
+                :done="step > 2"
+                prefix="2"
+              >
+                <h2>Step2 title</h2>
+                <h3>Form</h3>
+                <kw-form>
+                  <kw-form-row>
+                    <kw-form-item
+                      label="new"
+                    >
+                      <kw-input />
+                    </kw-form-item>
+                    <kw-form-item
+                      label="new"
+                    >
+                      <kw-input />
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </kw-step>
+              <kw-step
+                :name="3"
+                title="step3"
+                :done="step > 3"
+                prefix="3"
+              />
+            </kw-stepper>
+          </div>
+        </div>
+        <guide-code-view
+          :code-value="[headingStepper2, testScript2]"
           :lang="['vue', 'javascript']"
           multi
         />
@@ -215,40 +311,115 @@ const testCode = `
 const testScript = `
 const stepInitNum = ref(1);
 `;
+const testScript2 = `
+const stepInitNum = ref(2);
+`;
 const headingStepper = `
 <div class="kw-stepper-headingtext">
-  <h2>h2 Heading-text with stepper</h2>
+  <kw-stepper
+    ref="stepper"
+    v-model="stepInitNum"
+  >
+  <!-- This is only first step's content -->
+    <kw-step
+      :name="1"
+      title="step1"
+      :done="step > 1"
+      prefix="1"
+    >
+      <h2>Step1 title</h2>
+      <kw-form :cols="2">
+        <h3>Form</h3>
+        <kw-form-row>
+          <kw-form-item
+            label="기준상품코드"
+            required
+            hint-message="abc"
+          >
+            <kw-input
+              placeholder="기준상품코드"
+              rules="required"
+            />
+          </kw-form-item>
+          <kw-form-item
+            label="기준상품명"
+            required
+            hint-message="abc"
+          >
+            <kw-input placeholder="입력" />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+    </kw-step>
+    <kw-step
+      :name="2"
+      title="step2"
+      :done="step > 2"
+      prefix="2"
+    />
+    <kw-step
+      :name="3"
+      title="step3"
+      :done="step > 3"
+      prefix="3"
+    />
+  </kw-stepper>
+</div>
+`;
+const headingStepper2 = `
+<div class="kw-stepper-headingtext">
   <kw-stepper
     ref="stepper"
     v-model="stepInitNum"
   >
     <kw-step
       :name="1"
-      title="step"
+      title="step1"
       :done="step > 1"
       prefix="1"
     />
+    <!-- This is only Second step's content -->
     <kw-step
       :name="2"
-      title="step"
+      title="step2"
       :done="step > 2"
       prefix="2"
-    />
+    >
+      <h2>Step2 title</h2>
+      <h3>Form</h3>
+      <kw-form>
+        <kw-form-row>
+          <kw-form-item
+            label="new"
+          >
+            <kw-input />
+          </kw-form-item>
+          <kw-form-item
+            label="new"
+          >
+            <kw-input />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+    </kw-step>
     <kw-step
       :name="3"
-      title="step"
+      title="step3"
       :done="step > 3"
       prefix="3"
-    />
-    <kw-step
-      :name="4"
-      title="step"
-      :done="step > 4"
-      prefix="4"
     />
   </kw-stepper>
 </div>
 `;
 
 const stepInitNum = ref(1);
+const stepInitNum2 = ref(2);
+
+const guideHistory = [
+  {
+    timestamp: '2022-09-15',
+    text: 'Redefine heading text with stepper ',
+  },
+
+];
 </script>

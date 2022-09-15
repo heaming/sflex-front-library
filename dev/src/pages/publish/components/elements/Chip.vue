@@ -40,8 +40,7 @@
               label='text' <br>
               color="colorName" <br>
               outline <br>
-              icon="iconName" <br>
-              class="kw-chip--icon-only"
+              icon="iconName"
             </td>
             <td>
               <br>

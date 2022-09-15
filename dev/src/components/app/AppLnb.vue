@@ -32,7 +32,7 @@
     <kw-btn
       icon="lnb_arrow"
       class="kw-lnb__switch"
-      color="normal-text"
+      borderless
       :class="{'kw-lnb__switch--active': isExpanded}"
       @click="toggleLnb"
     />
