@@ -439,6 +439,11 @@ h2 {
       }
     }
   }
+
+  &.h2-small {
+    font-size: 18px;
+    border-bottom: 1px solid $black1;
+  }
 }
 
 h3 {
