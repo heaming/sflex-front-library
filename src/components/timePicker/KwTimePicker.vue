@@ -18,7 +18,6 @@
     @change="onChangeInput"
   >
     <template #append>
-      <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
       <div @click="toggleView()">
         <q-icon name="clock_16" />
       </div>
