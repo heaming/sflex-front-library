@@ -18,6 +18,12 @@
             role="alert"
           >
             {{ computedErrorMessage }}
+            <kw-tooltip
+              anchor="center middle"
+              show-when-ellipsised
+            >
+              {{ computedErrorMessage }}
+            </kw-tooltip>
           </div>
         </transition>
       </div>

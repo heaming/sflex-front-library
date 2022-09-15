@@ -1,19 +1,34 @@
 <template>
   <q-field
     class="kw-field kw-editor"
-    outlined
     v-bind="styleClassAttrs"
     :label="undefined"
     :error="invalid"
-    :error-message="invalidMessage"
     :disable="disable"
     no-error-icon
+    outlined
   >
     <template #control>
       <div
         ref="editorRef"
         v-bind="inheritedAttrs"
       />
+    </template>
+
+    <!-- error -->
+    <template
+      v-if="invalid"
+      #error
+    >
+      <div>
+        {{ invalidMessage }}
+        <kw-tooltip
+          anchor="center middle"
+          show-when-ellipsised
+        >
+          {{ invalidMessage }}
+        </kw-tooltip>
+      </div>
     </template>
   </q-field>
 </template>
