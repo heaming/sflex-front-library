@@ -44,11 +44,13 @@
             <td>kw-form-item / kw-search-item</td>
             <td>
               essential <br>
-              hint="value"
+              hint="value" <br>
+              no-label
             </td>
             <td>
               Add the class "essential" in the tags of kw-form-item or kw-search-item. <br>
-              Add the class hint="value" in the tags of kw-form-item or kw-search-item.
+              Add the class hint="value" in the tags of kw-form-item or kw-search-item. <br>
+              Add the 'no-label' in the tags of kw-form-item or kw-search-item attribute when necessary
             </td>
           </tr>
         </tbody>
@@ -91,6 +93,34 @@
         </div>
         <guide-code-view
           :code-value="inputCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="nolabel"
+        class="kw-guide-title"
+      >
+        No label Case
+      </h3>
+      <p class="kw-guide-description">
+        input with no label
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item
+                no-label
+              >
+                <kw-input />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="nolabelCode"
           lang="vue"
         />
       </q-card>
@@ -500,10 +530,42 @@ const tooltipCode = `
   </kw-form-row>
 </kw-form>
 `;
+
+const nolabelCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item
+      no-label
+    >
+      <kw-input />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+
+<!-- if Search Form -->
+<kw-search>
+  <kw-search-row>
+    <kw-search-item
+      no-label
+    >
+      <kw-input />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
+`;
+
 const guideHistory = [
+  {
+    timestamp: '2022-09-14',
+    text: 'add no label case',
+  },
   {
     timestamp: '2022-09-13',
     text: 'add label with tooltip case',
+  },
+  {
+    timestamp: '2022-09-08',
+    text: 'Add Textarea. the design may be changed later.',
   },
   {
     timestamp: '2022-09-06',
@@ -517,9 +579,6 @@ const guideHistory = [
     timestamp: '2022-09-01',
     text: 'remove the placeholder attribute',
   },
-  {
-    timestamp: '2022-09-08',
-    text: 'Add Textarea. the design may be changed later.',
-  },
+
 ];
 </script>
