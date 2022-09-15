@@ -196,7 +196,7 @@
 
 // text
 .notice {
-  color: $info !important;
+  color: $negative !important;
 }
 
 .throughline {
@@ -253,4 +253,9 @@
       }
     }
   }
+}
+
+.delete,
+.delete * {
+  text-decoration: line-through;
 }

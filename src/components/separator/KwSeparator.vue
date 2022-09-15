@@ -1,7 +1,7 @@
 <template>
   <q-separator
     class="kw-separator"
-    :spaced="angleSpaced"
+    :spaced="spaced"
     :inset="inset"
     :vertical="vertical"
     :size="size"
@@ -21,9 +21,8 @@ export default {
     color: { type: String, default: 'grey-5' }, // can be transparent
   },
 
-  setup(props) {
-    const angleSpaced = props.vertical ? '16px' : '30px';
-    return { angleSpaced };
+  setup() {
+    return {};
   },
 };
 </script>

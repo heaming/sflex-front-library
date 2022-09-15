@@ -45,10 +45,16 @@
           </tr>
           <tr>
             <td>
-              Any tag in ActionBar
+              <p class="delete">
+                Any tag in ActionBar
+              </p>
+              <b>kw-separator</b>
             </td>
             <td>
-              kw-action-bar--separator
+              <p class="delete">
+                kw-action-bar--separator
+              </p>
+              <b>Check Separator Page</b>
             </td>
             <td>
               Separator between elements
@@ -115,13 +121,21 @@
       <h3 class="kw-guide-title">
         Case 01
       </h3>
+      <p class="kw-guide-description notice">
+        This case is not currently used because the button coding method and the location of each role have changed.
+      </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-action-bar>
             <template #left>
-              <div class="kw-action-bar--count kw-action-bar--separator">
+              <div class="kw-action-bar--count">
                 총 <span class="kw-action-bar--number pl4">156</span>
               </div>
+              <kw-separator
+                vertical
+                inset
+                spaced="8px"
+              />
               <kw-select
                 v-model="selectData.model"
                 :options="selectData.options"
@@ -131,9 +145,11 @@
               />
               <div class="kw-action-bar--send ml40">
                 <kw-btn
-                  class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
                   label="URL 전송"
                   dense
+                  color="bg-box"
+                  border-color="line-line"
+                  text-color="black3"
                 />
                 <p class="kw-action-bar--description ml16">
                   고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
@@ -143,20 +159,30 @@
 
             <kw-btn
               icon="excel_16"
-              class="kw-btn--excel kw-action-bar--separator"
+              dense
               label="엑셀 다운로드"
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced="16px"
             />
             <kw-btn
               label="개인 고객 등록 URL 전송"
-              class="kw-btn--h32"
+              primary
+              dense
             />
             <kw-btn
               label="개인 고객 등록"
-              class="kw-btn--h32 ml4"
+              class="ml8"
+              primary
+              dense
             />
             <kw-btn
               label="법인 고객 등록"
-              class="kw-btn--h32 ml4"
+              class="ml8"
+              primary
+              dense
             />
           </kw-action-bar>
         </div>
@@ -182,9 +208,14 @@ const selectData = {
 const testCode = `
 <kw-action-bar>
   <template #left>
-    <div class="kw-action-bar--count kw-action-bar--separator">
+    <div class="kw-action-bar--count">
       총 <span class="kw-action-bar--number pl4">156</span>
     </div>
+    <kw-separator
+      vertical
+      inset
+      spaced="8px"
+    />
     <kw-select
       v-model="selectData.model"
       :options="selectData.options"
@@ -194,8 +225,11 @@ const testCode = `
     />
     <div class="kw-action-bar--send ml40">
       <kw-btn
-        class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
         label="URL 전송"
+        dense
+        color="bg-box"
+        border-color="line-line"
+        text-color="black3"
       />
       <p class="kw-action-bar--description ml16">
         고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
@@ -205,20 +239,30 @@ const testCode = `
 
   <kw-btn
     icon="excel_16"
-    class="kw-btn--excel kw-action-bar--separator"
+    dense
     label="엑셀 다운로드"
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced="16px"
   />
   <kw-btn
     label="개인 고객 등록 URL 전송"
-    class="kw-btn--h32"
+    primary
+    dense
   />
   <kw-btn
     label="개인 고객 등록"
-    class="kw-btn--h32 ml4"
+    class="ml8"
+    primary
+    dense
   />
   <kw-btn
     label="법인 고객 등록"
-    class="kw-btn--h32 ml4"
+    class="ml8"
+    primary
+    dense
   />
 </kw-action-bar>
 `;
@@ -231,6 +275,10 @@ const selectData = {
 };
 `;
 const guideHistory = [
+  {
+    timestamp: '2022.09.15',
+    text: 'Add notice in Case1. Edit summary',
+  },
   {
     timestamp: '2022.09.08',
     text: 'Add - select attr',

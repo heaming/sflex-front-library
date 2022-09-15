@@ -30,8 +30,6 @@
           class="w90"
           outline
           dense
-          text-color="secondary"
-          border-color="secondary"
           type="reset"
         />
         <kw-btn

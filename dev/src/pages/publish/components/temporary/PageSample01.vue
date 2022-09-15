@@ -103,12 +103,13 @@
       <div class="row justify-start items-center mt12">
         <!-- 'the helper classes' from Quasar & gutter -->
         <kw-btn
-          class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32"
           label="삭제"
+          grid-action
         />
         <kw-btn
-          class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 ml4"
           label="저장"
+          grid-action
+          class="ml8"
         />
       </div>
       <kw-pagination
@@ -234,7 +235,9 @@ const sampleVueCode = `
   </kw-search>
 
   <div class="result-area">
-    <h3>조회결과</h3>
+    <h3>
+      조회결과<span class="kw-title-refrence">&#8251;필수(&#42;)를 제외한 항목만 변경 가능합니다.</span>
+    </h3>
     <kw-action-bar>
       <template #left>
         <div class="kw-action-bar--count kw-action-bar--separator">
@@ -243,12 +246,17 @@ const sampleVueCode = `
         <kw-select
           v-model="selectData.model"
           :options="selectData.options"
+          borderless
+          dense
           suffix="개씩보기"
         />
         <div class="kw-action-bar--send ml40">
           <kw-btn
-            class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
             label="URL 전송"
+            dense
+            color="bg-box"
+            border-color="line-line"
+            text-color="black3"
           />
           <p class="kw-action-bar--description ml16">
             고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
@@ -258,20 +266,29 @@ const sampleVueCode = `
 
       <kw-btn
         icon="excel_16"
-        class="kw-btn--underline kw-action-bar--separator"
+        dense
         label="엑셀 다운로드"
+      />
+      <kw-separator
+        vertical
+        inset
       />
       <kw-btn
         label="개인 고객 등록 URL 전송"
-        class="kw-btn--h32"
+        primary
+        dense
       />
       <kw-btn
         label="개인 고객 등록"
-        class="kw-btn--h32 ml4"
+        class="ml8"
+        primary
+        dense
       />
       <kw-btn
         label="법인 고객 등록"
-        class="kw-btn--h32 ml4"
+        class="ml8"
+        primary
+        dense
       />
     </kw-action-bar>
     <kw-grid
@@ -281,30 +298,19 @@ const sampleVueCode = `
     <div class="row justify-start items-center mt12">
       <!-- 'the helper classes' from Quasar & gutter -->
       <kw-btn
-        class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32"
         label="삭제"
+        grid-action
       />
       <kw-btn
-        class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 ml4"
         label="저장"
+        grid-action
+        class="ml8"
       />
     </div>
     <kw-pagination
       :model-value="1"
       :total-count="100"
     />
-  </div>
-  <div class="kw-guide pa0">
-    <q-card>
-      <h3 class="center mb20">
-        This is the source code for this page. This part is not included in the coding.
-      </h3>
-      <guide-code-view
-        :code-value="[sampleVueCode, sampleJsCode]"
-        :lang="['vue','javascript']"
-        multi
-      />
-    </q-card>
   </div>
 </kw-page>`;
 
