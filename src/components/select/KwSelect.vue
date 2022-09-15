@@ -8,7 +8,6 @@
     popup-content-class="kw-select-options-menu"
     :label="undefined"
     :error="invalid"
-    :error-message="invalidMessage"
     :options="filteredOptions"
     :option-value="optionValue"
     :option-label="optionLabel"
@@ -105,6 +104,22 @@
         </q-item-section>
       </q-item>
       <q-separator v-if="opt[optionSeparator]" />
+    </template>
+
+    <!-- error -->
+    <template
+      v-if="invalid"
+      #error
+    >
+      <div>
+        {{ invalidMessage }}
+        <kw-tooltip
+          anchor="center middle"
+          show-when-ellipsised
+        >
+          {{ invalidMessage }}
+        </kw-tooltip>
+      </div>
     </template>
   </q-select>
 </template>

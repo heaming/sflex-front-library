@@ -1,9 +1,11 @@
 <template>
   <q-pagination
+    ref="paginationRef"
     class="kw-pagination justify-center"
     :model-value="pageIndex"
     :max="max"
     :max-pages="9"
+    :disable="disable"
     unelevated
     direction-links
     boundary-links
@@ -19,6 +21,7 @@ import { PageSearchContextKey } from '../../consts/private/symbols';
 
 export default {
   name: 'KwPagination',
+  inheritAttrs: false,
 
   props: {
     pageIndex: {
@@ -32,6 +35,10 @@ export default {
     totalCount: {
       type: Number,
       default: 0,
+    },
+    disable: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -65,9 +72,22 @@ export default {
       }
     });
 
+    const paginationRef = ref();
+
+    function set(pageIndex) {
+      paginationRef.value.set(pageIndex);
+    }
+
+    function setByOffset(offset) {
+      paginationRef.value.setByOffset(offset);
+    }
+
     return {
       max,
       onUpdateValue,
+      paginationRef,
+      set,
+      setByOffset,
     };
   },
 };

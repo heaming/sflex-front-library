@@ -116,4 +116,9 @@ export interface UseFieldInstance {
    * 컴포넌트에 포커싱한다
    */
   focus: () => void;
+
+  /**
+   * 컴포넌트에 포커싱 해제
+   */
+  blur: () => void;
 }

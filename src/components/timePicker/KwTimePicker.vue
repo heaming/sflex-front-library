@@ -7,7 +7,6 @@
     :class="{'q-field--highlighted': showing}"
     :label="undefined"
     :error="invalid"
-    :error-message="invalidMessage"
     :readonly="readonly"
     :disable="disable"
     mask="##:##"
@@ -18,7 +17,6 @@
     @change="onChangeInput"
   >
     <template #append>
-      <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
       <div @click="toggleView()">
         <q-icon name="clock_16" />
       </div>
@@ -60,6 +58,22 @@
         </q-virtual-scroll>
       </div>
     </q-menu>
+
+    <!-- error -->
+    <template
+      v-if="invalid"
+      #error
+    >
+      <div>
+        {{ invalidMessage }}
+        <kw-tooltip
+          anchor="center middle"
+          show-when-ellipsised
+        >
+          {{ invalidMessage }}
+        </kw-tooltip>
+      </div>
+    </template>
   </q-input>
 </template>
 

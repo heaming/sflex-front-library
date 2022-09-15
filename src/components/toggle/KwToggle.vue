@@ -20,7 +20,7 @@
     :indeterminate-icon="indeterminateIcon"
     :disable="disable"
     :tabindex="tabindex"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="onUpdateModelValue"
   >
     <slot />
   </q-toggle>
@@ -99,11 +99,11 @@ export default {
       type: [String, Number],
       default: undefined,
     },
+    onUpdateModelValue: {
+      type: Function,
+      default: undefined,
+    },
   },
-
-  emits: [
-    'update:modelValue',
-  ],
 
   setup() {
     const toggleRef = ref();

@@ -6,7 +6,6 @@
     :label="undefined"
     :dense="isSearchContext || dense"
     :error="invalid"
-    :error-message="invalidMessage"
     no-error-icon
     borderless
   >
@@ -20,6 +19,22 @@
         :dense="isSearchContext || dense"
         inline
       />
+    </template>
+
+    <!-- error -->
+    <template
+      v-if="invalid"
+      #error
+    >
+      <div>
+        {{ invalidMessage }}
+        <kw-tooltip
+          anchor="center middle"
+          show-when-ellipsised
+        >
+          {{ invalidMessage }}
+        </kw-tooltip>
+      </div>
     </template>
   </q-field>
 </template>
