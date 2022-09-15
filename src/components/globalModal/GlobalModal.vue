@@ -51,14 +51,14 @@ export default {
     const getContainerCtx = (modal) => containerRefs.value[modals.value.findIndex((v) => v === modal)]?.ctx;
 
     async function isClosable(modal, result) {
+      const ctx = getContainerCtx(modal);
       const shouldCheckModified = !result && !modal.ignoreOnModified;
 
       if (shouldCheckModified) {
-        const ctx = getContainerCtx(modal);
         if (!await ctx?.observer.confirmIfIsModified()) { return false; }
       }
 
-      return true;
+      return (await ctx.onBeforeClose?.value()) !== false;
     }
 
     async function close(modal, { result, payload }) {
