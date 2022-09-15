@@ -17,6 +17,7 @@ import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
 import { validateValue } from './private/validate';
 import i18n from '../i18n';
+import processWait from './private/processWait';
 
 function datetimeCallback(data, dataRow, fieldName, value) {
   if (!value) return null;
@@ -91,7 +92,7 @@ export function getDeletedRowValues(view) {
   return getRowValues(view, deletedRows);
 }
 
-export function getChangedRowValues(view, isIncludeDeleted = true) {
+export function getChangedRowValues(view, isIncludeDeleted = false) {
   return [
     ...(isIncludeDeleted ? getDeletedRowValues(view) : []),
     ...getUpdatedRowValues(view),
@@ -99,7 +100,7 @@ export function getChangedRowValues(view, isIncludeDeleted = true) {
   ];
 }
 
-export function getAllRowValues(view, isIncludeDeleted = true) {
+export function getAllRowValues(view, isIncludeDeleted = false) {
   const length = view.getDataSource().getRowCount();
   const startRow = view instanceof TreeView ? 1 : 0;
   const allRows = Array.from({ length }, (v, i) => i + startRow);
@@ -378,41 +379,35 @@ const normalizeExportOptions = (options = {}) => ({
   treeKey: options.treeKey,
 });
 
+function executeExportView(view, options, onProgress, onComplete) {
+  return new Promise((resolve) => {
+    const progressCallback = (g, work, max, position) => { onProgress(position); };
+    const done = async () => { await onComplete(); resolve(); };
+    view.exportGrid({ ...options, progressCallback, done });
+  });
+}
+
 export async function exportView(view, options) {
   options = normalizeExportOptions(options);
 
-  return new Promise((resolve, reject) => {
-    const shouldClone = !!options.exportData;
+  const shouldClone = !!options.exportData;
+  if (shouldClone) view = await cloneView(view, options);
 
-    if (shouldClone) {
-      view = cloneView(view, options);
-    }
-    if (options.timePostfix) {
-      options.fileName = `${options.fileName}_${date.formatDate(new Date(), 'YYYYMMHHHHmmss')}`;
-    }
+  if (options.timePostfix) {
+    const postfix = date.formatDate(new Date(), 'YYYYMMHHHHmmss');
+    options.fileName = `${options.fileName}_${postfix}`;
+  }
 
-    options.progressCallback = (g, work, max, position) => {
-      loadProgress(position);
-    };
-    options.done = () => {
-      if (shouldClone) destroyCloneView(view);
-
-      setTimeout(() => {
-        loadProgress(-1);
-        resolve();
-      }, libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
-    };
-
+  try {
     loadProgress(0);
-    setTimeout(() => {
-      try {
-        view.exportGrid(options);
-      } catch (e) {
-        loadProgress(-1);
-        reject(e);
-      }
+    await executeExportView(view, options, loadProgress, async () => {
+      await processWait();
+      if (shouldClone) destroyCloneView(view);
+      await processWait(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
     });
-  });
+  } finally {
+    loadProgress(-1);
+  }
 }
 
 /*

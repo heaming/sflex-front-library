@@ -13,20 +13,6 @@ export const useFieldStyleProps = {
     type: Boolean,
     default: false,
   },
-
-  // register props to ignore inheritAttrs
-  filled: {
-    type: Boolean,
-    default: undefined,
-  },
-  outlined: {
-    type: Boolean,
-    default: undefined,
-  },
-  standout: {
-    type: Boolean,
-    default: undefined,
-  },
 };
 
 export default () => {

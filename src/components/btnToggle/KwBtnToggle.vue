@@ -3,7 +3,7 @@
     ref="inputRef"
     class="kw-btn-toggle"
     v-bind="styleClassAttrs"
-    :label="$q.platform.is.desktop ? null : label"
+    :label="undefined"
     :error="invalid"
     :error-message="invalidMessage"
     no-error-icon

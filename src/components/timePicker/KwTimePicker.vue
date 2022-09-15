@@ -5,7 +5,7 @@
     v-bind="fieldStyles"
     class="kw-field kw-time-picker"
     :class="{'q-field--highlighted': showing}"
-    :label="$q.platform.is.desktop ? undefined : label"
+    :label="undefined"
     :error="invalid"
     :error-message="invalidMessage"
     :readonly="readonly"
@@ -18,7 +18,6 @@
     @change="onChangeInput"
   >
     <template #append>
-      <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
       <div @click="toggleView()">
         <q-icon name="clock_16" />
       </div>

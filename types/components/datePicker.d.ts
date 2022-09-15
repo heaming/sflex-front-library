@@ -1,6 +1,6 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
-import { UseFieldProps, UseFieldInstance } from './private/useField';
+import { UseFieldProps, UseFieldStyleProps, UseFieldInstance } from './private/useField';
 
 // KwDate
 interface KwDateProps {
@@ -70,7 +70,7 @@ interface KwDateSlots {}
 interface KwDate extends ComponentPublicInstance<KwDateProps> {}
 
 // KwDatePicker
-interface KwDatePickerProps extends UseFieldProps, Omit<KwDateProps, 'minView', 'maxView'> {
+interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDateProps, 'minView', 'maxView'> {
   /**
    * 데이트피커 유형
    * @defaultValue `date`

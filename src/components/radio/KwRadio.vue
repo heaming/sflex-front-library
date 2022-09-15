@@ -13,7 +13,7 @@
     :unchecked-icon="uncheckedIcon"
     :disable="disable"
     :tabindex="tabindex"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="onUpdateModelValue"
   >
     <slot />
   </q-radio>
@@ -68,11 +68,11 @@ export default {
       type: [String, Number],
       default: undefined,
     },
+    onUpdateModelValue: {
+      type: Function,
+      default: undefined,
+    },
   },
-
-  emits: [
-    'update:modelValue',
-  ],
 
   setup() {
     const radioRef = ref();

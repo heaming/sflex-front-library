@@ -98,6 +98,7 @@ module.exports = {
     'no-return-await': 'off',
     'object-curly-newline': 'off',
     'vue/multi-word-component-names': 'off',
+    'vuejs-accessibility/click-events-have-key-events': 'off',
 
     // allow during development only
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
