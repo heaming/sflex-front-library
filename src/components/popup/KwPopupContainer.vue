@@ -1,5 +1,6 @@
 <template>
   <q-card
+    v-show="isLoaded || isLoadFailed"
     ref="containerRef"
     class="kw-popup"
     :class="popupClass"
@@ -25,19 +26,34 @@
         @click="close(false)"
       />
     </q-card-section>
-    <div v-if="error">
-      Failed to load
-    </div>
+    <q-card-section
+      v-if="isLoadFailed"
+    >
+      <div class="row justify-center">
+        <q-icon
+          class="full-width"
+          size="40px"
+          name="info_24"
+        />
+        <div class="text-center mt5">
+          <p v-if="$i18n.locale === consts.LOCALE_KO">
+            팝업을 표시하는 도중 문제가 발생했습니다.<br>
+            관리자에게 문의하시기 바랍니다.
+          </p>
+          <p v-else>
+            A problem occurred while displaying the popup.<br>
+            Please contact administrator.
+          </p>
+        </div>
+      </div>
+    </q-card-section>
     <suspense
       v-else
       :timeout="0"
-      @resolve="resolve"
+      @resolve="onResolve"
     >
       <template #default>
         <slot />
-      </template>
-      <template #fallback>
-        Loading...
       </template>
     </suspense>
   </q-card>
@@ -46,6 +62,8 @@
 <script>
 import { PopupContainerContextKey } from '../../consts/private/symbols';
 import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
+import { loadSpinner } from '../../plugins/loading';
+import consts from '../../consts';
 
 export default {
   name: 'KwPopupContainer',
@@ -59,7 +77,10 @@ export default {
     },
   },
 
-  emits: ['close', 'resolve'],
+  emits: [
+    'resolve',
+    'close',
+  ],
 
   setup(props, { emit }) {
     const popupCtx = shallowRef({});
@@ -82,16 +103,22 @@ export default {
       close,
     });
 
-    let resolved = false;
-    const error = ref(false);
+    const isLoaded = ref(false);
+    const isLoadFailed = ref(false);
 
-    function resolve() {
-      resolved = true;
+    loadSpinner(true);
+
+    function onResolve() {
+      loadSpinner(false);
+      isLoaded.value = true;
       emit('resolve', true);
     }
 
     onErrorCaptured(() => {
-      error.value = !resolved;
+      if (!isLoaded.value) {
+        loadSpinner(false);
+        isLoadFailed.value = true;
+      }
     });
 
     const containerRef = ref();
@@ -102,6 +129,7 @@ export default {
     } = useDraggable(containerRef);
 
     const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
+    const popupSize = computed(() => popupCtx.value.size?.value);
 
     const popupStyle = computed(() => [
       popupCtx.value.style,
@@ -109,8 +137,8 @@ export default {
     ]);
 
     const popupClass = computed(() => [
-      'kw-popup',
       !popupTitle.value && 'kw-popup--no-title',
+      popupSize && `kw-popup--${popupSize.value}`,
       popupCtx.value.class,
     ]);
 
@@ -122,14 +150,16 @@ export default {
     return {
       ctx: popupCtx,
       close,
-      error,
-      resolve,
+      isLoaded,
+      isLoadFailed,
+      onResolve,
       containerRef,
       draggableEvents,
       popupTitle,
       popupStyle,
       popupClass,
       popupHeaderClass,
+      consts,
     };
   },
 };

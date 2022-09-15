@@ -57,8 +57,11 @@
           />
           <div class="kw-action-bar--send ml40">
             <kw-btn
-              class="kw-btn--h24 kw-btn--line-gray kw-btn--line-bg"
               label="URL 전송"
+              dense
+              color="bg-box"
+              border-color="line-line"
+              text-color="black3"
             />
             <p class="kw-action-bar--description ml16">
               고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
@@ -68,20 +71,29 @@
 
         <kw-btn
           icon="excel_16"
-          class="kw-btn--underline kw-action-bar--separator"
+          dense
           label="엑셀 다운로드"
+        />
+        <kw-separator
+          vertical
+          inset
         />
         <kw-btn
           label="개인 고객 등록 URL 전송"
-          class="kw-btn--h32"
+          primary
+          dense
         />
         <kw-btn
           label="개인 고객 등록"
-          class="kw-btn--h32 ml4"
+          class="ml8"
+          primary
+          dense
         />
         <kw-btn
           label="법인 고객 등록"
-          class="kw-btn--h32 ml4"
+          class="ml8"
+          primary
+          dense
         />
       </kw-action-bar>
       <kw-grid

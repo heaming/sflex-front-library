@@ -1,5 +1,7 @@
 <template>
-  <q-card-section class="kw-popup__content">
+  <q-card-section
+    class="kw-popup__content"
+  >
     <slot />
   </q-card-section>
   <q-card-section
@@ -15,6 +17,8 @@ import { PopupContainerContextKey } from '../../consts/private/symbols';
 import usePage from '../../composables/private/usePage';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 
+const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl'];
+
 export default {
   name: 'KwPopup',
   inheritAttrs: false,
@@ -22,6 +26,11 @@ export default {
   props: {
     ...useObserverProps,
 
+    size: {
+      type: String,
+      default: undefined,
+      validator: (v) => sizeValues.includes(v),
+    },
     style: {
       type: [String, Object, Array],
       default: undefined,
@@ -34,9 +43,13 @@ export default {
       type: String,
       default: undefined,
     },
+    onBeforeClose: {
+      type: Function,
+      default: undefined,
+    },
   },
 
-  setup(props) {
+  async setup(props) {
     const pageCtx = usePage();
     const observerCtx = useObserver();
 
@@ -56,6 +69,8 @@ export default {
       style: props.style,
       class: props.class,
       title: computed(() => props.title),
+      size: computed(() => props.size),
+      onBeforeClose: computed(() => props.onBeforeClose),
     };
 
     registerPopup(popupCtx);
