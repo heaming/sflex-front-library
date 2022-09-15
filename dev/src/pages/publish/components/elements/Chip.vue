@@ -40,8 +40,7 @@
               label='text' <br>
               color="colorName" <br>
               outline <br>
-              icon="iconName" <br>
-              class="kw-chip--icon-only"
+              icon="iconName"
             </td>
             <td>
               <br>
@@ -103,14 +102,14 @@
           <kw-chip
             icon="info_24"
             color="transparent"
-            class="kw-chip--icon-only ma2"
+            class="ma2"
           >
             <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
           </kw-chip>
           <kw-chip
             icon="warning_16"
             color="transparent"
-            class="kw-chip--icon-only ma2"
+            class="ma2"
           />
         </div>
         <guide-code-view
@@ -147,14 +146,14 @@ const chipCode = `
 <kw-chip
   icon="info_24"
   color="transparent"
-  class="kw-chip--icon-only ma2"
+  class="ma2"
 >
   <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
 </kw-chip>
 <kw-chip
   icon="warning_16"
   color="transparent"
-  class="kw-chip--icon-only ma2"
+  class="ma2"
 />
 `;
 

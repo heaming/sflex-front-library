@@ -2,6 +2,11 @@
   &.q-separator {
     // nothing to do
   }
+
+  &.q-separator--vertical-inset {
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
 }
 
 .kw-form + .kw-separator {
