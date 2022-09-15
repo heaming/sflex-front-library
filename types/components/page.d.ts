@@ -4,6 +4,11 @@ import { UseObserverProps, UseObserverInstance } from './private/useObserver';
 
 interface KwPageProps extends UseObserverProps {
   /**
+   * 페이지 사이즈
+   */
+  size?: 'sm' | 'md';
+
+  /**
    * 지정시 헤더 영역을 표시하지 않는다
    */
   noHeader?: boolean;
