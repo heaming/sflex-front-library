@@ -125,6 +125,11 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   regex?: 'alpha' | 'alpha_dash' | 'alpha_num' | 'alpha_spaces' | 'alpha_underscore' | string | RegExp;
 
   /**
+   * 입력 텍스트 우측 정렬 여부
+   */
+  alignRight?: boolean;
+
+  /**
    * KwSearch, KwForm 안에서 엔터 동작 시 submit 이벤트가 발생하는 것을 막는다
    */
   preventSubmit?: boolean;

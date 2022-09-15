@@ -23,6 +23,7 @@
     :bg-color="bgColor"
     :autofocus="autofocus"
     :placeholder="placeholder"
+    :input-class="{'text-right': alignRight}"
     no-error-icon
     clear-icon="close_24"
     @focus="$emit('focus', $event)"
@@ -150,6 +151,7 @@ export default {
     upperCase: { type: Boolean, default: false },
     lowerCase: { type: Boolean, default: false },
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
+    alignRight: { type: Boolean, default: false },
     preventSubmit: { type: Boolean, default: false },
   },
 
