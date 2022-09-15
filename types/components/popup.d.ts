@@ -1,9 +1,35 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
+import { UseObserverProps, UseObserverInstance } from './private/useObserver';
 
-interface KwPopupProps {}
-interface KwPopupSlots {}
-interface KwPopup extends ComponentPublicInstance<KwPopupProps> {}
+interface KwPopupProps extends UseObserverProps {
+  /**
+   * 팝업 사이즈
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+
+  /**
+   * 팝업 타이틀
+   */
+  title?: string;
+
+  /**
+   * 팝업 close 전에 발생하는 이벤트, false 반환 시 close 중지한다
+   */
+  onBeforeClose?: () => Promise<boolean>;
+}
+interface KwPopupSlots {
+  /**
+   * 기본 컨텐츠 영역
+   */
+  default: () => VNode[];
+
+  /**
+   * 하단 버튼 영역
+   */
+  action: () => VNode[];
+}
+interface KwPopup extends ComponentPublicInstance<KwPopupProps>, UseObserverInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

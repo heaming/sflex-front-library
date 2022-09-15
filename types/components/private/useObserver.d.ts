@@ -1,4 +1,4 @@
-export interface UseObserverChildProps {
+export interface UseObserverProps {
   /**
    * Observer에 등록할 떄 key 값으로 사용된다.
    */
@@ -14,8 +14,6 @@ export interface UseObserverChildProps {
    */
   ignoreOnReset?: boolean;
 }
-
-export interface UseObserverProps extends UseObserverChildProps {}
 
 export interface UseObserverInstance {
   /**

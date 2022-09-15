@@ -53,6 +53,23 @@ export interface UseFieldProps {
   ignoreOnReset?: boolean;
 }
 
+export interface UseFieldStyleProps {
+  /**
+   * 공간을 덜 차지하는 스타일 적용
+   */
+  dense?: string;
+
+  /**
+   * 밑줄 라인 스타일 적용
+   */
+  underline?: boolean;
+
+  /**
+   * 테두리가 없는 스타일 적용
+   */
+  borderless?: boolean;
+}
+
 export interface UseFieldInstance {
   /**
    * 컴포넌트를 현재 상태로 초기화 한다
@@ -94,4 +111,9 @@ export interface UseFieldInstance {
    * @param message confirm에 표시할 메시지
    */
   confirmIfIsModified: (message?: string) => Promise<boolean>;
+
+  /**
+   * 컴포넌트에 포커싱한다
+   */
+  focus: () => void;
 }

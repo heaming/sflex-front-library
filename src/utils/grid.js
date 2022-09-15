@@ -92,7 +92,7 @@ export function getDeletedRowValues(view) {
   return getRowValues(view, deletedRows);
 }
 
-export function getChangedRowValues(view, isIncludeDeleted = true) {
+export function getChangedRowValues(view, isIncludeDeleted = false) {
   return [
     ...(isIncludeDeleted ? getDeletedRowValues(view) : []),
     ...getUpdatedRowValues(view),
@@ -100,7 +100,7 @@ export function getChangedRowValues(view, isIncludeDeleted = true) {
   ];
 }
 
-export function getAllRowValues(view, isIncludeDeleted = true) {
+export function getAllRowValues(view, isIncludeDeleted = false) {
   const length = view.getDataSource().getRowCount();
   const startRow = view instanceof TreeView ? 1 : 0;
   const allRows = Array.from({ length }, (v, i) => i + startRow);
