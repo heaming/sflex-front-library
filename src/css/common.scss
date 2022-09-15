@@ -141,8 +141,9 @@ textarea::placeholder {
     }
 
     &:hover,
-    &:active {
-      background-color: transparent;
+    &:active,
+    &::before {
+      background-color: transparent !important;
     }
 
     &::after {
