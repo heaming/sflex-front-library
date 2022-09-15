@@ -100,17 +100,13 @@
             outline
             class="ma2"
           />
-          <kw-chip
-            icon="info_24"
-            color="transparent"
-            class="kw-chip--icon-only ma2"
+          <kw-icon
+            name="info_24"
           >
             <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
-          </kw-chip>
-          <kw-chip
-            icon="warning_16"
-            color="transparent"
-            class="kw-chip--icon-only ma2"
+          </kw-icon>
+          <kw-icon
+            name="warning_16"
           />
         </div>
         <guide-code-view
