@@ -685,3 +685,69 @@ $unit: px;
 @include color-based(".kw-bg--", $semantic-colors) using ($color) {
   background-color: $color;
 }
+
+.kw-notification {
+  list-style: none;
+  padding: 0;
+
+  li {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.43;
+    color: $black3;
+    position: relative;
+    padding-left: 12px;
+    padding-top: 4px;
+
+    &:first-child {
+      padding-top: 0;
+
+      &::before {
+        top: 0;
+      }
+    }
+
+    &::before {
+      content: "·";
+      display: block;
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 8px;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 4px 0 0;
+
+      li {
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.43;
+        color: $placeholder;
+        position: relative;
+        padding-left: 9px;
+        padding-top: 2px;
+
+        &:first-child {
+          padding-top: 0;
+
+          &::before {
+            top: 0;
+          }
+        }
+
+        &::before {
+          content: "-";
+          display: block;
+          position: absolute;
+          top: 2px;
+          left: 0;
+          width: 5px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
