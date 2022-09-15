@@ -7,7 +7,7 @@ export const useButtonStyleProps = {
   filled: { type: Boolean, default: false },
   underline: { type: Boolean, default: false },
   borderless: { type: Boolean, default: false },
-  outlined: { type: Boolean, default: true },
+  outlined: { type: Boolean, default: false },
 
   // color props
   color: { type: String, default: undefined }, // this one should be solid color.
@@ -84,7 +84,7 @@ export default () => {
     if (stylePreset.value.underline === true) return 'underline'; // preset
     if (stylePreset.value.filled === true) return 'filled'; // preset
     if (stylePreset.value.outlined === true) return 'outlined'; // preset
-    return undefined; // no border
+    return 'outlined'; // no border
   });
 
   const buttonColor = computed(() => props.color
