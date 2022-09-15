@@ -1,16 +1,9 @@
 @mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight) {
-  &.q-btn {
-    font-size: $font-size;
-    line-height: $line-height;
-    padding: $padding;
-    font-weight: $font-weight;
-    min-height: calc(#{$line-height} + #{ at($padding, 1) + at($padding, 3) });
-
-    // .q-icon,
-    // .q-spinner {
-    //   font-size: $line-height;
-    // }
-  }
+  font-size: $font-size;
+  line-height: $line-height;
+  padding: $padding;
+  font-weight: $font-weight;
+  min-height: calc(#{$line-height} + #{ at($padding, 1) + at($padding, 3) });
 }
 
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
@@ -84,10 +77,9 @@
     }
   }
 
-  @include kw-btn-height-modifier($-kw-btn-padding, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
-
   &.q-btn {
     // the height and width depend on contents line-height and padding.
+    @include kw-btn-height-modifier($-kw-btn-padding, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
 
     .on-left {
       margin-right: 4px;
@@ -213,15 +205,15 @@
 
 body.desktop {
   .kw-btn {
-    .q-focus-helper {
-      /*
-      Since design requirements, we can not use focus helper.
-      Cuase, it affects both the background color and the color at the same time.
-       */
-      display: none;
+    &.q-btn {
+      .q-focus-helper {
+        /*
+        Since design requirements, we can not use focus helper.
+        Cuase, it affects both the background color and the color at the same time.
+         */
+        display: none;
+      }
     }
-
-    transition: box-shadow 300ms;
 
     &--filled,
     &--outlined {
