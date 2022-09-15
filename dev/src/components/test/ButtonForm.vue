@@ -4,6 +4,20 @@
     ref="formRef"
     :cols="0"
   >
+    <!-- button toggle -->
+    <kw-form-row>
+      <kw-form-item label="button toggle">
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
+          clearable
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+        />
+      </kw-form-item>
+    </kw-form-row>
     <!-- coloring -->
     <kw-form-row>
       <kw-form-item label="coloring">
@@ -28,15 +42,8 @@
         />
         <kw-btn
           :icon="'bookmark_on_16'"
-          label="test"
-          color="blue-1"
-          text-color="blue-4"
-          dense
-        />
-        <kw-btn
-          :icon="'bookmark_on_16'"
           color="bg-white"
-          outlined="primary"
+          outlined
         />
         <kw-btn
           label="결재요청"
@@ -69,7 +76,12 @@
           :label="'조회'"
           color="secondary"
           text-color="bg-white"
+          padding="50px"
           dense
+        />
+        <kw-btn
+          :label="'label'"
+          grid-action
         />
       </kw-form-item>
     </kw-form-row>
@@ -493,9 +505,43 @@
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- style preset -->
+    <!-- designs -->
     <kw-form-row>
-      <kw-form-item label="underline preset">
+      <kw-form-item label="outlined">
+        <kw-btn
+          :label="'outlined'"
+          outlined
+        />
+        <kw-btn
+          :icon="'bookmark_on_16'"
+          outlined
+        />
+        <kw-btn
+          :label="'outlined'"
+          outlined
+          disable
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="filled">
+        <kw-btn
+          :label="'filled'"
+          filled
+        />
+        <kw-btn
+          :icon="'bookmark_on_16'"
+          filled
+        />
+        <kw-btn
+          :label="'filled'"
+          filled
+          disable
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="underline">
         <kw-btn
           :label="'underline'"
           underline
@@ -512,7 +558,7 @@
       </kw-form-item>
     </kw-form-row>
     <kw-form-row>
-      <kw-form-item label="borderless preset">
+      <kw-form-item label="borderless">
         <kw-btn
           :label="'borderless'"
           borderless
@@ -524,23 +570,6 @@
         <kw-btn
           :label="'outlined'"
           borderless
-          disable
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <kw-form-row>
-      <kw-form-item label="outlined preset">
-        <kw-btn
-          :label="'borderless'"
-          outlined
-        />
-        <kw-btn
-          :icon="'bookmark_on_16'"
-          outlined
-        />
-        <kw-btn
-          :label="'outlined'"
-          outlined
           disable
         />
       </kw-form-item>
@@ -549,7 +578,9 @@
 </template>
 
 <script setup>
-import { KwBtn } from '../../../../src/components';
+import { KwBtn, KwBtnToggle } from '../../../../src/components';
+
+const strModel = ref('');
 </script>
 
 <style scoped lang="scss">
