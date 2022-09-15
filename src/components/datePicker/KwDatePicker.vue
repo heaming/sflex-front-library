@@ -2,12 +2,11 @@
   <q-input
     ref="inputRef"
     v-model="innerValue"
-    v-bind="fieldStyles"
+    v-bind="{...styleClassAttrs, ...fieldStyles}"
     class="kw-field kw-date-picker"
     :class="{'q-field--highlighted': showing}"
     :label="undefined"
     :error="invalid"
-    :error-message="invalidMessage"
     :readonly="readonly"
     :disable="disable"
     :mask="innerValueMask"
@@ -44,11 +43,28 @@
         @update:model-value="onChangeDate"
       />
     </q-menu>
+
+    <!-- error -->
+    <template
+      v-if="invalid"
+      #error
+    >
+      <div>
+        {{ invalidMessage }}
+        <kw-tooltip
+          anchor="center middle"
+          show-when-ellipsised
+        >
+          {{ invalidMessage }}
+        </kw-tooltip>
+      </div>
+    </template>
   </q-input>
 </template>
 
 <script>
 import { date } from 'quasar';
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
@@ -61,6 +77,7 @@ const dateStringValidator = (v) => v?.length === 10 && !Number.isNaN(Date.parse(
 
 export default {
   name: 'KwDatePicker',
+  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
@@ -117,6 +134,7 @@ export default {
     const isExpanded = ref(false);
     const showing = computed(() => !isReadonlyOrDisable.value && isExpanded.value);
 
+    const fieldStyles = useFieldStyle();
     const fieldCtx = useField();
     const { value } = fieldCtx;
     const innerValue = ref(value.value);
@@ -233,9 +251,8 @@ export default {
       inputRef.value?.focus();
     }
 
-    const fieldStyles = useFieldStyle();
-
     return {
+      ...useInheritAttrs(),
       ...fieldCtx,
       fieldStyles,
       inputRef,

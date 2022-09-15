@@ -3,9 +3,9 @@
     <h2 class="kw-guide-h2">
       Tooltip
     </h2>
-    <p class="kw-guide-description">
+    <!-- <p class="kw-guide-description">
       It is in progress. Please wait for it to complete.
-    </p>
+    </p> -->
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -30,17 +30,34 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              kw-icon
             </td>
             <td>
-              essential (sample)
+              name
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Id used in svg
             </td>
           </tr>
         </tbody>
       </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <!-- <li>
+          If you need another icon image chip,
+          please refer to 'how to make icon button' inn iconButton page and add icon svg file.
+        </li> -->
+        <li>
+          If you need tooltip type icon, add 'kw-tooltip' tag inside kw-icon like as last example
+        </li>
+      </ul>
     </div>
     <div class="kw-guide-section">
       <h3
@@ -54,7 +71,15 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          It is in progress. Please wait for it to complete.
+          <kw-icon
+            name="info_24"
+          >
+            <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
+          </kw-icon>
+          <kw-icon
+            name="warning_16"
+            class="ml20"
+          />
         </div>
         <guide-code-view
           :code-value="testCode"
@@ -68,6 +93,14 @@
 <script setup>
 
 const testCode = `
-It is in progress. Please wait for it to complete.
+<kw-icon
+  name="info_24"
+>
+  <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
+</kw-icon>
+
+<kw-icon
+  name="warning_16"
+/>
 `;
 </script>
