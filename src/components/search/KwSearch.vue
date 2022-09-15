@@ -27,7 +27,7 @@
       <slot name="action">
         <kw-btn
           :label="$t('MSG_BTN_RESET', null, '초기화')"
-          :ripple="false"
+          class="w90"
           outline
           dense
           text-color="secondary"
@@ -36,12 +36,10 @@
         />
         <kw-btn
           :label="$t('MSG_BTN_SEARCH', null, '검색')"
-          :ripple="false"
-          color="secondary"
-          type="submit"
+          class="ml8 w90"
           primary
           dense
-          class="ml8"
+          color="secondary"
         />
       </slot>
     </div>
