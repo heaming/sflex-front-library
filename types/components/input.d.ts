@@ -90,6 +90,11 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   placeholder?: string;
 
   /**
+   * Tabindex HTML attribute value
+   */
+  tabindex?: number | string;
+
+  /**
    * icon을 append 영역에 표시한다
    */
   icon?: string;

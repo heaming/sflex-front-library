@@ -23,6 +23,7 @@
     :bg-color="bgColor"
     :autofocus="autofocus"
     :placeholder="placeholder"
+    :tabindex="tabindex"
     :input-class="{'text-right': alignRight}"
     no-error-icon
     clear-icon="close_24"
@@ -142,6 +143,7 @@ export default {
     bgColor: { type: String, default: undefined },
     autofocus: { type: Boolean, default: false },
     placeholder: { type: String, default: undefined },
+    tabindex: { type: [Number, String], default: undefined },
 
     // customize props
     icon: { type: String, default: undefined },
