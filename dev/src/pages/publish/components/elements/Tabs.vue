@@ -9,7 +9,6 @@
         Check 'page tab' : PageSample02<br>
         Check 'tab in tab' : PageSample03<br>
         Check 'small height tab' : PopupSample02<br>
-        Check 'Tabpage' : TabpageSample<br>
       </span>
     </p>
     <guide-history-view
@@ -214,7 +213,7 @@
 const guideHistory = [
   {
     timestamp: '2022.09.15',
-    text: 'Add TabpageSample in the page and redefine tab',
+    text: 'Redefine tab',
   },
   {
     timestamp: '2022.09.14',
