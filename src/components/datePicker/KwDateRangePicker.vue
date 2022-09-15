@@ -19,6 +19,7 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
+      :autofocus="autofocus"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
     />
@@ -98,6 +99,10 @@ export default {
     beforeShow: {
       type: Function,
       default: undefined,
+    },
+    autofocus: {
+      type: Boolean,
+      default: false,
     },
   },
 

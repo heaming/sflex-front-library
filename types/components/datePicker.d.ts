@@ -88,6 +88,11 @@ interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDa
   dense?: boolean;
 
   /**
+   * 마운트 시 포커스 여부
+   */
+  autofocus?: boolean;
+
+  /**
    * input placeholder
    */
   placeholder?: string;

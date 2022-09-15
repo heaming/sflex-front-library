@@ -11,6 +11,7 @@
     :disable="disable"
     :mask="innerValueMask"
     :unmasked-value="unmaskedValue"
+    :autofocus="autofocus"
     :placeholder="placeholder"
     no-error-icon
     @click="toggleView()"
@@ -117,6 +118,10 @@ export default {
     beforeShow: {
       type: Function,
       default: undefined,
+    },
+    autofocus: {
+      type: Boolean,
+      default: false,
     },
     placeholder: {
       type: String,
