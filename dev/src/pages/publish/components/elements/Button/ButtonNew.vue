@@ -183,23 +183,23 @@
         Form type(use with input type)
       </h3>
       <p class="kw-guide-description">
-        If height 40px, please add <em>padding="'12px'"</em> <br>
+        If height 40px, please add <em>padding="px value"</em> <br>
         (Default) height 40px / padding 8px 12px | (Dense) height 32px / padding 8px 6px <br>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            padding="'12px'"
+            padding="12px"
             label="파일첨부"
             class="mr8"
           />
           <kw-btn
-            padding="'12px'"
+            padding="12px"
             label="우편번호"
             class="mr8"
           />
           <kw-btn
-            padding="'12px'"
+            padding="12px"
             disable
             label="우편번호"
             class="mr8"
