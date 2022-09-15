@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       Here is some example how to make the icon button and text with icon's button
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -33,15 +36,16 @@
               kw-btn
             </td>
             <td>
-              kw-btn-reverse <br>
               icon="icon file name" <br>
-              size="px"
+              icon-right="icon file name" <br>
+              dense <br>
+              borderless
             </td>
             <td>
-              Add the class of 'kw-btn-reverse'
+              with icon type <br>
               when the icon is located in right side and text is located in left side. <br>
-              Add this attribute when necessary <br>
-              Add this attribute when necessary <br>
+              Add this attribute when height size is 32px <br>
+              when only icon img have
             </td>
           </tr>
         </tbody>
@@ -92,7 +96,7 @@
       </h3>
       <ul>
         <li>
-          mr10 is for the styling the guide.Remove it after copying the code.<br>
+          mr8 is for the styling the guide.Remove it after copying the code.<br>
           (The reference page of Gutter in publishing guide: Publish / Components / Element / Gutter)
         </li>
       </ul>
@@ -105,19 +109,16 @@
         Icon Button
       </h3>
       <p class="kw-guide-description">
-        Making only icon in the button.<br> Add the class of
-        <b>'kw-btn--icon-only'</b> and Add the size of width and height as helper classes in 'kw-btn'.<br>
-        (Ex: kw-btn--icon-only should be earlier than the other classes in 'kw-btn'.
-        (such as size classes(w20,h20) and styling the button's classes(kw-btn--line-gray))<br>
-        (<b>h40 means height: 40px  / w40 means width: 40px </b>
-        - The reference page (Components/Elements/Gutter&size)<br>
-        Add the size of the icon<b>(ex: size="16px")</b> as the attribute of the <b>'kw-btn'</b>.
+        Making only icon in the button.<br>
+        Add the prop of <b>borderless</b> <br>
+        <!-- Add the size of the icon<b>(ex: size="16px")</b> as the attribute of the <b>'kw-btn'</b>. -->
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
             icon="search_24"
             borderless
+            size="24px"
             class="mr8"
           />
         </div>
@@ -135,19 +136,27 @@
         Button with icon
       </h3>
       <p class="kw-guide-description">
-        Add the class of 'kw-btn-reverse' to swap the locations of the label and the icon
+        Using the prop of 'icon-right' to swap the locations of the label and the icon
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-            icon="arrow_down_16"
-            label="상태변경"
+            icon="plus_16"
+            dense
+            label="학습자 추가"
+            class="mr8"
           />
           <kw-btn
-            class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-            icon="arrow_down_16"
-            label="상태변경"
+            icon-right="plus_16"
+            dense
+            disable
+            label="학습자 추가"
+            class="mr8"
+          />
+          <kw-btn
+            icon-right="arrow_down_16"
+            dense
+            label="상태추가"
           />
         </div>
         <guide-code-view
@@ -161,61 +170,42 @@
         id="default"
         class="kw-guide-title"
       >
-        Excel button
+        Excel/Doc upload or download button
       </h3>
       <p class="kw-guide-description">
-        It is Excel download button.<br>If the icon is the diffrent with example,
+        It is upload or download button.<br>
         having a look above the part '<b>#how to make the button</b>' of the page.
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
             icon="excel_download_16"
-            class="kw-btn--excel mr10"
+            dense
+            class="mr8"
+            label="양식 다운로드"
+          />
+          <kw-btn
+            icon="excel_download_16"
+            dense
+            class="mr8"
             label="엑셀 다운로드"
           />
           <kw-btn
             icon="excel_upload_16"
-            class="kw-btn--excel"
+            dense
+            class="mr8"
+            label="엑셀 업로드"
+          />
+          <kw-btn
+            icon="excel_upload_16"
+            dense
+            disable
+            class="mr8"
             label="엑셀 업로드"
           />
         </div>
         <guide-code-view
           :code-value="excelCode"
-          lang="vue"
-        />
-        <div class="kw-guide-example">
-          <kw-btn
-            icon="excel_download_16"
-            class="kw-btn--line-black kw-btn--h32 mr10"
-            label="엑셀 다운로드"
-          />
-          <kw-btn
-            icon="excel_download_16"
-            class="kw-btn--line-black kw-btn--h32"
-            label="엑셀 다운로드"
-            disable
-          />
-        </div>
-        <guide-code-view
-          :code-value="excelCode02"
-          lang="vue"
-        />
-        <div class="kw-guide-example">
-          <kw-btn
-            icon="excel_upload_16"
-            class="kw-btn--line-black kw-btn--h32 mr10"
-            label="엑셀 업로드"
-          />
-          <kw-btn
-            icon="excel_upload_16"
-            class="kw-btn--line-black kw-btn--h32"
-            label="엑셀 업로드"
-            disable
-          />
-        </div>
-        <guide-code-view
-          :code-value="excelCode03"
           lang="vue"
         />
       </q-card>
@@ -234,7 +224,7 @@
         <div class="kw-guide-example">
           <kw-btn
             icon="print_16"
-            class="kw-btn--line-black kw-btn--h32"
+            dense
             label="인쇄"
           />
         </div>
@@ -297,83 +287,75 @@
 <script setup>
 
 const iconButton = `
-<!--  mr10:gutter margin-right:10px  -->
-<!--  The size of icon is 16px, and The button's size is width:40px and height:40px -->
+<!--  mr8:gutter margin-right:10px  -->
 <kw-btn
-  class="kw-btn--icon-only kw-btn--line-gray h40 w40 mr10"
   icon="search_24"
-  size="16px"
-/>
-<kw-btn
-  class="kw-btn--icon-only kw-btn--line-gray h50 w50 mr10"
-  icon="search_24"
+  borderless
   size="24px"
-/>
-<kw-btn
-  class="kw-btn--icon-only h50 w50 mr10"
-  icon="search_24"
-  size="24px"
-/>
-<kw-btn
-  class="kw-btn--icon-only mr10"
-  icon="info_24"
+  class="mr8"
 />
 `;
+// The size of icon is 16px, and The button's size is width:40px and height:40px
 const testCode = `
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-  icon="arrow_down_16"
-  label="상태변경"
-/>
-<kw-btn
-  class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-  icon="arrow_down_16"
-  label="상태변경"
-/>
+  <kw-btn
+    icon="plus_16"
+    dense
+    label="학습자 추가"
+    class="mr8"
+  />
+  <kw-btn
+    icon-right="plus_16"
+    dense
+    disable
+    label="학습자 추가"
+    class="mr8"
+  />
+  <kw-btn
+    icon-right="arrow_down_16"
+    dense
+    label="상태추가"
+  />
 `;
 const excelCode = `
-<kw-btn
-  icon="excel_download_16"
-  class="kw-btn--excel mr10"
-  label="엑셀 다운로드"
-/>
-<kw-btn
-  icon="excel_upload_16"
-  class="kw-btn--excel"
-  label="엑셀 업로드"
-/>
+  <kw-btn
+    icon="excel_download_16"
+    dense
+    class="mr8"
+    label="양식 다운로드"
+  />
+  <kw-btn
+    icon="excel_download_16"
+    dense
+    class="mr8"
+    label="엑셀 다운로드"
+  />
+  <kw-btn
+    icon="excel_upload_16"
+    dense
+    class="mr8"
+    label="엑셀 업로드"
+  />
+  <kw-btn
+    icon="excel_upload_16"
+    dense
+    disable
+    class="mr8"
+    label="엑셀 업로드"
+  />
 `;
-const excelCode02 = `
-<kw-btn
-  icon="excel_download_16"
-  class="kw-btn--line-black kw-btn--h32 mr10"
-  label="엑셀 다운로드"
-/>
-<kw-btn
-  icon="excel_download_16"
-  class="kw-btn--line-black kw-btn--h32"
-  label="엑셀 다운로드"
-  disable
-/>
-`;
-const excelCode03 = `
-<kw-btn
-  icon="excel_upload_16"
-  class="kw-btn--line-black kw-btn--h32 mr10"
-  label="엑셀 업로드"
-/>
-<kw-btn
-  icon="excel_upload_16"
-  class="kw-btn--line-black kw-btn--h32"
-  label="엑셀 업로드"
-  disable
-/>
-`;
+
 const printCode = `
 <kw-btn
   icon="print_16"
-  class="kw-btn--line-black kw-btn--h32"
+  dense
   label="인쇄"
 />
 `;
+// History
+const guideHistory = [
+  {
+    timestamp: '2022.09.15',
+    text: 'revised button component guide',
+  },
+];
 </script>
