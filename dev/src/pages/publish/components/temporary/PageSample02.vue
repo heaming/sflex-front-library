@@ -67,11 +67,13 @@
             </template>
             <kw-btn
               dense
+              secondary
               label="파트너과정 수료이관"
               class="mr8"
             />
             <kw-btn
               dense
+              secondary
               label="버튼"
             />
             <kw-separator
@@ -82,12 +84,14 @@
             <kw-btn
               icon="print_16"
               dense
+              secondary
               label="인쇄"
               class="mr8"
             />
             <kw-btn
               icon="excel_download_16"
               dense
+              secondary
               label="엑셀 다운로드"
               @click="onClickExcelDownload"
             />
@@ -258,11 +262,13 @@ const sampleVueCode = `
           </template>
           <kw-btn
             dense
+            secondary
             label="파트너과정 수료이관"
             class="mr8"
           />
           <kw-btn
             dense
+            secondary
             label="버튼"
           />
           <kw-separator
@@ -272,6 +278,7 @@ const sampleVueCode = `
           />
           <kw-btn
             icon="print_16"
+            secondary
             dense
             label="인쇄"
             class="mr8"
@@ -279,6 +286,7 @@ const sampleVueCode = `
           <kw-btn
             icon="excel_download_16"
             dense
+            secondary
             label="엑셀 다운로드"
             @click="onClickExcelDownload"
           />

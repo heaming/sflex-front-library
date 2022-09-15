@@ -110,16 +110,28 @@
       </h3>
       <p class="kw-guide-description">
         Making only icon in the button.<br>
-        Add the prop of <b>borderless</b> <br>
-        <!-- Add the size of the icon<b>(ex: size="16px")</b> as the attribute of the <b>'kw-btn'</b>. -->
+        Add the prop of <b>borderless</b> when necessary <br>
+        please control icon size by font-size input style="font-size: px value;", refer below sample
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="search_24"
             borderless
-            size="24px"
+            dense
+            icon="search_24"
             class="mr8"
+          />
+          <kw-btn
+            dense
+            secondary
+            icon="search_24"
+            class="mr8"
+          />
+          <kw-btn
+            padding="13px"
+            secondary
+            icon="plus_16"
+            style="font-size: 20px;"
           />
         </div>
         <guide-code-view
@@ -141,21 +153,24 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="plus_16"
             dense
+            secondary
+            icon="plus_16"
             label="학습자 추가"
             class="mr8"
           />
           <kw-btn
-            icon-right="plus_16"
             dense
+            secondary
+            icon-right="plus_16"
             disable
             label="학습자 추가"
             class="mr8"
           />
           <kw-btn
-            icon-right="arrow_down_16"
             dense
+            secondary
+            icon-right="arrow_down_16"
             label="상태추가"
           />
         </div>
@@ -179,26 +194,30 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download_16"
             dense
-            class="mr8"
+            secondary
+            icon="excel_download_16"
             label="양식 다운로드"
+            class="mr8"
           />
           <kw-btn
+            dense
+            secondary
             icon="excel_download_16"
-            dense
-            class="mr8"
             label="엑셀 다운로드"
-          />
-          <kw-btn
-            icon="excel_upload_16"
-            dense
             class="mr8"
-            label="엑셀 업로드"
           />
           <kw-btn
-            icon="excel_upload_16"
             dense
+            secondary
+            icon="excel_upload_16"
+            label="엑셀 업로드"
+            class="mr8"
+          />
+          <kw-btn
+            dense
+            secondary
+            icon="excel_upload_16"
             disable
             class="mr8"
             label="엑셀 업로드"
@@ -223,8 +242,9 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="print_16"
             dense
+            secondary
+            icon="print_16"
             label="인쇄"
           />
         </div>
@@ -288,24 +308,38 @@
 
 const iconButton = `
 <!--  mr8:gutter margin-right:10px  -->
-<kw-btn
-  icon="search_24"
-  borderless
-  size="24px"
-  class="mr8"
-/>
+  <kw-btn
+    borderless
+    dense
+    icon="search_24"
+    class="mr8"
+  />
+  <kw-btn
+    dense
+    secondary
+    icon="search_24"
+    class="mr8"
+  />
+  <kw-btn
+    secondary
+    padding="13px"
+    icon="plus_16"
+    style="font-size: 20px;"
+  />
 `;
 // The size of icon is 16px, and The button's size is width:40px and height:40px
 const testCode = `
   <kw-btn
     icon="plus_16"
     dense
+    secondary
     label="학습자 추가"
     class="mr8"
   />
   <kw-btn
     icon-right="plus_16"
     dense
+    secondary
     disable
     label="학습자 추가"
     class="mr8"
@@ -313,30 +347,36 @@ const testCode = `
   <kw-btn
     icon-right="arrow_down_16"
     dense
+    secondary
     label="상태추가"
   />
 `;
+
 const excelCode = `
   <kw-btn
     icon="excel_download_16"
+    secondary
     dense
     class="mr8"
     label="양식 다운로드"
   />
   <kw-btn
     icon="excel_download_16"
+    secondary
     dense
     class="mr8"
     label="엑셀 다운로드"
   />
   <kw-btn
     icon="excel_upload_16"
+    secondary
     dense
     class="mr8"
     label="엑셀 업로드"
   />
   <kw-btn
     icon="excel_upload_16"
+    secondary
     dense
     disable
     class="mr8"
@@ -347,6 +387,7 @@ const excelCode = `
 const printCode = `
 <kw-btn
   icon="print_16"
+  secondary
   dense
   label="인쇄"
 />
