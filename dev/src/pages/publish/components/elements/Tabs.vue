@@ -8,7 +8,8 @@
       <span class="notice">
         Check 'page tab' : PageSample02<br>
         Check 'tab in tab' : PageSample03<br>
-        Check 'small height tab' : PopupSample02
+        Check 'small height tab' : PopupSample02<br>
+        Check 'Tabpage' : TabpageSample<br>
       </span>
     </p>
     <guide-history-view
@@ -62,26 +63,149 @@
         </tbody>
       </q-markup-table>
     </div>
-    <!-- <div class="kw-guide-section">
+    <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
       >
-        default
+        Tab for search form , and form
       </h3>
       <p class="kw-guide-description">
-        description
+        Make sure to put <b>'model-value'</b> to be active current tab's number.<br>
+        First example, There is only form, it has no border around the box.<br>
+        Second example, There is only searchform, it has border around the searchform<br>
+        <b>model-value of kw-tabs and kw-tab-panels</b> should be changed as the active number.<br>
+        Also <b>name="1" of kw-tab-panel</b> should be same as model-value number
       </p>
       <q-card>
         <div class="kw-guide-example">
-          It is in progress. Please wait for it to complete.
+          <kw-tabs
+            model-value="1"
+            class="example-form"
+          >
+            <kw-tab
+              name="1"
+              label="form"
+            />
+            <kw-tab
+              name="2"
+              label="searchform"
+            />
+          </kw-tabs>
+          <kw-tab-panels
+            model-value="1"
+          >
+            <kw-tab-panel name="1">
+              <div class="normal-area">
+                <h3>kw-form</h3>
+                <kw-form
+                  cols="2"
+                  class="kw-form--textright"
+                >
+                  <kw-form-row>
+                    <kw-form-item label="label">
+                      <p>
+                        0
+                      </p>
+                    </kw-form-item>
+                    <kw-form-item label="하이퍼센트">
+                      <p>0</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="크리에이티브">
+                      <p>0</p>
+                    </kw-form-item>
+                    <kw-form-item label="크리에이티브">
+                      <p>0</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+                <kw-separator />
+                <h3>kw-form</h3>
+                <kw-form
+                  cols="2"
+                  class="kw-form--textright"
+                >
+                  <kw-form-row>
+                    <kw-form-item label="label">
+                      <p>
+                        0
+                      </p>
+                    </kw-form-item>
+                    <kw-form-item label="하이퍼센트">
+                      <p>0</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="크리에이티브">
+                      <p>0</p>
+                    </kw-form-item>
+                    <kw-form-item label="크리에이티브">
+                      <p>0</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </div>
+            </kw-tab-panel>
+          </kw-tab-panels>
         </div>
         <guide-code-view
-          :code-value="testCode"
-          lang="vue"
+          :code-value="tabform"
+          :lang="vue"
         />
       </q-card>
-    </div> -->
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-tabs
+            model-value="2"
+          >
+            <kw-tab
+              name="1"
+              label="form"
+            />
+            <kw-tab
+              name="2"
+              label="searchform"
+            />
+          </kw-tabs>
+          <kw-tab-panels
+            model-value="2"
+          >
+            <kw-tab-panel name="2">
+              <kw-search
+                cols="2"
+                class="kw-form--textright"
+              >
+                <kw-search-row>
+                  <kw-search-item label="label">
+                    <kw-input />
+                  </kw-search-item>
+                  <kw-search-item label="하이퍼센트">
+                    <p>0</p>
+                  </kw-search-item>
+                </kw-search-row>
+                <kw-search-row>
+                  <kw-search-item label="크리에이티브">
+                    <p>0</p>
+                  </kw-search-item>
+                  <kw-search-item label="크리에이티브">
+                    <p>0</p>
+                  </kw-search-item>
+                </kw-search-row>
+              </kw-search>
+              <div class="result-area">
+                <h3>content</h3>
+              </div>
+            </kw-tab-panel>
+          </kw-tab-panels>
+        </div>
+        <guide-code-view
+          :code-value="tabSearch"
+          :lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -89,8 +213,119 @@
 
 const guideHistory = [
   {
+    timestamp: '2022.09.15',
+    text: 'Add TabpageSample in the page and redefine tab',
+  },
+  {
     timestamp: '2022.09.14',
     text: 'Add summary - small height tab',
   },
 ];
+
+const tabform = `
+<kw-tabs
+  model-value="1"
+>
+  <kw-tab
+    name="1"
+    label="form"
+  />
+  <kw-tab
+    name="2"
+    label="searchform"
+  />
+</kw-tabs>
+<kw-tab-panels
+  model-value="1"
+>
+  <kw-tab-panel name="1">
+    <div class="normal-area">
+      <h3>kw-form</h3>
+      <kw-form
+        cols="2"
+        class="kw-form--textright"
+      >
+        <kw-form-row>
+          <kw-form-item label="label">
+            <p>
+              0
+            </p>
+          </kw-form-item>
+          <kw-form-item label="하이퍼센트">
+            <p>0</p>
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row>
+          <kw-form-item label="크리에이티브">
+            <p>0</p>
+          </kw-form-item>
+          <kw-form-item label="크리에이티브">
+            <p>0</p>
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+      <kw-separator />
+      <h3>kw-form</h3>
+      <kw-form
+        cols="2"
+        class="kw-form--textright"
+      >
+        <kw-form-row>
+          <kw-form-item label="label">
+            <p>
+              0
+            </p>
+          </kw-form-item>
+          <kw-form-item label="하이퍼센트">
+            <p>0</p>
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row>
+          <kw-form-item label="크리에이티브">
+            <p>0</p>
+          </kw-form-item>
+          <kw-form-item label="크리에이티브">
+            <p>0</p>
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+    </div>
+  </kw-tab-panel>
+</kw-tab-panels>
+`;
+const tabSearch = `
+<kw-tab-panel name="2">
+  <kw-search
+    cols="2"
+    class="kw-form--textright"
+  >
+    <kw-search-row>
+      <kw-search-item label="label">
+        <kw-input />
+      </kw-search-item>
+      <kw-search-item label="하이퍼센트">
+        <p>0</p>
+      </kw-search-item>
+    </kw-search-row>
+    <kw-search-row>
+      <kw-search-item label="크리에이티브">
+        <p>0</p>
+      </kw-search-item>
+      <kw-search-item label="크리에이티브">
+        <p>0</p>
+      </kw-search-item>
+    </kw-search-row>
+  </kw-search>
+  <div class="result-area">
+    <h3>content</h3>
+  </div>
+</kw-tab-panel>
+`;
+
 </script>
+
+<style lang="scss" scoped>
+.example-form {
+  border: none !important;
+}
+</style>
