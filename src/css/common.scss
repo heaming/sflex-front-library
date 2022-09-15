@@ -144,6 +144,12 @@ textarea::placeholder {
       border-bottom-right-radius: 30px;
       border-top-right-radius: 30px;
 
+      &:hover,
+      &:active,
+      &::before {
+        background-color: transparent !important;
+      }
+
       .q-icon {
         font-size: 16px;
         margin-left: 5px;
@@ -404,6 +410,35 @@ h2 {
   letter-spacing: 0;
   color: $black1;
   border-bottom: 2px solid $black1;
+  display: flex;
+  justify-content: space-between;
+
+  & > p {
+    font-size: 14px;
+    color: $black3;
+    font-weight: normal;
+
+    span {
+      display: inline-block;
+    }
+
+    & span + span {
+      position: relative;
+      margin-left: 15px;
+      padding-left: 15px;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        content: "";
+        width: 1px;
+        height: 18px;
+        background: $line-bg;
+      }
+    }
+  }
 }
 
 h3 {

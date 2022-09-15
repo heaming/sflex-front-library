@@ -33,15 +33,19 @@
         <div class="item">
           <kw-btn
             icon="search_24"
-            class="kw-btn--icon-only ml-24"
+            class="ml-34"
             size="24px"
+            color="translate"
+            borderless
           />
         </div>
         <div class="item">
           <kw-btn
             icon="alert_24"
-            class="kw-btn--icon-only ml20"
+            class="ml8"
             size="24px"
+            color="translate"
+            borderless
           />
         </div>
       </div>

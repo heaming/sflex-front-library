@@ -28,6 +28,9 @@
       <kw-btn
         icon="alert_16"
         class="btn-icon--bell pa0"
+        borderless
+        dense
+        color="translate"
       />
     </div>
     <q-breadcrumbs align="right">

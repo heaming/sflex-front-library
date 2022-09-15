@@ -17,6 +17,10 @@
       icon-right="arrow_down_16"
       :label="$t('MSG_BTN_VIEW_MORE', null, '더보기')"
       flat
+      borderless
+      dense
+      color="translate"
+      text-color="black2"
       @click="toggleExpand()"
     />
     <div class="kw-search__action">
@@ -24,12 +28,20 @@
         <kw-btn
           :label="$t('MSG_BTN_RESET', null, '초기화')"
           :ripple="false"
+          outline
+          dense
+          text-color="secondary"
+          border-color="secondary"
           type="reset"
         />
         <kw-btn
           :label="$t('MSG_BTN_SEARCH', null, '검색')"
           :ripple="false"
+          color="secondary"
           type="submit"
+          primary
+          dense
+          class="ml8"
         />
       </slot>
     </div>

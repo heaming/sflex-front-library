@@ -74,6 +74,13 @@
     opacity: 1 !important; // why?
   }
 
+  // customize
+  .q-field__prefix,
+  .q-field__suffix {
+    font-weight: 400;
+    color: $black3;
+  }
+
   // check adding .q-field__input has no side effect
 
   &--readonly,

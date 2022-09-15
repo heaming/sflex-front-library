@@ -38,7 +38,7 @@
   }
 }
 
-.kw-form:not(:has(input, select, .kw-option-group)) {
+.kw-form:not(:has(input, select,textarea, .kw-option-group)) {
   .kw-form-row {
     min-height: 24px;
     padding: 6px 0;

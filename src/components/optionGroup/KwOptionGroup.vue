@@ -3,7 +3,7 @@
     ref="inputRef"
     class="kw-option-group kw-field"
     v-bind="styleClassAttrs"
-    :label="$q.platform.is.desktop ? undefined : label"
+    :label="undefined"
     :dense="isSearchContext || dense"
     :error="invalid"
     :error-message="invalidMessage"
