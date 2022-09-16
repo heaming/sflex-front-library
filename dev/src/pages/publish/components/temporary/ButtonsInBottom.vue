@@ -71,9 +71,15 @@
     </div>
     <div class="kw-guide pa0">
       <q-card>
-        <h3 class="center mb20">
-          This is the source code for this page. This part is not included in the coding.
+        <h3 class="kw-guide-title mt20">
+          Button on the bottom of normal area
         </h3>
+        <p class="kw-guide-description">
+          Make sure to add the class <b>normal-area--button-set-bottom</b> with normal-area.<br>
+          Add the class of <b>"button-set--bottom"</b> in the tag ,after putting the all content(such as kw-form)<br>
+          The left side's button  side in button-set--bottom add <b>button-set--bottom-left</b><br>
+          The right side's button in button-set--bottom add <b> button-set--bottom-right</b><br>
+        </p>
         <guide-code-view
           :code-value="sampleVueCode"
           :lang="'vue'"
