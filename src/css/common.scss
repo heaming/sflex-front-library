@@ -686,32 +686,39 @@ $unit: px;
   background-color: $color;
 }
 
+.kw-notification-title {
+  padding-top: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.44;
+
+  & + .kw-notification {
+    margin-top: 8px;
+  }
+}
+
 .kw-notification {
-  list-style: none;
   padding: 0;
+  margin: 0;
+  list-style: none;
 
   li {
+    position: relative;
+    padding-left: 12px;
+    margin-top: 4px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.43;
     color: $black3;
-    position: relative;
-    padding-left: 12px;
-    padding-top: 4px;
 
     &:first-child {
-      padding-top: 0;
-
-      &::before {
-        top: 0;
-      }
+      margin-top: 0;
     }
 
     &::before {
-      content: "·";
-      display: block;
+      content: "\00B7";
       position: absolute;
-      top: 4px;
+      top: 0;
       left: 0;
       width: 8px;
       text-align: center;
@@ -728,21 +735,17 @@ $unit: px;
         color: $placeholder;
         position: relative;
         padding-left: 9px;
-        padding-top: 2px;
+        margin-top: 2px;
 
         &:first-child {
-          padding-top: 0;
-
-          &::before {
-            top: 0;
-          }
+          margin-top: 0;
         }
 
         &::before {
           content: "-";
           display: block;
           position: absolute;
-          top: 2px;
+          top: 0;
           left: 0;
           width: 5px;
           text-align: center;
