@@ -92,7 +92,7 @@ export function getDeletedRowValues(view) {
   return getRowValues(view, deletedRows);
 }
 
-export function getChangedRowValues(view, isIncludeDeleted = false) {
+export function getChangedRowValues(view, isIncludeDeleted = true) {
   return [
     ...(isIncludeDeleted ? getDeletedRowValues(view) : []),
     ...getUpdatedRowValues(view),

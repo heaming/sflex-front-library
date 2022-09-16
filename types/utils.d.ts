@@ -179,7 +179,7 @@ interface GridUtil {
   /**
    * 데이터 상태가 변경된(NONE이 아닌) 행들의 데이터를 가져온다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isIncludeDeleted 데이터 상태 DELETED 포함 여부, default `false`
+   * @param isIncludeDeleted 데이터 상태 DELETED 포함 여부, default `true`
    */
   getChangedRowValues(view: GridView | TreeView, isIncludeDeleted?: boolean): RowValue[];
 

@@ -41,7 +41,7 @@ interface KwDateProps {
   maxDate?: string;
 
   /**
-   * 컴포넌트 상태 비활성화
+   * 컴포넌트 비활성화 모드
    */
   disable?: boolean;
 
@@ -86,6 +86,11 @@ interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDa
    * 공간을 덜 차지하는 스타일 적용
    */
   dense?: boolean;
+
+  /**
+   * 마운트 시 포커스 여부
+   */
+  autofocus?: boolean;
 
   /**
    * input placeholder

@@ -80,6 +80,21 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   bgColor?: string;
 
   /**
+   * 마운트 시 포커스 여부
+   */
+  autofocus?: boolean;
+
+  /**
+   * input placeholder
+   */
+  placeholder?: string;
+
+  /**
+   * Tabindex HTML attribute value
+   */
+  tabindex?: number | string;
+
+  /**
    * icon을 append 영역에 표시한다
    */
   icon?: string;
@@ -113,6 +128,11 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
    * 정규 표현식, 인풋 입력을 제한할때 사용한다
    */
   regex?: 'alpha' | 'alpha_dash' | 'alpha_num' | 'alpha_spaces' | 'alpha_underscore' | string | RegExp;
+
+  /**
+   * 입력 텍스트 우측 정렬 여부
+   */
+  alignRight?: boolean;
 
   /**
    * KwSearch, KwForm 안에서 엔터 동작 시 submit 이벤트가 발생하는 것을 막는다

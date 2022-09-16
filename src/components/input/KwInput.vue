@@ -22,6 +22,9 @@
     :color="color"
     :bg-color="bgColor"
     :autofocus="autofocus"
+    :placeholder="placeholder"
+    :tabindex="tabindex"
+    :input-class="{'text-right': alignRight}"
     no-error-icon
     clear-icon="close_24"
     @focus="$emit('focus', $event)"
@@ -139,6 +142,8 @@ export default {
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     autofocus: { type: Boolean, default: false },
+    placeholder: { type: String, default: undefined },
+    tabindex: { type: [Number, String], default: undefined },
 
     // customize props
     icon: { type: String, default: undefined },
@@ -148,6 +153,7 @@ export default {
     upperCase: { type: Boolean, default: false },
     lowerCase: { type: Boolean, default: false },
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
+    alignRight: { type: Boolean, default: false },
     preventSubmit: { type: Boolean, default: false },
   },
 
