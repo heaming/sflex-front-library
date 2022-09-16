@@ -4,7 +4,8 @@
       Notification
     </h2>
     <p class="kw-guide-description">
-      It is in progress. Please wait for it to complete.
+      This is notification text style <br>
+      The special symbol is replaced <b>from reference mark(&#8251;) to middot(&middot;) and hypen.</b>
     </p>
     <div class="kw-guide-section">
       <h3
@@ -30,13 +31,35 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              h4
             </td>
             <td>
-              essential (sample)
+              kw-notification-title
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              Add when notification have title
+            </td>
+          </tr>
+          <tr>
+            <td>
+              1st depth (ul li)
+            </td>
+            <td>
+              ul.kw-notification
+            </td>
+            <td>
+              Add when notification is 1st depth list style
+            </td>
+          </tr>
+          <tr>
+            <td>
+              2nd depth (ul li)
+            </td>
+            <td>
+              Inside 1st depth list
+            </td>
+            <td>
+              Add when notification is 2nd depth list style
             </td>
           </tr>
         </tbody>
@@ -50,28 +73,83 @@
         Default
       </h3>
       <p class="kw-guide-description">
-        description
+        each elements description
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <h4>화면안내사항 타이틀</h4>
+          <h4 class="mb20">
+            Notification Title
+          </h4>
+          <h4 class="kw-notification-title">
+            화면안내사항 타이틀
+          </h4>
+        </div>
+        <guide-code-view
+          :code-value="titleCode"
+          lang="vue"
+        />
+        <div class="kw-guide-example">
+          <h4 class="mb20">
+            Notification List ( 1st depth )
+          </h4>
           <ul class="kw-notification">
             <li>
-              1dep nextline
+              1depth 안내사항의 1뎁스 내용이 들어갑니다.
             </li>
-            <li>
-              1dep nextline
-            </li>
-            <li>
-              1dep<br>nextline
+          </ul>
+        </div>
+        <guide-code-view
+          :code-value="onedepth"
+          lang="vue"
+        />
+        <div class="kw-guide-example">
+          <h4 class="mb20">
+            Notification List ( 2nd depth ): <em>This one can not use individually</em>
+          </h4>
+          <ul class="kw-notification">
+            <li style="font-size: 0; padding-left: 0;">
               <ul>
-                <li>2dep</li>
+                <li>2depth 안내사항의 2뎁스 내용이 들어갑니다.</li>
               </ul>
             </li>
           </ul>
         </div>
         <guide-code-view
-          :code-value="testCode"
+          :code-value="twodepth"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Combination
+      </h3>
+      <p class="kw-guide-description">
+        This is the sample of combination
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <h4 class="kw-notification-title">
+            화면안내사항 타이틀
+          </h4>
+          <ul class="kw-notification">
+            <li>
+              1depth 안내사항의 1뎁스 내용이 들어갑니다.
+            </li>
+            <li>
+              1depth 안내사항의 1뎁스 내용이 길어져 두줄
+              이상의 내용이 들어갈 때는 이렇게 표현됩니다. <br> 안내사항의 1뎁스 내용이 길어져 두줄 이상의 내용이 들어갈 때는 이렇게 표현됩니다.
+              <ul>
+                <li>2depth 안내사항의 2뎁스 내용이 들어갑니다.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <guide-code-view
+          :code-value="combCode"
           lang="vue"
         />
       </q-card>
@@ -80,7 +158,49 @@
 </template>
 
 <script setup>
-const testCode = `
-It is in progress. Please wait for it to complete.
+const titleCode = `
+  <h4 class="kw-notification-title">
+    화면안내사항 타이틀
+  </h4>
+`;
+
+const onedepth = `
+<ul class="kw-notification">
+  <li>
+    1depth 안내사항의 1뎁스 내용이 들어갑니다.
+  </li>
+</ul>
+`;
+
+const twodepth = `
+<!-- This one can not use individually -->
+<ul class="kw-notification">
+  <li style="font-size: 0; padding-left: 0;">
+    <ul>
+      <li>2depth 안내사항의 2뎁스 내용이 들어갑니다.</li>
+    </ul>
+  </li>
+</ul>
+`;
+
+const combCode = `
+<h4 class="kw-notification-title">
+  화면안내사항 타이틀
+</h4>
+<!-- 1st depth list -->
+<ul class="kw-notification">
+  <li>
+    1depth 안내사항의 1뎁스 내용이 들어갑니다.
+  </li>
+  <li>
+    1depth 안내사항의 1뎁스 내용이 길어져 두줄
+    이상의 내용이 들어갈 때는 이렇게 표현됩니다. <br> 안내사항의 1뎁스 내용이 길어져 두줄 이상의 내용이 들어갈 때는 이렇게 표현됩니다.
+
+    <!-- 2nd depth list -->
+    <ul>
+      <li>2depth 안내사항의 2뎁스 내용이 들어갑니다.</li>
+    </ul>
+  </li>
+</ul>
 `;
 </script>
