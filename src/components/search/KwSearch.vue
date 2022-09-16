@@ -37,6 +37,7 @@
           color="secondary"
           filled
           dense
+          type="submit"
         />
       </slot>
     </div>
