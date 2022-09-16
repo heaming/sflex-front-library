@@ -7,6 +7,9 @@
       This is notification text style <br>
       The special symbol is replaced <b>from reference mark(&#8251;) to middot(&middot;) and hypen.</b>
     </p>
+    <guide-history-view
+      :items="historyData"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -34,7 +37,7 @@
               h4
             </td>
             <td>
-              kw-notification-title
+              .kw-notification-title
             </td>
             <td>
               Add when notification have title
@@ -60,6 +63,17 @@
             </td>
             <td>
               Add when notification is 2nd depth list style
+            </td>
+          </tr>
+          <tr>
+            <td>
+              span
+            </td>
+            <td>
+              .kw-fc--primary
+            </td>
+            <td>
+              Highlight(Accent) use helper class.
             </td>
           </tr>
         </tbody>
@@ -95,6 +109,9 @@
           <ul class="kw-notification">
             <li>
               1depth 안내사항의 1뎁스 내용이 들어갑니다.
+            </li>
+            <li>
+              1depth 안내사항의 <span class="kw-fc--primary">1뎁스 내용</span>이 들어갑니다.
             </li>
           </ul>
         </div>
@@ -154,6 +171,39 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        In this cases
+      </h3>
+      <p class="kw-guide-description">
+        In this cases, please use "Notification List ( 1st depth )"
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <img
+            src="../../../../../assets/images/notification_01.png"
+            alt="case 1"
+            style="border: 1px solid #ccc;"
+          ><br><br>
+          <img
+            src="../../../../../assets/images/notification_02.png"
+            alt="case 1"
+            style="border: 1px solid #ccc;"
+          ><br><br>
+          <img
+            src="../../../../../assets/images/notification_03.png"
+            alt="case 1"
+            style="border: 1px solid #ccc;"
+          >
+          <p class="kw-guide-description">
+            In this cases, Highlight(Accent) use helper class(.kw-fc--primary : blue color, No red)."
+          </p>
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -168,6 +218,9 @@ const onedepth = `
 <ul class="kw-notification">
   <li>
     1depth 안내사항의 1뎁스 내용이 들어갑니다.
+  </li>
+  <li>
+    1depth 안내사항의 <span class="kw-fc--primary">1뎁스 내용</span>이 들어갑니다.
   </li>
 </ul>
 `;
@@ -203,4 +256,10 @@ const combCode = `
   </li>
 </ul>
 `;
+const historyData = [
+  {
+    timestamp: '2022-09-16',
+    text: 'First added',
+  },
+];
 </script>
