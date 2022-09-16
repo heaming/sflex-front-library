@@ -3,7 +3,7 @@
   line-height: $line-height;
   padding: $padding;
   font-weight: $font-weight;
-  min-height: calc(#{$line-height} + #{ at($padding, 1) + at($padding, 3) });
+  min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3)) });
 }
 
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
