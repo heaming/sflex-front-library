@@ -47,12 +47,12 @@
       v-if="icon || $slots.append"
       #append
     >
-      <q-icon
+      <kw-icon
         v-if="icon"
-        class="q-field__focusable-action"
         :tabindex="-1"
         :name="icon"
         :disable="disableIcon"
+        clickable
         @click="$emit('clickIcon')"
       />
       <slot name="append" />
