@@ -1,6 +1,96 @@
 <!--  eslint-disable vuejs-accessibility/tabindex-no-positive -->
 <template>
   <kw-form
+    class="kw-form--auto-height"
+    one-row
+  >
+    <kw-form-row>
+      <kw-form-item label="button toggle">
+        <div
+          style="width: 100%;"
+          class="text-right"
+        >
+          test
+        </div>
+      </kw-form-item>
+      <kw-form-item
+        label="button toggle"
+        class="kw-form-item--inline-field"
+      >
+        <p>test</p>
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="button toggle">
+        test
+      </kw-form-item>
+    </kw-form-row>
+  </kw-form>
+  <kw-form class="kw-form--auto-height">
+    <kw-form-row>
+      <kw-form-item label="button toggle">
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+          min-width="90px"
+        />
+        <kw-separator
+          inset
+          vertical
+        />
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="button toggle">
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+          min-width="90px"
+        />
+        <kw-separator
+          inset
+          vertical
+        />
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+        />
+      </kw-form-item>
+    </kw-form-row>
+  </kw-form>
+  <kw-form
     ref="formRef"
     :cols="0"
   >
@@ -11,10 +101,41 @@
           v-model="strModel"
           :label="'label'"
           :options="['A', 'B', 'C', 'D']"
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+          min-width="90px"
+          gap="10px"
+        />
+        <kw-separator
+          inset
+          vertical
+        />
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
+          outlined
+          color="table-blue"
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+        />
+      </kw-form-item>
+      <kw-form-item label="button toggle">
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
           clearable
           outlined
           color="table-blue"
           toggle-color="primary"
+          disable
         />
       </kw-form-item>
     </kw-form-row>
@@ -589,7 +710,7 @@ const strModel = ref('');
 <style scoped lang="scss">
 .kw-form-item__field {
   > div {
-    background-color: #eee;
+    background-color: #fff;
   }
 }
 </style>
