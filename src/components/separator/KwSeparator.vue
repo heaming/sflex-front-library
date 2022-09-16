@@ -4,6 +4,7 @@
     v-bind="styleClassAttrs"
     :spaced="spaced"
     :vertical="vertical"
+    :inset="inset"
     :size="size"
     :color="color"
   />
@@ -19,6 +20,7 @@ export default {
   props: {
     spaced: { type: [Boolean, String], default: '30px' },
     vertical: { type: Boolean, default: false },
+    inset: { type: Boolean, default: false },
     size: { type: String, default: undefined },
     color: { type: String, default: 'grey-5' }, // can be transparent
   },

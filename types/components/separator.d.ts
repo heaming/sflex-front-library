@@ -14,6 +14,11 @@ interface KwSeparatorProps {
   vertical?: string;
 
   /**
+   * 설정시 margin을 적용한다
+   */
+  inset?: Boolean;
+
+  /**
    * separator 사이즈
    */
   size?: string;
