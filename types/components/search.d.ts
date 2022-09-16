@@ -39,12 +39,35 @@ interface KwSearchProps extends UseObserverProps {
    * @defaultValue `true`
    */
   noResetFocus?: boolean;
+
+  /**
+   * `KwObserver, KwForm, KwGrid, KwTreeGrid` name 속성 값이 들어간다.
+   *
+   * 설정시 타겟들의 데이터 변경 여부를 확인해서, 검색 이벤트를 발생시킬지 결정하는 confirm을 호출한다
+   */
+  modifiedTargets?: string[];
+
+  /**
+   * 검색 이벤트
+   * @param values 검색 입력 필드들의 values
+   */
+  onSearch?: (values: { [name: string]: any }) => void;
+
+  /**
+   * 검색 입력 필드 초기화 이벤트
+   */
+  onReset?: () => void;
 }
 interface KwSearchSlots {
   /**
    * 기본 컨텐츠 영역
    */
   default: () => VNode[];
+
+  /**
+   * 액션 버튼 영역
+   */
+  action: () => VNode[];
 }
 interface KwSearch extends ComponentPublicInstance<KwSearchProps>, UseObserverInstance {}
 

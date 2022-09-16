@@ -2,6 +2,7 @@
   <q-form
     v-bind="styleClassAttrs"
     class="kw-form kw-search"
+    :class="{'kw-search--onerow': oneRow}"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
@@ -13,14 +14,12 @@
     <kw-btn
       v-if="isExpandable"
       class="kw-search__view-more"
-      :class="{'kw-search__view-more--expanded' : isExpanded }"
-      icon-right="arrow_down_16"
+      :class="{'kw-search__view-more--expanded': isExpanded}"
       :label="$t('MSG_BTN_VIEW_MORE', null, '더보기')"
-      flat
+      icon-right="arrow_down_16"
+      text-color="black2"
       borderless
       dense
-      color="translate"
-      text-color="black2"
       @click="toggleExpand()"
     />
     <div class="kw-search__action">
@@ -75,13 +74,20 @@ export default {
       type: Number,
       default: 120,
     },
+    oneRow: {
+      type: Boolean,
+      default: false,
+    },
     modifiedTargets: {
       type: Array,
       default: () => [],
     },
   },
 
-  emits: ['search', 'reset'],
+  emits: [
+    'search',
+    'reset',
+  ],
 
   setup(props, { emit }) {
     const formCtx = useForm();
