@@ -86,18 +86,44 @@
               </div>
             </template>
             <kw-btn
-              icon="excel_16"
-              class="kw-btn--underline kw-action-bar--separator"
+              dense
+              secondary
+              label="파트너과정 수료이관"
+              class="mr8"
+            />
+            <kw-btn
+              dense
+              secondary
+              label="버튼"
+            />
+            <kw-separator
+              spaced="16px"
+              vertical
+              inset
+            />
+            <kw-btn
+              icon="print_16"
+              dense
+              secondary
+              label="인쇄"
+              class="mr8"
+            />
+            <kw-btn
+              icon="excel_download_16"
+              dense
+              secondary
               label="엑셀 다운로드"
               @click="onClickExcelDownload"
             />
-            <kw-btn
-              class="kw-btn--h32"
-              label="파트너과정 수료이관"
+            <kw-separator
+              spaced="16px"
+              vertical
+              inset
             />
             <kw-btn
-              class="kw-btn--h32 ml4"
-              label="엑셀업로드"
+              primary
+              dense
+              label="주기능"
             />
           </kw-action-bar>
           <kw-grid
@@ -270,18 +296,44 @@ const sampleVueCode = `
             </div>
           </template>
           <kw-btn
-            icon="excel_16"
-            class="kw-btn--underline kw-action-bar--separator"
+            dense
+            secondary
+            label="파트너과정 수료이관"
+            class="mr8"
+          />
+          <kw-btn
+            dense
+            secondary
+            label="버튼"
+          />
+          <kw-separator
+            spaced="16px"
+            vertical
+            inset
+          />
+          <kw-btn
+            icon="print_16"
+            dense
+            secondary
+            label="인쇄"
+            class="mr8"
+          />
+          <kw-btn
+            icon="excel_download_16"
+            dense
+            secondary
             label="엑셀 다운로드"
             @click="onClickExcelDownload"
           />
-          <kw-btn
-            class="kw-btn--h32"
-            label="파트너과정 수료이관"
+          <kw-separator
+            spaced="16px"
+            vertical
+            inset
           />
           <kw-btn
-            class="kw-btn--h32 ml4"
-            label="엑셀업로드"
+            primary
+            dense
+            label="주기능"
           />
         </kw-action-bar>
         <kw-grid

@@ -509,6 +509,9 @@
     <kw-form-row>
       <kw-form-item label="outlined">
         <kw-btn
+          :label="'default'"
+        />
+        <kw-btn
           :label="'outlined'"
           outlined
         />

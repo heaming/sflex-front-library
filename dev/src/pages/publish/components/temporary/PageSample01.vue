@@ -77,6 +77,7 @@
         <kw-btn
           icon="excel_16"
           dense
+          secondary
           label="엑셀 다운로드"
         />
         <kw-separator
@@ -278,6 +279,7 @@ const sampleVueCode = `
       <kw-btn
         icon="excel_16"
         dense
+        secondary
         label="엑셀 다운로드"
       />
       <kw-separator

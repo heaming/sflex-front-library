@@ -86,7 +86,24 @@
             <td style="width: 33.33%;">
               color="colorname" <br>
               text-color="colorname" <br>
-              border-color="colorname" <br>
+              border-color="colorname" *Have to be used with outlined <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 33.33%;">
+              type
+            </td>
+            <td style="width: 33.33%;">
+              filled <br>
+              outlined <br>
+              underline <br>
+              borderless
+            </td>
+            <td style="width: 33.33%;">
+              Add prop when only background-color(no border)<br>
+              Add prop when need border <br>
+              Add prop when need underline <br>
+              Add prop when no border(no background-color)
             </td>
           </tr>
         </tbody>
@@ -190,21 +207,25 @@
         <div class="kw-guide-example">
           <kw-btn
             padding="12px"
+            secondary
             label="파일첨부"
             class="mr8"
           />
           <kw-btn
             padding="12px"
+            secondary
             label="우편번호"
             class="mr8"
           />
           <kw-btn
             padding="12px"
+            secondary
             disable
             label="우편번호"
             class="mr8"
           />
           <kw-btn
+            secondary
             dense
             label="신규등록"
             class="mr8"
@@ -348,6 +369,7 @@
             Located in table inside(For develop)
           </h4>
           <kw-btn
+            outlined
             border-color="primary"
             text-color="primary"
             dense
@@ -355,6 +377,7 @@
             class="kw-btn--color-table-blue mr8"
           />
           <kw-btn
+            outlined
             border-color="primary"
             text-color="primary"
             dense
@@ -486,22 +509,26 @@ const denseCode = `
 
 const formBtn = `
   <kw-btn
-    padding="'12px'"
+    padding="12px"
+    secondary
     label="파일첨부"
     class="mr8"
   />
   <kw-btn
-    padding="'12px'"
+    padding="12px"
+    secondary
     label="우편번호"
     class="mr8"
   />
   <kw-btn
-    padding="'12px'"
+    padding="12px"
+    secondary
     disable
     label="우편번호"
     class="mr8"
   />
   <kw-btn
+    secondary
     dense
     label="신규등록"
     class="mr8"
@@ -587,6 +614,7 @@ const tableBtn = `
   `;
 const tableInside = `
   <kw-btn
+    outlined
     border-color="primary"
     text-color="primary"
     dense
@@ -594,6 +622,7 @@ const tableInside = `
     class="kw-btn--color-table-blue mr8"
   />
   <kw-btn
+    outlined
     border-color="primary"
     text-color="primary"
     dense

@@ -325,7 +325,7 @@
       </h3>
       <p class="kw-guide-description">
         Add <b>type="textarea" and :rows="3"</b> in kw-input.<br>
-        default is :row="3"<br>
+        default is :rows="3"<br>
         The height of textarea is adjusted by row instead of size class.<br>
         one row is 24px excluded padding top and bottom.<br>
         Put rows similar height like design. don't need mind about same height like design.<br>

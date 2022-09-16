@@ -9,7 +9,9 @@
         color="primary"
         outline
       />
-      <h2>호시탐탐 문화유산(상품코드) <p><span>등록일 2022-08-01  /  김준</span><span>최종수정일 2022-04-09  / 임동욱</span></p> </h2>
+      <h2 class="h2-small">
+        호시탐탐 문화유산(상품코드) <p><span>등록일 2022-08-01  /  김준</span><span>최종수정일 2022-04-09  / 임동욱</span></p>
+      </h2>
       <kw-tabs
         model-value="1"
         class="kw-tab--dense mt20"
@@ -45,11 +47,12 @@
       </div>
       <template #action>
         <kw-btn
-          class="kw-btn--negative kw-btn--h36"
+          negative
           label="취소"
         />
         <kw-btn
-          class="kw-btn--h36 ml8"
+          primary
+          class="ml8"
           label="확인"
         />
       </template>
@@ -69,7 +72,7 @@ const sampleVueCode = `
     color="primary"
     outline
   />
-  <h2>호시탐탐 문화유산(상품코드) <p><span>등록일 2022-08-01  /  김준</span><span>최종수정일 2022-04-09  / 임동욱</span></p> </h2>
+  <h2 class="h2-small">호시탐탐 문화유산(상품코드) <p><span>등록일 2022-08-01  /  김준</span><span>최종수정일 2022-04-09  / 임동욱</span></p> </h2>
   <kw-tabs
     model-value="1"
     class="kw-tab--dense mt20"
@@ -94,11 +97,12 @@ const sampleVueCode = `
   </kw-tab-panels>
   <template #action>
     <kw-btn
-      class="kw-btn--negative kw-btn--h36"
+      negative
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      primary
+      class="ml8"
       label="확인"
     />
   </template>

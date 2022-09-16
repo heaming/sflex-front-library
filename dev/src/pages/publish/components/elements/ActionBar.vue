@@ -160,6 +160,7 @@
             <kw-btn
               icon="excel_16"
               dense
+              secondary
               label="엑셀 다운로드"
             />
             <kw-separator
@@ -238,6 +239,7 @@ const testCode = `
   </template>
 
   <kw-btn
+    secondary
     icon="excel_16"
     dense
     label="엑셀 다운로드"

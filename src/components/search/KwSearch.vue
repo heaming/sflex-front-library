@@ -28,16 +28,16 @@
         <kw-btn
           :label="$t('MSG_BTN_RESET', null, '초기화')"
           class="w90"
-          outline
+          secondary
           dense
           type="reset"
         />
         <kw-btn
           :label="$t('MSG_BTN_SEARCH', null, '검색')"
           class="ml8 w90"
-          primary
-          dense
           color="secondary"
+          filled
+          dense
         />
       </slot>
     </div>
