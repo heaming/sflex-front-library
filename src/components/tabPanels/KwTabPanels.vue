@@ -6,7 +6,7 @@
     :model-value="modelValue"
     keep-alive
     :animated="false"
-    @update:model-value="onUpdateModelValue"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <slot />
   </q-tab-panels>
@@ -24,11 +24,11 @@ export default {
       type: [Number, String],
       default: undefined,
     },
-    onUpdateModelValue: {
-      type: Function,
-      default: undefined,
-    },
   },
+
+  emits: [
+    'update:modelValue',
+  ],
 
   setup() {
     const tabPanelsRef = ref();
