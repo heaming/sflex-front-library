@@ -58,7 +58,6 @@
         </kw-search>
 
         <div class="result-area">
-          <h3>조회결과</h3>
           <kw-action-bar>
             <template #left>
               <div class="kw-action-bar--count">
@@ -253,7 +252,6 @@ const sampleVueCode = `
       </kw-search>
 
       <div class="result-area">
-        <h3>조회결과</h3>
         <kw-action-bar>
           <template #left>
             <div class="kw-action-bar--count">
