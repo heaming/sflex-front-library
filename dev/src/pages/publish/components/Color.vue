@@ -387,7 +387,7 @@
 <script setup>
 const guideHistory = [
   {
-    timestamp: '2022-09-14',
+    timestamp: '2022-09-16',
     text: 'change guide content',
   },
 ];
