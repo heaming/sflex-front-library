@@ -11,6 +11,9 @@
       background : 'kw-bc--'<br>
       Add the color name of list after '--'
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -75,7 +78,7 @@
               $info
             </td>
             <td>
-              #ed1941
+              #6cbf67
             </td>
             <td>
               kw-fc--info<br>
@@ -95,8 +98,8 @@
               #ed1941
             </td>
             <td>
-              kw-fc--info<br>
-              kw-bc--info
+              kw-fc--error<br>
+              kw-bc--error
             </td>
             <td>
               <div
@@ -381,7 +384,14 @@
     </div>
   </kw-page>
 </template>
-
+<script setup>
+const guideHistory = [
+  {
+    timestamp: '2022-09-14',
+    text: 'change guide content',
+  },
+];
+</script>
 <style scoped lang="scss">
 .color-system {
   .color-box {
