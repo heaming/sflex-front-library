@@ -34,7 +34,7 @@
     </div>
     <div
       class="kw-form-item__field"
-      :class="itemFieldClass"
+      :class="fieldClass"
     >
       <slot />
     </div>
@@ -44,8 +44,6 @@
 <script>
 import useFormType, { FORM_TYPE } from '../../composables/private/useFormType';
 import useFormItem, { useFormItemProps } from '../../composables/private/useFormItem';
-
-const supportedFieldAlign = ['right', 'center'];
 
 export default {
   name: 'KwFormItem',
@@ -57,25 +55,13 @@ export default {
       type: String,
       default: undefined,
     },
-
-    alignContent: {
-      type: String,
-      default: undefined,
-      validate: (val) => !supportedFieldAlign.find(val),
-    },
   },
 
-  setup(props) {
-    const itemFieldClass = computed(() => {
-      if (props.alignContent) return `kw-form-item__field--align-${props.alignContent} `;
-      return '';
-    });
-
+  setup() {
     useFormType(FORM_TYPE.FORM);
 
     return {
       ...useFormItem(),
-      itemFieldClass,
     };
   },
 };

@@ -1,5 +1,7 @@
 import { FormLayoutContextKey } from '../../consts/private/symbols';
 
+const supportedFieldAlign = ['right', 'center'];
+
 export const useFormItemProps = {
   required: {
     type: Boolean,
@@ -17,6 +19,11 @@ export const useFormItemProps = {
     type: String,
     default: undefined,
   },
+  alignContent: {
+    type: String,
+    default: undefined,
+    validate: (val) => !supportedFieldAlign.find(val),
+  },
 };
 
 export default () => {
@@ -25,9 +32,14 @@ export default () => {
 
   const labelClass = computed(() => (props.required ? 'kw-form-item__label--required' : null));
   const labelWidth = computed(() => `${labelSize.value}px`);
+  const fieldClass = computed(() => {
+    if (props.alignContent) return `kw-form-item__field--align-${props.alignContent} `;
+    return '';
+  });
 
   return {
     labelClass,
     labelWidth,
+    fieldClass,
   };
 };
