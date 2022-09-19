@@ -2,7 +2,7 @@
   <q-form
     v-bind="styleClassAttrs"
     class="kw-form kw-search"
-    :class="{'kw-search--onerow': oneRow}"
+    :class="{'kw-search--one-row': oneRow}"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >

@@ -2,6 +2,7 @@
   <q-form
     v-bind="styleClassAttrs"
     class="kw-form"
+    :class="{'kw-form--no-padding': oneRow, 'kw-form--dense' : dense, 'kw-form--auto-height': autoHeight }"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
@@ -23,6 +24,21 @@ export default {
   props: {
     ...useFormProps,
     ...useFormLayoutProps,
+
+    oneRow: {
+      type: Boolean,
+      default: false,
+    },
+
+    dense: {
+      type: Boolean,
+      default: false,
+    },
+
+    autoHeight: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['submit', 'reset'],

@@ -11,10 +11,27 @@
           v-model="strModel"
           :label="'label'"
           :options="['A', 'B', 'C', 'D']"
+          secondary
+          toggle-color="primary"
+          toggle-text-color="black1"
+          toggle-border-color="black1"
+          dense
+          min-width="90px"
+          gap="10px"
+          clearable
+          spread
+        />
+      </kw-form-item>
+      <kw-form-item label="button toggle">
+        <kw-btn-toggle
+          v-model="strModel"
+          :label="'label'"
+          :options="['A', 'B', 'C', 'D']"
           clearable
           outlined
           color="table-blue"
           toggle-color="primary"
+          disable
         />
       </kw-form-item>
     </kw-form-row>
@@ -589,7 +606,7 @@ const strModel = ref('');
 <style scoped lang="scss">
 .kw-form-item__field {
   > div {
-    background-color: #eee;
+    background-color: #fff;
   }
 }
 </style>

@@ -2,6 +2,7 @@ export const useButtonStyleProps = {
   // we will not use quasar btn props, since design break em based styling.
   dense: { type: Boolean, default: undefined },
   padding: { type: String, default: undefined },
+  minWidth: { type: String, default: undefined },
 
   // design on quasar unelevated style.
   filled: { type: Boolean, default: false },
@@ -122,6 +123,7 @@ export default () => {
   const buttonStyles = computed(() => {
     let styles = '';
     styles += props.padding ? `padding-left: ${props.padding}; padding-right: ${props.padding} ` : '';
+    styles += props.minWidth ? `min-width: ${props.minWidth}; ` : '';
     return styles;
   });
 

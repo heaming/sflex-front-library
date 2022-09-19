@@ -1,86 +1,91 @@
-.kw-form-row {
-  $-kw-form-row-height: $kw-field-line-height;
+.kw-form {
+  $-kw-form-row-height: $kw-field-height;
   $-kw-form-row-gap: 80px;
   $-kw-form-row-padding: 10px 0 10px 0;
-
-  @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
-}
-
-.kw-form-item {
   $-kw-form-item-min-height: $kw-field-height;
+  $-kw-form-row-height-dense: 24px;
+  $-kw-form-row-gap-dense: 80px;
+  $-kw-form-row-padding-dense: 6px 0;
+  $-kw-form-item-min-height-dense: 24px;
 
-  @include kw-item($-kw-form-item-min-height);
-
-  .kw-form-item__field p {
-    margin: 8px 0;
-    width: 100%;
-  }
-}
-
-.kw-label-content {
-  // In this context, use only inline elements.
-  font-size: $kw-field-font-size-dense;
-  line-height: $kw-field-line-height-dense;
-  color: $black3;
-  word-break: break-word;
-
-  &__label {
-    display: contents;
+  @at-root .kw-form-row {
+    @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
   }
 
-  &__hint {
-    display: contents;
-
-    ::before {
-      content: " ";
-      width: 4px;
-    }
-  }
-}
-
-.kw-form:not(:has(input, select,textarea, .kw-option-group)) {
-  .kw-form-row {
-    min-height: 24px;
-    padding: 6px 0;
+  @at-root .kw-form-item {
+    @include kw-item($-kw-form-item-min-height);
   }
 
-  .kw-form-item {
-    min-height: 24px;
-    max-height: 24px;
-    align-self: center;
+  @at-root .kw-label-content {
+    // In this context, use only inline elements.
+    font-size: $kw-field-font-size-dense;
+    line-height: $kw-field-line-height-dense;
+    color: $black3;
+    word-break: break-word;
 
-    .kw-form-item__label {
-      min-height: 24px;
-    }
-  }
-}
-
-.kw-form {
-  &.kw-form--textright .kw-form-item__field p {
-    text-align: right;
-  }
-
-  .kw-form-item__field p {
-    &.text-left {
-      text-align: left !important;
+    &__label {
+      display: contents;
     }
 
-    &.text-right {
-      text-align: right !important;
-    }
+    &__hint {
+      display: contents;
 
-    &.text-center {
-      text-align: center !important;
+      ::before {
+        content: " ";
+        width: 4px;
+      }
     }
   }
-}
 
-h3 + .kw-form {
-  .kw-form-row:first-child {
-    padding-top: 0;
+  &--no-padding {
+    .kw-form-row:first-child {
+      padding-top: 0;
+      min-height: $kw-field-line-height + at($-kw-form-row-padding, 3);
+    }
+
+    .kw-form-row:last-child {
+      padding-bottom: 0;
+      min-height: $kw-field-line-height + at($-kw-form-row-padding, 1);
+    }
+
+    .kw-form-row:first-child:last-child {
+      padding-bottom: 0;
+      min-height: $kw-field-line-height;
+    }
   }
 
-  .kw-form-row:last-child {
-    padding-bottom: 0;
+  &--dense {
+    .kw-form-row {
+      @include kw-row($-kw-form-row-height-dense, $-kw-form-row-gap-dense, $-kw-form-row-padding-dense);
+    }
+
+    .kw-form-item {
+      @include kw-item($-kw-form-item-min-height-dense);
+    }
+  }
+
+  // 가상 선택자 has 가 samsung internet 에서 지원 여부가 불확실 함...
+  // 기획 단계부터 form 의 높이는 가능하다면 동적으로 움직이지 않는 것이 베스트.
+  // 어쩔 수 없이 필요하다면, dense 를 사용하여 높이 변경 시점을 명확하게 가져갈 것.
+  // 퍼블리쉬 단계에서는 영역을 넓게 차지하는 것 기준으로 그리면 될 듯.
+  // 아래 스타일을 최후의 최후에 선택할 것.
+  &--auto-height {
+    .kw-form-row {
+      @include kw-row($-kw-form-row-height-dense, $-kw-form-row-gap-dense, $-kw-form-row-padding-dense);
+    }
+
+    .kw-form-item {
+      @include kw-item($-kw-form-row-height-dense);
+    }
+
+    &:has(.kw-field, .kw-field-wrap) {
+      .kw-form-row {
+        @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
+      }
+
+      .kw-form-item {
+        @include kw-item($-kw-form-row-height);
+      }
+    }
   }
 }
