@@ -234,6 +234,139 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3 class="kw-guide-title">
+        Case 03
+      </h3>
+      <p class="kw-guide-description notice">
+        This is sample case 3
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-action-bar>
+            <template #left>
+              <div class="kw-action-bar--count">
+                총 <span class="kw-action-bar--number pl4">1,247</span>
+              </div>
+            </template>
+            <kw-btn
+              dense
+              secondary
+              label="파트너과정 수료이관"
+              class="mr8"
+            />
+            <kw-btn
+              dense
+              secondary
+              label="버튼"
+            />
+            <kw-separator
+              spaced="16px"
+              vertical
+              inset
+            />
+            <kw-btn
+              icon="print_16"
+              dense
+              secondary
+              label="인쇄"
+              class="mr8"
+            />
+            <kw-btn
+              icon="excel_download_16"
+              dense
+              secondary
+              label="엑셀 다운로드"
+              @click="onClickExcelDownload"
+            />
+            <kw-separator
+              spaced="16px"
+              vertical
+              inset
+            />
+            <kw-btn
+              primary
+              dense
+              label="주기능"
+            />
+          </kw-action-bar>
+        </div>
+        <guide-code-view
+          :code-value="testCode3"
+          :lang="'vue'"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3 class="kw-guide-title">
+        Case 04
+      </h3>
+      <p class="kw-guide-description notice">
+        This is sample case 4
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-action-bar>
+            <template #left>
+              <div class="kw-action-bar--count">
+                총 <span class="kw-action-bar--number pl4">156</span>
+              </div>
+              <kw-separator
+                vertical
+                inset
+                spaced="8px"
+              />
+              <kw-select
+                v-model="selectData.model"
+                :options="selectData.options"
+                borderless
+                dense
+                suffix="개씩보기"
+              />
+
+              <kw-btn
+                label="저장"
+                grid-action
+                class="ml16"
+              />
+            </template>
+
+            <kw-btn
+              icon="excel_16"
+              dense
+              secondary
+              label="엑셀 다운로드"
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced="16px"
+            />
+            <kw-btn
+              label="개인 고객 등록 URL 전송"
+              primary
+              dense
+            />
+            <kw-btn
+              label="개인 고객 등록"
+              class="ml8"
+              primary
+              dense
+            />
+            <kw-btn
+              label="법인 고객 등록"
+              class="ml8"
+              primary
+              dense
+            />
+          </kw-action-bar>
+        </div>
+        <guide-code-view
+          :code-value="testCode4"
+          :lang="'vue'"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -343,10 +476,94 @@ const testCode2 = `
   />
 </kw-action-bar>
 `;
+
+const testCode3 = `
+<kw-action-bar>
+  <template #left>
+    <p class="kw-action-bar--count">
+      (단위: 원)
+    </p>
+  </template>
+
+  <kw-btn
+    icon="excel_16"
+    dense
+    secondary
+    label="엑셀 다운로드"
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced="16px"
+  />
+  <kw-btn
+    label="품의"
+    primary
+    dense
+  />
+</kw-action-bar>
+`;
+const testCode4 = `
+<kw-action-bar>
+  <template #left>
+    <div class="kw-action-bar--count">
+      총 <span class="kw-action-bar--number pl4">156</span>
+    </div>
+    <kw-separator
+    vertical
+    inset
+    spaced="8px"
+    />
+    <kw-select
+      v-model="selectData.model"
+      :options="selectData.options"
+      borderless
+      dense
+      suffix="개씩보기"
+    />
+
+    <kw-btn
+      label="저장"
+      grid-action
+      class="ml16"
+    />
+  </template>
+
+  <kw-btn
+    icon="excel_16"
+    dense
+    secondary
+    label="엑셀 다운로드"
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced="16px"
+  />
+  <kw-btn
+    label="개인 고객 등록 URL 전송"
+    primary
+    dense
+  />
+  <kw-btn
+    label="개인 고객 등록"
+    class="ml8"
+    primary
+    dense
+  />
+  <kw-btn
+    label="법인 고객 등록"
+    class="ml8"
+    primary
+    dense
+  />
+  </kw-action-bar>
+`;
+
 const guideHistory = [
   {
     timestamp: '2022.09.19',
-    text: 'Add case 2',
+    text: 'Add case 2/3/4',
   },
   {
     timestamp: '2022.09.15',
