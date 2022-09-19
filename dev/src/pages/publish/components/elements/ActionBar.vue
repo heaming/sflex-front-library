@@ -194,6 +194,46 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3 class="kw-guide-title">
+        Case 02
+      </h3>
+      <p class="kw-guide-description notice">
+        This is sample which have a unit text in left-side
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-action-bar>
+            <template #left>
+              <p class="kw-action-bar--count">
+                (단위: 원)
+              </p>
+            </template>
+
+            <kw-btn
+              icon="excel_16"
+              dense
+              secondary
+              label="엑셀 다운로드"
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced="16px"
+            />
+            <kw-btn
+              label="품의"
+              primary
+              dense
+            />
+          </kw-action-bar>
+        </div>
+        <guide-code-view
+          :code-value="testCode2"
+          :lang="'vue'"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -276,7 +316,38 @@ const selectData = {
   ],
 };
 `;
+
+const testCode2 = `
+<kw-action-bar>
+  <template #left>
+    <p class="kw-action-bar--count">
+      (단위: 원)
+    </p>
+  </template>
+
+  <kw-btn
+    icon="excel_16"
+    dense
+    secondary
+    label="엑셀 다운로드"
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced="16px"
+  />
+  <kw-btn
+    label="품의"
+    primary
+    dense
+  />
+</kw-action-bar>
+`;
 const guideHistory = [
+  {
+    timestamp: '2022.09.19',
+    text: 'Add case 2',
+  },
   {
     timestamp: '2022.09.15',
     text: 'Add notice in Case1. Edit summary',
