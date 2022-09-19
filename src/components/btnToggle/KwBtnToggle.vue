@@ -17,6 +17,11 @@
       color="not-use"
       text-color="not-use"
       :dense="buttonDense"
+      :disable="disable"
+      :stack="stack"
+      :no-wrap="noWrap"
+      :stretch="stretch"
+      :clearable="clearable"
       no-caps
       unelevated
       rectangle
@@ -37,6 +42,7 @@ export default {
   inheritAttrs: false,
 
   props: {
+    // customize props
     ...useFieldProps,
     ...useOptionsProps,
     ...useButtonStyleProps,
@@ -51,6 +57,13 @@ export default {
       type: [String, Number, Boolean],
       default: undefined,
     },
+
+    // fall through props
+    disable: { type: Boolean, default: false },
+    stack: { type: Boolean, default: false },
+    noWrap: { type: Boolean, default: false },
+    stretch: { type: Boolean, default: false },
+    clearable: { type: Boolean, default: false },
   },
 
   emits: ['update:modelValue', 'focus'],

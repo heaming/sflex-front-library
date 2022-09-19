@@ -11,29 +11,15 @@
           v-model="strModel"
           :label="'label'"
           :options="['A', 'B', 'C', 'D']"
-          outlined
-          color="table-blue"
+          secondary
           toggle-color="primary"
           toggle-text-color="black1"
           toggle-border-color="black1"
           dense
           min-width="90px"
           gap="10px"
-        />
-        <kw-separator
-          inset
-          vertical
-        />
-        <kw-btn-toggle
-          v-model="strModel"
-          :label="'label'"
-          :options="['A', 'B', 'C', 'D']"
-          outlined
-          color="table-blue"
-          toggle-color="primary"
-          toggle-text-color="black1"
-          toggle-border-color="black1"
-          dense
+          clearable
+          spread
         />
       </kw-form-item>
       <kw-form-item label="button toggle">
