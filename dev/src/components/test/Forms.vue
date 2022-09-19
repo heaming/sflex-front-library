@@ -168,18 +168,21 @@
   <kw-form
     dense
     cols="1"
+    align-content="right"
   >
     <kw-form-row>
       <kw-form-item
         label="align-content center"
+        align-content="left"
       >
         default = left
       </kw-form-item>
     </kw-form-row>
-    <kw-form-row>
+    <kw-form-row
+      align-content="center"
+    >
       <kw-form-item
         label="align-content center"
-        align-content="center"
       >
         center
       </kw-form-item>
@@ -187,7 +190,6 @@
     <kw-form-row>
       <kw-form-item
         label="align-content right"
-        align-content="right"
       >
         right
       </kw-form-item>
