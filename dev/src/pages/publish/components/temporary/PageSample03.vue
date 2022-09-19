@@ -78,7 +78,7 @@
           </kw-tab-panel>
         </kw-tab-panels>
         <div class="result-area">
-          <h3>조회결과</h3>
+          <h3>계약현황</h3>
           <kw-action-bar>
             <template #left>
               <div class="kw-action-bar--count">
@@ -128,7 +128,60 @@
           </kw-action-bar>
           <kw-grid
             ref="grdRef"
-            :visible-rows="13"
+            :visible-rows="5"
+            @init="initGrid"
+          />
+          <h3>상품결과</h3>
+          <kw-action-bar>
+            <template #left>
+              <div class="kw-action-bar--count">
+                총 <span class="kw-action-bar--number pl4">1,247</span>
+              </div>
+            </template>
+            <kw-btn
+              dense
+              secondary
+              label="파트너과정 수료이관"
+              class="mr8"
+            />
+            <kw-btn
+              dense
+              secondary
+              label="버튼"
+            />
+            <kw-separator
+              spaced="16px"
+              vertical
+              inset
+            />
+            <kw-btn
+              icon="print_16"
+              dense
+              secondary
+              label="인쇄"
+              class="mr8"
+            />
+            <kw-btn
+              icon="excel_download_16"
+              dense
+              secondary
+              label="엑셀 다운로드"
+              @click="onClickExcelDownload"
+            />
+            <kw-separator
+              spaced="16px"
+              vertical
+              inset
+            />
+            <kw-btn
+              primary
+              dense
+              label="주기능"
+            />
+          </kw-action-bar>
+          <kw-grid
+            ref="grdRef"
+            :visible-rows="5"
             @init="initGrid"
           />
         </div>
@@ -288,7 +341,7 @@ const sampleVueCode = `
         </kw-tab-panel>
       </kw-tab-panels>
       <div class="result-area">
-        <h3>조회결과</h3>
+        <h3>계약현황</h3>
         <kw-action-bar>
           <template #left>
             <div class="kw-action-bar--count">
@@ -338,7 +391,60 @@ const sampleVueCode = `
         </kw-action-bar>
         <kw-grid
           ref="grdRef"
-          :visible-rows="13"
+          :visible-rows="5"
+          @init="initGrid"
+        />
+        <h3>상품결과</h3>
+        <kw-action-bar>
+          <template #left>
+            <div class="kw-action-bar--count">
+              총 <span class="kw-action-bar--number pl4">1,247</span>
+            </div>
+          </template>
+          <kw-btn
+            dense
+            secondary
+            label="파트너과정 수료이관"
+            class="mr8"
+          />
+          <kw-btn
+            dense
+            secondary
+            label="버튼"
+          />
+          <kw-separator
+            spaced="16px"
+            vertical
+            inset
+          />
+          <kw-btn
+            icon="print_16"
+            dense
+            secondary
+            label="인쇄"
+            class="mr8"
+          />
+          <kw-btn
+            icon="excel_download_16"
+            dense
+            secondary
+            label="엑셀 다운로드"
+            @click="onClickExcelDownload"
+          />
+          <kw-separator
+            spaced="16px"
+            vertical
+            inset
+          />
+          <kw-btn
+            primary
+            dense
+            label="주기능"
+          />
+        </kw-action-bar>
+        <kw-grid
+          ref="grdRef"
+          :visible-rows="5"
           @init="initGrid"
         />
       </div>

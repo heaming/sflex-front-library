@@ -65,7 +65,7 @@
               primary<br>
               negative<br>
               secondary<br>
-              table-action<br>
+              <span class="delete">table-action</span> <em class="text-red">grid-action</em><br>
             </td>
             <td>
               bg: #2f8af3 / text: #fff<br>
@@ -662,6 +662,10 @@ const tableInside = `
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.09.16',
+    text: 'revised wrong prop name',
+  },
   {
     timestamp: '2022.09.15',
     text: 'revised button component guide',
