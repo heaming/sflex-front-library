@@ -1,8 +1,8 @@
 <template>
   <q-form
     v-bind="styleClassAttrs"
-    class="kw-form kw-form--auto-height"
-    :class="{'kw-form--no-padding': oneRow, 'kw-form--dense' : dense}"
+    class="kw-form"
+    :class="{'kw-form--no-padding': oneRow, 'kw-form--dense' : dense, 'kw-form--auto-height': autoHeight }"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
@@ -31,6 +31,11 @@ export default {
     },
 
     dense: {
+      type: Boolean,
+      default: false,
+    },
+
+    autoHeight: {
       type: Boolean,
       default: false,
     },

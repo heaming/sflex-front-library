@@ -1,7 +1,16 @@
 <template>
   <!-- input -->
   <q-expansion-item
-    v-if="false"
+    v-if="true"
+    label="Form"
+  >
+    <div class="result-area">
+      <forms />
+    </div>
+  </q-expansion-item>
+  <!-- input -->
+  <q-expansion-item
+    v-if="true"
     label="Input"
   >
     <div class="result-area">
@@ -117,7 +126,7 @@
 
 <script setup>
 /* eslint-disable no-unused-vars */
-import { InputForm, SelectForm, CheckBoxForm, ButtonForm, RadioForm, ToggleForm } from '../../components/test';
+import { InputForm, SelectForm, CheckBoxForm, ButtonForm, RadioForm, ToggleForm, Forms } from '../../components/test';
 </script>
 
 <style scoped>
