@@ -4,6 +4,16 @@
     min-width: 1px !important; // quasar use !important already...
   }
 
+  .q-field__append {
+    padding-left: 20px;
+  }
+
+  &.q-field--dense {
+    .q-field__append {
+      padding-left: 20px;
+    }
+  }
+
   .q-select__dropdown-icon {
     opacity: 1 !important;
   }
