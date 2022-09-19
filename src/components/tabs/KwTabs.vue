@@ -4,7 +4,7 @@
     v-bind="styleClassAttrs"
     :model-value="modelValue"
     :align="align"
-    @update:model-value="onUpdateModelValue"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <slot />
   </q-tabs>
@@ -26,11 +26,11 @@ export default {
       type: String,
       default: 'left',
     },
-    onUpdateModelValue: {
-      type: Function,
-      default: undefined,
-    },
   },
+
+  emits: [
+    'update:modelValue',
+  ],
 
   setup() {
     return {
