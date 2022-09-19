@@ -913,7 +913,7 @@ const EmailCode = `
 const AddressCode = `
 <kw-form-row>
   <kw-form-item
-    label="postCode"
+    label="주소"
   >
     <zwcm-post-code />
   </kw-form-item>
