@@ -32,7 +32,10 @@
         </span>
       </div>
     </div>
-    <div class="kw-form-item__field">
+    <div
+      class="kw-form-item__field"
+      :class="fieldClass"
+    >
       <slot />
     </div>
   </div>

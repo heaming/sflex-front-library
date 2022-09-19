@@ -25,6 +25,12 @@
     flex: 1 0 1%;
     display: flex;
 
+    // 직계 자손이 없는 field 의 경우 inline-block 으로 처리.
+    // 물론 없어도 동작하지만, text-align inherit 를 쓸 수 있는 구석은 마련해 놓는 것이 더 좋은 구조다.
+    &:not(:has(> *)) {
+      display: inline-block;
+    }
+
     .kw-field {
       flex: 1 0 1%;  // max-width: 498px; why?
 
@@ -47,14 +53,38 @@
     .kw-field-wrap {
       flex: 1 0 1%;
     }
+
+    &--align-left {
+      justify-content: flex-start;
+
+      &:not(:has(> *)) {
+        text-align: left;
+      }
+    }
+
+    &--align-right {
+      justify-content: flex-end;
+
+      &:not(:has(> *)) {
+        text-align: right;
+      }
+    }
+
+    &--align-center {
+      justify-content: center;
+
+      &:not(:has(> *)) {
+        text-align: center;
+      }
+    }
   }
 }
 
-@mixin kw-row($min-height , $gap, $padding) {
+@mixin kw-row($row-height , $gap, $padding) {
   display: flex;
   margin: 0;
   padding: $padding;
-  min-height: #{$min-height + nth($padding, 1) + nth($padding, 3)};
+  min-height: #{$row-height + at($padding, 1) + at($padding, 3)};
   gap: $gap;
   align-items: start;
 

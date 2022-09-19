@@ -17,8 +17,8 @@
     :dense="buttonDense"
     :tabindex="tabindex"
     :align="align"
+    :stack="stack"
     :stretch="stretch"
-    :loading="loading"
     :disable="disable"
     :no-wrap="noWrap"
     @click="onClick"
@@ -36,14 +36,15 @@ export default {
   name: 'KwBtn',
   inheritAttrs: false,
   props: {
+    // customize props
     ...useButtonStyleProps,
 
+    // fall through props
     type: { type: String, default: 'button' },
     label: { type: [Number, String], default: undefined },
     icon: { type: String, default: undefined },
     iconRight: { type: String, default: undefined },
     tabindex: { type: [Number, String], default: undefined },
-    loading: { type: Boolean, default: null },
     disable: { type: Boolean, default: false },
 
     // about innerClasses
@@ -51,12 +52,8 @@ export default {
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
     stretch: { type: Boolean, default: false },
-    // about router
-    to: { type: [String, Object], default: undefined },
-    replace: { type: Boolean, default: undefined },
-    exact: { type: Boolean, default: undefined },
-    href: { type: String, default: undefined },
-    target: { type: String, default: undefined },
+
+    // events
     onClick: { type: Function, default: undefined },
   },
 

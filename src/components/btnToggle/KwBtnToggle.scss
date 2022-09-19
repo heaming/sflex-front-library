@@ -1,30 +1,94 @@
 .kw-btn-toggle {
-  .kw-btn.q-btn-group {
-    padding: 0;
-    background-color: #fff;
-    height: 32px;
-    font-size: 14px;
+  &.q-btn-toggle {
+    .kw-btn {
+      &.q-btn {
+        &[aria-pressed="true"] {
+          z-index: 1;
 
-    .q-btn {
-      padding: 0 16px;
+          &.disabled {
+            background-color: $line-line !important; // 좀 더 진해야 할까? sorry for using !important.
 
-      &--outline::before {
-        border: 0;
+            .q-btn__content {
+              color: $bg-white !important;
+            }
+          }
+        }
       }
 
-      border: 1px solid $line-stroke;
-      background: #fff;
-      color: $black3;
+      &--outlined {
+        margin-left: -1px;
 
-      &[aria-pressed="true"] {
-        border: 1px solid $primary;
-        background: #fff;
-        color: $primary;
+        &.q-btn {
+          &[aria-pressed="true"] {
+            &.disabled {
+              background-color: $line-bg !important;
+
+              .q-btn__content {
+                color: $placeholder !important;
+              }
+
+              &::after {
+                border-color: $line-stroke !important;
+              }
+            }
+          }
+        }
+      }
+
+      &--filled,
+      &--outlined {
+        @include color-based("&.kw-btn--toggle-color-", $semantic-colors) using ($color) {
+          &[aria-pressed="true"] {
+            background-color: $color;
+          }
+        }
+
+        @include color-based("&.kw-btn--toggle-text-color-", $semantic-colors) using ($color) {
+          &[aria-pressed="true"] {
+            .q-btn__content {
+              color: $color;
+            }
+          }
+        }
+
+        @include color-based("&.kw-btn--toggle-border-color-", $semantic-colors) using ($color) {
+          &[aria-pressed="true"] {
+            &::after {
+              border-color: $color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--spaced {
+    .kw-btn {
+      &--outlined {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+body.desktop {
+  @include color-based(".kw-btn.kw-btn--toggle-color-", $semantic-colors) using ($color) {
+    &.q-focusable:focus,
+    &.q-manual-focusable--focused,
+    &.q-hoverable:hover {
+      background-color: $color;
+
+      &::before {
+        background-color: #fff;
       }
     }
 
-    .q-btn-item:not(:first-child) {
-      margin-left: 4px;
+    &.q-btn.q-btn--active {
+      background-color: $color;
+
+      &::before {
+        background-color: #fff;
+      }
     }
   }
 }

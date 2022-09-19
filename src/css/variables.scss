@@ -124,3 +124,11 @@ $kw-field-color-disable: $black3;
 
   @return nth($list, $idx);
 }
+
+@function zero-unit($number) {
+  @if unit($number) == "" {
+    @return $number + "px";
+  }
+
+  @return $number;
+}
