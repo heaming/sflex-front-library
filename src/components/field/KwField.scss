@@ -131,8 +131,12 @@
     .q-field__control {
       border-radius: $kw-field-border-radius;
 
+      &::before {
+        border-color: $line-stroke;
+      }
+
       &:hover::before {
-        border-color: currentcolor;
+        border-color: $black1;
       }
 
       &::after {
@@ -152,7 +156,7 @@
 
         &::after {
           border-width: 1px;
-          border-color: currentcolor;
+          border-color: $black1;
         }
       }
     }
@@ -162,6 +166,10 @@
         &::before {
           border-style: solid;
         }
+
+        &:hover::before {
+          border-color: $line-stroke;
+        }
       }
     }
   }
@@ -169,8 +177,12 @@
   // standard == underline
   &--standard {
     .q-field__control {
+      &::before {
+        border-color: $line-stroke;
+      }
+
       &:hover::before {
-        border-color: currentcolor;
+        border-color: $black1;
       }
 
       &::after {
@@ -187,7 +199,7 @@
 
         &::after {
           height: 1px;
-          border-color: currentcolor;
+          border-color: $black1;
         }
       }
     }
@@ -196,6 +208,10 @@
       .q-field__control {
         &::before {
           border-bottom-style: solid;
+        }
+
+        &:hover::before {
+          border-color: $line-stroke;
         }
       }
     }

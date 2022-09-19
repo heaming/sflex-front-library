@@ -40,9 +40,12 @@
     </kw-search>
 
     <div class="result-area">
-      <h3>
-        조회결과<span class="kw-title-refrence">&#8251;필수(&#42;)를 제외한 항목만 변경 가능합니다.</span>
-      </h3>
+      <ul class="kw-notification">
+        <li>
+          현금자동이체는 직전 청구결과에 따라서 청구가 제한됩니다.
+          <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
+        </li>
+      </ul>
       <kw-action-bar>
         <template #left>
           <div class="kw-action-bar--count">
@@ -242,9 +245,12 @@ const sampleVueCode = `
   </kw-search>
 
   <div class="result-area">
-    <h3>
-      조회결과<span class="kw-title-refrence">&#8251;필수(&#42;)를 제외한 항목만 변경 가능합니다.</span>
-    </h3>
+    <ul class="kw-notification">
+      <li>
+        현금자동이체는 직전 청구결과에 따라서 청구가 제한됩니다.
+        <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
+      </li>
+    </ul>
     <kw-action-bar>
       <template #left>
         <div class="kw-action-bar--count">
