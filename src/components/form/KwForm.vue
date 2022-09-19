@@ -2,7 +2,7 @@
   <q-form
     v-bind="styleClassAttrs"
     class="kw-form"
-    :class="{'kw-form--no-padding': oneRow, 'kw-form--dense' : dense, 'kw-form--auto-height': autoHeight }"
+    :class="formClass"
     @submit.prevent="onSubmit"
     @reset="onReset"
   >
@@ -46,6 +46,12 @@ export default {
   setup(props, { emit }) {
     const formCtx = useForm();
 
+    const formClass = computed(() => [
+      props.oneRow && 'kw-form--no-padding',
+      props.dense && 'kw-form--dense',
+      props.autoHeight && 'kw-form--auto-height',
+    ]);
+
     async function onSubmit() {
       const shouldFocus = !props.noErrorFocus;
 
@@ -62,11 +68,13 @@ export default {
     // form type injection
     provide(FormTypeContextKey, FORM_TYPE.FORM);
 
+    // form layout injection
     useFormLayout();
 
     return {
       ...useInheritAttrs(),
       ...formCtx,
+      formClass,
       onSubmit,
       onReset,
     };
