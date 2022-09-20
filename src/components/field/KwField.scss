@@ -18,12 +18,20 @@
     }
   }
 
+  .q-field__append {
+    padding-left: 20px;
+
+    & + .q-field__append {
+      padding-left: 8px;
+    }
+  }
+
   .q-field__inner {
     // align-self: initial;
   }
 
   .q-field__bottom {
-    padding: 2px 0 0;
+    padding: 1px 0 0;
     font-size: $kw-field-font-size-bottom;
     line-height: 1;
     min-height: $kw-field-font-size-bottom;
@@ -72,6 +80,15 @@
     color: $kw-field-color;
     padding: 0;
     opacity: 1 !important; // why?
+  }
+
+  .q-field__native {
+    &::placeholder {
+      font-size: 16px;
+      color: $placeholder !important;
+      font-weight: 400 !important;
+      opacity: 1 !important;
+    }
   }
 
   // customize
@@ -225,6 +242,14 @@
       height: $kw-field-height-dense;
     }
 
+    .q-field__append {
+      padding-left: 20px;
+
+      & + .q-field__append {
+        padding-left: 8px;
+      }
+    }
+
     .q-field__bottom {
       font-size: $kw-field-font-size-bottom-dense;
     }
@@ -234,6 +259,13 @@
     .q-field__suffix,
     .q-field__input {
       line-height: $kw-field-line-height-dense;
+    }
+
+    .q-field__native {
+      &::placeholder {
+        font-size: 14px;
+        opacity: 1 !important;
+      }
     }
   }
 
