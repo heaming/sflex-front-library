@@ -329,6 +329,7 @@
         The height of textarea is adjusted by row instead of size class.<br>
         one row is 24px excluded padding top and bottom.<br>
         Put rows similar height like design. don't need mind about same height like design.<br>
+        Add <b>counter</b> and <b>maxlength</b> if need to use text counter.
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -338,6 +339,16 @@
                 <kw-input
                   type="textarea"
                   :rows="3"
+                />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="textarea">
+                <kw-input
+                  type="textarea"
+                  :rows="3"
+                  counter
+                  maxlength="200"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -515,6 +526,16 @@ const textarea = `
       />
     </kw-form-item>
   </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="textarea">
+      <kw-input
+        type="textarea"
+        :rows="3"
+        counter
+        maxlength="200"
+      />
+    </kw-form-item>
+  </kw-form-row>
 </kw-form>
 `;
 
@@ -558,6 +579,10 @@ const nolabelCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-220',
+    text: 'add counter and maxlength in textarea',
+  },
   {
     timestamp: '2022-09-15',
     text: 'add explanation about textarea',
