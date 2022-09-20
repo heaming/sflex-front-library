@@ -18,6 +18,14 @@
     }
   }
 
+  .q-field__append {
+    padding-left: 20px;
+
+    & + .q-field__append {
+      padding-left: 8px;
+    }
+  }
+
   .q-field__inner {
     // align-self: initial;
   }
@@ -223,6 +231,14 @@
     .q-field__control,
     .q-field__marginal {
       height: $kw-field-height-dense;
+    }
+
+    .q-field__append {
+      padding-left: 20px;
+
+      & + .q-field__append {
+        padding-left: 8px;
+      }
     }
 
     .q-field__bottom {
