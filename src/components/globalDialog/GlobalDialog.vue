@@ -24,14 +24,14 @@
       <q-card-section class="global-dialog__action">
         <kw-btn
           v-if="dialog.isConfirm"
-          class="kw-btn--h36 kw-btn--negative"
           :label="$t('MSG_BTN_NO', null, '취소')"
+          negative
           @click="onClick(false)"
         />
         <kw-btn
           ref="okRef"
-          class="kw-btn--h36"
           :label="$t('MSG_BTN_CONFIRM', null, '확인')"
+          primary
           @click="onClick(true)"
         />
       </q-card-section>
