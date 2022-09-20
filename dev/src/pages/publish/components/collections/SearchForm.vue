@@ -389,13 +389,13 @@
         , the button should be on the right side. Because it looks too empty.<br>
         In this case,
         <ol>
-          <li>add 'kw-search--onerow' class</li>
+          <li>add 'one-row' in kw-search</li>
         </ol>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-search
-            class="kw-search--onerow"
+            one-row
           >
             <kw-search-row>
               <kw-search-item label="colspan">
@@ -1294,7 +1294,7 @@ const differentSize = `
 
 const theOneRowCode = `
 <kw-search
-  class="kw-search--onerow"
+  one-row
 >
   <kw-search-row>
     <kw-search-item label="colspan">
@@ -1312,6 +1312,10 @@ const theOneRowCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.08.29',
+    text: '1 or 2 columns in 1 row has been changed',
+  },
   {
     timestamp: '2022.08.29',
     text: 'Add case - 1 or 2 Columns in 1 row',

@@ -46,7 +46,7 @@
             </h3>
             <kw-form
               :cols="3"
-              class="kw-form--textright"
+              align-content="left"
             >
               <kw-form-row>
                 <kw-form-item
@@ -84,7 +84,7 @@
             <h3 class="mb20">
               2.None of elements(input,radio,select,datepicker)
             </h3>
-            <kw-form>
+            <kw-form align-content="right">
               <kw-form-row>
                 <kw-form-item label="교원">
                   <p>0</p>
@@ -156,7 +156,10 @@
       <p class="kw-guide-description">
         There are included <b>both of text and the elements(input,select,radio,datepicker)</b>.<br>
         Both of them are included in kw-form,<br>
-        The height is 44px and each of padding top and bottom are 10px except of first and last child of kw-form-row.
+        The height is 44px and each of padding top
+        and bottom are 10px except of first and last child of kw-form-row.<br>
+        <b>align-content="left"</b> is default. <br>
+        default is textalign left. and the height between row is 44px.
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -166,7 +169,6 @@
             </h3>
             <kw-form
               :cols="3"
-              class="kw-form--textright"
             >
               <kw-form-row>
                 <kw-form-item
@@ -218,12 +220,13 @@
         Form(only text)
       </h3>
       <p class="kw-guide-description">
-        There are included <b>only for text</b>. Use 'p' tag instead of the elements(input,select,radio,datepicker)<br>
+        There are included <b>only for text</b>. Use '<b>p</b>'
+        tag instead of the elements(input,select,radio,datepicker)<br>
         The height is 24px and each of padding top and bottom are 6px except of first and last child of kw-form-row.<br>
         The default of text-align is left.<br>
-        If it should be right, add the class <b>kw-form--textright</b> in kw-form<br>
-        If one of kw-form-item's p tags need to be textalign left,right and center,
-        Add the helper classes in p tag such as <b>text-right,text-left and text-center</b>.
+        If it should be right, add the attribute <b>align-content="right"</b> in kw-form<br>
+        If one of kw-form-item's p tags need to be textalign left,right
+        and center,add <b>align-content=""</b> in kw-form-item.
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -231,15 +234,24 @@
             <h3 class="mb20">
               2.None of elements(input,radio,select,datepicker)
             </h3>
-            <kw-form class="kw-form--textright">
+            <kw-form
+              align-content="right"
+              dense
+            >
               <kw-form-row>
-                <kw-form-item label="text-center">
-                  <p class="text-center">
+                <kw-form-item
+                  label="center"
+                  align-content="center"
+                >
+                  <p>
                     0
                   </p>
                 </kw-form-item>
-                <kw-form-item label="text-left">
-                  <p class="text-left">
+                <kw-form-item
+                  label="left"
+                  align-content="left"
+                >
+                  <p>
                     0
                   </p>
                 </kw-form-item>
@@ -273,12 +285,12 @@ const testCode = `
   class="kw-popup--2xl"
   title="Form table data"
 >
-  <h3 class="mb20">
+<h3 class="mb20">
     1.Form-column3
   </h3>
   <kw-form
     :cols="3"
-    class="kw-form--textright"
+    align-content="left"
   >
     <kw-form-row>
       <kw-form-item
@@ -316,7 +328,7 @@ const testCode = `
   <h3 class="mb20">
     2.None of elements(input,radio,select,datepicker)
   </h3>
-  <kw-form>
+  <kw-form align-content="right">
     <kw-form-row>
       <kw-form-item label="교원">
         <p>0</p>
@@ -376,7 +388,6 @@ const testCode = `
 const form = `
 <kw-form
   :cols="3"
-  class="kw-form--textright"
 >
   <kw-form-row>
     <kw-form-item
@@ -418,16 +429,23 @@ const textForm = `
   2.None of elements(input,radio,select,datepicker)
 </h3>
 <kw-form
-  class="kw-form--textright"
+  align-content="right"
+  dense
 >
   <kw-form-row>
-    <kw-form-item label="text-center">
-      <p class="text-center">
+    <kw-form-item
+      label="center"
+      align-content="center"
+    >
+      <p>
         0
       </p>
     </kw-form-item>
-    <kw-form-item label="text-left">
-      <p class="text-left">
+    <kw-form-item
+      label="left"
+      align-content="left"
+    >
+      <p>
         0
       </p>
     </kw-form-item>
@@ -446,6 +464,10 @@ const textForm = `
 </kw-form>
 `;
 const historyData = [
+  {
+    timestamp: '2022-09-08',
+    text: 'Add attribute instead of classes(textalign)',
+  },
   {
     timestamp: '2022-09-08',
     text: 'First added',
