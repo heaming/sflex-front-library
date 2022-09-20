@@ -31,14 +31,6 @@ body {
   opacity: 1 !important;
 }
 
-input::placeholder,
-textarea::placeholder {
-  font-size: 16px;
-  color: $placeholder !important;
-  font-weight: 400 !important;
-  opacity: 1 !important;
-}
-
 // gnb 관련
 .kw-gnb {
   border-bottom: 1px solid #e5e5e5;
