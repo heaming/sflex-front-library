@@ -17,6 +17,12 @@ interface KwSearchProps extends UseObserverProps {
   labelSize?: number;
 
   /**
+   * 아이템의 필드 영역 컨텐츠 정렬 값 (행이나 아이템에 alignContent가 있으면 해당 값을 우선한다)
+   * @defaultValue `left`
+   */
+  alignContent?: 'left' | 'center' | 'right';
+
+  /**
    * 기본으로 보여줄 행 갯수 (expandable 기준이 되는 행 갯수)
    * @defaultValue `2`
    */
@@ -82,6 +88,11 @@ interface KwSearchRowProps {
    * 아이템 라벨 사이즈
    */
   labelSize?: number;
+
+  /**
+   * 아이템의 필드 영역 컨텐츠 정렬 값 (아이템에 alignContent가 있으면 해당 값을 우선한다)
+   */
+  alignContent?: 'left' | 'center' | 'right';
 }
 interface KwSearchRowSlots {
   /**
@@ -107,6 +118,11 @@ interface KwSearchItemProps {
    * 라벨 힌트
    */
   hint?: string;
+
+  /**
+   * 아이템의 필드 영역 컨텐츠 정렬 값
+   */
+  alignContent?: 'left' | 'center' | 'right';
 
   /**
    * 아이템이 차지할 영역 colspan
