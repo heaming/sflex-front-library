@@ -78,7 +78,7 @@
         </template>
 
         <kw-btn
-          icon="excel_16"
+          icon="excel_download_16"
           dense
           secondary
           label="엑셀 다운로드"
@@ -283,7 +283,7 @@ const sampleVueCode = `
       </template>
 
       <kw-btn
-        icon="excel_16"
+        icon="excel_download_16"
         dense
         secondary
         label="엑셀 다운로드"

@@ -18,12 +18,20 @@
     }
   }
 
+  .q-field__append {
+    padding-left: 20px;
+
+    & + .q-field__append {
+      padding-left: 8px;
+    }
+  }
+
   .q-field__inner {
     // align-self: initial;
   }
 
   .q-field__bottom {
-    padding: 2px 0 0;
+    padding: 1px 0 0;
     font-size: $kw-field-font-size-bottom;
     line-height: 1;
     min-height: $kw-field-font-size-bottom;
@@ -223,6 +231,14 @@
     .q-field__control,
     .q-field__marginal {
       height: $kw-field-height-dense;
+    }
+
+    .q-field__append {
+      padding-left: 20px;
+
+      & + .q-field__append {
+        padding-left: 8px;
+      }
     }
 
     .q-field__bottom {
