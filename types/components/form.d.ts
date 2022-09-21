@@ -17,6 +17,12 @@ interface KwFormProps extends UseObserverProps {
   labelSize?: number;
 
   /**
+   * 아이템의 필드 영역 컨텐츠 정렬 값 (행이나 아이템에 alignContent가 있으면 해당 값을 우선한다)
+   * @defaultValue `left`
+   */
+  alignContent?: 'left' | 'center' | 'right';
+
+  /**
    * 마운트 시 첫 입력 컴포넌트에 포커스할지 여부
    * @defaultValue `false`
    */
@@ -64,6 +70,11 @@ interface KwFormRowProps {
    * 아이템 라벨 사이즈
    */
   labelSize?: number;
+
+  /**
+   * 아이템의 필드 영역 컨텐츠 정렬 값 (아이템에 alignContent가 있으면 해당 값을 우선한다)
+   */
+  alignContent?: 'left' | 'center' | 'right';
 }
 interface KwFormRowSlots {
   /**
@@ -89,6 +100,11 @@ interface KwFormItemProps {
    * 라벨 힌트
    */
   hint?: string;
+
+  /**
+   * 아이템의 필드 영역 컨텐츠 정렬 값
+   */
+  alignContent?: 'left' | 'center' | 'right';
 
   /**
    * 아이템이 차지할 영역 colspan

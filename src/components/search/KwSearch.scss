@@ -1,10 +1,9 @@
 .kw-search {
   $-kw-search-row-height: $kw-field-height-dense;
   $-kw-search-row-gap: 40px;
-  $-kw-search-row-padding: 6px 0 6px 0;
-  $-kw-search-row-padding: 6px 0 6px 0;
+  $-kw-search-row-padding: 12px 0 0;
 
-  padding: 24px 40px 30px;
+  padding: 30px 40px;
   border: 1px solid $line-line;
   box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
   background-color: $bg-white;
@@ -32,6 +31,13 @@
     .kw-label-content {
       // 두 줄 들어가면 overflow 나는 구조를 피하기 위한 고육지책
       line-height: calc(#{$-kw-search-row-height} / 2);
+    }
+
+    & {
+      .kw-form-row:first-of-type {
+        padding-top: 0;
+        min-height: $kw-field-line-height;
+      }
     }
   }
 

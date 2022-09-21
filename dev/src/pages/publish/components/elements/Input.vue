@@ -43,12 +43,12 @@
           <tr>
             <td>kw-form-item / kw-search-item</td>
             <td>
-              essential <br>
+              required <br>
               hint="value" <br>
               no-label
             </td>
             <td>
-              Add the class "essential" in the tags of kw-form-item or kw-search-item. <br>
+              Add 'required' when the essential case in the tags of kw-form-item or kw-search-item. <br>
               Add the class hint="value" in the tags of kw-form-item or kw-search-item. <br>
               Add the 'no-label' in the tags of kw-form-item or kw-search-item attribute when necessary
             </td>
@@ -580,7 +580,11 @@ const nolabelCode = `
 
 const guideHistory = [
   {
-    timestamp: '2022-09-220',
+    timestamp: '2022-09-21',
+    text: 'revised the summary area',
+  },
+  {
+    timestamp: '2022-09-20',
     text: 'add counter and maxlength in textarea',
   },
   {
