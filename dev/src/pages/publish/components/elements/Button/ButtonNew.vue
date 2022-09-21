@@ -50,10 +50,9 @@
               padding of right and left
             </td>
             <td style="width: 33.33%;">
-              custom
+              padding="px value"
             </td>
             <td style="width: 33.33%;">
-              padding="'String'"
               Add this can control padding of right and left
             </td>
           </tr>
@@ -200,7 +199,7 @@
         Form type(use with input type)
       </h3>
       <p class="kw-guide-description">
-        If height 40px, please add <em>padding="px value"</em> <br>
+        If height 40px, please add <em>padding="px value"</em> (only custom padding of right and left )<br>
         (Default) height 40px / padding 8px 12px | (Dense) height 32px / padding 8px 6px <br>
       </p>
       <q-card>
@@ -662,6 +661,10 @@ const tableInside = `
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.09.21',
+    text: 'add content of padding prop guide',
+  },
   {
     timestamp: '2022.09.16',
     text: 'revised wrong prop name',
