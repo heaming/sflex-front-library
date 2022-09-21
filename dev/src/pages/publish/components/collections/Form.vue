@@ -575,6 +575,32 @@
         </q-card>
       </p>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="telephoneExample"
+        class="kw-guide-title"
+      >
+        Telephone form type
+      </h3>
+      <p class="kw-guide-description">
+        please add <em>&lt; zwcm-telephone-number /&gt;</em> in kw-form-item and kw-search-item tag <br>
+        Also, please add <em>'carrier</em>' prop, if you need to 1st select like as 1st sample image
+        <q-card>
+          <div class="kw-guide-example">
+            <img
+              src="../../../../../assets/images/example_telephone.png"
+              alt="address example"
+              style="width: 65%;"
+            >
+          </div>
+
+          <guide-code-view
+            :code-value="telephoneCode"
+            lang="vue"
+          />
+        </q-card>
+      </p>
+    </div>
   </kw-page>
 </template>
 
@@ -919,8 +945,36 @@ const AddressCode = `
   </kw-form-item>
 </kw-form-row>
 `;
+const telephoneCode = `
+<kw-form-row>
+  <kw-form-item
+    label="전화번호"
+  >
+    <zwcm-telephone-number />
+  </kw-form-item>
+
+  <kw-form-item
+    label="전화번호"
+  >
+    <zwcm-telephone-number carrier/>
+  </kw-form-item>
+</kw-form-row>
+
+<!-- In search Form -->
+<kw-search-row>
+  <kw-search-item
+    label="전화번호"
+  >
+    <zwcm-telephone-number />
+  </kw-search-item>
+<kw-search-row>
+`;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-21',
+    text: 'Add example of phone form case',
+  },
   {
     timestamp: '2022-09-13',
     text: 'Add example of email and address form case',
