@@ -216,7 +216,7 @@
 const datePickerCode = `
 <kw-form>
   <kw-form-row>
-    <kw-form-item label="DatePicker">
+    <kw-form-item label="DatePicker"><!-- if essential case please add "required" -->
       <kw-date-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
@@ -226,7 +226,7 @@ const datePickerCode = `
 <!-- if Search Form -->
 <kw-search>
   <kw-search-row>
-    <kw-search-item label="DatePicker">
+    <kw-search-item label="DatePicker"><!-- if essential case please add "required" -->
       <kw-date-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-search-item>
@@ -237,7 +237,7 @@ const datePickerCode = `
 const dateRangePickerCode = `
 <kw-form>
   <kw-form-row>
-    <kw-form-item label="DateRangePicker">
+    <kw-form-item label="DateRangePicker"> <!-- if essential case please add "required" -->
       <kw-date-range-picker
         rules="date_range_months:1" />
       <!-- if essential case please add 'date_range_required' ex.rules="date_range_required|date_range_months:1"   -->
@@ -248,7 +248,7 @@ const dateRangePickerCode = `
 <!-- if Search Form -->
 <kw-search>
   <kw-search-row>
-    <kw-search-item label="DateRangePicker">
+    <kw-search-item label="DateRangePicker"> <!-- if essential case please add "required" -->
       <kw-date-range-picker
         rules="date_range_months:1" />
       <!-- if essential case please add 'date_range_required' ex.rules="date_range_required|date_range_months:1"   -->
@@ -259,7 +259,7 @@ const dateRangePickerCode = `
 const timePickerCode = `
 <kw-form>
   <kw-form-row>
-    <kw-form-item label="TimePicker">
+    <kw-form-item label="TimePicker"><!-- if essential case please add "required" -->
       <kw-time-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
@@ -269,7 +269,7 @@ const timePickerCode = `
 <!-- if Search Form -->
 <kw-search>
   <kw-search-row>
-    <kw-search-item label="TimePicker">
+    <kw-search-item label="TimePicker"> <!-- if essential case please add "required" -->
       <kw-time-picker />
       <!-- if essential case please add "rules='required'" -->
     </kw-search-item>
