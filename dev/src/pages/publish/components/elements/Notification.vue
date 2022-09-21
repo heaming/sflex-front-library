@@ -81,6 +81,21 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul>
+        <li>
+          When you need to refrence the notification text which is located below grid, please move to
+          <router-link to="/Publish/Components/Temporary/PageSample03">
+            Temporary > pagesample03
+          </router-link>.
+        </li>
+      </ul>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="default"
         class="kw-guide-title"
       >

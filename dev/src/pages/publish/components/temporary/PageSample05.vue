@@ -111,12 +111,12 @@
             총 <span class="kw-action-bar--number pl4">156</span>
           </div>
           <kw-separator
-            v-model="selectData.model"
             vertical
             inset
             spaced="8px"
           />
           <kw-select
+            v-model="selectData.model"
             :options="selectData.options"
             borderless
             dense
@@ -364,12 +364,12 @@ const sampleVueCode = `
           총 <span class="kw-action-bar--number pl4">156</span>
         </div>
         <kw-separator
-          v-model="selectData.model"
-          vertical
-          inset
-          spaced="8px"
+        vertical
+        inset
+        spaced="8px"
         />
         <kw-select
+          v-model="selectData.model"
           :options="selectData.options"
           borderless
           dense

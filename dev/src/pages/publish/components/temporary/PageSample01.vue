@@ -52,12 +52,12 @@
             총 <span class="kw-action-bar--number pl4">156</span>
           </div>
           <kw-separator
-            v-model="selectData.model"
             vertical
             inset
             spaced="8px"
           />
           <kw-select
+            v-model="selectData.model"
             :options="selectData.options"
             borderless
             dense
@@ -78,7 +78,7 @@
         </template>
 
         <kw-btn
-          icon="excel_16"
+          icon="excel_download_16"
           dense
           secondary
           label="엑셀 다운로드"
@@ -257,12 +257,12 @@ const sampleVueCode = `
           총 <span class="kw-action-bar--number pl4">156</span>
         </div>
         <kw-separator
-          v-model="selectData.model"
-          vertical
-          inset
-          spaced="8px"
+        vertical
+        inset
+        spaced="8px"
         />
         <kw-select
+          v-model="selectData.model"
           :options="selectData.options"
           borderless
           dense
@@ -283,7 +283,7 @@ const sampleVueCode = `
       </template>
 
       <kw-btn
-        icon="excel_16"
+        icon="excel_download_16"
         dense
         secondary
         label="엑셀 다운로드"

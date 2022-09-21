@@ -131,6 +131,9 @@
             :visible-rows="5"
             @init="initGrid"
           />
+          <ul class="mt12 kw-notification">
+            <li>이것은 테이블 하단 안내문구 예시입니다.(This is a 'kw-notification' sample which located in grid bottom)</li>
+          </ul>
           <h3>상품결과</h3>
           <kw-action-bar>
             <template #left>
@@ -394,6 +397,9 @@ const sampleVueCode = `
           :visible-rows="5"
           @init="initGrid"
         />
+        <ul class="mt12 kw-notification">
+          <li>이것은 테이블 하단 안내문구 예시입니다.(This is a 'kw-notification' sample which located in grid bottom)</li>
+        </ul>
         <h3>상품결과</h3>
         <kw-action-bar>
           <template #left>
