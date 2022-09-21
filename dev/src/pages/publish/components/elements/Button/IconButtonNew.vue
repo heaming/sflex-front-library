@@ -254,53 +254,6 @@
         />
       </q-card>
     </div>
-
-    <!-- <div class="kw-guide-section">
-      <h3
-        id="default"
-        class="kw-guide-title"
-      >
-       admin-arrow button
-      </h3>
-      <q-card>
-        <div class="kw-guide-example">
-          <div class="admin-arrow-box">
-            <kw-btn
-              class="kw-btn--line-gray"
-              icon="arrow_right_24|0 0 24 24"
-            />
-            <kw-btn
-              class="kw-btn--line-gray"
-              icon="arrow_left_24|0 0 24 24"
-            />
-          </div>
-        </div>
-      </q-card>
-    </div> -->
-    <!-- <div class="kw-guide-section">
-      <div class="kw-guide-section">
-        <h3
-          id="default"
-          class="kw-guide-title"
-        >
-          icon button size(width & height: 40px)
-        </h3>
-        <q-card>
-          <div class="kw-guide-example">
-            <div>
-              <kw-btn
-                class="kw-btn--line-gray kw-btn--size40"
-                icon="search_24|0 0 24 24"
-              />
-              <kw-btn
-                class="kw-btn--line-gray kw-btn--size40"
-                icon="double_check_24|0 0 24 24"
-              />
-            </div>
-          </div>
-        </q-card>
-      </div>
-    </div> -->
   </kw-page>
 </template>
 
