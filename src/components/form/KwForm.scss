@@ -37,18 +37,19 @@
     }
   }
 
-  &--no-padding {
-    .kw-form-row:first-child {
+  & {
+    .kw-form-row:first-of-type {
       padding-top: 0;
       min-height: $kw-field-line-height + at($-kw-form-row-padding, 3);
     }
 
-    .kw-form-row:last-child {
+    .kw-form-row:last-of-type {
       padding-bottom: 0;
       min-height: $kw-field-line-height + at($-kw-form-row-padding, 1);
     }
 
-    .kw-form-row:first-child:last-child {
+    .kw-form-row:first-of-type:last-of-type {
+      padding-top: 0;
       padding-bottom: 0;
       min-height: $kw-field-line-height;
     }
