@@ -62,10 +62,12 @@
             <td>
               rules="required"<br>
               placeholder="placeholder"
+              type="month,year"
             </td>
             <td>
               Add this when Essential Case<br>
-              Add the attribute "placeholder='날짜 선택'"
+              Add the attribute "placeholder='날짜 선택'"<br>
+              add the type of month or year
             </td>
           </tr>
           <tr>
@@ -122,6 +124,34 @@
               >
                 <kw-date-picker
                   rules="required"
+                />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="month">
+                <kw-date-picker type="month" />
+              </kw-form-item>
+              <kw-form-item
+                label="month"
+                required
+              >
+                <kw-date-picker
+                  rules="required"
+                  type="month"
+                />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="year">
+                <kw-date-picker type="year" />
+              </kw-form-item>
+              <kw-form-item
+                label="year"
+                required
+              >
+                <kw-date-picker
+                  rules="required"
+                  type="year"
                 />
               </kw-form-item>
             </kw-form-row>
@@ -221,6 +251,34 @@ const datePickerCode = `
       <!-- if essential case please add "rules='required'" -->
     </kw-form-item>
   </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="month">
+      <kw-date-picker type="month" />
+    </kw-form-item>
+    <kw-form-item
+      label="month"
+      required
+    >
+      <kw-date-picker
+        rules="required"
+        type="month"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item label="year">
+      <kw-date-picker type="year" />
+    </kw-form-item>
+    <kw-form-item
+      label="year"
+      required
+    >
+      <kw-date-picker
+        rules="required"
+        type="year"
+      />
+    </kw-form-item>
+  </kw-form-row>
 </kw-form>
 
 <!-- if Search Form -->
@@ -229,6 +287,34 @@ const datePickerCode = `
     <kw-search-item label="DatePicker"><!-- if essential case please add "required" -->
       <kw-date-picker />
       <!-- if essential case please add "rules='required'" -->
+    </kw-search-item>
+  </kw-search-row>
+  <kw-search-row>
+    <kw-search-item label="month">
+      <kw-date-picker type="month" />
+    </kw-search-item>
+    <kw-search-item
+      label="month"
+      required
+    >
+      <kw-date-picker
+        rules="required"
+        type="month"
+      />
+    </kw-search-item>
+  </kw-search-row>
+  <kw-search-row>
+    <kw-search-item label="year">
+      <kw-date-picker type="year" />
+    </kw-search-item>
+    <kw-search-item
+      label="year"
+      required
+    >
+      <kw-date-picker
+        rules="required"
+        type="year"
+      />
     </kw-search-item>
   </kw-search-row>
 </kw-search>
@@ -278,6 +364,10 @@ const timePickerCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-21',
+    text: 'Add options of year,month in datepicker',
+  },
   {
     timestamp: '2022-09-06',
     text: 'change guide content about essential type',
