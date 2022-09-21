@@ -15,8 +15,9 @@
         :class="`kw-${type}`"
         :options="normalizedOptions"
         :type="type"
-        :left-label="type === 'toggle' ? leftLabel !== false : leftLabel"
         :dense="isSearchContext || dense"
+        :disable="disable"
+        :left-label="type === 'toggle' ? leftLabel !== false : leftLabel"
         inline
       />
     </template>
@@ -61,13 +62,17 @@ export default {
       type: String,
       default: 'radio',
     },
-    leftLabel: {
-      type: Boolean,
-      default: undefined,
-    },
     dense: {
       type: Boolean,
       default: false,
+    },
+    disable: {
+      type: Boolean,
+      default: false,
+    },
+    leftLabel: {
+      type: Boolean,
+      default: undefined,
     },
   },
 
