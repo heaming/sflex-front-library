@@ -101,7 +101,7 @@
     }
   }
 
-  & + .kw-grid {
+  & + :is(.kw-grid, .grid-blank) {
     margin-top: 12px;
   }
 

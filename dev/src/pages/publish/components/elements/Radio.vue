@@ -36,10 +36,12 @@
               kw-form-item
             </td>
             <td>
-              label=" "
+              label=" " <br>
+              required
             </td>
             <td>
-              Add the title of content
+              Add the title of content <br>
+              Add this when Essential Case
             </td>
           </tr>
           <tr>
@@ -335,6 +337,10 @@ const essentialCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-21',
+    text: 'add guide content of summary about essential type',
+  },
   {
     timestamp: '2022-09-06',
     text: 'change guide content about essential type',
