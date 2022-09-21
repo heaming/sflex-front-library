@@ -8,7 +8,10 @@ export { default as router } from './router';
 export * from './router';
 
 // Components
-export * from './components/app';
+export * from './components/appGnb';
+export * from './components/appLayout';
+export * from './components/appLnb';
+export * from './components/appView';
 
 // Composables
 export { default as useDataService } from './composables/useDataService';
