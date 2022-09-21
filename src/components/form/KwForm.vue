@@ -25,11 +25,6 @@ export default {
     ...useFormProps,
     ...useFormLayoutProps,
 
-    oneRow: {
-      type: Boolean,
-      default: false,
-    },
-
     dense: {
       type: Boolean,
       default: false,
@@ -47,7 +42,6 @@ export default {
     const formCtx = useForm();
 
     const formClass = computed(() => [
-      props.oneRow && 'kw-form--no-padding',
       props.dense && 'kw-form--dense',
       props.autoHeight && 'kw-form--auto-height',
     ]);

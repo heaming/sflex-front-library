@@ -3,7 +3,14 @@
   <kw-form>
     <kw-form-row>
       <kw-form-item label="button toggle">
-        test
+        <kw-input v-model="strModel" />
+        <kw-field>
+          <kw-checkbox
+            v-model="ynModel"
+            dense
+            :label="'test'"
+          />
+        </kw-field>
       </kw-form-item>
       <kw-form-item
         label="button toggle"
@@ -201,6 +208,7 @@
 import { KwForm, KwFormRow, KwFormItem } from '../../../../src/components';
 
 const strModel = ref('');
+const ynModel = ref('N');
 </script>
 
 <style scoped lang="scss">
