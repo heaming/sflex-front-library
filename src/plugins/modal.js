@@ -3,25 +3,7 @@ import { addGlobalData } from '../utils/private/globalData';
 import { defineGetters } from '../utils/private/globalProperty';
 import store from '../store';
 
-const popups = {};
-
-export function registerPopupsByGlobImport(modules) {
-  Object.keys(modules).forEach((key) => {
-    // becare when fix this line
-    const matched = key.match(/\/pages((\/\w+)*)\/(\w+P)\.vue$/);
-
-    if (!matched) {
-      throw new Error(`Invalid path, could not parse "${key}"`);
-    }
-
-    const name = matched.pop();
-
-    popups[name] = {
-      name,
-      component: modules[key],
-    };
-  });
-}
+export const popups = {};
 
 const normalizeOptions = (options) => ({
   component: options.component,
