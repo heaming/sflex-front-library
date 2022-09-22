@@ -17,11 +17,17 @@ export function replaceRoutesByMenus(apps, menus) {
         const matched = find(menus, { applicationId, pageDestinationValue });
 
         if (matched) {
+          const { menuUid, menuName } = matched;
+
           router.addRoute({
             ...route,
-            name: matched.menuUid,
-            path: `/${matched.applicationId.toLowerCase()}${route.path}`,
-            meta: { requiresAuth: true },
+            name: menuUid,
+            path: `/${applicationId.toLowerCase()}${route.path}`,
+            meta: {
+              requiresAuth: true,
+              menuUid,
+              menuName,
+            },
           });
         }
       });

@@ -2,6 +2,7 @@
   <q-page
     class="kw-page"
     :class="pageClass"
+    :style-fn="styleFn"
   >
     <slot
       v-if="!noHeader"
@@ -42,12 +43,19 @@ export default {
     usePage();
     usePageSearch();
 
+    const styleFn = (offset, height) => {
+      const el = document.querySelector('.app-view .tabs-view__header');
+      const additionalOffset = el?.clientHeight || 0;
+      return { 'min-height': `${height - (offset + additionalOffset)}px` };
+    };
+
     const pageClass = computed(() => [
       props.size && `kw-popup--${props.size}`,
     ]);
 
     return {
       ...useObserver(),
+      styleFn,
       pageClass,
     };
   },

@@ -83,6 +83,16 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    // override useForm props
+    ignoreOnModified: {
+      type: Boolean,
+      default: true,
+    },
+    ignoreOnReset: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: [

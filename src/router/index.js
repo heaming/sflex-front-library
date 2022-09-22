@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { unionBy } from 'lodash-es';
-import { INITIAL_LOCATION, registerHooks } from './hooks';
+import beforeEach, { INITIAL_LOCATION } from './hooks/beforeEach';
+import beforeResolve from './hooks/beforeResolve';
+import afterEach from './hooks/afterEach';
 import env from '../consts/private/env';
 import { defineGetters } from '../utils/private/globalProperty';
 
@@ -24,6 +26,14 @@ function registerRoutes(routes) {
   ], 'name');
 
   mergedRoutes.forEach(router.addRoute);
+}
+
+function registerHooks() {
+  if (!__VUE_TEST_APP__) {
+    router.beforeEach(beforeEach);
+    router.beforeResolve(beforeResolve);
+    router.afterEach(afterEach);
+  }
 }
 
 export function installRouter(app, routes) {
