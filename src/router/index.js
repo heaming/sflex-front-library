@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import defaultRoutes from './defaultRoutes';
+import { unionBy } from 'lodash-es';
 import { INITIAL_LOCATION, registerHooks } from './hooks';
 import env from '../consts/private/env';
 import { defineGetters } from '../utils/private/globalProperty';
@@ -11,21 +11,25 @@ const router = createRouter({
 });
 
 function registerRoutes(routes) {
-  const routeNames = routes.map((v) => v.name);
-  const mergedRoutes = [
+  const mergedRoutes = unionBy([
     ...routes,
-    ...defaultRoutes.filter((v) => !routeNames.includes(v.name)),
-  ];
+
+    // default routes
+    // this routes replaced by same named route
+    {
+      name: 'ErrorNotFound',
+      path: '/:catchAll(.*)*',
+      component: () => import('../pages/ErrorNotFound.vue'),
+    },
+  ], 'name');
 
   mergedRoutes.forEach(router.addRoute);
 }
 
 export function installRouter(app, routes) {
   defineGetters(app, { router });
-
   registerRoutes(routes);
   registerHooks(router);
-
   app.use(router);
 }
 
