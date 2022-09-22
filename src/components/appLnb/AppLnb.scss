@@ -1,0 +1,123 @@
+.app-lnb {
+  .lnb-menus {
+    padding-top: 40px;
+
+    &__title {
+      display: flex;
+      min-height: 45px;
+      margin: 0 20px;
+      border-bottom: 2px solid $black1;
+      font-weight: 700;
+      font-size: 18px;
+      color: $black1;
+      align-items: center;
+    }
+  }
+
+  .lnb-tree {
+    &.q-tree {
+      .q-focus-helper,
+      .q-icon.q-tree__arrow {
+        display: none;
+      }
+
+      .q-tree__node,
+      .q-tree__node-header {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .q-tree__children {
+        padding: 14px 0;
+        background-color: $bg-box;
+
+        .q-tree__children {
+          padding: 0;
+        }
+      }
+    }
+
+    &__node {
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 400;
+      color: $black3;
+
+      .q-icon {
+        font-size: inherit;
+        transition: transform 0.3s;
+      }
+
+      &--depth-0 {
+        min-height: 45px;
+        font-size: 16px;
+      }
+
+      &--depth-1 {
+        padding-right: 40px;
+        min-height: 30px;
+
+        &::before {
+          content: "-";
+          display: inline-block;
+          margin-right: 2px;
+          font-weight: 700;
+        }
+      }
+
+      &--depth-2 {
+        padding-left: 40px;
+        min-height: 21px;
+
+        &::before {
+          content: "·";
+          display: inline-block;
+          margin-right: 2px;
+          font-weight: 700;
+        }
+      }
+
+      &--selected,
+      &:hover {
+        font-weight: 700;
+        color: $black1;
+      }
+    }
+  }
+
+  &-drawer {
+    &.kw-btn.q-btn {
+      position: absolute;
+      top: calc(50% - 30px);
+      right: -24px;
+      width: 30px;
+      height: 60px;
+      padding: 0;
+      border-radius: 0 30px 30px 0;
+      z-index: 990;
+      clip-path: inset(-10px -10px -10px 6px);
+      box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 35%);
+      background-color: $black2 !important;
+
+      .q-icon {
+        font-size: 16px;
+        margin-left: 5px;
+      }
+
+      &.q-focusable:focus,
+      &.q-manual-focusable--focused,
+      &.q-hoverable:hover,
+      &.q-btn.q-btn--active {
+        &::before {
+          background-color: $black2 !important;
+        }
+      }
+    }
+
+    &--expanded {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
 export default {
-  // App
   LOCALE_KO: 'ko',
   LOCALE_EN: 'en',
 
-  // HTTP
+  ROUTE_HOME_NAME: 'Home',
+
   HTTP_HEADER_PAGE_ID: 'X-PageId',
   HTTP_ERROR_TYPE_BIZ: 'B',
   HTTP_ERROR_TYPE_EXCEPTION: 'E',
@@ -13,10 +13,5 @@ export default {
   HTTP_ERROR_TYPE_OAUTH_EXPIRED: 'O',
   HTTP_ERROR_TYPE_UNSUPPORTED_DEVICE: 'D',
 
-  // Storage
   LOCAL_STORAGE_ACCESS_TOKEN: '__ACCESS_TOKEN__',
-
-  // Paging
-  PAGING_DEFAULT_PAGE_SIZE: 10,
-  PAGING_DEFAULT_SCROLL_SIZE: 10,
 };

@@ -1,18 +1,18 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <app-layout>
     <app-gnb />
 
     <app-lnb />
 
-    <app-router-view />
-  </q-layout>
+    <app-tabs-view />
+  </app-layout>
 </template>
 
 <script setup>
-import { useSession } from '~kw-lib';
-import AppLnb from '~test/components/app/AppLnb.vue';
-import AppGnb from '~test/components/app/AppGnb.vue';
-import AppRouterView from '~test/components/app/AppRouterView.vue';
+import {
+  useSession,
+  AppLayout, AppGnb, AppLnb, AppTabsView,
+} from '~kw-lib';
 
 await useSession().isReady();
 </script>

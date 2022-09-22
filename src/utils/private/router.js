@@ -1,5 +1,5 @@
 import { find } from 'lodash-es';
-import router from './index';
+import router from '../../router';
 
 function removeGlobImportedRoutes() {
   router.getRoutes().forEach((route) => {
@@ -9,7 +9,7 @@ function removeGlobImportedRoutes() {
   });
 }
 
-export default (apps, menus) => {
+export function replaceRoutesByMenus(apps, menus) {
   router.getRoutes().forEach((route) => {
     if (route.meta.isGlobImport) {
       apps.forEach(({ applicationId }) => {
@@ -17,11 +17,17 @@ export default (apps, menus) => {
         const matched = find(menus, { applicationId, pageDestinationValue });
 
         if (matched) {
+          const { menuUid, menuName } = matched;
+
           router.addRoute({
             ...route,
-            name: matched.menuUid,
-            path: `/${matched.applicationId.toLowerCase()}${route.path}`,
-            meta: { requiresAuth: true },
+            name: menuUid,
+            path: `/${applicationId.toLowerCase()}${route.path}`,
+            meta: {
+              requiresAuth: true,
+              menuUid,
+              menuName,
+            },
           });
         }
       });
@@ -29,4 +35,4 @@ export default (apps, menus) => {
   });
 
   removeGlobImportedRoutes();
-};
+}

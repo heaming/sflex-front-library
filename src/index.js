@@ -1,14 +1,18 @@
 // Core
 export { default as createApp } from './createApp';
 export { default as getComponentType } from './getComponentType';
+export { default as createRoutesByGlobImport } from './createRoutesByGlobImport';
+export { default as registerPopupsByGlobImport } from './registerPopupsByGlobImport';
 export { default as consts } from './consts';
 export { default as i18n } from './i18n';
 export { default as store } from './store';
 export { default as router } from './router';
-export * from './router';
 
 // Components
-export * from './components/app';
+export * from './components/appGnb';
+export * from './components/appLayout';
+export * from './components/appLnb';
+export * from './components/appView';
 
 // Composables
 export { default as useDataService } from './composables/useDataService';
