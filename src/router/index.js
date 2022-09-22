@@ -3,7 +3,6 @@ import defaultRoutes from './defaultRoutes';
 import { INITIAL_LOCATION, registerHooks } from './hooks';
 import env from '../consts/private/env';
 import { defineGetters } from '../utils/private/globalProperty';
-import createRoutesByGlobImport from './createRoutesByGlobImport';
 
 const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -31,7 +30,5 @@ export function installRouter(app, routes) {
 }
 
 export { INITIAL_LOCATION };
-
-export { createRoutesByGlobImport };
 
 export default router;
