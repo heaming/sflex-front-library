@@ -4,7 +4,7 @@
       Search Form
     </h2>
     <p class="kw-guide-description">
-      kw-search-form > kw-search-row > kw-search-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
+      kw-search > kw-search-row > kw-search-item > elements ( CheckBox, Input, Radio , Select, datapicker )<br>
       - This is the sequence to be wrapped<br>
       It is only for "search form". form is diffrent with form. Go to the reference page for form <br>
       (The roots for the Search form: components/collections/form)
@@ -1313,7 +1313,7 @@ const theOneRowCode = `
 
 const guideHistory = [
   {
-    timestamp: '2022.08.29',
+    timestamp: '2022.09.21',
     text: '1 or 2 columns in 1 row has been changed',
   },
   {

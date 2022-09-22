@@ -8,20 +8,24 @@
   max-width: 250px;
 }
 
-.kw-date-picker.q-field {
+.kw-date-picker.kw-field.q-field {
   .q-field__control {
     cursor: text;
   }
 
   .q-field__append {
-    padding-left: 0;
-    cursor: text;
+    // don't fix
+    // this has side effects to picker events
+    padding-left: 0 !important;
+    cursor: text !important;
 
     > div {
       display: flex;
       align-items: center;
       height: 100%;
-      padding-left: 12px;
+
+      // replaced that q-field__append padding-left
+      padding-left: 20px;
     }
   }
 
