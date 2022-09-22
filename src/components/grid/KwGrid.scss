@@ -33,6 +33,10 @@
   &.rg-focused-row {
     background: #e8eef5;
   }
+
+  &:has(td.rg-merged-cell) td {
+    border-left: 1px solid $line-bg;
+  }
 }
 
 .rg-selection {
