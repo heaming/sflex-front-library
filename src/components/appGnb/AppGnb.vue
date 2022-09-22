@@ -2,10 +2,9 @@
   <q-header class="app-gnb">
     <q-toolbar class="full-width">
       <a class="gnb-logo">
-        <img
-          src="~~@assets/images/logo_redpen.svg"
-          alt="KSS빨간펜"
-        >
+        <slot name="logo">
+          LOGO
+        </slot>
       </a>
 
       <div class="gnb__link-container ml80 row justify-between">
