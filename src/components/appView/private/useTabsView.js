@@ -1,10 +1,11 @@
 import { last } from 'lodash-es';
+import consts from '../../../consts';
 
 export default () => {
   const router = useRouter();
   const { getters } = useStore();
 
-  const homeKey = 'Home';
+  const homeKey = consts.ROUTE_HOME_NAME;
   const homeComponent = router.getRoutes()
     .find((v) => v.name === homeKey).components.default;
 
