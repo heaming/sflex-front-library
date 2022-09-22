@@ -2,7 +2,7 @@ import { filter, find } from 'lodash-es';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
 import { localStorage } from '../../plugins/storage';
-import replaceRoutesByMenus from '../../router/replaceRoutesByMenus';
+import { replaceRoutesByMenus } from '../../utils/private/router';
 
 export default {
   namespaced: true,
