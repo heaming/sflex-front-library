@@ -1,10 +1,24 @@
 .global-loading {
-  .q-loading__backdrop {
+  z-index: 99999;
+
+  .q-dialog__backdrop {
     background: transparent;
   }
 
-  .q-circular-progress,
-  .q-loading__spinner {
+  .q-dialog__inner > div {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: none;
+  }
+
+  .q-circular-progress {
+    font-size: 5em;
+    color: $primary;
+  }
+
+  .q-spinner {
+    font-size: 5em;
     color: $primary;
   }
 }
