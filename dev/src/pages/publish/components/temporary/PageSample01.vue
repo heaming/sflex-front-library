@@ -46,72 +46,69 @@
           <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
         </li>
       </ul>
-      <kw-action-bar>
+      <kw-action-top>
         <template #left>
-          <div class="kw-action-bar--count">
-            총 <span class="kw-action-bar--number pl4">156</span>
-          </div>
+          <span>총</span>
+          <span class="accent pl4">156</span>
           <kw-separator
             vertical
             inset
-            spaced="8px"
+            spaced
           />
           <kw-select
             v-model="selectData.model"
+            class="kw-select--rows-per-page"
             :options="selectData.options"
             borderless
             dense
             suffix="개씩보기"
           />
-          <div class="kw-action-bar--send ml40">
-            <kw-btn
-              label="URL 전송"
-              dense
-              color="bg-box"
-              border-color="line-line"
-              text-color="black3"
-            />
-            <p class="kw-action-bar--description ml16">
-              고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-            </p>
-          </div>
+          <kw-btn
+            class="ml40"
+            label="URL 전송"
+            dense
+            color="bg-box"
+            border-color="line-line"
+            text-color="black3"
+          />
+          <p class="description ml16">
+            고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
+          </p>
         </template>
-
-        <kw-btn
-          icon="excel_download_16"
-          dense
-          secondary
-          label="엑셀 다운로드"
-        />
-        <kw-separator
-          vertical
-          inset
-          spaced="16px"
-        />
-        <kw-btn
-          label="개인 고객 등록 URL 전송"
-          primary
-          dense
-        />
-        <kw-btn
-          label="개인 고객 등록"
-          class="ml8"
-          primary
-          dense
-        />
-        <kw-btn
-          label="법인 고객 등록"
-          class="ml8"
-          primary
-          dense
-        />
-      </kw-action-bar>
+        <template #default>
+          <kw-btn
+            icon="excel_download_16"
+            dense
+            secondary
+            label="엑셀 다운로드"
+          />
+          <kw-separator
+            vertical
+            inset
+            spaced
+          />
+          <kw-btn
+            label="개인 고객 등록 URL 전송"
+            primary
+            dense
+          />
+          <kw-btn
+            label="개인 고객 등록"
+            primary
+            dense
+          />
+          <kw-btn
+            label="법인 고객 등록"
+            primary
+            dense
+          />
+        </template>
+      </kw-action-top>
       <kw-grid
         :visible-rows="10"
         @init="initGrid"
       />
-      <div class="row justify-start items-center mt12">
-        <!-- 'the helper classes' from Quasar & gutter -->
+      <kw-action-bottom>
         <kw-btn
           label="삭제"
           grid-action
@@ -119,9 +116,8 @@
         <kw-btn
           label="저장"
           grid-action
-          class="ml8"
         />
-      </div>
+      </kw-action-bottom>
       <kw-pagination
         :model-value="1"
         :total-count="100"
@@ -251,72 +247,69 @@ const sampleVueCode = `
         <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
       </li>
     </ul>
-    <kw-action-bar>
+    <kw-action-top>
       <template #left>
-        <div class="kw-action-bar--count">
-          총 <span class="kw-action-bar--number pl4">156</span>
-        </div>
+        <span>총</span>
+        <span class="accent pl4">156</span>
         <kw-separator
-        vertical
-        inset
-        spaced="8px"
+          vertical
+          inset
+          spaced
         />
         <kw-select
+          class="kw-select--rows-per-page"
           v-model="selectData.model"
           :options="selectData.options"
           borderless
           dense
           suffix="개씩보기"
         />
-        <div class="kw-action-bar--send ml40">
-          <kw-btn
-            label="URL 전송"
-            dense
-            color="bg-box"
-            border-color="line-line"
-            text-color="black3"
-          />
-          <p class="kw-action-bar--description ml16">
-            고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-          </p>
-        </div>
+        <kw-btn
+          class="ml40"
+          label="URL 전송"
+          dense
+          color="bg-box"
+          border-color="line-line"
+          text-color="black3"
+        />
+        <p class="description ml16">
+          고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
+        </p>
       </template>
-
-      <kw-btn
-        icon="excel_download_16"
-        dense
-        secondary
-        label="엑셀 다운로드"
-      />
-      <kw-separator
-        vertical
-        inset
-        spaced="16px"
-      />
-      <kw-btn
-        label="개인 고객 등록 URL 전송"
-        primary
-        dense
-      />
-      <kw-btn
-        label="개인 고객 등록"
-        class="ml8"
-        primary
-        dense
-      />
-      <kw-btn
-        label="법인 고객 등록"
-        class="ml8"
-        primary
-        dense
-      />
-    </kw-action-bar>
+      <template #default>
+        <kw-btn
+          icon="excel_download_16"
+          dense
+          secondary
+          label="엑셀 다운로드"
+        />
+        <kw-separator
+          vertical
+          inset
+          spaced
+        />
+        <kw-btn
+          label="개인 고객 등록 URL 전송"
+          primary
+          dense
+        />
+        <kw-btn
+          label="개인 고객 등록"
+          primary
+          dense
+        />
+        <kw-btn
+          label="법인 고객 등록"
+          primary
+          dense
+        />
+      </template>
+    </kw-action-top>
     <kw-grid
       :visible-rows="10"
       @init="initGrid"
     />
-    <div class="row justify-start items-center mt12">
-      <!-- 'the helper classes' from Quasar & gutter -->
+    <kw-action-bottom>
       <kw-btn
         label="삭제"
         grid-action
@@ -324,15 +317,15 @@ const sampleVueCode = `
       <kw-btn
         label="저장"
         grid-action
-        class="ml8"
       />
-    </div>
+    </kw-action-bottom>
     <kw-pagination
       :model-value="1"
       :total-count="100"
     />
   </div>
-</kw-page>`;
+</kw-page>
+`;
 
 const sampleJsCode = `
 const selectData = { model: '10',

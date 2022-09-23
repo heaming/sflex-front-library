@@ -64,11 +64,11 @@ const designDefaultColors = {
   },
 };
 
-export default () => {
+export default (defaultPreset) => {
   const { props } = getCurrentInstance();
 
   const stylePreset = computed(() => {
-    let preset = availablePresets[props.preset] ?? {};
+    let preset = availablePresets[props.preset] ?? defaultPreset ?? {};
     if (props.primary === true) { preset = availablePresets.primary; }
     if (props.negative === true) { preset = availablePresets.negative; }
     if (props.secondary === true) { preset = availablePresets.secondary; }
