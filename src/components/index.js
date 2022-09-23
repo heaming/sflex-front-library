@@ -1,5 +1,6 @@
 // register global component
 // which that tag starts with `Kw`
+export * from './action';
 export * from './actionBar';
 export * from './btn';
 export * from './btnToggle';

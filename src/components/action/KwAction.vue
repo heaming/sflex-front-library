@@ -1,9 +1,9 @@
 <template>
-  <div class="kw-action-bar">
-    <div class="kw-action-bar__left">
+  <div class="kw-action">
+    <div class="kw-action__left">
       <slot name="left" />
     </div>
-    <div class="kw-action-bar__contents">
+    <div class="kw-action__contents">
       <slot />
     </div>
   </div>
@@ -12,6 +12,6 @@
 <script>
 
 export default {
-  name: 'KwActionBar',
+  name: 'KwAction',
 };
 </script>
