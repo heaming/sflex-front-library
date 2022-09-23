@@ -105,31 +105,33 @@
           <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
         </li>
       </ul>
-      <kw-action-bar>
+      <kw-action-top>
         <template #left>
-          <div class="kw-action-bar--count">
-            총 <span class="kw-action-bar--number pl4">156</span>
-          </div>
+          <span>총</span>
+          <span class="accent pl4">156</span>
           <kw-separator
+            spaced
             vertical
             inset
-            spaced="8px"
           />
           <kw-select
             v-model="selectData.model"
+            class="kw-select--rows-per-page"
             :options="selectData.options"
             borderless
             dense
             suffix="개씩보기"
           />
-
-          <kw-btn
-            label="저장"
-            grid-action
-            class="ml16"
-          />
         </template>
-
+        <kw-btn
+          label="저장"
+          grid-action
+        />
+        <kw-separator
+          spaced
+          vertical
+          inset
+        />
         <kw-btn
           icon="excel_16"
           dense
@@ -137,9 +139,9 @@
           label="엑셀 다운로드"
         />
         <kw-separator
+          spaced
           vertical
           inset
-          spaced="16px"
         />
         <kw-btn
           label="개인 고객 등록 URL 전송"
@@ -148,28 +150,25 @@
         />
         <kw-btn
           label="개인 고객 등록"
-          class="ml8"
           primary
           dense
         />
         <kw-btn
           label="법인 고객 등록"
-          class="ml8"
           primary
           dense
         />
-      </kw-action-bar>
+      </kw-action-top>
       <kw-grid
         :visible-rows="10"
         @init="initGrid"
       />
-      <div class="row justify-start items-center mt12">
-        <!-- 'the helper classes' from Quasar & gutter -->
+      <kw-action-bottom>
         <kw-btn
           label="삭제"
           grid-action
         />
-      </div>
+      </kw-action-bottom>
       <kw-pagination
         :model-value="1"
         :total-count="100"
@@ -358,30 +357,33 @@ const sampleVueCode = `
         <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
       </li>
     </ul>
-    <kw-action-bar>
+    <kw-action-top>
       <template #left>
-        <div class="kw-action-bar--count">
-          총 <span class="kw-action-bar--number pl4">156</span>
-        </div>
+        <span>총</span>
+        <span class="accent pl4">156</span>
         <kw-separator
-        vertical
-        inset
-        spaced="8px"
+          spaced
+          vertical
+          inset
         />
         <kw-select
           v-model="selectData.model"
+          class="kw-select--rows-per-page"
           :options="selectData.options"
           borderless
           dense
           suffix="개씩보기"
         />
-        <kw-btn
-          label="저장"
-          grid-action
-          class="ml16"
-        />
       </template>
-
+      <kw-btn
+        label="저장"
+        grid-action
+      />
+      <kw-separator
+        spaced
+        vertical
+        inset
+      />
       <kw-btn
         icon="excel_16"
         dense
@@ -389,9 +391,9 @@ const sampleVueCode = `
         label="엑셀 다운로드"
       />
       <kw-separator
+        spaced
         vertical
         inset
-        spaced="16px"
       />
       <kw-btn
         label="개인 고객 등록 URL 전송"
@@ -400,28 +402,29 @@ const sampleVueCode = `
       />
       <kw-btn
         label="개인 고객 등록"
-        class="ml8"
         primary
         dense
       />
       <kw-btn
         label="법인 고객 등록"
-        class="ml8"
         primary
         dense
       />
-    </kw-action-bar>
+    </kw-action-top>
     <kw-grid
       :visible-rows="10"
       @init="initGrid"
     />
-    <div class="row justify-start items-center mt12">
-      <!-- 'the helper classes' from Quasar & gutter -->
+    <kw-action-bottom>
       <kw-btn
         label="삭제"
         grid-action
       />
-    </div>
+    </kw-action-bottom>
+    <kw-pagination
+      :model-value="1"
+      :total-count="100"
+    />
     <kw-pagination
       :model-value="1"
       :total-count="100"

@@ -491,7 +491,7 @@ p {
   }
 
   & > *:first-child {
-    &:is(.kw-action-bar) {
+    &:is(.kw-action--top) {
       margin-top: 30px;
     }
 

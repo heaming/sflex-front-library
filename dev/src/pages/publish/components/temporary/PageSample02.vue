@@ -58,17 +58,15 @@
         </kw-search>
 
         <div class="result-area">
-          <kw-action-bar>
+          <kw-action-top>
             <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">1,247</span>
-              </div>
+              <span>총</span>
+              <span class="accent pl4">1,247</span>
             </template>
             <kw-btn
               dense
               secondary
               label="파트너과정 수료이관"
-              class="mr8"
             />
             <kw-btn
               dense
@@ -76,7 +74,7 @@
               label="버튼"
             />
             <kw-separator
-              spaced="16px"
+              spaced
               vertical
               inset
             />
@@ -85,7 +83,6 @@
               dense
               secondary
               label="인쇄"
-              class="mr8"
             />
             <kw-btn
               icon="excel_download_16"
@@ -95,7 +92,7 @@
               @click="onClickExcelDownload"
             />
             <kw-separator
-              spaced="16px"
+              spaced
               vertical
               inset
             />
@@ -104,7 +101,7 @@
               dense
               label="주기능"
             />
-          </kw-action-bar>
+          </kw-action-top>
           <kw-grid
             ref="grdRef"
             :visible-rows="13"
@@ -252,17 +249,15 @@ const sampleVueCode = `
       </kw-search>
 
       <div class="result-area">
-        <kw-action-bar>
+        <kw-action-top>
           <template #left>
-            <div class="kw-action-bar--count">
-              총 <span class="kw-action-bar--number pl4">1,247</span>
-            </div>
+            <span>총</span>
+            <span class="accent pl4">1,247</span>
           </template>
           <kw-btn
             dense
             secondary
             label="파트너과정 수료이관"
-            class="mr8"
           />
           <kw-btn
             dense
@@ -270,16 +265,15 @@ const sampleVueCode = `
             label="버튼"
           />
           <kw-separator
-            spaced="16px"
+            spaced
             vertical
             inset
           />
           <kw-btn
             icon="print_16"
-            secondary
             dense
+            secondary
             label="인쇄"
-            class="mr8"
           />
           <kw-btn
             icon="excel_download_16"
@@ -298,7 +292,7 @@ const sampleVueCode = `
             dense
             label="주기능"
           />
-        </kw-action-bar>
+        </kw-action-top>
         <kw-grid
           ref="grdRef"
           :visible-rows="13"
