@@ -10,16 +10,7 @@
         <kw-btn-toggle
           v-model="strModel"
           :label="'label'"
-          :options="['A', 'B', 'C', 'D']"
-          secondary
-          toggle-color="primary"
-          toggle-text-color="black1"
-          toggle-border-color="black1"
-          dense
-          min-width="90px"
-          gap="10px"
-          clearable
-          spread
+          :options="['오늘', '주간', '월간']"
         />
       </kw-form-item>
       <kw-form-item label="button toggle">
@@ -600,7 +591,7 @@
 <script setup>
 import { KwBtn, KwBtnToggle } from '../../../../src/components';
 
-const strModel = ref('');
+const strModel = ref('오늘');
 </script>
 
 <style scoped lang="scss">

@@ -47,11 +47,11 @@ export default {
     ...useOptionsProps,
     ...useButtonStyleProps,
 
-    toggleColor: { type: String, default: undefined },
-    toggleTextColor: { type: String, default: undefined },
-    toggleBorderColor: { type: String, default: undefined },
+    toggleColor: { type: String, default: 'bg-white' },
+    toggleTextColor: { type: String, default: 'primary' },
+    toggleBorderColor: { type: String, default: 'primary' },
 
-    gap: { type: String, default: undefined },
+    gap: { type: String, default: '4px' },
 
     modelValue: {
       type: [String, Number, Boolean],
@@ -70,7 +70,13 @@ export default {
 
   setup(props) {
     const { normalizedOptions } = useOptions();
-    const { buttonClasses, buttonStyles, buttonDense } = useButtonStyle();
+    const { buttonClasses, buttonStyles, buttonDense } = useButtonStyle({
+      color: 'bg-white',
+      textColor: 'black3',
+      borderColor: 'line-stroke',
+      outlined: true,
+      dense: true,
+    });
 
     const toggleButtonClasses = computed(() => {
       let classes = 'kw-btn ';
