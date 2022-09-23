@@ -1,0 +1,66 @@
+.kw-action {
+  min-height: 32px;
+  width: 100%;
+  color: $black3;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+
+  &__left {
+    flex: none;
+    min-height: 32px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  &__contents {
+    min-height: 32px;
+    margin-left: auto;
+    flex: 1 0 1px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .accent {
+    color: $black1;
+    font-weight: 700;
+    padding-left: 4px;
+  }
+
+  .description {
+    font-size: 11px;
+    color: $black3;
+  }
+
+  @at-root .kw-select--rows-per-page {
+    &.kw-field.q-field {
+      .q-field__native {
+        color: $black1;
+        font-weight: 700;
+      }
+    }
+
+    &.kw-field.q-field--dense .q-field__append {
+      padding-left: 4px;
+    }
+  }
+
+  &--top {
+    margin-bottom: 12px;
+    align-items: flex-end;
+
+    .kw-action__contents {
+      flex-wrap: wrap-reverse;
+    }
+  }
+
+  &--bottom {
+    margin-top: 12px;
+    align-items: flex-start;
+  }
+}
