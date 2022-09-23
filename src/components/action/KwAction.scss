@@ -1,7 +1,6 @@
 .kw-action {
   min-height: 32px;
   width: 100%;
-  color: $black3;
   font-size: 14px;
   line-height: 20px;
   display: flex;
@@ -13,6 +12,10 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+
+    > span {
+      color: $black3;
+    }
   }
 
   &__contents {
