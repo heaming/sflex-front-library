@@ -239,6 +239,18 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
   return [];
 }
 
+export async function insertRowAndFocus(view, dataRow, rowValue, fieldName) {
+  const data = view.getDataSource();
+  const isInserted = data.insertRow(dataRow, rowValue);
+  const shoudFocus = isInserted && fieldName !== false;
+
+  if (shoudFocus) {
+    await focusCellInput(view, dataRow, fieldName);
+  }
+
+  return isInserted;
+}
+
 /*
   DirtyCheck
  */
