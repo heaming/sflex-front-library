@@ -33,6 +33,10 @@ export default {
       type: Function,
       default: undefined,
     },
+    onError: {
+      type: Function,
+      default: undefined,
+    },
   },
 
   setup(props) {
@@ -57,10 +61,11 @@ export default {
       props.onResolve?.();
     }
 
-    onErrorCaptured(() => {
+    onErrorCaptured((e) => {
       if (!isLoaded.value) {
         isLoadFailed.value = true;
         loadSpinnerIfUse(false);
+        props.onError?.(e);
       }
     });
 
