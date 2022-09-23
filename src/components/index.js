@@ -24,6 +24,7 @@ export * from './search';
 export * from './select';
 export * from './separator';
 export * from './stepper';
+export * from './suspense';
 export * from './tabPanels';
 export * from './tabs';
 export * from './timePicker';
