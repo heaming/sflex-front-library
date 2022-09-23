@@ -1,5 +1,5 @@
 <template>
-  <q-page class="app-view__load-failed column">
+  <kw-page class="app-view__load-failed column">
     <q-card
       class="col row justify-center items-center"
       flat
@@ -12,7 +12,7 @@
           name="info_24"
         />
         <div class="text-center mt5">
-          <p v-if="$i18n.locale === consts.LOCALE_KO">
+          <p v-if="isLocaleKo">
             페이지를 표시하는 도중 문제가 발생했습니다.<br>
             관리자에게 문의하시기 바랍니다.
           </p>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </q-card>
-  </q-page>
+  </kw-page>
 </template>
 
 <script>
@@ -33,8 +33,11 @@ export default {
   name: 'LoadFailedView',
 
   setup() {
+    const { locale } = useI18n();
+    const isLocaleKo = computed(() => locale.value === consts.LOCALE_KO);
+
     return {
-      consts,
+      isLocaleKo,
     };
   },
 };

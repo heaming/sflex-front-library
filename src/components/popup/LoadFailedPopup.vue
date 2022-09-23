@@ -7,7 +7,7 @@
         name="info_24"
       />
       <div class="text-center mt5">
-        <p v-if="$i18n.locale === consts.LOCALE_KO">
+        <p v-if="isLocaleKo">
           팝업을 표시하는 도중 문제가 발생했습니다.<br>
           관리자에게 문의하시기 바랍니다.
         </p>
@@ -27,8 +27,11 @@ export default {
   name: 'LoadFailedPopup',
 
   setup() {
+    const { locale } = useI18n();
+    const isLocaleKo = computed(() => locale.value === consts.LOCALE_KO);
+
     return {
-      consts,
+      isLocaleKo,
     };
   },
 };
