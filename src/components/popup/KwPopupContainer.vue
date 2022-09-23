@@ -1,6 +1,6 @@
 <template>
   <q-card
-    v-show="isLoaded || isLoadFailed"
+    v-show="isLoaded"
     ref="containerRef"
     class="kw-popup"
     :class="popupClass"
@@ -27,8 +27,12 @@
       />
     </q-card-section>
 
-    <kw-suspense>
-      <slot />
+    <kw-suspense
+      @resolve="isLoaded = true"
+    >
+      <template #default>
+        <slot />
+      </template>
       <template #error>
         <load-failed-popup />
       </template>
@@ -56,6 +60,7 @@ export default {
   ],
 
   setup(props, { emit }) {
+    const isLoaded = ref(false);
     const popupCtx = shallowRef({});
 
     function registerPopup(ctx) {
@@ -93,6 +98,7 @@ export default {
     ]);
 
     return {
+      isLoaded,
       ctx: popupCtx,
       close,
       containerRef,
