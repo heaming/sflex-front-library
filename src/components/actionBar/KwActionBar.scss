@@ -1,196 +1,50 @@
 .kw-action-bar {
-  height: 32px;
+  min-height: 32px;
+  width: 100%;
+  color: $black3;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 12px; // default margin fixme
+  display: flex;
+  align-items: flex-end;
 
-  &--count {
-    height: 100%;
-    color: $black3;
-    font-size: 14px;
-    line-height: 1;
+  &__left {
+    min-height: 32px;
     display: flex;
     align-items: center;
   }
 
-  &--number {
+  &__contents {
+    min-height: 32px;
+    margin-left: auto;
+    flex: 1 0 1px;
+    display: flex;
+    gap: 8px;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+  }
+
+  .accent {
     color: $black1;
     font-weight: 700;
+    padding-left: 4px;
   }
 
-  &--send {
-    display: flex;
-    align-items: center;
-  }
-
-  &--description {
-    margin: 0;
+  .description {
     font-size: 11px;
     color: $black3;
-    display: flex;
-    align-items: center;
   }
 
-  &-menu {
-    font-size: 14px;
-    color: $black3;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      width: 16px;
-      height: 16px;
-      background: url(~@assets/images/ic_arrow_b_16.svg) no-repeat center;
-      background-size: 16px auto;
-      transition: transform 0.28s;
-    }
-
-    &--append {
-      &::after {
-        transform: translateY(-50%) rotate(180deg);
-      }
-    }
-
-    & &--value {
-      color: $black1;
-      font-weight: 700;
-    }
-  }
-
-  .kw-select.q-select {
-    height: 32px;
-    border: 0;
-
-    .q-field__control {
-      border: 0;
-      height: 32px;
-      min-height: 32px;
-    }
-
-    &.q-field--auto-height.q-field--labeled .q-field__control-container {
-      padding: 0;
-    }
-
-    .q-field__native {
-      padding: 0;
-
-      & > span {
-        font-size: 14px;
+  @at-root .kw-select--rows-per-page {
+    &.kw-field.q-field {
+      .q-field__native {
+        color: $black1;
         font-weight: 700;
       }
     }
 
-    &.q-field--with-bottom {
-      padding: 0;
+    &.kw-field.q-field--dense .q-field__append {
+      padding-left: 4px;
     }
-
-    &,
-    &.q-field--dense {
-      .q-field__append {
-        padding-left: 4px;
-      }
-    }
-
-    .q-select__dropdown-icon {
-      margin-right: 0;
-    }
-  }
-
-  & + :is(.kw-grid, .grid-blank) {
-    margin-top: 12px;
-  }
-
-  .kw-btn {
-    // padding: 0 14px;
-    // height: 32px;
-    // font-size: 14px;
-    // font-weight: 400;
-
-    // & + .kw-btn {
-    //   margin-left: 10px;
-    // }
-
-    // &.kw-btn--excel {
-    //   padding: 0;
-    //   padding-left: 22px;
-    //   background-color: #fff;
-    //   font-size: 14px;
-    //   color: $black1;
-    //   text-decoration: underline;
-    //   position: relative;
-
-    //   &::before {
-    //     content: "";
-    //     position: absolute;
-    //     top: 50%;
-    //     left: 0;
-    //     transform: translateY(-50%);
-    //     width: 16px;
-    //     height: 16px;
-    //     background: url(~@assets/images/ic_excel_off_16_3x.png) no-repeat center;
-    //     background-size: 16px 16px;
-    //     display: block;
-    //     box-shadow: none;
-    //     transition: none;
-    //   }
-    // }
-
-    &.kw-btn--search {
-      padding: 0 12px;
-      border: 1px solid $line-line;
-      background-color: $bg-box;
-      font-size: 12px;
-      color: $black2;
-
-      &:hover {
-        border-color: $black1;
-        background-color: $bg-box;
-      }
-
-      &.q-btn--active {
-        border-color: $line-line;
-        background-color: #dbdbdb;
-      }
-
-      // disabled
-      &:disabled {
-        color: #bbb;
-        border-color: $line-line;
-        background-color: $bg-box;
-
-        &:hover {
-          color: #bbb;
-          border-color: $line-line;
-          background-color: $bg-box;
-        }
-
-        &.q-btn--active {
-          color: #bbb;
-          border-color: $line-line;
-          background-color: $bg-box;
-        }
-      }
-    }
-  }
-}
-
-.kw-action-bar--separator {
-  margin-right: 20px;
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -10px;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 18px;
-    background-color: $line-bg;
   }
 }

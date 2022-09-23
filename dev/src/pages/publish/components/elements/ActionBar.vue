@@ -128,63 +128,61 @@
         <div class="kw-guide-example">
           <kw-action-bar>
             <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">156</span>
-              </div>
+              <span>총</span>
+              <span class="accent pl4">156</span>
               <kw-separator
                 vertical
                 inset
-                spaced="8px"
+                spaced
               />
               <kw-select
                 v-model="selectData.model"
+                class="kw-select--rows-per-page"
                 :options="selectData.options"
                 borderless
                 dense
                 suffix="개씩보기"
               />
-              <div class="kw-action-bar--send ml40">
-                <kw-btn
-                  label="URL 전송"
-                  dense
-                  color="bg-box"
-                  border-color="line-line"
-                  text-color="black3"
-                />
-                <p class="kw-action-bar--description ml16">
-                  고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-                </p>
-              </div>
+              <kw-btn
+                label="URL 전송"
+                class="ml40"
+                dense
+                color="bg-box"
+                border-color="line-line"
+                text-color="black3"
+              />
+              <p class="description ml16">
+                고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
+              </p>
             </template>
-
-            <kw-btn
-              icon="excel_16"
-              dense
-              secondary
-              label="엑셀 다운로드"
-            />
-            <kw-separator
-              vertical
-              inset
-              spaced="16px"
-            />
-            <kw-btn
-              label="개인 고객 등록 URL 전송"
-              primary
-              dense
-            />
-            <kw-btn
-              label="개인 고객 등록"
-              class="ml8"
-              primary
-              dense
-            />
-            <kw-btn
-              label="법인 고객 등록"
-              class="ml8"
-              primary
-              dense
-            />
+            <template #default>
+              <kw-btn
+                icon="excel_16"
+                dense
+                secondary
+                label="엑셀 다운로드"
+              />
+              <kw-separator
+                vertical
+                inset
+                spaced
+              />
+              <kw-btn
+                label="개인 고객 등록 URL 전송"
+                primary
+                dense
+              />
+              <kw-btn
+                label="개인 고객 등록"
+                primary
+                dense
+              />
+              <kw-btn
+                label="법인 고객 등록"
+                primary
+                dense
+              />
+            </template>
           </kw-action-bar>
         </div>
         <guide-code-view
@@ -205,27 +203,27 @@
         <div class="kw-guide-example">
           <kw-action-bar>
             <template #left>
-              <p class="kw-action-bar--count">
-                (단위: 원)
-              </p>
+              <span>(단위: 원)</span>
             </template>
 
-            <kw-btn
-              icon="excel_16"
-              dense
-              secondary
-              label="엑셀 다운로드"
-            />
-            <kw-separator
-              vertical
-              inset
-              spaced="16px"
-            />
-            <kw-btn
-              label="품의"
-              primary
-              dense
-            />
+            <template #default>
+              <kw-btn
+                icon="excel_16"
+                dense
+                secondary
+                label="엑셀 다운로드"
+              />
+              <kw-separator
+                vertical
+                inset
+                spaced
+              />
+              <kw-btn
+                label="품의"
+                primary
+                dense
+              />
+            </template>
           </kw-action-bar>
         </div>
         <guide-code-view
@@ -245,50 +243,50 @@
         <div class="kw-guide-example">
           <kw-action-bar>
             <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">1,247</span>
-              </div>
+              <span>총</span>
+              <span class="accent pl4">1,247</span>
             </template>
-            <kw-btn
-              dense
-              secondary
-              label="파트너과정 수료이관"
-              class="mr8"
-            />
-            <kw-btn
-              dense
-              secondary
-              label="버튼"
-            />
-            <kw-separator
-              spaced="16px"
-              vertical
-              inset
-            />
-            <kw-btn
-              icon="print_16"
-              dense
-              secondary
-              label="인쇄"
-              class="mr8"
-            />
-            <kw-btn
-              icon="excel_download_16"
-              dense
-              secondary
-              label="엑셀 다운로드"
-              @click="onClickExcelDownload"
-            />
-            <kw-separator
-              spaced="16px"
-              vertical
-              inset
-            />
-            <kw-btn
-              primary
-              dense
-              label="주기능"
-            />
+
+            <template #default>
+              <kw-btn
+                dense
+                secondary
+                label="파트너과정 수료이관"
+              />
+              <kw-btn
+                dense
+                secondary
+                label="버튼"
+              />
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <kw-btn
+                icon="print_16"
+                dense
+                secondary
+                label="인쇄"
+              />
+              <kw-btn
+                icon="excel_download_16"
+                dense
+                secondary
+                label="엑셀 다운로드"
+                @click="onClickExcelDownload"
+              />
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <kw-btn
+                primary
+                dense
+                label="주기능"
+              />
+            </template>
           </kw-action-bar>
         </div>
         <guide-code-view
@@ -308,16 +306,16 @@
         <div class="kw-guide-example">
           <kw-action-bar>
             <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">156</span>
-              </div>
+              <span>총</span>
+              <span class="accent pl4">156</span>
               <kw-separator
                 vertical
                 inset
-                spaced="8px"
+                spaced
               />
               <kw-select
                 v-model="selectData.model"
+                class="kw-select--rows-per-page"
                 :options="selectData.options"
                 borderless
                 dense
@@ -340,7 +338,7 @@
             <kw-separator
               vertical
               inset
-              spaced="16px"
+              spaced
             />
             <kw-btn
               label="개인 고객 등록 URL 전송"
@@ -349,13 +347,11 @@
             />
             <kw-btn
               label="개인 고객 등록"
-              class="ml8"
               primary
               dense
             />
             <kw-btn
               label="법인 고객 등록"
-              class="ml8"
               primary
               dense
             />
@@ -382,63 +378,61 @@ const selectData = {
 const testCode = `
 <kw-action-bar>
   <template #left>
-    <div class="kw-action-bar--count">
-      총 <span class="kw-action-bar--number pl4">156</span>
-    </div>
+    <span>총</span>
+    <span class="accent pl4">156</span>
     <kw-separator
       vertical
       inset
-      spaced="8px"
+      spaced
     />
     <kw-select
       v-model="selectData.model"
+      class="kw-select--rows-per-page"
       :options="selectData.options"
       borderless
       dense
       suffix="개씩보기"
     />
-    <div class="kw-action-bar--send ml40">
-      <kw-btn
-        label="URL 전송"
-        dense
-        color="bg-box"
-        border-color="line-line"
-        text-color="black3"
-      />
-      <p class="kw-action-bar--description ml16">
-        고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-      </p>
-    </div>
+    <kw-btn
+      label="URL 전송"
+      class="ml40"
+      dense
+      color="bg-box"
+      border-color="line-line"
+      text-color="black3"
+    />
+    <p class="description ml16">
+      고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
+    </p>
   </template>
-
-  <kw-btn
-    secondary
-    icon="excel_16"
-    dense
-    label="엑셀 다운로드"
-  />
-  <kw-separator
-    vertical
-    inset
-    spaced="16px"
-  />
-  <kw-btn
-    label="개인 고객 등록 URL 전송"
-    primary
-    dense
-  />
-  <kw-btn
-    label="개인 고객 등록"
-    class="ml8"
-    primary
-    dense
-  />
-  <kw-btn
-    label="법인 고객 등록"
-    class="ml8"
-    primary
-    dense
-  />
+  <template #default>
+    <kw-btn
+      icon="excel_16"
+      dense
+      secondary
+      label="엑셀 다운로드"
+    />
+    <kw-separator
+      vertical
+      inset
+      spaced
+    />
+    <kw-btn
+      label="개인 고객 등록 URL 전송"
+      primary
+      dense
+    />
+    <kw-btn
+      label="개인 고객 등록"
+      primary
+      dense
+    />
+    <kw-btn
+      label="법인 고객 등록"
+      primary
+      dense
+    />
+  </template>
 </kw-action-bar>
 `;
 const testData = `
@@ -453,69 +447,93 @@ const selectData = {
 const testCode2 = `
 <kw-action-bar>
   <template #left>
-    <p class="kw-action-bar--count">
-      (단위: 원)
-    </p>
+    <span>(단위: 원)</span>
   </template>
 
-  <kw-btn
-    icon="excel_16"
-    dense
-    secondary
-    label="엑셀 다운로드"
-  />
-  <kw-separator
-    vertical
-    inset
-    spaced="16px"
-  />
-  <kw-btn
-    label="품의"
-    primary
-    dense
-  />
+  <template #default>
+    <kw-btn
+      icon="excel_16"
+      dense
+      secondary
+      label="엑셀 다운로드"
+    />
+    <kw-separator
+      vertical
+      inset
+      spaced
+    />
+    <kw-btn
+      label="품의"
+      primary
+      dense
+    />
+  </template>
 </kw-action-bar>
 `;
 
 const testCode3 = `
 <kw-action-bar>
   <template #left>
-    <p class="kw-action-bar--count">
-      (단위: 원)
-    </p>
+    <span>총</span>
+    <span class="accent pl4">1,247</span>
   </template>
 
-  <kw-btn
-    icon="excel_16"
-    dense
-    secondary
-    label="엑셀 다운로드"
-  />
-  <kw-separator
-    vertical
-    inset
-    spaced="16px"
-  />
-  <kw-btn
-    label="품의"
-    primary
-    dense
-  />
+  <template #default>
+    <kw-btn
+      dense
+      secondary
+      label="파트너과정 수료이관"
+    />
+    <kw-btn
+      dense
+      secondary
+      label="버튼"
+    />
+    <kw-separator
+      spaced
+      vertical
+      inset
+    />
+    <kw-btn
+      icon="print_16"
+      dense
+      secondary
+      label="인쇄"
+    />
+    <kw-btn
+      icon="excel_download_16"
+      dense
+      secondary
+      label="엑셀 다운로드"
+      @click="onClickExcelDownload"
+    />
+    <kw-separator
+      spaced
+      vertical
+      inset
+    />
+    <kw-btn
+      primary
+      dense
+      label="주기능"
+    />
+  </template>
+
 </kw-action-bar>
 `;
 const testCode4 = `
 <kw-action-bar>
   <template #left>
-    <div class="kw-action-bar--count">
-      총 <span class="kw-action-bar--number pl4">156</span>
-    </div>
+    <span>총</span>
+    <span class="accent pl4">156</span>
     <kw-separator
-    vertical
-    inset
-    spaced="8px"
+      vertical
+      inset
+      spaced
     />
     <kw-select
       v-model="selectData.model"
+      class="kw-select--rows-per-page"
       :options="selectData.options"
       borderless
       dense
@@ -538,7 +556,7 @@ const testCode4 = `
   <kw-separator
     vertical
     inset
-    spaced="16px"
+    spaced
   />
   <kw-btn
     label="개인 고객 등록 URL 전송"
@@ -547,17 +565,15 @@ const testCode4 = `
   />
   <kw-btn
     label="개인 고객 등록"
-    class="ml8"
     primary
     dense
   />
   <kw-btn
     label="법인 고객 등록"
-    class="ml8"
     primary
     dense
   />
-  </kw-action-bar>
+</kw-action-bar>
 `;
 
 const guideHistory = [

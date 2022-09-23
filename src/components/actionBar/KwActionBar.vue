@@ -1,9 +1,9 @@
 <template>
-  <div class="kw-action-bar row">
-    <div class="col row justify-start items-center">
+  <div class="kw-action-bar">
+    <div class="kw-action-bar__left">
       <slot name="left" />
     </div>
-    <div class="col row justify-end items-center">
+    <div class="kw-action-bar__contents">
       <slot />
     </div>
   </div>
