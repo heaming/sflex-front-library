@@ -27,26 +27,18 @@
       />
     </q-card-section>
 
-    <load-failed-popup
-      v-if="isLoadFailed"
-    />
-    <suspense
-      v-else
-      :timeout="0"
-      @resolve="onResolve"
-    >
-      <template #default>
-        <slot />
+    <kw-suspense>
+      <slot />
+      <template #error>
+        <load-failed-popup />
       </template>
-    </suspense>
+    </kw-suspense>
   </q-card>
 </template>
 
 <script>
 import { PopupContainerContextKey } from '../../consts/private/symbols';
 import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
-import { loadSpinner } from '../../plugins/loading';
-import consts from '../../consts';
 
 import LoadFailedPopup from './LoadFailedPopup.vue';
 
@@ -82,36 +74,19 @@ export default {
       close,
     });
 
-    const isLoaded = ref(false);
-    const isLoadFailed = ref(false);
-
-    loadSpinner(true);
-    function onResolve() {
-      loadSpinner(false);
-      isLoaded.value = true;
-      emit('resolve', true);
-    }
-    onErrorCaptured(() => {
-      if (!isLoaded.value) {
-        loadSpinner(false);
-        isLoadFailed.value = true;
-      }
-    });
-
     const containerRef = ref();
     const { transform, events: draggableEvents } = useDraggable(containerRef);
 
     const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
     const popupSize = computed(() => popupCtx.value.size?.value);
-    const popupStyle = computed(() => [
-      popupCtx.value.style,
-      `transform: ${transform.value}`,
-    ]);
+    const popupStyle = computed(() => [popupCtx.value.style, `transform: ${transform.value}`]);
+
     const popupClass = computed(() => [
       !popupTitle.value && 'kw-popup--no-title',
-      popupSize && `kw-popup--${popupSize.value}`,
+      popupSize.value && `kw-popup--${popupSize.value}`,
       popupCtx.value.class,
     ]);
+
     const popupHeaderClass = computed(() => [
       'kw-popup__header',
       props.draggable && 'kw-popup__header--draggable',
@@ -120,16 +95,12 @@ export default {
     return {
       ctx: popupCtx,
       close,
-      isLoaded,
-      isLoadFailed,
-      onResolve,
       containerRef,
       draggableEvents,
       popupTitle,
       popupStyle,
       popupClass,
       popupHeaderClass,
-      consts,
     };
   },
 };

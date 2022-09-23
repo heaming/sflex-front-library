@@ -59,10 +59,15 @@
         :name="tabItem.key"
       >
         <kw-observer :ref="(vm) => tabItem.observerVm = vm">
-          <component
-            :is="tabItem.component"
-            v-bind="tabItem.componentProps"
-          />
+          <kw-suspense>
+            <component
+              :is="tabItem.component"
+              v-bind="tabItem.componentProps"
+            />
+            <template #error>
+              <load-failed-view />
+            </template>
+          </kw-suspense>
         </kw-observer>
       </q-tab-panel>
     </q-tab-panels>
@@ -71,20 +76,20 @@
 
 <script>
 import useTabsView from './private/useTabsView';
+import LoadFailedView from './LoadFailedView.vue';
 
 export default {
   name: 'AppTabsView',
+  components: { LoadFailedView },
 
   setup() {
+    const tabsViewCtx = useTabsView();
     const {
-      homeKey,
-      homeComponent,
       selectedKey,
-      tabItems,
-      removeItem,
       selectItem,
       selectClosestItem,
-    } = useTabsView();
+      removeItem,
+    } = tabsViewCtx;
 
     async function onSelect(tabKey) {
       if (selectedKey.value !== tabKey) {
@@ -94,20 +99,15 @@ export default {
 
     async function onClose(tabItem) {
       const isClosable = await tabItem.observerVm.confirmIfIsModified();
-
       if (isClosable) {
         const removedIndex = removeItem(tabItem);
         const isSelected = selectedKey.value === tabItem.key;
-
         if (isSelected) selectClosestItem(removedIndex);
       }
     }
 
     return {
-      homeKey,
-      homeComponent,
-      selectedKey,
-      tabItems,
+      ...tabsViewCtx,
       onSelect,
       onClose,
     };
