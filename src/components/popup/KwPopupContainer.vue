@@ -29,6 +29,7 @@
 
     <kw-suspense
       @resolve="isLoaded = true"
+      @error="isLoaded = true"
     >
       <template #default>
         <slot />
