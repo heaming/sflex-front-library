@@ -343,6 +343,5 @@ export function overrideDestory(view) {
     delete view.__originalFns__;
     delete view.__registeredEvents__;
     delete view.__metas__;
-    delete view.__mouseEventTarget__;
   });
 }
