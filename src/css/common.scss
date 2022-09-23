@@ -690,7 +690,7 @@ $unit: px;
   color: $color;
 }
 
-@include color-based(".kw-bg--", $semantic-colors) using ($color) {
+@include color-based(".kw-bc--", $semantic-colors) using ($color) {
   background-color: $color;
 }
 
