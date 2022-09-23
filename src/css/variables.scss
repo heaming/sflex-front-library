@@ -42,6 +42,9 @@ $negative: #ed1941; // Negative
 $info: #6cbf67; // Green
 $warning: #edca19; // Yellow
 
+// grid background color
+$bg-grid: #f8f8f8;
+
 // Grayscale
 $grey-1: $bg-white;
 $grey-2: $bg-box;
@@ -80,6 +83,7 @@ $semantic-colors: (
   negative :$negative,
   info :$info,
   warning :$warning,
+  bg-grid :$bg-grid,
 );
 $button-border-radius: 0;
 $button-padding: 8px 20px 8px 20px;

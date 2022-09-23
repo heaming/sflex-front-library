@@ -379,6 +379,23 @@
               />
             </td>
           </tr>
+          <tr>
+            <td>
+              $bg-grid
+            </td>
+            <td>
+              #f2c037
+            </td>
+            <td>
+              kw-fc--bg-grid<br>
+              kw-bc--bg-grid
+            </td>
+            <td>
+              <div
+                class="color-box bg-grid"
+              />
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -477,6 +494,10 @@ const guideHistory = [
 
     &.warning {
       background: $warning;
+    }
+
+    &.bg-grid {
+      background: $bg-grid;
     }
   }
 }
