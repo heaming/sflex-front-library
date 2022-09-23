@@ -178,6 +178,314 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="case01"
+        class="kw-guide-title"
+      >
+        case01
+      </h3>
+      <p class="kw-guide-description">
+        no border case <br>
+        example <a href="https://zpl.io/KGnzPER">https://zpl.io/KGnzPER</a>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <div class="kw-inquiry-result">
+            <div class="kw-inquiry-result__top">
+              <div class="col-auto">
+                <span class="kw-fc--black1">전체 요청/입금</span>
+                <span class="kw-fc--black3 ml8">출금일자 2022-07-20</span>
+              </div>
+              <div class="col-auto row">
+                <p class="kw-fc--black1 text-right">
+                  <span>33,624 / 건</span>
+                </p>
+                <p class="kw-fc--black1 text-right ml16">
+                  <span>33,624 / 원</span>
+                </p>
+              </div>
+            </div>
+            <ul class="kw-inquiry-result__list">
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>12:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>13:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>14:aaa</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770 / 원</span>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <guide-code-view
+          :code-value="case01"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -281,6 +589,297 @@ const testCode = `
     </tr>
   </tbody>
 </table>
+`;
+
+const case01 = `
+<div class="kw-inquiry-result">
+  <div class="kw-inquiry-result__top">
+    <div class="col-auto">
+      <span class="kw-fc--black1">전체 요청/입금</span>
+      <span class="kw-fc--black3 ml8">출금일자 2022-07-20</span>
+    </div>
+    <div class="col-auto row">
+      <p class="kw-fc--black1 text-right">
+        <span>33,624 / 건</span>
+      </p>
+      <p class="kw-fc--black1 text-right ml16">
+        <span>33,624 / 원</span>
+      </p>
+    </div>
+  </div>
+  <ul class="kw-inquiry-result__list">
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>12:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>13:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>14:aaa</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770 / 원</span>
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
 `;
 const historyData = [
   {
