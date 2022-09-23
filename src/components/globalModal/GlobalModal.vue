@@ -52,13 +52,13 @@ export default {
 
     async function isClosable(modal, result) {
       const ctx = getContainerCtx(modal);
-      const shouldCheckModified = !result && !modal.ignoreOnModified;
+      const shouldCheckModified = result === false;
 
       if (shouldCheckModified) {
         if (!await ctx?.observer.confirmIfIsModified()) { return false; }
       }
 
-      return (await ctx.onBeforeClose.value?.()) !== false;
+      return (await ctx.onBeforeClose.value?.(result)) !== false;
     }
 
     async function close(modal, { result, payload }) {

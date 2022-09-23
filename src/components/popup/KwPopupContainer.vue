@@ -56,16 +56,13 @@ export default {
 
   props: {
     ...useDraggableProps,
-
-    componentResolved: {
-      type: Boolean,
-      default: false,
-    },
   },
+
   emits: [
     'resolve',
     'close',
   ],
+
   setup(props, { emit }) {
     const popupCtx = shallowRef({});
 

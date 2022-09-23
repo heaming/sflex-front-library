@@ -10,7 +10,6 @@ const normalizeOptions = (options) => ({
   componentProps: options.componentProps || {},
   componentResolved: false,
   draggable: options.draggable === true,
-  ignoreOnModified: options.ignoreOnModified === true,
 });
 
 export async function modal(options) {
