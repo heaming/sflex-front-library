@@ -80,10 +80,9 @@ export function modal(options: {
   componentProps?: Record<string, unknown>;
 
   /**
-   * 팝업이 닫히기 전에 호출되는 콜백
-   * return false 시, 팝업 닫는 프로세스를 중단한다.
+   * 모달 드래그 가능 여부
    */
-  beforeClose?: () => boolean;
+  draggable?: boolean;
 }): Promise<{
   /**
    * 팝업 결과
@@ -95,8 +94,6 @@ export function modal(options: {
    */
   payload?: any;
 }>;
-
-export function registerPopupsByImportGlob(modules: { [key: string]: any }[]): void;
 
 // Sanitize
 import DOMPurify from 'dompurify';

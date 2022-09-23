@@ -54,6 +54,18 @@ interface KwSearchProps extends UseObserverProps {
   modifiedTargets?: string[];
 
   /**
+   * Observer에서 하위 ObserverChild의 변경여부를 확인할 때, 무시할지 여부
+   * @defaultValue `true`
+   */
+  ignoreOnModified?: boolean;
+
+  /**
+   * Observer에서 하위 ObserverChild를 reset할 때, 무시할지 여부
+   * @defaultValue `true`
+   */
+  ignoreOnReset?: boolean;
+
+  /**
    * 검색 이벤트
    * @param values 검색 입력 필드들의 values
    */
