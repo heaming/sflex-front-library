@@ -61,7 +61,10 @@
           <ol class="py10">
             <li>There is <em class="notice">no more spacing helperclass</em> between buttons (ex. ml8, mr8 )</li>
             <li>please add class <em class="notice">"kw-select--rows-per-page"</em> in left side select</li>
-            <li>please change the class from 'kw-action-bar--count' to <em class="notice">'accent'</em></li>
+            <li>
+              please change the class from 'kw-action-bar--number' to
+              <em class="notice">'accent'</em>for bold text
+            </li>
             <li>
               please remove the spaced px value in kw-separator
               (refer to <router-link to="/Publish/Components/Elements/Separator">

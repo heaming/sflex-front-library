@@ -58,7 +58,7 @@
               vertical
               inset
             />
-            <span class="accent pl4">1,020,000원</span>
+            <span class="accent">1,020,000원</span>
           </template>
         </kw-action-top>
         <kw-grid
@@ -227,7 +227,7 @@ const sampleVueCode = `
             vertical
             inset
           />
-          <span class="accent pl4">1,020,000원</span>
+          <span class="accent">1,020,000원</span>
         </template>
       </kw-action-top>
       <kw-grid

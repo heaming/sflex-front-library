@@ -3,7 +3,6 @@
     <template #header>
       <kw-page-header :options="['홈','고객','리쿠르팅 등록 관리(파트너)']" />
     </template>
-
     <ul class="kw-state-list">
       <li class="kw-state-list__item">
         <p class="kw-state-list__top">
@@ -62,7 +61,6 @@
         </p>
       </li>
     </ul>
-
     <kw-search title="조회조건">
       <kw-search-row>
         <kw-search-item label="고객 유형">
