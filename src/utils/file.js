@@ -28,7 +28,6 @@ export async function upload(file, targetPath = targetPaths[0]) {
 
   const response = await http.post(`/api/v1/common/file/${targetPath}/upload`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
-    responseType: 'blob',
   });
 
   return response.data;
