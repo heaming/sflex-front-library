@@ -587,12 +587,12 @@ function initGrid4(data, view) {
 const testCode6 = `
 <kw-grid
   :visible-rows="1"
-  @init="initGrid6"
+  @init="initGrid"
 />
 `;
 
 const testCodeScript6 = `
-function initGrid6(data, view) {
+function initGrid(data, view) {
   const fields = [
     { fieldName: 'col1' },
     { fieldName: 'col2' },
