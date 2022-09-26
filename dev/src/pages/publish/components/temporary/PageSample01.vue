@@ -63,17 +63,6 @@
             dense
             suffix="개씩보기"
           />
-          <kw-btn
-            class="ml40"
-            label="URL 전송"
-            dense
-            color="bg-box"
-            border-color="line-line"
-            text-color="black3"
-          />
-          <p class="description ml16">
-            고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-          </p>
         </template>
         <template #default>
           <kw-btn
@@ -86,16 +75,6 @@
             vertical
             inset
             spaced
-          />
-          <kw-btn
-            label="개인 고객 등록 URL 전송"
-            primary
-            dense
-          />
-          <kw-btn
-            label="개인 고객 등록"
-            primary
-            dense
           />
           <kw-btn
             label="법인 고객 등록"
@@ -287,16 +266,6 @@ const sampleVueCode = `
           vertical
           inset
           spaced
-        />
-        <kw-btn
-          label="개인 고객 등록 URL 전송"
-          primary
-          dense
-        />
-        <kw-btn
-          label="개인 고객 등록"
-          primary
-          dense
         />
         <kw-btn
           label="법인 고객 등록"

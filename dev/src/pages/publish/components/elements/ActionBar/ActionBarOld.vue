@@ -10,7 +10,7 @@
     <guide-history-view
       :items="guideHistory"
     />
-    <div class="kw-guide-section">
+    <div class="kw-guide-section delete">
       <h3
         id="summary"
         class="kw-guide-title"
@@ -577,6 +577,10 @@ const testCode4 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.09.23',
+    text: 'delete old version actionbar',
+  },
   {
     timestamp: '2022.09.19',
     text: 'Add case 2/3/4',

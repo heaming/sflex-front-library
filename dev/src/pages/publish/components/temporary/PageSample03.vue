@@ -79,17 +79,15 @@
         </kw-tab-panels>
         <div class="result-area">
           <h3>계약현황</h3>
-          <kw-action-bar>
+          <kw-action-top>
             <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">1,247</span>
-              </div>
+              <span>총</span>
+              <span class="accent pl4">1,247</span>
             </template>
             <kw-btn
               dense
               secondary
               label="파트너과정 수료이관"
-              class="mr8"
             />
             <kw-btn
               dense
@@ -97,7 +95,7 @@
               label="버튼"
             />
             <kw-separator
-              spaced="16px"
+              spaced
               vertical
               inset
             />
@@ -106,7 +104,6 @@
               dense
               secondary
               label="인쇄"
-              class="mr8"
             />
             <kw-btn
               icon="excel_download_16"
@@ -116,7 +113,7 @@
               @click="onClickExcelDownload"
             />
             <kw-separator
-              spaced="16px"
+              spaced
               vertical
               inset
             />
@@ -125,7 +122,7 @@
               dense
               label="주기능"
             />
-          </kw-action-bar>
+          </kw-action-top>
           <kw-grid
             ref="grdRef"
             :visible-rows="5"
@@ -135,17 +132,15 @@
             <li>이것은 테이블 하단 안내문구 예시입니다.(This is a 'kw-notification' sample which located in grid bottom)</li>
           </ul>
           <h3>상품결과</h3>
-          <kw-action-bar>
+          <kw-action-top>
             <template #left>
-              <div class="kw-action-bar--count">
-                총 <span class="kw-action-bar--number pl4">1,247</span>
-              </div>
+              <span>총</span>
+              <span class="accent pl4">1,247</span>
             </template>
             <kw-btn
               dense
               secondary
               label="파트너과정 수료이관"
-              class="mr8"
             />
             <kw-btn
               dense
@@ -153,7 +148,7 @@
               label="버튼"
             />
             <kw-separator
-              spaced="16px"
+              spaced
               vertical
               inset
             />
@@ -162,7 +157,6 @@
               dense
               secondary
               label="인쇄"
-              class="mr8"
             />
             <kw-btn
               icon="excel_download_16"
@@ -172,7 +166,7 @@
               @click="onClickExcelDownload"
             />
             <kw-separator
-              spaced="16px"
+              spaced
               vertical
               inset
             />
@@ -181,7 +175,7 @@
               dense
               label="주기능"
             />
-          </kw-action-bar>
+          </kw-action-top>
           <kw-grid
             ref="grdRef"
             :visible-rows="5"
@@ -345,17 +339,15 @@ const sampleVueCode = `
       </kw-tab-panels>
       <div class="result-area">
         <h3>계약현황</h3>
-        <kw-action-bar>
+        <kw-action-top>
           <template #left>
-            <div class="kw-action-bar--count">
-              총 <span class="kw-action-bar--number pl4">1,247</span>
-            </div>
+            <span>총</span>
+            <span class="accent pl4">1,247</span>
           </template>
           <kw-btn
             dense
             secondary
             label="파트너과정 수료이관"
-            class="mr8"
           />
           <kw-btn
             dense
@@ -363,7 +355,7 @@ const sampleVueCode = `
             label="버튼"
           />
           <kw-separator
-            spaced="16px"
+            spaced
             vertical
             inset
           />
@@ -372,7 +364,6 @@ const sampleVueCode = `
             dense
             secondary
             label="인쇄"
-            class="mr8"
           />
           <kw-btn
             icon="excel_download_16"
@@ -382,7 +373,7 @@ const sampleVueCode = `
             @click="onClickExcelDownload"
           />
           <kw-separator
-            spaced="16px"
+            spaced
             vertical
             inset
           />
@@ -391,7 +382,7 @@ const sampleVueCode = `
             dense
             label="주기능"
           />
-        </kw-action-bar>
+        </kw-action-top>
         <kw-grid
           ref="grdRef"
           :visible-rows="5"
@@ -401,17 +392,15 @@ const sampleVueCode = `
           <li>이것은 테이블 하단 안내문구 예시입니다.(This is a 'kw-notification' sample which located in grid bottom)</li>
         </ul>
         <h3>상품결과</h3>
-        <kw-action-bar>
+        <kw-action-top>
           <template #left>
-            <div class="kw-action-bar--count">
-              총 <span class="kw-action-bar--number pl4">1,247</span>
-            </div>
+            <span>총</span>
+            <span class="accent pl4">1,247</span>
           </template>
           <kw-btn
             dense
             secondary
             label="파트너과정 수료이관"
-            class="mr8"
           />
           <kw-btn
             dense
@@ -419,7 +408,7 @@ const sampleVueCode = `
             label="버튼"
           />
           <kw-separator
-            spaced="16px"
+            spaced
             vertical
             inset
           />
@@ -428,7 +417,6 @@ const sampleVueCode = `
             dense
             secondary
             label="인쇄"
-            class="mr8"
           />
           <kw-btn
             icon="excel_download_16"
@@ -438,7 +426,7 @@ const sampleVueCode = `
             @click="onClickExcelDownload"
           />
           <kw-separator
-            spaced="16px"
+            spaced
             vertical
             inset
           />
@@ -447,7 +435,7 @@ const sampleVueCode = `
             dense
             label="주기능"
           />
-        </kw-action-bar>
+        </kw-action-top>
         <kw-grid
           ref="grdRef"
           :visible-rows="5"
