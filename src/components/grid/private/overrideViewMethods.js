@@ -4,7 +4,6 @@ import { wrapMethod, execOriginal } from './overrideWrap';
 import {
   createCellIndexByDataColumn, dateTextFormat, isCellEditable, isCellItemClickable,
 } from '../../../utils/private/gridShared';
-import { normalizeRules } from '../../../utils/private/validate';
 import i18n from '../../../i18n';
 
 const setColumns = 'setColumns';
@@ -298,7 +297,7 @@ export function overrideSetColumns(view) {
     view.__metas__ = map(columns, (e) => ({
       fieldName: e.fieldName,
       column: e.column || e.fieldName,
-      rules: normalizeRules(e.rules),
+      rules: e.rules,
       customMessages: e.customMessages,
       preventCellItemFocus: e.preventCellItemFocus === true,
     }));

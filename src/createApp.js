@@ -4,10 +4,10 @@ import installGlobals from './installGlobals';
 import installComponents from './installComponents';
 import installDirectives from './installDirectives';
 import installPlugins from './installPlugins';
+import installValidation from './installValidation';
 import { installI18n } from './i18n';
 import { installRouter } from './router';
 import { installStore } from './store';
-import { defineRules } from './validate';
 import { GlobalKey } from './consts/private/symbols';
 import { g, defineGetters } from './utils/private/globalProperty';
 
@@ -39,10 +39,10 @@ export default (App, options) => {
   installComponents(app, components);
   installDirectives(app);
   installPlugins(app, plugins);
+  installValidation();
   installI18n(app);
   installRouter(app, routes);
   installStore(app, storeModules);
-  defineRules();
   provideGlobal(app);
 
   return app;

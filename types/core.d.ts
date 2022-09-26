@@ -51,3 +51,15 @@ export function createRoutesByGlobImport(modules: { [key: string]: any }[]): Rou
 
 // Modal
 export function registerPopupsByImportGlob(modules: { [key: string]: any }[]): void;
+
+// Validation
+export function validate(
+  value: unknown,
+  rules: string | object | Function,
+  options?: {
+    name?: string;
+    values?: Record<string, unknown>;
+    customMessages?: Record<string, string>;
+    bails?: boolean;
+  },
+): string | boolean | Promise<string | boolean>;

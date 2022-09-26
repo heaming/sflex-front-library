@@ -15,7 +15,7 @@ import { waitUntilShowEditor, cloneView, destroyCloneView } from './private/grid
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
-import { validateValue } from './private/validate';
+import _validate from '../validate';
 import i18n from '../i18n';
 import processWait from './private/processWait';
 
@@ -324,9 +324,9 @@ async function validateRow(view, data, dataRow, metas) {
     const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
     let errorMessage;
-    const result = await validateValue(value, rules, name, values, customMessages);
+    const result = await _validate(value, rules, { name, values, customMessages });
 
-    if (!result.valid) {
+    if (result.valid === false) {
       const [error] = result.errors;
       errorMessage = error;
     } else {

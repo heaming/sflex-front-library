@@ -1,26 +1,70 @@
-import { warn } from 'vue';
-import { defineRule } from 'vee-validate';
-import { snakeCase } from 'lodash-es';
-import i18n from '../i18n';
+import { validate as _validate } from 'vee-validate';
 
-export function defineRules() {
-  const imported = import.meta.globEager('./rules/*.js');
-  const keys = Object.keys(imported);
+const ruleSeparator = '|';
+const ruleParamSeparator = ':';
 
-  keys.forEach((key) => {
-    const matched = key.match(/\/(\w+)\.js$/);
+function convertRulesToArray(rules = []) {
+  if (Array.isArray(rules)) { return rules; }
+  if (typeof rules === 'function') { return [rules]; }
+  if (typeof rules === 'string') { return rules.split(ruleSeparator); }
+  if (typeof rules === 'object') { return Object.keys(rules).map((k) => ({ [k]: rules[k] })); }
+}
 
-    if (!matched) {
-      warn(`Invalid rule file, could not parse "${key}"`);
-      return;
+function getRuleName(rule) {
+  if (typeof rule === 'string') { return rule.split(ruleParamSeparator)[0]; }
+  if (typeof rule === 'object') { return Object.keys(rule)[0]; }
+}
+
+async function validate(value, rule, options) {
+  if (typeof rule === 'function') {
+    const result = await rule(value, options);
+
+    if (typeof result === 'string') {
+      return {
+        valid: false,
+        errors: [result],
+      };
     }
 
-    const ruleName = snakeCase(matched[1]);
-    const { validator, message } = imported[key].default;
+    return {
+      valid: !!result,
+      errors: ['Field is invalid'],
+    };
+  }
 
-    defineRule(
-      ruleName,
-      (...args) => validator(...args) || i18n.t(message, [args[2].field, ...args[1]]),
-    );
-  });
+  return _validate(value, rule, options);
 }
+
+export default async (value, rules, options) => {
+  options = {
+    name: undefined,
+    values: undefined,
+    customMessages: undefined,
+    bails: true,
+    ...options,
+  };
+
+  const errors = [];
+  const ruleList = convertRulesToArray(rules);
+  // eslint-disable-next-line no-restricted-syntax
+  for (const rule of ruleList) {
+    // eslint-disable-next-line no-await-in-loop
+    const result = await validate(value, rule, options);
+
+    if (result.valid === false) {
+      const ruleName = getRuleName(rule);
+      const customMessages = options.customMessages?.[ruleName];
+
+      errors.push(
+        customMessages || result.errors[0],
+      );
+
+      if (options.bails === true) break;
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+  };
+};

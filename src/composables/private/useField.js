@@ -2,7 +2,7 @@ import { klona as deepCopy } from 'klona/full';
 import isEqual from 'fast-deep-equal/es6';
 import useFieldState, { useFieldStateProps } from './useFieldState';
 import { FormContextKey } from '../../consts/private/symbols';
-import { normalizeRules, validateValue } from '../../utils/private/validate';
+import _validate from '../../validate';
 import processWait from '../../utils/private/processWait';
 
 export const useFieldProps = {
@@ -52,8 +52,8 @@ export default (options) => {
   const inputRef = ref();
   const bindValue = isRef(bindValueRef) ? bindValueRef : toRef(props, bindValueKey);
 
-  const normalizedRules = computed(() => normalizeRules(props.rules));
-  const customMessages = computed(() => props.customMessages);
+  const rules = toRef(props, 'rules');
+  const customMessages = toRef(props, 'customMessages');
 
   const {
     values,
@@ -90,13 +90,11 @@ export default (options) => {
   }
 
   async function validate() {
-    const result = await validateValue(
-      value.value,
-      normalizedRules.value,
-      name.value,
+    const result = await _validate(value.value, rules.value, {
+      name: name.value,
       values,
-      customMessages.value,
-    );
+      customMessages: customMessages.value,
+    });
 
     setState({
       errors: result.errors || [],
@@ -106,7 +104,7 @@ export default (options) => {
     return result.valid;
   }
 
-  watch(normalizedRules, async () => {
+  watch(rules, async () => {
     if (validated.value) {
       await validate();
     }
