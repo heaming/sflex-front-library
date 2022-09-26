@@ -7,7 +7,7 @@
   <suspense
     v-else
     :timeout="0"
-    @resolve="onResolve"
+    @resolve="onResolveSuspense"
   >
     <template #default>
       <slot />
@@ -29,6 +29,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    onResolve: {
+      type: Function,
+      default: undefined,
+    },
+    onError: {
+      type: Function,
+      default: undefined,
+    },
   },
 
   setup(props) {
@@ -42,21 +50,22 @@ export default {
     function suspense() {
       isLoaded.value = false;
       isLoadFailed.value = false;
-
       loadSpinnerIfUse(true);
     }
 
     suspense();
 
-    function onResolve() {
+    function onResolveSuspense() {
       loadSpinnerIfUse(false);
       isLoaded.value = true;
+      props.onResolve?.();
     }
 
-    onErrorCaptured(() => {
+    onErrorCaptured((e) => {
       if (!isLoaded.value) {
-        loadSpinnerIfUse(false);
         isLoadFailed.value = true;
+        loadSpinnerIfUse(false);
+        props.onError?.(e);
       }
     });
 
@@ -64,7 +73,7 @@ export default {
       isLoaded,
       isLoadFailed,
       suspense,
-      onResolve,
+      onResolveSuspense,
     };
   },
 };

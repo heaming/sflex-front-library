@@ -329,6 +329,15 @@ interface GridUtil {
   confirmDeleteCheckedRows(view: GridView | TreeView, isIncludeCreated?: boolean): Promise<RowValue[]>;
 
   /**
+   *
+   * @param view 그리드 뷰
+   * @param dataRow 데이터 행
+   * @param rowValue 데이터 행 오브젝트
+   * @param fieldName fieldName을 지정하면 매칭되는 컬럼으로 focus 한다. (`false` 지정시 focus 하지 않는다)
+   */
+  insertRowAndFocus(view: GridView, dataRow: number, rowValue: RowValue, fieldName?: string | boolean): Promise<boolean>;
+
+  /**
    * 현재 데이터를 초기 값으로 지정한다.
    * 전체 데이터 행의 상태가 NONE이 되며, DELETED인 데이터는 아예 삭제된다.
    * @param view 그리드 뷰 또는 트리 뷰

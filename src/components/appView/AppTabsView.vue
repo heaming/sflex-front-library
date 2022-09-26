@@ -60,10 +60,12 @@
       >
         <kw-observer :ref="(vm) => tabItem.observerVm = vm">
           <kw-suspense>
-            <component
-              :is="tabItem.component"
-              v-bind="tabItem.componentProps"
-            />
+            <template #default>
+              <component
+                :is="tabItem.component"
+                v-bind="tabItem.componentProps"
+              />
+            </template>
             <template #error>
               <load-failed-view />
             </template>
