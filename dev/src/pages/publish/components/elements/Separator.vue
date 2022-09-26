@@ -40,7 +40,7 @@
               vertical and inset
             </td>
             <td>
-              default: 30px / other case : input px value according to design from zeplin <br>
+              default: 30px / special case : input 'px value' according to design from zeplin <br>
               Add vertical and inset when vertical type please
             </td>
           </tr>
@@ -79,6 +79,7 @@
       </h3>
       <p class="kw-guide-description">
         have to use together <em>inset</em> prop
+        <br>*there is no more px value in left and right side of &lt;kw-action-top &gt;*
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -101,21 +102,20 @@ const testCode = `
 <kw-separator />
 `;
 const testCode2 = `
+<!--There is no more spaced px value in kw-action-top
+  -->
 <kw-separator
-  spaced="8px"
-  vertical
-  inset
-/>
-
-<!-- between button above table-->
-<kw-separator
-  spaced="16px"
+  spaced
   vertical
   inset
 />
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.09.26',
+    text: 'edit the code of vertical case',
+  },
   {
     timestamp: '2022.09.15',
     text: 'revised seperator component guide',
