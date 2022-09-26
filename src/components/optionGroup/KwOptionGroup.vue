@@ -17,7 +17,7 @@
         :type="type"
         :dense="isSearchContext || dense"
         :disable="disable"
-        :left-label="type === 'toggle' ? leftLabel !== false : leftLabel"
+        :left-label="itemLeftLabel"
         inline
       />
     </template>
@@ -80,12 +80,20 @@ export default {
     'update:modelValue',
   ],
 
-  setup() {
+  setup(props) {
+    const itemLeftLabel = computed(() => {
+      if (typeof props.leftLabel === 'boolean') {
+        return props.leftLabel;
+      }
+      return props.type === 'toggle';
+    });
+
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
       ...useField(),
       ...useOptions(),
+      itemLeftLabel,
     };
   },
 };
