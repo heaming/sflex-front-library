@@ -130,7 +130,8 @@
               '150'
             </td>
             <td>
-              As the width of the Zeplin, without 'px' units
+              As the width of the Zeplin, without 'px' units <br>
+              if could not access the width, please set width by '150px'
             </td>
           </tr>
           <tr>
@@ -246,6 +247,32 @@
             :code-value="[testCode4,testDate4]"
             :lang="['vue','javascript']"
             multi
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Case #5
+      </h3>
+      <p class="kw-guide-description">
+        If the grids are located same line(horizontal), refer this guide and sample page
+        <router-link to="/Publish/Components/Temporary/PageSample06">
+          samplepage06
+        </router-link>
+      </p>
+      <q-card>
+        <img
+          src="../../../../../assets/images/example_horizon-grid.png"
+          alt="block_type1"
+          style="width: 100%;"
+        >
+        <div class="kw-guide-example">
+          <guide-code-view
+            :code-value="testCode5"
+            :lang="'vue'"
           />
         </div>
       </q-card>
@@ -744,7 +771,22 @@ function initGrid4(data, view) {
   data.setRows([{ col1: 'a' }, { col1: 'b' }, { col1: 'c' }]);
 }
 
+const testCode5 = `
+<div class="result-area result-area--column">
+    <div class="result-area__section"> <!-- insert width helpeer class on smaller one when each 'result-area__section' has different size -->
+      grid
+    </div>
+    <div class="result-area__section">
+      grid
+    </div>
+  </div>
+`;
+
 const guideHistory = [
+  {
+    timestamp: '2022.09.26',
+    text: 'Add case #5, horizontal grid',
+  },
   {
     timestamp: '2022.08.30',
     text: 'Add case - multi row header type(case#4) and modified notice area',
