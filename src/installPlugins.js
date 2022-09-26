@@ -4,6 +4,7 @@ import dialog from './plugins/dialog';
 import http from './plugins/http';
 import loading from './plugins/loading';
 import modal from './plugins/modal';
+import notify from './plugins/notify';
 import sanitize from './plugins/sanitize';
 import storage from './plugins/storage';
 
@@ -13,6 +14,7 @@ const autoInstalledPlugins = [
   http,
   loading,
   modal,
+  notify,
   sanitize,
   storage,
 ];
