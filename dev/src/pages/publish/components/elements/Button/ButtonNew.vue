@@ -47,6 +47,30 @@
           </tr>
           <tr>
             <td style="width: 33.33%;">
+              height(toggle-raido)
+            </td>
+            <td style="width: 33.33%;">
+              dense="false"<br>
+              default
+            </td>
+            <td style="width: 33.33%;">
+              height: 42px<br>
+              height: 32px
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 33.33%;">
+              gap(toggle-radio)
+            </td>
+            <td style="width: 33.33%;">
+              gap="px value"
+            </td>
+            <td style="width: 33.33%;">
+              size between the toggle's button
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 33.33%;">
               padding of right and left
             </td>
             <td style="width: 33.33%;">
@@ -81,6 +105,21 @@
               background-color <br>
               text-color <br>
               border-color <br>
+            </td>
+            <td style="width: 33.33%;">
+              color="colorname" <br>
+              text-color="colorname" <br>
+              border-color="colorname" *Have to be used with outlined <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 33.33%;">
+              color(toggle-radio)
+            </td>
+            <td style="width: 33.33%;">
+              toggle-background-color <br>
+              toggle-text-color <br>
+              toggle-border-color <br>
             </td>
             <td style="width: 33.33%;">
               color="colorname" <br>
@@ -391,7 +430,61 @@
         />
       </q-card>
     </div>
-    <!-- To be updated -->
+    <div class="kw-guide-section">
+      <h3
+        id="toggleButton"
+        class="kw-guide-title"
+      >
+        Toggle(radio)
+      </h3>
+      <p class="kw-guide-description">
+        default gap is 4px. <br>
+        Adjust gap as attribute like gap="10px".<br>
+        default height is 32px<br>
+        Add dense = "false" as attribute is 40px<br>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn-toggle
+            v-model="strModel"
+            :label="'label'"
+            :options="['오늘', '주간', '월간']"
+          />
+          <kw-btn-toggle
+            v-model="strModel2"
+            class="mt10"
+            :label="'label'"
+            :options="['오늘', '주간', '월간']"
+            dense="false"
+          />
+          <kw-btn-toggle
+            v-model="strModel3"
+            class="mt10"
+            :label="'label'"
+            :options="['A', 'B', 'C']"
+            dense="false"
+            gap="0px"
+          />
+          <!-- 추후에 필요하면 추가 -->
+          <!-- <kw-btn-toggle
+            v-model="strModel3"
+            class="mt10"
+            :options="['오늘', '주간', '월간']"
+            color="error"
+            text-color="info"
+            border-color="info"
+            toggle-color="secondary"
+            toggle-text-color="black3"
+            toggle-border-color="black3"
+          /> -->
+        </div>
+        <guide-code-view
+          :code-value="[toggleRadio,toggleRadioScript]"
+          :lang="['vue','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
     <!-- <div class="kw-guide-section">
       <h3
         id="toggleButton"
@@ -400,15 +493,31 @@
         Toggle(switch)
       </h3>
       <p class="kw-guide-description">
-        toggle switch button
+        There are two options for kw-toggle and kw-option-group's toggle.<br>
+        one toggle for kw-toggle, More than one toggle for kw-option-group.<br>
+        Default's label location is left. And add
+        <b>left-label="false"</b> as attirbue in kw-toggle for Right side's label<br>
       </p>
       <q-card>
-        <div class="kw-guide-example">
+        <div class="kw-guide-example row">
           <kw-toggle
-            v-model="dummyData"
-            label="text"
-            :true-value="true"
-            :false-value="false"
+            v-model="ynModel"
+          />
+          <kw-toggle
+            v-model="ynModel2"
+            label="Left Label"
+          />
+          <kw-toggle
+            v-model="ynModel3"
+            label="Right Label"
+            left-label="false"
+          />
+          <kw-option-group
+            class="ml30"
+            :model-value="[]"
+            name="toggleOptionGroup"
+            type="toggle"
+            :options="['A', 'B', 'C', 'D']"
           />
         </div>
         <guide-code-view
@@ -423,24 +532,42 @@
         id="toggleButton"
         class="kw-guide-title"
       >
-        Toggle(radio)
+        Toggle(switch) in form or searchform
       </h3>
       <p class="kw-guide-description">
-        toggle radio button
+        toggle switch button
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-btn-toggle
-            v-model="toggleSelected"
-            name="btnToggle"
-            rules="required"
-            :options="['오늘', '주간', '월간']"
-            unelevated
-            outline
-          />
+          <kw-form class="mt30">
+            <kw-form-row>
+              <kw-form-item label="서치폼">
+                <kw-field
+                  :model-value="'Y'"
+                  rules="required"
+                >
+                  <template #default="{ field }">
+                    <kw-toggle
+                      v-bind="field"
+                      label="formform"
+                      left-label="false"
+                    />
+                  </template>
+                </kw-field>
+              </kw-form-item>
+              <kw-form-item label="Toggle (OptionGroup)">
+                <kw-option-group
+                  :model-value="[]"
+                  name="toggleOptionGroup"
+                  type="toggle"
+                  :options="['A', 'B', 'C', 'D']"
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
         </div>
         <guide-code-view
-          :code-value="[toggleRadio,toggleRadioScript]"
+          :code-value="[toggle,toggleScript]"
           :lang="['vue','javascript']"
           multi
         />
@@ -453,6 +580,13 @@
 
 // const dummyData = ref(true);
 // const toggleSelected = ref('오늘');
+
+// const ynModel = ref('N');
+// const ynModel2 = ref('N');
+// const ynModel3 = ref('N');
+const strModel = ref('오늘');
+const strModel2 = ref('오늘');
+const strModel3 = ref('A');
 
 const defaultCode = `
   <kw-btn
@@ -644,23 +778,40 @@ const tableInside = `
 //   const dummyData = ref(true); // select default value (true or false)
 //   `;
 
-// const toggleRadio = `
-//   <kw-btn-toggle
-//     v-model="toggleSelected"
-//     name="btnToggle"
-//     rules="required"
-//     :options="['오늘', '주간', '월간']"
-//     unelevated
-//     outline
-//   />
-//   `;
+const toggleRadio = `
+<!-- height: 32px -->
+<kw-btn-toggle
+  v-model="strModel"
+  :label="'label'"
+  :options="['오늘', '주간', '월간']"
+/>
+<!-- height: 40px -->
+<kw-btn-toggle
+  v-model="strModel"
+  :label="'label'"
+  :options="['오늘', '주간', '월간']"
+  dense="false"
+/>
+<!-- gap="0" -->
+<kw-btn-toggle
+  v-model="strModel"
+  :label="'label'"
+  :options="['A', 'B', 'C']"
+  dense="false"
+  gap="0px"
+/>
+`;
 
-// const toggleRadioScript = `
-//   const toggleSelected = ref('오늘')
-//   `;
+const toggleRadioScript = `
+const strModel = ref('오늘');
+  `;
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.09.26',
+    text: 'add toggle(radio)',
+  },
   {
     timestamp: '2022.09.21',
     text: 'add content of padding prop guide',
