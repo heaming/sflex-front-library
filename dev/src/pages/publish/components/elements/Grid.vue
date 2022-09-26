@@ -130,7 +130,8 @@
               '150'
             </td>
             <td>
-              As the width of the Zeplin, without 'px' units
+              As the width of the Zeplin, without 'px' units <br>
+              if could not access the width, please set width by '150px'
             </td>
           </tr>
           <tr>
@@ -244,6 +245,61 @@
           >
           <guide-code-view
             :code-value="[testCode4,testDate4]"
+            :lang="['vue','javascript']"
+            multi
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Case #5
+      </h3>
+      <p class="kw-guide-description">
+        If the grids are located same line(horizontal), refer this guide and sample page
+        <router-link to="/Publish/Components/Temporary/PageSample06">
+          samplepage06
+        </router-link>
+      </p>
+      <q-card>
+        <img
+          src="../../../../../assets/images/example_horizon-grid.png"
+          alt="block_type1"
+          style="width: 100%;"
+        >
+        <div class="kw-guide-example">
+          <guide-code-view
+            :code-value="testCode5"
+            :lang="'vue'"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        class="kw-guide-title"
+      >
+        Case #6
+      </h3>
+      <p class="kw-guide-description">
+        As first row's first column has no text, Put blank in header (header: ' ' - have to put space between '')<br>
+        Apply the backgorund color of first columns in grid.<br>
+        Add color name class in styleName<br>
+        <router-link to="/Publish/Components/Temporary/PopupSample03">
+          PopupSample03
+        </router-link>
+      </p>
+      <q-card>
+        <kw-grid
+          :visible-rows="1"
+          @init="initGrid6"
+        />
+
+        <div class="kw-guide-example">
+          <guide-code-view
+            :code-value="[testCode6,testCodeScript6]"
             :lang="['vue','javascript']"
             multi
           />
@@ -528,6 +584,50 @@ function initGrid4(data, view) {
 }
 `;
 
+const testCode6 = `
+<kw-grid
+  :visible-rows="1"
+  @init="initGrid"
+/>
+`;
+
+const testCodeScript6 = `
+function initGrid(data, view) {
+  const fields = [
+    { fieldName: 'col1' },
+    { fieldName: 'col2' },
+    { fieldName: 'col3' },
+    { fieldName: 'col4' },
+    { fieldName: 'col5' },
+    { fieldName: 'col6' },
+    { fieldName: 'col7' },
+    { fieldName: 'col8' },
+    { fieldName: 'col9' },
+    { fieldName: 'col10' },
+    { fieldName: 'col11' },
+    { fieldName: 'col12' },
+    { fieldName: 'col13' },
+  ];
+
+  const columns = [
+    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
+    { fieldName: 'col2', header: '고객 유형', width: '250', styleName: 'text-right' },
+    { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
+    { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
+  ];
+
+  data.setFields(fields);
+  view.setColumns(columns);
+
+  view.checkBar.visible = false;
+  view.rowIndicator.visible = false;
+
+  data.setRows([
+    { col1: '원천세 금액', col2: '개인', col3: '-', col4: '이엄마' },
+  ]);
+}
+`;
+
 function initGrid(data, view) {
   const fields = [
     { fieldName: 'col1' },
@@ -743,8 +843,61 @@ function initGrid4(data, view) {
 
   data.setRows([{ col1: 'a' }, { col1: 'b' }, { col1: 'c' }]);
 }
+function initGrid6(data, view) {
+  const fields = [
+    { fieldName: 'col1' },
+    { fieldName: 'col2' },
+    { fieldName: 'col3' },
+    { fieldName: 'col4' },
+    { fieldName: 'col5' },
+    { fieldName: 'col6' },
+    { fieldName: 'col7' },
+    { fieldName: 'col8' },
+    { fieldName: 'col9' },
+    { fieldName: 'col10' },
+    { fieldName: 'col11' },
+    { fieldName: 'col12' },
+    { fieldName: 'col13' },
+  ];
+
+  const columns = [
+    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
+    { fieldName: 'col2', header: '고객 유형', width: '250', styleName: 'text-right' },
+    { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
+    { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
+  ];
+
+  data.setFields(fields);
+  view.setColumns(columns);
+
+  view.checkBar.visible = false;
+  view.rowIndicator.visible = false;
+
+  data.setRows([
+    { col1: '원천세 금액', col2: '개인', col3: '-', col4: '이엄마' },
+  ]);
+}
+
+const testCode5 = `
+<div class="result-area result-area--column">
+    <div class="result-area__section"> <!-- insert width helpeer class on smaller one when each 'result-area__section' has different size -->
+      grid
+    </div>
+    <div class="result-area__section">
+      grid
+    </div>
+  </div>
+`;
 
 const guideHistory = [
+  {
+    timestamp: '2022.09.26',
+    text: 'Add case #6, text-align and color in grid',
+  },
+  {
+    timestamp: '2022.09.26',
+    text: 'Add case #5, horizontal grid',
+  },
   {
     timestamp: '2022.08.30',
     text: 'Add case - multi row header type(case#4) and modified notice area',

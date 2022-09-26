@@ -1,10 +1,10 @@
 <template>
   <kw-page>
     <template #header>
-      <kw-page-header :options="['홈','고객','Search Result(Normal)']" />
+      <kw-page-header :options="['홈','고객','리쿠르팅 등록 관리(파트너)']" />
     </template>
 
-    <kw-search title="조회조건">
+    <kw-search>
       <kw-search-row>
         <kw-search-item label="고객 유형">
           <kw-select
@@ -39,68 +39,62 @@
       </kw-search-row>
     </kw-search>
 
-    <div class="result-area">
-      <ul class="kw-notification">
-        <li>
-          현금자동이체는 직전 청구결과에 따라서 청구가 제한됩니다.
-          <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
-        </li>
-      </ul>
-      <kw-action-top>
-        <template #left>
-          <span>총</span>
-          <span class="accent pl4">156</span>
-          <kw-separator
-            vertical
-            inset
-            spaced
-          />
-          <kw-select
-            v-model="selectData.model"
-            class="kw-select--rows-per-page"
-            :options="selectData.options"
-            borderless
-            dense
-            suffix="개씩보기"
-          />
-        </template>
-        <template #default>
-          <kw-btn
-            icon="excel_download_16"
-            dense
-            secondary
-            label="엑셀 다운로드"
-          />
-          <kw-separator
-            vertical
-            inset
-            spaced
-          />
-          <kw-btn
-            label="법인 고객 등록"
-            primary
-            dense
-          />
-        </template>
-      </kw-action-top>
-      <kw-grid
-        :visible-rows="10"
-        @init="initGrid"
-      />
-      <kw-action-bottom>
-        <kw-btn
-          label="삭제"
-          grid-action
+    <div class="result-area result-area--column">
+      <div class="result-area__section">
+        <h3>방문실적</h3>
+        <kw-action-top>
+          <template #left>
+            <span>총</span>
+            <span class="accent pl4">30</span>
+            <kw-separator
+              spaced
+              vertical
+              inset
+            />
+            <span>처리율</span>
+            <span class="accent pl4">30%</span>
+            <kw-separator
+              spaced
+              vertical
+              inset
+            />
+            <span class="accent">1,020,000원</span>
+          </template>
+        </kw-action-top>
+        <kw-grid
+          :visible-rows="10"
+          @init="initGrid"
         />
-        <kw-btn
-          label="저장"
-          grid-action
+        <kw-action-bottom>
+          <kw-btn
+            label="삭제"
+            grid-action
+          />
+        </kw-action-bottom>
+      </div>
+      <div class="result-area__section w472">
+        <h3>수수료내역</h3>
+        <kw-action-top>
+          <template #left>
+            <span>적용률총</span>
+            <span class="accent pl4">30%</span>
+          </template>
+          <kw-btn
+            label="저장"
+            grid-action
+          />
+        </kw-action-top>
+        <kw-grid
+          :visible-rows="10"
+          @init="initGrid"
         />
-      </kw-action-bottom>
-      <kw-pagination
-        :model-value="1"
-        :total-count="100"
-      />
+        <kw-action-bottom>
+          <kw-btn
+            label="삭제"
+            grid-action
+          />
+        </kw-action-bottom>
+      </div>
     </div>
     <div class="kw-guide pa0">
       <q-card>
@@ -118,11 +112,6 @@
 </template>
 
 <script setup>
-
-const selectData = { model: '10',
-  options: [
-    '10', '20', '30', '40', '50',
-  ] };
 
 function initGrid(data, view) {
   const fields = [
@@ -219,82 +208,64 @@ const sampleVueCode = `
     </kw-search-row>
   </kw-search>
 
-  <div class="result-area">
-    <ul class="kw-notification">
-      <li>
-        현금자동이체는 직전 청구결과에 따라서 청구가 제한됩니다.
-        <span class="kw-fc--primary"> 특히, 계좌해지 상태로 인한 청구 오류건은 자동이체 재신청 해주셔야 합니다.</span> (청구기준 항목 참조)
-      </li>
-    </ul>
-    <kw-action-top>
-      <template #left>
-        <span>총</span>
-        <span class="accent pl4">156</span>
-        <kw-separator
-          vertical
-          inset
-          spaced
-        />
-        <kw-select
-          class="kw-select--rows-per-page"
-          v-model="selectData.model"
-          :options="selectData.options"
-          borderless
-          dense
-          suffix="개씩보기"
-        />
-        <kw-btn
-          class="ml40"
-          label="URL 전송"
-          dense
-          color="bg-box"
-          border-color="line-line"
-          text-color="black3"
-        />
-        <p class="description ml16">
-          고객정보 수정, 가족관계 증명서 등록, 약관동의, 본인인증 URL를 전송할 수 있습니다.
-        </p>
-      </template>
-      <template #default>
-        <kw-btn
-          icon="excel_download_16"
-          dense
-          secondary
-          label="엑셀 다운로드"
-        />
-        <kw-separator
-          vertical
-          inset
-          spaced
-        />
-        <kw-btn
-          label="법인 고객 등록"
-          primary
-          dense
-        />
-      </template>
-    </kw-action-top>
-    <kw-grid
-      :visible-rows="10"
-      @init="initGrid"
-    />
-    <kw-action-bottom>
-      <kw-btn
-        label="삭제"
-        grid-action
+  <div class="result-area result-area--column">
+    <div class="result-area__section">
+      <h3>방문실적</h3>
+      <kw-action-top>
+        <template #left>
+          <span>총</span>
+          <span class="accent pl4">30</span>
+          <kw-separator
+            spaced
+            vertical
+            inset
+          />
+          <span>처리율</span>
+          <span class="accent pl4">30%</span>
+          <kw-separator
+            spaced
+            vertical
+            inset
+          />
+          <span class="accent">1,020,000원</span>
+        </template>
+      </kw-action-top>
+      <kw-grid
+        :visible-rows="10"
+        @init="initGrid"
       />
-      <kw-btn
-        label="저장"
-        grid-action
+      <kw-action-bottom>
+        <kw-btn
+          label="삭제"
+          grid-action
+        />
+      </kw-action-bottom>
+    </div>
+    <div class="result-area__section w472">
+      <h3>수수료내역</h3>
+      <kw-action-top>
+        <template #left>
+          <span>적용률총</span>
+          <span class="accent pl4">30%</span>
+        </template>
+        <kw-btn
+          label="저장"
+          grid-action
+        />
+      </kw-action-top>
+      <kw-grid
+        :visible-rows="10"
+        @init="initGrid"
       />
-    </kw-action-bottom>
-    <kw-pagination
-      :model-value="1"
-      :total-count="100"
-    />
+      <kw-action-bottom>
+        <kw-btn
+          label="삭제"
+          grid-action
+        />
+      </kw-action-bottom>
+    </div>
   </div>
-</kw-page>
-`;
+</kw-page>`;
 
 const sampleJsCode = `
 const selectData = { model: '10',
