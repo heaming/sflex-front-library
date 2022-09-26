@@ -87,6 +87,9 @@ export function overrideOnCurrentChanging(view) {
 
       if (evt) {
         g.__cellClickTarget__ = { el, evt, index: newIndex };
+
+        // set topIndex to old itemIndex
+        // although cancel this event, top index are change..
         g._view._layoutManager._topIndex = oldIndex.itemIndex;
 
         return false;

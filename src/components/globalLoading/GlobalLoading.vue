@@ -1,30 +1,32 @@
 <template>
-  <div
-    v-if="isActive"
-    class="global-loading q-loading fullscreen flex flex-center z-max"
+  <q-dialog
+    ref="dialogRef"
+    :model-value="isActive"
+    class="global-loading"
+    :transition-duration="0"
+    persistent
+    no-shake
   >
-    <div class="q-loading__backdrop" />
-    <div class="q-loading__box column items-center">
+    <div>
       <q-circular-progress
         v-if="isProgress"
         show-value
-        size="8em"
         :value="progressValue"
         :animation-speed="LOADING_PROGRESS_ANIMATION_SPEED"
       />
       <q-spinner
         v-else
-        class="q-loading__spinner"
-        size="5em"
       />
     </div>
-  </div>
+  </q-dialog>
 </template>
 
 <script>
 import { GlobalLoadingVmKey } from '../../consts/private/symbols';
 import libConfig from '../../consts/private/libConfig';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
+import { stopAndPrevent } from '../../utils/private/event';
+import { addFocusout, removeFocusout } from '../../utils/private/focusout';
 
 const {
   LOADING_PROGRESS_MAX,
@@ -64,6 +66,21 @@ export default {
       );
     }
 
+    const dialogRef = ref();
+
+    function onFocusChange(evt) {
+      stopAndPrevent(evt);
+      dialogRef.value.focus();
+    }
+
+    watch(isActive, (val) => {
+      if (val === true) {
+        addFocusout(onFocusChange);
+      } else {
+        removeFocusout(onFocusChange);
+      }
+    });
+
     return {
       LOADING_PROGRESS_MAX,
       LOADING_PROGRESS_ANIMATION_SPEED,
@@ -73,6 +90,7 @@ export default {
       increaseLoadCount,
       decreaseLoadCount,
       setProgressValue,
+      dialogRef,
     };
   },
 };
