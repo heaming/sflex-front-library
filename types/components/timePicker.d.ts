@@ -32,7 +32,7 @@ interface KwTimePickerProps extends UseFieldProps, UseFieldStyleProps {
   placeholder?: string;
 }
 interface KwTimePickerSlots {}
-interface KwTimePicker extends ComponentPublicInstance<KwTimePickerProps>, UseFieldInstance {}
+export interface KwTimePicker extends ComponentPublicInstance<KwTimePickerProps>, UseFieldInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

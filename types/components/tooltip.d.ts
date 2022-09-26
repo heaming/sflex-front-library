@@ -52,7 +52,7 @@ interface KwTooltipSlots {
    */
   default: () => VNode[];
 }
-interface KwTooltip extends ComponentPublicInstance<KwTooltipProps> {}
+export interface KwTooltip extends ComponentPublicInstance<KwTooltipProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

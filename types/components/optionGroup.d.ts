@@ -40,7 +40,7 @@ interface KwOptionGroupProps extends UseFieldProps, UseOptionsProps {
 
 interface KwOptionGroupSlots {}
 
-interface KwOptionGroup extends ComponentPublicInstance<KwOptionGroupProps>, UseFieldInstance {}
+export interface KwOptionGroup extends ComponentPublicInstance<KwOptionGroupProps>, UseFieldInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

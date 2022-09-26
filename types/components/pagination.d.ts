@@ -47,7 +47,7 @@ interface KwPaginationProps {
   onChange?: (pageIndex: number, pageSize: number) => void;
 }
 interface KwPaginationSlots {}
-interface KwPagination extends ComponentPublicInstance<KwPaginationProps> {
+export interface KwPagination extends ComponentPublicInstance<KwPaginationProps> {
   /**
    * 페이지 인덱스를 변경한다
    * @param pageIndex 페이지 인덱스

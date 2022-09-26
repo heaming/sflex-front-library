@@ -29,7 +29,7 @@ interface KwPopupSlots {
    */
   action: () => VNode[];
 }
-interface KwPopup extends ComponentPublicInstance<KwPopupProps>, UseObserverInstance {}
+export interface KwPopup extends ComponentPublicInstance<KwPopupProps>, UseObserverInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

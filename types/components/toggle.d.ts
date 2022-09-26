@@ -100,7 +100,7 @@ interface KwToggleSlots {
   default: () => VNode[];
 }
 
-interface KwToggle extends ComponentPublicInstance<KwToggleProps> {
+export interface KwToggle extends ComponentPublicInstance<KwToggleProps> {
   /**
    * 선택 값 토글
    */

@@ -3,7 +3,7 @@ import { GlobalComponentConstructor } from 'quasar';
 
 interface KwFileProps {}
 interface KwFileSlots {}
-interface KwFile extends ComponentPublicInstance<KwFileProps> {}
+export interface KwFile extends ComponentPublicInstance<KwFileProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

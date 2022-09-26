@@ -13,7 +13,7 @@ interface KwActionBarSlots {
    */
   default: () => VNode[];
 }
-interface KwActionBar extends ComponentPublicInstance<KwActionBarProps> {}
+export interface KwActionBar extends ComponentPublicInstance<KwActionBarProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

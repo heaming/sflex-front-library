@@ -44,7 +44,7 @@ interface KwIconProps {
   onClick?: (evt: Event) => void;
 }
 interface KwIconSlots {}
-interface KwIcon extends ComponentPublicInstance<KwIconProps> {}
+export interface KwIcon extends ComponentPublicInstance<KwIconProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

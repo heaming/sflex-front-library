@@ -67,7 +67,7 @@ interface KwDateProps {
   'onUpdate:modelValue'?: (modelValue: string) => void;
 }
 interface KwDateSlots {}
-interface KwDate extends ComponentPublicInstance<KwDateProps> {}
+export interface KwDate extends ComponentPublicInstance<KwDateProps> {}
 
 // KwDatePicker
 interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDateProps, 'minView', 'maxView'> {
@@ -98,7 +98,7 @@ interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDa
   placeholder?: string;
 }
 interface KwDatePickerSlots {}
-interface KwDatePicker extends ComponentPublicInstance<KwDatePickerProps>, UseFieldInstance {}
+export interface KwDatePicker extends ComponentPublicInstance<KwDatePickerProps>, UseFieldInstance {}
 
 // KwDatePickerRange
 interface KwDatePickerRangeProps extends Omit<KwDatePickerProps, 'modelValue', 'onUpdate:modelValue', 'placeholder'> {
@@ -135,7 +135,7 @@ interface KwDatePickerRangeProps extends Omit<KwDatePickerProps, 'modelValue', '
   'onUpdate:to'?: (to: string) => void;
 }
 interface KwDatePickerRangeSlots {}
-interface KwDatePickerRange extends ComponentPublicInstance<KwDatePickerRangeProps>, UseFieldInstance {}
+export interface KwDatePickerRange extends ComponentPublicInstance<KwDatePickerRangeProps>, UseFieldInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

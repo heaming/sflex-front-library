@@ -3,7 +3,7 @@ import { GlobalComponentConstructor } from 'quasar';
 
 interface KwEditorProps {}
 interface KwEditorSlots {}
-interface KwEditor extends ComponentPublicInstance<KwEditorProps> {}
+export interface KwEditor extends ComponentPublicInstance<KwEditorProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

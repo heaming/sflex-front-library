@@ -57,7 +57,7 @@ interface KwFormSlots {
    */
   default: () => VNode[];
 }
-interface KwForm extends ComponentPublicInstance<KwFormProps>, UseObserverInstance {}
+export interface KwForm extends ComponentPublicInstance<KwFormProps>, UseObserverInstance {}
 
 // KwFormRow
 interface KwFormRowProps {
@@ -82,7 +82,7 @@ interface KwFormRowSlots {
    */
   default: () => VNode[];
 }
-interface KwFormRow extends ComponentPublicInstance<KwFormRowProps> {}
+export interface KwFormRow extends ComponentPublicInstance<KwFormRowProps> {}
 
 // KwFormItem
 interface KwFormItemProps {
@@ -133,7 +133,7 @@ interface KwFormItemSlots {
    */
   hint: () => VNode[];
 }
-interface KwFormItem extends ComponentPublicInstance<KwFormItemProps> {}
+export interface KwFormItem extends ComponentPublicInstance<KwFormItemProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

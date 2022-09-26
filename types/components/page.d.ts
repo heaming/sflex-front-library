@@ -24,7 +24,7 @@ interface KwPageSlots {
    */
   header: () => VNode[];
 }
-interface KwPage extends ComponentPublicInstance<KwPageProps>, UseObserverInstance {}
+export interface KwPage extends ComponentPublicInstance<KwPageProps>, UseObserverInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

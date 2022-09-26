@@ -20,7 +20,7 @@ interface KwTabPanelsSlots {
    */
   default: () => VNode[];
 }
-interface KwTabPanels extends ComponentPublicInstance<KwTabPanelsProps> {
+export interface KwTabPanels extends ComponentPublicInstance<KwTabPanelsProps> {
   /**
    * 다음 패널로 이동
    */
@@ -55,7 +55,7 @@ interface KwTabPanelSlots {
    */
   default: () => VNode[];
 }
-interface KwTabPanel extends ComponentPublicInstance<KwTabPanelProps> {}
+export interface KwTabPanel extends ComponentPublicInstance<KwTabPanelProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

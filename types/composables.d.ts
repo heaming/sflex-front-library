@@ -4,7 +4,7 @@ export function useDataService(pageId: string): CustomAxiosInstance;
 
 // useGlobal
 import { QVueGlobals } from 'quasar';
-import { cookies, alert, confirm, http, loadSpinner, loadProgress, getConfig, modal, sanitize, localStorage, sessionStorage } from './plugins';
+import { cookies, alert, confirm, http, loadSpinner, loadProgress, modal, notify, sanitize, localStorage, sessionStorage } from './plugins';
 export function useGlobal(): {
   q: QVueGlobals;
   cookies: typeof cookies;
@@ -13,8 +13,8 @@ export function useGlobal(): {
   http: typeof http;
   loadSpinner: typeof loadSpinner;
   loadProgress: typeof loadProgress;
-  getConfig: typeof getConfig;
   modal: typeof modal;
+  notify: typeof notify;
   sanitize: typeof sanitize;
   localStorage: typeof localStorage;
   sessionStorage: typeof sessionStorage;
@@ -35,7 +35,6 @@ export function useGnb(): {
 };
 
 // useLnb
-import { Ref, ComputedRef } from 'vue';
 import { QTree } from 'quasar';
 export function useLnb(): {
   lnbRef: Ref<QTree | undefined>;

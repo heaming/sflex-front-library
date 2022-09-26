@@ -23,7 +23,7 @@ interface KwGridProps<D = LocalDataProvider, V = GridView> extends UseObserverCh
   onInit?: (data: D, view: V) => void;
 }
 interface KwGridSlots {}
-interface KwGrid<D = LocalDataProvider, V = GridView> extends ComponentPublicInstance<KwGridProps<D, V>> {
+export interface KwGrid<D = LocalDataProvider, V = GridView> extends ComponentPublicInstance<KwGridProps<D, V>> {
   /**
    * 그리드 데이터 객체 반환
    */
@@ -38,7 +38,7 @@ interface KwGrid<D = LocalDataProvider, V = GridView> extends ComponentPublicIns
 // KwTreeGrid
 interface KwTreeGridProps<D = LocalTreeDataProvider, V = TreeView> extends KwGridProps<D, V> {}
 interface KwTreeGridSlots extends KwGridSlots {}
-interface KwTreeGrid<D = LocalTreeDataProvider, V = TreeView> extends KwGrid<D, V> {}
+export interface KwTreeGrid<D = LocalTreeDataProvider, V = TreeView> extends KwGrid<D, V> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

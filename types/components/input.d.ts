@@ -189,7 +189,7 @@ interface KwInputSlots {
    */
   after: () => VNode[];
 }
-interface KwInput extends ComponentPublicInstance<KwInputProps>, UseFieldInstance {
+export interface KwInput extends ComponentPublicInstance<KwInputProps>, UseFieldInstance {
   /**
    * 인풋 select
    */

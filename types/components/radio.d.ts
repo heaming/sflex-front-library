@@ -78,7 +78,7 @@ interface KwRadioSlots {
   default: () => VNode[];
 }
 
-interface KwRadio extends ComponentPublicInstance<KwRadioProps> {
+export interface KwRadio extends ComponentPublicInstance<KwRadioProps> {
   /**
    * v-model을 val 속성과 동일하게 설정
    */

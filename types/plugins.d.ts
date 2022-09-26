@@ -95,6 +95,9 @@ export function modal(options: {
   payload?: any;
 }>;
 
+// Notify
+export function notify(message: string): void;
+
 // Sanitize
 import DOMPurify from 'dompurify';
 export const sanitize: typeof DOMPurify.sanitize;
@@ -118,6 +121,7 @@ declare module '@vue/runtime-core' {
       loadSpinner: typeof loadSpinner;
       loadProgress: typeof loadProgress;
       modal: typeof modal;
+      notify: typeof notify;
       sanitize: typeof sanitize;
       localStorage: typeof localStorage;
       sessionStorage: typeof sessionStorage;

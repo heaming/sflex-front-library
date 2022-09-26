@@ -26,7 +26,7 @@ interface KwTabsSlots {
    */
   default: () => VNode[];
 }
-interface KwTabs extends ComponentPublicInstance<KwTabsProps> {}
+export interface KwTabs extends ComponentPublicInstance<KwTabsProps> {}
 
 // KwTab
 interface KwTabProps {
@@ -56,7 +56,7 @@ interface KwTabSlots {
    */
   default: () => VNode[];
 }
-interface KwTab extends ComponentPublicInstance<KwTabProps> {}
+export interface KwTab extends ComponentPublicInstance<KwTabProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

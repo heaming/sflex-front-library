@@ -49,7 +49,7 @@ interface KwChipSlots {
    */
   default: () => VNode[];
 }
-interface KwChip extends ComponentPublicInstance<KwChipProps> {}
+export interface KwChip extends ComponentPublicInstance<KwChipProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

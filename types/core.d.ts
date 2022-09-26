@@ -50,7 +50,7 @@ export const router: Router;
 export function createRoutesByGlobImport(modules: { [key: string]: any }[]): RouteRecordRaw[];
 
 // Modal
-export function registerPopupsByImportGlob(modules: { [key: string]: any }[]): void;
+export function registerPopupsByGlobImport(modules: { [key: string]: any }[]): void;
 
 // Validation
 export function validate(

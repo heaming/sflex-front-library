@@ -30,7 +30,7 @@ interface KwSeparatorProps {
   color?: string;
 }
 interface KwSeparatorSlots {}
-interface KwSeparator extends ComponentPublicInstance<KwSeparatorProps> {}
+export interface KwSeparator extends ComponentPublicInstance<KwSeparatorProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

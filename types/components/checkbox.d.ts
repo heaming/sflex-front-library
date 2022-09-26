@@ -99,7 +99,7 @@ interface KwCheckboxSlots {
   default: () => VNode[];
 }
 
-interface KwCheckbox extends ComponentPublicInstance<KwCheckboxProps> {
+export interface KwCheckbox extends ComponentPublicInstance<KwCheckboxProps> {
   /**
    * 선택 값 토글
    */

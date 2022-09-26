@@ -87,7 +87,7 @@ interface KwSearchSlots {
    */
   action: () => VNode[];
 }
-interface KwSearch extends ComponentPublicInstance<KwSearchProps>, UseObserverInstance {}
+export interface KwSearch extends ComponentPublicInstance<KwSearchProps>, UseObserverInstance {}
 
 // KwSearchRow
 interface KwSearchRowProps {
@@ -112,7 +112,7 @@ interface KwSearchRowSlots {
    */
   default: () => VNode[];
 }
-interface KwSearchRow extends ComponentPublicInstance<KwSearchRowProps> {}
+export interface KwSearchRow extends ComponentPublicInstance<KwSearchRowProps> {}
 
 // KwSearchItem
 interface KwSearchItemProps {
@@ -163,7 +163,7 @@ interface KwSearchItemSlots {
    */
   hint: () => VNode[];
 }
-interface KwSearchItem extends ComponentPublicInstance<KwSearchItemProps> {}
+export interface KwSearchItem extends ComponentPublicInstance<KwSearchItemProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

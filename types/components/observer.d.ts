@@ -9,7 +9,7 @@ interface KwObserverSlots {
    */
   default: () => VNode[];
 }
-interface KwObserver extends ComponentPublicInstance<KwObserverProps>, UseObserverInstance {}
+export interface KwObserver extends ComponentPublicInstance<KwObserverProps>, UseObserverInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

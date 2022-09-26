@@ -4,17 +4,17 @@ import { GlobalComponentConstructor } from 'quasar';
 // KwStepper
 interface KwStepperProps {}
 interface KwStepperSlots {}
-interface KwStepper extends ComponentPublicInstance<KwStepperProps> {}
+export interface KwStepper extends ComponentPublicInstance<KwStepperProps> {}
 
 // KwStep
 interface KwStepProps {}
 interface KwStepSlots {}
-interface KwStep extends ComponentPublicInstance<KwStepProps> {}
+export interface KwStep extends ComponentPublicInstance<KwStepProps> {}
 
 // KwStepperNavigation
 interface KwStepperNavigationProps {}
 interface KwStepperNavigationSlots {}
-interface KwStepperNavigation extends ComponentPublicInstance<KwStepperNavigationProps> {}
+export interface KwStepperNavigation extends ComponentPublicInstance<KwStepperNavigationProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

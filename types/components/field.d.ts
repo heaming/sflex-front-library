@@ -33,7 +33,7 @@ interface KwFieldSlots {
   }) => VNode[];
 }
 
-interface KwField extends ComponentPublicInstance<KwFieldProps>, UseFieldInstance {}
+export interface KwField extends ComponentPublicInstance<KwFieldProps>, UseFieldInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
