@@ -108,11 +108,11 @@ import { getMaxByteString, getByte } from '../../utils/string';
 import { preventSubmitEnter } from '../../utils/private/event';
 
 const NAMED_REGEX = {
-  alpha: /^[A-Z]*$/i,
-  alpha_dash: /^[0-9A-Z_-]*$/i,
-  alpha_num: /^[0-9A-Z]*$/i,
-  alpha_spaces: /^[A-Z\s]*$/i,
-  alpha_underscore: /^[0-9A-Z_]*$/i,
+  alpha: /^$|[A-Z]*$/i,
+  alpha_dash: /^$|[0-9A-Z_-]*$/i,
+  alpha_num: /^$|[0-9A-Z]*$/i,
+  alpha_spaces: /^$|[A-Z\s]*$/i,
+  alpha_underscore: /^$|[0-9A-Z_]*$/i,
 };
 
 export default {
