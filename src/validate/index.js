@@ -9,11 +9,13 @@ function convertRulesToArray(rules) {
   if (isFunction(rules)) { return [rules]; }
   if (isString(rules)) { return rules.split(ruleSeparator); }
   if (isObject(rules)) { return keys(rules).map((k) => ({ [k]: rules[k] })); }
+  return [];
 }
 
 function getRuleName(rule) {
   if (isString(rule)) { return rule.split(ruleParamSeparator)[0]; }
   if (isObject(rule)) { return keys(rule)[0]; }
+  return null;
 }
 
 async function validate(value, rule, options) {
