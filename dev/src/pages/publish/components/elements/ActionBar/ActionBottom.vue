@@ -4,7 +4,8 @@
       Action Bottom
     </h2>
     <p class="kw-guide-description">
-      Table Action bar.<br>
+      Table Action bottom.<br>
+      <b>All button are located in right-side(updated)</b> <br>
       'kw-action-bottom' uses flex css style.<b class="accent"> '&lt;template #left&gt;'</b> and
       is left-aligned, the rest are right-aligned.
     </p>

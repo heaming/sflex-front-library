@@ -5,6 +5,7 @@
     </h2>
     <p class="kw-guide-description">
       Action area located in table top.<br>
+      <b>All button are located in right-side(updated)</b> <br>
       'kw-action-top' uses flex css style.<b class="accent"> '&lt;template #left&gt;'</b>
       is left-aligned, the rest are right-aligned.
     </p>
