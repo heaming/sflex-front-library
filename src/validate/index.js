@@ -1,25 +1,26 @@
 import { validate as _validate } from 'vee-validate';
+import { isArray, isFunction, isString, isObject, keys } from 'lodash-es';
 
 const ruleSeparator = '|';
 const ruleParamSeparator = ':';
 
-function convertRulesToArray(rules = []) {
-  if (Array.isArray(rules)) { return rules; }
-  if (typeof rules === 'function') { return [rules]; }
-  if (typeof rules === 'string') { return rules.split(ruleSeparator); }
-  if (typeof rules === 'object') { return Object.keys(rules).map((k) => ({ [k]: rules[k] })); }
+function convertRulesToArray(rules) {
+  if (isArray(rules)) { return rules; }
+  if (isFunction(rules)) { return [rules]; }
+  if (isString(rules)) { return rules.split(ruleSeparator); }
+  if (isObject(rules)) { return keys(rules).map((k) => ({ [k]: rules[k] })); }
 }
 
 function getRuleName(rule) {
-  if (typeof rule === 'string') { return rule.split(ruleParamSeparator)[0]; }
-  if (typeof rule === 'object') { return Object.keys(rule)[0]; }
+  if (isString(rule)) { return rule.split(ruleParamSeparator)[0]; }
+  if (isObject(rule)) { return keys(rule)[0]; }
 }
 
 async function validate(value, rule, options) {
-  if (typeof rule === 'function') {
+  if (isFunction(rule)) {
     const result = await rule(value, options);
 
-    if (typeof result === 'string') {
+    if (isString(result)) {
       return {
         valid: false,
         errors: [result],
