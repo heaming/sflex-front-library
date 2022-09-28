@@ -367,7 +367,7 @@ interface GridUtil {
    * @param view 그리드 뷰 또는 트리 뷰
    * @param message 다이얼로그에 표시할 메세지 내용
    */
-  alertIfisNotModified(view: GridView | TreeView, message?: string): Promise<boolean>;
+  alertIfIsNotModified(view: GridView | TreeView, message?: string): Promise<boolean>;
 
   /**
    * 전체 데이터의 변경 유무를 확인하여
