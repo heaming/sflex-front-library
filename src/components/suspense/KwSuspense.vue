@@ -40,7 +40,7 @@ export default {
   },
 
   setup(props) {
-    const isLoaded = ref(false);
+    const isLoading = ref(false);
     const isLoadFailed = ref(false);
 
     function loadSpinnerIfUse(value) {
@@ -48,29 +48,34 @@ export default {
     }
 
     function suspense() {
-      isLoaded.value = false;
-      isLoadFailed.value = false;
       loadSpinnerIfUse(true);
+      isLoading.value = true;
+      isLoadFailed.value = false;
     }
 
     suspense();
 
     function onResolveSuspense() {
       loadSpinnerIfUse(false);
-      isLoaded.value = true;
+      isLoading.value = false;
+      isLoadFailed.value = false;
       props.onResolve?.();
     }
 
     onErrorCaptured((e) => {
-      if (!isLoaded.value) {
-        isLoadFailed.value = true;
+      if (isLoading.value) {
         loadSpinnerIfUse(false);
+        isLoading.value = false;
+        isLoadFailed.value = true;
         props.onError?.(e);
       }
     });
 
+    onBeforeUnmount(() => {
+      if (isLoading.value) loadSpinnerIfUse(false);
+    });
+
     return {
-      isLoaded,
       isLoadFailed,
       suspense,
       onResolveSuspense,
