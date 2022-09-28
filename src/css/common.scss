@@ -840,3 +840,29 @@ $unit: px;
     line-height: 1.44;
   }
 }
+
+.essential {
+  &::after {
+    content: "*";
+    display: inline;
+    font-size: 16px;
+    color: $error;
+  }
+
+  &.rg-header-cell {
+    &::after {
+      display: none;
+    }
+
+    div span {
+      position: relative;
+
+      &::after {
+        content: "*";
+        display: inline;
+        font-size: 16px;
+        color: $error;
+      }
+    }
+  }
+}
