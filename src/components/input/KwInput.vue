@@ -198,25 +198,25 @@ export default {
     });
 
     function onUpdateValue(val) {
-      const inputEl = inputRef.value.getNativeElement();
+      const el = inputRef.value.getNativeElement();
       val ??= '';
 
       if (regex.value?.test(val) === false) {
         val = value.value;
-        inputEl.value = val;
+        el.value = val;
       }
 
       if (props.maxlength) {
         val = getMaxByteString(val, props.maxlength);
-        inputEl.value = val;
+        el.value = val;
       }
 
       if (props.upperCase) {
         val = val.toUpperCase();
-        inputEl.value = val;
+        el.value = val;
       } else if (props.lowerCase) {
         val = val.toLowerCase();
-        inputEl.value = val;
+        el.value = val;
       }
 
       value.value = val;
