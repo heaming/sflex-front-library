@@ -11,7 +11,7 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   /**
    * input type
    */
-  type?: 'text' | 'password' | 'textarea';
+  type?: 'text' | 'number' | 'password' | 'textarea';
 
   /**
    * 컴포넌트 비활성화 모드
