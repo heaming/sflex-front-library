@@ -223,6 +223,7 @@
         There are included <b>only for text</b>. Use '<b>p</b>'
         tag instead of the elements(input,select,radio,datepicker)<br>
         The height is 24px and each of padding top and bottom are 6px except of first and last child of kw-form-row.<br>
+        in this case, add <b>dense</b> in kw-form, it adjusts the height of row.<br>
         The default of text-align is left.<br>
         If it should be right, add the attribute <b>align-content="right"</b> in kw-form<br>
         If one of kw-form-item's p tags need to be textalign left,right
@@ -464,6 +465,10 @@ const textForm = `
 </kw-form>
 `;
 const historyData = [
+  {
+    timestamp: '2022-09-27',
+    text: 'Add explaination of Form(only text)',
+  },
   {
     timestamp: '2022-09-08',
     text: 'Add attribute instead of classes(textalign)',

@@ -1,5 +1,5 @@
 <template>
-  <kw-page class="kw-guide">
+  <kw-page class="kw-guide delete">
     <h2 class="kw-guide-h2">
       Action Bar
     </h2>

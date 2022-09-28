@@ -485,6 +485,74 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="toggleButton"
+        class="kw-guide-title"
+      >
+        Toggle(switch)
+      </h3>
+      <p class="kw-guide-description">
+        For kw-toggle's label is located right side,Add <b>left-label="false"</b>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-toggle
+            v-model="ynModel"
+            label="가구 내 학습지 모두 보기"
+            left-label="false"
+          />
+          <kw-toggle
+            v-model="ynModel"
+            label="가구 내 학습지 모두 보기"
+          />
+          <!-- 추후 필요시 option group 추가  -->
+          <!-- <kw-option-group
+            :model-value="[]"
+            name="toggleOptionGroup"
+            rules="required"
+            type="toggle"
+            :options="['A', 'B', 'C', 'D']"
+            :left-label="false"
+          /> -->
+          <!-- in form  -->
+          <!-- <kw-form>
+            <kw-form-item label="Toggle (OptionGroup)">
+              <kw-field
+                :model-value="'Y'"
+                rules="required"
+              >
+                <template #default="{ field }">
+                  <kw-toggle
+                    v-bind="field"
+                    label="searchform"
+                    left-label="false"
+                  />
+                </template>
+              </kw-field>
+            </kw-form-item>
+            <kw-form-item
+              label="Toggle (OptionGroup)"
+              no-label
+            >
+              <kw-option-group
+                :model-value="[]"
+                name="toggleOptionGroup"
+                rules="required"
+                type="toggle"
+                :options="['A', 'B', 'C', 'D']"
+                :left-label="false"
+              />
+            </kw-form-item>
+          </kw-form> -->
+        </div>
+        <guide-code-view
+          :code-value="[toggleSwitch,toggleSwitchScript]"
+          :lang="['vue','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
     <!-- <div class="kw-guide-section">
       <h3
         id="toggleButton"
@@ -578,15 +646,10 @@
 
 <script setup>
 
-// const dummyData = ref(true);
-// const toggleSelected = ref('오늘');
-
-// const ynModel = ref('N');
-// const ynModel2 = ref('N');
-// const ynModel3 = ref('N');
 const strModel = ref('오늘');
 const strModel2 = ref('오늘');
 const strModel3 = ref('A');
+const ynModel = ref('N');
 
 const defaultCode = `
   <kw-btn
@@ -765,18 +828,20 @@ const tableInside = `
   />
   `;
 
-// const toggle = `
-//   <kw-toggle
-//     v-model="dummyData"
-//     label="text"
-//     :true-value="true"
-//     :false-value="false"
-//   />
-
-//   `;
-// const toggleScript = `
-//   const dummyData = ref(true); // select default value (true or false)
-//   `;
+const toggleSwitch = `
+<kw-toggle
+  v-model="ynModel"
+  label="가구 내 학습지 모두 보기"
+  left-label="false"
+/>
+<kw-toggle
+  v-model="ynModel"
+  label="가구 내 학습지 모두 보기"
+/>
+  `;
+const toggleSwitchScript = `
+  const ynModel = ref('N'); // select default value (Y or N)
+  `;
 
 const toggleRadio = `
 <!-- height: 32px -->
@@ -809,12 +874,16 @@ const strModel = ref('오늘');
 // History
 const guideHistory = [
   {
+    timestamp: '2022.09.27',
+    text: 'Add toggle(switch)',
+  },
+  {
     timestamp: '2022.09.26',
-    text: 'add toggle(radio)',
+    text: 'Add toggle(radio)',
   },
   {
     timestamp: '2022.09.21',
-    text: 'add content of padding prop guide',
+    text: 'Add content of padding prop guide',
   },
   {
     timestamp: '2022.09.16',

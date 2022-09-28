@@ -37,6 +37,15 @@
     }
   }
 
+  .kw-form-item__field {
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: $black1;
+    }
+  }
+
   & {
     .kw-form-row:first-of-type {
       padding-top: 0;
