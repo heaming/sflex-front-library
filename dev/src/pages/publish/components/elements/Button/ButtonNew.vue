@@ -383,7 +383,7 @@
           </h4>
           <kw-btn
             grid-action
-            label="행 추가"
+            label="행추가"
             class="mr8"
           />
           <kw-btn
@@ -794,7 +794,7 @@ const secondary = `
 const tableBtn = `
   <kw-btn
     grid-action
-    label="행 추가"
+    label="행추가"
     class="mr8"
   />
   <kw-btn

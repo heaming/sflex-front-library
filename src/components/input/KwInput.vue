@@ -198,25 +198,27 @@ export default {
     });
 
     function onUpdateValue(val) {
-      const inputEl = inputRef.value.getNativeElement();
+      const el = inputRef.value.getNativeElement();
       val ??= '';
 
-      if (regex.value?.test(val) === false) {
-        val = value.value;
-        inputEl.value = val;
-      }
+      if (val) {
+        if (regex.value?.test(val) === false) {
+          val = value.value;
+          el.value = val;
+        }
 
-      if (props.maxlength) {
-        val = getMaxByteString(val, props.maxlength);
-        inputEl.value = val;
-      }
+        if (props.maxlength) {
+          val = getMaxByteString(val, props.maxlength);
+          el.value = val;
+        }
 
-      if (props.upperCase) {
-        val = val.toUpperCase();
-        inputEl.value = val;
-      } else if (props.lowerCase) {
-        val = val.toLowerCase();
-        inputEl.value = val;
+        if (props.upperCase) {
+          val = val.toUpperCase();
+          el.value = val;
+        } else if (props.lowerCase) {
+          val = val.toLowerCase();
+          el.value = val;
+        }
       }
 
       value.value = val;

@@ -1,4 +1,7 @@
 .kw-field.q-field {
+  $-kw-field-gap: 8px;
+  $-kw-field-gap-dense: 4px;
+
   font-size: $kw-field-font-size;
 
   &.q-field--with-bottom {
@@ -16,6 +19,16 @@
         opacity: 1;
       }
     }
+  }
+
+  .q-field__before,
+  .q-field__prepend {
+    padding-right: $-kw-field-gap;
+  }
+
+  .q-field__after,
+  .q-field__append {
+    padding-left: $-kw-field-gap;
   }
 
   .q-field__append {
@@ -252,6 +265,16 @@
 
     .q-field__bottom {
       font-size: $kw-field-font-size-bottom-dense;
+    }
+
+    .q-field__before,
+    .q-field__prepend {
+      padding-right: $-kw-field-gap-dense;
+    }
+
+    .q-field__after,
+    .q-field__append {
+      padding-left: $-kw-field-gap-dense;
     }
 
     .q-field__native,
