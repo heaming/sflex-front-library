@@ -254,6 +254,35 @@
         id="disable"
         class="kw-guide-title"
       >
+        Search Input
+      </h3>
+      <p class="kw-guide-description">
+        If you need search input, add icon="search_16" and clearable prop like below
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item label="search">
+                <kw-input
+                  icon="search_16"
+                  clearable
+                />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="searchInput"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="disable"
+        class="kw-guide-title"
+      >
         Input with special symbols
       </h3>
       <p class="kw-guide-description">
@@ -516,6 +545,13 @@ const hypenInput = `
 </kw-form>
 `;
 
+const searchInput = `
+<kw-input
+  icon="search_16"
+  clearable
+/>
+`;
+
 const textarea = `
 <kw-form>
   <kw-form-row>
@@ -579,6 +615,10 @@ const nolabelCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-28',
+    text: 'add searchInput type',
+  },
   {
     timestamp: '2022-09-21',
     text: 'revised the summary area',
