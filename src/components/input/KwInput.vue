@@ -201,22 +201,24 @@ export default {
       const el = inputRef.value.getNativeElement();
       val ??= '';
 
-      if (regex.value?.test(val) === false) {
-        val = value.value;
-        el.value = val;
-      }
+      if (val) {
+        if (regex.value?.test(val) === false) {
+          val = value.value;
+          el.value = val;
+        }
 
-      if (props.maxlength) {
-        val = getMaxByteString(val, props.maxlength);
-        el.value = val;
-      }
+        if (props.maxlength) {
+          val = getMaxByteString(val, props.maxlength);
+          el.value = val;
+        }
 
-      if (props.upperCase) {
-        val = val.toUpperCase();
-        el.value = val;
-      } else if (props.lowerCase) {
-        val = val.toLowerCase();
-        el.value = val;
+        if (props.upperCase) {
+          val = val.toUpperCase();
+          el.value = val;
+        } else if (props.lowerCase) {
+          val = val.toLowerCase();
+          el.value = val;
+        }
       }
 
       value.value = val;
