@@ -34,7 +34,7 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
-import useButtonStyle, { useButtonStyleProps } from '../../composables/private/useButtonStyle';
+import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnStyle';
 
 export default {
   name: 'KwBtnToggle',
@@ -45,7 +45,7 @@ export default {
     // customize props
     ...useFieldProps,
     ...useOptionsProps,
-    ...useButtonStyleProps,
+    ...useBtnStyleProps,
 
     toggleColor: { type: String, default: 'bg-white' },
     toggleTextColor: { type: String, default: 'primary' },
@@ -70,7 +70,7 @@ export default {
 
   setup(props) {
     const { normalizedOptions } = useOptions();
-    const { buttonClasses, buttonStyles, buttonDense } = useButtonStyle({
+    const { buttonClasses, buttonStyles, buttonDense } = useBtnStyle({
       color: 'bg-white',
       textColor: 'black3',
       borderColor: 'line-stroke',
