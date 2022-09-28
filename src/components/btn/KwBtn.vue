@@ -30,14 +30,14 @@
 <script>
 import usePermissions from '../../composables/private/usePermissions';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
-import useButtonStyle, { useButtonStyleProps } from '../../composables/private/useButtonStyle';
+import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnStyle';
 
 export default {
   name: 'KwBtn',
   inheritAttrs: false,
   props: {
     // customize props
-    ...useButtonStyleProps,
+    ...useBtnStyleProps,
 
     // fall through props
     type: { type: String, default: 'button' },
@@ -68,7 +68,7 @@ export default {
 
     return {
       ...usePermissions(),
-      ...useButtonStyle(),
+      ...useBtnStyle(),
       styleClassAttrs,
       btnRef,
       click,

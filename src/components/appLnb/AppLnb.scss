@@ -15,6 +15,10 @@
   }
 
   .lnb-tree {
+    &--empty.q-tree {
+      padding: 0 20px;
+    }
+
     &.q-tree {
       .q-focus-helper,
       .q-icon.q-tree__arrow {

@@ -12,13 +12,13 @@
     height: $kw-field-height; // min-height: $kw-field-height;
     font-size: $kw-field-font-size-marginal;
 
-    .q-icon {
-      opacity: 0.6;
+    // .q-icon {
+    //   opacity: 0.6;
 
-      &:hover {
-        opacity: 1;
-      }
-    }
+    //   &:hover {
+    //     opacity: 1;
+    //   }
+    // }
   }
 
   .q-field__before,
@@ -126,6 +126,12 @@
     .q-field__suffix,
     .q-field__input {
       color: $kw-field-color-disable;
+    }
+
+    .q-field__marginal {
+      .q-icon {
+        opacity: 0.6 !important;
+      }
     }
 
     .q-field__native {

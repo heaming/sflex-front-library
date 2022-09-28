@@ -46,6 +46,8 @@
   $-kw-btn-line-height-dense: $kw-field-line-height-dense;
   $-kw-btn-font-size-dense: $kw-field-font-size-dense;
   $-kw-btn-font-weight-dense: $button-font-weight;
+  $-kw-btn-icon-size: 1em;
+  $-kw-btn-icon-size-dense: 16px; // design concept.
 
   // about color
   $-color-list: $semantic-colors;
@@ -91,7 +93,7 @@
 
     .q-icon,
     .q-spinner {
-      font-size: 1em;
+      font-size: $-kw-btn-icon-size;
     }
 
     &::before {
@@ -117,7 +119,7 @@
 
       .q-icon,
       .q-spinner {
-        font-size: 16px;  // design concept.
+        font-size: $-kw-btn-icon-size-dense;
       }
 
       &.on-left {
@@ -198,6 +200,20 @@
 
       &--dense {
         @include kw-btn-height-modifier(0, $-kw-btn-line-height-dense, $-kw-btn-font-size-dense, $-kw-btn-font-weight-dense);
+      }
+    }
+  }
+
+  &--icon-only {
+    &:not(&.kw-btn--borderless) {
+      &.q-btn {
+        padding-left: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
+        padding-right: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
+
+        &--dense {
+          padding-left: calc((#{$-kw-btn-line-height-dense} + #{ zero-unit(at($-kw-btn-padding-dense, 1) + at($-kw-btn-padding-dense, 3))} - #{$-kw-btn-icon-size-dense}) / 2);
+          padding-right: calc((#{$-kw-btn-line-height-dense} + #{ zero-unit(at($-kw-btn-padding-dense, 1) + at($-kw-btn-padding-dense, 3))} - #{$-kw-btn-icon-size-dense}) / 2);
+        }
       }
     }
   }

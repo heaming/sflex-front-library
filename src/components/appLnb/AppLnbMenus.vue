@@ -8,6 +8,7 @@
       ref="treeRef"
       :key="selectedGnbKey"
       class="lnb-tree"
+      :class="{'lnb-tree--empty': lnbNodes.length === 0}"
       :selected="selectedLnbKey"
       :expanded="expandedKeys"
       :nodes="lnbNodes"

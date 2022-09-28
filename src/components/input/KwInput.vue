@@ -26,7 +26,7 @@
     :tabindex="tabindex"
     :input-class="{'text-right': alignRight}"
     no-error-icon
-    clear-icon="close_24"
+    clear-icon="delete_16|0 0 16 16"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
     @clear="$emit('clear', $event)"
