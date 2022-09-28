@@ -124,6 +124,17 @@
           </tr>
           <tr>
             <td>
+              header
+            </td>
+            <td>
+              stylename: essential
+            </td>
+            <td>
+              Add essential in thead
+            </td>
+          </tr>
+          <tr>
+            <td>
               width
             </td>
             <td>
@@ -143,6 +154,20 @@
             </td>
             <td>
               If no value is entered, default left alignment
+            </td>
+          </tr>
+          <tr>
+            <td>
+              styleName
+            </td>
+            <td>
+              background-color
+            </td>
+            <td>
+              Use the color helper class in
+              <router-link to="/Publish/Components/color">
+                color
+              </router-link>
             </td>
           </tr>
         </tbody>
@@ -281,15 +306,18 @@
       <h3
         class="kw-guide-title"
       >
-        Case #6
+        Case #6 (Vetical thead and essential )
       </h3>
       <p class="kw-guide-description">
-        As first row's first column has no text, Put blank in header (header: ' ' - have to put space between '')<br>
+        As first row's first column has no text, Put blank in header
+        (<b>header: ' '</b> - have to put space between '')<br>
         Apply the backgorund color of first columns in grid.<br>
         Add color name class in styleName<br>
         <router-link to="/Publish/Components/Temporary/PopupSample03">
           PopupSample03
         </router-link>
+        <br>
+        It needs to be added <b>essential</b>, add { text : ' text ' , styleName: 'essential'} in header
       </p>
       <q-card>
         <kw-grid
@@ -609,9 +637,18 @@ function initGrid(data, view) {
     { fieldName: 'col13' },
   ];
 
+
   const columns = [
     { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
-    { fieldName: 'col2', header: '고객 유형', width: '250', styleName: 'text-right' },
+    {
+      fieldName: 'col2',
+      header: {
+        text: '고객 유형',
+        styleName: 'essential',
+      },
+      width: '250',
+      styleName: 'text-right',
+    },
     { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
   ];
@@ -862,7 +899,15 @@ function initGrid6(data, view) {
 
   const columns = [
     { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
-    { fieldName: 'col2', header: '고객 유형', width: '250', styleName: 'text-right' },
+    {
+      fieldName: 'col2',
+      header: {
+        text: '고객 유형',
+        styleName: 'essential',
+      },
+      width: '250',
+      styleName: 'text-right',
+    },
     { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
   ];
@@ -890,6 +935,10 @@ const testCode5 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.09.26',
+    text: 'Add case #6, essential',
+  },
   {
     timestamp: '2022.09.26',
     text: 'Add case #6, text-align and color in grid',
