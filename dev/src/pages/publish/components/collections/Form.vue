@@ -42,7 +42,10 @@
               essential
             </td>
             <td>
-              Add the class "essential" in the tag of kw-form-item.
+              <p class="delete">
+                Add the class "essential" in the tag of kw-form-item.
+              </p>
+              Add the prop "required" in tag of kw-form-item
             </td>
           </tr>
           <tr>
@@ -971,6 +974,10 @@ const telephoneCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-09-28',
+    text: 'Edit guide about essential',
+  },
   {
     timestamp: '2022-09-21',
     text: 'Add example of phone form case',
