@@ -1,24 +1,20 @@
 <template>
-  <q-dialog
-    ref="dialogRef"
-    :model-value="isActive"
+  <div
+    v-if="isActive"
+    ref="containerRef"
     class="global-loading"
-    :transition-duration="0"
-    persistent
-    no-shake
+    tabindex="-1"
   >
-    <div>
-      <q-circular-progress
-        v-if="isProgress"
-        show-value
-        :value="progressValue"
-        :animation-speed="LOADING_PROGRESS_ANIMATION_SPEED"
-      />
-      <q-spinner
-        v-else
-      />
-    </div>
-  </q-dialog>
+    <q-circular-progress
+      v-if="isProgress"
+      show-value
+      :value="progressValue"
+      :animation-speed="LOADING_PROGRESS_ANIMATION_SPEED"
+    />
+    <q-spinner
+      v-else
+    />
+  </div>
 </template>
 
 <script>
@@ -66,15 +62,15 @@ export default {
       );
     }
 
-    const dialogRef = ref();
+    const containerRef = ref();
 
     function onFocusChange(evt) {
       stopAndPrevent(evt);
-      dialogRef.value.focus();
+      containerRef.value.focus();
     }
 
     watch(isActive, (val) => {
-      if (val === true) {
+      if (val) {
         addFocusout(onFocusChange);
       } else {
         removeFocusout(onFocusChange);
@@ -90,7 +86,7 @@ export default {
       increaseLoadCount,
       decreaseLoadCount,
       setProgressValue,
-      dialogRef,
+      containerRef,
     };
   },
 };
