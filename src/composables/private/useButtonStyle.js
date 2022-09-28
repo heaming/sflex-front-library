@@ -65,7 +65,7 @@ const designDefaultColors = {
 };
 
 export default (defaultPreset) => {
-  const { props } = getCurrentInstance();
+  const { props, slots } = getCurrentInstance();
 
   const stylePreset = computed(() => {
     let preset = availablePresets[props.preset] ?? defaultPreset ?? {};
@@ -115,6 +115,10 @@ export default (defaultPreset) => {
 
     if (buttonBorderColor.value) {
       classes += `kw-btn--border-color-${buttonBorderColor.value} `;
+    }
+
+    if ((props.icon || props.iconRight) && !props.label && !slots.default) {
+      classes += 'kw-btn--icon-only ';
     }
 
     return classes;
