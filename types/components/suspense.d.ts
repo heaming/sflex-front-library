@@ -12,12 +12,12 @@ interface KwSuspenseProps {
   /**
    * 해결 이벤트
    */
-  onResolve?: boolean;
+  onResolve?: () => void;
 
   /**
    * 에러 이벤트
    */
-  onError?: boolean;
+  onError?: (e: Error) => void;
 }
 interface KwSuspenseSlots {
   /**
