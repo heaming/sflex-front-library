@@ -1,13 +1,9 @@
 <template>
-  <q-scroll-area
-    class="kw-popup--scroll"
+  <q-card-section
+    class="kw-popup__content"
   >
-    <q-card-section
-      class="kw-popup__content"
-    >
-      <slot />
-    </q-card-section>
-  </q-scroll-area>
+    <slot />
+  </q-card-section>
   <q-card-section
     v-if="$slots.action"
     class="kw-popup__action"
