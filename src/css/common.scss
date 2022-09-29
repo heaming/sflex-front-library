@@ -373,6 +373,11 @@ body {
       }
     }
   }
+
+  &--scroll {
+    height: 100%;
+    max-width: 279px;
+  }
 }
 
 body:not(.q-body--layout-animate) .q-layout--prevent-focus {
