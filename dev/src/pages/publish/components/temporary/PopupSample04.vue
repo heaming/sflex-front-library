@@ -4,11 +4,9 @@
       class="kw-popup--sm"
       title="서명 요청 SMS 발송 정보"
     >
-      <h2
-        class="h2-small justify-end"
-      >
-        <p><span>2022-09-14 변경</span></p>
-      </h2>
+      <p class="kw-font--14 kw-fc--black3 text-right mb12">
+        <span>2022-09-14 변경</span>
+      </p>
       <kw-form
         :cols="1"
         dense
