@@ -128,7 +128,6 @@
             class="mr8"
           />
           <kw-btn
-            padding="13px"
             secondary
             icon="plus_16"
             style="font-size: 20px;"
@@ -275,7 +274,6 @@ const iconButton = `
   />
   <kw-btn
     secondary
-    padding="13px"
     icon="plus_16"
     style="font-size: 20px;"
   />
@@ -347,6 +345,14 @@ const printCode = `
 `;
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.09.28',
+    text: 'edit icon only type sample',
+  },
+  {
+    timestamp: '2022.09.15',
+    text: 'revised button component guide',
+  },
   {
     timestamp: '2022.09.15',
     text: 'revised button component guide',
