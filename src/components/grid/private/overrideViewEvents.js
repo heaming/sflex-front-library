@@ -231,10 +231,8 @@ export function customOnCellEditable(view) {
 export function overrideOnShowEditor(view) {
   wrapEvent(view, onShowEditor, (g, index) => {
     if (g.onCellEditable(g, index) === false) {
-      g.__ignoreWaitUntilShowEditor__ = true;
       return false;
     }
-
     return true;
   });
 }

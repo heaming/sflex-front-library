@@ -28,8 +28,8 @@
     </q-card-section>
 
     <kw-suspense
-      @resolve="isLoaded = true"
-      @error="isLoaded = true"
+      @resolve="onLoad"
+      @error="onLoad"
     >
       <template #default>
         <slot />
@@ -98,6 +98,14 @@ export default {
       props.draggable && 'kw-popup__header--draggable',
     ]);
 
+    function onLoad(e) {
+      isLoaded.value = true;
+
+      if (!(e instanceof Error)) {
+        emit('resolve');
+      }
+    }
+
     return {
       isLoaded,
       ctx: popupCtx,
@@ -108,6 +116,7 @@ export default {
       popupStyle,
       popupClass,
       popupHeaderClass,
+      onLoad,
     };
   },
 };
