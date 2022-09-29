@@ -58,6 +58,17 @@
               If you need to sort differently, insert a helper class in the td.
             </td>
           </tr>
+          <tr>
+            <td>
+              th/td
+            </td>
+            <td>
+              essential
+            </td>
+            <td>
+              Need to add 'essential',insert a helper class
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -82,8 +93,12 @@
             </colgroup>
             <thead>
               <tr>
-                <th>계좌상태</th>
-                <th>오류번호</th>
+                <th>
+                  계좌상태
+                </th>
+                <th class="essential">
+                  오류번호
+                </th>
                 <th>오류명</th>
                 <th>청구여부</th>
               </tr>
@@ -501,7 +516,9 @@ const testCode = `
   <thead>
     <tr>
       <th>계좌상태</th>
-      <th>오류번호</th>
+      <th  class="essential">
+        오류번호
+      </th>
       <th>오류명</th>
       <th>청구여부</th>
     </tr>
@@ -882,6 +899,10 @@ const case01 = `
 </div>
 `;
 const historyData = [
+  {
+    timestamp: '2022-09-28',
+    text: 'Add essential',
+  },
   {
     timestamp: '2022-08-29',
     text: 'First added',
