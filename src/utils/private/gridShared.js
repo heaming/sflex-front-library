@@ -147,18 +147,21 @@ export function getCellClickEvent(view, el) {
 }
 
 export async function waitUntilShowEditor(view, dropdown = false) {
-  view.__ignoreWaitUntilShowEditor__ = false;
-  view.showEditor(dropdown);
+  const index = view.getCurrent();
 
-  if (view.__ignoreWaitUntilShowEditor__ === true) { return; }
+  if (index.itemIndex > -1) {
+    const column = view.columnByName(index.column);
 
-  await processWait();
-  const isEditing = view.isEditing();
+    if (isCellEditable(view, column, index)) {
+      view.showEditor(dropdown);
+      await processWait();
 
-  if (isEditing) {
-    document.activeElement.select();
-  } else {
-    await waitUntilShowEditor(view, dropdown);
+      if (view.isEditing()) {
+        document.activeElement.select();
+      } else {
+        await waitUntilShowEditor(view, dropdown);
+      }
+    }
   }
 }
 
