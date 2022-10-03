@@ -6,29 +6,30 @@
     show-if-above
     bordered
   >
-    <q-tree
-      ref="lnbRef"
-      :key="selectedGnbKey"
-      class="py20 pl10"
-      :selected="selectedLnbKey"
-      :expanded="expandedKeys"
-      :nodes="hierarchyedLnbItems"
-      icon="arrow_right_24"
-      :duration="100"
-      node-key="key"
-      label-key="label"
-      no-selection-unset
-      no-nodes-label=" "
-      @update:selected="onUpdateSelected"
-      @update:expanded="onUpdateExpanded"
-    >
-      <template #default-header="{node}">
-        <div :class="{'text-bold text-black': isSelected(node.key)}">
-          {{ node.label }}
-        </div>
-      </template>
-    </q-tree>
-
+    <q-scroll-area class="kw-lnb--scroll">
+      <q-tree
+        ref="lnbRef"
+        :key="selectedGnbKey"
+        class="py20 pl10"
+        :selected="selectedLnbKey"
+        :expanded="expandedKeys"
+        :nodes="hierarchyedLnbItems"
+        icon="arrow_right_24"
+        :duration="100"
+        node-key="key"
+        label-key="label"
+        no-selection-unset
+        no-nodes-label=" "
+        @update:selected="onUpdateSelected"
+        @update:expanded="onUpdateExpanded"
+      >
+        <template #default-header="{node}">
+          <div :class="{'text-bold text-black': isSelected(node.key)}">
+            {{ node.label }}
+          </div>
+        </template>
+      </q-tree>
+    </q-scroll-area>
     <kw-btn
       icon="lnb_arrow"
       class="kw-lnb__switch"

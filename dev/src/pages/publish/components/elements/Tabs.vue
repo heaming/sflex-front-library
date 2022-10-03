@@ -293,6 +293,18 @@ const tabform = `
 </kw-tab-panels>
 `;
 const tabSearch = `
+<kw-tabs
+  model-value="1"
+>
+  <kw-tab
+    name="1"
+    label="form"
+  />
+  <kw-tab
+    name="2"
+    label="searchform"
+  />
+</kw-tabs>
 <kw-tab-panel name="2">
   <kw-search
     cols="2"

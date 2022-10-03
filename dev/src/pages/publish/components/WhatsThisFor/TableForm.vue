@@ -84,7 +84,10 @@
             <h3 class="mb20">
               2.None of elements(input,radio,select,datepicker)
             </h3>
-            <kw-form align-content="right">
+            <kw-form
+              align-content="right"
+              dense
+            >
               <kw-form-row>
                 <kw-form-item label="교원">
                   <p>0</p>
@@ -103,8 +106,10 @@
               </kw-form-row>
             </kw-form>
             <kw-separator />
-            <h3>3.table</h3>
-            <table class="kw-table--normal mt20">
+            <h3 class="mb20">
+              3.table
+            </h3>
+            <table class="kw-table--normal">
               <colgroup>
                 <col style="width: 25%;">
                 <col style="width: 25%;">
@@ -329,7 +334,10 @@ const testCode = `
   <h3 class="mb20">
     2.None of elements(input,radio,select,datepicker)
   </h3>
-  <kw-form align-content="right">
+  <kw-form
+    align-content="right"
+    dense
+  >
     <kw-form-row>
       <kw-form-item label="교원">
         <p>0</p>
@@ -348,8 +356,12 @@ const testCode = `
     </kw-form-row>
   </kw-form>
   <kw-separator />
-  <h3>3.table</h3>
-  <table class="kw-table--normal mt20">
+  <h3
+    class="mb20"
+  >
+    3.table
+  </h3>
+  <table class="kw-table--normal">
     <colgroup>
       <col style="width: 25%;">
       <col style="width: 25%;">
