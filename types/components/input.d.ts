@@ -167,6 +167,12 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
    * @param value clear되기 이전의 값
    */
   onClear?: (value: string | number) => void;
+
+  /**
+   * input keydown 이벤트
+   * @param evt JS event object
+   */
+  onKeydown?: (evt: Event) => void;
 }
 interface KwInputSlots {
   /**

@@ -26,11 +26,11 @@
     :tabindex="tabindex"
     :input-class="{'text-right': alignRight}"
     no-error-icon
-    clear-icon="delete_16|0 0 16 16"
+    clear-icon="none"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
     @clear="$emit('clear', $event)"
-    @keydown.enter="onEnter"
+    @keydown="onKeydown"
     @change="onChange"
     @update:model-value="onUpdateValue"
   >
@@ -51,7 +51,7 @@
         v-if="icon"
         :tabindex="-1"
         :name="icon"
-        :disable="disableIcon"
+        :disable="disable || disableIcon"
         clickable
         @click="$emit('clickIcon')"
       />
@@ -105,7 +105,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { getMaxByteString, getByte } from '../../utils/string';
-import { preventSubmitEnter } from '../../utils/private/event';
+import { preventSubmitEnter, stopAndPrevent } from '../../utils/private/event';
 
 const NAMED_REGEX = {
   alpha: /^[A-Z]*$/i,
@@ -163,6 +163,7 @@ export default {
     'focus',
     'blur',
     'clear',
+    'keydown',
   ],
 
   setup(props, { emit }) {
@@ -174,14 +175,18 @@ export default {
       inputRef.value.select();
     }
 
-    function onEnter(evt) {
-      if (props.icon) {
-        evt.preventDefault();
+    function onKeydown(e) {
+      // enter
+      if (e.keyCode === 13) {
+        const disabled = props.disable || props.disableIcon;
 
-        if (!props.disableIcon) {
+        if (!disabled && props.icon) {
+          stopAndPrevent(e);
           emit('clickIcon');
         }
       }
+
+      emit('keydown', e);
     }
 
     const isModifiersTrim = useAttrs().modelModifiers?.trim === true;
@@ -239,7 +244,7 @@ export default {
       ...fieldCtx,
       fieldStyles,
       select,
-      onEnter,
+      onKeydown,
       onChange,
       onUpdateValue,
       useCounter,
