@@ -27,11 +27,11 @@
     :input-class="{'text-right': alignRight}"
     no-error-icon
     clear-icon="none"
-    @focus="$emit('focus', $event)"
-    @blur="$emit('blur', $event)"
-    @clear="$emit('clear', $event)"
-    @keydown="onKeydown"
-    @change="onChange"
+    @focus="onFocus"
+    @blur="onBlur"
+    @clear="onClear"
+    @keydown="onKeydownInput"
+    @change="onChangeInput"
     @update:model-value="onUpdateValue"
   >
     <!-- prepend -->
@@ -144,6 +144,10 @@ export default {
     autofocus: { type: Boolean, default: false },
     placeholder: { type: String, default: undefined },
     tabindex: { type: [Number, String], default: undefined },
+    onFocus: { type: Function, default: undefined },
+    onBlur: { type: Function, default: undefined },
+    onClear: { type: Function, default: undefined },
+    onKeydown: { type: Function, default: undefined },
 
     // customize props
     icon: { type: String, default: undefined },
@@ -154,19 +158,18 @@ export default {
     lowerCase: { type: Boolean, default: false },
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
     alignRight: { type: Boolean, default: false },
+    onClickIcon: { type: Function, default: undefined },
+
+    // when use mask props, keydown event not fired.
+    // so use this to block form submit
     preventSubmit: { type: Boolean, default: false },
   },
 
   emits: [
     'update:modelValue',
-    'clickIcon',
-    'focus',
-    'blur',
-    'clear',
-    'keydown',
   ],
 
-  setup(props, { emit }) {
+  setup(props) {
     const fieldStyles = useFieldStyle();
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
@@ -175,23 +178,23 @@ export default {
       inputRef.value.select();
     }
 
-    function onKeydown(e) {
+    function onKeydownInput(e) {
       // enter
       if (e.keyCode === 13) {
         const disabled = props.disable || props.disableIcon;
 
         if (!disabled && props.icon) {
           stopAndPrevent(e);
-          emit('clickIcon');
+          props.onClickIcon?.();
         }
       }
 
-      emit('keydown', e);
+      props?.onKeydown(e);
     }
 
     const isModifiersTrim = useAttrs().modelModifiers?.trim === true;
 
-    function onChange() {
+    function onChangeInput() {
       if (isModifiersTrim) {
         value.value = props.modelValue;
       }
@@ -244,8 +247,8 @@ export default {
       ...fieldCtx,
       fieldStyles,
       select,
-      onKeydown,
-      onChange,
+      onKeydownInput,
+      onChangeInput,
       onUpdateValue,
       useCounter,
       counterText,
