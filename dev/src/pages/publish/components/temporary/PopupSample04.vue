@@ -2,6 +2,7 @@
   <guide-popup-view>
     <kw-popup
       class="kw-popup--sm kw-popup--no-action"
+      title="타이틀입니다."
     >
       <p class="kw-font--14 kw-fc--black3 text-right mb12">
         <span>2022-09-14 변경</span>
