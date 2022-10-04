@@ -3,24 +3,40 @@
   <q-select
     ref="inputRef"
     :model-value="value"
-    v-bind="fieldStyles"
+    v-bind="{...styleClassAttrs, ...fieldStyles}"
     class="kw-field kw-select"
     popup-content-class="kw-select-options-menu"
     :label="undefined"
     :error="invalid"
-    :options="filteredOptions"
+    :options="normalizedOptions"
     :option-value="optionValue"
     :option-label="optionLabel"
     :multiple="multiple"
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="useInput"
-    :input-debounce="100"
-    dropdown-icon="arrow_down_16"
+    :hide-selected="useInput"
+    :input-debounce="inputDebounce"
+    :disable="disable"
+    :readonly="readonly"
+    :prefix="prefix"
+    :suffix="suffix"
+    :color="color"
+    :bg-color="bgColor"
+    :autofocus="autofocus"
+    :placeholder="placeholder"
+    :tabindex="tabindex"
+    :clearable="clearable"
     no-error-icon
-    @update:model-value="onUpdateValue"
-    @filter="filter"
+    :dropdown-icon="dropdownIcon"
+    :hide-dropdown-icon="hideDropdownIcon"
+    clear-icon="none"
+    @focus="onFocus"
     @blur="onBlur"
+    @clear="onClear"
+    @keydown="onKeydown"
+    @filter="onFilter"
+    @update:model-value="onUpdateValue"
   >
     <!-- no-option (override slots) -->
     <template
@@ -39,20 +55,20 @@
       </q-item>
     </template>
 
-    <!-- selected-item (override slots) -->
+    <!-- selected (override slots) -->
     <template
-      v-if="$slots['selected-item']"
-      #selected-item="slotProps"
+      v-if="placeholder && !isOptionSelected()"
+      #selected
     >
-      <slot
-        name="selected-item"
-        v-bind="slotProps"
-      />
+      <span
+        key="placeholder"
+        class="kw-select__placeholder"
+      >{{ placeholder }}</span>
     </template>
 
     <!--before-options -->
     <template
-      v-if="multiple"
+      v-if="multiple && !useInput"
       #before-options
     >
       <q-item
@@ -125,49 +141,54 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
-import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
+import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 
 export default {
   name: 'KwSelect',
+  inheritAttrs: false,
 
   props: {
     ...useFieldProps,
     ...useFieldStyleProps,
     ...useOptionsProps,
 
-    modelValue: {
-      type: [String, Number, Array, Object],
-      default: undefined,
-    },
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
-    emitValue: {
-      type: Boolean,
-      default: true,
-    },
-    useInput: {
-      type: Boolean,
-      default: false,
-    },
-    onFilter: {
-      type: Function,
-      default: undefined,
-    },
+    modelValue: { type: [String, Number, Array, Object], default: undefined },
+
+    // fall through props
+    multiple: { type: Boolean, default: false },
+    emitValue: { type: Boolean, default: true },
+    useInput: { type: Boolean, default: false },
+    inputDebounce: { type: [Number, String], default: 100 },
+    dropdownIcon: { type: String, default: 'arrow_down_16' },
+    hideDropdownIcon: { type: Boolean, default: false },
+    disable: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
+    prefix: { type: String, default: undefined },
+    suffix: { type: String, default: undefined },
+    clearable: { type: Boolean, default: false },
+    color: { type: String, default: undefined },
+    bgColor: { type: String, default: undefined },
+    autofocus: { type: Boolean, default: false },
+    placeholder: { type: String, default: undefined },
+    tabindex: { type: [Number, String], default: undefined },
+    onFocus: { type: Function, default: undefined },
+    onBlur: { type: Function, default: undefined },
+    onClear: { type: Function, default: undefined },
+    onKeydown: { type: Function, default: undefined },
+    onFilter: { type: Function, default: undefined },
   },
 
-  emits: ['update:modelValue'],
+  emits: [
+    'update:modelValue',
+  ],
 
   setup(props) {
+    const fieldStyles = useFieldStyle();
     const fieldCtx = useField();
     const { value } = fieldCtx;
-
-    function onUpdateValue(val) {
-      value.value = val ?? '';
-    }
 
     const optionsCtx = useOptions({
       valueRef: value,
@@ -177,36 +198,42 @@ export default {
       separator: props.optionSeparator,
     });
     const { normalizedOptions } = optionsCtx;
-    const filteredOptions = ref([...normalizedOptions.value]);
 
-    watch(normalizedOptions, (val) => {
-      filteredOptions.value = val;
-    }, { deep: true });
-
-    function defaultFilter(val, update) {
-      update(() => {
-        const needle = val.toLowerCase();
-        filteredOptions.value = normalizedOptions.value
-          .filter((v) => !val || v[props.optionLabel].toLowerCase().indexOf(needle) > -1);
-      });
+    function onUpdateValue(val) {
+      if (props.multiple) {
+        value.value = val ?? [];
+      } else {
+        value.value = val ?? '';
+      }
     }
 
-    const filter = computed(() => props.onFilter || defaultFilter);
-
-    function onBlur() {
-      filter.value('', (cb) => cb());
+    function getOptionIndex(val) {
+      return normalizedOptions.value.findIndex((v) => v[props.optionValue] === val);
     }
 
-    const fieldStyles = useFieldStyle();
+    function getOption(val) {
+      const index = getOptionIndex(val);
+      if (index > -1) return normalizedOptions.value[index];
+    }
+
+    function isOptionSelected() {
+      if (Array.isArray(value.value)) {
+        return value.value.length > 0;
+      }
+
+      return getOptionIndex(props.emitValue
+        ? value.value : value.value?.[props.optionValue]) > -1;
+    }
 
     return {
+      ...useInheritAttrs(),
       ...fieldCtx,
+      ...optionsCtx,
       fieldStyles,
       onUpdateValue,
-      ...optionsCtx,
-      filteredOptions,
-      filter,
-      onBlur,
+      getOptionIndex,
+      getOption,
+      isOptionSelected,
     };
   },
 };

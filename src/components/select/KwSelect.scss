@@ -8,10 +8,38 @@
     opacity: 1 !important;
   }
 
+  .q-field__native {
+    .kw-select__placeholder {
+      font-size: 16px;
+      color: $placeholder;
+      font-weight: 400;
+    }
+  }
+
   &.q-field--readonly,
   &.q-field--disabled {
     .q-select__dropdown-icon {
       opacity: 0.6 !important;
+    }
+
+    .q-field__native {
+      .kw-select__placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  &.q-field--dense {
+    .q-field__native {
+      .kw-select__placeholder {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .q-field__marginal {
+    button.q-icon {
+      background: url(~@assets/images/delete_16.svg);
     }
   }
 }

@@ -86,9 +86,11 @@ export default {
     const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
     const popupSize = computed(() => popupCtx.value.size?.value);
     const popupStyle = computed(() => [popupCtx.value.style, `transform: ${transform.value}`]);
+    const popupAction = computed(() => popupCtx.value.hasActionSlot?.value);
 
     const popupClass = computed(() => [
       !popupTitle.value && 'kw-popup--no-title',
+      !popupAction.value && 'kw-popup--no-action',
       popupSize.value && `kw-popup--${popupSize.value}`,
       popupCtx.value.class,
     ]);

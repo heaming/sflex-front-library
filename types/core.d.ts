@@ -63,3 +63,6 @@ export function validate(
     bails?: boolean;
   },
 ): string | boolean | Promise<string | boolean>;
+
+// Global Utils
+export function delay(ms?: number): Promise<void>;

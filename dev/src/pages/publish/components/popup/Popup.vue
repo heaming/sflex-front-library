@@ -20,7 +20,7 @@
         <thead>
           <tr>
             <th>
-              Size type
+              type/size
             </th>
             <th>
               class
@@ -38,7 +38,6 @@
               lg <br>
               xl <br>
               2xl <br>
-              3xl
             </td>
             <td>
               kw-popup--sm <br>
@@ -46,7 +45,7 @@
               kw-popup--lg <br>
               kw-popup--xl <br>
               kw-popup--2xl <br>
-              kw-popup--3xl
+              kw-popup--3xl <br>
             </td>
             <td>
               460px <br>
@@ -54,7 +53,18 @@
               860px<br>
               1060px<br>
               1260px<br>
-              1460px
+              1460px <br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              title="text" <br>
+            </td>
+            <td>
+              <br>
+            </td>
+            <td>
+              Add title when necessary <br>
             </td>
           </tr>
         </tbody>
@@ -74,7 +84,7 @@
           follow below step <br>
           <br>
           1. Check there is design screen <br>
-          2. Check there is design refrence <br>
+          2. Check there is design reference <br>
           <img
             src="../../../../../assets/images/example_popup2.png"
             width="500"
@@ -143,6 +153,16 @@ const testCode = `
     />
   </template>
 </kw-popup>
+
+// Small & No action
+<kw-popup
+  class="kw-popup--sm"
+  title="title"
+>
+  내용<br>
+  내용이 들어갑니다.
+</kw-popup>
+
 
 // Small & Titled type
 <kw-popup
@@ -266,6 +286,10 @@ const testCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-04',
+    text: 'add popup no-action case in code',
+  },
   {
     timestamp: '2022-09-14',
     text: 'add guide information',
