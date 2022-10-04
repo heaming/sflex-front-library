@@ -189,7 +189,7 @@ export default {
         }
       }
 
-      props?.onKeydown(e);
+      props.onKeydown?.(e);
     }
 
     const isModifiersTrim = useAttrs().modelModifiers?.trim === true;
