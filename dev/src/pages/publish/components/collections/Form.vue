@@ -402,7 +402,7 @@
       <ol class="kw-guide-description">
         <li>
           <em>Half size</em><br>
-          - Add the nessesary elements in kw-form-item. It's half size and 10px between the elements.<br>
+          - Add the necessary elements in kw-form-item. It's half size and 10px between the elements.<br>
         </li>
         <li>
           <em>Different size</em><br>
