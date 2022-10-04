@@ -53,7 +53,7 @@
         :name="icon"
         :disable="disable || disableIcon"
         clickable
-        @click="$emit('clickIcon')"
+        @click="onClickIcon?.()"
       />
       <slot name="append" />
     </template>
