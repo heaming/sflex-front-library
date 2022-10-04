@@ -881,3 +881,18 @@ $unit: px;
     }
   }
 }
+
+.kw-auth-wrap {
+  padding: 30px 40px 40px;
+  background-color: $bg-white;
+
+  h1 {
+    padding: 0 0 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: $black1;
+    border-bottom: 2px solid $black1;
+  }
+}
