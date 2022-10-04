@@ -58,27 +58,13 @@
           </tr>
           <tr>
             <td>
-              prop: title="text" <br>
-              no-title
+              title="text" <br>
             </td>
             <td>
               <br>
-              kw-popup--no-title
             </td>
             <td>
-              Add prop title <br>
-              Add this class when no-title type
-            </td>
-          </tr>
-          <tr>
-            <td>
-              no-action
-            </td>
-            <td>
-              kw-popup--no-action
-            </td>
-            <td>
-              Add this class when no-action(bottom button) type
+              Add title when necessary <br>
             </td>
           </tr>
         </tbody>
@@ -151,7 +137,7 @@
 const testCode = `
 // Small & No title
 <kw-popup
-  class="kw-popup--sm kw-popup--no-title" <!-- add class 'kw-popup--notitle' -->
+  class="kw-popup--sm"
 >
   내용<br>
   내용이 들어갑니다.
@@ -170,7 +156,7 @@ const testCode = `
 
 // Small & No action
 <kw-popup
-  class="kw-popup--sm kw-popup--no-action"
+  class="kw-popup--sm"
   title="title"
 >
   내용<br>
@@ -302,7 +288,7 @@ const testCode = `
 const guideHistory = [
   {
     timestamp: '2022-10-04',
-    text: 'add popup no-action case and modify code',
+    text: 'add popup no-action case in code',
   },
   {
     timestamp: '2022-09-14',
