@@ -881,3 +881,50 @@ $unit: px;
     }
   }
 }
+
+.kw-auth-wrap {
+  padding: 30px 40px 40px;
+  background-color: $bg-white;
+
+  h1 {
+    padding: 0 0 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: $black1;
+    border-bottom: 2px solid $black1;
+  }
+}
+
+.border-box {
+  padding: 30px;
+  border: solid 1px $line-line;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .kw-date-picker {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+.border-box--one-colomn {
+  .border-box + .border-box {
+    margin-top: 30px;
+  }
+}
+
+.border-box--two-colomn {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  column-gap: 40px;
+
+  .border-box {
+    width: calc((100% - 40px) / 2);
+  }
+}
