@@ -88,9 +88,8 @@
               <kw-separator class="my20" />
               <kw-btn
                 padding="12px"
-              >
-                삭제
-              </kw-btn>
+                label="삭제"
+              />
             </div>
           </div>
         </div>
@@ -132,9 +131,10 @@ const testCode = `
       </kw-form-row>
     </kw-form>
     <kw-separator class="my20" />
-    <kw-btn>
-      삭제
-    </kw-btn>
+    <kw-btn
+      padding="12px"
+      label="삭제"
+    />
   </div>
 </div>
 `;
