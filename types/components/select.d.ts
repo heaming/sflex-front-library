@@ -26,6 +26,17 @@ interface KwSelectProps extends UseFieldProps, UseFieldStyleProps, UseOptionsPro
   inputDebounce?: number;
 
   /**
+   * 드랍다운 아이콘
+   * @defaultValue `arrow_down_16`
+   */
+  dropdownIcon?: string;
+
+  /**
+   * 지정 시 드랍다운 아이콘 숨김
+   */
+  hideDropdownIcon?: boolean;
+
+  /**
    * 컴포넌트 비활성화 모드
    */
   disable?: boolean;

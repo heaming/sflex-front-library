@@ -28,7 +28,8 @@
     :tabindex="tabindex"
     :clearable="clearable"
     no-error-icon
-    dropdown-icon="arrow_down_16"
+    :dropdown-icon="dropdownIcon"
+    :hide-dropdown-icon="hideDropdownIcon"
     clear-icon="none"
     @focus="onFocus"
     @blur="onBlur"
@@ -161,6 +162,8 @@ export default {
     emitValue: { type: Boolean, default: true },
     useInput: { type: Boolean, default: false },
     inputDebounce: { type: [Number, String], default: 100 },
+    dropdownIcon: { type: String, default: 'arrow_down_16' },
+    hideDropdownIcon: { type: Boolean, default: false },
     disable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     prefix: { type: String, default: undefined },
