@@ -136,7 +136,7 @@
   &--no-title {
     .kw-popup__header {
       &::after {
-        display: none;
+        content: none;
       }
 
       &-close {
@@ -145,7 +145,7 @@
     }
 
     .kw-popup__content {
-      padding-top: 0;
+      padding-top: 30px;
     }
   }
 

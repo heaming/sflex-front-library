@@ -8,10 +8,9 @@
   >
     <q-btn-toggle
       v-model="value"
-      v-bind="inheritedAttrs"
       :class="toggleClass"
       :style="toggleStyle"
-      :options="options"
+      :options="styledOptions"
       toggle-color="not-use"
       toggle-text-color="not-use"
       color="not-use"
@@ -38,7 +37,6 @@ import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnS
 
 export default {
   name: 'KwBtnToggle',
-
   inheritAttrs: false,
 
   props: {
@@ -105,15 +103,20 @@ export default {
       return styles;
     });
 
+    const assignOptionStyle = (v) => ({
+      ...v,
+      class: toggleButtonClasses.value,
+      style: buttonStyles.value,
+    });
+    const styledOptions = computed(() => normalizedOptions.value.map(assignOptionStyle));
+
     return {
-      options: normalizedOptions.value.map((i) => ({ ...i,
-        class: toggleButtonClasses.value,
-        style: buttonStyles.value })),
+      ...useInheritAttrs(),
+      ...useField(),
+      styledOptions,
       buttonDense,
       toggleClass,
       toggleStyle,
-      ...useInheritAttrs(),
-      ...useField(),
     };
   },
 };

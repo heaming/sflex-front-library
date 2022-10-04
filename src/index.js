@@ -8,6 +8,7 @@ export { default as i18n } from './i18n';
 export { default as store } from './store';
 export { default as router } from './router';
 export { default as validate } from './validate';
+export * from './globalUtils';
 
 // Components
 export * from './components/appGnb';

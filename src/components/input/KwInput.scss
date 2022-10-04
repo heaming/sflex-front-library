@@ -7,6 +7,12 @@
   $-kw-input-line-height: $kw-field-line-height;
   $-kw-input-line-height-dense: $kw-field-line-height-dense;
 
+  .q-field__marginal {
+    button.q-icon {
+      background: url(~@assets/images/delete_16.svg);
+    }
+  }
+
   &.q-textarea {
     height: auto;
 
