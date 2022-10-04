@@ -60,6 +60,7 @@ export default {
       console.error('KwPopup needs to be child of KwPopupContainer');
     });
 
+    const slots = useSlots();
     const popupCtx = {
       page: pageCtx,
       observer: observerCtx,
@@ -70,6 +71,7 @@ export default {
       class: props.class,
       title: computed(() => props.title),
       size: computed(() => props.size),
+      hasActionSlot: computed(() => slots.action !== undefined),
       onBeforeClose: computed(() => props.onBeforeClose),
     };
 
