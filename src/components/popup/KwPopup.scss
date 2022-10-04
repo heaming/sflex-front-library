@@ -10,7 +10,7 @@
     width: 460px;
     max-width: 460px !important;
     min-width: 460px !important;
-    min-height: 300px;
+    min-height: 250px;
     margin-top: 0;
 
     .kw-popup__content {
@@ -146,6 +146,12 @@
 
     .kw-popup__content {
       padding-top: 30px;
+    }
+  }
+
+  &--no-action {
+    .kw-popup__content {
+      padding-bottom: 30px;
     }
   }
 }
