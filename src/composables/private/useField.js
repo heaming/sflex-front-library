@@ -1,5 +1,6 @@
 import { klona as deepCopy } from 'klona/full';
 import isEqual from 'fast-deep-equal/es6';
+import { debounce } from 'lodash-es';
 import useFieldState, { useFieldStateProps } from './useFieldState';
 import { FormContextKey } from '../../consts/private/symbols';
 import _validate from '../../validate';
@@ -104,9 +105,11 @@ export default (options) => {
     return result.valid;
   }
 
+  const debounceValidate = debounce(validate, 0);
+
   watch(rules, async () => {
     if (validated.value) {
-      await validate();
+      debounceValidate();
     }
   }, { deep: true });
 
@@ -130,7 +133,7 @@ export default (options) => {
   function watchValueForValidate() {
     unwatchValueForValidate = watch(value, () => {
       if (props.validateOnValueUpdate) {
-        validate();
+        debounceValidate();
       }
     }, { deep: true });
   }
