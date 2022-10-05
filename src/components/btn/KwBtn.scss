@@ -54,8 +54,22 @@
 
   align-self: center; // quasar only provide stretch true...!
 
-  &.self-stretch {
-    align-self: stretch;
+  &.self- {
+    &start {
+      align-self: flex-start;
+    }
+
+    &end {
+      align-self: flex-end;
+    }
+
+    &baseline {
+      align-self: baseline;
+    }
+
+    &stretch {
+      align-self: stretch;
+    }
   }
 
   // coloring
