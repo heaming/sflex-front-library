@@ -15,6 +15,7 @@
     :split="false"
     :disable-main-btn="false"
     :disable-dropdown="false"
+    :no-icon-animation="noIconAnimation"
     v-bind="styleClassAttrs"
     class="kw-btn kw-btn-dropdown"
     :class="buttonClasses"
@@ -94,10 +95,10 @@ export default {
     persistent: { type: Boolean, default: false },
     noRouteDismiss: { type: Boolean, default: false },
     autoClose: { type: Boolean, default: false },
-
     menuAnchor: { type: String, default: 'bottom end' },
     menuSelf: { type: String, default: 'top end' },
     menuOffset: { type: Array, default: () => [0, 4] },
+    noIconAnimation: { type: Boolean, default: false },
   },
 
   emits: [
