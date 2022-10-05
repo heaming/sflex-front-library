@@ -39,10 +39,20 @@
   <q-expansion-item
     v-if="true"
     label="Button"
-    default-opened
+    :default-opened="false"
   >
     <div class="result-area">
-      <button-form />
+      <btn-form />
+    </div>
+  </q-expansion-item>
+  <!-- button dropdown -->
+  <q-expansion-item
+    v-if="true"
+    label="Button Dropdown"
+    :default-opened="true"
+  >
+    <div class="result-area">
+      <btn-dropdown-form />
     </div>
   </q-expansion-item>
   <!-- radio -->
@@ -126,7 +136,16 @@
 
 <script setup>
 /* eslint-disable no-unused-vars */
-import { InputForm, SelectForm, CheckBoxForm, ButtonForm, RadioForm, ToggleForm, Forms } from '../../components/test';
+import {
+  InputForm,
+  SelectForm,
+  CheckBoxForm,
+  BtnForm,
+  BtnDropdownForm,
+  RadioForm,
+  ToggleForm,
+  Forms,
+} from '../../components/test';
 </script>
 
 <style scoped>

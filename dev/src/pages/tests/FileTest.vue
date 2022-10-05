@@ -1,125 +1,127 @@
 <template>
   <div
-    class="file-test"
+    class="result-area"
   >
-    <q-card class="test-item">
-      <q-card-section class="test-item__title text-h6">
-        Multi File Component
-      </q-card-section>
-      <q-card-section class="test-item__contents">
-        <kw-file
-          ref="multiFileRef"
-          rules="required"
-          name="Multi File Component"
-          label="Multi File Component"
-          outlined
-          filled
-          multiple
-          :attach-group-id="multiGroupId"
-          :attach-document-id="multiDocId"
-          :max-file-size="multiMaxFileSize"
-          :max-files="multiMaxFiles"
-          :instance-update="true"
-          @rejected="multiRejectedTest"
-        />
-      </q-card-section>
-      <q-card-actions
-        class="test-item__actions"
-      >
-        <q-form>
-          <q-input
+    <h3>single File Component</h3>
+    <kw-form :cols="0">
+      <kw-form-row>
+        <kw-form-item :label="'single quasar'">
+          <q-file
+            ref="singleFileRef"
+            v-model="singleFile"
+            label="Single File Component"
+            :max-file-size="singleMaxFileSize"
+            @rejected="singleRejectedTest"
+          />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item :label="'multi quasar'">
+          <q-file
+            ref="singleFileRef"
+            v-model="multiFiles"
+            multiple
+            append
+            label="Multi File Component"
+            :max-file-size="multiMaxFileSize"
+            :max-files="multiMaxFiles"
+            @rejected="multiRejectedTest"
+          />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item :label="'single'">
+          <kw-file
+            ref="singleFileRef"
+            v-model="multiFiles"
+            rules="required"
+            label="Single File Component"
+            :max-file-size="singleMaxFileSize"
+            :instance-update="true"
+            @rejected="singleRejectedTest"
+          />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item :label="'maxFileSize'">
+          <kw-input
+            v-model="singleMaxFileSizeString"
+            label="maxFileSize"
+          />
+        </kw-form-item>
+        <kw-form-item :label="'life cycle'">
+          <kw-btn
+            label="add dummy"
+            @click="singleDummy"
+          />
+          <kw-btn
+            label="reset"
+            @click="singleResetTest"
+          />
+          <kw-btn
+            label="isModified"
+            @click="singleIsModifiedTest"
+          />
+          <kw-btn
+            label="FileInfo"
+            @click="singleOpenFileInfo"
+          />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item :label="'multi'">
+          <kw-file
+            ref="MultiFileRef"
+            v-model="multiFiles"
+            rules="required"
+            multiple
+            label="Multi File Component"
+            :max-file-size="multiMaxFileSize"
+            :max-files="multiMaxFiles"
+            :instance-update="true"
+            @rejected="multiRejectedTest"
+          />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item :label="'maxFileSize'">
+          <kw-input
             v-model="multiMaxFileSizeString"
             label="maxFileSize"
           />
-          <q-input
+        </kw-form-item>
+        <kw-form-item :label="'MaxFiles'">
+          <kw-input
             v-model="multiMaxFiles"
             type="number"
             label="maxFiles"
           />
-          <q-btn
-            dense
-            @click="multiChangeDocIdTest"
-          >
-            DocID
-          </q-btn>
-          <q-btn
-            dense
-            @click="multiResetTest"
-          >
-            reset
-          </q-btn>
-          <q-btn
-            dense
-            @click="multiIsModifiedTest"
-          >
-            isModified
-          </q-btn>
-          <q-btn
-            dense
-            @click="multiOpenFileInfo"
-          >
-            FileInfo
-          </q-btn>
-        </q-form>
-      </q-card-actions>
-    </q-card>
-
-    <q-card class="test-item">
-      <q-card-section class="test-item__title text-h6">
-        Single File Component
-      </q-card-section>
-      <q-card-section class="test-item__contents">
-        <kw-file
-          ref="singleFileRef"
-          rules="required"
-          name="name test"
-          label="label test"
-          filled
-          :attach-group-id="singleGroupId"
-          :attach-document-id="singleDocId"
-          :max-file-size="singleMaxFileSize"
-          @rejected="singleRejectedTest"
-        />
-      </q-card-section>
-      <q-card-actions
-        class="test-item__actions"
-      >
-        <q-form>
-          <q-input
-            v-model="singleMaxFileSizeString"
-            label="maxFileSize"
+        </kw-form-item>
+        <kw-form-item :label="'life cycle'">
+          <kw-btn
+            label="add dummy"
+            @click="multiAddDummy"
           />
-          <q-btn
-            dense
-            @click="singleChangeDocIdTest"
-          >
-            DocID
-          </q-btn>
-          <q-btn
-            dense
-            @click="singleResetTest"
-          >
-            reset
-          </q-btn>
-          <q-btn
-            dense
-            @click="singleIsModifiedTest"
-          >
-            isModified
-          </q-btn>
-          <q-btn
-            dense
-            @click="singleOpenFileInfo"
-          >
-            FileInfo
-          </q-btn>
-        </q-form>
-      </q-card-actions>
-    </q-card>
+          <kw-btn
+            label="reset"
+            @click="multiResetTest"
+          />
+          <kw-btn
+            label="isModified"
+            @click="multiIsModifiedTest"
+          />
+          <kw-btn
+            label="FileInfo"
+            @click="multiOpenFileInfo"
+          />
+        </kw-form-item>
+      </kw-form-row>
+    </kw-form>
   </div>
 </template>
 
 <script setup>
+/* eslint-disable no-unused-vars */
 import { alert } from '../../../../src/plugins/dialog';
 
 // multi file test
@@ -130,6 +132,31 @@ const multiMaxFileSizeString = ref('10*1024*1024');
 // eslint-disable-next-line no-new-func
 const multiMaxFileSize = computed(() => new Function(`return ${multiMaxFileSizeString.value}`)());
 const multiMaxFiles = ref(3);
+const singleFile = ref(null);
+const multiFiles = ref([]);
+
+const dummy = {
+  name: 'dummy.pdf',
+  size: 152131,
+  type: undefined,
+  targetPath: 'storage',
+  serverFileName: '/test/file/is/shit/dummy.pdf',
+  fileUid: 'hello?hello?save-me-goat.',
+  myFileYn: 'N',
+};
+
+const generateDummyFile = (name) => ({
+  ...dummy,
+  name: name || `dummy${(Math.random() * 100).toFixed(0)}`,
+});
+
+function singleDummy() {
+  singleFile.value = generateDummyFile();
+}
+
+function multiAddDummy() {
+  multiFiles.value.push(generateDummyFile());
+}
 
 function multiRejectedTest(rejectedMessage) {
   console.log(rejectedMessage);

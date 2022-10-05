@@ -1,5 +1,6 @@
 import InputForm from './InputForm.vue';
-import ButtonForm from './BtnForm.vue';
+import BtnForm from './BtnForm.vue';
+import BtnDropdownForm from './BtnDropdownForm.vue';
 import CheckBoxForm from './CheckBoxForm.vue';
 import SelectForm from './SelectForm.vue';
 import RadioForm from './RadioForm.vue';
@@ -8,7 +9,8 @@ import Forms from './Forms.vue';
 
 export {
   Forms,
-  ButtonForm,
+  BtnForm,
+  BtnDropdownForm,
   CheckBoxForm,
   InputForm,
   SelectForm,
