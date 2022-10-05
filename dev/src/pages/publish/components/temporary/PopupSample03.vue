@@ -316,7 +316,7 @@ function initGrid(data, view) {
 
   // Add the style "text-align: left and background-color"
   const columns = [
-    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
+    { fieldName: 'col1', header: ' ', width: '245', styleName: 'text-left kw-bc--bg-grid' },
     { fieldName: 'col2', header: '고객 유형', width: '250', styleName: 'text-right' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '250', styleName: 'text-right' },
