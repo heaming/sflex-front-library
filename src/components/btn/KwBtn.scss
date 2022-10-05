@@ -166,13 +166,11 @@
   }
 
   &--underline {
-    // &::before {
-    //   border-bottom: 1px solid currentcolor;
-    // }
-
     text-decoration: underline;
 
     &.q-btn {
+      @include kw-btn-height-modifier(0, 1em, inherit, inherit);
+
       &.disabled {
         background-color: transparent;
         color: $placeholder;
@@ -180,6 +178,10 @@
         .q-btn__content {
           color: $placeholder;
         }
+      }
+
+      &--dense {
+        @include kw-btn-height-modifier(0, 1em, inherit, inherit);
       }
     }
   }
@@ -199,7 +201,7 @@
       }
 
       &--dense {
-        @include kw-btn-height-modifier(0, $-kw-btn-line-height-dense, $-kw-btn-font-size-dense, $-kw-btn-font-weight-dense);
+        @include kw-btn-height-modifier(0, 1em, inherit, inherit);
       }
     }
   }
