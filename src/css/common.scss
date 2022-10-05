@@ -736,6 +736,14 @@ $unit: px;
   line-height: 1.5;
 }
 
+.text- {
+  @each $weight, $value in $text-weights {
+    &weight-#{$weight} {
+      font-weight: $value !important;
+    }
+  }
+}
+
 .kw-notification-title {
   padding-top: 0;
   font-size: 18px;
