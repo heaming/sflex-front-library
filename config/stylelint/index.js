@@ -28,6 +28,6 @@ module.exports = {
     'scss/no-global-function-names': null,
     'selector-class-pattern': null,
     'selector-pseudo-element-no-unknown': null,
-    'selector-no-vendor-prefix': [true, [/:.*placeholder/g]],
+    'selector-no-vendor-prefix': null,
   },
 };
