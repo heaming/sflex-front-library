@@ -1,0 +1,45 @@
+.kw-btn-dropdown {
+  &__content {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  &__dropdown-box {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 1px solid $black1;
+    min-width: 142px; // why..? zeplin guide.
+
+    .kw-btn {
+      align-self: stretch;
+
+      &:not([class^="kw-btn--border-color-"])::after {
+        border-color: transparent;
+      }
+
+      &.q-btn {
+        // this one break size props of kw-btn like dense
+        @include kw-btn-height-modifier(7px 11px, 20px, 14px, 400);
+
+        .q-btn__content {
+          // this one break align props.
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+
+  &.q-btn-dropdown {
+    &--simple * + .q-btn-dropdown__arrow {
+      margin-left: 4px;
+    }
+  }
+
+  .q-btn-dropdown__arrow {
+    transition: none;
+
+    svg {
+      stroke: currentcolor; // it works after svg fixed.
+    }
+  }
+}

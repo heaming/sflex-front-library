@@ -1,0 +1,130 @@
+<template>
+  <q-btn-dropdown
+    v-if="!isDestroyed"
+    ref="btnRef"
+    :model-value="modelValue"
+    :dropdown-icon="dropdownIcon"
+    :content-class="'kw-btn-dropdown__content'"
+    :cover="cover"
+    :persistent="persistent"
+    :no-route-dismiss="noRouteDismiss"
+    :menu-anchor="menuAnchor"
+    :menu-self="menuSelf"
+    :menu-offset="menuOffset"
+    :auto-close="autoClose"
+    :split="false"
+    :disable-main-btn="false"
+    :disable-dropdown="false"
+    v-bind="styleClassAttrs"
+    class="kw-btn kw-btn-dropdown"
+    :class="buttonClasses"
+    :style="buttonStyles"
+    no-caps
+    unelevated
+    rectangle
+    :ripple="false"
+    :type="type"
+    :label="label"
+    :icon="icon"
+    :icon-right="iconRight"
+    :dense="buttonDense"
+    :tabindex="tabindex"
+    :align="align"
+    :stack="stack"
+    :stretch="stretch"
+    :disable="disable"
+    :no-wrap="noWrap"
+    @update:model-value="$emit('update:modelValue', $event)"
+    @click="$emit('click', $event)"
+    @hide="$emit('hide', $event)"
+    @before-hide="$emit('before-hide', $event)"
+    @show="$emit('show', $event)"
+    @before-show="$emit('before-show', $event)"
+  >
+    <template
+      v-if="$slots.default || $slots.menu"
+    >
+      <slot name="menu">
+        <div
+          v-close-popup
+          class="kw-btn-dropdown__dropdown-box"
+        >
+          <slot />
+        </div>
+      </slot>
+    </template>
+    <template
+      v-if="$slots.label"
+      #label
+    >
+      <slot name="label" />
+    </template>
+  </q-btn-dropdown>
+</template>
+
+<script>
+import usePermissions from '../../composables/private/usePermissions';
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnStyle';
+
+export default {
+  name: 'KwBtnDropdown',
+  inheritAttrs: false,
+  props: {
+    // customize props
+    ...useBtnStyleProps,
+
+    // fall through props
+    type: { type: String, default: 'button' },
+    label: { type: [Number, String], default: undefined },
+    icon: { type: String, default: undefined },
+    iconRight: { type: String, default: undefined },
+    tabindex: { type: [Number, String], default: undefined },
+    disable: { type: Boolean, default: false },
+
+    // about innerClasses
+    align: { type: String, default: 'center' },
+    stack: { type: Boolean, default: false },
+    noWrap: { type: Boolean, default: false },
+    stretch: { type: Boolean, default: false },
+
+    modelValue: { type: Boolean, default: undefined },
+    dropdownIcon: { type: String, default: 'arrow_down_16' },
+    cover: { type: Boolean, default: false },
+    persistent: { type: Boolean, default: false },
+    noRouteDismiss: { type: Boolean, default: false },
+    autoClose: { type: Boolean, default: false },
+
+    menuAnchor: { type: String, default: 'bottom end' },
+    menuSelf: { type: String, default: 'top end' },
+    menuOffset: { type: Array, default: () => [0, 4] },
+  },
+
+  emits: [
+    'update:modelValue',
+    'click',
+    'before-hide',
+    'hide',
+    'before-show',
+    'show',
+  ],
+
+  setup() {
+    const btnRef = ref();
+
+    function click(evt) {
+      btnRef.value.click(evt);
+    }
+
+    const { styleClassAttrs } = useInheritAttrs();
+
+    return {
+      ...usePermissions(),
+      ...useBtnStyle(),
+      styleClassAttrs,
+      btnRef,
+      click,
+    };
+  },
+};
+</script>
