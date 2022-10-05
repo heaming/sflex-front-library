@@ -10,6 +10,11 @@ interface KwSelectProps extends UseFieldProps, UseFieldStyleProps, UseOptionsPro
   modelValue?: string | number | boolean | object | Array;
 
   /**
+   * 다건 선택 모드
+   */
+  multiple?: boolean;
+
+  /**
    * 지정 시 modelValue를 option 그대로 매핑
    */
   emitValue?: boolean;
