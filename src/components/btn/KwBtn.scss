@@ -188,7 +188,7 @@
     background-color: transparent;
 
     &.q-btn {
-      @include kw-btn-height-modifier(0, $-kw-btn-line-height, $-kw-btn-font-size, $-kw-btn-font-weight);
+      @include kw-btn-height-modifier(0, 1em, inherit, inherit);
 
       &.disabled {
         background-color: transparent;
