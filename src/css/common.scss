@@ -905,6 +905,34 @@ $unit: px;
   }
 }
 
+// override quasar common classes
+.q-placeholder {
+  &::-webkit-input-placeholder {
+    color: $disabled;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    color: $disabled;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: $disabled !important;
+    opacity: 1 !important;
+  }
+
+  &::-ms-input-placeholder {
+    color: $disabled;
+    opacity: 1;
+  }
+
+  &::placeholder {
+    color: $disabled;
+    opacity: 1;
+  }
+}
+
 .kw-auth-wrap {
   padding: 30px 40px 40px;
   background-color: $bg-white;

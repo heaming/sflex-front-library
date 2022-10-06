@@ -87,7 +87,7 @@
   }
 
   &__content {
-    padding: 87px 20px 97px 26px;
+    padding: 87px 20px 120px 26px;
     overflow-y: scroll;
     min-height: 348px;
     max-height: calc(100vh - 195px) !important;
@@ -113,6 +113,7 @@
   &__action {
     display: flex;
     flex-wrap: wrap;
+    gap: 8px;
     justify-content: center;
     padding: 30px 0;
     background-color: #fff;

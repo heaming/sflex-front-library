@@ -566,6 +566,13 @@
           underline
           disable
         />
+        <kw-btn
+          :label="'underline'"
+          :icon-right="'bookmark_on_16'"
+          underline
+          disable
+          style="font-size: 30px; line-height: 1.2em;"
+        />
       </kw-form-item>
     </kw-form-row>
     <kw-form-row>

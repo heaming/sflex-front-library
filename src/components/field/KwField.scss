@@ -92,16 +92,6 @@
     line-height: $kw-field-line-height;
     color: $kw-field-color;
     padding: 0;
-    opacity: 1 !important; // why?
-  }
-
-  .q-field__native {
-    &::placeholder {
-      font-size: 16px;
-      color: $placeholder !important;
-      font-weight: 400 !important;
-      opacity: 1 !important;
-    }
   }
 
   // customize
@@ -131,12 +121,6 @@
     .q-field__marginal {
       .q-icon {
         opacity: 0.6 !important;
-      }
-    }
-
-    .q-field__native {
-      &::placeholder {
-        color: transparent !important;
       }
     }
   }
@@ -288,13 +272,6 @@
     .q-field__suffix,
     .q-field__input {
       line-height: $kw-field-line-height-dense;
-    }
-
-    .q-field__native {
-      &::placeholder {
-        font-size: 14px;
-        opacity: 1 !important;
-      }
     }
   }
 

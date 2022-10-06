@@ -1,5 +1,5 @@
 import InputForm from './InputForm.vue';
-import ButtonForm from './ButtonForm.vue';
+import ButtonForm from './BtnForm.vue';
 import CheckBoxForm from './CheckBoxForm.vue';
 import SelectForm from './SelectForm.vue';
 import RadioForm from './RadioForm.vue';
