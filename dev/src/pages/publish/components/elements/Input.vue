@@ -257,7 +257,7 @@
         Search Input
       </h3>
       <p class="kw-guide-description">
-        If you need search input, add icon="search_16" and clearable prop like below
+        If you need search input, add icon="search" and clearable prop like below
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -265,7 +265,7 @@
             <kw-form-row>
               <kw-form-item label="search">
                 <kw-input
-                  icon="search_16"
+                  icon="search"
                   clearable
                 />
               </kw-form-item>
@@ -547,7 +547,7 @@ const hypenInput = `
 
 const searchInput = `
 <kw-input
-  icon="search_16"
+  icon="search"
   clearable
 />
 `;

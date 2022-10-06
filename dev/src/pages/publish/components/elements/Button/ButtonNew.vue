@@ -392,7 +392,7 @@
             class="mr8"
           />
           <kw-btn
-            icon-right="arrow_down_16"
+            icon-right="arrow_down"
             grid-action
             label="저장"
           />
@@ -803,7 +803,7 @@ const tableBtn = `
     class="mr8"
   />
   <kw-btn
-    icon-right="arrow_down_16"
+    icon-right="arrow_down
     grid-action
     label="저장"
   />

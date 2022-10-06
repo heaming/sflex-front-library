@@ -105,7 +105,7 @@
               />
             </template>
             <kw-btn
-              icon="excel_16"
+              icon="excel"
               dense
               secondary
               label="엑셀 다운로드"
@@ -143,7 +143,7 @@
               <span>(단위: 원)</span>
             </template>
             <kw-btn
-              icon="excel_16"
+              icon="excel"
               dense
               secondary
               label="엑셀 다운로드"
@@ -196,13 +196,13 @@
               inset
             />
             <kw-btn
-              icon="print_16"
+              icon="print"
               dense
               secondary
               label="인쇄"
             />
             <kw-btn
-              icon="excel_download_16"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -264,7 +264,7 @@
               spaced
             />
             <kw-btn
-              icon="excel_16"
+              icon="excel"
               dense
               secondary
               label="엑셀 다운로드"
@@ -319,7 +319,7 @@ const testCode = `
     />
   </template>
   <kw-btn
-    icon="excel_16"
+    icon="excel"
     dense
     secondary
     label="엑셀 다운로드"
@@ -351,7 +351,7 @@ const testCode2 = `
     <span>(단위: 원)</span>
   </template>
   <kw-btn
-    icon="excel_16"
+    icon="excel"
     dense
     secondary
     label="엑셀 다운로드"
@@ -391,13 +391,13 @@ const testCode3 = `
     inset
   />
   <kw-btn
-    icon="print_16"
+    icon="print"
     dense
     secondary
     label="인쇄"
   />
   <kw-btn
-    icon="excel_download_16"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
@@ -445,7 +445,7 @@ const testCode4 = `
     spaced
   />
   <kw-btn
-    icon="excel_16"
+    icon="excel"
     dense
     secondary
     label="엑셀 다운로드"

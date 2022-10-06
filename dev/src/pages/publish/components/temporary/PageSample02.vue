@@ -79,13 +79,13 @@
               inset
             />
             <kw-btn
-              icon="print_16"
+              icon="print"
               dense
               secondary
               label="인쇄"
             />
             <kw-btn
-              icon="excel_download_16"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -270,13 +270,13 @@ const sampleVueCode = `
             inset
           />
           <kw-btn
-            icon="print_16"
+            icon="print"
             dense
             secondary
             label="인쇄"
           />
           <kw-btn
-            icon="excel_download_16"
+            icon="download_on"
             dense
             secondary
             label="엑셀 다운로드"

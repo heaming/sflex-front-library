@@ -156,12 +156,12 @@
         <div class="kw-guide-example">
           <kw-btn
             class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-            icon="arrow_down_16"
+            icon="arrow_down"
             label="상태변경"
           />
           <kw-btn
             class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-            icon="arrow_down_16"
+            icon="arrow_down"
             label="상태변경"
           />
         </div>
@@ -185,12 +185,12 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download_16"
+            icon="download_on"
             class="kw-btn--excel mr10"
             label="엑셀 다운로드"
           />
           <kw-btn
-            icon="excel_upload_16"
+            icon="upload_on"
             class="kw-btn--excel"
             label="엑셀 업로드"
           />
@@ -201,12 +201,12 @@
         />
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_download_16"
+            icon="download_on"
             class="kw-btn--line-black kw-btn--h32 mr10"
             label="엑셀 다운로드"
           />
           <kw-btn
-            icon="excel_download_16"
+            icon="download_on"
             class="kw-btn--line-black kw-btn--h32"
             label="엑셀 다운로드"
             disable
@@ -218,12 +218,12 @@
         />
         <div class="kw-guide-example">
           <kw-btn
-            icon="excel_upload_16"
+            icon="upload_on"
             class="kw-btn--line-black kw-btn--h32 mr10"
             label="엑셀 업로드"
           />
           <kw-btn
-            icon="excel_upload_16"
+            icon="upload_on"
             class="kw-btn--line-black kw-btn--h32"
             label="엑셀 업로드"
             disable
@@ -248,7 +248,7 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
-            icon="print_16"
+            icon="print"
             class="kw-btn--line-black kw-btn--h32"
             label="인쇄"
           />
@@ -337,35 +337,35 @@ const iconButton = `
 const testCode = `
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 mr10"
-  icon="arrow_down_16"
+  icon="arrow_down"
   label="상태변경"
 />
 <kw-btn
   class="kw-btn--line-gray kw-btn--line-bg kw-btn--h32 kw-btn-reverse"
-  icon="arrow_down_16"
+  icon="arrow_down"
   label="상태변경"
 />
 `;
 const excelCode = `
 <kw-btn
-  icon="excel_download_16"
+  icon="download_on"
   class="kw-btn--excel mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
-  icon="excel_upload_16"
+  icon="upload_on"
   class="kw-btn--excel"
   label="엑셀 업로드"
 />
 `;
 const excelCode02 = `
 <kw-btn
-  icon="excel_download_16"
+  icon="download_on"
   class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 다운로드"
 />
 <kw-btn
-  icon="excel_download_16"
+  icon="download_on"
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 다운로드"
   disable
@@ -373,12 +373,12 @@ const excelCode02 = `
 `;
 const excelCode03 = `
 <kw-btn
-  icon="excel_upload_16"
+  icon="upload_on"
   class="kw-btn--line-black kw-btn--h32 mr10"
   label="엑셀 업로드"
 />
 <kw-btn
-  icon="excel_upload_16"
+  icon="upload_on"
   class="kw-btn--line-black kw-btn--h32"
   label="엑셀 업로드"
   disable
@@ -386,7 +386,7 @@ const excelCode03 = `
 `;
 const printCode = `
 <kw-btn
-  icon="print_16"
+  icon="print"
   class="kw-btn--line-black kw-btn--h32"
   label="인쇄"
 />
