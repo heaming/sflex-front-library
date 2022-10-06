@@ -114,6 +114,7 @@ export function overrideOnCurrentChanging(view) {
 
         returnValue.then((value) => {
           if (value !== false) {
+            fixTopIndexIfInvalid(g);
             g.__ignoreOnCurrentChanging__ = true;
 
             if (newIndex.dataRow === -1) {
