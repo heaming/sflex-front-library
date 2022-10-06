@@ -465,6 +465,10 @@ const testCode4 = `
 
 const guideHistory = [
   {
+    timestamp: '2022.10.06',
+    text: 'edit icon name in code',
+  },
+  {
     timestamp: '2022.09.23',
     text: 'add new version actionbar(top area)',
   },

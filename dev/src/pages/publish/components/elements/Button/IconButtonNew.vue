@@ -346,6 +346,10 @@ const printCode = `
 // History
 const guideHistory = [
   {
+    timestamp: '2022.10.06',
+    text: 'edit icon name in code',
+  },
+  {
     timestamp: '2022.09.28',
     text: 'edit icon only type sample',
   },

@@ -616,6 +616,10 @@ const nolabelCode = `
 
 const guideHistory = [
   {
+    timestamp: '2022.10.06',
+    text: 'edit icon name in code',
+  },
+  {
     timestamp: '2022-09-28',
     text: 'add searchInput type',
   },
