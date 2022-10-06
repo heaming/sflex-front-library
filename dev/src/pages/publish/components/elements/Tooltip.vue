@@ -75,7 +75,7 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-icon
-            name="info_24"
+            name="info"
           >
             <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
           </kw-icon>
