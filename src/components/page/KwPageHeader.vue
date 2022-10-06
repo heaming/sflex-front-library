@@ -19,7 +19,7 @@
         size="16px"
         model-value="Y"
         checked-icon="bookmark_on"
-        unchecked-icon="bookmark_off_16"
+        unchecked-icon="bookmark_off"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}

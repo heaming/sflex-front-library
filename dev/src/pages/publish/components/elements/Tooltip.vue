@@ -6,6 +6,9 @@
     <!-- <p class="kw-guide-description">
       It is in progress. Please wait for it to complete.
     </p> -->
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -77,7 +80,7 @@
             <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
           </kw-icon>
           <kw-icon
-            name="warning_16"
+            name="warning"
             class="ml20"
           />
         </div>
@@ -94,13 +97,21 @@
 
 const testCode = `
 <kw-icon
-  name="info_24"
+  name="info"
 >
   <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
 </kw-icon>
 
 <kw-icon
-  name="warning_16"
+  name="warning"
 />
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022.10.06',
+    text: 'change icon name in code',
+  },
+
+];
 </script>
