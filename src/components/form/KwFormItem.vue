@@ -21,7 +21,7 @@
         >
           <q-icon
             size="16px"
-            name="info_16"
+            name="info"
           >
             <kw-tooltip>
               <slot name="hint">

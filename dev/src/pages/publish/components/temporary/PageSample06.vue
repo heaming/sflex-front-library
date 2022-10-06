@@ -39,61 +39,57 @@
       </kw-search-row>
     </kw-search>
 
-    <div class="result-area result-area--column">
-      <div class="result-area__section">
-        <h3>방문실적</h3>
-        <kw-action-top>
-          <template #left>
-            <span>총</span>
-            <span class="accent pl4">30</span>
-            <kw-separator
-              spaced
-              vertical
-              inset
+    <div class="result-area">
+      <div class="grid-horizontal-wrap">
+        <div class="grid-horizontal-wrap__section">
+          <h3>방문실적</h3>
+          <kw-action-top>
+            <template #left>
+              <span>총</span>
+              <span class="accent pl4">30</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span>처리율</span>
+              <span class="accent pl4">30%</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span class="accent">1,020,000원</span>
+            </template>
+          </kw-action-top>
+          <kw-grid
+            :visible-rows="10"
+            @init="initGrid"
+          />
+        </div>
+        <div class="grid-horizontal-wrap__section w472">
+          <h3>수수료내역</h3>
+          <kw-action-top>
+            <template #left>
+              <span>적용률총</span>
+              <span class="accent pl4">30%</span>
+            </template>
+            <kw-btn
+              label="저장"
+              grid-action
             />
-            <span>처리율</span>
-            <span class="accent pl4">30%</span>
-            <kw-separator
-              spaced
-              vertical
-              inset
+          </kw-action-top>
+          <kw-grid
+            :visible-rows="10"
+            @init="initGrid"
+          />
+          <kw-action-bottom>
+            <kw-btn
+              label="삭제"
+              grid-action
             />
-            <span class="accent">1,020,000원</span>
-          </template>
-        </kw-action-top>
-        <kw-grid
-          :visible-rows="10"
-          @init="initGrid"
-        />
-        <kw-action-bottom>
-          <kw-btn
-            label="삭제"
-            grid-action
-          />
-        </kw-action-bottom>
-      </div>
-      <div class="result-area__section w472">
-        <h3>수수료내역</h3>
-        <kw-action-top>
-          <template #left>
-            <span>적용률총</span>
-            <span class="accent pl4">30%</span>
-          </template>
-          <kw-btn
-            label="저장"
-            grid-action
-          />
-        </kw-action-top>
-        <kw-grid
-          :visible-rows="10"
-          @init="initGrid"
-        />
-        <kw-action-bottom>
-          <kw-btn
-            label="삭제"
-            grid-action
-          />
-        </kw-action-bottom>
+          </kw-action-bottom>
+        </div>
       </div>
     </div>
     <div class="kw-guide pa0">
@@ -208,62 +204,65 @@ const sampleVueCode = `
     </kw-search-row>
   </kw-search>
 
-  <div class="result-area result-area--column">
-    <div class="result-area__section">
-      <h3>방문실적</h3>
-      <kw-action-top>
-        <template #left>
-          <span>총</span>
-          <span class="accent pl4">30</span>
-          <kw-separator
-            spaced
-            vertical
-            inset
+  <div class="result-area">
+    <div class="grid-horizontal-wrap">
+      <div class="grid-horizontal-wrap__section">
+        <h3>방문실적</h3>
+        <kw-action-top>
+          <template #left>
+            <span>총</span>
+            <span class="accent pl4">30</span>
+            <kw-separator
+              spaced
+              vertical
+              inset
+            />
+            <span>처리율</span>
+            <span class="accent pl4">30%</span>
+            <kw-separator
+              spaced
+              vertical
+              inset
+            />
+            <span class="accent">1,020,000원</span>
+          </template>
+        </kw-action-top>
+        <kw-grid
+          :visible-rows="10"
+          @init="initGrid"
+        />
+        <kw-action-bottom>
+          <kw-btn
+            label="삭제"
+            grid-action
           />
-          <span>처리율</span>
-          <span class="accent pl4">30%</span>
-          <kw-separator
-            spaced
-            vertical
-            inset
+        </kw-action-bottom>
+      </div>
+      <div class="grid-horizontal-wrap__section w472">
+        <h3>수수료내역</h3>
+        <kw-action-top>
+          <template #left>
+            <span>적용률총</span>
+            <span class="accent pl4">30%</span>
+          </template>
+          <kw-btn
+            label="저장"
+            grid-action
           />
-          <span class="accent">1,020,000원</span>
-        </template>
-      </kw-action-top>
-      <kw-grid
-        :visible-rows="10"
-        @init="initGrid"
-      />
-      <kw-action-bottom>
-        <kw-btn
-          label="삭제"
-          grid-action
+        </kw-action-top>
+        <kw-grid
+          :visible-rows="10"
+          @init="initGrid"
         />
-      </kw-action-bottom>
+        <kw-action-bottom>
+          <kw-btn
+            label="삭제"
+            grid-action
+          />
+        </kw-action-bottom>
+      </div>
     </div>
-    <div class="result-area__section w472">
-      <h3>수수료내역</h3>
-      <kw-action-top>
-        <template #left>
-          <span>적용률총</span>
-          <span class="accent pl4">30%</span>
-        </template>
-        <kw-btn
-          label="저장"
-          grid-action
-        />
-      </kw-action-top>
-      <kw-grid
-        :visible-rows="10"
-        @init="initGrid"
-      />
-      <kw-action-bottom>
-        <kw-btn
-          label="삭제"
-          grid-action
-        />
-      </kw-action-bottom>
-    </div>
+  </div>
   </div>
 </kw-page>`;
 

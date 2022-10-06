@@ -392,7 +392,7 @@
             class="mr8"
           />
           <kw-btn
-            icon-right="arrow_down_16"
+            icon-right="arrow_down"
             grid-action
             label="저장"
           />
@@ -803,7 +803,7 @@ const tableBtn = `
     class="mr8"
   />
   <kw-btn
-    icon-right="arrow_down_16"
+    icon-right="arrow_down
     grid-action
     label="저장"
   />
@@ -873,6 +873,10 @@ const strModel = ref('오늘');
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.10.06',
+    text: 'edit icon name in code',
+  },
   {
     timestamp: '2022.09.27',
     text: 'Add toggle(switch)',

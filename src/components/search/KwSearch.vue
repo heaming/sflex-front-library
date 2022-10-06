@@ -16,7 +16,7 @@
       class="kw-search__view-more"
       :class="{'kw-search__view-more--expanded': isExpanded}"
       :label="$t('MSG_BTN_VIEW_MORE', null, '더보기')"
-      icon-right="arrow_down_16"
+      icon-right="arrow_down"
       text-color="black2"
       borderless
       dense

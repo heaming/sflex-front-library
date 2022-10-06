@@ -30,7 +30,7 @@
           <q-icon
             v-if="node.children.length"
             :class="{'rotate-180': expanded}"
-            name="arrow_down_16"
+            name="arrow_down"
           />
         </div>
       </template>

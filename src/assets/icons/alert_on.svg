@@ -1,0 +1,7 @@
+<svg id="alert_on" data-name="alert(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <path data-name="패스 210140" d="M1790.672 34.5h5.682a3.109 3.109 0 0 1-2.782 2 3.011 3.011 0 0 1-2.9-2z" style="fill:#ff8f1f" transform="translate(-1785.5 -21.5)"/>
+    <path data-name="선 2974" transform="translate(2 11.5)" style="stroke:#ff8f1f;stroke-width:1.5px;fill:none" d="M0 0h12"/>
+    <path data-name="선 2975" transform="translate(8 2)" style="stroke:#ff8f1f;stroke-width:1.5px;fill:none" d="M0 2V0"/>
+    <path data-name="사각형 151473" d="M4.5 0A4.5 4.5 0 0 1 9 4.5v4H0v-4A4.5 4.5 0 0 1 4.5 0z" transform="translate(3.5 3)" style="fill:#ff8f1f"/>
+</svg>
