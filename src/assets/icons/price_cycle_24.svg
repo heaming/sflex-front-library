@@ -1,0 +1,28 @@
+<svg id="price_cycle_24" data-name="price2_24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.001 24">
+    <defs>
+        <clipPath id="f0jmemenia">
+            <path data-name="사각형 151485" transform="translate(-3.999 -2)" style="fill:none" d="M0 0h24v24H0z"/>
+        </clipPath>
+    </defs>
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g data-name="line mask" style="clip-path:url(#f0jmemenia)" transform="translate(4 2)">
+        <g data-name="그룹 147439">
+            <g data-name="타원 5193" transform="rotate(45 9 7.586)" style="stroke-dasharray:28 40;stroke-width:1.5px;stroke:#222;fill:none">
+                <circle cx="10" cy="10" r="10" style="stroke:none"/>
+                <circle cx="10" cy="10" r="9.25" style="fill:none"/>
+            </g>
+            <path data-name="패스 210109" d="m18274.215-3412.96-2 2 2 2" transform="rotate(21 -112.987 -50980.32)" style="stroke-width:1.5px;stroke:#222;fill:none"/>
+        </g>
+        <g data-name="그룹 147441">
+            <g data-name="타원 5193" transform="rotate(-135 9 10.414)" style="stroke-dasharray:28 40;stroke-width:1.5px;stroke:#222;fill:none">
+                <circle cx="10" cy="10" r="10" style="stroke:none"/>
+                <circle cx="10" cy="10" r="9.25" style="fill:none"/>
+            </g>
+            <path data-name="패스 210109" d="m18274.215-3412.96-2 2 2 2" transform="rotate(-159 9458.497 -12.424)" style="stroke-width:1.5px;stroke:#222;fill:none"/>
+        </g>
+    </g>
+    <g data-name="그룹 147440">
+        <text transform="translate(7 16)" style="fill:#222;stroke-width:.3px;font-size:12px;font-family:NotoSansKR-Medium,Noto Sans KR;font-weight:500;stroke:#222"><tspan x="0" y="0">w</tspan></text>
+        <path data-name="선 3149" transform="translate(6.5 12.5)" style="stroke-width:1.5px;stroke:#222;fill:none" d="m0 0 11 .097"/>
+    </g>
+</svg>

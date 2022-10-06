@@ -1,0 +1,7 @@
+<svg id="plus_box" data-name="plus(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path style="fill:#eee" d="M0 0h16v16H0z"/>
+    <g data-name="-">
+        <path data-name="선 2933" transform="translate(4 8)" style="stroke:#222;fill:none;stroke-width:1.5px" d="M0 0h8"/>
+        <path data-name="선 2934" transform="rotate(90 2 6)" style="stroke:#555;fill:none;stroke-width:1.5px" d="M0 0h8"/>
+    </g>
+</svg>

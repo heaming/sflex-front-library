@@ -1,0 +1,23 @@
+<svg id="notice_24" data-name="notice(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <defs>
+        <clipPath id="at8272po0a">
+            <path data-name="사각형 151567" transform="translate(-1.09 3.293)" style="fill:#fff" d="M0 0h8.633v17.882H0z"/>
+        </clipPath>
+    </defs>
+    <path d="M0 0h24v24H0z" style="fill:none"/>
+    <g data-name="사각형 151566" style="stroke:#222;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h5v9H0z" transform="translate(2.5 7.951)"/>
+        <path style="fill:none" d="M.75.75h3.5v7.5H.75z" transform="translate(2.5 7.951)"/>
+    </g>
+    <g data-name="마스크 그룹 138" transform="translate(10.017 -.294)" style="clip-path:url(#at8272po0a)">
+        <g data-name="패스 210123" style="fill:none">
+            <path d="M0 6.26 9.587 0v17.832L0 12.392z" style="stroke:none" transform="translate(-3.15 3.344)"/>
+            <path d="M8.087 2.771 1.5 7.072v4.446l6.587 3.738V2.771M9.587 0v17.832L0 12.392V6.26L9.587 0z" style="fill:#222;stroke:none" transform="translate(-3.15 3.344)"/>
+        </g>
+    </g>
+    <g data-name="그룹 148989">
+        <path data-name="패스 210124" d="M0 2.941 1.207 0" transform="rotate(30 3.13 40.283)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+        <path data-name="패스 210126" d="M1.207 0 0 2.941" transform="rotate(105.01 4.914 16.308)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+        <path data-name="패스 210125" d="M0 3.3.808 0" transform="rotate(74.99 4.295 19.598)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+    </g>
+</svg>

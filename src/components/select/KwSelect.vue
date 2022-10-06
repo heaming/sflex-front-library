@@ -162,7 +162,7 @@ export default {
     emitValue: { type: Boolean, default: true },
     useInput: { type: Boolean, default: false },
     inputDebounce: { type: [Number, String], default: 100 },
-    dropdownIcon: { type: String, default: 'arrow_down_16' },
+    dropdownIcon: { type: String, default: 'arrow_down' },
     hideDropdownIcon: { type: Boolean, default: false },
     disable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },

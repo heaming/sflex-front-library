@@ -18,7 +18,7 @@
       <kw-checkbox
         size="16px"
         model-value="Y"
-        checked-icon="bookmark_on_16"
+        checked-icon="bookmark_on"
         unchecked-icon="bookmark_off_16"
       >
         <kw-tooltip>
@@ -26,7 +26,7 @@
         </kw-tooltip>
       </kw-checkbox>
       <kw-btn
-        icon="alert_16"
+        icon="alert_on"
         class="btn-icon--bell pa0"
         borderless
         dense
