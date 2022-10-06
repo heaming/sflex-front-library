@@ -967,13 +967,13 @@ $unit: px;
   }
 }
 
-.border-box--one-colomn {
+.border-box--one-column {
   .border-box + .border-box {
     margin-top: 30px;
   }
 }
 
-.border-box--two-colomn {
+.border-box--two-column {
   padding-top: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -986,17 +986,17 @@ $unit: px;
 }
 
 .normal-area {
-  &--first-colomn {
+  &--first-column {
     width: 44%;
   }
 
-  &--second-colomn {
+  &--second-column {
     width: 66%;
   }
 }
 
-// two colomns in kw page
-.normal-area--two-colomn {
+// two columns in kw page
+.normal-area--two-column {
   display: flex;
   padding: 30px 40px;
 }
