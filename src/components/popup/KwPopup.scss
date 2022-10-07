@@ -150,6 +150,7 @@
 
     @at-root .auto-logout & {
       padding-top: 0;
+      padding-bottom: 20px;
 
       &::after {
         content: none;
