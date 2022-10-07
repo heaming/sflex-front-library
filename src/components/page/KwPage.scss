@@ -1,15 +1,15 @@
 .kw-page {
   padding: 15px 40px 30px 64px;
-  min-width: 1536px;
+  min-width: calc(1536px + 104px);
 
   &--md {
-    width: 1536px;
+    width: calc(1536px + 104px);
     margin: 0 auto;
   }
 
   &--sm {
-    min-width: 1212px;
-    width: 1212px;
+    min-width: calc(1212px + 104px);
+    width: calc(1212px + 104px);
     margin: 0 auto;
   }
 
