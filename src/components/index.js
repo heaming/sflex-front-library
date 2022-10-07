@@ -3,6 +3,7 @@
 export * from './action';
 export * from './actionBar';
 export * from './btn';
+export * from './btnDropdown';
 export * from './btnToggle';
 export * from './chart';
 export * from './checkbox';
@@ -21,6 +22,7 @@ export * from './page';
 export * from './pagination';
 export * from './popup';
 export * from './radio';
+export * from './scrollArea';
 export * from './search';
 export * from './select';
 export * from './separator';

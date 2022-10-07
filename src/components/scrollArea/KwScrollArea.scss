@@ -1,0 +1,25 @@
+.kw-scroll-area {
+  display: grid;
+
+  &__wrapper {
+    position: relative;
+  }
+
+  .q-scrollarea {
+    contain: none;
+
+    &__container {
+      width: auto !important;
+      height: auto !important;
+      overflow: scroll;
+      max-height: 100% !important;
+      max-width: 100% !important;
+    }
+
+    &__content {
+      position: relative !important;
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+}

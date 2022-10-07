@@ -123,6 +123,45 @@
   }
 }
 
+@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight) {
+  font-size: $font-size;
+  line-height: $line-height;
+  padding: $padding;
+  font-weight: $font-weight;
+  min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3)) });
+}
+
+@mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
+  .kw-btn--filled,
+  .kw-btn--outlined {
+    &.kw-btn--color-#{$name} {
+      background-color: $color;
+    }
+
+    @at-root body.desktop {
+      .kw-btn.kw-btn--color-#{$name} {
+        &.q-focusable:focus,
+        &.q-manual-focusable--focused,
+        &.q-hoverable:hover {
+          background-color: $hover-color;
+
+          &::before {
+            background-color: #fff;
+          }
+        }
+
+        &.q-btn.q-btn--active {
+          background-color: $action-color;
+
+          &::before {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
 @mixin color-based($prefix, $color-map) {
   @each $name, $color in $color-map {
     $class-name: $prefix + $name;

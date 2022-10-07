@@ -54,8 +54,8 @@ const availablePresets = {
 
 const designDefaultColors = {
   filled: {
-    color: 'primary',
-    textColor: 'bg-white',
+    color: 'bg-white',
+    textColor: 'normal-text',
   },
   outlined: {
     color: 'bg-white',
