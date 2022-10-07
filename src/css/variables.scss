@@ -93,12 +93,12 @@ $button-line-height: 1.5em;
 $button-font-weight: 400;
 
 // gutter
-$space-base: 10px;
-$flex-gutter-xs: $space-base !default;
-$flex-gutter-sm: ($space-base * 2) !default;
-$flex-gutter-md: ($space-base * 3) !default;
-$flex-gutter-lg: ($space-base * 4) !default;
-$flex-gutter-xl: ($space-base * 5) !default;
+$gutter-base: 10px;
+$flex-gutter-xs: $gutter-base !default;
+$flex-gutter-sm: ($gutter-base * 2) !default;
+$flex-gutter-md: ($gutter-base * 3) !default;
+$flex-gutter-lg: ($gutter-base * 4) !default;
+$flex-gutter-xl: ($gutter-base * 5) !default;
 
 // kw variables
 // add global variables for component styling.
