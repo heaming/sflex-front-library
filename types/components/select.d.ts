@@ -122,6 +122,12 @@ interface KwSelectProps extends UseFieldProps, UseFieldStyleProps, UseOptionsPro
   onKeydown?: (evt: Event) => void;
 
   /**
+   * input 입력 이벤트
+   * @param inputValue string
+   */
+  onInputValue?: (inputValue: string) => void;
+
+  /**
    * useInput 사용 시 인풋 입력에 따른 필터 이벤트
    * @param inputValue input typed value
    * @param doneFn 필요한 업데이트를 수행하는 기능 제공
@@ -145,6 +151,16 @@ export interface KwSelect extends ComponentPublicInstance<KwSelectProps>, UseFie
    * value에 맞는 option 찾는다
    */
   getOption: (val: any) => void;
+
+  /**
+   * value에 맞는 label 찾는다
+   */
+  getOptionLabel: (val: any) => void;
+
+  /**
+   * use-input 사용시 input value를 설정한다
+   */
+  updateInputValue: (inputValue: string) => void;
 }
 
 declare module '@vue/runtime-core' {

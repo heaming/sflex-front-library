@@ -14,8 +14,9 @@
     :multiple="multiple"
     :emit-value="emitValue"
     :map-options="emitValue"
-    :use-input="useInput"
-    :hide-selected="useInput"
+    :use-input="computedUseInput"
+    :fill-input="computedUseInput"
+    :hide-selected="computedUseInput"
     :input-debounce="inputDebounce"
     :disable="disable"
     :readonly="readonly"
@@ -24,17 +25,18 @@
     :color="color"
     :bg-color="bgColor"
     :autofocus="autofocus"
-    :placeholder="placeholder"
+    :placeholder="computedUseInput ? placeholder : undefined"
     :tabindex="tabindex"
     :clearable="clearable"
     no-error-icon
     :dropdown-icon="dropdownIcon"
     :hide-dropdown-icon="hideDropdownIcon"
     clear-icon="none"
-    @focus="onFocus"
-    @blur="onBlur"
-    @clear="onClear"
-    @keydown="onKeydown"
+    @focus="$emit('focus', $event)"
+    @blur="$emit('blur', $event)"
+    @clear="$emit('clear', $event)"
+    @keydown="$emit('keydown', $event)"
+    @input-value="$emit('inputValue', $event)"
     @filter="onFilter"
     @update:model-value="onUpdateValue"
   >
@@ -57,18 +59,25 @@
 
     <!-- selected (override slots) -->
     <template
-      v-if="placeholder && !isOptionSelected()"
+      v-if="selectedText || placeholder"
       #selected
     >
       <span
-        key="placeholder"
-        class="kw-select__placeholder"
-      >{{ placeholder }}</span>
+        key="selectedSlot"
+        :class="{'kw-select__placeholder': !selectedText && !!placeholder}"
+      >{{ selectedText || placeholder }}
+        <kw-tooltip
+          anchor="center middle"
+          show-when-ellipsised
+        >
+          {{ selectedText || placeholder }}
+        </kw-tooltip>
+      </span>
     </template>
 
     <!--before-options -->
     <template
-      v-if="multiple && !useInput"
+      v-if="multiple"
       #before-options
     >
       <q-item
@@ -77,7 +86,6 @@
       >
         <q-item-section side>
           <kw-checkbox
-            class="kw-checkbox"
             :model-value="selectedAll"
             :true-value="true"
             :false-value="false"
@@ -95,7 +103,7 @@
     </template>
 
     <!-- options -->
-    <template #option="{ itemProps, opt, selected, toggleOption }">
+    <template #option="{ itemProps, opt, selected }">
       <q-item
         :active="selected"
         v-bind="itemProps"
@@ -105,7 +113,6 @@
           side
         >
           <kw-checkbox
-            class="kw-checkbox"
             :model-value="selected"
             dense
             :true-value="true"
@@ -174,21 +181,22 @@ export default {
     autofocus: { type: Boolean, default: false },
     placeholder: { type: String, default: undefined },
     tabindex: { type: [Number, String], default: undefined },
-    onFocus: { type: Function, default: undefined },
-    onBlur: { type: Function, default: undefined },
-    onClear: { type: Function, default: undefined },
-    onKeydown: { type: Function, default: undefined },
     onFilter: { type: Function, default: undefined },
   },
 
   emits: [
     'update:modelValue',
+    'focus',
+    'blur',
+    'clear',
+    'keydown',
+    'inputValue',
   ],
 
   setup(props) {
     const fieldStyles = useFieldStyle();
     const fieldCtx = useField();
-    const { value } = fieldCtx;
+    const { inputRef, value } = fieldCtx;
 
     const optionsCtx = useOptions({
       valueRef: value,
@@ -197,15 +205,8 @@ export default {
       label: props.optionLabel,
       separator: props.optionSeparator,
     });
-    const { normalizedOptions } = optionsCtx;
 
-    function onUpdateValue(val) {
-      if (props.multiple) {
-        value.value = val ?? [];
-      } else {
-        value.value = val ?? '';
-      }
-    }
+    const { normalizedOptions } = optionsCtx;
 
     function getOptionIndex(val) {
       return normalizedOptions.value.findIndex((v) => v[props.optionValue] === val);
@@ -214,6 +215,10 @@ export default {
     function getOption(val) {
       const index = getOptionIndex(val);
       if (index > -1) return normalizedOptions.value[index];
+    }
+
+    function getOptionLabel(v) {
+      return getOption(v)?.[props.optionLabel];
     }
 
     function isOptionSelected() {
@@ -225,15 +230,44 @@ export default {
         ? value.value : value.value?.[props.optionValue]) > -1;
     }
 
+    function updateInputValue(val, noFilter) {
+      inputRef.value.updateInputValue(val, noFilter);
+    }
+
+    function onUpdateValue(val) {
+      if (props.multiple) {
+        value.value = val ?? [];
+      } else {
+        value.value = val ?? '';
+      }
+    }
+
+    const computedUseInput = computed(() => props.useInput && !props.multiple);
+
+    const selectedText = computed(() => {
+      if (computedUseInput.value) return null;
+
+      if (props.multiple) {
+        return value.value
+          .map((v) => getOptionLabel(v?.[props.optionValue] || v))
+          .join(', ');
+      }
+      return getOptionLabel(value.value?.[props.optionValue] || value.value);
+    });
+
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
       ...optionsCtx,
       fieldStyles,
-      onUpdateValue,
       getOptionIndex,
       getOption,
+      getOptionLabel,
       isOptionSelected,
+      updateInputValue,
+      onUpdateValue,
+      computedUseInput,
+      selectedText,
     };
   },
 };
