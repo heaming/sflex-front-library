@@ -33,11 +33,13 @@ export default () => {
   const alignContent = computed(() => props.alignContent ?? injected?.alignContent.value);
 
   const labelClass = computed(() => (props.required ? 'kw-form-item__label--required' : null));
+  const fieldWidth = computed(() => `calc(100% - ${labelSize.value}px)`);
   const labelWidth = computed(() => `${labelSize.value}px`);
   const fieldClass = computed(() => [alignContent.value && `kw-form-item__field--align-${alignContent.value}`]);
 
   return {
     labelClass,
+    fieldWidth,
     labelWidth,
     fieldClass,
   };
