@@ -39,7 +39,7 @@
       <kw-icon
         class="gnb-icon"
         size="24px"
-        name="alert_24"
+        name="alert_off_24"
         clickable
       />
     </q-toolbar>

@@ -129,7 +129,7 @@
           />
           <kw-btn
             secondary
-            icon="plus_16"
+            icon="plus"
             style="font-size: 20px;"
           />
         </div>
@@ -154,14 +154,14 @@
           <kw-btn
             dense
             secondary
-            icon="plus_16"
+            icon="plus"
             label="학습자 추가"
             class="mr8"
           />
           <kw-btn
             dense
             secondary
-            icon-right="plus_16"
+            icon-right="plus"
             disable
             label="학습자 추가"
             class="mr8"
@@ -169,7 +169,7 @@
           <kw-btn
             dense
             secondary
-            icon-right="arrow_down_16"
+            icon-right="arrow_down"
             label="상태추가"
           />
         </div>
@@ -195,28 +195,28 @@
           <kw-btn
             dense
             secondary
-            icon="excel_download_16"
+            icon="download_on"
             label="양식 다운로드"
             class="mr8"
           />
           <kw-btn
             dense
             secondary
-            icon="excel_download_16"
+            icon="download_on"
             label="엑셀 다운로드"
             class="mr8"
           />
           <kw-btn
             dense
             secondary
-            icon="excel_upload_16"
+            icon="upload_on"
             label="엑셀 업로드"
             class="mr8"
           />
           <kw-btn
             dense
             secondary
-            icon="excel_upload_16"
+            icon="upload_on"
             disable
             class="mr8"
             label="엑셀 업로드"
@@ -243,7 +243,7 @@
           <kw-btn
             dense
             secondary
-            icon="print_16"
+            icon="print"
             label="인쇄"
           />
         </div>
@@ -274,21 +274,21 @@ const iconButton = `
   />
   <kw-btn
     secondary
-    icon="plus_16"
+    icon="plus"
     style="font-size: 20px;"
   />
 `;
 // The size of icon is 16px, and The button's size is width:40px and height:40px
 const testCode = `
   <kw-btn
-    icon="plus_16"
+    icon="plus"
     dense
     secondary
     label="학습자 추가"
     class="mr8"
   />
   <kw-btn
-    icon-right="plus_16"
+    icon-right="plus"
     dense
     secondary
     disable
@@ -296,7 +296,7 @@ const testCode = `
     class="mr8"
   />
   <kw-btn
-    icon-right="arrow_down_16"
+    icon-right="arrow_down"
     dense
     secondary
     label="상태추가"
@@ -305,28 +305,28 @@ const testCode = `
 
 const excelCode = `
   <kw-btn
-    icon="excel_download_16"
+    icon="download_on"
     secondary
     dense
     class="mr8"
     label="양식 다운로드"
   />
   <kw-btn
-    icon="excel_download_16"
+    icon="download_on"
     secondary
     dense
     class="mr8"
     label="엑셀 다운로드"
   />
   <kw-btn
-    icon="excel_upload_16"
+    icon="upload_on"
     secondary
     dense
     class="mr8"
     label="엑셀 업로드"
   />
   <kw-btn
-    icon="excel_upload_16"
+    icon="upload_on"
     secondary
     dense
     disable
@@ -337,7 +337,7 @@ const excelCode = `
 
 const printCode = `
 <kw-btn
-  icon="print_16"
+  icon="print"
   secondary
   dense
   label="인쇄"
@@ -345,6 +345,10 @@ const printCode = `
 `;
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.10.06',
+    text: 'edit icon name in code',
+  },
   {
     timestamp: '2022.09.28',
     text: 'edit icon only type sample',

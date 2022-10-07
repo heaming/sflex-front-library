@@ -16,128 +16,132 @@
       >
         Icon info
       </h3>
-      <q-markup-table class="kw-guide-table">
-        <thead>
-          <tr>
-            <th style="width: 250px;">
-              Preview
-            </th>
-            <th>
-              Name/id
-            </th>
-          </tr>
-        </thead>
-        <tbody class="color-system">
-          <tr>
-            <td>
-              <kw-icon name="bookmark_on_16" />
-            </td>
-            <td>
-              bookmark_on_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="alert_16" />
-            </td>
-            <td>
-              alert_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="alert_24" />
-            </td>
-            <td>
-              alert_24
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="search_24" />
-            </td>
-            <td>
-              search_24
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="arrow_down_16" />
-            </td>
-            <td>
-              arrow_down_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="print_16" />
-            </td>
-            <td>
-              print_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="calendar" />
-            </td>
-            <td>
-              calendar
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="info_16" />
-            </td>
-            <td>
-              info_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="warning_16" />
-            </td>
-            <td>
-              warning_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="clock_16" />
-            </td>
-            <td>
-              clock_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="excel_download_16" />
-            </td>
-            <td>
-              excel_download_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="excel_upload_16" />
-            </td>
-            <td>
-              excel_upload_16
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <kw-icon name="plus_16" />
-            </td>
-            <td>
-              plus_16
-            </td>
-          </tr>
-        </tbody>
-      </q-markup-table>
+      <h4 class="my10">
+        16px <span class="ml10 kw-fc--black3">{{ iconList1.length }} 개</span>
+      </h4>
+      <ul
+        class="temp_icons"
+      >
+        <li
+          v-for="icon in iconList1"
+          :key="`${icon.name}`"
+          class="temp_icons__item"
+        >
+          <p class="temp_icons__name">
+            {{ icon }}
+          </p>
+          <p class="temp_icons__icon">
+            <kw-icon :name="icon" />
+          </p>
+        </li>
+      </ul>
+      <kw-separator />
+      <h4 class="mb10">
+        24px <span class="ml10 kw-fc--black3">{{ iconList2.length }} 개</span>
+      </h4>
+      <ul
+        class="temp_icons"
+      >
+        <li
+          v-for="icon in iconList2"
+          :key="`${icon.name}`"
+          class="temp_icons__item"
+        >
+          <p class="temp_icons__name">
+            {{ icon }}
+          </p>
+          <p class="temp_icons__icon  temp_icons__icon--24px">
+            <kw-icon :name="icon" />
+          </p>
+        </li>
+      </ul>
     </div>
   </kw-page>
 </template>
 <script setup>
+
+const iconList1 = [
+  'alert_on',
+  'arrow_down',
+  'arrow_left',
+  'arrow_next',
+  'arrow_prev',
+  'arrow_right',
+  'arrow_stepper',
+  'arrow_up',
+  'bookmark_off',
+  'bookmark_on',
+  'bookmark_outline',
+  'calendar',
+  'checked',
+  'checked_stepper',
+  'clear',
+  'clock',
+  'close',
+  'delete',
+  'detail',
+  'download_on',
+  'download_off',
+  'excel',
+  'file',
+  'filter',
+  'info',
+  'list',
+  'minus_box',
+  'more',
+  'new_window',
+  'pdf',
+  'plus',
+  'plus_box',
+  'price',
+  'print',
+  'report',
+  'search',
+  'sorti',
+  'sorting_down',
+  'sorting_up',
+  'upload_on',
+  'upload_off',
+  'warning',
+  'write',
+];
+const iconList2 = [
+  'add_list_24',
+  'alert_off_24',
+  'alert_on_24',
+  'arrow_down_24',
+  'arrow_left_24',
+  'arrow_left_breadcrumbs_24',
+  'arrow_next_24',
+  'arrow_prev_24',
+  'arrow_right_24',
+  'arrow_up_24',
+  'barcode_24',
+  'calendar_24',
+  'call_24',
+  'checked_24',
+  'close_24',
+  'filter_24',
+  'imgpreview_24',
+  'info_24',
+  'menu_24',
+  'minus_24',
+  'more_24',
+  'notice_24',
+  'pdf_24',
+  'plus_24',
+  'preview_24',
+  'price_24',
+  'price_cycle_24',
+  'search_24',
+  'search_doc_24',
+  'setting_24',
+  'sms_24',
+  'tool_24',
+  'user_24',
+  'warning_24',
+  'write_24',
+];
 const guideHistory = [
   {
     timestamp: '2022-09-21',
@@ -146,7 +150,36 @@ const guideHistory = [
 ];
 </script>
 <style scoped lang="scss">
-.kw-icon {
-  font-size: 16px;
+// .kw-icon {
+//   font-size: 16px;
+// }
+.temp_icons {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+
+  &__item {
+    padding: 5px;
+    background-color: $bg-white;
+    border: 1px solid $line-stroke;
+    text-align: center;
+  }
+
+  &__name {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $line-stroke;
+  }
+
+  &__icon {
+    padding: 10px 0;
+    font-size: 16px;
+
+    &--24px {
+      font-size: 24px;
+    }
+  }
 }
 </style>

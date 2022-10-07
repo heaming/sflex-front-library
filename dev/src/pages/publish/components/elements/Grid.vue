@@ -924,17 +924,21 @@ function initGrid6(data, view) {
 }
 
 const testCode5 = `
-<div class="result-area result-area--column">
-    <div class="result-area__section"> <!-- insert width helpeer class on smaller one when each 'result-area__section' has different size -->
+<div class="grid-horizontal-wrap">
+    <div class="grid-horizontal-wrap__section"> <!-- insert width helper class on smaller one when each 'grid-horizontal-wrap__section' has different size -->
       grid
     </div>
-    <div class="result-area__section">
+    <div class="grid-horizontal-wrap__section">
       grid
     </div>
   </div>
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.10.06',
+    text: 'change guide case #5',
+  },
   {
     timestamp: '2022.09.26',
     text: 'Add case #6, essential',

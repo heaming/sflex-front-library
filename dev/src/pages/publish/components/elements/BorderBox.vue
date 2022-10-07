@@ -28,7 +28,7 @@
         <tbody>
           <tr>
             <td>
-              border-box--one-colomn
+              border-box--one-column
             </td>
             <td>
               Wrap 'border-box' by this class
@@ -39,7 +39,7 @@
               border-box
             </td>
             <td>
-              Add the div tag with this class in border-box--one-colomn
+              Add the div tag with this class in border-box--one-column
             </td>
           </tr>
         </tbody>
@@ -54,12 +54,12 @@
       </h3>
 
       <p class="kw-guide-description">
-        Wrap <b>border-box</b>(class of inside) by <b>border-box--one-colomn</b>(class of outside)<br>
+        Wrap <b>border-box</b>(class of inside) by <b>border-box--one-column</b>(class of outside)<br>
         border-box has ourside border of content.
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <div class="border-box--one-colomn">
+          <div class="border-box--one-column">
             <div class="border-box">
               <h3>자녀1</h3>
               <kw-form cols="2">
@@ -104,7 +104,7 @@
 
 <script setup>
 const testCode = `
-<div class="border-box--one-colomn">
+<div class="border-box--one-column">
   <div class="border-box">
     <h3>자녀1</h3>
     <kw-form cols="2">

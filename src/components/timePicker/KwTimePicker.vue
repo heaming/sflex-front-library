@@ -18,7 +18,7 @@
   >
     <template #append>
       <div @click="toggleView()">
-        <q-icon name="clock_16" />
+        <q-icon name="clock" />
       </div>
     </template>
     <q-menu

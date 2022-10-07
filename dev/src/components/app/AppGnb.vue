@@ -41,7 +41,7 @@
         </div>
         <div class="item">
           <kw-btn
-            icon="alert_24"
+            icon="alert_off_24"
             class="ml8"
             size="24px"
             color="translate"

@@ -1,0 +1,16 @@
+<svg id="detail" data-name="detail(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(2.999 1)">
+    <path id="합치기_457" data-name="합치기 457" d="M-14881-1420v-7l1.5-2,1.5,2v7Z" transform="translate(-9507.879 -11522.926) rotate(-135)" fill="none" stroke="#222" stroke-width="1.5"/>
+    <g id="page">
+      <rect id="사각형_151624" data-name="사각형 151624" width="6" height="1.5" transform="translate(-0.999 1)" fill="#222"/>
+      <rect id="사각형_151625" data-name="사각형 151625" width="12" height="1.5" transform="translate(-0.999 11.5)" fill="#222"/>
+      <rect id="사각형_151626" data-name="사각형 151626" width="12" height="1.5" transform="translate(0.501 1) rotate(90)" fill="#222"/>
+      <rect id="사각형_151627" data-name="사각형 151627" width="6" height="1.5" transform="translate(11.001 7) rotate(90)" fill="#222"/>
+    </g>
+  </g>
+</svg>

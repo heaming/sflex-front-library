@@ -66,7 +66,7 @@
         </template>
         <template #default>
           <kw-btn
-            icon="excel_download_16"
+            icon="download_on"
             dense
             secondary
             label="엑셀 다운로드"
@@ -257,7 +257,7 @@ const sampleVueCode = `
       </template>
       <template #default>
         <kw-btn
-          icon="excel_download_16"
+          icon="download_on"
           dense
           secondary
           label="엑셀 다운로드"

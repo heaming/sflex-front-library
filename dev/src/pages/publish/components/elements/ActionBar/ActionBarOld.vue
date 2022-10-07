@@ -157,7 +157,7 @@
             </template>
             <template #default>
               <kw-btn
-                icon="excel_16"
+                icon="excel"
                 dense
                 secondary
                 label="엑셀 다운로드"
@@ -208,7 +208,7 @@
 
             <template #default>
               <kw-btn
-                icon="excel_16"
+                icon="excel"
                 dense
                 secondary
                 label="엑셀 다운로드"
@@ -264,13 +264,13 @@
                 inset
               />
               <kw-btn
-                icon="print_16"
+                icon="print"
                 dense
                 secondary
                 label="인쇄"
               />
               <kw-btn
-                icon="excel_download_16"
+                icon="download_on"
                 dense
                 secondary
                 label="엑셀 다운로드"
@@ -330,7 +330,7 @@
             </template>
 
             <kw-btn
-              icon="excel_16"
+              icon="excel"
               dense
               secondary
               label="엑셀 다운로드"
@@ -407,7 +407,7 @@ const testCode = `
   </template>
   <template #default>
     <kw-btn
-      icon="excel_16"
+      icon="excel"
       dense
       secondary
       label="엑셀 다운로드"
@@ -452,7 +452,7 @@ const testCode2 = `
 
   <template #default>
     <kw-btn
-      icon="excel_16"
+      icon="excel"
       dense
       secondary
       label="엑셀 다운로드"
@@ -495,13 +495,13 @@ const testCode3 = `
       inset
     />
     <kw-btn
-      icon="print_16"
+      icon="print"
       dense
       secondary
       label="인쇄"
     />
     <kw-btn
-      icon="excel_download_16"
+      icon="download_on"
       dense
       secondary
       label="엑셀 다운로드"
@@ -548,7 +548,7 @@ const testCode4 = `
   </template>
 
   <kw-btn
-    icon="excel_16"
+    icon="excel"
     dense
     secondary
     label="엑셀 다운로드"

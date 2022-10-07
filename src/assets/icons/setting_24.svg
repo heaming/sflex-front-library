@@ -1,0 +1,11 @@
+<svg id="setting_24" data-name="setting_24" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g data-name="합치기 399" style="stroke-linejoin:round;fill:none">
+        <path d="M6.818 20v-2.319l-1.639 1.64-4.5-4.5 1.639-1.639H0V6.819h2.319l-1.64-1.64 4.5-4.5 1.639 1.64V0h6.364v2.319l1.64-1.64 4.5 4.5-1.639 1.64H20v6.364h-2.318l1.639 1.639-4.5 4.5-1.64-1.64V20z" style="stroke:none" transform="translate(2 2)"/>
+        <path d="M11.682 18.5v-.819a1.5 1.5 0 0 1 2.56-1.06l.58.579 2.377-2.379-.578-.578a1.5 1.5 0 0 1 1.06-2.56h.819V8.318h-.819a1.5 1.5 0 0 1-1.06-2.561l.579-.58L14.82 2.8l-.579.58a1.5 1.5 0 0 1-2.56-1.061V1.5H8.318v.819a1.5 1.5 0 0 1-2.56 1.06l-.58-.578L2.8 5.179l.58.579a1.5 1.5 0 0 1-1.061 2.56H1.5v3.364h.818a1.5 1.5 0 0 1 1.06 2.56l-.578.58L5.178 17.2l.58-.58a1.5 1.5 0 0 1 2.56 1.061v.819h3.364m1.5 1.5H6.818v-2.319l-1.64 1.64-4.499-4.5 1.639-1.639H0V6.82h2.319l-1.64-1.64 4.5-4.5 1.639 1.64V0h6.364v2.319l1.64-1.64 4.499 4.5-1.64 1.64H20v6.363h-2.318l1.639 1.639-4.5 4.5-1.64-1.64V20z" style="fill:#222;stroke:none" transform="translate(2 2)"/>
+    </g>
+    <g data-name="타원 5189" transform="translate(7.999 8)" style="stroke:#222;stroke-width:1.5px;fill:none">
+        <circle cx="4" cy="4" r="4" style="stroke:none"/>
+        <circle cx="4" cy="4" r="3.25" style="fill:none"/>
+    </g>
+</svg>

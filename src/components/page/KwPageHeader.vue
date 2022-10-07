@@ -18,15 +18,15 @@
       <kw-checkbox
         size="16px"
         model-value="Y"
-        checked-icon="bookmark_on_16"
-        unchecked-icon="bookmark_off_16"
+        checked-icon="bookmark_on"
+        unchecked-icon="bookmark_off"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
         </kw-tooltip>
       </kw-checkbox>
       <kw-btn
-        icon="alert_16"
+        icon="alert_on"
         class="btn-icon--bell pa0"
         borderless
         dense
