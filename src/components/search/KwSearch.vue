@@ -35,7 +35,7 @@
           :label="$t('MSG_BTN_SEARCH', null, '검색')"
           class="ml8 w90"
           color="secondary"
-          filled
+          text-color="bg-white"
           dense
           type="submit"
         />
