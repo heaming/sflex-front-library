@@ -18,6 +18,7 @@
         {{ $t(popupTitle) }}
       </h1>
       <q-icon
+        v-if="!popupNoCloseBtn"
         class="kw-popup__header-close"
         size="24px"
         name="close_24"
@@ -84,6 +85,7 @@ export default {
     const { transform, events: draggableEvents } = useDraggable(containerRef);
 
     const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
+    const popupNoCloseBtn = computed(() => popupCtx.value.noCloseBtn?.value);
     const popupSize = computed(() => popupCtx.value.size?.value);
     const popupStyle = computed(() => [popupCtx.value.style, `transform: ${transform.value}`]);
     const popupAction = computed(() => popupCtx.value.hasActionSlot?.value);
@@ -117,6 +119,7 @@ export default {
       popupTitle,
       popupStyle,
       popupClass,
+      popupNoCloseBtn,
       popupHeaderClass,
       onLoad,
     };

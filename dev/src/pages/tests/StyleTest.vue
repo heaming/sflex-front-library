@@ -1,5 +1,5 @@
 <template>
-  <!-- input -->
+  <!-- Form -->
   <q-expansion-item
     v-if="true"
     label="Form"
@@ -10,7 +10,7 @@
   </q-expansion-item>
   <!-- input -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="Input"
   >
     <div class="result-area">
@@ -37,12 +37,22 @@
   </q-expansion-item>
   <!-- button -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="Button"
-    default-opened
+    :default-opened="false"
   >
     <div class="result-area">
-      <button-form />
+      <btn-form />
+    </div>
+  </q-expansion-item>
+  <!-- button dropdown -->
+  <q-expansion-item
+    v-if="false"
+    label="Button Dropdown"
+    :default-opened="false"
+  >
+    <div class="result-area">
+      <btn-dropdown-form />
     </div>
   </q-expansion-item>
   <!-- radio -->
@@ -122,11 +132,128 @@
       </kw-search>
     </div>
   </q-expansion-item>
+  <!-- scroll test -->
+  <q-expansion-item
+    v-if="true"
+    label="scroll"
+    :default-opened="false"
+  >
+    <div class="result-area">
+      <div
+        class="bg-grey-3 pa10 user"
+        style="display: grid;"
+      >
+        <div
+          class="bg-green-3 pa10 scr fit"
+          style="position: relative; min-height: 300px; max-height: 500px; min-width: 300px; max-width: 500px;"
+        >
+          <div
+            class="bg-blue-3 pa10 scr-container"
+            style="width: auto;
+            height: auto;
+            overflow: auto;
+            max-height: 100%;
+            max-width: 100%;"
+          >
+            <div
+              class="bg-red-3 scr-scroll pa10"
+              style="width: max-content;
+                      height: max-content;"
+            >
+              <div class="w800 h500 bg-yellow-4 scr-contents">
+                contents
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-green-1 pa20"
+      >
+        <kw-scroll-area
+          class="bg-red-1"
+          max-width="400px"
+          max-height="400px"
+        >
+          <div
+            class="bg-green-3 w500 h500"
+            style="border: 3px solid red;"
+          />
+        </kw-scroll-area>
+      </div>
+
+      <div
+        class="bg-green-1 pa20"
+      >
+        <div style="display: flex; max-height: 300px;">
+          <div class="w200 bg-yellow-3" />
+          <kw-scroll-area
+            class="bg-red-1"
+            style="flex-grow: 1;"
+          >
+            <h3>test</h3>
+            <div
+              class="bg-green-3"
+              style="border: 3px solid red; height: 500px;"
+            />
+          </kw-scroll-area>
+        </div>
+      </div>
+      <span>
+        max-width="300px"
+        max-height="300px"
+        style="display:flex; align-items: stretch; justify-items: stretch; justify-content: stretch;"
+      </span>
+      <div
+        class="bg-green-1 pa20 row"
+      >
+        <div
+          class="bg-blue-3"
+          style="width: 400px;"
+        >
+          <div class="w300 h500" />
+        </div>
+        <div class="col column">
+          <h3>test</h3>
+          <q-scroll-area
+            class="bg-red-1"
+            style="border: 3px solid blue; flex-grow: 1;"
+          >
+            <div
+              class="bg-green-3"
+              style="border: 3px solid red; height: 600px;"
+            />
+          </q-scroll-area>
+        </div>
+      </div>
+    </div>
+  </q-expansion-item>
+  <!-- file -->
+  <q-expansion-item
+    v-if="true"
+    label="Button Dropdown"
+    :default-opened="true"
+  >
+    <div class="result-area">
+      <file-form />
+    </div>
+  </q-expansion-item>
 </template>
 
 <script setup>
 /* eslint-disable no-unused-vars */
-import { InputForm, SelectForm, CheckBoxForm, ButtonForm, RadioForm, ToggleForm, Forms } from '../../components/test';
+import {
+  InputForm,
+  SelectForm,
+  CheckBoxForm,
+  BtnForm,
+  BtnDropdownForm,
+  RadioForm,
+  ToggleForm,
+  FileForm,
+  Forms,
+} from '../../components/test';
 </script>
 
 <style scoped>

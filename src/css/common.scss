@@ -601,6 +601,67 @@ p {
   }
 }
 
+.grid-fix-footer {
+  $self: &;
+
+  display: flex;
+  padding: 20px 0;
+  margin: 0;
+  list-style: none;
+  background-color: rgba($primary, 0.1);
+
+  &__item {
+    position: relative;
+    padding: 0 40px;
+    flex: 1 1 auto;
+    display: flex;
+    column-gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+
+    &:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background-color: $line-line;
+    }
+  }
+
+  &__label {
+    flex: 0 1 80px;
+    max-width: 134px;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    color: $black3;
+  }
+
+  &__data {
+    flex: 2 2 auto;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: right;
+    color: $black1;
+  }
+
+  &.column {
+    row-gap: 12px;
+    #{$self}__item {
+      &::before {
+        content: none;
+      }
+    }
+    #{$self}__label {
+      flex-basis: 134px;
+    }
+  }
+}
+
 // helpers
 
 $sides: (t, b, l, r, x, y, a);

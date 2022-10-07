@@ -64,8 +64,34 @@
           </kw-action-top>
           <kw-grid
             :visible-rows="10"
-            @init="initGrid"
+            @init="initGrid1"
           />
+          <ul class="grid-fix-footer">
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">BS인정건수</span>
+              <p class="grid-fix-footer__data">
+                100,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">W1건수</span>
+              <p class="grid-fix-footer__data">
+                10,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">W2건수</span>
+              <p class="grid-fix-footer__data">
+                10
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">환경건수</span>
+              <p class="grid-fix-footer__data">
+                100,000
+              </p>
+            </li>
+          </ul>
         </div>
         <div class="grid-horizontal-wrap__section w472">
           <h3>수수료내역</h3>
@@ -81,14 +107,28 @@
           </kw-action-top>
           <kw-grid
             :visible-rows="10"
-            @init="initGrid"
+            @init="initGrid2"
           />
-          <kw-action-bottom>
-            <kw-btn
-              label="삭제"
-              grid-action
-            />
-          </kw-action-bottom>
+          <ul class="grid-fix-footer column">
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">지급합계</span>
+              <p class="grid-fix-footer__data">
+                100,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">지급총액</span>
+              <p class="grid-fix-footer__data">
+                10,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">공제합계</span>
+              <p class="grid-fix-footer__data">
+                10
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -109,7 +149,63 @@
 
 <script setup>
 
-function initGrid(data, view) {
+function initGrid1(data, view) {
+  const fields = [
+    { fieldName: 'col1' },
+    { fieldName: 'col2' },
+    { fieldName: 'col3' },
+    { fieldName: 'col4' },
+    { fieldName: 'col5' },
+    { fieldName: 'col6' },
+    { fieldName: 'col7' },
+    { fieldName: 'col8' },
+    { fieldName: 'col9' },
+    { fieldName: 'col10' },
+  ];
+
+  const columns = [
+    { fieldName: 'col1', header: '상품', width: '140' },
+    { fieldName: 'col2', header: '관리', width: '110' },
+    { fieldName: 'col3', header: '방문', width: '110' },
+    { fieldName: 'col4', header: '금액', width: '110', styleName: 'text-right' },
+    { fieldName: 'col5', header: '관리', width: '110' },
+    { fieldName: 'col6', header: '방문', width: '110' },
+    { fieldName: 'col7', header: '금액', width: '110', styleName: 'text-right' },
+    { fieldName: 'col8', header: '합계', width: '134', styleName: 'text-right' },
+  ];
+
+  data.setFields(fields);
+  view.setColumns(columns);
+
+  // multi row header setting
+  view.setColumnLayout([
+    'col1', // single
+    {
+      header: '일반', // colspan title
+      direction: 'horizontal', // merge type
+      items: ['col2', 'col3', 'col4'],
+    },
+    {
+      header: '정액',
+      direction: 'horizontal',
+      items: ['col5', 'col6', 'col7'],
+    },
+    'col8',
+  ]);
+
+  data.setRows([
+    { col1: '정수기1', col2: '73', col3: '71', col4: '527,000', col5: ' ', col6: ' ', col7: ' ', col8: ' ' },
+    { col1: '정수기2', col2: '47', col3: '5', col4: '40,000', col5: ' ', col6: ' ', col7: ' ', col8: '64,000' },
+    { col1: '정수기3', col2: '13', col3: '1', col4: '8,500', col5: ' ', col6: '-', col7: '-', col8: '17,000' },
+    { col1: '정수기4', col2: '39', col3: '0', col4: '10,000', col5: ' ', col6: ' ', col7: ' ', col8: '88,200' },
+    { col1: '청정기1', col2: '2', col3: '1', col4: '56,700', col5: ' ', col6: ' ', col7: ' ', col8: ' ' },
+    { col1: '청정기2', col2: ' ', col3: ' ', col4: ' ', col5: ' ', col6: '-', col7: '-', col8: ' ' },
+    { col1: '아웃소싱,커피,삼성', col2: '3', col3: '3', col4: '21,000', col5: ' ', col6: ' ', col7: ' ', col8: '32,500' },
+    { col1: '비데,연수기', col2: ' ', col3: ' ', col4: ' ', col5: ' ', col6: ' ', col7: ' ', col8: ' ' },
+  ]);
+}
+
+function initGrid2(data, view) {
   const fields = [
     { fieldName: 'col1' },
     { fieldName: 'col2' },
@@ -124,155 +220,239 @@ function initGrid(data, view) {
     { fieldName: 'col11' },
     { fieldName: 'col12' },
     { fieldName: 'col13' },
-    { fieldName: 'col14' },
   ];
 
   const columns = [
-    { fieldName: 'col1', header: '고객 유형', width: '100', styleName: 'text-center' },
-    { fieldName: 'col2', header: '고객 유형', width: '100', styleName: 'text-center' },
-    { fieldName: 'col3', header: '법인명(점포명)', width: '180' },
-    { fieldName: 'col4', header: '이름/담당자', width: '080', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
-    { fieldName: 'col5', header: '성별', width: '100', styleName: 'text-center' },
-    { fieldName: 'col6', header: '생년월일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
-    { fieldName: 'col7', header: '휴대전화번호', width: '160', styleName: 'text-center' },
-    { fieldName: 'col8', header: '주소', width: '296' },
-    { fieldName: 'col9', header: '약관동의', width: '100', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
-    { fieldName: 'col10', header: '본인인증', width: '100', styleName: 'text-center text-red' },
-    { fieldName: 'col11', header: '통합고객', width: '100', styleName: 'text-center text-blue' },
-    { fieldName: 'col12', header: '최종 수정일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
-    { fieldName: 'col13', header: '최종 등록일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
+    { fieldName: 'col1', header: '수수료내역', width: '115', styleName: 'text-center' },
+    { fieldName: 'col2', header: '금액', width: '115', styleName: 'text-right' },
+    { fieldName: 'col3', header: '추가지급', width: '115', styleName: 'text-center' },
+    { fieldName: 'col4', header: '수수료 공제', width: '115', styleName: 'text-center' },
   ];
 
   data.setFields(fields);
   view.setColumns(columns);
 
-  view.checkBar.visible = true;
-  view.rowIndicator.visible = true;
-
   data.setRows([
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
-    { col1: '041076279', col2: '개인', col3: '-', col4: '김사랑', col5: '여성', col6: '2014-05-20', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220324', col13: '20040216' },
-    { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
-    { col1: '041076279', col2: '개인', col3: '-', col4: '김사랑', col5: '여성', col6: '2014-05-20', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220324', col13: '20040216' },
-    { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
-    { col1: '041076279', col2: '개인', col3: '-', col4: '김사랑', col5: '여성', col6: '2014-05-20', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220324', col13: '20040216' },
-    { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
+    { col1: '관리수당', col2: '1,020,000', col3: '-', col4: '-' },
+    { col1: '판매장려', col2: '30,000', col3: '-', col4: '-' },
+    { col1: '판매미팅', col2: '20,000', col3: '-', col4: '-' },
+    { col1: '판매소급', col2: ' ', col3: '-', col4: '-' },
+    { col1: '정착', col2: ' ', col3: '-', col4: '-' },
+    { col1: '급지', col2: '20,000', col3: '-', col4: '-' },
+    { col1: '통신수당', col2: ' ', col3: '-', col4: '-' },
+    { col1: '기타수당', col2: ' ', col3: '-', col4: '-' },
+    { col1: '유니폼', col2: ' ', col3: '-', col4: '-' },
+    { col1: '사전방문', col2: ' ', col3: '-', col4: '-' },
+    { col1: 'texttemp', col2: ' ', col3: '-', col4: '-' },
   ]);
 }
 
 const sampleVueCode = `
 <kw-page>
-  <template #header>
-    <kw-page-header :options="['홈','고객','Search Result(Normal)']" />
-  </template>
+    <template #header>
+      <kw-page-header :options="['홈','고객','리쿠르팅 등록 관리(파트너)']" />
+    </template>
 
-  <kw-search title="조회조건">
-    <kw-search-row>
-      <kw-search-item label="고객 유형">
-        <kw-select
-          first-option="all"
-          :options="['A','B','C']"
-        />
-      </kw-search-item>
+    <kw-search>
+      <kw-search-row>
+        <kw-search-item label="고객 유형">
+          <kw-select
+            first-option="all"
+            :options="['A','B','C']"
+          />
+        </kw-search-item>
 
-      <kw-search-item label="교원키">
-        <kw-input placeholder="입력해주세요" />
-      </kw-search-item>
+        <kw-search-item label="교원키">
+          <kw-input placeholder="입력해주세요" />
+        </kw-search-item>
 
-      <kw-search-item label="이름/대표자/담당자">
-        <kw-input placeholder="입력해주세요" />
-      </kw-search-item>
-    </kw-search-row>
+        <kw-search-item label="이름/대표자/담당자">
+          <kw-input placeholder="입력해주세요" />
+        </kw-search-item>
+      </kw-search-row>
 
-    <kw-search-row>
-      <kw-search-item label="휴대전화번호">
-        <kw-input
-          placeholder="입력해주세요"
-          mask="###-####-####"
-        />
-      </kw-search-item>
+      <kw-search-row>
+        <kw-search-item label="휴대전화번호">
+          <kw-input
+            placeholder="입력해주세요"
+            mask="###-####-####"
+          />
+        </kw-search-item>
 
-      <kw-search-item label="통합 고객">
-        <kw-select
-          first-option="all"
-          :options="['A','B','C']"
-        />
-      </kw-search-item>
-    </kw-search-row>
-  </kw-search>
+        <kw-search-item label="통합 고객">
+          <kw-select
+            first-option="all"
+            :options="['A','B','C']"
+          />
+        </kw-search-item>
+      </kw-search-row>
+    </kw-search>
 
-  <div class="result-area">
-    <div class="grid-horizontal-wrap">
-      <div class="grid-horizontal-wrap__section">
-        <h3>방문실적</h3>
-        <kw-action-top>
-          <template #left>
-            <span>총</span>
-            <span class="accent pl4">30</span>
-            <kw-separator
-              spaced
-              vertical
-              inset
+    <div class="result-area">
+      <div class="grid-horizontal-wrap">
+        <div class="grid-horizontal-wrap__section">
+          <h3>방문실적</h3>
+          <kw-action-top>
+            <template #left>
+              <span>총</span>
+              <span class="accent pl4">30</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span>처리율</span>
+              <span class="accent pl4">30%</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span class="accent">1,020,000원</span>
+            </template>
+          </kw-action-top>
+          <kw-grid
+            :visible-rows="10"
+            @init="initGrid1"
+          />
+          <ul class="grid-fix-footer">
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">BS인정건수</span>
+              <p class="grid-fix-footer__data">
+                100,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">W1건수</span>
+              <p class="grid-fix-footer__data">
+                10,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">W2건수</span>
+              <p class="grid-fix-footer__data">
+                10
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">환경건수</span>
+              <p class="grid-fix-footer__data">
+                100,000
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="grid-horizontal-wrap__section w472">
+          <h3>수수료내역</h3>
+          <kw-action-top>
+            <template #left>
+              <span>적용률총</span>
+              <span class="accent pl4">30%</span>
+            </template>
+            <kw-btn
+              label="저장"
+              grid-action
             />
-            <span>처리율</span>
-            <span class="accent pl4">30%</span>
-            <kw-separator
-              spaced
-              vertical
-              inset
-            />
-            <span class="accent">1,020,000원</span>
-          </template>
-        </kw-action-top>
-        <kw-grid
-          :visible-rows="10"
-          @init="initGrid"
-        />
-        <kw-action-bottom>
-          <kw-btn
-            label="삭제"
-            grid-action
+          </kw-action-top>
+          <kw-grid
+            :visible-rows="10"
+            @init="initGrid2"
           />
-        </kw-action-bottom>
-      </div>
-      <div class="grid-horizontal-wrap__section w472">
-        <h3>수수료내역</h3>
-        <kw-action-top>
-          <template #left>
-            <span>적용률총</span>
-            <span class="accent pl4">30%</span>
-          </template>
-          <kw-btn
-            label="저장"
-            grid-action
-          />
-        </kw-action-top>
-        <kw-grid
-          :visible-rows="10"
-          @init="initGrid"
-        />
-        <kw-action-bottom>
-          <kw-btn
-            label="삭제"
-            grid-action
-          />
-        </kw-action-bottom>
+          <ul class="grid-fix-footer column">
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">지급합계</span>
+              <p class="grid-fix-footer__data">
+                100,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">지급총액</span>
+              <p class="grid-fix-footer__data">
+                10,000
+              </p>
+            </li>
+            <li class="grid-fix-footer__item">
+              <span class="grid-fix-footer__label">공제합계</span>
+              <p class="grid-fix-footer__data">
+                10
+              </p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-</kw-page>`;
+    <div class="kw-guide pa0">
+      <q-card>
+        <h3 class="center mb20">
+          This is the source code for this page. This part is not included in the coding.
+        </h3>
+        <guide-code-view
+          :code-value="[sampleVueCode, sampleJsCode]"
+          :lang="['vue','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
+  </kw-page>`;
 
 const sampleJsCode = `
-const selectData = { model: '10',
-  options: [
-    '10', '20', '30', '40', '50',
-  ] };
+function initGrid1(data, view) {
+  const fields = [
+    { fieldName: 'col1' },
+    { fieldName: 'col2' },
+    { fieldName: 'col3' },
+    { fieldName: 'col4' },
+    { fieldName: 'col5' },
+    { fieldName: 'col6' },
+    { fieldName: 'col7' },
+    { fieldName: 'col8' },
+    { fieldName: 'col9' },
+    { fieldName: 'col10' },
+  ];
 
-function initGrid(data, view) {
+  const columns = [
+    { fieldName: 'col1', header: '상품', width: '140' },
+    { fieldName: 'col2', header: '관리', width: '110' },
+    { fieldName: 'col3', header: '방문', width: '110' },
+    { fieldName: 'col4', header: '금액', width: '110', styleName: 'text-right' },
+    { fieldName: 'col5', header: '관리', width: '110' },
+    { fieldName: 'col6', header: '방문', width: '110' },
+    { fieldName: 'col7', header: '금액', width: '110', styleName: 'text-right' },
+    { fieldName: 'col8', header: '합계', width: '134', styleName: 'text-right' },
+  ];
+
+  data.setFields(fields);
+  view.setColumns(columns);
+
+  // multi row header setting
+  view.setColumnLayout([
+    'col1', // single
+    {
+      header: '일반', // colspan title
+      direction: 'horizontal', // merge type
+      items: ['col2', 'col3', 'col4'],
+    },
+    {
+      header: '정액',
+      direction: 'horizontal',
+      items: ['col5', 'col6', 'col7'],
+    },
+    'col8',
+  ]);
+
+  data.setRows([
+    { col1: '정수기1', col2: '73', col3: '71', col4: '527,000', col5: ' ', col6: ' ', col7: ' ', col8: ' ' },
+    { col1: '정수기2', col2: '47', col3: '5', col4: '40,000', col5: ' ', col6: ' ', col7: ' ', col8: '64,000' },
+    { col1: '정수기3', col2: '13', col3: '1', col4: '8,500', col5: ' ', col6: '-', col7: '-', col8: '17,000' },
+    { col1: '정수기4', col2: '39', col3: '0', col4: '10,000', col5: ' ', col6: ' ', col7: ' ', col8: '88,200' },
+    { col1: '청정기1', col2: '2', col3: '1', col4: '56,700', col5: ' ', col6: ' ', col7: ' ', col8: ' ' },
+    { col1: '청정기2', col2: ' ', col3: ' ', col4: ' ', col5: ' ', col6: '-', col7: '-', col8: ' ' },
+    { col1: '아웃소싱,커피,삼성', col2: '3', col3: '3', col4: '21,000', col5: ' ', col6: ' ', col7: ' ', col8: '32,500' },
+    { col1: '비데,연수기', col2: ' ', col3: ' ', col4: ' ', col5: ' ', col6: ' ', col7: ' ', col8: ' ' },
+  ]);
+}
+
+function initGrid2(data, view) {
   const fields = [
     { fieldName: 'col1' },
     { fieldName: 'col2' },
@@ -287,42 +467,30 @@ function initGrid(data, view) {
     { fieldName: 'col11' },
     { fieldName: 'col12' },
     { fieldName: 'col13' },
-    { fieldName: 'col14' },
   ];
 
   const columns = [
-    { fieldName: 'col1', header: '고객 유형', width: '100', styleName: 'text-center' },
-    { fieldName: 'col2', header: '고객 유형', width: '100', styleName: 'text-center' },
-    { fieldName: 'col3', header: '법인명(점포명)', width: '180' },
-    { fieldName: 'col4', header: '이름/담당자', width: '080', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
-    { fieldName: 'col5', header: '성별', width: '100', styleName: 'text-center' },
-    { fieldName: 'col6', header: '생년월일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
-    { fieldName: 'col7', header: '휴대전화번호', width: '160', styleName: 'text-center' },
-    { fieldName: 'col8', header: '주소', width: '296' },
-    { fieldName: 'col9', header: '약관동의', width: '100', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
-    { fieldName: 'col10', header: '본인인증', width: '100', styleName: 'text-center text-red' },
-    { fieldName: 'col11', header: '통합고객', width: '100', styleName: 'text-center text-blue' },
-    { fieldName: 'col12', header: '최종 수정일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
-    { fieldName: 'col13', header: '최종 등록일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
+    { fieldName: 'col1', header: '수수료내역', width: '115', styleName: 'text-center' },
+    { fieldName: 'col2', header: '금액', width: '115', styleName: 'text-right' },
+    { fieldName: 'col3', header: '추가지급', width: '115', styleName: 'text-center' },
+    { fieldName: 'col4', header: '수수료 공제', width: '115', styleName: 'text-center' },
   ];
 
   data.setFields(fields);
   view.setColumns(columns);
 
-  view.checkBar.visible = true;
-  view.rowIndicator.visible = true;
-
   data.setRows([
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
-    { col1: '041076279', col2: '개인', col3: '-', col4: '김사랑', col5: '여성', col6: '2014-05-20', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220324', col13: '20040216' },
-    { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
-    { col1: '041076279', col2: '개인', col3: '-', col4: '김사랑', col5: '여성', col6: '2014-05-20', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220324', col13: '20040216' },
-    { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
-    { col1: '041076279', col2: '개인', col3: '-', col4: '김사랑', col5: '여성', col6: '2014-05-20', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220324', col13: '20040216' },
-    { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
-    { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
+    { col1: '관리수당', col2: '1,020,000', col3: '-', col4: '-' },
+    { col1: '판매장려', col2: '30,000', col3: '-', col4: '-' },
+    { col1: '판매미팅', col2: '20,000', col3: '-', col4: '-' },
+    { col1: '판매소급', col2: ' ', col3: '-', col4: '-' },
+    { col1: '정착', col2: ' ', col3: '-', col4: '-' },
+    { col1: '급지', col2: '20,000', col3: '-', col4: '-' },
+    { col1: '통신수당', col2: ' ', col3: '-', col4: '-' },
+    { col1: '기타수당', col2: ' ', col3: '-', col4: '-' },
+    { col1: '유니폼', col2: ' ', col3: '-', col4: '-' },
+    { col1: '사전방문', col2: ' ', col3: '-', col4: '-' },
+    { col1: 'texttemp', col2: ' ', col3: '-', col4: '-' },
   ]);
 }
 `;

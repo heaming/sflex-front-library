@@ -45,6 +45,44 @@
       </kw-form-item>
     </kw-form-row>
     <kw-form-row>
+      <kw-form-item
+        label="placeholder"
+        hint="hint"
+        required
+      >
+        <kw-input
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+      </kw-form-item>
+      <kw-form-item
+        label="placeholder disable"
+        hint="hint"
+        required
+      >
+        <kw-input
+          disable
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+        <kw-input
+          readonly
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+        <kw-input
+          readonly
+          dense
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
       <kw-form-item label="Readonly">
         <kw-input
           v-model="stringModel"

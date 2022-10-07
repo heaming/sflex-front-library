@@ -43,6 +43,10 @@ export default {
       type: String,
       default: undefined,
     },
+    noCloseBtn: {
+      type: Boolean,
+      default: false,
+    },
     onBeforeClose: {
       type: Function,
       default: undefined,
@@ -71,6 +75,7 @@ export default {
       class: props.class,
       title: computed(() => props.title),
       size: computed(() => props.size),
+      noCloseBtn: computed(() => props.noCloseBtn),
       hasActionSlot: computed(() => slots.action !== undefined),
       onBeforeClose: computed(() => props.onBeforeClose),
     };
