@@ -53,7 +53,7 @@
     position: absolute;
     background: #fff;
     top: 0;
-    left: 0;
+    left: 4px;
     right: 10px;
     z-index: 11;
 
@@ -108,6 +108,21 @@
     &::-webkit-scrollbar-track {
       background-color: #fff;
     }
+
+    @at-root {
+      .kw-popup--auto-height & {
+        min-height: auto;
+        max-height: none !important;
+      }
+
+      .auto-logout & {
+        padding-bottom: 88px;
+      }
+    }
+
+    h2 {
+      padding-top: 0;
+    }
   }
 
   &__action {
@@ -119,7 +134,7 @@
     background-color: #fff;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 4px;
     right: 10px;
     z-index: 11;
 
@@ -131,6 +146,14 @@
       left: 30px;
       height: 1px;
       background-color: $line-bg;
+    }
+
+    @at-root .auto-logout & {
+      padding-top: 0;
+
+      &::after {
+        content: none;
+      }
     }
   }
 
@@ -155,15 +178,9 @@
       padding-bottom: 30px;
     }
   }
-}
 
-.kw-popup {
   .kw-date-picker {
     min-width: 140px;
     max-width: none;
   }
-}
-
-.kw-popup__content h2 {
-  padding-top: 0;
 }
