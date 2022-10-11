@@ -12,7 +12,7 @@ function removeGlobImportedRoutes() {
 export function replaceRoutesByMenus(apps, menus) {
   router.getRoutes().forEach((route) => {
     if (route.meta.isGlobImport) {
-      apps.forEach(({ applicationId }) => {
+      apps.forEach(({ applicationId, applicationUrl }) => {
         const pageDestinationValue = route.name;
         const matched = find(menus, { applicationId, pageDestinationValue });
 
@@ -22,9 +22,10 @@ export function replaceRoutesByMenus(apps, menus) {
           router.addRoute({
             ...route,
             name: menuUid,
-            path: `/${applicationId.toLowerCase()}${route.path}`,
+            path: `/${applicationUrl.toLowerCase()}${route.path}`,
             meta: {
               requiresAuth: true,
+              applicationId,
               menuUid,
               menuName,
             },
