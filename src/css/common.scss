@@ -554,6 +554,10 @@ p {
   }
 }
 
+.kw-search + .normal-area--button-set-bottom {
+  min-height: calc(100vh - 456px);
+}
+
 .text-placeholder {
   color: #999 !important;
 }
@@ -1157,6 +1161,8 @@ $unit: px;
       color: $black1;
 
       .kw-btn {
+        vertical-align: baseline;
+
         span {
           font-size: 14px;
           color: $black1;
