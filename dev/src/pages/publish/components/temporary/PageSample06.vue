@@ -63,6 +63,7 @@
             </template>
           </kw-action-top>
           <kw-grid
+            style="height: 598px;"
             :visible-rows="10"
             @init="initGrid1"
           />
@@ -106,6 +107,7 @@
             />
           </kw-action-top>
           <kw-grid
+            style="height: 525px;"
             :visible-rows="10"
             @init="initGrid2"
           />
