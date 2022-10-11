@@ -25,6 +25,16 @@ interface KwSelectProps extends UseFieldProps, UseFieldStyleProps, UseOptionsPro
   useInput?: boolean;
 
   /**
+   * 설정 시 인풋을 현재 값으로 채움
+   */
+  fillInput?: boolean;
+
+  /**
+   * selected 슬롯 숨김처리
+   */
+  hideSelected?: boolean;
+
+  /**
    * 인풋 디바운스 ms
    * @defaultValue `100`
    */

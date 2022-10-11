@@ -15,8 +15,8 @@
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="computedUseInput"
-    :fill-input="computedUseInput"
-    :hide-selected="computedUseInput"
+    :fill-input="fillInput ?? computedUseInput"
+    :hide-selected="hideSelected ?? computedUseInput"
     :input-debounce="inputDebounce"
     :disable="disable"
     :readonly="readonly"
@@ -168,6 +168,8 @@ export default {
     multiple: { type: Boolean, default: false },
     emitValue: { type: Boolean, default: true },
     useInput: { type: Boolean, default: false },
+    fillInput: { type: Boolean, default: undefined },
+    hideSelected: { type: Boolean, default: undefined },
     inputDebounce: { type: [Number, String], default: 100 },
     dropdownIcon: { type: String, default: 'arrow_down' },
     hideDropdownIcon: { type: Boolean, default: false },
