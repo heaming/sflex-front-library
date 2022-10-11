@@ -62,7 +62,7 @@
         </thead>
         <tbody>
           <tr>
-            <td rowspan="2">
+            <td rowspan="3">
               kw-grid
             </td>
             <td>
@@ -80,6 +80,15 @@
             </td>
             <td>
               Initializing function
+            </td>
+          </tr>
+          <tr>
+            <td>
+              style="height: px value"
+            </td>
+            <td>
+              Setting the height by style="height:px(include thead height)" in kw-grid tag, <br>
+              when it necessary(like as case #5)
             </td>
           </tr>
         </tbody>
@@ -286,7 +295,8 @@
         If the grids are located same line(horizontal), refer this guide and sample page
         <router-link to="/Publish/Components/Temporary/PageSample06">
           samplepage06
-        </router-link>
+        </router-link> <br>
+        <b>please set height by style="height:px(include thead height)" in kw-grid tag when it necessary</b>
       </p>
       <q-card>
         <img
@@ -927,6 +937,9 @@ const testCode5 = `
 <div class="grid-horizontal-wrap">
     <div class="grid-horizontal-wrap__section"> <!-- insert width helper class on smaller one when each 'grid-horizontal-wrap__section' has different size -->
       grid
+      <!-- <kw-grid
+        style="height:598px"
+      />-->
     </div>
     <div class="grid-horizontal-wrap__section">
       grid
@@ -935,6 +948,10 @@ const testCode5 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.10.11',
+    text: 'Add guide content of case #5',
+  },
   {
     timestamp: '2022.10.06',
     text: 'change guide case #5',

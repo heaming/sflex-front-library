@@ -534,12 +534,28 @@ p {
       position: absolute;
       bottom: 30px;
       width: calc(100% - 80px);
-      display: flex;
-      justify-content: space-between;
       padding-top: 20px;
       border-top: 1px solid $line-line;
+
+      &::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+    }
+
+    .button-set--bottom-left {
+      float: left;
+    }
+
+    .button-set--bottom-right {
+      float: right;
     }
   }
+}
+
+.kw-search + .normal-area--button-set-bottom {
+  min-height: calc(100vh - 456px);
 }
 
 .text-placeholder {
@@ -1145,6 +1161,8 @@ $unit: px;
       color: $black1;
 
       .kw-btn {
+        vertical-align: baseline;
+
         span {
           font-size: 14px;
           color: $black1;

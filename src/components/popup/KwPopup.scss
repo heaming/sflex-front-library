@@ -10,12 +10,13 @@
     width: 460px;
     max-width: 460px !important;
     min-width: 460px !important;
-    min-height: 250px;
+
+    // min-height: 250px;
     margin-top: 0;
 
-    .kw-popup__content {
-      min-height: 118px !important;
-    }
+    // .kw-popup__content {
+    //   min-height: 118px !important;
+    // }
   }
 
   &--md {
@@ -49,7 +50,7 @@
   }
 
   &__header {
-    padding: 20px 30px 10px;
+    padding: 20px 16px 10px 26px;
     position: absolute;
     background: #fff;
     top: 0;
@@ -62,7 +63,7 @@
       position: absolute;
       bottom: 0;
       right: 20px;
-      left: 30px;
+      left: 26px;
       height: 1px;
       background-color: $line-stroke;
     }
@@ -89,7 +90,8 @@
   &__content {
     padding: 87px 20px 120px 26px;
     overflow-y: scroll;
-    min-height: 348px;
+
+    // min-height: 348px;
     max-height: calc(100vh - 195px) !important;
     z-index: 10;
 
@@ -143,7 +145,7 @@
       position: absolute;
       top: 0;
       right: 20px;
-      left: 30px;
+      left: 26px;
       height: 1px;
       background-color: $line-bg;
     }

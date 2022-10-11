@@ -55,7 +55,8 @@
 
   &__view-more {
     position: absolute;
-    bottom: 20px;
+    height: 32px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -67,6 +68,11 @@
       .q-icon {
         transform: rotate(180deg);
       }
+    }
+
+    span.block {
+      color: $black3;
+      font-size: 14px;
     }
   }
 
