@@ -5,7 +5,7 @@
     :class="{'kw-radio--no-label': !(label || $slots.default)}"
     :model-value="modelValue"
     :val="val"
-    :label="label ?? String(val)"
+    :label="label ?? val?.toString()"
     :left-label="leftLabel"
     :size="size"
     :dense="isSearchContext || dense"
