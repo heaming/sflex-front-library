@@ -10,12 +10,13 @@
     width: 460px;
     max-width: 460px !important;
     min-width: 460px !important;
-    min-height: 250px;
+
+    // min-height: 250px;
     margin-top: 0;
 
-    .kw-popup__content {
-      min-height: 118px !important;
-    }
+    // .kw-popup__content {
+    //   min-height: 118px !important;
+    // }
   }
 
   &--md {
@@ -89,7 +90,8 @@
   &__content {
     padding: 87px 20px 120px 26px;
     overflow-y: scroll;
-    min-height: 348px;
+
+    // min-height: 348px;
     max-height: calc(100vh - 195px) !important;
     z-index: 10;
 
