@@ -25,6 +25,7 @@
     <div class="kw-search__action">
       <slot name="action">
         <kw-btn
+          v-permission:read
           :label="$t('MSG_BTN_RESET', null, '초기화')"
           class="w90"
           secondary
@@ -32,6 +33,7 @@
           type="reset"
         />
         <kw-btn
+          v-permission:read
           :label="$t('MSG_BTN_SEARCH', null, '검색')"
           class="ml8 w90"
           color="secondary"
@@ -51,6 +53,7 @@ import {
   ObserverContextKey,
   FormTypeContextKey,
   PageSearchContextKey,
+  PageContextKey,
 } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useForm, { useFormProps } from '../../composables/private/useForm';
@@ -61,6 +64,8 @@ import { FORM_TYPE } from '../../composables/private/useFormType';
 import libConfig from '../../consts/private/libConfig';
 import i18n from '../../i18n';
 import useFormLayout, { useFormLayoutProps } from '../../composables/private/useFormLayout';
+import { hasPermissionKeyInPage } from '../../directives/permission';
+import consts from '../../consts';
 
 export default {
   name: 'KwSearch',
@@ -114,12 +119,17 @@ export default {
       return !isModified || await confirm(i18n.t('MSG_ALT_CHG_CNTN'));
     }
 
-    const onSubmit = debounce(async () => {
-      const shouldFocus = !props.noErrorFocus;
+    const pageCtx = inject(PageContextKey, null);
+    const hasReadPermission = () => __VUE_TEST_APP__ || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
 
-      if (await formCtx.validate(shouldFocus, true)
-        && await confirmIfTargetsModified()) {
-        emit('search', formCtx.values);
+    const onSubmit = debounce(async () => {
+      if (hasReadPermission()) {
+        const shouldFocus = !props.noErrorFocus;
+
+        if (await formCtx.validate(shouldFocus, true)
+          && await confirmIfTargetsModified()) {
+          emit('search', formCtx.values);
+        }
       }
     }, libConfig.DEFAULT_DEBOUNCE_WAIT, { leading: true });
 

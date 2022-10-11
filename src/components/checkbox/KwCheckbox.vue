@@ -11,7 +11,7 @@
     :toggle-order="toggleOrder"
     :toggle-indeterminate="toggleIndeterminate"
     :val="val"
-    :label="label ?? val"
+    :label="label ?? val?.toString()"
     :left-label="leftLabel"
     :size="size"
     :dense="isSearchContext || dense"
