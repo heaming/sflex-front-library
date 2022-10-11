@@ -64,5 +64,7 @@ function destroyIfHasNoPermissions(binding, vnode) {
 }
 
 export default (el, binding, vnode) => {
-  destroyIfHasNoPermissions(binding, vnode);
+  if (!__VUE_TEST_APP__) {
+    destroyIfHasNoPermissions(binding, vnode);
+  }
 };
