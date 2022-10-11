@@ -148,7 +148,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -161,6 +161,25 @@ const testCode = `
 >
   내용<br>
   내용이 들어갑니다.
+</kw-popup>
+
+// Small & No close button
+<kw-popup
+  class="kw-popup--sm"
+  no-close-btn
+>
+  내용<br>
+  내용이 들어갑니다.
+  <template #action>
+    <kw-btn
+      class="kw-btn--negative kw-btn--h36"
+      label="취소"
+    />
+    <kw-btn
+      class="kw-btn--h36"
+      label="확인"
+    />
+  </template>
 </kw-popup>
 
 
@@ -178,7 +197,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -198,7 +217,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -218,7 +237,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -238,7 +257,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -258,7 +277,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -278,7 +297,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -286,6 +305,10 @@ const testCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-11',
+    text: 'remove button spacing helper class & add popup no-close btn case in code',
+  },
   {
     timestamp: '2022-10-04',
     text: 'add popup no-action case in code',
