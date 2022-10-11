@@ -63,11 +63,6 @@ export default {
       commit('app/setSelectedLnbKey', null);
     }
 
-    if (!selectedGnbKey.value) {
-      const gnbKey = gnbItems[0]?.key || null;
-      updateSelected(gnbKey);
-    }
-
     return {
       gnbItems,
       selectedGnbKey,
