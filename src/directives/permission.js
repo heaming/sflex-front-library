@@ -1,18 +1,19 @@
 import { lowerCase } from 'lodash-es';
+import consts from '../consts';
 import { getVm, injectPageContext } from '../utils/private/vm';
 
 // permission value is start at 63
-// if has not permission specific case that below
-// subtract the value that matched specific case
+// if has not specific permission then subtract the permission value
 // eg. `31 (= 63 - 32)` has no permission for `PRINT`
 const PERMISSIONS = {
-  PRINT: 32,
-  DOWNLOAD: 16,
-  DELETE: 8,
-  UPDATE: 4,
-  CREATE: 2,
-  READ: 1,
+  [consts.PERMISSION_KEY_PRINT]: 32,
+  [consts.PERMISSION_KEY_DOWNLOAD]: 16,
+  [consts.PERMISSION_KEY_DELETE]: 8,
+  [consts.PERMISSION_KEY_UPDATE]: 4,
+  [consts.PERMISSION_KEY_CREATE]: 2,
+  [consts.PERMISSION_KEY_READ]: 1,
 };
+
 const PERMISSON_KEYS = Object.keys(PERMISSIONS).map(lowerCase);
 const PERMISSON_VALUES = Object.values(PERMISSIONS);
 
