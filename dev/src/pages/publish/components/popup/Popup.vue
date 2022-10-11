@@ -148,7 +148,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -178,7 +178,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -198,7 +198,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -218,7 +218,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -238,7 +238,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -258,7 +258,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -278,7 +278,7 @@ const testCode = `
       label="취소"
     />
     <kw-btn
-      class="kw-btn--h36 ml8"
+      class="kw-btn--h36"
       label="확인"
     />
   </template>
@@ -286,6 +286,10 @@ const testCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-11',
+    text: 'remove button spacing helper class',
+  },
   {
     timestamp: '2022-10-04',
     text: 'add popup no-action case in code',
