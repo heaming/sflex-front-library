@@ -40,7 +40,7 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <div class="kw-popup">
+          <div class="kw-popup px30">
             <h3 class="mb20">
               1.Form-column3
             </h3>
@@ -168,7 +168,7 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <div class="kw-popup">
+          <div class="kw-popup px30 pb30">
             <h3 class="mb20">
               1.Form-column3
             </h3>
@@ -236,7 +236,7 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <div class="kw-popup">
+          <div class="kw-popup px30 pb30">
             <h3 class="mb20">
               2.None of elements(input,radio,select,datepicker)
             </h3>
