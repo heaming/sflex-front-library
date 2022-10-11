@@ -67,3 +67,14 @@
     align-items: flex-start;
   }
 }
+
+.kw-popup .kw-search {
+  & + .kw-action--top,
+  & + .kw-grid {
+    margin-top: 30px;
+  }
+
+  & + .kw-notification {
+    margin: 30px 0 20px;
+  }
+}
