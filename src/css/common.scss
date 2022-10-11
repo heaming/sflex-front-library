@@ -539,6 +539,7 @@ p {
 
       &::after {
         content: "";
+        display: block;
         clear: both;
       }
     }
