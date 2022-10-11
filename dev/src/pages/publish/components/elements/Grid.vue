@@ -937,9 +937,9 @@ const testCode5 = `
 <div class="grid-horizontal-wrap">
     <div class="grid-horizontal-wrap__section"> <!-- insert width helper class on smaller one when each 'grid-horizontal-wrap__section' has different size -->
       grid
-      <kw-grid
-        style="height:500px"
-      />
+      <!-- <kw-grid
+        style="height:598px"
+      />-->
     </div>
     <div class="grid-horizontal-wrap__section">
       grid
@@ -948,6 +948,10 @@ const testCode5 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.10.11',
+    text: 'Add guide content of case #5',
+  },
   {
     timestamp: '2022.10.06',
     text: 'change guide case #5',
