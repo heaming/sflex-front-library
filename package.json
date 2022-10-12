@@ -100,6 +100,6 @@
     "vue-highlight-code": "^0.1.16"
   },
   "publishConfig": {
-    "registry": "http://nexus-dev.kyowon.co.kr/repository/npm-sflex-releases/"
+    "registry": "http://nexus.kyowon.co.kr/repository/npm-sflex-releases/"
   }
 }
