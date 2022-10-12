@@ -927,6 +927,10 @@ const dropdownBtn = `
 // History
 const guideHistory = [
   {
+    timestamp: '2022.10.12',
+    text: 'add button dropdown case',
+  },
+  {
     timestamp: '2022.10.06',
     text: 'edit icon name in code',
   },
