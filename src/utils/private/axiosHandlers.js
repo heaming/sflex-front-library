@@ -8,7 +8,7 @@ import { isServerError } from './axiosShared';
 import i18n from '../../i18n';
 import env from '../../consts/private/env';
 
-const SESSION_EXPIRED_URL = env.PROD ? '/certification/sso/sso-service' : '/login';
+const SESSION_EXPIRED_URL = env.PROD ? '/login' : '/login';
 
 const blobToData = (blob) => new Promise((resolve) => {
   const reader = new FileReader();
