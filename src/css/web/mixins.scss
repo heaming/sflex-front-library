@@ -1,0 +1,181 @@
+@mixin kw-item($min-height) {
+  display: flex;
+  min-height: $min-height;
+
+  &__label {
+    flex: none;
+    align-self: start;
+    width: 150px;
+    min-height: $min-height;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+
+    &--required {
+      .kw-label-content__label::after {
+        content: "*";
+        display: contents;
+        color: $accent;
+      }
+    }
+  }
+
+  &__field {
+    align-self: center;
+    flex: 1 0 1%;
+    display: flex;
+    align-items: center;
+
+    // 직계 자손이 없는 field 의 경우 inline-block 으로 처리.
+    // 물론 없어도 동작하지만, text-align inherit 를 쓸 수 있는 구석은 마련해 놓는 것이 더 좋은 구조다.
+    &:not(:has(> *)) {
+      display: inline-block;
+    }
+
+    .kw-field {
+      flex: 1 0 1%;  // max-width: 498px; why?
+
+      & + span {
+        margin: auto;
+        color: $black3;
+        padding: 0 4px;
+        font-size: 14px;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      & + .kw-field,
+      & + .kw-field-wrap,
+      & + .kw-btn {
+        margin-left: 8px;
+      }
+    }
+
+    .kw-field-wrap {
+      flex: 1 0 1%;
+
+      & + .kw-field,
+      & + .kw-field-wrap,
+      & + .kw-btn {
+        margin-left: 8px;
+      }
+    }
+
+    &--align-left {
+      justify-content: flex-start;
+
+      &:not(:has(> *)) {
+        text-align: left;
+      }
+    }
+
+    &--align-right {
+      justify-content: flex-end;
+
+      &:not(:has(> *)) {
+        text-align: right;
+      }
+    }
+
+    &--align-center {
+      justify-content: center;
+
+      &:not(:has(> *)) {
+        text-align: center;
+      }
+    }
+  }
+}
+
+@mixin kw-row($row-height , $gap, $padding) {
+  display: flex;
+  margin: 0;
+  padding: $padding;
+  min-height: #{$row-height + at($padding, 1) + at($padding, 3)};
+  gap: $gap;
+  align-items: start;
+
+  .kw-form-item {
+    flex: none;
+  }
+
+  @for $i from 1 through 12 {
+    .kw-form-item:first-child:nth-last-child(#{$i}),
+    .kw-form-item:first-child:nth-last-child(#{$i}) ~ .kw-form-item {
+      width: calc((100% - (#{$gap} * (#{$i} - 1))) / #{$i});
+    }
+  }
+
+  @for $cols from 1 through 12 {
+    &--cols-#{$cols} {
+      .kw-form-item {
+        width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols}) !important;
+
+        @for $colspan from 1 through 12 {
+          &--colspan-#{$colspan} {
+            width: calc((100% - (#{$gap} * (#{$cols} - 1))) / #{$cols} * #{$colspan} + #{$gap} * #{$colspan - 1}) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight) {
+  font-size: $font-size;
+  line-height: $line-height;
+  padding: $padding;
+  font-weight: $font-weight;
+  min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3)) });
+}
+
+@mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
+  .kw-btn--filled,
+  .kw-btn--outlined {
+    &.kw-btn--color-#{$name} {
+      background-color: $color;
+    }
+
+    @at-root body.desktop {
+      .kw-btn.kw-btn--color-#{$name} {
+        &.q-focusable:focus,
+        &.q-manual-focusable--focused,
+        &.q-hoverable:hover {
+          background-color: $hover-color;
+
+          &::before {
+            background-color: #fff;
+          }
+        }
+
+        &.q-btn.q-btn--active {
+          background-color: $action-color;
+
+          &::before {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin color-based($prefix, $color-map) {
+  @each $name, $color in $color-map {
+    $class-name: $prefix + $name;
+    #{$class-name} {
+      @content($color);
+    }
+  }
+}
+
+@mixin color-based-with-name($prefix, $color-map) {
+  @each $name, $color in $color-map {
+    $class-name: $prefix + $name;
+    #{$class-name} {
+      @content($color, $name);
+    }
+  }
+}

@@ -1,0 +1,146 @@
+// Quasar SCSS (& Sass) Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass/SCSS variables found in Quasar's source Sass/SCSS files.
+
+// Check documentation for full list of Quasar variables
+
+// Your own variables (that are declared here) and Quasar's own
+// ones will be available out of the box in your .vue/.scss/.sass files
+
+// It's highly recommended to change the default colors
+// to match your app's branding.
+// Tip: Use the "Theme Builder" on Quasar's documentation website.
+
+// For additional sementic variables.
+// you can't use in quasar props.
+$error: #ed1941;
+$black1: #222;
+$black2: #555;
+$normal-text: #555;
+$black3: #777;
+$disabled: #777;
+$black-btn-line: #666;
+$placeholder: #999;
+$line-stroke: #ccc;
+$line-line: #ddd;
+$line-bg: #eee;
+$bg-white: #fff;
+$bg-box: #f5f5f5;
+$bg-body: #f3f4f5;
+
+// override quasar color-palette
+// see https://quasar.dev/style/color-palette#introduction
+
+// brand color
+$primary: #2f8af3; // Primary
+$secondary: #2f3c78; // Secondary
+$accent: #ed1941; // Sub
+$dark: #1d1d1d; // dark?
+$positive: $primary; // Positive
+$negative: #ed1941; // Negative
+$info: #6cbf67; // Green
+$warning: #edca19; // Yellow
+
+// grid background color
+$bg-grid: #f8f8f8;
+
+// Grayscale
+$grey-1: $bg-white;
+$grey-2: $bg-box;
+$grey-3: $bg-body;
+$grey-4: $line-bg;
+$grey-5: $line-line;
+$grey-6: $line-stroke;
+$grey-7: $placeholder;
+$grey-8: $black-btn-line;
+$grey-9: $dark;
+$grey-10: $black1;
+$grey-11: $black2;
+$grey-12: $black3;
+
+// helper list for semantics.
+$semantic-colors: (
+  error :$error,
+  black1 :$black1,
+  black2 :$black2,
+  normal-text :$normal-text,
+  black3 :$black3,
+  disabled :$disabled,
+  black-btn-line :$black-btn-line,
+  placeholder :$placeholder,
+  line-stroke :$line-stroke,
+  line-line :$line-line,
+  line-bg :$line-bg,
+  bg-white :$bg-white,
+  bg-box :$bg-box,
+  bg-body :$bg-body,
+  primary :$primary,
+  secondary :$secondary,
+  accent :$accent,
+  dark :$dark,
+  positive :$positive,
+  negative :$negative,
+  info :$info,
+  warning :$warning,
+  bg-grid :$bg-grid,
+);
+$button-border-radius: 0;
+$button-padding: 8px 20px 8px 20px;
+$button-dense-padding: 6px 8px 6px 8px;
+$button-font-size: 16px;
+$button-line-height: 1.5em;
+$button-font-weight: 400;
+
+// gutter
+$gutter-base: 10px;
+$flex-gutter-xs: $gutter-base !default;
+$flex-gutter-sm: ($gutter-base * 2) !default;
+$flex-gutter-md: ($gutter-base * 3) !default;
+$flex-gutter-lg: ($gutter-base * 4) !default;
+$flex-gutter-xl: ($gutter-base * 5) !default;
+
+// kw variables
+// add global variables for component styling.
+// since, there is no guarantee on dependency of global variables.
+$kw-field-font-size: 16px;
+$kw-field-font-size-dense: 14px;
+$kw-field-font-size-marginal: $kw-field-font-size;
+$kw-field-font-size-marginal-dense: $kw-field-font-size-dense;
+$kw-field-font-size-bottom: 14px;
+$kw-field-font-size-bottom-dense: 12px;
+$kw-field-line-height: 24px;
+$kw-field-line-height-dense: 20px;
+$kw-field-padding-input: 8px 12px 8px 12px;
+$kw-field-padding-input-dense: 6px 12px 6px 12px;
+$kw-field-height: 40px;
+$kw-field-height-dense: 32px;
+$kw-field-border-radius: 0;
+$kw-field-bg-color-disable: $line-bg;
+$kw-field-color: $black1;
+$kw-field-color-disable: $black3;
+
+// since there is no area for function. function defined in this place. plz fixme.
+@function at($list, $idx) {
+  @if type-of($list) != "list" {
+    @return $list;
+  }
+
+  @if length($list) == 1 {
+    @return nth($list, 1);
+  }
+
+  @if length($list) < $idx {
+    @return nth($list, $idx % length($list));
+  }
+
+  @return nth($list, $idx);
+}
+
+@function zero-unit($number) {
+  @if unit($number) == "" {
+    @return $number + "px";
+  }
+
+  @return $number;
+}
