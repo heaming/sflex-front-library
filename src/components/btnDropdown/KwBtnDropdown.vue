@@ -90,7 +90,7 @@ export default {
     stretch: { type: Boolean, default: false },
 
     modelValue: { type: Boolean, default: undefined },
-    dropdownIcon: { type: String, default: 'arrow_down_16' },
+    dropdownIcon: { type: String, default: 'arrow_down' },
     cover: { type: Boolean, default: false },
     persistent: { type: Boolean, default: false },
     noRouteDismiss: { type: Boolean, default: false },

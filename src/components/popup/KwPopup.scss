@@ -125,6 +125,13 @@
     h2 {
       padding-top: 0;
     }
+
+    h3 {
+      & + .kw-grid,
+      & + .kw-action--top {
+        margin-top: 20px;
+      }
+    }
   }
 
   &__action {
@@ -185,15 +192,5 @@
   .kw-date-picker {
     min-width: 140px;
     max-width: none;
-  }
-
-  h3 {
-    & + .kw-grid {
-      margin-top: 20px;
-    }
-
-    & + .kw-action--top {
-      margin-top: 12px;
-    }
   }
 }
