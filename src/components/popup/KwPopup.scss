@@ -186,4 +186,14 @@
     min-width: 140px;
     max-width: none;
   }
+
+  h3 {
+    & + .kw-grid {
+      margin-top: 20px;
+    }
+
+    & + .kw-action--top {
+      margin-top: 12px;
+    }
+  }
 }
