@@ -32,7 +32,7 @@ node -v
 ```
 -  Change npm registry
 ``` bash
-npm set registry http://nexus-dev.kyowon.co.kr/repository/npm-public/
+npm set registry http://nexus.kyowon.co.kr/repository/npm-group-public/
 npm set strict-ssl false
 ```
 - Other useful command
