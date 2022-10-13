@@ -39,8 +39,8 @@
         Radio + input together in search-item and form-item
       </h3>
       <p class="kw-guide-description">
-        Radio and input in kw-form-item or kw-search-item,
-        Put it as <b>Kw-select + kw-input in kw-form-item or kw-search-item</b>.
+        Radio and input in kw-form-item or kw-search-item in zeplin's planning,
+        Put it as <b>Kw-select + kw-input in kw-form-item or kw-search-item </b>.
       </p>
       <q-card>
         <img
