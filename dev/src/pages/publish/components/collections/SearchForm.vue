@@ -684,6 +684,14 @@
           - Also add the element's size as much as required size<br>
           <b>※ The elements mean input, select, radio, checkbox and so on</b>
         </li>
+        <li>
+          Radio and input together in kw-form-item or kw-search-item,<br>
+          It should come as select and input in kw-form-item or kw-search-item <br>
+          <router-link to="/Publish/Components/NewUpdate/RadioSelect">
+            The link is more detail for Radio + input -> Select + input.
+            Make sure to check it out
+          </router-link>
+        </li>
       </ol>
       <q-card>
         <div class="kw-guide-example">
@@ -1312,6 +1320,10 @@ const theOneRowCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.10.13',
+    text: 'Radio + input -> select + input',
+  },
   {
     timestamp: '2022.09.21',
     text: '1 or 2 columns in 1 row has been changed',
