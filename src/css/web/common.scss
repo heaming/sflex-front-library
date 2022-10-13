@@ -806,11 +806,11 @@ $unit: px;
 }
 
 @include color-based(".kw-fc--", $semantic-colors) using ($color) {
-  color: $color;
+  color: $color !important;
 }
 
 @include color-based(".kw-bc--", $semantic-colors) using ($color) {
-  background-color: $color;
+  background-color: $color !important;
 }
 
 .kw-font--14 {
@@ -1220,4 +1220,46 @@ $unit: px;
 
 .q-scroll--inside {
   padding: 30px 40px;
+}
+
+// q-card list
+.card-list {
+  .card-item {
+    box-shadow: none;
+    border-radius: 0;
+    border: 1px solid $line-line;
+    padding: 30px;
+    width: calc((100% - 80px) / 4);
+  }
+}
+
+.card-text {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    padding-top: 4px;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+
+    p {
+      min-width: 60px;
+      padding-right: 12px;
+      font-size: 14px;
+      color: $black3;
+      box-sizing: content-box;
+      line-height: 1.43;
+    }
+
+    span {
+      font-size: 14px;
+      color: $black1;
+      text-align: left;
+      line-height: 1.43;
+    }
+  }
 }

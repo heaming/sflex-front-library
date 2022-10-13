@@ -806,11 +806,11 @@ $unit: px;
 }
 
 @include color-based(".kw-fc--", $semantic-colors) using ($color) {
-  color: $color;
+  color: $color !important;
 }
 
 @include color-based(".kw-bc--", $semantic-colors) using ($color) {
-  background-color: $color;
+  background-color: $color !important;
 }
 
 .kw-font--14 {

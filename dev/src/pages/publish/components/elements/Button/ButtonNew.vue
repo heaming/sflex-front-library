@@ -553,6 +553,41 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="dropdownButton"
+        class="kw-guide-title"
+      >
+        Dropdown Button
+      </h3>
+      <p class="kw-guide-description">
+        This component for button which have options
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn-dropdown
+            label="상품등록"
+            dense
+            primary
+          >
+            <kw-btn
+              :label="'기준상품등록'"
+            />
+            <kw-btn
+              :label="'기준상품등록'"
+            />
+            <kw-btn
+              :label="'기준상품등록'"
+            />
+          </kw-btn-dropdown>
+        </div>
+        <guide-code-view
+          :code-value="[dropdownBtn]"
+          :lang="['vue']"
+          multi
+        />
+      </q-card>
+    </div>
     <!-- <div class="kw-guide-section">
       <h3
         id="toggleButton"
@@ -871,8 +906,30 @@ const toggleRadioScript = `
 const strModel = ref('오늘');
   `;
 
+const dropdownBtn = `
+<kw-btn-dropdown
+  label="선택"
+  dense
+  primary
+>
+  <kw-btn
+    :label="'기준상품등록'"
+  />
+  <kw-btn
+    :label="'기준상품등록'"
+  />
+  <kw-btn
+    :label="'기준상품등록'"
+  />
+</kw-btn-dropdown>
+`;
+
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.10.12',
+    text: 'add button dropdown case',
+  },
   {
     timestamp: '2022.10.06',
     text: 'edit icon name in code',
