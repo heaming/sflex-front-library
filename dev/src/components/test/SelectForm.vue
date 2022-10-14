@@ -48,7 +48,7 @@
       <kw-form-item label="멀티플">
         <kw-select
           v-model="arrayModel"
-          :options="optionsModel"
+          :options="testOptionsModel"
           multiple
         />
       </kw-form-item>

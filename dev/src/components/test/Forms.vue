@@ -43,7 +43,7 @@
   <kw-form
     dense
   >
-    <kw-form-row cols="1">
+    <kw-form-row :cols="1">
       <kw-form-item label="button toggle">
         test
       </kw-form-item>
@@ -60,7 +60,7 @@
     label="auto-height"
     class="kw-form--auto-height"
   >
-    <kw-form-row cols="1">
+    <kw-form-row :cols="1">
       <kw-form-item label="field only">
         <kw-input v-model="strModel" />
       </kw-form-item>
@@ -71,7 +71,7 @@
     label="auto-height"
     class="kw-form--auto-height"
   >
-    <kw-form-row cols="1">
+    <kw-form-row :cols="1">
       <kw-form-item label="text only">
         test
       </kw-form-item>
@@ -82,12 +82,12 @@
     label="auto-height"
     class="kw-form--auto-height"
   >
-    <kw-form-row cols="1">
+    <kw-form-row :cols="1">
       <kw-form-item label="both">
         <kw-input v-model="strModel" />
       </kw-form-item>
     </kw-form-row>
-    <kw-form-row cols="1">
+    <kw-form-row :cols="1">
       <kw-form-item label="exist">
         test
       </kw-form-item>
@@ -95,7 +95,7 @@
   </kw-form>
   <h1>cols</h1>
   <kw-form
-    cols="4"
+    :cols="4"
   >
     <kw-form-row
       v-for="r in 4"
@@ -126,7 +126,7 @@
   </kw-form>
   <h1>auto col counting => cols="0"</h1>
   <kw-form
-    cols="0"
+    :cols="0"
   >
     <kw-form-row
       v-for="r in 6"
@@ -174,7 +174,7 @@
   <h1>contents align</h1>
   <kw-form
     dense
-    cols="1"
+    :cols="1"
     align-content="right"
   >
     <kw-form-row>
