@@ -219,6 +219,26 @@
         </div>
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        notification in Action bar - top
+      </h3>
+      <p class="kw-guide-description">
+        It's tooltip in actionbar-top as planing in zeplin, But Make sure to put 'notification' instead of tooltip.
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <img
+            src="../../../../../assets/images/notificationActionbar.png"
+            alt="case 1"
+            style="border: 1px solid #ccc;"
+          >
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -272,6 +292,10 @@ const combCode = `
 </ul>
 `;
 const historyData = [
+  {
+    timestamp: '2022-10-13',
+    text: 'action bar top notification ',
+  },
   {
     timestamp: '2022-09-16',
     text: 'First added',
