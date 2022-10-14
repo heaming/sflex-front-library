@@ -209,7 +209,6 @@ function setColumnEditor(column, { dataType }) {
         editor: {
           commitOnSelect: true,
           dropDownWhenClick: false,
-          datetimeFormat: 'date',
           btOptions: {
             language: i18n.locale.value,
             keyboardNavigation: false,
@@ -226,6 +225,7 @@ function setColumnEditor(column, { dataType }) {
         },
       });
 
+      column.editor.datetimeFormat ||= column.datetimeFormat;
       column.datetimeFormat = getSessionDatetimeFormat(column.datetimeFormat);
       column.editor.datetimeFormat = getSessionDatetimeFormat(column.editor.datetimeFormat).replace(/[^ymdhms]/gi, '');
 
