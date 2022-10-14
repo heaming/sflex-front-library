@@ -3,13 +3,33 @@ import {
 } from 'realgrid';
 import { cloneDeep } from 'lodash-es';
 import processWait from './processWait';
+import consts from '../../consts';
+import store from '../../store';
 
 const GRID_BORDER_WIDTH = 2;
 
 /*
   Common
   */
-export function dateTextFormat(datetimeFormat) {
+export function getSessionDatetimeFormat(datetimeFormat) {
+  let convertedDatetimeFormat = datetimeFormat;
+  const userInfo = store.getters['meta/getUserInfo'];
+
+  switch (datetimeFormat) {
+    case 'date':
+      convertedDatetimeFormat = userInfo.dateFormat || consts.DEFAULT_DATE_FORMAT;
+      break;
+    case 'datetime':
+      convertedDatetimeFormat = userInfo.datetimeFormat || consts.DEFAULT_DATETIME_FORMAT;
+      break;
+    case 'time':
+      convertedDatetimeFormat = userInfo.timeFormat || consts.DEFAULT_TIME_FORMAT;
+      break;
+  }
+  return convertedDatetimeFormat.replace(/Y/g, 'y').replace(/D/g, 'd');
+}
+
+export function getTextDatetimeFormat(datetimeFormat) {
   const string = [];
   const replaceValue = [];
 

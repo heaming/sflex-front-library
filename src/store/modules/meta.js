@@ -75,6 +75,10 @@ export default {
       const loginInfo = response.data;
       const { userInfo, lastLoginInfo, configs, notices, linkPages } = loginInfo;
 
+      userInfo.dateFormat ||= consts.DEFAULT_DATE_FORMAT;
+      userInfo.timeFormat ||= consts.DEFAULT_TIME_FORMAT;
+      userInfo.datetimeFormat = `${userInfo.dateFormat} ${userInfo.timeFormat}`;
+
       commit('setLoginInfo', { accessToken, userInfo, lastLoginInfo });
       commit('setConfigs', configs);
       commit('setNotices', notices);

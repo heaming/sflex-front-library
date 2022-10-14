@@ -2,7 +2,7 @@ import { defaultsDeep, map, merge } from 'lodash-es';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 import {
-  createCellIndexByDataColumn, dateTextFormat, isCellEditable, isCellItemClickable,
+  createCellIndexByDataColumn, getSessionDatetimeFormat, getTextDatetimeFormat, isCellEditable, isCellItemClickable,
 } from '../../../utils/private/gridShared';
 import i18n from '../../../i18n';
 
@@ -158,15 +158,20 @@ function setColumnRenderer(column, { dataType }) {
       });
       break;
     default: {
-      if (dataType === ValueType.TEXT && column.datetimeFormat) {
-        defaultsDeep(column, {
-          textFormat: dateTextFormat(column.datetimeFormat),
-        });
-      } else if (dataType === ValueType.NUMBER) {
+      if (dataType === ValueType.NUMBER) {
         defaultsDeep(column, {
           numberFormat: '#,##0.######',
         });
+      } else if (column.datetimeFormat) {
+        column.datetimeFormat = getSessionDatetimeFormat(column.datetimeFormat);
+
+        if (ValueType.TEXT) {
+          defaultsDeep(column, {
+            textFormat: getTextDatetimeFormat(column.datetimeFormat),
+          });
+        }
       }
+
       break;
     }
   }
@@ -197,14 +202,14 @@ function setColumnEditor(column, { dataType }) {
         },
       });
       break;
-    case 'btdate':
+    case 'btdate': {
       defaultsDeep(column, {
         editButtonVisibility: ButtonVisibility.ALWAYS,
-        datetimeFormat: 'yyyy-MM-dd',
+        datetimeFormat: 'date',
         editor: {
           commitOnSelect: true,
           dropDownWhenClick: false,
-          datetimeFormat: 'yyyyMMdd',
+          datetimeFormat: 'date',
           btOptions: {
             language: i18n.locale.value,
             keyboardNavigation: false,
@@ -221,9 +226,12 @@ function setColumnEditor(column, { dataType }) {
         },
       });
 
+      column.datetimeFormat = getSessionDatetimeFormat(column.datetimeFormat);
+      column.editor.datetimeFormat = getSessionDatetimeFormat(column.editor.datetimeFormat).replace(/[^ymdhms]/gi, '');
+
       defaultsDeep(column, {
         ...(dataType === ValueType.TEXT ? {
-          textFormat: dateTextFormat(column.datetimeFormat),
+          textFormat: getTextDatetimeFormat(column.datetimeFormat),
         } : {}),
         editor: {
           mask: {
@@ -235,6 +243,7 @@ function setColumnEditor(column, { dataType }) {
       });
 
       break;
+    }
   }
 }
 

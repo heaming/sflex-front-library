@@ -41,6 +41,10 @@ export const consts: {
   PERMISSION_KEY_UPDATE: 'update';
   PERMISSION_KEY_CREATE: 'create';
   PERMISSION_KEY_READ: 'read';
+
+  DEFAULT_DATE_FORMAT: 'YYYY-MM-DD';
+  DEFAULT_DATETIME_FORMAT: 'YYYY-MM-DD HH:mm:ss';
+  DEFAULT_TIME_FORMAT: 'HH:mm:ss';
 };
 
 // I18n

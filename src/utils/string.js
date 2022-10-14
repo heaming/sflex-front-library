@@ -1,4 +1,7 @@
 import { uid } from 'quasar';
+import dayjs from 'dayjs';
+import consts from '../consts';
+import store from '../store';
 
 export function getByte(s, bytesPerKoChar = 3) {
   return Array.from(s).reduce((a, v) => a + (v.charCodeAt() > 127 ? bytesPerKoChar : 1), 0);
@@ -37,4 +40,19 @@ export function getNumberWithComma(s, decimalLimit = -1) {
 export function getUid(prefix) {
   const id = uid().toUpperCase();
   return prefix ? `${prefix}-${id}` : id;
+}
+
+export function getDateFormat(value, format = 'YYYYMMDD') {
+  const dateFormat = store.getters['meta/getUserInfo'].dateFormat || consts.DEFAULT_DATE_FORMAT;
+  return value ? dayjs(value, format).format(dateFormat) : '';
+}
+
+export function getDatetimeFormat(value, format = 'YYYYMMDDHHmmss') {
+  const datetimeFormat = store.getters['meta/getUserInfo'].datetimeFormat || consts.DEFAULT_DATETIME_FORMAT;
+  return value ? dayjs(value, format).format(datetimeFormat) : '';
+}
+
+export function getTimeFormat(value, format = 'HHmmss') {
+  const timeFormat = store.getters['meta/getUserInfo'].timeFormat || consts.DEFAULT_TIME_FORMAT;
+  return value ? dayjs(value, format).format(timeFormat) : '';
 }
