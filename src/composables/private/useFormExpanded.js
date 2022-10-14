@@ -17,10 +17,10 @@ export default () => {
     unregisterExpandableChild,
   } = inject(FormExpandableContextKey, {});
 
-  registerExpandableChild(vm);
+  registerExpandableChild?.(vm);
 
   onBeforeUnmount(() => {
-    unregisterExpandableChild(vm);
+    unregisterExpandableChild?.(vm);
   });
 
   return {
