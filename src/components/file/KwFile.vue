@@ -31,8 +31,6 @@
     :tabindex="tabindex"
     :input-class="inputClass"
     :input-style="inputStyle"
-    :error="invalid"
-    :error-message="invalidMessage"
     no-error-icon
     @rejected="onRejected"
     @click="preventIfClick"
