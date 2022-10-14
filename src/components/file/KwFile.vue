@@ -165,7 +165,6 @@
       >
         <kw-scroll-area
           class="kw-file__wrapper"
-          width="100%"
           :content-style="'padding-right: 14px;'"
           :content-active-style="'padding-right: 14px;'"
         >

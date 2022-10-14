@@ -1,51 +1,60 @@
 <template>
   <div
-    class="file-attacher"
+    class="file-wrapper"
   >
     <kw-action-top>
       <template #left>
         <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
         <span class="accent pl4">{{ fileRef?.files.length || 0 }}</span>
         <kw-btn
-          label="파일찾기"
-          class="ml4"
+          :label="$t('', null, '파일찾기')"
+          class="ml16"
           dense
           @click="fileRef?.pickFiles()"
         />
         <kw-btn
-          label="삭제"
-          class="ml4"
+          :label="$t('', null, '삭제')"
+          class="ml8"
           dense
-          @click="fileRef?.removeSelected()"
-        />
+          @click="fileRef?.revertSelected()"
+        /><!-- todo msg -->
       </template>
       <span>{{ fileRef?.computedCounter }}</span>
+      <kw-checkbox
+        v-model="isExpended"
+        checked-icon="arrow_up"
+        unchecked-icon="arrow_down"
+        :true-value="true"
+        :false-value="false"
+        dense
+      />
     </kw-action-top>
     <div
-      class="file-attacher__container"
+      v-show="isExpended"
+      class="file-wrapper__container"
     >
       <div
-        class="file-attacher__container-header"
+        class="file-wrapper__container-header"
       >
         <kw-checkbox
           :model-value="fileRef?.selectAll"
-          style="padding: 9px 16px;"
+          class="file-wrapper__checkbox"
           :true-value="true"
           :false-value="false"
           dense
           @update:model-value="(val) => { fileRef.selectAll = val}"
         />
-        <div class="text-center">
+        <div class="file-wrapper__name">
           {{ $t('MSG_TXT_FILE_NM', null, '파일명') }}
         </div>
-        <div class="text-center w92">
+        <div class="file-wrapper__aside">
           {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
         </div>
       </div>
       <kw-file
         ref="fileRef"
         :model-value="modelValue"
-        class="file-attacher__file-comp"
+        class="file-wrapper__file-comp"
         v-bind="{...styleClassAttrs }"
         borderless
         multiple
@@ -114,10 +123,12 @@ export default {
 
   setup() {
     const fileRef = ref();
+    const isExpended = ref(true);
 
     return {
       ...useInheritAttrs(),
       fileRef,
+      isExpended,
     };
   },
 };

@@ -2,7 +2,7 @@ export const useFileSelectProps = {
   selectable: { type: Boolean, default: true },
 };
 
-export default ({ files, updateFile, downloadFile, removeFile }) => {
+export default ({ files, updateFile, downloadFile, revertFile }) => {
   const { props } = getCurrentInstance();
 
   const selectedFileIndexes = ref([]);
@@ -32,8 +32,8 @@ export default ({ files, updateFile, downloadFile, removeFile }) => {
     selectedFiles.value.forEach(downloadFile);
   };
 
-  const removeSelected = () => {
-    selectedFiles.value.forEach(removeFile);
+  const revertSelected = () => {
+    selectedFiles.value.forEach(revertFile);
     clearSelected();
   };
 
@@ -47,7 +47,7 @@ export default ({ files, updateFile, downloadFile, removeFile }) => {
     clearSelected,
     updateSelected,
     downloadSelected,
-    removeSelected,
+    revertSelected,
   } : {
     selectable: computedSelectable.value,
   }));
