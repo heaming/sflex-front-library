@@ -1,0 +1,107 @@
+.kw-file {
+  &__wrapper {
+    flex: auto;
+    max-width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+  }
+
+  &__file {
+    min-height: 40px;
+  }
+
+  &__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: $disabled;
+  }
+
+  &--blocked {
+    .q-field__native,
+    .q-field__input {
+      cursor: default !important;
+
+      &::-webkit-file-upload-button {
+        cursor: default !important;
+      }
+    }
+  }
+
+  &--empty {
+    .q-field__native {
+      z-index: 1;
+      opacity: 0;
+    }
+  }
+
+  &--multiple {
+    &__file {
+      min-height: 34px;
+    }
+  }
+}
+
+.file-attacher {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__container {
+    border: 1px solid #ccc;
+  }
+
+  &__container-header {
+    height: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+  }
+
+  &__file-comp.kw-file {
+    .q-file__filler {
+      height: 116px;
+    }
+
+    .kw-file__wrapper {
+      height: 116px;
+    }
+
+    .kw-file__placeholder {
+      justify-content: center;
+    }
+  }
+}
+
+.kw-file-item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  &__checkbox {
+    padding: 8px 16px;
+  }
+
+  &__name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__aside {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__size {
+    font-size: 14px;
+    color: $black3;
+  }
+}
