@@ -71,9 +71,17 @@
     font-size: 14px;
     color: $black3;
   }
+
+  &--downloadable {
+    .kw-file-item__name {
+      text-decoration: underline;
+      cursor: pointer !important;
+      color: $primary;
+    }
+  }
 }
 
-.file-wrapper {
+.kw-file-wrap {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -108,6 +116,10 @@
   &__file-comp.kw-file {
     .q-file__filler {
       height: 116px;
+    }
+
+    .q-scrollarea__content {
+      padding-right: 14px;
     }
 
     .kw-file__wrapper {

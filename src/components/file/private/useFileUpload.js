@@ -1,5 +1,5 @@
 import { differenceBy } from 'lodash-es';
-import { download, downloadBlob, upload } from '../../utils/file';
+import { download, downloadBlob, upload } from '../../../utils/file';
 
 const UPLOADED = 'uploaded';
 const REMOVED = 'removed';
@@ -88,7 +88,7 @@ function Uploading(fileLike, options) {
   let instanceUpdate;
 
   function setInstanceUpdate(bool) {
-    instanceUpdate = bool && false;
+    instanceUpdate = bool || false;
   }
 
   setInstanceUpdate(options.instanceUpdate);
@@ -181,14 +181,14 @@ export const useSingleFileUpload = (value, options) => {
 
   const uploading = ref({});
   watch(value, async (newFile) => {
-    uploading.value = await generateReactiveUploading(newFile, normalizedOptions);
+    uploading.value = await generateReactiveUploading(newFile, normalizedOptions.value);
   }, { immediate: true });
 
   return uploading;
 };
 
 export default (values, options) => {
-  const normalizedOptions = options || {};
+  const normalizedOptions = ref(options || {});
   const uploadings = ref([]);
 
   function findUploading(file) {
@@ -219,7 +219,7 @@ export default (values, options) => {
     const added = differenceBy(newFiles, oldFiles, 'key');
     const generateUploadings = [];
     added.forEach((file) => {
-      generateUploadings.push(generateReactiveUploading(file, normalizedOptions));
+      generateUploadings.push(generateReactiveUploading(file, normalizedOptions.value));
     });
 
     const newUploadings = await Promise.all(generateUploadings);

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="file-wrapper"
+    class="kw-file-wrap"
   >
     <kw-action-top>
       <template #left>
@@ -31,43 +31,49 @@
     </kw-action-top>
     <div
       v-show="isExpended"
-      class="file-wrapper__container"
+      class="kw-file-wrap__container"
     >
       <div
-        class="file-wrapper__container-header"
+        class="kw-file-wrap__container-header"
       >
         <kw-checkbox
           :model-value="fileRef?.selectAll"
-          class="file-wrapper__checkbox"
+          class="kw-file-wrap__checkbox"
           :true-value="true"
           :false-value="false"
           dense
           @update:model-value="(val) => { fileRef.selectAll = val}"
         />
-        <div class="file-wrapper__name">
+        <div class="kw-file-wrap__name">
           {{ $t('MSG_TXT_FILE_NM', null, '파일명') }}
         </div>
-        <div class="file-wrapper__aside">
+        <div class="kw-file-wrap__aside">
           {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
         </div>
       </div>
       <kw-file
         ref="fileRef"
         :model-value="modelValue"
-        class="file-wrapper__file-comp"
+        class="kw-file-wrap__file-comp"
         v-bind="{...styleClassAttrs }"
         borderless
         multiple
-        append
+        :append="append"
+        selectable
+        pick-file-when-click
+        :removable="removable"
+        :instance-update="instanceUpdate"
         :disable="disable"
         :readonly="readonly"
         :accept="accept"
+        :capture="capture"
         :max-file-size="maxFileSize"
         :max-files="maxFiles"
         :max-total-size="maxTotalSize"
         :filter="filter"
         :tabindex="tabindex"
-        :label="label"
+        :reject-message="rejectMessage"
+        @rejected="$emit('rejected', $event)"
         @update:model-value="$emit('update:modelValue', $event)"
       />
     </div>
@@ -78,30 +84,14 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
-  name: 'KwFileWrapper',
+  name: 'KwFileWrap',
   inheritAttrs: false,
 
   props: {
     // customize props
     removable: { type: Boolean, default: true },
-    downloadable: { type: Boolean, default: true },
     instanceUpdate: { type: Boolean, default: false },
     rejectMessage: { type: [Function, String], default: undefined },
-
-    // fall through props
-
-    prefix: { type: String, default: undefined },
-    suffix: { type: String, default: undefined },
-    hint: { type: String, default: undefined },
-    hideHint: { type: Boolean, default: false },
-    color: { type: String, default: undefined },
-    bgColor: { type: String, default: undefined },
-    loading: { type: Boolean, default: false },
-    hideBottomSpace: { type: Boolean, default: false },
-    // Whether using default counter of q-file.
-    counter: { type: Boolean, default: false },
-    clearable: { type: Boolean, default: false },
-    clearIcon: { type: String, default: 'delete_16' },
     disable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     accept: { type: String, default: undefined },
@@ -112,11 +102,7 @@ export default {
     filter: { type: Function, default: undefined },
     modelValue: { type: [Object, Array], default: () => [] },
     append: { type: Boolean, default: true },
-    displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
-    counterLabel: { type: Function, default: undefined },
-    inputClass: { type: [Array, String, Object], default: undefined },
-    inputStyle: { type: [Array, String, Object], default: undefined },
   },
 
   emits: ['update:modelValue', 'rejected'],
