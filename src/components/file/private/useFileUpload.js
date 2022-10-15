@@ -145,7 +145,7 @@ function Uploading(fileLike, options) {
     } else if (state === UPLOAD) {
       downloadBlob(file.file, file.name);
     } else {
-      // console.warn(`${state} file is can not download.`);
+      throw new Error(`${state} file is can not download.`);
     }
   }
 
@@ -344,14 +344,19 @@ export default (values, options) => {
     await syncUploadings(fileLikes.value);
   }
 
+  function isDownloadable(file) {
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state);
+  }
+
   async function downloadFile(file) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
-    uploading.download();
+    await uploading.download();
   }
 
   async function downloadAll(onlyUploaded) {
     uploadings.value
-      .filter((uploading) => !onlyUploaded || uploading.state === UPLOADED)
+      .filter((uploading) => (onlyUploaded ? uploading.state === UPLOADED : isDownloadable(uploading)))
       .forEach((uploading) => uploading.download());
   }
 
@@ -372,6 +377,7 @@ export default (values, options) => {
     isReversible,
     revertFile,
     revertAll,
+    isDownloadable,
     downloadFile,
     downloadAll,
     isRetryPossible,

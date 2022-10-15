@@ -173,9 +173,9 @@
               :val="idx"
             />
             <div
-              v-if="downloadable"
+              v-if="downloadable && isDownloadable(file)"
               class="kw-file-item__name"
-              @click.prevent="downloadFile(file)"
+              @click.prevent="downloadFileWithHook(file)"
             >
               {{ file.name }}
               <kw-tooltip
@@ -209,10 +209,10 @@
                 <span> {{ fileSizeToString(file.size) }}</span>
               </div>
               <kw-btn
-                v-if="downloadable && false"
+                v-if="downloadable && isDownloadable(file) && false"
                 :icon="'download_off'"
                 borderless
-                @click.prevent="downloadFile(file)"
+                @click.prevent="downloadFileWithHook(file)"
               >
                 <kw-tooltip
                   anchor="bottom middle"
@@ -283,6 +283,7 @@ export default {
     pickFileWhenClick: { type: Boolean, default: false },
     removable: { type: Boolean, default: true },
     downloadable: { type: Boolean, default: false },
+    beforeDownload: { type: Function, default: undefined },
     retryPossible: { type: Boolean, default: true },
     instanceUpdate: { type: Boolean, default: false },
     rejectMessage: { type: [Function, String], default: undefined },
@@ -325,7 +326,7 @@ export default {
     inputStyle: { type: [Array, String, Object], default: undefined },
   },
 
-  emits: ['update:modelValue', 'rejected'],
+  emits: ['update:modelValue', 'rejected', 'downloaded'],
 
   setup(props, { emit }) {
     const fieldStyles = useFieldStyle();
@@ -407,6 +408,14 @@ export default {
       }
     }
 
+    const downloadFileWithHook = computed(() => (props.beforeDownload ? async (file) => {
+      const beforeHookResult = await props.beforeDownload(file);
+      if (beforeHookResult || beforeHookResult === undefined) {
+        await uploadCtx.downloadFile(file);
+        emit('downloaded', file);
+      }
+    } : uploadCtx.downloadFile));
+
     // reference methods
     const pickFiles = () => {
       fileRef.value?.getNativeElement()?.click();
@@ -438,6 +447,7 @@ export default {
       // ref
       pickFiles,
       fileClass,
+      downloadFileWithHook,
     };
   },
 };
