@@ -409,7 +409,8 @@ export default {
     }
 
     const downloadFileWithHook = computed(() => (props.beforeDownload ? async (file) => {
-      const beforeHookResult = await props.beforeDownload(file);
+      const normalizedFile = uploadCtx.findUploading(file).file;
+      const beforeHookResult = await props.beforeDownload(normalizedFile);
       if (beforeHookResult || beforeHookResult === undefined) {
         await uploadCtx.downloadFile(file);
         emit('downloaded', file);
