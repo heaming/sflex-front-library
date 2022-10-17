@@ -49,7 +49,7 @@
   <q-expansion-item
     v-if="false"
     label="Button Dropdown"
-    :default-opened="false"
+    :default-opened="true"
   >
     <div class="result-area">
       <btn-dropdown-form />
@@ -134,7 +134,7 @@
   </q-expansion-item>
   <!-- scroll test -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="scroll"
     :default-opened="false"
   >

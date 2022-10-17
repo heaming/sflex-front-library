@@ -15,8 +15,8 @@
         :bar-style="barStyle"
         :vertical-bar-style="verticalBarStyle"
         :horizontal-bar-style="horizontalBarStyle"
-        :content-style="contentStyle"
-        :content-active-style="contentActiveStyle"
+        :content-style="computedContentStyle"
+        :content-active-style="computedContentActiveStyle"
         :delay="delay"
         :visible="visible"
         :tabindex="tabindex"
@@ -47,11 +47,13 @@ export default {
     width: { type: String, default: undefined },
     minWidth: { type: String, default: '10px' },
     maxWidth: { type: String, default: undefined },
+    scrollAreaHeight: { type: String, default: undefined },
+    scrollAreaWidth: { type: String, default: '100%' },
 
     // fall through props
     thumbStyle: { type: Object, default: undefined },
     verticalThumbStyle: { type: Object, default: undefined },
-    horizontalThumbStyle: { type: Object, default: undefined },
+    horizontalThumbStyle: { type: Object, default: () => ({ borderBottomWidth: '4px', height: '14px' }) },
     barStyle: { type: [Array, String, Object], default: undefined },
     verticalBarStyle: { type: [Array, String, Object], default: undefined },
     horizontalBarStyle: { type: [Array, String, Object], default: undefined },
@@ -83,8 +85,32 @@ export default {
       return styles;
     });
 
+    const computedContentStyle = computed(() => {
+      const styles = props.contentStyle ? [props.contentStyle] : [];
+      if (props.scrollAreaWidth) {
+        styles.push(`width: ${props.scrollAreaWidth};`);
+      }
+      if (props.scrollAreaHeight) {
+        styles.push(`height: ${props.scrollAreaHeight}; `);
+      }
+      return styles;
+    });
+
+    const computedContentActiveStyle = computed(() => {
+      const styles = props.contentActiveStyle ? [props.contentActiveStyle] : [];
+      if (props.scrollAreaWidth) {
+        styles.push(`max-width: ${props.scrollAreaWidth}; `);
+      }
+      if (props.scrollAreaHeight) {
+        styles.push(`max-height: ${props.scrollAreaHeight}; `);
+      }
+      return styles;
+    });
+
     return {
       scrollAreaStyle,
+      computedContentStyle,
+      computedContentActiveStyle,
     };
   },
 };

@@ -34,6 +34,7 @@
 
     .kw-field {
       flex: 1 0 1%;  // max-width: 498px; why?
+      max-width: 100%;
 
       & + span {
         margin: auto;
@@ -55,6 +56,7 @@
 
     .kw-field-wrap {
       flex: 1 0 1%;
+      max-width: 100%;
 
       & + .kw-field,
       & + .kw-field-wrap,

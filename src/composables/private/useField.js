@@ -75,21 +75,6 @@ export default (options) => {
     setState,
   } = fieldState;
 
-  async function setPending() {
-    setState({ pending: true });
-    await processWait();
-  }
-
-  async function resetValidation() {
-    await setPending();
-
-    setState({
-      errors: [],
-      pending: false,
-      validated: false,
-    });
-  }
-
   async function validate() {
     const result = await _validate(value.value, rules.value, {
       name: name.value,
@@ -140,6 +125,12 @@ export default (options) => {
 
   watchValueForValidate();
 
+  async function setPending() {
+    setState({ pending: true });
+    await processWait();
+    debounceValidate.cancel();
+  }
+
   async function init() {
     await setPending();
 
@@ -167,6 +158,16 @@ export default (options) => {
     });
 
     watchValueForValidate();
+  }
+
+  async function resetValidation() {
+    await setPending();
+
+    setState({
+      errors: [],
+      pending: false,
+      validated: false,
+    });
   }
 
   function isModified() {

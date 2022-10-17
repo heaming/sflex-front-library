@@ -85,14 +85,16 @@ const iconList1 = [
   'excel',
   'file',
   'filter',
+  'group',
+  'group_minus',
+  'group_plus',
   'info',
   'list',
-  'minus_box',
+  'minus',
   'more',
   'new_window',
   'pdf',
   'plus',
-  'plus_box',
   'price',
   'print',
   'report',
@@ -143,6 +145,10 @@ const iconList2 = [
   'write_24',
 ];
 const guideHistory = [
+  {
+    timestamp: '2022-10-14',
+    text: 'add minus 16px and change name(plus/minus_box -> group_minus/plus)',
+  },
   {
     timestamp: '2022-09-21',
     text: 'add guide page',

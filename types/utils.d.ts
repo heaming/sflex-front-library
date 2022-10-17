@@ -524,6 +524,27 @@ interface StringUtil {
    * @param prefix 앞에 추가할 prefix `-`로 구분된다.
    */
   getUid(prefix?: string): boolean;
+
+  /**
+   * 세션에서 사용하는 date 형식으로 반환한다.
+   * @param value
+   * @param format value format, default `YYYYMMDD`
+   */
+  getDateFormat(value: string, format?: string): string;
+
+  /**
+   * 세션에서 사용하는 datetime 형식으로 반환한다.
+   * @param value
+   * @param format value format, default `YYYYMMDDHHmmss`
+   */
+  getDatetimeFormat(value: string, format?: string): string;
+
+  /**
+   * 세션에서 사용하는 time 형식으로 반환한다.
+   * @param value
+   * @param format value format, default `HHmmss`
+   */
+  getTimeFormat(value: string, format?: string): string;
 }
 
 export declare const stringUtil: StringUtil;

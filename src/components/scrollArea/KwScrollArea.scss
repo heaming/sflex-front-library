@@ -1,8 +1,10 @@
 .kw-scroll-area {
   display: grid;
+  grid-template-columns: 100%;
 
   &__wrapper {
     position: relative;
+    max-width: 100%;
   }
 
   .q-scrollarea {

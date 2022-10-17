@@ -48,26 +48,26 @@ function initGrd(data, view) {
     {
       fieldName: 'date01',
       header: 'Default',
-      datetimeFormat: 'yyyy-MM-dd', // default value, 생략 가능
+      datetimeFormat: 'date', // default value, 생략 가능
       editor: {
         type: 'btdate',
-        datetimeFormat: 'yyyyMMdd', // default value, 생략 가능
+        datetimeFormat: 'date', // default value, 생략 가능
       },
     },
     {
       fieldName: 'date02',
       header: 'Custom (datetimeFormat)',
-      datetimeFormat: 'yyyy-MM-dd HH:mm:ss',
+      datetimeFormat: 'datetime',
       editor: {
         type: 'btdate',
-        datetimeFormat: 'yyyyMMddHHmmss',
+        // datetimeFormat: 'datetime', // 없을 시, column.datetimeFormat으로 설정 (즉, column.datetimeFormat과 같으면 생략 가능)
       },
     },
     {
       fieldName: 'date03',
       header: 'Custom (datetimeFormat, align class)',
       styleName: 'text-center',
-      datetimeFormat: 'yyyy-MM-dd HH:mm:ss',
+      datetimeFormat: 'datetime',
       editable: false,
     },
   ];
@@ -120,26 +120,26 @@ const sampleCode = `
     {
       fieldName: 'date01',
       header: 'Default',
-      datetimeFormat: 'yyyy-MM-dd', // default value, 생략 가능
+      datetimeFormat: 'date', // default value, 생략 가능
       editor: {
         type: 'btdate',
-        datetimeFormat: 'yyyyMMdd', // default value, 생략 가능
+        datetimeFormat: 'date', // default value, 생략 가능
       },
     },
     {
       fieldName: 'date02',
       header: 'Custom (datetimeFormat)',
-      datetimeFormat: 'yyyy-MM-dd HH:mm:ss',
+      datetimeFormat: 'datetime',
       editor: {
         type: 'btdate',
-        datetimeFormat: 'yyyyMMddHHmmss',
+        datetimeFormat: 'datetime', // 없을 시, column.datetimeFormat으로 설정 (즉, column.datetimeFormat과 같으면 생략 가능)
       },
     },
     {
       fieldName: 'date03',
       header: 'Custom (datetimeFormat, align class)',
       styleName: 'text-center',
-      datetimeFormat: 'yyyy-MM-dd HH:mm:ss',
+      datetimeFormat: 'datetime',
       editable: false,
     },
   ];

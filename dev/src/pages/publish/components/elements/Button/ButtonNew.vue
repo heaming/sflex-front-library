@@ -571,13 +571,10 @@
             primary
           >
             <kw-btn
-              :label="'기준상품등록'"
+              label="기준 상품등록"
             />
             <kw-btn
-              :label="'기준상품등록'"
-            />
-            <kw-btn
-              :label="'기준상품등록'"
+              label="복합 상품등록"
             />
           </kw-btn-dropdown>
         </div>
@@ -908,24 +905,25 @@ const strModel = ref('오늘');
 
 const dropdownBtn = `
 <kw-btn-dropdown
-  label="선택"
+  label="상품등록"
   dense
   primary
 >
   <kw-btn
-    :label="'기준상품등록'"
+    label="기준 상품등록"
   />
   <kw-btn
-    :label="'기준상품등록'"
-  />
-  <kw-btn
-    :label="'기준상품등록'"
+    label="복합 상품등록"
   />
 </kw-btn-dropdown>
 `;
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2022.10.14',
+    text: 'modified button dropdown case',
+  },
   {
     timestamp: '2022.10.12',
     text: 'add button dropdown case',

@@ -1,0 +1,9 @@
+<svg id="retry"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 16 16"
+     stroke="black"
+     fill="none"
+     stroke-width="1.5">
+  <path d="M13 9 a 5 5 0 1 1 -5 -5 l 3 0"  stroke-linecap="round"/>
+  <path d="M9 6 l 2 -2 l -2 -2" stroke-linecap="round"/>
+</svg>
