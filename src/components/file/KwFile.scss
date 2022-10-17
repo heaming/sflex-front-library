@@ -51,7 +51,7 @@
   white-space: nowrap;
 
   &__checkbox {
-    padding: 8px 16px;
+    padding-right: 4px;
   }
 
   &__name {
@@ -101,10 +101,12 @@
     background-color: #eee;
     display: flex;
     align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   &__checkbox {
-    padding: 8px 16px;
+    padding-right: 4px;
   }
 
   &__name {
@@ -123,7 +125,8 @@
     }
 
     .q-scrollarea__content {
-      padding-right: 14px;
+      padding-left: 16px;
+      padding-right: 16px;
     }
 
     .kw-file__wrapper {

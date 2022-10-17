@@ -6,6 +6,7 @@
     class="kw-field kw-file"
     :class="fileClass"
     v-bind="{...styleClassAttrs, ...fieldStyles}"
+    :error="invalid"
     :prefix="prefix"
     :suffix="suffix"
     :hint="hint"
@@ -163,7 +164,7 @@
             v-for="(file, idx) in files"
             :key="`file${idx}`"
             class="kw-file__file kw-file-item"
-            :class="fileItemClass(file)"
+            :class="fileItemClasses[idx]"
           >
             <kw-checkbox
               v-if="selectable"
@@ -175,7 +176,7 @@
             <div
               v-if="downloadable && isDownloadable(file)"
               class="kw-file-item__name"
-              @click.prevent="downloadFileWithHook(file)"
+              @click.prevent="downloadFile(file)"
             >
               {{ file.name }}
               <kw-tooltip
@@ -212,7 +213,7 @@
                 v-if="downloadable && isDownloadable(file) && false"
                 :icon="'download_off'"
                 borderless
-                @click.prevent="downloadFileWithHook(file)"
+                @click.prevent="downloadFile(file)"
               >
                 <kw-tooltip
                   anchor="bottom middle"
@@ -273,10 +274,10 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
 import useFileCounter, { useFileCounterProps } from './private/useFileCounter';
 import useFileSelect, { useFileSelectProps } from './private/useFileSelect';
-import useFileDownloadHook, {
-  useFileDownloadHookEmits,
-  useFileDownloadHookProps,
-} from './private/useFileDownloadHook';
+import useFileDownload, {
+  useFileDownloadEmits,
+  useFileDownloadProps,
+} from './private/useFileDownload';
 
 export default {
   name: 'KwFile',
@@ -286,7 +287,6 @@ export default {
     // customize props
     pickFileWhenClick: { type: Boolean, default: false },
     removable: { type: Boolean, default: true },
-    downloadable: { type: Boolean, default: false },
     retryPossible: { type: Boolean, default: true },
     instanceUpdate: { type: [Boolean, String], default: false },
     rejectMessage: { type: [Function, String], default: undefined },
@@ -298,7 +298,7 @@ export default {
     ...useFieldStyleProps,
     ...useFileSelectProps,
     ...useFileCounterProps,
-    ...useFileDownloadHookProps,
+    ...useFileDownloadProps,
 
     // fall through props
     prefix: { type: String, default: undefined },
@@ -331,7 +331,7 @@ export default {
     inputStyle: { type: [Array, String, Object], default: undefined },
   },
 
-  emits: ['update:modelValue', 'rejected', ...useFileDownloadHookEmits],
+  emits: ['update:modelValue', 'rejected', ...useFileDownloadEmits],
 
   setup(props, { emit }) {
     const fieldStyles = useFieldStyle();
@@ -379,9 +379,10 @@ export default {
     const counterCtx = useFileCounter(files);
 
     // download hook
-    const downloadCtx = useFileDownloadHook({
+    const downloadCtx = useFileDownload({
       findUploading: uploadCtx.findUploading,
       downloadFile: uploadCtx.downloadFile,
+      isDownloadable: uploadCtx.isDownloadable,
     });
 
     // reject event
@@ -408,13 +409,15 @@ export default {
       'kw-file--empty': files.value.length === 0,
     }));
 
-    function fileItemClass(file) {
+    function getFileItemClass(file) {
       let classes = 'kw-file-item ';
       classes += (props.downloadable && uploadCtx.isDownloadable(file)) ? 'kw-file-item--downloadable ' : '';
       const uploadingState = uploadCtx.findUploading(file).state;
       classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
       return classes;
     }
+
+    const fileItemClasses = computed(() => files.value.map(getFileItemClass));
 
     // event handler
     function preventIfClick(e) {
@@ -459,7 +462,7 @@ export default {
       // ref
       pickFiles,
       fileClass,
-      fileItemClass,
+      fileItemClasses,
     };
   },
 };
