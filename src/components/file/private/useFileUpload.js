@@ -16,13 +16,13 @@ const FAIL_TO_REMOVE = 'failToRemove';
 const ERROR = 'error';
 const AVAILABLE_STATES = {
   [UPLOADED]: [REMOVE],
+  [REMOVED]: [], // end states
   [REMOVE]: [UPDATING, UPLOADED],
   [UPDATING]: [UPLOADED, REMOVED, ERROR, FAIL_TO_UPLOAD, FAIL_TO_REMOVE],
   [UPLOAD]: [UPDATING, REMOVED],
-  [REMOVED]: [],
+  [FAIL_TO_REMOVE]: [REMOVE, UPLOADED],
+  [FAIL_TO_UPLOAD]: [UPLOAD, REMOVED],
   [ERROR]: [REMOVED],
-  [FAIL_TO_UPLOAD]: [UPLOAD],
-  [FAIL_TO_REMOVE]: [REMOVE],
 };
 
 const generateFileLikeKey = (fileLike) => {
@@ -106,7 +106,15 @@ function Uploading(fileLike, options) {
   const targetPath = file.targetPath
     || options?.targetPath || 'temp'; // server root folder 를 결정한다.
 
-  async function update() {
+  async function update(evenFailed) {
+    if (evenFailed) {
+      if (state === FAIL_TO_REMOVE) {
+        setState(REMOVE);
+      }
+      if (state === FAIL_TO_UPLOAD) {
+        setState(UPLOAD);
+      }
+    }
     if (state === UPLOAD) {
       setState(UPDATING);
       try {
@@ -150,14 +158,17 @@ function Uploading(fileLike, options) {
   }
 
   async function revert() {
-    if (state === UPLOAD) {
-      await setStateWithUpdate(REMOVED);
-    } else if (state === UPLOADED) {
-      await setStateWithUpdate(REMOVE);
-    } else if (state === REMOVE) {
-      await setStateWithUpdate(UPLOADED);
+    const stateChange = {
+      [UPLOAD]: REMOVED,
+      [UPLOADED]: REMOVE, // if instantUpdates, will be REMOVED when update success, else, FAIL_TO_REMOVE;
+      [FAIL_TO_UPLOAD]: REMOVED,
+      [REMOVE]: UPLOADED,
+      [FAIL_TO_REMOVE]: UPLOADED,
+    };
+    if (stateChange[state]) {
+      await setStateWithUpdate(stateChange[state]);
     } else {
-      // console.warn(`${state} file is can not removed.`);
+      console.warn(`${state} file is can not revert.`);
     }
   }
 
@@ -178,6 +189,7 @@ function Uploading(fileLike, options) {
   Object.defineProperty(this, 'file', { get: () => file });
   Object.defineProperty(this, 'state', { get: () => state, set: setStateWithUpdate });
   Object.defineProperty(this, 'update', { get: () => update });
+  Object.defineProperty(this, 'retry', { get: () => (() => { update(true); }) });
   Object.defineProperty(this, 'revert', { get: () => revert });
   Object.defineProperty(this, 'download', { get: () => downloadFile });
   Object.defineProperty(this, 'instanceUpdate', { get: () => instanceUpdate, set: setInstanceUpdate });
@@ -304,17 +316,10 @@ export default (values, options) => {
     if (uploading.state === REMOVED) {
       fileLikes.value = fileLikes.value.filter((f) => f !== file);
     }
-    await syncUploadings(fileLikes.value);
   }
 
   async function updateAll(evenFailed = false) {
-    if (evenFailed) {
-      uploadings.value.forEach((uploading) => {
-        if (uploading.state === FAIL_TO_UPLOAD) { uploading.state = UPLOAD; }
-        if (uploading.state === FAIL_TO_REMOVE) { uploading.state = REMOVE; }
-      });
-    }
-    const updatings = uploadings.value.map((uploading) => uploading.update());
+    const updatings = uploadings.value.map((uploading) => uploading.update(evenFailed));
     await Promise.all(updatings);
     await syncUploadings(fileLikes.value);
   }
@@ -324,36 +329,24 @@ export default (values, options) => {
     return [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE].includes(uploading?.state);
   }
 
-  function readyForRetry(uploading) {
-    if (uploading.state === FAIL_TO_UPLOAD) {
-      uploading.state = UPLOAD;
-    }
-    if (uploading.state === FAIL_TO_REMOVE) {
-      uploading.state = REMOVE;
-    }
-  }
-
   async function retryUpdateFile(file) {
-    const uploading = findUploading(file);
-    readyForRetry(uploading);
-    return await updateFile(file);
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    await uploading.retry();
+    if (uploading.state === REMOVED) {
+      fileLikes.value = fileLikes.value.filter((f) => f !== file);
+    }
   }
 
-  function isReversible(file, includeFailed = true) {
+  function isReversible(file) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
-
-    return [STATE.UPLOADED, STATE.UPLOAD, STATE.REMOVE,
-      ...(includeFailed ? [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE] : [])]
+    return [STATE.UPLOAD, STATE.UPLOADED, STATE.REMOVE, STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE]
       .includes(uploading?.state);
   }
 
-  async function revertFile(file, includeFailed = true, forced = false) {
+  async function revertFile(file, forced = false) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
-    if (includeFailed && isRetryPossible(file)) {
-      readyForRetry(uploading);
-    }
     await uploading.revert();
-    if (forced) { await uploading.update(); }
+    if (!uploading.instanceUpdate && forced) { await uploading.update(); } // Since, revert resolve fail state.
     if (uploading.state === REMOVED) {
       fileLikes.value = fileLikes.value.filter((f) => f !== file);
     }
