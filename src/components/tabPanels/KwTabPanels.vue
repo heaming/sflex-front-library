@@ -2,6 +2,7 @@
   <div
     v-touch-swipe.mouse="onSwipe"
     class="kw-tab-panels q-tab-panels q-panel-parent"
+    v-bind="styleClassAttrs"
   >
     <transition
       v-for="panel of panels"
