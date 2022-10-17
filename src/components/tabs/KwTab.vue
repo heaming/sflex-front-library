@@ -22,7 +22,7 @@ export default {
 
   props: {
     name: {
-      type: String,
+      type: [Number, String],
       default: undefined,
     },
     label: {

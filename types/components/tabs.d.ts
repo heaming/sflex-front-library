@@ -33,7 +33,7 @@ interface KwTabProps {
   /**
    * modelValue 키 값으로 사용된다
    */
-  name?: string;
+  name?: number | string;
 
   /**
    * 탭 라벨

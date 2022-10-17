@@ -1,18 +1,25 @@
 <template>
-  <q-tab-panels
-    ref="tabPanelsRef"
-    class="kw-tab-panels"
-    v-bind="styleClassAttrs"
-    :model-value="modelValue"
-    keep-alive
-    :animated="false"
-    @update:model-value="$emit('update:modelValue', $event)"
+  <div
+    v-touch-swipe.mouse="onSwipe"
+    class="kw-tab-panels q-tab-panels q-panel-parent"
   >
-    <slot />
-  </q-tab-panels>
+    <transition
+      v-for="panel of panels"
+      :key="panel.props.name"
+      v-bind="panelTransition"
+    >
+      <keep-alive>
+        <component
+          :is="panel"
+          v-if="isActivePanel(panel)"
+        />
+      </keep-alive>
+    </transition>
+  </div>
 </template>
 
 <script>
+import usePanel, { usePanelProps, usePanelEmits } from './private/usePanel';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
@@ -20,34 +27,17 @@ export default {
   inheritAttrs: false,
 
   props: {
-    modelValue: {
-      type: [Number, String],
-      default: undefined,
-    },
+    ...usePanelProps,
   },
 
   emits: [
-    'update:modelValue',
+    ...usePanelEmits,
   ],
 
   setup() {
-    const tabPanelsRef = ref();
-
-    function next() {
-      tabPanelsRef.value.next();
-    }
-    function previous() {
-      tabPanelsRef.value.previous();
-    }
-    function goTo(panelName) {
-      tabPanelsRef.value.goTo(panelName);
-    }
-
     return {
+      ...usePanel(),
       ...useInheritAttrs(),
-      next,
-      previous,
-      goTo,
     };
   },
 };
