@@ -9,6 +9,7 @@ export const useObserverProps = {
 
 export default () => {
   const registered = {};
+  const { props } = getCurrentInstance();
 
   function registerObserverChild(observerChildctx) {
     const { uid } = observerChildctx;
@@ -38,18 +39,22 @@ export default () => {
     );
   }
 
-  async function reset(shouldFocus) {
-    await Promise.all(
-      Object.values(registered)
-        .map((e) => !e.ignoreOnReset.value && e.ctx.reset?.(shouldFocus)),
-    );
-  }
-
   async function resetValidation() {
     await Promise.all(
       Object.values(registered)
         .map((e) => e.ctx.resetValidation?.()),
     );
+  }
+
+  async function reset(shouldFocus) {
+    if (!props.ignoreOnReset) {
+      await Promise.all(
+        Object.values(registered)
+          .map((e) => !e.ignoreOnReset.value && e.ctx.reset?.(shouldFocus)),
+      );
+    } else {
+      await resetValidation();
+    }
   }
 
   async function validate(shouldFocus) {
@@ -69,8 +74,11 @@ export default () => {
   }
 
   function isModified() {
-    return Object.values(registered)
-      .some((e) => !e.ignoreOnModified.value && e.ctx.isModified?.());
+    if (!props.ignoreOnModified) {
+      return Object.values(registered)
+        .some((e) => !e.ignoreOnModified.value && e.ctx.isModified?.());
+    }
+    return false;
   }
 
   async function alertIfIsNotModified(message) {
