@@ -64,7 +64,7 @@
       v-if="!multiple || $slots.append"
       #append
     >
-      <span v-if="!multiple && !(counter || $slots.counter)">
+      <span v-if="!multiple && !(counter || $slots.counter) && computedCounter">
         {{ computedCounter }}
       </span>
       <slot name="append" />
@@ -83,16 +83,11 @@
       #after
     >
       <kw-btn
-        v-if="!multiple"
+        v-if="!pickFileWhenClick"
         :label="'파일선택'"
         @click="pickFiles"
       />
-      <kw-btn
-        v-if="downloadable && !multiple"
-        :disable="!files[0]"
-        :label="'양식 다운로드'"
-        @click.prevent="downloadFile(files[0])"
-      />
+      <slot name="after" />
     </template>
 
     <!-- error -->
@@ -163,13 +158,12 @@
       >
         <kw-scroll-area
           class="kw-file__wrapper"
-          :content-style="'padding-right: 14px;'"
-          :content-active-style="'padding-right: 14px;'"
         >
           <div
             v-for="(file, idx) in files"
             :key="`file${idx}`"
             class="kw-file__file kw-file-item"
+            :class="fileItemClass(file)"
           >
             <kw-checkbox
               v-if="selectable"
@@ -178,7 +172,23 @@
               class="kw-file-item__checkbox"
               :val="idx"
             />
-            <div class="kw-file-item__name">
+            <div
+              v-if="downloadable && isDownloadable(file)"
+              class="kw-file-item__name"
+              @click.prevent="downloadFileWithHook(file)"
+            >
+              {{ file.name }}
+              <kw-tooltip
+                anchor="center middle"
+                show-when-ellipsised
+              >
+                {{ file.name }}
+              </kw-tooltip>
+            </div>
+            <div
+              v-else
+              class="kw-file-item__name"
+            >
               {{ file.name }}
               <kw-tooltip
                 anchor="center middle"
@@ -199,26 +209,54 @@
                 <span> {{ fileSizeToString(file.size) }}</span>
               </div>
               <kw-btn
-                v-if="multiple && !instanceUpdate && isUpdatable(file)"
-                class="ml8"
+                v-if="downloadable && isDownloadable(file) && false"
+                :icon="'download_off'"
+                borderless
+                @click.prevent="downloadFileWithHook(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'download' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-if="!instanceUpdate && isUpdatable(file)"
                 :icon="'upload_off'"
                 borderless
                 @click.prevent="updateFile(file)"
-              />
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'update' }}
+                </kw-tooltip>
+              </kw-btn>
               <kw-btn
-                v-if="multiple && isRetryPossible(file)"
-                class="ml8"
+                v-if="retryPossible && isRetryPossible(file)"
                 :icon="'retry'"
                 borderless
                 @click.prevent="retryUpdateFile(file)"
-              />
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'retry' }}
+                </kw-tooltip>
+              </kw-btn>
               <kw-btn
                 v-if="removable && isReversible(file)"
                 class="kw-file-item__remove"
                 icon="clear"
                 borderless
                 @click.prevent="revertFile(file)"
-              />
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'remove' }}
+                </kw-tooltip>
+              </kw-btn>
             </div>
           </div>
         </kw-scroll-area>
@@ -228,13 +266,17 @@
 </template>
 
 <script>
-import useFileUpload from '../../composables/private/useFileUpload';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { alert } from '../../plugins/dialog';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
-import useSelectFile, { useFileSelectProps } from './useFileSelect';
-import useFileCounter from './useFileCounter';
+import useFileUpload from './private/useFileUpload';
+import useFileCounter, { useFileCounterProps } from './private/useFileCounter';
+import useFileSelect, { useFileSelectProps } from './private/useFileSelect';
+import useFileDownloadHook, {
+  useFileDownloadHookEmits,
+  useFileDownloadHookProps,
+} from './private/useFileDownloadHook';
 
 export default {
   name: 'KwFile',
@@ -244,18 +286,21 @@ export default {
     // customize props
     pickFileWhenClick: { type: Boolean, default: false },
     removable: { type: Boolean, default: true },
-    downloadable: { type: Boolean, default: true },
-    instanceUpdate: { type: Boolean, default: false },
+    downloadable: { type: Boolean, default: false },
+    retryPossible: { type: Boolean, default: true },
+    instanceUpdate: { type: [Boolean, String], default: false },
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
     placeholderClass: { type: [Array, String, Object], default: undefined },
     placeholderStyle: { type: [Array, String, Object], default: undefined },
 
-    // fall through props
     ...useFieldProps,
     ...useFieldStyleProps,
     ...useFileSelectProps,
+    ...useFileCounterProps,
+    ...useFileDownloadHookProps,
 
+    // fall through props
     prefix: { type: String, default: undefined },
     suffix: { type: String, default: undefined },
     hint: { type: String, default: undefined },
@@ -286,7 +331,7 @@ export default {
     inputStyle: { type: [Array, String, Object], default: undefined },
   },
 
-  emits: ['update:modelValue', 'rejected'],
+  emits: ['update:modelValue', 'rejected', ...useFileDownloadHookEmits],
 
   setup(props, { emit }) {
     const fieldStyles = useFieldStyle();
@@ -312,9 +357,9 @@ export default {
       },
     });
 
-    const uploadCtx = useFileUpload(innerValue, {
-      instanceUpdate: props.instanceUpdate,
-    });
+    const uploadCtx = useFileUpload(innerValue, ref({
+      instanceUpdate: computed(() => props.instanceUpdate),
+    }));
 
     const { files } = uploadCtx;
 
@@ -328,10 +373,16 @@ export default {
     const uploadings = computed(() => files.value.map(uploadCtx.findUploading));
 
     // select
-    const selectCtx = useSelectFile(uploadCtx);
+    const selectCtx = useFileSelect(uploadCtx);
 
     // counter
     const counterCtx = useFileCounter(files);
+
+    // download hook
+    const downloadCtx = useFileDownloadHook({
+      findUploading: uploadCtx.findUploading,
+      downloadFile: uploadCtx.downloadFile,
+    });
 
     // reject event
     const getRejectMessage = ({ failedPropValidation, file }) => {
@@ -356,6 +407,14 @@ export default {
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
     }));
+
+    function fileItemClass(file) {
+      let classes = 'kw-file-item ';
+      classes += (props.downloadable && uploadCtx.isDownloadable(file)) ? 'kw-file-item--downloadable ' : '';
+      const uploadingState = uploadCtx.findUploading(file).state;
+      classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
+      return classes;
+    }
 
     // event handler
     function preventIfClick(e) {
@@ -391,6 +450,7 @@ export default {
       uploadings,
       ...selectCtx.value,
       ...counterCtx,
+      ...downloadCtx,
       onRejected,
       preventIfClick,
 
@@ -399,6 +459,7 @@ export default {
       // ref
       pickFiles,
       fileClass,
+      fileItemClass,
     };
   },
 };
