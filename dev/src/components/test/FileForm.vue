@@ -43,8 +43,6 @@
           multiple
           :label="'multiple'"
           :max-total-size="40"
-          pick-file-when-click
-          counter
         />
       </kw-form-item>
       <kw-form-item label="life cycle">
@@ -58,68 +56,139 @@
         />
       </kw-form-item>
     </kw-form-row>
+    <!-- props -->
+    <kw-form-row>
+      <kw-form-item label="props handler">
+        <kw-toggle
+          v-model="pickFileWhenClick"
+          :true-value="true"
+          :false-value="false"
+          label="pickFileWhenClick"
+        />
+        <kw-toggle
+          v-model="instanceUpdate"
+          :true-value="true"
+          :false-value="false"
+          label="instanceUpdate"
+        />
+        <kw-toggle
+          v-model="removable"
+          :true-value="true"
+          :false-value="false"
+          label="removable"
+        />
+        <kw-toggle
+          v-model="downloadable"
+          :true-value="true"
+          :false-value="false"
+          label="downloadable"
+        />
+        <kw-toggle
+          v-model="retryPossible"
+          :true-value="true"
+          :false-value="false"
+          label="retryPossible"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="applied single">
+        <kw-file
+          ref="fileRef"
+          v-model="objValue"
+          :pick-file-when-click="pickFileWhenClick"
+          :instance-update="instanceUpdate"
+          :removable="removable"
+          :downloadable="downloadable"
+          :retry-possible="retryPossible"
+        />
+      </kw-form-item>
+      <kw-form-item label="applied multiple">
+        <kw-file
+          ref="fileRef"
+          v-model="arrayValue2"
+          multiple
+          :pick-file-when-click="pickFileWhenClick"
+          :instance-update="instanceUpdate"
+          :removable="removable"
+          :downloadable="downloadable"
+          :retry-possible="retryPossible"
+        />
+      </kw-form-item>
+    </kw-form-row>
+
+    <!-- dummy -->
+    <kw-form-row>
+      <kw-form-item label="dummy multiple">
+        <kw-file
+          ref="dummyRef"
+          v-model="dummyValue"
+          multiple
+          :label="'dummy multiple'"
+        />
+      </kw-form-item>
+      <kw-form-item label="life cycle">
+        <kw-btn
+          :label="'init'"
+          @click="initDummyRef"
+        />
+        <kw-btn
+          :label="'reset'"
+          @click="resetDummyRef"
+        />
+        <kw-btn
+          :label="'addDummy'"
+          @click="setDummy"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="dummy multiple">
+        <kw-file
+          ref="dummyRef2"
+          v-model="dummyArrayValue"
+          multiple
+          :label="'dummy multiple'"
+        />
+      </kw-form-item>
+      <kw-form-item label="life cycle">
+        <kw-btn
+          :label="'init'"
+          @click="initDummyRef2"
+        />
+        <kw-btn
+          :label="'reset'"
+          @click="resetDummyRef2"
+        />
+        <kw-btn
+          :label="'addDummy'"
+          @click="addDummy"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <!-- rules -->
+    <!-- select -->
+    <!-- counter -->
+    <!-- download hook -->
+    <!-- rejected -->
 
     <!-- wrapped -->
     <kw-form-row>
-      <kw-form-item label="wrapped">
-        <div
-          class="file-attacher"
-        >
-          <kw-action-top>
-            <template #left>
-              <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
-              <span class="accent pl4">{{ totalCount }}</span>
-              <kw-btn
-                label="파일찾기"
-                class="ml4"
-                dense
-                @click="fileRef2?.pickFiles()"
-              />
-              <kw-btn
-                label="삭제"
-                class="ml4"
-                dense
-                @click="fileRef2?.removeSelected()"
-              />
-            </template>
-            <span>{{ fileRef2?.computedCounter }}</span>
-          </kw-action-top>
-          <div
-            class="file-attacher__container"
-          >
-            <div
-              class="file-attacher__container-header"
-            >
-              <kw-checkbox
-                :model-value="fileRef2?.selectAll"
-                style="padding: 9px 16px;"
-                :true-value="true"
-                :false-value="false"
-                dense
-                @update:model-value="(val) => {fileRef2.selectAll = val}"
-              />
-              <div class="text-center">
-                파일명
-              </div>
-              <div class="text-center w92">
-                파일 크기
-              </div>
-            </div>
-            <kw-file
-              ref="fileRef2"
-              v-model="arrayValue"
-              class="file-attacher__file-comp"
-              borderless
-              multiple
-              :label="'default'"
-              :max-total-size="40"
-            />
-          </div>
-        </div>
-      </kw-form-item>
       <kw-form-item label="wrapped component">
-        <kw-file-wrapper
+        <kw-file-wrap
+          ref="wrappedRef"
           v-model="arrayValue"
+          :max-total-size="4000"
+        />
+      </kw-form-item>
+      <kw-form-item label="life cycle">
+        <kw-btn
+          :label="'init'"
+          @click="initWrappedFile"
+        />
+        <kw-btn
+          :label="'reset'"
+          @click="resetWrappedFile"
         />
       </kw-form-item>
     </kw-form-row>
@@ -130,10 +199,20 @@
 import { KwFile } from '../../../../src/components';
 
 const arrayValue = ref([]);
+const arrayValue2 = ref([]);
 const objValue = ref({});
 const fileRef = ref();
 const fileRef2 = ref();
-const totalCount = computed(() => arrayValue.value.length);
+const dummyRef = ref();
+const dummyRef2 = ref();
+const wrappedRef = ref();
+const instanceUpdate = ref(true);
+const removable = ref(true);
+const downloadable = ref(false);
+const retryPossible = ref(true);
+const pickFileWhenClick = ref(false);
+const dummyValue = ref({});
+const dummyArrayValue = ref([]);
 
 // const checkedAll = computed({
 //   get: () => true,
@@ -156,6 +235,56 @@ function resetFile2() {
 
 function initFile2() {
   fileRef2.value.init();
+}
+
+function resetWrappedFile() {
+  wrappedRef.value.fileRef.reset();
+}
+
+function initWrappedFile() {
+  wrappedRef.value.fileRef.init();
+}
+
+function addDummy() {
+  const seed = Math.ceil(Math.random() * 10000);
+  dummyArrayValue.value.push({
+    name: `fileName${seed}.bmp`,
+    size: seed,
+    type: undefined,
+    targetPath: 'storage',
+    serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
+    fileUid: `fileUid_${seed}`,
+    myFileYn: 'Y',
+  });
+}
+
+function resetDummyRef() {
+  dummyRef.value.reset();
+}
+
+function initDummyRef() {
+  dummyRef.value.init();
+}
+
+function setDummy() {
+  const seed = Math.ceil(Math.random() * 10000);
+  dummyValue.value = {
+    name: `fileName${seed}.bmp`,
+    size: seed,
+    type: undefined,
+    targetPath: 'storage',
+    serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
+    fileUid: `fileUid_${seed}`,
+    myFileYn: 'Y',
+  };
+}
+
+function resetDummyRef2() {
+  dummyRef2.value.reset();
+}
+
+function initDummyRef2() {
+  dummyRef2.value.init();
 }
 
 </script>
