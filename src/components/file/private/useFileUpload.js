@@ -86,7 +86,6 @@ function Uploading(fileLike, options) {
   let instanceUpdate;
 
   function setState(newState) {
-    console.log('setState', newState);
     if (state) {
       state = AVAILABLE_STATES[state].includes(newState) ? newState : ERROR;
     } else {
@@ -95,7 +94,6 @@ function Uploading(fileLike, options) {
   }
 
   function setInstanceUpdate(newInstanceUpdate) {
-    console.log('newInstanceUpdate', newInstanceUpdate);
     const avaliable = [INSTANT_UPDATE_ALL, INSTANT_UPLOAD, INSTANT_REMOVE, INSTANT_UPDATE_NOTHING];
     if (!avaliable.includes(newInstanceUpdate)) {
       instanceUpdate = INSTANT_UPDATE_NOTHING;
@@ -140,7 +138,6 @@ function Uploading(fileLike, options) {
   }
 
   async function setStateWithUpdate(newState) {
-    console.log('setStateWithUpdate', newState);
     setState(newState);
     if (state === UPLOAD
       && (instanceUpdate === INSTANT_UPLOAD || instanceUpdate === INSTANT_UPDATE_ALL)) {
