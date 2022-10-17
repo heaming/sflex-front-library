@@ -163,7 +163,7 @@
             v-for="(file, idx) in files"
             :key="`file${idx}`"
             class="kw-file__file kw-file-item"
-            :class="{'kw-file-item--downloadable': downloadable}"
+            :class="fileItemClass(file)"
           >
             <kw-checkbox
               v-if="selectable"
@@ -271,8 +271,12 @@ import { alert } from '../../plugins/dialog';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
-import useFileCounter from './private/useFileCounter';
+import useFileCounter, { useFileCounterProps } from './private/useFileCounter';
 import useFileSelect, { useFileSelectProps } from './private/useFileSelect';
+import useFileDownloadHook, {
+  useFileDownloadHookEmits,
+  useFileDownloadHookProps,
+} from './private/useFileDownloadHook';
 
 export default {
   name: 'KwFile',
@@ -283,19 +287,20 @@ export default {
     pickFileWhenClick: { type: Boolean, default: false },
     removable: { type: Boolean, default: true },
     downloadable: { type: Boolean, default: false },
-    beforeDownload: { type: Function, default: undefined },
     retryPossible: { type: Boolean, default: true },
-    instanceUpdate: { type: Boolean, default: false },
+    instanceUpdate: { type: [Boolean, String], default: false },
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
     placeholderClass: { type: [Array, String, Object], default: undefined },
     placeholderStyle: { type: [Array, String, Object], default: undefined },
 
-    // fall through props
     ...useFieldProps,
     ...useFieldStyleProps,
     ...useFileSelectProps,
+    ...useFileCounterProps,
+    ...useFileDownloadHookProps,
 
+    // fall through props
     prefix: { type: String, default: undefined },
     suffix: { type: String, default: undefined },
     hint: { type: String, default: undefined },
@@ -326,7 +331,7 @@ export default {
     inputStyle: { type: [Array, String, Object], default: undefined },
   },
 
-  emits: ['update:modelValue', 'rejected', 'downloaded'],
+  emits: ['update:modelValue', 'rejected', ...useFileDownloadHookEmits],
 
   setup(props, { emit }) {
     const fieldStyles = useFieldStyle();
@@ -373,6 +378,12 @@ export default {
     // counter
     const counterCtx = useFileCounter(files);
 
+    // download hook
+    const downloadCtx = useFileDownloadHook({
+      findUploading: uploadCtx.findUploading,
+      downloadFile: uploadCtx.downloadFile,
+    });
+
     // reject event
     const getRejectMessage = ({ failedPropValidation, file }) => {
       if (typeof props.rejectMessage === 'function') {
@@ -397,6 +408,14 @@ export default {
       'kw-file--empty': files.value.length === 0,
     }));
 
+    function fileItemClass(file) {
+      let classes = 'kw-file-item ';
+      classes += (props.downloadable && uploadCtx.isDownloadable(file)) ? 'kw-file-item--downloadable ' : '';
+      const uploadingState = uploadCtx.findUploading(file).state;
+      classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
+      return classes;
+    }
+
     // event handler
     function preventIfClick(e) {
       if (e.clientX === 0 && e.clientY === 0) {
@@ -407,15 +426,6 @@ export default {
         e.stopPropagation();
       }
     }
-
-    const downloadFileWithHook = computed(() => (props.beforeDownload ? async (file) => {
-      const normalizedFile = uploadCtx.findUploading(file).file;
-      const beforeHookResult = await props.beforeDownload(normalizedFile);
-      if (beforeHookResult || beforeHookResult === undefined) {
-        await uploadCtx.downloadFile(file);
-        emit('downloaded', file);
-      }
-    } : uploadCtx.downloadFile));
 
     // reference methods
     const pickFiles = () => {
@@ -440,6 +450,7 @@ export default {
       uploadings,
       ...selectCtx.value,
       ...counterCtx,
+      ...downloadCtx,
       onRejected,
       preventIfClick,
 
@@ -448,7 +459,7 @@ export default {
       // ref
       pickFiles,
       fileClass,
-      downloadFileWithHook,
+      fileItemClass,
     };
   },
 };

@@ -73,7 +73,9 @@
         :filter="filter"
         :tabindex="tabindex"
         :reject-message="rejectMessage"
+        @before-download="onBeforeDownload"
         @rejected="$emit('rejected', $event)"
+        @downloaded="$emit('downloaded', $event)"
         @update:model-value="$emit('update:modelValue', $event)"
       />
     </div>
@@ -103,9 +105,10 @@ export default {
     modelValue: { type: [Object, Array], default: () => [] },
     append: { type: Boolean, default: true },
     tabindex: { type: [Number, String], default: undefined },
+    onBeforeDownload: { type: Function, default: undefined },
   },
 
-  emits: ['update:modelValue', 'rejected'],
+  emits: ['update:modelValue', 'rejected', 'downloaded'],
 
   setup() {
     const fileRef = ref();

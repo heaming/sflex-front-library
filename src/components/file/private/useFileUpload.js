@@ -1,6 +1,11 @@
 import { differenceBy } from 'lodash-es';
 import { download, downloadBlob, upload } from '../../../utils/file';
 
+const INSTANT_UPDATE_ALL = true;
+const INSTANT_UPLOAD = 'upload';
+const INSTANT_REMOVE = 'remove';
+const INSTANT_UPDATE_NOTHING = false;
+
 const UPLOADED = 'uploaded';
 const REMOVED = 'removed';
 const UPDATING = 'updating';
@@ -76,22 +81,32 @@ const getInitialState = (fileLike) => (fileLike.dummy ? UPLOADED : UPLOAD);
 function Uploading(fileLike, options) {
   const file = normalizeFileLike(fileLike);
 
-  let state = getInitialState(file);
+  let state;
+
+  let instanceUpdate;
 
   function setState(newState) {
-    state = AVAILABLE_STATES[state].includes(newState) ? newState : ERROR;
+    console.log('setState', newState);
+    if (state) {
+      state = AVAILABLE_STATES[state].includes(newState) ? newState : ERROR;
+    } else {
+      state = newState;
+    }
+  }
+
+  function setInstanceUpdate(newInstanceUpdate) {
+    console.log('newInstanceUpdate', newInstanceUpdate);
+    const avaliable = [INSTANT_UPDATE_ALL, INSTANT_UPLOAD, INSTANT_REMOVE, INSTANT_UPDATE_NOTHING];
+    if (!avaliable.includes(newInstanceUpdate)) {
+      instanceUpdate = INSTANT_UPDATE_NOTHING;
+      setState(ERROR);
+      return;
+    }
+    instanceUpdate = newInstanceUpdate;
   }
 
   const targetPath = file.targetPath
     || options?.targetPath || 'temp'; // server root folder 를 결정한다.
-
-  let instanceUpdate;
-
-  function setInstanceUpdate(bool) {
-    instanceUpdate = bool || false;
-  }
-
-  setInstanceUpdate(options.instanceUpdate);
 
   async function update() {
     if (state === UPLOAD) {
@@ -124,18 +139,28 @@ function Uploading(fileLike, options) {
     }
   }
 
+  async function setStateWithUpdate(newState) {
+    console.log('setStateWithUpdate', newState);
+    setState(newState);
+    if (state === UPLOAD
+      && (instanceUpdate === INSTANT_UPLOAD || instanceUpdate === INSTANT_UPDATE_ALL)) {
+      await update();
+    }
+    if (state === REMOVE
+      && (instanceUpdate === INSTANT_REMOVE || instanceUpdate === INSTANT_UPDATE_ALL)) {
+      await update();
+    }
+  }
+
   async function revert() {
     if (state === UPLOAD) {
-      setState(REMOVED);
+      await setStateWithUpdate(REMOVED);
     } else if (state === UPLOADED) {
-      setState(REMOVE);
+      await setStateWithUpdate(REMOVE);
     } else if (state === REMOVE) {
-      setState(UPLOADED);
+      await setStateWithUpdate(UPLOADED);
     } else {
       // console.warn(`${state} file is can not removed.`);
-    }
-    if (instanceUpdate) {
-      await update();
     }
   }
 
@@ -149,12 +174,12 @@ function Uploading(fileLike, options) {
     }
   }
 
-  if (instanceUpdate) {
-    update();
-  }
+  setInstanceUpdate(options.instanceUpdate);
+
+  setStateWithUpdate(getInitialState(file));
 
   Object.defineProperty(this, 'file', { get: () => file });
-  Object.defineProperty(this, 'state', { get: () => state, set: setState });
+  Object.defineProperty(this, 'state', { get: () => state, set: setStateWithUpdate });
   Object.defineProperty(this, 'update', { get: () => update });
   Object.defineProperty(this, 'revert', { get: () => revert });
   Object.defineProperty(this, 'download', { get: () => downloadFile });

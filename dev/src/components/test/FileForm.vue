@@ -117,6 +117,61 @@
       </kw-form-item>
     </kw-form-row>
 
+    <!-- dummy -->
+    <kw-form-row>
+      <kw-form-item label="dummy multiple">
+        <kw-file
+          ref="dummyRef"
+          v-model="dummyValue"
+          multiple
+          :label="'dummy multiple'"
+        />
+      </kw-form-item>
+      <kw-form-item label="life cycle">
+        <kw-btn
+          :label="'init'"
+          @click="initDummyRef"
+        />
+        <kw-btn
+          :label="'reset'"
+          @click="resetDummyRef"
+        />
+        <kw-btn
+          :label="'addDummy'"
+          @click="setDummy"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="dummy multiple">
+        <kw-file
+          ref="dummyRef2"
+          v-model="dummyArrayValue"
+          multiple
+          :label="'dummy multiple'"
+        />
+      </kw-form-item>
+      <kw-form-item label="life cycle">
+        <kw-btn
+          :label="'init'"
+          @click="initDummyRef2"
+        />
+        <kw-btn
+          :label="'reset'"
+          @click="resetDummyRef2"
+        />
+        <kw-btn
+          :label="'addDummy'"
+          @click="addDummy"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <!-- rules -->
+    <!-- select -->
+    <!-- counter -->
+    <!-- download hook -->
+    <!-- rejected -->
+
     <!-- wrapped -->
     <kw-form-row>
       <kw-form-item label="wrapped component">
@@ -148,12 +203,16 @@ const arrayValue2 = ref([]);
 const objValue = ref({});
 const fileRef = ref();
 const fileRef2 = ref();
+const dummyRef = ref();
+const dummyRef2 = ref();
 const wrappedRef = ref();
 const instanceUpdate = ref(true);
 const removable = ref(true);
 const downloadable = ref(false);
 const retryPossible = ref(true);
 const pickFileWhenClick = ref(false);
+const dummyValue = ref({});
+const dummyArrayValue = ref([]);
 
 // const checkedAll = computed({
 //   get: () => true,
@@ -184,6 +243,48 @@ function resetWrappedFile() {
 
 function initWrappedFile() {
   wrappedRef.value.fileRef.init();
+}
+
+function addDummy() {
+  const seed = Math.ceil(Math.random() * 10000);
+  dummyArrayValue.value.push({
+    name: `fileName${seed}.bmp`,
+    size: seed,
+    type: undefined,
+    targetPath: 'storage',
+    serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
+    fileUid: `fileUid_${seed}`,
+    myFileYn: 'Y',
+  });
+}
+
+function resetDummyRef() {
+  dummyRef.value.reset();
+}
+
+function initDummyRef() {
+  dummyRef.value.init();
+}
+
+function setDummy() {
+  const seed = Math.ceil(Math.random() * 10000);
+  dummyValue.value = {
+    name: `fileName${seed}.bmp`,
+    size: seed,
+    type: undefined,
+    targetPath: 'storage',
+    serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
+    fileUid: `fileUid_${seed}`,
+    myFileYn: 'Y',
+  };
+}
+
+function resetDummyRef2() {
+  dummyRef2.value.reset();
+}
+
+function initDummyRef2() {
+  dummyRef2.value.init();
 }
 
 </script>

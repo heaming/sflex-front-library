@@ -79,6 +79,10 @@
       color: $primary;
     }
   }
+
+  &--remove {
+    opacity: 0.6; // fixme temp
+  }
 }
 
 .kw-file-wrap {

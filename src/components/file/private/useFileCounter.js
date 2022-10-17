@@ -1,5 +1,5 @@
 export const useFileCounterProps = {
-  counterLabel: { type: Boolean, default: true },
+  counterLabel: { type: Function, default: undefined },
 };
 
 export default (files) => {
