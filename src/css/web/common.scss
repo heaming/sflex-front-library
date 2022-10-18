@@ -829,9 +829,15 @@ $unit: px;
 }
 
 .text- {
-  @each $weight, $value in $text-weights {
+
+  /* stylelint-disable-next-line at-rule-empty-line-before */
+  @each $weight,$value in $text-weights {
     &weight-#{$weight} {
       font-weight: $value !important;
+
+      & * {
+        font-weight: $value !important;
+      }
     }
   }
 }
