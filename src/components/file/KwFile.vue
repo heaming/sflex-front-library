@@ -210,8 +210,8 @@
                 <span> {{ fileSizeToString(file.size) }}</span>
               </div>
               <kw-btn
-                v-if="downloadable && isDownloadable(file) && false"
-                :icon="'download_off'"
+                v-if="downloadable && isDownloadable(file) && downloadIcon"
+                :icon="downloadIcon"
                 borderless
                 @click.prevent="downloadFile(file)"
               >
@@ -223,7 +223,7 @@
               </kw-btn>
               <kw-btn
                 v-if="!instanceUpdate && isUpdatable(file)"
-                :icon="'upload_off'"
+                :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
               >
@@ -235,7 +235,7 @@
               </kw-btn>
               <kw-btn
                 v-if="retryPossible && isRetryPossible(file)"
-                :icon="'retry'"
+                :icon="retryIcon"
                 borderless
                 @click.prevent="retryUpdateFile(file)"
               >
@@ -248,7 +248,7 @@
               <kw-btn
                 v-if="removable && isReversible(file)"
                 class="kw-file-item__remove"
-                icon="clear"
+                :icon="removeIcon"
                 borderless
                 @click.prevent="revertFile(file)"
               >
@@ -287,8 +287,11 @@ export default {
     // customize props
     pickFileWhenClick: { type: Boolean, default: false },
     removable: { type: Boolean, default: true },
+    removeIcon: { type: String, default: 'clear' },
     retryPossible: { type: Boolean, default: true },
+    retryIcon: { type: String, default: 'retry' },
     instanceUpdate: { type: [Boolean, String], default: false },
+    updateIcon: { type: String, default: 'upload_off' },
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
     placeholderClass: { type: [Array, String, Object], default: undefined },
@@ -411,7 +414,7 @@ export default {
 
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
-      classes += (props.downloadable && uploadCtx.isDownloadable(file)) ? 'kw-file-item--downloadable ' : '';
+      classes += (props.downloadable && uploadCtx.isDownloadable(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
       const uploadingState = uploadCtx.findUploading(file).state;
       classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
       return classes;
@@ -432,7 +435,7 @@ export default {
 
     // reference methods
     const pickFiles = () => {
-      fileRef.value?.getNativeElement()?.click();
+      fileRef.value?.getNativeElement().click();
     };
 
     // sample codes for attach icon

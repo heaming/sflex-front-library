@@ -56,7 +56,7 @@ const normalizeFileLike = (fileLike = {}) => {
       type: fileLike.type || 'application/octet-stream',
       lastModified: fileLike.lastModified || new Date().getTime(),
       dummy: false,
-      file: fileLike,
+      nativeFile: fileLike,
       key: generateFileLikeKey(fileLike),
     };
   }
@@ -67,7 +67,7 @@ const normalizeFileLike = (fileLike = {}) => {
     type: fileLike.type || 'application/octet-stream',
     lastModified: fileLike.lastModified || new Date().getTime(),
     dummy: true,
-    file: null,
+    nativeFile: null,
     targetPath: fileLike.targetPath,
     serverFileName: fileLike.serverFileName,
     fileUid: fileLike.fileUid,
@@ -119,7 +119,7 @@ function Uploading(fileLike, options) {
       setState(UPDATING);
       try {
         // head up!!! it is not upload to targetPath! only to temp!
-        const uploadResult = await upload(file.file, 'temp');
+        const uploadResult = await upload(file.nativeFile, 'temp');
         file.serverFileName = uploadResult.serverFileName;
         // head up!!! originalFileName same with name! FileLike only use name Field
         // file.originalFileName = uploadResult.originalFileName;
@@ -176,7 +176,7 @@ function Uploading(fileLike, options) {
     if (state === UPLOADED) {
       await download(file, targetPath);
     } else if (state === UPLOAD) {
-      downloadBlob(file.file, file.name);
+      downloadBlob(file.nativeFile, file.name);
     } else {
       throw new Error(`${state} file is can not download.`);
     }
@@ -267,14 +267,15 @@ export default (values, options) => {
       track();
       return uploadings.value
         .filter((uploading) => uploading.state !== REMOVED)
-        .map((uploading) => (uploading.file.dummy ? uploading.file : uploading.file.file));
+        .map((uploading) => (uploading.file.dummy ? uploading.file : uploading.file.nativeFile));
       // return removeDuplicate(unref(values));
     },
     async set(newFiles) {
-      // console.log('fileLikes_set', unref(newFiles));
+      console.log('fileLikes_set', unref(newFiles));
       await syncUploadings(newFiles);
       if (values.value !== newFiles && !isReadonly(values)) {
-        values.value = newFiles;
+        values.value = normalizedOptions.value.bindNativeFile ? newFiles
+          : newFiles.map((file) => findUploading(file).file);
       }
       trigger();
     },
@@ -316,6 +317,7 @@ export default (values, options) => {
     if (uploading.state === REMOVED) {
       fileLikes.value = fileLikes.value.filter((f) => f !== file);
     }
+    await syncUploadings(fileLikes.value);
   }
 
   async function updateAll(evenFailed = false) {
@@ -350,6 +352,7 @@ export default (values, options) => {
     if (uploading.state === REMOVED) {
       fileLikes.value = fileLikes.value.filter((f) => f !== file);
     }
+    await syncUploadings(fileLikes.value);
   }
 
   async function revertAll(forced = false) {
