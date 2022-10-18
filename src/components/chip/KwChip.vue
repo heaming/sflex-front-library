@@ -7,9 +7,11 @@
     :icon="icon"
     :icon-right="iconRight"
     :color="color"
+    :text-color="textColor"
     :disable="disable"
     :ripple="false"
-    outline
+    :outline="outline"
+    :square="square"
     @click="onClick"
   >
     <slot />
@@ -40,6 +42,10 @@ export default {
       type: String,
       default: undefined,
     },
+    textColor: {
+      type: String,
+      default: undefined,
+    },
     clickable: {
       type: Boolean,
       default: false,
@@ -51,6 +57,14 @@ export default {
     onClick: {
       type: Function,
       default: undefined,
+    },
+    outline: {
+      type: Boolean,
+      default: false,
+    },
+    square: {
+      type: Boolean,
+      default: false,
     },
   },
 
