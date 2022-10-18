@@ -10,7 +10,7 @@ const locales = {
     today: '오늘',
     clear: '삭제',
     format: 'yyyy-mm-dd',
-    titleFormat: 'yyyy년 mm월',
+    titleFormat: 'yyyy-mm',
     weekStart: 0,
   },
   en: {
@@ -22,7 +22,7 @@ const locales = {
     today: 'Today',
     clear: 'Clear',
     format: 'yyyy-mm-dd',
-    titleFormat: 'MM yyyy',
+    titleFormat: 'yyyy-mm',
     weekStart: 0,
   },
 };
