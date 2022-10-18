@@ -15,7 +15,6 @@
       :duration="100"
       node-key="key"
       label-key="label"
-      no-selection-unset
       no-connectors
       @update:selected="onUpdateSelected"
     >

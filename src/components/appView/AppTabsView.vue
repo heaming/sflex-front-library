@@ -19,7 +19,7 @@
         @click="onSelect(homeKey)"
       >
         <q-icon
-          name="alert_24"
+          name="home"
           size="24px"
         />
       </q-tab>
