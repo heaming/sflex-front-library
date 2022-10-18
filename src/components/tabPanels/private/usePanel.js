@@ -47,17 +47,19 @@ function getNormalizedPanels(slots) {
 }
 
 export default () => {
-  const { props, emit } = getCurrentInstance();
+  const { proxy, props, emit } = getCurrentInstance();
   const slots = useSlots();
 
   const panels = computed(() => getNormalizedPanels(slots));
   const activePanel = computed(() => panels.value.find((v) => v.props.name === props.modelValue));
 
-  const isMounted = ref(false);
-  const isActivePanel = (panel) => !isMounted.value || panel === activePanel.value;
+  const isForceUpdated = ref(false);
+  const isActivePanel = (panel) => !isForceUpdated.value || panel === activePanel.value;
 
-  onMounted(() => {
-    isMounted.value = true;
+  onMounted(async () => {
+    proxy.$forceUpdate();
+    await nextTick();
+    isForceUpdated.value = true;
   });
 
   const getPanelIndex = (name) => panels.value.findIndex((v) => v.props.name === name);
