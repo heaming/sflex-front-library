@@ -4,14 +4,16 @@
 
     <app-lnb />
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+    <app-router-view />
   </q-layout>
 </template>
 
 <script setup>
 import AppGnb from '~dev/components/app/AppGnb.vue';
 import AppLnb from '~dev/components/app/AppLnb.vue';
+
+import {
+  AppRouterView,
+} from '~kw-lib';
 
 </script>

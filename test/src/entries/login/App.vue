@@ -49,8 +49,8 @@ const { locale } = useI18n();
 async function onSubmit(formValues) {
   try {
     await login({
-      tenantId: '',
-      portalId: 'DEF',
+      tenantId: 'TNT_BASE',
+      portalId: 'WEB_ADM',
       languageId: locale.value,
       ...formValues,
     });
