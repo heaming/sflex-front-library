@@ -1,7 +1,7 @@
 import KwFile from './KwFile.vue';
-import KwFileWrapper from './KwFileWrapper.vue';
+import KwFileWrap from './KwFileWrap.vue';
 
 export {
   KwFile,
-  KwFileWrapper,
+  KwFileWrap,
 };

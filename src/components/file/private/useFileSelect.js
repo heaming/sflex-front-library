@@ -1,5 +1,5 @@
 export const useFileSelectProps = {
-  selectable: { type: Boolean, default: true },
+  selectable: { type: Boolean, default: false },
 };
 
 export default ({ files, updateFile, downloadFile, revertFile }) => {
@@ -37,7 +37,7 @@ export default ({ files, updateFile, downloadFile, revertFile }) => {
     clearSelected();
   };
 
-  const computedSelectable = computed(() => props.multiple && props.selectable);
+  const computedSelectable = computed(() => (props.multiple && props.selectable));
 
   return computed(() => (computedSelectable.value ? {
     selectable: computedSelectable.value,

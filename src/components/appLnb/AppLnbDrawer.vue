@@ -4,25 +4,19 @@
     :class="{'app-lnb-drawer--expanded': isExpanded}"
     icon="lnb_arrow"
     borderless
-    @click="onClickDrawer"
+    @click="toggleExapnded()"
   />
 </template>
 
 <script>
+import useLnbExpand from './private/useLnbExpand';
+
 export default {
   name: 'AppLnbDrawer',
 
   setup() {
-    const { getters, commit } = useStore();
-    const isExpanded = computed(() => getters['app/getLnbExpanded']);
-
-    function onClickDrawer() {
-      commit('app/setLnbExpanded', !isExpanded.value);
-    }
-
     return {
-      isExpanded,
-      onClickDrawer,
+      ...useLnbExpand(),
     };
   },
 };

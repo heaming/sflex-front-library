@@ -1,5 +1,10 @@
 import { differenceBy } from 'lodash-es';
-import { download, downloadBlob, upload } from '../../utils/file';
+import { download, downloadBlob, upload } from '../../../utils/file';
+
+const INSTANT_UPDATE_ALL = true;
+const INSTANT_UPLOAD = 'upload';
+const INSTANT_REMOVE = 'remove';
+const INSTANT_UPDATE_NOTHING = false;
 
 const UPLOADED = 'uploaded';
 const REMOVED = 'removed';
@@ -11,13 +16,13 @@ const FAIL_TO_REMOVE = 'failToRemove';
 const ERROR = 'error';
 const AVAILABLE_STATES = {
   [UPLOADED]: [REMOVE],
+  [REMOVED]: [], // end states
   [REMOVE]: [UPDATING, UPLOADED],
   [UPDATING]: [UPLOADED, REMOVED, ERROR, FAIL_TO_UPLOAD, FAIL_TO_REMOVE],
   [UPLOAD]: [UPDATING, REMOVED],
-  [REMOVED]: [],
+  [FAIL_TO_REMOVE]: [REMOVE, UPLOADED],
+  [FAIL_TO_UPLOAD]: [UPLOAD, REMOVED],
   [ERROR]: [REMOVED],
-  [FAIL_TO_UPLOAD]: [UPLOAD],
-  [FAIL_TO_REMOVE]: [REMOVE],
 };
 
 const generateFileLikeKey = (fileLike) => {
@@ -76,24 +81,40 @@ const getInitialState = (fileLike) => (fileLike.dummy ? UPLOADED : UPLOAD);
 function Uploading(fileLike, options) {
   const file = normalizeFileLike(fileLike);
 
-  let state = getInitialState(file);
+  let state;
+
+  let instanceUpdate;
 
   function setState(newState) {
-    state = AVAILABLE_STATES[state].includes(newState) ? newState : ERROR;
+    if (state) {
+      state = AVAILABLE_STATES[state].includes(newState) ? newState : ERROR;
+    } else {
+      state = newState;
+    }
+  }
+
+  function setInstanceUpdate(newInstanceUpdate) {
+    const avaliable = [INSTANT_UPDATE_ALL, INSTANT_UPLOAD, INSTANT_REMOVE, INSTANT_UPDATE_NOTHING];
+    if (!avaliable.includes(newInstanceUpdate)) {
+      instanceUpdate = INSTANT_UPDATE_NOTHING;
+      setState(ERROR);
+      return;
+    }
+    instanceUpdate = newInstanceUpdate;
   }
 
   const targetPath = file.targetPath
     || options?.targetPath || 'temp'; // server root folder 를 결정한다.
 
-  let instanceUpdate;
-
-  function setInstanceUpdate(bool) {
-    instanceUpdate = bool && false;
-  }
-
-  setInstanceUpdate(options.instanceUpdate);
-
-  async function update() {
+  async function update(evenFailed) {
+    if (evenFailed) {
+      if (state === FAIL_TO_REMOVE) {
+        setState(REMOVE);
+      }
+      if (state === FAIL_TO_UPLOAD) {
+        setState(UPLOAD);
+      }
+    }
     if (state === UPLOAD) {
       setState(UPDATING);
       try {
@@ -124,18 +145,30 @@ function Uploading(fileLike, options) {
     }
   }
 
-  async function revert() {
-    if (state === UPLOAD) {
-      setState(REMOVED);
-    } else if (state === UPLOADED) {
-      setState(REMOVE);
-    } else if (state === REMOVE) {
-      setState(UPLOADED);
-    } else {
-      // console.warn(`${state} file is can not removed.`);
-    }
-    if (instanceUpdate) {
+  async function setStateWithUpdate(newState) {
+    setState(newState);
+    if (state === UPLOAD
+      && (instanceUpdate === INSTANT_UPLOAD || instanceUpdate === INSTANT_UPDATE_ALL)) {
       await update();
+    }
+    if (state === REMOVE
+      && (instanceUpdate === INSTANT_REMOVE || instanceUpdate === INSTANT_UPDATE_ALL)) {
+      await update();
+    }
+  }
+
+  async function revert() {
+    const stateChange = {
+      [UPLOAD]: REMOVED,
+      [UPLOADED]: REMOVE, // if instantUpdates, will be REMOVED when update success, else, FAIL_TO_REMOVE;
+      [FAIL_TO_UPLOAD]: REMOVED,
+      [REMOVE]: UPLOADED,
+      [FAIL_TO_REMOVE]: UPLOADED,
+    };
+    if (stateChange[state]) {
+      await setStateWithUpdate(stateChange[state]);
+    } else {
+      console.warn(`${state} file is can not revert.`);
     }
   }
 
@@ -145,17 +178,18 @@ function Uploading(fileLike, options) {
     } else if (state === UPLOAD) {
       downloadBlob(file.file, file.name);
     } else {
-      // console.warn(`${state} file is can not download.`);
+      throw new Error(`${state} file is can not download.`);
     }
   }
 
-  if (instanceUpdate) {
-    update();
-  }
+  setInstanceUpdate(options.instanceUpdate);
+
+  setStateWithUpdate(getInitialState(file));
 
   Object.defineProperty(this, 'file', { get: () => file });
-  Object.defineProperty(this, 'state', { get: () => state, set: setState });
+  Object.defineProperty(this, 'state', { get: () => state, set: setStateWithUpdate });
   Object.defineProperty(this, 'update', { get: () => update });
+  Object.defineProperty(this, 'retry', { get: () => (() => { update(true); }) });
   Object.defineProperty(this, 'revert', { get: () => revert });
   Object.defineProperty(this, 'download', { get: () => downloadFile });
   Object.defineProperty(this, 'instanceUpdate', { get: () => instanceUpdate, set: setInstanceUpdate });
@@ -181,14 +215,14 @@ export const useSingleFileUpload = (value, options) => {
 
   const uploading = ref({});
   watch(value, async (newFile) => {
-    uploading.value = await generateReactiveUploading(newFile, normalizedOptions);
+    uploading.value = await generateReactiveUploading(newFile, normalizedOptions.value);
   }, { immediate: true });
 
   return uploading;
 };
 
 export default (values, options) => {
-  const normalizedOptions = options || {};
+  const normalizedOptions = ref(options || {});
   const uploadings = ref([]);
 
   function findUploading(file) {
@@ -219,7 +253,7 @@ export default (values, options) => {
     const added = differenceBy(newFiles, oldFiles, 'key');
     const generateUploadings = [];
     added.forEach((file) => {
-      generateUploadings.push(generateReactiveUploading(file, normalizedOptions));
+      generateUploadings.push(generateReactiveUploading(file, normalizedOptions.value));
     });
 
     const newUploadings = await Promise.all(generateUploadings);
@@ -282,17 +316,10 @@ export default (values, options) => {
     if (uploading.state === REMOVED) {
       fileLikes.value = fileLikes.value.filter((f) => f !== file);
     }
-    await syncUploadings(fileLikes.value);
   }
 
   async function updateAll(evenFailed = false) {
-    if (evenFailed) {
-      uploadings.value.forEach((uploading) => {
-        if (uploading.state === FAIL_TO_UPLOAD) { uploading.state = UPLOAD; }
-        if (uploading.state === FAIL_TO_REMOVE) { uploading.state = REMOVE; }
-      });
-    }
-    const updatings = uploadings.value.map((uploading) => uploading.update());
+    const updatings = uploadings.value.map((uploading) => uploading.update(evenFailed));
     await Promise.all(updatings);
     await syncUploadings(fileLikes.value);
   }
@@ -302,36 +329,24 @@ export default (values, options) => {
     return [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE].includes(uploading?.state);
   }
 
-  function readyForRetry(uploading) {
-    if (uploading.state === FAIL_TO_UPLOAD) {
-      uploading.state = UPLOAD;
-    }
-    if (uploading.state === FAIL_TO_REMOVE) {
-      uploading.state = REMOVE;
-    }
-  }
-
   async function retryUpdateFile(file) {
-    const uploading = findUploading(file);
-    readyForRetry(uploading);
-    return await updateFile(file);
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    await uploading.retry();
+    if (uploading.state === REMOVED) {
+      fileLikes.value = fileLikes.value.filter((f) => f !== file);
+    }
   }
 
-  function isReversible(file, includeFailed = true) {
+  function isReversible(file) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
-
-    return [STATE.UPLOADED, STATE.UPLOAD, STATE.REMOVE,
-      ...(includeFailed ? [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE] : [])]
+    return [STATE.UPLOAD, STATE.UPLOADED, STATE.REMOVE, STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE]
       .includes(uploading?.state);
   }
 
-  async function revertFile(file, includeFailed = true, forced = false) {
+  async function revertFile(file, forced = false) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
-    if (includeFailed && isRetryPossible(file)) {
-      readyForRetry(uploading);
-    }
     await uploading.revert();
-    if (forced) { await uploading.update(); }
+    if (!uploading.instanceUpdate && forced) { await uploading.update(); } // Since, revert resolve fail state.
     if (uploading.state === REMOVED) {
       fileLikes.value = fileLikes.value.filter((f) => f !== file);
     }
@@ -344,14 +359,19 @@ export default (values, options) => {
     await syncUploadings(fileLikes.value);
   }
 
+  function isDownloadable(file) {
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state);
+  }
+
   async function downloadFile(file) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
-    uploading.download();
+    await uploading.download();
   }
 
   async function downloadAll(onlyUploaded) {
     uploadings.value
-      .filter((uploading) => !onlyUploaded || uploading.state === UPLOADED)
+      .filter((uploading) => (onlyUploaded ? uploading.state === UPLOADED : isDownloadable(uploading)))
       .forEach((uploading) => uploading.download());
   }
 
@@ -372,6 +392,7 @@ export default (values, options) => {
     isReversible,
     revertFile,
     revertAll,
+    isDownloadable,
     downloadFile,
     downloadAll,
     isRetryPossible,

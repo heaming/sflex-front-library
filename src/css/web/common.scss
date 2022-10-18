@@ -558,12 +558,12 @@ p {
   min-height: calc(100vh - 456px);
 }
 
-.text-placeholder {
-  color: #999 !important;
+@include color-based(".text-", $semantic-colors) using ($color) {
+  color: $color !important;
 }
 
-.bg-placeholder {
-  background-color: #999 !important;
+@include color-based(".bg-", $semantic-colors) using ($color) {
+  background-color: $color !important;
 }
 
 // ul,li
