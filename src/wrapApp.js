@@ -13,7 +13,6 @@ export default (App) => defineComponent({
       h(GlobalNotify),
       h(Suspense, null, {
         default: () => h(App),
-        fallback: () => 'Loading...',
       }),
     ]);
   },

@@ -1,6 +1,7 @@
 import { Quasar } from 'quasar';
 import consts from '../consts';
 import { http } from '../plugins/http';
+import { loadSpinner } from '../plugins/loading';
 import { localStorage } from '../plugins/storage';
 import { INITIAL_LOCATION } from '../router';
 
@@ -46,14 +47,15 @@ export default () => {
 
   async function isReady() {
     try {
+      loadSpinner(true);
       await fetchLoginInfo();
       await Promise.all([
         fetchMetas(),
         fetchLangs(),
       ]);
       await invokeInitialRoute();
-    } catch (e) {
-      console.error(e);
+    } finally {
+      loadSpinner(false);
     }
   }
 
