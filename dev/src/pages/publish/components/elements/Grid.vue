@@ -327,7 +327,8 @@
           PopupSample03
         </router-link>
         <br>
-        It needs to be added <b>essential</b>, add { text : ' text ' , styleName: 'essential'} in header
+        It needs to be added <b>essential</b>, add { text : ' text ' , styleName: 'essential'} in header.<br>
+        left side title should add "<b>{styleName: 'text-left kw-bc--bg-grid text-weight-medium'}</b> "
       </p>
       <q-card>
         <kw-grid
@@ -649,7 +650,7 @@ function initGrid(data, view) {
 
 
   const columns = [
-    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
+    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid text-weight-medium' },
     {
       fieldName: 'col2',
       header: {
@@ -908,7 +909,7 @@ function initGrid6(data, view) {
   ];
 
   const columns = [
-    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid' },
+    { fieldName: 'col1', header: ' ', width: '250', styleName: 'text-left kw-bc--bg-grid text-weight-medium' },
     {
       fieldName: 'col2',
       header: {
@@ -948,6 +949,10 @@ const testCode5 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.10.11',
+    text: 'Add more detail of case #6',
+  },
   {
     timestamp: '2022.10.11',
     text: 'Add guide content of case #5',
