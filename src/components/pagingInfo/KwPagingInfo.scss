@@ -1,0 +1,27 @@
+.kw-paging-info {
+  display: flex;
+  align-items: center;
+
+  > div > span {
+    color: $black3;
+  }
+
+  &__total-count {
+    padding-left: 4px;
+    color: $black1 !important;
+    font-weight: 700;
+  }
+
+  &__rows-per-page.kw-field.q-field {
+    .q-field__native {
+      color: $black1;
+      font-weight: 700;
+    }
+
+    &.q-field--dense {
+      .q-field__suffix {
+        padding: 0 4px 0 2px;
+      }
+    }
+  }
+}

@@ -64,14 +64,6 @@ export default {
       }
     }
 
-    watch(() => props.pageSize, async (val, oldVal) => {
-      if (await confirmIfTargetsModified?.()) {
-        emit('change', props.pageIndex, val);
-      } else {
-        emit('update:pageSize', oldVal);
-      }
-    });
-
     const paginationRef = ref();
 
     function set(pageIndex) {

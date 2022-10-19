@@ -20,6 +20,7 @@ export * from './observer';
 export * from './optionGroup';
 export * from './page';
 export * from './pagination';
+export * from './pagingInfo';
 export * from './popup';
 export * from './radio';
 export * from './scrollArea';
