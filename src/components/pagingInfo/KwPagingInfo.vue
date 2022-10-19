@@ -1,11 +1,11 @@
 <template>
   <div class="kw-paging-info">
     <div
-      v-if="totalCount !== undefined"
+      v-if="hasTotalCount"
       class="flex items-center self-stretch"
     >
       <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
-      <span class="kw-paging-info__total-count">{{ totalCount }}</span>
+      <span class="kw-paging-info__total-count">{{ totalCountWithComma }}</span>
       <kw-separator
         spaced
         vertical
@@ -29,6 +29,7 @@
 <script>
 import { isNil } from 'lodash-es';
 import { PageSearchContextKey } from '../../consts/private/symbols';
+import { getNumberWithComma } from '../../utils/string';
 
 const defaultOptions = [10, 20, 30, 40, 50];
 
@@ -81,8 +82,13 @@ export default {
       emit('update:pageSize', firstOptionVal);
     }
 
+    const hasTotalCount = computed(() => !isNil(props.totalCount));
+    const totalCountWithComma = computed(() => hasTotalCount.value && getNumberWithComma(props.totalCount));
+
     return {
       onUpdateValue,
+      hasTotalCount,
+      totalCountWithComma,
     };
   },
 };
