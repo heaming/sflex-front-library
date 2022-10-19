@@ -44,12 +44,12 @@ interface KwFormProps extends UseObserverProps {
    * submit 이벤트
    * @param values 등록된 하위 입력 컴포넌트 값들
    */
-  onSubmit: (values: { [name: string]: any }) => Promise<void>;
+  onSubmit?: (values: { [name: string]: any }) => Promise<void>;
 
   /**
    * reset 이벤트
    */
-  onReset: () => Promise<void>;
+  onReset?: () => Promise<void>;
 }
 interface KwFormSlots {
   /**
