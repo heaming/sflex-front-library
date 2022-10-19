@@ -304,7 +304,7 @@ export default (values, options) => {
     if (isFilesChanged(newFiles, oldFiles)) {
       fileLikes.value = removeDuplicate(newFiles);
     }
-  }, { deep: true });
+  }, { deep: true, immediate: true });
 
   function isUpdatable(file) {
     const uploading = file instanceof Uploading ? file : findUploading(file);
