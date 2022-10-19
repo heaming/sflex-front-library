@@ -374,6 +374,46 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
+                label="출력 제외 기간"
+                required
+              >
+                <kw-field
+                  :model-value="[]"
+                  class="w130"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-bind="field"
+                      label="제외 기간 설정"
+                      val=""
+                    />
+                  </template>
+                </kw-field>
+                <kw-date-range-picker
+                  rules="date_range_months:1"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="출력 제외 기간"
+                required
+              >
+                <kw-input />
+                <kw-field
+                  :model-value="[]"
+                  class="w130"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-bind="field"
+                      label="제외 기간 설정"
+                      val=""
+                    />
+                  </template>
+                </kw-field>
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row>
+              <kw-form-item
                 label="DatePicker"
               >
                 <kw-date-picker />
@@ -692,7 +732,6 @@ const twoColumns = `
       hint-message="힌트입니다."
     >
       <kw-input
-        class="w400"
         placeholder="입력해주세요"
         rules="required"
       />
@@ -724,7 +763,7 @@ const twoColumns = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input">
-      <div class="row items-center w460">
+      <div class="row items-center">
         <kw-input
           placeholder="입력해주세요"
         />
@@ -739,44 +778,43 @@ const twoColumns = `
       </div>
     </kw-form-item>
     <kw-form-item label="input2">
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
-      <span>-</span>
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
-      <span>-</span>
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
+      <div class="row items-center">
+        <kw-input
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          placeholder="입력해주세요"
+        />
+      </div>
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input2">
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
-      <span>-</span>
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
+      <div class="row items-center w302">
+        <kw-input
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          placeholder="입력해주세요"
+        />
+      </div>
     </kw-form-item>
     <kw-form-item label="input2">
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
-      <span>-</span>
-      <kw-input
-        name="input"
-        placeholder="입력해주세요"
-      />
+      <div class="row items-center w302">
+        <kw-input
+          placeholder="입력해주세요"
+        />
+        <span>-</span>
+        <kw-input
+          placeholder="입력해주세요"
+        />
+      </div>
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
@@ -809,6 +847,46 @@ const twoColumns = `
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
       />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row>
+    <kw-form-item
+      label="출력 제외 기간"
+      required
+    >
+      <kw-field
+        :model-value="[]"
+        class="w130"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="제외 기간 설정"
+            val=""
+          />
+        </template>
+      </kw-field>
+      <kw-date-range-picker
+        rules="date_range_months:1"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="출력 제외 기간"
+      required
+    >
+      <kw-input />
+      <kw-field
+        :model-value="[]"
+        class="w130"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="제외 기간 설정"
+            val=""
+          />
+        </template>
+      </kw-field>
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
@@ -974,6 +1052,10 @@ const telephoneCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-19',
+    text: 'Add example of use together width checkbox',
+  },
   {
     timestamp: '2022-09-28',
     text: 'Edit guide about essential',
