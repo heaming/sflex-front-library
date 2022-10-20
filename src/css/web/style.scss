@@ -1,0 +1,27 @@
+// 파일첨부 미리보기
+.preview-attach {
+  width: 100%;
+  border: 1px solid $line-stroke;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    padding: 0 7px;
+    height: 34px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid $line-bg;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    .q-img {
+      height: 120px;
+    }
+  }
+}

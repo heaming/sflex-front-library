@@ -93,7 +93,6 @@
               <kw-form-item label="optiongroup (default)">
                 <kw-option-group
                   :model-value="'A'"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C', 'D']"
                 />
@@ -124,7 +123,6 @@
               <kw-form-item label="optiongroup (disable)">
                 <kw-option-group
                   :model-value="'B'"
-                  rules="required"
                   type="radio"
                   :options="['A', 'B', 'C']"
                   disable
@@ -216,7 +214,6 @@ const groupRadioDefaultCode = `
     <kw-form-item label="optiongroup (default)">
       <kw-option-group
         :model-value="'A'"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -230,7 +227,6 @@ const groupRadioDefaultCode = `
     <kw-search-item label="optiongroup (default)">
       <kw-option-group
         :model-value="'A'"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C', 'D']"
       />
@@ -245,7 +241,6 @@ const groupRadioDisableCode = `
     <kw-form-item label="optiongroup (disable)">
       <kw-option-group
         :model-value="'B'"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C']"
         disable
@@ -260,7 +255,6 @@ const groupRadioDisableCode = `
     <kw-search-item label="optiongroup (disable)">
       <kw-option-group
         :model-value="'B'"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C']"
         disable
@@ -276,7 +270,6 @@ const groupRadioReadonlyCode = `
     <kw-form-item label="optiongroup (readonly)">
       <kw-option-group
         :model-value="'C'"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C']"
         disable
@@ -291,7 +284,6 @@ const groupRadioReadonlyCode = `
     <kw-search-item label="optiongroup (readonly)">
       <kw-option-group
         :model-value="'C'"
-        rules="required"
         type="radio"
         :options="['A', 'B', 'C']"
         disable
@@ -337,6 +329,10 @@ const essentialCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-20',
+    text: 'delete code about rules in non-essential type ',
+  },
   {
     timestamp: '2022-09-21',
     text: 'add guide content of summary about essential type',

@@ -12,6 +12,10 @@
     :boundary-numbers="false"
     :ripple="false"
     :ellipses="false"
+    icon-first="arrow_prev"
+    icon-last="arrow_next"
+    icon-prev="arrow_left"
+    icon-next="arrow_right"
     @update:model-value="onUpdateValue"
   />
 </template>
