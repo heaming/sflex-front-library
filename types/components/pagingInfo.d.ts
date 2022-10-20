@@ -16,7 +16,7 @@ interface KwPagingInfoProps {
    * 페이지 사이즈 옵션 목록
    * @defaultValue `[10, 20, 30, 40, 50]`
    */
-  pageSizeOptions?: Array;
+  pageSizeOptions?: Array<any>;
 
   /**
    * 페이지네이션 전체 갯수
