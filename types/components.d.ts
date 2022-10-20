@@ -18,6 +18,7 @@ import { KwObserver } from './components/observer';
 import { KwOptionGroup } from './components/optionGroup';
 import { KwPage } from './components/page';
 import { KwPagination } from './components/pagination';
+import { KwPagingInfo } from './components/pagingInfo';
 import { KwPopup } from './components/popup';
 import { KwRadio } from './components/radio';
 import { KwSearch, KwSearchRow, KwSearchItem } from './components/search';
@@ -54,6 +55,7 @@ export interface KwComponentNameMap {
   KwOptionGroup: KwOptionGroup;
   KwPage: KwPage;
   KwPagination: KwPagination;
+  KwPagingInfo: KwPagingInfo;
   KwPopup: KwPopup;
   KwRadio: KwRadio;
   KwSearch: KwSearch;
