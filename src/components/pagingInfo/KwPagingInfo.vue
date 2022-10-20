@@ -7,12 +7,14 @@
       <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
       <span class="kw-paging-info__total-count">{{ totalCountWithComma }}</span>
       <kw-separator
+        v-if="usePageSize"
         spaced
         vertical
         inset
       />
     </div>
     <kw-select
+      v-if="usePageSize"
       :model-value="pageSize"
       class="kw-paging-info__rows-per-page"
       :options="options"
@@ -54,6 +56,10 @@ export default {
       type: Array,
       default: () => [...defaultOptions],
     },
+    usePageSize: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -63,6 +69,9 @@ export default {
   ],
 
   setup(props, { emit }) {
+    const hasTotalCount = computed(() => !isNil(props.totalCount));
+    const totalCountWithComma = computed(() => hasTotalCount.value && getNumberWithComma(props.totalCount));
+
     const {
       getRegisteredSearch,
     } = inject(PageSearchContextKey, {});
@@ -77,18 +86,15 @@ export default {
       }
     }
 
-    if (isNil(props.pageSize)) {
+    if (props.usePageSize && isNil(props.pageSize)) {
       const firstOptionVal = props.options[0]?.codeId || props.options[0];
       emit('update:pageSize', firstOptionVal);
     }
 
-    const hasTotalCount = computed(() => !isNil(props.totalCount));
-    const totalCountWithComma = computed(() => hasTotalCount.value && getNumberWithComma(props.totalCount));
-
     return {
-      onUpdateValue,
       hasTotalCount,
       totalCountWithComma,
+      onUpdateValue,
     };
   },
 };
