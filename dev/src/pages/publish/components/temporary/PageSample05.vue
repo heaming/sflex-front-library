@@ -106,8 +106,8 @@
       <kw-action-top>
         <template #left>
           <kw-paging-info
-            use-page-size
             :page-size="10"
+            :page-size-options="[10, 20, 30, 40, 50]"
             :total-count="1567"
           />
         </template>

@@ -13,20 +13,15 @@ interface KwPagingInfoProps {
   pageSize?: number;
 
   /**
-   * 페이지네이션 전체 갯수
-   */
-  totalCount?: number;
-
-  /**
    * 페이지 사이즈 옵션 목록
    * @defaultValue `[10, 20, 30, 40, 50]`
    */
-  options?: Array;
+  pageSizeOptions?: Array;
 
   /**
-   * 페이지 사이즈 Select 표시 여부
+   * 페이지네이션 전체 갯수
    */
-  usePageSize?: boolean;
+  totalCount?: number;
 
   /**
    * 'v-model:pageIndex'에서 값 변경을 위해 사용

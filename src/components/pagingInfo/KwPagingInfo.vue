@@ -7,17 +7,17 @@
       <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
       <span class="kw-paging-info__total-count">{{ totalCountWithComma }}</span>
       <kw-separator
-        v-if="usePageSize"
+        v-if="hasPageSizeOptions"
         spaced
         vertical
         inset
       />
     </div>
     <kw-select
-      v-if="usePageSize"
+      v-if="hasPageSizeOptions"
       :model-value="pageSize"
       class="kw-paging-info__rows-per-page"
-      :options="options"
+      :options="pageSizeOptions"
       :suffix="$t('MSG_TXT_PER_PAGE_SIZE', null, '개씩보기')"
       borderless
       dense
@@ -33,8 +33,6 @@ import { isNil } from 'lodash-es';
 import { PageSearchContextKey } from '../../consts/private/symbols';
 import { getNumberWithComma } from '../../utils/string';
 
-const defaultOptions = [10, 20, 30, 40, 50];
-
 export default {
   name: 'KwPagingInfo',
   inheritAttrs: false,
@@ -48,17 +46,13 @@ export default {
       type: Number,
       default: undefined,
     },
+    pageSizeOptions: {
+      type: Array,
+      default: undefined,
+    },
     totalCount: {
       type: Number,
       default: undefined,
-    },
-    options: {
-      type: Array,
-      default: () => [...defaultOptions],
-    },
-    usePageSize: {
-      type: Boolean,
-      default: false,
     },
   },
 
@@ -69,9 +63,6 @@ export default {
   ],
 
   setup(props, { emit }) {
-    const hasTotalCount = computed(() => !isNil(props.totalCount));
-    const totalCountWithComma = computed(() => hasTotalCount.value && getNumberWithComma(props.totalCount));
-
     const {
       getRegisteredSearch,
     } = inject(PageSearchContextKey, {});
@@ -86,15 +77,15 @@ export default {
       }
     }
 
-    if (props.usePageSize && isNil(props.pageSize)) {
-      const firstOptionVal = props.options[0]?.codeId || props.options[0];
-      emit('update:pageSize', firstOptionVal);
-    }
+    const hasPageSizeOptions = computed(() => Array.isArray(props.pageSizeOptions));
+    const hasTotalCount = computed(() => !isNil(props.totalCount));
+    const totalCountWithComma = computed(() => hasTotalCount.value && getNumberWithComma(props.totalCount));
 
     return {
+      onUpdateValue,
+      hasPageSizeOptions,
       hasTotalCount,
       totalCountWithComma,
-      onUpdateValue,
     };
   },
 };
