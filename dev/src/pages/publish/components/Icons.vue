@@ -99,6 +99,7 @@ const iconList1 = [
   'price',
   'print',
   'report',
+  'retry',
   'save',
   'search',
   'sorti',
