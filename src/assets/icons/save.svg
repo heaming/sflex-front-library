@@ -1,0 +1,18 @@
+<svg id="save" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <g data-name="save(h16)">
+        <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+        <g data-name="사각형 151631" style="stroke-width:1.5px;stroke:currentColor;fill:none">
+            <path style="stroke:none" d="M0 0h7.37v5.863H0z" transform="translate(4 1.5)"/>
+            <path style="fill:none" d="M.75.75h5.87v4.363H.75z" transform="translate(4 1.5)"/>
+        </g>
+        <path data-name="선 3177" transform="translate(1.75 1.5)" style="stroke-width:1.5px;stroke:currentColor;fill:none" d="M0 0v13"/>
+        <path data-name="선 3178" transform="translate(14.25 4.5)" style="stroke-width:1.5px;stroke:currentColor;fill:none" d="M0 0v10"/>
+        <path data-name="선 3179" transform="translate(1.5 13.75)" style="stroke-width:1.5px;stroke:currentColor;fill:none" d="M0 0h13"/>
+        <path data-name="선 3180" transform="translate(1 2.25)" style="stroke-width:1.5px;stroke:currentColor;fill:none" d="M0 0h11"/>
+        <path data-name="선 3181" transform="translate(1 2.25)" style="stroke-width:1.5px;stroke:currentColor;fill:none" d="M0 0h11"/>
+        <g data-name="사각형 151632" style="fill:#fff;stroke:currentColor">
+            <path style="stroke:none" d="M0 0h4.25v1.5H0z" transform="rotate(45 4.187 15.23)"/>
+            <path style="fill:none" d="M.5.5h3.25V1H.5z" transform="rotate(45 4.187 15.23)"/>
+        </g>
+    </g>
+</svg>
