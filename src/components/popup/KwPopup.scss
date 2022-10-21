@@ -3,20 +3,13 @@
   border: 1px solid $black-btn-line;
   box-shadow: 8px 10px 10px 0 rgb(0 0 0 / 12%) !important;
   position: relative !important;
-  transform: none !important;
   overflow: hidden !important;
 
   &--sm {
     width: 460px;
     max-width: 460px !important;
     min-width: 460px !important;
-
-    // min-height: 250px;
     margin-top: 0;
-
-    // .kw-popup__content {
-    //   min-height: 118px !important;
-    // }
   }
 
   &--md {

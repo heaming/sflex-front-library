@@ -104,7 +104,7 @@ export default {
       replaceRoutesByMenus(apps, menus);
     },
     async fetchPage({ commit, getters }, pageDestinationValue) {
-      const isCached = !!getters.getPage(pageDestinationValue);
+      const isCached = getters.getPage(pageDestinationValue) !== undefined;
 
       if (!isCached) {
         const response = await http.get(`/api/v1/common/new-meta/${pageDestinationValue}`);
