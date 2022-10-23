@@ -37,7 +37,7 @@ export default {
   ],
 
   setup(props) {
-    const fieldCtx = useField();
+    const fieldCtx = useField({ bindValueKey: props.fieldKey });
     const { value } = fieldCtx;
 
     const fieldBinding = ref({
