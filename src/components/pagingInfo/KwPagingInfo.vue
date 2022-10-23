@@ -70,9 +70,11 @@ export default {
     const confirmIfTargetsModified = getRegisteredSearch?.()?.confirmIfTargetsModified || (() => true);
 
     async function onUpdateValue(val) {
+      val = Number.parseInt(val, 10);
+
       if (await confirmIfTargetsModified?.()) {
         emit('update:pageIndex', 1);
-        emit('update:pageSize', val);
+        emit('update:pageSize', val, 10);
         emit('change', 1, val);
       }
     }
