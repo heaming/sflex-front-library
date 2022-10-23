@@ -103,11 +103,11 @@ export default {
       dispatch('app/createLnbItems', menus, { root: true });
       replaceRoutesByMenus(apps, menus);
     },
-    async fetchPage({ commit, getters }, pageDestinationValue) {
-      const isCached = getters.getPage(pageDestinationValue) !== undefined;
+    async fetchPage({ commit, getters }, key) {
+      const isCached = getters.getPage(key) !== undefined;
 
       if (!isCached) {
-        const response = await http.get(`/api/v1/common/new-meta/${pageDestinationValue}`);
+        const response = await http.get(`/api/v1/common/meta/${key}`);
         const { pageInfo, ...pageMeta } = response.data;
         const page = { ...pageInfo, ...pageMeta };
 
