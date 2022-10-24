@@ -248,6 +248,14 @@
     }
   }
 
+  &--veritcal-header {
+    tbody tr {
+      th {
+        border-bottom: 1px solid $line-bg;
+      }
+    }
+  }
+
   tbody:has(td[rowspan]) td {
     border-left: 1px solid $line-bg;
   }
