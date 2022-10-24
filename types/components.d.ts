@@ -1,5 +1,6 @@
 // register global component
 // which that tag starts with `Kw`
+import { KwAction, KwActionTop, KwActionBottom } from './components/action';
 import { KwActionBar } from './components/actionBar';
 import { KwBtn } from './components/btn';
 import { KwBtnToggle } from './components/btnToggle';
@@ -32,6 +33,9 @@ import { KwToggle } from './components/toggle';
 import { KwTooltip } from './components/tooltip';
 
 export interface KwComponentNameMap {
+  KwAction: KwAction;
+  KwActionTop: KwActionTop;
+  KwActionBottom: KwActionBottom;
   KwActionBar: KwActionBar;
   KwBtn: KwBtn;
   KwBtnToggle: KwBtnToggle;
