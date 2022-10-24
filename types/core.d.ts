@@ -8,15 +8,6 @@ interface CreateAppOptions {
 }
 export function createApp(rootComponent: Component, options?: CreateAppOptions): App<Element>;
 
-// getComponentType
-import { Ref } from 'vue';
-import { KwComponentNameMap } from './components';
-export function getComponentType<K extends keyof KwComponentNameMap>(componentName: K): KwComponentNameMap[K];
-
-declare module '@vue/runtime-core' {
-  export function ref<T extends KwComponentNameMap[keyof KwComponentNameMap]>(kwComponent: T): Ref<T | null>;
-}
-
 // Consts
 export const consts: {
   LOCALE_KO: 'ko';
@@ -74,6 +65,3 @@ export function validate(
     bails?: boolean;
   },
 ): string | boolean | Promise<string | boolean>;
-
-// Global Utils
-export function delay(ms?: number): Promise<void>;
