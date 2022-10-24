@@ -16,6 +16,16 @@ export default (files) => {
     return fileSize.toFixed(fd) + units[unitIndex];
   };
 
+  const fileSizeToNumber = (fileSize) => {
+    const units = ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+    if (typeof fileSize === 'number') return Number.parseInt(fileSize, 10);
+    const delimiterRemoved = fileSize.replaceAll(/[,_]/g, '');
+    const findFirstCharOfUnit = /\d\s*([^.\s])/;
+    const firstUnit = findFirstCharOfUnit.exec(delimiterRemoved)[1].toUpperCase();
+    const numberFloat = Number.parseFloat(delimiterRemoved);
+    return numberFloat * 1024 ** (units.indexOf(firstUnit) || 0);
+  };
+
   const counterProps = computed(() => ({
     totalSize: fileSizeToString(files.value.reduce((acc, file) => acc + file.size, 0)),
     filesNumber: files.value.length,
@@ -23,13 +33,14 @@ export default (files) => {
   }));
 
   const defaultCounterLabel = ({ totalSize, filesNumber, maxFiles }) => {
+    const totalSizeInt = fileSizeToNumber(totalSize);
     const counters = [];
     if (props.maxFiles) {
       counters.push(`${filesNumber} files of ${maxFiles}`);
     }
     if (props.maxTotalSize) {
       const maxTotalSizeString = fileSizeToString(props.maxTotalSize);
-      let totalSizeString = totalSize;
+      let totalSizeString = fileSizeToString(totalSizeInt);
       if (maxTotalSizeString.at(-2) === totalSizeString.at(-2)) {
         totalSizeString = totalSizeString.replace(/\D*$/g, '');
       }
@@ -38,11 +49,17 @@ export default (files) => {
     return counters.join(' | ');
   };
 
-  const computedCounterLabel = computed(() => props.counterLabel || defaultCounterLabel);
+  const computedCounterLabel = computed(() => {
+    if (props.counterLabel) {
+      return () => props.counterLabel(counterProps.value);
+    }
+    return defaultCounterLabel;
+  });
 
   const computedCounter = computed(() => computedCounterLabel.value(counterProps.value));
 
   return {
+    fileSizeToNumber,
     fileSizeToString,
     computedCounterLabel,
     computedCounter,

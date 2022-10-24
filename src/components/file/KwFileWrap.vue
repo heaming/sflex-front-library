@@ -77,7 +77,29 @@
         @rejected="$emit('rejected', $event)"
         @downloaded="$emit('downloaded', $event)"
         @update:model-value="$emit('update:modelValue', $event)"
-      />
+      >
+        <template
+          v-if="$slots.selected"
+          #selected="{files, ref}"
+        >
+          <slot
+            :ref="ref"
+            name="selected"
+            :files="files"
+          />
+        </template>
+        <template
+          v-else-if="$slots['append-file']"
+          #append-file="{file, index, ref}"
+        >
+          <slot
+            :ref="ref"
+            name="append-file"
+            :file="file"
+            :index="index"
+          />
+        </template>
+      </kw-file>
     </div>
   </div>
 </template>
