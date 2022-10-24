@@ -35,8 +35,18 @@ export function isServerError(response) {
   return serverErrorKeys.every(hasOwnProperty);
 }
 
-export function joinUrls(...urls) {
-  return [...urls, '/']
-    .join('/')
-    .replace(/\/+/g, '/');
+export function buildURL(...partials) {
+  const [schema = ''] = partials[0].match(/^https?:\/\//) || [];
+  const combines = [];
+
+  if (schema) {
+    combines.push(
+      partials[0].substring(schema.length),
+      ...partials.splice(1),
+    );
+  } else {
+    combines.push('/', ...partials);
+  }
+
+  return `${schema}${combines.join('/').replace(/\/+/g, '/')}`;
 }
