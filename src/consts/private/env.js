@@ -7,6 +7,6 @@ export default {
   VITE_REALGRID_LIC: env.VITE_REALGRID_LIC,
 
   // HTTP
-  VITE_HTTP_BASE_URL: env.PROD ? '/' : env.VITE_HTTP_BASE_URL,
+  VITE_HTTP_BASE_URL: env.PROD ? '/api/v1' : env.VITE_HTTP_BASE_URL,
   VITE_HTTP_TIMEOUT: parseInt(env.VITE_HTTP_TIMEOUT, 10),
 };

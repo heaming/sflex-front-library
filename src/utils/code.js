@@ -8,7 +8,7 @@ async function fetchCodes(codeId, parentCodeValue) {
 
   if (!cachedCodes[key]) {
     const params = { parentsCodeValidityValue: parentCodeValue };
-    const response = await http.get(`/api/v1/sflex/common/common/codes/${codeId}`, { params });
+    const response = await http.get(`/sflex/common/common/codes/${codeId}`, { params });
     const codes = response.data;
 
     if (codes.length === 0) {
@@ -26,7 +26,7 @@ async function fetchMultiCodes(codeIds) {
 
   if (requestCodeIds.length > 0) {
     const params = { codeIds: requestCodeIds };
-    const response = await http.get('/api/v1/sflex/common/common/codes/code-ids', { params });
+    const response = await http.get('/sflex/common/common/codes/code-ids', { params });
     const multiCodes = response.data;
 
     multiCodes.forEach(({ codeId, codes }) => {
