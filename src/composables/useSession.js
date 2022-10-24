@@ -12,10 +12,10 @@ export default () => {
 
   async function fetchLoginInfo() {
     const { userInfo } = await store.dispatch('meta/fetchLoginInfo');
-    const { displayLangId } = userInfo;
+    const { langId } = userInfo;
 
-    i18n.locale.value = displayLangId;
-    Quasar.locale = displayLangId;
+    i18n.locale.value = langId;
+    Quasar.locale = langId;
   }
 
   async function fetchMetas() {
