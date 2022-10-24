@@ -26,7 +26,7 @@ export async function upload(file, targetPath = targetPaths[0]) {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await http.post(`/api/v1/common/file/${targetPath}/upload`, formData, {
+  const response = await http.post(`/api/v1/sflex/common/common/file/${targetPath}/upload`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
@@ -36,7 +36,7 @@ export async function upload(file, targetPath = targetPaths[0]) {
 export async function download(fileInfo, targetPath = targetPaths[0]) {
   throwIfIsInvalidTargetPath(targetPath);
 
-  const response = await http.get(`/api/v1/common/file/${targetPath}/download`, {
+  const response = await http.get(`/api/v1/sflex/common/common/file/${targetPath}/download`, {
     params: fileInfo,
     responseType: 'blob',
   });
