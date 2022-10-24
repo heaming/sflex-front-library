@@ -68,7 +68,7 @@ export default {
   actions: {
     async fetchLoginInfo({ commit }) {
       const accessToken = localStorage.getItem(consts.LOCAL_STORAGE_ACCESS_TOKEN) || null;
-      const response = await http.post('/api/v1/security/login-info', null, {
+      const response = await http.post('/api/v1/sflex/common/common/login-info', null, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
 
@@ -87,14 +87,14 @@ export default {
       return loginInfo;
     },
     async fetchApps({ commit, dispatch }) {
-      const response = await http.get('/api/v1/common/portal/applications');
+      const response = await http.get('/api/v1/sflex/common/common/portal/applications');
       const apps = response.data;
 
       commit('setApps', apps);
       dispatch('app/createGnbItems', apps, { root: true });
     },
     async fetchMenus({ commit, getters, dispatch }) {
-      const response = await http.get('/api/v1/common/portal/menus');
+      const response = await http.get('/api/v1/sflex/common/common/portal/menus');
 
       const apps = getters.getApps;
       const menus = response.data;
@@ -107,7 +107,7 @@ export default {
       const isCached = getters.getPage(key) !== undefined;
 
       if (!isCached) {
-        const response = await http.get(`/api/v1/common/meta/${key}`);
+        const response = await http.get(`/api/v1/sflex/common/common/meta/${key}`);
         const { pageInfo, ...pageMeta } = response.data;
         const page = { ...pageInfo, ...pageMeta };
 

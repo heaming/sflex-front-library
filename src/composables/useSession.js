@@ -27,7 +27,7 @@ export default () => {
 
   async function fetchLangs() {
     const locale = i18n.locale.value;
-    const response = await http.get('/api/v1/common/multi-languages', {
+    const response = await http.get('/api/v1/sflex/common/common/multi-languages', {
       params: {
         langId: locale,
         multiLanguageTypeCode: 'MSSG',
