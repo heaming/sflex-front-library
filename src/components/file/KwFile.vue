@@ -429,9 +429,8 @@ export default {
         return [];
       },
       set: (val) => {
-        const rawValue = unref(value);
-        if (Object(rawValue) === rawValue) {
-          value.value = 'length' in rawValue ? val : val[0];
+        if (Object(val) === val) {
+          value.value = 'length' in val ? val : val[0];
         }
       },
     });

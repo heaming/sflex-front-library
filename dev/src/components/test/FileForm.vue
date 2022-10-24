@@ -49,13 +49,20 @@
           :true-value="true"
           :false-value="false"
           :indeterminate-value="undefined"
-          label="pickFileWhenClick"
+          label="pickFileBtn"
+        />
+        <kw-toggle
+          v-model="multiple"
+          :true-value="true"
+          :false-value="false"
+          label="multiple"
         />
         <kw-toggle
           v-model="selectable"
+          :disable="!multiple"
           :true-value="true"
           :false-value="false"
-          label="selectable"
+          label="selectable (multiple only)"
         />
       </kw-form-item>
     </kw-form-row>
@@ -259,12 +266,13 @@
           </template>
         </kw-file>
       </kw-form-item>
-      <kw-form-item label="multiple">
+      <kw-form-item
+        label="multiple"
+      >
         <kw-file
           :ref="addRefs"
           v-model="multipleValue"
           name="multiple"
-          multiple
           :label="'multiple'"
           :pick-file-when-click="pickFileWhenClick"
           :pick-file-btn="pickFileBtn"
@@ -288,6 +296,7 @@
           :placeholder="placeholder || undefined"
           :placeholder-style="placeholderStyle"
           :placeholder-class="placeholderClass"
+          :multiple="multiple"
         >
           <template
             v-if="scrollHorizontal"
@@ -688,6 +697,7 @@ const appendFileValue = ref([
     myFileYn: 'Y',
   },
 ]);
+const multiple = ref(true);
 
 async function onDownloaded(file) {
   return alert(`${file.name} downloaded!`);
