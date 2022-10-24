@@ -1,3 +1,21 @@
+// getComponentType
+import { Ref } from 'vue';
+import { KwComponentNameMap } from './components';
+export function getComponentType<K extends keyof KwComponentNameMap>(componentName: K): KwComponentNameMap[K];
+
+declare module '@vue/runtime-core' {
+  export function ref<T extends KwComponentNameMap[keyof KwComponentNameMap]>(kwComponent: T): Ref<T | null>;
+}
+
+// defineGrid
+export function defineGrid<T = (view: GridView, data: LocalDataProvider) => void>(initFn: T): T;
+
+// defineTreeGrid
+export function defineTreeGrid<T = (view: TreeView, data: LocalTreeDataProvider) => void>(initFn: T): T;
+
+// Global Utils
+export function delay(ms?: number): Promise<void>;
+
 // Code
 interface Code {
   codeId: string;
@@ -74,7 +92,7 @@ interface FileUtil {
 export const fileUtil: FileUtil;
 
 // Grid
-import { GridView, TreeView, GridExportOptions, DataValues } from 'realgrid';
+import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider } from 'realgrid';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;

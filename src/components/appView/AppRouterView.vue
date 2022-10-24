@@ -1,28 +1,19 @@
 <template>
   <q-page-container class="app-view">
     <router-view v-slot="{ Component, route }">
-      <load-failed-view
-        v-if="isLoadFailed"
-      />
-      <suspense
-        v-else
-        :timeout="0"
-        @resolve="onResolve"
-      >
+      <kw-suspense :key="route.fullPath">
         <template #default>
-          <component
-            :is="Component"
-            :key="route.path"
-          />
+          <component :is="Component" />
         </template>
-      </suspense>
+        <template #error>
+          <load-failed-view />
+        </template>
+      </kw-suspense>
     </router-view>
   </q-page-container>
 </template>
 
 <script>
-import { loadSpinner } from '../../plugins/loading';
-import consts from '../../consts';
 import LoadFailedView from './LoadFailedView.vue';
 
 export default {
@@ -30,28 +21,8 @@ export default {
   components: { LoadFailedView },
 
   setup() {
-    const isLoaded = ref(false);
-    const isLoadFailed = ref(false);
-    const { currentRoute } = useRouter();
-    watch(currentRoute, () => {
-      isLoaded.value = false;
-      isLoadFailed.value = false;
-    });
-    loadSpinner(true);
-    function onResolve() {
-      loadSpinner(false);
-      isLoaded.value = true;
-    }
-    onErrorCaptured(() => {
-      if (!isLoaded.value) {
-        loadSpinner(false);
-        isLoadFailed.value = true;
-      }
-    });
     return {
-      consts,
-      isLoadFailed,
-      onResolve,
+
     };
   },
 };

@@ -5,7 +5,7 @@ interface KwCheckboxProps {
   /**
    * 현재 선택된 값
    */
-  modelValue?: string | number | boolean | Array;
+  modelValue?: string | number | boolean | Array<any>;
 
   /**
    * true 상태의 값
@@ -89,7 +89,7 @@ interface KwCheckboxProps {
    * 'v-model:modelValue'에서 값 변경을 위해 사용
    * @param modelValue 선택된 값
    */
-  'onUpdate:modelValue'?: (modelValue: string | number | boolean | Array) => void;
+  'onUpdate:modelValue'?: (modelValue: string | number | boolean | Array<any>) => void;
 }
 
 interface KwCheckboxSlots {

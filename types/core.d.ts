@@ -8,15 +8,6 @@ interface CreateAppOptions {
 }
 export function createApp(rootComponent: Component, options?: CreateAppOptions): App<Element>;
 
-// getComponentType
-import { Ref } from 'vue';
-import { KwComponentNameMap } from './components';
-export function getComponentType<K extends keyof KwComponentNameMap>(componentName: K): KwComponentNameMap[K];
-
-declare module '@vue/runtime-core' {
-  export function ref<T extends KwComponentNameMap[keyof KwComponentNameMap]>(kwComponent: T): Ref<T | null>;
-}
-
 // Consts
 export const consts: {
   LOCALE_KO: 'ko';
@@ -24,6 +15,8 @@ export const consts: {
 
   ROUTE_HOME_NAME: 'Home';
 
+  HTTP_ORIGIN: string;
+  HTTP_API_VERSION_PREFIX: string;
   HTTP_HEADER_PAGE_ID: 'X-PageId';
   HTTP_ERROR_TYPE_BIZ: 'B';
   HTTP_ERROR_TYPE_EXCEPTION: 'E';
@@ -33,7 +26,7 @@ export const consts: {
   HTTP_ERROR_TYPE_OAUTH_EXPIRED: 'O';
   HTTP_ERROR_TYPE_UNSUPPORTED_DEVICE: 'D';
 
-  LOCAL_STORAGE_ACCESS_TOKEN: '__ACCESS_TOKEN__';
+  LOCAL_STORAGE_ACCESS_TOKEN: 'accessToken';
 
   PERMISSION_KEY_PRINT: 'print';
   PERMISSION_KEY_DOWNLOAD: 'download';
@@ -74,6 +67,3 @@ export function validate(
     bails?: boolean;
   },
 ): string | boolean | Promise<string | boolean>;
-
-// Global Utils
-export function delay(ms?: number): Promise<void>;

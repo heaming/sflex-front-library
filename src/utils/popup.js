@@ -45,8 +45,8 @@ function calculateCenterTopLeft(width, height) {
   const otherScreenLeft = window.screenLeft ?? window.screenX;
   const otherScreenTop = window.screenTop ?? window.screenY;
 
-  const left = (fullWidth - Number.parseInt(width, 10)) / 2 / zoom + otherScreenLeft;
-  const top = (fullHeight - Number.parseInt(height, 10)) / 2 / zoom + otherScreenTop;
+  const left = (fullWidth - parseInt(width, 10)) / 2 / zoom + otherScreenLeft;
+  const top = (fullHeight - parseInt(height, 10)) / 2 / zoom + otherScreenTop;
 
   return { left, top };
 }

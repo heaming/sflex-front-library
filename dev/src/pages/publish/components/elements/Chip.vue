@@ -39,13 +39,19 @@
               tag name of chip component <br>
               label='text' <br>
               color="colorName" <br>
-              outline
+              outline <br>
+              square <br>
+              text-color <br>
+              icon(left-side)/icon-right(right-side)
             </td>
             <td>
+              <br>
               add text from zeplin <br>
               primary: #2f8af3 ,placeholder: #999, transparent: use icon-only type <br>
-              add this when existed border(ex: text type chip) <br>
-              add icon file name in assets file(refer iconButton guide)
+              add this when existed border <br>
+              add this when squared type <br>
+              add text-color <br>
+              add icon file name in assets file(refer icon guide)
             </td>
           </tr>
         </tbody>
@@ -76,9 +82,18 @@
             class="ma2"
           />
           <kw-chip
-            label="결제중"
-            color="primary"
-            outline
+            label="엔지니어"
+            square
+            color="bg-body"
+            text-color="primary"
+            class="ma2"
+          />
+          <kw-chip
+            icon-right="arrow_right"
+            label="엔지니어"
+            color="bg-body"
+            square
+            text-color="primary"
             class="ma2"
           />
         </div>
@@ -108,14 +123,27 @@ const chipCode = `
   class="ma2"
 />
 <kw-chip
-  label="결제중"
-  color="primary"
-  outline
+  label="엔지니어"
+  square
+  color="bg-body"
+  text-color="primary"
+  class="ma2"
+/>
+<kw-chip
+  icon-right="arrow_right"
+  label="엔지니어"
+  color="bg-body"
+  square
+  text-color="primary"
   class="ma2"
 />
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-18',
+    text: 'Add new type chip and updated guide',
+  },
   {
     timestamp: '2022-09-15',
     text: 'Tooltip icon move to Tooltip Page',

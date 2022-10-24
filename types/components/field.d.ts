@@ -26,8 +26,8 @@ interface KwFieldSlots {
    */
   default: (otions: {
     field: {
-      [fieldKey: string]: Ref<any>;
-      [onUpdateFieldKey: string]: (fieldValue: any) => void;
+      fieldKey: Ref<any>;
+      onUpdateFieldKey: (fieldValue: any) => void;
     };
     invalid: boolean;
   }) => VNode[];

@@ -6,26 +6,27 @@
     show-if-above
     bordered
   >
-    <app-lnb-menus />
+    <app-lnb-tree />
 
     <app-lnb-drawer />
   </q-drawer>
 </template>
 
 <script>
-import AppLnbMenus from './AppLnbMenus.vue';
+import useLnbExpand from './private/useLnbExpand';
+
+import AppLnbTree from './AppLnbTree.vue';
 import AppLnbDrawer from './AppLnbDrawer.vue';
 
 export default {
   name: 'AppLnb',
   components: {
-    AppLnbMenus,
+    AppLnbTree,
     AppLnbDrawer,
   },
 
   setup() {
-    const { getters } = useStore();
-    const isExpanded = computed(() => getters['app/getLnbExpanded']);
+    const { isExpanded } = useLnbExpand();
 
     return {
       isExpanded,

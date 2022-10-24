@@ -1,4 +1,6 @@
 .global-dialog {
+  z-index: 9999;
+
   .q-dialog__backdrop {
     background: transparent;
   }

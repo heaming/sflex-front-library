@@ -268,6 +268,21 @@
             <kw-search-item label="DatePicker">
               <kw-date-picker />
             </kw-search-item>
+            <kw-search-item label="combo">
+              <kw-field
+                :model-value="[]"
+                class="w80"
+              >
+                <template #default="{ field }">
+                  <kw-checkbox
+                    v-bind="field"
+                    label="기타"
+                    val=""
+                  />
+                </template>
+              </kw-field>
+              <kw-input />
+            </kw-search-item>
           </kw-search-row>
 
           <kw-search-row>
@@ -925,6 +940,21 @@ const searchCode = `
     <kw-search-item label="DatePicker">
       <kw-date-picker />
     </kw-search-item>
+    <kw-search-item label="combo">
+      <kw-field
+        :model-value="[]"
+        class="w80"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="기타"
+            val=""
+          />
+        </template>
+      </kw-field>
+      <kw-input />
+    </kw-search-item>
   </kw-search-row>
 
   <kw-search-row>
@@ -1320,6 +1350,10 @@ const theOneRowCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-10-19',
+    text: 'Add example of use together width checkbox',
+  },
   {
     timestamp: '2022.10.13',
     text: 'Radio + input -> select + input',

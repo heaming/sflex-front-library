@@ -212,6 +212,10 @@
 
 const guideHistory = [
   {
+    timestamp: '2022.10.21',
+    text: 'Modify code of Tab for search form , and form ',
+  },
+  {
     timestamp: '2022.09.15',
     text: 'Redefine tab',
   },
@@ -305,32 +309,36 @@ const tabSearch = `
     label="searchform"
   />
 </kw-tabs>
-<kw-tab-panel name="2">
-  <kw-search
-    cols="2"
-    class="kw-form--textright"
-  >
-    <kw-search-row>
-      <kw-search-item label="label">
-        <kw-input />
-      </kw-search-item>
-      <kw-search-item label="하이퍼센트">
-        <p>0</p>
-      </kw-search-item>
-    </kw-search-row>
-    <kw-search-row>
-      <kw-search-item label="크리에이티브">
-        <p>0</p>
-      </kw-search-item>
-      <kw-search-item label="크리에이티브">
-        <p>0</p>
-      </kw-search-item>
-    </kw-search-row>
-  </kw-search>
-  <div class="result-area">
-    <h3>content</h3>
-  </div>
-</kw-tab-panel>
+<kw-tab-panels
+  model-value="2"
+>
+  <kw-tab-panel name="2">
+    <kw-search
+      cols="2"
+      class="kw-form--textright"
+    >
+      <kw-search-row>
+        <kw-search-item label="label">
+          <kw-input />
+        </kw-search-item>
+        <kw-search-item label="하이퍼센트">
+          <p>0</p>
+        </kw-search-item>
+      </kw-search-row>
+      <kw-search-row>
+        <kw-search-item label="크리에이티브">
+          <p>0</p>
+        </kw-search-item>
+        <kw-search-item label="크리에이티브">
+          <p>0</p>
+        </kw-search-item>
+      </kw-search-row>
+    </kw-search>
+    <div class="result-area">
+      <h3>content</h3>
+    </div>
+  </kw-tab-panel>
+</kw-tab-panels>
 `;
 
 </script>

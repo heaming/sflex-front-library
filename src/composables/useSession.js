@@ -1,6 +1,7 @@
 import { Quasar } from 'quasar';
 import consts from '../consts';
 import { http } from '../plugins/http';
+import { loadSpinner } from '../plugins/loading';
 import { localStorage } from '../plugins/storage';
 import { INITIAL_LOCATION } from '../router';
 
@@ -26,7 +27,7 @@ export default () => {
 
   async function fetchLangs() {
     const locale = i18n.locale.value;
-    const response = await http.get('/api/v1/common/multi-languages', {
+    const response = await http.get('/sflex/common/common/multi-languages', {
       params: {
         langId: locale,
         multiLanguageTypeCode: 'MSSG',
@@ -46,19 +47,20 @@ export default () => {
 
   async function isReady() {
     try {
+      loadSpinner(true);
       await fetchLoginInfo();
       await Promise.all([
         fetchMetas(),
         fetchLangs(),
       ]);
       await invokeInitialRoute();
-    } catch (e) {
-      console.error(e);
+    } finally {
+      loadSpinner(false);
     }
   }
 
   async function login(loginId, password) {
-    const response = await http.post('/certification/simple-login', { loginId, password });
+    const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, { loginId, password });
     const { token } = response.data;
     localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, token);
     window.location.replace('/');

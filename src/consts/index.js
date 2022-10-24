@@ -1,9 +1,13 @@
+import env from './private/env';
+
 export default {
   LOCALE_KO: 'ko',
   LOCALE_EN: 'en',
 
   ROUTE_HOME_NAME: 'Home',
 
+  HTTP_ORIGIN: env.VITE_HTTP_ORIGIN,
+  HTTP_API_VERSION_PREFIX: env.VITE_HTTP_API_VERSION_PREFIX,
   HTTP_HEADER_PAGE_ID: 'X-PageId',
   HTTP_ERROR_TYPE_BIZ: 'B',
   HTTP_ERROR_TYPE_EXCEPTION: 'E',

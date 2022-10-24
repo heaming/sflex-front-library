@@ -34,3 +34,9 @@ export function isServerError(response) {
 
   return serverErrorKeys.every(hasOwnProperty);
 }
+
+export function joinUrls(...urls) {
+  return [...urls, '/']
+    .join('/')
+    .replace(/\/+/g, '/');
+}

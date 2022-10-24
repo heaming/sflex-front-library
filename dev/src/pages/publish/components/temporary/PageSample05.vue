@@ -105,20 +105,10 @@
       </ul>
       <kw-action-top>
         <template #left>
-          <span>총</span>
-          <span class="accent pl4">156</span>
-          <kw-separator
-            spaced
-            vertical
-            inset
-          />
-          <kw-select
-            v-model="selectData.model"
-            class="kw-select--rows-per-page"
-            :options="selectData.options"
-            borderless
-            dense
-            suffix="개씩보기"
+          <kw-paging-info
+            :page-size="10"
+            :page-size-options="[10, 20, 30, 40, 50]"
+            :total-count="1567"
           />
         </template>
         <kw-btn
@@ -188,11 +178,6 @@
 </template>
 
 <script setup>
-
-const selectData = { model: '10',
-  options: [
-    '10', '20', '30', '40', '50',
-  ] };
 
 function initGrid(data, view) {
   const fields = [

@@ -46,7 +46,9 @@ import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/global
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import processWait from '../../utils/private/processWait';
 
-const { DIALOG_TRANSITION_DURATION } = libConfig;
+const {
+  DIALOG_TRANSITION_DURATION,
+} = libConfig;
 
 export default {
   name: 'GlobalDialog',
@@ -65,8 +67,8 @@ export default {
 
     watch(isActive, async (val) => {
       if (val) {
-        await nextTick();
-        okRef.value.$el.focus();
+        await processWait(DIALOG_TRANSITION_DURATION);
+        okRef.value?.$el.focus();
       }
     });
 
@@ -78,20 +80,22 @@ export default {
       unregisterGlobalVm(GlobalDialogVmKey);
     });
 
-    async function pending() {
-      isPending.value = true;
-      await processWait(DIALOG_TRANSITION_DURATION);
-      isPending.value = false;
+    function requestAnimation() {
+      return new Promise((resolve) => {
+        isPending.value = true;
+        requestAnimationFrame(() => {
+          resolve();
+          isPending.value = false;
+        });
+      });
     }
 
     async function onClick(result) {
       if (isActive.value) {
-        await processWait();
-
-        dialog.value.resolve(result);
+        const { resolve } = dialog.value;
         removeGlobalData(dialog.value);
-
-        await pending();
+        resolve(result);
+        await requestAnimation();
       }
     }
 

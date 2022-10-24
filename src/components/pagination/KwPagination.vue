@@ -12,6 +12,10 @@
     :boundary-numbers="false"
     :ripple="false"
     :ellipses="false"
+    icon-first="arrow_prev"
+    icon-last="arrow_next"
+    icon-prev="arrow_left"
+    icon-next="arrow_right"
     @update:model-value="onUpdateValue"
   />
 </template>
@@ -63,14 +67,6 @@ export default {
         emit('change', val, props.pageSize);
       }
     }
-
-    watch(() => props.pageSize, async (val, oldVal) => {
-      if (await confirmIfTargetsModified?.()) {
-        emit('change', props.pageIndex, val);
-      } else {
-        emit('update:pageSize', oldVal);
-      }
-    });
 
     const paginationRef = ref();
 

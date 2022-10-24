@@ -3,20 +3,13 @@
   border: 1px solid $black-btn-line;
   box-shadow: 8px 10px 10px 0 rgb(0 0 0 / 12%) !important;
   position: relative !important;
-  transform: none !important;
   overflow: hidden !important;
 
   &--sm {
     width: 460px;
     max-width: 460px !important;
     min-width: 460px !important;
-
-    // min-height: 250px;
     margin-top: 0;
-
-    // .kw-popup__content {
-    //   min-height: 118px !important;
-    // }
   }
 
   &--md {
@@ -88,7 +81,7 @@
   }
 
   &__content {
-    padding: 87px 20px 120px 26px;
+    padding: 85px 20px 115px 26px;
     overflow-y: scroll;
 
     // min-height: 348px;
@@ -179,13 +172,13 @@
     }
 
     .kw-popup__content {
-      padding-top: 30px;
+      padding-top: 25px;
     }
   }
 
   &--no-action {
     .kw-popup__content {
-      padding-bottom: 30px;
+      padding-bottom: 25px;
     }
   }
 
