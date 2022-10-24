@@ -36,7 +36,7 @@ export function isServerError(response) {
 }
 
 export function buildURL(...partials) {
-  const [schema = ''] = partials[0].match(/^https?:\/\//) || [];
+  const [schema = ''] = partials[0]?.match(/^https?:\/\//) || [];
   const combines = [];
 
   if (schema) {
