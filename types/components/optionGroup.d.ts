@@ -7,7 +7,7 @@ interface KwOptionGroupProps extends UseFieldProps, UseOptionsProps {
   /**
    * 현재 선택된 값
    */
-  modelValue?: string | number | boolean | Array;
+  modelValue?: string | number | boolean | Array<any>;
 
   /**
    * 옵션 그룹 유형
@@ -35,7 +35,7 @@ interface KwOptionGroupProps extends UseFieldProps, UseOptionsProps {
    * 'v-model:modelValue'에서 값 변경을 위해 사용
    * @param modelValue 선택된 값
    */
-  'onUpdate:modelValue'?: (modelValue: string | number | boolean | Array) => void;
+  'onUpdate:modelValue'?: (modelValue: string | number | boolean | Array<any>) => void;
 }
 
 interface KwOptionGroupSlots {}

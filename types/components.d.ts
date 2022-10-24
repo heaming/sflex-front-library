@@ -6,7 +6,7 @@ import { KwBtnToggle } from './components/btnToggle';
 import { KwChart } from './components/chart';
 import { KwCheckbox } from './components/checkbox';
 import { KwChip } from './components/chip';
-import { KwDate, KwDatePicker, KwDatePickerRange } from './components/datePicker';
+import { KwDate, KwDatePicker, KwDateRangePicker } from './components/datePicker';
 import { KwEditor } from './components/editor';
 import { KwField } from './components/field';
 import { KwFile } from './components/file';
@@ -40,7 +40,7 @@ export interface KwComponentNameMap {
   KwChip: KwChip;
   KwDate: KwDate;
   KwDatePicker: KwDatePicker;
-  KwDatePickerRange: KwDatePickerRange;
+  KwDateRangePicker: KwDateRangePicker;
   KwEditor: KwEditor;
   KwField: KwField;
   KwFile: KwFile;

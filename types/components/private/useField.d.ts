@@ -57,7 +57,7 @@ export interface UseFieldStyleProps {
   /**
    * 공간을 덜 차지하는 스타일 적용
    */
-  dense?: string;
+  dense?: boolean;
 
   /**
    * 밑줄 라인 스타일 적용

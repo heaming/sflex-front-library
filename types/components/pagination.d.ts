@@ -23,11 +23,6 @@ interface KwPaginationProps {
   disable?: boolean;
 
   /**
-   * 컴포넌트 비활성화 모드
-   */
-  disable?: boolean;
-
-  /**
    * 'v-model:pageIndex'에서 값 변경을 위해 사용
    * @param pageIndex 페이지 인덱스
    */

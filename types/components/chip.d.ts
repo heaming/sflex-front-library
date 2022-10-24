@@ -23,11 +23,6 @@ interface KwChipProps {
   color?: string;
 
   /*
-   * 클릭 가능한 스타일 적용
-   */
-  clickable?: boolean;
-
-  /*
    * 컴포넌트 비활성화 모드
    */
   disable?: boolean;
