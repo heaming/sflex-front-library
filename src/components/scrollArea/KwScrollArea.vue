@@ -2,12 +2,14 @@
 <template>
   <div
     class="kw-scroll-area"
+    v-bind="styleClassAttrs"
   >
     <div
       class="kw-scroll-area__wrapper"
-      :style="scrollAreaStyle"
+      :style="scrollAreaWrapperStyle"
     >
       <q-scroll-area
+        ref="quasarRef"
         class="fit"
         :thumb-style="thumbStyle"
         :horizontal-thumb-style="horizontalThumbStyle"
@@ -20,7 +22,7 @@
         :delay="delay"
         :visible="visible"
         :tabindex="tabindex"
-        @scroll="$emit('scroll', $event)"
+        @scroll="onScroll"
       >
         <template v-if="$slots.default">
           <slot />
@@ -36,19 +38,27 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwScrollArea',
+  inheritAttrs: false,
 
   props: {
     // customize props
+    // about client size
     height: { type: String, default: undefined },
     minHeight: { type: String, default: '10px' },
     maxHeight: { type: String, default: undefined },
     width: { type: String, default: undefined },
     minWidth: { type: String, default: '10px' },
     maxWidth: { type: String, default: undefined },
+    // about scroll area size
+    // if you kill vertical scroll use this with value 100%
     scrollAreaHeight: { type: String, default: undefined },
-    scrollAreaWidth: { type: String, default: '100%' },
+    // if you kill horizontal scroll use this with value 100%
+    scrollAreaWidth: { type: String, default: undefined },
+    scrollAreaStyle: { type: String, default: undefined },
 
     // fall through props
     thumbStyle: { type: Object, default: undefined },
@@ -65,10 +75,10 @@ export default {
     onScroll: { type: Function, default: undefined },
   },
 
-  emits: ['scroll'],
-
   setup(props) {
-    const scrollAreaStyle = computed(() => {
+    const quasarRef = ref();
+
+    const scrollAreaWrapperStyle = computed(() => {
       let styles = '';
       if (props.height) {
         styles += props.height ? `height: ${props.height}; ` : '';
@@ -87,30 +97,39 @@ export default {
 
     const computedContentStyle = computed(() => {
       const styles = props.contentStyle ? [props.contentStyle] : [];
-      if (props.scrollAreaWidth) {
-        styles.push(`width: ${props.scrollAreaWidth};`);
-      }
-      if (props.scrollAreaHeight) {
-        styles.push(`height: ${props.scrollAreaHeight}; `);
-      }
+      if (props.scrollAreaWidth) { styles.push(`width: ${props.scrollAreaWidth};`); }
+      if (props.scrollAreaHeight) { styles.push(`height: ${props.scrollAreaHeight}; `); }
+      if (props.scrollAreaStyle) { styles.push(props.scrollAreaStyle); }
       return styles;
     });
 
     const computedContentActiveStyle = computed(() => {
       const styles = props.contentActiveStyle ? [props.contentActiveStyle] : [];
-      if (props.scrollAreaWidth) {
-        styles.push(`max-width: ${props.scrollAreaWidth}; `);
-      }
-      if (props.scrollAreaHeight) {
-        styles.push(`max-height: ${props.scrollAreaHeight}; `);
-      }
+      if (props.scrollAreaWidth) { styles.push(`width: ${props.scrollAreaWidth};`); }
+      if (props.scrollAreaHeight) { styles.push(`height: ${props.scrollAreaHeight}; `); }
+      if (props.scrollAreaStyle) { styles.push(props.scrollAreaStyle); }
       return styles;
     });
 
+    function getScrollTarget(...args) { quasarRef.value?.getScrollTarget(...args); }
+    function getScroll(...args) { quasarRef.value?.getScroll(...args); }
+    function getScrollPosition(...args) { quasarRef.value?.getScrollPosition(...args); }
+    function getScrollPercentage(...args) { quasarRef.value?.getScrollPercentage(...args); }
+    function setScrollPosition(...args) { quasarRef.value?.setScrollPosition(...args); }
+    function setScrollPercentage(...args) { quasarRef.value?.setScrollPercentage(...args); }
+
     return {
-      scrollAreaStyle,
+      ...useInheritAttrs(),
+      quasarRef,
+      scrollAreaWrapperStyle,
       computedContentStyle,
       computedContentActiveStyle,
+      getScrollTarget,
+      getScroll,
+      getScrollPosition,
+      getScrollPercentage,
+      setScrollPosition,
+      setScrollPercentage,
     };
   },
 };
