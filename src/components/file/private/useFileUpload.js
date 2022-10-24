@@ -271,7 +271,7 @@ export default (values, options) => {
       // return removeDuplicate(unref(values));
     },
     async set(newFiles) {
-      console.log('fileLikes_set', unref(newFiles));
+      // console.log('fileLikes_set', unref(newFiles));
       await syncUploadings(newFiles);
       if (values.value !== newFiles && !isReadonly(values)) {
         values.value = normalizedOptions.value.bindNativeFile ? newFiles
@@ -297,9 +297,9 @@ export default (values, options) => {
   }
 
   watch(values, (newFiles) => {
+    // console.log('watch values', newFiles, uploadings.value);
     const oldFiles = unref(uploadings)
       .map((uploading) => uploading.file);
-    // console.log('watch_values', newFiles, oldFiles);
 
     if (isFilesChanged(newFiles, oldFiles)) {
       fileLikes.value = removeDuplicate(newFiles);
