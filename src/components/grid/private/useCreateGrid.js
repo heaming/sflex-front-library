@@ -1,11 +1,14 @@
 import { warn } from 'vue';
 import defaultConfig from './defaultConfig';
 import override from './override';
+import useClickOutsideGrid from './useClickOutsideGrid';
+import useResizeGrid, { useResizeGridProps } from './useResizeGrid';
 import { syncHeadCheckIfAble, unregisterEventAll } from '../../../utils/private/gridShared';
 import { init, reset, validate, isModified } from '../../../utils/grid';
 import useObserverChild, { useObserverChildProps } from '../../../composables/private/useObserverChild';
 
 export const useCreateGridProps = {
+  ...useResizeGridProps,
   ...useObserverChildProps,
 
   onInit: {
@@ -78,8 +81,10 @@ export default (DataClass, ViewClass) => {
   };
 
   useObserverChild(observerChildctx);
+  useClickOutsideGrid();
 
   return {
+    ...useResizeGrid(),
     containerRef,
     getView,
     getData,
