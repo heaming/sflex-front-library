@@ -1,5 +1,6 @@
 export const useFileDownloadProps = {
   downloadable: { type: Boolean, default: false },
+  downloadIcon: { type: String, default: undefined }, // download_off
   onBeforeDownload: { type: Function, default: undefined },
 };
 

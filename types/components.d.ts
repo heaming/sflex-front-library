@@ -1,12 +1,13 @@
 // register global component
 // which that tag starts with `Kw`
+import { KwAction, KwActionTop, KwActionBottom } from './components/action';
 import { KwActionBar } from './components/actionBar';
 import { KwBtn } from './components/btn';
 import { KwBtnToggle } from './components/btnToggle';
 import { KwChart } from './components/chart';
 import { KwCheckbox } from './components/checkbox';
 import { KwChip } from './components/chip';
-import { KwDate, KwDatePicker, KwDatePickerRange } from './components/datePicker';
+import { KwDate, KwDatePicker, KwDateRangePicker } from './components/datePicker';
 import { KwEditor } from './components/editor';
 import { KwField } from './components/field';
 import { KwFile } from './components/file';
@@ -32,6 +33,9 @@ import { KwToggle } from './components/toggle';
 import { KwTooltip } from './components/tooltip';
 
 export interface KwComponentNameMap {
+  KwAction: KwAction;
+  KwActionTop: KwActionTop;
+  KwActionBottom: KwActionBottom;
   KwActionBar: KwActionBar;
   KwBtn: KwBtn;
   KwBtnToggle: KwBtnToggle;
@@ -40,7 +44,7 @@ export interface KwComponentNameMap {
   KwChip: KwChip;
   KwDate: KwDate;
   KwDatePicker: KwDatePicker;
-  KwDatePickerRange: KwDatePickerRange;
+  KwDateRangePicker: KwDateRangePicker;
   KwEditor: KwEditor;
   KwField: KwField;
   KwFile: KwFile;

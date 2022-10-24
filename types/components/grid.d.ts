@@ -1,10 +1,10 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
 import { LocalDataProvider, GridView, LocalTreeDataProvider, TreeView } from 'realgrid';
-import { UseObserverChildProps } from './private/useObserver';
+import { UseObserverProps } from './private/useObserver';
 
 // KwGrid
-interface KwGridProps<D = LocalDataProvider, V = GridView> extends UseObserverChildProps {
+interface KwGridProps<D = LocalDataProvider, V = GridView> extends UseObserverProps {
   /**
    * View만 생성할지 여부
    */

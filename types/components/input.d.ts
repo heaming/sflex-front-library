@@ -6,7 +6,7 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   /**
    * 현재 설정된 값
    */
-  modelValue?: String | number;
+  modelValue?: string | number;
 
   /**
    * input type
@@ -16,17 +16,17 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   /**
    * 컴포넌트 비활성화 모드
    */
-  disable?: Boolean;
+  disable?: boolean;
 
   /**
    * 컴포넌트 읽기전용 모드
    */
-  readonly?: Boolean;
+  readonly?: boolean;
 
   /**
    * type `textarea`의 속성, 설정시 높이가 자동으로 늘어난다
    */
-  autogrow?: Boolean;
+  autogrow?: boolean;
 
   /**
    * type `textarea`의 속성, 행 기준의 높이 값
@@ -143,7 +143,7 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
    * 'v-model:modelValue'에서 값 변경을 위해 사용
    * @param modelValue 설정된 값
    */
-  'onUpdate:modelValue'?: (modelValue: String | number) => void;
+  'onUpdate:modelValue'?: (modelValue: string | number) => void;
 
   /**
    * icon 클릭 이벤트

@@ -17,20 +17,17 @@
 <script>
 import { LocalTreeDataProvider, TreeView } from 'realgrid';
 import useCreateGrid, { useCreateGridProps } from './private/useCreateGrid';
-import useResizeGrid, { useResizeGridProps } from './private/useResizeGrid';
 
 export default {
   name: 'KwTreeGrid',
 
   props: {
     ...useCreateGridProps,
-    ...useResizeGridProps,
   },
 
   setup() {
     return {
       ...useCreateGrid(LocalTreeDataProvider, TreeView),
-      ...useResizeGrid(),
     };
   },
 };

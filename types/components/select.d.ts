@@ -7,7 +7,7 @@ interface KwSelectProps extends UseFieldProps, UseFieldStyleProps, UseOptionsPro
   /**
    * 현재 설정된 값
    */
-  modelValue?: string | number | boolean | object | Array;
+  modelValue?: string | number | boolean | object | Array<any>;
 
   /**
    * 다건 선택 모드

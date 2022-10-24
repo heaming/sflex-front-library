@@ -39,8 +39,8 @@ export default ({ files, updateFile, downloadFile, revertFile }) => {
 
   const computedSelectable = computed(() => (props.multiple && props.selectable));
 
-  return computed(() => (computedSelectable.value ? {
-    selectable: computedSelectable.value,
+  return {
+    computedSelectable,
     selectedFileIndexes,
     selectedFiles,
     selectAll,
@@ -48,7 +48,5 @@ export default ({ files, updateFile, downloadFile, revertFile }) => {
     updateSelected,
     downloadSelected,
     revertSelected,
-  } : {
-    selectable: computedSelectable.value,
-  }));
+  };
 };

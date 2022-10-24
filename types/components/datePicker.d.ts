@@ -70,7 +70,7 @@ interface KwDateSlots {}
 export interface KwDate extends ComponentPublicInstance<KwDateProps> {}
 
 // KwDatePicker
-interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDateProps, 'minView', 'maxView'> {
+interface KwDatePickerProps extends UseFieldProps, UseFieldStyleProps, Omit<KwDateProps, 'minView' | 'maxView'> {
   /**
    * 데이트피커 유형
    * @defaultValue `date`
@@ -101,7 +101,7 @@ interface KwDatePickerSlots {}
 export interface KwDatePicker extends ComponentPublicInstance<KwDatePickerProps>, UseFieldInstance {}
 
 // KwDatePickerRange
-interface KwDatePickerRangeProps extends Omit<KwDatePickerProps, 'modelValue', 'onUpdate:modelValue', 'placeholder'> {
+interface KwDateRangePickerProps extends Omit<KwDatePickerProps, 'modelValue' | 'onUpdate:modelValue' | 'placeholder'> {
   /**
    * 시작일 현재 날짜 값
    */
@@ -134,8 +134,8 @@ interface KwDatePickerRangeProps extends Omit<KwDatePickerProps, 'modelValue', '
    */
   'onUpdate:to'?: (to: string) => void;
 }
-interface KwDatePickerRangeSlots {}
-export interface KwDatePickerRange extends ComponentPublicInstance<KwDatePickerRangeProps>, UseFieldInstance {}
+interface KwDateRangePickerSlots {}
+export interface KwDateRangePicker extends ComponentPublicInstance<KwDateRangePickerSlots>, UseFieldInstance {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
