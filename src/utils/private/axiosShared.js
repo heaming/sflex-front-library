@@ -36,5 +36,7 @@ export function isServerError(response) {
 }
 
 export function joinUrls(...urls) {
-  return urls.join('/').replace(/\/+/g, '/');
+  return [...urls, '/']
+    .join('/')
+    .replace(/\/+/g, '/');
 }
