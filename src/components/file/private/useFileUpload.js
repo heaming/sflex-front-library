@@ -29,7 +29,7 @@ const generateFileLikeKey = (fileLike) => {
   // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
   const isNative = fileLike instanceof File;
   return (isNative
-    ? fileLike.name + (fileLike.lastModified || new Date().getTime())
+    ? fileLike.webkitRelativePath + (fileLike.lastModified || new Date().getTime()) + fileLike.name + fileLike.size
     : fileLike.key || fileLike.fileUid || fileLike.serverFileName);
 };
 

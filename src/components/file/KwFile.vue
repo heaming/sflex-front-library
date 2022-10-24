@@ -65,9 +65,12 @@
       v-if="!multiple || $slots.append"
       #append
     >
-      <span v-if="!multiple && !(counter || $slots.counter) && computedCounter">
+      <div
+        v-if="emptyAppendCounter"
+        class="kw-file-item__size"
+      >
         {{ computedCounter }}
-      </span>
+      </div>
       <slot name="append" />
     </template>
 
@@ -83,12 +86,56 @@
     <template
       #after
     >
-      <kw-btn
-        v-if="!pickFileWhenClick"
-        :label="'파일선택'"
-        @click="pickFiles"
-      />
-      <slot name="after" />
+      <kw-scroll-area
+        v-if="useHeader"
+        ref="headerScrollAreaRef"
+        class="kw-file__header-container"
+        :style="headerScrollAreaStyle"
+        :scroll-area-width="scrollHorizontal ? undefined : '100%'"
+        :horizontal-thumb-style="{ visibility: 'hidden' }"
+        :visible="false"
+        @scroll="onScrollHeader"
+      >
+        <div class="kw-file-item kw-file-item--header">
+          <kw-checkbox
+            v-if="computedSelectable"
+            v-model="selectAll"
+            class="kw-file-item__checkbox"
+            :true-value="true"
+            :false-value="false"
+            dense
+          />
+          <div
+            class="kw-file-item__name"
+            :style="fileItemNameStyles"
+          >
+            {{ $t('MSG_TXT_FILE_NM', null, '파일명') }}
+          </div>
+          <slot
+            :ref="fileRef"
+            name="append-header"
+          />
+          <div class="kw-file-item__size">
+            {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
+          </div>
+          <div
+            class="kw-file-item__aside"
+            :style="fileItemAsideStyles"
+          />
+        </div>
+      </kw-scroll-area>
+      <div
+        v-if="showDefaultFilePickBtn || $slots.after"
+        class="kw-file__after-slot-container"
+      >
+        <kw-btn
+          v-if="showDefaultFilePickBtn"
+          :label="'파일선택'"
+          :dense="dense"
+          @click="pickFiles"
+        />
+        <slot name="after" />
+      </div>
     </template>
 
     <!-- error -->
@@ -149,16 +196,17 @@
 
     <!-- selected -->
     <template
-      v-else
+      v-else-if="!$slots.selected"
       #selected="{files, ref}"
     >
-      <slot
-        :ref="ref"
-        name="selected"
-        :files="files"
+      <div
+        class="kw-file__selected"
       >
         <kw-scroll-area
-          class="kw-file__wrapper"
+          ref="fileScrollAreaRef"
+          class="kw-file__file-container"
+          :scroll-area-style="fileScrollAreaContentsStyle"
+          @scroll="onScrollFile"
         >
           <div
             v-for="(file, idx) in files"
@@ -167,7 +215,7 @@
             :class="fileItemClasses[idx]"
           >
             <kw-checkbox
-              v-if="selectable"
+              v-if="computedSelectable"
               v-model="selectedFileIndexes"
               dense
               class="kw-file-item__checkbox"
@@ -176,6 +224,7 @@
             <div
               v-if="downloadable && isDownloadable(file)"
               class="kw-file-item__name"
+              :style="fileItemNameStyles"
               @click.prevent="downloadFile(file)"
             >
               {{ file.name }}
@@ -189,6 +238,7 @@
             <div
               v-else
               class="kw-file-item__name"
+              :style="fileItemNameStyles"
             >
               {{ file.name }}
               <kw-tooltip
@@ -198,17 +248,25 @@
                 {{ file.name }}
               </kw-tooltip>
             </div>
-            <div class="kw-file-item__aside">
+            <slot
+              :ref="ref"
+              name="append-file"
+              :file="file"
+              :index="idx"
+            />
+            <div
+              class="kw-file-item__size"
+            >
               <kw-icon
                 v-if="isRetryPossible(file)"
                 name="warning"
               />
-              <div
-                v-else-if="multiple"
-                class="kw-file-item__size"
-              >
-                <span> {{ fileSizeToString(file.size) }}</span>
-              </div>
+              <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
+            </div>
+            <div
+              class="kw-file-item__aside"
+              :style="fileItemAsideStyles"
+            >
               <kw-btn
                 v-if="downloadable && isDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
@@ -261,7 +319,17 @@
             </div>
           </div>
         </kw-scroll-area>
-      </slot>
+      </div>
+    </template>
+    <template
+      v-else
+      #selected="{files, ref}"
+    >
+      <slot
+        :ref="ref"
+        name="selected"
+        :files="files"
+      />
     </template>
   </q-file>
 </template>
@@ -274,6 +342,8 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
 import useFileCounter, { useFileCounterProps } from './private/useFileCounter';
 import useFileSelect, { useFileSelectProps } from './private/useFileSelect';
+import useFileHeader, { useFileHeaderProps, useFileHeaderEmits } from './private/useFileHeader';
+import useFilePicker, { useFilePickerProps } from './private/useFilePicker';
 import useFileDownload, {
   useFileDownloadEmits,
   useFileDownloadProps,
@@ -285,7 +355,6 @@ export default {
 
   props: {
     // customize props
-    pickFileWhenClick: { type: Boolean, default: false },
     removable: { type: Boolean, default: true },
     removeIcon: { type: String, default: 'clear' },
     retryPossible: { type: Boolean, default: true },
@@ -299,9 +368,11 @@ export default {
 
     ...useFieldProps,
     ...useFieldStyleProps,
+    ...useFilePickerProps,
     ...useFileSelectProps,
     ...useFileCounterProps,
     ...useFileDownloadProps,
+    ...useFileHeaderProps,
 
     // fall through props
     prefix: { type: String, default: undefined },
@@ -334,9 +405,14 @@ export default {
     inputStyle: { type: [Array, String, Object], default: undefined },
   },
 
-  emits: ['update:modelValue', 'rejected', ...useFileDownloadEmits],
+  emits: [
+    'update:modelValue',
+    'rejected',
+    ...useFileDownloadEmits,
+    ...useFileHeaderEmits,
+  ],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const fieldStyles = useFieldStyle();
 
     const fileRef = ref();
@@ -405,12 +481,24 @@ export default {
       alert(rejectMessage);
     };
 
+    // warp file comp
+    const headerCtx = useFileHeader();
+
+    // use action
+
     // styling
     const fileClass = computed(() => ({
       'kw-file--multiple': props.multiple,
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
+      'kw-file--horizontal-scroll': props.scrollHorizontal,
+      ...headerCtx.useHeaderFileClass.value,
     }));
+
+    const emptyAppendCounter = computed(() => !props.multiple
+      && !(props.counter || slots.counter)
+      && !files.length && !props.useHeader
+      && counterCtx.computedCounter.value);
 
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
@@ -423,20 +511,7 @@ export default {
     const fileItemClasses = computed(() => files.value.map(getFileItemClass));
 
     // event handler
-    function preventIfClick(e) {
-      if (e.clientX === 0 && e.clientY === 0) {
-        return;
-      }
-      if (!props.pickFileWhenClick) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }
-
-    // reference methods
-    const pickFiles = () => {
-      fileRef.value?.getNativeElement().click();
-    };
+    const filePickCtx = useFilePicker(fileRef);
 
     // sample codes for attach icon
     // const getIcon = (file) => {
@@ -454,18 +529,15 @@ export default {
       fileRef,
       bindValue,
       uploadings,
-      ...selectCtx.value,
+      ...selectCtx,
       ...counterCtx,
       ...downloadCtx,
+      ...headerCtx,
+      ...filePickCtx,
       onRejected,
-      preventIfClick,
-
-      // contents
-
-      // ref
-      pickFiles,
       fileClass,
       fileItemClasses,
+      emptyAppendCounter,
     };
   },
 };
