@@ -60,7 +60,7 @@ export default () => {
   }
 
   async function login(loginId, password) {
-    const response = await http.post('/certification/simple-login', { loginId, password });
+    const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, { loginId, password });
     const { token } = response.data;
     localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, token);
     window.location.replace('/');
