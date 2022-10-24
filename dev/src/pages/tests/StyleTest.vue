@@ -1,7 +1,7 @@
 <template>
   <!-- Form -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="Form"
   >
     <div class="result-area">
@@ -140,6 +140,7 @@
   >
     <div class="result-area">
       <div
+        v-if="false"
         class="bg-grey-3 pa10 user"
         style="display: grid;"
       >
@@ -172,6 +173,7 @@
         class="bg-green-1 pa20"
       >
         <kw-scroll-area
+          ref="scrollAreaRef"
           class="bg-red-1"
           max-width="400px"
           max-height="400px"
@@ -184,6 +186,7 @@
       </div>
 
       <div
+        v-if="false"
         class="bg-green-1 pa20"
       >
         <div style="display: flex; max-height: 300px;">
@@ -200,12 +203,15 @@
           </kw-scroll-area>
         </div>
       </div>
-      <span>
+      <span
+        v-if="false"
+      >
         max-width="300px"
         max-height="300px"
         style="display:flex; align-items: stretch; justify-items: stretch; justify-content: stretch;"
       </span>
       <div
+        v-if="false"
         class="bg-green-1 pa20 row"
       >
         <div
@@ -232,7 +238,7 @@
   <!-- file -->
   <q-expansion-item
     v-if="true"
-    label="Button Dropdown"
+    label="file"
     :default-opened="true"
   >
     <div class="result-area">
@@ -254,6 +260,8 @@ import {
   FileForm,
   Forms,
 } from '../../components/test';
+
+const scrollAreaRef = ref();
 </script>
 
 <style scoped>
