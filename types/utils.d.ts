@@ -8,10 +8,10 @@ declare module '@vue/runtime-core' {
 }
 
 // defineGrid
-export function defineGrid<T = (view: GridView, data: LocalDataProvider) => void>(initFn: T): T;
+export function defineGrid<T = (data: LocalDataProvider, view: GridView) => void>(initFn: T): T;
 
 // defineTreeGrid
-export function defineTreeGrid<T = (view: TreeView, data: LocalTreeDataProvider) => void>(initFn: T): T;
+export function defineTreeGrid<T = (data: LocalTreeDataProvider, view: TreeView) => void>(initFn: T): T;
 
 // Global Utils
 export function delay(ms?: number): Promise<void>;
