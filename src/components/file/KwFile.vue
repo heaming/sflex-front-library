@@ -47,7 +47,7 @@
       v-if="files.length === 0"
       class="kw-file__placeholder"
       :class="placeholderClass"
-      :style="placeholderStyle"
+      :style="[placeholderStyle, headerScrollAreaStyle]"
     >
       {{ placeholder }}
     </div>
@@ -88,7 +88,7 @@
     >
       <kw-scroll-area
         v-if="useHeader"
-        ref="headerScrollAreaRef"
+        :ref="(vm) => { headerScrollAreaRef = vm }"
         class="kw-file__header-container"
         :style="headerScrollAreaStyle"
         :scroll-area-width="scrollHorizontal ? undefined : '100%'"
@@ -111,10 +111,15 @@
           >
             {{ $t('MSG_TXT_FILE_NM', null, '파일명') }}
           </div>
-          <slot
-            :ref="fileRef"
-            name="append-header"
-          />
+          <div
+            v-if="$slots['append-header']"
+            class="kw-file-item__append"
+          >
+            <slot
+              :ref="fileRef"
+              name="append-header"
+            />
+          </div>
           <div class="kw-file-item__size">
             {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
           </div>
@@ -203,9 +208,10 @@
         class="kw-file__selected"
       >
         <kw-scroll-area
-          ref="fileScrollAreaRef"
+          :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
           :scroll-area-style="fileScrollAreaContentsStyle"
+          :horizontal-thumb-style="scrollHorizontal && { borderBottomWidth: '4px', height: '14px' }"
           @scroll="onScrollFile"
         >
           <div
@@ -248,12 +254,17 @@
                 {{ file.name }}
               </kw-tooltip>
             </div>
-            <slot
-              :ref="ref"
-              name="append-file"
-              :file="file"
-              :index="idx"
-            />
+            <div
+              v-if="$slots['append-file']"
+              class="kw-file-item__append"
+            >
+              <slot
+                :ref="ref"
+                name="append-file"
+                :file="file"
+                :index="idx"
+              />
+            </div>
             <div
               class="kw-file-item__size"
             >

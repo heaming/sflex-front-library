@@ -63,7 +63,7 @@ export default {
     // fall through props
     thumbStyle: { type: Object, default: undefined },
     verticalThumbStyle: { type: Object, default: undefined },
-    horizontalThumbStyle: { type: Object, default: () => ({ borderBottomWidth: '4px', height: '14px' }) },
+    horizontalThumbStyle: { type: Object, default: undefined }, // { borderBottomWidth: '4px', height: '14px' }
     barStyle: { type: [Array, String, Object], default: undefined },
     verticalBarStyle: { type: [Array, String, Object], default: undefined },
     horizontalBarStyle: { type: [Array, String, Object], default: undefined },

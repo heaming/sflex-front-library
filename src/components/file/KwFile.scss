@@ -7,7 +7,7 @@
     $-kw-field-gap: 8px;
 
     &.q-field {
-      .q-field__after {
+      > .q-field__after {
         padding-left: 0;
 
         .kw-file__after-slot-container {
@@ -20,6 +20,12 @@
       .kw-file-item {
         min-height: $kw-field-height-dense;
       }
+    }
+  }
+
+  &.q-file--dnd {
+    .q-file__dnd {
+      z-index: 10000;
     }
   }
 
@@ -109,7 +115,7 @@
       &.q-field {
         position: relative;
 
-        .q-field__control {
+        > .q-field__inner > .q-field__control {
           padding-top: $-kw-file-header-height;
         }
 
@@ -122,7 +128,7 @@
             margin: 0 1px 1px;
           }
 
-          .q-field__control {
+          > .q-field__inner > .q-field__control {
             padding-left: 0;
             padding-right: 0;
           }
@@ -183,16 +189,24 @@
   }
 
   &__name { // you should notice this one's width set by props.
-    // min-width: TBD;
-    flex: 0 1 auto;
+    min-width: 100px; // width: TBD;
+    flex: 0 1 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 
+  &__append {
+    overflow: hidden;
+    flex: none;
+    display: flex;
+    align-items: center;
+    margin: 0 8px;
+  }
+
   &__size {
-    margin-left: auto;
-    margin-right: 8px;
+    margin-left: 16px;
+    min-width: 90px; // designed.
     text-align: right;
     font-size: 14px;
     color: $black3;
@@ -201,6 +215,8 @@
 
   &__aside { // you should notice this one's width set by props.
     // min-width: TBD;
+    margin-left: 16px;
+    min-width: 16px;
     flex: none;
     display: flex;
     justify-content: flex-end;
@@ -217,20 +233,22 @@
   }
 
   &--header {
+    color: $black1;
+    font-size: 14px;
+    font-weight: 500;
+
     .kw-file-item__name {
-      color: $black1;
-      font-size: 14px;
-      font-weight: 500;
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
       text-align: center;
       white-space: nowrap;
     }
 
     .kw-file-item__size {
-      min-width: 122px; // designed.
-      color: $black1;
-      font-size: 14px;
-      font-weight: 500;
-      text-align: center;
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
       white-space: nowrap;
     }
   }

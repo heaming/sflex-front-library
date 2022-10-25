@@ -1,6 +1,6 @@
 export const useFileHeaderProps = {
   useHeader: { type: Boolean, default: false },
-  scrollHorizontal: { type: Boolean, default: false },
+  scrollHorizontal: { type: Boolean, default: undefined },
   fileNameWidth: { type: String, default: undefined },
   asideWidth: { type: String, default: undefined },
 };
@@ -69,18 +69,22 @@ export default () => {
       return undefined;
     }
     let left = 0;
-    if (componentRootEl.querySelector('.q-field__before')) {
-      left += componentRootEl.querySelector('.q-field__before').getBoundingClientRect().width;
+    const beforeSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__before');
+    if (beforeSlotEl) {
+      left += beforeSlotEl.getBoundingClientRect().width;
     }
-    if (componentRootEl.querySelector('.q-field__prepend')) {
-      left += componentRootEl.querySelector('.q-field__prepend').getBoundingClientRect().width;
+    const prefixSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__prefix');
+    if (prefixSlotEl) {
+      left += prefixSlotEl.getBoundingClientRect().width;
     }
     let right = 0;
-    if (componentRootEl.querySelector('.q-field__append')) {
-      right += componentRootEl.querySelector('.q-field__append').getBoundingClientRect().width;
+    const suffixSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__suffix');
+    if (suffixSlotEl) {
+      right += suffixSlotEl.getBoundingClientRect().width;
     }
-    if (componentRootEl.querySelector('.q-field__after')) {
-      right += componentRootEl.querySelector('.q-field__after').getBoundingClientRect().width;
+    const afterSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__after');
+    if (afterSlotEl) {
+      right += afterSlotEl.getBoundingClientRect().width;
     }
     // const width = fileScrollAreaRef.value && fileScrollAreaRef.value.$el.getBoundingClientRect().width;
     // width: width ?? `${width}px`,
@@ -97,7 +101,7 @@ export default () => {
       return 'width: 100%; ';
     }
     if (props.useHeader) {
-      return 'margin-bottom: 10px; ';
+      return 'padding-bottom: 10px; ';
     }
     return undefined;
   });
