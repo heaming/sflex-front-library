@@ -13,7 +13,7 @@ interface KwGridProps<D = LocalDataProvider, V = GridView> extends UseObserverPr
   /**
    * 표시할 그리드 행 갯수
    */
-  visibleRows?: number;
+  visibleRows?: number | string;
 
   /**
    * onMounted 이후에 그리드가 생성되고 난 후에 발생하는 이벤트

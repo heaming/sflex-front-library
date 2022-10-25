@@ -2,7 +2,7 @@ import { waitUntilSetLayout, calcViewHeight } from '../../../utils/private/gridS
 
 export const useResizeGridProps = {
   visibleRows: {
-    type: Number,
+    type: [Number, String],
     default: 0,
   },
 };

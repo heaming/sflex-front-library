@@ -1,4 +1,5 @@
 import { ValueType } from 'realgrid';
+import { throttle } from 'lodash-es';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { isOverByte, getMaxByteLength, getMaxByteString } from '../../../utils/string';
@@ -20,6 +21,7 @@ const onValidate = 'onValidate'; // custom
 const onEditChange = 'onEditChange';
 const onGetEditValue = 'onGetEditValue';
 const onCellPasting = 'onCellPasting';
+const onScrollToBottom = 'onScrollToBottom';
 const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
 const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
 const dataDropOptionsDropCallback = 'dataDropOptions._callback';
@@ -364,6 +366,20 @@ export function overrideOnCellPasting(view) {
       return execOriginal(g, onCellPasting, g, index, value);
     }
   });
+}
+
+/*
+  사용자가 키보드나 스크롤 바 등을 조작하여 그리드에 마지막 행이 표시될 때 호출되는 콜백
+  */
+export function overrideOnScrollToBottom(view) {
+  wrapEvent(view, onScrollToBottom, throttle((g) => {
+    const { layoutManager } = g._view;
+    const hasVerticalScroll = layoutManager.vscrollBar === true;
+
+    if (hasVerticalScroll && hasOriginal(view, onScrollToBottom)) {
+      return execOriginal(g, onScrollToBottom, g);
+    }
+  }, 200));
 }
 
 /*
