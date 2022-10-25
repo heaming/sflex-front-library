@@ -98,7 +98,7 @@
               <div class="normal-area">
                 <h3>kw-form</h3>
                 <kw-form
-                  cols="2"
+                  :cols="2"
                   class="kw-form--textright"
                 >
                   <kw-form-row>
@@ -123,7 +123,7 @@
                 <kw-separator />
                 <h3>kw-form</h3>
                 <kw-form
-                  cols="2"
+                  :cols="2"
                   class="kw-form--textright"
                 >
                   <kw-form-row>
@@ -173,7 +173,7 @@
           >
             <kw-tab-panel name="2">
               <kw-search
-                cols="2"
+                :cols="2"
                 class="kw-form--textright"
               >
                 <kw-search-row>
@@ -245,7 +245,7 @@ const tabform = `
     <div class="normal-area">
       <h3>kw-form</h3>
       <kw-form
-        cols="2"
+        :cols="2"
         class="kw-form--textright"
       >
         <kw-form-row>
@@ -270,7 +270,7 @@ const tabform = `
       <kw-separator />
       <h3>kw-form</h3>
       <kw-form
-        cols="2"
+        :cols="2"
         class="kw-form--textright"
       >
         <kw-form-row>
@@ -314,7 +314,7 @@ const tabSearch = `
 >
   <kw-tab-panel name="2">
     <kw-search
-      cols="2"
+      :cols="2"
       class="kw-form--textright"
     >
       <kw-search-row>
