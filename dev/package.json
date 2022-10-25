@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "vite build",
+    "build": "vite build --mode=dev",
     "preview": "vite preview",
     "serve": "vite"
   }
