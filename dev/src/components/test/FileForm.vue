@@ -5,7 +5,7 @@
   >
     <!-- quasar -->
     <kw-form-row
-      v-if="false"
+      v-if="true"
     >
       <kw-form-item label="quasar">
         <q-file
@@ -67,8 +67,11 @@
       </kw-form-item>
     </kw-form-row>
     <!-- header props -->
-    <kw-form-row>
-      <kw-form-item label="use header">
+    <kw-form-row :cols="4">
+      <kw-form-item
+        :colspan="2"
+        label="use header"
+      >
         <kw-toggle
           v-model="useHeader"
           :true-value="true"
@@ -80,6 +83,18 @@
           :true-value="true"
           :false-value="false"
           label="scrollHorizontal"
+        />
+        <kw-toggle
+          v-model="useAppendFileSlot"
+          :true-value="true"
+          :false-value="false"
+          label="useAppendFileSlot"
+        />
+        <kw-toggle
+          v-model="slotOverflow"
+          :true-value="true"
+          :false-value="false"
+          label="slotOverflow"
         />
       </kw-form-item>
       <kw-form-item label="fileNameWidth">
@@ -237,31 +252,44 @@
           :placeholder-class="placeholderClass"
         >
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-header
           >
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              fileUid
             </div>
-            <div class="w500 text-center">
-              test
-            </div>
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              myFileYn
             </div>
           </template>
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-file="{file}"
           >
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-input
+                v-model="file.fileUid"
+                dense
+              />
             </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
-            </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-select
+                v-model="file.myFileYn"
+                dense
+                :options="[{value: 'Y', label: 'Y'}, {value: 'N', label: 'N'}]"
+              />
             </div>
           </template>
         </kw-file>
@@ -299,31 +327,44 @@
           :multiple="multiple"
         >
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-header
           >
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              fileUid
             </div>
-            <div class="w500 text-center">
-              test
-            </div>
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              myFileYn
             </div>
           </template>
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-file="{file}"
           >
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-input
+                v-model="file.fileUid"
+                dense
+              />
             </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
-            </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-select
+                v-model="file.myFileYn"
+                dense
+                :options="[{value: 'Y', label: 'Y'}, {value: 'N', label: 'N'}]"
+              />
             </div>
           </template>
         </kw-file>
@@ -664,6 +705,8 @@ const append = ref(true);
 const selectable = ref(true);
 const useHeader = ref(false);
 const scrollHorizontal = ref(false);
+const useAppendFileSlot = ref(false);
+const slotOverflow = ref(false);
 const fileNameWidth = ref('');
 const asideWidth = ref('');
 const borderless = ref(false);
