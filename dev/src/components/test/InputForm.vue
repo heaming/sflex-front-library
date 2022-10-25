@@ -1,376 +1,374 @@
 <template>
-  <kw-form
-    ref="formRef"
-    :cols="3"
-  >
-    <!-- quasar -->
+  <kw-form ref="formRef">
     <kw-form-row>
       <kw-form-item label="QUASAR">
-        <q-select
-          v-model="selectModel"
-          :options="optionsModel"
-          option-label="codeName"
-          option-value="codeId"
+        <q-input
+          v-model="stringModel"
           label="기본"
         />
       </kw-form-item>
-      <kw-form-item label="QUASAR borderless">
-        <q-select
-          v-model="selectModel"
-          :options="optionsModel"
-          option-label="codeName"
-          option-value="codeId"
-          borderless
+      <kw-form-item label="QUASAR">
+        <q-input
+          v-model="stringModel"
+          readonly
           label="기본"
         />
       </kw-form-item>
-      <kw-form-item label="QUASAR outlined">
-        <q-select
-          v-model="selectModel"
-          :options="optionsModel"
-          option-label="codeName"
-          option-value="codeId"
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item
+        label="기본"
+        hint="hint"
+        required
+      >
+        <kw-input
+          v-model="stringModel"
+          label="기본"
+        />
+      </kw-form-item>
+      <kw-form-item label="여러개">
+        <kw-input
+          v-model="stringModel"
+          readonly
+          label="기본"
+        />
+        <kw-input
+          v-model="stringModel"
+          readonly
+          label="기본"
+        /> <span>~</span>
+        <kw-input
+          v-model="stringModel"
+          readonly
+          label="기본"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item
+        label="placeholder"
+        hint="hint"
+        required
+      >
+        <kw-input
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+      </kw-form-item>
+      <kw-form-item
+        label="placeholder disable"
+        hint="hint"
+        required
+      >
+        <kw-input
+          disable
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+        <kw-input
+          readonly
+          model-value=""
+          label="기본"
+          placeholder="placeholder"
+        />
+        <kw-input
+          readonly
           dense
-          outlined
-          use-input
+          model-value=""
           label="기본"
-        />  <!-- ... 안해놨네...? -->
-      </kw-form-item>
-    </kw-form-row>
-    <!-- 기본 -->
-    <kw-form-row>
-      <kw-form-item label="기본">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-        />
-      </kw-form-item>
-      <kw-form-item label="멀티플">
-        <kw-select
-          v-model="arrayModel"
-          :options="testOptionsModel"
-          multiple
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
+          placeholder="placeholder"
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- readonly -->
     <kw-form-row>
-      <kw-form-item label="readonly">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+      <kw-form-item label="Readonly">
+        <kw-input
+          v-model="stringModel"
           readonly
+          label="Readonly"
         />
       </kw-form-item>
-      <kw-form-item label="멀티플 readonly">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          multiple
-          readonly
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input readonly">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          readonly
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <!-- disable -->
-    <kw-form-row>
       <kw-form-item label="disable">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           disable
-        />
-      </kw-form-item>
-      <kw-form-item label="멀티플 disable">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          multiple
-          disable
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input disable">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          disable
+          label="disable"
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- error -->
     <kw-form-row>
       <kw-form-item label="error">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          :rules="() => 'error'"
+        <kw-input
+          v-model="stringModel"
+          :rules="() => false"
           validate-on-mount
         />
       </kw-form-item>
-      <kw-form-item label="멀티플 error">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          multiple
-          :rules="() => 'error'"
-          validate-on-mount
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input error">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          :rules="() => 'error'"
-          validate-on-mount
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <!-- error and disable -->
-    <kw-form-row>
       <kw-form-item label="error & disable">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          disable
-          :rules="() => 'error'"
+        <kw-input
+          v-model="stringModel"
+          :rules="() => '길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고길고'"
           validate-on-mount
-        />
-      </kw-form-item>
-      <kw-form-item label="multiple & error & disable">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          multiple
           disable
-          :rules="() => 'error'"
-          validate-on-mount
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input error disable">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          disable
-          :rules="() => 'error'"
-          validate-on-mount
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- style : underline -->
+    <kw-form-row>
+      <kw-form-item label="slot - before">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+        >
+          <template #before>
+            before
+          </template>
+        </kw-input>
+      </kw-form-item>
+      <kw-form-item label="slot - after">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+        >
+          <template #after>
+            after
+          </template>
+        </kw-input>
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="slot - prepend">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+        >
+          <template #prepend>
+            prepend
+          </template>
+        </kw-input>
+      </kw-form-item>
+      <kw-form-item label="slot - append">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+        >
+          <template #append>
+            append
+          </template>
+        </kw-input>
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="prefix">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          prefix="prefix"
+        />
+      </kw-form-item>
+      <kw-form-item label="suffix">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          suffix="suffix"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="icon">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          icon="alert_16"
+        />
+      </kw-form-item>
+      <kw-form-item
+        tem
+        label="slot - complicate"
+      >
+        <kw-input
+          v-model="stringModel"
+          label="before"
+        >
+          <template #before>
+            Before
+          </template>
+          <template #after>
+            After
+          </template>
+          <template #prepend>
+            Prepend
+          </template>
+          <template #append>
+            Append
+          </template>
+        </kw-input>
+      </kw-form-item>
+    </kw-form-row>
+
+    <!-- textarea -->
+    <kw-form-row>
+      <kw-form-item label="textarea">
+        <kw-input
+          v-model="stringModel"
+          :label="'test'"
+          type="textarea"
+          :rows="5"
+        />
+      </kw-form-item>
+      <kw-form-item
+        label="autogrow autogrowautogrowautogrowautogrowautogrowautogrow"
+        required
+        hint="hint"
+      >
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          type="textarea"
+          autogrow
+          rows="1"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item label="textarea">
+        <kw-input
+          v-model="stringModel"
+          :label="'test'"
+          type="textarea"
+          dense
+          :rows="1"
+        />
+      </kw-form-item>
+      <kw-form-item label="autogrow">
+        <kw-input
+          v-model="stringModel"
+          label="before"
+          type="textarea"
+          autogrow
+          dense
+          rows="5"
+        />
+      </kw-form-item>
+    </kw-form-row>
+
+    <!-- style types -->
     <kw-form-row>
       <kw-form-item label="underline">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           underline
         />
-      </kw-form-item>
-      <kw-form-item label="멀티플 underline">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          multiple
+        <kw-input
+          v-model="stringModel"
           underline
+          readonly
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          disable
         />
       </kw-form-item>
-      <kw-form-item label="use-input underline">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
+      <kw-form-item label="underline-error">
+        <kw-input
+          v-model="stringModel"
           underline
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          readonly
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          disable
+          :rules="() => 'error'"
+          validate-on-mount
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- style : borderless -->
     <kw-form-row>
       <kw-form-item label="borderless">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           borderless
         />
-      </kw-form-item>
-      <kw-form-item label="멀티플 borderless">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          multiple
+        <kw-input
+          v-model="stringModel"
           borderless
+          readonly
+        />
+        <kw-input
+          v-model="stringModel"
+          borderless
+          disable
         />
       </kw-form-item>
-      <kw-form-item label="use-input borderless">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
+      <kw-form-item label="borderless-error">
+        <kw-input
+          v-model="stringModel"
           borderless
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          borderless
+          readonly
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          borderless
+          disable
+          :rules="() => 'error'"
+          validate-on-mount
         />
       </kw-form-item>
     </kw-form-row>
 
     <!-- dense -->
-    <!-- 기본 -->
     <kw-form-row>
       <kw-form-item label="dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
         />
-      </kw-form-item>
-      <kw-form-item label="멀티플 dense">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          dense
-          multiple
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          dense
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <!-- readonly -->
-    <kw-form-row>
-      <kw-form-item label="readonly dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
           readonly
         />
-      </kw-form-item>
-      <kw-form-item label="멀티플 readonly dense">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          dense
-          multiple
-          readonly
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input readonly dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          dense
-          readonly
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <!-- disable -->
-    <kw-form-row>
-      <kw-form-item label="disable dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
           disable
         />
       </kw-form-item>
-      <kw-form-item label="멀티플 disable dense">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          dense
-          multiple
-          disable
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input disable dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          dense
-          disable
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <!-- error -->
-    <kw-form-row>
       <kw-form-item label="error dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
           :rules="() => 'error'"
           validate-on-mount
         />
-      </kw-form-item>
-      <kw-form-item label="멀티플 error dense">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
-          multiple
+          readonly
           :rules="() => 'error'"
           validate-on-mount
         />
-      </kw-form-item>
-      <kw-form-item label="use-input error dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          dense
-          :rules="() => 'error'"
-          validate-on-mount
-        />
-      </kw-form-item>
-    </kw-form-row>
-    <!-- error and disable -->
-    <kw-form-row>
-      <kw-form-item label="error disable dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          dense
-          disable
-          :rules="() => 'error'"
-          validate-on-mount
-        />
-      </kw-form-item>
-      <kw-form-item label="multiple error disable dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          dense
-          multiple
-          disable
-          :rules="() => 'error'"
-          validate-on-mount
-        />
-      </kw-form-item>
-      <kw-form-item label="use-input error disable dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
+        <kw-input
+          v-model="stringModel"
           dense
           disable
           :rules="() => 'error'"
@@ -378,61 +376,99 @@
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- style : underline -->
     <kw-form-row>
       <kw-form-item label="underline dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
           underline
         />
-      </kw-form-item>
-      <kw-form-item label="멀티플 underline dense">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
+        <kw-input
+          v-model="stringModel"
           dense
-          multiple
           underline
+          readonly
+        />
+        <kw-input
+          v-model="stringModel"
+          dense
+          underline
+          disable
         />
       </kw-form-item>
-      <kw-form-item label="use-input underline dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          dense
+      <kw-form-item
+        label="underline error dense"
+        hint="hint"
+        required
+      >
+        <kw-input
+          v-model="stringModel"
           underline
+          dense
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          dense
+          readonly
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          dense
+          disable
+          :rules="() => 'error'"
+          validate-on-mount
         />
       </kw-form-item>
     </kw-form-row>
-    <!-- style : borderless -->
     <kw-form-row>
       <kw-form-item label="borderless dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          dense
+        <kw-input
+          v-model="stringModel"
           borderless
+          dense
+        />
+        <kw-input
+          v-model="stringModel"
+          borderless
+          dense
+          readonly
+        />
+        <kw-input
+          v-model="stringModel"
+          borderless
+          dense
+          disable
         />
       </kw-form-item>
-      <kw-form-item label="멀티플 borderless dense">
-        <kw-select
-          v-model="arrayModel"
-          :options="optionsModel"
-          dense
-          multiple
+      <kw-form-item label="borderless error dense">
+        <kw-input
+          v-model="stringModel"
           borderless
+          dense
+          :rules="() => 'error'"
+          validate-on-mount
         />
-      </kw-form-item>
-      <kw-form-item label="use-input borderless dense">
-        <kw-select
-          v-model="selectModel"
-          :options="optionsModel"
-          use-input
-          dense
+        <kw-input
+          v-model="stringModel"
           borderless
+          dense
+          readonly
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          borderless
+          dense
+          disable
+          :rules="() => 'error'"
+          validate-on-mount
         />
       </kw-form-item>
     </kw-form-row>
@@ -440,37 +476,9 @@
 </template>
 
 <script setup>
-import { KwSelect } from '../../../../src/components';
-/* eslint-disable no-unused-vars */
-const formRef = ref();
-const selectModel = ref('A');
-const optionsModel = [
-  { codeId: 'A', codeName: 'A' },
-  { codeId: 'B', codeName: 'B' },
-  { codeId: 'C', codeName: 'C' },
-  { codeId: 'D', codeName: 'D' },
-  { codeId: 'E', codeName: 'E' },
-  { codeId: 'F', codeName: 'F' },
-  { codeId: 'G', codeName: 'G' },
-  { codeId: 'H', codeName: 'H' },
-  { codeId: 'I', codeName: 'I' },
-];
+import { KwInput } from '../../../../src/components';
 
-const testOptionsModel = [
-  { codeId: 'A', codeName: 'AAAAAA' },
-  { codeId: 'B', codeName: 'BBBBBB' },
-  { codeId: 'C', codeName: 'CCCCCC' },
-  { codeId: 'D', codeName: 'DDDDDD' },
-  { codeId: 'E', codeName: 'EEEEEE' },
-  { codeId: 'F', codeName: 'FFFFFF' },
-  { codeId: 'Z', codeName: 'E982374932847329487239487239487133957691285798gyhu987' },
-];
-const longOptionsModel = Array.from({ length: 100 }).map((notUse, index) => {
-  const str = String.fromCharCode(index + 92);
-  return { codeId: str, codeName: Array.from({ length: index }).fill(str).join('') };
-});
-const arrayModel = ref(['A', 'B']);
-
+const stringModel = ref('test');
 </script>
 
 <style scoped>
