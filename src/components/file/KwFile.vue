@@ -211,7 +211,7 @@
           :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
           :scroll-area-style="fileScrollAreaContentsStyle"
-          :horizontal-thumb-style="scrollHorizontal && { borderBottomWidth: '4px', height: '14px' }"
+          :horizontal-thumb-style="scrollHorizontal ? { borderBottomWidth: '4px', height: '14px' } : undefined"
           @scroll="onScrollFile"
         >
           <div

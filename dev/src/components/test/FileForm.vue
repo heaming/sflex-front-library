@@ -216,6 +216,12 @@
           :label="'addDummy'"
           @click="addDummy"
         />
+        <kw-btn
+          class="mr8"
+          primary
+          :label="'addNewField'"
+          @click="addNewField"
+        />
       </kw-form-item>
     </kw-form-row>
     <!-- default -->
@@ -361,7 +367,7 @@
               :class="slotOverflow ? 'w500' : 'w100'"
             >
               <kw-select
-                v-model="file.myFileYn"
+                v-model="file.newField"
                 dense
                 :options="[{value: 'Y', label: 'Y'}, {value: 'N', label: 'N'}]"
               />
@@ -741,6 +747,12 @@ const appendFileValue = ref([
   },
 ]);
 const multiple = ref(true);
+
+function addNewField() {
+  if (multipleValue.value.length > 0) {
+    multipleValue.value[0].newField = 'Y';
+  }
+}
 
 async function onDownloaded(file) {
   return alert(`${file.name} downloaded!`);

@@ -281,7 +281,7 @@ export default (values, options) => {
     },
   }));
 
-  function isFilesChanged(nfs, ofs) {
+  function checkAndUpdateFilesChanged(nfs, ofs) {
     if (nfs.length !== ofs.length) {
       return true;
     }
@@ -289,9 +289,18 @@ export default (values, options) => {
     const ofKeys = ofs.map(generateFileLikeKey);
 
     for (let i = 0; i < nfs.length; i += 1) {
-      if (!ofKeys.includes(generateFileLikeKey(nfs[i]))) {
+      const existingIdx = ofKeys.indexOf(generateFileLikeKey(nfs[i]));
+      if (existingIdx === -1) {
         return true;
       }
+      const newFile = nfs[i];
+      const oldFile = ofs[existingIdx];
+      const newFileKeys = Reflect.ownKeys(nfs[i]);
+      newFileKeys.forEach((k) => {
+        if (!Reflect.ownKeys(oldFile).includes(k)) {
+          oldFile[k] = newFile[k];
+        }
+      });
     }
     return false;
   }
@@ -301,7 +310,7 @@ export default (values, options) => {
     const oldFiles = unref(uploadings)
       .map((uploading) => uploading.file);
 
-    if (isFilesChanged(newFiles, oldFiles)) {
+    if (checkAndUpdateFilesChanged(newFiles, oldFiles)) {
       fileLikes.value = removeDuplicate(newFiles);
     }
   }, { deep: true, immediate: true });
