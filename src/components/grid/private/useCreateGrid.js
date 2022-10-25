@@ -65,14 +65,6 @@ export default (DataClass, ViewClass) => {
     data = null;
   });
 
-  function getView() {
-    return view;
-  }
-
-  function getData() {
-    return view?.getDataSource();
-  }
-
   const observerChildctx = {
     init: () => init(view),
     reset: () => reset(view),
@@ -86,7 +78,7 @@ export default (DataClass, ViewClass) => {
   return {
     ...useResizeGrid(),
     containerRef,
-    getView,
-    getData,
+    getView: () => view,
+    getData: () => view?.getDataSource(),
   };
 };

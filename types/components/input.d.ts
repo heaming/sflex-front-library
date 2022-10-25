@@ -14,6 +14,11 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   type?: 'text' | 'number' | 'password' | 'textarea';
 
   /**
+   * 입력 지연 시간(ms) 설정
+   */
+  debounce?: number | string;
+
+  /**
    * 컴포넌트 비활성화 모드
    */
   disable?: boolean;
@@ -31,7 +36,7 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   /**
    * type `textarea`의 속성, 행 기준의 높이 값
    */
-  rows?: number;
+  rows?: number | string;
 
   /**
    * 입력 마스크
@@ -95,6 +100,16 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   tabindex?: number | string;
 
   /**
+   * type number일 때, 최소값
+   */
+  min?: number | string;
+
+  /**
+   * type number일 때, 최대값
+   */
+  max?: number | string;
+
+  /**
    * icon을 append 영역에 표시한다
    */
   icon?: string;
@@ -107,7 +122,7 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   /**
    * 지정시 인풋 입력 길이를 제한한다. Byte 길이 기준이며, 한글은 3Byte 처리한다
    */
-  maxlength?: number;
+  maxlength?: number | string;
 
   /**
    * 입력 글자 수(바이트) 표시 여부, maxlength가 설정되어 있어야 작동한다

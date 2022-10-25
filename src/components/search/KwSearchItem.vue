@@ -1,7 +1,7 @@
 <template>
   <div
     class="kw-form-item"
-    :class="colspan > 1 && `kw-form-item--colspan-${colspan}`"
+    :class="itemClass"
   >
     <div
       v-if="!noLabel"

@@ -24,6 +24,8 @@
     :autofocus="autofocus"
     :placeholder="placeholder"
     :tabindex="tabindex"
+    :min="min"
+    :max="max"
     :input-class="{'text-right': alignRight}"
     no-error-icon
     clear-icon="none"
@@ -127,11 +129,11 @@ export default {
 
     // fall through props
     type: { type: String, default: 'text' },
-    debounce: { type: Number, default: undefined },
+    debounce: { type: [Number, String], default: undefined },
     disable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     autogrow: { type: Boolean, default: false },
-    rows: { type: Number, default: undefined },
+    rows: { type: [Number, String], default: undefined },
     mask: { type: String, default: undefined },
     fillMask: { type: [Boolean, String], default: undefined },
     reverseFillMask: { type: Boolean, default: false },
@@ -144,6 +146,8 @@ export default {
     autofocus: { type: Boolean, default: false },
     placeholder: { type: String, default: undefined },
     tabindex: { type: [Number, String], default: undefined },
+    min: { type: [Number, String], default: undefined },
+    max: { type: [Number, String], default: undefined },
     onFocus: { type: Function, default: undefined },
     onBlur: { type: Function, default: undefined },
     onClear: { type: Function, default: undefined },
@@ -152,7 +156,7 @@ export default {
     // customize props
     icon: { type: String, default: undefined },
     disableIcon: { type: Boolean, default: false },
-    maxlength: { type: Number, default: 0 },
+    maxlength: { type: [Number, String], default: 0 },
     counter: { type: Boolean, default: false },
     upperCase: { type: Boolean, default: false },
     lowerCase: { type: Boolean, default: false },
@@ -205,21 +209,27 @@ export default {
       return v && (v instanceof RegExp ? v : NAMED_REGEX[v]);
     });
 
-    function onUpdateValue(val) {
-      const el = inputRef.value.getNativeElement();
-      val ??= '';
+    function onUpdateNumberValue(val) {
+      value.value = val;
+    }
 
+    function onUpdateTextValue(val) {
       if (val) {
+        const el = inputRef.value.getNativeElement();
+
+        // regex
         if (regex.value?.test(val) === false) {
           val = value.value;
           el.value = val;
         }
 
+        // maxlength
         if (props.maxlength) {
           val = getMaxByteString(val, props.maxlength);
           el.value = val;
         }
 
+        // convert case
         if (props.upperCase) {
           val = val.toUpperCase();
           el.value = val;
@@ -230,6 +240,15 @@ export default {
       }
 
       value.value = val;
+    }
+
+    function onUpdateValue(val) {
+      switch (props.type) {
+        case 'number':
+          return onUpdateNumberValue(val);
+        default:
+          return onUpdateTextValue(val ?? '');
+      }
     }
 
     const useCounter = computed(() => props.maxlength > 0 && props.counter);

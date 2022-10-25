@@ -32,15 +32,17 @@ export default () => {
   const labelSize = computed(() => injected?.labelSize.value);
   const alignContent = computed(() => props.alignContent ?? injected?.alignContent.value);
 
+  const itemClass = computed(() => props.colspan > 1 && `kw-form-item--colspan-${props.colspan}`);
   const labelClass = computed(() => (props.required ? 'kw-form-item__label--required' : null));
-  const fieldWidth = computed(() => `calc(100% - ${labelSize.value}px)`);
   const labelWidth = computed(() => `${labelSize.value}px`);
   const fieldClass = computed(() => [alignContent.value && `kw-form-item__field--align-${alignContent.value}`]);
+  const fieldWidth = computed(() => `calc(100% - ${labelSize.value}px)`);
 
   return {
+    itemClass,
     labelClass,
-    fieldWidth,
     labelWidth,
     fieldClass,
+    fieldWidth,
   };
 };
