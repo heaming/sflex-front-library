@@ -1,4 +1,4 @@
-import { differenceBy } from 'lodash-es';
+import { differenceBy, isEqual } from 'lodash-es';
 import { download, downloadBlob, upload } from '../../../utils/file';
 
 const INSTANT_UPDATE_ALL = true;
@@ -29,10 +29,11 @@ const key = Symbol('key value for uploading.');
 
 const generateFileLikeKey = (fileLike) => {
   // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
+  if (Object.hasOwn(fileLike, key)) { return fileLike[key]; }
   const isNative = fileLike instanceof File;
   return (isNative
     ? fileLike.webkitRelativePath + (fileLike.lastModified || new Date().getTime()) + fileLike.name + fileLike.size
-    : fileLike.key || fileLike.fileUid || fileLike.serverFileName);
+    : fileLike.fileUid || fileLike.serverFileName);
 };
 
 const removeDuplicate = (fileLikes) => {
@@ -283,36 +284,49 @@ export default (values, options) => {
     },
   }));
 
+  function updateFileExceptInternal(origin, update) {
+    const newFileKeys = Reflect.ownKeys(update);
+    const ignoreUpdateKeys = [key, 'name', 'size', 'type', 'lastModified', 'dummy', 'nativeFile', 'serverFileName', 'fileUid'];
+    newFileKeys
+      .filter((k) => !ignoreUpdateKeys.includes(k))
+      .forEach((k) => {
+        if (!isEqual(origin[k], update[k])) {
+          origin[k] = update[k];
+        }
+      });
+  }
+
   function checkAndUpdateFilesChanged(nfs, ofs) {
+    let changed = false;
+
     if (nfs.length !== ofs.length) {
-      return true;
+      changed = true;
     }
 
     const ofKeys = ofs.map(generateFileLikeKey);
 
     for (let i = 0; i < nfs.length; i += 1) {
-      const existingIdx = ofKeys.indexOf(generateFileLikeKey(nfs[i]));
-      if (existingIdx === -1) {
-        return true;
-      }
       const newFile = nfs[i];
+      const newFileLikeKey = generateFileLikeKey(newFile);
+      const existingIdx = ofKeys.indexOf(newFileLikeKey);
+      if (existingIdx === -1) {
+        changed = true;
+      }
+
       const oldFile = ofs[existingIdx];
-      const newFileKeys = Reflect.ownKeys(nfs[i]);
-      newFileKeys.forEach((k) => {
-        if (!Reflect.ownKeys(oldFile).includes(k)) {
-          oldFile[k] = newFile[k];
-        }
-      });
+      if (oldFile) { updateFileExceptInternal(oldFile, newFile); }
     }
-    return false;
+
+    return changed;
   }
 
   watch(values, (newFiles) => {
-    // console.log('watch values', newFiles, uploadings.value);
     const oldFiles = unref(uploadings)
       .map((uploading) => uploading.file);
 
-    if (checkAndUpdateFilesChanged(newFiles, oldFiles)) {
+    const normalizedNewFiles = removeDuplicate(newFiles.map(normalizeFileLike));
+
+    if (checkAndUpdateFilesChanged(normalizedNewFiles, oldFiles)) {
       fileLikes.value = removeDuplicate(newFiles);
     }
   }, { deep: true, immediate: true });

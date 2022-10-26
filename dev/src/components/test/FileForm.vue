@@ -294,7 +294,7 @@
               <kw-select
                 v-model="file.myFileYn"
                 dense
-                :options="[{value: 'Y', label: 'Y'}, {value: 'N', label: 'N'}]"
+                :options="selectOptions"
               />
             </div>
           </template>
@@ -367,9 +367,10 @@
               :class="slotOverflow ? 'w500' : 'w100'"
             >
               <kw-select
-                v-model="file.newField"
+                v-if="file.attachFile"
+                v-model="file.attachFile.newField"
                 dense
-                :options="[{value: 'Y', label: 'Y'}, {value: 'N', label: 'N'}]"
+                :options="selectOptions"
               />
             </div>
           </template>
@@ -747,12 +748,7 @@ const appendFileValue = ref([
   },
 ]);
 const multiple = ref(true);
-
-function addNewField() {
-  if (multipleValue.value.length > 0) {
-    multipleValue.value[0].newField = 'Y';
-  }
-}
+const selectOptions = ref([{ codeName: 'Y', codeId: 'Y' }, { codeName: 'N', codeId: 'N' }]);
 
 async function onDownloaded(file) {
   return alert(`${file.name} downloaded!`);
@@ -786,7 +782,20 @@ function addDummy() {
     serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
     fileUid: `fileUid_${seed}`,
     myFileYn: 'Y',
+    attachFile: reactive({
+      serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
+      fileUid: `fileUid_${seed}`,
+      myFileYn: 'Y',
+    }),
   });
+}
+
+function addNewField() {
+  if (multipleValue.value.length > 0) {
+    console.log(multipleValue.value[0].attachFile);
+    multipleValue.value[0].attachFile.newField = 'Y';
+    console.log(multipleValue.value[0].attachFile);
+  }
 }
 
 function setDummy() {
@@ -801,6 +810,7 @@ function setDummy() {
     myFileYn: 'Y',
   };
 }
+
 </script>
 
 <style scoped lang="scss">
