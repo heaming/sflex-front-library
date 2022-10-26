@@ -1221,6 +1221,12 @@ $unit: px;
     &:active {
       opacity: 1;
     }
+
+    &--h {
+      border: none;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
   }
 }
 
