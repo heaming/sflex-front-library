@@ -120,13 +120,15 @@
               name="append-header"
             />
           </div>
-          <div class="kw-file-item__size">
-            {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
-          </div>
+
           <div
             class="kw-file-item__aside"
             :style="fileItemAsideStyles"
-          />
+          >
+            <div class="kw-file-item__size">
+              {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
+            </div>
+          </div>
         </div>
       </kw-scroll-area>
       <div
@@ -266,18 +268,18 @@
               />
             </div>
             <div
-              class="kw-file-item__size"
-            >
-              <kw-icon
-                v-if="isRetryPossible(file)"
-                name="warning"
-              />
-              <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
-            </div>
-            <div
               class="kw-file-item__aside"
               :style="fileItemAsideStyles"
             >
+              <div
+                class="kw-file-item__size"
+              >
+                <kw-icon
+                  v-if="isRetryPossible(file)"
+                  name="warning"
+                />
+                <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
+              </div>
               <kw-btn
                 v-if="downloadable && isDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"

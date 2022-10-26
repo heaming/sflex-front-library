@@ -8,7 +8,7 @@ export const useFileHeaderProps = {
 export const useFileHeaderEmits = ['scroll:file', 'scroll:header'];
 
 export default () => {
-  const { props, emit, vnode } = getCurrentInstance();
+  const { props, emit, proxy } = getCurrentInstance();
 
   let ignoreSource;
 
@@ -64,7 +64,7 @@ export default () => {
   }));
 
   const getHeaderScrollAreaStyle = () => {
-    const componentRootEl = vnode.el;
+    const componentRootEl = proxy.$el;
     if (!componentRootEl) {
       return undefined;
     }
@@ -97,7 +97,7 @@ export default () => {
   const placeholderStyle = ref({});
 
   const getPlaceholderStyle = () => {
-    const componentRootEl = vnode.el;
+    const componentRootEl = proxy.$el;
     if (!componentRootEl) {
       return undefined;
     }
