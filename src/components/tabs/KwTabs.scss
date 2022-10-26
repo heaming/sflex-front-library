@@ -83,13 +83,11 @@
     padding: 0;
     border: none !important;
   }
-}
 
-// tab in tab
-.kw-tab-panels {
-  .kw-tabs:not(.kw-tab--dense) {
-    border-top: 0;
-    border-bottom: 0;
+  // navy tab
+  &--dense {
+    border: 0;
+    padding: 0;
 
     .q-tabs__content {
       height: 34px;
@@ -99,7 +97,7 @@
 
     .kw-tab {
       min-height: 34px;
-      height: 34px;
+      height: 34px !important;
       padding: 0 20px;
       background: none;
       border: 1px solid $line-stroke;
@@ -145,10 +143,11 @@
   }
 }
 
-.kw-tabs {
-  &--dense {
-    border: 0;
-    padding: 0;
+// tab in tab
+.kw-tab-panels {
+  .kw-tabs:not(.kw-tabs--dense) {
+    border-top: 0;
+    border-bottom: 0;
 
     .q-tabs__content {
       height: 34px;

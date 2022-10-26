@@ -52,7 +52,7 @@
               kw-tabs
             </td>
             <td>
-              .kw-tab--dense
+              .kw-tabs--dense
             </td>
             <td>
               When a small-height tab is used alone.<br>
