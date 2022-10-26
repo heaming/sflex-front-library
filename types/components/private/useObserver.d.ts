@@ -33,6 +33,13 @@ export interface UseObserverInstance {
   resetValidation: () => Promise<void>;
 
   /**
+   * confirm 다이얼로그를 호출하고, 확인을 누르면 reset 실행한다
+   * @param message alert에 표시할 메시지
+   * @param shouldFocus 초기화 후 포커스 여부
+   */
+  confirmReset(message?: string, shouldFocus?: boolean): Promise<void>;
+
+  /**
    * 하위 Observer, Form의 유효성 검사를 수행한다
    * @param shouldFocus 유효성 검사 실패시, 입력 컴포넌트 포커싱 여부
    */

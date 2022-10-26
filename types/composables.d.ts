@@ -75,6 +75,6 @@ export function useModal(): {
 // useSession
 export function useSession(): {
   isReady(): Promise<void>;
-  login(loginId: string, password: string): Promise<void>;
+  login(options: { tenantId?: string; portalId?: string; languageId?: string; loginId: string; password: string }): Promise<void>;
   logout(): Promise<void>;
 };

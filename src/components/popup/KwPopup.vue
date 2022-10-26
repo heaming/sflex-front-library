@@ -67,7 +67,6 @@ export default {
     const slots = useSlots();
     const popupCtx = {
       page: pageCtx,
-      observer: observerCtx,
 
       // do not set style to reactive
       // this occur maximum recursive updates exceeded

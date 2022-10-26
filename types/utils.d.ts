@@ -369,7 +369,7 @@ interface GridUtil {
   reset(view: GridView | TreeView): void;
 
   /**
-   * confirm 다이얼로그를 호출하고, 확인을 누르면 reset 실행하고 `true`를 반환한다.
+   * confirm 다이얼로그를 호출하고, 확인을 누르면 reset 실행한다
    * @param view 그리드 뷰 또는 트리 뷰
    */
   confirmReset(view: GridView | TreeView): Promise<void>;
