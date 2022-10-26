@@ -1236,6 +1236,12 @@ $unit: px;
     border: 1px solid $line-line;
     padding: 30px;
     width: calc((100% - 80px) / 4);
+
+    // 선택된 클래스
+    &--selected {
+      background-color: $bg-white;
+      border: 1px solid $black1;
+    }
   }
 }
 
