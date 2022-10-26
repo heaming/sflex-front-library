@@ -47,7 +47,7 @@
       v-if="files.length === 0"
       class="kw-file__placeholder"
       :class="placeholderClass"
-      :style="[placeholderStyle, headerScrollAreaStyle]"
+      :style="placeholderStyle"
     >
       {{ placeholder }}
     </div>
@@ -375,7 +375,6 @@ export default {
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
     placeholderClass: { type: [Array, String, Object], default: undefined },
-    placeholderStyle: { type: [Array, String, Object], default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,
