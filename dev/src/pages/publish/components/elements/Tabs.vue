@@ -52,11 +52,12 @@
               kw-tabs
             </td>
             <td>
-              .kw-tab--dense
+              .kw-tabs--dense
             </td>
             <td>
-              When a small-height tab is used alone.<br>
-              Generally, when you put a tab inside tabs, a small height design is automatically applied.
+              When a small-height tab is used alone and 2depth<br>
+              However, please do not add this class when you put a tab inside tabs which wrapped kw-search.
+              cuz, a small height design is automatically applied.
             </td>
           </tr>
         </tbody>
@@ -211,6 +212,10 @@
 <script setup>
 
 const guideHistory = [
+  {
+    timestamp: '2022.10.26',
+    text: 'Modify explanation of dense class ',
+  },
   {
     timestamp: '2022.10.21',
     text: 'Modify code of Tab for search form , and form ',
