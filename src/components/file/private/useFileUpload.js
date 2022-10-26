@@ -25,6 +25,8 @@ const AVAILABLE_STATES = {
   [ERROR]: [REMOVED],
 };
 
+const key = Symbol('key value for uploading.');
+
 const generateFileLikeKey = (fileLike) => {
   // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
   const isNative = fileLike instanceof File;
@@ -36,9 +38,9 @@ const generateFileLikeKey = (fileLike) => {
 const removeDuplicate = (fileLikes) => {
   const keys = [];
   return fileLikes.reduce((zipped, fileLike) => {
-    const key = generateFileLikeKey(fileLike);
-    if (!keys.includes(key)) {
-      keys.push(key);
+    const checkKey = generateFileLikeKey(fileLike);
+    if (!keys.includes(checkKey)) {
+      keys.push(checkKey);
       zipped.push(fileLike);
     }
     return zipped;
@@ -46,7 +48,7 @@ const removeDuplicate = (fileLikes) => {
 };
 
 const normalizeFileLike = (fileLike = {}) => {
-  if (typeof fileLike.dummy === 'boolean') {
+  if (Object.hasOwn(fileLike, key)) {
     return fileLike;
   }
   if (fileLike instanceof File) {
@@ -57,7 +59,7 @@ const normalizeFileLike = (fileLike = {}) => {
       lastModified: fileLike.lastModified || new Date().getTime(),
       dummy: false,
       nativeFile: fileLike,
-      key: generateFileLikeKey(fileLike),
+      [key]: generateFileLikeKey(fileLike),
     };
   }
   return {
@@ -72,7 +74,7 @@ const normalizeFileLike = (fileLike = {}) => {
     serverFileName: fileLike.serverFileName,
     fileUid: fileLike.fileUid,
     myFileYn: fileLike.myFileYn,
-    key: generateFileLikeKey(fileLike),
+    [key]: generateFileLikeKey(fileLike),
   };
 };
 
@@ -228,7 +230,7 @@ export default (values, options) => {
   function findUploading(file) {
     return uploadings
       .value
-      .find((uploading) => uploading.file.key === generateFileLikeKey(file));
+      .find((uploading) => uploading.file[key] === generateFileLikeKey(file));
   }
 
   async function syncUploadings(newFiles) {
@@ -240,17 +242,17 @@ export default (values, options) => {
 
     const restoreUploadings = rawUploadings
       .filter((uploading) => uploading.state === REMOVED)
-      .filter((uploading) => newFiles.map((file) => file.key).includes(uploading.file.key));
+      .filter((uploading) => newFiles.map((file) => file[key]).includes(uploading.file[key]));
 
     restoreUploadings.forEach((uploading) => {
       uploading.state = UPLOAD;
     });
 
-    const removed = differenceBy(oldFiles, newFiles, 'key');
+    const removed = differenceBy(oldFiles, newFiles, key);
     rawUploadings = rawUploadings
       .filter((uploading) => !removed.includes(uploading.file));
 
-    const added = differenceBy(newFiles, oldFiles, 'key');
+    const added = differenceBy(newFiles, oldFiles, key);
     const generateUploadings = [];
     added.forEach((file) => {
       generateUploadings.push(generateReactiveUploading(file, normalizedOptions.value));
