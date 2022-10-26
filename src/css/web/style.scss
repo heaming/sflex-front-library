@@ -25,3 +25,21 @@
     }
   }
 }
+
+// breadcrumbs 없는 경우
+.header--no-breadcrumbs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-right: 8px;
+      font-size: 14px;
+      color: $black2;
+    }
+  }
+}
