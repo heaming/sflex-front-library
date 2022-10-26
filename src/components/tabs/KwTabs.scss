@@ -1,8 +1,10 @@
 .kw-tab-panel {
   padding: 0;
 
-  .kw-tab-panels {
-    box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
+  & .kw-tabs:not(.kw-tabs--dense) {
+    & + .kw-tab-panels {
+      box-shadow: 2px 4px 7px -4px rgb(0 0 0 / 7%);
+    }
   }
 }
 
@@ -85,7 +87,7 @@
 
 // tab in tab
 .kw-tab-panels {
-  .kw-tabs {
+  .kw-tabs:not(.kw-tab--dense) {
     border-top: 0;
     border-bottom: 0;
 
@@ -143,59 +145,61 @@
   }
 }
 
-.kw-tabs.kw-tab--dense {
-  border: 0;
-  padding: 0;
+.kw-tabs {
+  &--dense {
+    border: 0;
+    padding: 0;
 
-  .q-tabs__content {
-    height: 34px;
-    border-bottom: none;
-    overflow: visible;
-  }
-
-  .kw-tab {
-    min-height: 34px;
-    height: 34px;
-    padding: 0 20px;
-    background: none;
-    border: 1px solid $line-stroke;
-    font-size: 14px;
-    opacity: 1;
-
-    & + .kw-tab {
-      margin-left: -1px;
+    .q-tabs__content {
+      height: 34px;
+      border-bottom: none;
+      overflow: visible;
     }
 
-    .q-tab__content {
-      padding: 0;
-      height: 32px; // 바깥 border 제외 높이
-    }
-
-    .q-tab__label {
+    .kw-tab {
+      min-height: 34px;
+      height: 34px;
+      padding: 0 20px;
+      background: none;
+      border: 1px solid $line-stroke;
       font-size: 14px;
-      line-height: 1;
-    }
-
-    &.q-tab--active {
-      background: $secondary;
-      border: none;
-
-      .q-tab__label {
-        font-weight: 500;
-        color: #fff;
-      }
-
-      .q-tab__indicator {
-        display: none;
-      }
+      opacity: 1;
 
       & + .kw-tab {
-        border-left: 1px solid $black1;
+        margin-left: -1px;
       }
-    }
 
-    .q-focus-helper {
-      display: none;
+      .q-tab__content {
+        padding: 0;
+        height: 32px; // 바깥 border 제외 높이
+      }
+
+      .q-tab__label {
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      &.q-tab--active {
+        background: $secondary;
+        border: none;
+
+        .q-tab__label {
+          font-weight: 500;
+          color: #fff;
+        }
+
+        .q-tab__indicator {
+          display: none;
+        }
+
+        & + .kw-tab {
+          border-left: 1px solid $black1;
+        }
+      }
+
+      .q-focus-helper {
+        display: none;
+      }
     }
   }
 }
