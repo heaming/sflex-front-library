@@ -230,7 +230,7 @@
               :val="idx"
             />
             <div
-              v-if="downloadable && isDownloadable(file)"
+              v-if="computedIsDownloadable(file)"
               class="kw-file-item__name"
               :style="fileItemNameStyles"
               @click.prevent="downloadFile(file)"
@@ -281,7 +281,7 @@
                 <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
               </div>
               <kw-btn
-                v-if="downloadable && isDownloadable(file) && downloadIcon"
+                v-if="computedIsDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
                 borderless
                 @click.prevent="downloadFile(file)"
@@ -515,7 +515,7 @@ export default {
 
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
-      classes += (props.downloadable && uploadCtx.isDownloadable(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
+      classes += (downloadCtx.computedIsDownloadable.value(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
       const uploadingState = uploadCtx.findUploading(file)?.state;
       classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
       return classes;

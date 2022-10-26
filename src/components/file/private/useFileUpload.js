@@ -11,8 +11,8 @@ const REMOVED = 'removed';
 const UPDATING = 'updating';
 const UPLOAD = 'upload';
 const REMOVE = 'remove';
-const FAIL_TO_UPLOAD = 'failToUpload';
-const FAIL_TO_REMOVE = 'failToRemove';
+const FAIL_TO_UPLOAD = 'fail-to-upload';
+const FAIL_TO_REMOVE = 'fail-to-remove';
 const ERROR = 'error';
 const AVAILABLE_STATES = {
   [UPLOADED]: [REMOVE],
@@ -25,7 +25,7 @@ const AVAILABLE_STATES = {
   [ERROR]: [REMOVED],
 };
 
-const key = Symbol('key value for uploading.');
+const key = Symbol('FILE_LIKE_KEY');
 
 const generateFileLikeKey = (fileLike) => {
   // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
