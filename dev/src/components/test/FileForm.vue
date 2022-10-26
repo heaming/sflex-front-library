@@ -114,12 +114,6 @@
     <kw-form-row>
       <kw-form-item label="model & state">
         <kw-toggle
-          v-model="instanceUpdate"
-          :true-value="true"
-          :false-value="false"
-          label="instanceUpdate"
-        />
-        <kw-toggle
           v-model="removable"
           :true-value="true"
           :false-value="false"
@@ -142,6 +136,19 @@
           :true-value="true"
           :false-value="false"
           label="append"
+        />
+      </kw-form-item>
+      <kw-form-item label="instanceUpdate">
+        <kw-option-group
+          v-model="instanceUpdate"
+          option-value="value"
+          option-label="label"
+          :options="[
+            {value: true, label: 'true'},
+            {value: false, label: 'false'},
+            {value: 'upload', label: 'upload'},
+            {value: 'remove', label: 'remove'},
+          ]"
         />
       </kw-form-item>
     </kw-form-row>
@@ -227,6 +234,7 @@
     <!-- default -->
     <kw-form-row>
       <kw-form-item
+        v-if="false"
         label="default"
       >
         <kw-file

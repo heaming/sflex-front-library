@@ -293,7 +293,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!instanceUpdate && isUpdatable(file)"
+                v-if="!(instanceUpdate === true) && isUpdatable(file)"
                 :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
@@ -447,9 +447,11 @@ export default {
       },
     });
 
-    const uploadCtx = useFileUpload(innerValue, ref({
-      instanceUpdate: computed(() => props.instanceUpdate),
+    const uploadOptions = computed(() => ({
+      instanceUpdate: props.instanceUpdate,
     }));
+
+    const uploadCtx = useFileUpload(innerValue, uploadOptions);
 
     const { files } = uploadCtx;
 
@@ -514,7 +516,7 @@ export default {
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
       classes += (props.downloadable && uploadCtx.isDownloadable(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
-      const uploadingState = uploadCtx.findUploading(file).state;
+      const uploadingState = uploadCtx.findUploading(file)?.state;
       classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
       return classes;
     }
