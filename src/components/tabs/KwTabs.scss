@@ -215,6 +215,7 @@
   border: none;
 }
 
+.kw-popup:has(.kw-search),
 .kw-page:has(.kw-search) {
   .kw-tabs {
     border: 1px solid #ddd;
