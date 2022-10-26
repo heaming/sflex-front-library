@@ -40,6 +40,7 @@
 
     .q-tab__content {
       padding: 0;
+      min-width: initial;
     }
 
     &[aria-selected="false"] {
