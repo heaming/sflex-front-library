@@ -42,11 +42,21 @@
         name="alert_off_24"
         clickable
       />
+
+      <kw-btn
+        dense
+        underline
+        class="ml20"
+        label="LOGOUT"
+        @click="logout"
+      />
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
+import useSession from '../../composables/useSession';
+
 export default {
   name: 'WebGnb',
 
@@ -63,11 +73,14 @@ export default {
       commit('app/setSelectedLnbKey', null);
     }
 
+    const { logout } = useSession();
+
     return {
       gnbItems,
       selectedGnbKey,
       isSelected,
       updateSelected,
+      logout,
     };
   },
 };
