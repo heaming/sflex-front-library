@@ -111,6 +111,7 @@
       .q-tab__content {
         padding: 0;
         height: 32px; // 바깥 border 제외 높이
+        color: $black3;
       }
 
       .q-tab__label {
@@ -122,7 +123,8 @@
         background: $secondary;
         border: none;
 
-        .q-tab__label {
+        .q-tab__label,
+        .q-tab__content {
           font-weight: 500;
           color: #fff;
         }
@@ -213,6 +215,7 @@
   border: none;
 }
 
+.kw-popup:has(.kw-search),
 .kw-page:has(.kw-search) {
   .kw-tabs {
     border: 1px solid #ddd;

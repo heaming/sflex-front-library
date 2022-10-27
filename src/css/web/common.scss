@@ -149,6 +149,10 @@ body {
     }
   }
 
+  .q-tree__arrow {
+    color: $black1;
+  }
+
   // menu depth
   &-tree {
     background: #fff;
@@ -204,8 +208,7 @@ body {
       display: none !important;
     }
 
-    /* This line is too long for my rule */
-    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {/* stylelint-disable-line */
+    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {
       margin-left: 0;
 
       &::after {
@@ -829,8 +832,6 @@ $unit: px;
 }
 
 .text- {
-
-  /* stylelint-disable-next-line at-rule-empty-line-before */
   @each $weight,$value in $text-weights {
     &weight-#{$weight} {
       font-weight: $value !important;
@@ -1221,6 +1222,12 @@ $unit: px;
     &:active {
       opacity: 1;
     }
+
+    &--h {
+      border: none;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
   }
 }
 
@@ -1236,6 +1243,12 @@ $unit: px;
     border: 1px solid $line-line;
     padding: 30px;
     width: calc((100% - 80px) / 4);
+
+    // 선택된 클래스
+    &--selected {
+      background-color: $bg-white;
+      border: 1px solid $black1;
+    }
   }
 }
 
