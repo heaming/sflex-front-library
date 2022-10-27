@@ -65,12 +65,11 @@ export default () => {
     }
   }
 
-  async function login({ loginId, password, ...options }) {
+  async function login({ tenantId, portalId, languageId, loginId, password }) {
     const data = {
-      tenantId: env.VITE_TENANT_ID,
-      portalId: env.VITE_PORTAL_ID,
-      languageId: i18n.locale.value,
-      ...options,
+      tenantId: tenantId || env.VITE_TENANT_ID,
+      portalId: portalId || env.VITE_PORTAL_ID,
+      languageId: languageId || i18n.locale.value,
       loginId,
       password,
     };
