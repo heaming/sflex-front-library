@@ -154,6 +154,13 @@
     </kw-form-row>
     <!-- constraint props -->
     <kw-form-row>
+      <kw-form-item label="counter">
+        <kw-toggle
+          v-model="counter"
+          :true-value="true"
+          :false-value="false"
+        />
+      </kw-form-item>
       <kw-form-item label="max-file-size">
         <kw-input
           v-model="maxFileSize"
@@ -248,6 +255,7 @@
           :removable="removable"
           :downloadable="downloadable"
           :retry-possible="retryPossible"
+          :counter="counter"
           :max-total-size="maxTotalSize ?? undefined"
           :max-file-size="maxFileSize ?? undefined"
           :max-files="maxFiles ?? undefined"
@@ -322,6 +330,7 @@
           :removable="removable"
           :downloadable="downloadable"
           :retry-possible="retryPossible"
+          :counter="counter"
           :max-total-size="maxTotalSize ?? undefined"
           :max-file-size="maxFileSize ?? undefined"
           :max-files="maxFiles ?? undefined"
@@ -727,6 +736,7 @@ const asideWidth = ref('');
 const borderless = ref(false);
 const underline = ref(false);
 const dense = ref(false);
+const counter = ref(false);
 const pickFileBtn = ref();
 
 const placeholder = ref('');

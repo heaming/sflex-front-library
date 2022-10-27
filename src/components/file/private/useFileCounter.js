@@ -17,10 +17,10 @@ export default (files) => {
   };
 
   const fileSizeToNumber = (fileSize) => {
-    const units = ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
     if (typeof fileSize === 'number') return Number.parseInt(fileSize, 10);
-    const delimiterRemoved = fileSize.replaceAll(/[,_]/g, '');
-    const findFirstCharOfUnit = /\d\s*([^.\s])/;
+    const units = ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+    const delimiterRemoved = fileSize.replaceAll(/[,_\s]/g, '');
+    const findFirstCharOfUnit = /\d*([^.\d])/;
     const firstUnit = findFirstCharOfUnit.exec(delimiterRemoved)[1].toUpperCase();
     const numberFloat = Number.parseFloat(delimiterRemoved);
     return numberFloat * 1024 ** (units.indexOf(firstUnit) || 0);
