@@ -384,6 +384,7 @@ interface GridUtil {
    * 전체 데이터의 변경 유무를 확인하고, 변경되지 않으면 alert 다이얼로그를 호출하고 `true`를 반환한다.
    * @param view 그리드 뷰 또는 트리 뷰
    * @param message 다이얼로그에 표시할 메세지 내용
+   * @return { Promise<boolean> } isNotModified
    */
   alertIfIsNotModified(view: GridView | TreeView, message?: string): Promise<boolean>;
 
@@ -392,6 +393,7 @@ interface GridUtil {
    * 변경되지 않았거나, 또는 변경되었으면 confirm 다이얼로그를 호출하고 확인시 `true`를 반환한다.
    * @param view 그리드 뷰 또는 트리 뷰
    * @param message 다이얼로그에 표시할 메세지 내용
+   * @return { Promise<boolean> } isNotModified || confirm dialog result
    */
   confirmIfIsModified(view: GridView | TreeView, message?: string): Promise<boolean>;
 
@@ -459,7 +461,7 @@ interface GridUtil {
    * 지정된 행을 펼친다.
    * @param view 트리 뷰
    * @param dataRow 데이터 행
-   * @param isCollapseDescendants 자손 행 펼침 여부, default `false`
+   * @param isExpandDescendants 자손 행 펼침 여부, default `false`
    */
   expand(view: TreeView, dataRow: number, isExpandDescendants?: boolean): void;
 }
@@ -483,7 +485,7 @@ interface PopupUtil {
   /**
    * 팝업을 호출한다.
    * @param url 호출할 팝업 URL
-   * @param options 팝업 옵션
+   * @param windowFeatures 팝업 옵션
    */
   open(url: string, windowFeatures?: WindowFeatures): Promise<boolean>;
 
