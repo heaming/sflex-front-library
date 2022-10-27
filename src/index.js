@@ -9,10 +9,7 @@ export { default as router } from './router';
 export { default as validate } from './validate';
 
 // Components
-export * from './components/appGnb';
-export * from './components/appLayout';
-export * from './components/appLnb';
-export * from './components/appView';
+export * from './layouts/web';
 
 // Composables
 export { default as useDataService } from './composables/useDataService';

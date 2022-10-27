@@ -52,8 +52,9 @@ export interface UseObserverInstance {
 
   /**
    * 하위 Observer, Form, Grid의 데이터가 변경되지 않았으면, alert를 표시한다
-   * (데이터가 변경되었으면 true 반환)
+   * (데이터가 변경되지 않았으면 true 반환)
    * @param message alert에 표시할 메시지
+   * @return { Promise<boolean> } isNotModified
    */
   alertIfIsNotModified: (message?: string) => Promise<boolean>;
 
@@ -61,6 +62,7 @@ export interface UseObserverInstance {
    * 하위 Observer, Form, Grid의 데이터가 변경되었으면 confirm을 표시한다
    * (데이터가 변경되지 않았거나, confirm에서 확인 선택시 true 반환)
    * @param message confirm에 표시할 메시지
+   * @return { Promise<boolean> } isNotModified || confirm dialog result
    */
   confirmIfIsModified: (message?: string) => Promise<boolean>;
 }

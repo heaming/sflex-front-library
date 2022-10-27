@@ -1,12 +1,12 @@
 <template>
   <q-drawer
-    class="kw-lnb"
+    class="kw-lnb overflow-hidden"
     :model-value="isExpanded"
     :width="280"
     show-if-above
     bordered
   >
-    <q-scroll-area class="kw-lnb--scroll">
+    <q-scroll-area style="height: 100%;">
       <q-tree
         ref="lnbRef"
         :key="selectedGnbKey"

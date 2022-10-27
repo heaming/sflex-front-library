@@ -25,14 +25,6 @@ export const useFieldProps = {
     type: Boolean,
     default: true,
   },
-  ignoreOnModified: {
-    type: Boolean,
-    default: false,
-  },
-  ignoreOnReset: {
-    type: Boolean,
-    default: false,
-  },
 };
 
 const normalizeOptions = (options = {}) => ({

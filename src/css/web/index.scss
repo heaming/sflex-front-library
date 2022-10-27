@@ -4,7 +4,7 @@
 @import "quasar/src/css/index.sass";
 
 /*
-  Common
+  Commons
  */
 @import "./variables";
 @import "./mixins";
@@ -12,6 +12,12 @@
 @import "./style";
 @import "./datepicker";
 @import "./guide";
+
+/*
+  Layouts
+  */
+@import "../../layouts/web/index";
+@import "../../layouts/tablet/index";
 
 /*
   Plugins
@@ -24,10 +30,6 @@
 /*
   Components
   */
-@import "../../components/appGnb/AppGnb";
-@import "../../components/appLayout/AppLayout";
-@import "../../components/appLnb/AppLnb";
-@import "../../components/appView/AppView";
 @import "../../components/action/KwAction";
 @import "../../components/actionBar/KwActionBar";
 @import "../../components/btn/KwBtn";

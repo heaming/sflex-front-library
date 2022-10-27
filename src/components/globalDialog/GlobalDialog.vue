@@ -60,7 +60,7 @@ export default {
     const dialogs = shallowRef([]);
 
     const isPending = ref(false);
-    const isActive = computed(() => !isPending.value && dialogs.value[0] !== undefined);
+    const isActive = computed(() => !isPending.value && dialogs.value.length > 0);
 
     const dialog = computed(() => dialogs.value[0]);
     const okRef = ref();

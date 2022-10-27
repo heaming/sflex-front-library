@@ -18,6 +18,14 @@ export const useFieldStateProps = {
     type: String,
     default: undefined,
   },
+  ignoreOnModified: {
+    type: Boolean,
+    default: false,
+  },
+  ignoreOnReset: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export default (val) => {
@@ -34,6 +42,9 @@ export default (val) => {
   const errors = ref([]);
   const invalid = computed(() => !pending.value && (props.error || (validated.value && !!errors.value.length)));
   const invalidMessage = computed(() => (invalid.value ? (props.errorMessage || errors.value[0]) : null));
+
+  const ignoreOnModified = toRef(props, 'ignoreOnModified');
+  const ignoreOnReset = toRef(props, 'ignoreOnReset');
 
   function setState(options = {}) {
     if ('initialValue' in options) {
@@ -81,6 +92,8 @@ export default (val) => {
     validated,
     invalid,
     invalidMessage,
+    ignoreOnModified,
+    ignoreOnReset,
     setState,
   };
 };
