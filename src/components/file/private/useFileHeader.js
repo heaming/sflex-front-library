@@ -8,7 +8,7 @@ export const useFileHeaderProps = {
 export const useFileHeaderEmits = ['scroll:file', 'scroll:header'];
 
 export default () => {
-  const { props, emit, vnode } = getCurrentInstance();
+  const { props, emit, proxy } = getCurrentInstance();
 
   let ignoreSource;
 
@@ -64,7 +64,7 @@ export default () => {
   }));
 
   const getHeaderScrollAreaStyle = () => {
-    const componentRootEl = vnode.el;
+    const componentRootEl = proxy.$el;
     if (!componentRootEl) {
       return undefined;
     }
@@ -94,6 +94,29 @@ export default () => {
     };
   };
 
+  const placeholderStyle = ref({});
+
+  const getPlaceholderStyle = () => {
+    const componentRootEl = proxy.$el;
+    if (!componentRootEl) {
+      return undefined;
+    }
+    let left = 0;
+    const prefixSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__prefix');
+    if (prefixSlotEl) {
+      left += prefixSlotEl.getBoundingClientRect().width;
+    }
+    let right = 0;
+    const suffixSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__suffix');
+    if (suffixSlotEl) {
+      right += suffixSlotEl.getBoundingClientRect().width;
+    }
+    return {
+      left: `${left}px`,
+      right: `${right}px`,
+    };
+  };
+
   const headerScrollAreaStyle = ref({});
 
   const fileScrollAreaContentsStyle = computed(() => {
@@ -108,10 +131,12 @@ export default () => {
 
   onUpdated(() => {
     headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
+    placeholderStyle.value = getPlaceholderStyle();
   });
 
   onMounted(() => {
-    headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
+    placeholderStyle.value = getHeaderScrollAreaStyle();
+    placeholderStyle.value = getPlaceholderStyle();
   });
 
   return {
@@ -123,6 +148,7 @@ export default () => {
     onScrollFile,
     onScrollHeader,
     headerScrollAreaStyle,
+    placeholderStyle,
     fileScrollAreaContentsStyle,
   };
 };

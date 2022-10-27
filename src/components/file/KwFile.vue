@@ -47,7 +47,7 @@
       v-if="files.length === 0"
       class="kw-file__placeholder"
       :class="placeholderClass"
-      :style="[placeholderStyle, headerScrollAreaStyle]"
+      :style="placeholderStyle"
     >
       {{ placeholder }}
     </div>
@@ -120,13 +120,15 @@
               name="append-header"
             />
           </div>
-          <div class="kw-file-item__size">
-            {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
-          </div>
+
           <div
             class="kw-file-item__aside"
             :style="fileItemAsideStyles"
-          />
+          >
+            <div class="kw-file-item__size">
+              {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
+            </div>
+          </div>
         </div>
       </kw-scroll-area>
       <div
@@ -211,7 +213,7 @@
           :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
           :scroll-area-style="fileScrollAreaContentsStyle"
-          :horizontal-thumb-style="scrollHorizontal && { borderBottomWidth: '4px', height: '14px' }"
+          :horizontal-thumb-style="scrollHorizontal ? { borderBottomWidth: '4px', height: '14px' } : undefined"
           @scroll="onScrollFile"
         >
           <div
@@ -266,18 +268,18 @@
               />
             </div>
             <div
-              class="kw-file-item__size"
-            >
-              <kw-icon
-                v-if="isRetryPossible(file)"
-                name="warning"
-              />
-              <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
-            </div>
-            <div
               class="kw-file-item__aside"
               :style="fileItemAsideStyles"
             >
+              <div
+                class="kw-file-item__size"
+              >
+                <kw-icon
+                  v-if="isRetryPossible(file)"
+                  name="warning"
+                />
+                <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
+              </div>
               <kw-btn
                 v-if="downloadable && isDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
@@ -375,7 +377,6 @@ export default {
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
     placeholderClass: { type: [Array, String, Object], default: undefined },
-    placeholderStyle: { type: [Array, String, Object], default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,

@@ -1,4 +1,4 @@
-import { differenceBy } from 'lodash-es';
+import { differenceBy, isEqual } from 'lodash-es';
 import { download, downloadBlob, upload } from '../../../utils/file';
 
 const INSTANT_UPDATE_ALL = true;
@@ -25,20 +25,23 @@ const AVAILABLE_STATES = {
   [ERROR]: [REMOVED],
 };
 
+const key = Symbol('key value for uploading.');
+
 const generateFileLikeKey = (fileLike) => {
   // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
+  if (Object.hasOwn(fileLike, key)) { return fileLike[key]; }
   const isNative = fileLike instanceof File;
   return (isNative
     ? fileLike.webkitRelativePath + (fileLike.lastModified || new Date().getTime()) + fileLike.name + fileLike.size
-    : fileLike.key || fileLike.fileUid || fileLike.serverFileName);
+    : fileLike.fileUid || fileLike.serverFileName);
 };
 
 const removeDuplicate = (fileLikes) => {
   const keys = [];
   return fileLikes.reduce((zipped, fileLike) => {
-    const key = generateFileLikeKey(fileLike);
-    if (!keys.includes(key)) {
-      keys.push(key);
+    const checkKey = generateFileLikeKey(fileLike);
+    if (!keys.includes(checkKey)) {
+      keys.push(checkKey);
       zipped.push(fileLike);
     }
     return zipped;
@@ -46,7 +49,7 @@ const removeDuplicate = (fileLikes) => {
 };
 
 const normalizeFileLike = (fileLike = {}) => {
-  if (typeof fileLike.dummy === 'boolean') {
+  if (Object.hasOwn(fileLike, key)) {
     return fileLike;
   }
   if (fileLike instanceof File) {
@@ -57,7 +60,7 @@ const normalizeFileLike = (fileLike = {}) => {
       lastModified: fileLike.lastModified || new Date().getTime(),
       dummy: false,
       nativeFile: fileLike,
-      key: generateFileLikeKey(fileLike),
+      [key]: generateFileLikeKey(fileLike),
     };
   }
   return {
@@ -72,7 +75,7 @@ const normalizeFileLike = (fileLike = {}) => {
     serverFileName: fileLike.serverFileName,
     fileUid: fileLike.fileUid,
     myFileYn: fileLike.myFileYn,
-    key: generateFileLikeKey(fileLike),
+    [key]: generateFileLikeKey(fileLike),
   };
 };
 
@@ -228,7 +231,7 @@ export default (values, options) => {
   function findUploading(file) {
     return uploadings
       .value
-      .find((uploading) => uploading.file.key === generateFileLikeKey(file));
+      .find((uploading) => uploading.file[key] === generateFileLikeKey(file));
   }
 
   async function syncUploadings(newFiles) {
@@ -240,17 +243,17 @@ export default (values, options) => {
 
     const restoreUploadings = rawUploadings
       .filter((uploading) => uploading.state === REMOVED)
-      .filter((uploading) => newFiles.map((file) => file.key).includes(uploading.file.key));
+      .filter((uploading) => newFiles.map((file) => file[key]).includes(uploading.file[key]));
 
     restoreUploadings.forEach((uploading) => {
       uploading.state = UPLOAD;
     });
 
-    const removed = differenceBy(oldFiles, newFiles, 'key');
+    const removed = differenceBy(oldFiles, newFiles, key);
     rawUploadings = rawUploadings
       .filter((uploading) => !removed.includes(uploading.file));
 
-    const added = differenceBy(newFiles, oldFiles, 'key');
+    const added = differenceBy(newFiles, oldFiles, key);
     const generateUploadings = [];
     added.forEach((file) => {
       generateUploadings.push(generateReactiveUploading(file, normalizedOptions.value));
@@ -281,27 +284,49 @@ export default (values, options) => {
     },
   }));
 
-  function isFilesChanged(nfs, ofs) {
+  function updateFileExceptInternal(origin, update) {
+    const newFileKeys = Reflect.ownKeys(update);
+    const ignoreUpdateKeys = [key, 'name', 'size', 'type', 'lastModified', 'dummy', 'nativeFile', 'serverFileName', 'fileUid'];
+    newFileKeys
+      .filter((k) => !ignoreUpdateKeys.includes(k))
+      .forEach((k) => {
+        if (!isEqual(origin[k], update[k])) {
+          origin[k] = update[k];
+        }
+      });
+  }
+
+  function checkAndUpdateFilesChanged(nfs, ofs) {
+    let changed = false;
+
     if (nfs.length !== ofs.length) {
-      return true;
+      changed = true;
     }
 
     const ofKeys = ofs.map(generateFileLikeKey);
 
     for (let i = 0; i < nfs.length; i += 1) {
-      if (!ofKeys.includes(generateFileLikeKey(nfs[i]))) {
-        return true;
+      const newFile = nfs[i];
+      const newFileLikeKey = generateFileLikeKey(newFile);
+      const existingIdx = ofKeys.indexOf(newFileLikeKey);
+      if (existingIdx === -1) {
+        changed = true;
       }
+
+      const oldFile = ofs[existingIdx];
+      if (oldFile) { updateFileExceptInternal(oldFile, newFile); }
     }
-    return false;
+
+    return changed;
   }
 
   watch(values, (newFiles) => {
-    // console.log('watch values', newFiles, uploadings.value);
     const oldFiles = unref(uploadings)
       .map((uploading) => uploading.file);
 
-    if (isFilesChanged(newFiles, oldFiles)) {
+    const normalizedNewFiles = removeDuplicate(newFiles.map(normalizeFileLike));
+
+    if (checkAndUpdateFilesChanged(normalizedNewFiles, oldFiles)) {
       fileLikes.value = removeDuplicate(newFiles);
     }
   }, { deep: true, immediate: true });

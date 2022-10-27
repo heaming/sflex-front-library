@@ -114,7 +114,7 @@ export default {
 
     async function confirmIfTargetsModified() {
       const targets = props.modifiedTargets.map(getRegisteredChild);
-      const isModified = targets.some((e) => e?.ctx.isModified());
+      const isModified = targets.some((e) => e?.ignoreOnModified.value === false && e?.ctx.isModified?.());
 
       return !isModified || await confirm(i18n.t('MSG_ALT_CHG_CNTN'));
     }

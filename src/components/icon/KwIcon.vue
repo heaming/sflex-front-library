@@ -6,7 +6,7 @@
     :name="name"
     :size="size"
     :color="color"
-    @click="!disable && onClick($event)"
+    @click="!disable && onClick?.($event)"
   >
     <slot />
   </q-icon>

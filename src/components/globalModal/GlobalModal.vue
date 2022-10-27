@@ -9,15 +9,17 @@
     no-refocus
   >
     <kw-popup-container
-      ref="containerRefs"
+      :ref="(vm) => modal.containeVm = vm"
       :draggable="modal.draggable"
       @resolve="resolveComponent(modal)"
       @close="close(modal, $event)"
     >
-      <component
-        :is="modal.component"
-        v-bind="modal.componentProps"
-      />
+      <kw-observer :ref="(vm) => modal.observerVm = vm">
+        <component
+          :is="modal.component"
+          v-bind="modal.componentProps"
+        />
+      </kw-observer>
     </kw-popup-container>
   </q-dialog>
 </template>
@@ -32,9 +34,7 @@ export default {
 
   setup() {
     const vm = getCurrentInstance();
-
     const modals = shallowRef([]);
-    const containerRefs = ref();
 
     registerGlobalVm(GlobalModalVmKey, vm, () => {
       modals.value = getGlobalData(GlobalModalVmKey);
@@ -48,17 +48,17 @@ export default {
       modal.componentResolved = true;
     }
 
-    const getContainerCtx = (modal) => containerRefs.value[modals.value.findIndex((v) => v === modal)]?.ctx;
-
     async function isClosable(modal, result) {
-      const ctx = getContainerCtx(modal);
+      const observer = modal.observerVm;
+      const popupCtx = modal.containeVm.ctx;
+
       const shouldCheckModified = result === false;
 
       if (shouldCheckModified) {
-        if (!await ctx?.observer.confirmIfIsModified()) { return false; }
+        if (!await observer.confirmIfIsModified()) { return false; }
       }
 
-      return (await ctx.onBeforeClose.value?.(result)) !== false;
+      return (await popupCtx.onBeforeClose.value?.(result)) !== false;
     }
 
     async function close(modal, { result, payload }) {
@@ -70,7 +70,6 @@ export default {
 
     return {
       modals,
-      containerRefs,
       resolveComponent,
       close,
     };

@@ -205,8 +205,7 @@
   }
 
   &__size {
-    margin-left: 16px;
-    min-width: 90px; // designed.
+    margin-right: 8px;
     text-align: right;
     font-size: 14px;
     color: $black3;
@@ -216,7 +215,7 @@
   &__aside { // you should notice this one's width set by props.
     // min-width: TBD;
     margin-left: 16px;
-    min-width: 16px;
+    width: 122px;
     flex: none;
     display: flex;
     justify-content: flex-end;
@@ -250,6 +249,9 @@
       font-size: inherit;
       font-weight: inherit;
       white-space: nowrap;
+      text-align: center;
+      width: 100%;
+      margin-right: 0;
     }
   }
 

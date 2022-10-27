@@ -1,5 +1,6 @@
 import { Quasar } from 'quasar';
 import consts from '../consts';
+import env from '../consts/private/env';
 import { http } from '../plugins/http';
 import { loadSpinner } from '../plugins/loading';
 import { localStorage } from '../plugins/storage';
@@ -45,32 +46,54 @@ export default () => {
     await router.replace(INITIAL_LOCATION);
   }
 
-  async function isReady() {
+  async function initApp() {
     try {
       loadSpinner(true);
       await fetchLoginInfo();
-      await Promise.all([
-        fetchMetas(),
-        fetchLangs(),
-      ]);
+      await Promise.all([fetchMetas(), fetchLangs()]);
       await invokeInitialRoute();
     } finally {
       loadSpinner(false);
     }
   }
 
-  async function login(loginId, password) {
-    const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, { loginId, password });
+  async function isReady() {
+    if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
+      await initApp();
+    } else if (env.VITE_LOGIN_URL) {
+      window.location.replace(env.VITE_LOGIN_URL); // redirect to sso
+    }
+  }
+
+  async function login({ loginId, password, ...options }) {
+    const data = {
+      tenantId: env.VITE_TENANT_ID,
+      portalId: env.VITE_PORTAL_ID,
+      languageId: i18n.locale.value,
+      ...options,
+      loginId,
+      password,
+    };
+
+    const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, data);
     const { token } = response.data;
     localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, token);
     window.location.replace('/');
   }
 
-  async function logout() {
-    //
+  function logout() {
+    if (env.VITE_LOGOUT_URL) {
+      window.location.replace(env.VITE_LOGOUT_URL);
+    } else {
+      localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+      window.location.replace('/');
+    }
   }
 
+  const isAuthenticated = computed(() => store.getters['meta/isAuthenticated']);
+
   return {
+    isAuthenticated,
     isReady,
     login,
     logout,

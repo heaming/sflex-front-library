@@ -146,10 +146,8 @@ export default (options) => {
     await setPending();
     unwatchValueForValidate?.();
 
-    if (!props.ignoreOnReset) {
-      value.value = deepCopy(initialValue.value);
-      await nextTick();
-    }
+    value.value = deepCopy(initialValue.value);
+    await nextTick();
 
     setState({
       errors: [],
@@ -171,7 +169,7 @@ export default (options) => {
   }
 
   function isModified() {
-    if (props.ignoreOnModified || pending.value) {
+    if (pending.value) {
       return false;
     }
 
