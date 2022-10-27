@@ -57,11 +57,13 @@ export default () => {
     }
   }
 
+  const locationReplace = (url = window.location.pathname) => window.location.replace(url);
+
   async function isReady() {
     if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
       await initApp();
     } else if (env.VITE_LOGIN_URL) {
-      window.location.replace(env.VITE_LOGIN_URL); // redirect to sso
+      locationReplace(env.VITE_LOGIN_URL); // redirect to sso
     }
   }
 
@@ -77,15 +79,15 @@ export default () => {
     const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, data);
     const { token } = response.data;
     localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, token);
-    window.location.replace('/');
+    locationReplace();
   }
 
   function logout() {
     if (env.VITE_LOGOUT_URL) {
-      window.location.replace(env.VITE_LOGOUT_URL);
+      locationReplace(env.VITE_LOGIN_URL);
     } else {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-      window.location.replace('/');
+      locationReplace();
     }
   }
 
