@@ -66,7 +66,7 @@ async function handleServerFailure(response) {
   if (isSessionExpired) {
     await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
     localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-    window.location.replace(env.VITE_LOGIN_URL || '/');
+    window.location.replace(env.VITE_LOGIN_URL || window.location.pathname);
     return;
   }
 

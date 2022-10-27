@@ -114,12 +114,6 @@
     <kw-form-row>
       <kw-form-item label="model & state">
         <kw-toggle
-          v-model="instanceUpdate"
-          :true-value="true"
-          :false-value="false"
-          label="instanceUpdate"
-        />
-        <kw-toggle
           v-model="removable"
           :true-value="true"
           :false-value="false"
@@ -144,9 +138,29 @@
           label="append"
         />
       </kw-form-item>
+      <kw-form-item label="instanceUpdate">
+        <kw-option-group
+          v-model="instanceUpdate"
+          option-value="value"
+          option-label="label"
+          :options="[
+            {value: true, label: 'true'},
+            {value: false, label: 'false'},
+            {value: 'upload', label: 'upload'},
+            {value: 'remove', label: 'remove'},
+          ]"
+        />
+      </kw-form-item>
     </kw-form-row>
     <!-- constraint props -->
     <kw-form-row>
+      <kw-form-item label="counter">
+        <kw-toggle
+          v-model="counter"
+          :true-value="true"
+          :false-value="false"
+        />
+      </kw-form-item>
       <kw-form-item label="max-file-size">
         <kw-input
           v-model="maxFileSize"
@@ -227,6 +241,7 @@
     <!-- default -->
     <kw-form-row>
       <kw-form-item
+        v-if="false"
         label="default"
       >
         <kw-file
@@ -240,6 +255,7 @@
           :removable="removable"
           :downloadable="downloadable"
           :retry-possible="retryPossible"
+          :counter="counter"
           :max-total-size="maxTotalSize ?? undefined"
           :max-file-size="maxFileSize ?? undefined"
           :max-files="maxFiles ?? undefined"
@@ -314,6 +330,7 @@
           :removable="removable"
           :downloadable="downloadable"
           :retry-possible="retryPossible"
+          :counter="counter"
           :max-total-size="maxTotalSize ?? undefined"
           :max-file-size="maxFileSize ?? undefined"
           :max-files="maxFiles ?? undefined"
@@ -719,6 +736,7 @@ const asideWidth = ref('');
 const borderless = ref(false);
 const underline = ref(false);
 const dense = ref(false);
+const counter = ref(false);
 const pickFileBtn = ref();
 
 const placeholder = ref('');

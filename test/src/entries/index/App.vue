@@ -1,18 +1,25 @@
 <template>
-  <app-layout>
-    <app-gnb />
-
-    <app-lnb />
-
-    <app-tabs-view />
-  </app-layout>
+  <web-layout>
+    <template #default>
+      <web-gnb />
+      <web-lnb />
+      <web-tabs-view />
+    </template>
+    <template #unauthenticated>
+      <web-fallback-login />
+    </template>
+  </web-layout>
 </template>
 
 <script setup>
 import {
   useSession,
-  AppLayout, AppGnb, AppLnb, AppTabsView,
+  WebLayout, WebGnb, WebLnb, WebTabsView, WebFallbackLogin,
 } from '~kw-lib';
 
-await useSession().isReady();
+const {
+  isReady,
+} = useSession();
+
+await isReady();
 </script>
