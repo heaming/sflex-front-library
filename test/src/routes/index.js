@@ -11,7 +11,7 @@ export default [
   {
     path: '/',
     name: consts.ROUTE_HOME_NAME,
-    component: () => import('~test/pages/IndexPage.vue'),
+    component: () => import('~test/routes/IndexPage.vue'),
   },
   ...createRoutesByGlobImport(routesGlobImport),
 ];
