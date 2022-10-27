@@ -208,8 +208,7 @@ body {
       display: none !important;
     }
 
-    /* This line is too long for my rule */
-    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {/* stylelint-disable-line */
+    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {
       margin-left: 0;
 
       &::after {
