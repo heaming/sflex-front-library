@@ -135,7 +135,7 @@ export default () => {
   });
 
   onMounted(() => {
-    placeholderStyle.value = getHeaderScrollAreaStyle();
+    headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
     placeholderStyle.value = getPlaceholderStyle();
   });
 
