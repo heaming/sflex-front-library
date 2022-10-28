@@ -9,7 +9,7 @@ const { isEmpty } = require('lodash');
 const context = process.cwd();
 
 const normalizePage = (entryName, page) => ({
-  template: page.template || 'index.html',
+  template: page.template || 'public/index.html',
   title: page.title || entryName.toUpperCase(),
 });
 
@@ -21,19 +21,19 @@ function scanPages(pagesDir) {
     .reduce((a, v) => { a[getEntryName(v)] = {}; return a; }, {});
 }
 
-function moveTemplateIndex() {
+function moveIndexPlugin(pages) {
   return {
-    name: 'vite-plugin-move-template-index',
-
+    name: 'load-pages:move-index',
     closeBundle() {
-      const absoluteDistPath = resolve(context, 'dist');
+      if (pages.index !== undefined) {
+        const absoluteDistPath = resolve(context, 'dist');
 
-      shelljs.mv(
-        resolve(absoluteDistPath, 'index/index.html'),
-        absoluteDistPath,
-      );
-
-      shelljs.rm('-rf', resolve(absoluteDistPath, 'index'));
+        shelljs.mv(
+          resolve(absoluteDistPath, 'index/index.html'),
+          absoluteDistPath,
+        );
+        shelljs.rm('-rf', resolve(absoluteDistPath, 'index'));
+      }
     },
   };
 }
@@ -54,7 +54,6 @@ module.exports = ({
 
   const plugins = [
     mpa({ scanDir: pagesDir, open: false }),
-
     htmlTemplate({
       pagesDir,
       pages,
@@ -69,7 +68,7 @@ module.exports = ({
 
   if (isBuild) {
     plugins.push(
-      moveTemplateIndex(),
+      moveIndexPlugin(pages),
     );
   }
 

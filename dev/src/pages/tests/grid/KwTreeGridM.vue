@@ -37,8 +37,8 @@ import { createTreeData } from '~dev/utils/data';
 
 export default {
   setup() {
-    let treeData = gridUtil.defineTreeData();
-    let treeView = gridUtil.defineTreeView();
+    let treeData;
+    let treeView;
 
     let columns;
     let fields;
