@@ -52,7 +52,7 @@
               kw-tabs
             </td>
             <td>
-              .kw-tabs--dense
+              dense
             </td>
             <td>
               When a small-height tab is used alone and 2depth<br>
@@ -213,8 +213,12 @@
 
 const guideHistory = [
   {
+    timestamp: '2022.10.28',
+    text: 'change methods class -> prop',
+  },
+  {
     timestamp: '2022.10.26',
-    text: 'Modify explanation of dense class ',
+    text: 'Modify explanation of dense class',
   },
   {
     timestamp: '2022.10.21',
