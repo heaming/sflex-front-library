@@ -136,7 +136,7 @@
         class="kw-file__after-slot-container"
       >
         <kw-btn
-          v-if="editable && showDefaultFilePickBtn"
+          v-if="showDefaultFilePickBtn"
           :label="'파일선택'"
           :dense="dense"
           @click="pickFiles"
@@ -281,7 +281,7 @@
                 <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
               </div>
               <kw-btn
-                v-if="editable &&computedIsDownloadable(file) && downloadIcon"
+                v-if="computedIsDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
                 borderless
                 @click.prevent="downloadFile(file)"
@@ -293,7 +293,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="editable && !(instanceUpdate === true) && isUpdatable(file)"
+                v-if="!(instanceUpdate === true) && isUpdatable(file)"
                 :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
@@ -305,7 +305,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="editable && retryPossible && isRetryPossible(file)"
+                v-if="retryPossible && isRetryPossible(file)"
                 :icon="retryIcon"
                 borderless
                 @click.prevent="retryUpdateFile(file)"
@@ -317,7 +317,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="editable && removable && isReversible(file)"
+                v-if="removable && isReversible(file)"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -450,8 +450,11 @@ export default {
       },
     });
 
+    const editable = computed(() => props.disable !== true && props.readonly !== true);
+
     const uploadOptions = computed(() => ({
       instanceUpdate: props.instanceUpdate,
+      editable,
     }));
 
     const uploadCtx = useFileUpload(innerValue, uploadOptions);
@@ -500,9 +503,6 @@ export default {
     // warp file comp
     const headerCtx = useFileHeader();
 
-    // use action
-    const editable = computed(() => props.disable !== true && props.readonly !== true);
-
     // styling
     const fileClass = computed(() => ({
       'kw-file--multiple': props.multiple,
@@ -528,7 +528,7 @@ export default {
     const fileItemClasses = computed(() => files.value.map(getFileItemClass));
 
     // event handler
-    const filePickCtx = useFilePicker(fileRef);
+    const filePickCtx = useFilePicker(fileRef, editable);
 
     // sample codes for attach icon
     // const getIcon = (file) => {

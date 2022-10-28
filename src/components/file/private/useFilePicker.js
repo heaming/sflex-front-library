@@ -3,7 +3,7 @@ export const useFilePickerProps = {
   pickFileBtn: { type: Boolean, default: undefined },
 };
 
-export default (ref) => {
+export default (ref, editable) => {
   const { props } = getCurrentInstance();
 
   function preventIfClick(e) {
@@ -17,6 +17,7 @@ export default (ref) => {
 
   // reference methods
   const pickFiles = () => {
+    if (unref(editable)) { return; }
     ref.value?.getNativeElement().click();
   };
 
