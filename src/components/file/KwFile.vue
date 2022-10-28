@@ -136,7 +136,7 @@
         class="kw-file__after-slot-container"
       >
         <kw-btn
-          v-if="showDefaultFilePickBtn"
+          v-if="editable && showDefaultFilePickBtn"
           :label="'파일선택'"
           :dense="dense"
           @click="pickFiles"
@@ -281,7 +281,7 @@
                 <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
               </div>
               <kw-btn
-                v-if="computedIsDownloadable(file) && downloadIcon"
+                v-if="editable &&computedIsDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
                 borderless
                 @click.prevent="downloadFile(file)"
@@ -293,7 +293,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!(instanceUpdate === true) && isUpdatable(file)"
+                v-if="editable && !(instanceUpdate === true) && isUpdatable(file)"
                 :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
@@ -305,7 +305,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="retryPossible && isRetryPossible(file)"
+                v-if="editable && retryPossible && isRetryPossible(file)"
                 :icon="retryIcon"
                 borderless
                 @click.prevent="retryUpdateFile(file)"
@@ -317,7 +317,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="removable && isReversible(file)"
+                v-if="editable && removable && isReversible(file)"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -408,7 +408,7 @@ export default {
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
     filter: { type: Function, default: undefined },
-    modelValue: { type: [Object, Array], default: () => [] },
+    modelValue: { type: [Object, Array], required: true },
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
@@ -441,8 +441,11 @@ export default {
         return [];
       },
       set: (val) => {
-        if (Object(val) === val) {
-          value.value = 'length' in val ? val : val[0];
+        console.log(val, value.value);
+        if (Object(value.value) === value.value) {
+          value.value = 'length' in value.value ? val : val[0];
+        } else {
+          value.value = val[0];
         }
       },
     });
@@ -498,6 +501,7 @@ export default {
     const headerCtx = useFileHeader();
 
     // use action
+    const editable = computed(() => props.disable !== true && props.readonly !== true);
 
     // styling
     const fileClass = computed(() => ({
@@ -551,6 +555,7 @@ export default {
       fileClass,
       fileItemClasses,
       emptyAppendCounter,
+      editable,
     };
   },
 };
