@@ -1,7 +1,7 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
 
-type TooltipPosition = 'top left' | 'top middle' | 'top right' | 'top start' | 'top end' | 'center left' | 'center middle' | 'center right' | 'center start' | 'center end' | 'bottom left' | 'mbottom middle' | 'bottom right' | 'bottom start' | 'bottom end';
+type TooltipPosition = 'top left' | 'top middle' | 'top right' | 'top start' | 'top end' | 'center left' | 'center middle' | 'center right' | 'center start' | 'center end' | 'bottom left' | 'bottom middle' | 'bottom right' | 'bottom start' | 'bottom end';
 
 // KwTooltip
 interface KwTooltipProps {
