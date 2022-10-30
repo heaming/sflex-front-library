@@ -350,11 +350,13 @@ export default (values, options) => {
   });
 
   function isUpdatable(file) {
+    if (!normalizedOptions.value.editable) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.REMOVE].includes(uploading?.state);
   }
 
   async function updateFile(file) {
+    if (!normalizedOptions.value.editable) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.update();
     if (uploading.state === REMOVED) {
@@ -364,17 +366,20 @@ export default (values, options) => {
   }
 
   async function updateAll(evenFailed = false) {
+    if (!normalizedOptions.value.editable) { return; }
     const updatings = uploadings.value.map((uploading) => uploading.update(evenFailed));
     await Promise.all(updatings);
     await syncUploadings(fileLikes.value);
   }
 
   function isRetryPossible(file) {
+    if (!normalizedOptions.value.editable) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE].includes(uploading?.state);
   }
 
   async function retryUpdateFile(file) {
+    if (!normalizedOptions.value.editable) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.retry();
     if (uploading.state === REMOVED) {
@@ -383,12 +388,14 @@ export default (values, options) => {
   }
 
   function isReversible(file) {
+    if (!normalizedOptions.value.editable) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.UPLOADED, STATE.REMOVE, STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE]
       .includes(uploading?.state);
   }
 
   async function revertFile(file, forced = false) {
+    if (!normalizedOptions.value.editable) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.revert();
     if (!uploading.instanceUpdate && forced) { await uploading.update(); } // Since, revert resolve fail state.
@@ -399,6 +406,7 @@ export default (values, options) => {
   }
 
   async function revertAll(forced = false) {
+    if (!normalizedOptions.value.editable) { return; }
     const removing = uploadings.value.map((uploading) => uploading.revert());
     await Promise.all(removing);
     if (forced) { await updateAll(); }

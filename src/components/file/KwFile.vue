@@ -408,7 +408,7 @@ export default {
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
     filter: { type: Function, default: undefined },
-    modelValue: { type: [Object, Array], default: () => [] },
+    modelValue: { type: [Object, Array], required: true },
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
@@ -441,14 +441,20 @@ export default {
         return [];
       },
       set: (val) => {
-        if (Object(val) === val) {
-          value.value = 'length' in val ? val : val[0];
+        console.log(val, value.value);
+        if (Object(value.value) === value.value) {
+          value.value = 'length' in value.value ? val : val[0];
+        } else {
+          value.value = val[0];
         }
       },
     });
 
+    const editable = computed(() => props.disable !== true && props.readonly !== true);
+
     const uploadOptions = computed(() => ({
       instanceUpdate: props.instanceUpdate,
+      editable,
     }));
 
     const uploadCtx = useFileUpload(innerValue, uploadOptions);
@@ -497,8 +503,6 @@ export default {
     // warp file comp
     const headerCtx = useFileHeader();
 
-    // use action
-
     // styling
     const fileClass = computed(() => ({
       'kw-file--multiple': props.multiple,
@@ -524,7 +528,7 @@ export default {
     const fileItemClasses = computed(() => files.value.map(getFileItemClass));
 
     // event handler
-    const filePickCtx = useFilePicker(fileRef);
+    const filePickCtx = useFilePicker(fileRef, editable);
 
     // sample codes for attach icon
     // const getIcon = (file) => {
@@ -551,6 +555,7 @@ export default {
       fileClass,
       fileItemClasses,
       emptyAppendCounter,
+      editable,
     };
   },
 };

@@ -241,7 +241,6 @@
     <!-- default -->
     <kw-form-row>
       <kw-form-item
-        v-if="false"
         label="default"
       >
         <kw-file
@@ -744,7 +743,7 @@ const placeholderStyle = ref();
 const placeholderClass = ref();
 
 const quasarValue = ref(null);
-const defaultValue = ref(null);
+const defaultValue = ref();
 const multipleValue = ref([]);
 const ruledValue = ref(null);
 const ruledMultipleValue = ref([]);
