@@ -37,13 +37,13 @@ export interface CustomAxiosRequestConfig<D = any> extends AxiosRequestConfig<D>
    * API 호출 시 스피너 표시 여부
    * @defaultValue `true`
    */
-  spinner?: boolean;
+  useSpinner?: boolean;
 
   /**
    * API 호출 결과가 에러 시 다이얼로그 표시 여부, 서버에서 발생한 에러에만 적용 된다.
    * @defaultValue `true`
    */
-  alert?: boolean;
+  useAlert?: boolean;
 }
 
 export interface CustomAxiosInstance {
@@ -78,11 +78,6 @@ export function modal(options: {
    * 호출할 컴포넌트에 전달할 Props
    */
   componentProps?: Record<string, unknown>;
-
-  /**
-   * 모달 드래그 가능 여부
-   */
-  draggable?: boolean;
 }): Promise<{
   /**
    * 팝업 결과

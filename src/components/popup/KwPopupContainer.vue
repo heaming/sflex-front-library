@@ -1,6 +1,6 @@
 <template>
   <q-card
-    v-show="isLoaded"
+    v-show="!isLoading"
     ref="containerRef"
     class="kw-popup"
     :class="popupClass"
@@ -15,10 +15,10 @@
         v-if="popupTitle"
         class="kw-popup__header-title"
       >
-        {{ $t(popupTitle) }}
+        {{ popupTitle }}
       </h1>
       <q-icon
-        v-if="!popupNoCloseBtn"
+        v-if="isLoadFailed || popupUseClose"
         class="kw-popup__header-close"
         size="24px"
         name="close_24"
@@ -29,8 +29,8 @@
     </q-card-section>
 
     <kw-suspense
-      @resolve="onLoad"
-      @error="onLoad"
+      @resolve="onLoaded"
+      @error="onLoadFailed"
     >
       <template #default>
         <slot />
@@ -62,7 +62,6 @@ export default {
   ],
 
   setup(props, { emit }) {
-    const isLoaded = ref(false);
     const popupCtx = shallowRef({});
 
     function registerPopup(ctx) {
@@ -84,16 +83,16 @@ export default {
     const containerRef = ref();
     const { transform, events: draggableEvents } = useDraggable(containerRef);
 
-    const popupTitle = computed(() => popupCtx.value.title?.value || popupCtx.value.page?.pageTitleMessageResourceId);
-    const popupNoCloseBtn = computed(() => popupCtx.value.noCloseBtn?.value);
     const popupSize = computed(() => popupCtx.value.size?.value);
-    const popupStyle = computed(() => [popupCtx.value.style, `transform: ${transform.value}`]);
-    const popupAction = computed(() => popupCtx.value.hasActionSlot?.value);
+    const popupTitle = computed(() => popupCtx.value.title?.value);
+    const popupUseClose = computed(() => popupCtx.value.noCloseBtn?.value === false);
+    const popupUseAction = computed(() => popupCtx.value.noAction?.value === false);
 
+    const popupStyle = computed(() => [popupCtx.value.style, `transform: ${transform.value}`]);
     const popupClass = computed(() => [
-      !popupTitle.value && 'kw-popup--no-title',
-      !popupAction.value && 'kw-popup--no-action',
       popupSize.value && `kw-popup--${popupSize.value}`,
+      !popupTitle.value && 'kw-popup--no-title',
+      !popupUseAction.value && 'kw-popup--no-action',
       popupCtx.value.class,
     ]);
 
@@ -102,26 +101,34 @@ export default {
       props.draggable && 'kw-popup__header--draggable',
     ]);
 
-    function onLoad(e) {
-      isLoaded.value = true;
+    const isLoading = ref(true);
+    const isLoadFailed = ref(false);
 
-      if (!(e instanceof Error)) {
-        emit('resolve');
-      }
+    function onLoaded() {
+      isLoading.value = false;
+      emit('resolve', popupCtx.value);
+    }
+
+    function onLoadFailed() {
+      isLoading.value = false;
+      isLoadFailed.value = true;
     }
 
     return {
-      isLoaded,
       ctx: popupCtx,
       close,
       containerRef,
       draggableEvents,
       popupTitle,
+      popupUseClose,
+      popupUseAction,
       popupStyle,
       popupClass,
-      popupNoCloseBtn,
       popupHeaderClass,
-      onLoad,
+      isLoading,
+      isLoadFailed,
+      onLoaded,
+      onLoadFailed,
     };
   },
 };

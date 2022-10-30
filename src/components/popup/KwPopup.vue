@@ -26,11 +26,6 @@ export default {
   props: {
     ...useObserverProps,
 
-    size: {
-      type: String,
-      default: undefined,
-      validator: (v) => sizeValues.includes(v),
-    },
     style: {
       type: [String, Object, Array],
       default: undefined,
@@ -39,9 +34,22 @@ export default {
       type: [String, Object, Array],
       default: undefined,
     },
+    size: {
+      type: String,
+      default: 'md',
+      validator: (v) => sizeValues.includes(v),
+    },
+    draggable: {
+      type: Boolean,
+      default: false,
+    },
     title: {
       type: String,
       default: undefined,
+    },
+    noTitle: {
+      type: Boolean,
+      default: false,
     },
     noCloseBtn: {
       type: Boolean,
@@ -54,6 +62,8 @@ export default {
   },
 
   async setup(props) {
+    const { t } = useI18n();
+
     const pageCtx = usePage();
     const observerCtx = useObserver();
 
@@ -72,10 +82,13 @@ export default {
       // this occur maximum recursive updates exceeded
       style: props.style,
       class: props.class,
-      title: computed(() => props.title),
+
+      // reactive attributes
+      draggable: computed(() => props.draggable === true),
       size: computed(() => props.size),
-      noCloseBtn: computed(() => props.noCloseBtn),
-      hasActionSlot: computed(() => slots.action !== undefined),
+      title: computed(() => (props.noTitle ? null : props.title || t(pageCtx.pageTitleMessageResourceId || ''))),
+      noCloseBtn: computed(() => props.noCloseBtn === true),
+      noAction: computed(() => slots.action === undefined),
       onBeforeClose: computed(() => props.onBeforeClose),
     };
 

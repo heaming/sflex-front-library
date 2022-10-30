@@ -5,13 +5,29 @@ import { UseObserverProps, UseObserverInstance } from './private/useObserver';
 interface KwPopupProps extends UseObserverProps {
   /**
    * 팝업 사이즈
+   * @defaultValue `md`
    */
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+
+  /**
+   * 팝업 헤더 드래그 기능 사용여부
+   */
+  draggable?: boolean;
 
   /**
    * 팝업 타이틀
    */
   title?: string;
+
+  /**
+   * 팝업 타이틀 표시 여부
+   */
+  noTitle?: boolean;
+
+  /**
+   * 팝업 닫기 버튼 표시 여부
+   */
+  noCloseBtn?: boolean;
 
   /**
    * 팝업 close 전에 발생하는 이벤트, false 반환 시 close 중지한다
