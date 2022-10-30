@@ -71,7 +71,7 @@ export function buildURL(...partials) {
 
 export async function showStackTraceLog(errorMessage, errorDetailMessage) {
   await modal({
-    component: () => import('../../pages/StackTraceLog.vue'),
+    component: () => import('../../components/popup/StackTracePopup.vue'),
     componentProps: {
       errorMessage,
       errorDetailMessage,
