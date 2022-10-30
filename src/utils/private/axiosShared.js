@@ -1,5 +1,6 @@
 import { stringify } from 'qs';
 import { isEmpty, keys } from 'lodash-es';
+import { modal } from '../../plugins/modal';
 
 export function createParamsSerializer() {
   const skipTypes = ['object', 'undefined'];
@@ -28,6 +29,23 @@ export function createParamsSerializer() {
   }, '');
 }
 
+export function blobToData(blob) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener('loadend', (evt) => {
+      try {
+        resolve(
+          blob.type === 'application/json'
+            ? JSON.parse(evt.target.result) : evt.target.result,
+        );
+      } catch {
+        resolve(blob);
+      }
+    });
+    reader.readAsText(blob, 'utf-8');
+  });
+}
+
 export function isServerError(response) {
   const serverErrorKeys = ['code', 'errorMessage', 'errorType'];
   const hasOwnProperty = Object.prototype.hasOwnProperty.bind(response.data || {});
@@ -49,4 +67,14 @@ export function buildURL(...partials) {
   }
 
   return `${schema}${combines.join('/').replace(/\/+/g, '/')}`;
+}
+
+export async function showStackTraceLog(errorMessage, errorDetailMessage) {
+  await modal({
+    component: () => import('../../pages/StackTraceLog.vue'),
+    componentProps: {
+      errorMessage,
+      errorDetailMessage,
+    },
+  });
 }
