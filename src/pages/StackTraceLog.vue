@@ -1,13 +1,14 @@
 <template>
   <kw-popup
+    class="stack-trace-log"
     size="xl"
     no-close-btn
   >
-    <h1 class="mb10 text-center">
+    <h1 class="stack-trace-log__title">
       {{ errorMessage }}
     </h1>
     <q-scroll-area>
-      <p>
+      <p class="stack-trace-log__content">
         {{ errorDetailMessage }}
       </p>
     </q-scroll-area>
@@ -38,15 +39,25 @@ defineProps({
 });
 </script>
 
-<style scoped lang="scss">
-.q-scrollarea:deep {
-  height: 460px;
+<style lang="scss">
+.stack-trace-log {
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $black1;
+    text-align: center;
+  }
 
-  p {
+  &__content {
     padding: 10px;
     white-space: pre;
     text-overflow: nowrap;
     background-color: #eee;
+  }
+
+  .q-scrollarea {
+    height: 400px;
+    margin-top: 10px;
   }
 }
 </style>
