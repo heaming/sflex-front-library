@@ -149,6 +149,10 @@ body {
     }
   }
 
+  .q-tree__arrow {
+    color: $black1;
+  }
+
   // menu depth
   &-tree {
     background: #fff;
@@ -204,8 +208,7 @@ body {
       display: none !important;
     }
 
-    /* This line is too long for my rule */
-    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {/* stylelint-disable-line */
+    & .q-tree__children > .q-tree__node .q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node-header > .q-focus-helper + i {
       margin-left: 0;
 
       &::after {
@@ -385,9 +388,9 @@ body:not(.q-body--layout-animate) .q-layout--prevent-focus {
 }
 
 // global settings
-.q-page-container {
-  background: #f4f5f6;
-}
+// .q-page-container {
+//   background: #f4f5f6;
+// }
 
 h1 {
   margin: 0;
@@ -829,9 +832,13 @@ $unit: px;
 }
 
 .text- {
-  @each $weight, $value in $text-weights {
+  @each $weight,$value in $text-weights {
     &weight-#{$weight} {
       font-weight: $value !important;
+
+      & * {
+        font-weight: $value !important;
+      }
     }
   }
 }
@@ -1215,9 +1222,63 @@ $unit: px;
     &:active {
       opacity: 1;
     }
+
+    &--h {
+      border: none;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
   }
 }
 
 .q-scroll--inside {
   padding: 30px 40px;
+}
+
+// q-card list
+.card-list {
+  .card-item {
+    box-shadow: none;
+    border-radius: 0;
+    border: 1px solid $line-line;
+    padding: 30px;
+    width: calc((100% - 80px) / 4);
+
+    // 선택된 클래스
+    &--selected {
+      background-color: $bg-white;
+      border: 1px solid $black1;
+    }
+  }
+}
+
+.card-text {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    padding-top: 4px;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+
+    p {
+      min-width: 60px;
+      padding-right: 12px;
+      font-size: 14px;
+      color: $black3;
+      box-sizing: content-box;
+      line-height: 1.43;
+    }
+
+    span {
+      font-size: 14px;
+      color: $black1;
+      text-align: left;
+      line-height: 1.43;
+    }
+  }
 }

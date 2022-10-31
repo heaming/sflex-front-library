@@ -187,3 +187,23 @@
     max-width: none;
   }
 }
+
+.stack-trace-popup {
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+  }
+
+  &__content {
+    padding: 10px;
+    white-space: pre;
+    background-color: #eee;
+  }
+
+  .q-scrollarea {
+    height: 400px;
+    margin-top: 10px;
+  }
+}

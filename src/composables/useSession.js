@@ -1,5 +1,6 @@
 import { Quasar } from 'quasar';
 import consts from '../consts';
+import env from '../consts/private/env';
 import { http } from '../plugins/http';
 import { loadSpinner } from '../plugins/loading';
 import { localStorage } from '../plugins/storage';
@@ -45,32 +46,55 @@ export default () => {
     await router.replace(INITIAL_LOCATION);
   }
 
-  async function isReady() {
+  async function initApp() {
     try {
       loadSpinner(true);
       await fetchLoginInfo();
-      await Promise.all([
-        fetchMetas(),
-        fetchLangs(),
-      ]);
+      await Promise.all([fetchMetas(), fetchLangs()]);
       await invokeInitialRoute();
     } finally {
       loadSpinner(false);
     }
   }
 
-  async function login(loginId, password) {
-    const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, { loginId, password });
+  const locationReplace = (url = window.location.pathname) => window.location.replace(url);
+
+  async function isReady() {
+    if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
+      await initApp();
+    } else if (env.VITE_LOGIN_URL) {
+      locationReplace(env.VITE_LOGIN_URL); // redirect to sso
+    }
+  }
+
+  async function login({ tenantId, portalId, languageId, loginId, password }) {
+    const data = {
+      tenantId: tenantId || env.VITE_TENANT_ID,
+      portalId: portalId || env.VITE_PORTAL_ID,
+      languageId: languageId || i18n.locale.value,
+      loginId,
+      password,
+    };
+
+    const response = await http.post(`${consts.HTTP_ORIGIN}/certification/simple-login`, data);
     const { token } = response.data;
     localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, token);
-    window.location.replace('/');
+    locationReplace();
   }
 
-  async function logout() {
-    //
+  function logout() {
+    if (env.VITE_LOGOUT_URL) {
+      locationReplace(env.VITE_LOGIN_URL);
+    } else {
+      localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+      locationReplace();
+    }
   }
+
+  const isAuthenticated = computed(() => store.getters['meta/isAuthenticated']);
 
   return {
+    isAuthenticated,
     isReady,
     login,
     logout,

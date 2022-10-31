@@ -1,4 +1,4 @@
-import { differenceBy } from 'lodash-es';
+import { differenceBy, intersectionBy, isEqual } from 'lodash-es';
 import { download, downloadBlob, upload } from '../../../utils/file';
 
 const INSTANT_UPDATE_ALL = true;
@@ -11,8 +11,8 @@ const REMOVED = 'removed';
 const UPDATING = 'updating';
 const UPLOAD = 'upload';
 const REMOVE = 'remove';
-const FAIL_TO_UPLOAD = 'failToUpload';
-const FAIL_TO_REMOVE = 'failToRemove';
+const FAIL_TO_UPLOAD = 'fail-to-upload';
+const FAIL_TO_REMOVE = 'fail-to-remove';
 const ERROR = 'error';
 const AVAILABLE_STATES = {
   [UPLOADED]: [REMOVE],
@@ -25,20 +25,23 @@ const AVAILABLE_STATES = {
   [ERROR]: [REMOVED],
 };
 
+const key = Symbol('FILE_LIKE_KEY');
+
 const generateFileLikeKey = (fileLike) => {
   // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
+  if (Object.hasOwn(fileLike, key)) { return fileLike[key]; }
   const isNative = fileLike instanceof File;
   return (isNative
     ? fileLike.webkitRelativePath + (fileLike.lastModified || new Date().getTime()) + fileLike.name + fileLike.size
-    : fileLike.key || fileLike.fileUid || fileLike.serverFileName);
+    : fileLike.fileUid || fileLike.serverFileName);
 };
 
 const removeDuplicate = (fileLikes) => {
   const keys = [];
   return fileLikes.reduce((zipped, fileLike) => {
-    const key = generateFileLikeKey(fileLike);
-    if (!keys.includes(key)) {
-      keys.push(key);
+    const checkKey = generateFileLikeKey(fileLike);
+    if (!keys.includes(checkKey)) {
+      keys.push(checkKey);
       zipped.push(fileLike);
     }
     return zipped;
@@ -46,7 +49,7 @@ const removeDuplicate = (fileLikes) => {
 };
 
 const normalizeFileLike = (fileLike = {}) => {
-  if (typeof fileLike.dummy === 'boolean') {
+  if (Object.hasOwn(fileLike, key)) {
     return fileLike;
   }
   if (fileLike instanceof File) {
@@ -57,7 +60,7 @@ const normalizeFileLike = (fileLike = {}) => {
       lastModified: fileLike.lastModified || new Date().getTime(),
       dummy: false,
       nativeFile: fileLike,
-      key: generateFileLikeKey(fileLike),
+      [key]: generateFileLikeKey(fileLike),
     };
   }
   return {
@@ -72,7 +75,7 @@ const normalizeFileLike = (fileLike = {}) => {
     serverFileName: fileLike.serverFileName,
     fileUid: fileLike.fileUid,
     myFileYn: fileLike.myFileYn,
-    key: generateFileLikeKey(fileLike),
+    [key]: generateFileLikeKey(fileLike),
   };
 };
 
@@ -83,7 +86,7 @@ function Uploading(fileLike, options) {
 
   let state;
 
-  let instanceUpdate;
+  let instanceUpdate = false;
 
   function setState(newState) {
     if (state) {
@@ -91,16 +94,6 @@ function Uploading(fileLike, options) {
     } else {
       state = newState;
     }
-  }
-
-  function setInstanceUpdate(newInstanceUpdate) {
-    const avaliable = [INSTANT_UPDATE_ALL, INSTANT_UPLOAD, INSTANT_REMOVE, INSTANT_UPDATE_NOTHING];
-    if (!avaliable.includes(newInstanceUpdate)) {
-      instanceUpdate = INSTANT_UPDATE_NOTHING;
-      setState(ERROR);
-      return;
-    }
-    instanceUpdate = newInstanceUpdate;
   }
 
   const targetPath = file.targetPath
@@ -157,6 +150,24 @@ function Uploading(fileLike, options) {
     }
   }
 
+  async function setInstanceUpdate(newInstanceUpdate) {
+    const avaliable = [INSTANT_UPDATE_ALL, INSTANT_UPLOAD, INSTANT_REMOVE, INSTANT_UPDATE_NOTHING];
+    if (!avaliable.includes(newInstanceUpdate)) {
+      instanceUpdate = INSTANT_UPDATE_NOTHING;
+      setState(ERROR);
+      return;
+    }
+    instanceUpdate = newInstanceUpdate;
+    if (state === UPLOAD
+      && (instanceUpdate === INSTANT_UPLOAD || instanceUpdate === INSTANT_UPDATE_ALL)) {
+      await update();
+    }
+    if (state === REMOVE
+      && (instanceUpdate === INSTANT_REMOVE || instanceUpdate === INSTANT_UPDATE_ALL)) {
+      await update();
+    }
+  }
+
   async function revert() {
     const stateChange = {
       [UPLOAD]: REMOVED,
@@ -182,21 +193,24 @@ function Uploading(fileLike, options) {
     }
   }
 
-  setInstanceUpdate(options.instanceUpdate);
-
-  setStateWithUpdate(getInitialState(file));
+  setState(getInitialState(file));
 
   Object.defineProperty(this, 'file', { get: () => file });
   Object.defineProperty(this, 'state', { get: () => state, set: setStateWithUpdate });
   Object.defineProperty(this, 'update', { get: () => update });
-  Object.defineProperty(this, 'retry', { get: () => (() => { update(true); }) });
+  Object.defineProperty(this, 'retry', { get: () => (async () => { await update(true); }) });
   Object.defineProperty(this, 'revert', { get: () => revert });
   Object.defineProperty(this, 'download', { get: () => downloadFile });
   Object.defineProperty(this, 'instanceUpdate', { get: () => instanceUpdate, set: setInstanceUpdate });
+  Object.defineProperty(this, 'setInstanceUpdate', { get: () => setInstanceUpdate });
 }
 
-async function generateReactiveUploading(file, options) {
-  return reactive(new Uploading(file, options));
+async function generateUploading(file, options) {
+  const uploading = new Uploading(file, options);
+  if (options.instanceUpdate) {
+    await uploading.setInstanceUpdate(options.instanceUpdate);
+  }
+  return uploading;
 }
 
 export const STATE = {
@@ -210,17 +224,6 @@ export const STATE = {
   FAIL_TO_REMOVE,
 };
 
-export const useSingleFileUpload = (value, options) => {
-  const normalizedOptions = options || {};
-
-  const uploading = ref({});
-  watch(value, async (newFile) => {
-    uploading.value = await generateReactiveUploading(newFile, normalizedOptions.value);
-  }, { immediate: true });
-
-  return uploading;
-};
-
 export default (values, options) => {
   const normalizedOptions = ref(options || {});
   const uploadings = ref([]);
@@ -228,7 +231,9 @@ export default (values, options) => {
   function findUploading(file) {
     return uploadings
       .value
-      .find((uploading) => uploading.file.key === generateFileLikeKey(file));
+      .find((uploading) => uploading.file === file
+        || uploading.file?.nativeFile === file
+        || uploading.file[key] === generateFileLikeKey(file));
   }
 
   async function syncUploadings(newFiles) {
@@ -240,26 +245,41 @@ export default (values, options) => {
 
     const restoreUploadings = rawUploadings
       .filter((uploading) => uploading.state === REMOVED)
-      .filter((uploading) => newFiles.map((file) => file.key).includes(uploading.file.key));
+      .filter((uploading) => newFiles.map((file) => file[key]).includes(uploading.file[key]));
 
     restoreUploadings.forEach((uploading) => {
       uploading.state = UPLOAD;
     });
 
-    const removed = differenceBy(oldFiles, newFiles, 'key');
+    const removed = differenceBy(oldFiles, newFiles, key);
     rawUploadings = rawUploadings
       .filter((uploading) => !removed.includes(uploading.file));
 
-    const added = differenceBy(newFiles, oldFiles, 'key');
-    const generateUploadings = [];
+    const updatePromises = [];
+    const updated = intersectionBy(oldFiles, newFiles, key);
+    rawUploadings
+      .filter((uploading) => updated.includes(uploading.file))
+      .forEach((uploading) => {
+        if (uploading.instanceUpdate !== normalizedOptions.value.instanceUpdate) {
+          updatePromises.push(uploading.setInstanceUpdate(normalizedOptions.value.instanceUpdate));
+        }
+      });
+
+    const added = differenceBy(newFiles, oldFiles, key);
+
+    const addedPromises = [];
     added.forEach((file) => {
-      generateUploadings.push(generateReactiveUploading(file, normalizedOptions.value));
+      addedPromises.push(generateUploading(file, normalizedOptions.value));
     });
 
-    const newUploadings = await Promise.all(generateUploadings);
+    await Promise.all(updatePromises);
+    const newUploadings = await Promise.all(addedPromises);
     rawUploadings.push(...newUploadings);
 
     uploadings.value = rawUploadings;
+    values.value = rawUploadings
+      .filter((uploading) => uploading.state !== REMOVED)
+      .map((uploading) => (uploading.file));
   }
 
   const fileLikes = customRef((track, trigger) => ({
@@ -268,50 +288,75 @@ export default (values, options) => {
       return uploadings.value
         .filter((uploading) => uploading.state !== REMOVED)
         .map((uploading) => (uploading.file.dummy ? uploading.file : uploading.file.nativeFile));
-      // return removeDuplicate(unref(values));
     },
     async set(newFiles) {
       // console.log('fileLikes_set', unref(newFiles));
-      await syncUploadings(newFiles);
-      if (values.value !== newFiles && !isReadonly(values)) {
-        values.value = normalizedOptions.value.bindNativeFile ? newFiles
-          : newFiles.map((file) => findUploading(file).file);
+      if (values.value !== newFiles) {
+        await syncUploadings(newFiles);
       }
       trigger();
     },
   }));
 
-  function isFilesChanged(nfs, ofs) {
+  function updateFileExceptInternal(origin, update) {
+    const newFileKeys = Reflect.ownKeys(update);
+    const ignoreUpdateKeys = [key, 'name', 'size', 'type', 'lastModified', 'dummy', 'nativeFile', 'serverFileName', 'fileUid'];
+    newFileKeys
+      .filter((k) => !ignoreUpdateKeys.includes(k))
+      .forEach((k) => {
+        if (!isEqual(origin[k], update[k])) {
+          origin[k] = update[k];
+        }
+      });
+  }
+
+  function checkAndUpdateFilesChanged(nfs, ofs) {
+    let changed = false;
+
     if (nfs.length !== ofs.length) {
-      return true;
+      changed = true;
     }
 
     const ofKeys = ofs.map(generateFileLikeKey);
 
     for (let i = 0; i < nfs.length; i += 1) {
-      if (!ofKeys.includes(generateFileLikeKey(nfs[i]))) {
-        return true;
+      const newFile = nfs[i];
+      const newFileLikeKey = generateFileLikeKey(newFile);
+      const existingIdx = ofKeys.indexOf(newFileLikeKey);
+      if (existingIdx === -1) {
+        changed = true;
       }
+
+      const oldFile = ofs[existingIdx];
+      if (oldFile) { updateFileExceptInternal(oldFile, newFile); }
     }
-    return false;
+
+    return changed;
   }
 
   watch(values, (newFiles) => {
-    // console.log('watch values', newFiles, uploadings.value);
     const oldFiles = unref(uploadings)
       .map((uploading) => uploading.file);
 
-    if (isFilesChanged(newFiles, oldFiles)) {
-      fileLikes.value = removeDuplicate(newFiles);
+    const normalizedNewFiles = removeDuplicate(newFiles.map(normalizeFileLike));
+
+    if (checkAndUpdateFilesChanged(normalizedNewFiles, oldFiles)) {
+      fileLikes.value = normalizedNewFiles;
     }
   }, { deep: true, immediate: true });
 
+  watch(normalizedOptions, async () => {
+    await syncUploadings(fileLikes.value);
+  });
+
   function isUpdatable(file) {
+    if (!normalizedOptions.value.editable) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.REMOVE].includes(uploading?.state);
   }
 
   async function updateFile(file) {
+    if (!normalizedOptions.value.editable) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.update();
     if (uploading.state === REMOVED) {
@@ -321,17 +366,20 @@ export default (values, options) => {
   }
 
   async function updateAll(evenFailed = false) {
+    if (!normalizedOptions.value.editable) { return; }
     const updatings = uploadings.value.map((uploading) => uploading.update(evenFailed));
     await Promise.all(updatings);
     await syncUploadings(fileLikes.value);
   }
 
   function isRetryPossible(file) {
+    if (!normalizedOptions.value.editable) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE].includes(uploading?.state);
   }
 
   async function retryUpdateFile(file) {
+    if (!normalizedOptions.value.editable) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.retry();
     if (uploading.state === REMOVED) {
@@ -340,12 +388,14 @@ export default (values, options) => {
   }
 
   function isReversible(file) {
+    if (!normalizedOptions.value.editable) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.UPLOADED, STATE.REMOVE, STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE]
       .includes(uploading?.state);
   }
 
   async function revertFile(file, forced = false) {
+    if (!normalizedOptions.value.editable) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.revert();
     if (!uploading.instanceUpdate && forced) { await uploading.update(); } // Since, revert resolve fail state.
@@ -356,6 +406,7 @@ export default (values, options) => {
   }
 
   async function revertAll(forced = false) {
+    if (!normalizedOptions.value.editable) { return; }
     const removing = uploadings.value.map((uploading) => uploading.revert());
     await Promise.all(removing);
     if (forced) { await updateAll(); }

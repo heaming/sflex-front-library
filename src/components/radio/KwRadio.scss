@@ -71,6 +71,11 @@
       color: $black1;
     }
 
+    &[aria-checked="false"] .q-radio__label {
+      color: $black2;
+      font-weight: 400;
+    }
+
     &.reverse .q-radio__label {
       padding-left: 0;
       padding-right: 8px;

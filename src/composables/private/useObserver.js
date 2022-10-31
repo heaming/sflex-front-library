@@ -9,7 +9,6 @@ export const useObserverProps = {
 
 export default () => {
   const registered = {};
-  const { props } = getCurrentInstance();
 
   function registerObserverChild(observerChildctx) {
     const { uid } = observerChildctx;
@@ -47,13 +46,15 @@ export default () => {
   }
 
   async function reset(shouldFocus) {
-    if (!props.ignoreOnReset) {
-      await Promise.all(
-        Object.values(registered)
-          .map((e) => !e.ignoreOnReset.value && e.ctx.reset?.(shouldFocus)),
-      );
-    } else {
-      await resetValidation();
+    await Promise.all(
+      Object.values(registered)
+        .map((e) => (e.ignoreOnReset.value ? e.ctx.resetValidation?.() : e.ctx.reset?.(shouldFocus))),
+    );
+  }
+
+  async function confirmReset(message, shoudFocus) {
+    if (await confirm(message || i18n.t('MSG_ALT_WANT_RESET'))) {
+      await reset(shoudFocus);
     }
   }
 
@@ -74,11 +75,8 @@ export default () => {
   }
 
   function isModified() {
-    if (!props.ignoreOnModified) {
-      return Object.values(registered)
-        .some((e) => !e.ignoreOnModified.value && e.ctx.isModified?.());
-    }
-    return false;
+    return Object.values(registered)
+      .some((e) => e.ignoreOnModified.value === false && e.ctx.isModified?.());
   }
 
   async function alertIfIsNotModified(message) {
@@ -99,6 +97,7 @@ export default () => {
     init,
     reset,
     resetValidation,
+    confirmReset,
     validate,
     isModified,
     alertIfIsNotModified,

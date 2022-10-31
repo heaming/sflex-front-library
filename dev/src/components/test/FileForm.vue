@@ -5,7 +5,7 @@
   >
     <!-- quasar -->
     <kw-form-row
-      v-if="false"
+      v-if="true"
     >
       <kw-form-item label="quasar">
         <q-file
@@ -67,8 +67,11 @@
       </kw-form-item>
     </kw-form-row>
     <!-- header props -->
-    <kw-form-row>
-      <kw-form-item label="use header">
+    <kw-form-row :cols="4">
+      <kw-form-item
+        :colspan="2"
+        label="use header"
+      >
         <kw-toggle
           v-model="useHeader"
           :true-value="true"
@@ -80,6 +83,18 @@
           :true-value="true"
           :false-value="false"
           label="scrollHorizontal"
+        />
+        <kw-toggle
+          v-model="useAppendFileSlot"
+          :true-value="true"
+          :false-value="false"
+          label="useAppendFileSlot"
+        />
+        <kw-toggle
+          v-model="slotOverflow"
+          :true-value="true"
+          :false-value="false"
+          label="slotOverflow"
         />
       </kw-form-item>
       <kw-form-item label="fileNameWidth">
@@ -98,12 +113,6 @@
     <!-- state props -->
     <kw-form-row>
       <kw-form-item label="model & state">
-        <kw-toggle
-          v-model="instanceUpdate"
-          :true-value="true"
-          :false-value="false"
-          label="instanceUpdate"
-        />
         <kw-toggle
           v-model="removable"
           :true-value="true"
@@ -129,9 +138,29 @@
           label="append"
         />
       </kw-form-item>
+      <kw-form-item label="instanceUpdate">
+        <kw-option-group
+          v-model="instanceUpdate"
+          option-value="value"
+          option-label="label"
+          :options="[
+            {value: true, label: 'true'},
+            {value: false, label: 'false'},
+            {value: 'upload', label: 'upload'},
+            {value: 'remove', label: 'remove'},
+          ]"
+        />
+      </kw-form-item>
     </kw-form-row>
     <!-- constraint props -->
     <kw-form-row>
+      <kw-form-item label="counter">
+        <kw-toggle
+          v-model="counter"
+          :true-value="true"
+          :false-value="false"
+        />
+      </kw-form-item>
       <kw-form-item label="max-file-size">
         <kw-input
           v-model="maxFileSize"
@@ -201,6 +230,12 @@
           :label="'addDummy'"
           @click="addDummy"
         />
+        <kw-btn
+          class="mr8"
+          primary
+          :label="'addNewField'"
+          @click="addNewField"
+        />
       </kw-form-item>
     </kw-form-row>
     <!-- default -->
@@ -219,6 +254,7 @@
           :removable="removable"
           :downloadable="downloadable"
           :retry-possible="retryPossible"
+          :counter="counter"
           :max-total-size="maxTotalSize ?? undefined"
           :max-file-size="maxFileSize ?? undefined"
           :max-files="maxFiles ?? undefined"
@@ -237,31 +273,44 @@
           :placeholder-class="placeholderClass"
         >
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-header
           >
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              fileUid
             </div>
-            <div class="w500 text-center">
-              test
-            </div>
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              myFileYn
             </div>
           </template>
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-file="{file}"
           >
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-input
+                v-model="file.fileUid"
+                dense
+              />
             </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
-            </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-select
+                v-model="file.myFileYn"
+                dense
+                :options="selectOptions"
+              />
             </div>
           </template>
         </kw-file>
@@ -280,6 +329,7 @@
           :removable="removable"
           :downloadable="downloadable"
           :retry-possible="retryPossible"
+          :counter="counter"
           :max-total-size="maxTotalSize ?? undefined"
           :max-file-size="maxFileSize ?? undefined"
           :max-files="maxFiles ?? undefined"
@@ -299,31 +349,45 @@
           :multiple="multiple"
         >
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-header
           >
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              fileUid
             </div>
-            <div class="w500 text-center">
-              test
-            </div>
-            <div class="w500 text-center">
-              test
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              myFileYn
             </div>
           </template>
           <template
-            v-if="scrollHorizontal"
+            v-if="useAppendFileSlot"
             #append-file="{file}"
           >
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-input
+                v-model="file.fileUid"
+                dense
+              />
             </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
-            </div>
-            <div class="w500 text-center">
-              {{ file.myFileYn }}
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-select
+                v-if="file.attachFile"
+                v-model="file.attachFile.newField"
+                dense
+                :options="selectOptions"
+              />
             </div>
           </template>
         </kw-file>
@@ -664,11 +728,14 @@ const append = ref(true);
 const selectable = ref(true);
 const useHeader = ref(false);
 const scrollHorizontal = ref(false);
+const useAppendFileSlot = ref(false);
+const slotOverflow = ref(false);
 const fileNameWidth = ref('');
 const asideWidth = ref('');
 const borderless = ref(false);
 const underline = ref(false);
 const dense = ref(false);
+const counter = ref(false);
 const pickFileBtn = ref();
 
 const placeholder = ref('');
@@ -676,7 +743,7 @@ const placeholderStyle = ref();
 const placeholderClass = ref();
 
 const quasarValue = ref(null);
-const defaultValue = ref(null);
+const defaultValue = ref();
 const multipleValue = ref([]);
 const ruledValue = ref(null);
 const ruledMultipleValue = ref([]);
@@ -698,6 +765,7 @@ const appendFileValue = ref([
   },
 ]);
 const multiple = ref(true);
+const selectOptions = ref([{ codeName: 'Y', codeId: 'Y' }, { codeName: 'N', codeId: 'N' }]);
 
 async function onDownloaded(file) {
   return alert(`${file.name} downloaded!`);
@@ -731,7 +799,20 @@ function addDummy() {
     serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
     fileUid: `fileUid_${seed}`,
     myFileYn: 'Y',
+    attachFile: reactive({
+      serverFileName: `/esgeswg/seg/fileName_${seed}.bmp`,
+      fileUid: `fileUid_${seed}`,
+      myFileYn: 'Y',
+    }),
   });
+}
+
+function addNewField() {
+  if (multipleValue.value.length > 0) {
+    console.log(multipleValue.value[0].attachFile);
+    multipleValue.value[0].attachFile.newField = 'Y';
+    console.log(multipleValue.value[0].attachFile);
+  }
 }
 
 function setDummy() {
@@ -746,6 +827,7 @@ function setDummy() {
     myFileYn: 'Y',
   };
 }
+
 </script>
 
 <style scoped lang="scss">

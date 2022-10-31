@@ -276,8 +276,8 @@
   }
 
   // error
-  &.q-field--error {
-    .q-field__control {
+  &--error {
+    > .q-field__inner > .q-field__control {
       &::before,
       &::after {
         color: $error !important;
@@ -285,12 +285,12 @@
       }
     }
 
-    .q-field__bottom {
+    > .q-field__inner > .q-field__bottom {
       color: $error !important;
     }
   }
 
-  &.q-field--auto-height {
+  &--auto-height {
     .q-field__control,
     .q-field__native {
       height: auto;

@@ -25,14 +25,6 @@ export const useFieldProps = {
     type: Boolean,
     default: true,
   },
-  ignoreOnModified: {
-    type: Boolean,
-    default: false,
-  },
-  ignoreOnReset: {
-    type: Boolean,
-    default: false,
-  },
 };
 
 const normalizeOptions = (options = {}) => ({
@@ -146,10 +138,8 @@ export default (options) => {
     await setPending();
     unwatchValueForValidate?.();
 
-    if (!props.ignoreOnReset) {
-      value.value = deepCopy(initialValue.value);
-      await nextTick();
-    }
+    value.value = deepCopy(initialValue.value);
+    await nextTick();
 
     setState({
       errors: [],
@@ -171,7 +161,7 @@ export default (options) => {
   }
 
   function isModified() {
-    if (props.ignoreOnModified || pending.value) {
+    if (pending.value) {
       return false;
     }
 

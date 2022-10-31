@@ -9,15 +9,16 @@
     no-refocus
   >
     <kw-popup-container
-      ref="containerRefs"
-      :draggable="modal.draggable"
-      @resolve="resolveComponent(modal)"
-      @close="close(modal, $event)"
+      :draggable="modal.popupCtx?.draggable.value"
+      @resolve="onResolve(modal, $event)"
+      @close="onClose(modal, $event)"
     >
-      <component
-        :is="modal.component"
-        v-bind="modal.componentProps"
-      />
+      <kw-observer :ref="(vm) => modal.observer = vm">
+        <component
+          :is="modal.component"
+          v-bind="modal.componentProps"
+        />
+      </kw-observer>
     </kw-popup-container>
   </q-dialog>
 </template>
@@ -32,9 +33,7 @@ export default {
 
   setup() {
     const vm = getCurrentInstance();
-
     const modals = shallowRef([]);
-    const containerRefs = ref();
 
     registerGlobalVm(GlobalModalVmKey, vm, () => {
       modals.value = getGlobalData(GlobalModalVmKey);
@@ -44,24 +43,23 @@ export default {
       unregisterGlobalVm(GlobalModalVmKey);
     });
 
-    function resolveComponent(modal) {
+    function onResolve(modal, popupCtx) {
       modal.componentResolved = true;
+      modal.popupCtx = popupCtx;
     }
 
-    const getContainerCtx = (modal) => containerRefs.value[modals.value.findIndex((v) => v === modal)]?.ctx;
-
     async function isClosable(modal, result) {
-      const ctx = getContainerCtx(modal);
+      const { observer, popupCtx } = modal;
       const shouldCheckModified = result === false;
 
       if (shouldCheckModified) {
-        if (!await ctx?.observer.confirmIfIsModified()) { return false; }
+        if (!await observer.confirmIfIsModified()) { return false; }
       }
 
-      return (await ctx.onBeforeClose.value?.(result)) !== false;
+      return (await popupCtx.onBeforeClose.value?.(result)) !== false;
     }
 
-    async function close(modal, { result, payload }) {
+    async function onClose(modal, { result, payload }) {
       if (!modal.componentResolved || await isClosable(modal, result)) {
         modal.resolve({ result, payload });
         removeGlobalData(modal);
@@ -70,9 +68,8 @@ export default {
 
     return {
       modals,
-      containerRefs,
-      resolveComponent,
-      close,
+      onResolve,
+      onClose,
     };
   },
 };

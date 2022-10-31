@@ -1,6 +1,7 @@
 <template>
   <q-tabs
     class="kw-tabs"
+    :class="tabsClass"
     v-bind="styleClassAttrs"
     :model-value="modelValue"
     :align="align"
@@ -26,15 +27,24 @@ export default {
       type: String,
       default: 'left',
     },
+    dense: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
     'update:modelValue',
   ],
 
-  setup() {
+  setup(props) {
+    const tabsClass = computed(() => ({
+      'kw-tabs--dense': props.dense,
+    }));
+
     return {
       ...useInheritAttrs(),
+      tabsClass,
     };
   },
 };

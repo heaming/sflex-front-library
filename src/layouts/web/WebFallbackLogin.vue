@@ -40,25 +40,48 @@
   </div>
 </template>
 
-<script setup>
-import { useSession, alert } from '~kw-lib';
+<script>
+import { alert } from '../../plugins/dialog';
+import useSession from '../../composables/useSession';
 
-const { login } = useSession();
-const { locale } = useI18n();
+export default {
+  name: 'WebFallbackLogin',
+  props: {
+    tenantId: {
+      type: String,
+      default: undefined,
+    },
+    portalId: {
+      type: String,
+      default: undefined,
+    },
+  },
 
-async function onSubmit(formValues) {
-  try {
-    await login({
-      tenantId: 'TNT_BASE',
-      portalId: 'WEB_ADM',
-      languageId: locale.value,
-      ...formValues,
-    });
-  } catch (e) {
-    if (e.response) {
-      const errorMessage = e.response.data;
-      await alert(errorMessage);
+  setup(props) {
+    const tenantId = toRaw(props.tenantId);
+    const portalId = toRaw(props.portalId);
+
+    const { login } = useSession();
+
+    async function onSubmit(formValues) {
+      try {
+        await login({
+          tenantId,
+          portalId,
+          ...formValues,
+        });
+      } catch (e) {
+        if (e.response) {
+          const errorMessage = e.response.data;
+          await alert(errorMessage);
+        }
+      }
     }
-  }
-}
+
+    return {
+      onSubmit,
+    };
+  },
+};
+
 </script>

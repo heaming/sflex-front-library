@@ -1,41 +1,26 @@
 import { AxiosError } from 'axios';
 import { omitBy, isNil } from 'lodash-es';
 import consts from '../../consts';
+import env from '../../consts/private/env';
 import store from '../../store';
 import { loadSpinner } from '../../plugins/loading';
+import { localStorage } from '../../plugins/storage';
 import { alert } from '../../plugins/dialog';
-import { isServerError } from './axiosShared';
 import i18n from '../../i18n';
-import env from '../../consts/private/env';
+import { blobToData, isServerError, showStackTraceLog } from './axiosShared';
 
-const SESSION_EXPIRED_URL = env.PROD ? '/login' : '/login';
-
-const blobToData = (blob) => new Promise((resolve) => {
-  const reader = new FileReader();
-  reader.addEventListener('loadend', (evt) => {
-    try {
-      resolve(
-        blob.type === 'application/json'
-          ? JSON.parse(evt.target.result) : evt.target.result,
-      );
-    } catch {
-      resolve(blob);
-    }
-  });
-  reader.readAsText(blob, 'utf-8');
-});
-
-const normalizeConfig = (config) => ({
-  ...config,
-  spinner: config.spinner !== false,
-  alert: config.alert !== false,
-});
-
+/*
+  Request
+  */
 export function handleConfig(config) {
-  config = normalizeConfig(config);
-  config.headers = omitBy(config.headers, isNil);
+  config = {
+    ...config,
+    headers: omitBy(config.headers, isNil),
+    useSpinner: config.useSpinner !== false,
+    useAlert: config.useAlert !== false,
+  };
 
-  if (config.spinner) {
+  if (config.useSpinner) {
     loadSpinner(true);
   }
 
@@ -50,38 +35,69 @@ export function handleConfig(config) {
   return config;
 }
 
+/*
+  Response Success
+  */
 export function handleSuccess(response) {
   const { config } = response;
 
-  if (config.spinner) {
+  if (config.useSpinner) {
     loadSpinner(false);
   }
 
   return response;
 }
 
-async function handleServerFailure(response) {
-  const { data, config } = response;
-  const isSessionExpired = data.errorType === consts.HTTP_ERROR_TYPE_SESSION_EXPIRED;
+/*
+  Response Failure
+  */
+const SESSION_EXPIRED_REPLACE_URL = env.VITE_LOGIN_URL || window.location.pathname;
+const ENABLE_STACK_TRACE_LOG = env.DEV || env.MODE === 'dev';
 
-  if (isSessionExpired) {
-    await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
-    window.location.replace(SESSION_EXPIRED_URL);
-    return;
+async function handleServerFailureSessionExpired() {
+  await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
+  localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+  window.location.replace(SESSION_EXPIRED_REPLACE_URL);
+}
+
+async function handleServerFailureBiz(response) {
+  const { config, data } = response;
+
+  if (config.useAlert) {
+    await alert(data.errorMessage);
   }
+}
 
-  const isBizError = data.errorType === consts.HTTP_ERROR_TYPE_BIZ;
-  const shouldAlert = !isBizError || config.alert;
+async function handleServerFailureDefault(response) {
+  const {
+    errorMessage,
+    errorDetailMessage,
+  } = response.data;
 
-  if (shouldAlert) {
-    await alert(data.errorMessage || i18n.t('MSG_ALT_ERR_CONTACT_ADMIN'));
+  if (ENABLE_STACK_TRACE_LOG && errorDetailMessage) {
+    await showStackTraceLog(errorMessage, errorDetailMessage);
+  } else {
+    await alert(errorMessage);
+  }
+}
+
+async function handleServerFailure(response) {
+  const { data } = response;
+
+  switch (data.errorType) {
+    case consts.HTTP_ERROR_TYPE_SESSION_EXPIRED:
+      await handleServerFailureSessionExpired(); break;
+    case consts.HTTP_ERROR_TYPE_BIZ:
+      await handleServerFailureBiz(response); break;
+    default:
+      await handleServerFailureDefault(response);
   }
 }
 
 export async function handleFailure(error) {
   const { config, response, request } = error;
 
-  if (config?.spinner) {
+  if (config?.useSpinner) {
     loadSpinner(false);
   }
 

@@ -82,7 +82,7 @@ export default () => {
 
     await Promise.all(
       Object.values(registered)
-        .map((e) => e.ctx.reset()),
+        .map((e) => (e.ctx.ignoreOnReset.value ? e.ctx.resetValidation() : e.ctx.reset())),
     );
 
     if (shouldFocus) {
@@ -122,7 +122,7 @@ export default () => {
 
   function isModified() {
     return Object.values(registered)
-      .some((e) => e.ctx.isModified());
+      .some((e) => e.ctx.ignoreOnModified.value === false && e.ctx.isModified());
   }
 
   async function alertIfIsNotModified(message) {

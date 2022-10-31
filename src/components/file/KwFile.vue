@@ -88,7 +88,7 @@
     >
       <kw-scroll-area
         v-if="useHeader"
-        ref="headerScrollAreaRef"
+        :ref="(vm) => { headerScrollAreaRef = vm }"
         class="kw-file__header-container"
         :style="headerScrollAreaStyle"
         :scroll-area-width="scrollHorizontal ? undefined : '100%'"
@@ -111,17 +111,24 @@
           >
             {{ $t('MSG_TXT_FILE_NM', null, '파일명') }}
           </div>
-          <slot
-            :ref="fileRef"
-            name="append-header"
-          />
-          <div class="kw-file-item__size">
-            {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
+          <div
+            v-if="$slots['append-header']"
+            class="kw-file-item__append"
+          >
+            <slot
+              :ref="fileRef"
+              name="append-header"
+            />
           </div>
+
           <div
             class="kw-file-item__aside"
             :style="fileItemAsideStyles"
-          />
+          >
+            <div class="kw-file-item__size">
+              {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
+            </div>
+          </div>
         </div>
       </kw-scroll-area>
       <div
@@ -203,9 +210,10 @@
         class="kw-file__selected"
       >
         <kw-scroll-area
-          ref="fileScrollAreaRef"
+          :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
           :scroll-area-style="fileScrollAreaContentsStyle"
+          :horizontal-thumb-style="scrollHorizontal ? { borderBottomWidth: '4px', height: '14px' } : undefined"
           @scroll="onScrollFile"
         >
           <div
@@ -222,7 +230,7 @@
               :val="idx"
             />
             <div
-              v-if="downloadable && isDownloadable(file)"
+              v-if="computedIsDownloadable(file)"
               class="kw-file-item__name"
               :style="fileItemNameStyles"
               @click.prevent="downloadFile(file)"
@@ -248,27 +256,32 @@
                 {{ file.name }}
               </kw-tooltip>
             </div>
-            <slot
-              :ref="ref"
-              name="append-file"
-              :file="file"
-              :index="idx"
-            />
             <div
-              class="kw-file-item__size"
+              v-if="$slots['append-file']"
+              class="kw-file-item__append"
             >
-              <kw-icon
-                v-if="isRetryPossible(file)"
-                name="warning"
+              <slot
+                :ref="ref"
+                name="append-file"
+                :file="file"
+                :index="idx"
               />
-              <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
             </div>
             <div
               class="kw-file-item__aside"
               :style="fileItemAsideStyles"
             >
+              <div
+                class="kw-file-item__size"
+              >
+                <kw-icon
+                  v-if="isRetryPossible(file)"
+                  name="warning"
+                />
+                <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
+              </div>
               <kw-btn
-                v-if="downloadable && isDownloadable(file) && downloadIcon"
+                v-if="computedIsDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
                 borderless
                 @click.prevent="downloadFile(file)"
@@ -280,7 +293,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!instanceUpdate && isUpdatable(file)"
+                v-if="!(instanceUpdate === true) && isUpdatable(file)"
                 :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
@@ -364,7 +377,6 @@ export default {
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
     placeholderClass: { type: [Array, String, Object], default: undefined },
-    placeholderStyle: { type: [Array, String, Object], default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,
@@ -396,7 +408,7 @@ export default {
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
     filter: { type: Function, default: undefined },
-    modelValue: { type: [Object, Array], default: () => [] },
+    modelValue: { type: [Object, Array], required: true },
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
@@ -429,15 +441,23 @@ export default {
         return [];
       },
       set: (val) => {
-        if (Object(val) === val) {
-          value.value = 'length' in val ? val : val[0];
+        console.log(val, value.value);
+        if (Object(value.value) === value.value) {
+          value.value = 'length' in value.value ? val : val[0];
+        } else {
+          value.value = val[0];
         }
       },
     });
 
-    const uploadCtx = useFileUpload(innerValue, ref({
-      instanceUpdate: computed(() => props.instanceUpdate),
+    const editable = computed(() => props.disable !== true && props.readonly !== true);
+
+    const uploadOptions = computed(() => ({
+      instanceUpdate: props.instanceUpdate,
+      editable,
     }));
+
+    const uploadCtx = useFileUpload(innerValue, uploadOptions);
 
     const { files } = uploadCtx;
 
@@ -483,8 +503,6 @@ export default {
     // warp file comp
     const headerCtx = useFileHeader();
 
-    // use action
-
     // styling
     const fileClass = computed(() => ({
       'kw-file--multiple': props.multiple,
@@ -501,8 +519,8 @@ export default {
 
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
-      classes += (props.downloadable && uploadCtx.isDownloadable(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
-      const uploadingState = uploadCtx.findUploading(file).state;
+      classes += (downloadCtx.computedIsDownloadable.value(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
+      const uploadingState = uploadCtx.findUploading(file)?.state;
       classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
       return classes;
     }
@@ -510,7 +528,7 @@ export default {
     const fileItemClasses = computed(() => files.value.map(getFileItemClass));
 
     // event handler
-    const filePickCtx = useFilePicker(fileRef);
+    const filePickCtx = useFilePicker(fileRef, editable);
 
     // sample codes for attach icon
     // const getIcon = (file) => {
@@ -537,6 +555,7 @@ export default {
       fileClass,
       fileItemClasses,
       emptyAppendCounter,
+      editable,
     };
   },
 };

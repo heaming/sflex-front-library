@@ -52,11 +52,12 @@
               kw-tabs
             </td>
             <td>
-              .kw-tab--dense
+              dense
             </td>
             <td>
-              When a small-height tab is used alone.<br>
-              Generally, when you put a tab inside tabs, a small height design is automatically applied.
+              When a small-height tab is used alone and 2depth<br>
+              However, please do not add this class when you put a tab inside tabs which wrapped kw-search.
+              cuz, a small height design is automatically applied.
             </td>
           </tr>
         </tbody>
@@ -98,7 +99,7 @@
               <div class="normal-area">
                 <h3>kw-form</h3>
                 <kw-form
-                  cols="2"
+                  :cols="2"
                   class="kw-form--textright"
                 >
                   <kw-form-row>
@@ -123,7 +124,7 @@
                 <kw-separator />
                 <h3>kw-form</h3>
                 <kw-form
-                  cols="2"
+                  :cols="2"
                   class="kw-form--textright"
                 >
                   <kw-form-row>
@@ -173,7 +174,7 @@
           >
             <kw-tab-panel name="2">
               <kw-search
-                cols="2"
+                :cols="2"
                 class="kw-form--textright"
               >
                 <kw-search-row>
@@ -212,6 +213,14 @@
 
 const guideHistory = [
   {
+    timestamp: '2022.10.28',
+    text: 'change methods class -> prop',
+  },
+  {
+    timestamp: '2022.10.26',
+    text: 'Modify explanation of dense class',
+  },
+  {
     timestamp: '2022.10.21',
     text: 'Modify code of Tab for search form , and form ',
   },
@@ -245,7 +254,7 @@ const tabform = `
     <div class="normal-area">
       <h3>kw-form</h3>
       <kw-form
-        cols="2"
+        :cols="2"
         class="kw-form--textright"
       >
         <kw-form-row>
@@ -270,7 +279,7 @@ const tabform = `
       <kw-separator />
       <h3>kw-form</h3>
       <kw-form
-        cols="2"
+        :cols="2"
         class="kw-form--textright"
       >
         <kw-form-row>
@@ -314,7 +323,7 @@ const tabSearch = `
 >
   <kw-tab-panel name="2">
     <kw-search
-      cols="2"
+      :cols="2"
       class="kw-form--textright"
     >
       <kw-search-row>

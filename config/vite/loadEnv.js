@@ -7,6 +7,8 @@ const context = process.cwd();
 const isOuterContext = !isInternalContext();
 const { name } = getPackageJson();
 
+const DEVELOPMENT_MODE = 'dev';
+
 function configPlugin(mode, command, envDir, shouldTransform) {
   const absolutePath = resolve(context, envDir || '');
   const env = loadEnv(mode, absolutePath);
@@ -32,6 +34,7 @@ function configPlugin(mode, command, envDir, shouldTransform) {
             PROD: command === 'build',
             ...env,
           },
+          __VUE_PROD_DEVTOOLS__: mode === DEVELOPMENT_MODE,
         },
       };
     },

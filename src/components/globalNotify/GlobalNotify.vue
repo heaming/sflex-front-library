@@ -1,7 +1,7 @@
 <template>
   <q-dialog
     class="global-notify"
-    :model-value="true"
+    :model-value="isActive"
     :transition-duration="0"
     seamless
     position="right"
@@ -40,7 +40,21 @@ export default {
 
   setup() {
     const vm = getCurrentInstance();
+
+    const isActive = ref(false);
     const notifications = shallowRef([]);
+
+    let closeTimeout;
+    watch(notifications, (val) => {
+      const isClose = val.length === 0;
+
+      if (isClose) {
+        closeTimeout = setTimeout(() => { isActive.value = false; }, 300);
+      } else {
+        clearTimeout(closeTimeout);
+        isActive.value = !isClose;
+      }
+    });
 
     function setTimeoutToClose(notification) {
       notification.timeout = setTimeout(() => {
@@ -63,6 +77,7 @@ export default {
     }
 
     return {
+      isActive,
       notifications,
       onClickClose,
     };

@@ -27,6 +27,7 @@ module.exports = {
     'order/properties-order': ['width', 'height'],
     'scss/no-global-function-names': null,
     'selector-class-pattern': null,
+    'selector-pseudo-class-no-unknown': null,
     'selector-pseudo-element-no-unknown': null,
     'selector-no-vendor-prefix': null,
   },
