@@ -127,6 +127,7 @@ const iconList2 = [
   'checked_24',
   'close_24',
   'filter_24',
+  'id_24',
   'imgpreview_24',
   'info_24',
   'menu_24',
