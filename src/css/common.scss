@@ -555,6 +555,10 @@ p {
       float: right;
     }
   }
+
+  .q-stepper__header.q-stepper__header--alternative-labels {
+    margin: 0 -41px;
+  }
 }
 
 .kw-search + .normal-area--button-set-bottom {
