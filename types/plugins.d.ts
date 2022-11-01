@@ -93,6 +93,17 @@ export function modal(options: {
 // Notify
 export function notify(message: string): void;
 
+// Platform
+export interface Platform {
+  is: {
+    local: boolean;
+    server: boolean;
+    test: boolean;
+    mobile: boolean;
+    tablet: boolean;
+  };
+}
+
 // Sanitize
 import DOMPurify from 'dompurify';
 export const sanitize: typeof DOMPurify.sanitize;
@@ -105,21 +116,27 @@ export const sessionStorage: SessionStorage;
 
 // Component Custom Properties for plugins
 import { QVueGlobals } from 'quasar';
+
+export interface KwVueGlobals {
+  version: string;
+  timestampe: number;
+  q: QVueGlobals;
+  cookies: typeof cookies;
+  alert: typeof alert;
+  confirm: typeof confirm;
+  http: typeof http;
+  loadSpinner: typeof loadSpinner;
+  loadProgress: typeof loadProgress;
+  modal: typeof modal;
+  notify: typeof notify;
+  platform: Platform;
+  sanitize: typeof sanitize;
+  localStorage: typeof localStorage;
+  sessionStorage: typeof sessionStorage;
+}
+
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $g: {
-      q: QVueGlobals;
-      cookies: typeof cookies;
-      alert: typeof alert;
-      confirm: typeof confirm;
-      http: typeof http;
-      loadSpinner: typeof loadSpinner;
-      loadProgress: typeof loadProgress;
-      modal: typeof modal;
-      notify: typeof notify;
-      sanitize: typeof sanitize;
-      localStorage: typeof localStorage;
-      sessionStorage: typeof sessionStorage;
-    };
+    $g: KwVueGlobals;
   }
 }
