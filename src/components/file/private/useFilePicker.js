@@ -17,7 +17,7 @@ export default (ref, editable) => {
 
   // reference methods
   const pickFiles = () => {
-    if (unref(editable)) { return; }
+    if (!unref(editable)) { return; }
     ref.value?.getNativeElement().click();
   };
 

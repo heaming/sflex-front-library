@@ -17,7 +17,7 @@
   src: url("~@assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
 }
 
-#app > .q-layout { min-width: 1900px; }
+.desktop > #app > .q-layout { min-width: 1900px; }
 
 body {
   font-size: 16px;
@@ -554,6 +554,10 @@ p {
     .button-set--bottom-right {
       float: right;
     }
+  }
+
+  .q-stepper__header.q-stepper__header--alternative-labels {
+    margin: 0 -41px;
   }
 }
 
