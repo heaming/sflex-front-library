@@ -207,6 +207,8 @@ export async function cloneView(view, options) {
   copyView.setColumnLayout(options.exportLayout || cloneDeep(view.saveColumnLayout()));
   copyView.setRowIndicator(cloneDeep(view.getRowIndicator()));
   copyView.setCheckBar(cloneDeep(view.getCheckBar()));
+  copyView.setHeader(cloneDeep(view.getHeader()));
+  copyView.setDisplayOptions(cloneDeep(view.getDisplayOptions()));
   copyView.setFooters(cloneDeep(view.getFooters()));
 
   if (view.isGrouped()) {
