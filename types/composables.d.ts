@@ -3,22 +3,8 @@ import { CustomAxiosInstance } from './plugins';
 export function useDataService(pageId: string): CustomAxiosInstance;
 
 // useGlobal
-import { QVueGlobals } from 'quasar';
-import { cookies, alert, confirm, http, loadSpinner, loadProgress, modal, notify, sanitize, localStorage, sessionStorage } from './plugins';
-export function useGlobal(): {
-  q: QVueGlobals;
-  cookies: typeof cookies;
-  alert: typeof alert;
-  confirm: typeof confirm;
-  http: typeof http;
-  loadSpinner: typeof loadSpinner;
-  loadProgress: typeof loadProgress;
-  modal: typeof modal;
-  notify: typeof notify;
-  sanitize: typeof sanitize;
-  localStorage: typeof localStorage;
-  sessionStorage: typeof sessionStorage;
-};
+import { KwVueGlobals } from './plugins';
+export function useGlobal(): KwVueGlobals;
 
 // useGnb
 import { Ref, ComputedRef } from 'vue';
@@ -76,5 +62,5 @@ export function useModal(): {
 export function useSession(): {
   isReady(): Promise<void>;
   login(options: { tenantId?: string; portalId?: string; languageId?: string; loginId: string; password: string }): Promise<void>;
-  logout(): Promise<void>;
+  logout(): void;
 };

@@ -5,7 +5,7 @@ const getPackageJson = require('../utils/getPackageJson');
 
 const context = process.cwd();
 const isOuterContext = !isInternalContext();
-const { name } = getPackageJson();
+const { name, version } = getPackageJson();
 
 const DEVELOPMENT_MODE = 'dev';
 
@@ -29,10 +29,12 @@ function configPlugin(mode, command, envDir, shouldTransform) {
       return {
         define: {
           __IMPORT_META_ENV__: {
+            ...env,
             MODE: mode,
             DEV: command === 'serve',
             PROD: command === 'build',
-            ...env,
+            VERSION: version,
+            TIMESTAMP: Date.now(),
           },
           __VUE_PROD_DEVTOOLS__: mode === DEVELOPMENT_MODE,
         },

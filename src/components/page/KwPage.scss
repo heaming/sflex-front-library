@@ -1,23 +1,28 @@
 .kw-page {
   padding: 15px 40px 30px 64px;
-  min-width: calc(1536px + 104px);
 
-  &--md {
-    width: calc(1536px + 104px);
-    margin: 0 auto;
-  }
+  @at-root .desktop {
+    & {
+      min-width: calc(1536px + 104px);
+    }
 
-  &--sm {
-    min-width: calc(1212px + 104px);
-    width: calc(1212px + 104px);
-    margin: 0 auto;
-  }
+    &--md {
+      width: calc(1536px + 104px);
+      margin: 0 auto;
+    }
 
-  &--auth {
-    margin: 0 auto;
-    padding: 40px 0;
-    min-width: 1000px;
-    width: 1000px;
+    &--sm {
+      min-width: calc(1212px + 104px);
+      width: calc(1212px + 104px);
+      margin: 0 auto;
+    }
+
+    &--auth {
+      margin: 0 auto;
+      padding: 40px 0;
+      min-width: 1000px;
+      width: 1000px;
+    }
   }
 }
 

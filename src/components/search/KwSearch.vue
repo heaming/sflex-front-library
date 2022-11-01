@@ -66,6 +66,7 @@ import i18n from '../../i18n';
 import useFormLayout, { useFormLayoutProps } from '../../composables/private/useFormLayout';
 import { hasPermissionKeyInPage } from '../../directives/permission';
 import consts from '../../consts';
+import env from '../../consts/private/env';
 
 export default {
   name: 'KwSearch',
@@ -120,7 +121,7 @@ export default {
     }
 
     const pageCtx = inject(PageContextKey, null);
-    const hasReadPermission = () => __VUE_TEST_APP__ || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
+    const hasReadPermission = () => env.TEST === true || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
 
     const onSubmit = debounce(async () => {
       if (hasReadPermission()) {
