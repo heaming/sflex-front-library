@@ -4,10 +4,7 @@
       <div class="row justify-start items-center item-wrap full-height">
         <div class="item">
           <q-avatar>
-            <img
-              src="~~@assets/images/logo_redpen.svg"
-              alt="KSS빨간펜"
-            >
+            DEV
           </q-avatar>
         </div>
         <div class="item full-height">
@@ -24,6 +21,13 @@
         </div>
       </div>
       <div class="row justify-end items-center item-wrap">
+        <div class="item">
+          <kw-btn-toggle
+            v-model="layoutStyle"
+            class="text-uppercase"
+            :options="['Web', 'Mobile', 'Tablet']"
+          />
+        </div>
         <div class="item">
           <kw-input
             placeholder="메뉴검색"
@@ -71,4 +75,19 @@ const {
   isSelected,
   updateSelected,
 } = useGnb();
+
+const layoutStyle = ref('Web');
+
+watch(layoutStyle, (val) => {
+  const bodyClassList = document.body.classList;
+  bodyClassList.remove('desktop', 'mobile', 'tablet');
+
+  if (val === 'Mobile') {
+    bodyClassList.add('mobile');
+  } else if (val === 'Tablet') {
+    bodyClassList.add('mobile', 'tablet');
+  } else {
+    bodyClassList.add('desktop');
+  }
+}, { immediate: true });
 </script>
