@@ -26,6 +26,9 @@ function configPlugin(mode, command, envDir, shouldTransform) {
         };
       }
 
+      const timestamp = command === 'build'
+        ? Date.now() : undefined;
+
       return {
         define: {
           __IMPORT_META_ENV__: {
@@ -34,7 +37,7 @@ function configPlugin(mode, command, envDir, shouldTransform) {
             DEV: command === 'serve',
             PROD: command === 'build',
             VERSION: version,
-            TIMESTAMP: Date.now(),
+            TIMESTAMP: timestamp,
           },
           __VUE_PROD_DEVTOOLS__: mode === DEVELOPMENT_MODE,
         },
