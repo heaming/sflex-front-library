@@ -319,7 +319,7 @@
     list-style: none;
 
     li {
-      flex: 0 1 calc(50% - 40px);
+      flex: 1 1 100%;
       display: inline-flex;
       column-gap: 16px;
       align-items: center;
@@ -342,6 +342,12 @@
           font-weight: 500;
           line-height: 1.5;
         }
+      }
+    }
+
+    &--2col {
+      li {
+        flex: 0 1 calc(50% - 40px);
       }
     }
   }

@@ -202,7 +202,73 @@
       </h3>
       <p class="kw-guide-description">
         no border case <br>
-        example <a href="https://zpl.io/KGnzPER">https://zpl.io/KGnzPER</a>
+        1column example <a href="https://zpl.io/p1QydA8">https://zpl.io/p1QydA8</a>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <div class="kw-inquiry-result">
+            <div class="kw-inquiry-result__top">
+              <div class="col-auto">
+                <span class="kw-fc--black1">RDS 잔액</span>
+                <span class="kw-fc--black3 ml8">해약일자 2022-07-20</span>
+              </div>
+              <div class="col-auto row">
+                <p class="kw-fc--black1 text-right ml16">
+                  <span>33,624 / 원</span>
+                </p>
+              </div>
+            </div>
+            <ul class="kw-inquiry-result__list">
+              <li>
+                <p class="kw-fc--black3">
+                  <span>RDS 적립 총 금액</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>95,334,640원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>RDS 지급 총 금액</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>95,334,640원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>RDS 공제 총 금액</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>95,334,640원</span>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <guide-code-view
+          :code-value="case02"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="case02"
+        class="kw-guide-title"
+      >
+        case02
+      </h3>
+      <p class="kw-guide-description">
+        no border case <br>
+        2column example <a href="https://zpl.io/KGnzPER">https://zpl.io/KGnzPER</a>
+        add class="kw-inquiry-result__list--2col" in ul.kw-inquiry-result
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -221,7 +287,7 @@
                 </p>
               </div>
             </div>
-            <ul class="kw-inquiry-result__list">
+            <ul class="kw-inquiry-result__list kw-inquiry-result__list--2col">
               <li>
                 <p class="kw-fc--black3">
                   <span>11:전집할부</span>
@@ -612,6 +678,54 @@ const case01 = `
 <div class="kw-inquiry-result">
   <div class="kw-inquiry-result__top">
     <div class="col-auto">
+      <span class="kw-fc--black1">RDS 잔액</span>
+      <span class="kw-fc--black3 ml8">해약일자 2022-07-20</span>
+    </div>
+    <div class="col-auto row">
+      <p class="kw-fc--black1 text-right ml16">
+        <span>33,624 / 원</span>
+      </p>
+    </div>
+  </div>
+  <ul class="kw-inquiry-result__list">
+    <li>
+      <p class="kw-fc--black3">
+        <span>RDS 적립 총 금액</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>95,334,640원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>RDS 지급 총 금액</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>95,334,640원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>RDS 공제 총 금액</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>95,334,640원</span>
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+const case02 = `
+<div class="kw-inquiry-result">
+  <div class="kw-inquiry-result__top">
+    <div class="col-auto">
       <span class="kw-fc--black1">전체 요청/입금</span>
       <span class="kw-fc--black3 ml8">출금일자 2022-07-20</span>
     </div>
@@ -898,7 +1012,12 @@ const case01 = `
   </ul>
 </div>
 `;
+
 const historyData = [
+  {
+    timestamp: '2022-11-01',
+    text: 'add new case',
+  },
   {
     timestamp: '2022-09-28',
     text: 'Add essential',
