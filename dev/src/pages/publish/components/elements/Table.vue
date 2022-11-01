@@ -253,7 +253,7 @@
           </div>
         </div>
         <guide-code-view
-          :code-value="case02"
+          :code-value="case01"
           lang="vue"
         />
       </q-card>
@@ -562,7 +562,7 @@
           </div>
         </div>
         <guide-code-view
-          :code-value="case01"
+          :code-value="case02"
           lang="vue"
         />
       </q-card>
