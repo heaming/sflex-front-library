@@ -1,5 +1,6 @@
 import { lowerCase } from 'lodash-es';
 import consts from '../consts';
+import env from '../consts/private/env';
 import { getVm, injectPageContext } from '../utils/private/vm';
 
 // permission value is start at 63
@@ -64,7 +65,7 @@ function destroyIfHasNoPermissions(binding, vnode) {
 }
 
 export default (el, binding, vnode) => {
-  if (!__VUE_TEST_APP__) {
+  if (env.TEST === false) {
     destroyIfHasNoPermissions(binding, vnode);
   }
 };

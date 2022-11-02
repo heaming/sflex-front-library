@@ -11,18 +11,18 @@ import { installStore } from './store';
 import { GlobalKey } from './consts/private/symbols';
 import { g, defineGetters } from './utils/private/globalProperty';
 
-function provideGlobal(app) {
-  const q = app.config.globalProperties.$q;
-  defineGetters(app, { q });
-  app.provide(GlobalKey, g);
-}
-
 const normalizeOptions = (options = {}) => ({
   components: options.components || {},
   plugins: options.plugins || [],
   routes: options.routes || [],
   storeModules: options.storeModules || {},
 });
+
+function provideAppGlobal(app) {
+  const q = app.config.globalProperties.$q;
+  defineGetters(app, { q });
+  app.provide(GlobalKey, g);
+}
 
 export default (App, options) => {
   const wrappedApp = wrapApp(App);
@@ -43,7 +43,7 @@ export default (App, options) => {
   installI18n(app);
   installRouter(app, routes);
   installStore(app, storeModules);
-  provideGlobal(app);
+  provideAppGlobal(app);
 
   return app;
 };

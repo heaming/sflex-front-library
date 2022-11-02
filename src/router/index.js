@@ -29,7 +29,7 @@ function registerRoutes(routes) {
 }
 
 function registerHooks() {
-  if (!__VUE_TEST_APP__) {
+  if (env.TEST === false) {
     router.beforeEach(beforeEach);
     router.beforeResolve(beforeResolve);
     router.afterEach(afterEach);
