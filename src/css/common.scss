@@ -997,27 +997,32 @@ $unit: px;
 // override quasar common classes
 .q-placeholder {
   &::-webkit-input-placeholder {
-    color: $disabled;
+    color: $placeholder;
+    font-weight: normal;
     opacity: 1;
   }
 
   &::-moz-placeholder {
-    color: $disabled;
+    color: $placeholder;
+    font-weight: normal;
     opacity: 1;
   }
 
   &:-ms-input-placeholder {
-    color: $disabled !important;
+    color: $placeholder !important;
+    font-weight: normal;
     opacity: 1 !important;
   }
 
   &::-ms-input-placeholder {
-    color: $disabled;
+    color: $placeholder;
+    font-weight: normal;
     opacity: 1;
   }
 
   &::placeholder {
-    color: $disabled;
+    color: $placeholder;
+    font-weight: normal;
     opacity: 1;
   }
 }
