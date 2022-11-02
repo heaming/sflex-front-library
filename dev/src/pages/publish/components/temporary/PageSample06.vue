@@ -251,151 +251,139 @@ function initGrid2(data, view) {
 
 const sampleVueCode = `
 <kw-page>
-    <template #header>
-      <kw-page-header :options="['홈','고객','리쿠르팅 등록 관리(파트너)']" />
-    </template>
+  <template #header>
+    <kw-page-header :options="['홈','고객','리쿠르팅 등록 관리(파트너)']" />
+  </template>
 
-    <kw-search>
-      <kw-search-row>
-        <kw-search-item label="고객 유형">
-          <kw-select
-            first-option="all"
-            :options="['A','B','C']"
-          />
-        </kw-search-item>
+  <kw-search>
+    <kw-search-row>
+      <kw-search-item label="고객 유형">
+        <kw-select
+          first-option="all"
+          :options="['A','B','C']"
+        />
+      </kw-search-item>
 
-        <kw-search-item label="교원키">
-          <kw-input placeholder="입력해주세요" />
-        </kw-search-item>
+      <kw-search-item label="교원키">
+        <kw-input placeholder="입력해주세요" />
+      </kw-search-item>
 
-        <kw-search-item label="이름/대표자/담당자">
-          <kw-input placeholder="입력해주세요" />
-        </kw-search-item>
-      </kw-search-row>
+      <kw-search-item label="이름/대표자/담당자">
+        <kw-input placeholder="입력해주세요" />
+      </kw-search-item>
+    </kw-search-row>
 
-      <kw-search-row>
-        <kw-search-item label="휴대전화번호">
-          <kw-input
-            placeholder="입력해주세요"
-            mask="###-####-####"
-          />
-        </kw-search-item>
+    <kw-search-row>
+      <kw-search-item label="휴대전화번호">
+        <kw-input
+          placeholder="입력해주세요"
+          mask="###-####-####"
+        />
+      </kw-search-item>
 
-        <kw-search-item label="통합 고객">
-          <kw-select
-            first-option="all"
-            :options="['A','B','C']"
-          />
-        </kw-search-item>
-      </kw-search-row>
-    </kw-search>
+      <kw-search-item label="통합 고객">
+        <kw-select
+          first-option="all"
+          :options="['A','B','C']"
+        />
+      </kw-search-item>
+    </kw-search-row>
+  </kw-search>
 
-    <div class="result-area">
-      <div class="grid-horizontal-wrap">
-        <div class="grid-horizontal-wrap__section">
-          <h3>방문실적</h3>
-          <kw-action-top>
-            <template #left>
-              <span>총</span>
-              <span class="accent pl4">30</span>
-              <kw-separator
-                spaced
-                vertical
-                inset
-              />
-              <span>처리율</span>
-              <span class="accent pl4">30%</span>
-              <kw-separator
-                spaced
-                vertical
-                inset
-              />
-              <span class="accent">1,020,000원</span>
-            </template>
-          </kw-action-top>
-          <kw-grid
-            :visible-rows="10"
-            @init="initGrid1"
-          />
-          <ul class="grid-fix-footer">
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">BS인정건수</span>
-              <p class="grid-fix-footer__data">
-                100,000
-              </p>
-            </li>
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">W1건수</span>
-              <p class="grid-fix-footer__data">
-                10,000
-              </p>
-            </li>
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">W2건수</span>
-              <p class="grid-fix-footer__data">
-                10
-              </p>
-            </li>
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">환경건수</span>
-              <p class="grid-fix-footer__data">
-                100,000
-              </p>
-            </li>
-          </ul>
-        </div>
-        <div class="grid-horizontal-wrap__section w472">
-          <h3>수수료내역</h3>
-          <kw-action-top>
-            <template #left>
-              <span>적용률총</span>
-              <span class="accent pl4">30%</span>
-            </template>
-            <kw-btn
-              label="저장"
-              grid-action
+  <div class="result-area">
+    <div class="grid-horizontal-wrap">
+      <div class="grid-horizontal-wrap__section">
+        <h3>방문실적</h3>
+        <kw-action-top>
+          <template #left>
+            <span>총</span>
+            <span class="accent pl4">30</span>
+            <kw-separator
+              spaced
+              vertical
+              inset
             />
-          </kw-action-top>
-          <kw-grid
-            :visible-rows="10"
-            @init="initGrid2"
+            <span>처리율</span>
+            <span class="accent pl4">30%</span>
+            <kw-separator
+              spaced
+              vertical
+              inset
+            />
+            <span class="accent">1,020,000원</span>
+          </template>
+        </kw-action-top>
+        <kw-grid
+          :visible-rows="10"
+          @init="initGrid1"
+        />
+        <ul class="grid-fix-footer">
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">BS인정건수</span>
+            <p class="grid-fix-footer__data">
+              100,000
+            </p>
+          </li>
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">W1건수</span>
+            <p class="grid-fix-footer__data">
+              10,000
+            </p>
+          </li>
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">W2건수</span>
+            <p class="grid-fix-footer__data">
+              10
+            </p>
+          </li>
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">환경건수</span>
+            <p class="grid-fix-footer__data">
+              100,000
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="grid-horizontal-wrap__section w472">
+        <h3>수수료내역</h3>
+        <kw-action-top>
+          <template #left>
+            <span>적용률총</span>
+            <span class="accent pl4">30%</span>
+          </template>
+          <kw-btn
+            label="저장"
+            grid-action
           />
-          <ul class="grid-fix-footer column">
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">지급합계</span>
-              <p class="grid-fix-footer__data">
-                100,000
-              </p>
-            </li>
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">지급총액</span>
-              <p class="grid-fix-footer__data">
-                10,000
-              </p>
-            </li>
-            <li class="grid-fix-footer__item">
-              <span class="grid-fix-footer__label">공제합계</span>
-              <p class="grid-fix-footer__data">
-                10
-              </p>
-            </li>
-          </ul>
-        </div>
+        </kw-action-top>
+        <kw-grid
+          :visible-rows="10"
+          @init="initGrid2"
+        />
+        <ul class="grid-fix-footer column">
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">지급합계</span>
+            <p class="grid-fix-footer__data">
+              100,000
+            </p>
+          </li>
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">지급총액</span>
+            <p class="grid-fix-footer__data">
+              10,000
+            </p>
+          </li>
+          <li class="grid-fix-footer__item">
+            <span class="grid-fix-footer__label">공제합계</span>
+            <p class="grid-fix-footer__data">
+              10
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="kw-guide pa0">
-      <q-card>
-        <h3 class="center mb20">
-          This is the source code for this page. This part is not included in the coding.
-        </h3>
-        <guide-code-view
-          :code-value="[sampleVueCode, sampleJsCode]"
-          :lang="['vue','javascript']"
-          multi
-        />
-      </q-card>
-    </div>
-  </kw-page>`;
+  </div>
+</kw-page>`;
 
 const sampleJsCode = `
 function initGrid1(data, view) {
