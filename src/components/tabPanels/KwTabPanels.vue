@@ -13,6 +13,8 @@
         <component
           :is="panel"
           v-if="isActivePanel(panel)"
+          @touchstart="onBeforeSwipe"
+          @mousedown="onBeforeSwipe"
         />
       </keep-alive>
     </transition>

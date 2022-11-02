@@ -1,3 +1,4 @@
+import { stop } from '../../../utils/private/event';
 import { getNormalizedVNodes } from '../../../utils/private/vm';
 
 export const usePanelProps = {
@@ -139,6 +140,12 @@ export default () => {
     goToByIndex(index);
   }
 
+  function onBeforeSwipe(evt) {
+    if (!props.swipeable) {
+      stop(evt);
+    }
+  }
+
   function onSwipe(evt) {
     if (props.swipeable) {
       const isValidDirection = validDirections.value.includes(evt.direction);
@@ -156,6 +163,7 @@ export default () => {
     previous,
     next,
     goTo,
+    onBeforeSwipe,
     onSwipe,
   };
 };
