@@ -67,7 +67,7 @@ export default () => {
     lnbKey ||= selectedLnbKey.value;
 
     const node = treeRef.value.getNodeByKey(lnbKey);
-    const isLeaf = node.children.length === 0;
+    const isLeaf = (node.children?.length || 0) === 0;
 
     if (isLeaf) {
       onUpdateSelected(lnbKey);
