@@ -31,6 +31,7 @@ import { KwTab, KwTabs } from './components/tabs';
 import { KwTimePicker } from './components/timePicker';
 import { KwToggle } from './components/toggle';
 import { KwTooltip } from './components/tooltip';
+import { KwTree } from './components/tree';
 
 export interface KwComponentNameMap {
   KwAction: KwAction;
@@ -77,4 +78,5 @@ export interface KwComponentNameMap {
   KwTimePicker: KwTimePicker;
   KwToggle: KwToggle;
   KwTooltip: KwTooltip;
+  KwTree: KwTree;
 }
