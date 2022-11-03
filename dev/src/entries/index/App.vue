@@ -1,7 +1,12 @@
 <template>
   <dev-layout>
     <dev-gnb />
+
     <dev-lnb />
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
   </dev-layout>
 </template>
 
