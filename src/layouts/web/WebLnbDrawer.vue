@@ -4,12 +4,12 @@
     :class="{'web-lnb-drawer--expanded': isExpanded}"
     icon="lnb_arrow"
     borderless
-    @click="toggleExapnded()"
+    @click="toggleExpanded"
   />
 </template>
 
 <script>
-import useLnbExpand from './private/useLnbExpand';
+import useLnbExpand from '../../composables/private/useLnbExpand';
 
 export default {
   name: 'WebLnbDrawer',

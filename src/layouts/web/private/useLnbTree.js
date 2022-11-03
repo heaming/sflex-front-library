@@ -15,7 +15,6 @@ export default () => {
   const title = ref();
   const treeNodes = ref([]);
   const expandedKeys = ref([]);
-  const selectedKeys = ref([]);
 
   function createHierarchy(nodes, currents) {
     return currents.map((c) => ({
@@ -23,7 +22,7 @@ export default () => {
     }));
   }
 
-  function createTreeNodes(gnbKey) {
+  function createNodes(gnbKey) {
     const nodes = lnbItems.filter((v) => v.gnbKey === gnbKey);
     const roots = nodes.filter((v) => v.depth === 0);
     return createHierarchy(nodes, roots);
@@ -34,17 +33,13 @@ export default () => {
     return matched ? [...recursiveGetKeys(gnbKey, matched.parentsKey), lnbKey] : [];
   }
 
-  watch(selectedGnbKey, (gnbKey) => {
-    title.value = gnbItems.find((v) => v.key === gnbKey)?.label;
-    treeNodes.value = createTreeNodes(gnbKey);
-    expandedKeys.value = recursiveGetKeys(gnbKey, selectedLnbKey.value);
+  watch(selectedGnbKey, (key) => {
+    title.value = gnbItems.find((v) => v.key === key)?.label;
+    treeNodes.value = createNodes(key);
+    expandedKeys.value = recursiveGetKeys(key, selectedLnbKey.value);
   }, { immediate: true });
 
-  watch(selectedLnbKey, (lnbKey) => {
-    selectedKeys.value = recursiveGetKeys(selectedGnbKey.value, lnbKey);
-  }, { immediate: true });
-
-  async function onUpdateSelectedLeaf(lnbKey) {
+  async function onUpdateSelected(lnbKey) {
     try {
       await push({ name: lnbKey });
       commit('app/setSelectedLnbKey', lnbKey);
@@ -57,7 +52,7 @@ export default () => {
     }
   }
 
-  function onUpdateSelectedGroup(lnbKey) {
+  function onUpdateExpanded(lnbKey) {
     const expanded = expandedKeys.value;
     const index = expanded.findIndex((v) => v === lnbKey);
 
@@ -68,24 +63,18 @@ export default () => {
     }
   }
 
-  function onUpdateSelected(lnbKey) {
+  function onSelect(lnbKey) {
     lnbKey ||= selectedLnbKey.value;
 
     const node = treeRef.value.getNodeByKey(lnbKey);
     const isLeaf = node.children.length === 0;
 
     if (isLeaf) {
-      onUpdateSelectedLeaf(lnbKey);
+      onUpdateSelected(lnbKey);
     } else {
-      onUpdateSelectedGroup(lnbKey);
+      onUpdateExpanded(lnbKey);
     }
   }
-
-  const isNodeSelected = (node) => selectedKeys.value.includes(node.key);
-  const getNodeClass = (node) => [
-    `lnb-tree__node--depth-${node.depth}`,
-    isNodeSelected(node) && 'lnb-tree__node--selected',
-  ];
 
   return {
     selectedGnbKey,
@@ -94,8 +83,6 @@ export default () => {
     title,
     treeNodes,
     expandedKeys,
-    selectedKeys,
-    onUpdateSelected,
-    getNodeClass,
+    onSelect,
   };
 };

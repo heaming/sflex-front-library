@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import useLnbExpand from './private/useLnbExpand';
+import useLnbExpand from '../../composables/private/useLnbExpand';
 
 import WebLnbTree from './WebLnbTree.vue';
 import WebLnbDrawer from './WebLnbDrawer.vue';

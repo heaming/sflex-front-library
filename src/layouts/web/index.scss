@@ -1,7 +1,7 @@
 /*
   Layout
  */
-.desktop .web-layout {
+body.desktop .web-layout {
   min-width: 1900px;
   background: #f4f5f6;
 }
@@ -79,7 +79,7 @@
     height: 100%;
   }
 
-  .lnb-menus {
+  .lnb-tree {
     padding-top: 40px;
 
     &__title {
@@ -92,52 +92,88 @@
       color: $black1;
       align-items: center;
     }
-  }
 
-  .lnb-tree {
-    &--empty.q-tree {
-      padding: 0 20px;
-    }
-
-    &.q-tree {
-      .q-focus-helper,
-      .q-icon.q-tree__arrow {
+    .q-tree {
+      .q-focus-helper {
         display: none;
       }
 
-      .q-tree__node,
-      .q-tree__node-header {
-        padding: 0 !important;
-        margin: 0 !important;
+      &__node {
+        padding: 0;
+        margin: 0;
       }
 
-      .q-tree__children {
+      &__node-header {
+        padding: 0;
+        margin: 0;
+      }
+
+      &__node-header-content {
+        padding: 0 20px;
+        font-size: 14px;
+        font-weight: 400;
+        color: $black3;
+
+        .q-icon {
+          font-size: inherit;
+          transition: transform 0.3s;
+        }
+
+        &:hover {
+          font-weight: 700;
+          color: $black1;
+        }
+      }
+
+      &__children {
         padding: 14px 0;
-        background-color: $bg-box;
+        background: $bg-box;
 
         .q-tree__children {
           padding: 0;
         }
       }
-    }
 
-    &__node {
-      padding: 0 20px;
-      font-size: 14px;
-      font-weight: 400;
-      color: $black3;
-
-      .q-icon {
-        font-size: inherit;
-        transition: transform 0.3s;
+      &__node--parent {
+        &:has(.q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node--selected) {
+          > .q-tree__node-header .q-tree__node-header-content {
+            font-weight: 700;
+            color: $black1;
+          }
+        }
       }
 
-      &--depth-0 {
+      &__node--selected .q-tree__node-header-content {
+        font-weight: 700;
+        color: $black1;
+      }
+
+      &__arrow {
+        display: none;
+      }
+    }
+
+    .lnb-tree {
+      &--empty {
+        padding: 0 20px;
+      }
+
+      &__node {
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      &__node-content {
+        flex: 1 1 0%;
+      }
+
+      &__node--depth-0 {
         min-height: 45px;
         font-size: 16px;
       }
 
-      &--depth-1 {
+      &__node--depth-1 {
         padding-right: 40px;
         min-height: 30px;
 
@@ -149,7 +185,7 @@
         }
       }
 
-      &--depth-2 {
+      &__node--depth-2 {
         padding-left: 40px;
         min-height: 21px;
 
@@ -161,10 +197,13 @@
         }
       }
 
-      &--selected,
-      &:hover {
-        font-weight: 700;
-        color: $black1;
+      &__arrow {
+        font-size: inherit;
+        transition: transform 0.3s;
+
+        &--expanded {
+          transform: rotate(180deg);
+        }
       }
     }
   }
