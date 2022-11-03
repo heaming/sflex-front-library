@@ -7,7 +7,3 @@ export default {
   name: 'KwCarousel',
 };
 </script>
-
-<style scoped>
-
-</style>

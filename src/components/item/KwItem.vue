@@ -7,7 +7,3 @@ export default {
   name: 'KwItem',
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -7,7 +7,3 @@ export default {
   name: 'KwCard',
 };
 </script>
-
-<style scoped>
-
-</style>

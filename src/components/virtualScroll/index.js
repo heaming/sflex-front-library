@@ -1,5 +1,5 @@
-import KwVirtualsScroll from './KwVirtualsScroll.vue';
+import KwVirtualScroll from './KwVirtualScroll.vue';
 
 export {
-  KwVirtualsScroll,
+  KwVirtualScroll,
 };

@@ -7,7 +7,3 @@ export default {
   name: 'KwList',
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -7,7 +7,3 @@ export default {
   name: 'KwAvatar',
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -7,7 +7,3 @@ export default {
   name: 'KwItemSection',
 };
 </script>
-
-<style scoped>
-
-</style>

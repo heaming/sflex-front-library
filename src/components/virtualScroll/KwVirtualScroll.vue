@@ -4,10 +4,6 @@
 
 <script>
 export default {
-  name: 'KwVirtualsScroll',
+  name: 'KwVirtualScroll',
 };
 </script>
-
-<style scoped>
-
-</style>
