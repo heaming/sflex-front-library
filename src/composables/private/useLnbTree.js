@@ -1,5 +1,5 @@
 import { isNavigationFailure } from 'vue-router';
-import { alert } from '../../../plugins/dialog';
+import { alert } from '../../plugins/dialog';
 
 export default () => {
   const { getters, commit } = useStore();
@@ -15,7 +15,6 @@ export default () => {
   const title = ref();
   const treeNodes = ref([]);
   const expandedKeys = ref([]);
-  const selectedKeys = ref([]);
 
   function createHierarchy(nodes, currents) {
     return currents.map((c) => ({
@@ -23,7 +22,7 @@ export default () => {
     }));
   }
 
-  function createTreeNodes(gnbKey) {
+  function createNodes(gnbKey) {
     const nodes = lnbItems.filter((v) => v.gnbKey === gnbKey);
     const roots = nodes.filter((v) => v.depth === 0);
     return createHierarchy(nodes, roots);
@@ -34,58 +33,46 @@ export default () => {
     return matched ? [...recursiveGetKeys(gnbKey, matched.parentsKey), lnbKey] : [];
   }
 
-  watch(selectedGnbKey, (gnbKey) => {
-    title.value = gnbItems.find((v) => v.key === gnbKey)?.label;
-    treeNodes.value = createTreeNodes(gnbKey);
-    expandedKeys.value = recursiveGetKeys(gnbKey, selectedLnbKey.value);
+  watch(selectedGnbKey, (key) => {
+    title.value = gnbItems.find((v) => v.key === key)?.label;
+    treeNodes.value = createNodes(key);
+    expandedKeys.value = recursiveGetKeys(key, selectedLnbKey.value);
   }, { immediate: true });
 
-  watch(selectedLnbKey, (lnbKey) => {
-    selectedKeys.value = recursiveGetKeys(selectedGnbKey.value, lnbKey);
-  }, { immediate: true });
+  function onUpdateExpanded(expanded) {
+    expandedKeys.value = expanded;
+  }
 
-  async function onUpdateSelectedLeaf(lnbKey) {
+  async function handleUpdateSelected(lnbKey) {
     try {
       await push({ name: lnbKey });
       commit('app/setSelectedLnbKey', lnbKey);
     } catch (e) {
-      if (isNavigationFailure(e, 1)) {
-        // matcher not found
+      if (isNavigationFailure(e, 1)) { // matcher not found
         await alert(t('MSG_ALT_PAGE_NOT_FOUND'));
+      } else {
+        throw e;
       }
-      throw e;
     }
   }
 
-  function onUpdateSelectedGroup(lnbKey) {
-    const expanded = expandedKeys.value;
-    const index = expanded.findIndex((v) => v === lnbKey);
-
-    if (index > -1) {
-      expanded.splice(index, 1);
-    } else {
-      expanded.push(lnbKey);
-    }
+  function handleUpdateExpanded(lnbKey) {
+    const expanded = treeRef.value.isExpanded(lnbKey);
+    treeRef.value.setExpanded(lnbKey, !expanded);
   }
 
-  function onUpdateSelected(lnbKey) {
+  async function onUpdateSelected(lnbKey) {
     lnbKey ||= selectedLnbKey.value;
 
     const node = treeRef.value.getNodeByKey(lnbKey);
-    const isLeaf = node.children.length === 0;
+    const isLeaf = (node.children?.length || 0) === 0;
 
     if (isLeaf) {
-      onUpdateSelectedLeaf(lnbKey);
+      handleUpdateSelected(lnbKey);
     } else {
-      onUpdateSelectedGroup(lnbKey);
+      handleUpdateExpanded(lnbKey);
     }
   }
-
-  const isNodeSelected = (node) => selectedKeys.value.includes(node.key);
-  const getNodeClass = (node) => [
-    `lnb-tree__node--depth-${node.depth}`,
-    isNodeSelected(node) && 'lnb-tree__node--selected',
-  ];
 
   return {
     selectedGnbKey,
@@ -94,8 +81,7 @@ export default () => {
     title,
     treeNodes,
     expandedKeys,
-    selectedKeys,
+    onUpdateExpanded,
     onUpdateSelected,
-    getNodeClass,
   };
 };

@@ -60,7 +60,6 @@ const viewConfig = {
     commitLevel: ValidationLevel.ERROR,
     crossWhenExitLast: true,
     exitGridWhenTab: ExitGridWhenTab.GRID,
-    viewGridInside: false,
   },
   editorOptions: {
     viewGridInside: false,

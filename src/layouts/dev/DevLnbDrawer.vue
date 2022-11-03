@@ -1,7 +1,7 @@
 <template>
   <kw-btn
-    class="web-lnb-drawer"
-    :class="{'web-lnb-drawer--expanded': isExpanded}"
+    class="dev-lnb-drawer"
+    :class="{'dev-lnb-drawer--expanded': isExpanded}"
     icon="lnb_arrow"
     borderless
     @click="toggleExpanded"
@@ -12,7 +12,7 @@
 import useLnbExpand from '../../composables/private/useLnbExpand';
 
 export default {
-  name: 'WebLnbDrawer',
+  name: 'DevLnbDrawer',
 
   setup() {
     return {

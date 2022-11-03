@@ -1,5 +1,5 @@
 <template>
-  <q-card-actions>
+  <q-card-actions class="kw-card-actions">
     <slot />
   </q-card-actions>
 </template>
