@@ -2,19 +2,25 @@
 // which that tag starts with `Kw`
 import { KwAction, KwActionTop, KwActionBottom } from './components/action';
 import { KwActionBar } from './components/actionBar';
+import { KwAvatar } from './components/avatar';
 import { KwBtn } from './components/btn';
 import { KwBtnToggle } from './components/btnToggle';
+import { KwCard, KwCardActions, KwCardSection } from './components/card';
+import { KwCarousel } from './components/carousel';
 import { KwChart } from './components/chart';
 import { KwCheckbox } from './components/checkbox';
 import { KwChip } from './components/chip';
 import { KwDate, KwDatePicker, KwDateRangePicker } from './components/datePicker';
 import { KwEditor } from './components/editor';
+import { KwExpansionItem } from './components/expansionItem';
 import { KwField } from './components/field';
 import { KwFile } from './components/file';
 import { KwForm, KwFormRow, KwFormItem } from './components/form';
 import { KwGrid, KwTreeGrid } from './components/grid';
 import { KwIcon } from './components/icon';
 import { KwInput } from './components/input';
+import { KwItem, KwItemLabel, KwItemSection } from './components/item';
+import { KwList } from './components/list';
 import { KwObserver } from './components/observer';
 import { KwOptionGroup } from './components/optionGroup';
 import { KwPage } from './components/page';
@@ -25,6 +31,7 @@ import { KwRadio } from './components/radio';
 import { KwSearch, KwSearchRow, KwSearchItem } from './components/search';
 import { KwSelect } from './components/select';
 import { KwSeparator } from './components/separator';
+import { KwSlider } from './components/slider';
 import { KwStep, KwStepper, KwStepperNavigation } from './components/stepper';
 import { KwTabPanel, KwTabPanels } from './components/tabPanels';
 import { KwTab, KwTabs } from './components/tabs';
@@ -32,14 +39,20 @@ import { KwTimePicker } from './components/timePicker';
 import { KwToggle } from './components/toggle';
 import { KwTooltip } from './components/tooltip';
 import { KwTree } from './components/tree';
+import { KwVirtualScroll } from './components/virtualScroll';
 
 export interface KwComponentNameMap {
   KwAction: KwAction;
   KwActionTop: KwActionTop;
+  KwAvatar: KwAvatar;
   KwActionBottom: KwActionBottom;
   KwActionBar: KwActionBar;
   KwBtn: KwBtn;
   KwBtnToggle: KwBtnToggle;
+  KwCard: KwCard;
+  KwCardActions: KwCardActions;
+  KwCardSection: KwCardSection;
+  KwCarousel: KwCarousel;
   KwChart: KwChart;
   KwCheckbox: KwCheckbox;
   KwChip: KwChip;
@@ -47,6 +60,7 @@ export interface KwComponentNameMap {
   KwDatePicker: KwDatePicker;
   KwDateRangePicker: KwDateRangePicker;
   KwEditor: KwEditor;
+  KwExpansionItem: KwExpansionItem;
   KwField: KwField;
   KwFile: KwFile;
   KwForm: KwForm;
@@ -56,6 +70,10 @@ export interface KwComponentNameMap {
   KwTreeGrid: KwTreeGrid;
   KwIcon: KwIcon;
   KwInput: KwInput;
+  KwItem: KwItem;
+  KwItemLabel: KwItemLabel;
+  KwItemSection: KwItemSection;
+  KwList: KwList;
   KwObserver: KwObserver;
   KwOptionGroup: KwOptionGroup;
   KwPage: KwPage;
@@ -68,6 +86,7 @@ export interface KwComponentNameMap {
   KwSearchItem: KwSearchItem;
   KwSelect: KwSelect;
   KwSeparator: KwSeparator;
+  KwSlider: KwSlider;
   KwStep: KwStep;
   KwStepper: KwStepper;
   KwStepperNavigation: KwStepperNavigation;
@@ -79,4 +98,5 @@ export interface KwComponentNameMap {
   KwToggle: KwToggle;
   KwTooltip: KwTooltip;
   KwTree: KwTree;
+  KwVirtualScroll: KwVirtualScroll;
 }
