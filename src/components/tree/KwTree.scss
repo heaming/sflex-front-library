@@ -1,0 +1,72 @@
+.kw-tree.q-tree {
+  color: $line-line;
+
+  .q-tree {
+    &__node {
+      &::after {
+        top: -12px;
+      }
+    }
+
+    &__node-header::before {
+      width: 20px;
+      left: -13px;
+    }
+
+    &__node-header-content {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.63;
+      color: $black1;
+    }
+
+    &__node-body {
+      padding-left: 28px;
+    }
+
+    &__node--parent {
+      padding-left: 0;
+
+      > .q-tree__node-collapsible > .q-tree__node-body {
+        padding-left: 28px;
+      }
+
+      &:has(.q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node--selected) {
+        > .q-tree__node-header .q-tree__node-header-content {
+          font-weight: 700;
+        }
+      }
+    }
+
+    &__node--child {
+      padding-left: 0;
+
+      .q-tree__node-header::before {
+        width: 15px;
+      }
+    }
+
+    &__node--selected .q-tree__node-header-content {
+      font-weight: 700;
+    }
+
+    &__icon,
+    &__node-header-content .q-icon {
+      font-size: 16px;
+    }
+
+    &__arrow {
+      margin-right: 8px;
+      background: url(~@assets/icons/group_plus.svg);
+
+      &--rotate {
+        transform: none;
+        background: url(~@assets/icons/group_minus.svg);
+      }
+    }
+  }
+
+  > .q-tree__node--child > .q-tree__node-header {
+    padding-left: 4px;
+  }
+}
