@@ -41,4 +41,5 @@ export * from './tabs';
 export * from './timePicker';
 export * from './toggle';
 export * from './tooltip';
+export * from './tree';
 export * from './virtualScroll';
