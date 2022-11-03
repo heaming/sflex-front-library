@@ -1256,7 +1256,7 @@ $unit: px;
 
     // 선택된 클래스
     &--selected {
-      background-color: $bg-white;
+      background-color: $bg-white !important;
       border: 1px solid $black1;
     }
   }
