@@ -3,10 +3,7 @@
     <q-toolbar class="full-width">
       <a class="gnb-logo">
         <slot name="logo">
-          <img
-            src="~~@assets/images/logo_redpen.svg"
-            alt="KSS빨간펜"
-          >
+          LOGO
         </slot>
       </a>
 
