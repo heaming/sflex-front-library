@@ -1,5 +1,7 @@
 <template>
-  <q-card-section />
+  <q-card-section>
+    <slot />
+  </q-card-section>
 </template>
 
 <script>
