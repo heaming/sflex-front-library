@@ -119,7 +119,7 @@ import { QVueGlobals } from 'quasar';
 
 export interface KwVueGlobals {
   version: string;
-  timestampe: number;
+  timestamp?: number;
   q: QVueGlobals;
   cookies: typeof cookies;
   alert: typeof alert;
