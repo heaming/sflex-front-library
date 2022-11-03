@@ -207,6 +207,7 @@ function setColumnEditor(column, { dataType }) {
         editButtonVisibility: ButtonVisibility.ALWAYS,
         datetimeFormat: 'date',
         editor: {
+          viewGridInside: false,
           commitOnSelect: true,
           dropDownWhenClick: false,
           btOptions: {
