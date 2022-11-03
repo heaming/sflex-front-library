@@ -137,6 +137,7 @@
       >
         <kw-btn
           v-if="showDefaultFilePickBtn"
+          padding="12px"
           :label="'파일선택'"
           :dense="dense"
           @click="pickFiles"

@@ -4,8 +4,12 @@
       File
     </h2>
     <p class="kw-guide-description">
-      It is in progress. Please wait for it to complete.
+      It's currently under development. <br>  Even if the style is different in screen with zeplin,
+      <span class="text-bold">please do not care and just insert file component when it necessary</span>
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -30,13 +34,15 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              zwcm-file-attacher
             </td>
             <td>
-              essential (sample)
+              <br>
+              multiple
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              default : single file attached<br>
+              add the prop "multiple" in the tag when multiple type of file component
             </td>
           </tr>
         </tbody>
@@ -50,14 +56,42 @@
         Default
       </h3>
       <p class="kw-guide-description">
-        description
+        single file attachment component
       </p>
       <q-card>
         <div class="kw-guide-example">
-          It is in progress. Please wait for it to complete.
+          <img
+            src="../../../../../assets/images/example_file-single.png"
+            width="500"
+            alt="단일 파일첨부"
+          >
         </div>
         <guide-code-view
-          :code-value="testCode"
+          :code-value="singleCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="multiple"
+        class="kw-guide-title"
+      >
+        Multiple
+      </h3>
+      <p class="kw-guide-description">
+        Multiple files attachment component
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <img
+            src="../../../../../assets/images/example_file-multiple.png"
+            width="500"
+            alt="복수 파일첨부"
+          >
+        </div>
+        <guide-code-view
+          :code-value="multipleCode"
           lang="vue"
         />
       </q-card>
@@ -66,8 +100,30 @@
 </template>
 
 <script setup>
-
-const testCode = `
-It is in progress. Please wait for it to complete.
+const singleCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="file">
+      <zwcm-file-attacher />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
 `;
+
+const multipleCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item label="multiple files">
+      <zwcm-file-attacher multiple />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
+const guideHistory = [
+  {
+    timestamp: '2022-11-03',
+    text: 'Updated guide',
+  },
+];
 </script>

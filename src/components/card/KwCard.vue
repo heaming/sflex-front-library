@@ -1,5 +1,7 @@
 <template>
-  <q-card />
+  <q-card class="kw-card">
+    <slot />
+  </q-card>
 </template>
 
 <script>

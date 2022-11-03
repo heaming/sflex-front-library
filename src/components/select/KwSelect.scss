@@ -16,7 +16,7 @@
       white-space: nowrap;
 
       &.kw-select__placeholder {
-        color: $disabled;
+        color: $placeholder;
       }
     }
   }
@@ -50,7 +50,7 @@
     min-height: 34px;
     padding: 7px 12px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: normal;
     color: $black2;
 
     &__section {
@@ -74,6 +74,7 @@
 
     &.q-manual-focusable--focused {
       font-weight: 700;
+      background-color: $bg-box;
       color: $black1;
 
       & > .q-focus-helper {
