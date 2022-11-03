@@ -393,6 +393,163 @@
         </kw-file>
       </kw-form-item>
     </kw-form-row>
+    <!-- default -->
+    <kw-form-row>
+      <kw-form-item
+        label="default"
+      >
+        <kw-file
+          :ref="addRefs"
+          v-model="defaultValue"
+          name="default"
+          class="kw-file--download-only"
+          dense
+          :label="'default'"
+          :pick-file-when-click="pickFileWhenClick"
+          :pick-file-btn="pickFileBtn"
+          :instance-update="instanceUpdate"
+          :removable="removable"
+          :downloadable="downloadable"
+          :retry-possible="retryPossible"
+          :counter="counter"
+          :max-total-size="maxTotalSize ?? undefined"
+          :max-file-size="maxFileSize ?? undefined"
+          :max-files="maxFiles ?? undefined"
+          :accept="accept ?? undefined"
+          :append="append"
+          :use-header="useHeader"
+          :borderless="borderless"
+          :underline="underline"
+          :selectable="selectable"
+          :scroll-horizontal="scrollHorizontal"
+          :file-name-width="fileNameWidth"
+          :aside-width="asideWidth"
+          :placeholder="placeholder || undefined"
+          :placeholder-style="placeholderStyle"
+          :placeholder-class="placeholderClass"
+        >
+          <template
+            v-if="useAppendFileSlot"
+            #append-header
+          >
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              fileUid
+            </div>
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              myFileYn
+            </div>
+          </template>
+          <template
+            v-if="useAppendFileSlot"
+            #append-file="{file}"
+          >
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-input
+                v-model="file.fileUid"
+                dense
+              />
+            </div>
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-select
+                v-model="file.myFileYn"
+                dense
+                :options="selectOptions"
+              />
+            </div>
+          </template>
+        </kw-file>
+      </kw-form-item>
+      <kw-form-item
+        label="multiple"
+      >
+        <kw-file
+          :ref="addRefs"
+          v-model="multipleValue"
+          name="multiple"
+          class="kw-file--download-only"
+          dense
+          :label="'multiple'"
+          :pick-file-when-click="pickFileWhenClick"
+          :pick-file-btn="pickFileBtn"
+          :instance-update="instanceUpdate"
+          :removable="removable"
+          :downloadable="downloadable"
+          :retry-possible="retryPossible"
+          :counter="counter"
+          :max-total-size="maxTotalSize ?? undefined"
+          :max-file-size="maxFileSize ?? undefined"
+          :max-files="maxFiles ?? undefined"
+          :accept="accept ?? undefined"
+          :append="append"
+          :use-header="useHeader"
+          :borderless="borderless"
+          :underline="underline"
+          :selectable="selectable"
+          :scroll-horizontal="scrollHorizontal"
+          :file-name-width="fileNameWidth"
+          :aside-width="asideWidth"
+          :placeholder="placeholder || undefined"
+          :placeholder-style="placeholderStyle"
+          :placeholder-class="placeholderClass"
+          :multiple="multiple"
+        >
+          <template
+            v-if="useAppendFileSlot"
+            #append-header
+          >
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              fileUid
+            </div>
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              myFileYn
+            </div>
+          </template>
+          <template
+            v-if="useAppendFileSlot"
+            #append-file="{file}"
+          >
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-input
+                v-model="file.fileUid"
+                dense
+              />
+            </div>
+            <div
+              class="text-center"
+              :class="slotOverflow ? 'w500' : 'w100'"
+            >
+              <kw-select
+                v-if="file.attachFile"
+                v-model="file.attachFile.newField"
+                dense
+                :options="selectOptions"
+              />
+            </div>
+          </template>
+        </kw-file>
+      </kw-form-item>
+    </kw-form-row>
     <!-- rules -->
     <kw-form-row
       v-if="false"
