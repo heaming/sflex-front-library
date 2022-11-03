@@ -176,6 +176,32 @@
       }
     }
   }
+
+  &--download-only {
+    &.kw-field.q-field {
+      &--dense {
+        .kw-file__file-container {
+          .q-scrollarea__content {
+            padding: 8px 0;
+          }
+        }
+
+        .kw-file-item {
+          padding-left: 0;
+          padding-right: 0;
+          min-height: 28px;
+
+          &--downloadable {
+            .kw-file-item__name {
+              text-decoration: underline;
+              color: $black1;
+              font-weight: normal;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .kw-file-item {

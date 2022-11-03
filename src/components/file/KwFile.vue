@@ -515,8 +515,8 @@ export default {
 
     const emptyAppendCounter = computed(() => !props.multiple
       && !(props.counter || slots.counter)
-      && !files.length && !props.useHeader
-      && counterCtx.computedCounter.value);
+      && !files.value.length && !props.useHeader
+      && !!counterCtx.computedCounter.value);
 
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
