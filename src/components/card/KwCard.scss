@@ -1,0 +1,20 @@
+.kw-card {
+  &.q-card {
+    box-shadow: none;
+    border-radius: 0;
+    border: 1px solid $line-line;
+    padding: 30px;
+    width: calc((100% - 80px) / 4);
+  }
+
+  &--selected {
+    background-color: $bg-white !important;
+    border: 1px solid $black1;
+  }
+}
+
+.kw-card-actions {
+  &.q-card__actions {
+    padding: 0;
+  }
+}
