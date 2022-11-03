@@ -13,6 +13,7 @@
     :no-selection-unset="noSelectionUnset"
     :default-expand-all="defaultExpandAll"
     :accordion="accordion"
+    :duration="duration"
     :no-transition="noTransition"
     :no-connectors="noConnectors"
     :selected-color="selectedColor"
@@ -62,6 +63,7 @@ export default {
     noSelectionUnset: { type: Boolean, default: true },
     defaultExpandAll: { type: Boolean, default: false },
     accordion: { type: Boolean, default: false },
+    duration: { type: Number, default: 100 },
     noTransition: { type: Boolean, default: false },
     noConnectors: { type: Boolean, default: false },
     selectedColor: { type: String, default: 'primary' },

@@ -69,6 +69,12 @@ interface KwTreeProps {
   accordion?: boolean;
 
   /**
+   * 애니메이션 진행 시간
+   * @defaultValue `100`
+   */
+  duration?: number;
+
+  /**
    * 트랜지션 끄기 여부
    */
   noTransition?: boolean;

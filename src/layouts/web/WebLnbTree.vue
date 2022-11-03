@@ -1,13 +1,12 @@
 <template>
-  <div class="lnb-menus">
-    <div class="lnb-menus__title">
+  <div class="lnb-tree">
+    <div class="lnb-tree__title">
       {{ title }}
     </div>
 
     <q-tree
       ref="treeRef"
       :key="selectedGnbKey"
-      class="lnb-tree"
       :class="{'lnb-tree--empty': treeNodes.length === 0}"
       :selected="selectedLnbKey"
       :expanded="expandedKeys"
@@ -16,19 +15,20 @@
       node-key="key"
       label-key="label"
       no-connectors
-      @update:selected="onUpdateSelected"
+      @update:selected="onSelect"
     >
       <template #default-header="{node, expanded}">
         <div
-          class="lnb-tree__node row items-center full-width"
-          :class="getNodeClass(node)"
+          class="lnb-tree__node"
+          :class="`lnb-tree__node--depth-${node.depth}`"
         >
-          <div class="col">
+          <div class="lnb-tree__node-content">
             {{ node.label }}
           </div>
           <q-icon
-            v-if="node.children.length"
-            :class="{'rotate-180': expanded}"
+            v-if="node.children?.length"
+            class="lnb-tree__arrow"
+            :class="{'lnb-tree__arrow--expanded': expanded}"
             name="arrow_down"
           />
         </div>
