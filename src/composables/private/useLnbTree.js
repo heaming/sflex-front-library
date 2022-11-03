@@ -1,5 +1,5 @@
 import { isNavigationFailure } from 'vue-router';
-import { alert } from '../../../plugins/dialog';
+import { alert } from '../../plugins/dialog';
 
 export default () => {
   const { getters, commit } = useStore();
@@ -39,40 +39,38 @@ export default () => {
     expandedKeys.value = recursiveGetKeys(key, selectedLnbKey.value);
   }, { immediate: true });
 
-  async function onUpdateSelected(lnbKey) {
+  function onUpdateExpanded(expanded) {
+    expandedKeys.value = expanded;
+  }
+
+  async function handleUpdateSelected(lnbKey) {
     try {
       await push({ name: lnbKey });
       commit('app/setSelectedLnbKey', lnbKey);
     } catch (e) {
-      if (isNavigationFailure(e, 1)) {
-        // matcher not found
+      if (isNavigationFailure(e, 1)) { // matcher not found
         await alert(t('MSG_ALT_PAGE_NOT_FOUND'));
+      } else {
+        throw e;
       }
-      throw e;
     }
   }
 
-  function onUpdateExpanded(lnbKey) {
-    const expanded = expandedKeys.value;
-    const index = expanded.findIndex((v) => v === lnbKey);
-
-    if (index > -1) {
-      expanded.splice(index, 1);
-    } else {
-      expanded.push(lnbKey);
-    }
+  function handleUpdateExpanded(lnbKey) {
+    const expanded = treeRef.value.isExpanded(lnbKey);
+    treeRef.value.setExpanded(lnbKey, !expanded);
   }
 
-  function onSelect(lnbKey) {
+  async function onUpdateSelected(lnbKey) {
     lnbKey ||= selectedLnbKey.value;
 
     const node = treeRef.value.getNodeByKey(lnbKey);
     const isLeaf = (node.children?.length || 0) === 0;
 
     if (isLeaf) {
-      onUpdateSelected(lnbKey);
+      handleUpdateSelected(lnbKey);
     } else {
-      onUpdateExpanded(lnbKey);
+      handleUpdateExpanded(lnbKey);
     }
   }
 
@@ -83,6 +81,7 @@ export default () => {
     title,
     treeNodes,
     expandedKeys,
-    onSelect,
+    onUpdateExpanded,
+    onUpdateSelected,
   };
 };

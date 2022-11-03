@@ -1,0 +1,124 @@
+/*
+  Layout
+ */
+body.desktop .dev-layout {
+  min-width: 1900px;
+  background: #f4f5f6;
+}
+
+/*
+  GNB
+  */
+.dev-gnb {
+  border-bottom: 1px solid #e5e5e5;
+
+  .q-toolbar {
+    padding: 0 40px;
+    height: 70px;
+    background: #fff;
+  }
+
+  .gnb-logo {
+    width: 120px;
+    height: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    color: $black1;
+  }
+
+  .gnb__link-container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 80px;
+
+    .gnb-link {
+      position: relative;
+      height: 100%;
+      margin-right: 40px;
+      color: $black2;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 70px;
+      text-decoration: none;
+      cursor: pointer;
+
+      &--active {
+        font-weight: 700;
+
+        &::after {
+          content: "";
+          position: absolute;
+          display: block;
+          bottom: -1px;
+          right: 0;
+          left: 0;
+          height: 4px;
+          background: $primary;
+        }
+      }
+    }
+  }
+}
+
+/*
+  LNB
+ */
+.dev-lnb {
+  overflow: hidden;
+
+  .q-scrollarea {
+    height: 100%;
+  }
+
+  &-drawer {
+    &.kw-btn.q-btn {
+      position: absolute;
+      top: calc(50% - 30px);
+      right: -24px;
+      width: 30px;
+      height: 60px;
+      padding: 0;
+      border-radius: 0 30px 30px 0;
+      z-index: 990;
+      clip-path: inset(-10px -10px -10px 6px);
+      box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 35%);
+      background-color: $black2 !important;
+
+      .q-icon {
+        font-size: 16px;
+        margin-left: 5px;
+      }
+
+      &.q-focusable:focus,
+      &.q-manual-focusable--focused,
+      &.q-hoverable:hover,
+      &.q-btn.q-btn--active {
+        &::before {
+          background-color: $black2 !important;
+        }
+      }
+    }
+
+    &--expanded {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.dev-lnb-tree {
+  padding: 40px 20px 0;
+
+  &__title {
+    display: flex;
+    min-height: 45px;
+    border-bottom: 2px solid $black1;
+    font-weight: 700;
+    font-size: 18px;
+    color: $black1;
+    align-items: center;
+  }
+}
