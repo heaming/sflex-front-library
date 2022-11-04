@@ -1,9 +1,12 @@
 /*
   Layout
  */
-body.desktop .dev-layout {
-  min-width: 1900px;
+.dev-layout {
   background: #f4f5f6;
+
+  body.desktop & {
+    min-width: 1900px;
+  }
 }
 
 /*
@@ -19,21 +22,21 @@ body.desktop .dev-layout {
   }
 
   .gnb-logo {
+    display: flex;
     width: 120px;
-    height: 24px;
     font-size: 24px;
     font-weight: 700;
-    line-height: 24px;
     text-align: center;
-    color: $black1;
+    align-items: center;
+    color: $accent;
   }
 
-  .gnb__link-container {
+  .gnb__menus {
     display: flex;
     justify-content: space-between;
     margin-left: 80px;
 
-    .gnb-link {
+    &-item {
       position: relative;
       height: 100%;
       margin-right: 40px;
@@ -114,11 +117,16 @@ body.desktop .dev-layout {
 
   &__title {
     display: flex;
+    padding: 4px;
     min-height: 45px;
     border-bottom: 2px solid $black1;
     font-weight: 700;
     font-size: 18px;
     color: $black1;
     align-items: center;
+
+    .q-icon {
+      cursor: pointer;
+    }
   }
 }

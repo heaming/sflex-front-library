@@ -1,6 +1,56 @@
 <template>
   <dev-layout>
-    <dev-gnb />
+    <dev-gnb>
+      <template #logo>
+        <kw-btn
+          borderless
+          @click="$router.replace('/')"
+        >
+          <img
+            src="~~@assets/images/logo_kss.svg"
+            alt="KSS"
+            height="24"
+          >
+          DEV
+        </kw-btn>
+      </template>
+
+      <template #default>
+        <kw-btn
+          v-if="!$g.platform.is.desktop"
+          dense
+          underline
+          class="text-weight-bold text-uppercase mr20"
+          text-color="black2"
+          href="/"
+          target="_blank"
+        >
+          Desktop
+        </kw-btn>
+        <kw-btn
+          v-if="!$g.platform.is.mobile"
+          dense
+          underline
+          class="text-weight-bold text-uppercase mr20"
+          text-color="black2"
+          href="/mobile"
+          target="_blank"
+        >
+          Mobile
+        </kw-btn>
+        <kw-btn
+          v-if="!$g.platform.is.tablet"
+          dense
+          underline
+          class="text-weight-bold text-uppercase"
+          text-color="black2"
+          href="/tablet"
+          target="_blank"
+        >
+          Tablet
+        </kw-btn>
+      </template>
+    </dev-gnb>
 
     <dev-lnb />
 

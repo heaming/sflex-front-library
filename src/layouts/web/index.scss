@@ -30,12 +30,12 @@ body.desktop .web-layout {
     color: $black1;
   }
 
-  .gnb__link-container {
+  .gnb__menus {
     display: flex;
     justify-content: space-between;
     margin-left: 80px;
 
-    .gnb-link {
+    &-item {
       position: relative;
       height: 100%;
       margin-right: 40px;
