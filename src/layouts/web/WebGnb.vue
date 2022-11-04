@@ -1,18 +1,16 @@
 <template>
   <q-header class="web-gnb">
     <q-toolbar class="full-width">
-      <a class="gnb-logo">
-        <slot name="logo">
-          LOGO
-        </slot>
-      </a>
+      <div class="gnb-logo">
+        <slot name="logo" />
+      </div>
 
-      <div class="gnb__link-container ml80 row justify-between">
+      <div class="gnb__menus">
         <a
           v-for="{key, label} of gnbItems"
           :key="key"
-          class="gnb-link"
-          :class="{'gnb-link--active': isSelected(key)}"
+          class="gnb__menus-item"
+          :class="{'gnb__menus-item--active': isSelected(key)}"
           @click="updateSelected(key)"
         >
           {{ label }}

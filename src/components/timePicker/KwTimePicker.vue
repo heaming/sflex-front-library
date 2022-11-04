@@ -83,6 +83,7 @@ import useFieldStyle, { useFieldStyleProps } from '../../composables/private/use
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
+import i18n from '../../i18n';
 
 function createOptions(n) {
   const { length } = n.toString();
@@ -114,7 +115,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: undefined,
+      default: i18n.t('MSG_TXT_INP_TIME', null, '시간 입력'),
     },
   },
 

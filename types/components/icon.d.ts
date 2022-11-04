@@ -32,6 +32,26 @@ interface KwIconProps {
    */
   clickable?: boolean;
 
+  /*
+   * 아이콘 툴팁
+   */
+  tooltip?: boolean;
+
+  /*
+   * 툴팁 부모 요소로 부터의 상대 위치
+   */
+  tooltipAnchor?: boolean;
+
+  /*
+   * 툴팁 자신으로 부터의 상대 위치
+   */
+  tooltipSelf?: boolean;
+
+  /*
+   * 툴팁 픽셀 단위의 상대 위치 값
+   */
+  tooltipOffset?: boolean;
+
   /**
    * 클릭 이벤트
    * @param evt JS event object

@@ -7,9 +7,9 @@
     bordered
     @update:model-value="setExpanded"
   >
-    <q-scroll-area>
+    <kw-scroll-area scroll-area-width="100%">
       <dev-lnb-tree />
-    </q-scroll-area>
+    </kw-scroll-area>
 
     <dev-lnb-drawer />
   </q-drawer>

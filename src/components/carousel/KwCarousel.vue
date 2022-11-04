@@ -1,5 +1,7 @@
 <template>
-  <q-carousel />
+  <q-carousel>
+    <slot />
+  </q-carousel>
 </template>
 
 <script>

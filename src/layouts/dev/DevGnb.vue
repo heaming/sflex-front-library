@@ -1,18 +1,16 @@
 <template>
   <q-header class="dev-gnb">
     <q-toolbar>
-      <a class="gnb-logo">
-        <slot name="logo">
-          DEV
-        </slot>
-      </a>
+      <div class="gnb-logo">
+        <slot name="logo" />
+      </div>
 
-      <div class="gnb__link-container">
+      <div class="gnb__menus">
         <a
           v-for="{key, label} of gnbMenus"
           :key="key"
-          class="gnb-link"
-          :class="{'gnb-link--active': isSelected(key)}"
+          class="gnb__menus-item"
+          :class="{'gnb__menus-item--active': isSelected(key)}"
           @click="updateSelected(key)"
         >
           {{ label }}
@@ -21,14 +19,7 @@
 
       <q-space />
 
-      <div class="row justify-end items-center item-wrap">
-        <div class="item">
-          <kw-btn-toggle
-            v-model="layoutStyle"
-            :options="['Web', 'Mobile', 'Tablet']"
-          />
-        </div>
-      </div>
+      <slot />
     </q-toolbar>
   </q-header>
 </template>
@@ -40,24 +31,8 @@ export default {
   name: 'DevGnb',
 
   setup() {
-    const layoutStyle = ref('Web');
-
-    watch(layoutStyle, (val) => {
-      const bodyClassList = document.body.classList;
-      bodyClassList.remove('desktop', 'mobile', 'tablet');
-
-      if (val === 'Mobile') {
-        bodyClassList.add('mobile');
-      } else if (val === 'Tablet') {
-        bodyClassList.add('mobile', 'tablet');
-      } else {
-        bodyClassList.add('desktop');
-      }
-    }, { immediate: true });
-
     return {
       ...useGnbMenus(),
-      layoutStyle,
     };
   },
 };

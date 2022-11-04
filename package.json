@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.132",
+  "version": "0.1.133",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -92,6 +92,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "highlight.js": "^11.6.0",
     "husky": "^8.0.0",
     "lint-staged": "^12.4.1",

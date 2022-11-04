@@ -31,7 +31,7 @@ function createRoutesByGlobImport(modules, match) {
 export default [
   {
     path: '/',
-    component: () => import('~dev/pages/IndexPage.vue'),
+    component: () => import('~dev/routes/IndexPage.vue'),
   },
 
   // publish
