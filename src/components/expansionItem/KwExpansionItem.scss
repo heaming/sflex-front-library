@@ -1,0 +1,28 @@
+.kw-expansion-item {
+  border-bottom: 1px solid $line-line;
+
+  .q-item {
+    padding: 20px 0;
+
+    &__label {
+      font-size: 18px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.44;
+      color: $black1;
+    }
+
+    &__section--side {
+      color: inherit;
+    }
+  }
+
+  .q-focus-helper {
+    display: none;
+  }
+
+  .q-expansion-item__content {
+    background-color: $bg-body;
+  }
+}
