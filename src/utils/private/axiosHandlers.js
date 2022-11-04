@@ -85,9 +85,9 @@ async function handleServerFailure(response) {
   const { data } = response;
 
   switch (data.errorType) {
-    case consts.HTTP_ERROR_TYPE_SESSION_EXPIRED:
+    case consts.HTTP_ERROR_SESSION_EXPIRED:
       await handleServerFailureSessionExpired(); break;
-    case consts.HTTP_ERROR_TYPE_BIZ:
+    case consts.HTTP_ERROR_BIZ:
       await handleServerFailureBiz(response); break;
     default:
       await handleServerFailureDefault(response);

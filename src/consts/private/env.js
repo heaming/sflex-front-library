@@ -13,6 +13,7 @@ export default {
   LOCAL: isLocal,
   SERVER: isServer,
   TEST: __VUE_TEST_APP__ === true,
+  DESKTOP: __VUE_MOBILE_APP__ !== true && __VUE_TABLET_APP__ !== true,
   MOBILE: __VUE_MOBILE_APP__ === true,
   TABLET: __VUE_TABLET_APP__ === true,
 
