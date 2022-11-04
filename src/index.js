@@ -9,13 +9,12 @@ export { default as router } from './router';
 export { default as validate } from './validate';
 
 // Components
+export * from './layouts/dev';
 export * from './layouts/web';
 
 // Composables
 export { default as useDataService } from './composables/useDataService';
 export { default as useGlobal } from './composables/useGlobal';
-export { default as useGnb } from './composables/useGnb';
-export { default as useLnb } from './composables/useLnb';
 export { default as useMeta } from './composables/useMeta';
 export { default as useModal } from './composables/useModal';
 export { default as useSession } from './composables/useSession';

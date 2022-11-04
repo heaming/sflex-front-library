@@ -7,8 +7,9 @@ export default () => {
     const clickOutsideProps = {
       innerRefs: [vm.proxy.containerRef],
       onClickOutside() {
-        const view = vm.proxy.getView?.();
-        if (view?.isEditing()) view.commit();
+        // TODO: fix
+        // const view = vm.proxy.getView?.();
+        // if (view?.isEditing()) view.commit();
       },
     };
 

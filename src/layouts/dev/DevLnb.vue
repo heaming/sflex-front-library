@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    class="web-lnb overflow-hidden"
+    class="dev-lnb"
     :model-value="isExpanded"
     :width="280"
     show-if-above
@@ -8,24 +8,24 @@
     @update:model-value="setExpanded"
   >
     <q-scroll-area>
-      <web-lnb-tree />
+      <dev-lnb-tree />
     </q-scroll-area>
 
-    <web-lnb-drawer />
+    <dev-lnb-drawer />
   </q-drawer>
 </template>
 
 <script>
 import useLnbExpand from '../../composables/private/useLnbExpand';
 
-import WebLnbTree from './WebLnbTree.vue';
-import WebLnbDrawer from './WebLnbDrawer.vue';
+import DevLnbTree from './DevLnbTree.vue';
+import DevLnbDrawer from './DevLnbDrawer.vue';
 
 export default {
-  name: 'WebLnb',
+  name: 'DevLnb',
   components: {
-    WebLnbTree,
-    WebLnbDrawer,
+    DevLnbTree,
+    DevLnbDrawer,
   },
 
   setup() {

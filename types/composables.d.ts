@@ -6,43 +6,6 @@ export function useDataService(pageId: string): CustomAxiosInstance;
 import { KwVueGlobals } from './plugins';
 export function useGlobal(): KwVueGlobals;
 
-// useGnb
-import { Ref, ComputedRef } from 'vue';
-export function useGnb(): {
-  gnbItems: Ref<
-    {
-      key: string;
-      label: string;
-    }[]
-  >;
-  selectedGnbKey: ComputedRef<string | null>;
-  isSelected: (gnbKey: string) => boolean;
-  updateSelected: (gnbKey: string) => void;
-};
-
-// useLnb
-import { QTree } from 'quasar';
-export function useLnb(): {
-  lnbRef: Ref<QTree | undefined>;
-  hierarchyedLnbItems: Ref<
-    {
-      gnbKey: string;
-      key: string;
-      parentsKey?: string;
-      label: string;
-      depth: number;
-    }[]
-  >;
-  isExpanded: ComputedRef<boolean>;
-  expandedKeys: Ref<string[]>;
-  selectedGnbKey: ComputedRef<string | null>;
-  selectedLnbKey: ComputedRef<string | null>;
-  isSelected: (lnbKey: string) => boolean;
-  toggleLnb: () => void;
-  onUpdateSelected: (lnbKey: string) => void;
-  onUpdateExpanded: (expandedKeys: string[]) => void;
-};
-
 // useMeta
 export function useMeta(): {
   getUserInfo(): any;
