@@ -8,11 +8,21 @@
     :color="color"
     @click="!disable && onClick?.($event)"
   >
-    <slot />
+    <kw-tooltip
+      v-if="hasContent"
+      :anchor="tooltipAnchor"
+      :self="tooltipSelf"
+      :offset="tooltipOffset"
+    >
+      <slot>
+        {{ tooltip }}
+      </slot>
+    </kw-tooltip>
   </q-icon>
 </template>
 
 <script>
+import { isNil } from 'lodash-es';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
@@ -40,6 +50,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    tooltip: {
+      type: [Number, String],
+      default: undefined,
+    },
+    tooltipAnchor: {
+      type: String,
+      default: undefined,
+    },
+    tooltipSelf: {
+      type: String,
+      default: undefined,
+    },
+    tooltipOffset: {
+      type: Array,
+      default: undefined,
+    },
     onClick: {
       type: Function,
       default: undefined,
@@ -52,9 +78,13 @@ export default {
       props.disable && 'disabled',
     ]);
 
+    const slots = useSlots();
+    const hasContent = computed(() => !isNil(props.tooltip || slots.default));
+
     return {
       ...useInheritAttrs(),
       iconClass,
+      hasContent,
     };
   },
 };
