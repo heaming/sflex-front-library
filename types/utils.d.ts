@@ -359,8 +359,9 @@ interface GridUtil {
    * 현재 데이터를 초기 값으로 지정한다.
    * 전체 데이터 행의 상태가 NONE이 되며, DELETED인 데이터는 아예 삭제된다.
    * @param view 그리드 뷰 또는 트리 뷰
+   * @param shouldClearCurrent 행 선택 초기화 여부
    */
-  init(view: GridView | TreeView): void;
+  init(view: GridView | TreeView, shouldClearCurrent?: boolean): void;
 
   /**
    * 초기 값으로 지정된 데이터로 복원한다.

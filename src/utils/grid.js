@@ -254,18 +254,13 @@ export async function insertRowAndFocus(view, dataRow, rowValue, fieldName) {
 /*
   DirtyCheck
  */
-export function init(view) {
+export function init(view, shouldClearCurrnet = false) {
   const data = view.getDataSource();
-  const allRowValues = getAllRowValues(view, false);
+  data.clearRowStates(true, false);
 
-  if (view instanceof TreeView) {
-    const treeKey = view.__treeKey__;
-    data.setRows(allRowValues, treeKey);
-  } else {
-    data.setRows(allRowValues);
+  if (shouldClearCurrnet) {
+    view.clearCurrent();
   }
-
-  view.clearCurrent();
 }
 
 export function reset(view) {
