@@ -92,6 +92,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "highlight.js": "^11.6.0",
     "husky": "^8.0.0",
     "lint-staged": "^12.4.1",
