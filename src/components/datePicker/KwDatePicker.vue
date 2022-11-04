@@ -70,6 +70,7 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
+import i18n from '../../i18n';
 
 const typeValues = ['date', 'month', 'year'];
 const typeFormats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
@@ -125,7 +126,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: undefined,
+      default: i18n.t('MSG_TXT_INP_DATE', null, '날짜 입력'),
     },
   },
 

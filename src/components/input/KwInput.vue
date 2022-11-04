@@ -108,6 +108,7 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { getMaxByteString, getByte } from '../../utils/string';
 import { preventSubmitEnter, stopAndPrevent } from '../../utils/private/event';
+import i18n from '../../i18n';
 
 const NAMED_REGEX = {
   alpha: /^[A-Z]*$/i,
@@ -144,7 +145,7 @@ export default {
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     autofocus: { type: Boolean, default: false },
-    placeholder: { type: String, default: undefined },
+    placeholder: { type: String, default: i18n.t('MSG_TXT_INP', null, '입력') },
     tabindex: { type: [Number, String], default: undefined },
     min: { type: [Number, String], default: undefined },
     max: { type: [Number, String], default: undefined },

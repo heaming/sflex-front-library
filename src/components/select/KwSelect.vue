@@ -152,6 +152,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
+import i18n from '../../i18n';
 
 export default {
   name: 'KwSelect',
@@ -181,7 +182,7 @@ export default {
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     autofocus: { type: Boolean, default: false },
-    placeholder: { type: String, default: undefined },
+    placeholder: { type: String, default: i18n.t('MSG_TXT_SEL', null, '선택') },
     tabindex: { type: [Number, String], default: undefined },
     onFilter: { type: Function, default: undefined },
   },
