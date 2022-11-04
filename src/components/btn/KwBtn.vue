@@ -21,6 +21,10 @@
     :stretch="stretch"
     :disable="disable"
     :no-wrap="noWrap"
+    :to="to"
+    :replace="replace"
+    :href="href"
+    :target="target"
     @click="onClick"
   >
     <slot />
@@ -46,6 +50,10 @@ export default {
     iconRight: { type: String, default: undefined },
     tabindex: { type: [Number, String], default: undefined },
     disable: { type: Boolean, default: false },
+    to: { type: String, default: undefined },
+    replace: { type: Boolean, default: undefined },
+    href: { type: String, default: undefined },
+    target: { type: String, default: undefined },
 
     // about innerClasses
     align: { type: String, default: 'center' },
