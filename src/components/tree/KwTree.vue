@@ -22,7 +22,7 @@
     @update:expanded="onUpdateExpanded"
     @update:selected="onUpdateSelected"
   >
-    <template #header="{node, ...slotProps}">
+    <template #default-header="{node, ...slotProps}">
       <slot
         name="header"
         v-bind="slotProps"
@@ -34,7 +34,7 @@
     </template>
     <template
       v-if="$slots.body"
-      #body="slotProps"
+      #default-body="slotProps"
     >
       <slot
         name="body"
