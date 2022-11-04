@@ -5,7 +5,6 @@ const { quasar, transformAssetUrls } = require('@quasar/vite-plugin');
 const { default: eslint } = require('vite-plugin-eslint');
 const { default: visualizer } = require('rollup-plugin-visualizer');
 const autoImport = require('unplugin-auto-import/vite');
-const { resolve } = require('path');
 
 const isInternalContext = require('../utils/isInternalContext');
 const loadEnv = require('./loadEnv');
@@ -120,11 +119,7 @@ exports.defineConfig = (config) => {
       },
 
       resolve: {
-        alias: {
-          ...config.alias,
-          '~@assets': resolve(__dirname, '../../src/assets'),
-          '~@css': resolve(__dirname, '../../src/css'),
-        },
+        alias: config.alias,
       },
 
       css: {
