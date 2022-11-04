@@ -5,6 +5,10 @@ const isInternalContext = require('./isInternalContext');
 
 const context = isInternalContext() ? resolve(__dirname, '../../') : process.cwd();
 const configFiles = ['jsconfig.json', 'tsconfig.json'];
+const reservedAlias = [
+  ['~@assets', resolve(__dirname, '../../src/assets')],
+  ['~@css', resolve(__dirname, '../../src/css')],
+];
 
 function getConfigFilePath(configDir) {
   // eslint-disable-next-line no-restricted-syntax
@@ -28,13 +32,18 @@ function getConfigCompilerOptions(configDir) {
 
 module.exports = (configDir = context) => {
   const { baseUrl = './', paths = {} } = getConfigCompilerOptions(configDir);
-  const alias = [];
+  const alias = [...reservedAlias];
 
   Object.keys(paths).forEach((v) => {
     const key = v.replace('/*', '');
-    const isDup = alias.some((e) => e[0] === key);
 
-    if (!isDup) {
+    const isReserved = reservedAlias.some((e) => e[0] === key);
+    if (isReserved) {
+      throw new Error(`The alias '${key}' is reserved, do not use this.`);
+    }
+
+    const isDuplicated = alias.some((e) => e[0] === key);
+    if (!isDuplicated) {
       const path = resolve(configDir, baseUrl, paths[v][0]?.replace('/*', ''));
       alias.push([key, path]);
     }

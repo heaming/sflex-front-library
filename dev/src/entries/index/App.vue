@@ -4,7 +4,8 @@
       <template #logo>
         <kw-btn
           borderless
-          @click="$router.replace('/')"
+          to="/"
+          replace
         >
           <img
             src="~~@assets/images/logo_kss.svg"
