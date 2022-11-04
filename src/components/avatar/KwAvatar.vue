@@ -1,5 +1,7 @@
 <template>
-  <q-avatar />
+  <q-avatar>
+    <slot />
+  </q-avatar>
 </template>
 
 <script>
