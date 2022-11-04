@@ -103,6 +103,7 @@ export interface Platform {
     tablet: boolean;
   };
 }
+export const platform: Platform;
 
 // Sanitize
 import DOMPurify from 'dompurify';
