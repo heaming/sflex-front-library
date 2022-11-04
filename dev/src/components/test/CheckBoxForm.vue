@@ -266,9 +266,9 @@
       <kw-form-item label="icon">
         <kw-checkbox
           v-model="yModel"
-          checked-icon="bookmark_on_16"
-          unchecked-icon="bookmark_off_16"
-          indeterminate-icon="close_24"
+          checked-icon="arrow_up"
+          unchecked-icon="arrow_down"
+          indeterminate-icon="close"
         />
         <kw-checkbox
           v-model="nModel"

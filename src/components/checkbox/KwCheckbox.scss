@@ -35,8 +35,11 @@
       width: $-kw-checkbox-line-height;
       min-width: $-kw-checkbox-line-height;
       height: $-kw-checkbox-line-height;
+      color: inherit;
 
       &--truthy {
+        color: inherit;
+
         use {
           /*
           If you want use custom icon, you should override this. or use fixed color in your icon svg.
@@ -59,6 +62,8 @@
       }
 
       &--indet {
+        color: inherit;
+
         .q-checkbox__bg {
           background: url(~@assets/images/checkbox_indet.svg) no-repeat center;
           background-size: $-kw-checkbox-icon-size;
