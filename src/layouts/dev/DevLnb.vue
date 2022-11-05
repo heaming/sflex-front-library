@@ -7,7 +7,10 @@
     bordered
     @update:model-value="setExpanded"
   >
-    <kw-scroll-area scroll-area-width="100%">
+    <kw-scroll-area
+      style="height: 100%;"
+      scroll-area-width="100%"
+    >
       <dev-lnb-tree />
     </kw-scroll-area>
 
