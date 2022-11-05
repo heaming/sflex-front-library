@@ -35,7 +35,7 @@
         <kw-btn
           v-permission:read
           :label="$t('MSG_BTN_SEARCH', null, '검색')"
-          class="ml8 w90"
+          class="w90"
           color="secondary"
           text-color="bg-white"
           dense
