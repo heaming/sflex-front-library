@@ -185,6 +185,14 @@ export async function waitUntilShowEditor(view, dropdown = false) {
   }
 }
 
+export function getOutsideEditorElements(view) {
+  const { delegate } = view._view;
+  const cellEditors = delegate._cellEditors;
+
+  return Object.values(cellEditors)
+    .map((e) => e._list?._element).filter((e) => !!e);
+}
+
 /*
   Excel
   */

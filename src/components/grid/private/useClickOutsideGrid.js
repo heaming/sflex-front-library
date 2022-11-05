@@ -1,15 +1,22 @@
 import { addClickOutside, removeClickOutside } from '../../../utils/private/clickOutside';
+import { getOutsideEditorElements } from '../../../utils/private/gridShared';
 
 export default () => {
   const vm = getCurrentInstance();
 
+  function isClickedOutsideEditor(view, target) {
+    const els = getOutsideEditorElements(view);
+    return els.some((e) => e.contains(target));
+  }
+
   onMounted(() => {
     const clickOutsideProps = {
       innerRefs: [vm.proxy.containerRef],
-      onClickOutside() {
-        // TODO: fix
-        // const view = vm.proxy.getView?.();
-        // if (view?.isEditing()) view.commit();
+      onClickOutside(evt) {
+        const view = vm.proxy.getView?.();
+        const shouldCommit = view?.isEditing() && !isClickedOutsideEditor(view, evt.target);
+
+        if (shouldCommit) view.commit();
       },
     };
 
