@@ -86,7 +86,7 @@ export default {
       // reactive attributes
       draggable: computed(() => props.draggable === true),
       size: computed(() => props.size),
-      title: computed(() => (props.noTitle ? null : props.title || t(pageCtx.pageTitleMessageResourceId || ''))),
+      title: computed(() => (props.noTitle ? null : (props.title || t(pageCtx.pageTitleMessageResourceId || '')))),
       noCloseBtn: computed(() => props.noCloseBtn === true),
       noAction: computed(() => slots.action === undefined),
       onBeforeClose: computed(() => props.onBeforeClose),
