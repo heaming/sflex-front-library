@@ -32,14 +32,15 @@
 </template>
 
 <script>
-import consts from '../../consts';
 import useLnbTree from '../../composables/private/useLnbTree';
 
 export default {
   name: 'DevLnbTree',
 
   setup() {
-    const { treeRef, ...lnbTreeCtx } = useLnbTree();
+    const lnbTreeCtx = useLnbTree();
+    const { treeRef, selectedGnbKey } = lnbTreeCtx;
+
     const expandedAll = ref(false);
 
     function setExpandedAll(state) {
@@ -52,12 +53,14 @@ export default {
       }
     }
 
+    watch(selectedGnbKey, () => {
+      setExpandedAll(false);
+    });
+
     return {
-      consts,
-      treeRef,
+      ...lnbTreeCtx,
       expandedAll,
       setExpandedAll,
-      ...lnbTreeCtx,
     };
   },
 };

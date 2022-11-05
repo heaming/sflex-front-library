@@ -22,6 +22,8 @@ export default {
       if (meta.isGlobImport) {
         commit('app/setSelectedGnbKey', name.split('/')[1]);
         commit('app/setSelectedLnbKey', name);
+      } else {
+        commit('app/setSelectedLnbKey', null);
       }
     }
 
