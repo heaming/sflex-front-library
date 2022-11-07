@@ -410,7 +410,7 @@ export default {
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
     filter: { type: Function, default: undefined },
-    modelValue: { type: [Object, Array], required: true },
+    modelValue: { type: [Object, Array], default: undefined },
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
