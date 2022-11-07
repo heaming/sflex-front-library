@@ -351,6 +351,7 @@
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { alert } from '../../plugins/dialog';
+import i18n from '../../i18n';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
@@ -377,7 +378,7 @@ export default {
     updatable: { type: Boolean, default: true },
     updateIcon: { type: String, default: 'upload_off' },
     rejectMessage: { type: [Function, String], default: undefined },
-    placeholder: { type: [Function, String], default: 'select files' },
+    placeholder: { type: [Function, String], default: i18n.t('MSG_TXT_SEL_FILE', null, '파일 선택') },
     placeholderClass: { type: [Array, String, Object], default: undefined },
 
     ...useFieldProps,
