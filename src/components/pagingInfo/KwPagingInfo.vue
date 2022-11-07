@@ -17,7 +17,7 @@
       v-if="hasPageSizeOptions"
       :model-value="pageSize"
       class="kw-paging-info__rows-per-page"
-      :options="pageSizeOptions"
+      :options="normalizedPageSizeOptions"
       :suffix="$t('MSG_TXT_PER_PAGE_SIZE', null, '개씩보기')"
       borderless
       dense
@@ -80,12 +80,14 @@ export default {
     }
 
     const hasPageSizeOptions = computed(() => Array.isArray(props.pageSizeOptions));
+    const normalizedPageSizeOptions = computed(() => props.pageSizeOptions.map((v) => parseInt(v?.codeId || v, 10)));
     const hasTotalCount = computed(() => !isNil(props.totalCount));
     const totalCountWithComma = computed(() => hasTotalCount.value && getNumberWithComma(props.totalCount));
 
     return {
       onUpdateValue,
       hasPageSizeOptions,
+      normalizedPageSizeOptions,
       hasTotalCount,
       totalCountWithComma,
     };

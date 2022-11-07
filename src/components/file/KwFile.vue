@@ -294,7 +294,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!(instanceUpdate === true) && isUpdatable(file)"
+                v-if="updatable && !(instanceUpdate === true) && isUpdatable(file)"
                 :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
@@ -351,6 +351,7 @@
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { alert } from '../../plugins/dialog';
+import i18n from '../../i18n';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
@@ -374,9 +375,10 @@ export default {
     retryPossible: { type: Boolean, default: true },
     retryIcon: { type: String, default: 'retry' },
     instanceUpdate: { type: [Boolean, String], default: false },
+    updatable: { type: Boolean, default: true },
     updateIcon: { type: String, default: 'upload_off' },
     rejectMessage: { type: [Function, String], default: undefined },
-    placeholder: { type: [Function, String], default: 'select files' },
+    placeholder: { type: [Function, String], default: i18n.t('MSG_TXT_SEL_FILE', null, '파일 선택') },
     placeholderClass: { type: [Array, String, Object], default: undefined },
 
     ...useFieldProps,
@@ -409,7 +411,7 @@ export default {
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
     filter: { type: Function, default: undefined },
-    modelValue: { type: [Object, Array], required: true },
+    modelValue: { type: [Object, Array], default: undefined },
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
@@ -442,7 +444,6 @@ export default {
         return [];
       },
       set: (val) => {
-        console.log(val, value.value);
         if (Object(value.value) === value.value) {
           value.value = 'length' in value.value ? val : val[0];
         } else {
