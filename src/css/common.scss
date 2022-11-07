@@ -441,6 +441,25 @@ $unit: px;
   background-color: $color !important;
 }
 
+.text- {
+  @each $type, $value in $font-types {
+    &#{$type} {
+      @include typo($type);
+    }
+  }
+}
+
+.kw-font- {
+  @each $type, $value in $font-types {
+    &#{$type} {
+      font-size: map-get($value, "size") !important;
+      font-weight: map-get($value, "weight") !important;
+      line-height: map-get($value, "line-height") !important;
+      letter-spacing: map-get($value, "letter-spacing") !important;
+    }
+  }
+}
+
 .kw-font--14 {
   font-size: 14px !important;
   line-height: 1.43 !important;
