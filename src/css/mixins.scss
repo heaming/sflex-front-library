@@ -1,4 +1,4 @@
-@mixin typo($type, $font-weight: "default") {
+@mixin typo($type, $font-weight: null) {
   $-typed: map-get($font-types, $type);
 
   @if $-typed {
@@ -6,7 +6,7 @@
     line-height: map-get($-typed, "line-height");
     letter-spacing: map-get($-typed, "letter-spacing");
 
-    @if $font-weight != "default" {
+    @if $font-weight {
       font-weight: $font-weight;
     } @else {
       font-weight: map-get($-typed, "weight");
@@ -14,7 +14,7 @@
   }
 }
 
-@mixin typo-of-size($font-size, $font-weight: "default") {
+@mixin typo-of-size($font-size, $font-weight: null) {
   $-px-map: (
     22px: "title",
     18px: "subtitle",
