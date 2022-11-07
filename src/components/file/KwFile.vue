@@ -294,7 +294,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!(instanceUpdate === true) && isUpdatable(file)"
+                v-if="updatable && !(instanceUpdate === true) && isUpdatable(file)"
                 :icon="updateIcon"
                 borderless
                 @click.prevent="updateFile(file)"
@@ -374,6 +374,7 @@ export default {
     retryPossible: { type: Boolean, default: true },
     retryIcon: { type: String, default: 'retry' },
     instanceUpdate: { type: [Boolean, String], default: false },
+    updatable: { type: Boolean, default: true },
     updateIcon: { type: String, default: 'upload_off' },
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: 'select files' },
@@ -442,7 +443,6 @@ export default {
         return [];
       },
       set: (val) => {
-        console.log(val, value.value);
         if (Object(value.value) === value.value) {
           value.value = 'length' in value.value ? val : val[0];
         } else {

@@ -14,11 +14,11 @@
           padding-left: $-kw-field-gap;
         }
       }
-    }
 
-    &--dense {
-      .kw-file-item {
-        min-height: $kw-field-height-dense;
+      &--dense {
+        .kw-file-item {
+          min-height: $kw-field-height-dense;
+        }
       }
     }
   }
