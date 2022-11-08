@@ -8,3 +8,11 @@
 .kw-form + .kw-separator {
   margin-top: 20px;
 }
+
+// [디자인 수정] 그리드 액션 탑 > separator 높이 12px
+.kw-action__left {
+  .kw-separator.q-separator--vertical-inset {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
