@@ -14,7 +14,7 @@
     :label="label ?? val?.toString()"
     :left-label="leftLabel"
     :size="size"
-    :dense="isSearchContext || dense"
+    :dense="dense"
     :checked-icon="checkedIcon"
     :unchecked-icon="uncheckedIcon"
     :indeterminate-icon="indeterminateIcon"
@@ -29,12 +29,15 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
+import useDense, { useDenseProps } from '../../composables/private/useDense';
 
 export default {
   name: 'KwCheckbox',
   inheritAttrs: false,
 
   props: {
+    ...useDenseProps,
+
     modelValue: {
       type: [String, Number, Boolean, Array],
       default: undefined,
@@ -75,10 +78,6 @@ export default {
       type: String,
       default: undefined,
     },
-    dense: {
-      type: Boolean,
-      default: undefined,
-    },
     checkedIcon: {
       type: String,
       default: undefined,
@@ -111,6 +110,7 @@ export default {
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
+      dense: useDense(),
       checkRef,
       toggle() {
         checkRef.value.toggle();
