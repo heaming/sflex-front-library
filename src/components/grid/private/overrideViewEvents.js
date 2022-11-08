@@ -92,7 +92,7 @@ export function overrideOnCurrentChanging(view) {
 
         // set topIndex to old itemIndex
         // although cancel this event, top index are change..
-        g._view._layoutManager._topIndex = oldIndex.itemIndex;
+        g._view.layoutManager._topIndex = oldIndex.itemIndex;
 
         return false;
       }
@@ -112,7 +112,7 @@ export function overrideOnCurrentChanging(view) {
       const isPromise = returnValue instanceof Promise;
 
       if (isPromise) {
-        g._view._layoutManager._topIndex = oldIndex.itemIndex;
+        g._view.layoutManager._topIndex = oldIndex.itemIndex;
 
         returnValue.then((value) => {
           if (value !== false) {
@@ -245,11 +245,9 @@ export function overrideOnShowEditor(view) {
   그리드 유틸 validate 함수 실행 시 호출되는 콜백
   */
 export function customOnValidate(view) {
-  wrapEvent(view, onValidate, async (g, itemIndex, column, value) => {
+  wrapEvent(view, onValidate, async (g, index, value, values) => {
     if (hasOriginal(g, onValidate)) {
-      const index = createCellIndexByDataColumn(g, itemIndex, column);
-      // eslint-disable-next-line no-return-await
-      return await execOriginal(g, onValidate, index, g, value);
+      return await execOriginal(g, onValidate, g, index, value, values);
     }
   });
 }

@@ -92,7 +92,7 @@ interface FileUtil {
 export const fileUtil: FileUtil;
 
 // Grid
-import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider } from 'realgrid';
+import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider, RowState } from 'realgrid';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
@@ -103,6 +103,11 @@ type ListIterator<T, TResult> = (value: T, index: number, collection: Array<T>) 
 type IterateeShorthand<T> = PropertyName | [PropertyName, any] | PartialShallow<T>;
 type ListIteratee<T, TResult> = ListIterator<T, TResult> | IterateeShorthand<T>;
 type MemoListIterator<T, TResult, TList> = (prev: TResult, curr: T, index: number, list: TList) => TResult;
+type ValidationError = {
+  dataRow: number;
+  fieldName: string;
+  errors: string[];
+};
 
 interface ExportOptions extends Omit<GridExportOptions, 'target'> {
   /**
@@ -143,12 +148,53 @@ interface ExportOptions extends Omit<GridExportOptions, 'target'> {
 
 interface GridUtil {
   /**
+   * 그리드가 보이도록 스크롤을 이동시킨다
+   * @param view 그리드 뷰 또는 트리 뷰
+   */
+  scrollIntoView(view: GridView | TreeView): void;
+
+  /**
    * 지정한 행,필드와 일치하는 셀 포커스
    * @param view 그리드 뷰 또는 트리 뷰
    * @param dataRow 데이터 행
    * @param fieldName 필드명
    */
   focusCellInput(view: GridView | TreeView, dataRow: number, fieldName?: string): Promise<void>;
+
+  /**
+   * 지정한 데이터 행의 상태를 가져온다
+   * @param view 그리드 뷰 또는 트리 뷰
+   * @param dataRow 데이터 행
+   */
+  getRowState(view: GridView | TreeView, dataRow: number): keyof typeof RowState | null;
+
+  /**
+   * 지정한 데이터 행의 상태가 RowState.NONE 인지 확인
+   * @param view 그리드 뷰 또는 트리 뷰
+   * @param dataRow 데이터 행
+   */
+  isNoneRow(view: GridView | TreeView, dataRow: number): boolean;
+
+  /**
+   * 지정한 데이터 행의 상태가 RowState.CREATED 인지 확인
+   * @param view 그리드 뷰 또는 트리 뷰
+   * @param dataRow 데이터 행
+   */
+  isCreatedRow(view: GridView | TreeView, dataRow: number): boolean;
+
+  /**
+   * 지정한 데이터 행의 상태가 RowState.UPDATED 인지 확인
+   * @param view 그리드 뷰 또는 트리 뷰
+   * @param dataRow 데이터 행
+   */
+  isUpdatedRow(view: GridView | TreeView, dataRow: number): boolean;
+
+  /**
+   * 지정한 데이터 행의 상태가 RowState.DELETED 인지 확인
+   * @param view 그리드 뷰 또는 트리 뷰
+   * @param dataRow 데이터 행
+   */
+  isDeletedRow(view: GridView | TreeView, dataRow: number): boolean;
 
   /**
    * 지정한 데이터 행의 데이터를 가져온다.
@@ -399,12 +445,27 @@ interface GridUtil {
   confirmIfIsModified(view: GridView | TreeView, message?: string): Promise<boolean>;
 
   /**
+   * 지정된 행의 유효성 검사를 수행한다.
+   * @param view 그리드 뷰 또는 트리 뷰
+   * @param dataRow 데이터 행
+   * @param bails 첫 번째 실패한 규칙에서 유효성 검사가 중지됩니다, default `true`
+   */
+  validateRow(view: GridView | TreeView, dataRow: number, bails: true): Promise<ValidationError[]>;
+
+  /**
    * 그리드의 유효성 검사를 수행한다.
    * @param view 그리드 뷰 또는 트리 뷰
-   * @param isChangedOnly 변경된 행들에 대해서만 유효성 검사를 수행할지 여부, default `true`
-   * @param isAlertMessage 유효성 검사를 수행하고 다이얼로그로 표시할지 여부, default `true`
+   * @param options.isChangedOnly 변경된 행들에 대해서만 유효성 검사를 수행할지 여부, default `true`
+   * @param options.isAlertMessage 유효성 검사를 수행하고 다이얼로그로 표시할지 여부, default `true`
+   * @param options.bails 첫 번째 실패한 규칙에서 유효성 검사가 중지됩니다, default `true`
    */
-  validate(view: GridView | TreeView, isChangedOnly?: boolean, isAlertMessage?: boolean): boolean;
+  validate(view: GridView | TreeView, options: { isChangedOnly?: boolean; isAlertMessage?: boolean; bails?: boolean }): boolean;
+
+  /**
+   * validate 수행 이후에, 오류 목록을 가져온다.
+   * @param view 그리드 뷰 또는 트리 뷰
+   */
+  getValidationErrors(view: GridView | TreeView): ValidationError[];
 
   /**
    * 그리드를 엑셀이나 CSV 내보낸다.
