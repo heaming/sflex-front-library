@@ -29,7 +29,6 @@ export default {
       type: Boolean,
       default: undefined,
     },
-
     autoHeight: {
       type: Boolean,
       default: false,
