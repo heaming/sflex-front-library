@@ -1,8 +1,8 @@
 .kw-action {
+  @include typo("dense");
+
   min-height: 32px;
   width: 100%;
-  font-size: 14px;
-  line-height: 20px;
   display: flex;
   align-items: center;
 

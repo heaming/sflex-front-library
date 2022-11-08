@@ -62,8 +62,8 @@
     }
 
     &-title {
-      font-size: 18px;
-      font-weight: 700;
+      @include typo("subtitle");
+
       color: $black1;
     }
 
