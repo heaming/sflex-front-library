@@ -103,6 +103,7 @@
                 dense
                 suffix="개씩보기"
               />
+              <span class="ml8">(단위:원)</span>
             </template>
             <kw-btn
               icon="excel"
@@ -317,6 +318,7 @@ const testCode = `
       dense
       suffix="개씩보기"
     />
+    <span class="ml8">(단위:원)</span>
   </template>
   <kw-btn
     icon="excel"
@@ -464,6 +466,10 @@ const testCode4 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.11.09',
+    text: 'add unit text next to select in left side',
+  },
   {
     timestamp: '2022.10.06',
     text: 'edit icon name in code',
