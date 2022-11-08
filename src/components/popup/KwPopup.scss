@@ -5,17 +5,17 @@
   position: relative !important;
   overflow: hidden !important;
 
+  &--md {
+    width: 660px;
+    max-width: 660px !important;
+    min-width: 660px !important;
+  }
+
   &--sm {
     width: 460px;
     max-width: 460px !important;
     min-width: 460px !important;
     margin-top: 0;
-  }
-
-  &--md {
-    width: 660px;
-    max-width: 660px !important;
-    min-width: 660px !important;
   }
 
   &--lg {
@@ -62,8 +62,8 @@
     }
 
     &-title {
-      font-size: 18px;
-      font-weight: 700;
+      @include typo("subtitle");
+
       color: $black1;
     }
 

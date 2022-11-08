@@ -150,7 +150,7 @@ p {
   }
 
   &--button-set-bottom {
-    min-height: calc(100vh - 250px);
+    min-height: calc(100vh - 222px);
     padding-bottom: 120px;
     position: relative;
 
@@ -183,7 +183,7 @@ p {
 }
 
 .kw-search + .normal-area--button-set-bottom {
-  min-height: calc(100vh - 456px);
+  min-height: calc(100vh - 410px);
 }
 
 @include color-based(".text-", $semantic-colors) using ($color) {
@@ -439,6 +439,25 @@ $unit: px;
 
 @include color-based(".kw-bc--", $semantic-colors) using ($color) {
   background-color: $color !important;
+}
+
+.text- {
+  @each $type, $value in $font-types {
+    &#{$type} {
+      @include typo($type);
+    }
+  }
+}
+
+.kw-font- {
+  @each $type, $value in $font-types {
+    &#{$type} {
+      font-size: map-get($value, "size") !important;
+      font-weight: map-get($value, "weight") !important;
+      line-height: map-get($value, "line-height") !important;
+      letter-spacing: map-get($value, "letter-spacing") !important;
+    }
+  }
 }
 
 .kw-font--14 {

@@ -41,7 +41,7 @@ export default {
   props: {
     dense: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     error: {
       type: Boolean,

@@ -29,7 +29,7 @@ export default {
     },
     dense: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
   },
 
@@ -39,7 +39,7 @@ export default {
 
   setup(props) {
     const tabsClass = computed(() => ({
-      'kw-tabs--dense': props.dense,
+      'kw-tabs--dense': props.dense === false,
     }));
 
     return {
