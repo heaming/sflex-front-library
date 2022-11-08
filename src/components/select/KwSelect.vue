@@ -6,8 +6,8 @@
     v-bind="{...styleClassAttrs, ...fieldStyles}"
     class="kw-field kw-select"
     popup-content-class="kw-select-options-menu"
-    :label="undefined"
-    :error="invalid"
+    :label="$g.platform.is.mobile ? label : undefined"
+    :error="invalid || undefined"
     :options="normalizedOptions"
     :option-value="optionValue"
     :option-label="optionLabel"
@@ -15,6 +15,7 @@
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="computedUseInput"
+    :behavior="$g.platform.is.mobile && 'dialog'"
     :fill-input="fillInput ?? computedUseInput"
     :hide-selected="hideSelected ?? computedUseInput"
     :input-debounce="inputDebounce"
@@ -142,6 +143,16 @@
         >
           {{ invalidMessage }}
         </kw-tooltip>
+      </div>
+    </template>
+
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && label || $slots.label"
+      #label
+    >
+      <div style="background-color: red;">
+        {{ label + ' test' }}
       </div>
     </template>
   </q-select>

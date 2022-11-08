@@ -1,6 +1,9 @@
+import useDense, { useDenseProps } from './useDense';
+
 export const useBtnStyleProps = {
+  ...useDenseProps,
+
   // we will not use quasar btn props, since design break em based styling.
-  dense: { type: Boolean, default: undefined },
   padding: { type: String, default: undefined },
   minWidth: { type: String, default: undefined },
 
@@ -131,7 +134,8 @@ export default (defaultPreset) => {
     return styles;
   });
 
-  const buttonDense = computed(() => props.dense ?? stylePreset.value.dense);
+  const computedDense = useDense();
+  const buttonDense = computed(() => computedDense.value ?? stylePreset.value.dense);
 
   return {
     buttonClasses,

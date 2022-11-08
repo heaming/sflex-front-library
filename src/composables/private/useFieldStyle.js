@@ -1,10 +1,8 @@
-import useSearchChild from './useSearchChild';
+import { platform } from '../../plugins/platform';
+import useDense, { useDenseProps } from './useDense';
 
 export const useFieldStyleProps = {
-  dense: {
-    type: Boolean,
-    default: false,
-  },
+  ...useDenseProps,
   underline: {
     type: Boolean,
     default: false,
@@ -13,22 +11,36 @@ export const useFieldStyleProps = {
     type: Boolean,
     default: false,
   },
+  outlined: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export default () => {
   const { props } = getCurrentInstance();
 
-  const design = computed(() => {
-    if (props.underline) return { };
-    if (props.borderless) return { borderless: true };
-    return { outlined: true };
+  const computedDense = useDense();
+
+  return computed(() => {
+    const fieldProps = {
+      dense: computedDense.value,
+    };
+    if (!platform.is.mobile) {
+      fieldProps.outlined = true;
+    }
+    if (props.underline === true) {
+      fieldProps.outlined = false;
+      fieldProps.borderless = false;
+    }
+    if (props.borderless === true) {
+      fieldProps.outlined = false;
+      fieldProps.borderless = true;
+    }
+    if (props.outlined === true) {
+      fieldProps.outlined = true;
+      fieldProps.borderless = false;
+    }
+    return fieldProps;
   });
-
-  const { isSearchContext } = useSearchChild();
-  const fieldStyles = computed(() => ({
-    ...design.value,
-    dense: isSearchContext || props.dense,
-  }));
-
-  return fieldStyles;
 };
