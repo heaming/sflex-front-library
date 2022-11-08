@@ -121,7 +121,7 @@
           inset
         />
         <kw-btn
-          icon="excel"
+          icon="download_on"
           dense
           secondary
           label="엑셀 다운로드"
@@ -368,7 +368,7 @@ const sampleVueCode = `
         inset
       />
       <kw-btn
-        icon="excel"
+        icon="download_on"
         dense
         secondary
         label="엑셀 다운로드"

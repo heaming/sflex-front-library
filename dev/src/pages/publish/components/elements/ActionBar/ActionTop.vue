@@ -106,7 +106,7 @@
               <span class="ml8">(단위:원)</span>
             </template>
             <kw-btn
-              icon="excel"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -144,7 +144,7 @@
               <span>(단위: 원)</span>
             </template>
             <kw-btn
-              icon="excel"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -265,7 +265,7 @@
               spaced
             />
             <kw-btn
-              icon="excel"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -321,7 +321,7 @@ const testCode = `
     <span class="ml8">(단위:원)</span>
   </template>
   <kw-btn
-    icon="excel"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
@@ -353,7 +353,7 @@ const testCode2 = `
     <span>(단위: 원)</span>
   </template>
   <kw-btn
-    icon="excel"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
@@ -447,7 +447,7 @@ const testCode4 = `
     spaced
   />
   <kw-btn
-    icon="excel"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
