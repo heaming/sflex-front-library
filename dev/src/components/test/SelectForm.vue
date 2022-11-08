@@ -154,7 +154,7 @@
       </kw-form-item>
       <kw-form-item label="multiple & error & disable">
         <kw-select
-          v-model="selectModel"
+          v-model="arrayModel"
           :options="optionsModel"
           multiple
           disable
@@ -357,7 +357,7 @@
       </kw-form-item>
       <kw-form-item label="multiple error disable dense">
         <kw-select
-          v-model="selectModel"
+          v-model="arrayModel"
           :options="optionsModel"
           dense
           multiple

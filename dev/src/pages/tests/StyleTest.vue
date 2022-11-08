@@ -1,7 +1,7 @@
 <template>
   <!-- Form -->
   <q-expansion-item
-    v-if="false"
+    v-if="true"
     label="Form"
   >
     <div class="result-area">
@@ -170,16 +170,14 @@
       </div>
 
       <div
-        class="bg-green-1 pa20"
+        class="bg-green-1 pa20 w800 h800"
       >
         <kw-scroll-area
           ref="scrollAreaRef"
-          class="bg-red-1"
-          max-width="400px"
-          max-height="400px"
+          class="bg-red-1 fit"
         >
           <div
-            class="bg-green-3 w500 h500"
+            class="bg-green-3 w500 h900"
             style="border: 3px solid red;"
           />
         </kw-scroll-area>
@@ -237,7 +235,7 @@
   </q-expansion-item>
   <!-- file -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="file"
     :default-opened="true"
   >
