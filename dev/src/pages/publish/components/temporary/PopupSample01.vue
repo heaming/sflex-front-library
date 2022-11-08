@@ -121,7 +121,6 @@
         />
         <kw-btn
           primary
-          class="ml8"
           label="확인"
         />
       </template>
@@ -144,7 +143,6 @@ const sampleVueCode = `
     />
     <kw-btn
       primary
-      class="ml8"
       label="확인"
     />
   </template>
