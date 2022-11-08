@@ -22,12 +22,15 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
+import useDense, { useDenseProps } from '../../composables/private/useDense';
 
 export default {
   name: 'KwRadio',
   inheritAttrs: false,
 
   props: {
+    ...useDenseProps,
+
     modelValue: {
       type: [String, Number, Boolean],
       default: undefined,
@@ -46,10 +49,6 @@ export default {
     },
     size: {
       type: String,
-      default: undefined,
-    },
-    dense: {
-      type: Boolean,
       default: undefined,
     },
     checkedIcon: {
@@ -80,6 +79,7 @@ export default {
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
+      dense: useDense(),
       radioRef,
       set() {
         radioRef.value.set();
