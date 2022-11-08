@@ -100,6 +100,31 @@ $flex-gutter-md: ($gutter-base * 3) !default;
 $flex-gutter-lg: ($gutter-base * 4) !default;
 $flex-gutter-xl: ($gutter-base * 5) !default;
 
+// override typography
+
+$title: (size: 1.375rem, line-height: 2rem, letter-spacing: normal, weight: 700) !default;
+$pt22: (size: 1.375rem, line-height: 2rem, letter-spacing: normal, weight: 700) !default;
+$subtitle: (size: 1.125rem, line-height: 1.75rem, letter-spacing: normal, weight: 700) !default;
+$pt18: (size: 1.125rem, line-height: 1.75rem, letter-spacing: normal, weight: 700) !default;
+$body: (size: 1rem, line-height: 1.5rem, letter-spacing: normal, weight: 500) !default;
+$pt16: (size: 1rem, line-height: 1.5rem, letter-spacing: normal, weight: 500) !default;
+$dense: (size: 0.875rem, line-height: 1.375rem, letter-spacing: normal, weight: 500) !default;
+$pt14: (size: 0.875rem, line-height: 1.375rem, letter-spacing: normal, weight: 500) !default;
+$caption: (size: 0.75rem, line-height: 1.25rem, letter-spacing: normal, weight: 400) !default;
+$pt12: (size: 0.75rem, line-height: 1.25rem, letter-spacing: normal, weight: 400) !default;
+$font-types: (
+  title: $title,
+  subtitle: $subtitle,
+  body: $body,
+  dense: $dense,
+  caption: $caption,
+  pt12: $pt12,
+  pt14: $pt14,
+  pt16: $pt16,
+  pt18: $pt18,
+  pt22: $pt22,
+);
+
 // kw variables
 // add global variables for component styling.
 // since, there is no guarantee on dependency of global variables.
