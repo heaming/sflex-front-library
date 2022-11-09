@@ -39,7 +39,7 @@ export default {
 
   setup(props) {
     const tabsClass = computed(() => ({
-      'kw-tabs--dense': props.dense === false,
+      'kw-tabs--dense': !!props.dense,
     }));
 
     return {
