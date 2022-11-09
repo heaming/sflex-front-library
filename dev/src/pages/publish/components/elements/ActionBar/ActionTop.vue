@@ -103,9 +103,10 @@
                 dense
                 suffix="개씩보기"
               />
+              <span class="ml8">(단위:원)</span>
             </template>
             <kw-btn
-              icon="excel"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -143,7 +144,7 @@
               <span>(단위: 원)</span>
             </template>
             <kw-btn
-              icon="excel"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -264,7 +265,7 @@
               spaced
             />
             <kw-btn
-              icon="excel"
+              icon="download_on"
               dense
               secondary
               label="엑셀 다운로드"
@@ -317,9 +318,10 @@ const testCode = `
       dense
       suffix="개씩보기"
     />
+    <span class="ml8">(단위:원)</span>
   </template>
   <kw-btn
-    icon="excel"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
@@ -351,7 +353,7 @@ const testCode2 = `
     <span>(단위: 원)</span>
   </template>
   <kw-btn
-    icon="excel"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
@@ -445,7 +447,7 @@ const testCode4 = `
     spaced
   />
   <kw-btn
-    icon="excel"
+    icon="download_on"
     dense
     secondary
     label="엑셀 다운로드"
@@ -464,6 +466,10 @@ const testCode4 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.11.09',
+    text: 'add unit text next to select in left side',
+  },
   {
     timestamp: '2022.10.06',
     text: 'edit icon name in code',

@@ -45,6 +45,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
+import useDense, { useDenseProps } from '../../composables/private/useDense';
 
 export default {
   name: 'KwOptionGroup',
@@ -53,6 +54,7 @@ export default {
   props: {
     ...useFieldProps,
     ...useOptionsProps,
+    ...useDenseProps,
 
     modelValue: {
       type: [String, Number, Boolean, Array],
@@ -61,10 +63,6 @@ export default {
     type: {
       type: String,
       default: 'radio',
-    },
-    dense: {
-      type: Boolean,
-      default: false,
     },
     disable: {
       type: Boolean,
@@ -93,6 +91,7 @@ export default {
       ...useSearchChild(),
       ...useField(),
       ...useOptions(),
+      dense: useDense(),
       itemLeftLabel,
     };
   },

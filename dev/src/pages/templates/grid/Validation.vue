@@ -73,6 +73,11 @@ function initGrd(data, view) {
   view.setColumns(columns);
   view.editOptions.editable = true;
 
+  view.onValidate = (g, index, value, values) => {
+    console.log(index, value, values);
+    // return 'error text if needed';
+  };
+
   data.setRows([
     {
       text: '',
@@ -100,7 +105,10 @@ function initGrd(data, view) {
 
 async function validate() {
   const view = grdRef.value.getView();
-  await gridUtil.validate(view, false);
+  await gridUtil.validate(view, { isChangedOnly: false, bails: false });
+
+  const validationErrors = gridUtil.getValidationErrors(view);
+  console.log(validationErrors);
 }
 
 const sampleCode = `
@@ -148,6 +156,11 @@ function initGrd(data, view) {
   view.setColumns(columns);
   view.editOptions.editable = true;
 
+  view.onValidate = (g, index, value, values) => {
+    console.log(index, value, values);
+    // return 'error text if needed';
+  };
+
   data.setRows([
     {
       text: '',
@@ -175,7 +188,10 @@ function initGrd(data, view) {
 
 async function validate() {
   const view = grdRef.value.getView();
-  await gridUtil.validate(view, false);
+  await gridUtil.validate(view, { isChangedOnly: false, bails: false });
+
+  const validationErrors = gridUtil.getValidationErrors(view);
+  console.log(validationErrors);
 }
 `;
 </script>

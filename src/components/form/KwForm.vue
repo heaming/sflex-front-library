@@ -27,9 +27,8 @@ export default {
 
     dense: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
-
     autoHeight: {
       type: Boolean,
       default: false,

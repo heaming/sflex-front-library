@@ -11,7 +11,7 @@ import {
 } from 'lodash-es';
 import { date } from 'quasar';
 import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
-import { waitUntilShowEditor, cloneView, destroyCloneView } from './private/gridShared';
+import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView } from './private/gridShared';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
@@ -48,8 +48,18 @@ function getOutputRow(data, dataRow) {
 /*
   Common
  */
+export async function scrollIntoView(view) {
+  const el = view._view.container._containerDiv;
+
+  if (el.scrollIntoViewIfNeeded) {
+    el.scrollIntoViewIfNeeded(false);
+  } else {
+    el.scrollIntoView(false);
+  }
+}
+
 export async function focusCellInput(view, dataRow, fieldName, dropdown = false) {
-  view._view._dom.scrollIntoView();
+  scrollIntoView(view);
   view.setCurrent({ dataRow, fieldName });
   await waitUntilShowEditor(view, dropdown);
 }
@@ -57,6 +67,27 @@ export async function focusCellInput(view, dataRow, fieldName, dropdown = false)
 /*
   RowData
  */
+export function getRowState(view, dataRow) {
+  const data = view.getDataSource();
+  return data.hasData(dataRow) ? data.getRowState(dataRow) : null;
+}
+
+export function isNoneRow(view, dataRow) {
+  return getRowState(view, dataRow) === RowState.NONE;
+}
+
+export function isCreatedRow(view, dataRow) {
+  return getRowState(view, dataRow) === RowState.CREATED;
+}
+
+export function isUpdatedRow(view, dataRow) {
+  return getRowState(view, dataRow) === RowState.UPDATED;
+}
+
+export function isDeletedRow(view, dataRow) {
+  return getRowState(view, dataRow) === RowState.DELETED;
+}
+
 export function getRowValue(view, dataRow) {
   const data = view.getDataSource();
   return getOutputRow(data, dataRow);
@@ -309,7 +340,10 @@ export function confirmIfIsModified(view, message) {
 /*
   Validation
  */
-async function validateRow(view, data, dataRow, metas) {
+export async function validateRow(view, dataRow, bails = true) {
+  const validationErrors = [];
+  const data = view.getDataSource();
+  const metas = view.__metas__.filter((e) => !isEmpty(e.rules));
   const values = getOutputRow(data, dataRow);
 
   for (let i = 0; i < metas.length; i += 1) {
@@ -318,55 +352,82 @@ async function validateRow(view, data, dataRow, metas) {
     const name = column.header.text || column.name;
     const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
-    let errorMessage;
-    const result = await _validate(value, rules, { name, values, customMessages });
+    const result = await _validate(value, rules, { name, values, customMessages, bails });
+    const errors = [...result.errors];
+    const shouldInvokeOnValidate = result.valid || !bails;
 
-    if (result.valid === false) {
-      const [error] = result.errors;
-      errorMessage = error;
-    } else {
+    if (shouldInvokeOnValidate) {
       const itemIndex = view.getItemIndex(dataRow);
-      errorMessage = await view.onValidate(view, { itemIndex, column }, value);
+      const index = createCellIndexByDataColumn(view, itemIndex, column);
+      const error = await view.onValidate(view, index, value, values);
+
+      if (error) errors.push(error);
     }
 
-    if (errorMessage) {
-      return {
-        valid: false, dataRow, fieldName, errorMessage,
-      };
+    const invalid = errors.length > 0;
+
+    if (invalid) {
+      validationErrors.push({
+        dataRow,
+        fieldName,
+        errors,
+      });
+
+      if (bails) break;
     }
   }
 
-  return { valid: true };
+  return validationErrors;
 }
 
-export async function validate(view, isChangedOnly = true, isAlertMessage = true) {
-  const data = view.getDataSource();
-  const metas = view.__metas__.filter((e) => !isEmpty(e.rules));
+export async function validate(view, options = {}) {
+  const {
+    isChangedOnly = true,
+    isAlertMessage = true,
+    bails = true,
+  } = options;
 
+  const validationErrors = [];
+  const data = view.getDataSource();
   const rowCount = data.getRowCount();
-  const ignoreStates = [
-    RowState.DELETED,
-    ...(isChangedOnly ? [RowState.NONE] : []),
-  ];
 
   for (let i = 0; i < rowCount; i += 1) {
     const rowState = data.getRowState(i);
+    const shouldValidate = rowState !== RowState.DELETED && (!isChangedOnly || rowState !== RowState.NONE);
 
-    if (!ignoreStates.includes(rowState)) {
-      const result = await validateRow(view, data, i, metas);
+    if (shouldValidate) {
+      const result = await validateRow(view, i, bails);
+      const invalid = result.length > 0;
 
-      if (!result.valid) {
-        if (isAlertMessage) {
-          await alert(result.errorMessage);
-          await focusCellInput(view, result.dataRow, result.fieldName);
-        }
+      if (invalid) {
+        validationErrors.push(...result);
 
-        return false;
+        if (bails) break;
       }
     }
   }
 
-  return true;
+  view.__validationErrors__ = validationErrors;
+
+  const valid = validationErrors.length === 0;
+  const shouldAlertMessage = !valid && isAlertMessage;
+
+  if (shouldAlertMessage) {
+    const {
+      dataRow,
+      fieldName,
+      errors,
+    } = validationErrors[0];
+
+    await alert(errors[0]);
+    await focusCellInput(view, dataRow, fieldName);
+  }
+
+  return valid;
+}
+
+export function getValidationErrors(view) {
+  return view.__validationErrors__ || [];
 }
 
 /*
