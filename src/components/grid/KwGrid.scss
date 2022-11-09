@@ -219,8 +219,9 @@
 
   thead tr {
     th {
-      height: 36px;
-      line-height: 36px;
+      // height: 36px;
+      padding: 7px 10px;
+      line-height: 20px;
       color: $black1;
       background: #f8f8f8;
       border-left: 1px solid $line-bg;
@@ -236,8 +237,9 @@
 
   tbody tr {
     th {
-      height: 36px;
-      line-height: 36px;
+      // height: 36px;
+      padding: 7px 10px;
+      line-height: 20px;
       color: $black1;
       background: #f8f8f8;
       border-left: 1px solid $line-bg;
