@@ -34,7 +34,7 @@
         />
         <kw-btn
           v-permission:read
-          :label="$t('MSG_BTN_SEARCH', null, '검색')"
+          :label="$t('MSG_TXT_SRCH', null, '조회')"
           class="w90"
           color="secondary"
           text-color="bg-white"
