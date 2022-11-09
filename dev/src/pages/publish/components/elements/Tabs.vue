@@ -205,6 +205,61 @@
           :lang="vue"
         />
       </q-card>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-tabs
+            dense
+            model-value="1"
+            class="example-form"
+          >
+            <kw-tab
+              name="1"
+              label="form"
+            />
+            <kw-tab
+              name="2"
+              label="searchform"
+            />
+          </kw-tabs>
+          <kw-tab-panels
+            model-value="1"
+          >
+            <kw-tab-panel name="1">
+              <div class="normal-area">
+                <h3>kw-form</h3>
+                <kw-form
+                  :cols="2"
+                  dense
+                  class="kw-form--textright"
+                >
+                  <kw-form-row>
+                    <kw-form-item label="label">
+                      <p>
+                        0
+                      </p>
+                    </kw-form-item>
+                    <kw-form-item label="하이퍼센트">
+                      <p>0</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="크리에이티브">
+                      <p>0</p>
+                    </kw-form-item>
+                    <kw-form-item label="크리에이티브">
+                      <p>0</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </div>
+            </kw-tab-panel>
+          </kw-tab-panels>
+        </div>
+        <guide-code-view
+          :code-value="denseTabs"
+          :lang="vue"
+        />
+      </q-card>
     </div>
   </kw-page>
 </template>
@@ -212,6 +267,10 @@
 <script setup>
 
 const guideHistory = [
+  {
+    timestamp: '2022.11.09',
+    text: 'add example of using dense prop',
+  },
   {
     timestamp: '2022.10.28',
     text: 'change methods class -> prop',
@@ -350,6 +409,55 @@ const tabSearch = `
 </kw-tab-panels>
 `;
 
+const denseTabs = `
+<kw-tabs
+  dense
+  model-value="1"
+  class="example-form"
+>
+  <kw-tab
+    name="1"
+    label="form"
+  />
+  <kw-tab
+    name="2"
+    label="searchform"
+  />
+</kw-tabs>
+<kw-tab-panels
+  model-value="1"
+>
+  <kw-tab-panel name="1">
+    <div class="normal-area">
+      <h3>kw-form</h3>
+      <kw-form
+        :cols="2"
+        dense
+        class="kw-form--textright"
+      >
+        <kw-form-row>
+          <kw-form-item label="label">
+            <p>
+              0
+            </p>
+          </kw-form-item>
+          <kw-form-item label="하이퍼센트">
+            <p>0</p>
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row>
+          <kw-form-item label="크리에이티브">
+            <p>0</p>
+          </kw-form-item>
+          <kw-form-item label="크리에이티브">
+            <p>0</p>
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+    </div>
+  </kw-tab-panel>
+</kw-tab-panels>
+`;
 </script>
 
 <style lang="scss" scoped>
