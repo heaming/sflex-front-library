@@ -1,6 +1,6 @@
 import {
   RestoreMode, IndicatorValue, GridFitStyle, ExitGridWhenTab, SortMode,
-  SelectionStyle, ValidationLevel, GridBase, TreeView, RowGroupAdornments, ExpanderVisibility,
+  SelectionStyle, ValidationLevel, GridBase, TreeView, RowGroupAdornments, ExpanderVisibility, HandleVisibility,
 } from 'realgrid';
 
 const dataConfig = {
@@ -79,7 +79,22 @@ const viewConfig = {
 
   sortMode: SortMode.EXPLICIT,
   sortingOptions: {
+    enabled: true,
+    commitBeforeFiltering: true,
+    handleVisibility: HandleVisibility.VISIBLE,
     keepFocusedRow: true,
+  },
+  filteringOptions: {
+    enabled: false,
+    commitBeforeFiltering: true,
+    handleVisibility: HandleVisibility.VISIBLE,
+    includeParentItem: true,
+    automating: {
+      lookupDisplay: true,
+    },
+    selector: {
+      showButtons: true,
+    },
   },
 
   copyOptions: {
