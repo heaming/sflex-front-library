@@ -5,7 +5,9 @@
       class="flex items-center self-stretch"
     >
       <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
-      <span class="kw-paging-info__total-count">{{ totalCountWithComma }}</span>
+      <span class="kw-paging-info__total-count">
+        {{ totalCountWithComma }}{{ $t('MSG_TXT_CNT', null, '건') }}
+      </span>
       <kw-separator
         v-if="hasPageSizeOptions"
         spaced
