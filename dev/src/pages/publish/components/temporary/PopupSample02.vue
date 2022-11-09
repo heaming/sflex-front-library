@@ -100,7 +100,7 @@ const sampleVueCode = `
       label="취소"
     />
     <kw-btn
-      prima
+      primary
       label="확인"
     />
   </template>
