@@ -225,33 +225,31 @@
             model-value="1"
           >
             <kw-tab-panel name="1">
-              <div class="normal-area">
-                <h3>kw-form</h3>
-                <kw-form
-                  :cols="2"
-                  dense
-                  class="kw-form--textright"
-                >
-                  <kw-form-row>
-                    <kw-form-item label="label">
-                      <p>
-                        0
-                      </p>
-                    </kw-form-item>
-                    <kw-form-item label="하이퍼센트">
-                      <p>0</p>
-                    </kw-form-item>
-                  </kw-form-row>
-                  <kw-form-row>
-                    <kw-form-item label="크리에이티브">
-                      <p>0</p>
-                    </kw-form-item>
-                    <kw-form-item label="크리에이티브">
-                      <p>0</p>
-                    </kw-form-item>
-                  </kw-form-row>
-                </kw-form>
-              </div>
+              <h3>kw-form</h3>
+              <kw-form
+                :cols="2"
+                dense
+                class="kw-form--textright"
+              >
+                <kw-form-row>
+                  <kw-form-item label="label">
+                    <p>
+                      0
+                    </p>
+                  </kw-form-item>
+                  <kw-form-item label="하이퍼센트">
+                    <p>0</p>
+                  </kw-form-item>
+                </kw-form-row>
+                <kw-form-row>
+                  <kw-form-item label="크리에이티브">
+                    <p>0</p>
+                  </kw-form-item>
+                  <kw-form-item label="크리에이티브">
+                    <p>0</p>
+                  </kw-form-item>
+                </kw-form-row>
+              </kw-form>
             </kw-tab-panel>
           </kw-tab-panels>
         </div>
@@ -428,33 +426,31 @@ const denseTabs = `
   model-value="1"
 >
   <kw-tab-panel name="1">
-    <div class="normal-area">
-      <h3>kw-form</h3>
-      <kw-form
-        :cols="2"
-        dense
-        class="kw-form--textright"
-      >
-        <kw-form-row>
-          <kw-form-item label="label">
-            <p>
-              0
-            </p>
-          </kw-form-item>
-          <kw-form-item label="하이퍼센트">
-            <p>0</p>
-          </kw-form-item>
-        </kw-form-row>
-        <kw-form-row>
-          <kw-form-item label="크리에이티브">
-            <p>0</p>
-          </kw-form-item>
-          <kw-form-item label="크리에이티브">
-            <p>0</p>
-          </kw-form-item>
-        </kw-form-row>
-      </kw-form>
-    </div>
+    <h3>kw-form</h3>
+    <kw-form
+      :cols="2"
+      dense
+      class="kw-form--textright"
+    >
+      <kw-form-row>
+        <kw-form-item label="label">
+          <p>
+            0
+          </p>
+        </kw-form-item>
+        <kw-form-item label="하이퍼센트">
+          <p>0</p>
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="크리에이티브">
+          <p>0</p>
+        </kw-form-item>
+        <kw-form-item label="크리에이티브">
+          <p>0</p>
+        </kw-form-item>
+      </kw-form-row>
+    </kw-form>
   </kw-tab-panel>
 </kw-tab-panels>
 `;
