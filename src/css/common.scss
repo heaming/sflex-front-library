@@ -931,3 +931,50 @@ $unit: px;
     }
   }
 }
+
+.filter-box {
+  display: flex;
+  align-items: center;
+  padding: 12px 40px;
+  border: 1px solid $line-line;
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    .kw-date-picker {
+      width: 140px;
+    }
+
+    .kw-select {
+      width: 250px;
+    }
+
+    &:not(:first-child) {
+      margin-left: 20px;
+      padding-left: 16px;
+      position: relative;
+
+      &::after {
+        width: 1px;
+        height: 20px;
+        background-color: $line-bg;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &__item-label {
+    font-size: 14px;
+    line-height: 1.43;
+    margin-right: 12px;
+  }
+}
+
+body.mobile {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
