@@ -207,6 +207,12 @@
   .rg-header-filtering.filter-activated {
     display: inline-block !important;
   }
+
+  &.rg-header-cell--required > .rg-header-renderer > span:first-child::after {
+    content: "*";
+    position: absolute;
+    color: $error;
+  }
 }
 
 // table 정의 - 필요에 따라 본 정의는 이동될 수 있음.
