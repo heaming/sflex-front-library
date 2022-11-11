@@ -15,7 +15,7 @@
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="computedUseInput"
-    :behavior="$g.platform.is.mobile && 'dialog'"
+    :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
     :fill-input="fillInput ?? computedUseInput"
     :hide-selected="hideSelected ?? computedUseInput"
     :input-debounce="inputDebounce"
