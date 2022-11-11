@@ -1,4 +1,4 @@
-.kw-field.q-field {
+.kw-field {
   $-kw-field-gap: 8px;
   $-kw-field-gap-dense: 4px;
 
@@ -8,6 +8,11 @@
     &__marginal {
       height: $kw-field-height; // min-height: $kw-field-height;
       font-size: $kw-field-font-size-marginal;
+
+      // added for clear icon focused action.
+      > .q-field__focusable-action {
+        opacity: 1;
+      }
     }
 
     &__before,
@@ -40,14 +45,7 @@
     }
 
     &__messages {
-      > div {
-        word-break: keep-all;
-        word-wrap: normal;
-        overflow-wrap: normal;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
+      max-width: 100%;
     }
 
     &__control {
@@ -76,6 +74,18 @@
     &__suffix {
       font-weight: 400;
       color: $black3;
+    }
+
+    &__label {
+      @include typo("dense");
+
+      left: 0;
+      top: -1 * $kw-field-label-height;
+      max-width: 100%;
+      color: $input-label-color;
+      text-decoration: inherit;
+      text-transform: inherit;
+      transition: none;
     }
   }
 
@@ -267,11 +277,88 @@
       }
     }
 
+    &--labeled {
+      // remove quasar default rules
+      .q-field__native,
+      .q-field__prefix,
+      .q-field__suffix {
+        line-height: unset;
+        padding-top: unset;
+        padding-bottom: unset;
+      }
+
+      &:not(.q-field--float) {
+        .q-field__prefix,
+        .q-field__suffix {
+          opacity: 1;
+        }
+
+        .q-field__native,
+        .q-field__input {
+          &::-webkit-input-placeholder {
+            color: $placeholder;
+          }
+
+          &::-moz-placeholder {
+            color: $placeholder;
+          }
+
+          &:-ms-input-placeholder {
+            color: $placeholder !important;
+          }
+
+          &::-ms-input-placeholder {
+            color: $placeholder;
+          }
+
+          &::placeholder {
+            color: $placeholder;
+          }
+        }
+      }
+
+      &.q-field--dense {
+        .q-field__native,
+        .q-field__prefix,
+        .q-field__suffix {
+          padding-top: unset;
+          padding-bottom: unset;
+        }
+      }
+
+      // added
+      .q-field__after,
+      .q-field__before,
+      .q-field__control {
+        margin-top: $kw-field-label-height;
+      }
+
+      &.q-field--dense {
+        .q-field__after,
+        .q-field__before,
+        .q-field__control {
+          margin-top: $kw-field-label-height-dense;
+        }
+      }
+    }
+
+    &--float .q-field__label {
+      max-width: unset;
+      transform: none;
+      transition: none;
+    }
+
     &--auto-height {
       .q-field__control,
       .q-field__native {
         height: auto;
         min-height: $kw-field-height;
+      }
+
+      &.q-field--labeled {
+        .q-field__control-container {
+          padding-top: 0;
+        }
       }
 
       &.q-field--dense {
@@ -282,13 +369,46 @@
       }
     }
   }
+
+  .q-transition--field-message {
+    &-leave-from,
+    &-leave-active {
+      width: 100%;
+    }
+  }
 }
 
 .kw-field-wrap {
   position: relative;
 
-  .q-field__messages {
-    display: none; // notice. field 에 속한 field 의 message 영역 무시
+  .kw-field {
+    & .q-field {
+      &__messages {
+        display: none; // notice. field-wrap 에 속한 field 의 message 무시
+      }
+
+      &__label {
+        display: none; // notice. field-wrap 에 속한 field 의 label 무시
+      }
+    }
+
+    &.q-field {
+      &--labeled {
+        .q-field__after,
+        .q-field__before,
+        .q-field__control {
+          margin-top: 0;
+        }
+
+        &.q-field--dense {
+          .q-field__after,
+          .q-field__before,
+          .q-field__control {
+            margin-top: 0;
+          }
+        }
+      }
+    }
   }
 
   &__control {
@@ -296,45 +416,38 @@
     display: flex;
     flex-wrap: nowrap;
     height: auto;
+    min-height: $kw-field-label-height;
     align-items: center;
     outline: none;
   }
 
   &__bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     padding: 2px 0 0;
     min-height: $kw-field-font-size-bottom;
     font-size: $kw-field-font-size-bottom;
     line-height: 1;
-    transform: translateY(100%);
     color: rgb(0 0 0 / 54%);
+
+    &--animated {
+      transform: translateY(100%);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 
-  &__messages {
-    > div {
-      word-break: keep-all;
-      word-wrap: normal;
-      overflow-wrap: normal;
-      text-overflow: ellipsis !important;
-      white-space: nowrap;
-      overflow: hidden;
-    }
+  &__label {
+    @include typo("dense");
 
-    &--transition {
-      &-enter-active,
-      &-leave-active {
-        transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.6s cubic-bezier(0.86, 0, 0.07, 1);
-      }
-
-      &-enter-from,
-      &-leave-to {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-    }
+    position: absolute;
+    left: 0;
+    top: -1 * $kw-field-label-height;
+    max-width: 100%;
+    color: $input-label-color;
+    text-decoration: inherit;
+    text-transform: inherit;
+    transition: none;
   }
 
   &--error {
@@ -354,6 +467,80 @@
   &--dense {
     .kw-field-wrap__bottom {
       font-size: $kw-field-font-size-bottom-dense;
+    }
+  }
+
+  &--labeled {
+    .kw-field-wrap__control {
+      margin-top: $kw-field-label-height;
+    }
+
+    &.kw-field-wrap--dense {
+      .kw-field-wrap__control {
+        margin-top: $kw-field-label-height-dense;
+      }
+    }
+  }
+
+  .q-transition--field-message {
+    &-leave-from,
+    &-leave-active {
+      width: 100%;
+    }
+  }
+}
+
+body.desktop,
+body.tablet {
+  .kw-field {
+    & .q-field {
+      &__messages {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+        * {
+          max-width: 100%;
+        }
+      }
+    }
+
+    &.q-field {
+      &--with-bottom {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .kw-field-wrap {
+    &__messages {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      * {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+body.mobile:not(.tablet) {
+  .kw-field {
+    & .q-field {
+      &__messages {
+        overflow-wrap: anywhere;
+      }
+    }
+
+    &.q-field {
+      // todo
+    }
+  }
+
+  .kw-field-wrap {
+    &__messages {
+      overflow-wrap: anywhere;
     }
   }
 }

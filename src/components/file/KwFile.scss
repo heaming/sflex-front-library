@@ -112,6 +112,12 @@
     }
 
     &.kw-field {
+      & .q-field {
+        &__label {
+          top: -1 * ($-kw-file-header-height + $kw-field-label-height);
+        }
+      }
+
       &.q-field {
         position: relative;
 
@@ -170,7 +176,23 @@
 
         &--standard {
           .kw-file__header-container {
-            background-color: $bg-white;
+            background-color: transparent;
+          }
+        }
+
+        &--labeled {
+          .kw-file__header-container {
+            margin-top: $kw-field-label-height;
+          }
+
+          &.q-field--dense {
+            .q-field__label {
+              top: -1 * ($-kw-file-header-height + $kw-field-label-height-dense);
+            }
+
+            .kw-file__header-container {
+              margin-top: $kw-field-label-height-dense;
+            }
           }
         }
       }

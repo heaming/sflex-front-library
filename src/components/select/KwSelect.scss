@@ -1,42 +1,40 @@
 .kw-select.q-select {
-  .q-field__input {
-    width: 0;
-    min-width: 1px !important; // quasar use !important already...
-  }
+  & .q-field {
+    &__input {
+      width: 0;
+      min-width: 1px !important; // quasar use !important already...
+    }
 
-  .q-select__dropdown-icon {
-    opacity: 1 !important;
-    color: $black1;
-  }
+    &__dropdown-icon {
+      opacity: 1 !important;
+      color: $black1;
+    }
 
-  .q-field__native {
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    &__native {
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
-      &.kw-select__placeholder {
-        color: $placeholder;
+        &.kw-select__placeholder {
+          color: $placeholder;
+        }
       }
     }
   }
 
-  &.q-field--readonly,
-  &.q-field--disabled {
-    .q-select__dropdown-icon {
-      opacity: 0.6 !important;
-    }
-
-    .q-field__native {
-      .kw-select__placeholder {
-        color: transparent;
+  &.q-field {
+    &--readonly,
+    &--disabled {
+      .q-select__dropdown-icon {
+        opacity: 0.6 !important;
       }
-    }
-  }
 
-  .q-field__marginal {
-    button.q-icon {
-      background: url(~@assets/images/delete_16.svg);
+      .q-field__native {
+        .kw-select__placeholder {
+          color: transparent;
+        }
+      }
     }
   }
 }

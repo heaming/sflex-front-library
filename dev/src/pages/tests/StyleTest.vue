@@ -1,7 +1,17 @@
 <template>
-  <!-- Form -->
+  <!-- Mobile test -->
   <q-expansion-item
     v-if="true"
+    label="Mobile"
+    default-opened
+  >
+    <div class="result-area">
+      <mobile-comp-test />
+    </div>
+  </q-expansion-item>
+  <!-- Form -->
+  <q-expansion-item
+    v-if="false"
     label="Form"
   >
     <div class="result-area">

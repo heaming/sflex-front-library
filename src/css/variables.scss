@@ -91,6 +91,7 @@ $button-dense-padding: 6px 8px 6px 8px;
 $button-font-size: 16px;
 $button-line-height: 1.5em;
 $button-font-weight: 400;
+$input-label-color: $disabled;
 
 // gutter
 $gutter-base: 10px;
@@ -144,6 +145,8 @@ $kw-field-border-radius: 0;
 $kw-field-bg-color-disable: $line-bg;
 $kw-field-color: $black1;
 $kw-field-color-disable: $black3;
+$kw-field-label-height: 24px;
+$kw-field-label-height-dense: 24px;
 
 // since there is no area for function. function defined in this place. plz fixme.
 @function at($list, $idx) {

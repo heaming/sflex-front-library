@@ -136,3 +136,9 @@
     }
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-page {
+    padding: 0;
+  }
+}
