@@ -38,6 +38,7 @@
               lg <br>
               xl <br>
               2xl <br>
+              3xl
             </td>
             <td>
               kw-popup--sm <br>
