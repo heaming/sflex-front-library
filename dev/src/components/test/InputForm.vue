@@ -255,6 +255,46 @@
 
     <!-- style types -->
     <kw-form-row>
+      <kw-form-item label="outlined">
+        <kw-input
+          v-model="stringModel"
+          underline
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          readonly
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          disable
+        />
+      </kw-form-item>
+      <kw-form-item label="underline-error">
+        <kw-input
+          v-model="stringModel"
+          underline
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          readonly
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+        <kw-input
+          v-model="stringModel"
+          underline
+          disable
+          :rules="() => 'error'"
+          validate-on-mount
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
       <kw-form-item label="underline">
         <kw-input
           v-model="stringModel"

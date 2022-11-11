@@ -1,6 +1,7 @@
 <template>
   <kw-field-wrap
     ref="inputRef"
+    :label="label"
     :error="invalid"
     :error-message="invalidMessage"
     @focus="$emit('focus')"
@@ -9,6 +10,13 @@
       :field="fieldBinding"
       :invalid="invalid"
     />
+
+    <template
+      v-if="$slots.label"
+      #label
+    >
+      <slot name="label" />
+    </template>
   </kw-field-wrap>
 </template>
 

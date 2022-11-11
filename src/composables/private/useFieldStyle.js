@@ -24,10 +24,12 @@ export default () => {
 
   return computed(() => {
     const fieldProps = {
+      hideBottomSpace: true,
       dense: computedDense.value,
     };
     if (!platform.is.mobile) {
       fieldProps.outlined = true;
+      fieldProps.hideBottomSpace = false;
     }
     if (props.underline === true) {
       fieldProps.outlined = false;

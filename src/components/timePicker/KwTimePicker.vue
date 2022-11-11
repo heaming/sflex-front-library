@@ -64,15 +64,13 @@
       v-if="invalid"
       #error
     >
-      <div>
+      {{ invalidMessage }}
+      <kw-tooltip
+        anchor="center middle"
+        show-when-ellipsised
+      >
         {{ invalidMessage }}
-        <kw-tooltip
-          anchor="center middle"
-          show-when-ellipsised
-        >
-          {{ invalidMessage }}
-        </kw-tooltip>
-      </div>
+      </kw-tooltip>
     </template>
   </q-input>
 </template>
