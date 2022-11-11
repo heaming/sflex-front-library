@@ -5,7 +5,7 @@
     v-bind="{...styleClassAttrs, ...fieldStyles}"
     class="kw-field kw-date-picker"
     :class="{'q-field--highlighted': showing}"
-    :label="undefined"
+    :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :readonly="readonly"
     :disable="disable"
@@ -50,15 +50,21 @@
       v-if="invalid"
       #error
     >
-      <div>
+      {{ invalidMessage }}
+      <kw-tooltip
+        anchor="center middle"
+        show-when-ellipsised
+      >
         {{ invalidMessage }}
-        <kw-tooltip
-          anchor="center middle"
-          show-when-ellipsised
-        >
-          {{ invalidMessage }}
-        </kw-tooltip>
-      </div>
+      </kw-tooltip>
+    </template>
+
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
+      #label
+    >
+      {{ label ?? label }}
     </template>
   </q-input>
 </template>

@@ -4,14 +4,13 @@
     :model-value="value"
     v-bind="{...styleClassAttrs, ...fieldStyles}"
     class="kw-field kw-input"
-    :label="undefined"
+    :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :type="type"
     :debounce="debounce"
     :disable="disable"
     :readonly="readonly"
     :autogrow="autogrow"
-    :rows="rows"
     :mask="mask"
     :fill-mask="fillMask"
     :reverse-fill-mask="reverseFillMask"
@@ -27,8 +26,9 @@
     :min="min"
     :max="max"
     :input-class="{'text-right': alignRight}"
+    :hide-bottom-space="hideBottomSpace ?? fieldStyles.hideBottomSpace"
     no-error-icon
-    clear-icon="none"
+    clear-icon="clear"
     @focus="onFocus"
     @blur="onBlur"
     @clear="onClear"
@@ -89,15 +89,21 @@
       v-if="invalid"
       #error
     >
-      <div>
+      {{ invalidMessage }}
+      <kw-tooltip
+        anchor="center middle"
+        show-when-ellipsised
+      >
         {{ invalidMessage }}
-        <kw-tooltip
-          anchor="center middle"
-          show-when-ellipsised
-        >
-          {{ invalidMessage }}
-        </kw-tooltip>
-      </div>
+      </kw-tooltip>
+    </template>
+
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
+      #label
+    >
+      {{ label ?? label }}
     </template>
   </q-input>
 </template>
@@ -149,6 +155,7 @@ export default {
     tabindex: { type: [Number, String], default: undefined },
     min: { type: [Number, String], default: undefined },
     max: { type: [Number, String], default: undefined },
+    hideBottomSpace: { type: Boolean, default: undefined },
     onFocus: { type: Function, default: undefined },
     onBlur: { type: Function, default: undefined },
     onClear: { type: Function, default: undefined },

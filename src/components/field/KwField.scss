@@ -1,251 +1,31 @@
-.kw-field.q-field {
+.kw-field {
   $-kw-field-gap: 8px;
   $-kw-field-gap-dense: 4px;
 
   font-size: $kw-field-font-size;
 
-  &.q-field--with-bottom {
-    padding-bottom: 0;
-  }
+  & .q-field {
+    &__marginal {
+      height: $kw-field-height; // min-height: $kw-field-height;
+      font-size: $kw-field-font-size-marginal;
 
-  .q-field__marginal {
-    height: $kw-field-height; // min-height: $kw-field-height;
-    font-size: $kw-field-font-size-marginal;
-
-    // .q-icon {
-    //   opacity: 0.6;
-
-    //   &:hover {
-    //     opacity: 1;
-    //   }
-    // }
-  }
-
-  .q-field__before,
-  .q-field__prepend {
-    padding-right: $-kw-field-gap;
-  }
-
-  .q-field__after,
-  .q-field__append {
-    padding-left: $-kw-field-gap;
-  }
-
-  .q-field__append {
-    padding-left: 20px;
-
-    & + .q-field__append {
-      padding-left: 8px;
-    }
-  }
-
-  .q-field__inner {
-    // align-self: initial;
-  }
-
-  .q-field__bottom {
-    padding: 0;
-    font-size: $kw-field-font-size-bottom;
-    line-height: 1;
-    min-height: $kw-field-font-size-bottom;
-  }
-
-  .q-field__messages {
-    > div {
-      word-break: keep-all;
-      word-wrap: normal;
-      overflow-wrap: normal;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
-
-  &.q-field--item-aligned {
-    .q-field__before {
-      min-width: $kw-field-height;
-    }
-  }
-
-  /*
-    .q-field__control-container {
-      padding-top: 0; // label 작업 시, 삭제 요망.
-    }
-   */
-
-  .q-field__control {
-    height: $kw-field-height; // min-height: $kw-field-height;
-    color: $kw-field-color;
-
-    &::before,
-    &::after {
-      transition: initial;
-    }
-  }
-
-  .q-field__native,
-  .q-field__prefix,
-  .q-field__suffix,
-  .q-field__input {
-    font-weight: 500;
-    font-size: inherit;
-    line-height: $kw-field-line-height;
-    color: $kw-field-color;
-    padding: 0;
-  }
-
-  // customize
-  .q-field__prefix,
-  .q-field__suffix {
-    font-weight: 400;
-    color: $black3;
-  }
-
-  // check adding .q-field__input has no side effect
-
-  &--readonly,
-  &--disabled {
-    .q-field__control {
-      &::before {
-        background-color: $kw-field-bg-color-disable;
+      // added for clear icon focused action.
+      > .q-field__focusable-action {
+        opacity: 1;
       }
     }
 
-    .q-field__native,
-    .q-field__prefix,
-    .q-field__suffix,
-    .q-field__input {
-      color: $kw-field-color-disable;
+    &__before,
+    &__prepend {
+      padding-right: $-kw-field-gap;
     }
 
-    .q-field__marginal {
-      .q-icon {
-        opacity: 0.6 !important;
-      }
-    }
-  }
-
-  &--disabled {
-    .q-field__control > div {
-      opacity: 1 !important // control by fixed color : $black3
-    }
-  }
-
-  /*
-    .q-field__label {
-      display: none; // 우선 안쓰니 통째로 없엠. 모바일 작업 시, 살려서 작업 해야 함.
-    }
-  */
-
-  // focus
-  &.q-field--highlighted {
-    // style type 마다 focus 설정이 다름. 공통적으로 적용할 것 만 이 곳에 정의 할 것.
-  }
-
-  &.q-field--filled {
-    // do not use
-  }
-
-  // outlined (default)
-  &--outlined {
-    .q-field__control {
-      border-radius: $kw-field-border-radius;
-
-      &::before {
-        border-color: $line-stroke;
-      }
-
-      &:hover::before {
-        border-color: $black1;
-      }
-
-      &::after {
-        border: 1px solid transparent;
-      }
+    &__after,
+    &__append {
+      padding-left: $-kw-field-gap;
     }
 
-    .q-field--rounded .q-field__control {
-      border-radius: calc(#{$kw-field-height} / 2);
-    }
-
-    &.q-field--highlighted {
-      .q-field__control {
-        &:hover::before {
-          border-color: transparent;
-        }
-
-        &::after {
-          border-width: 1px;
-          border-color: $black1;
-        }
-      }
-    }
-
-    &.q-field--readonly {
-      .q-field__control {
-        &::before {
-          border-style: solid;
-        }
-
-        &:hover::before {
-          border-color: $line-stroke;
-        }
-      }
-    }
-  }
-
-  // standard == underline
-  &--standard {
-    .q-field__control {
-      &::before {
-        border-color: $line-stroke;
-      }
-
-      &:hover::before {
-        border-color: $black1;
-      }
-
-      &::after {
-        height: 0; // notice. transform to height
-        transform: initial; // turn off animation
-      }
-    }
-
-    &.q-field--highlighted {
-      .q-field__control {
-        &:hover::before {
-          border-color: transparent;
-        }
-
-        &::after {
-          height: 1px;
-          border-color: $black1;
-        }
-      }
-    }
-
-    &.q-field--readonly {
-      .q-field__control {
-        &::before {
-          border-bottom-style: solid;
-        }
-
-        &:hover::before {
-          border-color: $line-stroke;
-        }
-      }
-    }
-  }
-
-  &--dense {
-    font-size: $kw-field-font-size-dense;
-
-    .q-field__control,
-    .q-field__marginal {
-      height: $kw-field-height-dense;
-    }
-
-    .q-field__append {
+    &__append {
       padding-left: 20px;
 
       & + .q-field__append {
@@ -253,55 +33,347 @@
       }
     }
 
-    .q-field__bottom {
-      font-size: $kw-field-font-size-bottom-dense;
+    &__inner {
+      // align-self: initial;
     }
 
-    .q-field__before,
-    .q-field__prepend {
-      padding-right: $-kw-field-gap-dense;
+    &__bottom {
+      padding: 0;
+      font-size: $kw-field-font-size-bottom;
+      line-height: 1;
+      min-height: $kw-field-font-size-bottom;
     }
 
-    .q-field__after,
-    .q-field__append {
-      padding-left: $-kw-field-gap-dense;
+    &__messages {
+      max-width: 100%;
     }
 
-    .q-field__native,
-    .q-field__prefix,
-    .q-field__suffix,
-    .q-field__input {
-      line-height: $kw-field-line-height-dense;
-    }
-  }
+    &__control {
+      height: $kw-field-height; // min-height: $kw-field-height;
+      color: $kw-field-color;
 
-  // error
-  &--error {
-    > .q-field__inner > .q-field__control {
       &::before,
       &::after {
-        color: $error !important;
-        border-color: $error !important;
+        transition: initial;
       }
     }
 
-    > .q-field__inner > .q-field__bottom {
-      color: $error !important;
+    &__native,
+    &__prefix,
+    &__suffix,
+    &__input {
+      font-weight: 500;
+      font-size: inherit;
+      line-height: $kw-field-line-height;
+      color: $kw-field-color;
+      padding: 0;
+    }
+
+    // customize
+    &__prefix,
+    &__suffix {
+      font-weight: 400;
+      color: $black3;
+    }
+
+    &__label {
+      @include typo("dense");
+
+      left: 0;
+      top: -1 * $kw-field-label-height;
+      max-width: 100%;
+      color: $input-label-color;
+      text-decoration: inherit;
+      text-transform: inherit;
+      transition: none;
     }
   }
 
-  &--auto-height {
-    .q-field__control,
-    .q-field__native {
-      height: auto;
-      min-height: $kw-field-height;
+  &.q-field {
+    &--item-aligned {
+      .q-field__before {
+        min-width: $kw-field-height;
+      }
     }
 
-    &.q-field--dense {
+    &--readonly,
+    &--disabled {
+      .q-field__control {
+        &::before {
+          background-color: $kw-field-bg-color-disable;
+        }
+      }
+
+      .q-field__native,
+      .q-field__prefix,
+      .q-field__suffix,
+      .q-field__input {
+        color: $kw-field-color-disable;
+      }
+
+      .q-field__marginal {
+        .q-icon {
+          opacity: 0.6 !important;
+        }
+      }
+    }
+
+    &--disabled {
+      .q-field__control > div {
+        opacity: 1 !important // control by fixed color : $black3
+      }
+    }
+
+    // focus
+    &.q-field--highlighted {
+      // style type 마다 focus 설정이 다름. 공통적으로 적용할 것 만 이 곳에 정의 할 것.
+    }
+
+    &.q-field--filled {
+      // do not use
+    }
+
+    // outlined == desktop default
+    &--outlined {
+      .q-field__control {
+        border-radius: $kw-field-border-radius;
+
+        &::before {
+          border-color: $line-stroke;
+        }
+
+        &:hover::before {
+          border-color: $black1;
+        }
+
+        &::after {
+          border: 1px solid transparent;
+        }
+      }
+
+      .q-field--rounded .q-field__control {
+        border-radius: calc(#{$kw-field-height} / 2);
+      }
+
+      &.q-field--highlighted {
+        .q-field__control {
+          &:hover::before {
+            border-color: transparent;
+          }
+
+          &::after {
+            border-width: 1px;
+            border-color: $black1;
+          }
+        }
+      }
+
+      &.q-field--readonly {
+        .q-field__control {
+          &::before {
+            border-style: solid;
+          }
+
+          &:hover::before {
+            border-color: $line-stroke;
+          }
+        }
+      }
+    }
+
+    // standard == underline == mobile default
+    &--standard {
+      .q-field__control {
+        &::before {
+          border-color: $line-stroke;
+        }
+
+        &:hover::before {
+          border-color: $black1;
+        }
+
+        &::after {
+          height: 0; // notice. transform to height
+          transform: initial; // turn off animation
+        }
+      }
+
+      &.q-field--highlighted {
+        .q-field__control {
+          &:hover::before {
+            border-color: transparent;
+          }
+
+          &::after {
+            height: 1px;
+            border-color: $black1;
+          }
+        }
+      }
+
+      &.q-field--readonly {
+        .q-field__control {
+          &::before {
+            border-bottom-style: solid;
+          }
+
+          &:hover::before {
+            border-color: $line-stroke;
+          }
+        }
+      }
+    }
+
+    &--dense {
+      font-size: $kw-field-font-size-dense;
+
+      .q-field__control,
+      .q-field__marginal {
+        height: $kw-field-height-dense;
+      }
+
+      .q-field__append {
+        padding-left: 20px;
+
+        & + .q-field__append {
+          padding-left: 8px;
+        }
+      }
+
+      .q-field__bottom {
+        font-size: $kw-field-font-size-bottom-dense;
+      }
+
+      .q-field__before,
+      .q-field__prepend {
+        padding-right: $-kw-field-gap-dense;
+      }
+
+      .q-field__after,
+      .q-field__append {
+        padding-left: $-kw-field-gap-dense;
+      }
+
+      .q-field__native,
+      .q-field__prefix,
+      .q-field__suffix,
+      .q-field__input {
+        line-height: $kw-field-line-height-dense;
+      }
+    }
+
+    // error
+    &--error {
+      > .q-field__inner > .q-field__control {
+        &::before,
+        &::after {
+          color: $error !important;
+          border-color: $error !important;
+        }
+      }
+
+      > .q-field__inner > .q-field__bottom {
+        color: $error !important;
+      }
+    }
+
+    &--labeled {
+      // remove quasar default rules
+      .q-field__native,
+      .q-field__prefix,
+      .q-field__suffix {
+        line-height: unset;
+        padding-top: unset;
+        padding-bottom: unset;
+      }
+
+      &:not(.q-field--float) {
+        .q-field__prefix,
+        .q-field__suffix {
+          opacity: 1;
+        }
+
+        .q-field__native,
+        .q-field__input {
+          &::-webkit-input-placeholder {
+            color: $placeholder;
+          }
+
+          &::-moz-placeholder {
+            color: $placeholder;
+          }
+
+          &:-ms-input-placeholder {
+            color: $placeholder !important;
+          }
+
+          &::-ms-input-placeholder {
+            color: $placeholder;
+          }
+
+          &::placeholder {
+            color: $placeholder;
+          }
+        }
+      }
+
+      &.q-field--dense {
+        .q-field__native,
+        .q-field__prefix,
+        .q-field__suffix {
+          padding-top: unset;
+          padding-bottom: unset;
+        }
+      }
+
+      // added
+      .q-field__after,
+      .q-field__before,
+      .q-field__control {
+        margin-top: $kw-field-label-height;
+      }
+
+      &.q-field--dense {
+        .q-field__after,
+        .q-field__before,
+        .q-field__control {
+          margin-top: $kw-field-label-height-dense;
+        }
+      }
+    }
+
+    &--float .q-field__label {
+      max-width: unset;
+      transform: none;
+      transition: none;
+    }
+
+    &--auto-height {
       .q-field__control,
       .q-field__native {
-        min-height: $kw-field-height-dense;
+        height: auto;
+        min-height: $kw-field-height;
       }
+
+      &.q-field--labeled {
+        .q-field__control-container {
+          padding-top: 0;
+        }
+      }
+
+      &.q-field--dense {
+        .q-field__control,
+        .q-field__native {
+          min-height: $kw-field-height-dense;
+        }
+      }
+    }
+  }
+
+  .q-transition--field-message {
+    &-leave-from,
+    &-leave-active {
+      width: 100%;
     }
   }
 }
@@ -309,8 +381,34 @@
 .kw-field-wrap {
   position: relative;
 
-  .q-field__messages {
-    display: none; // notice. field 에 속한 field 의 message 영역 무시
+  .kw-field {
+    & .q-field {
+      &__messages {
+        display: none; // notice. field-wrap 에 속한 field 의 message 무시
+      }
+
+      &__label {
+        display: none; // notice. field-wrap 에 속한 field 의 label 무시
+      }
+    }
+
+    &.q-field {
+      &--labeled {
+        .q-field__after,
+        .q-field__before,
+        .q-field__control {
+          margin-top: 0;
+        }
+
+        &.q-field--dense {
+          .q-field__after,
+          .q-field__before,
+          .q-field__control {
+            margin-top: 0;
+          }
+        }
+      }
+    }
   }
 
   &__control {
@@ -318,45 +416,38 @@
     display: flex;
     flex-wrap: nowrap;
     height: auto;
+    min-height: $kw-field-label-height;
     align-items: center;
     outline: none;
   }
 
   &__bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     padding: 2px 0 0;
     min-height: $kw-field-font-size-bottom;
     font-size: $kw-field-font-size-bottom;
     line-height: 1;
-    transform: translateY(100%);
     color: rgb(0 0 0 / 54%);
+
+    &--animated {
+      transform: translateY(100%);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 
-  &__messages {
-    > div {
-      word-break: keep-all;
-      word-wrap: normal;
-      overflow-wrap: normal;
-      text-overflow: ellipsis !important;
-      white-space: nowrap;
-      overflow: hidden;
-    }
+  &__label {
+    @include typo("dense");
 
-    &--transition {
-      &-enter-active,
-      &-leave-active {
-        transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.6s cubic-bezier(0.86, 0, 0.07, 1);
-      }
-
-      &-enter-from,
-      &-leave-to {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-    }
+    position: absolute;
+    left: 0;
+    top: -1 * $kw-field-label-height;
+    max-width: 100%;
+    color: $input-label-color;
+    text-decoration: inherit;
+    text-transform: inherit;
+    transition: none;
   }
 
   &--error {
@@ -376,6 +467,80 @@
   &--dense {
     .kw-field-wrap__bottom {
       font-size: $kw-field-font-size-bottom-dense;
+    }
+  }
+
+  &--labeled {
+    .kw-field-wrap__control {
+      margin-top: $kw-field-label-height;
+    }
+
+    &.kw-field-wrap--dense {
+      .kw-field-wrap__control {
+        margin-top: $kw-field-label-height-dense;
+      }
+    }
+  }
+
+  .q-transition--field-message {
+    &-leave-from,
+    &-leave-active {
+      width: 100%;
+    }
+  }
+}
+
+body.desktop,
+body.tablet {
+  .kw-field {
+    & .q-field {
+      &__messages {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+        * {
+          max-width: 100%;
+        }
+      }
+    }
+
+    &.q-field {
+      &--with-bottom {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .kw-field-wrap {
+    &__messages {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      * {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+body.mobile:not(.tablet) {
+  .kw-field {
+    & .q-field {
+      &__messages {
+        overflow-wrap: anywhere;
+      }
+    }
+
+    &.q-field {
+      // todo
+    }
+  }
+
+  .kw-field-wrap {
+    &__messages {
+      overflow-wrap: anywhere;
     }
   }
 }
