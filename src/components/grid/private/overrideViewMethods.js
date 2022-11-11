@@ -16,10 +16,21 @@ const firstOptionLabels = {
   select: ['MSG_TXT_SEL', null, '선택'],
 };
 
-function setColumnCustom(column) {
-  const { options } = column;
+function setColumnBase(column) {
+  // header
+  if (column.header) {
+    column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
+    column.header.tooltip = column.header.tooltip || column.header.text;
+  }
 
-  if (Array.isArray(options)) {
+  // filter
+  defaultsDeep(column, {
+    autoFilter: true,
+  });
+}
+
+function setColumnOptions(column) {
+  if (Array.isArray(column.options)) {
     const copyOptions = [];
     const optionValue = column.optionValue || 'codeId';
     const optionLabel = column.optionLabel || 'codeName';
@@ -34,20 +45,13 @@ function setColumnCustom(column) {
       });
     }
 
-    copyOptions.push(...options);
+    copyOptions.push(...column.options);
 
     defaultsDeep(column, {
       lookupDisplay: typeof column.displayCallback !== 'function',
       values: map(copyOptions, optionValue),
       labels: map(copyOptions, optionLabel),
     });
-  }
-}
-
-function setColumnHeader(column) {
-  if (column.header) {
-    column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
-    column.header.tooltip = column.header.tooltip || column.header.text;
   }
 }
 
@@ -295,8 +299,8 @@ export function overrideSetColumns(view) {
 
     columns.forEach((e) => {
       const field = data.fieldByName(e.fieldName);
-      setColumnCustom(e, field);
-      setColumnHeader(e, field);
+      setColumnBase(e, field);
+      setColumnOptions(e, field);
       setColumnStyleName(e, field);
       setColumnRenderer(e, field);
       setColumnEditor(e, field);
