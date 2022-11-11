@@ -15,7 +15,7 @@
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="computedUseInput"
-    :behavior="$g.platform.is.mobile && 'dialog'"
+    :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
     :fill-input="fillInput ?? computedUseInput"
     :hide-selected="hideSelected ?? computedUseInput"
     :input-debounce="inputDebounce"
@@ -32,7 +32,8 @@
     no-error-icon
     :dropdown-icon="dropdownIcon"
     :hide-dropdown-icon="hideDropdownIcon"
-    clear-icon="none"
+    :hide-bottom-space="hideBottemSpace"
+    clear-icon="clear"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
     @clear="$emit('clear', $event)"
@@ -135,25 +136,21 @@
       v-if="invalid"
       #error
     >
-      <div>
+      {{ invalidMessage }}
+      <kw-tooltip
+        anchor="center middle"
+        show-when-ellipsised
+      >
         {{ invalidMessage }}
-        <kw-tooltip
-          anchor="center middle"
-          show-when-ellipsised
-        >
-          {{ invalidMessage }}
-        </kw-tooltip>
-      </div>
+      </kw-tooltip>
     </template>
 
     <!-- label -->
     <template
-      v-if="$g.platform.is.mobile && label || $slots.label"
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
       #label
     >
-      <div style="background-color: red;">
-        {{ label + ' test' }}
-      </div>
+      {{ label ?? label }}
     </template>
   </q-select>
 </template>
@@ -185,6 +182,7 @@ export default {
     inputDebounce: { type: [Number, String], default: 100 },
     dropdownIcon: { type: String, default: 'arrow_down' },
     hideDropdownIcon: { type: Boolean, default: false },
+    hideBottemSpace: { type: Boolean, default: true },
     disable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     prefix: { type: String, default: undefined },

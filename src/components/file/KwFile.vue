@@ -5,6 +5,7 @@
     :counter-label="computedCounterLabel"
     class="kw-field kw-file"
     :class="fileClass"
+    :label="$g.platform.is.mobile ? label : undefined"
     v-bind="{...styleClassAttrs, ...fieldStyles}"
     :error="invalid"
     :prefix="prefix"
@@ -151,15 +152,13 @@
       v-if="invalid"
       #error
     >
-      <div>
+      {{ invalidMessage }}
+      <kw-tooltip
+        anchor="center middle"
+        show-when-ellipsised
+      >
         {{ invalidMessage }}
-        <kw-tooltip
-          anchor="center middle"
-          show-when-ellipsised
-        >
-          {{ invalidMessage }}
-        </kw-tooltip>
-      </div>
+      </kw-tooltip>
     </template>
 
     <!-- hint -->
@@ -345,6 +344,14 @@
         :files="files"
       />
     </template>
+
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
+      #label
+    >
+      {{ label ?? label }}
+    </template>
   </q-file>
 </template>
 
@@ -397,7 +404,7 @@ export default {
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     loading: { type: Boolean, default: false },
-    hideBottomSpace: { type: Boolean, default: false },
+    hideBottomSpace: { type: Boolean, default: true },
     // Whether using default counter of q-file.
     counter: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },

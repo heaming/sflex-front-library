@@ -54,7 +54,8 @@
       <p class="kw-guide-description">
         It should be added as button
         <router-link to="/Publish/Components/Elements/Button/ButtonNew">
-          buttonNew - button(dense)
+          buttonNew - button(dense) <br>
+          no-label and button only in kw-search-item
         </router-link>
       </p>
       <q-card>
@@ -72,7 +73,7 @@
               <kw-input />
             </kw-form-item>
             <kw-form-item
-              no-label=""
+              no-label
             >
               <kw-btn
                 secondary
@@ -147,7 +148,7 @@ const buttonForm = `
       <kw-input />
     </kw-form-item>
     <kw-form-item
-      no-label=""
+      no-label
     >
       <kw-btn
         secondary

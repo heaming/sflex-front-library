@@ -9,62 +9,89 @@
       tabindex="-1"
     >
       <slot />
+      <div
+        v-if="showLabel"
+        class="kw-field-wrap__label"
+      >
+        <slot name="label">
+          {{ label ?? label }}
+        </slot>
+      </div>
     </div>
     <div class="kw-field-wrap__bottom">
-      <div class="kw-field-wrap__messages">
-        <transition name="kw-field-wrap__messages--transition">
-          <div
-            v-if="showErrorMessage"
-            role="alert"
+      <template
+        v-if="$g.platform.is.mobile"
+      >
+        <div
+          v-if="showErrorMessage"
+          class="kw-field-wrap__messages kw-field-wrap__messages--stale"
+          role="alert"
+        >
+          {{ computedErrorMessage }}
+          <kw-tooltip
+            anchor="center middle"
+            show-when-ellipsised
           >
             {{ computedErrorMessage }}
-            <kw-tooltip
-              anchor="center middle"
-              show-when-ellipsised
-            >
-              {{ computedErrorMessage }}
-            </kw-tooltip>
-          </div>
-        </transition>
-      </div>
+          </kw-tooltip>
+        </div>
+      </template>
+      <transition
+        v-else
+        name="q-transition--field-message"
+      >
+        <div
+          v-if="showErrorMessage"
+          class="kw-field-wrap__messages kw-field-wrap__messages--animated"
+          role="alert"
+        >
+          {{ computedErrorMessage }}
+          <kw-tooltip
+            anchor="center middle"
+            show-when-ellipsised
+          >
+            {{ computedErrorMessage }}
+          </kw-tooltip>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
 import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
-import useSearchChild from '../../composables/private/useSearchChild';
+import useDense, { useDenseProps } from '../../composables/private/useDense';
+import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwFieldWrap',
 
   props: {
-    dense: {
-      type: Boolean,
-      default: undefined,
-    },
-    error: {
-      type: Boolean,
-      default: undefined,
-    },
-    errorMessage: {
-      type: String,
-      default: undefined,
-    },
+    ...useDenseProps,
+
+    label: { type: String, default: undefined },
+    error: { type: Boolean, default: undefined },
+    errorMessage: { type: String, default: undefined },
   },
 
   emits: ['focus'],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const controlRef = ref();
 
-    const { invalid, invalidMessage } = useFieldStateWrap();
-    const { isSearchContext } = useSearchChild();
+    const {
+      invalid,
+      invalidMessage,
+    } = useFieldStateWrap();
+
+    const computedDense = useDense();
 
     const showErrorMessage = computed(() => props.error || invalid.value);
+    const showLabel = computed(() => platform.is.mobile && (props.label || slots.label));
     const computedClass = computed(() => ({
       'kw-field-wrap--error': props.error || invalid.value,
-      'kw-field-wrap--dense': isSearchContext || props.dense,
+      'kw-field-wrap--dense': computedDense.value,
+      'kw-field-wrap--labeled': showLabel.value,
     }));
     const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
 
@@ -74,8 +101,10 @@ export default {
     }
 
     return {
+      dense: computedDense,
       controlRef,
       showErrorMessage,
+      showLabel,
       computedClass,
       computedErrorMessage,
       focus,
