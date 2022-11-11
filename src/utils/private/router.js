@@ -17,7 +17,7 @@ export function replaceRoutesByMenus(apps, menus) {
         const matched = find(menus, { applicationId, pageDestinationValue });
 
         if (matched) {
-          const { menuUid, menuName } = matched;
+          const { menuUid, menuName, pageId } = matched;
 
           router.addRoute({
             ...route,
@@ -28,6 +28,7 @@ export function replaceRoutesByMenus(apps, menus) {
               applicationId,
               menuUid,
               menuName,
+              pageId,
             },
           });
         }

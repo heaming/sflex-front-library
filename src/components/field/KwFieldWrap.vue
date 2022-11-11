@@ -6,16 +6,21 @@
     <div
       ref="controlRef"
       class="kw-field-wrap__control"
+      :class="controlClass"
       tabindex="-1"
     >
-      <slot />
       <div
-        v-if="showLabel"
-        class="kw-field-wrap__label"
+        class="kw-field-wrap__control-container"
       >
-        <slot name="label">
-          {{ label ?? label }}
-        </slot>
+        <slot />
+        <div
+          v-if="showLabel"
+          class="kw-field-wrap__label"
+        >
+          <slot name="label">
+            {{ label ?? label }}
+          </slot>
+        </div>
       </div>
     </div>
     <div class="kw-field-wrap__bottom">
@@ -70,6 +75,7 @@ export default {
     ...useDenseProps,
 
     label: { type: String, default: undefined },
+    controlClass: { type: [Object, Array, String], default: undefined },
     error: { type: Boolean, default: undefined },
     errorMessage: { type: String, default: undefined },
   },

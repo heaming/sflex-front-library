@@ -58,19 +58,26 @@ export default () => {
     selectedKey.value = key;
   }
 
-  const removeTabsViewHook = router.afterEach(
+  const removeBeforeResolve = router.beforeResolve((to) => {
+    to.meta.logging = isMenuRoute(to) && !isDuplicated(to);
+  });
+
+  const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
 
-      const isAddable = isMenuRoute(to) && !isDuplicated(to);
-      if (isAddable) addItem(to);
+      // is new tab
+      if (to.meta.logging === true) {
+        addItem(to);
+      }
 
       selectedKey.value = to.name || to.path;
     },
   );
 
   onBeforeUnmount(() => {
-    removeTabsViewHook();
+    removeBeforeResolve();
+    removeAfterEach();
   });
 
   return {

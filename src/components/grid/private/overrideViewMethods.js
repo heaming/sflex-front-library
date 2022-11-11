@@ -16,17 +16,27 @@ const firstOptionLabels = {
   select: ['MSG_TXT_SEL', null, '선택'],
 };
 
-function setColumnBase(column) {
-  // header
-  if (column.header) {
-    column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
-    column.header.tooltip = column.header.tooltip || column.header.text;
-  }
-
+function setColumnDefault(column) {
   // filter
   defaultsDeep(column, {
     autoFilter: true,
   });
+}
+
+function setColumnHeader(column) {
+  column.header ||= {};
+  column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
+  column.header.tooltip = column.header.tooltip || column.header.text;
+
+  // required
+  if (column.required === true || column.rules?.includes('required')) {
+    const headerClass = [
+      column.header.styleName,
+      'rg-header-cell--required',
+    ];
+
+    column.header.styleName = headerClass.join(' ').trim();
+  }
 }
 
 function setColumnOptions(column) {
@@ -299,13 +309,14 @@ export function overrideSetColumns(view) {
 
     columns.forEach((e) => {
       const field = data.fieldByName(e.fieldName);
-      setColumnBase(e, field);
+      setColumnDefault(e, field);
+      setColumnHeader(e, field);
       setColumnOptions(e, field);
       setColumnStyleName(e, field);
       setColumnRenderer(e, field);
       setColumnEditor(e, field);
       setColumnCellButton(e, field);
-      setColumnStyleCallback(e);
+      setColumnStyleCallback(e, field);
     });
 
     view.__metas__ = map(columns, (e) => ({

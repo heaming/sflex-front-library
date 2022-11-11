@@ -1,5 +1,5 @@
 <template>
-  <div class="w360 bg-cyan-1">
+  <div class="w360 bg-green-1">
     <div
       class="maybe-header text-title flex h55 px16 items-center"
       style="width: 100%;"
@@ -28,23 +28,58 @@
       </kw-btn-dropdown>
     </div>
     <div class="maybe-search-or-tab">
-      <div
-        class="maybe-item-container flex no-wrap items-end"
+      <kw-field-wrap
+        label="wrapped"
+        control-class="bg-bg-body px20"
       >
         <kw-select
           v-model="selectModel"
-          outlined
-          label="fit1"
+          label="fit"
           class="fit"
           :options="optionsModel"
+          borderless
+          :error="true"
+        />
+        <kw-separator
+          vertical
+          spaced
+          inset
         />
         <kw-select
           v-model="selectModel"
+          borderless
           class="fit"
-          outlined
           :options="optionsModel"
           stretch
         />
+      </kw-field-wrap>
+      <div
+        class="maybe-item-container flex no-wrap items-end"
+      >
+        <kw-field-wrap
+          class="col"
+          control-class="bg-bg-body px20"
+        >
+          <kw-select
+            v-model="selectModel"
+            label="fit"
+            class="fit"
+            :options="optionsModel"
+            borderless
+          />
+          <kw-separator
+            vertical
+            spaced
+            inset
+          />
+          <kw-select
+            v-model="selectModel"
+            borderless
+            class="fit"
+            :options="optionsModel"
+            stretch
+          />
+        </kw-field-wrap>
       </div>
       <kw-select
         v-model="selectModel"

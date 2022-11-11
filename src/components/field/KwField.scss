@@ -1,6 +1,7 @@
 .kw-field {
   $-kw-field-gap: 8px;
   $-kw-field-gap-dense: 4px;
+  $-kw-field-standard-padding: 4px;
 
   font-size: $kw-field-font-size;
 
@@ -184,6 +185,9 @@
     // standard == underline == mobile default
     &--standard {
       .q-field__control {
+        padding-left: $-kw-field-standard-padding;
+        padding-right: $-kw-field-standard-padding;
+
         &::before {
           border-color: $line-stroke;
         }
@@ -383,16 +387,18 @@
 
   .kw-field {
     & .q-field {
-      &__messages {
-        display: none; // notice. field-wrap 에 속한 field 의 message 무시
-      }
-
       &__label {
         display: none; // notice. field-wrap 에 속한 field 의 label 무시
       }
     }
 
     &.q-field {
+      &--error {
+        .q-field__bottom {
+          display: none;
+        }
+      }
+
       &--labeled {
         .q-field__after,
         .q-field__before,
@@ -412,13 +418,18 @@
   }
 
   &__control {
+    outline: none;
+    height: auto;
+    min-height: $kw-field-height;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  &__control-container {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    height: auto;
-    min-height: $kw-field-label-height;
     align-items: center;
-    outline: none;
   }
 
   &__bottom {
@@ -465,6 +476,10 @@
   }
 
   &--dense {
+    .kw-field-wrap__control {
+      min-height: $kw-field-height-dense;
+    }
+
     .kw-field-wrap__bottom {
       font-size: $kw-field-font-size-bottom-dense;
     }
