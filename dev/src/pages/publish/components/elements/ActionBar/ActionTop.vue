@@ -88,20 +88,10 @@
         <div class="kw-guide-example">
           <kw-action-top>
             <template #left>
-              <span>총</span>
-              <span class="accent pl4">156</span>
-              <kw-separator
-                vertical
-                inset
-                spaced
-              />
-              <kw-select
-                v-model="selectData.model"
-                class="kw-select--rows-per-page"
-                :options="selectData.options"
-                borderless
-                dense
-                suffix="개씩보기"
+              <kw-paging-info
+                :page-size="30"
+                :page-size-options="[30,60,90,120]"
+                :total-count="7"
               />
               <span class="ml8">(단위:원)</span>
             </template>
@@ -124,9 +114,8 @@
           </kw-action-top>
         </div>
         <guide-code-view
-          :code-value="[testCode,testData]"
-          :lang="['vue','javascript']"
-          multi
+          :code-value="testCode"
+          lang="vue"
         />
       </q-card>
     </div>
@@ -141,7 +130,7 @@
         <div class="kw-guide-example">
           <kw-action-top>
             <template #left>
-              <span>(단위: 원)</span>
+              <span>(단위:원)</span>
             </template>
             <kw-btn
               icon="download_on"
@@ -178,8 +167,7 @@
         <div class="kw-guide-example">
           <kw-action-top>
             <template #left>
-              <span>총</span>
-              <span class="accent pl4">1,247</span>
+              <kw-paging-info :total-count="7" />
             </template>
             <kw-btn
               dense
@@ -238,20 +226,10 @@
         <div class="kw-guide-example">
           <kw-action-top>
             <template #left>
-              <span>총</span>
-              <span class="accent pl4">156</span>
-              <kw-separator
-                vertical
-                inset
-                spaced
-              />
-              <kw-select
-                v-model="selectData.model"
-                class="kw-select--rows-per-page"
-                :options="selectData.options"
-                borderless
-                dense
-                suffix="개씩보기"
+              <kw-paging-info
+                :page-size="30"
+                :page-size-options="[30,60,90,120]"
+                :total-count="7"
               />
             </template>
             <kw-btn
@@ -293,30 +271,13 @@
 
 <script setup>
 
-const selectData = {
-  model: '10',
-  options: [
-    '10', '20', '30', '40', '50',
-  ],
-};
-
 const testCode = `
 <kw-action-top>
   <template #left>
-    <span>총</span>
-    <span class="accent pl4">156</span>
-    <kw-separator
-      vertical
-      inset
-      spaced
-    />
-    <kw-select
-      v-model="selectData.model"
-      class="kw-select--rows-per-page"
-      :options="selectData.options"
-      borderless
-      dense
-      suffix="개씩보기"
+    <kw-paging-info
+      :page-size="30"
+      :page-size-options="[30,60,90,120]"
+      :total-count="7"
     />
     <span class="ml8">(단위:원)</span>
   </template>
@@ -337,14 +298,6 @@ const testCode = `
     dense
   />
 </kw-action-top>
-`;
-const testData = `
-const selectData = {
-  model: '10',
-  options: [
-    '10', '20', '30', '40', '50',
-  ],
-};
 `;
 
 const testCode2 = `
@@ -374,8 +327,7 @@ const testCode2 = `
 const testCode3 = `
 <kw-action-top>
   <template #left>
-    <span>총</span>
-    <span class="accent pl4">1,247</span>
+    <kw-paging-info :total-count="7" />
   </template>
   <kw-btn
     dense
@@ -420,20 +372,10 @@ const testCode3 = `
 const testCode4 = `
 <kw-action-top>
   <template #left>
-    <span>총</span>
-    <span class="accent pl4">156</span>
-    <kw-separator
-      vertical
-      inset
-      spaced
-    />
-    <kw-select
-      v-model="selectData.model"
-      class="kw-select--rows-per-page"
-      :options="selectData.options"
-      borderless
-      dense
-      suffix="개씩보기"
+    <kw-paging-info
+      :page-size="30"
+      :page-size-options="[30,60,90,120]"
+      :total-count="7"
     />
   </template>
   <kw-btn
@@ -466,6 +408,10 @@ const testCode4 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.11.15',
+    text: 'updated inside of template #left in action-top',
+  },
   {
     timestamp: '2022.11.09',
     text: 'add unit text next to select in left side',
