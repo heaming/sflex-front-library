@@ -38,8 +38,7 @@
           class="fit"
           :options="optionsModel"
           borderless
-          :error="selectModel !== 'a'"
-          :error-message="'please give me A for first select. there is no spoon. Sometimes crow says kkack.'"
+          :error="true"
         />
         <kw-separator
           vertical
