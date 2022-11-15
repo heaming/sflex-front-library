@@ -110,6 +110,11 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   max?: number | string;
 
   /**
+   * type number일 때, 스탭 단위 값
+   */
+  step?: number | string;
+
+  /**
    * icon을 append 영역에 표시한다
    */
   icon?: string;

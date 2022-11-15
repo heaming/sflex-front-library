@@ -23,10 +23,7 @@
         </div>
       </div>
     </div>
-    <div
-      v-if="showErrorMessage"
-      class="kw-field-wrap__bottom"
-    >
+    <div class="kw-field-wrap__bottom">
       <template
         v-if="$g.platform.is.mobile"
       >
@@ -81,7 +78,6 @@ export default {
     controlClass: { type: [Object, Array, String], default: undefined },
     error: { type: Boolean, default: undefined },
     errorMessage: { type: String, default: undefined },
-    autoHeight: { type: Boolean, default: true },
   },
 
   emits: ['focus'],
@@ -102,7 +98,6 @@ export default {
       'kw-field-wrap--error': props.error || invalid.value,
       'kw-field-wrap--dense': computedDense.value,
       'kw-field-wrap--labeled': showLabel.value,
-      'kw-field-wrap--auto-height': props.autoHeight,
     }));
     const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
 
