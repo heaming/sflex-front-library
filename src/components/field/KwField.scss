@@ -97,14 +97,26 @@
       }
     }
 
-    &--readonly,
+    &--readonly {
+      .q-field__control {
+        &::before {
+          background-color: transparent;
+        }
+
+        background-color: $kw-field-bg-color-readonly;
+      }
+    }
+
     &--disabled {
       .q-field__control {
         &::before {
           background-color: $kw-field-bg-color-disable;
         }
       }
+    }
 
+    &--readonly,
+    &--disabled {
       .q-field__native,
       .q-field__prefix,
       .q-field__suffix,
@@ -419,10 +431,7 @@
 
   &__control {
     outline: none;
-    height: auto;
-    min-height: $kw-field-height;
-    padding-left: 4px;
-    padding-right: 4px;
+    height: $kw-field-height;
   }
 
   &__control-container {
@@ -477,7 +486,7 @@
 
   &--dense {
     .kw-field-wrap__control {
-      min-height: $kw-field-height-dense;
+      height: $kw-field-height-dense;
     }
 
     .kw-field-wrap__bottom {
@@ -493,6 +502,20 @@
     &.kw-field-wrap--dense {
       .kw-field-wrap__control {
         margin-top: $kw-field-label-height-dense;
+      }
+    }
+  }
+
+  &--auto-height {
+    .kw-field-wrap__control {
+      height: auto;
+      min-height: $kw-field-height;
+    }
+
+    &.kw-field-wrap--dense {
+      .kw-field-wrap__control {
+        height: auto;
+        min-height: $kw-field-height-dense;
       }
     }
   }

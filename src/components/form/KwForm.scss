@@ -56,7 +56,7 @@
   }
 
   & {
-    .kw-form-row:first-of-type {
+    .kw-form-row:first-of-type:not(h3+.kw-form-row) {
       padding-top: 0;
       min-height: $kw-field-line-height + at($-kw-form-row-padding, 3);
     }

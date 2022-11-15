@@ -2,6 +2,7 @@ body {
   // font-family: "Spoqa Han Sans Neo", sans-serif;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
+  font-weight: 400;
   color: #222;
 
   &:not(.q-body--layout-animate) .q-layout--prevent-focus {
@@ -882,23 +883,6 @@ $unit: px;
 
 .q-scroll--inside {
   padding: 30px 40px;
-}
-
-// q-card list
-.card-list {
-  .card-item {
-    box-shadow: none;
-    border-radius: 0;
-    border: 1px solid $line-line;
-    padding: 30px;
-    width: calc((100% - 80px) / 4);
-
-    // 선택된 클래스
-    &--selected {
-      background-color: $bg-white !important;
-      border: 1px solid $black1;
-    }
-  }
 }
 
 .card-text {
