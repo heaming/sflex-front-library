@@ -84,7 +84,7 @@ export default () => {
 
   function logout() {
     if (env.VITE_LOGOUT_URL) {
-      locationReplace(env.VITE_LOGIN_URL);
+      locationReplace(env.VITE_LOGOUT_URL);
     } else {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
       locationReplace();
