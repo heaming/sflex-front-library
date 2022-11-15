@@ -46,7 +46,7 @@ export default () => {
     await router.replace(INITIAL_LOCATION);
   }
 
-  async function initSession() {
+  async function initApp() {
     try {
       loadSpinner(true);
       await fetchLoginInfo();
@@ -61,7 +61,7 @@ export default () => {
 
   async function isReady() {
     if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
-      await initSession();
+      await initApp();
     } else if (env.VITE_LOGIN_URL) {
       locationReplace(env.VITE_LOGIN_URL); // redirect to sso
     }
@@ -84,7 +84,7 @@ export default () => {
 
   function logout() {
     if (env.VITE_LOGOUT_URL) {
-      locationReplace(env.VITE_LOGOUT_URL);
+      locationReplace(env.VITE_LOGIN_URL);
     } else {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
       locationReplace();

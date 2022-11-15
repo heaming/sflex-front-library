@@ -25,7 +25,6 @@
     :tabindex="tabindex"
     :min="min"
     :max="max"
-    :step="step"
     :input-class="{'text-right': alignRight}"
     :hide-bottom-space="hideBottomSpace ?? fieldStyles.hideBottomSpace"
     no-error-icon
@@ -156,7 +155,6 @@ export default {
     tabindex: { type: [Number, String], default: undefined },
     min: { type: [Number, String], default: undefined },
     max: { type: [Number, String], default: undefined },
-    step: { type: [Number, String], default: undefined },
     hideBottomSpace: { type: Boolean, default: undefined },
     onFocus: { type: Function, default: undefined },
     onBlur: { type: Function, default: undefined },

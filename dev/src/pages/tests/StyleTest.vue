@@ -20,7 +20,7 @@
   </q-expansion-item>
   <!-- input -->
   <q-expansion-item
-    v-if="true"
+    v-if="false"
     label="Input"
   >
     <div class="result-area">

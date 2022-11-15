@@ -30,7 +30,6 @@
         <kw-input
           v-model="stringModel"
           readonly
-          bg-color="bg-white"
           label="기본"
         />
         <kw-input
