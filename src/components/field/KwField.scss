@@ -431,11 +431,7 @@
 
   &__control {
     outline: none;
-    height: auto;
-    min-height: $kw-field-height;
-    padding-left: 4px;
-    padding-right: 4px;
-    align-items: center;
+    height: $kw-field-height;
   }
 
   &__control-container {
@@ -490,7 +486,7 @@
 
   &--dense {
     .kw-field-wrap__control {
-      min-height: $kw-field-height-dense;
+      height: $kw-field-height-dense;
     }
 
     .kw-field-wrap__bottom {
@@ -506,6 +502,20 @@
     &.kw-field-wrap--dense {
       .kw-field-wrap__control {
         margin-top: $kw-field-label-height-dense;
+      }
+    }
+  }
+
+  &--auto-height {
+    .kw-field-wrap__control {
+      height: auto;
+      min-height: $kw-field-height;
+    }
+
+    &.kw-field-wrap--dense {
+      .kw-field-wrap__control {
+        height: auto;
+        min-height: $kw-field-height-dense;
       }
     }
   }
