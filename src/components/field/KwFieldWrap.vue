@@ -26,13 +26,14 @@
     <div
       v-if="showErrorMessage"
       class="kw-field-wrap__bottom"
+      :class="computedBottomClass"
     >
       <template
         v-if="$g.platform.is.mobile"
       >
         <div
           v-if="showErrorMessage"
-          class="kw-field-wrap__messages kw-field-wrap__messages--stale"
+          class="kw-field-wrap__messages"
           role="alert"
         >
           {{ computedErrorMessage }}
@@ -50,7 +51,7 @@
       >
         <div
           v-if="showErrorMessage"
-          class="kw-field-wrap__messages kw-field-wrap__messages--animated"
+          class="kw-field-wrap__messages"
           role="alert"
         >
           {{ computedErrorMessage }}
@@ -70,6 +71,7 @@
 import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
 import { platform } from '../../plugins/platform';
+import useFormLayout from '../../composables/private/useFormLayout';
 
 export default {
   name: 'KwFieldWrap',
@@ -95,16 +97,25 @@ export default {
     } = useFieldStateWrap();
 
     const computedDense = useDense();
+    const { cols } = useFormLayout();
 
     const showErrorMessage = computed(() => props.error || invalid.value);
     const showLabel = computed(() => platform.is.mobile && (props.label || slots.label));
-    const computedClass = computed(() => ({
-      'kw-field-wrap--error': props.error || invalid.value,
-      'kw-field-wrap--dense': computedDense.value,
-      'kw-field-wrap--labeled': showLabel.value,
-      'kw-field-wrap--auto-height': props.autoHeight,
-    }));
+    const computedClass = computed(() => {
+      const classes = [];
+      if (props.error || invalid.value) { classes.push('kw-field-wrap--error'); }
+      if (computedDense.value) { classes.push('kw-field-wrap--dense'); }
+      if (showLabel.value) { classes.push('kw-field-wrap--labeled'); }
+      if (props.autoHeight) { classes.push('kw-field-wrap--auto-height'); }
+      if (cols.value) { classes.push(`kw-field-wrap--col-${cols.value}`); }
+      return classes;
+    });
     const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
+    const computedBottomClass = computed(() => {
+      const classes = [];
+      classes.push(platform.is.mobile ? 'kw-field-wrap__bottom--stale' : 'kw-field-wrap__bottom--animated');
+      return classes;
+    });
 
     function focus() {
       controlRef.value.focus();
@@ -118,6 +129,7 @@ export default {
       showLabel,
       computedClass,
       computedErrorMessage,
+      computedBottomClass,
       focus,
     };
   },
