@@ -132,9 +132,25 @@
     flex: none;
   }
 
+  &:first-of-type:not(h3+.kw-form-row) {
+    padding-top: 0;
+    min-height: $kw-field-line-height + at($padding, 3);
+  }
+
+  &:last-of-type {
+    padding-bottom: 0;
+    min-height: $kw-field-line-height + at($padding, 1);
+  }
+
+  &:first-of-type:last-of-type {
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: $kw-field-line-height;
+  }
+
   @for $i from 1 through 12 {
-    .kw-form-item:first-child:nth-last-child(#{$i}),
-    .kw-form-item:first-child:nth-last-child(#{$i}) ~ .kw-form-item {
+    .kw-form-item:first-child:nth-last-of-type(#{$i}),
+    .kw-form-item:first-child:nth-last-of-type(#{$i}) ~ .kw-form-item {
       width: calc((100% - (#{$gap} * (#{$i} - 1))) / #{$i});
     }
   }

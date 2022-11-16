@@ -202,6 +202,54 @@
       </kw-form-item>
     </kw-form-row>
   </kw-form>
+
+  <h1>custom</h1>
+  <kw-form
+    class="custom-form"
+    :cols="0"
+  >
+    <kw-form-row
+      v-for="r in 6"
+      :key="'kw-form-row' + r"
+    >
+      <kw-form-item
+        v-for="n in r"
+        :key="'kw-form-row' + r + 'kw-form-item' + n"
+        :label="`items ${n}`"
+      >
+        test
+      </kw-form-item>
+    </kw-form-row>
+
+    <kw-form-row>
+      <kw-form-item
+        :colspan="3"
+        label="break!"
+      >
+        in auto counting col, you can not use colspan.
+      </kw-form-item>
+      <kw-form-item
+        :colspan="1"
+        label="break!"
+      >
+        in auto counting col, you can not use colspan.
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row :cols="4">
+      <kw-form-item
+        :colspan="3"
+        label="break!"
+      >
+        if you want use colspan, declare cols in row or form!
+      </kw-form-item>
+      <kw-form-item
+        :colspan="1"
+        label="break!"
+      >
+        :)
+      </kw-form-item>
+    </kw-form-row>
+  </kw-form>
 </template>
 
 <script setup>
@@ -212,6 +260,8 @@ const ynModel = ref('N');
 </script>
 
 <style scoped lang="scss">
+@import "~@css/mixins";
+
 .kw-form::before {
   position: absolute;
   content: "";
@@ -241,5 +291,22 @@ const ynModel = ref('N');
   inset: 0;
   border: 1px dashed #ff5353;
   background-color: rgb(244 211 100 / 10%);
+}
+
+.custom-form {
+  $-custom-form-row-height: 30px;
+  $-custom-form-row-gap: 30px;
+  $-custom-form-row-padding: 10px;
+  $-custom-form-item-min-height: 50px;
+
+  &.kw-form {
+    .kw-form-row {
+      @include kw-row($-custom-form-row-height, $-custom-form-row-gap, $-custom-form-row-padding);
+    }
+
+    .kw-form-item {
+      @include kw-item($-custom-form-item-min-height);
+    }
+  }
 }
 </style>
