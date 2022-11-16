@@ -1,11 +1,11 @@
 .kw-select.q-select {
-  & .q-field {
+  &.q-field {
     &__input {
       width: 0;
       min-width: 1px !important; // quasar use !important already...
     }
 
-    &__dropdown-icon {
+    .q-select__dropdown-icon {
       opacity: 1 !important;
       color: $black1;
     }
