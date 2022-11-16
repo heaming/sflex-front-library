@@ -11,7 +11,7 @@
   </q-expansion-item>
   <!-- Form -->
   <q-expansion-item
-    v-if="false"
+    v-if="true"
     label="Form"
   >
     <div class="result-area">

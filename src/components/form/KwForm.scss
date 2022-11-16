@@ -55,24 +55,6 @@
     }
   }
 
-  & {
-    .kw-form-row:first-of-type:not(h3+.kw-form-row) {
-      padding-top: 0;
-      min-height: $kw-field-line-height + at($-kw-form-row-padding, 3);
-    }
-
-    .kw-form-row:last-of-type {
-      padding-bottom: 0;
-      min-height: $kw-field-line-height + at($-kw-form-row-padding, 1);
-    }
-
-    .kw-form-row:first-of-type:last-of-type {
-      padding-top: 0;
-      padding-bottom: 0;
-      min-height: $kw-field-line-height;
-    }
-  }
-
   &--dense {
     .kw-form-row {
       @include kw-row($-kw-form-row-height-dense, $-kw-form-row-gap-dense, $-kw-form-row-padding-dense);
