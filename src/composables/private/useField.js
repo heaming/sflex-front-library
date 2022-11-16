@@ -4,7 +4,7 @@ import { debounce } from 'lodash-es';
 import useFieldState, { useFieldStateProps } from './useFieldState';
 import { FormContextKey } from '../../consts/private/symbols';
 import _validate from '../../validate';
-import processWait from '../../utils/private/processWait';
+import { timeout } from '../../utils/private/tick';
 
 export const useFieldProps = {
   ...useFieldStateProps,
@@ -119,7 +119,7 @@ export default (options) => {
 
   async function setPending() {
     setState({ pending: true });
-    await processWait();
+    await timeout();
     debounceValidate.cancel();
   }
 

@@ -44,7 +44,7 @@ import { GlobalDialogVmKey } from '../../consts/private/symbols';
 import libConfig from '../../consts/private/libConfig';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
-import processWait from '../../utils/private/processWait';
+import { timeout } from '../../utils/private/tick';
 
 const {
   DIALOG_TRANSITION_DURATION,
@@ -67,7 +67,7 @@ export default {
 
     watch(isActive, async (val) => {
       if (val) {
-        await processWait(DIALOG_TRANSITION_DURATION);
+        await timeout(DIALOG_TRANSITION_DURATION);
         okRef.value?.$el.focus();
       }
     });
