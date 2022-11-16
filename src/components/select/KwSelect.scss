@@ -5,11 +5,6 @@
       min-width: 1px !important; // quasar use !important already...
     }
 
-    &__dropdown-icon {
-      opacity: 1 !important;
-      color: $black1;
-    }
-
     &__native {
       span {
         overflow: hidden;
@@ -36,6 +31,11 @@
         }
       }
     }
+  }
+
+  .q-select__dropdown-icon {
+    opacity: 1 !important;
+    color: $black1;
   }
 }
 
