@@ -253,11 +253,22 @@
       <file-form />
     </div>
   </q-expansion-item>
+  <!-- avatar -->
+  <q-expansion-item
+    v-if="true"
+    label="avatar"
+    :default-opened="true"
+  >
+    <div class="result-area">
+      <avatar-form />
+    </div>
+  </q-expansion-item>
 </template>
 
 <script setup>
 /* eslint-disable no-unused-vars */
 import {
+  AvatarForm,
   InputForm,
   SelectForm,
   CheckBoxForm,
