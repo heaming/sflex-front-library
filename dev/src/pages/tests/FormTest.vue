@@ -94,7 +94,7 @@
           <kw-form-item label="Select">
             <kw-select
               :model-value="[]"
-              :options="['A', 'B', 'C', 'D']"
+              :options="Array.from({length: 99}, (v, i) => String(i))"
               name="select"
               rules="required"
             />
