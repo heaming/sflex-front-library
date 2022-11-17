@@ -48,22 +48,27 @@
 
       &.q-router-link--active,
       &--active {
-        font-weight: 700;
         color: $black2;
       }
 
-      // .q-focus-helper {
-      //   display: none;
-      // }
+      .q-focus-helper {
+        display: none;
+      }
     }
   }
 
   &__highlight {
     position: absolute;
-    top: 0;
+    top: calc(50% - 17px);
     width: 100%;
-    background: $placeholder;
-    opacity: 0.1;
-    pointer-events: none;
+    height: 34px;
+    overflow: hidden;
+    background: rgba(128 128 128 / 20%);
+  }
+
+  &__highlight &__options {
+    .q-item {
+      font-weight: 700;
+    }
   }
 }
