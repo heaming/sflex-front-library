@@ -959,6 +959,23 @@ $unit: px;
   }
 }
 
+// only Desktop
+body.desktop {
+  .hasSearch:has(.overWidth) {
+    .q-tab-panels,
+    .q-panel-parent {
+      overflow: visible;
+    }
+
+    .kw-search {
+      border-top: 1px solid #ddd;
+      margin-right: -41px;
+      margin-left: -41px;
+    }
+  }
+}
+
+// only Mobile
 body.mobile {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
