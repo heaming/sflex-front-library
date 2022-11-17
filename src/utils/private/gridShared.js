@@ -2,7 +2,7 @@ import {
   LocalDataProvider, GridView, LocalTreeDataProvider, TreeView,
 } from 'realgrid';
 import { cloneDeep } from 'lodash-es';
-import processWait from './processWait';
+import { timeout } from './tick';
 import consts from '../../consts';
 import store from '../../store';
 
@@ -174,7 +174,7 @@ export async function waitUntilShowEditor(view, dropdown = false) {
 
     if (isCellEditable(view, column, index)) {
       view.showEditor(dropdown);
-      await processWait();
+      await timeout();
 
       if (view.isEditing()) {
         document.activeElement.select();
@@ -220,7 +220,7 @@ export async function cloneView(view, options) {
   copyView.setFooters(cloneDeep(view.getFooters()));
 
   if (view.isGrouped()) {
-    await processWait();
+    await timeout();
     copyView.setRowGroup(cloneDeep(view.getRowGroup()));
     copyView.groupBy(cloneDeep(view.getGroupFields()));
   }
