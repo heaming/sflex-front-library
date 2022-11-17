@@ -17,6 +17,10 @@
       color: $black3;
       font-weight: 400;
     }
+
+    > h3 {
+      margin-top: 0 !important;
+    }
   }
 
   &__contents {
