@@ -7,8 +7,31 @@
       아바타다.
     </p>
     <guide-section
-      title="default"
-      description="default"
+      title="playground"
+      description="playground"
+    >
+      <guide-props
+        v-model="blndingProps"
+        :props="{
+          size: { type: String, default: undefined },
+          fontSize: { type: String, default: undefined },
+          color: { type: String, default: undefined },
+          textColor: { type: String, default: undefined },
+          icon: { type: String, default: undefined },
+          square: { type: Boolean, default: undefined },
+          rounded: { type: Boolean, default: undefined },
+        }"
+      />
+      <kw-separator />
+      <kw-avatar
+        v-bind="blndingProps"
+      >
+        !
+      </kw-avatar>
+    </guide-section>
+    <guide-section
+      title="default slot"
+      description="=Use default slot when you want draw picture or image in the avatar."
       :guide-code="defaultCode"
     >
       <kw-avatar>
@@ -20,7 +43,7 @@
     </guide-section>
     <guide-section
       title="Google"
-      description="Google"
+      description="Or you can write text."
       :guide-code="googleCode"
     >
       <kw-avatar
@@ -120,4 +143,5 @@ const googleCode = `
       >
         E
       </kw-avatar>`;
+const blndingProps = ref(null);
 </script>
