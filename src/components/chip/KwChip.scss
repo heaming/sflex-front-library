@@ -13,6 +13,10 @@
       .q-chip__content {
         font-weight: 500;
       }
+
+      &.bg-primary {
+        background-color: rgb(47 138 243 / 10%) !important;
+      }
     }
 
     .q-chip__icon {
