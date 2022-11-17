@@ -961,7 +961,7 @@ $unit: px;
 
 // only Desktop
 body.desktop {
-  .hasSearch:has(.overWidth) {
+  .has-search:has(.over-width) {
     .q-tab-panels,
     .q-panel-parent {
       overflow: visible;

@@ -11,7 +11,7 @@
         <kw-stepper
           ref="stepper"
           v-model="stepInitNum"
-          class="hasSearch"
+          class="has-search"
         >
           <kw-step
             :name="1"
@@ -47,7 +47,7 @@
             </kw-tabs>
             <kw-tab-panels model-value="1">
               <kw-tab-panel name="1">
-                <div class="overWidth">
+                <div class="over-width">
                   <kw-search>
                     <kw-search-row>
                       <kw-search-item label="abc">
