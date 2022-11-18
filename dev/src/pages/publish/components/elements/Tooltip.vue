@@ -57,8 +57,11 @@
           If you need another icon image chip,
           please refer to 'how to make icon button' inn iconButton page and add icon svg file.
         </li> -->
-        <li>
+        <li class="delete">
           If you need tooltip type icon, add 'kw-tooltip' tag inside kw-icon like as last example
+        </li>
+        <li>
+          If you need tooltip type icon, add tooltip prop please find detail in example code
         </li>
       </ul>
     </div>
@@ -76,9 +79,8 @@
         <div class="kw-guide-example">
           <kw-icon
             name="info"
-          >
-            <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
-          </kw-icon>
+            tooltip="tooltip text"
+          />
           <kw-icon
             name="warning"
             class="ml20"
@@ -98,8 +100,9 @@
 const testCode = `
 <kw-icon
   name="info"
+  tooltip="tooltip text"
 >
-  <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip>
+  <!-- <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip> -->
 </kw-icon>
 
 <kw-icon
