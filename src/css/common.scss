@@ -488,6 +488,22 @@ $unit: px;
   }
 }
 
+.grow {
+  flex-grow: 1;
+}
+
+.kw-grow {
+  flex-grow: 1 !important;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.kw-shrink {
+  flex-shrink: 1 !important;
+}
+
 .kw-notification-title {
   padding-top: 0;
   font-size: 18px;
