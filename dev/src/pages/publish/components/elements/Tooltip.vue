@@ -112,6 +112,10 @@ const testCode = `
 
 const guideHistory = [
   {
+    timestamp: '2022.11.18',
+    text: 'change code with tooltip',
+  },
+  {
     timestamp: '2022.10.06',
     text: 'change icon name in code',
   },
