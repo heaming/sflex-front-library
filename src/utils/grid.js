@@ -17,7 +17,7 @@ import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
 import _validate from '../validate';
 import i18n from '../i18n';
-import processWait from './private/processWait';
+import { timeout } from './private/tick';
 
 function datetimeCallback(data, dataRow, fieldName, value) {
   if (!value) return null;
@@ -469,9 +469,9 @@ export async function exportView(view, options) {
   try {
     loadProgress(0);
     await executeExportView(view, options, loadProgress, async () => {
-      await processWait();
+      await timeout();
       if (shouldClone) destroyCloneView(view);
-      await processWait(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
+      await timeout(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
     });
   } finally {
     loadProgress(-1);

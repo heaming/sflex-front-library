@@ -1,33 +1,43 @@
 .kw-chip {
-  margin: 0;
-  padding: 0 8px;
-  height: 20px;
-  font-size: 12px;
-  border-radius: 10px;
-  line-height: 20px;
+  &.q-chip {
+    margin: 0;
+    padding: 0 8px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 10px;
+    line-height: 20px;
 
-  &.q-chip--square {
-    border-radius: 0;
-  }
+    &--square {
+      border-radius: 0;
 
-  .q-chip__icon {
-    font-size: 1em;
-  }
+      .q-chip__content {
+        font-weight: 500;
+      }
 
-  &.kw-chip--icon-only {
-    padding: 0;
-    font-size: 16px;
-
-    .q-chip__icon--left {
-      margin: 0;
-
-      & + .q-chip__content {
-        display: none;
+      &.bg-primary {
+        background-color: rgb(47 138 243 / 10%) !important;
       }
     }
-  }
 
-  & + h2 {
-    padding-top: 8px;
+    .q-chip__icon {
+      font-size: 1em;
+    }
+
+    // &.kw-chip--icon-only {
+    //   padding: 0;
+    //   font-size: 16px;
+
+    //   .q-chip__icon--left {
+    //     margin: 0;
+
+    //     & + .q-chip__content {
+    //       display: none;
+    //     }
+    //   }
+    // }
+
+    & + h2 {
+      padding-top: 8px;
+    }
   }
 }
