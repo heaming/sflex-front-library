@@ -1,4 +1,14 @@
 <template>
+  <div
+    class="w300 h300 bg-deep-orange-1 flex"
+    style="align-items: center;"
+  >
+    <div class="rotate-container">
+      <div class="rotate-item">
+        item
+      </div>
+    </div>
+  </div>
   <!-- Mobile test -->
   <q-expansion-item
     v-if="true"
@@ -283,6 +293,26 @@ import {
 const scrollAreaRef = ref();
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.rotate-container {
+  background-color: blue;
+  width: 200px;
+  height: 0;
+  outline-offset: 1px;
+  outline: #000 solid 1px;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  transform-style: preserve-3d;
+  transform: rotateX(-70deg);
+}
 
+.rotate-item {
+  position: absolute;
+  background-color: red;
+  width: 50%;
+  height: 50px;
+  top: -25px;
+  transform: rotateX(70deg) translateZ(200px);
+}
 </style>
