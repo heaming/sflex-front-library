@@ -59,7 +59,6 @@ export default {
     align: { type: String, default: 'center' },
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
-    stretch: { type: Boolean, default: false },
 
     // events
     onClick: { type: Function, default: undefined },

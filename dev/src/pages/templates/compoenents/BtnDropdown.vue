@@ -4,7 +4,7 @@
       Btn
     </h2>
     <p class="kw-guide-description">
-      버튼이다.
+      버튼 드랍다운: 버튼을 눌렀을때 menu 혹은 dialog 가 등장하며, 추가적인 버튼 액션을 할 때 사용함.
     </p>
     <guide-section
       title="playground"
@@ -12,18 +12,29 @@
     >
       <guide-props
         v-model="bindingProps1"
-        title="content"
+        title="bt"
         :props="{
-          label: { type: [Number, String], default: undefined },
-          icon: { type: String, default: undefined },
-          iconRight: { type: String, default: undefined },
+          padding: { type: String, default: undefined },
+          minWidth: { type: String, default: undefined },
 
-          // about innerClasses
-          align: { type: String, default: 'center' },
-          stack: { type: Boolean, default: false },
-          noWrap: { type: Boolean, default: false },
-          stretch: { type: Boolean, default: false },
-          grow: { type: Boolean, default: false },
+          // design on quasar unelevated style.
+          filled: { type: Boolean, default: false },
+          underline: { type: Boolean, default: false },
+          borderless: { type: Boolean, default: false },
+          outlined: { type: Boolean, default: false },
+
+          // color props
+          color: { type: String, default: undefined }, // this one should be solid color.
+          textColor: { type: String, default: undefined }, // this one should be solid color.
+          borderColor: { type: String, default: undefined }, // this one should be solid color.
+          // glossy: { type: Boolean, default: false }, // about background tweak. we will not use.
+
+          // presets for color and design
+          preset: { type: String, default: '' },
+          primary: { type: Boolean, default: false },
+          negative: { type: Boolean, default: false },
+          secondary: { type: Boolean, default: false },
+          gridAction: { type: Boolean, default: false },
         }"
       />
       <guide-props
@@ -72,6 +83,7 @@
         v-model="bindingProps4"
         title="behavior"
         :props="{
+          modelValue: { type: Boolean, default: undefined },
           type: { type: String, default: 'button' },
           tabindex: { type: [Number, String], default: undefined },
           disable: { type: Boolean, default: false },
@@ -80,7 +92,7 @@
           href: { type: String, default: undefined },
           target: { type: String, default: undefined },
         }"
-      />
+      />=
       <kw-separator />
       <div class="w300 h300 bg-green flex">
         <kw-btn
@@ -123,3 +135,7 @@ const defaultCode = `
             >
           </kw-avatar>`;
 </script>
+
+<style scoped>
+
+</style>
