@@ -18,7 +18,7 @@ interface KwOptionGroupProps extends UseFieldProps, UseOptionsProps {
   /**
    * 공간을 덜 차지하는 스타일 적용
    */
-  dense?: string;
+  dense?: boolean;
 
   /**
    * 컴포넌트 비활성화 모드
