@@ -72,12 +72,15 @@ import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
 import { platform } from '../../plugins/platform';
 import useFormLayout from '../../composables/private/useFormLayout';
+import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwFieldWrap',
 
   props: {
     ...useDenseProps,
+    ...useStretchProps,
+    grow: { type: Boolean, default: true },
 
     label: { type: String, default: undefined },
     controlClass: { type: [Object, Array, String], default: undefined },
@@ -98,16 +101,20 @@ export default {
 
     const computedDense = useDense();
     const { cols } = useFormLayout();
+    const { stretchClasses } = useStretch();
 
     const showErrorMessage = computed(() => props.error || invalid.value);
     const showLabel = computed(() => platform.is.mobile && (props.label || slots.label));
+
     const computedClass = computed(() => {
-      const classes = [];
-      if (props.error || invalid.value) { classes.push('kw-field-wrap--error'); }
-      if (computedDense.value) { classes.push('kw-field-wrap--dense'); }
-      if (showLabel.value) { classes.push('kw-field-wrap--labeled'); }
-      if (props.autoHeight) { classes.push('kw-field-wrap--auto-height'); }
-      if (cols.value) { classes.push(`kw-field-wrap--col-${cols.value}`); }
+      const classes = {
+        ...stretchClasses.value,
+      };
+      classes['kw-field-wrap--error'] = props.error || invalid.value;
+      classes['kw-field-wrap--dense'] = computedDense.value;
+      classes['kw-field-wrap--labeled'] = showLabel.value;
+      classes['kw-field-wrap--auto-height'] = props.autoHeight;
+      classes[`kw-field-wrap--col-${cols.value}`] = !!cols.value;
       return classes;
     });
     const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);

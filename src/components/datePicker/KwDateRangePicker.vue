@@ -19,6 +19,8 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
+      :stretch="stretch"
+      :grow="grow"
       :autofocus="autofocus"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
@@ -37,6 +39,8 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
+      :stretch="stretch"
+      :grow="grow"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 1)"
     />

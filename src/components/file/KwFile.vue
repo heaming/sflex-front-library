@@ -6,7 +6,7 @@
     class="kw-field kw-file"
     :class="fileClass"
     :label="$g.platform.is.mobile ? label : undefined"
-    v-bind="{...styleClassAttrs, ...fieldStyles}"
+    v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     :error="invalid"
     :prefix="prefix"
     :suffix="suffix"
@@ -16,7 +16,6 @@
     :bg-color="bgColor"
     :loading="loading"
     bottom-slots
-    :hide-bottom-space="hideBottomSpace"
     :counter="counter"
     :clearable="clearable"
     :clear-icon="clearIcon"
@@ -138,6 +137,7 @@
       >
         <kw-btn
           v-if="showDefaultFilePickBtn"
+          color="transparent"
           padding="12px"
           :label="'파일선택'"
           :dense="dense"
@@ -404,7 +404,6 @@ export default {
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     loading: { type: Boolean, default: false },
-    hideBottomSpace: { type: Boolean, default: true },
     // Whether using default counter of q-file.
     counter: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
@@ -436,6 +435,7 @@ export default {
 
   setup(props, { emit, slots }) {
     const fieldStyles = useFieldStyle();
+    const { fieldStyleProps, fieldClasses } = fieldStyles;
 
     const fileRef = ref();
 
@@ -511,14 +511,16 @@ export default {
 
     // warp file comp
     const headerCtx = useFileHeader();
+    const { useHeaderFileClass } = headerCtx;
 
     // styling
     const fileClass = computed(() => ({
+      ...fieldClasses.value,
       'kw-file--multiple': props.multiple,
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
       'kw-file--horizontal-scroll': props.scrollHorizontal,
-      ...headerCtx.useHeaderFileClass.value,
+      ...useHeaderFileClass.value,
     }));
 
     const emptyAppendCounter = computed(() => !props.multiple
@@ -550,7 +552,7 @@ export default {
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
-      fieldStyles,
+      fieldStyleProps,
       ...uploadCtx,
       fileRef,
       bindValue,

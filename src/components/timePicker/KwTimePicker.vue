@@ -2,9 +2,9 @@
   <q-input
     ref="inputRef"
     v-model="innerValue"
-    v-bind="fieldStyles"
+    v-bind="fieldStyleProps"
     class="kw-field kw-time-picker"
-    :class="{'q-field--highlighted': showing}"
+    :class="timePickerClasses"
     :label="undefined"
     :error="invalid"
     :readonly="readonly"
@@ -354,10 +354,16 @@ export default {
     });
 
     const fieldStyles = useFieldStyle();
+    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const timePickerClasses = computed(() => ({
+      ...fieldClasses.value,
+      'q-field--highlighted': showing.value,
+    }));
 
     return {
       ...fieldCtx,
-      fieldStyles,
+      fieldStyleProps,
+      timePickerClasses,
       timeRef,
       timeListRefs,
       timeLists,

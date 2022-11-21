@@ -1,5 +1,5 @@
 export const useFilePickerProps = {
-  pickFileWhenClick: { type: Boolean, default: false },
+  pickFileWhenClick: { type: Boolean, default: undefined },
   pickFileBtn: { type: Boolean, default: undefined },
 };
 
@@ -21,8 +21,12 @@ export default (ref, editable) => {
     ref.value?.getNativeElement().click();
   };
 
-  const showDefaultFilePickBtn = computed(() => (props.pickFileBtn === undefined && !props.pickFileWhenClick)
-    || props.pickFileBtn === true);
+  const showDefaultFilePickBtn = computed(() => {
+    if (props.pickFileBtn === undefined) {
+      return !props.pickFileWhenClick;
+    }
+    return props.pickFileBtn;
+  });
 
   return {
     preventIfClick,
