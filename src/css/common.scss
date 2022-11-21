@@ -492,6 +492,10 @@ $unit: px;
   flex-grow: 1;
 }
 
+.grow-off {
+  flex-grow: 0;
+}
+
 .kw-grow {
   flex-grow: 1 !important;
 }
@@ -502,6 +506,10 @@ $unit: px;
 
 .kw-shrink {
   flex-shrink: 1 !important;
+}
+
+.shrink-off {
+  flex-shrink: 0;
 }
 
 .kw-notification-title {
