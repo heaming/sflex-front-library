@@ -1,5 +1,7 @@
 <template>
-  <q-item-label />
+  <q-item-label class="kw-item-label">
+    <slot />
+  </q-item-label>
 </template>
 
 <script>
