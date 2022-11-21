@@ -1,5 +1,6 @@
 <template>
   <kw-form ref="formRef">
+    <!-- quasar -->
     <kw-form-row>
       <kw-form-item label="QUASAR">
         <q-input
@@ -15,6 +16,7 @@
         />
       </kw-form-item>
     </kw-form-row>
+    <!-- default -->
     <kw-form-row>
       <kw-form-item
         label="기본"
@@ -80,6 +82,33 @@
           model-value=""
           label="기본"
           placeholder="placeholder"
+        />
+      </kw-form-item>
+    </kw-form-row>
+    <kw-form-row>
+      <kw-form-item
+        label="type"
+        required
+      >
+        <kw-input
+          model-value=""
+          type="number"
+        />
+        <kw-input
+          model-value=""
+          type="password"
+        />
+        <kw-input
+          model-value=""
+          type="email"
+        />
+        <kw-input
+          model-value=""
+          type="search"
+        />
+        <kw-input
+          model-value=""
+          type="tel"
         />
       </kw-form-item>
     </kw-form-row>
