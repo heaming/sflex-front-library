@@ -26,7 +26,7 @@
     :min="min"
     :max="max"
     :step="step"
-    :input-class="{'text-right': alignRight}"
+    :input-class="inputClass"
     :hide-bottom-space="hideBottomSpace ?? fieldStyles.hideBottomSpace"
     no-error-icon
     clear-icon="clear"
@@ -172,6 +172,7 @@ export default {
     lowerCase: { type: Boolean, default: false },
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
     alignRight: { type: Boolean, default: false },
+    spinner: { type: Boolean, default: undefined },
     onClickIcon: { type: Function, default: undefined },
 
     // when use mask props, keydown event not fired.
@@ -263,6 +264,10 @@ export default {
 
     const useCounter = computed(() => props.maxlength > 0 && props.counter);
     const counterText = computed(() => (useCounter ? `${getByte(value.value)} / ${props.maxlength}` : null));
+    const inputClass = computed(() => ({
+      'text-right': props.alignRight,
+      'q-no-input-spinner': !props.spinner,
+    }));
 
     onMounted(() => {
       if (props.preventSubmit) {
@@ -281,6 +286,7 @@ export default {
       onUpdateValue,
       useCounter,
       counterText,
+      inputClass,
     };
   },
 };

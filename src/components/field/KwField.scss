@@ -437,6 +437,7 @@
   }
 
   &__control-container {
+    flex: 10000 1 0;
     position: relative;
     display: flex;
     flex-wrap: nowrap;

@@ -155,6 +155,12 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   alignRight?: boolean;
 
   /**
+   * type: number 시 브라우저 기본 spinner 사용 여부
+   * @default undefined
+   */
+  spinner?: boolean;
+
+  /**
    * KwSearch, KwForm 안에서 엔터 동작 시 submit 이벤트가 발생하는 것을 막는다
    */
   preventSubmit?: boolean;
