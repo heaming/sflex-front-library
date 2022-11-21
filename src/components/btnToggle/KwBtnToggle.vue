@@ -78,22 +78,16 @@ export default {
 
     const toggleButtonClasses = computed(() => {
       let classes = 'kw-btn ';
-      classes += buttonClasses.value || '';
-      if (props.toggleColor) {
-        classes += `kw-btn--toggle-color-${props.toggleColor} `;
-      }
-      if (props.toggleTextColor) {
-        classes += `kw-btn--toggle-text-color-${props.toggleTextColor} `;
-      }
-      if (props.toggleBorderColor) {
-        classes += `kw-btn--toggle-border-color-${props.toggleBorderColor} `;
-      }
+      classes += buttonClasses.value || {};
+      if (props.toggleColor) { classes[`kw-btn--toggle-color-${props.toggleColor}`] = true; }
+      if (props.toggleTextColor) { classes[`kw-btn--toggle-text-color-${props.toggleTextColor}`] = true; }
+      if (props.toggleBorderColor) { classes[`kw-btn--toggle-border-color-${props.toggleBorderColor}`] = true; }
       return classes;
     });
 
     const toggleClass = computed(() => {
-      let classes = 'kw-btn-toggle ';
-      if (props.gap) { classes += 'kw-btn-toggle--spaced '; }
+      const classes = { 'kw-btn-toggle': true };
+      if (props.gap) { classes['kw-btn-toggle--spaced'] = true; }
       return classes;
     });
 

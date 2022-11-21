@@ -1,7 +1,9 @@
 import useDense, { useDenseProps } from './useDense';
+import useStretch, { useStretchProps } from './useStretch';
 
 export const useBtnStyleProps = {
   ...useDenseProps,
+  ...useStretchProps,
 
   // we will not use quasar btn props, since design break em based styling.
   padding: { type: String, default: undefined },
@@ -101,35 +103,21 @@ export default (defaultPreset) => {
     || stylePreset.value.borderColor
     || designDefaultColors[design.value]?.borderColor);
 
+  const { stretchClasses } = useStretch();
+
   const buttonClasses = computed(() => {
-    let classes = '';
-
-    if (design.value) {
-      classes += `kw-btn--${design.value} `;
-    }
-
-    if (buttonColor.value) {
-      classes += `kw-btn--color-${buttonColor.value} `;
-    }
-
-    if (buttonTextColor.value) {
-      classes += `kw-btn--text-color-${buttonTextColor.value} `;
-    }
-
-    if (buttonBorderColor.value) {
-      classes += `kw-btn--border-color-${buttonBorderColor.value} `;
-    }
-
-    if ((props.icon || props.iconRight) && !props.label && !slots.default) {
-      classes += 'kw-btn--icon-only ';
-    }
-
+    const classes = { ...stretchClasses.value };
+    if (design.value) { classes[`kw-btn--${design.value}`] = true; }
+    if (buttonColor.value) { classes[`kw-btn--color-${buttonColor.value}`] = true; }
+    if (buttonTextColor.value) { classes[`kw-btn--text-color-${buttonTextColor.value}`] = true; }
+    if (buttonBorderColor.value) { classes[`kw-btn--border-color-${buttonBorderColor.value}`] = true; }
+    if ((props.icon || props.iconRight) && !props.label && !slots.default) { classes['kw-btn--icon-only'] = true; }
     return classes;
   });
 
   const buttonStyles = computed(() => {
     let styles = '';
-    styles += props.padding ? `padding-left: ${props.padding}; padding-right: ${props.padding} ` : '';
+    styles += props.padding ? `padding-left: ${props.padding}; padding-right: ${props.padding}; ` : '';
     styles += props.minWidth ? `min-width: ${props.minWidth}; ` : '';
     return styles;
   });
