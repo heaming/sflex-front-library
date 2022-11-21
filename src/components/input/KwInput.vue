@@ -2,8 +2,9 @@
   <q-input
     ref="inputRef"
     :model-value="value"
-    v-bind="{...styleClassAttrs, ...fieldStyles}"
+    v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-input"
+    :class="fieldClasses"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :type="type"
@@ -27,7 +28,6 @@
     :max="max"
     :step="step"
     :input-class="inputClass"
-    :hide-bottom-space="hideBottomSpace ?? fieldStyles.hideBottomSpace"
     no-error-icon
     clear-icon="clear"
     @focus="onFocus"
@@ -157,7 +157,6 @@ export default {
     min: { type: [Number, String], default: undefined },
     max: { type: [Number, String], default: undefined },
     step: { type: [Number, String], default: undefined },
-    hideBottomSpace: { type: Boolean, default: undefined },
     onFocus: { type: Function, default: undefined },
     onBlur: { type: Function, default: undefined },
     onClear: { type: Function, default: undefined },
@@ -186,6 +185,7 @@ export default {
 
   setup(props) {
     const fieldStyles = useFieldStyle();
+    const { fieldStyleProps, fieldClasses } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
@@ -279,7 +279,8 @@ export default {
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
-      fieldStyles,
+      fieldStyleProps,
+      fieldClasses,
       select,
       onKeydownInput,
       onChangeInput,

@@ -1,12 +1,12 @@
-import { UseDense } from './useDense';
-import { UseStretch } from './UseStretch';
+import { UseDenseProps } from './useDense';
+import { UseStretchProps } from './UseStretch';
 
 /**
  * 추가 시, opacity 가 0 인 색을 지정 할 것.
  */
-type semanticColor = 'error' | 'black1' | 'black2' | 'normal-text' | 'black3' | 'disabled' | 'black-btn-line' | 'placeholder' | 'line-stroke' | 'line-line' | 'line-bg' | 'bg-white' | 'bg-box' | 'bg-body' | 'primary' | 'secondary' | 'accent' | 'dark' | 'positive' | 'negative' | 'info' | 'warning' | 'bg-grid';
+type semanticColor = 'transparent' | 'error' | 'black1' | 'black2' | 'normal-text' | 'black3' | 'disabled' | 'black-btn-line' | 'placeholder' | 'line-stroke' | 'line-line' | 'line-bg' | 'bg-white' | 'bg-box' | 'bg-body' | 'primary' | 'secondary' | 'accent' | 'dark' | 'positive' | 'negative' | 'info' | 'warning' | 'bg-grid';
 
-export interface UseBtnStyleProps extends UseDense, UseStretch {
+export interface UseBtnStyleProps extends UseDenseProps, UseStretchProps {
   /**
    * content 영역 '좌우' padding 크기를 지정한다.
    * @example '12px'
@@ -31,7 +31,7 @@ export interface UseBtnStyleProps extends UseDense, UseStretch {
    * @see borderless
    * @see outlined
    */
-  filled?: string;
+  filled?: boolean;
 
   /**
    * 버튼 디자인 속성.
@@ -44,7 +44,7 @@ export interface UseBtnStyleProps extends UseDense, UseStretch {
    * @see borderless
    * @see outlined
    */
-  underline?: string;
+  underline?: boolean;
 
   /**
    * 버튼 디자인 속성.
@@ -57,7 +57,7 @@ export interface UseBtnStyleProps extends UseDense, UseStretch {
    * @see borderless
    * @see outlined
    */
-  borderless?: string;
+  borderless?: boolean;
 
   /**
    * 버튼 디자인 속성.
@@ -68,7 +68,7 @@ export interface UseBtnStyleProps extends UseDense, UseStretch {
    * @see borderless
    * @see outlined
    */
-  outlined?: string;
+  outlined?: boolean;
 
   /**
    * 버튼 색 속성.
