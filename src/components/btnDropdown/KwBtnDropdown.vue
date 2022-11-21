@@ -87,7 +87,6 @@ export default {
     align: { type: String, default: 'center' },
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
-    stretch: { type: Boolean, default: false },
 
     modelValue: { type: Boolean, default: undefined },
     dropdownIcon: { type: String, default: 'arrow_down' },

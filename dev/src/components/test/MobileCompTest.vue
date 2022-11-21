@@ -174,7 +174,7 @@
           suffix="sf"
           rows="3"
         />
-        <kw-f6ile
+        <kw-file
           label="file multiple"
           multiple
         />

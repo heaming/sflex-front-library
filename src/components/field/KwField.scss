@@ -432,6 +432,8 @@
   &__control {
     outline: none;
     height: $kw-field-height;
+    display: flex;
+    flex-flow: row nowrap;
   }
 
   &__control-container {
