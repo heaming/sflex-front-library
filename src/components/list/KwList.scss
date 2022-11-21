@@ -1,0 +1,58 @@
+.kw-list {
+  &.q-list {
+    // kw-search > 체크박스 목록
+    &.checkbox-group {
+      .kw-item {
+        padding: 0;
+        min-height: auto;
+
+        .kw-field-wrap {
+          max-width: 158px;
+        }
+
+        .kw-field-wrap__control {
+          flex-shrink: 1;
+        }
+
+        &:first-child {
+          padding-bottom: 13px;
+        }
+
+        &:not(:first-child) {
+          border-top: 1px solid $line-bg;
+          padding: 13px 0;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+      }
+
+      .kw-option-group {
+        flex-grow: 5 !important;
+
+        .kw-checkbox.q-option-group {
+          flex-wrap: wrap;
+          gap: 12px 20px;
+
+          & > div + div {
+            margin-left: 0;
+          }
+
+          .q-checkbox {
+            min-height: 32px;
+          }
+
+          .q-checkbox--dense .q-checkbox__label {
+            min-width: 185px;
+          }
+        }
+      }
+
+      .kw-separator {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+}
