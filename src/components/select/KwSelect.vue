@@ -3,8 +3,9 @@
   <q-select
     ref="inputRef"
     :model-value="value"
-    v-bind="{...styleClassAttrs, ...fieldStyles}"
+    v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-select"
+    :class="fieldClasses"
     popup-content-class="kw-select-options-menu"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid || undefined"
@@ -32,7 +33,6 @@
     no-error-icon
     :dropdown-icon="dropdownIcon"
     :hide-dropdown-icon="hideDropdownIcon"
-    :hide-bottom-space="hideBottemSpace"
     clear-icon="clear"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
@@ -182,7 +182,6 @@ export default {
     inputDebounce: { type: [Number, String], default: 100 },
     dropdownIcon: { type: String, default: 'arrow_down' },
     hideDropdownIcon: { type: Boolean, default: false },
-    hideBottemSpace: { type: Boolean, default: true },
     disable: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false },
     prefix: { type: String, default: undefined },
@@ -207,6 +206,7 @@ export default {
 
   setup(props) {
     const fieldStyles = useFieldStyle();
+    const { fieldStyleProps, fieldClasses } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
@@ -271,7 +271,8 @@ export default {
       ...useInheritAttrs(),
       ...fieldCtx,
       ...optionsCtx,
-      fieldStyles,
+      fieldStyleProps,
+      fieldClasses,
       getOptionIndex,
       getOption,
       getOptionLabel,

@@ -58,7 +58,7 @@ interface KwCheckboxProps {
   /**
    * 공간을 덜 차지하는 스타일 적용
    */
-  dense?: string;
+  dense?: boolean;
 
   /**
    * checked 커스텀 아이콘

@@ -1,8 +1,15 @@
 import { platform } from '../../plugins/platform';
 import useDense, { useDenseProps } from './useDense';
+import useStretch, { useStretchProps } from './useStretch';
 
 export const useFieldStyleProps = {
   ...useDenseProps,
+  ...useStretchProps,
+
+  hideBottomSpace: {
+    type: Boolean,
+    default: undefined,
+  },
   underline: {
     type: Boolean,
     default: false,
@@ -22,15 +29,18 @@ export default () => {
 
   const computedDense = useDense();
 
-  return computed(() => {
+  const { stretchClasses } = useStretch();
+
+  const fieldClasses = computed(() => ({
+    ...stretchClasses.value,
+  }));
+
+  const fieldStyleProps = computed(() => {
     const fieldProps = {
-      hideBottomSpace: true,
       dense: computedDense.value,
+      hideBottomSpace: props.hideBottomSpace ?? platform.is.mobile,
+      outlined: !platform.is.mobile,
     };
-    if (!platform.is.mobile) {
-      fieldProps.outlined = true;
-      fieldProps.hideBottomSpace = false;
-    }
     if (props.underline === true) {
       fieldProps.outlined = false;
       fieldProps.borderless = false;
@@ -45,4 +55,9 @@ export default () => {
     }
     return fieldProps;
   });
+
+  return {
+    fieldStyleProps,
+    fieldClasses,
+  };
 };

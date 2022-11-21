@@ -1,5 +1,6 @@
-export interface UseDense {
+export interface UseDenseProps {
   /**
+   * 크가 관련 속성.
    * 기준 item 높이 인 40px 이 아닌, 32px 높이 기준의 컴포넌트 Style 로 지정.
    */
   dense?: boolean;
