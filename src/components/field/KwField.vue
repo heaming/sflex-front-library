@@ -6,6 +6,7 @@
     :error-message="invalidMessage"
     :stretch="stretch"
     :grow="grow"
+    :overflow="overflow"
     @focus="$emit('focus')"
   >
     <slot

@@ -21,6 +21,7 @@
       :borderless="borderless"
       :stretch="stretch"
       :grow="grow"
+      :overflow="overflow"
       :autofocus="autofocus"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
@@ -41,6 +42,7 @@
       :borderless="borderless"
       :stretch="stretch"
       :grow="grow"
+      :overflow="overflow"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 1)"
     />

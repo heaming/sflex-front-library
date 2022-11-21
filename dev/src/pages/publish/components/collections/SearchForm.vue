@@ -289,6 +289,7 @@
             <kw-search-item label="DateRangePicker">
               <kw-date-range-picker
                 rules="date_range_required|date_range_months:1"
+                overflow
               />
             </kw-search-item>
             <kw-search-item
