@@ -35,7 +35,7 @@
     :exact-active-class="exactActiveClass"
     :disable="disable"
     :model-value="modelValue"
-    @on-update:model-value="$emit('onUpdate:modelValue', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
     @before-show="$emit('before-show', $event)"
     @show="$emit('show', $event)"
     @before-hide="$emit('before-hide', $event)"
@@ -102,7 +102,7 @@ export default {
   },
 
   emits: [
-    'onUpdate:modelValue',
+    'update:modelValue',
     'before-show',
     'show',
     'before-hide',
