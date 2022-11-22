@@ -1,5 +1,6 @@
 <template>
   <q-carousel-slide
+    v-bind="styleClassAttrs"
     class="kw-carousel-slide"
     :name="name"
     :img-src="imgSrc"
@@ -12,6 +13,8 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwCarouselSlide',
   inheritAttrs: false,
@@ -19,9 +22,16 @@ export default {
     // customize props
 
     // fall through props
-    name: { type: [Object, String, Number, Array, Boolean], required: true },
+    name: { type: [Object, Array, Number, String, Boolean, Function], required: true },
     imgSrc: { type: String, default: undefined },
     disable: { type: Boolean, default: undefined },
+  },
+  setup() {
+    const { styleClassAttrs } = useInheritAttrs();
+
+    return {
+      styleClassAttrs,
+    };
   },
 };
 </script>

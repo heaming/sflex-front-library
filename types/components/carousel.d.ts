@@ -4,6 +4,8 @@ import { GlobalComponentConstructor } from 'quasar';
 interface KwCarouselProps {}
 interface KwCarouselSlots {
   default: () => VNode[];
+  control: () => VNode[];
+  navigationIcon: (scope: { index: number; maxIndex: number; name: any; active: boolean; btnProps: object; onClick: (evt: Event) => void }) => VNode[];
 }
 
 interface KwCarouselControlProps {}

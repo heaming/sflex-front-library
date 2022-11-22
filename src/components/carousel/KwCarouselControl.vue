@@ -1,6 +1,7 @@
 <template>
   <q-carousel-control
     class="kw-carousel-control"
+    v-bind="styleClassAttrs"
     :position="position"
     :offset="offset"
   >
@@ -11,6 +12,8 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwCarouselControl',
   inheritAttrs: false,
@@ -18,8 +21,15 @@ export default {
     // customize props
 
     // fall through props
-    position: { type: String, default: undefined },
-    offset: { type: Array, default: undefined },
+    position: { type: String, default: 'bottom-right' },
+    offset: { type: Array, default: () => [18, 18] },
+  },
+  setup() {
+    const { styleClassAttrs } = useInheritAttrs();
+
+    return {
+      styleClassAttrs,
+    };
   },
 };
 </script>

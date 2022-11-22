@@ -34,7 +34,6 @@
           navigationIcon: { type: String, default: undefined },
           navigationActiveIcon: { type: String, default: undefined },
           thumbnails: { type: Boolean, default: undefined },
-          modelValue: { type: [Object, String, Number, Array, Boolean], default: 1 },
           dark: { type: Boolean, default: undefined },
           height: { type: String, default: undefined },
           controlColor: { type: String, default: undefined },
@@ -49,8 +48,7 @@
         v-model="slideProps1"
         title="slideProps1"
         :props="{
-          name: { type: [Object, String, Number, Array, Boolean], default: 1 },
-          imgSrc: { type: Boolean, default: undefined },
+          imgSrc: { type: String, default: undefined },
           disable: { type: Boolean, default: undefined },
         }"
       />
@@ -58,8 +56,7 @@
         v-model="slideProps2"
         title="slideProps2"
         :props="{
-          name: { type: [Object, String, Number, Array, Boolean], default: 2 },
-          imgSrc: { type: Boolean, default: undefined },
+          imgSrc: { type: String, default: undefined },
           disable: { type: Boolean, default: undefined },
         }"
       />
@@ -67,8 +64,7 @@
         v-model="slideProps3"
         title="slideProps3"
         :props="{
-          name: { type: [Object, String, Number, Array, Boolean], default: 3 },
-          imgSrc: { type: Boolean, default: undefined },
+          imgSrc: { type: String, default: undefined },
           disable: { type: Boolean, default: undefined },
         }"
       />
@@ -76,56 +72,83 @@
         v-model="controlProps"
         title="controlProps"
         :props="{
-          position: { type: String, default: undefined },
-          offset: { type: Array, default: undefined },
+          position: { type: String, default: 'bottom-right' },
+          offset: { type: Array, default: () => [18, 18] },
         }"
       />
       <kw-separator />
+
       <kw-carousel
+        ref="carousel"
+        v-model="slide"
         v-bind="carouselProps"
         swipeable
         animated
-        control-color="white"
-        navigation
-        padding
         arrows
+        prev-icon="arrow_left"
+        next-icon="arrow_right"
+        height="300px"
+        class="bg-purple text-white rounded-borders"
       >
         <kw-carousel-slide
-          v-bind="slideProps1"
+          :name="slides[0]"
+          class="column no-wrap flex-center"
         >
-          <div
-            class="bg-green w500 h500"
-          >
-            slide1
+          <kw-avatar>{{ slides[0] }}</kw-avatar>
+          <div class="q-mt-md text-center">
+            {{ lorem }}
           </div>
         </kw-carousel-slide>
         <kw-carousel-slide
-          v-bind="slideProps2"
+          :name="slides[1]"
+          class="column no-wrap flex-center"
         >
-          <div class="bg-orange w500 h500">
-            slide2
+          <kw-avatar>{{ slides[1] }}</kw-avatar>
+          <div class="q-mt-md text-center">
+            {{ lorem }}
           </div>
         </kw-carousel-slide>
         <kw-carousel-slide
-          v-bind="slideProps3"
+          :name="slides[2]"
+          class="column no-wrap flex-center"
         >
-          <div class="bg-blue w500 h500">
-            slide2
+          <kw-avatar>{{ slides[2] }}</kw-avatar>
+          <div class="q-mt-md text-center">
+            {{ lorem }}
           </div>
         </kw-carousel-slide>
-        <kw-carousel-control
-          v-if="false"
-          v-bind="controlProps"
-        >
-          control
-        </kw-carousel-control>
+
+        <template #control>
+          <kw-carousel-control v-bind="controlProps">
+            <kw-btn
+              color="transparent"
+              border-color="transparent"
+              text-color="bg-white"
+              icon="arrow_left"
+              @click="carousel.previous()"
+            />
+            <kw-btn
+              color="transparent"
+              border-color="transparent"
+              text-color="bg-white"
+              icon="arrow_right"
+              @click="carousel.next()"
+            />
+          </kw-carousel-control>
+        </template>
       </kw-carousel>
     </guide-section>
   </kw-page>
 </template>
 
 <script setup>
-const carouselProps = ref(null);
+const carousel = ref();
+const slide = ref(1);
+const slides = ref([1, 2, 3]);
+const lorem = 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.';
+const carouselProps = ref({
+  modelValue: '1',
+});
 const slideProps1 = ref(null);
 const slideProps2 = ref(null);
 const slideProps3 = ref(null);

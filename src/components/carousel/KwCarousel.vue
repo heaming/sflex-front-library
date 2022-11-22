@@ -1,6 +1,7 @@
 <template>
   <q-carousel
     ref="quasarRef"
+    v-bind="styleClassAttrs"
     class="kw-carousel"
     :fullscreen="fullscreen"
     :no-route-fullscreen-exit="noRouteFullscreenExit"
@@ -60,6 +61,8 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwCarousel',
   inheritAttrs: false,
@@ -70,44 +73,48 @@ export default {
     fullscreen: { type: Boolean, default: undefined },
     noRouteFullscreenExit: { type: Boolean, default: undefined },
     keepAlive: { type: Boolean, default: undefined },
-    keepAliveInclude: { type: [String, Array], default: undefined },
-    keepAliveExclude: { type: [String, Array], default: undefined },
+    keepAliveInclude: { type: [String, Array, RegExp], default: undefined },
+    keepAliveExclude: { type: [String, Array, RegExp], default: undefined },
     keepAliveMax: { type: Number, default: undefined },
     animated: { type: Boolean, default: undefined },
     infinite: { type: Boolean, default: undefined },
     swipeable: { type: Boolean, default: undefined },
     vertical: { type: Boolean, default: undefined },
-    autoplay: { type: [Number, Boolean], default: undefined },
+    autoplay: { type: [Number, Boolean], default: false },
     padding: { type: Boolean, default: undefined },
     arrows: { type: Boolean, default: undefined },
     prevIcon: { type: String, default: undefined },
     nextIcon: { type: String, default: undefined },
     navigation: { type: Boolean, default: undefined },
-    navigationPosition: { type: String, default: undefined },
+    navigationPosition: { type: String, default: 'bottom/right' },
     navigationIcon: { type: String, default: undefined },
     navigationActiveIcon: { type: String, default: undefined },
     thumbnails: { type: Boolean, default: undefined },
-    modelValue: { type: Boolean, default: undefined },
+    modelValue: { type: [Object, Array, Number, String, Boolean, Function], required: true },
     dark: { type: Boolean, default: undefined },
     height: { type: String, default: undefined },
     controlColor: { type: String, default: undefined },
     controlTextColor: { type: String, default: undefined },
     controlType: { type: String, default: undefined },
-    transitionPrev: { type: String, default: undefined },
-    transitionNext: { type: String, default: undefined },
-    transitionDuration: { type: [String, Number], default: undefined },
+    transitionPrev: { type: String, default: 'fade' },
+    transitionNext: { type: String, default: 'fade' },
+    transitionDuration: { type: [String, Number], default: 300 },
   },
   emits: ['update:model-value', 'before-transition', 'transition'],
   setup() {
     const quasarRef = ref();
-    function toggleFullscreen(...args) { quasarRef.value?.getScrollTarget(...args); }
-    function setFullscreen(...args) { quasarRef.value?.getScroll(...args); }
-    function exitFullscreen(...args) { quasarRef.value?.getScrollPosition(...args); }
-    function next(...args) { quasarRef.value?.getScrollPercentage(...args); }
-    function previous(...args) { quasarRef.value?.setScrollPosition(...args); }
-    function goTo(...args) { quasarRef.value?.setScrollPercentage(...args); }
+    function toggleFullscreen(...args) { quasarRef.value?.toggleFullscreen(...args); }
+    function setFullscreen(...args) { quasarRef.value?.setFullscreen(...args); }
+    function exitFullscreen(...args) { quasarRef.value?.exitFullscreen(...args); }
+    function next(...args) { quasarRef.value?.next(...args); }
+    function previous(...args) { quasarRef.value?.previous(...args); }
+    function goTo(...args) { quasarRef.value?.goTo(...args); }
+
+    const { styleClassAttrs } = useInheritAttrs();
 
     return {
+      quasarRef,
+      styleClassAttrs,
       toggleFullscreen,
       setFullscreen,
       exitFullscreen,
