@@ -13,10 +13,21 @@ interface KwActionBarSlots {
    */
   default: () => VNode[];
 }
+
+/**
+ * 삭제 예정.
+ *
+ * @deprecated
+ */
 export interface KwActionBar extends ComponentPublicInstance<KwActionBarProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
+    /**
+     * 삭제 예정.
+     *
+     * @deprecated
+     */
     KwActionBar: GlobalComponentConstructor<KwActionBarProps, KwActionBarSlots>;
   }
 }
