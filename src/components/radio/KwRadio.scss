@@ -22,6 +22,12 @@
       }
     }
 
+    &:hover {
+      .q-radio__label {
+        color: $black1;
+      }
+    }
+
     .q-radio__icon {
       font-size: 1em;
     }
@@ -68,12 +74,17 @@
       font-size: $-kw-radio-label-font-size;
       line-height: $-kw-radio-line-height;
       font-weight: 500;
-      color: $black1;
+
+      // color: $black1;
     }
 
     &[aria-checked="false"] .q-radio__label {
       color: $black2;
       font-weight: 400;
+
+      &:hover {
+        color: $black1;
+      }
     }
 
     &.reverse .q-radio__label {
