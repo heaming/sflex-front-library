@@ -104,7 +104,9 @@
 </template>
 
 <script setup>
-const bindingProps1 = ref(null);
+const bindingProps1 = ref({
+  label: 'label',
+});
 const bindingProps2 = ref(null);
 const bindingProps3 = ref(null);
 const bindingProps4 = ref(null);

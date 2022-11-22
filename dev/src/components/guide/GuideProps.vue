@@ -88,13 +88,15 @@ for (const propKey of Object.getOwnPropertyNames(innerProps.props)) {
   let value = propDefineObject.default;
   if (!isPrimitive && typeof value === 'function' && value.length === 0) {
     value = value();
-    if (propKey === 'offset') {
-      console.log(value);
-    }
+  }
+  if (innerProps.modelValue?.[propKey]) {
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    value = innerProps.modelValue?.[propKey];
   }
   if (Array.isArray(value)) {
     value = `[${value}]`;
   }
+
   innerValue.push({
     propKey,
     value,

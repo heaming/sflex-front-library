@@ -12,92 +12,45 @@
     >
       <guide-props
         v-model="bindingProps1"
-        title="bt"
-        :props="{
-          padding: { type: String, default: undefined },
-          minWidth: { type: String, default: undefined },
-
-          // design on quasar unelevated style.
-          filled: { type: Boolean, default: false },
-          underline: { type: Boolean, default: false },
-          borderless: { type: Boolean, default: false },
-          outlined: { type: Boolean, default: false },
-
-          // color props
-          color: { type: String, default: undefined }, // this one should be solid color.
-          textColor: { type: String, default: undefined }, // this one should be solid color.
-          borderColor: { type: String, default: undefined }, // this one should be solid color.
-          // glossy: { type: Boolean, default: false }, // about background tweak. we will not use.
-
-          // presets for color and design
-          preset: { type: String, default: '' },
-          primary: { type: Boolean, default: false },
-          negative: { type: Boolean, default: false },
-          secondary: { type: Boolean, default: false },
-          gridAction: { type: Boolean, default: false },
-        }"
+        title="btnStyleProps"
+        :props="btnStyleProps"
       />
       <guide-props
         v-model="bindingProps2"
         title="Style presets"
         :props="{
-          // presets for color and design
-          primary: { type: Boolean, default: false },
-          negative: { type: Boolean, default: false },
-          secondary: { type: Boolean, default: false },
-          gridAction: { type: Boolean, default: false },
-
-          preset: { type: String, default: '' },
-        }"
-      />
-      <guide-props
-        v-model="bindingProps3"
-        title="Styles"
-        :props="{
-          dense: { type: Boolean, default: undefined },
-          blockInheritDense: { type: Boolean, default: undefined },
-          padding: { type: String, default: undefined },
-          minWidth: { type: String, default: undefined },
-
-          // design on quasar unelevated style.
-          filled: { type: Boolean, default: false },
-          underline: { type: Boolean, default: false },
-          borderless: { type: Boolean, default: false },
-          outlined: { type: Boolean, default: false },
-
-          // color props
-          color: { type: String, default: undefined }, // this one should be solid color.
-          textColor: { type: String, default: undefined }, // this one should be solid color.
-          borderColor: { type: String, default: undefined }, // this one should be solid color.
-          // glossy: { type: Boolean, default: false }, // about background tweak. we will not use.
-
-          // presets for color and design
-          size: { type: String, default: undefined },
-          fontSize: { type: String, default: undefined },
-          color: { type: String, default: undefined },
-          textColor: { type: String, default: undefined },
-          icon: { type: String, default: undefined },
-        }"
-      />
-      <guide-props
-        v-model="bindingProps4"
-        title="behavior"
-        :props="{
-          modelValue: { type: Boolean, default: undefined },
           type: { type: String, default: 'button' },
+          label: { type: [Number, String], default: undefined },
+          icon: { type: String, default: undefined },
+          iconRight: { type: String, default: undefined },
           tabindex: { type: [Number, String], default: undefined },
           disable: { type: Boolean, default: false },
-          to: { type: String, default: undefined },
-          replace: { type: Boolean, default: undefined },
-          href: { type: String, default: undefined },
-          target: { type: String, default: undefined },
+
+          // about innerClasses
+          align: { type: String, default: 'center' },
+          stack: { type: Boolean, default: false },
+          noWrap: { type: Boolean, default: false },
+
+          modelValue: { type: Boolean, default: undefined },
+          dropdownIcon: { type: String, default: 'arrow_down' },
+          cover: { type: Boolean, default: false },
+          persistent: { type: Boolean, default: false },
+          noRouteDismiss: { type: Boolean, default: false },
+          autoClose: { type: Boolean, default: false },
+          menuAnchor: { type: String, default: 'bottom end' },
+          menuSelf: { type: String, default: 'top end' },
+          menuOffset: { type: Array, default: () => [0, 4] },
+          noIconAnimation: { type: Boolean, default: false },
         }"
-      />=
+      />
       <kw-separator />
       <div class="w300 h300 bg-green flex">
-        <kw-btn
+        <kw-btn-dropdown
           v-bind="bindingProps"
-        />
+        >
+          <kw-btn label="btn1" />
+          <kw-btn label="btn2" />
+        </kw-btn-dropdown>
       </div>
     </guide-section>
     <guide-section
@@ -105,35 +58,31 @@
       description="=Use default slot."
       :guide-code="defaultCode"
     >
-      <kw-btn
+      <kw-btn-dropdown
         v-bind="bindingProps"
       >
         <div>div1</div>
         <div>div2</div>
-      </kw-btn>
+      </kw-btn-dropdown>
     </guide-section>
   </kw-page>
 </template>
 
 <script setup>
-const bindingProps1 = ref(null);
-const bindingProps2 = ref(null);
-const bindingProps3 = ref(null);
-const bindingProps4 = ref(null);
+import { useBtnStyleProps } from '../../../../../src/composables/private/useBtnStyle';
+
+const bindingProps1 = ref({
+  padding: '12px',
+});
+const bindingProps2 = ref({
+  dropdownIcon: 'more',
+});
 const bindingProps = computed(() => ({
   ...bindingProps1.value,
   ...bindingProps2.value,
-  ...bindingProps3.value,
-  ...bindingProps4.value,
 }));
 
-const defaultCode = `
-          <kw-avatar>
-            <img
-              src="assets/images/test_image.png"
-              alt="test"
-            >
-          </kw-avatar>`;
+const btnStyleProps = useBtnStyleProps;
 </script>
 
 <style scoped>

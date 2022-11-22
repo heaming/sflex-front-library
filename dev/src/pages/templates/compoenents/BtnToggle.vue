@@ -43,7 +43,6 @@
       <div class="w300 h300 bg-green flex">
         <kw-btn-toggle
           v-bind="bindingProps"
-          :options="['1', '2', '3']"
         />
       </div>
     </guide-section>
@@ -68,7 +67,9 @@ import { useOptionsProps } from '../../../../../src/composables/private/useOptio
 import { useBtnStyleProps } from '../../../../../src/composables/private/useBtnStyle';
 
 const bindingProps1 = ref(null);
-const bindingProps2 = ref(null);
+const bindingProps2 = ref({
+  options: [1, 2, 3],
+});
 const bindingProps3 = ref(null);
 const bindingProps4 = ref(null);
 const bindingProps = computed(() => ({
