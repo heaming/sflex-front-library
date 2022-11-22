@@ -1,26 +1,40 @@
 .kw-list {
   &.q-list {
-    // kw-search > 체크박스 목록
+    // START kw-search > 체크박스 목록
     &.checkbox-group {
+      $checkboxes: ".checkbox-group";
+
+      padding-top: 6px;
+
       .kw-item {
         padding: 0;
         min-height: auto;
 
-        .kw-field-wrap {
-          max-width: 158px;
+        & > .kw-field-wrap {
+          max-width: 120px;
+          min-width: 120px;
         }
 
         .kw-field-wrap__control {
           flex-shrink: 1;
+          min-height: 22px;
+        }
+
+        .kw-field-wrap__control-container {
+          padding-top: 2px;
+        }
+
+        .q-field__control {
+          min-height: 22px;
         }
 
         &:first-child {
-          padding-bottom: 13px;
+          padding-bottom: 14px;
         }
 
         &:not(:first-child) {
           border-top: 1px solid $line-bg;
-          padding: 13px 0;
+          padding: 14px 0;
         }
 
         &:last-child {
@@ -33,26 +47,62 @@
 
         .kw-checkbox.q-option-group {
           flex-wrap: wrap;
-          gap: 12px 20px;
+          gap: 4px 12px;
 
           & > div + div {
             margin-left: 0;
           }
 
           .q-checkbox {
-            min-height: 32px;
+            min-height: 22px;
           }
 
           .q-checkbox--dense .q-checkbox__label {
-            min-width: 185px;
+            min-width: 170px;
           }
+        }
+
+        .q-field__native {
+          min-height: 22px;
         }
       }
 
       .kw-separator {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
+        margin-left: 12px !important;
+      }
+
+      #{$checkboxes}__children {
+        display: flex;
+        flex-flow: column wrap;
+        row-gap: 8px;
+      }
+
+      #{$checkboxes}__child {
+        display: flex;
+        flex-direction: row;
+
+        & > .kw-field-wrap {
+          max-width: 170px;
+          min-width: 170px;
+        }
+
+        .kw-option-group {
+          flex-grow: 4 !important;
+
+          .kw-checkbox.q-option-group {
+            flex-wrap: wrap;
+            gap: 2px 12px;
+
+            .q-checkbox--dense .q-checkbox__label {
+              min-width: 165px;
+            }
+          }
+        }
       }
     }
+
+    // END kw-search > 체크박스 목록
   }
 }
