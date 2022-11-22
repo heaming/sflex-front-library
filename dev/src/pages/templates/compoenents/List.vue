@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Carousel
+      List & Item
     </h2>
     <p class="kw-guide-description">
       리스트
@@ -67,6 +67,7 @@
       />
       <kw-separator />
 
+      <kw-action-bar />
       <kw-list
         ref="list"
         v-bind="listProps"
@@ -106,6 +107,14 @@
             kw-item-section
           </kw-item-section>
         </kw-item>
+        <kw-expansion-item class="bg-deep-orange">
+          <template #header>
+            header
+          </template>
+          <template #default>
+            default
+          </template>
+        </kw-expansion-item>
       </kw-list>
     </guide-section>
   </kw-page>
