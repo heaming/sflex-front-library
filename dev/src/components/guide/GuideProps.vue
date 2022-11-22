@@ -95,6 +95,8 @@ for (const propKey of Object.getOwnPropertyNames(innerProps.props)) {
   }
   if (Array.isArray(value)) {
     value = `[${value}]`;
+  } else if (typeof value === 'object') {
+    value = JSON.stringify(value);
   }
 
   innerValue.push({
@@ -122,6 +124,9 @@ const emitModelValue = () => {
       } catch (e) {
         // ignored
       }
+    }
+    if (value && innerElement.type === Number) {
+      value = Number(value) ?? undefined;
     }
     if (validType(innerElement.type, value)) {
       ev[innerElement.propKey] = value;
