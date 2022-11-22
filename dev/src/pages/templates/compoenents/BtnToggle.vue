@@ -51,12 +51,9 @@
       description="=Use default slot."
       :guide-code="defaultCode"
     >
-      <kw-btn
+      <kw-btn-toggle
         v-bind="bindingProps"
-      >
-        <div>div1</div>
-        <div>div2</div>
-      </kw-btn>
+      />
     </guide-section>
   </kw-page>
 </template>
@@ -80,12 +77,9 @@ const bindingProps = computed(() => ({
 }));
 
 const defaultCode = `
-          <kw-avatar>
-            <img
-              src="assets/images/test_image.png"
-              alt="test"
-            >
-          </kw-avatar>`;
+      <kw-btn-toggle
+        v-bind="bindingProps"
+      />`;
 const fieldProps = useFieldProps;
 const optionsProps = useOptionsProps;
 const btnStyleProps = useBtnStyleProps;

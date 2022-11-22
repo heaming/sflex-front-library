@@ -61,8 +61,8 @@
       <kw-btn-dropdown
         v-bind="bindingProps"
       >
-        <div>div1</div>
-        <div>div2</div>
+        <kw-btn label="btn1" />
+        <kw-btn label="btn2" />
       </kw-btn-dropdown>
     </guide-section>
   </kw-page>
@@ -83,6 +83,13 @@ const bindingProps = computed(() => ({
 }));
 
 const btnStyleProps = useBtnStyleProps;
+const defaultCode = `
+      <kw-btn-dropdown
+        v-bind="bindingProps"
+      >
+        <kw-btn label="btn1" />
+        <kw-btn label="btn2" />
+      </kw-btn-dropdown>`;
 </script>
 
 <style scoped>

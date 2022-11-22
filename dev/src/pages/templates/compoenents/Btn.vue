@@ -118,10 +118,10 @@ const bindingProps = computed(() => ({
 }));
 
 const defaultCode = `
-          <kw-avatar>
-            <img
-              src="assets/images/test_image.png"
-              alt="test"
-            >
-          </kw-avatar>`;
+      <kw-btn
+        v-bind="bindingProps"
+      >
+        <div>div1</div>
+        <div>div2</div>
+      </kw-btn>`;
 </script>

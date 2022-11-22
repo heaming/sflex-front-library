@@ -11,7 +11,7 @@
       description="playground"
     >
       <guide-props
-        v-model="blndingProps"
+        v-model="bindingProps"
         :props="{
           size: { type: String, default: undefined },
           fontSize: { type: String, default: undefined },
@@ -24,7 +24,7 @@
       />
       <kw-separator />
       <kw-avatar
-        v-bind="blndingProps"
+        v-bind="bindingProps"
       >
         !
       </kw-avatar>
@@ -143,5 +143,5 @@ const googleCode = `
       >
         E
       </kw-avatar>`;
-const blndingProps = ref(null);
+const bindingProps = ref(null);
 </script>
