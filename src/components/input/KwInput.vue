@@ -2,8 +2,9 @@
   <q-input
     ref="inputRef"
     :model-value="value"
-    v-bind="{...styleClassAttrs, ...fieldStyles}"
+    v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-input"
+    :class="fieldClasses"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :type="type"
@@ -26,8 +27,7 @@
     :min="min"
     :max="max"
     :step="step"
-    :input-class="{'text-right': alignRight}"
-    :hide-bottom-space="hideBottomSpace ?? fieldStyles.hideBottomSpace"
+    :input-class="inputClass"
     no-error-icon
     clear-icon="clear"
     @focus="onFocus"
@@ -157,7 +157,6 @@ export default {
     min: { type: [Number, String], default: undefined },
     max: { type: [Number, String], default: undefined },
     step: { type: [Number, String], default: undefined },
-    hideBottomSpace: { type: Boolean, default: undefined },
     onFocus: { type: Function, default: undefined },
     onBlur: { type: Function, default: undefined },
     onClear: { type: Function, default: undefined },
@@ -172,6 +171,7 @@ export default {
     lowerCase: { type: Boolean, default: false },
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
     alignRight: { type: Boolean, default: false },
+    spinner: { type: Boolean, default: undefined },
     onClickIcon: { type: Function, default: undefined },
 
     // when use mask props, keydown event not fired.
@@ -185,6 +185,7 @@ export default {
 
   setup(props) {
     const fieldStyles = useFieldStyle();
+    const { fieldStyleProps, fieldClasses } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
@@ -263,6 +264,10 @@ export default {
 
     const useCounter = computed(() => props.maxlength > 0 && props.counter);
     const counterText = computed(() => (useCounter ? `${getByte(value.value)} / ${props.maxlength}` : null));
+    const inputClass = computed(() => ({
+      'text-right': props.alignRight,
+      'q-no-input-spinner': !props.spinner,
+    }));
 
     onMounted(() => {
       if (props.preventSubmit) {
@@ -274,13 +279,15 @@ export default {
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
-      fieldStyles,
+      fieldStyleProps,
+      fieldClasses,
       select,
       onKeydownInput,
       onChangeInput,
       onUpdateValue,
       useCounter,
       counterText,
+      inputClass,
     };
   },
 };

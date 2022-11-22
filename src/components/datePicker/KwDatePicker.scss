@@ -4,8 +4,7 @@
 }
 
 .kw-date-picker {
-  min-width: 140px;
-  max-width: 250px;
+  width: 140px;
 }
 
 .kw-date-picker.kw-field.q-field {
@@ -56,11 +55,6 @@
 }
 
 .kw-date-range-picker {
-  .kw-date-picker {
-    min-width: auto;
-    max-width: none;
-  }
-
   .kw-date-picker + span {
     padding: 0 4px !important;
   }

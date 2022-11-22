@@ -6,7 +6,7 @@ import { KwAvatar } from './components/avatar';
 import { KwBtn } from './components/btn';
 import { KwBtnToggle } from './components/btnToggle';
 import { KwCard, KwCardActions, KwCardSection } from './components/card';
-import { KwCarousel } from './components/carousel';
+import { KwCarousel, KwCarouselSlide, KwCarouselControl } from './components/carousel';
 import { KwChart } from './components/chart';
 import { KwCheckbox } from './components/checkbox';
 import { KwChip } from './components/chip';
@@ -53,6 +53,8 @@ export interface KwComponentNameMap {
   KwCardActions: KwCardActions;
   KwCardSection: KwCardSection;
   KwCarousel: KwCarousel;
+  KwCarouselControl: KwCarouselControl;
+  KwCarouselSlide: KwCarouselSlide;
   KwChart: KwChart;
   KwCheckbox: KwCheckbox;
   KwChip: KwChip;
