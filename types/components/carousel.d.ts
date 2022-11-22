@@ -1,22 +1,14 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QCarouselProps, QCarouselSlots, QCarouselControlProps, QCarouselControlSlots, QCarouselSlideProps, QCarouselSlideSlots } from 'quasar';
 
-interface KwCarouselProps {}
-interface KwCarouselSlots {
-  default: () => VNode[];
-  control: () => VNode[];
-  navigationIcon: (scope: { index: number; maxIndex: number; name: any; active: boolean; btnProps: object; onClick: (evt: Event) => void }) => VNode[];
-}
+interface KwCarouselProps extends QCarouselProps {}
+interface KwCarouselSlots extends QCarouselSlots {}
 
-interface KwCarouselControlProps {}
-interface KwCarouselControlSlots {
-  default: () => VNode[];
-}
+interface KwCarouselControlProps extends QCarouselControlProps {}
+interface KwCarouselControlSlots extends QCarouselControlSlots {}
 
-interface KwCarouselSlideProps {}
-interface KwCarouselSlideSlots {
-  default: () => VNode[];
-}
+interface KwCarouselSlideProps extends QCarouselSlideProps {}
+interface KwCarouselSlideSlots extends QCarouselSlideSlots {}
 
 export interface KwCarousel extends ComponentPublicInstance<KwCarouselProps> {}
 export interface KwCarouselControl extends ComponentPublicInstance<KwCarouselControlProps> {}
