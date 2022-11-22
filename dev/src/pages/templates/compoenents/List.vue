@@ -67,7 +67,6 @@
       />
       <kw-separator />
 
-      <kw-action-bar />
       <kw-list
         ref="list"
         v-bind="listProps"
