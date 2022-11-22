@@ -61,11 +61,19 @@
             </td>
             <td>
               rules="required"<br>
+              dense <br>
+              grow<br>
+              stretch<br>
+              overflow<br>
               placeholder="placeholder"
               type="month,year"
             </td>
             <td>
               Add this when Essential Case<br>
+              height: 32px <br>
+              flex-grow - full width<br>
+              align-item: stretch - full height<br>
+              overflow - shrink off<br>
               Add the attribute "placeholder='날짜 선택'"<br>
               add the type of month or year
             </td>
@@ -364,6 +372,10 @@ const timePickerCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.11.22',
+    text: 'Add new prop about stretch and dense',
+  },
   {
     timestamp: '2022-09-21',
     text: 'Add options of year,month in datepicker',
