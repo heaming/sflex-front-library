@@ -81,12 +81,25 @@ const innerValue = [];
 for (const propKey of Object.getOwnPropertyNames(innerProps.props)) {
   // eslint-disable-next-line vue/no-setup-props-destructure
   const propDefineObject = innerProps.props[propKey];
+  const isPrimitive = propDefineObject.type === String
+      || propDefineObject.type === Number
+      || propDefineObject.type === Function
+      || propDefineObject.type === Boolean;
+  let value = propDefineObject.default;
+  if (!isPrimitive && typeof value === 'function' && value.length === 0) {
+    value = value();
+    if (propKey === 'offset') {
+      console.log(value);
+    }
+  }
+  if (Array.isArray(value)) {
+    value = `[${value}]`;
+  }
   innerValue.push({
     propKey,
-    value: propDefineObject.default,
+    value,
     type: propDefineObject.type,
-    isPrimitive: propDefineObject.type === String
-      || propDefineObject.type === Number || propDefineObject.type === Boolean,
+    isPrimitive,
   });
 }
 

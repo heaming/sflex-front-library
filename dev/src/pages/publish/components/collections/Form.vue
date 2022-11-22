@@ -174,32 +174,28 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="row items-center w302">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="row items-center w460">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
@@ -286,58 +282,50 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input">
-                <div class="row items-center">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
               <kw-form-item label="input2">
-                <div class="row items-center">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input2">
-                <div class="row items-center w302">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
               <kw-form-item label="input2">
-                <div class="row items-center w302">
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                  <span>-</span>
-                  <kw-input
-                    placeholder="입력해주세요"
-                  />
-                </div>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
+                <span>-</span>
+                <kw-input
+                  placeholder="입력해주세요"
+                />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
@@ -458,8 +446,10 @@
           <em>The bigger column or the smaller column</em><br>
           - If the general size's different compared to
           kw-form-item's size except of label's size,<br>
-          The elements should be wrapped with the classes
-          ( <b>size's class , row , items-center </b> ) , row , items-center.<br>
+          <span class="delete">
+            The elements should be wrapped with the classes
+            ( <b>size's class , row , items-center </b> ) , row , items-center.<br>
+          </span>
           - Also add the element's size as much as required size<br>
           <b>※ The elements mean input, select, radio, checkbox and so on</b>
         </li>
@@ -483,21 +473,45 @@
               <kw-form-item
                 label="Half"
               >
-                <kw-input
-                  rules="required"
-                  placeholder="Half"
-                />
                 <kw-select
                   :model-value="['Half']"
                   :options="['Half']"
                   placeholder="Half"
-                  rules="required"
+                />
+                <kw-input
+                  placeholder="Half"
                 />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
               <kw-form-item
                 label="Flexible"
+              >
+                <kw-input
+                  placeholder="100px"
+                  class="w100"
+                />
+                <kw-input
+                  placeholder="Flexible"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="Flexible"
+              >
+                <kw-input
+                  placeholder="Flexible"
+                />
+                <kw-select
+                  :model-value="['200px']"
+                  :options="['200px']"
+                  placeholder="200px"
+                  class="w200"
+                />
+              </kw-form-item>
+            </kw-form-row>
+            <kw-form-row class="delete">
+              <kw-form-item
+                label="400px"
               >
                 <kw-input
                   rules="required"
@@ -510,53 +524,19 @@
                 />
               </kw-form-item>
               <kw-form-item
-                label="Flexible"
+                label="400px"
               >
                 <kw-input
                   rules="required"
                   placeholder="Flexible"
                 />
                 <kw-select
-                  :model-value="['200px']"
-                  :options="['200px']"
-                  placeholder="200px"
+                  :model-value="['300px']"
+                  :options="['300px']"
+                  placeholder="300px"
                   rules="required"
-                  class="w200"
+                  class="w300"
                 />
-              </kw-form-item>
-            </kw-form-row>
-            <kw-form-row>
-              <kw-form-item
-                label="400px"
-              >
-                <div class="row items-center w400">
-                  <kw-input
-                    rules="required"
-                    placeholder="100px"
-                    class="w100"
-                  />
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                </div>
-              </kw-form-item>
-              <kw-form-item
-                label="400px"
-              >
-                <div class="row items-center w400">
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                  <kw-select
-                    :model-value="['300px']"
-                    :options="['300px']"
-                    placeholder="300px"
-                    rules="required"
-                    class="w300"
-                  />
-                </div>
               </kw-form-item>
             </kw-form-row>
           </kw-form>
@@ -667,32 +647,28 @@ const oneColumns = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input">
-      <div class="row items-center w302">
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input">
-      <div class="row items-center w460">
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
@@ -763,58 +739,50 @@ const twoColumns = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input">
-      <div class="row items-center">
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
     <kw-form-item label="input2">
-      <div class="row items-center">
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input2">
-      <div class="row items-center w302">
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
     <kw-form-item label="input2">
-      <div class="row items-center w302">
-        <kw-input
-          placeholder="입력해주세요"
-        />
-        <span>-</span>
-        <kw-input
-          placeholder="입력해주세요"
-        />
-      </div>
+      <kw-input
+        placeholder="입력해주세요"
+      />
+      <span>-</span>
+      <kw-input
+        placeholder="입력해주세요"
+      />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
@@ -907,7 +875,6 @@ const twoColumns = `
 const differentSize = `
 <kw-form :cols="2">
   <kw-form-row>
-  <!-- half size -->
     <kw-form-item
       label="Half size"
     >
@@ -920,26 +887,48 @@ const differentSize = `
         placeholder="Half"
       />
     </kw-form-item>
-    <!-- Half size -->
     <kw-form-item
       label="Half"
     >
-      <kw-input
-        rules="required"
-        placeholder="Half"
-      />
       <kw-select
         :model-value="['Half']"
         :options="['Half']"
         placeholder="Half"
-        rules="required"
+      />
+      <kw-input
+        placeholder="Half"
       />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
-  <!-- shorter element's high priority: input-width:100px. -->
     <kw-form-item
       label="Flexible"
+    >
+      <kw-input
+        placeholder="100px"
+        class="w100"
+      />
+      <kw-input
+        placeholder="Flexible"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="Flexible"
+    >
+      <kw-input
+        placeholder="Flexible"
+      />
+      <kw-select
+        :model-value="['200px']"
+        :options="['200px']"
+        placeholder="200px"
+        class="w200"
+      />
+    </kw-form-item>
+  </kw-form-row>
+  <kw-form-row class="delete">
+    <kw-form-item
+      label="400px"
     >
       <kw-input
         rules="required"
@@ -951,57 +940,20 @@ const differentSize = `
         placeholder="Flexible"
       />
     </kw-form-item>
-      <!-- The high priority element is kw-select in this case -->
     <kw-form-item
-      label="Flexible"
+      label="400px"
     >
       <kw-input
         rules="required"
         placeholder="Flexible"
       />
       <kw-select
-        :model-value="['200px']"
-        :options="['200px']"
-        placeholder="200px"
+        :model-value="['300px']"
+        :options="['300px']"
+        placeholder="300px"
         rules="required"
-        class="w200"
+        class="w300"
       />
-    </kw-form-item>
-  </kw-form-row>
-  <kw-form-row>
-  <!-- The wrapped tag's size:400px, The high priority element is shorter input in this case -->
-    <kw-form-item
-      label="400px"
-    >
-      <div class="row items-center w400">
-        <kw-input
-          rules="required"
-          placeholder="100px"
-          class="w100"
-        />
-        <kw-input
-          rules="required"
-          placeholder="Flexible"
-        />
-      </div>
-    </kw-form-item>
-    <!-- The wrapped tag's size:400px, The high priority element is kw-select in this case -->
-    <kw-form-item
-      label="400px"
-    >
-      <div class="row items-center w400">
-        <kw-input
-          rules="required"
-          placeholder="Flexible"
-        />
-        <kw-select
-          :model-value="['300px']"
-          :options="['300px']"
-          placeholder="300px"
-          rules="required"
-          class="w300"
-        />
-      </div>
     </kw-form-item>
   </kw-form-row>
 </kw-form>
@@ -1052,6 +1004,10 @@ const telephoneCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-11-22',
+    text: 'delete wrap div.row.items-center.w$$ method',
+  },
   {
     timestamp: '2022-10-19',
     text: 'Add example of use together width checkbox',

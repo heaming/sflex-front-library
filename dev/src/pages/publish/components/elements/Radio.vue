@@ -53,14 +53,16 @@
               type="radio"<br>
               :options="['A', 'B', 'C', 'D']"<br>
               disable<br>
-              :model-value="[]"
+              :model-value="[]" <br>
+              dense
             </td>
             <td>
               Add this when Essential Case<br>
               Required, Default : "radio"<br>
               Add the option lists in [ ]<br>
               Add the attribue "disable" when it is required to be readonly or disable<br>
-              Required, Default : "[]"
+              Required, Default : "[]" <br>
+              height: 32px; font-size: 14px
             </td>
           </tr>
         </tbody>
