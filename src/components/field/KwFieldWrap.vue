@@ -6,11 +6,12 @@
     <div
       ref="controlRef"
       class="kw-field-wrap__control"
-      :class="controlClass"
+      :class="[controlClass, stretchClasses]"
       tabindex="-1"
     >
       <div
         class="kw-field-wrap__control-container"
+        :class="stretchClasses"
       >
         <slot />
         <div
@@ -80,7 +81,6 @@ export default {
   props: {
     ...useDenseProps,
     ...useStretchProps,
-    grow: { type: Boolean, default: true },
 
     label: { type: String, default: undefined },
     controlClass: { type: [Object, Array, String], default: undefined },
@@ -138,6 +138,7 @@ export default {
       computedErrorMessage,
       computedBottomClass,
       focus,
+      stretchClasses,
     };
   },
 };

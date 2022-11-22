@@ -4,6 +4,9 @@
     v-bind="styleClassAttrs"
     :error="invalid"
     :error-message="invalidMessage"
+    :grow="grow"
+    :overflow="overflow"
+    :stretch="stretch"
     @focus="$emit('focus')"
   >
     <q-btn-toggle
@@ -34,6 +37,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnStyle';
+import useStretch from '../../composables/private/useStretch';
 
 export default {
   name: 'KwBtnToggle',
@@ -60,7 +64,6 @@ export default {
     disable: { type: Boolean, default: false },
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
-    stretch: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
   },
 
@@ -77,16 +80,23 @@ export default {
     });
 
     const toggleButtonClasses = computed(() => {
-      let classes = 'kw-btn ';
-      classes += buttonClasses.value || {};
+      const classes = {
+        ...buttonClasses.value,
+        'kw-btn': true,
+      };
       if (props.toggleColor) { classes[`kw-btn--toggle-color-${props.toggleColor}`] = true; }
       if (props.toggleTextColor) { classes[`kw-btn--toggle-text-color-${props.toggleTextColor}`] = true; }
       if (props.toggleBorderColor) { classes[`kw-btn--toggle-border-color-${props.toggleBorderColor}`] = true; }
       return classes;
     });
 
+    const { stretchClasses } = useStretch();
+
     const toggleClass = computed(() => {
-      const classes = { 'kw-btn-toggle': true };
+      const classes = {
+        'kw-btn-toggle': true,
+        ...stretchClasses.value,
+      };
       if (props.gap) { classes['kw-btn-toggle--spaced'] = true; }
       return classes;
     });
