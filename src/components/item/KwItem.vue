@@ -19,6 +19,7 @@
     :active-class="activeClass"
     :exact-active-class="exactActiveClass"
     :disable="disable"
+    @click="$emit('click', $event)"
   >
     <slot />
   </q-item>
@@ -52,6 +53,9 @@ export default {
     exactActiveClass: { type: String, default: 'q-router-link--exact-active' },
     disable: { type: Boolean, default: undefined },
   },
+  emits: [
+    'click',
+  ],
   setup() {
     const { styleClassAttrs } = useInheritAttrs();
 

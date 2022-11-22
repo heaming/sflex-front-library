@@ -35,7 +35,14 @@
     :exact-active-class="exactActiveClass"
     :disable="disable"
     :model-value="modelValue"
-    @update:model-value="$emit('onUpdate:modelValue', $event)"
+    @on-update:model-value="$emit('onUpdate:modelValue', $event)"
+    @before-show="$emit('before-show', $event)"
+    @show="$emit('show', $event)"
+    @before-hide="$emit('before-hide', $event)"
+    @hide="$emit('hide', $event)"
+    @click="$emit('click', $event)"
+    @after-show="$emit('after-show', $event)"
+    @after-hide="$emit('after-hide', $event)"
   >
     <slot />
     <template
@@ -94,7 +101,16 @@ export default {
     modelValue: { type: Boolean, default: null },
   },
 
-  emits: ['onUpdate:modelValue', 'before-show', 'show', 'before-hide', 'hide'],
+  emits: [
+    'onUpdate:modelValue',
+    'before-show',
+    'show',
+    'before-hide',
+    'hide',
+    'click',
+    'after-show',
+    'after-hide',
+  ],
   setup() {
     const quasarRef = ref();
     function show(...args) { quasarRef.value?.show(...args); }
