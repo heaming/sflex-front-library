@@ -52,6 +52,10 @@
               :model-value="[]"<br>
               rules="required"<br>
               :options="['A', 'B', 'C', 'D']"<br>
+              dense <br>
+              grow<br>
+              stretch<br>
+              overflow<br>
               readonly<br>
               disable<br>
               multiple <br>
@@ -62,6 +66,10 @@
               Required, Default : "[]"<br>
               Add this when Essential Case<br>
               Add the option lists in [ ]<br>
+              height: 32px; <br>
+              flex-grow - full width<br>
+              align-item: stretch - full height<br>
+              overflow - shrink off<br>
               Add the attribute "readonly" when it's required to be readonly<br>
               Add the attribute "disable" when it's required to be disable<br>
               Add the attribute "multiple" in the tag of kw-select, If it's required to be mutilple select <br>
@@ -378,6 +386,10 @@ const essentialCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-11-22',
+    text: 'Add new prop about stretch and dense',
+  },
   {
     timestamp: '2022-09-06',
     text: 'change guide content about essential type',
