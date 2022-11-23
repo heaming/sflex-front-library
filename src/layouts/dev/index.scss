@@ -9,6 +9,15 @@
   }
 }
 
+.mobile {
+  // mobile
+  &:not(.tablet) {
+    .dev-layout {
+      background: inherit;
+    }
+  }
+}
+
 /*
   GNB
   */
