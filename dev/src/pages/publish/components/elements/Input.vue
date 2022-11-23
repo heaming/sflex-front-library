@@ -29,12 +29,20 @@
             <td>kw-input</td>
             <td>
               rules="required"<br>
+              dense <br>
+              grow<br>
+              stretch<br>
+              overflow<br>
               placeholder="입력해주세요"<br>
               readonly<br>
               disable
             </td>
             <td>
               Add this when Essential Case<br>
+              height: 32px <br>
+              flex-grow - full width<br>
+              align-item: stretch - full height<br>
+              overflow - shrink off<br>
               placeholder<br>
               Add the attribute "readonly" in the tag of kw-input<br>
               Add the attribute "disable" in the tag of kw-input<br>
@@ -86,7 +94,7 @@
               <kw-form-item
                 label="label"
               >
-                <kw-input />
+                <kw-input shrink />
               </kw-form-item>
             </kw-form-row>
           </kw-form>
@@ -615,6 +623,10 @@ const nolabelCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022.11.22',
+    text: 'Add new prop about stretch and dense',
+  },
   {
     timestamp: '2022.10.06',
     text: 'edit icon name in code',

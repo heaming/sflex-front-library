@@ -102,6 +102,33 @@
           :lang="'vue'"
         />
       </q-card>
+      <p class="kw-guide-description">
+        case 04
+      </p>
+      <q-card>
+        <div class="temp">
+          <div class="filter-box justify-between py16">
+            <div class="filter-box__item">
+              <kw-icon
+                name="pdf_24"
+                size="24px"
+              />
+              <p class="kw-font-body ml10">
+                EDU 非정도영업 조치규정_개정안(22년02월)
+              </p>
+            </div>
+            <kw-btn
+              borderless
+              icon="download"
+              style="font-size: 24px;"
+            />
+          </div>
+        </div>
+        <guide-code-view
+          :code-value="exampleCode3"
+          :lang="'vue'"
+        />
+      </q-card>
     </div>
   </kw-page>
 </template>
@@ -158,6 +185,24 @@ const exampleCode2 = `
     />
   </li>
 </ul>`;
+const exampleCode3 = `
+<div class="filter-box justify-between py16">
+  <div class="filter-box__item">
+    <kw-icon
+      name="pdf_24"
+      size="24px"
+    />
+    <p class="kw-font-body ml10">
+      EDU 非정도영업 조치규정_개정안(22년02월)
+    </p>
+  </div>
+  <kw-btn
+    borderless
+    icon="download"
+    style="font-size: 24px;"
+  />
+</div>;
+`;
 
 const historyData = [
   {

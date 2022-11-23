@@ -16,3 +16,19 @@
     }
   }
 }
+
+.kw-option-group--wrap {
+  .q-option-group.kw-radio {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    column-gap: 10px;
+
+    & > div {
+      padding-left: 0;
+
+      & + div {
+        margin-left: 0;
+      }
+    }
+  }
+}
