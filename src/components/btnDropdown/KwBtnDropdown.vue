@@ -18,7 +18,7 @@
     :no-icon-animation="noIconAnimation"
     v-bind="styleClassAttrs"
     class="kw-btn kw-btn-dropdown"
-    :class="buttonClasses"
+    :class="buttonClass"
     :style="buttonStyles"
     no-caps
     unelevated

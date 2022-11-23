@@ -4,7 +4,7 @@
     :model-value="value"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-input"
-    :class="fieldClasses"
+    :class="fieldClass"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :type="type"
@@ -185,7 +185,7 @@ export default {
 
   setup(props) {
     const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const { fieldStyleProps, fieldClass } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
@@ -280,7 +280,7 @@ export default {
       ...useInheritAttrs(),
       ...fieldCtx,
       fieldStyleProps,
-      fieldClasses,
+      fieldClass,
       select,
       onKeydownInput,
       onChangeInput,

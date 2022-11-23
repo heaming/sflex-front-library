@@ -1,18 +1,12 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QCardActionsProps, QCardActionsSlots, QCardProps, QCardSectionProps, QCardSectionSlots, QCardSlots } from 'quasar';
 
-interface KwCardProps {}
-interface KwCardSlots {
-  default: () => VNode[];
-}
-interface KwCardActionsProps {}
-interface KwCardActionsSlots {
-  default: () => VNode[];
-}
-interface KwCardSectionProps {}
-interface KwCardSectionSlots {
-  default: () => VNode[];
-}
+interface KwCardProps extends QCardProps {}
+interface KwCardSlots extends QCardSlots {}
+interface KwCardActionsProps extends QCardActionsProps {}
+interface KwCardActionsSlots extends QCardActionsSlots {}
+interface KwCardSectionProps extends QCardSectionProps {}
+interface KwCardSectionSlots extends QCardSectionSlots {}
 
 export interface KwCard extends ComponentPublicInstance<KwCardProps> {}
 export interface KwCardActions extends ComponentPublicInstance<KwCardActionsProps> {}

@@ -5,7 +5,7 @@
     :model-value="value"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-select"
-    :class="fieldClasses"
+    :class="fieldClass"
     popup-content-class="kw-select-options-menu"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid || undefined"
@@ -206,7 +206,7 @@ export default {
 
   setup(props) {
     const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const { fieldStyleProps, fieldClass } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
@@ -272,7 +272,7 @@ export default {
       ...fieldCtx,
       ...optionsCtx,
       fieldStyleProps,
-      fieldClasses,
+      fieldClass,
       getOptionIndex,
       getOption,
       getOptionLabel,

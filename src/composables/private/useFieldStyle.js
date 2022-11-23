@@ -29,10 +29,10 @@ export default () => {
 
   const computedDense = useDense();
 
-  const { stretchClasses } = useStretch();
+  const { stretchClass } = useStretch();
 
-  const fieldClasses = computed(() => ({
-    ...stretchClasses.value,
+  const fieldClass = computed(() => ({
+    ...stretchClass.value,
   }));
 
   const fieldStyleProps = computed(() => {
@@ -58,6 +58,6 @@ export default () => {
 
   return {
     fieldStyleProps,
-    fieldClasses,
+    fieldClass,
   };
 };

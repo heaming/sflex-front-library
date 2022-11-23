@@ -4,6 +4,9 @@
     v-bind="styleClassAttrs"
     :error="invalid"
     :error-message="invalidMessage"
+    :grow="grow"
+    :overflow="overflow"
+    :stretch="stretch"
     @focus="$emit('focus')"
   >
     <q-btn-toggle
@@ -34,6 +37,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnStyle';
+import useStretch from '../../composables/private/useStretch';
 
 export default {
   name: 'KwBtnToggle',
@@ -60,7 +64,6 @@ export default {
     disable: { type: Boolean, default: false },
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
-    stretch: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
   },
 
@@ -68,7 +71,7 @@ export default {
 
   setup(props) {
     const { normalizedOptions } = useOptions();
-    const { buttonClasses, buttonStyles, buttonDense } = useBtnStyle({
+    const { buttonClass, buttonStyles, buttonDense } = useBtnStyle({
       color: 'bg-white',
       textColor: 'black3',
       borderColor: 'line-stroke',
@@ -76,17 +79,24 @@ export default {
       dense: true,
     });
 
-    const toggleButtonClasses = computed(() => {
-      let classes = 'kw-btn ';
-      classes += buttonClasses.value || {};
+    const togglebuttonClass = computed(() => {
+      const classes = {
+        ...buttonClass.value,
+        'kw-btn': true,
+      };
       if (props.toggleColor) { classes[`kw-btn--toggle-color-${props.toggleColor}`] = true; }
       if (props.toggleTextColor) { classes[`kw-btn--toggle-text-color-${props.toggleTextColor}`] = true; }
       if (props.toggleBorderColor) { classes[`kw-btn--toggle-border-color-${props.toggleBorderColor}`] = true; }
       return classes;
     });
 
+    const { stretchClass } = useStretch();
+
     const toggleClass = computed(() => {
-      const classes = { 'kw-btn-toggle': true };
+      const classes = {
+        'kw-btn-toggle': true,
+        ...stretchClass.value,
+      };
       if (props.gap) { classes['kw-btn-toggle--spaced'] = true; }
       return classes;
     });
@@ -99,7 +109,7 @@ export default {
 
     const assignOptionStyle = (v) => ({
       ...v,
-      class: toggleButtonClasses.value,
+      class: togglebuttonClass.value,
       style: buttonStyles.value,
     });
     const styledOptions = computed(() => normalizedOptions.value.map(assignOptionStyle));
