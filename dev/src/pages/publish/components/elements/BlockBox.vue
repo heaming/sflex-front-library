@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       Here, you can find the block elements you need to build a page.
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <!-- <div class="kw-guide-section">
       <h3
         id="summary"
@@ -49,7 +52,8 @@
         Case #1 - Search Results Box
       </h3>
       <p class="kw-guide-description">
-        The search result box is used after search result
+        The search result box is used after search result <br>
+        <em>Do not use in kw-popup</em>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -105,4 +109,11 @@ const normalArea = `
   <h3>거래처 정보</h3>
 </div>
 `;
+
+const guideHistory = [
+  {
+    timestamp: '2022-11-18',
+    text: 'do not use div.result-area in kw-popup',
+  },
+];
 </script>

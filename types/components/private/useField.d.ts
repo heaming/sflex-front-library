@@ -1,3 +1,6 @@
+import { UseDenseProps } from './useDense';
+import { UseStretchProps } from './useStretch';
+
 export interface UseFieldProps {
   /**
    * Form에 등록될 때 사용될 key 값으로 범위 내에서 유일한 값이어야 한다
@@ -53,12 +56,7 @@ export interface UseFieldProps {
   ignoreOnReset?: boolean;
 }
 
-export interface UseFieldStyleProps {
-  /**
-   * 공간을 덜 차지하는 스타일 적용
-   */
-  dense?: boolean;
-
+export interface UseFieldStyleProps extends UseDenseProps, UseStretchProps {
   /**
    * 밑줄 라인 스타일 적용
    */
@@ -68,6 +66,12 @@ export interface UseFieldStyleProps {
    * 테두리가 없는 스타일 적용
    */
   borderless?: boolean;
+
+  /**
+   * 하단 에러 영역의 등장 방식을 결정합니다.
+   * platform 에 따라 기본적으로 적용되어 있으므로, 특수한 경우를 제하고는 사용할 일이 없습니다.
+   */
+  hideBottomSpace?: boolean;
 }
 
 export interface UseFieldInstance {

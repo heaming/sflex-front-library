@@ -84,7 +84,7 @@
           <kw-chip
             label="엔지니어"
             square
-            color="bg-body"
+            color="primary"
             text-color="primary"
             class="ma2"
           />
@@ -125,7 +125,7 @@ const chipCode = `
 <kw-chip
   label="엔지니어"
   square
-  color="bg-body"
+  color="primary"
   text-color="primary"
   class="ma2"
 />

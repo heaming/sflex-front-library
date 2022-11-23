@@ -146,7 +146,6 @@
             v-model="selectModel"
             class="fit"
             :options="optionsModel"
-            stretch
           />
         </div>
         <kw-input
@@ -174,7 +173,7 @@
           suffix="sf"
           rows="3"
         />
-        <kw-f6ile
+        <kw-file
           label="file multiple"
           multiple
         />
@@ -183,6 +182,7 @@
         />
         <kw-date-picker
           label="date-picker"
+          grow
         />
         <q-field
           label="클래스 테스트를 위한 임의의 컴포넌트"
@@ -199,17 +199,30 @@
           </template>
         </q-field>
 
-        <kw-field
-          label="kw-field-wrap"
-          :error="ynModel === 'Y'"
-          :error-message="'가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사'"
-        >
-          <kw-checkbox
-            v-model="ynModel"
-            dense
-            :label="'test'"
-          />
-        </kw-field>
+        <div class="flex">
+          <kw-field
+            label="kw-field-wrap"
+            :error="ynModel === 'Y'"
+            :error-message="'가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사'"
+          >
+            <kw-checkbox
+              v-model="ynModel"
+              dense
+              :label="'test'"
+            />
+          </kw-field>
+          <kw-field
+            label="kw-field-wrap"
+            :error="ynModel === 'Y'"
+            :error-message="'가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사'"
+          >
+            <kw-checkbox
+              v-model="ynModel"
+              dense
+              :label="'test'"
+            />
+          </kw-field>
+        </div>
       </kw-form>
     </div>
   </div>

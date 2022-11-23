@@ -262,6 +262,21 @@
                 disable
               />
             </kw-search-item>
+            <kw-search-item label="combo">
+              <kw-field
+                :model-value="[]"
+                class="w80"
+              >
+                <template #default="{ field }">
+                  <kw-checkbox
+                    v-bind="field"
+                    label="기타"
+                    val=""
+                  />
+                </template>
+              </kw-field>
+              <kw-input />
+            </kw-search-item>
           </kw-search-row>
 
           <kw-search-row>
@@ -281,7 +296,7 @@
                   />
                 </template>
               </kw-field>
-              <kw-input />
+              <kw-date-picker />
             </kw-search-item>
           </kw-search-row>
 
@@ -740,67 +755,63 @@
                 />
               </kw-search-item>
               <kw-search-item
+                class="delete"
                 label="width:250"
               >
-                <div class="row items-center w250">
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                  <kw-select
-                    :model-value="['100px']"
-                    :options="['100px', 'B']"
-                    placeholder="선택해 주세요."
-                    rules="required"
-                    class="w100"
-                  />
-                </div>
+                <kw-input
+                  rules="required"
+                  placeholder="Flexible"
+                />
+                <kw-select
+                  :model-value="['100px']"
+                  :options="['100px', 'B']"
+                  placeholder="선택해 주세요."
+                  rules="required"
+                  class="w100"
+                />
               </kw-search-item>
             </kw-search-row>
-            <kw-search-row>
+            <kw-search-row class="delete">
               <kw-search-item
                 label="600px"
                 :colspan="2"
               >
-                <div class="row items-center w600">
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                  <kw-select
-                    :model-value="['400px']"
-                    :options="['400px']"
-                    placeholder="선택해 주세요."
-                    rules="required"
-                    class="w400"
-                  />
-                </div>
+                <kw-input
+                  rules="required"
+                  placeholder="Flexible"
+                />
+                <kw-input
+                  rules="required"
+                  placeholder="Flexible"
+                />
+                <kw-select
+                  :model-value="['400px']"
+                  :options="['400px']"
+                  placeholder="선택해 주세요."
+                  rules="required"
+                  class="w400"
+                />
               </kw-search-item>
             </kw-search-row>
             <kw-search-row>
               <kw-search-item
+                class="delete"
                 label="600px"
                 :colspan="2"
               >
-                <div class="row items-center w600">
-                  <kw-input
-                    rules="required"
-                    placeholder="100px"
-                    class="w100"
-                  />
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                  <kw-input
-                    rules="required"
-                    placeholder="Flexible"
-                  />
-                </div>
+                <kw-input
+                  rules="required"
+                  placeholder="100px"
+                  class="w100"
+                />
+                <kw-input
+                  rules="required"
+                  placeholder="Flexible"
+                />
+                <kw-input
+                  rules="required"
+                  placeholder="Flexible"
+                />
               </kw-search-item>
             </kw-search-row>
           </kw-search>
@@ -877,26 +888,20 @@ const searchCode = `
 
   <kw-search-row>
     <kw-search-item label="Radio">
-      <kw-field>
-        <template #default="{ field }">
-          <kw-radio
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
+      <kw-option-group
+        type="radio"
+        :options="['김엄마', '김마', '마']"
+      />
     </kw-search-item>
 
-    <kw-search-item label="OptionGroup (readonly)">
+    <kw-search-item label="readonly">
       <kw-option-group
         type="radio"
         :options="['김엄마', '김마', '마']"
         disable
       />
     </kw-search-item>
-    <kw-search-item label="optiongroup (disable)">
+    <kw-search-item label="disable">
       <kw-option-group
         type="radio"
         :options="['김엄마', '김마', '마']"
@@ -906,22 +911,16 @@ const searchCode = `
   </kw-search-row>
 
   <kw-search-row>
-    <kw-search-item label="Checkbox">
-      <kw-field
+    <kw-search-item label="Optiongroup (Checkbox)">
+      <kw-option-group
         :model-value="[]"
-      >
-        <template #default="{ field }">
-          <kw-checkbox
-            v-for="(item, i) of ['A', 'B', 'C', 'D']"
-            :key="i"
-            v-bind="field"
-            :val="item"
-          />
-        </template>
-      </kw-field>
+        type="checkbox"
+        :options="['A', 'B', 'C', 'D']"
+      />
     </kw-search-item>
     <kw-search-item label="OptionGroup (readonly)">
       <kw-option-group
+        :model-value="[]"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
@@ -929,10 +928,26 @@ const searchCode = `
     </kw-search-item>
     <kw-search-item label="OptionGroup (disable)">
       <kw-option-group
+        :model-value="[]"
         type="checkbox"
         :options="['A', 'B', 'C', 'D']"
         disable
       />
+    </kw-search-item>
+    <kw-search-item label="combo">
+      <kw-field
+        :model-value="[]"
+        class="w80"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="기타"
+            val=""
+          />
+        </template>
+      </kw-field>
+      <kw-input />
     </kw-search-item>
   </kw-search-row>
 
@@ -953,7 +968,7 @@ const searchCode = `
           />
         </template>
       </kw-field>
-      <kw-input />
+      <kw-date-picker />
     </kw-search-item>
   </kw-search-row>
 
@@ -965,7 +980,7 @@ const searchCode = `
     </kw-search-item>
     <kw-search-item
       label="DateRangePicker"
-      :cols="2"
+      :colspan="2"
     >
       <kw-date-range-picker
         rules="date_range_required|date_range_months:1"
@@ -1230,42 +1245,39 @@ const EssentialExample = `
 `;
 
 const differentSize = `
-
-<kw-search-row>
-  <!-- half sizes  -->
-  <kw-search-item
-    label="Half sizes"
-  >
-    <kw-input
-      rules="required"
-      placeholder="Half"
-    />
-    <kw-input
-      rules="required"
-      placeholder="Half"
-    />
-  </kw-search-item>
-  <!-- one of the elements has 'width' -->
-  <kw-search-item
-    label="Flexible"
-  >
-    <kw-input
-      rules="required"
-      placeholder="Flexible"
-    />
-    <kw-select
-      :model-value="['190px']"
-      :options="['190px']"
-      placeholder="190px"
-      rules="required"
-      class="w190"
-    />
-  </kw-search-item>
-  <!-- search-item's width:250. Select's width : 100px -->
-  <kw-search-item
-    label="width:250"
-  >
-    <div class="row items-center w250">
+<kw-search>
+  <kw-search-row>
+    <kw-search-item
+      label="Half size"
+    >
+      <kw-input
+        rules="required"
+        placeholder="Half"
+      />
+      <kw-input
+        rules="required"
+        placeholder="Half"
+      />
+    </kw-search-item>
+    <kw-search-item
+      label="Flexible"
+    >
+      <kw-input
+        rules="required"
+        placeholder="Flexible"
+      />
+      <kw-select
+        :model-value="['190px']"
+        :options="['190px']"
+        placeholder="190px"
+        rules="required"
+        class="w190"
+      />
+    </kw-search-item>
+    <kw-search-item
+      class="delete"
+      label="width:250"
+    >
       <kw-input
         rules="required"
         placeholder="Flexible"
@@ -1277,16 +1289,13 @@ const differentSize = `
         rules="required"
         class="w100"
       />
-    </div>
-  </kw-search-item>
-</kw-search-row>
-<kw-search-row>
-<!-- search-item: :colspan="2" and width:600px. select's width:400px -->
-  <kw-search-item
-    label="600px"
-    :colspan="2"
-  >
-    <div class="row items-center w600">
+    </kw-search-item>
+  </kw-search-row>
+  <kw-search-row class="delete">
+    <kw-search-item
+      label="600px"
+      :colspan="2"
+    >
       <kw-input
         rules="required"
         placeholder="Flexible"
@@ -1302,16 +1311,14 @@ const differentSize = `
         rules="required"
         class="w400"
       />
-    </div>
-  </kw-search-item>
-</kw-search-row>
-<kw-search-row>
-<!-- search-item: :colspan="2" and width:600px. Shortest input's width:100px the other one is flexible-->
-  <kw-search-item
-    label="600px"
-    :colspan="2"
-  >
-    <div class="row items-center w600">
+    </kw-search-item>
+  </kw-search-row>
+  <kw-search-row>
+    <kw-search-item
+      class="delete"
+      label="600px"
+      :colspan="2"
+    >
       <kw-input
         rules="required"
         placeholder="100px"
@@ -1325,9 +1332,9 @@ const differentSize = `
         rules="required"
         placeholder="Flexible"
       />
-    </div>
-  </kw-search-item>
-</kw-search-row>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
 `;
 
 const theOneRowCode = `
@@ -1350,6 +1357,10 @@ const theOneRowCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-11-22',
+    text: 'delete wrap div.row.items-center.w$$ method',
+  },
   {
     timestamp: '2022-10-19',
     text: 'Add example of use together width checkbox',

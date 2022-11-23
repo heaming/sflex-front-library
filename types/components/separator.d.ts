@@ -11,7 +11,7 @@ interface KwSeparatorProps {
   /**
    * 지정시 수직 스타일 적용
    */
-  vertical?: string;
+  vertical?: boolean;
 
   /**
    * 설정시 margin을 적용한다

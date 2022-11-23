@@ -18,6 +18,10 @@
       background-size: $-kw-checkbox-icon-size;
     }
 
+    &:hover {
+      color: $black1;
+    }
+
     .q-checkbox__icon {
       font-size: 1em;
     }
@@ -79,6 +83,15 @@
       line-height: $-kw-checkbox-line-height;
       font-weight: 500;
       color: $black1;
+    }
+
+    &[aria-checked="false"] .q-checkbox__label {
+      color: $black2;
+      font-weight: 400;
+
+      &:hover {
+        color: $black1;
+      }
     }
 
     &.reverse .q-checkbox__label {

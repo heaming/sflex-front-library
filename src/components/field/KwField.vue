@@ -4,6 +4,9 @@
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
+    :stretch="stretch"
+    :grow="grow"
+    :overflow="overflow"
     @focus="$emit('focus')"
   >
     <slot
@@ -22,12 +25,14 @@
 
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
+import { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwField',
 
   props: {
     ...useFieldProps,
+    ...useStretchProps,
 
     modelValue: {
       type: [String, Number, Boolean, Array],
