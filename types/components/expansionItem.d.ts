@@ -1,10 +1,10 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QExpansionItemProps, QExpansionItemSlots } from 'quasar';
 
-interface KwExpansionItemProps {}
-interface KwExpansionItemSlots {
-  default: () => VNode[];
-}
+type privateKey = 'dark' | 'group';
+
+interface KwExpansionItemProps extends Omit<QExpansionItemProps, privateKey> {}
+interface KwExpansionItemSlots extends QExpansionItemSlots {}
 
 export interface KwExpansionItem extends ComponentPublicInstance<KwExpansionItemProps> {}
 

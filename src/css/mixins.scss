@@ -1,3 +1,28 @@
+// since there is no area for function. function defined in this place. plz fixme.
+@function at($list, $idx) {
+  @if type-of($list) != "list" {
+    @return $list;
+  }
+
+  @if length($list) == 1 {
+    @return nth($list, 1);
+  }
+
+  @if length($list) < $idx {
+    @return nth($list, $idx % length($list));
+  }
+
+  @return nth($list, $idx);
+}
+
+@function zero-unit($number, $unit: "px") {
+  @if unit($number) == "" {
+    @return $number + $unit;
+  }
+
+  @return $number;
+}
+
 @mixin typo($type, $font-weight: null) {
   $-typed: map-get($font-types, $type);
 

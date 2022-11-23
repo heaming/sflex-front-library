@@ -220,7 +220,7 @@
             v-for="(file, idx) in files"
             :key="`file${idx}`"
             class="kw-file__file kw-file-item"
-            :class="fileItemClasses[idx]"
+            :class="fileItemClass[idx]"
           >
             <kw-checkbox
               v-if="computedSelectable"
@@ -435,7 +435,7 @@ export default {
 
   setup(props, { emit, slots }) {
     const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const { fieldStyleProps, fieldClass } = fieldStyles;
 
     const fileRef = ref();
 
@@ -515,7 +515,7 @@ export default {
 
     // styling
     const fileClass = computed(() => ({
-      ...fieldClasses.value,
+      ...fieldClass.value,
       'kw-file--multiple': props.multiple,
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
@@ -536,7 +536,7 @@ export default {
       return classes;
     }
 
-    const fileItemClasses = computed(() => files.value.map(getFileItemClass));
+    const fileItemClass = computed(() => files.value.map(getFileItemClass));
 
     // event handler
     const filePickCtx = useFilePicker(fileRef, editable);
@@ -564,7 +564,7 @@ export default {
       ...filePickCtx,
       onRejected,
       fileClass,
-      fileItemClasses,
+      fileItemClass,
       emptyAppendCounter,
       editable,
     };

@@ -1,10 +1,8 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QVirtualScrollProps, QVirtualScrollSlots } from 'quasar';
 
-interface KwVirtualScrollProps {}
-interface KwVirtualScrollSlots {
-  default: () => VNode[];
-}
+interface KwVirtualScrollProps extends QVirtualScrollProps {}
+interface KwVirtualScrollSlots extends QVirtualScrollSlots {}
 
 export interface KwVirtualScroll extends ComponentPublicInstance<KwVirtualScrollProps> {}
 

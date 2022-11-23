@@ -149,28 +149,3 @@ $kw-field-color: $black1;
 $kw-field-color-disable: $black3;
 $kw-field-label-height: 24px;
 $kw-field-label-height-dense: 24px;
-
-// since there is no area for function. function defined in this place. plz fixme.
-@function at($list, $idx) {
-  @if type-of($list) != "list" {
-    @return $list;
-  }
-
-  @if length($list) == 1 {
-    @return nth($list, 1);
-  }
-
-  @if length($list) < $idx {
-    @return nth($list, $idx % length($list));
-  }
-
-  @return nth($list, $idx);
-}
-
-@function zero-unit($number) {
-  @if unit($number) == "" {
-    @return $number + "px";
-  }
-
-  @return $number;
-}

@@ -1,10 +1,8 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QSliderProps, QSliderSlots } from 'quasar';
 
-interface KwSliderProps {}
-interface KwSliderSlots {
-  default: () => VNode[];
-}
+interface KwSliderProps extends QSliderProps {}
+interface KwSliderSlots extends QSliderSlots {}
 
 export interface KwSlider extends ComponentPublicInstance<KwSliderProps> {}
 

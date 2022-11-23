@@ -103,10 +103,10 @@ export default (defaultPreset) => {
     || stylePreset.value.borderColor
     || designDefaultColors[design.value]?.borderColor);
 
-  const { stretchClasses } = useStretch();
+  const { stretchClass } = useStretch();
 
-  const buttonClasses = computed(() => {
-    const classes = { ...stretchClasses.value };
+  const buttonClass = computed(() => {
+    const classes = { ...stretchClass.value };
     if (design.value) { classes[`kw-btn--${design.value}`] = true; }
     if (buttonColor.value) { classes[`kw-btn--color-${buttonColor.value}`] = true; }
     if (buttonTextColor.value) { classes[`kw-btn--text-color-${buttonTextColor.value}`] = true; }
@@ -126,7 +126,7 @@ export default (defaultPreset) => {
   const buttonDense = computed(() => computedDense.value ?? stylePreset.value.dense);
 
   return {
-    buttonClasses,
+    buttonClass,
     buttonStyles,
     buttonDense,
   };

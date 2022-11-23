@@ -30,6 +30,7 @@ export * from './pagingInfo';
 export * from './popup';
 export * from './radio';
 export * from './scrollArea';
+export * from './scrollPicker';
 export * from './search';
 export * from './select';
 export * from './separator';

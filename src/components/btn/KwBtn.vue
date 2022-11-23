@@ -4,7 +4,7 @@
     ref="btnRef"
     v-bind="styleClassAttrs"
     class="kw-btn"
-    :class="buttonClasses"
+    :class="buttonClass"
     :style="buttonStyles"
     no-caps
     unelevated

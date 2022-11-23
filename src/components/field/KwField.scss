@@ -436,6 +436,10 @@
     flex-flow: row nowrap;
   }
 
+  &.self-stretch {
+    display: flex;
+  }
+
   &__control-container {
     width: 100%;
     position: relative;

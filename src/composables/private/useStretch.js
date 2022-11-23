@@ -7,13 +7,13 @@ export const useStretchProps = {
 export default () => {
   const { props } = getCurrentInstance();
 
-  const stretchClasses = computed(() => ({
+  const stretchClass = computed(() => ({
     grow: props.grow,
     'shrink-off': props.overflow,
     'self-stretch': props.stretch,
   }));
 
   return {
-    stretchClasses,
+    stretchClass,
   };
 };
