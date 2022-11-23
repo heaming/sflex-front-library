@@ -92,6 +92,7 @@
               rules="required"<br>
               type="checkbox"<br>
               :options="['A', 'B', 'C', 'D']"<br>
+              dense <br>
               disable
             </td>
             <td>
@@ -99,6 +100,7 @@
               Add this when Essential Case <br>
               Required, Default : "checkbox" <br>
               Add the option lists in [ ]<br>
+              height: 32px; font-size: 14px <br>
               Add the attribue "disable" when it is required to be readonly or disable
             </td>
           </tr>
@@ -610,6 +612,10 @@ const essentialCode = `
 // const readonlyCheckbox = ref(['A']);eckboxOptionGroup = ref(['A']);
 
 const guideHistory = [
+  {
+    timestamp: '2022-11-22',
+    text: 'Add dense prop',
+  },
   {
     timestamp: '2022-09-06',
     text: 'change guide content about essential type',

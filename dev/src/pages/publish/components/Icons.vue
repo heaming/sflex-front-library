@@ -147,6 +147,7 @@ const iconList2 = [
   'user_24',
   'warning_24',
   'write_24',
+  'download',
 ];
 const guideHistory = [
   {
