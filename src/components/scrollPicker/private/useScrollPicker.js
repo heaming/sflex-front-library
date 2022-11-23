@@ -103,7 +103,7 @@ export default () => {
   }
 
   watch(() => props.modelValue, (val) => {
-    updateOptions(val);
+    updateOptions(val ?? items[0]?.value);
   }, { immediate: true });
 
   const lastAnimationFrameId = ref(null);
@@ -156,31 +156,31 @@ export default () => {
   async function scrollTo(value) {
     const index = findIndex(items, { value });
 
-    if (index > -1) {
-      const distance = abs(selectedIndex.value - index);
-      const indexOffset = min(distance, normalizeIndex(items, -distance));
-      const normalizedIndex = normalizeIndex(items, selectedIndex.value - indexOffset);
+    if (index === -1) return;
 
-      const isUpside = infinite ? normalizedIndex === index : index < selectedIndex.value;
-      const direction = isUpside ? DIRECTION.UP : DIRECTION.DOWN;
+    const distance = abs(selectedIndex.value - index);
+    const indexOffset = min(distance, normalizeIndex(items, -distance));
+    const normalizedIndex = normalizeIndex(items, selectedIndex.value - indexOffset);
 
-      const frames = 12;
-      const minOffset = itemAngle / 3;
-      const rotationOffset = max((indexOffset * itemAngle) / frames, minOffset) * direction;
+    const isUpside = infinite ? normalizedIndex === index : index < selectedIndex.value;
+    const direction = isUpside ? DIRECTION.UP : DIRECTION.DOWN;
 
-      rotationFix(direction);
+    const frames = 12;
+    const minOffset = itemAngle / 3;
+    const rotationOffset = max((indexOffset * itemAngle) / frames, minOffset) * direction;
 
-      try {
-        while (index !== selectedIndex.value) {
-          // eslint-disable-next-line no-await-in-loop
-          await animate(rotationOffset);
-        }
+    rotationFix(direction);
 
-        updateValue(value);
-      } catch (e) {
-        if (!isAnimateCanceledError(e)) {
-          throw e;
-        }
+    try {
+      while (index !== selectedIndex.value) {
+        // eslint-disable-next-line no-await-in-loop
+        await animate(rotationOffset);
+      }
+
+      updateValue(value);
+    } catch (e) {
+      if (!isAnimateCanceledError(e)) {
+        throw e;
       }
     }
   }
