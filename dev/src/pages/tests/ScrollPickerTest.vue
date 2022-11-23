@@ -14,6 +14,6 @@
 <script setup>
 
 const value = ref(0);
-const items = Array.from({ length: 2 }, (v, i) => ({ value: i, label: i }));
+const items = Array.from({ length: 12 }, (v, i) => ({ value: i, label: i }));
 
 </script>

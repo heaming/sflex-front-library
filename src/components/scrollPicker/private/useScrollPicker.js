@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { findIndex } from 'lodash-es';
 import { createAnimateCanceledError, isAnimateCanceledError } from './animateCancel';
 
-const { max, min, abs, floor, ceil, PI } = Math;
+const { max, min, abs, round, floor, PI } = Math;
 const normalizeIndex = ({ length }, index) => (index + (abs(floor(index / length)) + 1) * length) % length;
 
 export const DIRECTION = { UP: -1, DOWN: 1 };
@@ -25,7 +26,7 @@ export const useScrollPickerProps = {
   },
   infinite: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 };
 
@@ -43,48 +44,57 @@ export default () => {
 
   const circumference = (itemSize * 360) / itemAngle;
   const radius = circumference / (2 * PI);
-
   const rotation = ref(0);
-  const virtualOptions = shallowRef();
-  const options = computed(() => virtualOptions.value ?? items);
 
-  const selectedItem = ref();
-  const selectedItemIndex = computed(() => findIndex(items, { value: selectedItem.value?.value }));
-  const selectedItemValue = computed(() => selectedItem.value?.value);
+  const options = shallowRef();
+  const selected = ref();
+  const selectedIndex = computed(() => findIndex(items, { value: selected.value?.value }));
+  const selectedValue = computed(() => selected.value?.value);
 
   const optionsStyle = computed(() => {
-    const top = `calc(50% - ${itemSize / 2}px)`;
-    const transform = `rotateX(${rotation.value}deg) rotateY(2deg)`;
+    const top = '50%';
+    const transform = `rotateX(${rotation.value}deg) rotateY(0deg)`;
     return { top, transform };
   });
 
-  const getOptionStyle = (index) => {
-    const m = floor(options.value.length / 2);
+  const highlightStyle = computed(() => {
+    const top = `calc(50% - ${itemSize / 2}px)`;
+    return { top };
+  });
+
+  const getOptionStyle = (option) => {
+    const top = `${-itemSize / 2}px`;
     const height = `${itemSize}px`;
-    const transform = `rotateX(${(m - index) * itemAngle}deg) translateZ(${radius}px)`;
-    return { height, transform };
+    const transform = `rotateX(${option.angle}deg) translateZ(${radius}px)`;
+    const visibility = option.hidden ? 'hidden' : 'visible';
+    return { top, height, transform, visibility };
   };
 
-  const cachedVirtualOptions = new Map();
+  function createOptions(index) {
+    const length = floor(90 / itemAngle) * 2 + 1;
+    const m = floor(length / 2);
+
+    return Array.from({ length }, (v, i) => {
+      const j = i + index - m;
+      const k = normalizeIndex(items, j);
+      const angle = (m - i) * itemAngle;
+      const hidden = !infinite && j !== k;
+      return { ...items[k], angle, hidden };
+    });
+  }
+
   function updateOptions(value, initialRotation = 0) {
     rotation.value = initialRotation;
 
-    if (value !== selectedItemValue.value) {
+    if (value !== selectedValue.value) {
       const index = max(findIndex(items, { value }), 0);
-      const length = floor(90 / itemAngle) * 2 + 1;
-      const m = infinite ? floor(length / 2) : 0;
 
-      if (!cachedVirtualOptions.has(value)) {
-        const newVirtualOptions = Array.from({ length }, (v, i) => items[normalizeIndex(items, i + index - m)]);
-        cachedVirtualOptions.set(value, newVirtualOptions);
-      }
-
-      virtualOptions.value = cachedVirtualOptions.get(value);
-      selectedItem.value = items[index];
+      options.value = createOptions(index);
+      selected.value = items[index];
     }
   }
 
-  function updateValue(value = selectedItemValue.value) {
+  function updateValue(value = selectedValue.value) {
     updateOptions(value);
 
     if (value !== props.modelValue) {
@@ -104,12 +114,17 @@ export default () => {
 
     rotation.value += rotationOffset;
 
-    const x = rotation.value / itemAngle;
-    const indexOffset = rotationOffset < 0 ? ceil(x) : floor(x);
-    const normalizedIndex = normalizeIndex(items, selectedItemIndex.value + indexOffset);
+    const direction = rotationOffset < 0 ? DIRECTION.UP : DIRECTION.DOWN;
+    const indexOffset = round(abs(rotation.value) / itemAngle) * direction;
+    const index = selectedIndex.value + indexOffset;
+
+    const normalizedIndex = infinite
+      ? normalizeIndex(items, index)
+      : min(max(index, 0), items.length - 1);
+
     const { value } = items[normalizedIndex];
 
-    if (value !== selectedItemValue.value) {
+    if (value !== selectedValue.value) {
       const overflowedRotation = rotation.value % itemAngle;
       updateOptions(value, overflowedRotation);
     }
@@ -142,17 +157,21 @@ export default () => {
     const index = findIndex(items, { value });
 
     if (index > -1) {
-      const distance = abs(selectedItemIndex.value - index);
+      const distance = abs(selectedIndex.value - index);
       const indexOffset = min(distance, normalizeIndex(items, -distance));
+      const normalizedIndex = normalizeIndex(items, selectedIndex.value - indexOffset);
 
-      const normalizedIndex = normalizeIndex(items, selectedItemIndex.value - indexOffset);
-      const direction = normalizedIndex === index ? DIRECTION.UP : DIRECTION.DOWN;
-      const rotationOffset = max((indexOffset * itemAngle) / 12, itemAngle / 3) * direction;
+      const isUpside = infinite ? normalizedIndex === index : index < selectedIndex.value;
+      const direction = isUpside ? DIRECTION.UP : DIRECTION.DOWN;
+
+      const frames = 12;
+      const minOffset = itemAngle / 3;
+      const rotationOffset = max((indexOffset * itemAngle) / frames, minOffset) * direction;
 
       rotationFix(direction);
 
       try {
-        while (index !== selectedItemIndex.value) {
+        while (index !== selectedIndex.value) {
           // eslint-disable-next-line no-await-in-loop
           await animate(rotationOffset);
         }
@@ -167,7 +186,7 @@ export default () => {
   }
 
   async function scrollBy(indexOffset) {
-    const normalizedIndex = normalizeIndex(items, selectedItemIndex.value + indexOffset);
+    const normalizedIndex = normalizeIndex(items, selectedIndex.value + indexOffset);
     const { value } = items[normalizedIndex];
     await scrollTo(value);
   }
@@ -188,6 +207,7 @@ export default () => {
     rotation,
     options,
     optionsStyle,
+    highlightStyle,
     getOptionStyle,
 
     updateValue,

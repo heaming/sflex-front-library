@@ -10,7 +10,7 @@
       <q-item
         v-for="(option, i) in options"
         :key="i"
-        :style="getOptionStyle(i)"
+        :style="getOptionStyle(option)"
         clickable
         tabindex="-1"
         @click="onClickOption(option)"
@@ -23,7 +23,10 @@
       </q-item>
     </q-list>
 
-    <div class="kw-scroll-picker__highlight">
+    <div
+      class="kw-scroll-picker__highlight"
+      :style="highlightStyle"
+    >
       <q-list
         class="kw-scroll-picker__options"
         :style="optionsStyle"
@@ -31,7 +34,7 @@
         <q-item
           v-for="(option, i) in options"
           :key="i"
-          :style="getOptionStyle(i)"
+          :style="getOptionStyle(option)"
           tabindex="-1"
         >
           <q-item-section>

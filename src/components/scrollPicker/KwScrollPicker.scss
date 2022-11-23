@@ -28,7 +28,6 @@
 
   &__options {
     position: absolute;
-    top: 50%;
     width: 100%;
     height: 0;
     transform-style: preserve-3d;
@@ -46,10 +45,10 @@
         text-align: center;
       }
 
-      &.q-router-link--active,
-      &--active {
-        color: $black2;
-      }
+      // &.q-router-link--active,
+      // &--active {
+      //   color: $black2;
+      // }
 
       .q-focus-helper {
         display: none;
@@ -59,7 +58,6 @@
 
   &__highlight {
     position: absolute;
-    top: calc(50% - 17px);
     width: 100%;
     height: 34px;
     overflow: hidden;
@@ -68,6 +66,7 @@
 
   &__highlight &__options {
     .q-item {
+      font-size: 16px;
       font-weight: 700;
     }
   }
