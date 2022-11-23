@@ -88,13 +88,17 @@ for (const propKey of Object.getOwnPropertyNames(innerProps.props)) {
   let value = propDefineObject.default;
   if (!isPrimitive && typeof value === 'function' && value.length === 0) {
     value = value();
-    if (propKey === 'offset') {
-      console.log(value);
-    }
+  }
+  if (innerProps.modelValue?.[propKey]) {
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    value = innerProps.modelValue?.[propKey];
   }
   if (Array.isArray(value)) {
-    value = `[${value}]`;
+    value = JSON.stringify(value);
+  } else if (typeof value === 'object') {
+    value = JSON.stringify(value);
   }
+
   innerValue.push({
     propKey,
     value,
@@ -120,6 +124,9 @@ const emitModelValue = () => {
       } catch (e) {
         // ignored
       }
+    }
+    if (value && innerElement.type === Number) {
+      value = Number(value) ?? undefined;
     }
     if (validType(innerElement.type, value)) {
       ev[innerElement.propKey] = value;

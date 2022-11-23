@@ -1,120 +1,99 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Carousel
+      slider
     </h2>
     <p class="kw-guide-description">
-      리스트
+      slider
     </p>
     <guide-section
       title="playground"
       description="playground"
     >
       <guide-props
-        v-model="listProps"
-        title="listProps"
-        :props="{
-          separator: { type: Boolean, default: undefined },
-          padding: { type: Boolean, default: undefined },
-          bordered: { type: Boolean, default: undefined },
-          dense: { type: Boolean, default: undefined },
-          dark: { type: Boolean, default: undefined },
-        }"
-      />
-      <guide-props
-        v-model="itemProps"
-        title="labelProps"
-        :props="{
-          tag: { type: String, default: 'div' },
-          active: { type: Boolean, default: undefined },
-          clickable: { type: Boolean, default: undefined },
-          dense: { type: Boolean, default: undefined },
-          insetLevel: { type: Number, default: undefined },
-          tabindex: { type: [String, Number], default: undefined },
-          focused: { type: Boolean, default: undefined },
-          manualFocus: { type: Boolean, default: undefined },
-          dark: { type: Boolean, default: undefined },
-          to: { type: String, default: undefined },
-          replace: { type: Boolean, default: undefined },
-          exact: { type: Boolean, default: undefined },
-          href: { type: String, default: undefined },
-          target: { type: String, default: undefined },
-          activeClass: { type: String, default: 'q-router-link--active' },
-          exactActiveClass: { type: String, default: 'q-router-link--exact-active' },
-          disable: { type: Boolean, default: undefined },
-        }"
-      />
-      <guide-props
-        v-model="labelProps"
-        title="labelProps"
-        :props="{
-          lines: { type: [Number, String], default: undefined },
-          overline: { type: Boolean, default: undefined },
-          caption: { type: Boolean, default: undefined },
-          header: { type: Boolean, default: undefined },
-        }"
-      />
-      <guide-props
-        v-model="sectionProps"
-        title="sectionProps"
-        :props="{
-          avatar: { type: Boolean, default: undefined },
-          thumbnail: { type: Boolean, default: undefined },
-          side: { type: Boolean, default: undefined },
-          top: { type: Boolean, default: undefined },
-          noWrap: { type: Boolean, default: undefined },
-        }"
+        v-model="bindingProps"
+        :props="sliderProps"
+        title="sliderProps"
       />
       <kw-separator />
+      <kw-slider
+        v-model="model"
+        v-bind="bindingProps"
+      />
+      <div>
+        <span>modelValue: {{ model }}</span>
+      </div>
+    </guide-section>
+    <guide-section
+      title="default slot"
+      description="=default"
+      :guide-code="defaultCode"
+    >
+      <kw-slider
+        v-model="model"
+        v-bind="bindingProps"
+      />
 
-      <kw-list
-        ref="list"
-        v-bind="listProps"
-        class="bg-yellow"
-      >
-        <kw-item
-          v-bind="itemProps"
-          class="bg-cyan"
-        >
-          <kw-item-label
-            v-bind="labelProps"
-            class="bg-purple"
-          >
-            kw-item-label
-          </kw-item-label>
-          <kw-item-section
-            v-bind="sectionProps"
-            class="bg-green"
-          >
-            kw-item-section
-          </kw-item-section>
-        </kw-item>
-        <kw-item
-          v-bind="itemProps"
-          class="bg-cyan"
-        >
-          <kw-item-label
-            v-bind="labelProps"
-            class="bg-purple"
-          >
-            kw-item-label
-          </kw-item-label>
-          <kw-item-section
-            v-bind="sectionProps"
-            class="bg-green"
-          >
-            kw-item-section
-          </kw-item-section>
-        </kw-item>
-      </kw-list>
+      <div>
+        <span>modelValue: {{ model }}</span>
+      </div>
     </guide-section>
   </kw-page>
 </template>
 
 <script setup>
-const list = ref();
-const sectionProps = ref(null);
-const itemProps = ref(null);
-const labelProps = ref(null);
-const listProps = ref(null);
+const sliderProps = {
+  labelValue: { type: [String, Number], default: undefined },
+  name: { type: String, default: undefined },
+  dark: { type: Boolean, default: undefined },
+  min: { type: Number, default: 0 },
+  max: { type: Number, default: 0 },
+  innerMin: { type: Number, default: undefined },
+  innerMax: { type: Number, default: undefined },
+  step: { type: Number, default: 1 },
+  snap: { type: Boolean, default: undefined },
+  vertical: { type: Boolean, default: undefined },
+  reverse: { type: Boolean, default: false },
+  hideSelection: { type: Boolean, default: undefined },
+  color: { type: String, default: undefined },
+  markerLabelsClass: { type: String, default: undefined },
+  label: { type: Boolean, default: undefined },
+  labelColor: { type: String, default: undefined },
+  labelTextColor: { type: String, default: undefined },
+  labelAlways: { type: Boolean, default: undefined },
+  switchLabelSide: { type: Boolean, default: undefined },
+  markers: { type: [Boolean, Number], default: undefined },
+  markerLabels: { type: [Boolean, Array, Object, Function], default: false },
+  switchMarkerLabelsSide: { type: Boolean, default: undefined },
+  trackImg: { type: String, default: undefined },
+  trackColor: { type: String, default: undefined },
+  innerTrackImg: { type: String, default: undefined },
+  innerTrackColor: { type: String, default: undefined },
+  selectionColor: { type: String, default: undefined },
+  selectionImg: { type: String, default: undefined },
+  thumbSize: { type: String, default: '20px' },
+  trackSize: { type: String, default: '4px' },
+  disable: { type: Boolean, default: undefined },
+  readonly: { type: Boolean, default: undefined },
+  dense: { type: Boolean, default: undefined },
+  tabindex: { type: [String, Number], default: undefined },
+  thumbColor: { type: String, default: undefined },
+  thumbPath: {
+    type: String,
+    default: 'M 4, 10 a 6,6 0 1,0 12,0 a 6,6 0 1,0 -12,0',
+  },
+};
+
+const bindingProps = ref(null);
+
+const defaultCode = `
+      <kw-slider
+        v-model="model"
+        v-bind="bindingProps"
+      />
+      <div>
+        <span>modelValue: {{ model }}</span>
+      </div>`;
+
+const model = ref(0);
 </script>
