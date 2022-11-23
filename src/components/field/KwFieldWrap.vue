@@ -6,12 +6,12 @@
     <div
       ref="controlRef"
       class="kw-field-wrap__control"
-      :class="[controlClass, stretchClasses]"
+      :class="[controlClass, stretchClass]"
       tabindex="-1"
     >
       <div
         class="kw-field-wrap__control-container"
-        :class="stretchClasses"
+        :class="stretchClass"
       >
         <slot />
         <div
@@ -101,14 +101,14 @@ export default {
 
     const computedDense = useDense();
     const { cols } = useFormLayout();
-    const { stretchClasses } = useStretch();
+    const { stretchClass } = useStretch();
 
     const showErrorMessage = computed(() => props.error || invalid.value);
     const showLabel = computed(() => platform.is.mobile && (props.label || slots.label));
 
     const computedClass = computed(() => {
       const classes = {
-        ...stretchClasses.value,
+        ...stretchClass.value,
       };
       classes['kw-field-wrap--error'] = props.error || invalid.value;
       classes['kw-field-wrap--dense'] = computedDense.value;
@@ -138,7 +138,7 @@ export default {
       computedErrorMessage,
       computedBottomClass,
       focus,
-      stretchClasses,
+      stretchClass,
     };
   },
 };
