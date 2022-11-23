@@ -94,7 +94,7 @@ for (const propKey of Object.getOwnPropertyNames(innerProps.props)) {
     value = innerProps.modelValue?.[propKey];
   }
   if (Array.isArray(value)) {
-    value = `[${value}]`;
+    value = JSON.stringify(value);
   } else if (typeof value === 'object') {
     value = JSON.stringify(value);
   }
