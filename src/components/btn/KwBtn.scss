@@ -239,3 +239,19 @@ body.desktop {
 }
 
 @include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28)); // notice! this is exception.
+
+body.mobile {
+  .kw-btn {
+    // mobile 용
+
+    //// mobile 용
+  }
+
+  &:not(.tablet) {
+    .kw-btn {
+      // tablet 용
+
+      //// tablet 용
+    }
+  }
+}
