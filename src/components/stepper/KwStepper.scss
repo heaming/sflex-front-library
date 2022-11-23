@@ -208,3 +208,31 @@
     padding-bottom: 12px;
   }
 }
+
+.mobile {
+  .kw-stepper {
+    // tablet
+  }
+
+  // mobile
+  &:not(.tablet) {
+    .kw-stepper {
+      .q-stepper__header {
+        .q-stepper__tab {
+          &::after {
+            display: none;
+          }
+
+          .q-stepper__dot {
+            margin-right: 8px;
+
+            span {
+              font-size: 13px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}
