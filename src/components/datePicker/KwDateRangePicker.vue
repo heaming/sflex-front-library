@@ -2,6 +2,7 @@
   <kw-field-wrap
     class="kw-date-range-picker"
     v-bind="styleClassAttrs"
+    :label="label"
     :error="invalid"
     :error-message="invalidMessage"
   >

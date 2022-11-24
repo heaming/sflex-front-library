@@ -3,6 +3,7 @@
     ref="quasarRef"
     v-bind="styleClassAttrs"
     class="kw-expansion-item"
+    :class="expansionItemClass"
     :toggle-aria-label="toggleAriaLabel"
     :icon="icon"
     :label="label"
@@ -10,7 +11,7 @@
     :caption="caption"
     :caption-lines="captionLines"
     :dense="dense"
-    :expand-icon="expandIcon"
+    :expand-icon="computedExpandIcon"
     :expanded-icon="expandedIcon"
     :expand-icon-class="expandIconClass"
     :duration="duration"
@@ -34,8 +35,8 @@
     :active-class="activeClass"
     :exact-active-class="exactActiveClass"
     :disable="disable"
-    :model-value="modelValue"
-    @update:model-value="$emit('update:modelValue', $event)"
+    :model-value="showing"
+    @update:model-value="onUpdateModelValue"
     @before-show="$emit('before-show', $event)"
     @show="$emit('show', $event)"
     @before-hide="$emit('before-hide', $event)"
@@ -44,7 +45,7 @@
     @after-show="$emit('after-show', $event)"
     @after-hide="$emit('after-hide', $event)"
   >
-    <slot />
+    <slot :toggle-count="toggleCount" />
     <template
       v-if="$slots.header"
       #header="scoped"
@@ -52,6 +53,8 @@
       <slot
         name="header"
         v-bind="scoped"
+        :toggle-count="toggleCount"
+        :read="read"
       />
     </template>
   </q-expansion-item>
@@ -59,6 +62,7 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwExpansionItem',
@@ -74,7 +78,7 @@ export default {
     caption: { type: String, default: undefined },
     captionLines: { type: [Number, String], default: undefined },
     dense: { type: Boolean, default: undefined },
-    expandIcon: { type: String, default: 'arrow_down_24' },
+    expandIcon: { type: String, default: undefined },
     expandedIcon: { type: String, default: undefined },
     expandIconClass: { type: [Array, String, Object], default: undefined },
     duration: { type: Number, default: undefined },
@@ -111,11 +115,32 @@ export default {
     'after-show',
     'after-hide',
   ],
-  setup() {
+  setup(props, { emit }) {
     const quasarRef = ref();
-    function show(...args) { quasarRef.value?.show(...args); }
-    function hide(...args) { quasarRef.value?.hide(...args); }
-    function toggle(...args) { quasarRef.value?.toggle(...args); }
+    const showing = ref(props.defaultOpened);
+    const toggleCount = ref(0);
+    const read = computed(() => props.defaultOpened || toggleCount.value > 0);
+    const expansionItemClass = computed(() => {
+      const classes = {};
+      classes['kw-expansion-item--read'] = read.value;
+      return classes;
+    });
+
+    watch(() => props.modelValue, (val) => { showing.value = val; });
+    watch(showing, () => { toggleCount.value += 1; });
+
+    const defaultExpandIcon = platform.is.tablet ? 'arrow_down' : 'arrow_down_24';
+
+    const computedExpandIcon = computed(() => props.expandIcon ?? defaultExpandIcon);
+
+    function onUpdateModelValue(evt) {
+      showing.value = evt;
+      emit('update:modelValue', evt);
+    }
+
+    function show(evt) { quasarRef.value?.show(evt); }
+    function hide(evt) { quasarRef.value?.hide(evt); }
+    function toggle(evt) { quasarRef.value?.toggle(evt); }
 
     const { styleClassAttrs } = useInheritAttrs();
 
@@ -125,6 +150,12 @@ export default {
       show,
       hide,
       toggle,
+      onUpdateModelValue,
+      computedExpandIcon,
+      toggleCount,
+      showing,
+      expansionItemClass,
+      read,
     };
   },
 };
