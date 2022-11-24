@@ -13,7 +13,7 @@ import { KwChip } from './components/chip';
 import { KwDate, KwDatePicker, KwDateRangePicker } from './components/datePicker';
 import { KwEditor } from './components/editor';
 import { KwExpansionItem } from './components/expansionItem';
-import { KwField } from './components/field';
+import { KwField, KwFieldWrap } from './components/field';
 import { KwFile } from './components/file';
 import { KwForm, KwFormRow, KwFormItem } from './components/form';
 import { KwGrid, KwTreeGrid } from './components/grid';
@@ -64,6 +64,7 @@ export interface KwComponentNameMap {
   KwEditor: KwEditor;
   KwExpansionItem: KwExpansionItem;
   KwField: KwField;
+  KwFieldWrap: KwFieldWrap;
   KwFile: KwFile;
   KwForm: KwForm;
   KwFormRow: KwFormRow;
