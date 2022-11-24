@@ -119,7 +119,7 @@
             </div>
             <kw-btn
               borderless
-              icon="download"
+              icon="download_24"
               style="font-size: 24px;"
             />
           </div>
@@ -198,7 +198,7 @@ const exampleCode3 = `
   </div>
   <kw-btn
     borderless
-    icon="download"
+    icon="download_24"
     style="font-size: 24px;"
   />
 </div>;

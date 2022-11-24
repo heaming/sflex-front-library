@@ -126,6 +126,7 @@ const iconList2 = [
   'call_24',
   'checked_24',
   'close_24',
+  'download_24',
   'filter_24',
   'id_24',
   'imgpreview_24',
@@ -147,7 +148,7 @@ const iconList2 = [
   'user_24',
   'warning_24',
   'write_24',
-  'download',
+  'qrcode_24',
 ];
 const guideHistory = [
   {
