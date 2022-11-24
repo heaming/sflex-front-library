@@ -392,6 +392,16 @@
       width: 100%;
     }
   }
+
+  &--required {
+    & .q-field {
+      &__label::after {
+        content: "*";
+        display: contents;
+        color: $accent;
+      }
+    }
+  }
 }
 
 .kw-field-wrap {
