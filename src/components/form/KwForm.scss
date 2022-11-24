@@ -108,3 +108,56 @@
     }
   }
 }
+
+body.mobile {
+  .kw-form {
+    // tablet 용
+    $-kw-form-row-height: $kw-field-height;
+    $-kw-form-row-gap: 60px;
+    $-kw-form-row-padding: 8px 0 8px 0;
+    $-kw-form-row-height-dense: 24px;
+    $-kw-form-row-gap-dense: 60px;
+    $-kw-form-row-padding-dense: 6px 0;
+    $-kw-form-item-min-height: $kw-field-height;
+    $-kw-form-item-min-height-dense: 24px;
+
+    @at-root .kw-form-row {
+      @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
+    }
+
+    @at-root .kw-form-item {
+      @include kw-item($-kw-form-item-min-height);
+    }
+
+    .kw-form-item__label {
+      @include typo("dense",400);
+    }
+
+    .kw-form-item__field {
+      p {
+        @include typo("dense");
+
+        color: $black1;
+      }
+
+      ol {
+        margin: 0;
+        padding-left: 20px;
+
+        @include typo("dense");
+
+        color: #222;
+      }
+    }
+
+    //// tablet 용
+  }
+
+  &:not(.tablet) {
+    .kw-form {
+      // mobile 용
+
+      //// mobile 용
+    }
+  }
+}
