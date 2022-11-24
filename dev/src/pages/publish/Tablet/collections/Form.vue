@@ -7,6 +7,9 @@
       This is the form example for Tablet. <br>
       <b>The methods is same with desktop</b>, only label width and between spacing have been changed
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="default"
@@ -20,9 +23,6 @@
         </li>
       </ul>
     </div>
-    <guide-history-view
-      :items="guideHistory"
-    />
     <div class="kw-guide-section">
       <h3
         class="kw-guide-title"

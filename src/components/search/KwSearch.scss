@@ -96,3 +96,30 @@
     }
   }
 }
+
+body.mobile {
+  .kw-search {
+    $-kw-search-padding: 24px 40px;
+    $-kw-search-row-height: $kw-field-height-dense;
+    $-kw-search-row-gap: 60px;
+    $-kw-search-row-padding: 12px 0 0;
+
+    // override kw-form
+    &.kw-form {
+      .kw-form-row {
+        @include kw-row($-kw-search-row-height, $-kw-search-row-gap, $-kw-search-row-padding);
+      }
+
+      .kw-form-item {
+        @include kw-item($-kw-search-row-height);
+
+        &__label {
+          width: 120px;
+          padding-right: 12px;
+        }
+      }
+    }
+
+    //// tablet 용
+  }
+}
