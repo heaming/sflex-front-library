@@ -28,6 +28,8 @@ import { KwPagination } from './components/pagination';
 import { KwPagingInfo } from './components/pagingInfo';
 import { KwPopup } from './components/popup';
 import { KwRadio } from './components/radio';
+import { KwScrollArea } from './components/scrollArea';
+import { KwScrollPicker } from './components/scrollPicker';
 import { KwSearch, KwSearchRow, KwSearchItem } from './components/search';
 import { KwSelect } from './components/select';
 import { KwSeparator } from './components/separator';
@@ -84,6 +86,8 @@ export interface KwComponentNameMap {
   KwPagingInfo: KwPagingInfo;
   KwPopup: KwPopup;
   KwRadio: KwRadio;
+  KwScrollArea: KwScrollArea;
+  KwScrollPicker: KwScrollPicker;
   KwSearch: KwSearch;
   KwSearchRow: KwSearchRow;
   KwSearchItem: KwSearchItem;
