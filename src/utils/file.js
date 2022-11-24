@@ -43,3 +43,24 @@ export async function download(fileInfo, targetPath = targetPaths[0]) {
 
   downloadBlob(response.data, fileInfo.name);
 }
+
+export async function readExcel(file) {
+  const [, extension] = file.name.match(/\.(\w+)$/) || [];
+
+  if (!extension) {
+    throw new Error('invalid file format.');
+  }
+
+  const acceptExtensions = ['xlsx', 'xls'];
+  const isForbidden = !acceptExtensions.includes(extension);
+
+  if (isForbidden) {
+    throw new Error(`${extension} is a forbidden extension.`);
+  }
+
+  const response = await http.post('/sflex/common/common/excel-read', { file }, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return response.data;
+}

@@ -447,11 +447,19 @@ const normalizeExportOptions = (options = {}) => ({
   treeKey: options.treeKey,
 });
 
-function executeExportView(view, options, onProgress, onComplete) {
-  return new Promise((resolve) => {
-    const progressCallback = (g, work, max, position) => { onProgress(position); };
-    const done = async () => { await onComplete(); resolve(); };
-    view.exportGrid({ ...options, progressCallback, done });
+function exportGrid(view, options, onProgress, onComplete) {
+  return new Promise((resolve, reject) => {
+    view.exportGrid({
+      ...options,
+      progressCallback(g, work, max, position) {
+        onProgress(position);
+      },
+      done() {
+        onComplete()
+          .then(resolve)
+          .catch(reject);
+      },
+    });
   });
 }
 
@@ -459,20 +467,29 @@ export async function exportView(view, options) {
   options = normalizeExportOptions(options);
 
   const shouldClone = !!options.exportData;
-  if (shouldClone) view = await cloneView(view, options);
+
+  if (shouldClone) {
+    view = await cloneView(view, options);
+  }
 
   if (options.timePostfix) {
     const postfix = date.formatDate(new Date(), 'YYYYMMHHHHmmss');
     options.fileName = `${options.fileName}_${postfix}`;
   }
 
+  const onProgress = loadProgress;
+  const onComplete = async () => {
+    await timeout();
+
+    if (shouldClone) {
+      destroyCloneView(view);
+    }
+    await timeout(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
+  };
+
   try {
     loadProgress(0);
-    await executeExportView(view, options, loadProgress, async () => {
-      await timeout();
-      if (shouldClone) destroyCloneView(view);
-      await timeout(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
-    });
+    await exportGrid(view, options, onProgress, onComplete);
   } finally {
     loadProgress(-1);
   }

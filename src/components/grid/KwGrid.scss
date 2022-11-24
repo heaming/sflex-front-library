@@ -146,6 +146,7 @@
   }
 
   .rg-alternate-row,
+  .rg-fixed-body .rg-data-row,
   .rg-data-row.rg-focused-row {
     background: #fff;
   }
@@ -213,6 +214,16 @@
     position: absolute;
     color: $error;
   }
+}
+
+// Tree
+
+.rg-tree-collapsed {
+  background-image: url(~@assets/icons/group_plus.svg);
+}
+
+.rg-tree-expanded {
+  background-image: url(~@assets/icons/group_minus.svg);
 }
 
 // table 정의 - 필요에 따라 본 정의는 이동될 수 있음.

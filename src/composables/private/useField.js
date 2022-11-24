@@ -165,7 +165,10 @@ export default (options) => {
       return false;
     }
 
-    return !isEqual(value.value, initialValue.value);
+    return !isEqual(
+      value.value ?? '',
+      initialValue.value ?? '',
+    );
   }
 
   function focus() {

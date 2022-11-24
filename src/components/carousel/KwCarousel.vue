@@ -103,12 +103,12 @@ export default {
   emits: ['update:model-value', 'before-transition', 'transition'],
   setup() {
     const quasarRef = ref();
-    function toggleFullscreen(...args) { quasarRef.value?.toggleFullscreen(...args); }
-    function setFullscreen(...args) { quasarRef.value?.setFullscreen(...args); }
-    function exitFullscreen(...args) { quasarRef.value?.exitFullscreen(...args); }
-    function next(...args) { quasarRef.value?.next(...args); }
-    function previous(...args) { quasarRef.value?.previous(...args); }
-    function goTo(...args) { quasarRef.value?.goTo(...args); }
+    function toggleFullscreen() { quasarRef.value?.toggleFullscreen(); }
+    function setFullscreen() { quasarRef.value?.setFullscreen(); }
+    function exitFullscreen() { quasarRef.value?.exitFullscreen(); }
+    function next() { quasarRef.value?.next(); }
+    function previous() { quasarRef.value?.previous(); }
+    function goTo(panelName) { quasarRef.value?.goTo(panelName); }
 
     const { styleClassAttrs } = useInheritAttrs();
 

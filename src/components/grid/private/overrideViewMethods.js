@@ -271,7 +271,7 @@ function setColumnCellButton(column) {
 }
 
 function overrideStyleCallback(styleCallback, isGlobal = false) {
-  const normalizeReturnValue = (val) => (typeof val === 'string' ? { styleName: val } : (val || {}));
+  const normalizeReturnValue = (val) => (typeof val === 'string' ? { styleName: val } : { ...val });
 
   return (g, model) => {
     const { column, itemIndex } = model.index;
