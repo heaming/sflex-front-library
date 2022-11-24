@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Stepper
+      [Mobile] Stepper
     </h2>
     <guide-history-view
       :items="guideHistory"
