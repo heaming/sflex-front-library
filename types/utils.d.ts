@@ -89,6 +89,12 @@ interface FileUtil {
    * @param targetPath default `temp`
    */
   download(fileInfo: FileInfo, targetPath?: TargetPath): Promise<void>;
+
+  /**
+   * xlsx, xls 파일을 서버로 부터 읽어들인다.
+   * @param file
+   */
+  readExcel(file: File): Promise<Array<Record<string, any>>>;
 }
 
 export const fileUtil: FileUtil;

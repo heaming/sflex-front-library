@@ -197,18 +197,18 @@ export function getOutsideEditorElements(view) {
   Excel
   */
 export async function cloneView(view, options) {
-  const isGrid = view instanceof GridView;
+  const isGridView = view instanceof GridView;
 
   const container = document.createElement('div');
   container.style.display = 'none';
   document.body.appendChild(container);
 
-  const DataClass = isGrid ? LocalDataProvider : LocalTreeDataProvider;
+  const DataClass = isGridView ? LocalDataProvider : LocalTreeDataProvider;
   const copyData = new DataClass(false);
   copyData.setFields(cloneDeep(view.getDataSource().getFields()));
-  copyData.setRows(options.exportData, isGrid ? undefined : (options.treeKey || view.__treeKey__));
+  copyData.setRows(options.exportData, isGridView ? undefined : (options.treeKey || view.__treeKey__));
 
-  const ViewClass = isGrid ? GridView : TreeView;
+  const ViewClass = isGridView ? GridView : TreeView;
   const copyView = new ViewClass(container);
   copyView.setDataSource(copyData);
   copyView.setColumns(cloneDeep(view.getColumns()));
@@ -219,7 +219,7 @@ export async function cloneView(view, options) {
   copyView.setDisplayOptions(cloneDeep(view.getDisplayOptions()));
   copyView.setFooters(cloneDeep(view.getFooters()));
 
-  if (view.isGrouped()) {
+  if (isGridView && view.isGrouped()) {
     await timeout();
     copyView.setRowGroup(cloneDeep(view.getRowGroup()));
     copyView.groupBy(cloneDeep(view.getGroupFields()));

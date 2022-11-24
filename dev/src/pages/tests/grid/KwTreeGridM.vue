@@ -152,7 +152,7 @@ export default {
         onClickExport = async () => {
           await gridUtil.exportView(treeView, {
             exportData: createTreeData(columns, fields, 10000, 'treeKey'),
-            exportLayout: fields.map((e) => e.fieldName).reverse(),
+            exportLayout: columns.map((e) => e.fieldName).reverse(),
           });
         };
       },
