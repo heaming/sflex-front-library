@@ -99,10 +99,6 @@ export default {
       type: Object,
       default: undefined,
     },
-    plugins: {
-      type: Array,
-      default: () => [],
-    },
   },
   setup(props) {
     const chartRef = ref(null);
