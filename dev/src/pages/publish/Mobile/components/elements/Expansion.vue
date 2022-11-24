@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      [MOBILE] Expansion
+      [TABLET] Expansion
     </h2>
     <guide-history-view :items="historyData" />
     <div class="kw-guide-section">
@@ -392,7 +392,7 @@ const case2 = `
 // `;
 const historyData = [
   {
-    timestamp: '2022-11-14',
+    timestamp: '2022-11-24',
     text: 'First added',
   },
 ];
