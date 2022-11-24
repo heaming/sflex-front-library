@@ -57,5 +57,24 @@
 .kw-date-range-picker {
   .kw-date-picker + span {
     padding: 0 4px !important;
+    color: $black3;
+  }
+}
+
+body.mobile {
+  .kw-date-picker {
+    // tablet 용
+    width: 250px;
+  }
+
+  // // tablet 용
+
+  &:not(.tablet) {
+    // mobile 용
+    .kw-date-picker {
+      width: auto;
+    }
+
+    // // mobile 용
   }
 }

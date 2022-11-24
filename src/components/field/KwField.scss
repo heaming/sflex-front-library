@@ -442,6 +442,13 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
+    & > span {
+      // margin: auto;
+      padding: 0 4px;
+      font-size: 14px;
+      color: $black3;
+    }
   }
 
   &__bottom {
