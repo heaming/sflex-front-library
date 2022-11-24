@@ -70,43 +70,36 @@
       <kw-list
         ref="list"
         v-bind="listProps"
-        class="bg-yellow"
       >
         <kw-item
           v-bind="itemProps"
-          class="bg-cyan"
         >
           <kw-item-label
             v-bind="labelProps"
-            class="bg-purple"
           >
             kw-item-label
           </kw-item-label>
           <kw-item-section
             v-bind="sectionProps"
-            class="bg-green"
           >
             kw-item-section
           </kw-item-section>
         </kw-item>
         <kw-item
           v-bind="itemProps"
-          class="bg-cyan"
         >
           <kw-item-label
             v-bind="labelProps"
-            class="bg-purple"
           >
             kw-item-label
           </kw-item-label>
           <kw-item-section
             v-bind="sectionProps"
-            class="bg-green"
           >
             kw-item-section
           </kw-item-section>
         </kw-item>
-        <kw-expansion-item class="bg-deep-orange">
+        <kw-expansion-item>
           <template #header>
             header
           </template>
@@ -126,3 +119,48 @@ const itemProps = ref(null);
 const labelProps = ref(null);
 const listProps = ref(null);
 </script>
+
+<style scoped lang="scss">
+.kw-list {
+  position: relative;
+}
+
+.kw-list::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  border: 1px dashed #2f8af3;
+}
+
+.kw-item::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  border: 1px dashed #6cbf67;
+  background-color: rgb(144 211 244 / 5%);
+}
+
+.kw-item-section {
+  position: relative;
+}
+
+.kw-item-section::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  border: 1px dashed #ff5353;
+  background-color: rgb(244 211 100 / 10%);
+}
+
+.kw-item-label {
+  position: relative;
+}
+
+.kw-item-label::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  border: 1px dashed #53ffff;
+  background-color: rgb(244 211 100 / 10%);
+}
+</style>

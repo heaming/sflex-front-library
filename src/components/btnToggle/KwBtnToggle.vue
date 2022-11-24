@@ -2,6 +2,7 @@
   <kw-field-wrap
     ref="inputRef"
     v-bind="styleClassAttrs"
+    :label="label"
     :error="invalid"
     :error-message="invalidMessage"
     :grow="grow"
