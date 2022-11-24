@@ -12,19 +12,6 @@
     />
     <div class="kw-guide-section">
       <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        Notice
-      </h3>
-      <ul>
-        <li class="kw-fc--error">
-          please add :label-size="108" prop and value in kw-form
-        </li>
-      </ul>
-    </div>
-    <div class="kw-guide-section">
-      <h3
         class="kw-guide-title"
       >
         summary
@@ -49,12 +36,11 @@
               kw-form
             </td>
             <td>
-              :label-size="108" <br>
               :cols="Number(1~4)" <br>
               dense
             </td>
             <td>
-              in tablet label width is 108 px <br> (default : 3) <br> only have data text type use dense prop<br>
+              (default : 3) <br> only have data text type use dense prop<br>
             </td>
           </tr>
           <tr>
@@ -93,7 +79,6 @@
         <div class="kw-guide-example">
           <kw-form
             :cols="2"
-            :label-size="108"
           >
             <kw-form-row>
               <kw-form-item label="Input">
@@ -139,7 +124,6 @@
           <kw-form
             :cols="3"
             dense
-            :label-size="108"
           >
             <kw-form-row>
               <kw-form-item label="이름">
@@ -178,7 +162,6 @@
 const example1 = `
 <kw-form
   :cols="2"
-  :label-size="108"
 >
   <kw-form-row>
     <kw-form-item label="Input">
@@ -211,7 +194,6 @@ const example2 = `
 <kw-form
   :cols="3"
   dense
-  :label-size="108"
 >
   <kw-form-row>
     <kw-form-item label="이름">
