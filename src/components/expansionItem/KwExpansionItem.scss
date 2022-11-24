@@ -26,3 +26,42 @@
     background-color: $bg-body;
   }
 }
+
+.mobile {
+  .kw-expansion-item {
+    // tablet
+  }
+
+  // mobile
+  &:not(.tablet) {
+    .kw-expansion-item {
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .q-item {
+        padding: 12px  0;
+
+        &__label {
+          font-size: 16px;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.5;
+          color: $black1;
+
+          &--caption {
+            margin-top: 8px;
+            font-size: 14px;
+            color: $black3;
+          }
+        }
+
+        .q-item__section--side {
+          padding-right: 0 !important;
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+}
