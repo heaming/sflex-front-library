@@ -1,0 +1,14 @@
+// kw-expansion-item 감싸는 클래스
+.kw-item:has(.kw-expansion-item) {
+  flex-wrap: wrap;
+  padding: 0;
+  border-bottom: 1px solid $line-line;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .kw-expansion-item {
+    width: 100%;
+  }
+}
