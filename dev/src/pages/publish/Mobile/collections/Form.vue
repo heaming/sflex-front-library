@@ -71,9 +71,6 @@
       >
         Example
       </h3>
-      <p class="kw-guide-description">
-        Add the column's value as <b>:cols="1"</b> in the tag of <b>kw-form</b>.
-      </p>
       <q-card>
         <div class="kw-guide-example">
           <h3 class="kw-font-body kw-fc--black mb16">
@@ -89,6 +86,11 @@
           />
           <kw-date-picker
             label="날짜선택"
+            class="pt20"
+          />
+          <kw-date-range-picker
+            label="날짜지정"
+            grow
             class="pt20"
           />
         </div>

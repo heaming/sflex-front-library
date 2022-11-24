@@ -12,19 +12,6 @@
     />
     <div class="kw-guide-section">
       <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        Notice
-      </h3>
-      <ul>
-        <li class="kw-fc--error">
-          please add :label-size="108" prop and value in kw-form
-        </li>
-      </ul>
-    </div>
-    <div class="kw-guide-section">
-      <h3
         id="summary"
         class="kw-guide-title"
       >
@@ -50,11 +37,10 @@
               kw-search
             </td>
             <td>
-              :label-size="108" <br>
-              :cols="Number(1~4)" <br>
+              :cols="Number(1~4)"
             </td>
             <td>
-              in tablet label width is 108 px <br> (default : 3)
+              (default : 3)
             </td>
           </tr>
           <tr>
@@ -93,7 +79,6 @@
         <div class="kw-guide-example">
           <kw-search
             :cols="2"
-            :label-size="108"
           >
             <kw-search-row>
               <kw-search-item label="이름">
@@ -127,7 +112,6 @@
 const example = `
 <kw-search
   :cols="2"
-  :label-size="108"
 >
   <kw-search-row>
     <kw-search-item label="이름">
