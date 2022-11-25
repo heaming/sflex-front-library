@@ -2,7 +2,7 @@
   <q-radio
     v-bind="styleClassAttrs"
     class="kw-radio spaced-sibling"
-    :class="{'kw-radio--no-label': !(label || $slots.default)}"
+    :class="radioClass"
     :model-value="modelValue"
     :val="val"
     :label="label ?? val?.toString()"
@@ -23,6 +23,7 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
+import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwRadio',
@@ -30,6 +31,7 @@ export default {
 
   props: {
     ...useDenseProps,
+    ...useStretchProps,
 
     modelValue: {
       type: [String, Number, Boolean],
@@ -73,8 +75,15 @@ export default {
     'update:modelValue',
   ],
 
-  setup() {
+  setup(props, { slots }) {
     const radioRef = ref();
+
+    const { stretchClass } = useStretch();
+
+    const radioClass = computed(() => ({
+      'kw-radio--no-label': !(props.label || slots.default),
+      ...stretchClass.value,
+    }));
 
     return {
       ...useInheritAttrs(),
@@ -84,6 +93,7 @@ export default {
       set() {
         radioRef.value.set();
       },
+      radioClass,
     };
   },
 };

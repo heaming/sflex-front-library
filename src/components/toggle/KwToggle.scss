@@ -1,4 +1,5 @@
-.kw-toggle {
+.kw-toggle,
+%kw-toggle {
   // notice! we will break em based styling. so, you can use size props.
   $-kw-toggle-height: $kw-field-line-height;
   $-kw-toggle-track-height: 17px; // $-kw-toggle-height * 0.7?
@@ -11,16 +12,15 @@
   $-kw-toggle-label-font-size: $kw-field-font-size-dense;
   $-kw-toggle-label-line-height: $kw-field-line-height-dense;
 
-  &.q-toggle,
-  .kw-option-group &.q-option-group .q-toggle {
-    .q-toggle__track {
+  & .q-toggle {
+    &__track {
       height: 100%;
       border-radius: $-kw-toggle-track-height / 2;
       opacity: 1;
       background: currentcolor;
     }
 
-    .q-toggle__thumb {
+    &__thumb {
       top: $-kw-toggle-thumb-padding;
       left: $-kw-toggle-thumb-padding;
       width: $-kw-toggle-thumb-size;
@@ -37,7 +37,7 @@
       }
     }
 
-    .q-toggle__inner {
+    &__inner {
       margin: auto;
       font-size: $-kw-toggle-thumb-size; // when use icon
       padding: 0;
@@ -71,6 +71,18 @@
       }
     }
 
+    &__label {
+      padding-left: 8px;
+      font-size: $-kw-toggle-label-font-size;
+      line-height: $-kw-toggle-label-line-height;
+      color: $-kw-toggle-label-color;
+      font-weight: 500;
+    }
+  }
+
+  .q-toggle {
+    justify-content: center;
+
     &.disabled {
       opacity: 1 !important;
 
@@ -85,14 +97,6 @@
       .q-toggle__thumb::after {
         background: $line-bg;
       }
-    }
-
-    .q-toggle__label {
-      padding-left: 8px;
-      font-size: $-kw-toggle-label-font-size;
-      line-height: $-kw-toggle-label-line-height;
-      color: $-kw-toggle-label-color;
-      font-weight: 500;
     }
 
     &.reverse {
@@ -153,9 +157,21 @@
         }
       }
     }
+
+    &.grow {
+      flex-grow: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &.self-stretch {
+      align-self: unset;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
   }
 
-  &--no-label {
+  &.kw-toggle--no-label {
     .q-toggle__label {
       display: none;
     }

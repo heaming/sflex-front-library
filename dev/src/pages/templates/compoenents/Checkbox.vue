@@ -16,9 +16,13 @@
         title="checkboxProps"
       />
       <kw-separator />
-      <kw-checkbox
-        v-bind="bindingProps"
-      />
+      <div class="flex items-center bg-lime-1 w500 h500">
+        <kw-checkbox
+          v-model="model"
+          v-bind="bindingProps"
+          :label="model"
+        />
+      </div>
     </guide-section>
     <guide-section
       title="default slot"
@@ -34,14 +38,12 @@
 
 <script setup>
 import { useDenseProps } from '../../../../../src/composables/private/useDense';
+import { useStretchProps } from '../../../../../src/composables/private/useStretch';
 
 const checkboxProps = {
   ...useDenseProps,
+  ...useStretchProps,
 
-  modelValue: {
-    type: [String, Number, Boolean, Array],
-    default: undefined,
-  },
   trueValue: {
     type: [String, Number, Boolean],
     default: 'Y',
@@ -99,6 +101,7 @@ const checkboxProps = {
     default: undefined,
   },
 };
+const model = ref('Y');
 
 const bindingProps = ref(null);
 
