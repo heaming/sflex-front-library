@@ -22,7 +22,7 @@
     display: none;
   }
 
-  .q-expansion-item__content {
+  .q-expansion-item__content > div {
     background-color: $bg-body;
   }
 }
