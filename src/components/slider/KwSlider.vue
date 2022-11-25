@@ -14,7 +14,6 @@
     :snap="snap"
     :vertical="vertical"
     :reverse="reverse"
-    :hide-selection="hideSelection"
     :color="color"
     :marker-labels-class="markerLabelsClass"
     :label="label"
@@ -67,7 +66,6 @@ export default {
     snap: { type: Boolean, default: undefined },
     vertical: { type: Boolean, default: undefined },
     reverse: { type: Boolean, default: false },
-    hideSelection: { type: Boolean, default: undefined },
     color: { type: String, default: undefined },
     markerLabelsClass: { type: String, default: undefined },
     label: { type: Boolean, default: undefined },

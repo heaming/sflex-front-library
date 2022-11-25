@@ -1,18 +1,20 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QItemLabelProps, QItemLabelSlots, QItemProps, QItemSectionProps, QItemSectionSlots, QItemSlots } from 'quasar';
 
-interface KwItemProps {}
-interface KwItemSlots {
-  default: () => VNode[];
-}
-interface KwItemLabelProps {}
-interface KwItemLabelSlots {
-  default: () => VNode[];
-}
-interface KwItemSectionProps {}
-interface KwItemSectionSlots {
-  default: () => VNode[];
-}
+type FallThroughItemProps = 'tag' | 'active' | 'clickable' | 'dense' | 'insetLevel' | 'tabindex' | 'focused' | 'manualFocus' | 'dark' | 'to' | 'replace' | 'exact' | 'href' | 'target' | 'activeClass' | 'exactActiveClass' | 'disable' | 'onClick';
+
+interface KwItemProps extends Pick<QItemProps, FallThroughItemProps> {}
+interface KwItemSlots extends QItemSlots {}
+
+type FallThroughLabelProps = 'lines' | 'overline' | 'caption' | 'header';
+
+interface KwItemLabelProps extends Pick<QItemLabelProps, FallThroughLabelProps> {}
+interface KwItemLabelSlots extends QItemLabelSlots {}
+
+type FallThroughSectionProps = 'avatar' | 'thumbnail' | 'side' | 'top' | 'noWrap';
+
+interface KwItemSectionProps extends Pick<QItemSectionProps, FallThroughSectionProps> {}
+interface KwItemSectionSlots extends QItemSectionSlots {}
 
 export interface KwItem extends ComponentPublicInstance<KwItemProps> {}
 export interface KwItemLabel extends ComponentPublicInstance<KwItemLabelProps> {}

@@ -1,7 +1,9 @@
 import { ComponentPublicInstance } from 'vue';
 import { GlobalComponentConstructor, QAvatarProps, QAvatarSlots } from 'quasar';
 
-interface KwAvatarProps extends QAvatarProps {}
+type FallThroughProps = 'size' | 'fontSize' | 'color' | 'textColor' | 'icon' | 'square' | 'rounded';
+
+interface KwAvatarProps extends Pick<QAvatarProps, FallThroughProps> {}
 
 interface KwAvatarSlots extends QAvatarSlots {}
 

@@ -1,11 +1,17 @@
 import { ComponentPublicInstance } from 'vue';
 import { GlobalComponentConstructor, QCardActionsProps, QCardActionsSlots, QCardProps, QCardSectionProps, QCardSectionSlots, QCardSlots } from 'quasar';
 
-interface KwCardProps extends QCardProps {}
+type FallThroughCardProps = 'tag' | 'dark' | 'square' | 'flat' | 'bordered';
+
+type FallThroughCardActionsProps = 'align' | 'vertical';
+
+type FallThroughCardSectionProps = 'tag' | 'horizontal';
+
+interface KwCardProps extends Pick<QCardProps, FallThroughCardProps> {}
 interface KwCardSlots extends QCardSlots {}
-interface KwCardActionsProps extends QCardActionsProps {}
+interface KwCardActionsProps extends Pick<QCardActionsProps, FallThroughCardActionsProps> {}
 interface KwCardActionsSlots extends QCardActionsSlots {}
-interface KwCardSectionProps extends QCardSectionProps {}
+interface KwCardSectionProps extends Pick<QCardSectionProps, FallThroughCardSectionProps> {}
 interface KwCardSectionSlots extends QCardSectionSlots {}
 
 export interface KwCard extends ComponentPublicInstance<KwCardProps> {}
