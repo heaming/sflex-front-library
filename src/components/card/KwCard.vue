@@ -1,6 +1,7 @@
 <template>
   <q-card
     class="kw-card"
+    v-bind="styleClassAttrs"
     :tag="tag"
     :dark="dark"
     :square="square"
@@ -12,6 +13,8 @@
 </template>
 
 <script>
+
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
   name: 'KwCard',
@@ -25,6 +28,13 @@ export default {
     square: { type: Boolean, default: undefined },
     flat: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
+  },
+  setup() {
+    const { styleClassAttrs } = useInheritAttrs();
+
+    return {
+      styleClassAttrs,
+    };
   },
 };
 </script>
