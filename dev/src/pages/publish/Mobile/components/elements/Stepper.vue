@@ -54,7 +54,7 @@
         Stepper
       </h3>
       <p class="kw-guide-description">
-        It's similar to use as Desktop. However,
+        It's similar to use as Desktop.
       </p>
       <q-card>
         <div class="kw-guide-example">
