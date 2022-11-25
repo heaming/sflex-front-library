@@ -31,7 +31,6 @@ export default () => {
 
   const { stretchClass } = useStretch();
 
-  // fixme
   const required = computed(() => {
     if (props.required || attrs.required) {
       return true;
@@ -44,7 +43,7 @@ export default () => {
         return props.rules.includes('required');
       }
       if (typeof props.rules === 'object') {
-        return props.rules.required;
+        return !!props.rules.required;
       }
     }
   });
