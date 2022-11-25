@@ -1,6 +1,7 @@
 <template>
   <q-card-actions
     class="kw-card-actions"
+    v-bind="styleClassAttrs"
     :align="align"
     :vertical="vertical"
   >
@@ -9,6 +10,8 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwCardActions',
   inheritAttrs: false,
@@ -18,6 +21,13 @@ export default {
     // fall through props
     align: { type: String, default: 'left' },
     vertical: { type: Boolean, default: undefined },
+  },
+  setup() {
+    const { styleClassAttrs } = useInheritAttrs();
+
+    return {
+      styleClassAttrs,
+    };
   },
 };
 </script>
