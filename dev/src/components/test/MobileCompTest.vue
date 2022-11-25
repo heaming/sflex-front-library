@@ -151,7 +151,7 @@
         <kw-input
           v-model="strModel"
           label="default"
-          rules="required"
+          :rules="{'required': true}"
           error-message="긴한글은어떻게처리하려나너무나도궁금하고궁금한워드브레이크의기이한현상"
           prefix="pr"
           suffix="sf"
@@ -162,7 +162,7 @@
           </template>
         </kw-input>
         <kw-input
-          v-if="false"
+          v-if="true"
           type="textarea"
           label="textarea"
           rules="required"
