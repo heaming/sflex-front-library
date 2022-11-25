@@ -174,6 +174,20 @@
                   </li>
                 </ul>
               </div>
+              <div class="py16 px20 mt8">
+                <ul class="card-text card-text--between">
+                  <li>
+                    <p>상품정보</p>
+                    <span>
+                      비데(BK750RWA)
+                    </span>
+                  </li>
+                  <li>
+                    <p>서비스정보</p>
+                    <span>고객 과실</span>
+                  </li>
+                </ul>
+              </div>
             </kw-expansion-item>
             <kw-expansion-item>
               <template #header>
@@ -343,6 +357,20 @@ const case2 = `
       </div>
     </template>
     <div class="py16 px20">
+      <ul class="card-text card-text--between">
+        <li>
+          <p>상품정보</p>
+          <span>
+            비데(BK750RWA)
+          </span>
+        </li>
+        <li>
+          <p>서비스정보</p>
+          <span>고객 과실</span>
+        </li>
+      </ul>
+    </div>
+    <div class="py16 px20 mt8">
       <ul class="card-text card-text--between">
         <li>
           <p>상품정보</p>
