@@ -280,6 +280,10 @@
 
     // error
     &--error {
+      .q-field__label {
+        animation: none;
+      }
+
       > .q-field__inner > .q-field__control {
         &::before,
         &::after {
