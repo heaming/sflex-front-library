@@ -53,19 +53,20 @@ export default () => {
 
   const optionsStyle = computed(() => {
     const top = '50%';
-    const transform = `rotateX(${rotation.value}deg) rotateY(0deg)`;
+    const transform = `rotateY(0deg) translateZ(${-radius}px)`;
     return { top, transform };
   });
 
   const highlightStyle = computed(() => {
     const top = `calc(50% - ${itemSize / 2}px)`;
-    return { top };
+    const height = `${itemSize}px`;
+    return { top, height };
   });
 
   const getOptionStyle = (option) => {
     const top = `${-itemSize / 2}px`;
     const height = `${itemSize}px`;
-    const transform = `rotateX(${option.angle}deg) translateZ(${radius}px)`;
+    const transform = `rotateX(${rotation.value + option.angle}deg) translateZ(${radius}px)`;
     const visibility = option.hidden ? 'hidden' : 'visible';
     return { top, height, transform, visibility };
   };
