@@ -6,7 +6,7 @@
     :transition-duration="DIALOG_TRANSITION_DURATION"
     persistent
     no-shake
-    :no-refocus="dialog?.refocus === false"
+    :no-refocus="activeDialog?.refocus === false"
     @keydown.esc="onClick(false)"
   >
     <q-card
@@ -15,15 +15,15 @@
     >
       <q-card-section class="global-dialog__content">
         <p>
-          {{ dialog.message }}
+          {{ activeDialog.message }}
         </p>
-        <p v-if="dialog.subMessage">
-          {{ dialog.subMessage }}
+        <p v-if="activeDialog.subMessage">
+          {{ activeDialog.subMessage }}
         </p>
       </q-card-section>
       <q-card-section class="global-dialog__action">
         <kw-btn
-          v-if="dialog.isConfirm"
+          v-if="activeDialog.isConfirm"
           :label="$t('MSG_BTN_NO', null, '취소')"
           negative
           @click="onClick(false)"
@@ -56,13 +56,12 @@ export default {
   setup() {
     const vm = getCurrentInstance();
 
-    const dialogRef = ref();
     const dialogs = shallowRef([]);
+    const activeDialog = computed(() => dialogs.value[0]);
 
     const isPending = ref(false);
     const isActive = computed(() => !isPending.value && dialogs.value.length > 0);
 
-    const dialog = computed(() => dialogs.value[0]);
     const okRef = ref();
 
     watch(isActive, async (val) => {
@@ -80,30 +79,27 @@ export default {
       unregisterGlobalVm(GlobalDialogVmKey);
     });
 
-    function requestAnimation() {
-      return new Promise((resolve) => {
-        isPending.value = true;
-        requestAnimationFrame(() => {
-          resolve();
-          isPending.value = false;
-        });
-      });
+    async function pending() {
+      isPending.value = true;
+      await timeout();
+      isPending.value = false;
     }
 
     async function onClick(result) {
       if (isActive.value) {
-        const { resolve } = dialog.value;
-        removeGlobalData(dialog.value);
+        const { resolve } = activeDialog.value;
+
+        removeGlobalData(activeDialog.value);
         resolve(result);
-        await requestAnimation();
+
+        await pending();
       }
     }
 
     return {
       DIALOG_TRANSITION_DURATION,
-      dialogRef,
+      activeDialog,
       isActive,
-      dialog,
       okRef,
       onClick,
     };

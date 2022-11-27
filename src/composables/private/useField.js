@@ -10,7 +10,7 @@ export const useFieldProps = {
   ...useFieldStateProps,
 
   rules: {
-    type: [String, Function, Object],
+    type: [String, Array, Function, Object],
     default: undefined,
   },
   customMessages: {

@@ -3,7 +3,7 @@
     ref="checkRef"
     v-bind="styleClassAttrs"
     class="kw-checkbox spaced-sibling"
-    :class="{'kw-checkbox--no-label': !(label || $slots.default)}"
+    :class="checkboxClass"
     :model-value="modelValue"
     :true-value="trueValue"
     :false-value="falseValue"
@@ -30,6 +30,7 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
+import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwCheckbox',
@@ -37,6 +38,7 @@ export default {
 
   props: {
     ...useDenseProps,
+    ...useStretchProps,
 
     modelValue: {
       type: [String, Number, Boolean, Array],
@@ -104,14 +106,22 @@ export default {
     'update:modelValue',
   ],
 
-  setup() {
+  setup(props, { slots }) {
     const checkRef = ref();
+
+    const { stretchClass } = useStretch();
+
+    const checkboxClass = computed(() => ({
+      'kw-checkbox--no-label': !(props.label || slots.default),
+      ...stretchClass.value,
+    }));
 
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
       dense: useDense(),
       checkRef,
+      checkboxClass,
       toggle() {
         checkRef.value.toggle();
       },

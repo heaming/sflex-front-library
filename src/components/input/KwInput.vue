@@ -220,8 +220,11 @@ export default {
       return v && (v instanceof RegExp ? v : NAMED_REGEX[v]);
     });
 
+    const min = computed(() => (props.min === undefined ? -Infinity : parseInt(props.min, 10)));
+    const max = computed(() => (props.max === undefined ? Infinity : parseInt(props.max, 10)));
+
     function onUpdateNumberValue(val) {
-      value.value = val;
+      value.value = min(max(val, min.value), max.value);
     }
 
     function onUpdateTextValue(val) {

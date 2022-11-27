@@ -15,7 +15,6 @@
     :color="color"
     :bg-color="bgColor"
     :loading="loading"
-    bottom-slots
     :counter="counter"
     :clearable="clearable"
     :clear-icon="clearIcon"
@@ -32,6 +31,7 @@
     :tabindex="tabindex"
     :input-class="inputClass"
     :input-style="inputStyle"
+    bottom-slots
     no-error-icon
     @rejected="onRejected"
     @click="preventIfClick"
@@ -49,7 +49,7 @@
       :class="placeholderClass"
       :style="placeholderStyle"
     >
-      {{ placeholder }}
+      {{ typeof placeholder === 'function' ? placeholder() : placeholder }}
     </div>
 
     <!-- prepend -->
@@ -412,7 +412,6 @@ export default {
     readonly: { type: Boolean, default: false },
     multiple: { type: Boolean, default: false },
     accept: { type: String, default: undefined },
-    capture: { type: String, default: undefined },
     maxFileSize: { type: [Number, String], default: undefined },
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
@@ -421,7 +420,6 @@ export default {
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
-    counterLabel: { type: Function, default: undefined },
     inputClass: { type: [Array, String, Object], default: undefined },
     inputStyle: { type: [Array, String, Object], default: undefined },
   },

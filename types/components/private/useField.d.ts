@@ -27,7 +27,7 @@ export interface UseFieldProps {
   /**
    * 적용할 유효성 규칙
    */
-  rules?: string | Object | Function;
+  rules?: string | Object | Function | Array<string | Object | Function>;
 
   /**
    * 적용된 규칙에 대한 커스텀 메시지

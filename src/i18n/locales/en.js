@@ -1,5 +1,6 @@
 export default {
   // Validation
+  MSG_VAL_INVALID: 'The {0} field is not a valid value.',
   MSG_VAL_ALPHA: 'The {0} field may only contain alphabetic characters.',
   MSG_VAL_ALPHA_DASH: 'The {0} field may contain alpha-numeric characters as well as dashes and underscores.',
   MSG_VAL_ALPHA_NUM: 'The {0} field may only contain alpha-numeric characters.',

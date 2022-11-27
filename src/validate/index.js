@@ -1,22 +1,8 @@
+/* eslint-disable no-restricted-syntax, no-await-in-loop */
 import { validate as _validate } from 'vee-validate';
-import { isArray, isFunction, isString, isObject, keys } from 'lodash-es';
-
-const ruleSeparator = '|';
-const ruleParamSeparator = ':';
-
-function convertRulesToArray(rules) {
-  if (isArray(rules)) { return rules; }
-  if (isFunction(rules)) { return [rules]; }
-  if (isString(rules)) { return rules.split(ruleSeparator); }
-  if (isObject(rules)) { return keys(rules).map((k) => ({ [k]: rules[k] })); }
-  return [];
-}
-
-function getRuleName(rule) {
-  if (isString(rule)) { return rule.split(ruleParamSeparator)[0]; }
-  if (isObject(rule)) { return keys(rule)[0]; }
-  return null;
-}
+import { isFunction, isString } from 'lodash-es';
+import { normalizeRules, normalizeRule } from './helper';
+import i18n from '../i18n';
 
 async function validate(value, rule, options) {
   if (isFunction(rule)) {
@@ -29,9 +15,12 @@ async function validate(value, rule, options) {
       };
     }
 
+    const { name, params } = options;
+    const defaultMessage = i18n.t('MSG_VAL_INVALID', [name, ...params]);
+
     return {
       valid: !!result,
-      errors: ['Field is invalid'],
+      errors: [defaultMessage],
     };
   }
 
@@ -48,14 +37,13 @@ export default async (value, rules, options) => {
   };
 
   const errors = [];
-  const ruleList = convertRulesToArray(rules);
-  // eslint-disable-next-line no-restricted-syntax
-  for (const rule of ruleList) {
-    // eslint-disable-next-line no-await-in-loop
-    const result = await validate(value, rule, options);
+  const normalizedRules = normalizeRules(rules);
+
+  for (const rule of normalizedRules) {
+    const [, ruleName, params] = normalizeRule(rule);
+    const result = await validate(value, rule, { ...options, params });
 
     if (result.valid === false) {
-      const ruleName = getRuleName(rule);
       const customMessages = options.customMessages?.[ruleName];
 
       errors.push(

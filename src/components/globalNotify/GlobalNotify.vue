@@ -1,39 +1,28 @@
 <template>
   <q-dialog
-    class="global-notify"
+    :class="notifyClass"
     :model-value="isActive"
-    :transition-duration="0"
+    :transition-duration="DIALOG_TRANSITION_DURATION"
     seamless
-    position="right"
   >
-    <transition-group
-      tag="div"
-      name="fade"
-      class="global-notify__inner"
-    >
-      <div
-        v-for="notification of notifications"
-        :key="notification.uid"
-        class="global-notify__item"
-      >
-        <p class="global-notify__item-message">
-          {{ notification.message }}
-        </p>
-        <q-icon
-          class="global-notify__item-close"
-          name="close_24"
-          @click="onClickClose(notification)"
-        />
-      </div>
-    </transition-group>
+    <div class="global-notify__inner">
+      <span class="global-notify__message">
+        {{ activeNotification.message }}
+      </span>
+    </div>
   </q-dialog>
 </template>
 
 <script>
 import { GlobalNotifyVmKey } from '../../consts/private/symbols';
 import libConfig from '../../consts/private/libConfig';
-import { registerGlobalVm, unregisterGlobalVm, UPDATE_STATE } from '../../utils/private/globalVm';
+import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
+import { timeout } from '../../utils/private/tick';
+
+const {
+  DIALOG_TRANSITION_DURATION,
+} = libConfig;
 
 export default {
   name: 'GlobalNotify',
@@ -41,45 +30,55 @@ export default {
   setup() {
     const vm = getCurrentInstance();
 
-    const isActive = ref(false);
+    const { getters } = useStore();
+    const lnbExpanded = computed(() => getters['app/getLnbExpanded']);
+    const notifyClass = computed(() => ({
+      'global-notify': true,
+      'global-notify--lnb-expanded': lnbExpanded.value,
+    }));
+
     const notifications = shallowRef([]);
+    const activeNotification = computed(() => notifications.value[0]);
 
-    let closeTimeout;
-    watch(notifications, (val) => {
-      const isClose = val.length === 0;
+    const isPending = ref(false);
+    const isActive = computed(() => !isPending.value && notifications.value.length > 0);
 
-      if (isClose) {
-        closeTimeout = setTimeout(() => { isActive.value = false; }, 300);
-      } else {
-        clearTimeout(closeTimeout);
-        isActive.value = !isClose;
-      }
-    });
-
-    function setTimeoutToClose(notification) {
-      notification.timeout = setTimeout(() => {
-        removeGlobalData(notification);
-      }, libConfig.NOTIFY_TIMEOUT);
+    async function pending() {
+      isPending.value = true;
+      await timeout();
+      isPending.value = false;
     }
 
-    registerGlobalVm(GlobalNotifyVmKey, vm, (updateState, notification) => {
+    async function close(notification) {
+      clearTimeout(notification.timeout);
+      removeGlobalData(notification);
+      await pending();
+    }
+
+    registerGlobalVm(GlobalNotifyVmKey, vm, (notification) => {
+      if (notification) {
+        notification.timeout = setTimeout(() => {
+          close(notification);
+        }, libConfig.NOTIFY_TIMEOUT);
+
+        if (activeNotification.value) {
+          close(activeNotification.value);
+        }
+      }
+
       notifications.value = getGlobalData(GlobalNotifyVmKey);
-      if (updateState === UPDATE_STATE.ADDED) setTimeoutToClose(notification);
     });
 
     onBeforeUnmount(() => {
       unregisterGlobalVm(GlobalNotifyVmKey);
     });
 
-    function onClickClose(notification) {
-      clearTimeout(notification.timeout);
-      removeGlobalData(notification);
-    }
-
     return {
-      isActive,
+      DIALOG_TRANSITION_DURATION,
+      notifyClass,
       notifications,
-      onClickClose,
+      activeNotification,
+      isActive,
     };
   },
 };

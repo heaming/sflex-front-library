@@ -1,7 +1,9 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
+import { UseDenseProps } from './private/useDense';
+import { UseStretchProps } from './private/useStretch';
 
-interface KwToggleProps {
+interface KwToggleProps extends UseDenseProps, UseStretchProps {
   /**
    * 현재 선택된 값
    */
@@ -55,11 +57,6 @@ interface KwToggleProps {
    * 아이콘 사이즈, px 단위 사용
    */
   size?: string;
-
-  /**
-   * 공간을 덜 차지하는 스타일 적용
-   */
-  dense?: boolean;
 
   /**
    * checked 커스텀 아이콘

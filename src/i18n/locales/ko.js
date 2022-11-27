@@ -1,5 +1,6 @@
 export default {
   // Validation
+  MSG_VAL_INVALID: '{0} 항목의 값이 유효하지 않습니다.',
   MSG_VAL_ALPHA: '{0} 항목에는 영문자만 사용할 수 있습니다.',
   MSG_VAL_ALPHA_DASH: '{0} 항목에는 영문자, 숫자, 대시(-)와 언더스코어(_)만 사용할 수 있습니다.',
   MSG_VAL_ALPHA_NUM: '{0} 항목에는 영문자와 숫자만 사용할 수 있습니다.',

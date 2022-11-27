@@ -16,9 +16,13 @@
         title="radioProps"
       />
       <kw-separator />
-      <kw-radio
-        v-bind="bindingProps"
-      />
+      <div class="flex items-center bg-lime-1 w500 h500">
+        <kw-radio
+          v-model="model"
+          v-bind="bindingProps"
+          :label="model ? 'Y' : 'N'"
+        />
+      </div>
     </guide-section>
     <guide-section
       title="default slot"
@@ -34,14 +38,12 @@
 
 <script setup>
 import { useDenseProps } from '../../../../../src/composables/private/useDense';
+import { useStretchProps } from '../../../../../src/composables/private/useStretch';
 
 const radioProps = {
   ...useDenseProps,
+  ...useStretchProps,
 
-  modelValue: {
-    type: [String, Number, Boolean],
-    default: undefined,
-  },
   val: {
     type: [String, Number, Boolean],
     default: undefined,
@@ -76,7 +78,11 @@ const radioProps = {
   },
 };
 
-const bindingProps = ref(null);
+const bindingProps = ref({
+  val: 'Y',
+});
+
+const model = ref();
 
 const defaultCode = `
       <kw-radio
