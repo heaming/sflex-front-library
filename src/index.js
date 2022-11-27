@@ -35,5 +35,6 @@ export * from './globalUtils';
 export * as codeUtil from './utils/code';
 export * as fileUtil from './utils/file';
 export * as gridUtil from './utils/grid';
+export * as mobileUtil from './utils/mobile';
 export * as popupUtil from './utils/popup';
 export * as stringUtil from './utils/string';

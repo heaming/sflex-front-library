@@ -538,6 +538,73 @@ interface GridUtil {
 
 export const gridUtil: GridUtil;
 
+// Mobile
+interface MobileUtil {
+  /**
+   * 디바이스 버전 확인
+   */
+  getDeviceVersion(): Promise<any>;
+
+  /**
+   * 디바이스 토큰 확인
+   */
+  getDeviceToken(): Promise<any>;
+
+  /**
+   * 카메라 호출
+   */
+  openCamera(): Promise<any>;
+
+  /**
+   * 사진 갤러리 호출
+   */
+  openPhotoGallery(): Promise<any>;
+
+  /**
+   * 바코드 리더기 호출
+   */
+  openBarcodeReader(): Promise<any>;
+
+  /**
+   * Prefernce 설정
+   * @param key
+   * @param value
+   */
+  openBarcodeReader(key: string, value: any): Promise<any>;
+
+  /**
+   * Prefernce 가져오기
+   * @param key
+   */
+  getPreference(key: string): Promise<any>;
+
+  /**
+   * phone 호출
+   * @param address
+   */
+  openPhone(address: string): Promise<any>;
+
+  /**
+   * SMS 호출
+   * @param address
+   * @param body
+   */
+  openSMS(address: string, body: string): Promise<any>;
+
+  /**
+   * TMap 호출
+   * @param routeInfo
+   */
+  openTMap(routeInfo: any): Promise<any>;
+
+  /**
+   * 프린트 호출
+   * @param printType
+   * @param printString
+   */
+  openPrint(printType: string, printString: string): Promise<any>;
+}
+
 // Popup
 interface WindowFeatures {
   [key: string]: any;
