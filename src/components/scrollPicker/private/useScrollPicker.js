@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-await-in-loop */
 import { findIndex } from 'lodash-es';
 import { createAnimateCanceledError, isAnimateCanceledError } from './animateCancel';
 
@@ -117,26 +117,22 @@ export default () => {
     const direction = rotationOffset < 0 ? DIRECTION.UP : DIRECTION.DOWN;
     const indexOffset = round(abs(rotation.value) / itemAngle) * direction;
     const index = selectedIndex.value + indexOffset;
-
-    const normalizedIndex = infinite
-      ? normalizeIndex(items, index)
-      : min(max(index, 0), items.length - 1);
-
+    const normalizedIndex = infinite ? normalizeIndex(items, index) : min(max(index, 0), items.length - 1);
     const { value } = items[normalizedIndex];
 
     if (value !== selectedValue.value) {
       const overflowedRotation = rotation.value % itemAngle;
-      updateOptions(value, overflowedRotation);
+      updateOptions(value, -overflowedRotation);
     }
   }
 
-  function rotationFix(direction) {
-    const rotationOffset = (itemAngle * direction - rotation.value) % itemAngle;
-    rotate(rotationOffset);
+  function cancelAnimate() {
+    cancelAnimationFrame(lastAnimationFrameId.value);
+    lastAnimationFrameId.value = null;
   }
 
   function animate(rotationOffset) {
-    cancelAnimationFrame(lastAnimationFrameId.value);
+    cancelAnimate();
 
     return new Promise((resolve, reject) => {
       const animationFrameId = requestAnimationFrame(() => {
@@ -153,27 +149,36 @@ export default () => {
     });
   }
 
+  function rotationFix(direction) {
+    const rotationOffset = (itemAngle * direction - rotation.value) % itemAngle;
+    rotate(rotationOffset);
+  }
+
   async function scrollTo(value) {
     const index = findIndex(items, { value });
 
     if (index === -1) return;
 
     const distance = abs(selectedIndex.value - index);
-    const indexOffset = min(distance, normalizeIndex(items, -distance));
-    const normalizedIndex = normalizeIndex(items, selectedIndex.value - indexOffset);
+    const indexOffset = infinite ? min(distance, normalizeIndex(items, -distance)) : distance;
 
-    const isUpside = infinite ? normalizedIndex === index : index < selectedIndex.value;
-    const direction = isUpside ? DIRECTION.UP : DIRECTION.DOWN;
+    const isUpside = infinite
+      ? normalizeIndex(items, selectedIndex.value - indexOffset) === index
+      : index < selectedIndex.value;
 
     const frames = 12;
-    const minOffset = itemAngle / 3;
-    const rotationOffset = max((indexOffset * itemAngle) / frames, minOffset) * direction;
+    const direction = isUpside ? DIRECTION.UP : DIRECTION.DOWN;
+    const rotationOffset = ((indexOffset * itemAngle) / frames) * direction;
 
     rotationFix(direction);
 
+    if (selectedIndex.value === index) return;
+
     try {
-      while (index !== selectedIndex.value) {
-        // eslint-disable-next-line no-await-in-loop
+      let loopCount = 0;
+
+      while (loopCount < frames) {
+        loopCount += 1;
         await animate(rotationOffset);
       }
 
@@ -186,8 +191,10 @@ export default () => {
   }
 
   async function scrollBy(indexOffset) {
-    const normalizedIndex = normalizeIndex(items, selectedIndex.value + indexOffset);
+    const index = selectedIndex.value + indexOffset;
+    const normalizedIndex = infinite ? normalizeIndex(items, index) : min(max(index, 0), items.length - 1);
     const { value } = items[normalizedIndex];
+
     await scrollTo(value);
   }
 
@@ -212,6 +219,7 @@ export default () => {
 
     updateValue,
     rotate,
+    cancelAnimate,
     animate,
     scrollTo,
     scrollBy,
