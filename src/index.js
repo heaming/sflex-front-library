@@ -8,7 +8,7 @@ export { default as store } from './store';
 export { default as router } from './router';
 export { default as validate } from './validate';
 
-// Components
+// Layouts
 export * from './layouts/dev';
 export * from './layouts/web';
 
