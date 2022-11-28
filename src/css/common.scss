@@ -914,6 +914,10 @@ $unit: px;
   padding: 0;
   margin: 0;
 
+  &--between li {
+    justify-content: space-between;
+  }
+
   li {
     display: flex;
     padding-top: 4px;
