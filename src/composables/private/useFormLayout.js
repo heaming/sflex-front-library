@@ -1,4 +1,5 @@
 import { FormLayoutContextKey } from '../../consts/private/symbols';
+import { platform } from '../../plugins/platform';
 
 export const FIELD_ALIGNS = ['left', 'center', 'right'];
 
@@ -19,7 +20,10 @@ export const useFormLayoutProps = {
 };
 
 const DEFAULT_COLS = 3;
-const DEFAULT_LABEL_SIZE = 150;
+let DEFAULT_LABEL_SIZE;
+if (platform.is.desktop) { DEFAULT_LABEL_SIZE = 150; }
+if (platform.is.tablet) { DEFAULT_LABEL_SIZE = 108; }
+if (platform.is.mobile) { DEFAULT_LABEL_SIZE = 0; }
 const DEFAULT_ALIGN_CONTENT = 'left';
 
 export default () => {

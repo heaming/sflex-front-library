@@ -280,6 +280,10 @@
 
     // error
     &--error {
+      .q-field__label {
+        animation: none;
+      }
+
       > .q-field__inner > .q-field__control {
         &::before,
         &::after {
@@ -392,6 +396,16 @@
       width: 100%;
     }
   }
+
+  &--required {
+    & .q-field {
+      &__label::after {
+        content: "*";
+        display: contents;
+        color: $accent;
+      }
+    }
+  }
 }
 
 .kw-field-wrap {
@@ -434,6 +448,10 @@
     height: $kw-field-height;
     display: flex;
     flex-flow: row nowrap;
+  }
+
+  &.self-stretch {
+    display: flex;
   }
 
   &__control-container {

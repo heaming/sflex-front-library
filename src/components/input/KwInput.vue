@@ -4,7 +4,7 @@
     :model-value="value"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-input"
-    :class="fieldClasses"
+    :class="fieldClass"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :type="type"
@@ -185,7 +185,7 @@ export default {
 
   setup(props) {
     const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const { fieldStyleProps, fieldClass } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
@@ -220,8 +220,11 @@ export default {
       return v && (v instanceof RegExp ? v : NAMED_REGEX[v]);
     });
 
+    const min = computed(() => (props.min === undefined ? -Infinity : parseInt(props.min, 10)));
+    const max = computed(() => (props.max === undefined ? Infinity : parseInt(props.max, 10)));
+
     function onUpdateNumberValue(val) {
-      value.value = val;
+      value.value = min(max(val, min.value), max.value);
     }
 
     function onUpdateTextValue(val) {
@@ -280,7 +283,7 @@ export default {
       ...useInheritAttrs(),
       ...fieldCtx,
       fieldStyleProps,
-      fieldClasses,
+      fieldClass,
       select,
       onKeydownInput,
       onChangeInput,

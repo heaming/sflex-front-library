@@ -1,10 +1,10 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QListProps, QListSlots } from 'quasar';
 
-interface KwListProps {}
-interface KwListSlots {
-  default: () => VNode[];
-}
+type FallThroughProps = 'separator' | 'padding' | 'bordered' | 'dense' | 'dark';
+
+interface KwListProps extends Pick<QListProps, FallThroughProps> {}
+interface KwListSlots extends QListSlots {}
 
 export interface KwList extends ComponentPublicInstance<KwListProps> {}
 

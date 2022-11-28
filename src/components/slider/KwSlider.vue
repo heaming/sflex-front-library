@@ -14,7 +14,6 @@
     :snap="snap"
     :vertical="vertical"
     :reverse="reverse"
-    :hide-selection="hideSelection"
     :color="color"
     :marker-labels-class="markerLabelsClass"
     :label="label"
@@ -66,8 +65,7 @@ export default {
     step: { type: Number, default: 1, validator: (v) => v >= 0 },
     snap: { type: Boolean, default: undefined },
     vertical: { type: Boolean, default: undefined },
-    reverse: { type: Boolean, default: undefined },
-    hideSelection: { type: Boolean, default: undefined },
+    reverse: { type: Boolean, default: false },
     color: { type: String, default: undefined },
     markerLabelsClass: { type: String, default: undefined },
     label: { type: Boolean, default: undefined },
@@ -76,7 +74,7 @@ export default {
     labelAlways: { type: Boolean, default: undefined },
     switchLabelSide: { type: Boolean, default: undefined },
     markers: { type: [Boolean, Number], default: undefined },
-    markerLabels: { type: [Boolean, Array, Object, Function], default: undefined },
+    markerLabels: { type: [Boolean, Array, Object, Function], default: false },
     switchMarkerLabelsSide: { type: Boolean, default: undefined },
     trackImg: { type: String, default: undefined },
     trackColor: { type: String, default: undefined },

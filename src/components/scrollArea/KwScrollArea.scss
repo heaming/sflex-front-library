@@ -1,4 +1,6 @@
 .kw-scroll-area {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: 100%;
 
@@ -25,8 +27,8 @@
 
     &__content {
       position: relative !important;
-      width: fit-content;
-      height: fit-content;
+      min-height: unset !important;
+      min-width: unset !important;
     }
   }
 }

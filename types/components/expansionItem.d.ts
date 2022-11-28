@@ -1,12 +1,28 @@
-import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { ComponentPublicInstance } from 'vue';
+import { GlobalComponentConstructor, QExpansionItemProps, QExpansionItemSlots } from 'quasar';
 
-interface KwExpansionItemProps {}
-interface KwExpansionItemSlots {
-  default: () => VNode[];
+type FallThroughProps = 'toggleAriaLabel' | 'icon' | 'label' | 'labelLines' | 'caption' | 'captionLines' | 'dense' | 'expandIcon' | 'expandedIcon' | 'expandIconClass' | 'duration' | 'headerInsetLevel' | 'contentInsetLevel' | 'expandSeparator' | 'defaultOpened' | 'expandIconToggle' | 'switchToggleSide' | 'denseToggle' | 'group' | 'popup' | 'headerStyle' | 'headerClass' | 'dark' | 'to' | 'replace' | 'exact' | 'href' | 'target' | 'activeClass' | 'exactActiveClass' | 'disable' | 'modelValue' | 'onUpdate:modelValue' | 'onShow' | 'onBeforeShow' | 'onHide' | 'onBeforeHide' | 'onAfterShow' | 'onAfterHide';
+
+interface KwExpansionItemProps extends Pick<QExpansionItemProps, FallThroughProps> {}
+interface KwExpansionItemSlots extends QExpansionItemSlots {}
+
+export interface KwExpansionItem extends ComponentPublicInstance<KwExpansionItemProps> {
+  /**
+   * Triggers component to show
+   * @param evt JS event object
+   */
+  show: (evt?: Event) => void;
+  /**
+   * Triggers component to hide
+   * @param evt JS event object
+   */
+  hide: (evt?: Event) => void;
+  /**
+   * Triggers component to toggle between show/hide
+   * @param evt JS event object
+   */
+  toggle: (evt?: Event) => void;
 }
-
-export interface KwExpansionItem extends ComponentPublicInstance<KwExpansionItemProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {

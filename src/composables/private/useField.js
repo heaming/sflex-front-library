@@ -10,7 +10,7 @@ export const useFieldProps = {
   ...useFieldStateProps,
 
   rules: {
-    type: [String, Function, Object],
+    type: [String, Array, Function, Object],
     default: undefined,
   },
   customMessages: {
@@ -165,7 +165,10 @@ export default (options) => {
       return false;
     }
 
-    return !isEqual(value.value, initialValue.value);
+    return !isEqual(
+      value.value ?? '',
+      initialValue.value ?? '',
+    );
   }
 
   function focus() {

@@ -4,8 +4,10 @@
       v-if="hasTotalCount"
       class="flex items-center self-stretch"
     >
-      <span>{{ $t('MSG_TXT_COM_TOT', null, '총') }}</span>
-      <span class="kw-paging-info__total-count">
+      <span class="kw-paging-info__label">
+        {{ $t('MSG_TXT_COM_TOT', null, '총') }}
+      </span>
+      <span class="kw-paging-info__count">
         {{ totalCountWithComma }}{{ $t('MSG_TXT_CNT', null, '건') }}
       </span>
       <kw-separator

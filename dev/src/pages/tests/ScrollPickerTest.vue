@@ -2,9 +2,9 @@
   <kw-page>
     <div>
       {{ value }}
-      <scroll-picker
+      <kw-scroll-picker
         v-model="value"
-        class="w200 h200"
+        class="w200 h400"
         :items="items"
       />
     </div>
@@ -14,6 +14,6 @@
 <script setup>
 
 const value = ref(0);
-const items = Array.from({ length: 24 }, (v, i) => ({ value: i, label: i }));
+const items = Array.from({ length: 999 }, (v, i) => ({ value: i, label: i }));
 
 </script>

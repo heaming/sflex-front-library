@@ -3,7 +3,7 @@
     ref="toggleRef"
     v-bind="styleClassAttrs"
     class="kw-toggle spaced-sibling"
-    :class="{'kw-toggle--no-label': !(label || $slots.default)}"
+    :class="toggleClass"
     :model-value="modelValue"
     :true-value="trueValue"
     :false-value="falseValue"
@@ -30,6 +30,7 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
+import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwToggle',
@@ -37,6 +38,7 @@ export default {
 
   props: {
     ...useDenseProps,
+    ...useStretchProps,
 
     modelValue: {
       type: [String, Number, Boolean, Array],
@@ -104,8 +106,15 @@ export default {
     'update:modelValue',
   ],
 
-  setup() {
+  setup(props, { slots }) {
     const toggleRef = ref();
+
+    const { stretchClass } = useStretch();
+
+    const toggleClass = computed(() => ({
+      'kw-toggle--no-label': !(props.label || slots.default),
+      ...stretchClass.value,
+    }));
 
     return {
       ...useInheritAttrs(),
@@ -115,6 +124,7 @@ export default {
       toggle() {
         toggleRef.value.toggle();
       },
+      toggleClass,
     };
   },
 };

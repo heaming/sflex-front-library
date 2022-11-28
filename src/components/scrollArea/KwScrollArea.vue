@@ -58,7 +58,7 @@ export default {
     scrollAreaHeight: { type: String, default: undefined },
     // if you kill horizontal scroll use this with value 100%
     scrollAreaWidth: { type: String, default: undefined },
-    scrollAreaStyle: { type: String, default: undefined },
+    scrollAreaStyle: { type: [Object, Array, String], default: undefined },
 
     // fall through props
     thumbStyle: { type: Object, default: undefined },
@@ -111,12 +111,28 @@ export default {
       return styles;
     });
 
-    function getScrollTarget(...args) { quasarRef.value?.getScrollTarget(...args); }
-    function getScroll(...args) { quasarRef.value?.getScroll(...args); }
-    function getScrollPosition(...args) { quasarRef.value?.getScrollPosition(...args); }
-    function getScrollPercentage(...args) { quasarRef.value?.getScrollPercentage(...args); }
-    function setScrollPosition(...args) { quasarRef.value?.setScrollPosition(...args); }
-    function setScrollPercentage(...args) { quasarRef.value?.setScrollPercentage(...args); }
+    const getScrollTarget = () => quasarRef.value?.getScrollTarget();
+    const getScroll = () => quasarRef.value?.getScroll();
+    const getScrollPosition = () => quasarRef.value?.getScrollPosition();
+    const getScrollPercentage = () => quasarRef.value?.getScrollPercentage();
+    const setScrollPosition = (
+      axis,
+      offset,
+      duration,
+    ) => quasarRef.value?.setScrollPosition(
+      axis,
+      offset,
+      duration,
+    );
+    const setScrollPercentage = (
+      axis,
+      offset,
+      duration,
+    ) => quasarRef.value?.setScrollPercentage(
+      axis,
+      offset,
+      duration,
+    );
 
     return {
       ...useInheritAttrs(),

@@ -2,6 +2,7 @@
   <q-field
     ref="inputRef"
     class="kw-option-group kw-field"
+    :class="`kw-option-group--${type}`"
     v-bind="styleClassAttrs"
     :label="undefined"
     :dense="isSearchContext || dense"
@@ -12,7 +13,7 @@
     <template #control>
       <q-option-group
         v-model="value"
-        :class="`kw-${type}`"
+        :class="`kw-option-group__control`"
         :options="normalizedOptions"
         :type="type"
         :dense="isSearchContext || dense"

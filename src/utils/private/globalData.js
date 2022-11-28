@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash-es';
-import { updateGlobalVm, UPDATE_STATE } from './globalVm';
+import { updateGlobalVm } from './globalVm';
 
 const globalData = [];
 
@@ -15,7 +15,7 @@ export function addGlobalData(data) {
   data.uid = uniqueId(vmKey);
 
   globalData.push(data);
-  updateGlobalVm(vmKey, UPDATE_STATE.ADDED, data);
+  updateGlobalVm(vmKey, data);
 }
 
 export function removeGlobalData(e) {
@@ -27,7 +27,7 @@ export function removeGlobalData(e) {
   const { vmKey } = data;
 
   globalData.splice(index, 1);
-  updateGlobalVm(vmKey, UPDATE_STATE.REMOVED, data);
+  updateGlobalVm(vmKey);
 }
 
 export function getGlobalData(vmKey) {

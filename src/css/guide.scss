@@ -82,7 +82,7 @@
     }
   }
 
-  .q-card {
+  .q-card:not(.kw-card) {
     margin-top: 20px;
     padding: 20px 40px 40px;
     border: 1px solid #d9d9d9;

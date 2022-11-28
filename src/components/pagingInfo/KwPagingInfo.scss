@@ -2,13 +2,14 @@
   display: flex;
   align-items: center;
 
-  > div > span {
+  &__label {
+    font-weight: 400;
     color: $black3;
   }
 
-  &__total-count {
+  &__count {
     padding-left: 4px;
-    color: $black1 !important;
+    color: $black1;
     font-weight: 700;
   }
 

@@ -1,6 +1,8 @@
 <template>
   <q-avatar
+    class="kw-avatar"
     :size="size"
+    v-bind="styleClassAttrs"
     :font-size="fontSize"
     :color="color"
     :text-color="textColor"
@@ -13,6 +15,8 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwAvatar',
   inheritAttrs: false,
@@ -29,8 +33,10 @@ export default {
   },
   setup() {
     const avatarRef = ref();
+    const { styleClassAttrs } = useInheritAttrs();
     return {
       avatarRef,
+      styleClassAttrs,
     };
   },
 };

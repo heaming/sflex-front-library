@@ -15,7 +15,6 @@
     :color="color"
     :bg-color="bgColor"
     :loading="loading"
-    bottom-slots
     :counter="counter"
     :clearable="clearable"
     :clear-icon="clearIcon"
@@ -32,6 +31,7 @@
     :tabindex="tabindex"
     :input-class="inputClass"
     :input-style="inputStyle"
+    bottom-slots
     no-error-icon
     @rejected="onRejected"
     @click="preventIfClick"
@@ -49,7 +49,7 @@
       :class="placeholderClass"
       :style="placeholderStyle"
     >
-      {{ placeholder }}
+      {{ typeof placeholder === 'function' ? placeholder() : placeholder }}
     </div>
 
     <!-- prepend -->
@@ -220,7 +220,7 @@
             v-for="(file, idx) in files"
             :key="`file${idx}`"
             class="kw-file__file kw-file-item"
-            :class="fileItemClasses[idx]"
+            :class="fileItemClass[idx]"
           >
             <kw-checkbox
               v-if="computedSelectable"
@@ -412,7 +412,6 @@ export default {
     readonly: { type: Boolean, default: false },
     multiple: { type: Boolean, default: false },
     accept: { type: String, default: undefined },
-    capture: { type: String, default: undefined },
     maxFileSize: { type: [Number, String], default: undefined },
     maxTotalSize: { type: [Number, String], default: undefined },
     maxFiles: { type: [Number, String], default: undefined },
@@ -421,7 +420,6 @@ export default {
     append: { type: Boolean, default: true },
     displayValue: { type: [Number, String], default: undefined },
     tabindex: { type: [Number, String], default: undefined },
-    counterLabel: { type: Function, default: undefined },
     inputClass: { type: [Array, String, Object], default: undefined },
     inputStyle: { type: [Array, String, Object], default: undefined },
   },
@@ -435,7 +433,7 @@ export default {
 
   setup(props, { emit, slots }) {
     const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const { fieldStyleProps, fieldClass } = fieldStyles;
 
     const fileRef = ref();
 
@@ -515,7 +513,7 @@ export default {
 
     // styling
     const fileClass = computed(() => ({
-      ...fieldClasses.value,
+      ...fieldClass.value,
       'kw-file--multiple': props.multiple,
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
@@ -536,7 +534,7 @@ export default {
       return classes;
     }
 
-    const fileItemClasses = computed(() => files.value.map(getFileItemClass));
+    const fileItemClass = computed(() => files.value.map(getFileItemClass));
 
     // event handler
     const filePickCtx = useFilePicker(fileRef, editable);
@@ -564,7 +562,7 @@ export default {
       ...filePickCtx,
       onRejected,
       fileClass,
-      fileItemClasses,
+      fileItemClass,
       emptyAppendCounter,
       editable,
     };

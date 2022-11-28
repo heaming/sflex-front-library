@@ -1,4 +1,5 @@
-.kw-radio {
+.kw-radio,
+%kw-radio {
   $-kw-radio-icon-size: 22px; // maybe calc(#{$kw-field-line-height} - 2px)
   $-kw-radio-icon-size-dense: 18px;
   $-kw-radio-label-font-size: $kw-field-font-size;
@@ -6,9 +7,8 @@
   $-kw-radio-line-height: $kw-field-line-height;
   $-kw-radio-line-height-dense: $kw-field-line-height-dense;
 
-  &.q-radio,
-  .kw-option-group &.q-option-group .q-radio {
-    .q-radio__bg { /* does not appear when using icon */
+  & .q-radio {
+    &__bg { /* does not appear when using icon */
       inset: 1px;
       width: $-kw-radio-icon-size;
       height: $-kw-radio-icon-size;
@@ -28,17 +28,17 @@
       }
     }
 
-    .q-radio__icon {
+    &__icon {
       font-size: 1em;
     }
 
-    .q-radio__svg {
+    &__svg {
       display: none;
     }
 
-    .q-radio__check { /* does not appear */ }
+    &__check { /* does not appear */ }
 
-    .q-radio__inner {
+    &__inner {
       font-size: $-kw-radio-icon-size;
       width: $-kw-radio-line-height;
       min-width: $-kw-radio-line-height;
@@ -66,10 +66,19 @@
         }
       }
 
-      &--falsy { /* does not appear */ }
+      &--falsy {
+        & ~ .q-radio__label {
+          color: $black2;
+          font-weight: 400;
+
+          &:hover {
+            color: $black1;
+          }
+        }
+      }
     }
 
-    .q-radio__label {
+    &__label {
       padding-left: 8px;
       font-size: $-kw-radio-label-font-size;
       line-height: $-kw-radio-line-height;
@@ -77,15 +86,10 @@
 
       // color: $black1;
     }
+  }
 
-    &[aria-checked="false"] .q-radio__label {
-      color: $black2;
-      font-weight: 400;
-
-      &:hover {
-        color: $black1;
-      }
-    }
+  &.q-radio {
+    justify-content: center;
 
     &.reverse .q-radio__label {
       padding-left: 0;
@@ -154,9 +158,21 @@
         background-size: $-kw-radio-icon-size-dense;
       }
     }
+
+    &.grow {
+      flex-grow: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &.self-stretch {
+      align-self: unset;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
   }
 
-  &--no-label {
+  &.kw-radio--no-label {
     .q-radio__label {
       display: none;
     }

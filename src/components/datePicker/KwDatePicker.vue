@@ -4,7 +4,7 @@
     v-model="innerValue"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-date-picker"
-    :class="datePickerClasses"
+    :class="datePickerClass"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :readonly="readonly"
@@ -147,13 +147,13 @@ export default {
     const showing = computed(() => !isReadonlyOrDisable.value && isExpanded.value);
 
     const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClasses } = fieldStyles;
+    const { fieldStyleProps, fieldClass } = fieldStyles;
 
     const fieldCtx = useField();
     const { value } = fieldCtx;
     const innerValue = ref(value.value);
-    const datePickerClasses = computed(() => ({
-      ...fieldClasses.value,
+    const datePickerClass = computed(() => ({
+      ...fieldClass.value,
       'q-field--highlighted': showing.value,
     }));
 
@@ -273,7 +273,7 @@ export default {
       ...useInheritAttrs(),
       ...fieldCtx,
       fieldStyleProps,
-      datePickerClasses,
+      datePickerClass,
       inputRef,
       dateRef,
       showing,

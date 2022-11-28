@@ -1,14 +1,17 @@
 <template>
   <q-card-section
+    class="kw-card-section"
+    v-bind="styleClassAttrs"
     :tag="tag"
     :horizontal="horizontal"
-    class="kw-card-section"
   >
     <slot />
   </q-card-section>
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
+
 export default {
   name: 'KwCardSection',
   inheritAttrs: false,
@@ -18,6 +21,13 @@ export default {
     // fall through props
     tag: { type: String, default: 'div' },
     horizontal: { type: Boolean, default: undefined },
+  },
+  setup() {
+    const { styleClassAttrs } = useInheritAttrs();
+
+    return {
+      styleClassAttrs,
+    };
   },
 };
 </script>

@@ -25,14 +25,32 @@ export const useFieldStyleProps = {
 };
 
 export default () => {
-  const { props } = getCurrentInstance();
+  const { props, attrs } = getCurrentInstance();
 
   const computedDense = useDense();
 
-  const { stretchClasses } = useStretch();
+  const { stretchClass } = useStretch();
 
-  const fieldClasses = computed(() => ({
-    ...stretchClasses.value,
+  const required = computed(() => {
+    if (props.required || attrs.required) {
+      return true;
+    }
+    if (props.rules) {
+      if (typeof props.rules === 'string') {
+        return props.rules.includes('required');
+      }
+      if (Array.isArray(props.rules)) {
+        return props.rules.includes('required');
+      }
+      if (typeof props.rules === 'object') {
+        return !!props.rules.required;
+      }
+    }
+  });
+
+  const fieldClass = computed(() => ({
+    'kw-field--required': required.value,
+    ...stretchClass.value,
   }));
 
   const fieldStyleProps = computed(() => {
@@ -58,6 +76,6 @@ export default () => {
 
   return {
     fieldStyleProps,
-    fieldClasses,
+    fieldClass,
   };
 };

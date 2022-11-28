@@ -15,6 +15,30 @@
       }
     }
   }
+
+  &--checkbox {
+    .kw-option-group__control {
+      .q-checkbox {
+        @extend %kw-checkbox;
+      }
+    }
+  }
+
+  &--radio {
+    .kw-option-group__control {
+      .q-radio {
+        @extend %kw-radio;
+      }
+    }
+  }
+
+  &--toggle {
+    .kw-option-group__control {
+      .q-toggle {
+        @extend %kw-toggle;
+      }
+    }
+  }
 }
 
 .kw-option-group--wrap {

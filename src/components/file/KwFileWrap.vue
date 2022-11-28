@@ -1,4 +1,5 @@
 <template>
+  <!-- fixme: deprecated!!! -->
   <div
     class="kw-file-wrap"
   >
