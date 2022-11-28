@@ -28,6 +28,10 @@ export const useScrollPickerProps = {
     type: Boolean,
     default: false,
   },
+  rotateY: {
+    type: Number,
+    default: 0,
+  },
 };
 
 export const useScrollPickerEmits = [
@@ -41,6 +45,7 @@ export default () => {
   const itemSize = toRaw(props.itemSize);
   const itemAngle = toRaw(props.itemAngle);
   const infinite = toRaw(props.infinite);
+  const rotateY = toRef(props, 'rotateY');
 
   const circumference = (itemSize * 360) / itemAngle;
   const radius = circumference / (2 * PI);
@@ -53,7 +58,7 @@ export default () => {
 
   const optionsStyle = computed(() => {
     const top = '50%';
-    const transform = `rotateY(0deg) translateZ(${-radius}px)`;
+    const transform = `rotateY(${rotateY.value}deg) translateZ(${-radius}px)`;
     return { top, transform };
   });
 
