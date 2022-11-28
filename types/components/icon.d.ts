@@ -58,7 +58,12 @@ interface KwIconProps {
    */
   onClick?: (evt: Event) => void;
 }
-interface KwIconSlots {}
+interface KwIconSlots {
+  /**
+   * 툴팁 영역 내부를 지정합니다.
+   */
+  default: () => VNode[];
+}
 export interface KwIcon extends ComponentPublicInstance<KwIconProps> {}
 
 declare module '@vue/runtime-core' {
