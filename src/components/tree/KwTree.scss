@@ -69,4 +69,72 @@
   > .q-tree__node--child > .q-tree__node-header {
     padding-left: 4px;
   }
+
+  // 조직도
+  &.organization-tree {
+    color: $line-line; // q-tree 라인 색 변경
+
+    // .q-tree_node {
+    //   &::after {
+    //     top: -12px;
+    //   }
+    // }
+
+    // .q-tree__node-header::before {
+    //   width: 20px;
+    // }
+
+    // 마지막 depth일 때,
+    .q-tree__children {
+      .q-tree__node--child {
+        padding-left: 0;
+
+        .q-tree__node-header {
+          &::before {
+            width: 15px;
+          }
+        }
+      }
+    }
+
+    .q-tree__node--parent {
+      padding-left: 0;
+
+      .q-tree__node-header::before {
+        left: -13px;
+      }
+    }
+
+    .q-tree__node-header-content {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.63;
+      color: $black1;
+    }
+
+    // .q-tree__node--selected .q-tree__node-header-content {
+    //   color: $black1;
+    //   font-weight: 700;
+    // }
+
+    .q-tree__node--child {
+      .q-tree__node--selected .q-tree__node-header-content {
+        color: $primary;
+      }
+    }
+
+    .q-tree__icon,
+    .q-tree__node-header-content .q-icon {
+      font-size: 16px;
+    }
+
+    .q-tree__arrow {
+      margin-right: 8px;
+    }
+
+    // 하위 레벨이 없는 1depth 인 경우(if)
+    > .q-tree__node--child > .q-tree__node-header {
+      padding-left: 4px;
+    }
+  }
 }
