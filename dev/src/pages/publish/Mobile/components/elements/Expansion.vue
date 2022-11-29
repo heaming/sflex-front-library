@@ -226,6 +226,7 @@
       </q-card>
     </div>
 
+    <!-- 우리가 해야하는 것!!  -->
     <!-- <div class="kw-guide-section">
       <h3
         id="default"
@@ -235,25 +236,38 @@
       </h3>
 
       <p class="kw-guide-description">
-        use label and caption only in expansion
         <a href="https://zpl.io/PqMRBJA">Zeplin design</a>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-list>
-            <kw-expansion-item
-              label="[KSS 전자계약오류] 개인 신용정보 조회 동의 처리 가능한 상태가 아닙니다."
-              caption="오후 3:34"
-            >
+            <kw-expansion-item>
+              <template #header="{read}">
+                <kw-icon :name="read ? 'alert_off_24' : 'alert_on_24'" />
+                <div class="kw-expansion-item-text">
+                  <p>[KSS 전자계약오류] 개인 신용정보 조회 동의 처리 가능한 상태가 아닙니다.</p>
+                  <span>
+                    오후 3:34
+                  </span>
+                </div>
+              </template>
+
               <div class="py16 px20 kw-font-pt14">
                 계약 고객이 사용하는 통신사에 신용정보 조회 동의를 거부한 상태인 경우에 나타나는 메세지입니다.
                 통신사에 문의 바랍니다.
               </div>
             </kw-expansion-item>
-            <kw-expansion-item
-              label="[KSS 전자계약오류] 개인 신용정보 조회 동의 처리 가능한 상태가 아닙니다."
-              caption="오후 3:34"
-            >
+            <kw-expansion-item>
+              <template #header="{read}">
+                <kw-icon :name="read ? 'alert_off_24' : 'alert_on_24'" />
+                <div class="kw-expansion-item-text">
+                  <p>[KSS 전자계약오류] 개인 신용정보 조회 동의 처리 가능한 상태가 아닙니다.</p>
+                  <span>
+                    오후 3:34
+                  </span>
+                </div>
+              </template>
+
               <div class="py16 px20 kw-font-pt14">
                 계약 고객이 사용하는 통신사에 신용정보 조회 동의를 거부한 상태인 경우에 나타나는 메세지입니다.
                 통신사에 문의 바랍니다.
@@ -415,9 +429,6 @@ const case2 = `
   </kw-expansion-item>
 </kw-list>
 `;
-// const case3 = `
-// ss
-// `;
 const historyData = [
   {
     timestamp: '2022-11-24',
