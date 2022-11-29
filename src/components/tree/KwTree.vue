@@ -1,6 +1,7 @@
 <template>
   <q-tree
     ref="treeRef"
+    v-bind="styleClassAttrs"
     class="kw-tree"
     :expanded="expanded"
     :selected="selected"
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
   name: 'KwTree',
@@ -126,6 +128,7 @@ export default {
     }
 
     return {
+      ...useInheritAttrs(),
       treeRef,
       getNodeByKey,
       getExpandedNodes,
