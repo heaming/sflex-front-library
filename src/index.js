@@ -8,7 +8,7 @@ export { default as store } from './store';
 export { default as router } from './router';
 export { default as validate } from './validate';
 
-// Components
+// Layouts
 export * from './layouts/dev';
 export * from './layouts/web';
 
@@ -35,5 +35,6 @@ export * from './globalUtils';
 export * as codeUtil from './utils/code';
 export * as fileUtil from './utils/file';
 export * as gridUtil from './utils/grid';
+export * as mobileUtil from './utils/mobile';
 export * as popupUtil from './utils/popup';
 export * as stringUtil from './utils/string';

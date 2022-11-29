@@ -71,6 +71,7 @@ export default {
       const direction = evt.deltaY < 0 ? DIRECTION.UP : DIRECTION.DOWN;
       const rotationOffset = ctx.itemAngle * direction;
 
+      ctx.cancelAnimate();
       ctx.rotate(rotationOffset);
       ctx.updateValue();
     }

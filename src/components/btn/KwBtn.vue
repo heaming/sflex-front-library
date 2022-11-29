@@ -18,7 +18,6 @@
     :tabindex="tabindex"
     :align="align"
     :stack="stack"
-    :stretch="stretch"
     :disable="disable"
     :no-wrap="noWrap"
     :to="to"

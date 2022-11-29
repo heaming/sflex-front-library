@@ -74,6 +74,28 @@
           </tr>
           <tr>
             <td>
+              The element in kw-form-item
+            </td>
+            <td>
+              disable
+            </td>
+            <td>
+              Add the attribute "disable" in the tag of element which is wrapped for kw-form-item
+            </td>
+          </tr>
+          <tr>
+            <td>
+              The element in kw-form-item
+            </td>
+            <td>
+              no-label
+            </td>
+            <td>
+              Add the 'no-label' in the tags of kw-form-item or kw-search-item attribute when necessary
+            </td>
+          </tr>
+          <tr>
+            <td>
               kw-form
             </td>
             <td>
@@ -624,6 +646,34 @@
         </q-card>
       </p>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="nolabel"
+        class="kw-guide-title"
+      >
+        No label Case
+      </h3>
+      <p class="kw-guide-description">
+        input with no label
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item
+                no-label
+              >
+                <kw-input />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="nolabelCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -1003,7 +1053,23 @@ const telephoneCode = `
 <kw-search-row>
 `;
 
+const nolabelCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item
+      no-label
+    >
+      <kw-input />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
 const guideHistory = [
+  {
+    timestamp: '2022-11-29',
+    text: 'add no-label explanation',
+  },
   {
     timestamp: '2022-11-22',
     text: 'delete wrap div.row.items-center.w$$ method',

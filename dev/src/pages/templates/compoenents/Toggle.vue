@@ -25,7 +25,14 @@
       description="=default"
       :guide-code="defaultCode"
     >
+      <div class="flex items-center bg-lime-1 w500 h500">
+        <kw-toggle
+          v-model="model"
+          v-bind="bindingProps"
+        />
+      </div>
       <kw-toggle
+        v-model="model"
         v-bind="bindingProps"
       />
     </guide-section>
@@ -34,14 +41,12 @@
 
 <script setup>
 import { useDenseProps } from '../../../../../src/composables/private/useDense';
+import { useStretchProps } from '../../../../../src/composables/private/useStretch';
 
 const toggleProps = {
   ...useDenseProps,
+  ...useStretchProps,
 
-  modelValue: {
-    type: [String, Number, Boolean, Array],
-    default: undefined,
-  },
   trueValue: {
     type: [String, Number, Boolean],
     default: 'Y',
@@ -101,6 +106,8 @@ const toggleProps = {
 };
 
 const bindingProps = ref(null);
+
+const model = ref('Y');
 
 const defaultCode = `
       <kw-toggle
