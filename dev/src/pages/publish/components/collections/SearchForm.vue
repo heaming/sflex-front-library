@@ -71,6 +71,17 @@
           </tr>
           <tr>
             <td>
+              The element in kw-search-item
+            </td>
+            <td>
+              no-label
+            </td>
+            <td>
+              Add the 'no-label' in the tags of kw-form-item or kw-search-item attribute when necessary
+            </td>
+          </tr>
+          <tr>
+            <td>
               kw-search
             </td>
             <td>
@@ -823,6 +834,34 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="nolabel"
+        class="kw-guide-title"
+      >
+        No label Case
+      </h3>
+      <p class="kw-guide-description">
+        input with no label
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-search>
+            <kw-search-row>
+              <kw-search-item
+                no-label
+              >
+                <kw-input />
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+        </div>
+        <guide-code-view
+          :code-value="nolabelCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -1356,7 +1395,23 @@ const theOneRowCode = `
 </kw-search>
 `;
 
+const nolabelCode = `
+<kw-form>
+  <kw-form-row>
+    <kw-form-item
+      no-label
+    >
+      <kw-input />
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
 const guideHistory = [
+  {
+    timestamp: '2022-11-29',
+    text: 'add no-label explanation',
+  },
   {
     timestamp: '2022-11-22',
     text: 'delete wrap div.row.items-center.w$$ method',

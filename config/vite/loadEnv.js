@@ -7,13 +7,26 @@ const context = process.cwd();
 const isOuterContext = !isInternalContext();
 const { name, version } = getPackageJson();
 
-const DEVELOPMENT_MODE = 'dev';
+const NODE_ENV_PRODUCTION = 'production';
+const NODE_ENV_DEVELOPMENT = 'development';
+const MODE_DEV = 'dev';
 
 function configPlugin(mode, command, envDir, shouldTransform) {
   const absolutePath = resolve(context, envDir || '');
   const env = loadEnv(mode, absolutePath);
+  const metaEnv = {
+    ...env,
+    MODE: mode,
+    DEV: command === 'serve',
+    PROD: command === 'build',
+    VERSION: version,
+    TIMESTAMP: command === 'build' ? Date.now() : undefined,
+  };
 
-  Object.assign(process.env, { ...env });
+  Object.assign(process.env, {
+    ...metaEnv,
+    NODE_ENV: metaEnv.PROD ? NODE_ENV_PRODUCTION : NODE_ENV_DEVELOPMENT,
+  });
 
   return {
     name: 'load-env:config',
@@ -26,20 +39,10 @@ function configPlugin(mode, command, envDir, shouldTransform) {
         };
       }
 
-      const timestamp = command === 'build'
-        ? Date.now() : undefined;
-
       return {
         define: {
-          __IMPORT_META_ENV__: {
-            ...env,
-            MODE: mode,
-            DEV: command === 'serve',
-            PROD: command === 'build',
-            VERSION: version,
-            TIMESTAMP: timestamp,
-          },
-          __VUE_PROD_DEVTOOLS__: mode === DEVELOPMENT_MODE,
+          __IMPORT_META_ENV__: metaEnv,
+          __VUE_PROD_DEVTOOLS__: mode === MODE_DEV,
         },
       };
     },
