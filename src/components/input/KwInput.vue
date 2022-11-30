@@ -224,7 +224,14 @@ export default {
     const max = computed(() => (props.max === undefined ? Infinity : parseInt(props.max, 10)));
 
     function onUpdateNumberValue(val) {
-      value.value = min(max(val, min.value), max.value);
+      if (val) {
+        const el = inputRef.value.getNativeElement();
+
+        val = Math.min(Math.max(val, min.value), max.value);
+        el.value = val;
+      }
+
+      value.value = val;
     }
 
     function onUpdateTextValue(val) {
