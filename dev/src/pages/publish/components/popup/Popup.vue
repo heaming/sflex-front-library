@@ -87,14 +87,14 @@
           1. Check there is design screen <br>
           2. Check there is design reference <br>
           <img
-            src="../../../../../assets/images/example_popup2.png"
+            src="~~dev/assets/images/example_popup2.png"
             width="500"
             alt="디자인 참고"
           > <br> <br>
           3. If there is no infos about step 2 and 3,
           please use the popup class which have <em>approximate value</em> size. <br>
           <img
-            src="../../../../../assets/images/example_popup.png"
+            src="~~dev/assets/images/example_popup.png"
             width="500"
             alt="디자인 참고"
           > <br>
@@ -119,7 +119,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/pop_sample.png"
+            src="~~dev/assets/images/pop_sample.png"
             alt="popup sample"
             style="width: auto;"
           >

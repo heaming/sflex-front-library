@@ -1,7 +1,7 @@
 <template>
   <kw-avatar>
     <img
-      src="assets/images/test_image.png"
+      src="~~dev/assets/images/test_image.png"
       alt="test"
     >
   </kw-avatar>
@@ -12,13 +12,13 @@
   />
   <kw-avatar square>
     <img
-      src="assets/images/test_image.png"
+      src="~~dev/assets/images/test_image.png"
       alt="test"
     >
   </kw-avatar>
   <kw-avatar rounded>
     <img
-      src="assets/images/test_image.png"
+      src="~~dev/assets/images/test_image.png"
       alt="test"
     >
   </kw-avatar>

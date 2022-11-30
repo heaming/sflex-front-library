@@ -63,7 +63,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/example_file-single.png"
+            src="~~dev/assets/images/example_file-single.png"
             width="500"
             alt="단일 파일첨부"
           >
@@ -87,7 +87,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/example_file-multiple.png"
+            src="~~dev/assets/images/example_file-multiple.png"
             width="500"
             alt="복수 파일첨부"
           >
@@ -112,7 +112,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/example_file-multiple-download.png"
+            src="~~dev/assets/images/example_file-multiple-download.png"
             width="500"
             alt="복수 파일첨부"
           >
