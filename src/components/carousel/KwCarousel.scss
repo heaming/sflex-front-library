@@ -1,0 +1,43 @@
+.kw-carousel {
+  .q-carousel__arrow {
+    .q-btn {
+      min-width: 30px;
+      height: 50px;
+      border-radius: 0;
+      pointer-events: visible;
+      background-color: rgb(34 34 34 / 20%);
+    }
+
+    &.q-carousel__prev-arrow--horizontal,
+    &.q-carousel__next-arrow--horizontal {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &.q-carousel__prev-arrow--horizontal {
+      left: 0;
+    }
+
+    &.q-carousel__next-arrow--horizontal {
+      right: 0;
+    }
+  }
+
+  .kw-carousel-slide {
+    .kw-carousel-slide-caption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgb(34 34 34 / 30%);
+
+      p {
+        padding: 8px 12px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        color: $bg-white;
+      }
+    }
+  }
+}
