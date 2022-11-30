@@ -22,7 +22,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/popup_form.png"
+            src="~~dev/assets/images/popup_form.png"
             alt="Layout Type 1"
           >
         </div>

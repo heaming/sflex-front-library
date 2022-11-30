@@ -582,7 +582,7 @@
         <q-card>
           <div class="kw-guide-example">
             <img
-              src="../../../../../assets/images/example_email.png"
+              src="~~dev/assets/images/example_email.png"
               alt="email example"
               style="width: 100%;"
             >
@@ -607,7 +607,7 @@
         <q-card>
           <div class="kw-guide-example">
             <img
-              src="../../../../../assets/images/example_address.png"
+              src="~~dev/assets/images/example_address.png"
               alt="address example"
               style="width: 65%;"
             >
@@ -633,7 +633,7 @@
         <q-card>
           <div class="kw-guide-example">
             <img
-              src="../../../../../assets/images/example_telephone.png"
+              src="~~dev/assets/images/example_telephone.png"
               alt="address example"
               style="width: 65%;"
             >

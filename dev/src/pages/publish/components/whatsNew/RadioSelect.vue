@@ -21,7 +21,7 @@
       </p>
       <q-card>
         <img
-          src="../../../../../assets/images/onlyRadio.png"
+          src="~~dev/assets/images/onlyRadio.png"
           alt="onlyRadio"
         >
         <guide-code-view
@@ -44,7 +44,7 @@
       </p>
       <q-card>
         <img
-          src="../../../../../assets/images/RadioInput.png"
+          src="~~dev/assets/images/RadioInput.png"
           alt="onlyRadio"
         >
         <guide-code-view
