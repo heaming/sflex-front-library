@@ -273,7 +273,7 @@
             @init="initGrid4"
           />
           <img
-            src="../../../../../assets/images/grid_case_4.png"
+            src="~~dev/assets/images/grid_case_4.png"
             alt="block_type1"
             style="width: 100%;"
           >
@@ -300,7 +300,7 @@
       </p>
       <q-card>
         <img
-          src="../../../../../assets/images/example_horizon-grid.png"
+          src="~~dev/assets/images/example_horizon-grid.png"
           alt="block_type1"
           style="width: 100%;"
         >
