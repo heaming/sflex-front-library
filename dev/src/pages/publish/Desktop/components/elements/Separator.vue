@@ -60,7 +60,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/seperator.png"
+            src="~~dev/assets/images/seperator.png"
             alt="separator"
           >
         </div>
@@ -84,7 +84,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/example_separator_vertical.png"
+            src="~~dev/assets/images/example_separator_vertical.png"
             alt="separator"
           >
         </div>

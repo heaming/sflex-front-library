@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { findIndex } from 'lodash-es';
 import { createAnimateCanceledError, isAnimateCanceledError } from './animateCancel';
+import { stopAndPrevent } from '../../../utils/private/event';
 
 const { max, min, abs, round, floor, PI } = Math;
 const normalizeIndex = ({ length }, index) => (index + (abs(floor(index / length)) + 1) * length) % length;
@@ -28,6 +29,14 @@ export const useScrollPickerProps = {
     type: Boolean,
     default: false,
   },
+  rotateY: {
+    type: Number,
+    default: 0,
+  },
+  animateOnValueUpdate: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export const useScrollPickerEmits = [
@@ -41,6 +50,7 @@ export default () => {
   const itemSize = toRaw(props.itemSize);
   const itemAngle = toRaw(props.itemAngle);
   const infinite = toRaw(props.infinite);
+  const rotateY = toRef(props, 'rotateY');
 
   const circumference = (itemSize * 360) / itemAngle;
   const radius = circumference / (2 * PI);
@@ -53,7 +63,7 @@ export default () => {
 
   const optionsStyle = computed(() => {
     const top = '50%';
-    const transform = `rotateY(0deg) translateZ(${-radius}px)`;
+    const transform = `rotateY(${rotateY.value}deg) translateZ(${-radius}px)`;
     return { top, transform };
   });
 
@@ -85,6 +95,7 @@ export default () => {
   }
 
   function updateOptions(value, initialRotation = 0) {
+    value ??= items[0].value;
     rotation.value = initialRotation;
 
     if (value !== selectedValue.value) {
@@ -102,10 +113,6 @@ export default () => {
       emit('update:modelValue', value);
     }
   }
-
-  watch(() => props.modelValue, (val) => {
-    updateOptions(val ?? items[0]?.value);
-  }, { immediate: true });
 
   const lastAnimationFrameId = ref(null);
   const requestingAnimationFrame = computed(() => lastAnimationFrameId.value !== null);
@@ -177,7 +184,6 @@ export default () => {
 
     try {
       let loopCount = 0;
-
       while (loopCount < frames) {
         loopCount += 1;
         await animate(rotationOffset);
@@ -207,6 +213,31 @@ export default () => {
     await scrollBy(1);
   }
 
+  watch(() => props.modelValue, (val) => {
+    if (props.animateOnValueUpdate) {
+      scrollTo(val);
+    } else {
+      updateOptions(val);
+    }
+  });
+
+  updateOptions(props.modelValue);
+
+  function onWheel(evt) {
+    stopAndPrevent(evt);
+
+    const direction = evt.deltaY < 0 ? DIRECTION.UP : DIRECTION.DOWN;
+    const rotationOffset = itemAngle * direction;
+
+    cancelAnimate();
+    rotate(rotationOffset);
+    updateValue();
+  }
+
+  function onClick(option) {
+    scrollTo(option.value);
+  }
+
   return {
     items,
     itemSize,
@@ -226,5 +257,8 @@ export default () => {
     scrollBy,
     previous,
     next,
+
+    onWheel,
+    onClick,
   };
 };

@@ -450,6 +450,10 @@ $unit: px;
   }
 }
 
+.text-underline {
+  text-decoration: underline !important;
+}
+
 .kw-font- {
   @each $type, $value in $font-types {
     &#{$type} {

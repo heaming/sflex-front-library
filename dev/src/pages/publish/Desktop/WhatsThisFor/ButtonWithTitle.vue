@@ -30,7 +30,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/button_with_tittle.png"
+            src="~~dev/assets/images/button_with_tittle.png"
             alt="Layout Type 1"
           >
         </div>

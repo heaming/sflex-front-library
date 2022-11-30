@@ -71,6 +71,17 @@
           </tr>
           <tr>
             <td>
+              The element in kw-search-item
+            </td>
+            <td>
+              no-label
+            </td>
+            <td>
+              Add the 'no-label' in the tags of kw-form-item or kw-search-item attribute when necessary
+            </td>
+          </tr>
+          <tr>
+            <td>
               kw-search
             </td>
             <td>
@@ -685,6 +696,67 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        id="checkbox"
+        class="kw-guide-title"
+      >
+        use with checkbox
+      </h3>
+      <p class="kw-guide-description">
+        if you need to use together with single checkbox, <b>please use width helperclass</b> like as below example
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-search :cols="2">
+            <kw-search-row>
+              <kw-search-item
+                label="출력 제외 기간"
+                required
+              >
+                <kw-field
+                  :model-value="[]"
+                  class="w120"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-bind="field"
+                      label="제외 기간 설정"
+                      val=""
+                    />
+                  </template>
+                </kw-field>
+                <kw-date-range-picker
+                  rules="date_range_months:1"
+                />
+              </kw-search-item>
+              <kw-search-item
+                label="출력 제외 기간"
+                required
+              >
+                <kw-input />
+                <kw-field
+                  :model-value="[]"
+                  class="w120"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-bind="field"
+                      label="제외 기간 설정"
+                      val=""
+                    />
+                  </template>
+                </kw-field>
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+          <guide-code-view
+            :code-value="withCheckbox"
+            lang="vue"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="EssentialExample"
         class="kw-guide-title"
       >
@@ -819,6 +891,34 @@
 
         <guide-code-view
           :code-value="differentSize"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="nolabel"
+        class="kw-guide-title"
+      >
+        No label Case
+      </h3>
+      <p class="kw-guide-description">
+        input with no label
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-search>
+            <kw-search-row>
+              <kw-search-item
+                no-label
+              >
+                <kw-input />
+              </kw-search-item>
+            </kw-search-row>
+          </kw-search>
+        </div>
+        <guide-code-view
+          :code-value="nolabelCode"
           lang="vue"
         />
       </q-card>
@@ -1356,7 +1456,72 @@ const theOneRowCode = `
 </kw-search>
 `;
 
+const nolabelCode = `
+<kw-search>
+  <kw-search-row>
+    <kw-search-item
+      no-label
+    >
+      <kw-input />
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
+`;
+
+const withCheckbox = `
+<kw-search :cols="2">
+  <kw-search-row>
+    <kw-search-item
+      label="출력 제외 기간"
+      required
+    >
+      <kw-field
+        :model-value="[]"
+        class="w120"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="제외 기간 설정"
+            val=""
+          />
+        </template>
+      </kw-field>
+      <kw-date-range-picker
+        rules="date_range_months:1"
+      />
+    </kw-search-item>
+    <kw-search-item
+      label="출력 제외 기간"
+      required
+    >
+      <kw-input />
+      <kw-field
+        :model-value="[]"
+        class="w120"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="제외 기간 설정"
+            val=""
+          />
+        </template>
+      </kw-field>
+    </kw-search-item>
+  </kw-search-row>
+</kw-search>
+`;
+
 const guideHistory = [
+  {
+    timestamp: '2022-11-30',
+    text: 'add explanation of using together with select and checkbox case',
+  },
+  {
+    timestamp: '2022-11-29',
+    text: 'add no-label explanation',
+  },
   {
     timestamp: '2022-11-22',
     text: 'delete wrap div.row.items-center.w$$ method',
@@ -1381,5 +1546,6 @@ const guideHistory = [
     timestamp: '2022.08.29',
     text: 'Remove the attribut of :col="4" in 1 or 2 Columns in 1 row',
   },
+
 ];
 </script>

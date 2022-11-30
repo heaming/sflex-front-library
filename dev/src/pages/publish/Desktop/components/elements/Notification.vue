@@ -199,17 +199,17 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../../assets/images/notification_01.png"
+            src="~~dev/assets/images/notification_01.png"
             alt="case 1"
             style="border: 1px solid #ccc;"
           ><br><br>
           <img
-            src="../../../../../../assets/images/notification_02.png"
+            src="~~dev/assets/images/notification_02.png"
             alt="case 1"
             style="border: 1px solid #ccc;"
           ><br><br>
           <img
-            src="../../../../../../assets/images/notification_03.png"
+            src="~~dev/assets/images/notification_03.png"
             alt="case 1"
             style="border: 1px solid #ccc;"
           >
@@ -232,7 +232,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../../assets/images/notificationActionbar.png"
+            src="~~dev/assets/images/notificationActionbar.png"
             alt="case 1"
             style="border: 1px solid #ccc;"
           >

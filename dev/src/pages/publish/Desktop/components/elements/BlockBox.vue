@@ -58,7 +58,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/block_type1.png"
+            src="~~dev/assets/images/block_type1.png"
             alt="block_type1"
             style="width: 50%;"
           >
@@ -82,7 +82,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../../assets/images/normal_case.png"
+            src="~~dev/assets/images/normal_case.png"
             alt="normal_case"
             style="width: 50%;"
           >

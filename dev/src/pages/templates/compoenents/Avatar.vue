@@ -36,7 +36,7 @@
     >
       <kw-avatar>
         <img
-          src="assets/images/test_image.png"
+          src="~~dev/assets/images/test_image.png"
           alt="test"
         >
       </kw-avatar>
@@ -96,7 +96,7 @@
 const defaultCode = `
           <kw-avatar>
             <img
-              src="assets/images/test_image.png"
+              src="~~dev/assets/images/test_image.png"
               alt="test"
             >
           </kw-avatar>`;

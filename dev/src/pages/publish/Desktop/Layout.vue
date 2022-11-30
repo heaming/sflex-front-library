@@ -16,7 +16,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../assets/images/layout_type1.png"
+            src="~~dev/assets/images/layout_type1.png"
             alt="Layout Type 1"
           >
         </div>
@@ -39,7 +39,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../assets/images/layout_type2.png"
+            src="~~dev/assets/images/layout_type2.png"
             alt="Layout Type 1"
           >
         </div>
@@ -62,7 +62,7 @@
       <q-card>
         <div class="kw-guide-example">
           <img
-            src="../../../../assets/images/layout_type3.png"
+            src="~~dev/assets/images/layout_type3.png"
             alt="Layout Type 1"
           >
         </div>
