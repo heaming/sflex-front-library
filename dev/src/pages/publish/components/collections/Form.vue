@@ -444,6 +444,67 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        id="checkbox"
+        class="kw-guide-title"
+      >
+        use with checkbox
+      </h3>
+      <p class="kw-guide-description">
+        if you need to use together with single checkbox, <b>please use width helperclass</b> like as below example
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form :cols="2">
+            <kw-form-row>
+              <kw-form-item
+                label="출력 제외 기간"
+                required
+              >
+                <kw-field
+                  :model-value="[]"
+                  class="w130"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-bind="field"
+                      label="제외 기간 설정"
+                      val=""
+                    />
+                  </template>
+                </kw-field>
+                <kw-date-range-picker
+                  rules="date_range_months:1"
+                />
+              </kw-form-item>
+              <kw-form-item
+                label="출력 제외 기간"
+                required
+              >
+                <kw-input />
+                <kw-field
+                  :model-value="[]"
+                  class="w130"
+                >
+                  <template #default="{ field }">
+                    <kw-checkbox
+                      v-bind="field"
+                      label="제외 기간 설정"
+                      val=""
+                    />
+                  </template>
+                </kw-field>
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+          <guide-code-view
+            :code-value="withCheckbox"
+            lang="vue"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="EssentialExample"
         class="kw-guide-title"
       >
@@ -578,7 +639,7 @@
         Email form type
       </h3>
       <p class="kw-guide-description">
-        please add <em>&lt; zwcm-email-address /&gt;</em> in kw-form-item tag
+        please add <em>&lt; zwcm-email-address /&gt;</em> in kw-form-item tag <br>
         <q-card>
           <div class="kw-guide-example">
             <img
@@ -603,7 +664,9 @@
         Address form type
       </h3>
       <p class="kw-guide-description">
-        please add <em>&lt; zwcm-post-code /&gt;</em> in kw-form-item tag
+        please add <em>&lt; zwcm-post-code /&gt;</em> in kw-form-item tag <br>
+
+        if you need to full width (over basis size) please add class <b>kw-grow</b>
         <q-card>
           <div class="kw-guide-example">
             <img
@@ -630,6 +693,8 @@
       <p class="kw-guide-description">
         please add <em>&lt; zwcm-telephone-number /&gt;</em> in kw-form-item and kw-search-item tag <br>
         Also, please add <em>'carrier</em>' prop, if you need to 1st select like as 1st sample image
+        <br>
+        if you need to full width (over basis size) please add class <b>kw-grow</b>
         <q-card>
           <div class="kw-guide-example">
             <img
@@ -922,6 +987,51 @@ const twoColumns = `
 </kw-form>
 `;
 
+const withCheckbox = `
+<kw-form :cols="2">
+  <kw-form-row>
+    <kw-form-item
+      label="출력 제외 기간"
+      required
+    >
+      <kw-field
+        :model-value="[]"
+        class="w130"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="제외 기간 설정"
+            val=""
+          />
+        </template>
+      </kw-field>
+      <kw-date-range-picker
+        rules="date_range_months:1"
+      />
+    </kw-form-item>
+    <kw-form-item
+      label="출력 제외 기간"
+      required
+    >
+      <kw-input />
+      <kw-field
+        :model-value="[]"
+        class="w130"
+      >
+        <template #default="{ field }">
+          <kw-checkbox
+            v-bind="field"
+            label="제외 기간 설정"
+            val=""
+          />
+        </template>
+      </kw-field>
+    </kw-form-item>
+  </kw-form-row>
+</kw-form>
+`;
+
 const differentSize = `
 <kw-form :cols="2">
   <kw-form-row>
@@ -1066,6 +1176,10 @@ const nolabelCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-11-30',
+    text: 'add kw-grow class when necessary and explanation of using together with select and checkbox case',
+  },
   {
     timestamp: '2022-11-29',
     text: 'add no-label explanation',
