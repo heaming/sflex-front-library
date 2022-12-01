@@ -143,7 +143,7 @@ export default {
     autogrow: { type: Boolean, default: false },
     rows: { type: [Number, String], default: undefined },
     mask: { type: String, default: undefined },
-    fillMask: { type: [Boolean, String], default: undefined },
+    fillMask: { type: [Boolean, String], default: false },
     reverseFillMask: { type: Boolean, default: false },
     unmaskedValue: { type: Boolean, default: true },
     prefix: { type: String, default: undefined },
