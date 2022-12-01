@@ -65,5 +65,5 @@ export async function readExcel(file, columns = [], header = 1) {
 
   return (response.data || [])
     .splice(header)
-    .map((e) => mapKeys(e, (v) => columns[v] || v));
+    .map((e) => mapKeys(e, (v, k) => columns[k] || k));
 }
