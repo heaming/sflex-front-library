@@ -93,6 +93,12 @@
             grow
             class="pt20"
           />
+          <kw-input
+            icon="qrcode_24"
+            label="상품 QR코드"
+            placeholder="QR코드 입력"
+            class="pt20"
+          />
         </div>
         <guide-code-view
           :code-value="example"
@@ -139,11 +145,11 @@
         please add <em>&lt; zwcm-post-code /&gt;</em> in kw-form-item tag
         <q-card>
           <div class="kw-guide-example">
-            <img
+            <!-- <img
               src="../../../../../assets/images/example_address.png"
               alt="address example"
               style="width: 65%;"
-            >
+            > -->
           </div>
 
           <guide-code-view

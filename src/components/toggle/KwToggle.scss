@@ -201,3 +201,35 @@ body.desktop {
     }
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-toggle {
+    $-mobile-kw-toggle-track-height: 24px;
+    $-mobile-kw-toggle-track-width: 40px;
+    $-mobile-kw-toggle-thumb-size: 22px;
+    $-mobile-kw-toggle-thumb-padding: ($-mobile-kw-toggle-track-height - $-mobile-kw-toggle-thumb-size) / 2;
+    $-mobile-kw-toggle-thumb-slide-length: $-mobile-kw-toggle-track-width - $-mobile-kw-toggle-track-height;
+
+    & .q-toggle {
+      &__track {
+        border-radius: $-mobile-kw-toggle-track-height / 2;
+      }
+
+      &__thumb {
+        width: $-mobile-kw-toggle-thumb-size;
+        height: $-mobile-kw-toggle-thumb-size;
+      }
+
+      &__inner {
+        width: $-mobile-kw-toggle-track-width;
+        height: $-mobile-kw-toggle-track-height;
+
+        &--truthy {
+          .q-toggle__thumb {
+            left: $-mobile-kw-toggle-thumb-padding + $-mobile-kw-toggle-thumb-slide-length;
+          }
+        }
+      }
+    }
+  }
+}
