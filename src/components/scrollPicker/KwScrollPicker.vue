@@ -13,7 +13,7 @@
         :style="getOptionStyle(option)"
         clickable
         tabindex="-1"
-        @click="onClickOption(option)"
+        @click="onClick(option)"
       >
         <q-item-section>
           <q-item-label>
@@ -49,8 +49,7 @@
 </template>
 
 <script>
-import useScrollPicker, { useScrollPickerProps, useScrollPickerEmits, DIRECTION } from './private/useScrollPicker';
-import { stopAndPrevent } from '../../utils/private/event';
+import useScrollPicker, { useScrollPickerProps, useScrollPickerEmits } from './private/useScrollPicker';
 
 export default {
   name: 'KwScrollPicker',
@@ -63,27 +62,8 @@ export default {
   ],
 
   setup() {
-    const ctx = useScrollPicker();
-
-    function onWheel(evt) {
-      stopAndPrevent(evt);
-
-      const direction = evt.deltaY < 0 ? DIRECTION.UP : DIRECTION.DOWN;
-      const rotationOffset = ctx.itemAngle * direction;
-
-      ctx.cancelAnimate();
-      ctx.rotate(rotationOffset);
-      ctx.updateValue();
-    }
-
-    function onClickOption(option) {
-      ctx.scrollTo(option.value);
-    }
-
     return {
-      ...ctx,
-      onWheel,
-      onClickOption,
+      ...useScrollPicker(),
     };
   },
 };

@@ -1,3 +1,4 @@
+import { mapKeys } from 'lodash-es';
 import { http } from '../plugins/http';
 
 const targetPaths = ['temp', 'storage', 'export'];
@@ -44,7 +45,7 @@ export async function download(fileInfo, targetPath = targetPaths[0]) {
   downloadBlob(response.data, fileInfo.name);
 }
 
-export async function readExcel(file) {
+export async function readExcel(file, columns = [], header = 1) {
   const [, extension] = file.name.match(/\.(\w+)$/) || [];
 
   if (!extension) {
@@ -62,5 +63,7 @@ export async function readExcel(file) {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-  return response.data;
+  return (response.data || [])
+    .splice(header)
+    .map((e) => mapKeys(e, (v) => columns[v] || v));
 }
