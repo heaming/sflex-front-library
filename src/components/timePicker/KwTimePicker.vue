@@ -5,7 +5,7 @@
     v-bind="fieldStyleProps"
     class="kw-field kw-time-picker"
     :class="timePickerClass"
-    :label="undefined"
+    :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :readonly="readonly"
     :disable="disable"
