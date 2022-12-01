@@ -90,13 +90,17 @@ export default () => {
     }
   }
 
-  async function setExpanded(e) {
+  function setExpanded(e) {
     isExpanded.value = e ?? !isExpanded.value;
   }
 
-  const menuContainerRef = ref();
+  function focus() {
+    inputRef.value?.focus();
+  }
+
+  const scrollPickerContainerRef = ref();
   const clickOutsideProps = {
-    innerRefs: [inputRef, menuContainerRef],
+    innerRefs: [inputRef, scrollPickerContainerRef],
     onClickOutside() { setExpanded(false); },
   };
 
@@ -154,10 +158,12 @@ export default () => {
     fieldStyleProps,
     ...fieldCtx,
     inputValue,
-    inputMeridiem,
     inputPrefix,
-    menuContainerRef,
+    scrollPickerContainerRef,
+
     setExpanded,
+    focus,
+
     onChangeInput,
   };
 };

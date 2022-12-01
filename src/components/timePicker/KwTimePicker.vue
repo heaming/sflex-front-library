@@ -59,6 +59,14 @@
       </div>
     </q-menu>
 
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
+      #label
+    >
+      {{ label ?? label }}
+    </template>
+
     <!-- error -->
     <template
       v-if="invalid"
