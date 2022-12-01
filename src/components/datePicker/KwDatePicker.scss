@@ -5,6 +5,10 @@
 
 .kw-date-picker {
   width: 140px;
+
+  @at-root .kw-form-item__field &.kw-field {
+    max-width: 250px;
+  }
 }
 
 .kw-date-picker.kw-field.q-field {
