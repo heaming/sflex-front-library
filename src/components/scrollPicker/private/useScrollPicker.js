@@ -2,9 +2,9 @@
 import { findIndex } from 'lodash-es';
 import { createAnimateCanceledError, isAnimateCanceledError } from './animateCancel';
 import { stopAndPrevent } from '../../../utils/private/event';
+import { normalizeArrayIndex } from '../../../utils/private/normalize';
 
 const { max, min, abs, round, floor, PI } = Math;
-const normalizeIndex = ({ length }, index) => (index + (abs(floor(index / length)) + 1) * length) % length;
 
 export const DIRECTION = { UP: -1, DOWN: 1 };
 
@@ -87,7 +87,7 @@ export default () => {
 
     return Array.from({ length }, (v, i) => {
       const j = i + index - m;
-      const k = normalizeIndex(items, j);
+      const k = normalizeArrayIndex(items, j);
       const angle = (m - i) * itemAngle;
       const hidden = !infinite && j !== k;
       return { ...items[k], angle, hidden };
@@ -125,7 +125,7 @@ export default () => {
     const direction = rotationOffset < 0 ? DIRECTION.UP : DIRECTION.DOWN;
     const indexOffset = round(abs(rotation.value) / itemAngle) * direction;
     const index = selectedIndex.value + indexOffset;
-    const normalizedIndex = infinite ? normalizeIndex(items, index) : min(max(index, 0), items.length - 1);
+    const normalizedIndex = infinite ? normalizeArrayIndex(items, index) : min(max(index, 0), items.length - 1);
     const { value } = items[normalizedIndex];
 
     if (value !== selectedValue.value) {
@@ -168,10 +168,10 @@ export default () => {
     if (index === -1) return;
 
     const distance = abs(selectedIndex.value - index);
-    const indexOffset = infinite ? min(distance, normalizeIndex(items, -distance)) : distance;
+    const indexOffset = infinite ? min(distance, normalizeArrayIndex(items, -distance)) : distance;
 
     const isUpside = infinite
-      ? normalizeIndex(items, selectedIndex.value - indexOffset) === index
+      ? normalizeArrayIndex(items, selectedIndex.value - indexOffset) === index
       : index < selectedIndex.value;
 
     const frames = 12;
@@ -199,7 +199,7 @@ export default () => {
 
   async function scrollBy(indexOffset) {
     const index = selectedIndex.value + indexOffset;
-    const normalizedIndex = infinite ? normalizeIndex(items, index) : min(max(index, 0), items.length - 1);
+    const normalizedIndex = infinite ? normalizeArrayIndex(items, index) : min(max(index, 0), items.length - 1);
     const { value } = items[normalizedIndex];
 
     await scrollTo(value);

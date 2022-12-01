@@ -14,18 +14,18 @@
     :autofocus="autofocus"
     :placeholder="placeholder"
     no-error-icon
-    @click="toggleView()"
+    @click="setExpanded()"
     @change="onChangeInput"
   >
     <template #append>
       <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
-      <div @click="toggleView()">
+      <div @click="setExpanded()">
         <q-icon name="calendar" />
       </div>
     </template>
     <q-menu
       :model-value="showing"
-      class="kw-date-picker-menu"
+      class="kw-date-picker"
       no-parent-event
       no-focus
       no-refocus
@@ -45,6 +45,14 @@
       />
     </q-menu>
 
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
+      #label
+    >
+      {{ label ?? label }}
+    </template>
+
     <!-- error -->
     <template
       v-if="invalid"
@@ -57,14 +65,6 @@
       >
         {{ invalidMessage }}
       </kw-tooltip>
-    </template>
-
-    <!-- label -->
-    <template
-      v-if="$g.platform.is.mobile && (label || $slots.label)"
-      #label
-    >
-      {{ label ?? label }}
     </template>
   </q-input>
 </template>
@@ -166,7 +166,7 @@ export default {
       innerValue.value = val;
     });
 
-    function toggleView(e) {
+    function setExpanded(e) {
       isExpanded.value = e ?? !isExpanded.value;
     }
 
@@ -217,26 +217,24 @@ export default {
       el.focus();
       el.setSelectionRange(length, length);
 
-      toggleView(false);
+      setExpanded(false);
     }
 
     function onKeydown(e) {
       // enter
       if (e.keyCode === 13 && (e.target.value === e.target.__oldValue__)) {
         stopAndPrevent(e);
-        toggleView(true);
+        setExpanded(true);
       }
     }
 
     function onKeydownWhenShowing() {
-      toggleView(false);
+      setExpanded(false);
     }
 
     const clickOutsideProps = {
       innerRefs: [inputRef, dateRef],
-      onClickOutside() {
-        toggleView(false);
-      },
+      onClickOutside() { setExpanded(false); },
     };
 
     watch(showing, (val) => {
@@ -280,7 +278,7 @@ export default {
       innerValue,
       innerValueMask,
       minView,
-      toggleView,
+      setExpanded,
       onChangeInput,
       onChangeDate,
       focus,
