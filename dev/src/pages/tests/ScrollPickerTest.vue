@@ -1,19 +1,23 @@
 <template>
   <kw-page>
-    <div>
-      {{ value }}
-      <kw-scroll-picker
-        v-model="value"
-        class="w200 h400"
-        :items="items"
-      />
+    <div class="result-area">
+      <kw-form :cols="3">
+        <kw-form-row>
+          <kw-form-item
+            :label="value"
+          >
+            <kw-time-picker2
+              v-model="value"
+            />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
     </div>
   </kw-page>
 </template>
 
 <script setup>
 
-const value = ref(0);
-const items = Array.from({ length: 999 }, (v, i) => ({ value: i, label: i }));
+const value = ref();
 
 </script>
