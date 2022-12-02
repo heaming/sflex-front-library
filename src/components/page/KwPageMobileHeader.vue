@@ -1,8 +1,16 @@
 <template>
   <div class="kw-page-mobile-header">
     <kw-btn
+      v-if="leftBtn === 'back'"
       class="kw-page-mobile-header__back-btn"
       icon="arrow_right_24"
+      borderless
+      @click="toggleExpanded"
+    />
+    <kw-btn
+      v-if="leftBtn === 'menu'"
+      class="kw-page-mobile-header__back-btn"
+      icon="menu"
       borderless
       @click="toggleExpanded"
     />
@@ -37,6 +45,13 @@
     >
       <slot name="more" />
     </kw-btn-dropdown>
+    <kw-btn
+      v-if="showClose"
+      class="kw-page-mobile-header__close"
+      icon="close"
+      filled
+      @click="$emit('close')"
+    />
   </div>
 </template>
 
@@ -48,7 +63,10 @@ export default {
   props: {
     hint: { type: String, default: undefined },
     title: { type: String, default: undefined },
+    leftBtn: { type: String, default: 'back' },
+    showClose: { type: Boolean, default: false },
   },
+  emits: ['close'],
   setup() {
     return {
       ...useLnbExpand(),
