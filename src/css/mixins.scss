@@ -16,7 +16,7 @@
 }
 
 @function zero-unit($number, $unit: "px") {
-  @if unit($number) == "" {
+  @if $number == 0 {
     @return $number + $unit;
   }
 
@@ -195,12 +195,24 @@
   }
 }
 
-@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight) {
+@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight, $letter-spacing: normal) {
   font-size: $font-size;
   line-height: $line-height;
   padding: $padding;
   font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
   min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3)) });
+}
+
+@mixin kw-btn-height-modifier-by-font-type($min-height, $font-type, $side-padding: 12px) {
+  $-font-type: map-get($font-types, $font-type);
+  $-line-height: map-get($-font-type, "line-height");
+  $-font-size: map-get($-font-type, "size");
+  $-font-weight: map-get($-font-type, "font-weigth");
+  $-letter-spacing: map-get($-font-type, "letter-spacing");
+  $-padding: calc((#{$min-height} - #{$-line-height}) / 2) $side-padding;
+
+  @include kw-btn-height-modifier($-padding, $-line-height, $-font-size, $-font-weight, $-letter-spacing);
 }
 
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
