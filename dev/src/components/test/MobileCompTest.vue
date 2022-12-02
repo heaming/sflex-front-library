@@ -1,63 +1,31 @@
 <template>
-  <div class="w360 bg-green-1">
-    <div
-      class="maybe-header text-title flex h55 px16 items-center"
-      style="width: 100%;"
-    >
-      <kw-btn
-        class="mr16"
-        icon="bookmark_on"
-        borderless
-      />
-      <div
-        style="margin-right: auto;"
-      >
-        TITLE
-      </div>
-      <kw-icon
-        name="info_24"
-        :tooltip="'hint'"
-      />
-      <kw-btn-dropdown
-        borderless
-        dropdown-icon="more"
-      >
+  <div>
+    <kw-btn
+      filled
+      primary
+      label="OPEN"
+      @click="showDummyWindow = !showDummyWindow"
+    />
+  </div>
+  <div
+    v-if="showDummyWindow"
+    class="maybe-window"
+  >
+    <kw-page>
+      <template #more>
+        <h1>more</h1>
         <kw-btn label="test1" />
         <kw-btn label="test2" />
         <kw-btn label="test3" />
-      </kw-btn-dropdown>
-    </div>
-    <div class="maybe-search-or-tab">
-      <kw-field-wrap
-        label="wrapped"
-        control-class="bg-bg-body px20"
+      </template>
+
+      <template
+        v-if="showSubHeader"
+        #sub-header
       >
-        <kw-select
-          v-model="selectModel"
-          label="fit"
-          class="fit"
-          :options="optionsModel"
-          borderless
-          :error="true"
-        />
-        <kw-separator
-          vertical
-          spaced
-          inset
-        />
-        <kw-select
-          v-model="selectModel"
-          borderless
-          class="fit"
-          :options="optionsModel"
-          stretch
-        />
-      </kw-field-wrap>
-      <div
-        class="maybe-item-container flex no-wrap items-end"
-      >
+        <h1>sub-header</h1>
         <kw-field-wrap
-          class="col"
+          label="wrapped"
           control-class="bg-bg-body px20"
         >
           <kw-select
@@ -66,6 +34,7 @@
             class="fit"
             :options="optionsModel"
             borderless
+            :error="true"
           />
           <kw-separator
             vertical
@@ -80,58 +49,270 @@
             stretch
           />
         </kw-field-wrap>
-      </div>
-      <kw-select
-        v-model="selectModel"
-        outlined
-        label="fit1"
-        :options="optionsModel"
-      />
-      <kw-input
-        v-model="strModel"
-        outlined
-        label="default"
-        rules="required"
-        error-message="긴한글은어떻게처리하려나너무나도궁금하고궁금한워드브레이크의기이한현상"
-        prefix="pr"
-        suffix="sf"
+      </template>
+
+      <template
+        v-if="showContentTop"
+        #content-top
       >
-        <template #after>
-          af
-        </template>
-      </kw-input>
-      <kw-field v-if="false">
-        <kw-checkbox
-          v-model="ynModel"
-          dense
-          :label="'test'"
+        <h1>content-top</h1>
+        <kw-field-wrap
+          label="wrapped"
+          control-class="bg-bg-body px20"
+        >
+          <kw-select
+            v-model="selectModel"
+            label="fit"
+            class="fit"
+            :options="optionsModel"
+            borderless
+            :error="true"
+          />
+          <kw-separator
+            vertical
+            spaced
+            inset
+          />
+          <kw-select
+            v-model="selectModel"
+            borderless
+            class="fit"
+            :options="optionsModel"
+            stretch
+          />
+        </kw-field-wrap>
+      </template>
+
+      <h1>content === default</h1>
+      <ul class="slot-handler">
+        <li>
+          <kw-toggle
+            v-model="showSubHeader"
+            :true-value="true"
+            :false-value="false"
+            label="sub-header"
+          />
+        </li>
+        <li>
+          <kw-toggle
+            v-model="showLorem"
+            :true-value="true"
+            :false-value="false"
+            label="long content"
+          />
+        </li>
+        <li>
+          <kw-toggle
+            v-model="showContentTop"
+            :true-value="true"
+            :false-value="false"
+            label="content-top"
+          />
+        </li>
+        <li>
+          <kw-toggle
+            v-model="showContentBottom"
+            :true-value="true"
+            :false-value="false"
+            label="content-bottom"
+          />
+        </li>
+        <li>
+          <kw-toggle
+            v-model="showFooter"
+            :true-value="true"
+            :false-value="false"
+            label="footer"
+          />
+        </li>
+        <li>
+          <kw-toggle
+            v-model="showAction"
+            :true-value="true"
+            :false-value="false"
+            label="action"
+          />
+        </li>
+      </ul>
+
+      <template v-if="showLorem">
+        <div
+          v-for="n in 10"
+          :key="`lorem${n}`"
+        >
+          {{ lorem }}
+        </div>
+      </template>
+
+      <template
+        v-if="showContentBottom"
+        #content-bottom
+      >
+        <h1>content-bottom</h1>
+      </template>
+
+      <template
+        v-if="showFooter"
+        #footer
+      >
+        <h1>footer</h1>
+      </template>
+
+      <template
+        v-if="showAction"
+        #action
+      >
+        <kw-btn
+          filled
+          negative
+          label="취소"
+          @click="showDummyWindow = !showDummyWindow"
         />
-      </kw-field>
-      <kw-input
-        v-if="false"
-        type="textarea"
-        label="default"
-        rules="required"
-        error-message="긴한글은어떻게처리하려나너무나도궁금하고궁금한워드브레이크의기이한현상"
-        prefix="pr"
-        suffix="sf"
-        autogrow
-      />
-      <q-field
-        v-if="false"
-        label="test"
-        class="kw-field"
-        prefix="pr"
-        suffix="sf"
-      >
-        <template #control>
-          <div>
-            <span>클래스 테스트를 위한 임의의 컴포넌트</span>
-          </div>
-        </template>
-      </q-field>
-    </div>
-    <div class="maybe-page ma20 bg-deep-orange-1">
+        <kw-btn
+          filled
+          primary
+          label="확인"
+        />
+      </template>
+    </kw-page>
+    <kw-page
+      v-if="false"
+    >
+      <template #sub-header>
+        <kw-field-wrap
+          label="wrapped"
+          control-class="bg-bg-body px20"
+        >
+          <kw-select
+            v-model="selectModel"
+            label="fit"
+            class="fit"
+            :options="optionsModel"
+            borderless
+            :error="true"
+          />
+          <kw-separator
+            vertical
+            spaced
+            inset
+          />
+          <kw-select
+            v-model="selectModel"
+            borderless
+            class="fit"
+            :options="optionsModel"
+            stretch
+          />
+        </kw-field-wrap>
+        <div
+          v-if="false"
+          class="maybe-item-container flex no-wrap items-end"
+        >
+          <kw-field-wrap
+            class="col"
+            control-class="bg-bg-body px20"
+          >
+            <kw-select
+              v-model="selectModel"
+              label="fit"
+              class="fit"
+              :options="optionsModel"
+              borderless
+            />
+            <kw-separator
+              vertical
+              spaced
+              inset
+            />
+            <kw-select
+              v-model="selectModel"
+              borderless
+              class="fit"
+              :options="optionsModel"
+              stretch
+            />
+          </kw-field-wrap>
+        </div>
+        <kw-select
+          v-if="false"
+          v-model="selectModel"
+          outlined
+          label="fit1"
+          :options="optionsModel"
+        />
+        <kw-input
+          v-model="strModel"
+          outlined
+          label="default"
+          rules="required"
+          error-message="긴한글은어떻게처리하려나너무나도궁금하고궁금한워드브레이크의기이한현상"
+          prefix="pr"
+          suffix="sf"
+        >
+          <template #after>
+            af
+          </template>
+        </kw-input>
+        <kw-field v-if="false">
+          <kw-checkbox
+            v-model="ynModel"
+            dense
+            :label="'test'"
+          />
+        </kw-field>
+        <kw-input
+          v-if="false"
+          type="textarea"
+          label="default"
+          rules="required"
+          error-message="긴한글은어떻게처리하려나너무나도궁금하고궁금한워드브레이크의기이한현상"
+          prefix="pr"
+          suffix="sf"
+          autogrow
+        />
+        <q-field
+          v-if="false"
+          label="test"
+          class="kw-field"
+          prefix="pr"
+          suffix="sf"
+        >
+          <template #control>
+            <div>
+              <span>클래스 테스트를 위한 임의의 컴포넌트</span>
+            </div>
+          </template>
+        </q-field>
+      </template>
+      <template #content-top>
+        content-top
+        <kw-field-wrap
+          label="wrapped"
+          control-class="bg-bg-body px20"
+        >
+          <kw-select
+            v-model="selectModel"
+            label="fit"
+            class="fit"
+            :options="optionsModel"
+            borderless
+            :error="true"
+          />
+          <kw-separator
+            vertical
+            spaced
+            inset
+          />
+          <kw-select
+            v-model="selectModel"
+            borderless
+            class="fit"
+            :options="optionsModel"
+            stretch
+          />
+        </kw-field-wrap>
+      </template>
+
       <kw-form>
         <div
           class="maybe-item-container flex no-wrap items-end"
@@ -198,7 +379,6 @@
             />
           </template>
         </q-field>
-
         <div class="flex">
           <kw-field
             label="kw-field-wrap"
@@ -224,7 +404,26 @@
           </kw-field>
         </div>
       </kw-form>
-    </div>
+
+      <template #more>
+        <kw-btn label="test1" />
+        <kw-btn label="test2" />
+        <kw-btn label="test3" />
+      </template>
+
+      <template #action>
+        <kw-btn
+          filled
+          negative
+          label="취소"
+        />
+        <kw-btn
+          filled
+          primary
+          label="확인"
+        />
+      </template>
+    </kw-page>
   </div>
 </template>
 
@@ -233,24 +432,31 @@ const strModel = ref('');
 const ynModel = ref('N');
 const selectModel = ref('');
 const optionsModel = ['a', 'b'];
+const showDummyWindow = ref(true);
+const showSubHeader = ref(false);
+const showContentTop = ref(false);
+const showContentBottom = ref(false);
+const showFooter = ref(false);
+const showAction = ref(false);
+const showLorem = ref(false);
+
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
 </script>
 
 <style scoped lang="scss">
 body.mobile:not(.tablet) {
-  .maybe-page {
-    .kw-form {
-      display: flex;
-      flex-flow: column;
-      gap: 8px;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-color: $lime-1;
-      }
-    }
+  .maybe-window {
+    position: fixed;
+    inset: 0;
+    border: 1px solid black;
+    z-index: 2999;
+    background-color: #fff;
+    overflow: auto;
   }
 }
 
+.slot-handler {
+  border: 1px solid red;
+}
 </style>

@@ -189,6 +189,12 @@
       }
     }
   }
+
+  &--cta {
+    @include kw-btn-height-modifier-by-font-type (60px, "body");
+
+    flex-grow: 1;
+  }
 }
 
 body.desktop {
