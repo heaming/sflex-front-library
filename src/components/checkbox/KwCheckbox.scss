@@ -6,6 +6,8 @@
   $-kw-checkbox-label-font-size-dense: $kw-field-font-size-dense;
   $-kw-checkbox-line-height: $kw-field-line-height;
   $-kw-checkbox-line-height-dense: $kw-field-line-height-dense;
+  $-kw-checkbox-margin: (($kw-field-height - $kw-field-line-height) / 2);
+  $-kw-checkbox-margin-dense: (($kw-field-height-dense - $kw-field-line-height-dense) / 2);
 
   & .q-checkbox {
     &__bg { /* does not appear when using icon */
@@ -179,6 +181,15 @@
       align-self: unset;
       margin-top: auto;
       margin-bottom: auto;
+    }
+
+    &.pad {
+      align-self: unset;
+      margin: $-kw-checkbox-margin;
+    }
+
+    &--dense.pad {
+      margin: $-kw-checkbox-margin-dense;
     }
   }
 
