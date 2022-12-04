@@ -1,67 +1,67 @@
 <template>
   <kw-page>
-    <div class="row justify-end q-gutter-sm">
-      <kw-toggle
-        v-model="autofocus"
-        label="autofocus"
-        :true-value="true"
-        :false-value="false"
-      />
-      <kw-toggle
-        v-model="noResetFocus"
-        label="noResetFocus"
-        :true-value="true"
-        :false-value="false"
-      />
+    <div class="result-area">
+      <kw-action-top>
+        <kw-toggle
+          v-model="autofocus"
+          label="autofocus"
+          :true-value="true"
+          :false-value="false"
+        />
+        <kw-toggle
+          v-model="noResetFocus"
+          label="noResetFocus"
+          :true-value="true"
+          :false-value="false"
+        />
 
-      <span class="q-ml-lg self-center"> cols:</span>
-      <kw-option-group
-        v-model="cols"
-        type="radio"
-        label="cols"
-        size="xs"
-        :options="[1, 2, 3, 4, 5]"
-      />
+        <span class="q-ml-lg self-center"> cols:</span>
+        <kw-option-group
+          v-model="cols"
+          type="radio"
+          label="cols"
+          size="xs"
+          :options="[1, 2, 3, 4, 5]"
+        />
 
-      <q-space />
-      <kw-btn
-        class="text-capitalize"
-        outline
-        size="md"
-        label="init"
-        @click="onClickInit"
-      />
-      <kw-btn
-        class="text-capitalize"
-        outline
-        size="md"
-        label="validate"
-        @click="onClickValidate"
-      />
-      <kw-btn
-        class="text-capitalize"
-        outline
-        size="md"
-        label="isModified"
-        @click="onClickIsModified"
-      />
-      <kw-btn
-        class="text-capitalize"
-        outline
-        size="md"
-        label="reset"
-        @click="onClickReset"
-      />
-      <kw-btn
-        class="text-capitalize"
-        outline
-        size="md"
-        label="resetValidation"
-        @click="onClickResetValidation"
-      />
-    </div>
+        <q-space />
+        <kw-btn
+          class="text-capitalize"
+          outline
+          size="md"
+          label="init"
+          @click="onClickInit"
+        />
+        <kw-btn
+          class="text-capitalize"
+          outline
+          size="md"
+          label="validate"
+          @click="onClickValidate"
+        />
+        <kw-btn
+          class="text-capitalize"
+          outline
+          size="md"
+          label="isModified"
+          @click="onClickIsModified"
+        />
+        <kw-btn
+          class="text-capitalize"
+          outline
+          size="md"
+          label="reset"
+          @click="onClickReset"
+        />
+        <kw-btn
+          class="text-capitalize"
+          outline
+          size="md"
+          label="resetValidation"
+          @click="onClickResetValidation"
+        />
+      </kw-action-top>
 
-    <q-card>
       <kw-form
         :key="formKey"
         ref="formRef"
@@ -245,7 +245,7 @@
           />
         </div>
       </kw-form>
-    </q-card>
+    </div>
   </kw-page>
 </template>
 

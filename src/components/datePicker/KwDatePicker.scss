@@ -3,15 +3,13 @@
   box-sizing: content-box;
 }
 
-.kw-date-picker {
+.kw-date-picker.kw-field.q-field {
   width: 140px;
 
-  @at-root .kw-form-item__field &.kw-field {
+  @at-root .kw-form-item__field & {
     max-width: 250px;
   }
-}
 
-.kw-date-picker.kw-field.q-field {
   .q-field__control {
     cursor: text;
   }
@@ -58,8 +56,9 @@
   box-shadow: none;
 }
 
-.kw-date-range-picker {
+.kw-date-range-picker.kw-field-wrap {
   .kw-date-picker + span {
+    margin: 0;
     padding: 0 4px !important;
   }
 }
