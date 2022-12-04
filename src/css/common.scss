@@ -46,8 +46,8 @@ h2 {
 
     & span + span {
       position: relative;
-      margin-left: 15px;
-      padding-left: 15px;
+      margin-left: 8px;
+      padding-left: 8px;
 
       &::before {
         position: absolute;
@@ -74,7 +74,7 @@ h2 {
 
   &.h2-small {
     font-size: 18px;
-    border-bottom: 1px solid $black1;
+    border-bottom: 2px solid $black1;
   }
 }
 

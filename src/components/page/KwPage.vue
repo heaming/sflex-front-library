@@ -1,17 +1,75 @@
 <template>
   <q-page
     class="kw-page"
-    :class="pageClass"
     :style-fn="styleFn"
   >
     <slot
       v-if="!noHeader"
       name="header"
     >
-      <kw-page-header />
+      <kw-page-mobile-header
+        v-if="$g.platform.is.mobile"
+        class="kw-page__header"
+        :hint="hint"
+        :title="'TITLE'"
+      >
+        <template
+          v-if="$slots.more"
+          #more
+        >
+          <slot name="more" />
+        </template>
+      </kw-page-mobile-header>
+      <kw-page-header
+        v-else
+        class="kw-page__header"
+      />
     </slot>
 
-    <slot />
+    <div
+      v-if="$slots['sub-header']"
+      class="kw-page__sub-header"
+    >
+      <slot name="sub-header" />
+    </div>
+
+    <div
+      class="kw-page__content"
+    >
+      <div
+        v-if="$slots['content-top']"
+        class="kw-page__content-top"
+      >
+        <slot name="content-top" />
+      </div>
+      <div
+        v-if="$slots.default"
+        class="kw-page__content-container"
+      >
+        <slot />
+      </div>
+      <div
+        v-if="$slots['content-bottom']"
+        class="kw-page__content-bottom"
+      >
+        <slot name="content-bottom" />
+      </div>
+    </div>
+
+    <div
+      v-if="$slots.footer || $slots.action"
+      class="kw-page__footer"
+    >
+      <slot name="footer" />
+      <div
+        v-if="$slots.action"
+        class="kw-page__action"
+      >
+        <slot
+          name="action"
+        />
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -20,26 +78,17 @@ import usePage from '../../composables/private/usePage';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 import usePageSearch from '../../composables/private/usePageSearch';
 
-const sizeValues = ['sm', 'md'];
-
 export default {
   name: 'KwPage',
 
   props: {
     ...useObserverProps,
 
-    size: {
-      type: String,
-      default: undefined,
-      validator: (v) => sizeValues.includes(v),
-    },
-    noHeader: {
-      type: Boolean,
-      default: false,
-    },
+    noHeader: { type: Boolean, default: false },
+    hint: { type: String, default: undefined },
   },
 
-  setup(props) {
+  setup() {
     usePage();
     usePageSearch();
 
@@ -49,14 +98,10 @@ export default {
       return { 'min-height': `${height - (offset + additionalOffset)}px` };
     };
 
-    const pageClass = computed(() => [
-      props.size && `kw-popup--${props.size}`,
-    ]);
-
     return {
       ...useObserver(),
       styleFn,
-      pageClass,
+
     };
   },
 };

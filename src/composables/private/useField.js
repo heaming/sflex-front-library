@@ -193,7 +193,9 @@ export default (options) => {
     }
   });
 
+  const el = computed(() => proxy.$el);
   const fieldCtx = {
+    el,
     ...fieldState,
     inputRef,
     init,

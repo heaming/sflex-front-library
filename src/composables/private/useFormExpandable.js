@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { FormExpandableContextKey } from '../../consts/private/symbols';
 
 export const useFormExpandableProps = {
@@ -18,8 +19,6 @@ export default () => {
 
   async function updateExpand() {
     registeredCount.value = registeredList.length;
-    await nextTick();
-
     registeredList.forEach((vm, i) => {
       vm.proxy.toggleShowing(
         !isExpandable.value
@@ -31,6 +30,15 @@ export default () => {
 
   function registerExpandableChild(vm) {
     registeredList.push(vm);
+    registeredList.sort((n, o) => {
+      const node = n.proxy.$el;
+      const otherNode = o.proxy.$el;
+      const relativePosition = node.compareDocumentPosition(otherNode);
+      const isOtherNodeFollowing = relativePosition & Node.DOCUMENT_POSITION_FOLLOWING;
+
+      return isOtherNodeFollowing ? -1 : 1;
+    });
+
     updateExpand();
   }
 
