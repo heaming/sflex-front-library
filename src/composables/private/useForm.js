@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { FormContextKey } from '../../consts/private/symbols';
 import useObserverChild, { useObserverChildProps } from './useObserverChild';
 import { alert, confirm } from '../../plugins/dialog';
@@ -23,15 +24,22 @@ export const useFormProps = {
 export default () => {
   const { props } = getCurrentInstance();
 
-  const registered = {};
-  const values = reactive({});
+  const registeredList = [];
+  const values = {};
+  const initialValues = {};
 
   function registerField(fieldCtx) {
-    const { uid, value, valueKey } = fieldCtx;
+    const {
+      valueKey,
+      value,
+      initialValue,
+    } = fieldCtx;
 
     const unwatchValueKey = watch(valueKey, (newValue, oldValue) => {
       delete values[oldValue];
+      delete initialValues[oldValue];
       values[newValue] = value.value;
+      initialValues[newValue] = initialValue.value;
     });
 
     const unwatchValue = watch(value, (newValue) => {
@@ -40,24 +48,47 @@ export default () => {
       }
     });
 
-    registered[uid] = {
+    const unwatchInitialValue = watch(initialValue, (newValue) => {
+      if (Object.hasOwnProperty.call(initialValues, valueKey.value)) {
+        initialValues[valueKey.value] = newValue;
+      }
+    });
+
+    registeredList.push({
       unwatchValueKey,
       unwatchValue,
+      unwatchInitialValue,
       ctx: fieldCtx,
-    };
+    });
 
     values[valueKey.value] = value.value;
+    initialValues[valueKey.value] = initialValue.value;
+
+    nextTick(() => {
+      registeredList.sort((n, o) => {
+        const node = n.ctx.el.value;
+        const otherNode = o.ctx.el.value;
+        const relativePosition = node.compareDocumentPosition(otherNode);
+        const isOtherNodeFollowing = relativePosition & Node.DOCUMENT_POSITION_FOLLOWING;
+
+        return isOtherNodeFollowing ? -1 : 1;
+      });
+    });
   }
 
   function unregisterField(fieldCtx) {
-    const { uid, valueKey } = fieldCtx;
-    const { unwatchValueKey, unwatchValue } = registered[uid];
+    const index = registeredList.findIndex((e) => e.ctx === fieldCtx);
+    const registered = registeredList[index];
 
-    unwatchValueKey();
-    unwatchValue();
+    registered.unwatchValueKey();
+    registered.unwatchValue();
+    registered.unwatchInitialValue();
+    registeredList.splice(index, 1);
 
-    delete registered[uid];
+    const { valueKey } = fieldCtx;
+
     delete values[valueKey.value];
+    delete initialValues[valueKey.value];
   }
 
   provide(FormContextKey, {
@@ -67,13 +98,12 @@ export default () => {
   });
 
   function focus() {
-    Object.values(registered)[0]?.ctx.focus();
+    registeredList[0]?.ctx.focus();
   }
 
   async function init() {
     await Promise.all(
-      Object.values(registered)
-        .map((e) => e.ctx.init()),
+      registeredList.map((e) => e.ctx.init()),
     );
   }
 
@@ -81,8 +111,7 @@ export default () => {
     shouldFocus ??= !props.noResetFocus;
 
     await Promise.all(
-      Object.values(registered)
-        .map((e) => (e.ctx.ignoreOnReset.value ? e.ctx.resetValidation() : e.ctx.reset())),
+      registeredList.map((e) => (e.ctx.ignoreOnReset.value ? e.ctx.resetValidation() : e.ctx.reset())),
     );
 
     if (shouldFocus) {
@@ -92,24 +121,22 @@ export default () => {
 
   async function resetValidation() {
     await Promise.all(
-      Object.values(registered)
-        .map((e) => e.ctx.resetValidation()),
+      registeredList.map((e) => e.ctx.resetValidation()),
     );
   }
 
   async function validate(shouldFocus, alertMessage = false) {
     shouldFocus ??= !props.noErrorFocus;
 
-    const registeredArr = Object.values(registered);
     const results = await Promise.all(
-      registeredArr.map((e) => e.ctx.validate()),
+      registeredList.map((e) => e.ctx.validate()),
     );
 
     const invalidIndex = results.findIndex((v) => !v);
     const invalid = invalidIndex > -1;
 
     if (invalid && shouldFocus) {
-      const { ctx } = registeredArr[invalidIndex];
+      const { ctx } = registeredList[invalidIndex];
       ctx.focus();
 
       if (alertMessage) {
@@ -121,7 +148,7 @@ export default () => {
   }
 
   function isModified() {
-    return Object.values(registered)
+    return registeredList
       .some((e) => e.ctx.ignoreOnModified.value === false && e.ctx.isModified());
   }
 
@@ -137,6 +164,12 @@ export default () => {
 
   function confirmIfIsModified(message) {
     return !isModified() || confirm(message || i18n.t('MSG_ALT_CHG_CNTN'));
+  }
+
+  function getInvalidFields() {
+    return registeredList
+      .filter((e) => e.ctx.invalid.value)
+      .map((e) => e.ctx);
   }
 
   onMounted(() => {
@@ -155,6 +188,7 @@ export default () => {
     isModified,
     alertIfIsNotModified,
     confirmIfIsModified,
+    getInvalidFields,
   };
 
   useObserverChild(formCtx);
