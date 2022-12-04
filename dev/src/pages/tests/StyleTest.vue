@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="false"
     class="w300 h300 bg-deep-orange-1 flex"
     style="align-items: center;"
   >

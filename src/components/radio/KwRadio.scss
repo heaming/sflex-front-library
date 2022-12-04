@@ -6,6 +6,8 @@
   $-kw-radio-label-font-size-dense: $kw-field-font-size-dense;
   $-kw-radio-line-height: $kw-field-line-height;
   $-kw-radio-line-height-dense: $kw-field-line-height-dense;
+  $-kw-radio-margin: (($kw-field-height - $kw-field-line-height) / 2);
+  $-kw-radio-margin-dense: (($kw-field-height-dense - $kw-field-line-height-dense) / 2);
 
   & .q-radio {
     &__bg { /* does not appear when using icon */
@@ -169,6 +171,15 @@
       align-self: unset;
       margin-top: auto;
       margin-bottom: auto;
+    }
+
+    &.pad {
+      align-self: unset;
+      margin: $-kw-radio-margin;
+    }
+
+    &--dense.pad {
+      margin: $-kw-radio-margin-dense;
     }
   }
 

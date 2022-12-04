@@ -1,29 +1,27 @@
 .kw-page {
   padding: 30px 40px 30px 64px;
 
-  @at-root .desktop {
-    & {
-      min-width: calc(1536px + 104px);
-    }
-
-    &--md {
-      width: calc(1536px + 104px);
-      margin: 0 auto;
-    }
-
-    &--sm {
-      min-width: calc(1212px + 104px);
-      width: calc(1212px + 104px);
-      margin: 0 auto;
-    }
-
-    &--auth {
-      margin: 0 auto;
-      padding: 40px 0;
-      min-width: 1000px;
-      width: 1000px;
-    }
-  }
+  // FIXME
+  // @at-root .desktop {
+  //   & {
+  //     min-width: calc(1536px + 104px);
+  //   }
+  //   &--md {
+  //     width: calc(1536px + 104px);
+  //     margin: 0 auto;
+  //   }
+  //   &--sm {
+  //     min-width: calc(1212px + 104px);
+  //     width: calc(1212px + 104px);
+  //     margin: 0 auto;
+  //   }
+  //   &--auth {
+  //     margin: 0 auto;
+  //     padding: 40px 0;
+  //     min-width: 1000px;
+  //     width: 1000px;
+  //   }
+  // }
 }
 
 .kw-page-header {
@@ -137,8 +135,95 @@
   }
 }
 
+.kw-page-mobile-header {
+  @include typo("title");
+
+  background-color: $bg-white;
+  width: 100%;
+  height: 55px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $line-bg;
+
+  &__back-btn {
+    margin-right: 16px;
+  }
+
+  &__hint {
+    margin-left: 8px;
+  }
+
+  &__more {
+    margin-left: 8px;
+  }
+
+  &__close {
+    margin-left: 8px;
+  }
+}
+
 body.mobile:not(.tablet) {
   .kw-page {
     padding: 0;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+    &__header {
+      flex: none;
+    }
+
+    &__content {
+      flex: auto;
+      overflow: auto;
+      position: relative;
+    }
+
+    &__content-container {
+      padding: 20px;
+    }
+
+    &__footer {
+      box-shadow: $shadow-up-1; // for DaeYoung Kim.
+      flex: none;
+    }
+
+    &__action {
+      display: flex;
+
+      > .kw-btn.q-btn {
+        @include kw-btn-height-modifier-by-font-type (60px, "body");
+
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .kw-page--sticky-layout { // 당장은 안쓴다.
+    position: relative;
+    display: block;
+    height: unset;
+
+    .kw-page__header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2001; // q-header z-index + 1
+    }
+
+    .kw-page__content {
+      overflow: unset;
+    }
+
+    .kw-page__footer {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2001; // q-header z-index + 1
+    }
   }
 }
