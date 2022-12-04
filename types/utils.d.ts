@@ -93,8 +93,10 @@ interface FileUtil {
   /**
    * xlsx, xls 파일을 서버로 부터 읽어들인다.
    * @param file
+   * @param columns 컬럼 정보를 담고 있는 배열
+   * @param header 헤더가 끝나는 행 번호, default `1`
    */
-  readExcel(file: File): Promise<Array<Record<string, any>>>;
+  readExcel(file: File, columns?: string[], header?: number): Promise<Array<Record<string, any>>>;
 }
 
 export const fileUtil: FileUtil;
