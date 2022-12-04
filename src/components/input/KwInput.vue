@@ -11,6 +11,8 @@
     :debounce="debounce"
     :disable="disable"
     :readonly="readonly"
+    :rows="rows"
+    :cols="cols"
     :autogrow="autogrow"
     :mask="mask"
     :fill-mask="fillMask"
@@ -142,6 +144,7 @@ export default {
     readonly: { type: Boolean, default: false },
     autogrow: { type: Boolean, default: false },
     rows: { type: [Number, String], default: undefined },
+    cols: { type: [Number, String], default: undefined },
     mask: { type: String, default: undefined },
     fillMask: { type: [Boolean, String], default: false },
     reverseFillMask: { type: Boolean, default: false },
