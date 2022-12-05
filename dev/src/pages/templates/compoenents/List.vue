@@ -9,6 +9,7 @@
     <guide-section
       title="playground"
       description="playground"
+      :class="{'show-guide-line': showGuideLine}"
     >
       <guide-props
         v-model="listProps"
@@ -23,7 +24,7 @@
       />
       <guide-props
         v-model="itemProps"
-        title="labelProps"
+        title="itemProps"
         :props="{
           tag: { type: String, default: 'div' },
           active: { type: Boolean, default: undefined },
@@ -67,36 +68,94 @@
       />
       <kw-separator />
 
+      <kw-toggle
+        v-model="showGuideLine"
+        :true-value="true"
+        :false-value="false"
+      />
       <kw-list
         ref="list"
         v-bind="listProps"
       >
+        <kw-item-label header>
+          header-label
+        </kw-item-label>
         <kw-item
-          v-bind="itemProps"
+          tag="label"
         >
-          <kw-item-label
-            v-bind="labelProps"
+          <kw-item-section
+            side
+            top
           >
-            kw-item-label
-          </kw-item-label>
+            <kw-checkbox
+              v-model="yn"
+              class="h40"
+            />
+          </kw-item-section>
           <kw-item-section
             v-bind="sectionProps"
           >
-            kw-item-section
+            <kw-item-label overline>
+              overline
+            </kw-item-label>
+            <kw-item-label
+              lines="1"
+            >
+              {{ lorem }}
+            </kw-item-label>
+            <kw-item-label
+              lines="2"
+            >
+              {{ lorem }}
+            </kw-item-label>
+            <kw-item-label caption>
+              caption
+            </kw-item-label>
           </kw-item-section>
         </kw-item>
         <kw-item
           v-bind="itemProps"
         >
-          <kw-item-label
-            v-bind="labelProps"
+          <kw-item-section
+            thumbnail
           >
-            kw-item-label
-          </kw-item-label>
+            <img
+              src="~~@assets/images/logo_kss.svg"
+              alt="KS`S"
+            >
+            thumbnail
+          </kw-item-section>
+          <kw-item-section
+            avatar
+          >
+            avatar
+          </kw-item-section>
+
+          <kw-item-section
+            side
+          >
+            side
+          </kw-item-section>
+          <kw-item-section
+            top
+          >
+            top
+          </kw-item-section>
+          <kw-item-section>
+            default
+          </kw-item-section>
+        </kw-item>
+        <kw-item
+          v-bind="itemProps"
+        >
           <kw-item-section
             v-bind="sectionProps"
           >
-            kw-item-section
+            <kw-item-label
+              v-bind="labelProps"
+            >
+              kw-item-label
+            </kw-item-label>
           </kw-item-section>
         </kw-item>
         <kw-expansion-item>
@@ -115,52 +174,55 @@
 <script setup>
 const list = ref();
 const sectionProps = ref(null);
+const showGuideLine = ref(null);
 const itemProps = ref(null);
 const labelProps = ref(null);
 const listProps = ref(null);
+const yn = ref('Y');
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 </script>
 
 <style scoped lang="scss">
-.kw-list {
-  position: relative;
+.show-guide-line {
+  .kw-list {
+    position: relative;
+  }
+
+  .kw-list::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    border: 1px dashed #2f8af3;
+  }
+
+  .kw-item::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    border: 1px dashed #6cbf67;
+  }
+
+  .kw-item-section {
+    position: relative;
+  }
+
+  .kw-item-section::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    border: 1px dashed #ff5353;
+  }
+
+  .kw-item-label {
+    position: relative;
+  }
+
+  .kw-item-label::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    border: 1px dashed #53ffff;
+  }
 }
 
-.kw-list::before {
-  position: absolute;
-  content: "";
-  inset: 0;
-  border: 1px dashed #2f8af3;
-}
-
-.kw-item::before {
-  position: absolute;
-  content: "";
-  inset: 0;
-  border: 1px dashed #6cbf67;
-  background-color: rgb(144 211 244 / 5%);
-}
-
-.kw-item-section {
-  position: relative;
-}
-
-.kw-item-section::before {
-  position: absolute;
-  content: "";
-  inset: 0;
-  border: 1px dashed #ff5353;
-  background-color: rgb(244 211 100 / 10%);
-}
-
-.kw-item-label {
-  position: relative;
-}
-
-.kw-item-label::before {
-  position: absolute;
-  content: "";
-  inset: 0;
-  border: 1px dashed #53ffff;
-  background-color: rgb(244 211 100 / 10%);
-}
 </style>
