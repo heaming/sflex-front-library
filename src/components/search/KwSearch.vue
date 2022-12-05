@@ -108,10 +108,34 @@ export default {
 
   setup(props, { emit }) {
     const formCtx = useForm();
+    const formExpandableCtx = useFormExpandable();
 
     const {
       getRegisteredChild,
     } = inject(ObserverContextKey, {});
+
+    const pageCtx = inject(PageContextKey, null);
+    const hasReadPermission = () => env.TEST === true || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
+
+    async function validate() {
+      await formCtx.validate(false, false);
+
+      const {
+        isExpandable,
+        isExpanded,
+        toggleExpand,
+      } = formExpandableCtx;
+
+      const shouldFocus = !props.noErrorFocus;
+      const shouldExpand = isExpandable.value && !isExpanded.value
+        && formCtx.getInvalidFields().some((ctx) => ctx.el.value.clientHeight === 0);
+
+      if (shouldExpand) {
+        toggleExpand(true);
+      }
+
+      return await formCtx.validate(shouldFocus, true);
+    }
 
     async function confirmIfTargetsModified() {
       const targets = props.modifiedTargets.map(getRegisteredChild);
@@ -120,15 +144,9 @@ export default {
       return !isModified || await confirm(i18n.t('MSG_ALT_CHG_CNTN'));
     }
 
-    const pageCtx = inject(PageContextKey, null);
-    const hasReadPermission = () => env.TEST === true || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
-
     const onSubmit = debounce(async () => {
       if (hasReadPermission()) {
-        const shouldFocus = !props.noErrorFocus;
-
-        if (await formCtx.validate(shouldFocus, true)
-          && await confirmIfTargetsModified()) {
+        if (await validate() && await confirmIfTargetsModified()) {
           emit('search', formCtx.values);
         }
       }
@@ -166,8 +184,9 @@ export default {
 
     return {
       ...useInheritAttrs(),
-      ...useFormExpandable(),
       ...formCtx,
+      ...formExpandableCtx,
+      validate,
       onSubmit,
       onReset,
     };

@@ -17,7 +17,9 @@ export default () => {
     unregisterExpandableChild,
   } = inject(FormExpandableContextKey, {});
 
-  registerExpandableChild?.(vm);
+  onMounted(() => {
+    registerExpandableChild?.(vm);
+  });
 
   onBeforeUnmount(() => {
     unregisterExpandableChild?.(vm);

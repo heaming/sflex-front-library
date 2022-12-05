@@ -1,6 +1,6 @@
 .kw-toggle,
 %kw-toggle {
-  // notice! we will break em based styling. so, you can use size props.
+  // notice! we will break em based styling. so, you can not use size props.
   $-kw-toggle-height: $kw-field-line-height;
   $-kw-toggle-track-height: 17px; // $-kw-toggle-height * 0.7?
   $-kw-toggle-track-width: 30px; // $-kw-toggle-height * 1.2?
@@ -11,6 +11,16 @@
   $-kw-toggle-label-color: $black3;
   $-kw-toggle-label-font-size: $kw-field-font-size-dense;
   $-kw-toggle-label-line-height: $kw-field-line-height-dense;
+  $-kw-toggle-margin: (($kw-field-height - $-kw-toggle-height) / 2);
+  $-kw-toggle-height-dense: $kw-field-line-height-dense;
+  $-kw-toggle-track-height-dense: 14px; // $-kw-toggle-height * 0.7?
+  $-kw-toggle-track-width-dense: 24px; // $-kw-toggle-height * 1.2?
+  $-kw-toggle-thumb-size-dense: 12px;
+  $-kw-toggle-thumb-padding-dense: ($-kw-toggle-track-height-dense - $-kw-toggle-thumb-size-dense) / 2;
+  $-kw-toggle-thumb-slide-length-dense: $-kw-toggle-track-width-dense - $-kw-toggle-track-height-dense;
+  $-kw-toggle-label-font-size-dense: $kw-field-font-size-dense;
+  $-kw-toggle-label-line-height-dense: $kw-field-line-height-dense;
+  $-kw-toggle-margin-dense: (($kw-field-height-dense - $-kw-toggle-height-dense) / 2);
 
   & .q-toggle {
     &__track {
@@ -107,15 +117,6 @@
     }
 
     &--dense {
-      $-kw-toggle-height-dense: $kw-field-line-height-dense;
-      $-kw-toggle-track-height-dense: 14px; // $-kw-toggle-height * 0.7?
-      $-kw-toggle-track-width-dense: 24px; // $-kw-toggle-height * 1.2?
-      $-kw-toggle-thumb-size-dense: 12px;
-      $-kw-toggle-thumb-padding-dense: ($-kw-toggle-track-height-dense - $-kw-toggle-thumb-size-dense) / 2;
-      $-kw-toggle-thumb-slide-length-dense: $-kw-toggle-track-width-dense - $-kw-toggle-track-height-dense;
-      $-kw-toggle-label-font-size-dense: $kw-field-font-size-dense;
-      $-kw-toggle-label-line-height-dense: $kw-field-line-height-dense;
-
       .q-toggle__thumb {
         top: $-kw-toggle-thumb-padding-dense;
         left: $-kw-toggle-thumb-padding-dense;
@@ -168,6 +169,15 @@
       align-self: unset;
       margin-top: auto;
       margin-bottom: auto;
+    }
+
+    &.pad {
+      align-self: unset;
+      margin: $-kw-toggle-margin;
+    }
+
+    &--dense.pad {
+      margin: $-kw-toggle-margin-dense;
     }
   }
 

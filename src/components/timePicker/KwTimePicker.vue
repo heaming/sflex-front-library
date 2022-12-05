@@ -5,7 +5,7 @@
     v-bind="fieldStyleProps"
     class="kw-field kw-time-picker"
     :class="timePickerClass"
-    :label="undefined"
+    :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :readonly="readonly"
     :disable="disable"
@@ -58,6 +58,14 @@
         </q-virtual-scroll>
       </div>
     </q-menu>
+
+    <!-- label -->
+    <template
+      v-if="$g.platform.is.mobile && (label || $slots.label)"
+      #label
+    >
+      {{ label ?? label }}
+    </template>
 
     <!-- error -->
     <template

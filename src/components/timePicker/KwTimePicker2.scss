@@ -1,15 +1,4 @@
-.kw-date {
-  padding: 16px 16px 21px;
-  box-sizing: content-box;
-}
-
-.kw-date-picker.kw-field.q-field {
-  width: 140px;
-
-  @at-root .kw-form-item__field & {
-    max-width: 250px;
-  }
-
+.kw-time-picker2.kw-field.q-field {
   .q-field__control {
     cursor: text;
   }
@@ -35,6 +24,11 @@
     cursor: pointer;
   }
 
+  .q-field__prefix {
+    margin-right: 8px;
+    color: $black1;
+  }
+
   &--dense {
     .q-field__append > div {
       padding-left: 6px;
@@ -50,34 +44,18 @@
   }
 }
 
-.kw-date-picker.q-menu {
+.kw-time-picker2.q-menu {
   border: 1px solid $black1;
   border-radius: 0;
   box-shadow: none;
-}
 
-.kw-date-range-picker.kw-field-wrap {
-  .kw-date-picker + span {
-    margin: 0;
-    padding: 0 4px !important;
-    color: $black3;
-  }
-}
+  .time-scroll-picker {
+    display: flex;
+    width: 100%;
+    height: 154px;
 
-body.mobile {
-  .kw-date-picker {
-    // tablet 용
-    width: 250px;
-  }
-
-  // // tablet 용
-
-  &:not(.tablet) {
-    // mobile 용
-    .kw-date-picker {
-      width: auto;
+    .kw-scroll-picker {
+      height: 100%;
     }
-
-    // // mobile 용
   }
 }

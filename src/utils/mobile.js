@@ -9,15 +9,19 @@ const NativePlugin = {
   Bluetooth: 'BluetoothPlugin',
 };
 
-function callMethod(plugin, methodId, eventId, data) {
-  const pluginCallMethod = window[plugin]?.callMethod;
+function callMethod(pluginName, methodId, eventId, data) {
+  const plugin = window[pluginName];
 
-  if (!isFunction(pluginCallMethod)) {
-    throw new Error(`can't call method of ${plugin}.`);
+  if (!isFunction(plugin?.callMethod)) {
+    throw new Error(`failed to invoke ${pluginName}.${methodId}, ${pluginName} is not injected.`);
   }
 
-  pluginCallMethod(
-    JSON.stringify({ methodId, eventId, data }),
+  plugin.callMethod(
+    JSON.stringify({
+      MethodID: methodId,
+      Callback: eventId,
+      Data: data,
+    }),
   );
 }
 
