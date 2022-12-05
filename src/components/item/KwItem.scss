@@ -1,14 +1,95 @@
-// kw-expansion-item 감싸는 클래스
-.kw-item:has(.kw-expansion-item) {
-  flex-wrap: wrap;
-  padding: 0;
-  border-bottom: 1px solid $line-line;
+%kw-item-dense {
+  @include typo("dense");
 
-  &:last-child {
-    border-bottom: none;
+  min-height: $kw-field-height-dense;
+  padding: 0;
+
+  &.kw-item--padding {
+    padding: $kw-item-padding;
+  }
+}
+
+%kw-item-padding {
+  padding: $kw-item-padding;
+}
+
+.kw-item {
+  &.q-item {
+    min-height: $kw-field-height;
+    padding: 0;
+
+    > .q-item__section--thumbnail:first-child,
+    > .q-focus-helper + .q-item__section--thumbnail {
+      margin-left: 0;
+    }
+
+    > .q-item__section--thumbnail:last-of-type {
+      margin-right: 0;
+    }
+
+    &--dense {
+      @extend %kw-item-dense;
+    }
   }
 
-  .kw-expansion-item {
-    width: 100%;
+  & .q-item {
+    // todo
+  }
+
+  &--padding {
+    @extend %kw-item-padding;
+  }
+
+  // section
+  &__section {
+    &.q-item__section {
+      &--main {
+        & + & {
+          margin-left: 0;
+        }
+
+        &.q-item__section--thumbnail {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  // END section
+
+  // label
+  &__label {
+    &.q-item__label {
+      line-height: 1.5em !important;
+
+      & + .q-item__label {
+        margin-top: 4px;
+      }
+    }
+
+    &--padding,
+    %kw-item-padding {
+      padding: 0 16px;
+    }
+  }
+
+  // END label
+}
+
+// only mobile
+body.mobile:not(.tablet) {
+  .kw-item:has(.kw-expansion-item) {
+    flex-wrap: wrap;
+    padding: 0;
+    border-bottom: 1px solid $line-line;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .kw-expansion-item {
+      width: 100%;
+    }
   }
 }

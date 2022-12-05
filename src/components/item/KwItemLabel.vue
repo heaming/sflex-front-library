@@ -1,7 +1,9 @@
 <template>
   <q-item-label
     v-bind="styleClassAttrs"
-    class="kw-item-label"
+    class="kw-item__label"
+    :class="fontClass"
+    :style="fontStyle"
     :lines="lines"
     :overline="overline"
     :caption="caption"
@@ -13,12 +15,14 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useFont, { useFontProps } from '../../composables/private/useFont';
 
 export default {
   name: 'KwItemLabel',
   inheritAttrs: false,
   props: {
     // customize props
+    ...useFontProps,
 
     // fall through props
     lines: { type: [Number, String], default: undefined },
@@ -28,9 +32,12 @@ export default {
   },
   setup() {
     const { styleClassAttrs } = useInheritAttrs();
+    const { fontClass, fontStyle } = useFont(true);
 
     return {
       styleClassAttrs,
+      fontClass,
+      fontStyle,
     };
   },
 };

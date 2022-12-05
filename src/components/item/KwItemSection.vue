@@ -1,7 +1,7 @@
 <template>
   <q-item-section
     v-bind="styleClassAttrs"
-    class="kw-item-section"
+    class="kw-item__section"
     :avatar="avatar"
     :thumbnail="thumbnail"
     :side="side"
