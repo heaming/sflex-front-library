@@ -1,7 +1,8 @@
 <template>
   <q-item
     v-bind="styleClassAttrs"
-    class="kw-item"
+    :class="itemClass"
+    :style="itemStyle"
     :tag="tag"
     :active="active"
     :clickable="clickable"
@@ -33,6 +34,7 @@ export default {
   inheritAttrs: false,
   props: {
     // customize props
+    padding: { type: [Boolean, String], default: false },
 
     // fall through props
     tag: { type: String, default: 'div' },
@@ -56,11 +58,27 @@ export default {
   emits: [
     'click',
   ],
-  setup() {
+  setup(props) {
     const { styleClassAttrs } = useInheritAttrs();
+
+    const itemClass = computed(() => {
+      const classes = {
+        'kw-item': true,
+      };
+      if (props.padding === true) { classes['kw-item--padding'] = true; }
+      return classes;
+    });
+
+    const itemStyle = computed(() => {
+      const styles = {};
+      if (typeof props.padding === 'string') { styles.padding = props.padding; }
+      return styles;
+    });
 
     return {
       styleClassAttrs,
+      itemStyle,
+      itemClass,
     };
   },
 };

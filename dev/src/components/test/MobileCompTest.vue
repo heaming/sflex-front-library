@@ -1,10 +1,14 @@
 <template>
   <div>
     <kw-btn
-      filled
       primary
-      label="OPEN"
+      label="Window1"
       @click="showDummyWindow = !showDummyWindow"
+    />
+    <kw-btn
+      primary
+      label="Window2"
+      @click="showDummyWindow2 = !showDummyWindow2"
     />
   </div>
   <div
@@ -84,6 +88,10 @@
       </template>
 
       <h1>content === default</h1>
+      <kw-btn
+        label="Close Window1"
+        @click="showDummyWindow = !showDummyWindow"
+      />
       <ul class="slot-handler">
         <li>
           <kw-toggle
@@ -425,14 +433,163 @@
       </template>
     </kw-page>
   </div>
+  <div
+    v-if="showDummyWindow2"
+    class="maybe-window"
+  >
+    <kw-page>
+      <template #header>
+        <kw-page-mobile-header
+          title="주소확인"
+          show-close
+          @close="showDummyWindow2 = !showDummyWindow2"
+        >
+          <template #hint>
+            test
+          </template>
+
+          <template #more>
+            <kw-btn label="test" />
+            <kw-btn label="test" />
+            <kw-btn label="test" />
+            <kw-btn label="test" />
+          </template>
+        </kw-page-mobile-header>
+      </template>
+
+      <kw-list
+        padding
+        separator
+      >
+        <kw-item
+          tag="label"
+        >
+          <kw-item-section
+            side
+            top
+          >
+            <kw-checkbox
+              v-model="arrModel"
+              val="1"
+            />
+          </kw-item-section>
+          <kw-item-section>
+            <kw-item-label>
+              도로명 주소
+            </kw-item-label>
+            <kw-item-label
+              font="caption"
+              class="text-primary"
+            >
+              08050
+            </kw-item-label>
+            <kw-item-label>
+              서울특별시 양천구 신정로 11길 63
+            </kw-item-label>
+            <kw-item-label
+              font="caption"
+              lines="2"
+            >
+              11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)
+              11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)
+              11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)
+              11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)
+            </kw-item-label>
+          </kw-item-section>
+        </kw-item>
+        <kw-item
+          tag="label"
+        >
+          <kw-item-section
+            side
+            top
+          >
+            <kw-checkbox
+              v-model="arrModel"
+              val="2"
+            />
+          </kw-item-section>
+          <kw-item-section>
+            <kw-item-label>
+              도로명 주소
+            </kw-item-label>
+            <kw-item-label
+              font="caption"
+              class="text-primary"
+            >
+              08050
+            </kw-item-label>
+            <kw-item-label>
+              서울특별시 양천구 신정로 11길 63
+            </kw-item-label>
+            <kw-item-label
+              font="caption"
+              lines="2"
+            >
+              11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)
+            </kw-item-label>
+          </kw-item-section>
+        </kw-item>
+        <kw-item
+          tag="label"
+        >
+          <kw-item-section
+            side
+            top
+          >
+            <kw-checkbox
+              v-model="arrModel"
+              val="3"
+            />
+          </kw-item-section>
+          <kw-item-section>
+            <kw-item-label>
+              도로명 주소
+            </kw-item-label>
+            <kw-item-label
+              font="caption"
+              class="text-primary"
+            >
+              08050
+            </kw-item-label>
+            <kw-item-label>
+              서울특별시 양천구 신정로 11길 63
+            </kw-item-label>
+            <kw-item-label
+              font="caption"
+              lines="2"
+            >
+              11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)
+            </kw-item-label>
+          </kw-item-section>
+        </kw-item>
+      </kw-list>
+
+      <template #action>
+        <kw-btn
+          filled
+          negative
+          label="이전"
+        />
+        <kw-btn
+          filled
+          primary
+          disable
+          label="확인"
+        />
+      </template>
+    </kw-page>
+  </div>
 </template>
 
 <script setup>
 const strModel = ref('');
 const ynModel = ref('N');
+const arrModel = ref([]);
 const selectModel = ref('');
 const optionsModel = ['a', 'b'];
 const showDummyWindow = ref(true);
+const showDummyWindow2 = ref(false);
 const showSubHeader = ref(false);
 const showContentTop = ref(false);
 const showContentBottom = ref(false);
