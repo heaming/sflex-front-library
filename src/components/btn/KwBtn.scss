@@ -246,18 +246,54 @@ body.desktop {
 
 @include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28)); // notice! this is exception.
 
-body.mobile {
+body.mobile:not(.tablet) {
   .kw-btn {
     // mobile 용
+    $-mobile-kw-btn-padding: 10px 12px 10px 12px;
+    $-mobile-kw-btn-line-height: 20px;
+    $-mobile-kw-btn-font-size: 14px;
+    $-mobile-kw-btn-font-weight: 400;
+    $-mobile-kw-btn-padding-dense: 5px 12px 5px 12px;
+    $-mobile-kw-btn-line-height-dense: 20px;
+    $-mobile-kw-btn-font-size-dense: 12px;
+    $-mobile-kw-btn-font-weight-dense: 400;
+
+    &.q-btn {
+      @include kw-btn-height-modifier($-mobile-kw-btn-padding, $-mobile-kw-btn-line-height, $-mobile-kw-btn-font-size, $-mobile-kw-btn-font-weight);
+
+      &--dense {
+        @include kw-btn-height-modifier($-mobile-kw-btn-padding-dense, $-mobile-kw-btn-line-height-dense, $-mobile-kw-btn-font-size-dense, $-mobile-kw-btn-font-weight-dense);
+      }
+
+      // &--icon-only {
+      //   &.kw-btn--tmap-only {
+
+      //   }
+      // }
+    }
+
+    &--tmap-icon {
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+
+      .q-btn__content {
+        padding-left: 20px;
+        background: url(~@assets/images/logo_tmap@2x.png) no-repeat 0 center;
+        background-size: 16px auto;
+      }
+
+      &.kw-btn--border-color-black-btn-line::after {
+        border-color: #ccc;
+      }
+
+      &.disabled {
+        .q-btn__content {
+          filter: grayscale(100%);
+          mix-blend-mode: multiply;
+        }
+      }
+    }
 
     //// mobile 용
-  }
-
-  &:not(.tablet) {
-    .kw-btn {
-      // tablet 용
-
-      //// tablet 용
-    }
   }
 }

@@ -1,11 +1,10 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Button NEW Version
+      [Mobile] Button
     </h2>
     <p class="kw-guide-description">
-      Define the basic height and color.<br>
-      For other special buttons, refer to those included in the corresponding component.
+      Button's Examples in Mobile
     </p>
     <guide-history-view
       :items="guideHistory"
@@ -42,7 +41,7 @@
             </td>
             <td style="width: 33.33%;">
               height: 40px<br>
-              height: 32px
+              <em class="text-red">height: 30px</em>
             </td>
           </tr>
           <tr>
@@ -135,13 +134,15 @@
               filled <br>
               outlined <br>
               underline <br>
-              borderless
+              borderless <br>
+              round
             </td>
             <td style="width: 33.33%;">
               Add prop when only background-color(no border)<br>
               Add prop when need border <br>
               Add prop when need underline <br>
-              Add prop when no border(no background-color)
+              Add prop when no border(no background-color) <br>
+              Add prop when need circle shape button
             </td>
           </tr>
         </tbody>
@@ -149,13 +150,61 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="default"
+        class="kw-guide-title"
+      >
+        Width / Height
+      </h3>
+      <p class="kw-guide-description">
+        please use helper class of height
+      </p>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>
+              The Element(tag's name)
+            </th>
+            <th>
+              Attr or Class
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              kw-btn
+            </td>
+            <td>
+              w1, w2, w3......w1000
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-btn
+            </td>
+            <td>
+              h1, h2, h3......h1000
+            </td>
+          </tr>
+          <tr>
+            <td>
+              kw-btn
+            </td>
+            <td>
+              full-width
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="Default"
         class="kw-guide-title"
       >
         Default
       </h3>
       <p class="kw-guide-description">
-        height 40px / padding 8px 20px
+        height 40px / padding 10px 12px
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -178,6 +227,7 @@
             secondary
             disable
             label="확인"
+            class="mr8"
           />
         </div>
         <guide-code-view
@@ -195,7 +245,7 @@
       </h3>
       <p class="kw-guide-description">
         Add <em>dense</em> prop <br>
-        height 32px / padding 6px 8px
+        height 30px / padding 5px 12px
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -222,6 +272,7 @@
             dense
             disable
             label="확인"
+            class="mr8"
           />
         </div>
         <guide-code-view
@@ -322,14 +373,14 @@
             class="mr8"
           />
           <kw-btn
-            negative
             dense
+            negative
             label="취소"
             class="mr8"
           />
           <kw-btn
-            negative
             dense
+            negative
             disable
             label="취소"
           />
@@ -348,14 +399,14 @@
             class="mr8"
           />
           <kw-btn
-            secondary
             dense
+            secondary
             label="초기화"
             class="mr8"
           />
           <kw-btn
-            secondary
             dense
+            secondary
             disable
             label="초기화"
           />
@@ -371,61 +422,106 @@
         id="table"
         class="kw-guide-title"
       >
-        table button
+        custom button
       </h3>
       <p class="kw-guide-description">
-        It used when related with grid and table component <br>
+        if you need to another style button please use prop of color, border-color and text-color,
+        also you can control width and height by helper class
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <h4 class="mb20">
-            Located in table top and bottom
-          </h4>
           <kw-btn
-            grid-action
-            label="행추가"
+            dense
+            secondary
+            border-color="line-stroke"
+            label="TEXT"
             class="mr8"
           />
           <kw-btn
-            grid-action
-            label="저장"
-            class="mr8"
+            dense
+            secondary
+            label="TEXT"
+            class="w120 mr8"
           />
           <kw-btn
-            icon-right="arrow_down"
-            grid-action
-            label="저장"
+            negative
+            label="TEXT"
+            class="w180"
+          />
+          <p class="mt20">
+            dense full width
+          </p>
+          <kw-btn
+            dense
+            secondary
+            border-color="line-stroke"
+            label="TEXT"
+            class="full-width mt10"
+          />
+          <p class="mt10">
+            height:37px and full width
+          </p>
+          <kw-btn
+            dense
+            secondary
+            border-color="line-stroke"
+            label="TEXT"
+            class="full-width mt10 h37"
           />
         </div>
         <guide-code-view
-          :code-value="tableBtn"
+          :code-value="customBtn"
           lang="vue"
         />
-
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="table"
+        class="kw-guide-title"
+      >
+        ETC
+      </h3>
+      <p class="kw-guide-description">
+        anchor type and icon only type
+      </p>
+      <q-card>
         <div class="kw-guide-example">
-          <h4 class="mb20">
-            Located in table inside(For develop)
-          </h4>
           <kw-btn
-            outlined
-            border-color="primary"
-            text-color="primary"
             dense
-            label="더보기"
-            class="kw-btn--color-table-blue mr8"
+            underline
+            text-color="black3"
+            icon-right="plus"
+            label="TEXT"
+            class="mr8"
           />
           <kw-btn
-            outlined
-            border-color="primary"
+            dense
+            borderless
             text-color="primary"
+            icon-right="arrow_right"
+            label="TEXT"
+            class="mr8"
+          />
+          <kw-btn
             dense
             disable
-            label="더보기"
-            class="kw-btn--color-table-blue"
+            label="TMAP 최적경로"
+            class="mr8 kw-btn--tmap-icon"
+          />
+          <kw-btn
+            dense
+            label="TMAP 최적경로"
+            class="mr8 kw-btn--tmap-icon"
+          />
+          <kw-btn
+            round
+            icon="call_24"
+            style="font-size: 24px;"
           />
         </div>
         <guide-code-view
-          :code-value="tableInside"
+          :code-value="etcBtn"
           lang="vue"
         />
       </q-card>
@@ -492,59 +588,11 @@
       >
         Toggle(switch)
       </h3>
-      <p class="kw-guide-description">
-        For kw-toggle's label is located right side,Add <b>left-label="false"</b>
-      </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-toggle
             v-model="ynModel"
-            label="가구 내 학습지 모두 보기"
-            left-label="false"
           />
-          <kw-toggle
-            v-model="ynModel"
-            label="가구 내 학습지 모두 보기"
-          />
-          <!-- 추후 필요시 option group 추가  -->
-          <!-- <kw-option-group
-            :model-value="[]"
-            name="toggleOptionGroup"
-            rules="required"
-            type="toggle"
-            :options="['A', 'B', 'C', 'D']"
-            :left-label="false"
-          /> -->
-          <!-- in form  -->
-          <!-- <kw-form>
-            <kw-form-item label="Toggle (OptionGroup)">
-              <kw-field
-                :model-value="'Y'"
-                rules="required"
-              >
-                <template #default="{ field }">
-                  <kw-toggle
-                    v-bind="field"
-                    label="searchform"
-                    left-label="false"
-                  />
-                </template>
-              </kw-field>
-            </kw-form-item>
-            <kw-form-item
-              label="Toggle (OptionGroup)"
-              no-label
-            >
-              <kw-option-group
-                :model-value="[]"
-                name="toggleOptionGroup"
-                rules="required"
-                type="toggle"
-                :options="['A', 'B', 'C', 'D']"
-                :left-label="false"
-              />
-            </kw-form-item>
-          </kw-form> -->
         </div>
         <guide-code-view
           :code-value="[toggleSwitch,toggleSwitchScript]"
@@ -684,28 +732,26 @@ const strModel3 = ref('A');
 const ynModel = ref('N');
 
 const defaultCode = `
-  <kw-btn
-    primary
-    label="프로모션등록"
-    class="mr8"
-  />
-  <kw-btn
-    negative
-    label="취소"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    label="확인"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    disable
-    label="확인"
-  />
-  <!-- mr8: gutter margin-left:8px -->
-  `;
+<kw-btn
+  primary
+  label="프로모션등록"
+  class="mr8"
+/>
+<kw-btn
+  negative
+  label="취소"
+  class="mr8"
+/>
+<kw-btn
+  secondary
+  label="확인"
+  class="mr8"
+/>
+<kw-btn
+  secondary
+  disable
+  la
+`;
 
 const denseCode = `
   <kw-btn
@@ -823,42 +869,23 @@ const secondary = `
   />
   `;
 
-const tableBtn = `
-  <kw-btn
-    grid-action
-    label="행추가"
-    class="mr8"
-  />
-  <kw-btn
-    grid-action
-    label="저장"
-    class="mr8"
-  />
-  <kw-btn
-    icon-right="arrow_down
-    grid-action
-    label="저장"
-  />
-  `;
-const tableInside = `
-  <kw-btn
-    outlined
-    border-color="primary"
-    text-color="primary"
-    dense
-    label="더보기"
-    class="kw-btn--color-table-blue mr8"
-  />
-  <kw-btn
-    outlined
-    border-color="primary"
-    text-color="primary"
-    dense
-    disable
-    label="더보기"
-    class="kw-btn--color-table-blue"
-  />
-  `;
+const customBtn = `
+<kw-btn
+  border-color="line-stroke"
+  secondary
+  dense
+  label="TEXT"
+  class="mr8"
+/>
+
+<kw-btn
+  border-color="line-stroke"
+  secondary
+  dense
+  label="TEXT"
+  class="w120"
+/>
+`;
 
 const toggleSwitch = `
 <kw-toggle
@@ -921,36 +948,8 @@ const dropdownBtn = `
 // History
 const guideHistory = [
   {
-    timestamp: '2022.10.14',
+    timestamp: '2022.11.25',
     text: 'modified button dropdown case',
-  },
-  {
-    timestamp: '2022.10.12',
-    text: 'add button dropdown case',
-  },
-  {
-    timestamp: '2022.10.06',
-    text: 'edit icon name in code',
-  },
-  {
-    timestamp: '2022.09.27',
-    text: 'Add toggle(switch)',
-  },
-  {
-    timestamp: '2022.09.26',
-    text: 'Add toggle(radio)',
-  },
-  {
-    timestamp: '2022.09.21',
-    text: 'Add content of padding prop guide',
-  },
-  {
-    timestamp: '2022.09.16',
-    text: 'revised wrong prop name',
-  },
-  {
-    timestamp: '2022.09.15',
-    text: 'revised button component guide',
   },
 ];
 </script>

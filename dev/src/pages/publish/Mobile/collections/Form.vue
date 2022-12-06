@@ -145,11 +145,11 @@
         please add <em>&lt; zwcm-post-code /&gt;</em> in kw-form-item tag
         <q-card>
           <div class="kw-guide-example">
-            <!-- <img
-              src="../../../../../assets/images/example_address.png"
+            <img
+              src="~~dev/assets/images/example_mobile_address.png"
               alt="address example"
               style="width: 65%;"
-            > -->
+            >
           </div>
 
           <guide-code-view
