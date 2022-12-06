@@ -51,8 +51,8 @@ export default {
     exact: { type: Boolean, default: undefined },
     href: { type: String, default: undefined },
     target: { type: String, default: undefined },
-    activeClass: { type: String, default: 'q-router-link--active' },
-    exactActiveClass: { type: String, default: 'q-router-link--exact-active' },
+    activeClass: { type: String, default: 'kw-item--active' },
+    exactActiveClass: { type: String, default: 'kw-item--exact-active' },
     disable: { type: Boolean, default: undefined },
   },
   emits: [

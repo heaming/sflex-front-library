@@ -27,6 +27,23 @@
 
   // END quasar overrides
 
+  &--selectable {
+    &.q-list {
+      & .kw-list {
+        &__total-item.kw-item {
+          min-height: unset;
+          padding-top: 0;
+          padding-bottom: 8px;
+
+          &:not(:last-child) {
+            margin-bottom: -1px;
+            border-bottom: 1px solid $black1;
+          }
+        }
+      }
+    }
+  }
+
   // START kw-search > 체크박스 목록
   &.checkbox-group {
     $checkboxes: ".checkbox-group";
