@@ -124,6 +124,7 @@ export function createCellIndexByDataColumn(view, itemIndex, dataColumn) {
   };
 }
 
+const editRendererTypes = ['check', 'radio'];
 export function isCellEditable(view, column, index) {
   const { columnEditableFirst, editable } = view.editOptions;
 
@@ -132,7 +133,7 @@ export function isCellEditable(view, column, index) {
     return false;
   }
 
-  if (column.renderer?.type === 'check') {
+  if (editRendererTypes.includes(column.renderer?.type)) {
     return column.renderer.editable !== false
       && view.onCellEditable(view, index) !== false;
   }

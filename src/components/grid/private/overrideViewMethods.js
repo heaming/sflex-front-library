@@ -110,8 +110,16 @@ function setColumnStyleName(column, { dataType }) {
 }
 
 function setColumnRenderer(column, { dataType }) {
+  if (typeof column.renderer === 'string') {
+    column.renderer = {
+      type: column.renderer,
+    };
+  }
+
   defaultsDeep(column, {
-    renderer: { showTooltip: true },
+    renderer: {
+      showTooltip: true,
+    },
   });
 
   switch (column.renderer?.type) {
@@ -149,6 +157,12 @@ function setColumnRenderer(column, { dataType }) {
         },
       });
 
+      break;
+    }
+    case 'radio': {
+      defaultsDeep(column, {
+        editable: false,
+      });
       break;
     }
     case 'button': {
