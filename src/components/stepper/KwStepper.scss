@@ -220,11 +220,11 @@
       .q-stepper__header {
         .q-stepper__tab {
           &::after {
-            display: none;
+            margin: 0; // 화살표 없으면 display: none;
           }
 
           .q-stepper__dot {
-            margin-right: 8px;
+            margin-right: 0; // 화살표 없으면 margin-right: 8px
 
             span {
               font-size: 13px;
