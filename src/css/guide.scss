@@ -281,9 +281,12 @@ body.mobile {
         margin: 0 20px;
       }
     }
+  }
 
-    .q-card {
-      padding: 10px 20px 20px;
+  .kw-guide {
+    .q-card:not(.kw-card) {
+      padding: 0;
+      border-radius: 0;
     }
   }
 }

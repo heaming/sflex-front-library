@@ -146,6 +146,13 @@
   align-items: center;
   border-bottom: 1px solid $line-bg;
 
+  .kw-btn.q-btn {
+    @at-root body.mobile:not(.tablet) & {
+      font-size: 24px;
+      padding: 0;
+    }
+  }
+
   &__back-btn {
     margin-right: 16px;
   }
