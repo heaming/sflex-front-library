@@ -1,0 +1,75 @@
+%kw-item-dense {
+  @include typo("dense");
+
+  min-height: $kw-field-height-dense;
+}
+
+%kw-item-padding {
+  padding: $kw-item-padding;
+}
+
+.kw-item {
+  &.q-item {
+    min-height: $kw-field-height;
+    padding: 0;
+
+    > .q-item__section--thumbnail:first-child,
+    > .q-focus-helper + .q-item__section--thumbnail {
+      margin-left: 0;
+    }
+
+    > .q-item__section--thumbnail:last-of-type {
+      margin-right: 0;
+    }
+
+    &--dense {
+      @extend %kw-item-dense;
+    }
+  }
+
+  & .q-item {
+    // todo
+  }
+
+  &.q-item.kw-item--padding {
+    // default Specificity is 0-2-0 for override quasar style.
+    // so, it require minimum specificity 0-3-0
+    @extend %kw-item-padding;
+  }
+
+  // section
+  &__section {
+    &.q-item__section {
+      &--main {
+        & + & {
+          margin-left: 0;
+        }
+
+        &.q-item__section--thumbnail {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  // END section
+
+  // label
+  &__label {
+    &.q-item__label {
+      line-height: 1.5em !important;
+
+      & + .q-item__label {
+        margin-top: 4px;
+      }
+    }
+
+    &--padding,
+    %kw-item-padding {
+      padding: 0 16px;
+    }
+  }
+
+  // END label
+}

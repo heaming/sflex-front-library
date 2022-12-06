@@ -1,65 +1,72 @@
 .kw-date {
-  padding: 16px 16px 21px;
-  box-sizing: content-box;
+  margin: 14px 14px 21px;
+
+  &__container {
+    width: 220px;
+  }
 }
 
 .kw-date-picker {
-  width: 140px;
+  width: 250px;
 
-  @at-root .kw-form-item__field &.kw-field {
-    max-width: 250px;
-  }
-}
+  &.kw-field {
+    & .q-field {
+      &__control {
+        cursor: text;
+      }
 
-.kw-date-picker.kw-field.q-field {
-  .q-field__control {
-    cursor: text;
-  }
+      &__append {
+        // don't fix
+        // this has side effects to picker events
+        padding-left: 0 !important;
+        cursor: text !important;
 
-  .q-field__append {
-    // don't fix
-    // this has side effects to picker events
-    padding-left: 0 !important;
-    cursor: text !important;
+        > div {
+          display: flex;
+          align-items: center;
+          height: 100%;
 
-    > div {
-      display: flex;
-      align-items: center;
-      height: 100%;
+          // replaced that q-field__append padding-left
+          padding-left: 20px;
+        }
+      }
 
-      // replaced that q-field__append padding-left
-      padding-left: 20px;
+      &__marginal .q-icon {
+        opacity: 1 !important;
+        cursor: pointer;
+      }
+    }
+
+    &.q-field {
+      &--dense {
+        .q-field__append > div {
+          padding-left: 6px;
+        }
+      }
+
+      &--readonly,
+      &--disabled {
+        .q-field__marginal .q-icon {
+          opacity: 0.6 !important;
+          cursor: default;
+        }
+      }
     }
   }
 
-  .q-field__marginal .q-icon {
-    opacity: 1 !important;
-    cursor: pointer;
-  }
-
-  &--dense {
-    .q-field__append > div {
-      padding-left: 6px;
-    }
-  }
-
-  &--readonly,
-  &--disabled {
-    .q-field__marginal .q-icon {
-      opacity: 0.6 !important;
-      cursor: default;
-    }
+  &__menu.q-menu {
+    border: 1px solid $black1;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 
-.kw-date-picker.q-menu {
-  border: 1px solid $black1;
-  border-radius: 0;
-  box-shadow: none;
-}
+.kw-form:not(.kw-search) .kw-form-item__field {
+  .kw-date-picker {
+    flex: 0 1 250px !important;
+  }
 
-.kw-date-range-picker {
-  .kw-date-picker + span {
-    padding: 0 4px !important;
+  .kw-date-range-picker {
+    flex: 0 1 250px !important;
   }
 }

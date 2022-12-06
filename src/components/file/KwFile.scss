@@ -88,11 +88,13 @@
     }
 
     .kw-file__file-container {
+      width: unset;
       height: 116px;
     }
 
     .kw-file__header-container {
-      min-height: $-kw-file-header-height;
+      width: unset;
+      height: $-kw-file-header-height;
       position: absolute;
       top: 0;
       background-color: $-kw-file-header-background-color; // fixme
