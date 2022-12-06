@@ -48,9 +48,53 @@
       description="=default"
       :guide-code="defaultCode2"
     >
-      <kw-date-range-picker
-        v-bind="bindingProps2"
-      />
+      <div
+        v-if="false"
+        class="w700"
+      >
+        <kw-date-picker
+          v-bind="bindingProps"
+          grow
+        />
+        <kw-date-range-picker
+          v-bind="bindingProps2"
+          grow
+        />
+      </div>
+
+      <div
+        v-if="false"
+        class="flex w700"
+      >
+        <kw-date-picker
+          v-bind="bindingProps"
+          grow
+        />
+        <kw-date-range-picker
+          v-bind="bindingProps2"
+          grow
+        />
+      </div>
+
+      <kw-form :cols="0">
+        <kw-form-row>
+          <kw-form-item label="폼 아이템">
+            <kw-date-range-picker
+              v-bind="bindingProps2"
+            />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+
+      <kw-search :cols="0">
+        <kw-search-row>
+          <kw-search-item label="서치 아이템">
+            <kw-date-range-picker
+              v-bind="bindingProps2"
+            />
+          </kw-search-item>
+        </kw-search-row>
+      </kw-search>
     </guide-section>
   </kw-page>
 </template>
