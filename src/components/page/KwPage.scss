@@ -181,10 +181,6 @@ body.mobile:not(.tablet) {
       position: relative;
     }
 
-    &__content-container {
-      padding: 20px;
-    }
-
     &__footer {
       box-shadow: $shadow-up-1; // for DaeYoung Kim.
       flex: none;

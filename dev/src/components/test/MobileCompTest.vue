@@ -87,71 +87,72 @@
         </kw-field-wrap>
       </template>
 
-      <h1>content === default</h1>
-      <kw-btn
-        label="Close Window1"
-        @click="showDummyWindow = !showDummyWindow"
-      />
-      <ul class="slot-handler">
-        <li>
-          <kw-toggle
-            v-model="showSubHeader"
-            :true-value="true"
-            :false-value="false"
-            label="sub-header"
-          />
-        </li>
-        <li>
-          <kw-toggle
-            v-model="showLorem"
-            :true-value="true"
-            :false-value="false"
-            label="long content"
-          />
-        </li>
-        <li>
-          <kw-toggle
-            v-model="showContentTop"
-            :true-value="true"
-            :false-value="false"
-            label="content-top"
-          />
-        </li>
-        <li>
-          <kw-toggle
-            v-model="showContentBottom"
-            :true-value="true"
-            :false-value="false"
-            label="content-bottom"
-          />
-        </li>
-        <li>
-          <kw-toggle
-            v-model="showFooter"
-            :true-value="true"
-            :false-value="false"
-            label="footer"
-          />
-        </li>
-        <li>
-          <kw-toggle
-            v-model="showAction"
-            :true-value="true"
-            :false-value="false"
-            label="action"
-          />
-        </li>
-      </ul>
+      <div class="px20">
+        <h1>content === default</h1>
+        <kw-btn
+          label="Close Window1"
+          @click="showDummyWindow = !showDummyWindow"
+        />
+        <ul class="slot-handler">
+          <li>
+            <kw-toggle
+              v-model="showSubHeader"
+              :true-value="true"
+              :false-value="false"
+              label="sub-header"
+            />
+          </li>
+          <li>
+            <kw-toggle
+              v-model="showLorem"
+              :true-value="true"
+              :false-value="false"
+              label="long content"
+            />
+          </li>
+          <li>
+            <kw-toggle
+              v-model="showContentTop"
+              :true-value="true"
+              :false-value="false"
+              label="content-top"
+            />
+          </li>
+          <li>
+            <kw-toggle
+              v-model="showContentBottom"
+              :true-value="true"
+              :false-value="false"
+              label="content-bottom"
+            />
+          </li>
+          <li>
+            <kw-toggle
+              v-model="showFooter"
+              :true-value="true"
+              :false-value="false"
+              label="footer"
+            />
+          </li>
+          <li>
+            <kw-toggle
+              v-model="showAction"
+              :true-value="true"
+              :false-value="false"
+              label="action"
+            />
+          </li>
+        </ul>
 
-      <template v-if="showLorem">
-        <div
-          v-for="n in 10"
-          :key="`lorem${n}`"
-        >
-          {{ lorem }}
-        </div>
-      </template>
-
+        <template v-if="showLorem">
+          <div
+            v-for="n in 10"
+            :key="`lorem${n}`"
+          >
+            {{ lorem }}
+          </div>
+        </template>
+      </div>
       <template
         v-if="showContentBottom"
         #content-bottom
