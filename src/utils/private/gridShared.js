@@ -1,5 +1,5 @@
 import {
-  LocalDataProvider, GridView, LocalTreeDataProvider, TreeView,
+  LocalDataProvider, GridView, LocalTreeDataProvider, TreeView, ButtonVisibility,
 } from 'realgrid';
 import { cloneDeep } from 'lodash-es';
 import { timeout } from './tick';
@@ -124,33 +124,33 @@ export function createCellIndexByDataColumn(view, itemIndex, dataColumn) {
   };
 }
 
-const editRendererTypes = ['check', 'radio'];
 export function isCellEditable(view, column, index) {
-  const { columnEditableFirst, editable } = view.editOptions;
+  const { editOptions } = view;
+  const { renderer, editor } = column;
 
-  if ((columnEditableFirst === false && editable === false)
+  if ((editOptions.columnEditableFirst === false && editOptions.editable === false)
     || column.readOnly === true) {
     return false;
   }
 
-  if (editRendererTypes.includes(column.renderer?.type)) {
-    return column.renderer.editable !== false
+  if (['check', 'radio'].includes(renderer?.type)) {
+    return renderer.editable !== false
+      && view.onCellEditable(view, index) !== false;
+  }
+
+  if (['btdate', 'list', 'dropdown'].includes(editor?.type)) {
+    return column.editButtonVisibility !== ButtonVisibility.HIDDEN
+      && view.onCellEditable(view, index) !== false;
+  }
+
+  if (editor?.type === 'number') {
+    return editor.showStepButton === true
+      && column.editButtonVisibility !== ButtonVisibility.HIDDEN
       && view.onCellEditable(view, index) !== false;
   }
 
   return column.editable !== false
     && view.onCellEditable(view, index) !== false;
-}
-
-export function isCellPastable(view, column, index) {
-  if (!isCellEditable(view, column, index)) {
-    return false;
-  }
-
-  const textReadOnlyTypes = ['btdate', 'number', 'list', 'dropdown'];
-  const { editor } = column;
-
-  return !textReadOnlyTypes.includes(editor?.type) || editor?.textReadOnly !== true;
 }
 
 export function isCellItemClickable(view, column, index) {

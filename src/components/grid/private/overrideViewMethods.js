@@ -211,8 +211,11 @@ function setColumnEditor(column, { dataType }) {
   switch (editor?.type) {
     case 'number':
       defaultsDeep(column, {
+        editButtonVisibility: ButtonVisibility.ALWAYS,
         editor: {
+          showStepButton: false,
           maxIntegerLength: 13,
+          textReadOnly: false,
           // editFormat: '#,##0.######',
         },
       });
@@ -238,6 +241,7 @@ function setColumnEditor(column, { dataType }) {
           viewGridInside: false,
           commitOnSelect: true,
           dropDownWhenClick: false,
+          textReadOnly: false,
           btOptions: {
             language: i18n.locale.value,
             keyboardNavigation: false,
