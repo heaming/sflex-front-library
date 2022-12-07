@@ -57,6 +57,18 @@
         }
       }
     }
+
+    &--top {
+      justify-content: flex-start;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--bottom {
+      justify-content: flex-end;
+    }
   }
 
   // END section
