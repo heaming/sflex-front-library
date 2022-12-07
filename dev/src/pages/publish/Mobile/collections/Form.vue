@@ -170,11 +170,22 @@ const example = `
 />
 <kw-select
   label="운행목적"
-  class="mt20"
+  class="pt20"
 />
 <kw-date-picker
   label="날짜선택"
-  class="mt20"
+  class="pt20"
+/>
+<kw-date-range-picker
+  label="날짜지정"
+  grow
+  class="pt20"
+/>
+<kw-input
+  icon="qrcode_24"
+  label="상품 QR코드"
+  placeholder="QR코드 입력"
+  class="pt20"
 />
 `;
 
@@ -188,15 +199,14 @@ const combination = `
   <kw-input grow />
 </kw-field-wrap>
 `;
+
 const AddressCode = `
-<kw-form-row>
-  <kw-form-item
-    label="주소"
-  >
-    <zwcm-post-code />
-  </kw-form-item>
-</kw-form-row>
+<zwcm-post-code
+  label="주소"
+  class="pt20"
+/>
 `;
+
 const guideHistory = [
   {
     timestamp: '2022-11-2',
