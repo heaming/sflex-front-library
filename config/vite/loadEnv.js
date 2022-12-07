@@ -23,6 +23,8 @@ function configPlugin(mode, command, envDir, shouldTransform) {
     TIMESTAMP: command === 'build' ? Date.now() : undefined,
   };
 
+  const enableProdDevTools = mode === MODE_DEV;
+
   Object.assign(process.env, {
     ...metaEnv,
     NODE_ENV: metaEnv.PROD ? NODE_ENV_PRODUCTION : NODE_ENV_DEVELOPMENT,
@@ -36,13 +38,16 @@ function configPlugin(mode, command, envDir, shouldTransform) {
           optimizeDeps: {
             exclude: [`${name}/dist/env`],
           },
+          define: {
+            __VUE_PROD_DEVTOOLS__: enableProdDevTools,
+          },
         };
       }
 
       return {
         define: {
           __IMPORT_META_ENV__: metaEnv,
-          __VUE_PROD_DEVTOOLS__: mode === MODE_DEV,
+          __VUE_PROD_DEVTOOLS__: enableProdDevTools,
         },
       };
     },
