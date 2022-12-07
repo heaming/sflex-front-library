@@ -14,17 +14,17 @@
       >
         <kw-item-section
           side
-          top
+          v-bind="selectAllAlignProps"
         >
           <kw-checkbox
             :model-value="innerSelectAll"
             class="kw-list__select-all"
-            :label="'전체선택'"
+            :label="$t('MSG_BTN_SELT_ALL', undefined, '전체선택')"
             :true-value="true"
             :false-value="false"
             dense
             @update:model-value="onUpdateSelectAll"
-          /><!-- why... this shit... -->
+          />
         </kw-item-section>
         <kw-item-section>
           <kw-item-label
@@ -39,10 +39,18 @@
             </slot>
           </kw-item-label>
         </kw-item-section>
+        <kw-item-section
+          v-if="$slots.action"
+          class="kw-list__action-container"
+          side
+        >
+          <slot name="action" />
+        </kw-item-section>
       </kw-item>
       <kw-item
         v-for="(item) in innerItems"
-        :key="getKey(item)"
+        v-bind="selectAlignProps"
+        :key="item.key"
         :clickable="clickable"
         :active-class="activeClass"
         :active="activated.includes(item)"
@@ -53,18 +61,18 @@
       >
         <kw-item-section
           side
-          top
+          v-bind="selectAlignProps"
         >
-          <kw-checkbox
-            v-if="type === 'checkbox'"
+          <kw-radio
+            v-if="radio"
             v-model="innerSelected"
-            :val="getKey(item)"
+            :val="item.key"
             @change="emitUpdateSelected"
           />
-          <kw-radio
-            v-if="type === 'radio'"
+          <kw-checkbox
+            v-else-if="checkbox"
             v-model="innerSelected"
-            :val="getKey(item)"
+            :val="item.key"
             @change="emitUpdateSelected"
           />
         </kw-item-section>
@@ -72,9 +80,8 @@
           <slot
             name="item"
             :item="item.value"
-            :item-key="item.key"
           >
-            {{ getKey(item) }}
+            {{ item.key }}
           </slot>
         </kw-item-section>
       </kw-item>
@@ -93,11 +100,14 @@ export default {
     // customize props
     // when if you don't use default slot,
     // under props is required for default default.
-    selectAll: { type: Boolean, default: true },
+    hideSelectAll: { type: Boolean, default: false },
     selected: { type: [Array, Object, String, Number], default: undefined },
     items: { type: Array, default: () => [] },
     itemKey: { type: String, default: 'key' },
-    type: { type: String, default: 'checkbox' },
+    checkbox: { type: Boolean, default: true },
+    selectAlign: { type: String, default: 'top' },
+    selectAllAlign: { type: String, default: 'center' },
+    radio: { type: Boolean, default: false },
     itemTag: { type: String, default: undefined },
     placeholder: { type: String, default: undefined },
     disable: { type: Boolean, default: undefined },
@@ -115,7 +125,7 @@ export default {
     const { styleClassAttrs } = useInheritAttrs();
 
     const activated = ref([]);
-    const multipleSelect = computed(() => props.type === 'checkbox');
+    const multipleSelect = computed(() => props.checkbox === true);
     const innerSelected = ref(props.selected ?? (multipleSelect.value ? [] : undefined));
     const normalizeItem = (item) => ({
       key: item[props.itemKey] ?? item,
@@ -159,14 +169,12 @@ export default {
       emit('update:selected', innerSelected.value);
     };
 
-    const getKey = (item) => (item.key);
-
     const innerSelectAll = computed(() => {
       if (!multipleSelect.value) { return; }
       if (!innerItems.value.length) { return false; }
       if (innerItems.value.length !== innerSelected.value.length) { return false; }
       const registrationItem = (dict, item) => {
-        const itemKey = getKey(item);
+        const itemKey = item.key;
         dict[itemKey] = true;
         return dict;
       };
@@ -177,7 +185,7 @@ export default {
 
     const onUpdateSelectAll = (value) => {
       if (value) {
-        innerSelected.value = innerItems.value.map(getKey);
+        innerSelected.value = innerItems.value.map((item) => (item.key));
       } else {
         innerSelected.value = [];
       }
@@ -185,7 +193,7 @@ export default {
 
     const toggleSelected = (item) => {
       if (!multipleSelect.value) { return; }
-      const key = getKey(item);
+      const { key } = item;
       const targetIdx = innerSelected.value.indexOf(key);
       if (targetIdx > -1) {
         innerSelected.value.splice(targetIdx, 1);
@@ -196,7 +204,7 @@ export default {
     };
 
     const setSelected = (item) => {
-      innerSelected.value = getKey(item);
+      innerSelected.value = item.key;
       emitUpdateSelected();
     };
 
@@ -216,11 +224,23 @@ export default {
       }
     };
 
-    const showSelectAll = computed(() => props.selectAll && multipleSelect.value);
+    const showSelectAll = computed(() => !props.hideSelectAll && multipleSelect.value);
 
     const listClass = computed(() => ({
       'kw-list': true,
       'kw-list--selectable': showSelectAll.value,
+    }));
+
+    const selectAlignProps = computed(() => ({
+      top: props.selectAlign === 'top',
+      center: props.selectAlign === 'center',
+      bottom: props.selectAlign === 'bottom',
+    }));
+
+    const selectAllAlignProps = computed(() => ({
+      top: props.selectAllAlign === 'top',
+      center: props.selectAllAlign === 'center',
+      bottom: props.selectAllAlign === 'bottom',
     }));
 
     return {
@@ -236,7 +256,9 @@ export default {
       onClick,
       showSelectAll,
       activated,
-      getKey,
+      selectAllAlignProps,
+      selectAlignProps,
+
     };
   },
 };
