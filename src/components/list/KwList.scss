@@ -21,11 +21,30 @@
     }
 
     &--dense > .kw-item.q-item {
+      // default Specificity is 0-2-0 for override quasar style. (.kw-item.q-item)
+      // so, it require minimum specificity 0-3-0
       @extend %kw-item-dense;
     }
   }
 
   // END quasar overrides
+
+  &--selectable {
+    &.q-list {
+      & .kw-list {
+        &__total-item.kw-item {
+          min-height: unset;
+          padding-top: 0;
+          padding-bottom: 8px;
+
+          &:not(:last-child) {
+            margin-bottom: -1px;
+            border-bottom: 1px solid $black1;
+          }
+        }
+      }
+    }
+  }
 
   // START kw-search > 체크박스 목록
   &.checkbox-group {

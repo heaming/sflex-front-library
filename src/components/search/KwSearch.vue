@@ -68,6 +68,8 @@ import { hasPermissionKeyInPage } from '../../directives/permission';
 import consts from '../../consts';
 import env from '../../consts/private/env';
 
+const ONE_ROW_DEFAULT_COLS = 2;
+
 export default {
   name: 'KwSearch',
   inheritAttrs: false,
@@ -180,7 +182,9 @@ export default {
     // ignore observe
     provide(ObserverContextKey, {});
 
-    useFormLayout();
+    useFormLayout({
+      cols: props.oneRow ? ONE_ROW_DEFAULT_COLS : undefined,
+    });
 
     return {
       ...useInheritAttrs(),

@@ -37,22 +37,10 @@
       class="kw-page__content"
     >
       <div
-        v-if="$slots['content-top']"
-        class="kw-page__content-top"
-      >
-        <slot name="content-top" />
-      </div>
-      <div
         v-if="$slots.default"
         class="kw-page__content-container"
       >
         <slot />
-      </div>
-      <div
-        v-if="$slots['content-bottom']"
-        class="kw-page__content-bottom"
-      >
-        <slot name="content-bottom" />
       </div>
     </div>
 
