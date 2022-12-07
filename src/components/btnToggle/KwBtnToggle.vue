@@ -1,13 +1,10 @@
 <template>
   <kw-field-wrap
     ref="inputRef"
-    v-bind="styleClassAttrs"
+    v-bind="{...styleClassAttrs, ...stretchProps}"
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
-    :grow="grow"
-    :overflow="overflow"
-    :stretch="stretch"
     @focus="$emit('focus')"
   >
     <q-btn-toggle
@@ -91,7 +88,7 @@ export default {
       return classes;
     });
 
-    const { stretchClass } = useStretch();
+    const { stretchClass, stretchProps } = useStretch();
 
     const toggleClass = computed(() => {
       const classes = {
@@ -118,6 +115,7 @@ export default {
     return {
       ...useInheritAttrs(),
       ...useField(),
+      stretchProps,
       styledOptions,
       buttonDense,
       toggleClass,
