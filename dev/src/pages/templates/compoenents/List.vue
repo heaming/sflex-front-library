@@ -168,6 +168,14 @@
           </template>
         </kw-expansion-item>
       </kw-list>
+      <kw-list
+        class="bg-green"
+        :items="[1,2,3,4,{a: 1}]"
+      >
+        <template #item="{item}">
+          {{ item }}
+        </template>
+      </kw-list>
     </guide-section>
   </kw-page>
 </template>

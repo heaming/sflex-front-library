@@ -41,8 +41,8 @@
         </kw-item-section>
       </kw-item>
       <kw-item
-        v-for="(item, index) in innerItems"
-        :key="findKey(item) || `item${index}`"
+        v-for="(item) in innerItems"
+        :key="getKey(item)"
         :clickable="clickable"
         :active-class="activeClass"
         :active="activated.includes(item)"
@@ -58,21 +58,24 @@
           <kw-checkbox
             v-if="type === 'checkbox'"
             v-model="innerSelected"
-            :val="findKey(item)"
+            :val="getKey(item)"
             @change="emitUpdateSelected"
           />
           <kw-radio
             v-if="type === 'radio'"
             v-model="innerSelected"
-            :val="findKey(item)"
+            :val="getKey(item)"
             @change="emitUpdateSelected"
           />
         </kw-item-section>
         <kw-item-section>
           <slot
             name="item"
-            :item="item"
-          />
+            :item="item.value"
+            :item-key="item.key"
+          >
+            {{ getKey(item) }}
+          </slot>
         </kw-item-section>
       </kw-item>
     </slot>
@@ -91,9 +94,9 @@ export default {
     // when if you don't use default slot,
     // under props is required for default default.
     selectAll: { type: Boolean, default: true },
-    selected: { type: [Array, Object, String, Number, Boolean, Function], default: undefined },
+    selected: { type: [Array, Object, String, Number], default: undefined },
     items: { type: Array, default: () => [] },
-    itemKey: { type: String, default: undefined },
+    itemKey: { type: String, default: 'key' },
     type: { type: String, default: 'checkbox' },
     itemTag: { type: String, default: undefined },
     placeholder: { type: String, default: undefined },
@@ -114,8 +117,13 @@ export default {
     const activated = ref([]);
     const multipleSelect = computed(() => props.type === 'checkbox');
     const innerSelected = ref(props.selected ?? (multipleSelect.value ? [] : undefined));
+    const normalizeItem = (item) => ({
+      key: item[props.itemKey] ?? item,
+      value: item,
+    });
+
     const innerItems = computed(() => {
-      if (Array.isArray(props.items)) { return props.items; }
+      if (Array.isArray(props.items)) { return props.items.map(normalizeItem); }
       return [];
     });
     const totalCountWithComma = computed(() => (
@@ -140,8 +148,8 @@ export default {
     watch(() => props.selected, updateSelected);
 
     const updateItems = (val) => {
-      if (val) {
-        innerItems.value = [...val];
+      if (val && Array.isArray(val)) {
+        innerItems.value = val.map(normalizeItem);
       }
     };
 
@@ -151,12 +159,14 @@ export default {
       emit('update:selected', innerSelected.value);
     };
 
+    const getKey = (item) => (item.key);
+
     const innerSelectAll = computed(() => {
       if (!multipleSelect.value) { return; }
       if (!innerItems.value.length) { return false; }
       if (innerItems.value.length !== innerSelected.value.length) { return false; }
       const registrationItem = (dict, item) => {
-        const itemKey = props.itemKey ? item[props.itemKey] : item;
+        const itemKey = getKey(item);
         dict[itemKey] = true;
         return dict;
       };
@@ -165,11 +175,9 @@ export default {
       return innerSelected.value.every(checkExist);
     });
 
-    const findKey = (item) => (props.itemKey ? item[props.itemKey] : item);
-
     const onUpdateSelectAll = (value) => {
       if (value) {
-        innerSelected.value = innerItems.value.map(findKey);
+        innerSelected.value = innerItems.value.map(getKey);
       } else {
         innerSelected.value = [];
       }
@@ -177,7 +185,7 @@ export default {
 
     const toggleSelected = (item) => {
       if (!multipleSelect.value) { return; }
-      const key = findKey(item);
+      const key = getKey(item);
       const targetIdx = innerSelected.value.indexOf(key);
       if (targetIdx > -1) {
         innerSelected.value.splice(targetIdx, 1);
@@ -188,7 +196,7 @@ export default {
     };
 
     const setSelected = (item) => {
-      innerSelected.value = findKey(item);
+      innerSelected.value = getKey(item);
       emitUpdateSelected();
     };
 
@@ -228,7 +236,7 @@ export default {
       onClick,
       showSelectAll,
       activated,
-      findKey,
+      getKey,
     };
   },
 };
