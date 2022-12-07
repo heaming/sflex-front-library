@@ -4,11 +4,11 @@
     no-header
   >
     <h2 class="kw-guide-h2">
-      [Mobile] Page Header
+      [Tablet] Page Header
     </h2>
     <p class="kw-guide-description">
       Use this component if you need headers when composing your page.
-      <!-- <router-link>sample page</router-link> -->
+      <!-- <router-link to="">sample page</router-link> -->
     </p>
     <guide-history-view
       :items="guideHistory"
@@ -60,7 +60,7 @@
             </td>
             <td>
               title text <br>
-              'back': back icon , 'menu': menu icon<br>
+              'back': back icon<br>
               <br>
               hint text<br>
               <br>
@@ -87,7 +87,6 @@
         <div class="kw-guide-example">
           <kw-page-mobile-header
             title="Default"
-            left-btn="menu"
             hint="text"
           >
             <!-- you can also put tooltip text in template#hint instead of adding prop -->
@@ -107,26 +106,6 @@
         </div>
         <guide-code-view
           :code-value="defaultCode"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="close"
-        class="kw-guide-title"
-      >
-        close + no left-side icon
-      </h3>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-page-mobile-header
-            title="title"
-            show-close
-          />
-        </div>
-        <guide-code-view
-          :code-value="closeCode"
           lang="vue"
         />
       </q-card>
@@ -159,49 +138,6 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
-      <h3
-        id="subHeader"
-        class="kw-guide-title"
-      >
-        Sub Header(sticky, located below main Header)
-      </h3>
-      <p class="kw-guide-description">
-        Please add this area(template#sub-header) when need the sticky sub-header in kw-page
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-field-wrap
-            control-class="bg-bg-body px20"
-          >
-            <kw-select
-              v-model="selectModel"
-              label="fit"
-              class="fit"
-              :options="optionsModel"
-              borderless
-              :error="true"
-            />
-            <kw-separator
-              vertical
-              spaced
-              inset
-            />
-            <kw-select
-              v-model="selectModel"
-              borderless
-              class="fit"
-              :options="optionsModel"
-              stretch
-            />
-          </kw-field-wrap>
-        </div>
-        <guide-code-view
-          :code-value="subHeader"
-          lang="vue"
-        />
-      </q-card>
-    </div>
   </kw-page>
 </template>
 
@@ -211,7 +147,6 @@ const defaultCode = `
 <template #header>
   <kw-page-mobile-header
     title="Default"
-    left-btn="menu"
     hint="text"
   >
     <!-- you can put tooltip text in template#hint instead of adding prop -->
@@ -228,15 +163,6 @@ const defaultCode = `
     </template>
   <!--// more dropdown menu -->
   </kw-page-mobile-header>
-</template>
-`;
-
-const closeCode = `
-<template #header>
-  <kw-page-mobile-header
-    title="title"
-    show-close
-  />
 </template>
 `;
 
@@ -257,39 +183,10 @@ const backCode = `
 </template>
 `;
 
-const subHeader = `
-<template #sub-header>
-  <kw-field-wrap
-    control-class="bg-bg-body px20"
-  >
-    <kw-select
-      v-model="selectModel"
-      label="fit"
-      class="fit"
-      :options="optionsModel"
-      borderless
-      :error="true"
-    />
-    <kw-separator
-      vertical
-      spaced
-      inset
-    />
-    <kw-select
-      v-model="selectModel"
-      borderless
-      class="fit"
-      :options="optionsModel"
-      stretch
-    />
-  </kw-field-wrap>
-</template>
-`;
-
 const guideHistory = [
   {
-    timestamp: '2022.12.06',
-    text: 'Add mobile header',
+    timestamp: '2022.12.07',
+    text: 'Add Tablet header',
   },
 ];
 </script>

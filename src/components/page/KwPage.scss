@@ -138,8 +138,9 @@
 .kw-page-mobile-header {
   @include typo("title");
 
+  margin-bottom: 15px;
   width: 100%;
-  height: 55px;
+  height: 29px;
   display: flex;
   align-items: center;
 
@@ -151,7 +152,7 @@
   }
 
   &__back-btn {
-    margin-right: 16px;
+    margin-right: 6px;
     color: $placeholder;
   }
 
@@ -233,10 +234,13 @@ body.mobile:not(.tablet) {
   // 모바일 테블릿 헤더
   .kw-page-mobile-header {
     padding: 0 16px;
+    margin-bottom: 0;
+    height: 55px;
     background-color: $bg-white;
     border-bottom: 1px solid $line-bg;
 
     &__back-btn {
+      margin-right: 16px;
       color: $black1;
     }
   }
