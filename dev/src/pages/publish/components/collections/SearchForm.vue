@@ -1443,6 +1443,7 @@ const differentSize = `
 const theOneRowCode = `
 <kw-search
   one-row
+  :cols=2
 >
   <kw-search-row>
     <kw-search-item label="colspan">
