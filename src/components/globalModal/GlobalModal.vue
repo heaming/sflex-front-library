@@ -2,6 +2,7 @@
   <q-dialog
     v-for="modal of modals"
     :key="modal.uid"
+    v-bind="modal.dialogProps"
     class="global-modal"
     :model-value="true"
     persistent
@@ -25,8 +26,13 @@
 
 <script>
 import { GlobalModalVmKey } from '../../consts/private/symbols';
+import libConfig from '../../consts/private/libConfig';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
+
+const {
+  DIALOG_TRANSITION_DURATION,
+} = libConfig;
 
 export default {
   name: 'GlobalModal',
@@ -67,6 +73,7 @@ export default {
     }
 
     return {
+      DIALOG_TRANSITION_DURATION,
       modals,
       onResolve,
       onClose,

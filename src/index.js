@@ -1,12 +1,11 @@
 // Core
 export { default as createApp } from './createApp';
-export { default as createRoutesByGlobImport } from './createRoutesByGlobImport';
-export { default as registerPopupsByGlobImport } from './registerPopupsByGlobImport';
 export { default as consts } from './consts';
 export { default as i18n } from './i18n';
 export { default as store } from './store';
 export { default as router } from './router';
 export { default as validate } from './validate';
+export * from './globImportUtils';
 
 // Layouts
 export * from './layouts/dev';
