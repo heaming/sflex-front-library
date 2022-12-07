@@ -19,7 +19,7 @@ export default {
     function updateSelectedGnbLnb(route) {
       const { meta, name } = route;
 
-      if (meta.isGlobImport) {
+      if (meta.glob === true) {
         commit('app/setSelectedGnbKey', name.split('/')[1]);
         commit('app/setSelectedLnbKey', name);
       } else {

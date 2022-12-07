@@ -1,6 +1,9 @@
 <template>
   <q-page-container class="web-view">
-    <router-view v-slot="{ Component, route }">
+    <router-view
+      v-if="useRouterView"
+      v-slot="{ Component, route }"
+    >
       <kw-suspense :key="route.fullPath">
         <template #default>
           <component :is="Component" />
@@ -14,6 +17,8 @@
 </template>
 
 <script>
+import useEntryPopup from '../../composables/private/useEntryPopup';
+
 import LoadFailedView from './LoadFailedView.vue';
 
 export default {
@@ -22,7 +27,7 @@ export default {
 
   setup() {
     return {
-
+      ...useEntryPopup(),
     };
   },
 };
