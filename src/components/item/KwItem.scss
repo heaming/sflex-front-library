@@ -38,7 +38,7 @@
   }
 
   &.q-item.kw-item--padding {
-    // default Specificity is 0-2-0 for override quasar style.
+    // default Specificity is 0-2-0 for override quasar style. (.kw-item.q-item)
     // so, it require minimum specificity 0-3-0
     @extend %kw-item-padding;
   }

@@ -1,7 +1,7 @@
 <template>
   <q-list
     v-bind="styleClassAttrs"
-    class="kw-list kw-list--selectable"
+    :class="listClass"
     :bordered="bordered"
     :dense="dense"
     :padding="padding"
@@ -210,7 +210,13 @@ export default {
 
     const showSelectAll = computed(() => props.selectAll && multipleSelect.value);
 
+    const listClass = computed(() => ({
+      'kw-list': true,
+      'kw-list--selectable': showSelectAll.value,
+    }));
+
     return {
+      listClass,
       innerSelected,
       styleClassAttrs,
       totalCountWithComma,

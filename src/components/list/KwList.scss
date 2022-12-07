@@ -21,6 +21,8 @@
     }
 
     &--dense > .kw-item.q-item {
+      // default Specificity is 0-2-0 for override quasar style. (.kw-item.q-item)
+      // so, it require minimum specificity 0-3-0
       @extend %kw-item-dense;
     }
   }

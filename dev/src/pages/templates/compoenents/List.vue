@@ -82,6 +82,7 @@
         </kw-item-label>
         <kw-item
           tag="label"
+          dense
         >
           <kw-item-section
             side
