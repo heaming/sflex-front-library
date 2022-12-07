@@ -1,7 +1,7 @@
 .kw-search {
   $-kw-search-padding: 24px 40px;
   $-kw-search-row-height: $kw-field-height-dense;
-  $-kw-search-row-gap: 40px;
+  $-kw-search-row-gap: 60px;
   $-kw-search-row-padding: 12px 0 0;
 
   padding: $-kw-search-padding;
@@ -87,13 +87,23 @@
     flex-flow: row nowrap;
 
     .kw-form-row {
-      flex-grow: 1;
+      // flex-grow:1;
+      flex-grow: 2;
+      flex-basis: calc(100% / 3 * 2);
+
+      &.kw-form-row--cols-2 {
+        .kw-form-item--colspan-2 {
+          width: calc((100% - (40px * (2 - 1))) / 2 * 2 + 40px * 1 - 248px) !important;
+        }
+      }
     }
 
     .kw-search__action {
       padding: 0;
       margin-left: $-kw-search-row-gap;
-      flex: none;
+
+      // flex: none;
+      flex: 1 1 calc(100% / 3 - 30px);
     }
   }
 }

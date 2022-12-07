@@ -2,11 +2,6 @@
   @include typo("dense");
 
   min-height: $kw-field-height-dense;
-  padding: 0;
-
-  &.kw-item--padding {
-    padding: $kw-item-padding;
-  }
 }
 
 %kw-item-padding {
@@ -36,7 +31,9 @@
     // todo
   }
 
-  &--padding {
+  &.q-item.kw-item--padding {
+    // default Specificity is 0-2-0 for override quasar style.
+    // so, it require minimum specificity 0-3-0
     @extend %kw-item-padding;
   }
 

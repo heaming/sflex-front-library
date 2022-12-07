@@ -48,8 +48,8 @@
     <kw-btn
       v-if="showClose"
       class="kw-page-mobile-header__close"
-      icon="close"
-      filled
+      icon="close_24"
+      borderless
       @click="$emit('close')"
     />
   </div>

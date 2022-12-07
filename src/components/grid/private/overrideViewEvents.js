@@ -4,7 +4,7 @@ import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { isOverByte, getMaxByteLength, getMaxByteString } from '../../../utils/string';
 import {
-  fixTopIndexIfInvalid, registerEvent, createCellIndexByDataColumn, getCellClickEvent, isCellPastable,
+  fixTopIndexIfInvalid, registerEvent, createCellIndexByDataColumn, getCellClickEvent, isCellEditable,
 } from '../../../utils/private/gridShared';
 
 const onShowTooltip = 'onShowTooltip';
@@ -327,7 +327,7 @@ export function overrideOnCellPasting(view) {
   wrapEvent(view, onCellPasting, (g, index, value) => {
     const column = g.columnByName(index.column);
 
-    if (!isCellPastable(g, column, index)) {
+    if (!isCellEditable(g, column, index)) {
       return false;
     }
 

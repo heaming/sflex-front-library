@@ -8,10 +8,28 @@
     </h2>
     <p class="kw-guide-description">
       Use this component if you need headers when composing your page.
+      <router-link>sample page</router-link>
     </p>
     <guide-history-view
       :items="guideHistory"
     />
+    <div class="kw-guide-section">
+      <h3
+        id="notice"
+        class="kw-guide-title"
+      >
+        Notice
+      </h3>
+      <ul style="margin: 0; padding-left: 25px;">
+        <li>
+          This is for QA of publishing, so some function can be not provided. <br>
+        </li>
+        <li>
+          Thus, For pages that cannot be implemented with the sample provided below,
+          please use the default case and modify only the title
+        </li>
+      </ul>
+    </div>
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -49,7 +67,7 @@
             </td>
             <td>
               please insert title text
-              <br>
+              <br>No icon is default type
               <br>Add this when you need close button like as popup page
               <br>Add this when you need hint icon in right-side
               <br>Add this when you need more icon in right-side with dropdown menu
@@ -72,11 +90,11 @@
             left-btn="menu"
             hint="text"
           >
-            <!-- you can put tooltip text in template#hint instead of adding prop -->
+            <!-- you can also put tooltip text in template#hint instead of adding prop -->
             <!-- <template #hint>
               hint text
             </template> -->
-            <!-- // you can put tooltip text in template#hint instead of adding prop -->
+            <!-- // you can also put tooltip text in template#hint instead of adding prop -->
 
             <!-- more dropdown menu -->
             <template #more>
@@ -199,6 +217,10 @@ const guideHistory = [
 </script>
 <style lang="scss" scoped>
 ::v-deep(.kw-guide-example) {
+  padding: 0 !important;
+}
+
+::v-deep(.q-card) {
   padding: 0 !important;
 }
 </style>
