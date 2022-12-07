@@ -3,7 +3,10 @@
     :style="resizedStyle"
     class="kw-date"
   >
-    <div ref="containerRef">
+    <div
+      ref="containerRef"
+      class="kw-date__container"
+    >
       <q-resize-observer
         :debounce="0"
         @resize="onResize"
@@ -157,6 +160,7 @@ export default {
     const resizedStyle = ref({});
 
     function onResize(e) {
+      console.log(e);
       resizedStyle.value = `width: ${e.width}px; height: ${e.height}px`;
     }
 

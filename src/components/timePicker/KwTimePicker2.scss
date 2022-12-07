@@ -1,61 +1,67 @@
-.kw-time-picker2.kw-field.q-field {
-  .q-field__control {
-    cursor: text;
+.kw-time-picker2 {
+  &.kw-field {
+    & .q-field {
+      &__control {
+        cursor: text;
+      }
+
+      &__append {
+        // don't fix
+        // this has side effects to picker events
+        padding-left: 0 !important;
+        cursor: text !important;
+
+        > div {
+          display: flex;
+          align-items: center;
+          height: 100%;
+
+          // replaced that q-field__append padding-left
+          padding-left: 20px;
+        }
+      }
+
+      &__marginal .q-icon {
+        opacity: 1 !important;
+        cursor: pointer;
+      }
+
+      &__prefix {
+        margin-right: 8px;
+        color: $black1;
+      }
+    }
+
+    &.q-field {
+      &--dense {
+        .q-field__append > div {
+          padding-left: 6px;
+        }
+      }
+
+      &--readonly,
+      &--disabled {
+        .q-field__marginal .q-icon {
+          opacity: 0.6 !important;
+          cursor: default;
+        }
+      }
+    }
   }
 
-  .q-field__append {
-    // don't fix
-    // this has side effects to picker events
-    padding-left: 0 !important;
-    cursor: text !important;
+  &__menu.q-menu {
+    border: 1px solid $black1;
+    border-radius: 0;
+    box-shadow: none;
 
-    > div {
+    .time-scroll-picker {
       display: flex;
-      align-items: center;
-      height: 100%;
+      width: 100%;
+      height: 154px;
 
-      // replaced that q-field__append padding-left
-      padding-left: 20px;
-    }
-  }
-
-  .q-field__marginal .q-icon {
-    opacity: 1 !important;
-    cursor: pointer;
-  }
-
-  .q-field__prefix {
-    margin-right: 8px;
-    color: $black1;
-  }
-
-  &--dense {
-    .q-field__append > div {
-      padding-left: 6px;
-    }
-  }
-
-  &--readonly,
-  &--disabled {
-    .q-field__marginal .q-icon {
-      opacity: 0.6 !important;
-      cursor: default;
-    }
-  }
-}
-
-.kw-time-picker2.q-menu {
-  border: 1px solid $black1;
-  border-radius: 0;
-  box-shadow: none;
-
-  .time-scroll-picker {
-    display: flex;
-    width: 100%;
-    height: 154px;
-
-    .kw-scroll-picker {
-      height: 100%;
+      .kw-scroll-picker {
+        height: 100%;
+      }
     }
   }
 }
