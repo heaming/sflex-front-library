@@ -601,13 +601,32 @@ body.mobile:not(.tablet) {
     }
 
     &.q-field {
-      // todo
+      &--auto-height {
+        .kw-field-wrap__control {
+          height: auto;
+          min-height: 44px !important;
+        }
+      }
     }
   }
 
   .kw-field-wrap {
     &__messages {
       overflow-wrap: anywhere;
+    }
+
+    &__control.selectbox {
+      .kw-field-wrap__control-container {
+        padding: 0 20px;
+        background-color: $bg-body;
+        border-bottom: 1px solid $line-line;
+
+        .kw-select__placeholder {
+          font-size: 14px;
+          color: $black1;
+          font-weight: 400;
+        }
+      }
     }
   }
 }
