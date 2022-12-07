@@ -1,5 +1,8 @@
 <template>
-  <kw-page class="kw-guide">
+  <kw-page
+    class="kw-guide"
+    no-header
+  >
     <h2 class="kw-guide-h2">
       [Mobile] Stepper
     </h2>
