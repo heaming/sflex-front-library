@@ -5,6 +5,10 @@
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
+    :grow="grow"
+    :shrink="shrink"
+    :overflow="overflow"
+    :stretch="stretch"
   >
     <kw-date-picker
       ref="inputRef"
@@ -55,6 +59,7 @@ import { FormContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useField, { useFieldProps } from '../../composables/private/useField';
+import { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwDateRangePicker',
@@ -62,6 +67,7 @@ export default {
   props: {
     ...useFieldProps,
     ...useFieldStyleProps,
+    ...useStretchProps,
 
     from: {
       type: String,

@@ -110,8 +110,16 @@ function setColumnStyleName(column, { dataType }) {
 }
 
 function setColumnRenderer(column, { dataType }) {
+  if (typeof column.renderer === 'string') {
+    column.renderer = {
+      type: column.renderer,
+    };
+  }
+
   defaultsDeep(column, {
-    renderer: { showTooltip: true },
+    renderer: {
+      showTooltip: true,
+    },
   });
 
   switch (column.renderer?.type) {
@@ -149,6 +157,12 @@ function setColumnRenderer(column, { dataType }) {
         },
       });
 
+      break;
+    }
+    case 'radio': {
+      defaultsDeep(column, {
+        editable: false,
+      });
       break;
     }
     case 'button': {
@@ -197,8 +211,11 @@ function setColumnEditor(column, { dataType }) {
   switch (editor?.type) {
     case 'number':
       defaultsDeep(column, {
+        editButtonVisibility: ButtonVisibility.ALWAYS,
         editor: {
+          showStepButton: false,
           maxIntegerLength: 13,
+          textReadOnly: false,
           // editFormat: '#,##0.######',
         },
       });
@@ -224,6 +241,7 @@ function setColumnEditor(column, { dataType }) {
           viewGridInside: false,
           commitOnSelect: true,
           dropDownWhenClick: false,
+          textReadOnly: false,
           btOptions: {
             language: i18n.locale.value,
             keyboardNavigation: false,

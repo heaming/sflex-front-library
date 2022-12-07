@@ -1,6 +1,7 @@
 import { warn } from 'vue';
 import defaultConfig from './defaultConfig';
 import override from './override';
+import { registerCustomRenderers } from './customRenderer';
 import useClickOutsideGrid from './useClickOutsideGrid';
 import useResizeGrid, { useResizeGridProps } from './useResizeGrid';
 import { syncHeadCheckIfAble, unregisterEventAll } from '../../../utils/private/gridShared';
@@ -48,6 +49,7 @@ export default (DataClass, ViewClass) => {
     }
 
     defaultConfig(view);
+    registerCustomRenderers(view);
     override(view, vm);
     syncHeadCheckIfAble(view);
 
@@ -65,14 +67,14 @@ export default (DataClass, ViewClass) => {
     data = null;
   });
 
-  const observerChildctx = {
+  const observerChildCtx = {
     init: () => init(view),
     reset: () => reset(view),
     validate: (shouldFocus) => validate(view, true, shouldFocus),
     isModified: () => isModified(view),
   };
 
-  useObserverChild(observerChildctx);
+  useObserverChild(observerChildCtx);
   useClickOutsideGrid();
 
   return {
