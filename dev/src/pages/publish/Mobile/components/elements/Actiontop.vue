@@ -136,7 +136,7 @@
           </kw-action-top>
         </div>
         <guide-code-view
-          :code-value="case1"
+          :code-value="case2"
           lang="vue"
         />
       </q-card>
@@ -187,7 +187,7 @@
           </kw-action-top>
         </div>
         <guide-code-view
-          :code-value="case1"
+          :code-value="case3"
           lang="vue"
         />
       </q-card>
@@ -197,76 +197,92 @@
 
 <script setup>
 const case1 = `
-<kw-list>
-  <kw-item>
-    <div class="kw-font-body text-weight-bold mt15">
-      곽재원(21164) | 성수지점
-    </div>
-    <kw-expansion-item>
-      <template #header>
-        <div class="col">
-          <div class="row justify-between">
-            <p class="kw-font-pt14 kw-fc--black3">
-              결재총액
-            </p>
-            <div class="kw-font-pt16 kw-fc--black1 mr8">
-              30,000 원
-            </div>
-          </div>
-        </div>
-      </template>
-      <div class="py16 px20">
-        <ul class="card-text card-text--between">
-          <li>
-            <p>상품정보</p>
-            <span>
-              비데(BK750RWA)
-            </span>
-          </li>
-          <li>
-            <p>서비스정보</p>
-            <span>고객 과실</span>
-          </li>
-        </ul>
-      </div>
-    </kw-expansion-item>
-  </kw-item>
-  <kw-item>
-    <div class="kw-font-body text-weight-bold mt15">
-      곽재원(21164) | 성수지점
-    </div>
-    <kw-expansion-item>
-      <template #header>
-        <div class="col">
-          <div class="row justify-between">
-            <p class="kw-font-pt14 kw-fc--black3">
-              결재총액
-            </p>
-            <div class="kw-font-pt16 kw-fc--black1 mr8">
-              30,000 원
-            </div>
-          </div>
-        </div>
-      </template>
-      <div class="py16 px20">
-        <ul class="card-text card-text--between">
-          <li>
-            <p>상품정보</p>
-            <span>
-              비데(BK750RWA)
-            </span>
-          </li>
-          <li>
-            <p>서비스정보</p>
-            <span>고객 과실</span>
-          </li>
-        </ul>
-      </div>
-    </kw-expansion-item>
-  </kw-item>
-</kw-list>
-`;
+<kw-action-top>
+  <template #left>
+    <kw-paging-info
+      :total-count="7"
+    />
+  </template>
+</kw-action-top>
 
+<kw-action-top>
+  <template #left>
+    <kw-paging-info
+      :total-count="7"
+    />
+  </template>
+  <kw-btn
+    secondary
+    dense
+    border-color="line-stroke"
+    label="조회"
+  />
+</kw-action-top>
+`;
+const case2 = `
+<kw-action-top>
+  <template #left>
+    <kw-paging-info
+      :total-count="7"
+    />
+  </template>
+  <kw-btn
+    secondary
+    dense
+    border-color="line-stroke"
+    label="조회"
+  />
+</kw-action-top>
+
+<kw-action-top>
+  <template #left>
+    <h3>작업정보</h3>
+  </template>
+  <kw-btn
+    secondary
+    dense
+    border-color="line-stroke"
+    label="사진"
+    class="w70"
+  />
+  <kw-btn
+    secondary
+    dense
+    border-color="line-stroke"
+    class="w70"
+    label="고객서명"
+  />
+</kw-action-top>
+`;
+const case3 = `
+<kw-action-top>
+  <template #left>
+    <span>총주행</span>
+    <span class="accent pl4">7</span>
+    <span class=" pl12">업무용</span>
+    <span class="accent pl4">1734</span>
+    <span class=" pl12">비율</span>
+    <span class="accent pl4">100%</span>
+  </template>
+  <kw-btn
+    secondary
+    dense
+    border-color="line-stroke"
+    label="편집"
+  />
+</kw-action-top>
+<kw-action-top>
+  <template #left>
+    <p>가구화코드 202266791613</p>
+  </template>
+  <span>전체</span>
+  <span class="accent pl4">3</span>
+  <span class="pl8">완료</span>
+  <span class="accent pl4">1</span>
+  <span class="pl8">미완료</span>
+  <span class="accent pl4">1</span>
+</kw-action-top>
+`;
 const historyData = [
   {
     timestamp: '2022-12-08',
