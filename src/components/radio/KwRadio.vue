@@ -5,7 +5,7 @@
     :class="radioClass"
     :model-value="modelValue"
     :val="val"
-    :label="label ?? val?.toString()"
+    :label="label"
     :left-label="leftLabel"
     :size="size"
     :dense="isSearchContext || dense"
