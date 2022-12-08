@@ -101,9 +101,8 @@ const testCode = `
 <kw-icon
   name="info"
   tooltip="tooltip text"
->
-  <!-- <kw-tooltip>if you need tooltip type chip,<br> please add this element and content</kw-tooltip> -->
-</kw-icon>
+/>
+
 
 <kw-icon
   name="warning"
