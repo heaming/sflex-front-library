@@ -202,8 +202,8 @@ body.desktop {
     &.q-btn {
       .q-focus-helper {
         /*
-        Since design requirements, we can not use focus helper.
-        Cuase, it affects both the background color and the color at the same time.
+          since design requirements, we can not use focus helper
+          that affects both the background color and the color at the same time.
          */
         display: none;
       }

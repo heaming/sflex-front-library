@@ -44,7 +44,7 @@ export const useOptionsProps = {
 export default (config) => {
   const { props } = getCurrentInstance();
 
-  const withDefaultConfig = {
+  const mergedConfig = {
     emitValue: true,
     value: 'value',
     label: 'label',
@@ -54,11 +54,12 @@ export default (config) => {
 
   const {
     valueRef,
+    onUpdateValue,
     emitValue,
     value,
     label,
     separator,
-  } = withDefaultConfig;
+  } = mergedConfig;
 
   const normalizedOptions = computed(() => {
     const options = [];
@@ -102,8 +103,14 @@ export default (config) => {
 
   function toggleAll() {
     if (isArrayValue()) {
-      valueRef.value = selectedAll.value
+      const val = selectedAll.value
         ? [] : normalizedOptions.value.map((v) => (emitValue ? v[value] : v));
+
+      if (onUpdateValue) {
+        onUpdateValue(val);
+      } else {
+        valueRef.value = val;
+      }
     }
   }
 
