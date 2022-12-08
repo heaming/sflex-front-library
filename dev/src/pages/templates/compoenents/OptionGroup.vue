@@ -16,10 +16,13 @@
         title="optionGroupProps"
       />
       <kw-separator />
-      <kw-optionGroup
-        v-model="model"
-        v-bind="bindingProps"
-      />
+      <div class="flex w700">
+        <kw-optionGroup
+          v-model="model"
+          v-bind="bindingProps"
+          class="shrink"
+        />
+      </div>
     </guide-section>
     <guide-section
       title="default slot"

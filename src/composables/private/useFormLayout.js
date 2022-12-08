@@ -26,15 +26,24 @@ if (platform.is.tablet) { DEFAULT_LABEL_SIZE = 108; }
 if (platform.is.mobile) { DEFAULT_LABEL_SIZE = 0; }
 const DEFAULT_ALIGN_CONTENT = 'left';
 
-export default () => {
+export default (defaults = {}) => {
   const vm = getCurrentInstance();
   const { props } = vm;
 
   const injected = inject(FormLayoutContextKey, null);
   const formLayoutCtx = {
-    cols: computed(() => props.cols ?? injected?.cols.value ?? DEFAULT_COLS),
-    labelSize: computed(() => props.labelSize ?? injected?.labelSize.value ?? DEFAULT_LABEL_SIZE),
-    alignContent: computed(() => props.alignContent ?? injected?.alignContent.value ?? DEFAULT_ALIGN_CONTENT),
+    cols: computed(() => props.cols
+      ?? injected?.cols.value
+      ?? defaults.cols
+      ?? DEFAULT_COLS),
+    labelSize: computed(() => props.labelSize
+      ?? injected?.labelSize.value
+      ?? defaults.labelSize
+      ?? DEFAULT_LABEL_SIZE),
+    alignContent: computed(() => props.alignContent
+      ?? injected?.alignContent.value
+      ?? defaults.alignContent
+      ?? DEFAULT_ALIGN_CONTENT),
   };
 
   // form layout injection

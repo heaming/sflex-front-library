@@ -1,12 +1,10 @@
 <template>
   <kw-field-wrap
     ref="inputRef"
+    v-bind="stretchProps"
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
-    :stretch="stretch"
-    :grow="grow"
-    :overflow="overflow"
     @focus="$emit('focus')"
   >
     <slot
@@ -25,7 +23,7 @@
 
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
-import { useStretchProps } from '../../composables/private/useStretch';
+import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwField',
@@ -59,6 +57,7 @@ export default {
     });
 
     return {
+      ...useStretch(),
       ...fieldCtx,
       fieldBinding,
     };

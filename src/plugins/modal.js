@@ -9,6 +9,7 @@ const normalizeOptions = (options) => ({
   component: options.component,
   componentProps: options.componentProps || {},
   componentResolved: false,
+  dialogProps: options.dialogProps || {},
 });
 
 export async function modal(options) {

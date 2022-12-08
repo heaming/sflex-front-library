@@ -61,12 +61,29 @@
   }
 }
 
+// 폼 내부 최내 너비 예외 처리.
 .kw-form:not(.kw-search) .kw-form-item__field {
   .kw-date-picker {
     flex: 0 1 250px !important;
+
+    &.grow {
+      flex-grow: 1 !important;
+    }
+
+    &.shrink-off {
+      flex-shrink: 0 !important;
+    }
   }
 
   .kw-date-range-picker {
     flex: 0 1 250px !important;
+
+    &.grow {
+      flex-grow: 1 !important;
+    }
+
+    &.shrink-off {
+      flex-shrink: 0 !important;
+    }
   }
 }

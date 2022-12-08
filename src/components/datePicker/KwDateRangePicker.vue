@@ -1,17 +1,14 @@
 <template>
   <kw-field-wrap
     class="kw-date-range-picker"
-    v-bind="styleClassAttrs"
+    v-bind="{...styleClassAttrs, ...stretchProps}"
     :label="label"
     :error="invalid"
     :error-message="invalidMessage"
-    :grow="grow"
-    :shrink="shrink"
-    :overflow="overflow"
-    :stretch="stretch"
   >
     <kw-date-picker
       ref="inputRef"
+      v-bind="stretchProps"
       :model-value="value[0]"
       :type="type"
       :readonly="readonly"
@@ -24,9 +21,6 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
-      :stretch="stretch"
-      :grow="grow"
-      :overflow="overflow"
       :autofocus="autofocus"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
@@ -34,6 +28,7 @@
     <span>~</span>
     <kw-date-picker
       :model-value="value[1]"
+      v-bind="stretchProps"
       :type="type"
       :readonly="readonly"
       :disable="disable"
@@ -45,9 +40,6 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
-      :stretch="stretch"
-      :grow="grow"
-      :overflow="overflow"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 1)"
     />
@@ -59,7 +51,7 @@ import { FormContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useField, { useFieldProps } from '../../composables/private/useField';
-import { useStretchProps } from '../../composables/private/useStretch';
+import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
 export default {
   name: 'KwDateRangePicker',
@@ -155,6 +147,7 @@ export default {
 
     return {
       ...useInheritAttrs(),
+      ...useStretch(),
       ...fieldCtx,
       onChangeDate,
     };

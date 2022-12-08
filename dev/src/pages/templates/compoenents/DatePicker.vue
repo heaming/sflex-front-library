@@ -48,9 +48,101 @@
       description="=default"
       :guide-code="defaultCode2"
     >
-      <kw-date-range-picker
-        v-bind="bindingProps2"
-      />
+      <div class="flex">
+        <div
+          v-if="true"
+          class="w700 bg-red-1"
+        >
+          <kw-date-picker
+            v-bind="bindingProps"
+            grow
+          />
+          <kw-date-range-picker
+            v-bind="bindingProps2"
+            grow
+          />
+        </div>
+        <kw-separator vertical />
+        <div
+          v-if="true"
+          class="w200 bg-red-1"
+        >
+          <kw-date-picker
+            v-bind="bindingProps"
+          />
+          <kw-date-range-picker
+            v-bind="bindingProps2"
+          />
+        </div>
+      </div>
+
+      <div class="flex">
+        <div
+          v-if="true"
+          class="flex w700 bg-orange-1"
+        >
+          <kw-date-picker
+            v-bind="bindingProps"
+            grow
+          />
+          <kw-date-range-picker
+            v-bind="bindingProps2"
+            grow
+          />
+        </div>
+        <kw-separator vertical />
+        <div
+          v-if="true"
+          class="flex w200 bg-orange-1"
+        >
+          <kw-date-picker
+            v-bind="bindingProps"
+          />
+          <kw-date-range-picker
+            v-bind="bindingProps2"
+          />
+        </div>
+      </div>
+
+      <kw-form
+        :cols="0"
+        class="bg-yellow-1"
+      >
+        <kw-form-row>
+          <kw-form-item label="폼 아이템">
+            <kw-date-range-picker
+              v-bind="bindingProps2"
+            />
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row>
+          <kw-form-item label="폼 아이템">
+            <kw-date-picker
+              v-bind="bindingProps"
+            />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+
+      <kw-search
+        :cols="0"
+        class="bg-green-1"
+      >
+        <kw-search-row>
+          <kw-search-item label="서치 아이템">
+            <kw-date-range-picker
+              v-bind="bindingProps2"
+            />
+          </kw-search-item>
+        </kw-search-row>
+        <kw-search-row>
+          <kw-search-item label="서치 아이템">
+            <kw-date-picker
+              v-bind="bindingProps"
+            />
+          </kw-search-item>
+        </kw-search-row>
+      </kw-search>
     </guide-section>
   </kw-page>
 </template>
