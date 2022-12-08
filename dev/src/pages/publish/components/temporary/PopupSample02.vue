@@ -13,7 +13,6 @@
         호시탐탐 문화유산(상품코드) <p><span>등록일 2022-08-01  /  김준</span><span>최종수정일 2022-04-09  / 임동욱</span></p>
       </h2>
       <kw-tabs
-        dense
         model-value="1"
         class="mt20"
       >
