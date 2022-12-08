@@ -9,7 +9,7 @@
   >
     <slot>
       <kw-item
-        v-if="showSelectAll"
+        v-if="showSelectAll || $slots.counter || $slots.action"
         class="kw-list__total-item"
       >
         <kw-item-section
