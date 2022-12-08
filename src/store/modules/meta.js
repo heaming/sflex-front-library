@@ -2,7 +2,6 @@ import { filter, find } from 'lodash-es';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
 import { localStorage } from '../../plugins/storage';
-import { replaceRoutesByMenus } from '../../utils/private/router';
 
 export default {
   namespaced: true,
@@ -93,15 +92,12 @@ export default {
       commit('setApps', apps);
       dispatch('app/createGnbItems', apps, { root: true });
     },
-    async fetchMenus({ commit, getters, dispatch }) {
+    async fetchMenus({ commit, dispatch }) {
       const response = await http.get('/sflex/common/common/portal/menus');
-
-      const apps = getters.getApps;
       const menus = response.data;
 
       commit('setMenus', menus);
       dispatch('app/createLnbItems', menus, { root: true });
-      replaceRoutesByMenus(apps, menus);
     },
     async fetchPage({ commit, getters }, key) {
       const isCached = getters.getPage(key) !== undefined;

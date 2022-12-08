@@ -995,7 +995,8 @@ $unit: px;
 body.desktop {
   .has-search:has(.over-width) {
     .q-tab-panels,
-    .q-panel-parent {
+    .q-panel-parent,
+    .q-panel.scroll {
       overflow: visible;
     }
 

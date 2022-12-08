@@ -25,7 +25,7 @@
 
     <q-menu
       :model-value="showing"
-      class="kw-time-picker2"
+      class="kw-time-picker2__menu"
       no-parent-event
       no-focus
       no-refocus

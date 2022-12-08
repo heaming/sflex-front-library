@@ -4,12 +4,11 @@ import env from '../consts/private/env';
 import { http } from '../plugins/http';
 import { loadSpinner } from '../plugins/loading';
 import { localStorage } from '../plugins/storage';
-import { INITIAL_LOCATION } from '../router';
+import { isReady as routerIsReady } from '../router';
 
 export default () => {
   const store = useStore();
   const i18n = useI18n();
-  const router = useRouter();
 
   async function fetchLoginInfo() {
     const { userInfo } = await store.dispatch('meta/fetchLoginInfo');
@@ -41,17 +40,14 @@ export default () => {
     i18n.mergeLocaleMessage(locale, localeMessages);
   }
 
-  async function invokeInitialRoute() {
-    await router.isReady();
-    await router.replace(INITIAL_LOCATION);
-  }
-
   async function initSession() {
     try {
       loadSpinner(true);
       await fetchLoginInfo();
-      await Promise.all([fetchMetas(), fetchLangs()]);
-      await invokeInitialRoute();
+      await Promise.all([
+        fetchMetas(),
+        fetchLangs(),
+      ]);
     } finally {
       loadSpinner(false);
     }
@@ -62,6 +58,7 @@ export default () => {
   async function isReady() {
     if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
       await initSession();
+      await routerIsReady();
     } else if (env.VITE_LOGIN_URL) {
       locationReplace(env.VITE_LOGIN_URL); // redirect to sso
     }

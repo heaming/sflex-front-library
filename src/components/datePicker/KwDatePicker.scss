@@ -1,64 +1,89 @@
 .kw-date {
-  padding: 16px 16px 21px;
-  box-sizing: content-box;
-}
+  margin: 14px 14px 21px;
 
-.kw-date-picker.kw-field.q-field {
-  width: 140px;
-
-  @at-root .kw-form-item__field & {
-    max-width: 250px;
-  }
-
-  .q-field__control {
-    cursor: text;
-  }
-
-  .q-field__append {
-    // don't fix
-    // this has side effects to picker events
-    padding-left: 0 !important;
-    cursor: text !important;
-
-    > div {
-      display: flex;
-      align-items: center;
-      height: 100%;
-
-      // replaced that q-field__append padding-left
-      padding-left: 20px;
-    }
-  }
-
-  .q-field__marginal .q-icon {
-    opacity: 1 !important;
-    cursor: pointer;
-  }
-
-  &--dense {
-    .q-field__append > div {
-      padding-left: 6px;
-    }
-  }
-
-  &--readonly,
-  &--disabled {
-    .q-field__marginal .q-icon {
-      opacity: 0.6 !important;
-      cursor: default;
-    }
+  &__container {
+    width: 220px;
   }
 }
 
-.kw-date-picker.q-menu {
-  border: 1px solid $black1;
-  border-radius: 0;
-  box-shadow: none;
+.kw-date-picker {
+  width: 250px;
+
+  &.kw-field {
+    & .q-field {
+      &__control {
+        cursor: text;
+      }
+
+      &__append {
+        // don't fix
+        // this has side effects to picker events
+        padding-left: 0 !important;
+        cursor: text !important;
+
+        > div {
+          display: flex;
+          align-items: center;
+          height: 100%;
+
+          // replaced that q-field__append padding-left
+          padding-left: 20px;
+        }
+      }
+
+      &__marginal .q-icon {
+        opacity: 1 !important;
+        cursor: pointer;
+      }
+    }
+
+    &.q-field {
+      &--dense {
+        .q-field__append > div {
+          padding-left: 6px;
+        }
+      }
+
+      &--readonly,
+      &--disabled {
+        .q-field__marginal .q-icon {
+          opacity: 0.6 !important;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &__menu.q-menu {
+    border: 1px solid $black1;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
-.kw-date-range-picker.kw-field-wrap {
-  .kw-date-picker + span {
-    margin: 0;
-    padding: 0 4px !important;
+// 폼 내부 최내 너비 예외 처리.
+.kw-form:not(.kw-search) .kw-form-item__field {
+  .kw-date-picker {
+    flex: 0 1 250px !important;
+
+    &.grow {
+      flex-grow: 1 !important;
+    }
+
+    &.shrink-off {
+      flex-shrink: 0 !important;
+    }
+  }
+
+  .kw-date-range-picker {
+    flex: 0 1 250px !important;
+
+    &.grow {
+      flex-grow: 1 !important;
+    }
+
+    &.shrink-off {
+      flex-shrink: 0 !important;
+    }
   }
 }

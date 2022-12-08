@@ -25,7 +25,7 @@
     </template>
     <q-menu
       :model-value="showing"
-      class="kw-date-picker"
+      class="kw-date-picker__menu"
       no-parent-event
       no-focus
       no-refocus

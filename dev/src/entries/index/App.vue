@@ -90,7 +90,7 @@ function recursiveCreateLnbItems(nodes, index = 0) {
   return recursiveCreateLnbItems(nodes, index + 1);
 }
 
-const globImportedRoutes = getRoutes().filter((e) => e.meta.isGlobImport);
+const globImportedRoutes = getRoutes().filter(({ meta }) => meta.glob === true);
 const appKeys = Object.keys(globImportedRoutes.reduce((a, e) => { a[e.path.split('/')[1]] = null; return a; }, {}));
 
 const gnbItems = appKeys.map((v) => ({ key: v, label: v }));

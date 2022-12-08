@@ -22,7 +22,7 @@ function createRoutesByGlobImport(modules, match) {
     return {
       name,
       path: name,
-      meta: { label, isGlobImport: true },
+      meta: { label, glob: true },
       component: modules[key],
     };
   });

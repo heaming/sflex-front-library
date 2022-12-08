@@ -19,10 +19,26 @@
       <div class="flex items-center bg-lime-1 w500 h500">
         <kw-radio
           v-model="model"
-          v-bind="bindingProps"
-          :label="model ? 'Y' : 'N'"
+          val="1"
+          label="1"
+        />
+        <kw-radio
+          v-model="model"
+          val="2"
+          label="2"
+        />
+        <kw-radio
+          v-model="model"
+          val="3"
+          label="3"
+        />
+        <kw-radio
+          v-model="model"
+          val="4"
+          label="4"
         />
       </div>
+      {{ model }}
     </guide-section>
     <guide-section
       title="default slot"

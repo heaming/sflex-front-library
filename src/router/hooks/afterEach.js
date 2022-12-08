@@ -26,8 +26,8 @@ function assignParamsIfIsLinkPage(to) {
   }
 }
 
-async function createMenuLog({ meta }) {
-  const shouldLogging = !!meta.menuUid && meta.logging === true;
+async function logging({ meta }) {
+  const shouldLogging = meta.logging === true;
 
   if (shouldLogging) {
     const logData = {
@@ -50,5 +50,5 @@ async function createMenuLog({ meta }) {
 export default async (to, from, failure) => {
   assignParamsByQuery(to);
   assignParamsIfIsLinkPage(to);
-  createMenuLog(to);
+  logging(to);
 };

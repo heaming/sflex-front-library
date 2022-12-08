@@ -2,11 +2,6 @@
   @include typo("dense");
 
   min-height: $kw-field-height-dense;
-  padding: 0;
-
-  &.kw-item--padding {
-    padding: $kw-item-padding;
-  }
 }
 
 %kw-item-padding {
@@ -30,13 +25,21 @@
     &--dense {
       @extend %kw-item-dense;
     }
+
+    &.q-router-link--active,
+    &--active {
+      color: inherit;
+      background-color: change-color($primary, $alpha: 0.08); // fixme
+    }
   }
 
   & .q-item {
     // todo
   }
 
-  &--padding {
+  &.q-item.kw-item--padding {
+    // default Specificity is 0-2-0 for override quasar style. (.kw-item.q-item)
+    // so, it require minimum specificity 0-3-0
     @extend %kw-item-padding;
   }
 
@@ -53,6 +56,18 @@
           margin-right: 0;
         }
       }
+    }
+
+    &--top {
+      justify-content: flex-start;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--bottom {
+      justify-content: flex-end;
     }
   }
 
