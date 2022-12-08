@@ -13,6 +13,7 @@
         class="kw-list__total-item"
       >
         <kw-item-section
+          v-if="showSelectAll"
           side
           v-bind="selectAllAlignProps"
         >
@@ -26,19 +27,19 @@
             @update:model-value="onUpdateSelectAll"
           />
         </kw-item-section>
-        <kw-item-section>
-          <kw-item-label
-            class="kw-list__count"
-            font="dense"
-          >
-            <slot
-              name="counter"
-              :selected="innerSelected"
+        <slot
+          name="counter"
+          :selected="innerSelected"
+        >
+          <kw-item-section>
+            <kw-item-label
+              class="kw-list__count"
+              font="dense"
             >
               {{ `${selectedCountWithComma}/${totalCountWithComma}` }}
-            </slot>
-          </kw-item-label>
-        </kw-item-section>
+            </kw-item-label>
+          </kw-item-section>
+        </slot>
         <kw-item-section
           v-if="$slots.action"
           class="kw-list__action-container"
@@ -64,26 +65,24 @@
           v-bind="selectAlignProps"
         >
           <kw-radio
-            v-if="radio"
+            v-if="selectComponent === 'radio'"
             v-model="innerSelected"
             :val="item.key"
             @change="emitUpdateSelected"
           />
           <kw-checkbox
-            v-else-if="checkbox"
+            v-if="selectComponent === 'checkbox'"
             v-model="innerSelected"
             :val="item.key"
             @change="emitUpdateSelected"
           />
         </kw-item-section>
-        <kw-item-section>
-          <slot
-            name="item"
-            :item="item.value"
-          >
-            {{ item.key }}
-          </slot>
-        </kw-item-section>
+        <slot
+          name="item"
+          :item="item.value"
+        >
+          {{ item.key }}
+        </slot>
       </kw-item>
     </slot>
   </q-list>
@@ -104,7 +103,7 @@ export default {
     selected: { type: [Array, Object, String, Number], default: undefined },
     items: { type: Array, default: () => [] },
     itemKey: { type: String, default: 'key' },
-    checkbox: { type: Boolean, default: true },
+    checkbox: { type: Boolean, default: false },
     selectAlign: { type: String, default: 'top' },
     selectAllAlign: { type: String, default: 'center' },
     radio: { type: Boolean, default: false },
@@ -125,7 +124,12 @@ export default {
     const { styleClassAttrs } = useInheritAttrs();
 
     const activated = ref([]);
-    const multipleSelect = computed(() => props.checkbox === true);
+    const selectComponent = computed(() => {
+      if (props.radio) { return 'radio'; }
+      if (props.checkbox) { return 'checkbox'; }
+      return undefined;
+    });
+    const multipleSelect = computed(() => selectComponent.value === 'checkbox');
     const innerSelected = ref(props.selected ?? (multipleSelect.value ? [] : undefined));
     const normalizeItem = (item) => ({
       key: item[props.itemKey] ?? item,
@@ -256,9 +260,9 @@ export default {
       onClick,
       showSelectAll,
       activated,
+      selectComponent,
       selectAllAlignProps,
       selectAlignProps,
-
     };
   },
 };
