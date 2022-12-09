@@ -211,6 +211,30 @@
           </kw-search-item>
         </kw-search-row>
       </kw-search>
+
+      <kw-search
+        :key="formKey"
+        one-row
+        @search="onSearch"
+        @reset="onReset"
+      >
+        <kw-search-row>
+          <kw-search-item label="Input">
+            <kw-input
+              name="input"
+              rules="required"
+            />
+          </kw-search-item>
+          <kw-search-item label="Input (TextArea)">
+            <kw-input
+              name="textarea"
+              type="textarea"
+              autogrow
+              rules="required"
+            />
+          </kw-search-item>
+        </kw-search-row>
+      </kw-search>
     </q-card>
   </kw-page>
 </template>
