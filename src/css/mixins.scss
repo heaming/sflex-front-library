@@ -9,7 +9,13 @@
   }
 
   @if length($list) < $idx {
-    @return nth($list, $idx % length($list));
+    $remain-idx: $idx % length($list);
+
+    @if $remain-idx == 0 {
+      @return nth($list, length($list));
+    } @else {
+      @return nth($list, $remain-idx);
+    }
   }
 
   @return nth($list, $idx);
@@ -194,13 +200,28 @@
   }
 }
 
-@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight, $letter-spacing: normal) {
+@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight, $letter-spacing: normal, $border-radius: null) {
+  $-min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3))});
+
   font-size: $font-size;
   line-height: $line-height;
   padding: $padding;
   font-weight: $font-weight;
   letter-spacing: $letter-spacing;
-  min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3)) });
+  min-height: $-min-height;
+
+  &.kw-btn--round {
+    min-width: $-min-height;
+    border-radius: 50%;
+  }
+
+  &.kw-btn--rounded {
+    @if $border-radius {
+      border-radius: $border-radius;
+    } @else {
+      border-radius: max(#{at($padding, 4)}, #{at($padding, 1)}) max(#{at($padding, 1)}, #{at($padding, 2)}) max(#{at($padding, 2)}, #{at($padding, 3)}) max(#{at($padding, 3)}, #{at($padding, 4)});
+    }
+  }
 }
 
 @mixin kw-btn-height-modifier-by-font-type($min-height, $font-type, $side-padding: 12px) {
