@@ -25,7 +25,7 @@
       </div>
     </div>
     <div
-      v-if="showErrorMessage"
+      v-if="!doNotRenderBottom"
       class="kw-field-wrap__bottom"
       :class="computedBottomClass"
     >
@@ -33,7 +33,6 @@
         v-if="$g.platform.is.mobile"
       >
         <div
-          v-if="showErrorMessage"
           class="kw-field-wrap__messages"
           role="alert"
         >
@@ -46,24 +45,25 @@
           </kw-tooltip>
         </div>
       </template>
-      <transition
-        v-else
-        name="q-transition--field-message"
-      >
-        <div
-          v-if="showErrorMessage"
-          class="kw-field-wrap__messages"
-          role="alert"
+      <template v-else>
+        <Transition
+          name="q-transition--field-message"
         >
-          {{ computedErrorMessage }}
-          <kw-tooltip
-            anchor="center middle"
-            show-when-ellipsised
+          <div
+            v-if="showErrorMessage"
+            class="kw-field-wrap__messages"
+            role="alert"
           >
             {{ computedErrorMessage }}
-          </kw-tooltip>
-        </div>
-      </transition>
+            <kw-tooltip
+              anchor="center middle"
+              show-when-ellipsised
+            >
+              {{ computedErrorMessage }}
+            </kw-tooltip>
+          </div>
+        </Transition>
+      </template>
     </div>
   </div>
 </template>
@@ -83,10 +83,12 @@ export default {
     ...useStretchProps,
 
     label: { type: String, default: undefined },
+    required: { type: Boolean, default: undefined },
     controlClass: { type: [Object, Array, String], default: undefined },
     error: { type: Boolean, default: undefined },
     errorMessage: { type: String, default: undefined },
     autoHeight: { type: Boolean, default: true },
+    hideBottomSpace: { type: Boolean, default: undefined },
   },
 
   emits: ['focus'],
@@ -103,7 +105,9 @@ export default {
     const { cols } = useFormLayout();
     const { stretchClass } = useStretch();
 
+    const computedHideBottom = computed(() => props.hideBottomSpace ?? platform.is.mobile);
     const showErrorMessage = computed(() => props.error || invalid.value);
+    const doNotRenderBottom = computed(() => computedHideBottom.value && !showErrorMessage.value);
     const showLabel = computed(() => platform.is.mobile && (props.label || slots.label));
 
     const computedClass = computed(() => {
@@ -113,6 +117,7 @@ export default {
       classes['kw-field-wrap--error'] = props.error || invalid.value;
       classes['kw-field-wrap--dense'] = computedDense.value;
       classes['kw-field-wrap--labeled'] = showLabel.value;
+      classes['kw-field-wrap--required'] = props.required;
       classes['kw-field-wrap--auto-height'] = props.autoHeight;
       classes[`kw-field-wrap--col-${cols.value}`] = !!cols.value;
       return classes;
@@ -139,6 +144,7 @@ export default {
       computedBottomClass,
       focus,
       stretchClass,
+      doNotRenderBottom,
     };
   },
 };

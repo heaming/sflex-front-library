@@ -24,12 +24,12 @@ export const useFieldStyleProps = {
   },
 };
 
-export default () => {
+export default (defaults = {}) => {
   const { props, attrs } = getCurrentInstance();
 
-  const computedDense = useDense();
+  const computedDense = useDense(defaults);
 
-  const { stretchClass } = useStretch();
+  const { stretchClass } = useStretch(defaults);
 
   const required = computed(() => {
     if (props.required || attrs.required) {
@@ -49,25 +49,35 @@ export default () => {
   });
 
   const fieldClass = computed(() => ({
+    'kw-field': true,
     'kw-field--required': required.value,
     ...stretchClass.value,
   }));
 
+  const fieldDesign = computed(() => {
+    if (props.underline === true) { return 'underline'; }
+    if (props.borderless === true) { return 'borderless'; }
+    if (props.outlined === true) { return 'outlined'; }
+    if (defaults.underline === true) { return 'underline'; }
+    if (defaults.borderless === true) { return 'borderless'; }
+    if (defaults.outlined === true) { return 'outlined'; }
+    return platform.is.mobile ? 'underline' : 'outlined';
+  });
+
   const fieldStyleProps = computed(() => {
     const fieldProps = {
       dense: computedDense.value,
-      hideBottomSpace: props.hideBottomSpace ?? platform.is.mobile,
-      outlined: !platform.is.mobile,
+      hideBottomSpace: props.hideBottomSpace ?? defaults.hideBottomSpace ?? platform.is.mobile,
     };
-    if (props.underline === true) {
+    if (fieldDesign.value === 'underline') {
       fieldProps.outlined = false;
       fieldProps.borderless = false;
     }
-    if (props.borderless === true) {
+    if (fieldDesign.value === 'borderless') {
       fieldProps.outlined = false;
       fieldProps.borderless = true;
     }
-    if (props.outlined === true) {
+    if (fieldDesign.value === 'outlined') {
       fieldProps.outlined = true;
       fieldProps.borderless = false;
     }
