@@ -119,7 +119,7 @@
       </kw-btn>
       <kw-btn
         rounded
-        class="just-rounded"
+        class="just-rounded-but-round-is-strong"
       >
         <kw-icon
           size="40px"
@@ -128,7 +128,16 @@
       </kw-btn>
       <kw-btn
         round
-        class="just-rounded"
+        class="just-rounded-but-round-is-strong"
+      >
+        <kw-icon
+          size="40px"
+          name="bookmark_on"
+        />
+      </kw-btn>
+      <kw-btn
+        padding="8px"
+        rounded="50%"
       >
         <kw-icon
           size="40px"
@@ -186,7 +195,7 @@ const defaultCode = `
   }
 }
 
-.just-rounded {
+.just-rounded-but-round-is-strong {
   &.kw-btn {
     @include kw-btn-height-modifier(7px, 1em, 18px, 500);
   }

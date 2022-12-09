@@ -15,7 +15,7 @@ export const useBtnStyleProps = {
   borderless: { type: Boolean, default: false },
   outlined: { type: Boolean, default: false },
   round: { type: Boolean, default: false },
-  rounded: { type: Boolean, default: false },
+  rounded: { type: [Boolean, String], default: false },
 
   // color props
   color: { type: String, default: undefined }, // this one should be solid color.
@@ -152,9 +152,15 @@ export default (defaults = {}) => {
   });
 
   const buttonStyles = computed(() => {
-    let styles = '';
-    styles += computedProps.value.padding ? `padding-left: ${computedProps.value.padding}; padding-right: ${computedProps.value.padding}; ` : '';
-    styles += computedProps.value.minWidth ? `min-width: ${computedProps.value.minWidth}; ` : '';
+    const styles = {};
+    if (computedProps.value.padding) {
+      styles['padding-left'] = computedProps.value.padding;
+      styles['padding-right'] = computedProps.value.padding;
+    }
+    if (computedProps.value.minWidth) { styles['min-width'] = computedProps.value.minWidth; }
+    if (computedProps.value.rounded && typeof computedProps.value.rounded === 'string') {
+      styles['border-radius'] = computedProps.value.rounded;
+    }
     return styles;
   });
 
