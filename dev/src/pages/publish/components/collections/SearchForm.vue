@@ -432,14 +432,16 @@
         <ol>
           <li>add 'one-row' in kw-search</li>
           <li>add prop :cols="2"</li>
-          <li>if the kw-search-item need more wide, then add :colspan="2" in item tag</li>
+          <li class="delete">
+            if the kw-search-item need more wide, then add :colspan="2" in item tag
+          </li>
         </ol>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-search
-            :cols="2"
             one-row
+            :cols="2"
           >
             <kw-search-row>
               <kw-search-item label="colspan">
@@ -1518,6 +1520,10 @@ const withCheckbox = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-12-08',
+    text: 'modify explanation of one-row case',
+  },
   {
     timestamp: '2022-12-07',
     text: 'add explanation of one-row case',

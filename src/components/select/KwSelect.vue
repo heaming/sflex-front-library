@@ -2,11 +2,11 @@
 <template>
   <q-select
     ref="inputRef"
-    :model-value="value"
+    :model-value="computedValue"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-select"
     :class="fieldClass"
-    popup-content-class="kw-select-options-menu"
+    popup-content-class="kw-select-options"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid || undefined"
     :options="normalizedOptions"
@@ -16,7 +16,6 @@
     :emit-value="emitValue"
     :map-options="emitValue"
     :use-input="computedUseInput"
-    :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
     :fill-input="fillInput ?? computedUseInput"
     :hide-selected="hideSelected ?? computedUseInput"
     :input-debounce="inputDebounce"
@@ -33,6 +32,9 @@
     no-error-icon
     :dropdown-icon="dropdownIcon"
     :hide-dropdown-icon="hideDropdownIcon"
+    :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
+    :transition-show="$g.platform.is.mobile ? 'jump-up' : undefined"
+    :transition-hide="$g.platform.is.mobile ? 'jump-down' : undefined"
     clear-icon="clear"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
@@ -41,6 +43,8 @@
     @input-value="$emit('inputValue', $event)"
     @filter="onFilter"
     @update:model-value="onUpdateValue"
+    @popup-show="onPopup(true)"
+    @popup-hide="onPopup(false)"
   >
     <!-- no-option (override slots) -->
     <template
@@ -79,40 +83,52 @@
 
     <!--before-options -->
     <template
-      v-if="multiple"
+      v-if="$g.platform.is.mobile || multiple"
       #before-options
     >
-      <q-item
-        clickable
-        @click="toggleAll"
+      <div
+        v-if="$g.platform.is.mobile"
+        class="kw-select-options__header"
       >
-        <q-item-section side>
-          <kw-checkbox
-            :model-value="selectedAll"
-            :true-value="true"
-            :false-value="false"
-            dense
-            @update:model-value="toggleAll"
-          />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>
-            {{ $t('MSG_TXT_ALL', null, '전체') }}
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-separator />
+        <h1>{{ placeholder }}</h1>
+        <q-icon
+          name="close"
+          @click="inputRef.hidePopup()"
+        />
+      </div>
+      <div v-if="multiple">
+        <q-item
+          clickable
+          @click="toggleAll"
+        >
+          <q-item-section class="kw-select-options__side">
+            <kw-checkbox
+              :model-value="selectedAll"
+              :true-value="true"
+              :false-value="false"
+              dense
+              @update:model-value="toggleAll"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>
+              {{ $t('MSG_TXT_ALL', null, '전체') }}
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator />
+      </div>
     </template>
 
     <!-- options -->
-    <template #option="{ itemProps, opt, selected }">
+    <template #option="{ itemProps, selected, opt, toggleOption }">
       <q-item
         :active="selected"
         v-bind="itemProps"
       >
         <q-item-section
           v-if="multiple"
-          side
+          class="kw-select-options__side"
         >
           <kw-checkbox
             :model-value="selected"
@@ -129,6 +145,21 @@
         </q-item-section>
       </q-item>
       <q-separator v-if="opt[optionSeparator]" />
+    </template>
+
+    <!-- after-options -->
+    <template
+      v-if="$g.platform.is.mobile"
+      #after-options
+    >
+      <div class="kw-select-options__action">
+        <kw-btn
+          grow
+          primary
+          :label="$t('MSG_BTN_CONFIRM', null, '확인')"
+          @click="onConfirm"
+        />
+      </div>
     </template>
 
     <!-- error -->
@@ -156,11 +187,13 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import i18n from '../../i18n';
+import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwSelect',
@@ -205,13 +238,25 @@ export default {
   ],
 
   setup(props) {
-    const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClass } = fieldStyles;
     const fieldCtx = useField();
     const { inputRef, value } = fieldCtx;
 
+    const innerValue = ref();
+    const computedValue = computed(() => innerValue.value ?? value.value);
+
+    function onUpdateValue(val) {
+      val ??= (props.multiple ? [] : '');
+
+      if (platform.is.mobile) {
+        innerValue.value = val;
+      } else {
+        value.value = val;
+      }
+    }
+
     const optionsCtx = useOptions({
-      valueRef: value,
+      valueRef: computedValue,
+      onUpdateValue,
       emitValue: props.emitValue,
       value: props.optionValue,
       label: props.optionLabel,
@@ -246,14 +291,6 @@ export default {
       inputRef.value.updateInputValue(val, noFilter);
     }
 
-    function onUpdateValue(val) {
-      if (props.multiple) {
-        value.value = val ?? [];
-      } else {
-        value.value = val ?? '';
-      }
-    }
-
     const computedUseInput = computed(() => props.useInput && !props.multiple);
 
     const selectedText = computed(() => {
@@ -267,18 +304,30 @@ export default {
       return getOptionLabel(value.value?.[props.optionValue] || value.value);
     });
 
+    function onPopup(show) {
+      innerValue.value = show
+        ? cloneDeep(value.value) : undefined;
+    }
+
+    function onConfirm() {
+      value.value = innerValue.value;
+      inputRef.value.hidePopup();
+    }
+
     return {
       ...useInheritAttrs(),
+      ...useFieldStyle(),
       ...fieldCtx,
       ...optionsCtx,
-      fieldStyleProps,
-      fieldClass,
+      computedValue,
       getOptionIndex,
       getOption,
       getOptionLabel,
       isOptionSelected,
       updateInputValue,
       onUpdateValue,
+      onPopup,
+      onConfirm,
       computedUseInput,
       selectedText,
     };
