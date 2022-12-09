@@ -14,16 +14,29 @@ export const useFontProps = {
   letterSpacing: { type: String, default: undefined },
 };
 
-export default (useImportant) => {
+export default (useImportant, defaults = {}) => {
   const { props } = getCurrentInstance();
 
+  const computedProps = computed(() => ({
+    font: props.font ?? defaults.font,
+    titleFont: props.titleFont ?? defaults.titleFont,
+    subtitleFont: props.subtitleFont ?? defaults.subtitleFont,
+    bodyFont: props.bodyFont ?? defaults.bodyFont,
+    denseFont: props.denseFont ?? defaults.denseFont,
+    captionFont: props.captionFont ?? defaults.captionFont,
+    lineHeight: props.lineHeight ?? defaults.lineHeight,
+    fontSize: props.fontSize ?? defaults.fontSize,
+    fontWeight: props.fontWeight ?? defaults.fontWeight,
+    letterSpacing: props.letterSpacing ?? defaults.letterSpacing,
+  }));
+
   const computedFont = computed(() => {
-    if (props.titleFont === true) return 'title';
-    if (props.subtitleFont === true) return 'subtitle';
-    if (props.bodyFont === true) return 'body';
-    if (props.denseFont === true) return 'dense';
-    if (props.captionFont === true) return 'caption';
-    if (props.font) return props.font;
+    if (computedProps.value.titleFont === true) return 'title';
+    if (computedProps.value.subtitleFont === true) return 'subtitle';
+    if (computedProps.value.bodyFont === true) return 'body';
+    if (computedProps.value.denseFont === true) return 'dense';
+    if (computedProps.value.captionFont === true) return 'caption';
+    if (computedProps.value.font) return props.font;
     return 'body';
   });
 
@@ -36,10 +49,10 @@ export default (useImportant) => {
 
   const fontStyle = computed(() => {
     const styles = {};
-    if (props.lineHeight) { styles['line-height'] = useImportant ? `${props.lineHeight} !important` : props.lineHeight; }
-    if (props.fontSize) { styles['font-size'] = useImportant ? `${props.fontSize} !important` : props.fontSize; }
-    if (props.fontWeight) { styles['font-weight'] = useImportant ? `${props.fontWeight} !important` : props.fontWeight; }
-    if (props.letterSpacing) { styles['letter-spacing'] = useImportant ? `${props.letterSpacing} !important` : props.letterSpacing; }
+    if (computedProps.value.lineHeight) { styles['line-height'] = useImportant ? `${props.lineHeight} !important` : props.lineHeight; }
+    if (computedProps.value.fontSize) { styles['font-size'] = useImportant ? `${props.fontSize} !important` : props.fontSize; }
+    if (computedProps.value.fontWeight) { styles['font-weight'] = useImportant ? `${props.fontWeight} !important` : props.fontWeight; }
+    if (computedProps.value.letterSpacing) { styles['letter-spacing'] = useImportant ? `${props.letterSpacing} !important` : props.letterSpacing; }
     return styles;
   });
 
