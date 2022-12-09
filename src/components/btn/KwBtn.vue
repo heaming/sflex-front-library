@@ -2,8 +2,7 @@
   <q-btn
     v-if="!isDestroyed"
     ref="btnRef"
-    v-bind="styleClassAttrs"
-    class="kw-btn"
+    v-bind="{...styleClassAttrs, ...buttonStyleProps}"
     :class="buttonClass"
     :style="buttonStyles"
     no-caps
@@ -14,7 +13,6 @@
     :label="label"
     :icon="icon"
     :icon-right="iconRight"
-    :dense="buttonDense"
     :tabindex="tabindex"
     :align="align"
     :stack="stack"

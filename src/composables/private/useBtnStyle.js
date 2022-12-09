@@ -14,6 +14,8 @@ export const useBtnStyleProps = {
   underline: { type: Boolean, default: false },
   borderless: { type: Boolean, default: false },
   outlined: { type: Boolean, default: false },
+  round: { type: Boolean, default: false },
+  rounded: { type: Boolean, default: false },
 
   // color props
   color: { type: String, default: undefined }, // this one should be solid color.
@@ -69,23 +71,42 @@ const designDefaultColors = {
   },
 };
 
-export default (defaultPreset) => {
+export default (defaults = {}) => {
   const { props, slots } = getCurrentInstance();
 
+  const computedProps = computed(() => ({
+    preset: props.preset ?? defaults.preset,
+    primary: props.primary ?? defaults.primary,
+    negative: props.negative ?? defaults.prnegativeeset,
+    secondary: props.secondary ?? defaults.secondary,
+    gridAction: props.gridAction ?? defaults.gridAction,
+    color: props.color ?? defaults.color,
+    textColor: props.textColor ?? defaults.textColor,
+    borderColor: props.borderColor ?? defaults.borderColor,
+    filled: props.filled ?? defaults.filled,
+    underline: props.underline ?? defaults.underline,
+    borderless: props.borderless ?? defaults.borderless,
+    outlined: props.outlined ?? defaults.outlined,
+    round: props.round ?? defaults.round,
+    rounded: props.rounded ?? defaults.rounded,
+    padding: props.padding ?? defaults.padding,
+    minWidth: props.minWidth ?? defaults.minWidth,
+  }));
+
   const stylePreset = computed(() => {
-    let preset = availablePresets[props.preset] ?? defaultPreset ?? {};
-    if (props.primary === true) { preset = availablePresets.primary; }
-    if (props.negative === true) { preset = availablePresets.negative; }
-    if (props.secondary === true) { preset = availablePresets.secondary; }
-    if (props.gridAction === true) { preset = availablePresets.gridAction; }
+    let preset = availablePresets[computedProps.value.preset] ?? {};
+    if (computedProps.value.primary === true) { preset = availablePresets.primary; }
+    if (computedProps.value.negative === true) { preset = availablePresets.negative; }
+    if (computedProps.value.secondary === true) { preset = availablePresets.secondary; }
+    if (computedProps.value.gridAction === true) { preset = availablePresets.gridAction; }
     return preset;
   });
 
   const design = computed(() => {
-    if (props.borderless === true) return 'borderless'; // no border, no hover, active, background : transparent
-    if (props.underline === true) return 'underline'; // no hover, active, border bottom = textColor
-    if (props.filled === true) return 'filled'; // no border
-    if (props.outlined === true) return 'outlined'; // border = textColor
+    if (computedProps.value.borderless === true) return 'borderless'; // no border, no hover, active, background : transparent
+    if (computedProps.value.underline === true) return 'underline'; // no hover, active, border bottom = textColor
+    if (computedProps.value.filled === true) return 'filled'; // no border
+    if (computedProps.value.outlined === true) return 'outlined'; // border = textColor
     if (stylePreset.value.borderless === true) return 'borderless'; // preset
     if (stylePreset.value.underline === true) return 'underline'; // preset
     if (stylePreset.value.filled === true) return 'filled'; // preset
@@ -93,41 +114,58 @@ export default (defaultPreset) => {
     return 'outlined'; // no border
   });
 
-  const buttonColor = computed(() => props.color
+  const buttonColor = computed(() => computedProps.value.color
     || stylePreset.value.color
     || designDefaultColors[design.value]?.color);
-  const buttonTextColor = computed(() => props.textColor
+  const buttonTextColor = computed(() => computedProps.value.textColor
     || stylePreset.value.textColor
     || designDefaultColors[design.value]?.textColor);
-  const buttonBorderColor = computed(() => props.borderColor
+  const buttonBorderColor = computed(() => computedProps.value.borderColor
     || stylePreset.value.borderColor
     || designDefaultColors[design.value]?.borderColor);
 
-  const { stretchClass } = useStretch();
+  const { stretchClass } = useStretch(defaults);
+
+  const iconOnly = computed(() => (props.icon || props.iconRight) && !props.label && !slots.default);
+
+  const borderStyle = computed(() => {
+    if (design.value === 'borderless' || design.value === 'underline') { return; }
+    if (computedProps.value.round === true) return 'round';
+    if (computedProps.value.rounded === true) return 'rounded';
+    if (stylePreset.value.round === true) return 'round';
+    if (stylePreset.value.rounded === true) return 'rounded';
+    return 'square';
+  });
 
   const buttonClass = computed(() => {
-    const classes = { ...stretchClass.value };
+    const classes = {
+      ...stretchClass.value,
+      'kw-btn': true,
+    };
     if (design.value) { classes[`kw-btn--${design.value}`] = true; }
     if (buttonColor.value) { classes[`kw-btn--color-${buttonColor.value}`] = true; }
     if (buttonTextColor.value) { classes[`kw-btn--text-color-${buttonTextColor.value}`] = true; }
     if (buttonBorderColor.value) { classes[`kw-btn--border-color-${buttonBorderColor.value}`] = true; }
-    if ((props.icon || props.iconRight) && !props.label && !slots.default) { classes['kw-btn--icon-only'] = true; }
+    if (iconOnly.value) { classes['kw-btn--icon-only'] = true; }
+    if (borderStyle.value) { classes[`kw-btn--${borderStyle.value}`] = true; }
     return classes;
   });
 
   const buttonStyles = computed(() => {
     let styles = '';
-    styles += props.padding ? `padding-left: ${props.padding}; padding-right: ${props.padding}; ` : '';
-    styles += props.minWidth ? `min-width: ${props.minWidth}; ` : '';
+    styles += computedProps.value.padding ? `padding-left: ${computedProps.value.padding}; padding-right: ${computedProps.value.padding}; ` : '';
+    styles += computedProps.value.minWidth ? `min-width: ${computedProps.value.minWidth}; ` : '';
     return styles;
   });
 
-  const computedDense = useDense();
-  const buttonDense = computed(() => computedDense.value ?? stylePreset.value.dense);
+  const computedDense = useDense(defaults);
+  const buttonStyleProps = computed(() => ({
+    dense: computedDense.value ?? defaults.dense,
+  }));
 
   return {
     buttonClass,
     buttonStyles,
-    buttonDense,
+    buttonStyleProps,
   };
 };

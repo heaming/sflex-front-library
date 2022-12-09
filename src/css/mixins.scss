@@ -235,6 +235,7 @@
   @include kw-btn-height-modifier($-padding, $-line-height, $-font-size, $-font-weight, $-letter-spacing);
 }
 
+// If, you don't want common hover, active effect. use this.
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
   .kw-btn--filled,
   .kw-btn--outlined {
