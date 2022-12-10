@@ -10,11 +10,8 @@
     :scroll-target="scrollTarget"
     :touch-position="touchPosition"
     :persistent="persistent"
-    :no-route-dismiss="noRouteDismiss"
-    :auto-close="autoClose"
-    :separate-close-popup="separateClosePopup"
-    :no-refocus="noRefocus"
-    :no-focus="noFocus"
+    :no-refocus="(isDialog || noRefocus)"
+    :no-focus="(isDialog || noFocus)"
     :fit="fit"
     :cover="cover"
     :anchor="anchor"
@@ -22,17 +19,17 @@
     :offset="offset"
     :max-height="maxHeight"
     :max-width="maxWidth"
-    :transition-show="$g.platform.is.mobile ? 'jump-up' : undefined"
-    :transition-hide="$g.platform.is.mobile ? 'jump-down' : undefined"
-    :transition-duration="$g.platform.is.mobile ? 0 : undefined"
-    @show="$emit('show', $event)"
+    :transition-duration="isDialog ? 0 : undefined"
     @before-show="$emit('beforeShow', $event)"
-    @hide="$emit('hide', $event)"
+    @show="$emit('show', $event)"
     @before-hide="$emit('beforeHide', $event)"
+    @hide="$emit('hide', $event)"
     @escape-key="$emit('escapeKey', $event)"
     @update:model-value="onUpdateShowing"
   >
-    <slot v-if="!isDialog" />
+    <kw-scroll-area>
+      <slot v-if="!isDialog" />
+    </kw-scroll-area>
   </q-menu>
   <q-dialog
     v-if="isDialog"
@@ -41,18 +38,16 @@
     :model-value="showing"
     class="kw-menu-dialog"
     :persistent="persistent"
-    :auto-close="autoClose"
-    :no-route-dismiss="noRouteDismiss"
     :no-refocus="noRefocus"
     :no-focus="noFocus"
     :no-shake="true"
-    :transition-show="$g.platform.is.mobile ? 'jump-up' : undefined"
-    :transition-hide="$g.platform.is.mobile ? 'jump-down' : undefined"
+    transition-show="jump-up"
+    transition-hide="jump-down"
     @update:model-value="onUpdateShowing"
   >
     <div>
       <div class="kw-menu-dialog__header">
-        <h1>{{ title || 'testtest' }}</h1>
+        <h1>{{ title }}</h1>
         <q-icon
           name="close"
           @click="onUpdateShowing(false)"
@@ -92,18 +87,15 @@ export default {
 
     // fallthrough
     target: { type: [Boolean, String, Element], default: undefined },
-    noParentEvent: { type: Boolean, default: undefined },
-    contextMenu: { type: Boolean, default: undefined },
+    noParentEvent: { type: Boolean, default: false },
+    contextMenu: { type: Boolean, default: false },
     scrollTarget: { type: [Element, String], default: undefined },
-    touchPosition: { type: Boolean, default: undefined },
-    persistent: { type: Boolean, default: undefined },
-    noRouteDismiss: { type: Boolean, default: undefined },
-    autoClose: { type: Boolean, default: undefined },
-    separateClosePopup: { type: Boolean, default: undefined },
-    noRefocus: { type: Boolean, default: undefined },
-    noFocus: { type: Boolean, default: undefined },
-    fit: { type: Boolean, default: undefined },
-    cover: { type: Boolean, default: undefined },
+    touchPosition: { type: Boolean, default: false },
+    persistent: { type: Boolean, default: false },
+    noRefocus: { type: Boolean, default: false },
+    noFocus: { type: Boolean, default: false },
+    fit: { type: Boolean, default: false },
+    cover: { type: Boolean, default: false },
     anchor: { type: String, default: undefined },
     self: { type: String, default: undefined },
     offset: { type: Array, default: undefined },
@@ -111,15 +103,14 @@ export default {
     maxWidth: { type: String, default: undefined },
   },
   emits: [
-    'show',
     'beforeShow',
-    'hide',
+    'show',
     'beforeHide',
+    'hide',
     'escapeKey',
   ],
 
-  // eslint-disable-next-line no-unused-vars
-  setup(props, { emits, attrs }) {
+  setup(props) {
     const menuRef = ref();
     const dialogRef = ref();
 

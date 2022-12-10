@@ -3,9 +3,14 @@
   border-radius: 0;
   box-shadow: none;
   box-sizing: border-box;
+  max-height: initial;
 
   &--dialog {
     display: none;
+  }
+
+  > .kw-scroll-area > .kw-scroll-area__wrapper {
+    max-height: 65vh;
   }
 }
 
@@ -71,7 +76,7 @@ body.mobile:not(.tablet) {
     }
 
     &__content {
-      .kw-scroll-area__wrapper {
+      > .kw-scroll-area > .kw-scroll-area__wrapper {
         max-height: calc(100vh - 278px);
       }
     }

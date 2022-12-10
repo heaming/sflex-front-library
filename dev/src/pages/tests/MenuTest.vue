@@ -10,7 +10,7 @@
         >
           <kw-list>
             <kw-item
-              v-for="n of 5"
+              v-for="n of 10"
               :key="n"
               tag="label"
               padding
