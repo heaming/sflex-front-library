@@ -124,7 +124,7 @@
     <template #option="{ itemProps, selected, opt, toggleOption }">
       <q-item
         :active="selected"
-        v-bind="itemProps"
+        v-bind="{...itemProps, onClick: () => toggleOption(opt, $g.platform.is.mobile) }"
       >
         <q-item-section
           v-if="multiple"
@@ -135,7 +135,7 @@
             dense
             :true-value="true"
             :false-value="false"
-            @update:model-value="toggleOption(opt)"
+            @update:model-value="toggleOption(opt, $g.platform.is.mobile)"
           />
         </q-item-section>
         <q-item-section>
@@ -187,7 +187,7 @@
 </template>
 
 <script>
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
@@ -247,9 +247,9 @@ export default {
     function onUpdateValue(val) {
       val ??= (props.multiple ? [] : '');
 
-      if (platform.is.mobile) {
-        innerValue.value = val;
-      } else {
+      innerValue.value = val;
+
+      if (platform.is.mobile === false) {
         value.value = val;
       }
     }
