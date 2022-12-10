@@ -36,7 +36,7 @@
   </q-menu>
   <q-dialog
     v-if="isDialog"
-    ref="dialog"
+    ref="dialogRef"
     v-bind="styleClassAttrs"
     :model-value="showing"
     class="kw-menu-dialog"
@@ -123,8 +123,14 @@ export default {
     const menuRef = ref();
     const dialogRef = ref();
 
-    const isDialog = computed(() => platform.is.mobile === true
-      && props.behavior === behaviorValues[1]);
+    const isDialog = computed(() => {
+      const isMobile = platform.is.mobile === true;
+      const behaviorIsDialog = props.behavior === behaviorValues[1];
+      return isMobile && behaviorIsDialog;
+    });
+
+    const currentComponent = computed(() => (isDialog.value ? dialogRef.value : menuRef.value));
+    const contentEl = computed(() => currentComponent.value?.contentEl);
 
     const menuClass = computed(() => ({
       'kw-menu': true,
@@ -147,14 +153,36 @@ export default {
       }
     }
 
+    function show(evt) {
+      currentComponent.value.show(evt);
+    }
+
+    function hide(evt) {
+      currentComponent.value.hide(evt);
+    }
+
+    function toggle(evt) {
+      currentComponent.value.toggle(evt);
+    }
+
+    function focus() {
+      currentComponent.value.focus();
+    }
+
     return {
       ...useInheritAttrs(),
       menuRef,
       dialogRef,
-      showing,
       isDialog,
+      currentComponent,
+      contentEl,
       menuClass,
+      showing,
       onUpdateShowing,
+      show,
+      hide,
+      toggle,
+      focus,
     };
   },
 };
