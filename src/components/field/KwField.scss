@@ -542,6 +542,14 @@
     }
   }
 
+  &--required {
+    & .kw-field-wrap__label::after {
+      content: "*";
+      display: contents;
+      color: $accent;
+    }
+  }
+
   .q-transition--field-message {
     &-leave-from,
     &-leave-active {

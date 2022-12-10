@@ -5,15 +5,15 @@ export const useStretchProps = {
   stretch: { type: Boolean, default: undefined },
 };
 
-export default () => {
+export default (defaults = {}) => {
   const { props } = getCurrentInstance();
 
   const stretchClass = computed(() => ({
-    grow: props.grow,
-    shrink: props.shrink,
-    'shrink-off': props.notFlexible,
-    'grow-off': props.notFlexible,
-    'self-stretch': props.stretch,
+    grow: props.grow ?? defaults.grow,
+    shrink: props.shrink ?? defaults.shrink,
+    'shrink-off': props.notFlexible ?? defaults.notFlexible,
+    'grow-off': props.notFlexible ?? defaults.notFlexible,
+    'self-stretch': props.stretch ?? defaults.stretch,
   }));
   const stretchProps = computed(() => ({
     grow: props.grow,

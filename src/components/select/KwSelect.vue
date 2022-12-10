@@ -8,7 +8,7 @@
     :class="fieldClass"
     popup-content-class="kw-select-options"
     :label="$g.platform.is.mobile ? label : undefined"
-    :error="invalid || undefined"
+    :error="invalid"
     :options="normalizedOptions"
     :option-value="optionValue"
     :option-label="optionLabel"
