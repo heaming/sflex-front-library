@@ -1,18 +1,18 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor, QListProps, QListSlots } from 'quasar';
 
-type FallThroughProps = 'separator' | 'padding' | 'bordered' | 'dense' | 'dark';
+type FallThroughProps = 'separator' | 'bordered';
 
 interface KwListProps extends Pick<QListProps, FallThroughProps> {
   /**
-   * custom, write me!!
+   * 직계 `KwItem` 컴포넌트를 dense style 로 만든다.
    *
    * @default false
    */
   dense?: boolean | undefined;
 
   /**
-   * custom, write me!!
+   * 직계 `KwItem` 컴포넌트를 padding style 로 만든다.
    *
    * @default false
    */

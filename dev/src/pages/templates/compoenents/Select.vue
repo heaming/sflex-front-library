@@ -28,6 +28,11 @@
       <kw-select
         v-bind="bindingProps"
       />
+      <div class="flex">
+        <kw-select
+          v-bind="bindingProps"
+        />
+      </div>
     </guide-section>
   </kw-page>
 </template>
