@@ -16,9 +16,8 @@
     :disable-main-btn="false"
     :disable-dropdown="false"
     :no-icon-animation="noIconAnimation"
-    v-bind="styleClassAttrs"
-    class="kw-btn kw-btn-dropdown"
-    :class="buttonClass"
+    v-bind="{...styleClassAttrs, ...buttonStyleProps}"
+    :class="buttonDropdownClass"
     :style="buttonStyles"
     no-caps
     unelevated
@@ -28,7 +27,6 @@
     :label="label"
     :icon="icon"
     :icon-right="iconRight"
-    :dense="buttonDense"
     :tabindex="tabindex"
     :align="align"
     :stack="stack"
@@ -118,9 +116,18 @@ export default {
 
     const { styleClassAttrs } = useInheritAttrs();
 
+    const { buttonClass, buttonStyles, buttonStyleProps } = useBtnStyle();
+
+    const buttonDropdownClass = computed(() => ({
+      'kw-btn-dropdown': true,
+      ...buttonClass.value,
+    }));
+
     return {
       ...usePermissions(),
-      ...useBtnStyle(),
+      buttonDropdownClass,
+      buttonStyles,
+      buttonStyleProps,
       styleClassAttrs,
       btnRef,
       click,

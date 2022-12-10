@@ -6,13 +6,19 @@ export interface UseStretchProps {
   stretch?: boolean;
 
   /**
-   * When used on flexbox parent, and there is not enough area, if overflow on, it will overflow the parent box.
+   * When used on flexbox parent, it will not be affected by flex system.
    */
-  overflow?: boolean;
+  notFlexible?: boolean;
 
   /**
    * When used on flexbox parent, will stretch to parent's width
    * if, it used in radio, checkbox, toggle, it just set margin auto
    */
   grow?: boolean;
+
+  /**
+   * When used on flexbox parent and this component not shrink,
+   * With this, it Will Shrink.
+   */
+  shrink?: boolean;
 }

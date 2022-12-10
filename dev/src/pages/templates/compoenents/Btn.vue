@@ -48,6 +48,9 @@
           padding: { type: String, default: undefined },
           minWidth: { type: String, default: undefined },
 
+          round: { type: Boolean, default: false },
+          rounded: { type: Boolean, default: false },
+
           // design on quasar unelevated style.
           filled: { type: Boolean, default: false },
           underline: { type: Boolean, default: false },
@@ -82,9 +85,21 @@
         }"
       />
       <kw-separator />
+      <kw-form>
+        <kw-form-row>
+          <kw-form-item label="class">
+            <kw-input
+              v-model="btnClass"
+              label="class"
+            />
+          </kw-form-item>
+        </kw-form-row>
+      </kw-form>
+      <kw-separator />
       <div class="w300 h300 bg-green flex">
         <kw-btn
           v-bind="bindingProps"
+          :class="btnClass"
         />
       </div>
     </guide-section>
@@ -93,6 +108,42 @@
       description="=Use default slot."
       :guide-code="defaultCode"
     >
+      <kw-btn
+        rounded
+        class="change-hard-rounded"
+      >
+        <kw-icon
+          size="40px"
+          name="bookmark_on"
+        />
+      </kw-btn>
+      <kw-btn
+        rounded
+        class="just-rounded-but-round-is-strong"
+      >
+        <kw-icon
+          size="40px"
+          name="bookmark_on"
+        />
+      </kw-btn>
+      <kw-btn
+        round
+        class="just-rounded-but-round-is-strong"
+      >
+        <kw-icon
+          size="40px"
+          name="bookmark_on"
+        />
+      </kw-btn>
+      <kw-btn
+        padding="8px"
+        rounded="50%"
+      >
+        <kw-icon
+          size="40px"
+          name="bookmark_on"
+        />
+      </kw-btn>
       <kw-btn
         v-bind="bindingProps"
       >
@@ -116,6 +167,7 @@ const bindingProps = computed(() => ({
   ...bindingProps3.value,
   ...bindingProps4.value,
 }));
+const btnClass = ref('kw-btn--t-btn');
 
 const defaultCode = `
       <kw-btn
@@ -125,3 +177,34 @@ const defaultCode = `
         <div>div2</div>
       </kw-btn>`;
 </script>
+
+<style lang="scss" scoped>
+@import "../src/css/mixins";
+
+.kw-btn {
+  &--t-btn {
+    &.q-btn {
+      @include kw-btn-height-modifier(7px, 1em, 18px, 500, normal, 50%);
+    }
+  }
+}
+
+.change-hard-rounded {
+  &.kw-btn {
+    @include kw-btn-height-modifier(7px, 1em, 18px, 500, normal, 50%);
+  }
+}
+
+.just-rounded-but-round-is-strong {
+  &.kw-btn {
+    @include kw-btn-height-modifier(7px, 1em, 18px, 500);
+  }
+}
+
+.just-rounded {
+  &.kw-btn {
+    @include kw-btn-height-modifier(7px, 1em, 18px, 500);
+  }
+}
+
+</style>
