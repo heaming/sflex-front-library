@@ -71,6 +71,25 @@ export interface UseBtnStyleProps extends UseDenseProps, UseStretchProps {
   outlined?: boolean;
 
   /**
+   * 버튼 디자인 속성.
+   *
+   * 테두리를 둥글게 만든다.
+   * 컨텐츠와 너비와 높이는 제한하려다가 풀어놓았다.
+   * @default false
+   */
+  round?: boolean;
+
+  /**
+   * 버튼 디자인 속성.
+   *
+   * 테두리를 패딩영역에 맞추어 최대한 둥글게 만든다.
+   * 값을 입력 할 경우 인라인 스타일로 박아버린다.
+   * 가능하다면, 값 입력을 자제하고 클래스를 작성해서 사용 할 것.
+   * @default false
+   */
+  rounded?: boolean | string;
+
+  /**
    * 버튼 색 속성.
    *
    * 버튼의 배경 색을 지정한다.
