@@ -1,29 +1,19 @@
 export const useFontProps = {
   font: { type: String, default: undefined },
 
-  titleFont: { type: Boolean, default: false },
-  subtitleFont: { type: Boolean, default: false },
-  bodyFont: { type: Boolean, default: false },
-  denseFont: { type: Boolean, default: false },
-  captionFont: { type: Boolean, default: false },
-
-  // color props
   lineHeight: { type: String, default: undefined },
   fontSize: { type: String, default: undefined },
   fontWeight: { type: String, default: undefined },
   letterSpacing: { type: String, default: undefined },
 };
 
+const FONT_DEFAULT = 'body';
+
 export default (useImportant, defaults = {}) => {
   const { props } = getCurrentInstance();
 
   const computedProps = computed(() => ({
     font: props.font ?? defaults.font,
-    titleFont: props.titleFont ?? defaults.titleFont,
-    subtitleFont: props.subtitleFont ?? defaults.subtitleFont,
-    bodyFont: props.bodyFont ?? defaults.bodyFont,
-    denseFont: props.denseFont ?? defaults.denseFont,
-    captionFont: props.captionFont ?? defaults.captionFont,
     lineHeight: props.lineHeight ?? defaults.lineHeight,
     fontSize: props.fontSize ?? defaults.fontSize,
     fontWeight: props.fontWeight ?? defaults.fontWeight,
@@ -31,13 +21,8 @@ export default (useImportant, defaults = {}) => {
   }));
 
   const computedFont = computed(() => {
-    if (computedProps.value.titleFont === true) return 'title';
-    if (computedProps.value.subtitleFont === true) return 'subtitle';
-    if (computedProps.value.bodyFont === true) return 'body';
-    if (computedProps.value.denseFont === true) return 'dense';
-    if (computedProps.value.captionFont === true) return 'caption';
     if (computedProps.value.font) return props.font;
-    return 'body';
+    return FONT_DEFAULT;
   });
 
   const fontClass = computed(() => {

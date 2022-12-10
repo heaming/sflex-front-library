@@ -24,6 +24,9 @@
           noWrap: { type: Boolean, default: false },
           stretch: { type: Boolean, default: false },
           grow: { type: Boolean, default: false },
+          loading: { type: Boolean, default: false },
+          percentage: { type: Number, default: undefined },
+          darkPercentage: { type: Boolean, default: undefined },
         }"
       />
       <guide-props
@@ -35,7 +38,6 @@
           negative: { type: Boolean, default: false },
           secondary: { type: Boolean, default: false },
           gridAction: { type: Boolean, default: false },
-
           preset: { type: String, default: '' },
         }"
       />
