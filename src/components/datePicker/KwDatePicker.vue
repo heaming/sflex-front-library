@@ -1,7 +1,7 @@
 <template>
   <q-input
     ref="inputRef"
-    v-model="innerValue"
+    v-model="inputValue"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-date-picker"
     :class="datePickerClass"
@@ -9,7 +9,7 @@
     :error="invalid"
     :readonly="readonly"
     :disable="disable"
-    :mask="innerValueMask"
+    :mask="inputValueMask"
     :unmasked-value="unmaskedValue"
     :autofocus="autofocus"
     :placeholder="placeholder"
@@ -23,17 +23,19 @@
         <q-icon name="calendar" />
       </div>
     </template>
-    <q-menu
+    <kw-menu
+      ref="menuRef"
       :model-value="showing"
       class="kw-date-picker__menu"
       no-parent-event
-      no-focus
-      no-refocus
+      :no-focus="!$g.platform.is.mobile"
+      :no-refocus="!$g.platform.is.mobile"
+      :title="placeholder"
+      :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
+      @update:model-value="setExpanded"
     >
       <kw-date
-        ref="dateRef"
-        tabindex="-1"
-        :model-value="value"
+        :model-value="dateValue"
         :unmasked-value="unmaskedValue"
         :min-view="minView"
         :max-view="2"
@@ -43,7 +45,18 @@
         :before-show="beforeShow"
         @update:model-value="onChangeDate"
       />
-    </q-menu>
+      <template
+        v-if="$g.platform.is.mobile"
+        #action
+      >
+        <kw-btn
+          grow
+          primary
+          :label="$t('MSG_BTN_CONFIRM', null, '확인')"
+          @click="onConfirm"
+        />
+      </template>
+    </kw-menu>
 
     <!-- label -->
     <template
@@ -76,6 +89,7 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
+import { platform } from '../../plugins/platform';
 import i18n from '../../i18n';
 
 const typeValues = ['date', 'month', 'year'];
@@ -139,31 +153,32 @@ export default {
   emits: ['update:modelValue'],
 
   setup(props) {
-    const inputRef = ref();
-    const dateRef = ref();
+    const menuRef = ref();
+
+    const fieldCtx = useField();
+    const { inputRef, value } = fieldCtx;
+
+    const fieldStyles = useFieldStyle();
+    const { fieldClass } = fieldStyles;
+
+    const minView = typeValues.findIndex((v) => v === props.type);
+    const typeFormat = typeFormats[minView];
 
     const isReadonlyOrDisable = computed(() => props.readonly || props.disable);
     const isExpanded = ref(false);
     const showing = computed(() => !isReadonlyOrDisable.value && isExpanded.value);
 
-    const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClass } = fieldStyles;
-
-    const fieldCtx = useField();
-    const { value } = fieldCtx;
-    const innerValue = ref(value.value);
     const datePickerClass = computed(() => ({
       ...fieldClass.value,
       'q-field--highlighted': showing.value,
     }));
 
-    const i = typeValues.findIndex((v) => v === props.type);
-    const typeFormat = typeFormats[i];
-    const innerValueMask = typeFormat.replace(/[YMD]/g, '#');
-    const minView = i;
+    const dateValue = ref();
+    const inputValue = ref(value.value);
+    const inputValueMask = typeFormat.replace(/[YMD]/g, '#');
 
     watch(value, (val) => {
-      innerValue.value = val;
+      inputValue.value = val;
     });
 
     function setExpanded(e) {
@@ -197,7 +212,7 @@ export default {
         }
       }
 
-      innerValue.value = value.value;
+      inputValue.value = value.value;
 
       const el = inputRef.value.getNativeElement();
       const shouldChangeSelection = document.activeElement === el && e.length < length;
@@ -208,15 +223,24 @@ export default {
     }
 
     async function onChangeDate(e) {
-      value.value = e;
-      await nextTick();
+      dateValue.value = e;
 
-      const el = inputRef.value.getNativeElement();
-      const { length } = typeFormat;
+      if (platform.is.mobile === false) {
+        value.value = e;
+        await nextTick();
 
-      el.focus();
-      el.setSelectionRange(length, length);
+        const el = inputRef.value.getNativeElement();
+        const { length } = typeFormat;
 
+        el.focus();
+        el.setSelectionRange(length, length);
+
+        setExpanded(false);
+      }
+    }
+
+    function onConfirm() {
+      value.value = dateValue.value;
       setExpanded(false);
     }
 
@@ -232,8 +256,9 @@ export default {
       setExpanded(false);
     }
 
+    const contentEl = computed(() => menuRef.value?.contentEl);
     const clickOutsideProps = {
-      innerRefs: [inputRef, dateRef],
+      innerRefs: [inputRef, contentEl],
       onClickOutside() { setExpanded(false); },
     };
 
@@ -241,6 +266,8 @@ export default {
       const el = inputRef.value.getNativeElement();
 
       if (val) {
+        dateValue.value = value.value;
+
         if (el !== document.activeElement) {
           const { length } = typeFormat;
           el.focus();
@@ -269,18 +296,20 @@ export default {
 
     return {
       ...useInheritAttrs(),
+      ...useFieldStyle(),
       ...fieldCtx,
-      fieldStyleProps,
-      datePickerClass,
-      inputRef,
-      dateRef,
-      showing,
-      innerValue,
-      innerValueMask,
+      ...fieldStyles,
+      menuRef,
       minView,
+      showing,
+      datePickerClass,
+      dateValue,
+      inputValue,
+      inputValueMask,
       setExpanded,
       onChangeInput,
       onChangeDate,
+      onConfirm,
       focus,
     };
   },

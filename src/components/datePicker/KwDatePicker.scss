@@ -59,6 +59,12 @@
     border-radius: 0;
     box-shadow: none;
   }
+
+  &__menu.q-dialog {
+    .kw-date {
+      margin: auto;
+    }
+  }
 }
 
 // 폼 내부 최내 너비 예외 처리.
