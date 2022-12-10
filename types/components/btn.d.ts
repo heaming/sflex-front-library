@@ -1,62 +1,34 @@
 import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { GlobalComponentConstructor, QBtnProps } from 'quasar';
 import { UseBtnStyleProps } from './private/useBtnStyle';
 
-interface KwBtnProps extends UseBtnStyleProps {
-  /**
-   * 1) Define the button native type attribute (submit, reset, button) or 2) render component with &lt;a&gt; tag so you can access events even if disable or 3) Use 'href' prop and specify 'type' as a media tag.
-   * @default 'button'
-   * @example 'a' | 'submit' | 'reset' | 'image/png href="https://quasar.dev" target="_blank"'
-   */
-  type?: string;
+type FallThroughProps = 'label' | 'disable' | 'to' | 'replace' | 'href' | 'target' | 'stack' | 'noWrap' | 'loading';
 
+interface KwBtnProps extends Pick<QBtnProps, FallThroughProps>, UseBtnStyleProps {
   /**
    * 버튼에 표시되는 텍스트
    */
-  label?: string | number;
+  label?: string | number | undefined;
 
   /**
    * 아이콘 이름을 지정. label 없이 아이콘만 있다면 너비가 자동 변경되게 해놓음.
    */
-  icon?: string;
+  icon?: string | undefined;
 
   /**
    * 라벨 우측에 표시되는 아이콘.
    */
-  iconRight?: string;
+  iconRight?: string | undefined;
 
   /**
    * Tabindex HTML attribute value
    */
-  tabindex?: number | string;
+  tabindex?: number | string | undefined;
 
   /**
    * 컴포넌트 비활성화 모드
    */
-  disable?: boolean;
-
-  /**
-   * Equivalent to Vue Router <router-link> 'to' property; Superseded by 'href' prop if used
-   * @example '/home/dashboard' | { name: 'my-route-name' }
-   */
-  to?: string | object;
-
-  /**
-   * Equivalent to Vue Router <router-link> 'replace' property; Superseded by 'href' prop if used
-   */
-  replace?: boolean;
-
-  /**
-   * Native &lt;a&gt; link href attribute; Has priority over the 'to' and 'replace' props
-   * @example 'https://quasar.dev' | { name: 'my-route-name' }
-   */
-  href?: string;
-
-  /**
-   * Native &lt;a&gt; link target attribute; Use it only with 'to' or 'href' props
-   * @example '\_blank' | '\_self' | '\_parent' | '\_top'
-   */
-  target?: string;
+  disable?: boolean | undefined;
 
   /**
    * Label or content alignment
@@ -66,14 +38,7 @@ interface KwBtnProps extends UseBtnStyleProps {
    * @default 'center'
    * @example 'left' | 'right' | 'center' | 'around' | 'between' | 'evenly'
    */
-  align?: string;
-
-  /**
-   * Stack icon and label vertically instead of on same line (like it is by default)
-   *
-   * adjust content area's flex-direction to column
-   */
-  stack?: boolean;
+  align?: string | undefined;
 
   /**
    * Avoid label text wrapping
@@ -81,7 +46,7 @@ interface KwBtnProps extends UseBtnStyleProps {
    *
    * adjust content area's flex-warp to nowrap
    */
-  noWrap?: boolean;
+  noWrap?: boolean | undefined;
 }
 interface KwBtnSlots {
   /**

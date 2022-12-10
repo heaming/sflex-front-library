@@ -22,6 +22,9 @@
     :replace="replace"
     :href="href"
     :target="target"
+    :loading="loading"
+    :percentage="percentage"
+    :dark-percentage="darkPercentage"
     @click="onClick"
   >
     <slot />
@@ -56,6 +59,9 @@ export default {
     align: { type: String, default: 'center' },
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
+    loading: { type: Boolean, default: false },
+    percentage: { type: Number, default: undefined },
+    darkPercentage: { type: Boolean, default: false },
 
     // events
     onClick: { type: Function, default: undefined },
