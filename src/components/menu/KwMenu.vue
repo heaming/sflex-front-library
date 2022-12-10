@@ -36,7 +36,7 @@
     ref="dialogRef"
     v-bind="styleClassAttrs"
     :model-value="showing"
-    class="kw-menu-dialog"
+    :class="dialogClass"
     :persistent="persistent"
     :no-refocus="noRefocus"
     :no-focus="noFocus"
@@ -59,9 +59,7 @@
         </kw-scroll-area>
       </div>
       <div class="kw-menu-dialog__action">
-        <slot name="action">
-          <kw-btn />
-        </slot>
+        <slot name="action" />
       </div>
     </div>
   </q-dialog>
@@ -128,6 +126,12 @@ export default {
       'kw-menu--dialog': isDialog.value,
     }));
 
+    const slots = useSlots();
+    const dialogClass = computed(() => ({
+      'kw-menu-dialog': true,
+      'kw-menu-dialog--no-action': slots.action === undefined,
+    }));
+
     const showing = ref(false);
 
     watch(() => props.modelValue, (val) => {
@@ -168,6 +172,7 @@ export default {
       currentComponent,
       contentEl,
       menuClass,
+      dialogClass,
       showing,
       onUpdateShowing,
       show,

@@ -30,6 +30,12 @@
       background: #fff;
     }
   }
+
+  &--no-action {
+    .kw-menu-dialog__action {
+      display: none !important;
+    }
+  }
 }
 
 body.mobile:not(.tablet) {
