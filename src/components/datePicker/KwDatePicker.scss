@@ -1,8 +1,175 @@
 .kw-date {
-  margin: 14px 14px 21px;
+  margin: 5px 12px 11px;
 
   &__container {
-    width: 220px;
+    width: 224px;
+
+    .datepicker-inline {
+      width: 224px;
+    }
+  }
+
+  & .datepicker.datepicker-inline th {
+    color: $black3;
+    font-size: 12px;
+    font-weight: 400;
+
+    &.prev,
+    &.datepicker-switch,
+    &.next {
+      color: $black1;
+      font-size: 16px;
+      font-weight: 500;
+      height: 46px;
+
+      &:hover {
+        background: none;
+      }
+    }
+
+    &.prev {
+      background: url(~@assets/images/ic_arrow_left.svg) no-repeat center;
+      background-size: 16px;
+      font-size: 0;
+    }
+
+    &.next {
+      background: url(~@assets/images/ic_arrow_right.svg) no-repeat center;
+      background-size: 16px;
+      font-size: 0;
+    }
+  }
+
+  & .datepicker table {
+    border-spacing: 0;
+
+    & tr td {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      border: 2px solid #fff;
+      color: $black1;
+      font-size: 14px;
+    }
+  }
+
+  & .datepicker table tr td.today {
+    background-color: rgba($primary, 0.1);
+  }
+
+  & .day {
+    &.old,
+    &.new {
+      color: rgba($black1, 0.3);
+    }
+
+    &.sunday {
+      color: $accent;
+
+      &.old,
+      &.new {
+        color: rgba($accent, 0.3);
+      }
+    }
+  }
+
+  & .datepicker table thead tr th.dow:first-child {
+    color: $accent;
+  }
+
+  .datepicker table tr td.day:not(.today):not(.active):not(.disabled):not(.old):not(.new).saturday {
+    color: $black1;
+
+    &.old {
+      color: rgba($black1, 0.3);
+    }
+  }
+
+  .datepicker table tr td.active.active,
+  .datepicker table tr td.active.highlighted.active,
+  .datepicker table tr td.active.highlighted:active,
+  .datepicker table tr td.active:active {
+    border-color: #fff !important;
+    background-color: $primary;
+    font-weight: 400;
+  }
+
+  @at-root [lang=ko-KR] & .datepicker {
+    .datepicker-months {
+      .datepicker-switch::after {
+        content: "년";
+        display: inline;
+      }
+    }
+
+    .datepicker-years {
+      span.year::after {
+        content: "년";
+        display: inline;
+      }
+    }
+  }
+
+  .datepicker .datepicker-months,
+  .datepicker .datepicker-years {
+    .table-condensed {
+      width: 100%;
+    }
+
+    td {
+      border: 0;
+    }
+
+    .year {
+      font-size: 12px;
+    }
+
+    .month,
+    .year {
+      width: 46px;
+      height: 46px;
+      line-height: 46px;
+      border-radius: 50%;
+      margin: 2px 6px;
+
+      &.old,
+      &.new {
+        color: $black1;
+      }
+
+      &:nth-child(4n - 3) {
+        margin-left: 2px;
+      }
+
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        margin-top: 0;
+      }
+
+      &:nth-child(9),
+      &:nth-child(10),
+      &:nth-child(11),
+      &:nth-child(12) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .datepicker table tr td span.active.active,
+  .datepicker table tr td span.active.disabled.active,
+  .datepicker table tr td span.active.disabled:active,
+  .datepicker table tr td span.active.disabled:hover.active,
+  .datepicker table tr td span.active.disabled:hover:active,
+  .datepicker table tr td span.active:active,
+  .datepicker table tr td span.active:hover.active,
+  .datepicker table tr td span.active:hover:active {
+    background-color: $primary;
   }
 }
 
