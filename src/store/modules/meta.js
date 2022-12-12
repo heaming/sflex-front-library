@@ -90,14 +90,14 @@ export default {
       const apps = response.data;
 
       commit('setApps', apps);
-      dispatch('app/createGnbItems', apps, { root: true });
+      dispatch('app/createGlobalApps', apps, { root: true });
     },
     async fetchMenus({ commit, dispatch }) {
       const response = await http.get('/sflex/common/common/portal/menus');
       const menus = response.data;
 
       commit('setMenus', menus);
-      dispatch('app/createLnbItems', menus, { root: true });
+      dispatch('app/createGlobalMenus', menus, { root: true });
     },
     async fetchPage({ commit, getters }, key) {
       const isCached = getters.getPage(key) !== undefined;

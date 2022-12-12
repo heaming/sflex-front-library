@@ -3,6 +3,7 @@ import useFieldStyle, { useFieldStyleProps } from '../../../composables/private/
 import useField, { useFieldProps } from '../../../composables/private/useField';
 import { addClickOutside, removeClickOutside } from '../../../utils/private/clickOutside';
 import { preventSubmitEnter, stopAndPrevent, addEvt, removeEvt } from '../../../utils/private/event';
+import { platform } from '../../../plugins/platform';
 import i18n from '../../../i18n';
 
 export const useTimePickerProps = {
@@ -46,12 +47,18 @@ export default () => {
   const fieldClasses = computed(() => ({ ...fieldClass.value, 'q-field--highlighted': showing.value }));
 
   const fieldCtx = useField();
-  const { value, inputRef } = fieldCtx;
+  const { inputRef, value } = fieldCtx;
 
   const inputValue = ref();
   const inputMeridiem = ref();
   const inputPrefix = computed(() => i18n.t(`MSG_TXT_${inputMeridiem.value}`, null, inputMeridiem.value));
+
+  const timeValue = ref();
   const timeFormat = computed(() => (props.unmaskedValue ? 'HHmm' : 'HH:mm'));
+
+  function setExpanded(e) {
+    isExpanded.value = e ?? !isExpanded.value;
+  }
 
   function updateInput(val) {
     const date = dayjs(
@@ -90,31 +97,49 @@ export default () => {
     }
   }
 
-  function setExpanded(e) {
-    isExpanded.value = e ?? !isExpanded.value;
+  async function onChangeTime(e) {
+    timeValue.value = e;
+
+    if (platform.is.mobile === false) {
+      value.value = e;
+      await nextTick();
+
+      const el = inputRef.value.getNativeElement();
+
+      el.focus();
+      el.setSelectionRange(5, 5);
+    }
   }
 
   function focus() {
     inputRef.value?.focus();
   }
 
-  const scrollPickerContainerRef = ref();
+  const menuRef = ref();
+  const contentEl = computed(() => menuRef.value?.contentEl);
   const clickOutsideProps = {
-    innerRefs: [inputRef, scrollPickerContainerRef],
+    innerRefs: [inputRef, contentEl],
     onClickOutside() { setExpanded(false); },
   };
 
+  function onConfirm() {
+    value.value = timeValue.value;
+    setExpanded(false);
+  }
+
   function onKeydown(e) {
-    // enter
-    if ((e.keyCode === 13)
+    // enter, space
+    if ((e.keyCode === 13 || e.keyCode === 32)
       && (e.target.value === e.target.__oldValue__)) {
       stopAndPrevent(e);
       setExpanded(true);
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
   function onKeydownWhenShowing(e) {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      stopAndPrevent(e);
+    }
     setExpanded(false);
   }
 
@@ -130,6 +155,8 @@ export default () => {
     const el = inputRef.value.getNativeElement();
 
     if (val) {
+      timeValue.value = value.value;
+
       if (el !== document.activeElement) {
         el.focus();
         el.setSelectionRange(5, 5);
@@ -159,11 +186,14 @@ export default () => {
     ...fieldCtx,
     inputValue,
     inputPrefix,
-    scrollPickerContainerRef,
+    timeValue,
+    menuRef,
 
     setExpanded,
     focus,
 
     onChangeInput,
+    onChangeTime,
+    onConfirm,
   };
 };

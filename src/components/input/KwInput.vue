@@ -39,6 +39,14 @@
     @change="onChangeInput"
     @update:model-value="onUpdateValue"
   >
+    <!-- default -->
+    <template
+      v-if="$slots.default"
+      #default
+    >
+      <slot />
+    </template>
+
     <!-- prepend -->
     <template
       v-if="$slots.prepend"

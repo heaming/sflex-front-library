@@ -16,7 +16,7 @@
       toggle-text-color="not-use"
       color="not-use"
       text-color="not-use"
-      :dense="buttonDense"
+      :dense="buttonStyleProps.dense"
       :disable="disable"
       :stack="stack"
       :no-wrap="noWrap"
@@ -69,7 +69,7 @@ export default {
 
   setup(props) {
     const { normalizedOptions } = useOptions();
-    const { buttonClass, buttonStyles, buttonDense } = useBtnStyle({
+    const { buttonClass, buttonStyles, buttonStyleProps } = useBtnStyle({
       color: 'bg-white',
       textColor: 'black3',
       borderColor: 'line-stroke',
@@ -77,10 +77,9 @@ export default {
       dense: true,
     });
 
-    const togglebuttonClass = computed(() => {
+    const toggleButtonClass = computed(() => {
       const classes = {
         ...buttonClass.value,
-        'kw-btn': true,
       };
       if (props.toggleColor) { classes[`kw-btn--toggle-color-${props.toggleColor}`] = true; }
       if (props.toggleTextColor) { classes[`kw-btn--toggle-text-color-${props.toggleTextColor}`] = true; }
@@ -107,7 +106,7 @@ export default {
 
     const assignOptionStyle = (v) => ({
       ...v,
-      class: togglebuttonClass.value,
+      class: toggleButtonClass.value,
       style: buttonStyles.value,
     });
     const styledOptions = computed(() => normalizedOptions.value.map(assignOptionStyle));
@@ -117,7 +116,7 @@ export default {
       ...useField(),
       stretchProps,
       styledOptions,
-      buttonDense,
+      buttonStyleProps,
       toggleClass,
       toggleStyle,
     };

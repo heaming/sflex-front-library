@@ -45,11 +45,6 @@
         user-select: none;
       }
 
-      // &.q-router-link--active,
-      // &--active {
-      //   color: $black2;
-      // }
-
       .q-focus-helper {
         display: none;
       }
@@ -61,6 +56,7 @@
     width: 100%;
     background: #fff;
     overflow: hidden;
+    z-index: 2;
 
     &::before {
       content: "";
@@ -75,6 +71,52 @@
     .q-item {
       font-size: 16px;
       font-weight: 700;
+    }
+  }
+
+  &__step {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 80%;
+      height: 100%;
+      border: 1px solid $line-bg;
+    }
+
+    > .q-icon {
+      position: absolute;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:nth-child(1) {
+        top: -16px;
+      }
+
+      &:nth-child(2) {
+        bottom: -16px;
+      }
+    }
+  }
+
+  &:has(.kw-scroll-picker__step) {
+    &::before {
+      background: #fff;
+      pointer-events: all;
+    }
+
+    &::after {
+      background: #fff;
+      pointer-events: all;
+    }
+
+    .kw-scroll-picker__highlight::before {
+      background: initial;
     }
   }
 }

@@ -16,14 +16,14 @@ export default {
     const { commit } = useStore();
     const { getRoutes, currentRoute } = useRouter();
 
-    function updateSelectedGnbLnb(route) {
+    function updateSelectedGlobalKeys(route) {
       const { meta, name } = route;
 
       if (meta.glob === true) {
-        commit('app/setSelectedGnbKey', name.split('/')[1]);
-        commit('app/setSelectedLnbKey', name);
+        commit('app/setSelectedGlobalAppKey', name.split('/')[1]);
+        commit('app/setSelectedGlobalMenuKey', name);
       } else {
-        commit('app/setSelectedLnbKey', null);
+        commit('app/setSelectedGlobalMenuKey', null);
       }
     }
 
@@ -31,10 +31,10 @@ export default {
     const matched = getRoutes().find((v) => v.name === hash);
 
     if (matched) {
-      updateSelectedGnbLnb(matched);
+      updateSelectedGlobalKeys(matched);
     }
 
-    watch(currentRoute, updateSelectedGnbLnb);
+    watch(currentRoute, updateSelectedGlobalKeys);
   },
 };
 </script>

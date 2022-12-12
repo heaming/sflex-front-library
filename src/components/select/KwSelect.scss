@@ -85,12 +85,18 @@
 }
 
 body.mobile:not(.tablet) {
+  $kw-select-options-header-height: 74px;
+  $kw-select-options-action-height: 96px;
+  $kw-select-options-max-height: calc(100vh - (108px + #{$kw-select-options-header-height} + #{$kw-select-options-action-height})) !important;
+
   .q-select__dialog {
     position: absolute;
-    bottom: 0;
+    overflow: visible;
+    bottom: $kw-select-options-action-height;
     width: 100vw !important;
     max-width: 100vw !important;
-    border-radius: 16px 16px 0 0;
+    max-height: $kw-select-options-max-height;
+    box-shadow: none;
 
     .q-field {
       display: none;
@@ -106,16 +112,28 @@ body.mobile:not(.tablet) {
   }
 
   .kw-select-options {
+    position: static;
+    border: none;
+
+    // overflow: hidden;
+
     .q-item {
       padding: 14px 20px;
       flex-direction: row-reverse;
     }
 
     &__header {
+      position: absolute;
+      top: -$kw-select-options-header-height;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px 20px 24px;
+      width: 100%;
+      height: $kw-select-options-header-height;
+      border-radius: 16px 16px 0 0;
+      background: #fff;
+      z-index: 1;
 
       > h1 {
         flex: 1;
@@ -139,8 +157,14 @@ body.mobile:not(.tablet) {
     }
 
     &__action {
+      position: absolute;
+      bottom: -$kw-select-options-action-height;
       display: flex;
       padding: 24px 20px 32px;
+      width: 100%;
+      height: $kw-select-options-action-height;
+      background: #fff;
+      z-index: 1;
     }
   }
 }

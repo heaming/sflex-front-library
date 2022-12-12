@@ -122,6 +122,20 @@
             />
           </kw-form-item>
         </kw-form-row>
+        <kw-form-row :cols="4">
+          <kw-form-item label="폼 아이템">
+            <kw-date-range-picker
+              v-bind="bindingProps2"
+            />
+          </kw-form-item>
+        </kw-form-row>
+        <kw-form-row :cols="4">
+          <kw-form-item label="폼 아이템">
+            <kw-date-picker
+              v-bind="bindingProps"
+            />
+          </kw-form-item>
+        </kw-form-row>
       </kw-form>
 
       <kw-search
@@ -130,6 +144,7 @@
       >
         <kw-search-row>
           <kw-search-item label="서치 아이템">
+            <kw-input />
             <kw-date-range-picker
               v-bind="bindingProps2"
             />
@@ -137,6 +152,22 @@
         </kw-search-row>
         <kw-search-row>
           <kw-search-item label="서치 아이템">
+            <kw-date-picker
+              v-bind="bindingProps"
+            />
+          </kw-search-item>
+        </kw-search-row>
+        <kw-search-row :cols="4">
+          <kw-search-item label="서치 아이템">
+            <kw-input />
+            <kw-date-range-picker
+              v-bind="bindingProps2"
+            />
+          </kw-search-item>
+        </kw-search-row>
+        <kw-search-row :cols="4">
+          <kw-search-item label="서치 아이템">
+            <kw-input />
             <kw-date-picker
               v-bind="bindingProps"
             />

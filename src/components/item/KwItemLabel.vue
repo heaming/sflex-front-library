@@ -26,9 +26,6 @@ export default {
 
     // fall through props
     lines: { type: [Number, String], default: undefined },
-    overline: { type: Boolean, default: undefined },
-    caption: { type: Boolean, default: undefined },
-    header: { type: Boolean, default: undefined },
   },
   setup() {
     const { styleClassAttrs } = useInheritAttrs();

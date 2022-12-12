@@ -138,6 +138,7 @@ const iconList2 = [
   'pdf_24',
   'plus_24',
   'preview_24',
+  'preview_img_24',
   'price_24',
   'price_cycle_24',
   'search_24',
