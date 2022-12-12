@@ -2,60 +2,60 @@ export default {
   namespaced: true,
 
   state: () => ({
-    lnbExpanded: true,
+    leftDrawerExpanded: true,
 
-    gnbItems: [],
-    selectedGnbKey: null,
+    globalApps: [],
+    selectedGlobalAppKey: null,
 
-    lnbItems: [],
-    selectedLnbKey: null,
+    globalMenus: [],
+    selectedGlobalMenuKey: null,
   }),
 
   mutations: {
-    setLnbExpanded(state, value) {
-      state.lnbExpanded = value;
+    setLeftDrawerExpanded(state, expanded) {
+      state.leftDrawerExpanded = expanded;
     },
-    setGnbItems(state, gnbItems) {
-      state.gnbItems = gnbItems;
+    setGlobalApps(state, apps) {
+      state.globalApps = apps;
     },
-    setSelectedGnbKey(state, gnbKey) {
-      state.selectedGnbKey = gnbKey;
+    setSelectedGlobalAppKey(state, lnbKey) {
+      state.selectedGlobalAppKey = lnbKey;
     },
-    setLnbItems(state, lnbItems) {
-      state.lnbItems = lnbItems;
+    setGlobalMenus(state, menus) {
+      state.globalMenus = menus;
     },
-    setSelectedLnbKey(state, lnbKey) {
-      state.selectedLnbKey = lnbKey;
+    setSelectedGlobalMenuKey(state, menuKey) {
+      state.selectedGlobalMenuKey = menuKey;
     },
   },
 
   getters: {
-    getLnbExpanded: (state) => state.lnbExpanded,
-    getGnbItems: (state) => state.gnbItems,
-    getSelectedGnbKey: (state) => state.selectedGnbKey,
-    getLnbItems: (state) => state.lnbItems,
-    getSelectedLnbKey: (state) => state.selectedLnbKey,
+    getLeftDrawerExpanded: (state) => state.leftDrawerExpanded,
+    getGlobalApps: (state) => state.globalApps,
+    getSelectedGlobalAppKey: (state) => state.selectedGlobalAppKey,
+    getGlobalMenus: (state) => state.globalMenus,
+    getSelectedGlobalMenuKey: (state) => state.selectedGlobalMenuKey,
   },
 
   actions: {
-    createGnbItems({ commit }, apps) {
-      const normalizedGnbItems = apps.map((v) => ({
+    createGlobalApps({ commit }, apps) {
+      const normalizedApps = apps.map((v) => ({
         key: v.key || v.applicationId,
         label: v.label || v.applicationName,
       }));
 
-      commit('setGnbItems', normalizedGnbItems);
+      commit('setGlobalApps', normalizedApps);
     },
-    createLnbItems({ commit }, menus) {
-      const normalizedLnbItems = menus.map((v) => ({
-        gnbKey: v.gnbKey || v.applicationId,
+    createGlobalMenus({ commit }, menus) {
+      const normalizedMenus = menus.map((v) => ({
+        appKey: v.appKey || v.applicationId,
         key: v.key || v.menuUid,
         parentsKey: v.parentsKey || v.parentsMenuUid,
         label: v.label || v.menuName,
         depth: v.depth || v.menuLevel,
       }));
 
-      commit('setLnbItems', normalizedLnbItems);
+      commit('setGlobalMenus', normalizedMenus);
     },
   },
 };
