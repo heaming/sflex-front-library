@@ -1,16 +1,17 @@
 <template>
   <div
     class="kw-scroll-picker"
-    @wheel="onWheel"
+    @wheel.passive="onWheel"
   >
     <q-list
       class="kw-scroll-picker__options"
-      :style="optionsStyle"
+      :style="transformPositionStyle"
     >
       <q-item
         v-for="(option, i) in options"
         :key="i"
         :style="getOptionStyle(option)"
+        :disable="disable === true"
         clickable
         tabindex="-1"
         @click="onClick(option)"
@@ -25,11 +26,11 @@
 
     <div
       class="kw-scroll-picker__highlight"
-      :style="highlightStyle"
+      :style="centralPositionStyle"
     >
       <q-list
         class="kw-scroll-picker__options"
-        :style="optionsStyle"
+        :style="transformPositionStyle"
       >
         <q-item
           v-for="(option, i) in options"
@@ -44,6 +45,23 @@
           </q-item-section>
         </q-item>
       </q-list>
+    </div>
+
+    <div
+      v-if="step === true"
+      class="kw-scroll-picker__step"
+      :style="centralPositionStyle"
+    >
+      <q-icon
+        :style="stepArrowUpStyle"
+        name="arrow_up"
+        @click="previous()"
+      />
+      <q-icon
+        :style="stepArrowDownStyle"
+        name="arrow_down"
+        @click="next()"
+      />
     </div>
   </div>
 </template>

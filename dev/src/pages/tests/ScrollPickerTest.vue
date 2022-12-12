@@ -1,7 +1,7 @@
 <template>
   <kw-page>
     <div class="result-area">
-      <kw-form :cols="3">
+      <kw-form :cols="1">
         <kw-form-row>
           <kw-form-item
             :label="value"
