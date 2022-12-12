@@ -1,54 +1,65 @@
 <template>
   <div class="kw-page-header">
     <div
-      v-if="heading"
-      class="kw-page-header-title_area"
+      v-if="title"
+      class="kw-page-header__title"
     >
-      <q-icon
+      <kw-icon
         size="24px"
-        class="mr6"
         name="arrow_left_breadcrumbs_24"
+        clickable
         @click="onClickBack"
       >
-        <kw-tooltip>
-          {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
-        </kw-tooltip>
-      </q-icon>
-      <h1>{{ heading }}</h1>
+        {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
+      </kw-icon>
+
+      <h1>{{ title }}</h1>
+    </div>
+
+    <div class="kw-page-header__tools">
       <kw-checkbox
-        size="16px"
         model-value="Y"
         checked-icon="bookmark_on"
         unchecked-icon="bookmark_off"
+        @click="onClickFavorites"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
         </kw-tooltip>
       </kw-checkbox>
-      <kw-btn
-        icon="alert_on"
-        class="btn-icon--bell pa0"
-        borderless
-        dense
-        color="translate"
-      />
+
+      <kw-icon
+        name="alert_on"
+        clickable
+        @click="onClickNotifications"
+      >
+        {{ $t('MSG_TXT_NTC', null, '알림보기') }}
+      </kw-icon>
+
+      <kw-icon
+        name="new_window"
+        clickable
+        @click="onClickNewWindow"
+      >
+        {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
+      </kw-icon>
     </div>
-    <q-breadcrumbs align="right">
+
+    <q-space />
+
+    <q-breadcrumbs class="kw-page-header__navigation">
       <q-breadcrumbs-el
         v-for="(breadcrumb, i) of breadcrumbs"
         :key="breadcrumb.key"
         :label="breadcrumb.label"
       >
-        <button
+        <kw-icon
           v-if="i === breadcrumbs.length - 1"
-          type="button"
-          class="breadcrumbs-hint"
+          clickable
           @click="onClickHint"
         >
-          <kw-tooltip>
-            {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
-          </kw-tooltip>
-        </button>
+          {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
+        </kw-icon>
       </q-breadcrumbs-el>
     </q-breadcrumbs>
   </div>
@@ -56,6 +67,7 @@
 
 <script>
 import { find, last } from 'lodash-es';
+import { open } from '../../utils/popup';
 
 function creataBreadcrumbs(menus, menuUid) {
   const matched = find(menus, { menuUid });
@@ -83,30 +95,44 @@ export default {
     },
   },
   setup(props) {
+    const { t } = useI18n();
     const { getters } = useStore();
+
     const { currentRoute } = useRouter();
+    const { name: menuUid, path } = currentRoute.value;
 
-    const breadcrumbs = ref([]);
-    const options = toRef(props, 'options');
+    const menus = getters['meta/getMenus'];
+    const matched = find(menus, { menuUid });
 
-    if (Array.isArray(options.value)) {
-      breadcrumbs.value = options.value.map((v) => ({ key: v, label: v }));
-    } else {
-      const menus = getters['meta/getMenus'];
-      const { applicationId, menuUid } = find(menus, ['menuUid', currentRoute.value.name]) || {};
+    const breadcrumbs = computed(() => {
+      if (Array.isArray(props.options)) {
+        return props.options.value.map((v) => ({ key: v, label: v }));
+      }
 
-      if (applicationId) {
-        const app = getters['meta/getApp'](applicationId);
-        breadcrumbs.value = [
+      if (matched) {
+        const {
+          applicationId,
+          applicationName,
+        } = getters['meta/getApp'](matched.applicationId);
+
+        return [
+          {
+            key: 'home',
+            label: t('MSG_TXT_HOME', null, '홈'),
+
+          },
           {
             key: applicationId,
-            label: app.applicationName,
+            label: applicationName,
           },
           ...creataBreadcrumbs(menus, menuUid),
         ];
       }
-    }
-    const heading = computed(() => last(breadcrumbs.value)?.label);
+
+      return [];
+    });
+
+    const title = computed(() => last(breadcrumbs.value)?.label);
     const isAuthenticated = getters['meta/isAuthenticated'];
 
     function onClickBack() {
@@ -119,15 +145,25 @@ export default {
       }
     }
 
+    function onClickNotifications() {
+      //
+    }
+
+    function onClickNewWindow() {
+      open(`/popup#${path}`);
+    }
+
     function onClickHint() {
       //
     }
 
     return {
       breadcrumbs,
-      heading,
+      title,
       onClickBack,
       onClickFavorites,
+      onClickNotifications,
+      onClickNewWindow,
       onClickHint,
     };
   },

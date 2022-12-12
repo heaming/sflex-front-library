@@ -245,14 +245,19 @@ export default {
     }
 
     function onKeydown(e) {
-      // enter
-      if (e.keyCode === 13 && (e.target.value === e.target.__oldValue__)) {
+      // enter, space
+      if ((e.keyCode === 13 || e.keyCode === 32)
+        && (e.target.value === e.target.__oldValue__)) {
         stopAndPrevent(e);
         setExpanded(true);
       }
     }
 
-    function onKeydownWhenShowing() {
+    function onKeydownWhenShowing(e) {
+      // enter, space
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        stopAndPrevent(e);
+      }
       setExpanded(false);
     }
 

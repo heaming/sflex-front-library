@@ -33,6 +33,14 @@ export const useScrollPickerProps = {
     type: Number,
     default: 0,
   },
+  step: {
+    type: Boolean,
+    default: false,
+  },
+  disable: {
+    type: Boolean,
+    default: false,
+  },
   animateOnValueUpdate: {
     type: Boolean,
     default: false,
@@ -50,7 +58,6 @@ export default () => {
   const itemSize = toRaw(props.itemSize);
   const itemAngle = toRaw(props.itemAngle);
   const infinite = toRaw(props.infinite);
-  const rotateY = toRef(props, 'rotateY');
 
   const circumference = (itemSize * 360) / itemAngle;
   const radius = circumference / (2 * PI);
@@ -61,16 +68,27 @@ export default () => {
   const selectedIndex = computed(() => findIndex(items, { value: selected.value?.value }));
   const selectedValue = computed(() => selected.value?.value);
 
-  const optionsStyle = computed(() => {
+  const rotateY = computed(() => (props.step === true ? 0 : props.rotateY));
+  const transformPositionStyle = computed(() => {
     const top = '50%';
     const transform = `rotateY(${rotateY.value}deg) translateZ(${-radius}px)`;
     return { top, transform };
   });
-
-  const highlightStyle = computed(() => {
+  const centralPositionStyle = computed(() => {
     const top = `calc(50% - ${itemSize / 2}px)`;
     const height = `${itemSize}px`;
     return { top, height };
+  });
+
+  const stepArrowUpStyle = computed(() => {
+    const disabled = props.disable === true
+      || (!infinite && selectedValue.value === items[0].value);
+    return { cursor: disabled ? 'not-allowed' : 'pointer' };
+  });
+  const stepArrowDownStyle = computed(() => {
+    const disabled = props.disable === true
+      || (!infinite && selectedValue.value === items[items.length - 1].value);
+    return { cursor: disabled ? 'not-allowed' : 'pointer' };
   });
 
   const getOptionStyle = (option) => {
@@ -164,8 +182,9 @@ export default () => {
 
   async function scrollTo(value) {
     const index = findIndex(items, { value });
+    const shouldIgnore = props.disable === true || index === -1;
 
-    if (index === -1) return;
+    if (shouldIgnore) return;
 
     const distance = abs(selectedIndex.value - index);
     const indexOffset = infinite ? min(distance, normalizeArrayIndex(items, -distance)) : distance;
@@ -223,7 +242,13 @@ export default () => {
 
   updateOptions(props.modelValue);
 
+  function onClick(option) {
+    scrollTo(option.value);
+  }
+
   function onWheel(evt) {
+    if (props.disable === true) return;
+
     stopAndPrevent(evt);
 
     const direction = evt.deltaY < 0 ? DIRECTION.UP : DIRECTION.DOWN;
@@ -234,31 +259,24 @@ export default () => {
     updateValue();
   }
 
-  function onClick(option) {
-    scrollTo(option.value);
-  }
-
   return {
     items,
     itemSize,
     itemAngle,
-
     rotation,
     options,
-    optionsStyle,
-    highlightStyle,
+    transformPositionStyle,
+    centralPositionStyle,
+    stepArrowUpStyle,
+    stepArrowDownStyle,
     getOptionStyle,
 
-    updateValue,
-    rotate,
-    cancelAnimate,
-    animate,
     scrollTo,
     scrollBy,
     previous,
     next,
 
-    onWheel,
     onClick,
+    onWheel,
   };
 };
