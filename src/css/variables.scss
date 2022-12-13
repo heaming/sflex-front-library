@@ -150,3 +150,28 @@ $kw-field-color-disable: $black3;
 $kw-field-label-height: 24px;
 $kw-field-label-height-dense: 24px;
 $kw-item-padding: 16px 0;
+$kw-scrollbar-width: 6px;
+$kw-scrollbar-height: 6px;
+$kw-scrollbar-track-background-color: transparent !default;
+$kw-scrollbar-track-background-color-hover: transparent !default;
+$kw-scrollbar-track-background-color-active: transparent !default;
+$kw-scrollbar-thumb-background-color: transparent !default;
+$kw-scrollbar-thumb-background-color-hover: $line-stroke !default;
+$kw-scrollbar-thumb-background-color-active: $line-stroke !default;
+
+// notice thumb width == (scrollbar-width ||  scrollbar-height) - border size
+$kw-scrollbar-thumb-border: 0 solid transparent;
+$kw-scrollbar-thumb-border-hover: 0 solid transparent;
+$kw-scrollbar-thumb-border-active: 0 solid $line-stroke;
+
+// mobile scroll
+$kw-scrollbar-width-mobile: 6px;
+$kw-scrollbar-height-mobile: 6px;
+$kw-scrollbar-track-background-color-mobile: transparent !default;
+$kw-scrollbar-track-background-color-hover-mobile: transparent !default;
+$kw-scrollbar-thumb-background-color-mobile: transparent !default;
+$kw-scrollbar-thumb-background-color-hover-mobile: $line-stroke !default;
+$kw-scrollbar-track-background-color-active-mobile: $line-stroke !default;
+$kw-scrollbar-thumb-border-mobile: 2px solid transparent;
+$kw-scrollbar-thumb-border-hover-mobile: 2px solid transparent;
+$kw-scrollbar-thumb-border-active-mobile: 2px solid $line-stroke;

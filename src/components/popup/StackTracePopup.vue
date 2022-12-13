@@ -7,7 +7,7 @@
     <h1 class="stack-trace-popup__title">
       {{ errorMessage }}
     </h1>
-    <q-scroll-area>
+    <q-scroll-area class="legacy-scroll-area">
       <p class="stack-trace-popup__content">
         {{ errorDetailMessage }}
       </p>
