@@ -17,6 +17,13 @@
       cursor: grab; // fixme default
     }
 
+    &__thumb {
+      &:hover,
+      &:active {
+        border-color: $line-stroke !important;
+      }
+    }
+
     &__container {
       width: auto !important;
       height: auto !important;
@@ -27,8 +34,8 @@
 
     &__content {
       position: relative !important;
-      min-height: unset !important;
-      min-width: unset !important;
+      min-height: fit-content !important;
+      min-width: fit-content !important;
     }
   }
 }

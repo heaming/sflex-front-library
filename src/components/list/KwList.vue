@@ -61,6 +61,7 @@
         @click="onClick(item)"
       >
         <kw-item-section
+          v-if="selectComponent"
           side
           v-bind="selectAlignProps"
         >

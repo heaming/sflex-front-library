@@ -27,7 +27,7 @@
     @escape-key="$emit('escapeKey', $event)"
     @update:model-value="onUpdateShowing"
   >
-    <kw-scroll-area>
+    <kw-scroll-area class="kw-menu__scroll-area">
       <slot v-if="!isDialog" />
     </kw-scroll-area>
   </q-menu>
@@ -54,7 +54,7 @@
         />
       </div>
       <div class="kw-menu-dialog__content">
-        <kw-scroll-area>
+        <kw-scroll-area class="kw-menu-dialog__scroll-area">
           <slot />
         </kw-scroll-area>
       </div>

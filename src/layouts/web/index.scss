@@ -21,13 +21,12 @@ body.desktop .web-layout {
   }
 
   &__logo {
-    width: 120px;
-    height: 24px;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 24px;
-    text-align: center;
-    color: $black1;
+    width: 135px;
+    height: 34px;
+
+    img {
+      cursor: pointer;
+    }
   }
 
   &__apps {
@@ -92,65 +91,51 @@ body.desktop .web-layout {
   Left Drawer
  */
 .web-left-drawer {
+  display: flex;
   overflow: hidden;
 
-  .q-scrollarea {
+  &__mini {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     height: 100%;
-  }
+    border-right: 1px solid $line-line;
+    box-sizing: border-box;
 
-  &__btn {
-    &.kw-btn.q-btn {
-      position: absolute;
-      top: calc(50% - 30px);
-      right: -24px;
-      width: 30px;
-      height: 60px;
-      padding: 0;
-      border-radius: 0 30px 30px 0;
-      z-index: 990;
-      clip-path: inset(-10px -10px -10px 6px);
-      box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 35%);
-      background-color: $black2 !important;
-
-      .q-icon {
-        font-size: 16px;
-        margin-left: 5px;
-      }
-
-      &.q-focusable:focus,
-      &.q-manual-focusable--focused,
-      &.q-hoverable:hover,
-      &.q-btn.q-btn--active {
-        &::before {
-          background-color: $black2 !important;
-        }
-      }
-    }
-
-    &--expanded {
-      svg {
-        transform: rotate(180deg);
-      }
+    > .kw-btn {
+      width: 40px;
+      height: 96px;
+      border-bottom: 1px solid $line-line;
     }
   }
 
   &__title {
     display: flex;
-    min-height: 45px;
-    margin: 0 20px;
-    border-bottom: 2px solid $black1;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid $line-line;
     font-weight: 700;
     font-size: 18px;
     color: $black1;
-    align-items: center;
   }
 
-  &__menus {
-    padding-top: 40px;
+  &__content {
+    flex: 100;
+    height: 100%;
+
+    > div {
+      height: calc(100% - 50px);
+
+      .q-scrollarea {
+        height: 100%;
+      }
+    }
   }
 }
 
-.web-left-drawer__tree {
+.web-left-drawer__menu {
   &.q-tree {
     .q-focus-helper {
       display: none;
