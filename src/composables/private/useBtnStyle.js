@@ -77,7 +77,7 @@ export default (defaults = {}) => {
   const computedProps = computed(() => ({
     preset: props.preset ?? defaults.preset,
     primary: props.primary ?? defaults.primary,
-    negative: props.negative ?? defaults.prnegativeeset,
+    negative: props.negative ?? defaults.negative,
     secondary: props.secondary ?? defaults.secondary,
     gridAction: props.gridAction ?? defaults.gridAction,
     color: props.color ?? defaults.color,
@@ -166,7 +166,7 @@ export default (defaults = {}) => {
 
   const computedDense = useDense(defaults);
   const buttonStyleProps = computed(() => ({
-    dense: computedDense.value ?? defaults.dense,
+    dense: computedDense.value ?? stylePreset.value.dense ?? defaults.dense,
   }));
 
   return {
