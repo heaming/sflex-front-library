@@ -123,7 +123,6 @@
     <!-- options -->
     <template #option="{ itemProps, selected, opt, toggleOption }">
       <q-item
-        class="kw-select-options__item"
         :active="selected"
         v-bind="{...itemProps, onClick: () => toggleOption(opt, $g.platform.is.mobile) }"
       >

@@ -46,45 +46,43 @@
   border-radius: 0;
   box-shadow: none;
 
-  &__item {
+  .q-item {
     min-height: 34px;
     padding: 7px 12px;
     font-size: 14px;
     font-weight: normal;
     color: $black2;
 
-    &.q-item {
-      &__section {
-        &--side {
-          .q-checkbox {
-            &__icon {
-              font-size: 1em;
-            }
+    &__section {
+      &--side {
+        .q-checkbox {
+          &__icon {
+            font-size: 1em;
           }
         }
-
-        &--main {
-          margin: 0 !important;
-        }
       }
 
-      &.q-hoverable:hover,
-      &.q-focusable:focus,
-      &.q-manual-focusable--focused {
-        font-weight: 700;
-        background-color: $bg-box;
-        color: $black1;
-      }
-
-      .q-focus-helper {
-        display: none;
+      &--main {
+        margin: 0 !important;
       }
     }
 
-    &__side {
-      flex: none;
-      padding-right: 16px;
+    &.q-hoverable:hover,
+    &.q-focusable:focus,
+    &.q-manual-focusable--focused {
+      font-weight: 700;
+      background-color: $bg-box;
+      color: $black1;
     }
+
+    .q-focus-helper {
+      display: none;
+    }
+  }
+
+  &__side {
+    flex: none;
+    padding-right: 16px;
   }
 }
 
