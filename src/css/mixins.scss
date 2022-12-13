@@ -285,7 +285,7 @@
   }
 }
 
-@mixin native-scrollbar($overflow: overlay, $scrollbar-gutter: stable, $is-mobile: null) {
+@mixin native-scrollbar($overflow: overlay, $scrollbar-gutter: stable, $is-mobile: null, $visible: null) {
   $-scrollbar-width: $kw-scrollbar-width;
   $-scrollbar-height: $kw-scrollbar-height;
   $-scrollbar-track-background-color: $kw-scrollbar-track-background-color;
@@ -297,6 +297,11 @@
   $-scrollbar-thumb-border: $kw-scrollbar-thumb-border;
   $-scrollbar-thumb-border-hover: $kw-scrollbar-thumb-border-hover;
   $-scrollbar-thumb-border-active: $kw-scrollbar-thumb-border-active;
+
+  @if $visible {
+    $-scrollbar-track-background-color: $kw-scrollbar-track-background-color-hover;
+    $-scrollbar-thumb-background-color: $kw-scrollbar-thumb-background-color-hover;
+  }
 
   @if $is-mobile {
     $-scrollbar-width: $kw-scrollbar-width-mobile;
