@@ -246,16 +246,16 @@ export default {
       duration,
     );
 
-    const triggerObserver = () => {
-      contentObserverStyle.value = {
-        width: undefined,
-        height: undefined,
-      };
-    };
+    // const triggerObserver = () => {
+    //   contentObserverStyle.value = {
+    //     width: undefined,
+    //     height: undefined,
+    //   };
+    // };
 
-    onUpdated(() => {
-      triggerObserver();
-    });
+    // onUpdated(() => {
+    //   triggerObserver();
+    // });
 
     return {
       ...useInheritAttrs(),
