@@ -5,13 +5,7 @@
         <slot
           name="logo"
           :go-to-home="goToHome"
-        >
-          <img
-            src="~~@assets/images/kstation_standard.svg"
-            alt="K-Station"
-            @click="goToHome()"
-          >
-        </slot>
+        />
       </div>
 
       <div class="web-header__apps">
