@@ -111,7 +111,6 @@ export default {
     });
 
     const normalizeStyleProps = (pr) => {
-      console.log('pr', pr);
       if (!pr) { return []; }
       if (typeof pr === 'string') {
         return pr
