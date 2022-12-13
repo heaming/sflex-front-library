@@ -284,3 +284,99 @@
     }
   }
 }
+
+@mixin native-scrollbar($overflow: overlay, $scrollbar-gutter: stable, $is-mobile: null, $visible: null) {
+  $-scrollbar-width: $kw-scrollbar-width;
+  $-scrollbar-height: $kw-scrollbar-height;
+  $-scrollbar-track-background-color: $kw-scrollbar-track-background-color;
+  $-scrollbar-track-background-color-hover: $kw-scrollbar-track-background-color-hover;
+  $-scrollbar-track-background-color-active: $kw-scrollbar-track-background-color-active;
+  $-scrollbar-thumb-background-color: $kw-scrollbar-thumb-background-color;
+  $-scrollbar-thumb-background-color-hover: $kw-scrollbar-thumb-background-color-hover;
+  $-scrollbar-thumb-background-color-active: $kw-scrollbar-thumb-background-color-active;
+  $-scrollbar-thumb-border: $kw-scrollbar-thumb-border;
+  $-scrollbar-thumb-border-hover: $kw-scrollbar-thumb-border-hover;
+  $-scrollbar-thumb-border-active: $kw-scrollbar-thumb-border-active;
+
+  @if $visible {
+    $-scrollbar-track-background-color: $kw-scrollbar-track-background-color-hover;
+    $-scrollbar-thumb-background-color: $kw-scrollbar-thumb-background-color-hover;
+  }
+
+  @if $is-mobile {
+    $-scrollbar-width: $kw-scrollbar-width-mobile;
+    $-scrollbar-height: $kw-scrollbar-height-mobile;
+    $-scrollbar-track-background-color: $kw-scrollbar-track-background-color-mobile;
+    $-scrollbar-track-background-color-hover: $kw-scrollbar-track-background-color-hover-mobile;
+    $-scrollbar-thumb-background-color: $kw-scrollbar-thumb-background-color-mobile;
+    $-scrollbar-thumb-background-color-hover: $kw-scrollbar-thumb-background-color-hover-mobile;
+    $-scrollbar-thumb-border: $kw-scrollbar-thumb-border-mobile;
+    $-scrollbar-thumb-border-hover: $kw-scrollbar-thumb-border-hover-mobile;
+    $-scrollbar-thumb-border-active: $kw-scrollbar-thumb-border-active-mobile;
+  }
+
+  // noinspection CssInvalidPropertyValue
+  overflow: $overflow;
+  -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
+  scrollbar-gutter: $scrollbar-gutter;
+
+  &::-webkit-scrollbar {
+    width: $-scrollbar-width;
+    height: $-scrollbar-height;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $-scrollbar-thumb-background-color;
+    background-clip: content-box;
+    border: $-scrollbar-thumb-border;
+    transition: background-color 0.3s;
+
+    &:vertical {
+      border-radius: calc(#{$-scrollbar-width} / 2);
+    }
+
+    &:horizontal {
+      border-radius: calc(#{$-scrollbar-height} / 2);
+    }
+
+    &:hover {
+      border: $-scrollbar-thumb-border-active !important;
+      background-color: $-scrollbar-thumb-background-color-active;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $-scrollbar-track-background-color;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: $-scrollbar-track-background-color-hover;
+    }
+  }
+
+  &::-webkit-scrollbar-corner {
+    background-color: $-scrollbar-track-background-color;
+
+    &:hover {
+      background-color: $-scrollbar-track-background-color-hover;
+    }
+  }
+
+  &.kw-scrollbar--scroll,
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      border: $-scrollbar-thumb-border-hover;
+      background-color: $-scrollbar-thumb-background-color-hover;
+    }
+
+    &::-webkit-scrollbar-track {
+      border: $-scrollbar-thumb-border-hover;
+      background-color: $-scrollbar-track-background-color-hover;
+    }
+
+    &::-webkit-scrollbar-corner {
+      border: $-scrollbar-thumb-border-hover;
+      background-color: $-scrollbar-track-background-color-hover;
+    }
+  }
+}

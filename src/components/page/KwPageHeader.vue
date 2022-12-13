@@ -106,7 +106,7 @@ export default {
 
     const navigations = computed(() => {
       if (Array.isArray(props.options)) {
-        return props.options.value.map((v) => ({ key: v, label: v }));
+        return props.options.map((v) => ({ key: v, label: v }));
       }
 
       if (matched) {
