@@ -1,7 +1,7 @@
 <template>
-  <kw-page class="app-view__load-failed column">
+  <kw-page class="column">
     <q-card
-      class="col row justify-center items-center"
+      class="col row justify-center items-center h500"
       flat
       square
     >

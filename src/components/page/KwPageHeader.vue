@@ -1,9 +1,9 @@
 <template>
-  <div class="kw-page-header">
-    <div
-      v-if="title"
-      class="kw-page-header__title"
-    >
+  <div
+    v-if="title"
+    class="kw-page-header"
+  >
+    <div class="kw-page-header__title">
       <kw-icon
         size="24px"
         name="arrow_left_breadcrumbs_24"
@@ -49,12 +49,12 @@
 
     <q-breadcrumbs class="kw-page-header__navigation">
       <q-breadcrumbs-el
-        v-for="(breadcrumb, i) of breadcrumbs"
-        :key="breadcrumb.key"
-        :label="breadcrumb.label"
+        v-for="(navigation, i) of navigations"
+        :key="navigation.key"
+        :label="navigation.label"
       >
         <kw-icon
-          v-if="i === breadcrumbs.length - 1"
+          v-if="i === navigation.length - 1"
           clickable
           @click="onClickHint"
         >
@@ -104,7 +104,7 @@ export default {
     const menus = getters['meta/getMenus'];
     const matched = find(menus, { menuUid });
 
-    const breadcrumbs = computed(() => {
+    const navigations = computed(() => {
       if (Array.isArray(props.options)) {
         return props.options.value.map((v) => ({ key: v, label: v }));
       }
@@ -132,7 +132,7 @@ export default {
       return [];
     });
 
-    const title = computed(() => last(breadcrumbs.value)?.label);
+    const title = computed(() => last(navigations.value)?.label);
     const isAuthenticated = getters['meta/isAuthenticated'];
 
     function onClickBack() {
@@ -158,7 +158,7 @@ export default {
     }
 
     return {
-      breadcrumbs,
+      navigations,
       title,
       onClickBack,
       onClickFavorites,

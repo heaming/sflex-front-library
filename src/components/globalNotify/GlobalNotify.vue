@@ -31,10 +31,10 @@ export default {
     const vm = getCurrentInstance();
 
     const { getters } = useStore();
-    const lnbExpanded = computed(() => getters['app/getLnbExpanded']);
+    const isLeftExpanded = computed(() => getters['app/getLeftDrawerExpanded']);
     const notifyClass = computed(() => ({
       'global-notify': true,
-      'global-notify--lnb-expanded': lnbExpanded.value,
+      'global-notify--minimized': isLeftExpanded.value,
     }));
 
     const notifications = shallowRef([]);

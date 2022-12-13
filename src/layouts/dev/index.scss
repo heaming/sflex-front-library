@@ -10,9 +10,9 @@
 }
 
 /*
-  GNB
+  Header
   */
-.dev-gnb {
+.dev-header {
   border-bottom: 1px solid #e5e5e5;
 
   .q-toolbar {
@@ -21,7 +21,7 @@
     background: #fff;
   }
 
-  .gnb-logo {
+  &__logo {
     display: flex;
     width: 120px;
     font-size: 24px;
@@ -31,47 +31,47 @@
     color: $accent;
   }
 
-  .gnb__menus {
+  &__apps {
     display: flex;
     justify-content: space-between;
     margin-left: 80px;
+  }
 
-    &-item {
-      position: relative;
-      height: 100%;
-      margin-right: 40px;
-      color: $black2;
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 70px;
-      text-decoration: none;
-      cursor: pointer;
+  &__link {
+    position: relative;
+    height: 100%;
+    margin-right: 40px;
+    color: $black2;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 70px;
+    text-decoration: none;
+    cursor: pointer;
 
-      &--active {
-        font-weight: 700;
+    &--active {
+      font-weight: 700;
 
-        &::after {
-          content: "";
-          position: absolute;
-          display: block;
-          bottom: -1px;
-          right: 0;
-          left: 0;
-          height: 4px;
-          background: $primary;
-        }
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: -1px;
+        right: 0;
+        left: 0;
+        height: 4px;
+        background: $primary;
       }
     }
   }
 }
 
 /*
-  LNB
+  Left Drawer
  */
-.dev-lnb {
+.dev-left-drawer {
   overflow: hidden;
 
-  &-drawer {
+  &__btn {
     &.kw-btn.q-btn {
       position: absolute;
       top: calc(50% - 30px);
@@ -106,10 +106,10 @@
       }
     }
   }
-}
 
-.dev-lnb-tree {
-  padding: 40px 20px 0;
+  &__menus {
+    padding: 40px 20px 0;
+  }
 
   &__title {
     display: flex;
@@ -128,7 +128,7 @@
 }
 
 body.mobile:not(.tablet) {
-  .dev-lnb-drawer {
+  .dev-left-drawer__btn {
     &.kw-btn.q-btn {
       position: absolute;
       top: 0;

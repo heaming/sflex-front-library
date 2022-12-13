@@ -1,5 +1,5 @@
 <template>
-  <q-page-container class="web-view">
+  <q-page-container class="web-router-view">
     <router-view
       v-if="useRouterView"
       v-slot="{ Component, route }"
