@@ -103,17 +103,37 @@
     </guide-section>
     <guide-section
       title="default slot"
-      description="=default"
+      description="default"
       :guide-code="defaultCode"
     >
-      <kw-scroll-area
-        v-bind="bindingProps"
+      <div class="flex">
+        <kw-scroll-area
+          style="width: unset; height: unset;"
+          class="pa10 bg-green"
+          max-width="40em"
+          max-height="40em"
+        >
+          <div
+            style="width: 50em; height: 50em; background: linear-gradient(45deg, #f69d3c, #3f87a6);"
+          />
+        </kw-scroll-area>
+      </div>
+
+      <div
+        v-scrollbar
+        style="width: 30em; height: 30em;"
       >
         <div
-          class="w500 h500"
-          style="background: linear-gradient(#f69d3c, #3f87a6);"
+          style="width: 50em; height: 50em; background: linear-gradient(45deg, #f69d3c, #3f87a6);"
         />
-      </kw-scroll-area>
+      </div>
+
+      <div style="width: min-content;">
+        <div
+          class="w500 h500"
+          style="background: linear-gradient(45deg, #f69d3c, #3f87a6);"
+        />
+      </div>
     </guide-section>
   </kw-page>
 </template>
@@ -177,9 +197,76 @@ const contentsStyle = ref({
   width: '100%',
   height: '1000px',
 });
+
+// let timer = null;
+//
+// const customClass = ref({});
+//
+// const removeClass = () => {
+//   clearTimeout(timer);
+//   timer = null;
+//   customClass.value['test-class'] = false;
+// };
+//
+// const addClass = () => {
+//   customClass.value['test-class'] = true;
+// };
+//
+// const onObserveScroll = () => {
+//   addClass();
+//   const debounce = 100;
+//   if (timer === null) {
+//     timer = setTimeout(removeClass, debounce);
+//   } else {
+//     clearTimeout(timer);
+//     timer = setTimeout(removeClass, debounce);
+//   }
+// };
+
+const vScrollbar = {
+  mounted: (el, binding) => {
+    const normalizeValue = (val) => ({
+      debounce: val?.debounce ?? 1000,
+      defaultClass: val?.scrollClass ?? 'kw-scrollbar',
+      scrollClass: val?.scrollClass ?? 'kw-scrollbar--scroll',
+      ...val,
+    });
+
+    const { debounce, defaultClass, scrollClass } = normalizeValue(binding?.value);
+
+    el.classList.add(defaultClass);
+
+    let timer = null;
+
+    const removeClass = () => {
+      clearTimeout(timer);
+      timer = null;
+      el.classList.remove(scrollClass);
+    };
+
+    const addClass = () => {
+      el.classList.add(scrollClass);
+    };
+
+    const trigger = () => {
+      addClass();
+      if (timer === null) {
+        timer = setTimeout(removeClass, debounce);
+      } else {
+        clearTimeout(timer);
+        timer = setTimeout(removeClass, debounce);
+      }
+    };
+
+    el.onscroll = trigger;
+    el.onpointerenter = trigger;
+  },
+};
 </script>
 
 <style scoped lang="scss">
+@import "../src/css/mixins";
+
 .scroll-area-test {
   display: flex;
   flex-flow: nowrap;
