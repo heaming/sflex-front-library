@@ -7,9 +7,9 @@ body.desktop .web-layout {
 }
 
 /*
-  GNB
+  Header
  */
-.web-gnb {
+.web-header {
   border-bottom: 1px solid #e5e5e5;
   color: $black2;
 
@@ -20,7 +20,7 @@ body.desktop .web-layout {
     background: #fff;
   }
 
-  .gnb-logo {
+  &__logo {
     width: 120px;
     height: 24px;
     font-size: 24px;
@@ -30,47 +30,57 @@ body.desktop .web-layout {
     color: $black1;
   }
 
-  .gnb__menus {
+  &__apps {
     display: flex;
     justify-content: space-between;
     margin-left: 80px;
+  }
 
-    &-item {
-      position: relative;
-      height: 100%;
-      margin-right: 40px;
-      color: $black2;
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 70px;
-      text-decoration: none;
-      cursor: pointer;
+  &__link {
+    position: relative;
+    height: 100%;
+    margin-right: 40px;
+    color: $black2;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 70px;
+    text-decoration: none;
+    cursor: pointer;
 
-      &--active {
-        font-weight: 700;
+    &--active {
+      font-weight: 700;
 
-        &::after {
-          content: "";
-          position: absolute;
-          display: block;
-          bottom: -1px;
-          right: 0;
-          left: 0;
-          height: 4px;
-          background: $primary;
-        }
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: -1px;
+        right: 0;
+        left: 0;
+        height: 4px;
+        background: $primary;
       }
     }
   }
 
-  .gnb-search {
+  &__tools {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__search {
+    width: 220px;
+
     .q-field__append .q-icon {
+      font-size: 24px;
       opacity: 1 !important;
     }
   }
 
-  .gnb-icon {
-    margin-left: 20px;
+  &__icon {
+    font-size: 24px;
   }
 
   &.q-layout__section--marginal {
@@ -79,16 +89,16 @@ body.desktop .web-layout {
 }
 
 /*
-  LNB
+  Left Drawer
  */
-.web-lnb {
+.web-left-drawer {
   overflow: hidden;
 
   .q-scrollarea {
     height: 100%;
   }
 
-  &-drawer {
+  &__btn {
     &.kw-btn.q-btn {
       position: absolute;
       top: calc(50% - 30px);
@@ -123,10 +133,6 @@ body.desktop .web-layout {
       }
     }
   }
-}
-
-.web-lnb-tree {
-  padding-top: 40px;
 
   &__title {
     display: flex;
@@ -139,11 +145,19 @@ body.desktop .web-layout {
     align-items: center;
   }
 
-  .q-tree {
+  &__menus {
+    padding-top: 40px;
+  }
+}
+
+.web-left-drawer__tree {
+  &.q-tree {
     .q-focus-helper {
       display: none;
     }
+  }
 
+  .q-tree {
     &__node {
       padding: 0;
       margin: 0;
@@ -199,7 +213,7 @@ body.desktop .web-layout {
     }
   }
 
-  .web-lnb-tree {
+  .menu-tree {
     &--empty {
       padding: 0 20px;
     }
@@ -257,86 +271,66 @@ body.desktop .web-layout {
 /*
   View
  */
-.web-view {
-  &__load-failed {
-    padding: 15px 40px 30px 64px;
-    height: 100%;
+.web-tab-view {
+  $tabs-view-bg-color: #dedfe0;
+  $tabs-view-tab-border-color: #d9d9d9;
+  $tabs-view-tab-bg-color: #e4e5e6;
+  $tabs-view-tab-active-bg-color: #f4f5f6;
 
-    .q-card {
-      border: 1px solid $line-bg;
+  &__header {
+    padding: 0 30px 0 64px !important;
+    height: 40px;
+    background: $tabs-view-bg-color;
+
+    .q-tab {
+      padding: 0;
+      min-height: 40px;
+      border: none;
+      cursor: default !important;
+      background-color: $tabs-view-tab-bg-color;
+
+      &__content {
+        padding: 0 12px 0 7px;
+        width: 150px;
+        min-width: auto;
+
+        > div {
+          font-size: 14px;
+          color: $black3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .q-focus-helper,
+      .q-tab__indicator {
+        display: none;
+      }
+
+      &.q-focusable:focus,
+      &.q-manual-focusable--focused,
+      &.q-hoverable:hover {
+        background-color: $tabs-view-tab-active-bg-color;
+      }
+
+      &--active {
+        border-bottom-color: $tabs-view-tab-active-bg-color !important;
+        background-color: $tabs-view-tab-active-bg-color;
+
+        .q-tab__content > div {
+          color: $black1;
+        }
+      }
     }
   }
 
-  .tabs-view {
-    $tabs-view-bg-color: #dedfe0;
-    $tabs-view-tab-border-color: #d9d9d9;
-    $tabs-view-tab-bg-color: #e4e5e6;
-    $tabs-view-tab-active-bg-color: #f4f5f6;
+  &__content {
+    background-color: transparent;
 
-    &__header {
-      padding: 10px 30px 0 64px !important;
-      background-color: $tabs-view-bg-color;
-
-      .q-tab {
-        padding: 0;
-        min-height: 40px;
-        border: 1px solid $tabs-view-tab-border-color;
-        border-left: none;
-        cursor: default !important;
-        background-color: $tabs-view-tab-bg-color;
-
-        &__content {
-          padding: 0 12px 0 7px;
-          width: 150px;
-          min-width: auto;
-
-          > div {
-            font-size: 14px;
-            color: $black3;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-        }
-
-        &.tabs-view-home {
-          border: 1px solid $tabs-view-tab-border-color;
-          background-color: $tabs-view-tab-active-bg-color;
-
-          .q-tab__content {
-            padding: 0;
-            width: 40px;
-          }
-        }
-
-        .q-focus-helper,
-        .q-tab__indicator {
-          display: none;
-        }
-
-        &.q-focusable:focus,
-        &.q-manual-focusable--focused,
-        &.q-hoverable:hover {
-          background-color: $tabs-view-tab-active-bg-color;
-        }
-
-        &--active {
-          border-bottom-color: $tabs-view-tab-active-bg-color !important;
-          background-color: $tabs-view-tab-active-bg-color;
-
-          .q-tab__content > div {
-            color: $black1;
-          }
-        }
-      }
-    }
-
-    &__body {
-      background-color: transparent;
-
-      .q-tab-panel {
-        padding: 0;
-      }
+    .q-tab-panel {
+      padding: 0;
+      outline: none;
     }
   }
 }

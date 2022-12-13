@@ -160,7 +160,6 @@ export default {
     const resizedStyle = ref({});
 
     function onResize(e) {
-      console.log(e);
       resizedStyle.value = `width: ${e.width}px; height: ${e.height}px`;
     }
 

@@ -431,7 +431,7 @@
         In this case,
         <ol>
           <li>add 'one-row' in kw-search</li>
-          <li>add prop :cols="2"</li>
+          <li>add prop :cols="2" <b>automatically added</b></li>
           <li class="delete">
             if the kw-search-item need more wide, then add :colspan="2" in item tag
           </li>

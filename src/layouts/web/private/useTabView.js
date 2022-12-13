@@ -1,35 +1,30 @@
 import { last } from 'lodash-es';
-import consts from '../../../consts';
 
 export default () => {
   const router = useRouter();
   const { getters } = useStore();
 
-  const homeKey = consts.ROUTE_HOME_NAME;
-  const homeComponent = router.getRoutes()
-    .find((v) => v.name === homeKey).components.default;
+  const selectedKey = ref();
+  const tabViews = shallowReactive([]);
 
-  const selectedKey = ref(homeKey);
-  const tabItems = shallowReactive([]);
-
-  function addItem(to) {
-    const index = tabItems.push({
+  function add(to) {
+    const index = tabViews.push({
       key: to.name,
       label: to.meta.menuName,
       component: last(to.matched).components.default,
       componentProps: to.params,
     });
 
-    return tabItems[index - 1];
+    return tabViews[index - 1];
   }
 
-  function removeItem(tabItem) {
-    const index = tabItems.findIndex((v) => v === tabItem);
-    tabItems.splice(index, 1);
+  function remove(tabItem) {
+    const index = tabViews.findIndex((v) => v === tabItem);
+    tabViews.splice(index, 1);
     return index;
   }
 
-  async function selectItem(key) {
+  async function select(key) {
     try {
       await router.push({ name: key });
     } catch (e) {
@@ -37,24 +32,22 @@ export default () => {
     }
   }
 
-  async function selectClosestItem(index) {
-    const { length } = tabItems;
+  async function selectClosest(index) {
+    const { length } = tabViews;
 
     if (length > 0) {
       const closestIndex = index === length ? index - 1 : index + 1;
-      const closestItem = tabItems[closestIndex];
-      await selectItem(closestItem.key);
-    } else {
-      await selectItem(homeKey);
+      const closestItem = tabViews[closestIndex];
+      await select(closestItem.key);
     }
   }
 
   const isMenuRoute = (to) => getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isDuplicated = (to) => tabItems.some((v) => v.key === to.name);
+  const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
 
   const { currentRoute } = router;
   if (isMenuRoute(currentRoute.value)) {
-    const { key } = addItem(currentRoute.value);
+    const { key } = add(currentRoute.value);
     selectedKey.value = key;
   }
 
@@ -68,7 +61,7 @@ export default () => {
 
       // is new tab
       if (to.meta.logging === true) {
-        addItem(to);
+        add(to);
       }
 
       selectedKey.value = to.name || to.path;
@@ -81,13 +74,11 @@ export default () => {
   });
 
   return {
-    homeKey,
-    homeComponent,
+    tabViews,
     selectedKey,
-    tabItems,
-    addItem,
-    removeItem,
-    selectItem,
-    selectClosestItem,
+    add,
+    remove,
+    select,
+    selectClosest,
   };
 };

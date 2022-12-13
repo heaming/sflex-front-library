@@ -1,10 +1,9 @@
 <template>
   <q-field
     ref="inputRef"
-    class="kw-option-group kw-field"
-    :class="`kw-option-group--${type}`"
-    v-bind="styleClassAttrs"
-    :label="undefined"
+    :class="optionGroupClass"
+    v-bind="{...styleClassAttrs, ...fieldStyleProps}"
+    :label="$g.platform.is.mobile ? label : undefined"
     :dense="isSearchContext || dense"
     :error="invalid"
     no-error-icon
@@ -44,7 +43,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
-import useDense, { useDenseProps } from '../../composables/private/useDense';
+import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 
 export default {
   name: 'KwOptionGroup',
@@ -52,8 +51,8 @@ export default {
 
   props: {
     ...useFieldProps,
+    ...useFieldStyleProps,
     ...useOptionsProps,
-    ...useDenseProps,
 
     modelValue: {
       type: [String, Number, Boolean, Array],
@@ -85,12 +84,21 @@ export default {
       return props.type === 'toggle';
     });
 
+    const { fieldClass, fieldStyleProps } = useFieldStyle({ borderless: true });
+
+    const optionGroupClass = computed(() => ({
+      ...fieldClass.value,
+      'kw-option-group': true,
+      [`kw-option-group--${props.type}`]: true,
+    }));
+
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
       ...useField(),
       ...useOptions(),
-      dense: useDense(),
+      fieldStyleProps,
+      optionGroupClass,
       itemLeftLabel,
     };
   },

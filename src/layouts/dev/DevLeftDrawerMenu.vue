@@ -1,6 +1,6 @@
 <template>
-  <div class="dev-lnb-tree">
-    <div class="dev-lnb-tree__title">
+  <div class="dev-left-drawer__menus">
+    <div class="dev-left-drawer__title">
       <div class="col">
         {{ title }}
       </div>
@@ -20,10 +20,10 @@
 
     <kw-tree
       ref="treeRef"
-      :key="selectedGnbKey"
+      :key="selectedGlobalAppKey"
       :nodes="treeNodes"
       :expanded="expandedKeys"
-      :selected="selectedLnbKey"
+      :selected="selectedGlobalMenuKey"
       select-leaf-only
       @update:expanded="onUpdateExpanded"
       @update:selected="onUpdateSelected"
@@ -32,15 +32,15 @@
 </template>
 
 <script>
-import useLnbTree from '../../composables/private/useLnbTree';
+import useLeftDrawerMenu from '../../composables/private/useLeftDrawerMenu';
 
 export default {
-  name: 'DevLnbTree',
+  name: 'DevLeftDrawerMenu',
 
   setup() {
-    const lnbTreeCtx = useLnbTree();
-    const { treeRef, selectedGnbKey } = lnbTreeCtx;
+    const menuCtx = useLeftDrawerMenu();
 
+    const { treeRef, selectedGlobalAppKey } = menuCtx;
     const expandedAll = ref(false);
 
     function setExpandedAll(state) {
@@ -53,12 +53,10 @@ export default {
       }
     }
 
-    watch(selectedGnbKey, () => {
-      setExpandedAll(false);
-    });
+    watch(selectedGlobalAppKey, () => setExpandedAll(false));
 
     return {
-      ...lnbTreeCtx,
+      ...menuCtx,
       expandedAll,
       setExpandedAll,
     };

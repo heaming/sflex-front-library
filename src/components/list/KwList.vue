@@ -84,6 +84,17 @@
           {{ item.key }}
         </slot>
       </kw-item>
+      <div
+        v-if="showPlaceholder"
+        class="kw-list__placeholder"
+      >
+        <slot
+          v-if="showPlaceholder"
+          name="placeholder"
+        >
+          {{ placeholder }}
+        </slot>
+      </div>
     </slot>
   </q-list>
 </template>
@@ -104,9 +115,9 @@ export default {
     items: { type: Array, default: () => [] },
     itemKey: { type: String, default: 'key' },
     checkbox: { type: Boolean, default: false },
+    radio: { type: Boolean, default: false },
     selectAlign: { type: String, default: 'top' },
     selectAllAlign: { type: String, default: 'center' },
-    radio: { type: Boolean, default: false },
     itemTag: { type: String, default: undefined },
     placeholder: { type: String, default: undefined },
     disable: { type: Boolean, default: undefined },
@@ -120,7 +131,7 @@ export default {
     onClickItem: { type: Function, default: undefined },
   },
   emits: ['update:selected', 'clickItem'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const { styleClassAttrs } = useInheritAttrs();
 
     const activated = ref([]);
@@ -247,6 +258,9 @@ export default {
       bottom: props.selectAllAlign === 'bottom',
     }));
 
+    const showPlaceholder = computed(() => (innerItems.value?.length === 0)
+      && (props.placeholder || slots.placeholder));
+
     return {
       listClass,
       innerSelected,
@@ -263,6 +277,7 @@ export default {
       selectComponent,
       selectAllAlignProps,
       selectAlignProps,
+      showPlaceholder,
     };
   },
 };

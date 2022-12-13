@@ -1,9 +1,9 @@
 import DevLayout from './DevLayout.vue';
-import DevGnb from './DevGnb.vue';
-import DevLnb from './DevLnb.vue';
+import DevHeader from './DevHeader.vue';
+import DevLeftDrawer from './DevLeftDrawer.vue';
 
 export {
   DevLayout,
-  DevGnb,
-  DevLnb,
+  DevHeader,
+  DevLeftDrawer,
 };

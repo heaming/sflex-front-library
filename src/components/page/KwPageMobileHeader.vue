@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import useLnbExpand from '../../composables/private/useLnbExpand';
+import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 export default {
   name: 'KwPageMobileHeader',
@@ -69,7 +69,7 @@ export default {
   emits: ['close'],
   setup() {
     return {
-      ...useLnbExpand(),
+      ...useLeftDrawerExpand(),
     };
   },
 };

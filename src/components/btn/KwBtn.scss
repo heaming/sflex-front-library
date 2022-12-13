@@ -71,6 +71,7 @@
       font-size: $-kw-btn-icon-size;
     }
 
+    // notify!!! The default Hover and active effect is drawn by this area. It's getting darker darker and darker.
     &::before {
       mix-blend-mode: multiply;
       background-color: #fff;
@@ -177,7 +178,8 @@
   }
 
   &--icon-only {
-    &:not(&.kw-btn--borderless) {
+    &:not(&.kw-btn--borderless),
+    &:not(&.kw-btn--underline) {
       &.q-btn {
         padding-left: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
         padding-right: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
@@ -190,8 +192,11 @@
     }
   }
 
+  // belows rules are examples, for custom button.
   &--cta {
-    @include kw-btn-height-modifier-by-font-type (60px, "body");
+    &.q-btn {
+      @include kw-btn-height-modifier-by-font-type (60px, "body");
+    }
 
     flex-grow: 1;
   }
@@ -244,7 +249,8 @@ body.desktop {
   }
 }
 
-@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28)); // notice! this is exception.
+// notice! this is exception.
+@include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28));
 
 body.mobile:not(.tablet) {
   .kw-btn {

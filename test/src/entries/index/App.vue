@@ -1,9 +1,9 @@
 <template>
   <web-layout>
     <template #default>
-      <web-gnb />
-      <web-lnb />
-      <web-tabs-view />
+      <web-header />
+      <web-left-drawer />
+      <web-tab-view />
     </template>
     <template #unauthenticated>
       <web-fallback-login />
@@ -14,7 +14,7 @@
 <script setup>
 import {
   useSession,
-  WebLayout, WebGnb, WebLnb, WebTabsView, WebFallbackLogin,
+  WebLayout, WebHeader, WebLeftDrawer, WebTabView, WebFallbackLogin,
 } from '~kw-lib';
 
 const {

@@ -27,8 +27,8 @@ export default {
     const { applicationId, menuUid } = currentRoute.value.meta;
     const firstApplicationId = getters['meta/getApps'][0]?.applicationId;
 
-    commit('app/setSelectedGnbKey', applicationId || firstApplicationId || null);
-    commit('app/setSelectedLnbKey', menuUid || null);
+    commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
+    commit('app/setSelectedGlobalMenuKey', menuUid || null);
 
     return {
       isAuthenticated,

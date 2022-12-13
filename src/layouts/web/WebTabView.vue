@@ -1,8 +1,8 @@
 <template>
-  <q-page-container class="web-view">
+  <q-page-container class="web-tab-view">
     <q-tabs
       :model-value="selectedKey"
-      class="tabs-view__header"
+      class="web-tab-view__header"
       align="left"
       inline-label
       outside-arrows
@@ -13,57 +13,43 @@
       switch-indicator
     >
       <q-tab
-        class="tabs-view-home"
-        :name="homeKey"
+        v-for="tabView of tabViews"
+        :key="tabView.key"
+        :name="tabView.key"
         :ripple="false"
-        @click="onSelect(homeKey)"
-      >
-        <q-icon
-          name="home"
-          size="24px"
-        />
-      </q-tab>
-      <q-tab
-        v-for="tabItem of tabItems"
-        :key="tabItem.key"
-        :name="tabItem.key"
-        :ripple="false"
-        @click="onSelect(tabItem.key)"
+        @click="onSelect(tabView.key)"
       >
         <div class="col text-left">
-          {{ tabItem.label }}
+          {{ tabView.label }}
           <kw-tooltip show-when-ellipsised>
-            {{ tabItem.label }}
+            {{ tabView.label }}
           </kw-tooltip>
         </div>
         <q-icon
           class="cursor-pointer"
           name="close_24"
           size="12px"
-          @click.stop="onClose(tabItem)"
+          @click.stop="onClose(tabView)"
         />
       </q-tab>
     </q-tabs>
 
     <q-tab-panels
       :model-value="selectedKey"
-      class="tabs-view__body"
+      class="web-tab-view__content"
       keep-alive
     >
-      <q-tab-panel :name="homeKey">
-        <component :is="homeComponent" />
-      </q-tab-panel>
       <q-tab-panel
-        v-for="tabItem of tabItems"
-        :key="tabItem.key"
-        :name="tabItem.key"
+        v-for="tabView of tabViews"
+        :key="tabView.key"
+        :name="tabView.key"
       >
-        <kw-observer :ref="(vm) => tabItem.observerVm = vm">
+        <kw-observer :ref="(vm) => tabView.observerVm = vm">
           <kw-suspense>
             <template #default>
               <component
-                :is="tabItem.component"
-                v-bind="tabItem.componentProps"
+                :is="tabView.component"
+                v-bind="tabView.componentProps"
               />
             </template>
             <template #error>
@@ -77,39 +63,42 @@
 </template>
 
 <script>
-import useTabsView from './private/useTabsView';
+import useTabView from './private/useTabView';
 import LoadFailedView from './LoadFailedView.vue';
 
 export default {
-  name: 'WebTabsView',
+  name: 'WebTabView',
   components: { LoadFailedView },
 
   setup() {
-    const tabsViewCtx = useTabsView();
+    const tabViewCtx = useTabView();
     const {
       selectedKey,
-      selectItem,
-      selectClosestItem,
-      removeItem,
-    } = tabsViewCtx;
+      select,
+      selectClosest,
+      remove,
+    } = tabViewCtx;
 
     async function onSelect(tabKey) {
       if (selectedKey.value !== tabKey) {
-        await selectItem(tabKey);
+        await select(tabKey);
       }
     }
 
     async function onClose(tabItem) {
       const isClosable = await tabItem.observerVm.confirmIfIsModified();
       if (isClosable) {
-        const removedIndex = removeItem(tabItem);
+        const removedIndex = remove(tabItem);
         const isSelected = selectedKey.value === tabItem.key;
-        if (isSelected) selectClosestItem(removedIndex);
+
+        if (isSelected) {
+          selectClosest(removedIndex);
+        }
       }
     }
 
     return {
-      ...tabsViewCtx,
+      ...tabViewCtx,
       onSelect,
       onClose,
     };

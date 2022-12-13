@@ -23,24 +23,35 @@
       </div>
     </template>
 
-    <q-menu
+    <kw-menu
+      ref="menuRef"
       :model-value="showing"
       class="kw-time-picker2__menu"
       no-parent-event
-      no-focus
-      no-refocus
-      fit
+      :no-focus="!$g.platform.is.mobile"
+      :no-refocus="!$g.platform.is.mobile"
+      :title="placeholder"
+      :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
+      @update:model-value="setExpanded"
     >
-      <div
-        ref="scrollPickerContainerRef"
-        tabindex="-1"
+      <time-scroll-picker
+        :model-value="timeValue"
+        :unmasked-value="unmaskedValue"
+        @update:model-value="onChangeTime"
+      />
+
+      <template
+        v-if="$g.platform.is.mobile"
+        #action
       >
-        <time-scroll-picker
-          v-model="value"
-          :unmasked-value="unmaskedValue"
+        <kw-btn
+          grow
+          primary
+          :label="$t('MSG_BTN_CONFIRM', null, '확인')"
+          @click="onConfirm"
         />
-      </div>
-    </q-menu>
+      </template>
+    </kw-menu>
 
     <!-- label -->
     <template
@@ -83,10 +94,8 @@ export default {
   ],
 
   setup() {
-    const ctx = useTimePicker();
-
     return {
-      ...ctx,
+      ...useTimePicker(),
     };
   },
 };

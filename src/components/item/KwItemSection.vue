@@ -20,14 +20,14 @@ export default {
   inheritAttrs: false,
   props: {
     // customize props
-
-    // fall through props
-    avatar: { type: Boolean, default: undefined },
-    thumbnail: { type: Boolean, default: undefined },
-    side: { type: Boolean, default: undefined },
     top: { type: Boolean, default: undefined },
     center: { type: Boolean, default: undefined },
     bottom: { type: Boolean, default: undefined },
+
+    // fall through props
+    side: { type: Boolean, default: undefined },
+    avatar: { type: Boolean, default: undefined },
+    thumbnail: { type: Boolean, default: undefined },
     noWrap: { type: Boolean, default: undefined },
   },
   setup(props) {
