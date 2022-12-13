@@ -78,6 +78,11 @@ export function modal(options: {
    * 호출할 컴포넌트에 전달할 Props
    */
   componentProps?: Record<string, unknown>;
+
+  /**
+   * 윈도우 팝업으로 호출할지 여부
+   */
+  window?: boolean;
 }): Promise<{
   /**
    * 팝업 결과
@@ -101,6 +106,7 @@ export interface Platform {
     test: boolean;
     mobile: boolean;
     tablet: boolean;
+    popup: boolean;
   };
 }
 export const platform: Platform;
