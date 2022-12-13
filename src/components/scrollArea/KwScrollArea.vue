@@ -111,7 +111,6 @@ export default {
     });
 
     const normalizeStyleProps = (pr) => {
-      console.log('pr', pr);
       if (!pr) { return []; }
       if (typeof pr === 'string') {
         return pr
@@ -246,16 +245,16 @@ export default {
       duration,
     );
 
-    const triggerObserver = () => {
-      contentObserverStyle.value = {
-        width: undefined,
-        height: undefined,
-      };
-    };
+    // const triggerObserver = () => {
+    //   contentObserverStyle.value = {
+    //     width: undefined,
+    //     height: undefined,
+    //   };
+    // };
 
-    onUpdated(() => {
-      triggerObserver();
-    });
+    // onUpdated(() => {
+    //   triggerObserver();
+    // });
 
     return {
       ...useInheritAttrs(),
