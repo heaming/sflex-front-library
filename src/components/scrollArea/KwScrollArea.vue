@@ -11,34 +11,35 @@
       <q-scroll-area
         ref="quasarRef"
         class="fit"
-        :thumb-style="thumbStyle"
-        :horizontal-thumb-style="horizontalThumbStyle"
-        :vertical-thumb-style="verticalThumbStyle"
-        :bar-style="barStyle"
-        :vertical-bar-style="verticalBarStyle"
-        :horizontal-bar-style="horizontalBarStyle"
+        :thumb-style="computedThumbStyle"
+        :horizontal-thumb-style="computedHorizontalThumbStyle"
+        :vertical-thumb-style="computedVerticalThumbStyle"
+        :bar-style="computedBarStyle"
+        :vertical-bar-style="computedBarStyle"
+        :horizontal-bar-style="computedHorizontalBarStyle"
         :content-style="computedContentStyle"
         :content-active-style="computedContentActiveStyle"
         :delay="delay"
         :visible="visible"
         :tabindex="tabindex"
-        @scroll="onScroll"
+        @scroll="$emit('scroll', $event)"
       >
         <template v-if="$slots.default">
           <slot />
         </template>
+
+        <q-resize-observer
+          debounce="100"
+          @resize="onResizeContent"
+        />
       </q-scroll-area>
     </div>
-
-    <!--    </div>  -->
-    <!--      <div class="kw-scroll-area__container">-->
-    <!--        -->
-    <!--      </div>-->
   </div>
 </template>
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwScrollArea',
@@ -72,10 +73,11 @@ export default {
     delay: { type: [String, Number], default: 1000 },
     visible: { type: Boolean, default: null },
     tabindex: { type: [String, Number], default: undefined },
-    onScroll: { type: Function, default: undefined },
   },
 
-  setup(props) {
+  emits: ['scroll', 'resize:content'],
+
+  setup(props, { emit }) {
     const quasarRef = ref();
 
     const scrollAreaWrapperStyle = computed(() => {
@@ -95,21 +97,131 @@ export default {
       return styles;
     });
 
+    const contentObserverStyle = ref({
+      width: undefined,
+      height: undefined,
+    });
+
+    const scrollAreaSizingStyle = computed(() => {
+      const { width, height } = contentObserverStyle.value;
+      return {
+        width: props.scrollAreaWidth ?? (width ? `${width}px` : width),
+        height: props.scrollAreaHeight ?? (height ? `${height}px` : height),
+      };
+    });
+
+    const normalizeStyleProps = (pr) => {
+      console.log('pr', pr);
+      if (!pr) { return []; }
+      if (typeof pr === 'string') {
+        return pr
+          .split(';')
+          .map((rule) => rule.trim())
+          .filter((rule) => rule.length);
+      }
+      if (Array.isArray(pr)) {
+        const flatter = (acc, cur) => acc.concat(...normalizeStyleProps(cur));
+        return pr.reduce(flatter, []);
+      }
+      return Object.entries(pr).map(([key, value]) => {
+        if (typeof key !== 'string' && value) {
+          return normalizeStyleProps(key);
+        }
+        return `${key}: ${value}`;
+      }).flat();
+    };
+
     const computedContentStyle = computed(() => {
       const styles = props.contentStyle ? [props.contentStyle] : [];
-      if (props.scrollAreaWidth) { styles.push(`width: ${props.scrollAreaWidth};`); }
-      if (props.scrollAreaHeight) { styles.push(`height: ${props.scrollAreaHeight}; `); }
-      if (props.scrollAreaStyle) { styles.push(props.scrollAreaStyle); }
+      if (scrollAreaSizingStyle.value) { styles.push(scrollAreaSizingStyle.value); }
+      if (props.scrollAreaStyle) { styles.push(...normalizeStyleProps(props.scrollAreaStyle)); }
       return styles;
     });
 
     const computedContentActiveStyle = computed(() => {
       const styles = props.contentActiveStyle ? [props.contentActiveStyle] : [];
-      if (props.scrollAreaWidth) { styles.push(`width: ${props.scrollAreaWidth};`); }
-      if (props.scrollAreaHeight) { styles.push(`height: ${props.scrollAreaHeight}; `); }
-      if (props.scrollAreaStyle) { styles.push(props.scrollAreaStyle); }
+      if (scrollAreaSizingStyle.value) { styles.push(scrollAreaSizingStyle.value); }
+      if (props.scrollAreaStyle) { styles.push(...normalizeStyleProps(props.scrollAreaStyle)); }
       return styles;
     });
+
+    const computedBarStyle = computed(() => {
+      const style = {};
+      if (platform.is.desktop) {
+        // fixme
+      }
+      return normalizeStyleProps([props.barStyle, style]);
+    });
+
+    const computedVerticalBarStyle = computed(() => {
+      const style = {};
+      if (platform.is.desktop) {
+        style.width = '6px'; // $kw-scrollbar-width
+      }
+      return [props.verticalBarStyle, style];
+    });
+
+    const computedHorizontalBarStyle = computed(() => {
+      const style = {};
+      if (platform.is.desktop) {
+        style.height = '6px'; // $kw-scrollbar-height
+      }
+      return normalizeStyleProps([props.horizontalBarStyle, style]);
+    });
+
+    const computedThumbStyle = computed(() => {
+      const style = {};
+      style.backgroundClip = 'content-box';
+      style.opacity = 1;
+
+      if (platform.is.desktop) {
+        style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color
+      }
+      if (platform.is.mobile) {
+        style.border = '2px solid transparent';
+        style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color-mobile
+      }
+      return {
+        ...style,
+        ...props.thumbStyle,
+      };
+    });
+
+    const computedVerticalThumbStyle = computed(() => {
+      const style = {};
+      if (platform.is.desktop) {
+        style.width = '6px'; // $kw-scrollbar-width
+        style.borderRadius = '3px';
+      }
+      if (platform.is.mobile) {
+        style.width = '6px'; // $kw-scrollbar-width
+        style.borderRadius = '3px';
+      }
+      return {
+        ...style,
+        ...props.verticalThumbStyle,
+      };
+    });
+
+    const computedHorizontalThumbStyle = computed(() => {
+      const style = {};
+      if (platform.is.desktop) {
+        style.height = '6px'; // $kw-scrollbar-width
+      }
+      if (platform.is.mobile) {
+        style.height = '6px'; // $kw-scrollbar-width
+        style.borderRadius = '3px';
+      }
+      return {
+        ...style,
+        ...props.horizontalThumbStyle,
+      };
+    });
+
+    const onResizeContent = (resizeInfo) => {
+      contentObserverStyle.value = resizeInfo;
+      emit('resize:content', resizeInfo);
+    };
 
     const getScrollTarget = () => quasarRef.value?.getScrollTarget();
     const getScroll = () => quasarRef.value?.getScroll();
@@ -134,18 +246,36 @@ export default {
       duration,
     );
 
+    const triggerObserver = () => {
+      contentObserverStyle.value = {
+        width: undefined,
+        height: undefined,
+      };
+    };
+
+    onUpdated(() => {
+      triggerObserver();
+    });
+
     return {
       ...useInheritAttrs(),
       quasarRef,
       scrollAreaWrapperStyle,
       computedContentStyle,
       computedContentActiveStyle,
+      computedBarStyle,
+      computedVerticalBarStyle,
+      computedHorizontalBarStyle,
+      computedThumbStyle,
+      computedVerticalThumbStyle,
+      computedHorizontalThumbStyle,
       getScrollTarget,
       getScroll,
       getScrollPosition,
       getScrollPercentage,
       setScrollPosition,
       setScrollPercentage,
+      onResizeContent,
     };
   },
 };
