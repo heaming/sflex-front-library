@@ -21,6 +21,7 @@ import { KwIcon } from './components/icon';
 import { KwInput } from './components/input';
 import { KwItem, KwItemLabel, KwItemSection } from './components/item';
 import { KwList } from './components/list';
+import { KwMenu } from './components/menu';
 import { KwObserver } from './components/observer';
 import { KwOptionGroup } from './components/optionGroup';
 import { KwPage } from './components/page';
@@ -79,6 +80,7 @@ export interface KwComponentNameMap {
   KwItemLabel: KwItemLabel;
   KwItemSection: KwItemSection;
   KwList: KwList;
+  KwMenu: KwMenu;
   KwObserver: KwObserver;
   KwOptionGroup: KwOptionGroup;
   KwPage: KwPage;
