@@ -81,7 +81,7 @@ export default {
     usePageSearch();
 
     const styleFn = (offset, height) => {
-      const el = document.querySelector('.app-view .tabs-view__header');
+      const el = document.querySelector('.web-tab-view > .web-tab-view__header');
       const additionalOffset = el?.clientHeight || 0;
       return { 'min-height': `${height - (offset + additionalOffset)}px` };
     };
