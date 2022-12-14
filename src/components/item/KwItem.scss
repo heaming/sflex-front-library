@@ -107,4 +107,8 @@ body.mobile:not(.tablet) {
       width: 100%;
     }
   }
+
+  .kw-item.q-item--active {
+    background-color: inherit;
+  }
 }
