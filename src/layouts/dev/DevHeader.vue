@@ -37,7 +37,7 @@
           underline
           class="text-weight-bold text-uppercase mr20"
           text-color="black2"
-          href="/mobile"
+          href="/?mobile"
           target="_blank"
         >
           Mobile
@@ -48,7 +48,7 @@
           underline
           class="text-weight-bold text-uppercase"
           text-color="black2"
-          href="/tablet"
+          href="/?tablet"
           target="_blank"
         >
           Tablet
