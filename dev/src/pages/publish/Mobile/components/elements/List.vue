@@ -27,15 +27,68 @@
         </thead>
         <tbody>
           <tr>
-            <td>
-              kw-expansion-item
+            <td rowspan="6">
+              kw-list
             </td>
             <td>
-              label="" <br>
+              v-model:selected="arrModel"<br>
             </td>
             <td>
-              The title for Expansion-item
+              arrModel for selected radio or checkbox
             </td>
+          </tr>
+          <tr>
+            <td>
+              separator
+            </td>
+            <td>
+              seperator between kw-item
+            </td>
+          </tr>
+          <tr>
+            <td>
+              padding
+            </td>
+            <td>
+              default top and bottom of kw-item: 16px,
+            </td>
+          </tr>
+          <tr>
+            <td>
+              checkbox or radio
+            </td>
+            <td>
+              add checkbox or radio,
+            </td>
+          </tr>
+          <tr>
+            <td>
+              hide-select-all
+              clickable
+            </td>
+            <td>
+              default: false/ Add it, hide the select all button
+              add it as default all time
+            </td>
+          </tr>
+          <tr>
+            <td>
+              clickable
+            </td>
+            <td>
+              add it as default all time
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2">
+              kw-item-section
+            </td>
+            <td>top/ center / bottom</td>
+            <td>adjust the location</td>
+          </tr>
+          <tr>
+            <td>side</td>
+            <td>create flexible space width padding 16px </td>
           </tr>
         </tbody>
       </q-markup-table>
@@ -49,10 +102,6 @@
       </h3>
 
       <div class="kw-guide-description">
-        <!-- default of hide-select-all is false,Make it as true when use it with checkbox, add "hide-select-all"<br>
-        Add <b>clickable</b> every time<br>
-        checkbox and radio can be moved to top , center and bottom -->
-
         <em># Add radio or checkbox in list</em><br>
         default: false.<br>
         Make it as true , add "radio" or "checkbox" in kw-list<br>
@@ -110,6 +159,8 @@
             checkbox with select all
           </h3>
           <kw-list
+            v-model:selected="arrModel1"
+            :items="items"
             separator
             padding
             checkbox
@@ -143,7 +194,7 @@
             Radio
           </h3>
           <kw-list
-            v-model:selected="arrModel"
+            v-model:selected="arrModel2"
             :items="items"
             separator
             padding
@@ -176,9 +227,11 @@
             </template>
           </kw-list>
         </div>
+
         <guide-code-view
-          :code-value="case1"
-          lang="vue"
+          :code-value="[case1, script1]"
+          :lang="['vue','javascript']"
+          multi
         />
       </q-card>
     </div>
@@ -223,7 +276,6 @@
             no padding and seperator /add "my20" as helper class
           </h3>
           <kw-list
-            v-model:selected="arrModel"
             :items="items"
             clickable
             item-key="id"
@@ -242,8 +294,9 @@
           </kw-list>
         </div>
         <guide-code-view
-          :code-value="case1"
-          lang="vue"
+          :code-value="[case2, script1]"
+          :lang="['vue','javascript']"
+          multi
         />
       </q-card>
     </div>
@@ -263,6 +316,11 @@
         <b>no side in kw-item-section</b> : it's the rest of space except of side props in kw-item-section.<br>
         And divide the rest of space equally<br>
         <em># section - top/center/bottom</em><br>
+        default: center <br>
+        Adjust the content to top / center / bottom<br>
+        <em># kw-item-label</em><br>
+        use it with font="caption"<br>
+        use it with line="1", adjust the shown line.<br>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -364,10 +422,43 @@
               </kw-item-section>
             </template>
           </kw-list>
+          <h3 class="my15">
+            kw-item-label
+          </h3>
+          <kw-list
+            :items="items2"
+            separator
+            padding
+            clickable
+            item-key="id"
+          >
+            <template #item="{ item }">
+              <kw-item-section center>
+                <kw-item-label>
+                  line="2"
+                </kw-item-label>
+                <kw-item-label
+                  font="caption"
+                  lines="2"
+                >
+                  {{ item.lorem }}
+                </kw-item-label>
+                <kw-item-label>
+                  line="1"
+                </kw-item-label>
+                <kw-item-label
+                  lines="1"
+                >
+                  {{ item.lorem }}
+                </kw-item-label>
+              </kw-item-section>
+            </template>
+          </kw-list>
         </div>
         <guide-code-view
-          :code-value="case1"
-          lang="vue"
+          :code-value="[case3, script3]"
+          :lang="['vue','javascript']"
+          multi
         />
       </q-card>
     </div>
@@ -422,8 +513,9 @@
           </kw-list>
         </div>
         <guide-code-view
-          :code-value="case1"
-          lang="vue"
+          :code-value="[case4, script3]"
+          :lang="['vue','javascript']"
+          multi
         />
       </q-card>
     </div>
@@ -432,9 +524,318 @@
 
 <script setup>
 const case1 = `
+<h3 class="my15">
+  checkbox
+</h3>
+<kw-list
+  v-model:selected="arrModel"
+  :items="items"
+  separator
+  padding
+  checkbox
+  hide-select-all
+  clickable
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section
+      center
+    >
+      <kw-item-label>
+        {{ item.title }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        class="text-primary"
+      >
+        {{ item.addressCode }}
+      </kw-item-label>
+      <kw-item-label>
+        {{ item.address }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        lines="2"
+      >
+        {{ item.addressDetail }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
+<h3 class="my15">
+  checkbox with select all
+</h3>
+<kw-list
+  v-model:selected="arrModel"
+  :items="items"
+  separator
+  padding
+  checkbox
+  clickable
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section>
+      <kw-item-label>
+        {{ item.title }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        class="text-primary"
+      >
+        {{ item.addressCode }}
+      </kw-item-label>
+      <kw-item-label>
+        {{ item.address }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        lines="2"
+      >
+        {{ item.addressDetail }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
+<h3 class="my15">
+  Radio
+</h3>
+<kw-list
+  v-model:selected="arrModel"
+  :items="items"
+  separator
+  padding
+  radio
+  hide-select-all
+  clickable
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section>
+      <kw-item-label>
+        {{ item.title }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        class="text-primary"
+      >
+        {{ item.addressCode }}
+      </kw-item-label>
+      <kw-item-label>
+        {{ item.address }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        lines="2"
+      >
+        {{ item.addressDetail }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
+`;
 
+const script1 = `
+const arrModel = ref([]);
+
+const items = ref([
+  {
+    id: '1', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)' },
+  { id: '2', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)' },
+  { id: '3', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)' },
+]);
+`;
+
+const case2 = `
+<h3 class="my15">
+  padding and seperator
+</h3>
+<kw-list
+  :items="items"
+  separator
+  padding
+  clickable
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section
+      top
+      side
+    >
+      <kw-item-label>
+        {{ item.title }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
+<h3 class="my15">
+  no padding and seperator /add "my20" as helper class
+</h3>
+<kw-list
+  :items="items"
+  clickable
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section
+      top
+      side
+      class="my20"
+    >
+      <kw-item-label>
+        {{ item.title }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
+`;
+
+const script3 = `
+const items2 = ref([
+  {
+    id: '1', text: 'text', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
+]);
+`;
+const case3 = `
+<h3 class="my15">
+  two side and one of default section
+</h3>
+<kw-list
+  :items="items2"
+  separator
+  padding
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section
+      side
+    >
+      side
+    </kw-item-section>
+    <kw-item-section
+      center
+      class="kw-bc--line-bg pa10"
+    >
+      <kw-item-label>
+        <span>{{ item.text }}</span>
+      </kw-item-label>
+    </kw-item-section>
+    <kw-item-section
+      side
+    >
+      side
+    </kw-item-section>
+  </template>
+</kw-list>
+<h3 class="my15">
+  two side and one two of default sections
+</h3>
+<kw-list
+  :items="items2"
+  separator
+  padding
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section
+      side
+    >
+      side<br>(padding-right:16px)
+    </kw-item-section>
+    <kw-item-section
+      center
+      class="kw-bc--line-bg pa10"
+    >
+      <kw-item-label>
+        <span>{{ item.text }}</span>
+      </kw-item-label>
+    </kw-item-section>
+    <kw-item-section
+      class="kw-bc--line-bg pa10"
+    >
+      <kw-item-label>
+        <span>{{ item.text }}</span>
+      </kw-item-label>
+    </kw-item-section>
+    <kw-item-section
+      side
+    >
+      side<br>(padding-left:16px)
+    </kw-item-section>
+  </template>
+</kw-list>
+
+<h3 class="my15">
+  top / center / bottom
+</h3>
+<kw-list
+  :items="items2"
+  separator
+  padding
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section
+      top
+    >
+      top
+    </kw-item-section>
+    <kw-item-section
+      class="kw-bc--line-bg py20 px10"
+    >
+      <kw-item-label>
+        <span>{{ item.text }}</span>
+        default:center
+      </kw-item-label>
+    </kw-item-section>
+    <kw-item-section
+      bottom
+    >
+      bottom
+    </kw-item-section>
+  </template>
+</kw-list>
+`;
+const case4 = `
+<h3 class="my15">
+    div
+  </h3>
+  <kw-list
+    :items="items2"
+    separator
+    padding
+    item-key="id"
+  >
+    <template #item="{ item }">
+      <div class="w120">
+        <img
+          :src="item.src"
+          alt="img"
+          class="w100"
+        >
+      </div>
+      <div
+        class="row justify-between"
+        style="width: 100%;"
+      >
+        <div>
+          <p>
+            p tag
+          </p>
+          <span>{{ item.title }}</span>
+        </div>
+        <kw-chip
+          label="완료"
+          color="primary"
+          outline
+        />
+      </div>
+    </template>
+  </kw-list>
 `;
 const arrModel = ref([]);
+const arrModel1 = ref([]);
+const arrModel2 = ref([]);
 const items = ref([
   {
     id: '1', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
@@ -443,7 +844,7 @@ const items = ref([
 ]);
 const items2 = ref([
   {
-    id: '1', text: 'text', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
+    id: '1', text: 'text', src: 'https://cdn.quasar.dev/img/mountains.jpg', lorem: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Molestiae autem, illo error nesciunt unde consequuntur atque incidunt, aliquid voluptates tempora veritatis! A illo velit, vitae laudantium tempora incidunt voluptatum quas?' },
 ]);
 const historyData = [
   {
