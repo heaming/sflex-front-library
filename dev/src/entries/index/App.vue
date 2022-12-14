@@ -3,17 +3,18 @@
     <dev-header>
       <template #logo>
         <kw-btn
-          borderless
           to="/"
           replace
+          borderless
         >
           <img
-            src="~~@assets/images/logo_kss.svg"
-            alt="KSS"
-            height="24"
+            src="~~@assets/images/kstation_standard.svg"
+            alt="K-Station DEV"
           >
-          DEV
         </kw-btn>
+        <span>
+          DEV
+        </span>
       </template>
     </dev-header>
 

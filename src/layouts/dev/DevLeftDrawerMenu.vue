@@ -1,20 +1,23 @@
 <template>
-  <div class="dev-left-drawer__menus">
-    <div class="dev-left-drawer__title">
-      <div class="col">
-        {{ title }}
-      </div>
-      <kw-icon
-        v-if="expandedAll"
-        name="minus"
-        tooltip="Collapse All"
-        @click="setExpandedAll(false)"
-      />
-      <kw-icon
-        v-else
-        name="plus"
-        tooltip="Expand All"
+  <div class="dev-left-drawer__title">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="dev-left-drawer__menu">
+    <div class="dev-left-drawer__menu-control">
+      <kw-btn
+        dense
+        icon="plus"
+        label="Expand All"
+        clickable
         @click="setExpandedAll(true)"
+      />
+      <kw-btn
+        dense
+        icon="minus"
+        label="Collapse All"
+        clickable
+        @click="setExpandedAll(false)"
       />
     </div>
 
