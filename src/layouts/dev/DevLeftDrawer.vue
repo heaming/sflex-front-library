@@ -5,22 +5,20 @@
     :width="280"
     show-if-above
     bordered
-    @update:model-value="setExpanded"
   >
     <kw-btn
       class="dev-left-drawer__btn"
       :class="{'dev-left-drawer__btn--expanded': isExpanded}"
       icon="lnb_arrow"
       borderless
-      @click="toggleExpanded"
+      @click="toggleExpanded()"
     />
 
-    <kw-scroll-area
-      style="height: 100%;"
-      scroll-area-width="100%"
-    >
-      <dev-left-drawer-menu />
-    </kw-scroll-area>
+    <div class="dev-left-drawer__content">
+      <kw-scroll-area>
+        <dev-left-drawer-menu />
+      </kw-scroll-area>
+    </div>
   </q-drawer>
 </template>
 
