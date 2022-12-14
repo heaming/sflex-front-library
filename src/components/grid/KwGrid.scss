@@ -76,7 +76,15 @@
 
 /*
   Button
-  */
+
+  # 버튼스타일 규칙 ( selector: .rg-data-cell > .rg-button-renderer > .rg-button-renderer-button )
+  - 일반버튼: rg-buttion-xx
+  - 아이콘버튼: rg-buttion-icon-xx
+  - 버튼 disabled 스타일: rg-button-disabled
+
+  # 액션버튼 규칙 ( selector: .rg-data-cell > .rg-cell-buttons > .rg-button-action )
+  - rg-button-action-xx
+*/
 .rg-button-link {
   .rg-button-renderer-button {
     width: auto;
