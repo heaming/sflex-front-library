@@ -16,6 +16,10 @@
     icon-last="arrow_next"
     icon-prev="arrow_left"
     icon-next="arrow_right"
+    flat
+    text-color="black2"
+    active-color="bg-body"
+    active-text-color="black1"
     @update:model-value="onUpdateValue"
   />
 </template>
