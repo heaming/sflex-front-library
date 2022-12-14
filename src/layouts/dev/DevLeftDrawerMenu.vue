@@ -1,8 +1,4 @@
 <template>
-  <div class="dev-left-drawer__title">
-    <h1>{{ title }}</h1>
-  </div>
-
   <div class="dev-left-drawer__menu">
     <div class="dev-left-drawer__menu-control">
       <kw-btn
