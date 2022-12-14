@@ -13,7 +13,7 @@
           >
         </kw-btn>
         <span>
-          DEV
+          Development
         </span>
       </template>
     </dev-header>

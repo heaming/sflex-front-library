@@ -313,6 +313,11 @@
     $-scrollbar-thumb-border: $kw-scrollbar-thumb-border-mobile;
     $-scrollbar-thumb-border-hover: $kw-scrollbar-thumb-border-hover-mobile;
     $-scrollbar-thumb-border-active: $kw-scrollbar-thumb-border-active-mobile;
+
+    @if $visible {
+      $-scrollbar-track-background-color: $kw-scrollbar-track-background-color-hover-mobile;
+      $-scrollbar-thumb-background-color: $kw-scrollbar-thumb-background-color-hover-mobile;
+    }
   }
 
   // noinspection CssInvalidPropertyValue

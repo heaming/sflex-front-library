@@ -55,6 +55,11 @@
 
   & .datepicker table tr td.today {
     background-color: rgba($primary, 0.1);
+    border: 2px solid #fff !important;
+
+    &:active {
+      background-color: rgba($primary, 0.1);
+    }
   }
 
   & .day {
