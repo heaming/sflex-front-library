@@ -24,7 +24,7 @@ body.desktop .web-layout {
     width: 135px;
     height: 34px;
 
-    img {
+    > img {
       cursor: pointer;
     }
   }
@@ -128,8 +128,8 @@ body.desktop .web-layout {
     > div {
       height: calc(100% - 50px);
 
-      .q-scrollarea {
-        height: 100%;
+      .kw-scroll-area__wrapper {
+        max-height: 100%;
       }
     }
   }

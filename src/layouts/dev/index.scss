@@ -31,13 +31,18 @@
   }
 
   &__logo {
-    display: flex;
-    width: 120px;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    align-items: center;
-    color: $accent;
+    position: relative;
+    width: 135px;
+    height: 34px;
+
+    > span {
+      position: absolute;
+      right: 0;
+      bottom: -12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: $accent;
+    }
   }
 
   &__apps {
@@ -80,32 +85,33 @@
 .dev-left-drawer {
   overflow: hidden;
 
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid $line-line;
+    font-weight: 700;
+    font-size: 18px;
+    color: $black1;
+  }
+
   &__btn {
     &.kw-btn.q-btn {
       position: absolute;
-      top: calc(50% - 30px);
-      right: -24px;
-      width: 30px;
-      height: 60px;
-      padding: 0;
-      border-radius: 0 30px 30px 0;
+      top: 0;
+      right: -40px;
+      width: 40px;
+      height: 55px;
+      padding-left: 16px;
+      padding-right: 16px;
       z-index: 990;
-      clip-path: inset(-10px -10px -10px 6px);
-      box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 35%);
       background-color: $black2 !important;
 
       .q-icon {
-        font-size: 16px;
-        margin-left: 5px;
-      }
-
-      &.q-focusable:focus,
-      &.q-manual-focusable--focused,
-      &.q-hoverable:hover,
-      &.q-btn.q-btn--active {
-        &::before {
-          background-color: $black2 !important;
-        }
+        font-size: 24px;
+        margin-left: 0;
       }
     }
 
@@ -116,53 +122,39 @@
     }
   }
 
-  &__menus {
-    padding: 40px 20px 0;
-  }
+  &__content {
+    flex: 100;
+    height: 100%;
 
-  &__title {
-    display: flex;
-    padding: 4px;
-    min-height: 45px;
-    border-bottom: 2px solid $black1;
-    font-weight: 700;
-    font-size: 18px;
-    color: $black1;
-    align-items: center;
+    > div {
+      height: calc(100% - 50px);
 
-    .q-icon {
-      cursor: pointer;
+      .kw-scroll-area__wrapper {
+        max-height: 100%;
+      }
     }
   }
-}
 
-body.mobile:not(.tablet) {
-  .dev-left-drawer__btn {
-    &.kw-btn.q-btn {
-      position: absolute;
-      top: 0;
-      right: -40px;
-      width: 40px;
-      padding-left: 16px;
-      padding-right: 16px;
-      height: 55px;
-      border-radius: unset;
-      z-index: 990;
-      clip-path: unset;
-      box-shadow: unset;
+  &__menu {
+    padding: 0 20px;
+
+    > .kw-icon.q-icon {
+      position: relative;
+      right: 0;
     }
 
-    .q-icon {
-      font-size: 24px;
-      margin-left: 0;
-    }
+    &-control {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 16px 4px 8px;
 
-    &.q-focusable:focus,
-    &.q-manual-focusable--focused,
-    &.q-hoverable:hover,
-    &.q-btn.q-btn--active {
-      &::before {
-        background-color: unset !important;
+      .kw-btn.q-btn {
+        @include kw-btn-height-modifier(4px, 12px, 12px, normal);
+
+        .q-icon {
+          font-size: 12px;
+        }
       }
     }
   }

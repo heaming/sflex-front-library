@@ -29,7 +29,7 @@
         </template>
 
         <q-resize-observer
-          debounce="100"
+          :debounce="100"
           @resize="onResizeContent"
         />
       </q-scroll-area>
@@ -102,12 +102,17 @@ export default {
       height: undefined,
     });
 
-    const scrollAreaSizingStyle = computed(() => {
-      const { width, height } = contentObserverStyle.value;
-      return {
-        width: props.scrollAreaWidth ?? (width ? `${width}px` : width),
-        height: props.scrollAreaHeight ?? (height ? `${height}px` : height),
-      };
+    const computedScrollAreaWidth = computed(() => {
+      if (props.scrollAreaWidth) {
+        return props.scrollAreaWidth;
+      }
+      return contentObserverStyle.value?.width && `${contentObserverStyle.value.width}px`;
+    });
+    const computedScrollAreaHeight = computed(() => {
+      if (props.scrollAreaHeight) {
+        return props.scrollAreaHeight;
+      }
+      return contentObserverStyle.value?.height && `${contentObserverStyle.value.height}px`;
     });
 
     const normalizeStyleProps = (pr) => {
@@ -123,25 +128,33 @@ export default {
         return pr.reduce(flatter, []);
       }
       return Object.entries(pr).map(([key, value]) => {
-        if (typeof key !== 'string' && value) {
+        if (value === true) {
           return normalizeStyleProps(key);
         }
-        return `${key}: ${value}`;
+        if (value) {
+          if (typeof key === 'string' && !key.includes(':') && !key.includes(';')) {
+            return `${key}: ${value}`;
+          }
+          return normalizeStyleProps(key);
+        }
+        return [];
       }).flat();
     };
 
     const computedContentStyle = computed(() => {
-      const styles = props.contentStyle ? [props.contentStyle] : [];
-      if (scrollAreaSizingStyle.value) { styles.push(scrollAreaSizingStyle.value); }
-      if (props.scrollAreaStyle) { styles.push(...normalizeStyleProps(props.scrollAreaStyle)); }
-      return styles;
+      const styles = {
+        'min-width': computedScrollAreaWidth.value,
+        'min-height': computedScrollAreaHeight.value,
+      };
+      return normalizeStyleProps([props.contentStyle, props.scrollAreaStyle, styles]);
     });
 
     const computedContentActiveStyle = computed(() => {
-      const styles = props.contentActiveStyle ? [props.contentActiveStyle] : [];
-      if (scrollAreaSizingStyle.value) { styles.push(scrollAreaSizingStyle.value); }
-      if (props.scrollAreaStyle) { styles.push(...normalizeStyleProps(props.scrollAreaStyle)); }
-      return styles;
+      const styles = {
+        'min-width': computedScrollAreaWidth.value,
+        'min-height': computedScrollAreaHeight.value,
+      };
+      return normalizeStyleProps([props.contentActiveStyle, props.scrollAreaStyle, styles]);
     });
 
     const computedBarStyle = computed(() => {
@@ -244,17 +257,6 @@ export default {
       offset,
       duration,
     );
-
-    // const triggerObserver = () => {
-    //   contentObserverStyle.value = {
-    //     width: undefined,
-    //     height: undefined,
-    //   };
-    // };
-
-    // onUpdated(() => {
-    //   triggerObserver();
-    // });
 
     return {
       ...useInheritAttrs(),
