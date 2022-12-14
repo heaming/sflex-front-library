@@ -4,7 +4,7 @@
       :title="title"
     />
 
-    <q-scroll-area>
+    <kw-scroll-area>
       <q-tree
         ref="treeRef"
         :key="selectedGlobalAppKey"
@@ -37,7 +37,7 @@
           </div>
         </template>
       </q-tree>
-    </q-scroll-area>
+    </kw-scroll-area>
   </div>
 </template>
 

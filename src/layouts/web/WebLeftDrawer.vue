@@ -7,7 +7,6 @@
     :width="280"
     show-if-above
     bordered
-    @update:model-value="setExpanded"
   >
     <div class="web-left-drawer__mini">
       <kw-btn
