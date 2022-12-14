@@ -5,6 +5,7 @@
     :width="280"
     show-if-above
     bordered
+    @update:model-value="setExpanded"
   >
     <kw-btn
       class="dev-left-drawer__btn"
