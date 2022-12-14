@@ -385,3 +385,13 @@
     }
   }
 }
+
+@mixin native-scrollbar-to($selector, $overflow: overlay, $scrollbar-gutter: stable, $visible: null) {
+  @at-root #{$selector} {
+    @include native-scrollbar($overflow, $scrollbar-gutter, false, $visible);
+  }
+
+  @at-root body.mobile:not(.tablet) #{$selector} {
+    @include native-scrollbar($overflow, $scrollbar-gutter, true, $visible);
+  }
+}
