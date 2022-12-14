@@ -5,9 +5,6 @@
     :class="fontClass"
     :style="fontStyle"
     :lines="lines"
-    :overline="overline"
-    :caption="caption"
-    :header="header"
   >
     <slot />
   </q-item-label>

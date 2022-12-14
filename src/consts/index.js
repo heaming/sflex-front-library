@@ -4,6 +4,7 @@ export default {
   LOCALE_KO: 'ko',
   LOCALE_EN: 'en',
 
+  ENTRY_POPUP_PATHNAME: env.VITE_ENTRY_POPUP_PATHNAME,
   ROUTE_HOME_NAME: 'Home',
 
   HTTP_ORIGIN: env.VITE_HTTP_ORIGIN,

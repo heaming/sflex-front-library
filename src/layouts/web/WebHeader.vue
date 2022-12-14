@@ -2,7 +2,10 @@
   <q-header class="web-header">
     <q-toolbar class="full-width">
       <div class="web-header__logo">
-        <slot name="logo" />
+        <slot
+          name="logo"
+          :go-to-home="goToHome"
+        />
       </div>
 
       <div class="web-header__apps">
@@ -54,16 +57,24 @@
 <script>
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
+import consts from '../../consts';
 
 export default {
   name: 'WebHeader',
 
   setup() {
+    const { push } = useRouter();
+
+    function goToHome() {
+      push({ name: consts.ROUTE_HOME_NAME });
+    }
+
     const { logout } = useSession();
 
     return {
       ...useHeaderApp(),
       logout,
+      goToHome,
     };
   },
 };

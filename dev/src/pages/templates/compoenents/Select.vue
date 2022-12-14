@@ -25,12 +25,19 @@
       description="=default"
       :guide-code="defaultCode"
     >
-      <kw-select
-        v-bind="bindingProps"
-      />
-      <div class="flex">
+      <div style="width: 700px;">
         <kw-select
           v-bind="bindingProps"
+        />
+      </div>
+      <div style="width: 700px; display: flex;">
+        <kw-select
+          v-bind="bindingProps"
+          :options="longOptions"
+        />
+        <q-select
+          v-model="modelRef"
+          :options="longOptions.map(o => o.codeName)"
         />
       </div>
     </guide-section>
@@ -80,6 +87,10 @@ const bindingProps = ref({
     { codeId: 'd', codeName: 'd' },
   ],
 });
+
+const longOptions = Object.keys(Array(30).fill(undefined)).map((i) => ({ codeId: i, codeName: `The ${i} square is : ${String(i * i)}` }));
+
+const modelRef = ref();
 
 const defaultCode = `
       <kw-select

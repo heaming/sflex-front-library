@@ -4,7 +4,7 @@
     ref="inputRef"
     :model-value="computedValue"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
-    class="kw-field kw-select"
+    class="kw-select"
     :class="fieldClass"
     popup-content-class="kw-select-options"
     :label="$g.platform.is.mobile ? label : undefined"

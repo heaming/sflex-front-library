@@ -1,15 +1,17 @@
-.q-menu.kw-menu {
-  border: 1px solid $black1;
-  border-radius: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-  max-height: initial;
+.kw-menu {
+  &.q-menu {
+    border: 1px solid $black1;
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    max-height: initial;
+  }
 
   &--dialog {
     display: none;
   }
 
-  > .kw-scroll-area > .kw-scroll-area__wrapper {
+  &__scroll-area > .kw-scroll-area__wrapper {
     max-height: 65vh;
   }
 }

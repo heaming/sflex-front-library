@@ -13,6 +13,7 @@ export const consts: {
   LOCALE_KO: 'ko';
   LOCALE_EN: 'en';
 
+  ENTRY_POPUP_PATHNAME: string;
   ROUTE_HOME_NAME: 'Home';
 
   HTTP_ORIGIN: string;
