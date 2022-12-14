@@ -881,11 +881,11 @@ $unit: px;
 .q-scrollarea:not(.kw-scroll-area) {
   flex-grow: 1;
 
-  &__bar {
+  .q-scrollarea__bar {
     background-color: #fff;
   }
 
-  &__thumb {
+  .q-scrollarea__thumb {
     border: 4px solid #fff;
     border-bottom-width: 6px;
     width: 14px;
