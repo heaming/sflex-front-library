@@ -878,7 +878,7 @@ $unit: px;
 //   }
 // }
 
-.q-scrollarea:not(.kw-scroll-area) {
+.q-scrollarea:not(.kw-scroll-area__scrollarea) {
   flex-grow: 1;
 
   .q-scrollarea__bar {
@@ -1013,12 +1013,4 @@ body.mobile {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.kw-scrollbar {
-  @include native-scrollbar;
-}
-
-body.mobile:not(.tablet) {
-  .kw-scrollbar {
-    @include native-scrollbar(overlay, stable, true);
-  }
-}
+@include native-scrollbar-to(".kw-scrollbar");

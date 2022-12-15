@@ -10,7 +10,7 @@
     >
       <q-scroll-area
         ref="quasarRef"
-        class="fit"
+        class="kw-scroll-area__scrollarea"
         :thumb-style="computedThumbStyle"
         :horizontal-thumb-style="computedHorizontalThumbStyle"
         :vertical-thumb-style="computedVerticalThumbStyle"

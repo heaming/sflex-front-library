@@ -46,21 +46,21 @@
     @update:model-value="onUpdateShowing"
   >
     <div>
-      <div class="kw-menu-dialog__header">
-        <h1>{{ title }}</h1>
-        <q-icon
-          name="close"
-          @click="onUpdateShowing(false)"
-        />
-      </div>
-      <div class="kw-menu-dialog__content">
-        <kw-scroll-area class="kw-menu-dialog__scroll-area">
+      <kw-scroll-area class="kw-menu-dialog__scroll-area">
+        <div class="kw-menu-dialog__header">
+          <h1>{{ title }}</h1>
+          <q-icon
+            name="close"
+            @click="onUpdateShowing(false)"
+          />
+        </div>
+        <div class="kw-menu-dialog__content">
           <slot />
-        </kw-scroll-area>
-      </div>
-      <div class="kw-menu-dialog__action">
-        <slot name="action" />
-      </div>
+        </div>
+        <div class="kw-menu-dialog__action">
+          <slot name="action" />
+        </div>
+      </kw-scroll-area>
     </div>
   </q-dialog>
 </template>

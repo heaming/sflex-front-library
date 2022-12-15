@@ -1,8 +1,7 @@
 import env from '../consts/private/env';
 import { defineGetters } from '../utils/private/globalProperty';
 
-const { pathname } = window.location;
-
+const pathname = window.location.pathname.replace(/\/$/, '');
 export const platform = {
   is: {
     local: env.LOCAL === true,
