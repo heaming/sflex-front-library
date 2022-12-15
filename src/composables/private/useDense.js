@@ -14,7 +14,9 @@ export default (defaults = {}) => {
   const injected = inject(DenseContextKey, null);
   const computedDense = computed(() => props.dense ?? (isSearchContext || injected?.dense?.value) ?? defaults.dense);
 
-  provide(DenseContextKey, { dense: props.blockInheritDense ? undefined : computedDense });
+  provide(DenseContextKey, {
+    dense: (props.blockInheritDense ?? defaults.blockInheritDense) ? undefined : computedDense,
+  });
 
   return computedDense;
 };
