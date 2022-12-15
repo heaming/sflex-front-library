@@ -32,7 +32,7 @@ export default (defaults = {}) => {
   const { stretchClass } = useStretch(defaults);
 
   const required = computed(() => {
-    if (props.required || attrs.required) {
+    if (props.required || attrs.required || attrs.required === '') {
       return true;
     }
     if (props.rules) {
