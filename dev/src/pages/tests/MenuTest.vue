@@ -48,6 +48,14 @@
               </kw-item-section>
             </kw-item>
           </kw-list>
+
+          <template #action>
+            <kw-btn
+              grow
+              label="확인"
+              primary
+            />
+          </template>
         </kw-menu>
       </kw-btn>
     </div>
