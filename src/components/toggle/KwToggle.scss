@@ -240,6 +240,14 @@ body.mobile:not(.tablet) {
           }
         }
       }
+
+      &__label {
+        padding-left: 8px;
+
+        @include typo("dense", 400);
+
+        color: $black1;
+      }
     }
   }
 }

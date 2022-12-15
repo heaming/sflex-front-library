@@ -89,14 +89,12 @@
             <td>
               primary<br>
               negative<br>
-              secondary<br>
-              <span class="delete">table-action</span> <em class="text-red">grid-action</em><br>
+              secondary
             </td>
             <td>
               bg: #2f8af3 / text: #fff<br>
               bg: #777777(black3) / text: #fff<br>
-              border: #666(black-btn-line) / bg: #fff / text: #555(black3)<br>
-              dense / border: #ddd(line-line) / bg: #f5f5f5 / text: #555(black3)
+              border: #666(black-btn-line) / bg: #fff / text: #555(black3)
             </td>
           </tr>
           <tr>
@@ -286,51 +284,6 @@
     </div>
     <div class="kw-guide-section">
       <h3
-        id="Form"
-        class="kw-guide-title"
-      >
-        Form type(use with input type)
-      </h3>
-      <p class="kw-guide-description">
-        If height 40px, please add <em>padding="px value"</em> (only custom padding of right and left )<br>
-        (Default) height 40px / padding 8px 12px | (Dense) height 32px / padding 8px 6px <br>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-btn
-            padding="12px"
-            secondary
-            label="파일첨부"
-            class="mr8"
-          />
-          <kw-btn
-            padding="12px"
-            secondary
-            label="우편번호"
-            class="mr8"
-          />
-          <kw-btn
-            padding="12px"
-            secondary
-            disable
-            label="우편번호"
-            class="mr8"
-          />
-          <kw-btn
-            secondary
-            dense
-            label="신규등록"
-            class="mr8"
-          />
-        </div>
-        <guide-code-view
-          :code-value="formBtn"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
         id="popupBottomButton"
         class="kw-guide-title"
       >
@@ -425,6 +378,37 @@
         id="table"
         class="kw-guide-title"
       >
+        T맵 아이콘
+      </h3>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            dense
+            disable
+            label="TMAP 최적경로"
+            class="mr8 kw-btn--tmap-icon"
+          />
+          <kw-btn
+            dense
+            label="TMAP 최적경로"
+            class="mr8 kw-btn--tmap-icon"
+          />
+          <kw-btn
+            round
+            class="mr8 kw-btn--tmap-icon"
+          />
+        </div>
+        <guide-code-view
+          :code-value="TmapIcon"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="table"
+        class="kw-guide-title"
+      >
         custom button
       </h3>
       <p class="kw-guide-description">
@@ -507,20 +491,12 @@
             class="mr8"
           />
           <kw-btn
-            dense
-            disable
-            label="TMAP 최적경로"
-            class="mr8 kw-btn--tmap-icon"
-          />
-          <kw-btn
-            dense
-            label="TMAP 최적경로"
-            class="mr8 kw-btn--tmap-icon"
-          />
-          <kw-btn
             round
-            icon="call_24"
-            style="font-size: 24px;"
+            filled
+            color="bg-box"
+            icon="call_24_WH"
+            style="font-size: 20px;"
+            class="w32 h32"
           />
         </div>
         <guide-code-view
@@ -538,44 +514,30 @@
       </h3>
       <p class="kw-guide-description">
         default gap is 4px. <br>
-        Adjust gap as attribute like gap="10px".<br>
-        default height is 32px<br>
+        Adjust gap as attribute like gap="8px".<br>
+        default height is 30px<br>
         Add dense = "false" as attribute is 40px<br>
       </p>
       <q-card>
         <div class="kw-guide-example">
+          <p>default</p>
           <kw-btn-toggle
             v-model="strModel"
-            :label="'label'"
+            label="label"
             :options="['오늘', '주간', '월간']"
           />
+          <p class="mt10">
+            full-width (flexible) / gap="0"
+          </p>
           <kw-btn-toggle
             v-model="strModel2"
-            class="mt10"
-            :label="'label'"
-            :options="['오늘', '주간', '월간']"
-            dense="false"
-          />
-          <kw-btn-toggle
-            v-model="strModel3"
-            class="mt10"
-            :label="'label'"
-            :options="['A', 'B', 'C']"
-            dense="false"
+            class="mt10 full-width"
+            label="label"
+            :options="['남성','여성']"
             gap="0px"
+            dense="false"
+            grow
           />
-          <!-- 추후에 필요하면 추가 -->
-          <!-- <kw-btn-toggle
-            v-model="strModel3"
-            class="mt10"
-            :options="['오늘', '주간', '월간']"
-            color="error"
-            text-color="info"
-            border-color="info"
-            toggle-color="secondary"
-            toggle-text-color="black3"
-            toggle-border-color="black3"
-          /> -->
         </div>
         <guide-code-view
           :code-value="[toggleRadio,toggleRadioScript]"
@@ -591,10 +553,21 @@
       >
         Toggle(switch)
       </h3>
+      <p class="kw-guide-description">
+        For kw-toggle's label is located right side,Add left-label="false"
+      </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-toggle
             v-model="ynModel"
+            :label="ynModel === 'N' ? 'off' : 'on'"
+            left-label="false"
+          />
+          <p class="mt10">
+            no label
+          </p>
+          <kw-toggle
+            v-model="ynModel2"
           />
         </div>
         <guide-code-view
@@ -604,135 +577,15 @@
         />
       </q-card>
     </div>
-    <div class="kw-guide-section">
-      <h3
-        id="dropdownButton"
-        class="kw-guide-title"
-      >
-        Dropdown Button
-      </h3>
-      <p class="kw-guide-description">
-        This component for button which have options
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-btn-dropdown
-            label="상품등록"
-            dense
-            primary
-          >
-            <kw-btn
-              label="기준 상품등록"
-            />
-            <kw-btn
-              label="복합 상품등록"
-            />
-          </kw-btn-dropdown>
-        </div>
-        <guide-code-view
-          :code-value="[dropdownBtn]"
-          :lang="['vue']"
-          multi
-        />
-      </q-card>
-    </div>
-    <!-- <div class="kw-guide-section">
-      <h3
-        id="toggleButton"
-        class="kw-guide-title"
-      >
-        Toggle(switch)
-      </h3>
-      <p class="kw-guide-description">
-        There are two options for kw-toggle and kw-option-group's toggle.<br>
-        one toggle for kw-toggle, More than one toggle for kw-option-group.<br>
-        Default's label location is left. And add
-        <b>left-label="false"</b> as attirbue in kw-toggle for Right side's label<br>
-      </p>
-      <q-card>
-        <div class="kw-guide-example row">
-          <kw-toggle
-            v-model="ynModel"
-          />
-          <kw-toggle
-            v-model="ynModel2"
-            label="Left Label"
-          />
-          <kw-toggle
-            v-model="ynModel3"
-            label="Right Label"
-            left-label="false"
-          />
-          <kw-option-group
-            class="ml30"
-            :model-value="[]"
-            name="toggleOptionGroup"
-            type="toggle"
-            :options="['A', 'B', 'C', 'D']"
-          />
-        </div>
-        <guide-code-view
-          :code-value="[toggle,toggleScript]"
-          :lang="['vue','javascript']"
-          multi
-        />
-      </q-card>
-    </div>
-    <div class="kw-guide-section">
-      <h3
-        id="toggleButton"
-        class="kw-guide-title"
-      >
-        Toggle(switch) in form or searchform
-      </h3>
-      <p class="kw-guide-description">
-        toggle switch button
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-form class="mt30">
-            <kw-form-row>
-              <kw-form-item label="서치폼">
-                <kw-field
-                  :model-value="'Y'"
-                  rules="required"
-                >
-                  <template #default="{ field }">
-                    <kw-toggle
-                      v-bind="field"
-                      label="formform"
-                      left-label="false"
-                    />
-                  </template>
-                </kw-field>
-              </kw-form-item>
-              <kw-form-item label="Toggle (OptionGroup)">
-                <kw-option-group
-                  :model-value="[]"
-                  name="toggleOptionGroup"
-                  type="toggle"
-                  :options="['A', 'B', 'C', 'D']"
-                />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </div>
-        <guide-code-view
-          :code-value="[toggle,toggleScript]"
-          :lang="['vue','javascript']"
-          multi
-        />
-      </q-card>
-    </div> -->
   </kw-page>
 </template>
 
 <script setup>
 
 const strModel = ref('오늘');
-const strModel2 = ref('오늘');
-const strModel3 = ref('A');
+const strModel2 = ref('남성');
 const ynModel = ref('N');
+const ynModel2 = ref('N');
 
 const defaultCode = `
 <kw-btn
@@ -753,152 +606,196 @@ const defaultCode = `
 <kw-btn
   secondary
   disable
-  la
+  label="확인"
+  class="mr8"
+/>
+<!-- mr8: gutter margin-left:8px -->
 `;
 
 const denseCode = `
-  <kw-btn
-    primary
-    dense
-    label="프로모션등록"
-    class="mr8"
-  />
-  <kw-btn
-    negative
-    dense
-    label="취소"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    dense
-    label="확인"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    dense
-    disable
-    label="확인"
-  />
+<kw-btn
+  primary
+  dense
+  label="프로모션등록"
+  class="mr8"
+/>
+<kw-btn
+  negative
+  dense
+  label="취소"
+  class="mr8"
+/>
+<kw-btn
+  secondary
+  dense
+  label="확인"
+  class="mr8"
+/>
+<kw-btn
+  secondary
+  dense
+  disable
+  label="확인"
+  class="mr8"
+/>
   <!-- mr8: gutter margin-left:8px -->
   `;
 
-const formBtn = `
-  <kw-btn
-    padding="12px"
-    secondary
-    label="파일첨부"
-    class="mr8"
-  />
-  <kw-btn
-    padding="12px"
-    secondary
-    label="우편번호"
-    class="mr8"
-  />
-  <kw-btn
-    padding="12px"
-    secondary
-    disable
-    label="우편번호"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    dense
-    label="신규등록"
-    class="mr8"
-  />
-  `;
-
 const primaryPositive = `
-  <kw-btn
-    primary
-    label="확인"
-    class="mr8"
-  />
-  <kw-btn
-    primary
-    dense
-    label="확인"
-    class="mr8"
-  />
-  <kw-btn
-    primary
-    dense
-    disable
-    label="확인"
-  />
+<kw-btn
+  primary
+  label="확인"
+  class="mr8"
+/>
+<kw-btn
+  primary
+  dense
+  label="확인"
+  class="mr8"
+/>
+<kw-btn
+  primary
+  dense
+  disable
+  label="확인"
+/>
+<!-- mr8: gutter margin-left:8px -->
   `;
 
 const primaryNegative = `
-  <kw-btn
-    negative
-    label="취소"
-    class="mr8"
-  />
-  <kw-btn
-    negative
-    dense
-    label="취소"
-    class="mr8"
-  />
-  <kw-btn
-    negative
-    dense
-    disable
-    label="취소"
-  />
+<kw-btn
+  negative
+  label="취소"
+  class="mr8"
+/>
+<kw-btn
+  dense
+  negative
+  label="취소"
+  class="mr8"
+/>
+<kw-btn
+  dense
+  negative
+  disable
+  label="취소"
+/>
+<!-- mr8: gutter margin-left:8px -->
   `;
 
 const secondary = `
-  <kw-btn
-    secondary
-    label="초기화"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    dense
-    label="초기화"
-    class="mr8"
-  />
-  <kw-btn
-    secondary
-    dense
-    disable
-    label="초기화"
-  />
+<kw-btn
+  secondary
+  label="초기화"
+  class="mr8"
+/>
+<kw-btn
+  dense
+  secondary
+  label="초기화"
+  class="mr8"
+/>
+<kw-btn
+  dense
+  secondary
+  disable
+  label="초기화"
+/>
   `;
+
+const TmapIcon = `
+<kw-btn
+  dense
+  disable
+  label="TMAP 최적경로"
+  class="mr8 kw-btn--tmap-icon"
+/>
+<kw-btn
+  dense
+  label="TMAP 최적경로"
+  class="mr8 kw-btn--tmap-icon"
+/>
+<kw-btn
+  round
+  class="mr8 kw-btn--tmap-icon"
+/>
+`;
 
 const customBtn = `
 <kw-btn
-  border-color="line-stroke"
-  secondary
   dense
+  secondary
+  border-color="line-stroke"
   label="TEXT"
   class="mr8"
 />
-
 <kw-btn
-  border-color="line-stroke"
-  secondary
   dense
+  secondary
   label="TEXT"
-  class="w120"
+  class="w120 mr8"
+/>
+<kw-btn
+  negative
+  label="TEXT"
+  class="w180"
+/>
+
+// dense full width
+<kw-btn
+  dense
+  secondary
+  border-color="line-stroke"
+  label="TEXT"
+  class="full-width mt10"
+/>
+
+//height:37px and full width
+<kw-btn
+  dense
+  secondary
+  border-color="line-stroke"
+  label="TEXT"
+  class="full-width mt10 h37"
+/>
+`;
+
+const etcBtn = `
+<kw-btn
+  dense
+  underline
+  text-color="black3"
+  icon-right="plus"
+  label="TEXT"
+  class="mr8"
+/>
+<kw-btn
+  dense
+  borderless
+  text-color="primary"
+  icon-right="arrow_right"
+  label="TEXT"
+  class="mr8"
+/>
+<kw-btn
+  round
+  filled
+  color="bg-box"
+  icon="call_24_WH"
+  style="font-size: 20px;"
+  class="w32 h32"
 />
 `;
 
 const toggleSwitch = `
 <kw-toggle
   v-model="ynModel"
-  label="가구 내 학습지 모두 보기"
+  :label="ynModel === 'N' ? 'off' : 'on'"
   left-label="false"
 />
+<!-- no label-->
 <kw-toggle
-  v-model="ynModel"
-  label="가구 내 학습지 모두 보기"
+  v-model="ynModel2"
 />
   `;
 const toggleSwitchScript = `
@@ -912,41 +809,22 @@ const toggleRadio = `
   :label="'label'"
   :options="['오늘', '주간', '월간']"
 />
-<!-- height: 40px -->
+<!-- full-width (flexible) / gap="0" -->
 <kw-btn-toggle
-  v-model="strModel"
-  :label="'label'"
-  :options="['오늘', '주간', '월간']"
-  dense="false"
-/>
-<!-- gap="0" -->
-<kw-btn-toggle
-  v-model="strModel"
-  :label="'label'"
-  :options="['A', 'B', 'C']"
-  dense="false"
+  v-model="strModel2"
+  class="mt10 full-width"
+  label="label"
+  :options="['남성','여성']"
   gap="0px"
+  dense="false"
+  grow
 />
 `;
 
 const toggleRadioScript = `
 const strModel = ref('오늘');
+const strModel2 = ref('남성');
   `;
-
-const dropdownBtn = `
-<kw-btn-dropdown
-  label="상품등록"
-  dense
-  primary
->
-  <kw-btn
-    label="기준 상품등록"
-  />
-  <kw-btn
-    label="복합 상품등록"
-  />
-</kw-btn-dropdown>
-`;
 
 // History
 const guideHistory = [
