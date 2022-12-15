@@ -259,9 +259,7 @@ body.desktop .web-layout {
  */
 .web-tab-view {
   $tabs-view-bg-color: #dedfe0;
-  $tabs-view-tab-border-color: #d9d9d9;
-  $tabs-view-tab-bg-color: #e4e5e6;
-  $tabs-view-tab-active-bg-color: #f4f5f6;
+  $tabs-view-active-bg-color: #f4f5f6;
 
   &__header {
     padding: 0 30px 0 64px !important;
@@ -298,11 +296,11 @@ body.desktop .web-layout {
       &.q-focusable:focus,
       &.q-manual-focusable--focused,
       &.q-hoverable:hover {
-        background-color: $tabs-view-tab-active-bg-color;
+        background-color: $tabs-view-active-bg-color;
       }
 
       &--active {
-        background-color: $tabs-view-tab-active-bg-color;
+        background-color: $tabs-view-active-bg-color;
 
         .q-tab__content > div {
           color: $black1;
