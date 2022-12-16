@@ -5,12 +5,7 @@
       class="web-tab-view__header"
       align="left"
       inline-label
-      outside-arrows
-      mobile-arrows
       no-caps
-      left-icon="arrow_left_24"
-      right-icon="arrow_right_24"
-      switch-indicator
     >
       <q-tab
         v-for="tabView of tabViews"

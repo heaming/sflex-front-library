@@ -4,14 +4,14 @@
     class="kw-page-header"
   >
     <div class="kw-page-header__title">
-      <kw-icon
+      <!-- <kw-icon
         size="24px"
         name="arrow_left_breadcrumbs_24"
         clickable
         @click="onClickBack"
       >
         {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
-      </kw-icon>
+      </kw-icon> -->
 
       <h1>{{ title }}</h1>
     </div>
@@ -54,7 +54,7 @@
         :label="navigation.label"
       >
         <kw-icon
-          v-if="i === navigation.length - 1"
+          v-if="i === navigations.length - 1"
           clickable
           @click="onClickHint"
         >
