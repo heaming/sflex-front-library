@@ -112,8 +112,8 @@ const viewConfig = {
     lineVisible: true,
   },
 
-  scrollBarHeight: 10,
   scrollBarWidth: 10,
+  scrollBarHeight: 10,
   hideDeletedRows: true,
   undoable: false,
 };

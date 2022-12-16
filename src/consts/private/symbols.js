@@ -9,6 +9,7 @@ export const FormLayoutContextKey = Symbol.for('__FormLayoutContextKey__');
 export const FormExpandableContextKey = Symbol.for('__FormExpandableContextKey__');
 export const FieldStateWrapContextKey = Symbol.for('__FieldStateWrapContextKey__');
 export const DenseContextKey = Symbol.for('__DenseContextKey__');
+export const ListContextKey = Symbol.for('__ListContextKey__');
 
 // Plugins
 export const GlobalDialogVmKey = Symbol.for('__GlobalDialogVmKey__');

@@ -179,6 +179,10 @@ export default () => {
     preventSubmitEnter(el);
   });
 
+  onBeforeUnmount(() => {
+    removeClickOutside(clickOutsideProps);
+  });
+
   return {
     showing,
     fieldClasses,

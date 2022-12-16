@@ -7,7 +7,7 @@ export const useFontProps = {
   letterSpacing: { type: String, default: undefined },
 };
 
-const FONT_DEFAULT = 'body';
+const FONT_DEFAULT = undefined;
 
 export default (useImportant, defaults = {}) => {
   const { props } = getCurrentInstance();

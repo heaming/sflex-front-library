@@ -85,6 +85,7 @@
       font-size: $-kw-radio-label-font-size;
       line-height: $-kw-radio-line-height;
       font-weight: 500;
+      word-break: keep-all;
 
       // color: $black1;
     }

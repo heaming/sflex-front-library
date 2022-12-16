@@ -89,10 +89,10 @@
 
     <!-- counter -->
     <template
-      v-if="useCounter"
+      v-if="inputCounter"
       #counter
     >
-      {{ counterText }}
+      {{ inputCounter }}
     </template>
 
     <!-- error -->
@@ -195,14 +195,19 @@ export default {
   ],
 
   setup(props) {
-    const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClass } = fieldStyles;
-    const fieldCtx = useField();
+    const fieldCtx = useField({ onChangeValue: () => {} });
     const { inputRef, value } = fieldCtx;
 
-    function select() {
-      inputRef.value.select();
-    }
+    const inputClass = computed(() => ({
+      'text-right': props.alignRight,
+      'q-no-input-spinner': !props.spinner,
+    }));
+
+    const inputCounter = computed(() => {
+      if (props.counter === true && props.maxlength > 0) {
+        return `${getByte(value.value)} / ${props.maxlength}`;
+      }
+    });
 
     function onKeydownInput(e) {
       // enter
@@ -220,10 +225,12 @@ export default {
 
     const isModifiersTrim = useAttrs().modelModifiers?.trim === true;
 
-    function onChangeInput() {
+    function onChangeInput(val) {
       if (isModifiersTrim) {
         value.value = props.modelValue;
       }
+
+      props.onChange?.(val);
     }
 
     const regex = computed(() => {
@@ -283,13 +290,6 @@ export default {
       }
     }
 
-    const useCounter = computed(() => props.maxlength > 0 && props.counter);
-    const counterText = computed(() => (useCounter ? `${getByte(value.value)} / ${props.maxlength}` : null));
-    const inputClass = computed(() => ({
-      'text-right': props.alignRight,
-      'q-no-input-spinner': !props.spinner,
-    }));
-
     onMounted(() => {
       if (props.preventSubmit) {
         const el = inputRef.value.getNativeElement();
@@ -297,18 +297,20 @@ export default {
       }
     });
 
+    function select() {
+      inputRef.value.select();
+    }
+
     return {
       ...useInheritAttrs(),
+      ...useFieldStyle(),
       ...fieldCtx,
-      fieldStyleProps,
-      fieldClass,
+      inputClass,
+      inputCounter,
       select,
       onKeydownInput,
       onChangeInput,
       onUpdateValue,
-      useCounter,
-      counterText,
-      inputClass,
     };
   },
 };

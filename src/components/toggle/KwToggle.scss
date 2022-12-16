@@ -87,6 +87,7 @@
       line-height: $-kw-toggle-label-line-height;
       color: $-kw-toggle-label-color;
       font-weight: 500;
+      word-break: keep-all;
     }
   }
 

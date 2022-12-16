@@ -13,17 +13,16 @@
     }
 
     &--padding {
-      padding: 0;
-
-      > .kw-item {
-        @extend %kw-item-padding;
-      }
+      // remove quasar padding
+      // if you want use q-props, remove following rules
+      padding: unset;
     }
 
-    &--dense > .kw-item.q-item {
-      // default Specificity is 0-2-0 for override quasar style. (.kw-item.q-item)
-      // so, it require minimum specificity 0-3-0
-      @extend %kw-item-dense;
+    &--dense {
+      // remove quasar dense
+      // if you want use q-props, remove following rules
+      min-height: unset;
+      padding: unset;
     }
   }
 
@@ -49,6 +48,22 @@
       }
     }
   }
+
+  /*
+
+  &--padding {
+    > .kw-item-type {
+      @extend %kw-item-type-padding;
+    }
+  }
+
+  &--dense {
+    > .kw-item-type {
+      @extend %kw-item-type-dense;
+    }
+  }
+
+   */
 
   // START kw-search > 체크박스 목록
   &.checkbox-group {
