@@ -2,7 +2,6 @@
   <q-checkbox
     ref="checkRef"
     v-bind="styleClassAttrs"
-    class="kw-checkbox spaced-sibling"
     :class="checkboxClass"
     :model-value="modelValue"
     :true-value="trueValue"
@@ -100,6 +99,14 @@ export default {
       type: [String, Number],
       default: undefined,
     },
+    multiline: {
+      type: Boolean,
+      default: undefined,
+    },
+    removeSpacedSibling: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -112,7 +119,10 @@ export default {
     const { stretchClass } = useStretch();
 
     const checkboxClass = computed(() => ({
+      'kw-checkbox': true,
       'kw-checkbox--no-label': !(props.label || slots.default),
+      'kw-checkbox--multiline': props.multiline,
+      'spaced-sibling': !(props.removeSpacedSibling),
       ...stretchClass.value,
     }));
 
