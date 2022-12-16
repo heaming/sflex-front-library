@@ -1,13 +1,35 @@
 <template>
   <kw-page>
-    <kw-grid
-      :visible-rows="6"
-      @init="initGrid"
-    />
+    <kw-search @search="onSearch" />
+    <div class="result-area">
+      <kw-grid
+        ref="grdRef"
+        :visible-rows="9"
+        @init="initGrid"
+      />
+    </div>
   </kw-page>
 </template>
 
 <script setup>
+import { delay, loadSpinner } from '~kw-lib';
+
+const grdRef = ref();
+
+async function fetchData(startIndex = 0) {
+  loadSpinner(true);
+  await delay(200);
+  loadSpinner(false);
+  return Array.from({ length: 10 }, (v, i) => ({ text: `test${startIndex + i}` }));
+}
+
+async function onSearch() {
+  const data = grdRef.value.getData();
+
+  data.setRows(
+    await fetchData(),
+  );
+}
 
 function initGrid(data, view) {
   const fields = [
@@ -21,13 +43,11 @@ function initGrid(data, view) {
   data.setFields(fields);
   view.setColumns(columns);
 
-  view.onScrollToBottom = () => {
-    console.log('onScrollToBottom');
+  view.onScrollToBottom = async () => {
+    data.addRows(
+      await fetchData(data.getRowCount()),
+    );
   };
-
-  data.setRows(
-    Array(8).fill().map((v, i) => ({ text: `test${i}` })),
-  );
 }
 
 </script>

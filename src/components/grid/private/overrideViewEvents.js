@@ -1,5 +1,4 @@
 import { ValueType } from 'realgrid';
-import { throttle } from 'lodash-es';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { isOverByte, getMaxByteLength, getMaxByteString } from '../../../utils/string';
@@ -21,6 +20,7 @@ const onValidate = 'onValidate'; // custom
 const onEditChange = 'onEditChange';
 const onGetEditValue = 'onGetEditValue';
 const onCellPasting = 'onCellPasting';
+const onTopIndexChanged = 'onTopIndexChanged';
 const onScrollToBottom = 'onScrollToBottom';
 const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
 const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
@@ -367,17 +367,37 @@ export function overrideOnCellPasting(view) {
 }
 
 /*
+  수직 스크롤 바의 위치가 변경됨을 알리는 콜백
+  (onScrollToBottom 버그 있어서 별도 구현처리)
+  */
+export function overrideOnTopIndexChanged(view) {
+  wrapEvent(view, onTopIndexChanged, (g, itemIndex) => {
+    if (hasOriginal(view, onTopIndexChanged)) {
+      execOriginal(g, onTopIndexChanged, g, itemIndex);
+    }
+
+    const vscrollBar = g._view._vscrollBar;
+    const hasVerticalScroll = vscrollBar.visible === true;
+
+    if (hasVerticalScroll && hasOriginal(g, onScrollToBottom)) {
+      const thumb = vscrollBar._thumb;
+      const threshold = vscrollBar.height - thumb.height - 20;
+      const shouldFireOnScrollToBottom = thumb.y >= threshold;
+
+      if (shouldFireOnScrollToBottom) {
+        execOriginal(view, onScrollToBottom, view);
+      }
+    }
+  });
+}
+
+/*
   사용자가 키보드나 스크롤 바 등을 조작하여 그리드에 마지막 행이 표시될 때 호출되는 콜백
   */
 export function overrideOnScrollToBottom(view) {
-  wrapEvent(view, onScrollToBottom, throttle((g) => {
-    const { layoutManager } = g._view;
-    const hasVerticalScroll = layoutManager.vscrollBar === true;
-
-    if (hasVerticalScroll && hasOriginal(view, onScrollToBottom)) {
-      return execOriginal(g, onScrollToBottom, g);
-    }
-  }, 200));
+  wrapEvent(view, onScrollToBottom, () => {
+    // ignore
+  });
 }
 
 /*
