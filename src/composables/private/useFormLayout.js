@@ -23,7 +23,7 @@ const DEFAULT_COLS = 3;
 let DEFAULT_LABEL_SIZE;
 if (platform.is.desktop) { DEFAULT_LABEL_SIZE = 150; }
 if (platform.is.tablet) { DEFAULT_LABEL_SIZE = 108; }
-if (platform.is.mobile) { DEFAULT_LABEL_SIZE = 0; }
+if (platform.is.mobile) { DEFAULT_LABEL_SIZE = 105; }
 const DEFAULT_ALIGN_CONTENT = 'left';
 
 export default (defaults = {}) => {
