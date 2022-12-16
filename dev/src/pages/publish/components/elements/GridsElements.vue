@@ -31,7 +31,7 @@
         </li>
       </ul>
     </div>
-    <div class="kw-guide-section">
+    <!-- <div class="kw-guide-section">
       <h3
         class="kw-guide-title"
       >
@@ -118,7 +118,7 @@
           </tr>
         </tbody>
       </q-markup-table>
-    </div>
+    </div> -->
     <div class="kw-guide-section">
       <h3
         class="kw-guide-title"
@@ -126,7 +126,8 @@
         버튼
       </h3>
       <p class="kw-guide-description">
-        위 버튼 클래스를 실제 적용한 그리드입니다. 소스코드를 참고하세요.
+        <!-- 위 버튼 클래스를 실제 적용한 그리드입니다.  -->
+        소스코드를 참고하세요.
       </p>
       <q-card>
         <div class="kw-guide-example">
