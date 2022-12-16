@@ -295,6 +295,10 @@ export default {
       preventSubmitEnter(el);
     });
 
+    onBeforeUnmount(() => {
+      removeClickOutside(clickOutsideProps);
+    });
+
     function focus() {
       inputRef.value?.focus();
     }
