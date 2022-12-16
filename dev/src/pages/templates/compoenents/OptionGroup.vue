@@ -29,10 +29,12 @@
       description="=default"
       :guide-code="defaultCode"
     >
-      <kw-optionGroup
-        v-model="model"
-        v-bind="bindingProps"
-      />
+      <div class="flex w300">
+        <kw-optionGroup
+          v-model="model"
+          v-bind="bindingProps"
+        />
+      </div>
     </guide-section>
   </kw-page>
 </template>
@@ -62,7 +64,7 @@ const optionGroupProps = {
 
 const model = ref(1);
 const bindingProps = ref({
-  options: [1, 2, 3],
+  options: ['test test test', 'somewhere over the rainbow', 'how can i handle it!'],
 });
 
 const defaultCode = `
