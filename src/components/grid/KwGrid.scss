@@ -85,23 +85,97 @@
   # 액션버튼 규칙 ( selector: .rg-data-cell > .rg-cell-buttons > .rg-button-action )
   - rg-button-action-xx
 */
+.rg-button-renderer-button {
+  width: auto;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 5px 7px;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.rg-button-default {
+  .rg-button-renderer-button {
+    border: 1px solid $primary;
+    color: $primary;
+    background: rgba($primary, 0.08);
+
+    &:hover {
+      background: rgba($primary, 0.18);
+    }
+
+    &:active {
+      background: rgba($primary, 0.28);
+    }
+  }
+
+  &.rg-button-disabled .rg-button-renderer-button {
+    border: 1px solid $line-stroke;
+    color: $grey-7;
+    background: $line-bg;
+  }
+}
+
 .rg-button-link {
   .rg-button-renderer-button {
     width: auto;
     border: none;
     background: inherit;
-    color: -webkit-link;
+    color: $black1;
     text-decoration: underline;
     cursor: pointer;
-
-    &:hover {
-      color: -webkit-activelink;
-    }
   }
 
   &.rg-button-disabled .rg-button-renderer-button {
     color: inherit;
+    width: auto;
     text-decoration: none;
+  }
+}
+
+.rg-button-exceldown {
+  .rg-button-renderer-button {
+    border: 1px solid $black-btn-line;
+    color: $black2;
+    background: $bg-white url(~@assets/icons/download_on.svg) 8px center no-repeat;
+    background-size: 16px;
+    padding-left: 28px;
+
+    &:hover {
+      background-color: #f2f2f2;
+    }
+
+    &:active {
+      background-color: #f6f6f6;
+    }
+  }
+
+  &.rg-button-disabled .rg-button-renderer-button {
+    background-color: #e9e9e9;
+    opacity: 0.5;
+  }
+}
+
+.rg-button-excelup {
+  .rg-button-renderer-button {
+    border: 1px solid $black-btn-line;
+    color: $black2;
+    background: $bg-white url(~@assets/icons/upload_on.svg) 8px center no-repeat;
+    background-size: 16px;
+    padding-left: 28px;
+
+    &:hover {
+      background-color: #f2f2f2;
+    }
+
+    &:active {
+      background-color: #f6f6f6;
+    }
+  }
+
+  &.rg-button-disabled .rg-button-renderer-button {
+    background-color: #e9e9e9;
+    opacity: 0.5;
   }
 }
 
