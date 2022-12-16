@@ -54,6 +54,12 @@ export interface UseFieldProps {
    * 상위 Observer, Form에서 reset 수행 시 제외할지 여부
    */
   ignoreOnReset?: boolean;
+
+  /**
+   * change event
+   * @param value
+   */
+  onChange?: (value: any) => void;
 }
 
 export interface UseFieldStyleProps extends UseDenseProps, UseStretchProps {

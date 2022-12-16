@@ -25,22 +25,20 @@ export const useFieldProps = {
     type: Boolean,
     default: true,
   },
+  onChange: {
+    type: Function,
+    default: undefined,
+  },
 };
 
-const normalizeOptions = (options = {}) => ({
-  bindValueRef: options.bindValueRef,
-  bindValueKey: options.bindValueKey || 'modelValue',
-  onUpdateValue: options.onUpdateValue,
-});
-
-export default (options) => {
+export default (options = {}) => {
+  const { props, emit, proxy } = getCurrentInstance();
   const {
     bindValueRef,
-    bindValueKey,
-    onUpdateValue,
-  } = normalizeOptions(options);
-
-  const { props, emit, proxy } = getCurrentInstance();
+    bindValueKey = 'modelValue',
+    onUpdateValue = (val) => emit(`update:${bindValueKey}`, val),
+    onChangeValue = (val) => props.onChange?.(val),
+  } = options;
 
   const inputRef = ref();
   const bindValue = isRef(bindValueRef) ? bindValueRef : toRef(props, bindValueKey);
@@ -90,20 +88,29 @@ export default (options) => {
     }
   }, { deep: true });
 
+  let syncChaining = false;
   watch(bindValue, (val) => {
-    if (!isEqual(val, value.value)) {
+    if (!syncChaining) {
       value.value = deepCopy(val) ?? '';
     }
+
+    syncChaining = true;
+    nextTick(() => { syncChaining = false; });
   }, { deep: true });
 
   watch(value, (val) => {
-    if (!isEqual(val, bindValue.value)) {
-      if (onUpdateValue) {
-        onUpdateValue(deepCopy(val));
-      } else {
-        emit(`update:${bindValueKey}`, deepCopy(val));
+    if (!syncChaining) {
+      val = deepCopy(val);
+
+      onUpdateValue(val);
+
+      if (!pending.value) {
+        onChangeValue(val);
       }
     }
+
+    syncChaining = true;
+    nextTick(() => { syncChaining = false; });
   }, { deep: true });
 
   let unwatchValueForValidate;
