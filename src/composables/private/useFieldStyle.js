@@ -22,17 +22,21 @@ export const useFieldStyleProps = {
     type: Boolean,
     default: false,
   },
+  required: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export default (defaults = {}) => {
-  const { props, attrs } = getCurrentInstance();
+  const { props } = getCurrentInstance();
 
   const computedDense = useDense(defaults);
 
   const { stretchClass } = useStretch(defaults);
 
   const required = computed(() => {
-    if (props.required || attrs.required || attrs.required === '') {
+    if (props.required === true) {
       return true;
     }
     if (props.rules) {
