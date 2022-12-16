@@ -2,18 +2,17 @@
   <q-expansion-item
     ref="quasarRef"
     v-bind="styleClassAttrs"
-    class="kw-expansion-item"
     :class="expansionItemClass"
+    :style="expansionItemStyle"
     :toggle-aria-label="toggleAriaLabel"
     :icon="icon"
     :label="label"
     :label-lines="labelLines"
     :caption="caption"
     :caption-lines="captionLines"
-    :dense="dense"
     :expand-icon="computedExpandIcon"
     :expanded-icon="expandedIcon"
-    :expand-icon-class="expandIconClass"
+    :expand-icon-class="computedExpandIconClass"
     :duration="duration"
     :header-inset-level="headerInsetLevel"
     :content-inset-level="contentInsetLevel"
@@ -24,8 +23,8 @@
     :dense-toggle="denseToggle"
     :group="group"
     :popup="popup"
-    :header-style="headerStyle"
-    :header-class="headerClass"
+    :header-style="headerItemStyle"
+    :header-class="headerItemClass"
     :dark="dark"
     :to="to"
     :replace="replace"
@@ -63,12 +62,16 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { platform } from '../../plugins/platform';
+import useItemStyle, { useItemStyleProps } from '../../composables/private/useItemStyle';
 
 export default {
   name: 'KwExpansionItem',
   inheritAttrs: false,
   props: {
     // customize props
+    ...useItemStyleProps,
+    expandIconAlign: { type: String, default: undefined },
+    paddingTarget: { type: [Array, String], default: () => ['self'] },
 
     // fall through props
     toggleAriaLabel: { type: String, default: undefined },
@@ -104,7 +107,6 @@ export default {
     disable: { type: Boolean, default: undefined },
     modelValue: { type: Boolean, default: null },
   },
-
   emits: [
     'update:modelValue',
     'before-show',
@@ -120,41 +122,103 @@ export default {
     const showing = ref(props.defaultOpened);
     const toggleCount = ref(0);
     const read = computed(() => props.defaultOpened || toggleCount.value > 0);
-    const expansionItemClass = computed(() => {
-      const classes = {};
-      classes['kw-expansion-item--read'] = read.value;
-      return classes;
-    });
 
     watch(() => props.modelValue, (val) => { showing.value = val; });
     watch(showing, () => { toggleCount.value += 1; });
+
+    const onUpdateModelValue = (evt) => {
+      showing.value = evt;
+      emit('update:modelValue', evt);
+    };
+
+    // region dynamic styling
+    const {
+      itemClass,
+      itemStyle,
+    } = useItemStyle();
+
+    const normalizePaddingTarget = computed(() => {
+      if (!props.paddingTarget) {
+        return [];
+      }
+      if (typeof props.paddingTarget === 'string') {
+        return [props.paddingTarget];
+      }
+      return props.paddingTarget;
+    });
+
+    const expansionItemClass = computed(() => ({
+      ...itemClass.value,
+      'kw-item': false,
+      'kw-expansion-item': true,
+      'kw-expansion-item--read': read.value,
+      'kw-item-type--padding': itemClass.value['kw-item-type--padding'] && normalizePaddingTarget.value.includes('self'),
+    }));
+
+    const expansionItemStyle = itemStyle;
+
+    const headerItemClass = computed(() => {
+      const classes = [{
+        ...itemClass.value,
+        'kw-item-type--padding': itemClass.value['kw-item-type--padding'] && normalizePaddingTarget.value.includes('header'),
+      }];
+      if (props.headerClass) {
+        classes.push(props.headerClass);
+      }
+      return classes;
+    });
+
+    const headerItemStyle = computed(() => {
+      const style = [{
+        ...itemStyle.value,
+        padding: undefined,
+      }];
+      if (props.headerStyle) {
+        style.push(props.headerClass);
+      }
+      return style;
+    });
 
     const defaultExpandIcon = platform.is.tablet ? 'arrow_down' : 'arrow_down_24';
 
     const computedExpandIcon = computed(() => props.expandIcon ?? defaultExpandIcon);
 
-    function onUpdateModelValue(evt) {
-      showing.value = evt;
-      emit('update:modelValue', evt);
-    }
+    const computedExpandSideSectionClass = computed(() => {
+      const classes = ['kw-item__section'];
+      if (props.expandIconAlign) {
+        classes.push(`kw-item__section--${props.expandIconAlign}`);
+      }
+      if (props.expandIconClass) {
+        classes.push(props.expandIconClass);
+      }
+      return classes;
+    });
+    // endregion dynamic styling
 
+    // region quasar component method transfer
     function show(evt) { quasarRef.value?.show(evt); }
+
     function hide(evt) { quasarRef.value?.hide(evt); }
+
     function toggle(evt) { quasarRef.value?.toggle(evt); }
 
-    const { styleClassAttrs } = useInheritAttrs();
+    // endregion quasar component method transfer
 
     return {
+      ...useInheritAttrs(),
       quasarRef,
-      styleClassAttrs,
       show,
       hide,
       toggle,
       onUpdateModelValue,
       computedExpandIcon,
+      computedExpandIconClass: computedExpandSideSectionClass,
       toggleCount,
       showing,
       expansionItemClass,
+      expansionItemStyle,
+      headerItemClass,
+      headerItemStyle,
       read,
     };
   },
