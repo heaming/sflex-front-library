@@ -1,7 +1,6 @@
 <template>
   <q-radio
     v-bind="styleClassAttrs"
-    class="kw-radio spaced-sibling"
     :class="radioClass"
     :model-value="modelValue"
     :val="val"
@@ -69,6 +68,14 @@ export default {
       type: [String, Number],
       default: undefined,
     },
+    multiline: {
+      type: Boolean,
+      default: undefined,
+    },
+    removeSpacedSibling: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -81,7 +88,10 @@ export default {
     const { stretchClass } = useStretch();
 
     const radioClass = computed(() => ({
+      'kw-radio': true,
       'kw-radio--no-label': !(props.label || slots.default),
+      'kw-radio--multiline': props.multiline,
+      'spaced-sibling': !(props.removeSpacedSibling),
       ...stretchClass.value,
     }));
 
