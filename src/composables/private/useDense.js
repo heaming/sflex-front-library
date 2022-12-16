@@ -12,7 +12,12 @@ export default (defaults = {}) => {
   const { isSearchContext } = useSearchChild();
 
   const injected = inject(DenseContextKey, null);
-  const computedDense = computed(() => props.dense ?? (isSearchContext || injected?.dense?.value) ?? defaults.dense);
+  const computedDense = computed(() => {
+    if (props.dense !== undefined) { return props.dense; }
+    if (isSearchContext) { return true; }
+    if (injected?.dense !== undefined) { return injected?.dense?.value; }
+    return defaults.dense;
+  });
 
   provide(DenseContextKey, {
     dense: (props.blockInheritDense ?? defaults.blockInheritDense) ? undefined : computedDense,
