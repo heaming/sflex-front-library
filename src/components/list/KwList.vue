@@ -3,8 +3,6 @@
     v-bind="styleClassAttrs"
     :class="listClass"
     :bordered="bordered"
-    :dense="dense"
-    :padding="padding"
     :separator="separator"
   >
     <slot>
@@ -103,6 +101,8 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { getNumberWithComma } from '../../utils/string';
+import { ListContextKey } from '../../consts/private/symbols';
+import useDense, { useDenseProps } from '../../composables/private/useDense';
 
 export default {
   name: 'KwList',
@@ -111,6 +111,9 @@ export default {
     // customize props
     // when if you don't use default slot,
     // under props is required for default default.
+    ...useDenseProps,
+    itemPadding: { type: [String, Boolean], default: undefined },
+
     hideSelectAll: { type: Boolean, default: false },
     selected: { type: [Array, Object, String, Number], default: undefined },
     items: { type: Array, default: () => [] },
@@ -126,9 +129,7 @@ export default {
     activeClass: { type: String, default: undefined },
     // fall through props
     separator: { type: Boolean, default: undefined },
-    padding: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
-    dense: { type: Boolean, default: undefined },
     onClickItem: { type: Function, default: undefined },
   },
   emits: ['update:selected', 'clickItem'],
@@ -242,11 +243,6 @@ export default {
 
     const showSelectAll = computed(() => !props.hideSelectAll && multipleSelect.value);
 
-    const listClass = computed(() => ({
-      'kw-list': true,
-      'kw-list--selectable': showSelectAll.value,
-    }));
-
     const selectAlignProps = computed(() => ({
       top: props.selectAlign === 'top',
       center: props.selectAlign === 'center',
@@ -261,6 +257,21 @@ export default {
 
     const showPlaceholder = computed(() => (innerItems.value?.length === 0)
       && (props.placeholder || slots.placeholder));
+
+    const computedDense = useDense();
+
+    const listClass = computed(() => ({
+      'kw-list': true,
+      'kw-list--selectable': showSelectAll.value,
+      'kw-list--dense': computedDense.value,
+      'kw-list--padding': props.itemPadding === true,
+    }));
+
+    const listProvideContext = {
+      padding: computed(() => props.itemPadding),
+    };
+
+    provide(ListContextKey, listProvideContext);
 
     return {
       listClass,
