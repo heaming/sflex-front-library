@@ -58,20 +58,33 @@ export interface UseFieldProps {
 
 export interface UseFieldStyleProps extends UseDenseProps, UseStretchProps {
   /**
-   * 밑줄 라인 스타일 적용
+   * 밑줄 라인 스타일 적용 : mobile default.
    */
-  underline?: boolean;
+  underline?: boolean | undefined;
 
   /**
    * 테두리가 없는 스타일 적용
    */
-  borderless?: boolean;
+  borderless?: boolean | undefined;
+
+  /**
+   * 테두리가 있는 스타일 적용. : web default
+   */
+  outlined?: boolean | undefined;
 
   /**
    * 하단 에러 영역의 등장 방식을 결정합니다.
    * platform 에 따라 기본적으로 적용되어 있으므로, 특수한 경우를 제하고는 사용할 일이 없습니다.
    */
-  hideBottomSpace?: boolean;
+  hideBottomSpace?: boolean | undefined;
+
+  /**
+   * `모바일 한정`으로 사용되는 label 영역에 required 상태를 표기한다.
+   * 스타일 속성으로, label 이 없을 시 무의미하다.
+   *
+   * only for mobile with labeled.
+   */
+  required?: boolean | undefined;
 }
 
 export interface UseFieldInstance {
