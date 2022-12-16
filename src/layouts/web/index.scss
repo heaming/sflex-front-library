@@ -33,6 +33,7 @@ body.desktop .web-layout {
     display: flex;
     justify-content: space-between;
     margin-left: 80px;
+    white-space: nowrap;
   }
 
   &__link {
@@ -258,9 +259,7 @@ body.desktop .web-layout {
  */
 .web-tab-view {
   $tabs-view-bg-color: #dedfe0;
-  $tabs-view-tab-border-color: #d9d9d9;
-  $tabs-view-tab-bg-color: #e4e5e6;
-  $tabs-view-tab-active-bg-color: #f4f5f6;
+  $tabs-view-active-bg-color: #f4f5f6;
 
   &__header {
     padding: 0 30px 0 64px !important;
@@ -269,15 +268,16 @@ body.desktop .web-layout {
 
     .q-tab {
       padding: 0;
+      min-width: 10%;
+      max-width: 10%;
       min-height: 40px;
-      border: none;
+      border: 0;
+      background-color: $tabs-view-bg-color;
       cursor: default !important;
-      background-color: $tabs-view-tab-bg-color;
 
       &__content {
-        padding: 0 12px 0 7px;
-        width: 150px;
-        min-width: auto;
+        padding: 0 10px;
+        width: 100%;
 
         > div {
           font-size: 14px;
@@ -296,16 +296,24 @@ body.desktop .web-layout {
       &.q-focusable:focus,
       &.q-manual-focusable--focused,
       &.q-hoverable:hover {
-        background-color: $tabs-view-tab-active-bg-color;
+        background-color: $tabs-view-active-bg-color;
       }
 
       &--active {
-        border-bottom-color: $tabs-view-tab-active-bg-color !important;
-        background-color: $tabs-view-tab-active-bg-color;
+        background-color: $tabs-view-active-bg-color;
 
         .q-tab__content > div {
           color: $black1;
         }
+      }
+
+      & + .q-tab::before {
+        content: "";
+        position: absolute;
+        left: -0.5px;
+        width: 1px;
+        height: 13px;
+        background-color: $line-stroke;
       }
     }
   }
