@@ -203,11 +203,13 @@ export default {
       const style = {};
       if (platform.is.desktop) {
         style.width = '6px'; // $kw-scrollbar-width
-        style.borderRadius = '3px';
+        style.borderRadius = '0';
+        style.marginRight = '4px';
       }
       if (platform.is.mobile) {
         style.width = '6px'; // $kw-scrollbar-width
-        style.borderRadius = '3px';
+        style.borderRadius = '0';
+        style.marginRight = '4px';
       }
       return {
         ...style,
@@ -219,10 +221,11 @@ export default {
       const style = {};
       if (platform.is.desktop) {
         style.height = '6px'; // $kw-scrollbar-width
+        style.marginBottom = '4px';
       }
       if (platform.is.mobile) {
         style.height = '6px'; // $kw-scrollbar-width
-        style.borderRadius = '3px';
+        style.borderRadius = '0';
       }
       return {
         ...style,
