@@ -2,7 +2,6 @@
   <q-toggle
     ref="toggleRef"
     v-bind="styleClassAttrs"
-    class="kw-toggle spaced-sibling"
     :class="toggleClass"
     :model-value="modelValue"
     :true-value="trueValue"
@@ -100,6 +99,14 @@ export default {
       type: [String, Number],
       default: undefined,
     },
+    multiline: {
+      type: Boolean,
+      default: undefined,
+    },
+    removeSpacedSibling: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -112,7 +119,10 @@ export default {
     const { stretchClass } = useStretch();
 
     const toggleClass = computed(() => ({
+      'kw-toggle': true,
       'kw-toggle--no-label': !(props.label || slots.default),
+      'kw-toggle--multiline': props.multiline,
+      'spaced-sibling': !(props.removeSpacedSibling),
       ...stretchClass.value,
     }));
 
