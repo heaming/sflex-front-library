@@ -173,8 +173,13 @@
   }
 
   .kw-date-picker {
-    min-width: 140px;
+    // min-width: 140px;
     max-width: none;
+  }
+
+  // 팝업내 탭 스크롤 제거
+  .kw-tab-panels {
+    .q-panel.scroll { overflow: visible; }
   }
 }
 
