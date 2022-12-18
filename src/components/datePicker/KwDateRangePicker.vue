@@ -12,7 +12,7 @@
       :model-value="value[0]"
       :type="type"
       :readonly="readonly"
-      :disable="disable"
+      :disable="fromDisable ?? disable"
       :unmasked-value="unmaskedValue"
       :min-date="minDate"
       :max-date="maxDate"
@@ -31,7 +31,7 @@
       v-bind="stretchProps"
       :type="type"
       :readonly="readonly"
-      :disable="disable"
+      :disable="toDisable ?? disable"
       :unmasked-value="unmaskedValue"
       :min-date="minDate"
       :max-date="maxDate"
@@ -91,6 +91,14 @@ export default {
     },
     maxDate: {
       type: String,
+      default: undefined,
+    },
+    fromDisable: {
+      type: Boolean,
+      default: undefined,
+    },
+    toDisable: {
+      type: Boolean,
       default: undefined,
     },
     fromPlaceholder: {
