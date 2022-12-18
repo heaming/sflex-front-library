@@ -11,7 +11,7 @@
   >
     <template #control>
       <q-option-group
-        v-model="value"
+        :model-value="value ?? ''"
         :class="`kw-option-group__control`"
         :options="normalizedOptions"
         :type="type"
@@ -19,6 +19,7 @@
         :disable="disable"
         :left-label="itemLeftLabel"
         inline
+        @update:model-value="value = $event"
       />
     </template>
 
@@ -77,13 +78,6 @@ export default {
   ],
 
   setup(props) {
-    const itemLeftLabel = computed(() => {
-      if (typeof props.leftLabel === 'boolean') {
-        return props.leftLabel;
-      }
-      return props.type === 'toggle';
-    });
-
     const { fieldClass, fieldStyleProps } = useFieldStyle({ borderless: true });
 
     const optionGroupClass = computed(() => ({
@@ -91,6 +85,13 @@ export default {
       'kw-option-group': true,
       [`kw-option-group--${props.type}`]: true,
     }));
+
+    const itemLeftLabel = computed(() => {
+      if (typeof props.leftLabel === 'boolean') {
+        return props.leftLabel;
+      }
+      return props.type === 'toggle';
+    });
 
     return {
       ...useInheritAttrs(),

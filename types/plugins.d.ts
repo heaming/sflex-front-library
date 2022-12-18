@@ -104,6 +104,7 @@ export interface Platform {
     local: boolean;
     server: boolean;
     test: boolean;
+    desktop: boolean;
     mobile: boolean;
     tablet: boolean;
     popup: boolean;
