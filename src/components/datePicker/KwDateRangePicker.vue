@@ -11,7 +11,7 @@
       v-bind="stretchProps"
       :model-value="value[0]"
       :type="type"
-      :readonly="readonly"
+      :readonly="fromReadonly ?? readonly"
       :disable="fromDisable ?? disable"
       :unmasked-value="unmaskedValue"
       :min-date="minDate"
@@ -30,7 +30,7 @@
       :model-value="value[1]"
       v-bind="stretchProps"
       :type="type"
-      :readonly="readonly"
+      :readonly="toReadonly ?? readonly"
       :disable="toDisable ?? disable"
       :unmasked-value="unmaskedValue"
       :min-date="minDate"
@@ -91,6 +91,14 @@ export default {
     },
     maxDate: {
       type: String,
+      default: undefined,
+    },
+    fromReadonly: {
+      type: Boolean,
+      default: undefined,
+    },
+    toReadonly: {
+      type: Boolean,
       default: undefined,
     },
     fromDisable: {

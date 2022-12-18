@@ -113,14 +113,34 @@ interface KwDateRangePickerProps extends Omit<KwDatePickerProps, 'modelValue' | 
   to?: string;
 
   /**
+   * 시작일 input readonly
+   */
+  fromReadonly?: string;
+
+  /**
+   * 종료일 input readonly
+   */
+  toReadonly?: string;
+
+  /**
+   * 시작일 input disable
+   */
+  fromDisable?: string;
+
+  /**
+   * 종료일 input disable
+   */
+  toDisable?: string;
+
+  /**
    * 시작일 input placeholder
    */
-  toPlaceholder?: string;
+  fromPlaceholder?: string;
 
   /**
    * 종료일 input placeholder
    */
-  fromPlaceholder?: string;
+  toPlaceholder?: string;
 
   /**
    * 'v-model:from'에서 값 변경을 위해 사용
