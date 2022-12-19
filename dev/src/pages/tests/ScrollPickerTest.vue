@@ -6,7 +6,7 @@
           <kw-form-item
             :label="value"
           >
-            <kw-time-picker2
+            <kw-time-picker
               v-model="value"
             />
           </kw-form-item>

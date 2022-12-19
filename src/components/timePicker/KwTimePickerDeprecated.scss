@@ -1,0 +1,123 @@
+.kw-time-picker.kw-field.q-field {
+  .q-field__control {
+    cursor: text;
+  }
+
+  .q-field__append {
+    // don't fix
+    // this has side effects to picker events
+    padding-left: 0 !important;
+    cursor: text !important;
+
+    > div {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      // replaced that q-field__append padding-left
+      padding-left: 20px;
+    }
+  }
+
+  .q-field__marginal .q-icon {
+    opacity: 1 !important;
+    cursor: pointer;
+  }
+
+  &--dense {
+    .q-field__append > div {
+      padding-left: 6px;
+    }
+  }
+
+  &--readonly,
+  &--disabled {
+    .q-field__marginal .q-icon {
+      opacity: 0.6 !important;
+      cursor: default;
+    }
+  }
+}
+
+.kw-time-picker-menu.q-menu {
+  border: 1px solid $black1;
+  border-radius: 0;
+  box-shadow: none;
+
+  .kw-time-picker__view {
+    // width: 178px;
+    box-sizing: border-box;
+  }
+
+  .kw-time-picker__list {
+    width: 50%;
+    height: 200px;
+    overflow: auto;
+    box-sizing: border-box;
+
+    & + .kw-time-picker__list {
+      border-left: 1px solid $black1;
+    }
+  }
+
+  .q-item {
+    min-height: 34px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $black2;
+
+    &__section {
+      &--side {
+        .q-checkbox {
+          &__icon {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+
+    .q-focus-helper {
+      transition: none;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    &.q-manual-focusable--focused {
+      font-weight: 700;
+      color: $black1;
+
+      & > .q-focus-helper {
+        background-color: $bg-box;
+        opacity: 1;
+        z-index: -1;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    border-left: 2px solid $line-bg;
+    border-right: 2px solid $line-bg;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $line-bg;
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 4px;
+    background: #999;
+    background-clip: padding-box;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+
+    &:hover {
+      background: #555;
+    }
+  }
+}

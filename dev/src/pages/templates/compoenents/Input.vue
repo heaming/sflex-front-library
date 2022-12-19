@@ -18,6 +18,7 @@
       <kw-separator />
       <kw-input
         v-bind="bindingProps"
+        required
       />
     </guide-section>
     <guide-section

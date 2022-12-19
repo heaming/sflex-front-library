@@ -242,7 +242,7 @@ export default {
     const { inputRef, value } = fieldCtx;
 
     const innerValue = ref();
-    const computedValue = computed(() => innerValue.value ?? value.value);
+    const computedValue = computed(() => innerValue.value ?? value.value ?? '');
 
     function onUpdateValue(val) {
       val ??= (props.multiple ? [] : '');
@@ -301,7 +301,8 @@ export default {
           .map((v) => getOptionLabel(v?.[props.optionValue] || v))
           .join(', ');
       }
-      return getOptionLabel(value.value?.[props.optionValue] || value.value);
+
+      return getOptionLabel((value.value?.[props.optionValue] || value.value) ?? '');
     });
 
     function onPopup(show) {

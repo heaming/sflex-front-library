@@ -53,7 +53,7 @@ export default (options = {}) => {
   } = inject(FormContextKey, {});
 
   const fieldState = useFieldState(
-    deepCopy(bindValue.value) ?? '',
+    deepCopy(bindValue.value),
   );
 
   const {
@@ -82,35 +82,27 @@ export default (options = {}) => {
 
   const debounceValidate = debounce(validate, 0);
 
-  watch(rules, async () => {
+  watch(rules, () => {
     if (validated.value) {
       debounceValidate();
     }
   }, { deep: true });
 
-  let syncChaining = false;
   watch(bindValue, (val) => {
-    if (!syncChaining) {
-      value.value = deepCopy(val) ?? '';
+    if (!isEqual(val, value.value)) {
+      value.value = deepCopy(val);
     }
-
-    syncChaining = true;
-    nextTick(() => { syncChaining = false; });
   }, { deep: true });
 
   watch(value, (val) => {
-    if (!syncChaining) {
+    if (!isEqual(val, bindValue.value)) {
       val = deepCopy(val);
-
       onUpdateValue(val);
-
-      if (!pending.value) {
-        onChangeValue(val);
-      }
     }
 
-    syncChaining = true;
-    nextTick(() => { syncChaining = false; });
+    if (!pending.value) {
+      onChangeValue(val);
+    }
   }, { deep: true });
 
   let unwatchValueForValidate;

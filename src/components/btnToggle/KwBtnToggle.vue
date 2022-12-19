@@ -8,7 +8,7 @@
     @focus="$emit('focus')"
   >
     <q-btn-toggle
-      v-model="value"
+      :model-value="value ?? ''"
       :class="toggleClass"
       :style="toggleStyle"
       :options="styledOptions"
@@ -26,6 +26,7 @@
       unelevated
       rectangle
       :ripple="false"
+      @update:model-value="value = $event"
     />
   </kw-field-wrap>
 </template>

@@ -34,8 +34,8 @@
     clear-icon="clear"
     @focus="onFocus"
     @blur="onBlur"
-    @clear="onClear"
     @keydown="onKeydownInput"
+    @clear="onClearInput"
     @change="onChangeInput"
     @update:model-value="onUpdateValue"
   >
@@ -133,6 +133,7 @@ const NAMED_REGEX = {
   alpha_num: /^[0-9A-Z]*$/i,
   alpha_spaces: /^[A-Z\s]*$/i,
   alpha_underscore: /^[0-9A-Z_]*$/i,
+  num: /^[0-9]*$/i,
 };
 
 export default {
@@ -224,6 +225,14 @@ export default {
     }
 
     const isModifiersTrim = useAttrs().modelModifiers?.trim === true;
+    const isModifiersNumber = useAttrs().modelModifiers?.number === true;
+
+    const clearValue = computed(() => (props.type === 'number' && isModifiersNumber ? null : ''));
+
+    function onClearInput(val) {
+      props.onClear?.(val);
+      props.onChange?.(clearValue.value);
+    }
 
     function onChangeInput(val) {
       if (isModifiersTrim) {
@@ -242,42 +251,49 @@ export default {
     const max = computed(() => (props.max === undefined ? Infinity : parseInt(props.max, 10)));
 
     function onUpdateNumberValue(val) {
-      if (val) {
-        const el = inputRef.value.getNativeElement();
+      val ||= clearValue.value;
 
-        val = Math.min(Math.max(val, min.value), max.value);
-        el.value = val;
+      if (val) {
+        // min, max
+        val = Math.min(Math.max(val, min.value), max.value).toString();
+
+        // maxlength
+        if (props.maxlength) {
+          val = getMaxByteString(val, props.maxlength);
+        }
       }
 
+      const el = inputRef.value.getNativeElement();
+
+      el.value = val;
       value.value = val;
     }
 
     function onUpdateTextValue(val) {
-      if (val) {
-        const el = inputRef.value.getNativeElement();
+      val ||= clearValue.value;
 
+      if (val) {
         // regex
         if (regex.value?.test(val) === false) {
           val = value.value;
-          el.value = val;
         }
 
         // maxlength
         if (props.maxlength) {
           val = getMaxByteString(val, props.maxlength);
-          el.value = val;
         }
 
         // convert case
         if (props.upperCase) {
           val = val.toUpperCase();
-          el.value = val;
         } else if (props.lowerCase) {
           val = val.toLowerCase();
-          el.value = val;
         }
       }
 
+      const el = inputRef.value.getNativeElement();
+
+      el.value = val;
       value.value = val;
     }
 
@@ -286,7 +302,7 @@ export default {
         case 'number':
           return onUpdateNumberValue(val);
         default:
-          return onUpdateTextValue(val ?? '');
+          return onUpdateTextValue(val);
       }
     }
 
@@ -309,6 +325,7 @@ export default {
       inputCounter,
       select,
       onKeydownInput,
+      onClearInput,
       onChangeInput,
       onUpdateValue,
     };
