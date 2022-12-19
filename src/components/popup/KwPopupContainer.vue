@@ -71,7 +71,10 @@ export default {
       popupCtx.value = {};
     }
     function close(result, payload) {
-      emit('close', { result, payload });
+      // resolve occurred errors in grid event chaining that caused by destroy instance
+      setTimeout(() => {
+        emit('close', { result, payload });
+      });
     }
 
     provide(PopupContainerContextKey, {

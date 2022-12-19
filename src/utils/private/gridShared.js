@@ -104,11 +104,15 @@ export async function syncHeadCheckIfAble(view) {
 }
 
 export function fixTopIndexIfInvalid(view) {
-  const { layoutManager } = view._view;
-  const topIndex = view.getTopItem();
+  const layoutManager = view._view?.layoutManager;
 
-  if (layoutManager._topIndex !== topIndex) {
-    layoutManager._topIndex = topIndex;
+  if (layoutManager) {
+    const topIndex = view.getTopItem();
+    const shouldFix = layoutManager._topIndex !== topIndex;
+
+    if (shouldFix) {
+      layoutManager._topIndex = topIndex;
+    }
   }
 }
 
