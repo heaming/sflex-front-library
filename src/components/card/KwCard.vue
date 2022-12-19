@@ -7,6 +7,7 @@
     :square="square"
     :flat="flat"
     :bordered="bordered"
+    @click="$emit('click', $event)"
   >
     <slot />
   </q-card>
@@ -19,6 +20,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 export default {
   name: 'KwCard',
   inheritAttrs: false,
+
   props: {
     // customize props
 
@@ -29,6 +31,10 @@ export default {
     flat: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
   },
+  emits: [
+    'click',
+  ],
+
   setup() {
     const { styleClassAttrs } = useInheritAttrs();
 
