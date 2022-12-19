@@ -6,7 +6,6 @@
     :tag="tag"
     :active="active"
     :clickable="clickable"
-    :dense="dense"
     :inset-level="insetLevel"
     :tabindex="tabindex"
     :focused="focused"
@@ -28,19 +27,19 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import useItemStyle, { useItemStyleProps } from '../../composables/private/useItemStyle';
 
 export default {
   name: 'KwItem',
   inheritAttrs: false,
   props: {
     // customize props
-    padding: { type: [Boolean, String], default: false },
+    ...useItemStyleProps,
 
     // fall through props
     tag: { type: String, default: 'div' },
     active: { type: Boolean, default: undefined },
     clickable: { type: Boolean, default: undefined },
-    dense: { type: Boolean, default: undefined },
     insetLevel: { type: Number, default: undefined },
     tabindex: { type: [String, Number], default: undefined },
     focused: { type: Boolean, default: undefined },
@@ -58,27 +57,15 @@ export default {
   emits: [
     'click',
   ],
-  setup(props) {
+  setup() {
     const { styleClassAttrs } = useInheritAttrs();
 
-    const itemClass = computed(() => {
-      const classes = {
-        'kw-item': true,
-      };
-      if (props.padding === true) { classes['kw-item--padding'] = true; }
-      return classes;
-    });
-
-    const itemStyle = computed(() => {
-      const styles = {};
-      if (typeof props.padding === 'string') { styles.padding = props.padding; }
-      return styles;
-    });
-
     return {
+      ...useItemStyle({
+        blockInheritDense: true,
+        blockInheritPadding: true,
+      }),
       styleClassAttrs,
-      itemStyle,
-      itemClass,
     };
   },
 };

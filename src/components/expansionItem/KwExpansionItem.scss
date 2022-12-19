@@ -1,4 +1,4 @@
-.kw-expansion-item {
+.kw-expansion-item.legacy {
   border-bottom: 1px solid $line-line;
 
   .q-item {
@@ -34,7 +34,7 @@
 
   // mobile
   &:not(.tablet) {
-    .kw-expansion-item {
+    .kw-expansion-item.legacy {
       &:last-child {
         border-bottom: none;
       }

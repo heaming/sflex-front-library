@@ -419,6 +419,7 @@
     }
 
     &.q-field {
+      // FIXME: is displayed when processing transition
       &--error {
         .q-field__bottom {
           display: none;

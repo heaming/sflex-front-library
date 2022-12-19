@@ -1,18 +1,30 @@
-%kw-item-dense {
+.kw-item-type {
+  min-height: $kw-field-height;
+  padding: 0;
+
+  &--padding {
+    padding: $kw-item-padding;
+  }
+
+  &--dense {
+    @include typo("dense");
+
+    min-height: $kw-field-height-dense;
+  }
+}
+
+%kw-item-type-padding {
+  padding: $kw-item-padding;
+}
+
+%kw-item-type-dense {
   @include typo("dense");
 
   min-height: $kw-field-height-dense;
 }
 
-%kw-item-padding {
-  padding: $kw-item-padding;
-}
-
 .kw-item {
   &.q-item {
-    min-height: $kw-field-height;
-    padding: 0;
-
     > .q-item__section--thumbnail:first-child,
     > .q-focus-helper + .q-item__section--thumbnail {
       margin-left: 0;
@@ -23,7 +35,9 @@
     }
 
     &--dense {
-      @extend %kw-item-dense;
+      // remove quasar dense
+      min-height: unset;
+      padding: unset;
     }
 
     &.q-router-link--active,
@@ -37,15 +51,21 @@
     // todo
   }
 
-  &.q-item.kw-item--padding {
-    // default Specificity is 0-2-0 for override quasar style. (.kw-item.q-item)
-    // so, it require minimum specificity 0-3-0
-    @extend %kw-item-padding;
-  }
-
   // section
   &__section {
+    $-kw-item-section-side-padding-right: 16px; // if you change default, you can handle it.
+    $-kw-item-section-side-padding-left: 16px; // if you change default, you can handle it.
+
     &.q-item__section {
+      &--side {
+        color: inherit;
+        padding-right: $-kw-item-section-side-padding-right;
+
+        > .q-icon {
+          font-size: 1em;
+        }
+      }
+
       &--main {
         & + & {
           margin-left: 0;
@@ -54,6 +74,11 @@
         &.q-item__section--thumbnail {
           margin-left: 0;
           margin-right: 0;
+        }
+
+        ~ .q-item__section--side {
+          padding-right: 0;
+          padding-left: $-kw-item-section-side-padding-left;
         }
       }
     }
@@ -76,7 +101,7 @@
   // label
   &__label {
     &.q-item__label {
-      line-height: 1.5em !important;
+      line-height: inherit !important; // quasar use important...
 
       & + .q-item__label {
         margin-top: 4px;
