@@ -181,6 +181,10 @@
   .kw-tab-panels {
     .q-panel.scroll { overflow: visible; }
   }
+
+  h3 + .kw-form {
+    margin-top: 20px;
+  }
 }
 
 .stack-trace-popup {
