@@ -7,7 +7,9 @@ type FallThroughCardActionsProps = 'align' | 'vertical';
 
 type FallThroughCardSectionProps = 'tag' | 'horizontal';
 
-interface KwCardProps extends Pick<QCardProps, FallThroughCardProps> {}
+interface KwCardProps extends Pick<QCardProps, FallThroughCardProps> {
+  onClick?: (event: MouseEvent) => void;
+}
 interface KwCardSlots extends QCardSlots {}
 interface KwCardActionsProps extends Pick<QCardActionsProps, FallThroughCardActionsProps> {}
 interface KwCardActionsSlots extends QCardActionsSlots {}
