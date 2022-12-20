@@ -19,7 +19,7 @@
     :offset="offset"
     :max-height="maxHeight"
     :max-width="maxWidth"
-    :transition-duration="isDialog ? 0 : undefined"
+    :transition-duration="isDialog ? 0 : transitionDuration"
     @before-show="$emit('beforeShow', $event)"
     @show="$emit('show', $event)"
     @before-hide="$emit('beforeHide', $event)"
@@ -27,9 +27,7 @@
     @escape-key="$emit('escapeKey', $event)"
     @update:model-value="onUpdateShowing"
   >
-    <kw-scroll-area class="kw-menu__scroll-area">
-      <slot v-if="!isDialog" />
-    </kw-scroll-area>
+    <slot v-if="!isDialog" />
   </q-menu>
   <q-dialog
     v-if="isDialog"
@@ -99,6 +97,7 @@ export default {
     offset: { type: Array, default: undefined },
     maxHeight: { type: String, default: undefined },
     maxWidth: { type: String, default: undefined },
+    transitionDuration: { type: [String, Number], default: undefined },
   },
   emits: [
     'beforeShow',
