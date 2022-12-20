@@ -70,8 +70,8 @@ function setColumnStyleName(column, { dataType }) {
     styleName: '',
   });
 
-  const alignClass = ['text-left', 'text-center', 'text-right'];
   const colClass = column.styleName.split(/\s+/).filter((e) => !!e);
+  const alignClass = ['text-left', 'text-center', 'text-right'];
 
   if (!alignClass.some((e) => colClass.includes(e))) {
     if (column.renderer?.type) {
@@ -104,6 +104,14 @@ function setColumnStyleName(column, { dataType }) {
         //   break;
       }
     }
+  }
+
+  const btnClassCount = colClass.reduce((a, v) => (v.includes('rg-button-') ? a + 1 : a), 0);
+  const hasDisabledClass = colClass.some((v) => v === 'rg-button-disabled');
+  const shouldSetDefaultClass = btnClassCount === 0 || (btnClassCount === 1 && hasDisabledClass);
+
+  if (shouldSetDefaultClass) {
+    colClass.push('rg-button-default');
   }
 
   column.styleName = colClass.join(' ');
