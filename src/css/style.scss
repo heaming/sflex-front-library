@@ -20,8 +20,9 @@
     align-items: center;
     padding: 20px;
 
-    .q-img {
+    img {
       height: 120px;
+      object-fit: contain;
     }
   }
 
