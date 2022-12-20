@@ -304,8 +304,12 @@ function overrideStyleCallback(styleCallback, isGlobal = false) {
     const { dataColumn } = model;
     const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
 
-    if (isCellEditable(g, mergedColumn, index)) classes.push('rg-editable');
-    if (isCellItemClickable(g, mergedColumn, index)) classes.push('rg-button-enabled');
+    if (isCellEditable(g, mergedColumn, index)) {
+      classes.push('rg-editable');
+    }
+    if (isCellItemClickable(g, mergedColumn, index) === false) {
+      classes.push('rg-button-disabled');
+    }
 
     returnValue.styleName = classes.join(' ');
     return returnValue;
