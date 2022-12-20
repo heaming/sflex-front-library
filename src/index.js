@@ -9,6 +9,8 @@ export * from './globImportUtils';
 
 // Layouts
 export * from './layouts/dev';
+export * from './layouts/mobile';
+export * from './layouts/tablet';
 export * from './layouts/web';
 
 // Composables
