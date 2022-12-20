@@ -1,8 +1,10 @@
+import { platform } from '../../plugins/platform';
+
 export default {
   namespaced: true,
 
   state: () => ({
-    leftDrawerExpanded: true,
+    leftDrawerExpanded: !platform.is.mobile,
 
     globalApps: [],
     selectedGlobalAppKey: null,

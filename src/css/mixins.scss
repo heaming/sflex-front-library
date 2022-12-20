@@ -338,6 +338,8 @@
 
     &:vertical {
       border-radius: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
     }
 
     &:horizontal {

@@ -206,7 +206,7 @@ export default {
 
     const inputCounter = computed(() => {
       if (props.counter === true && props.maxlength > 0) {
-        return `${getByte(value.value)} / ${props.maxlength}`;
+        return `${getByte(value.value ?? '')} / ${props.maxlength}`;
       }
     });
 

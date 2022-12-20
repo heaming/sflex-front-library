@@ -11,12 +11,24 @@
       v-bind="draggableEvents"
       :class="popupHeaderClass"
     >
-      <h1
-        v-if="popupTitle"
-        class="kw-popup__header-title"
-      >
-        {{ popupTitle }}
-      </h1>
+      <div class="row items-center">
+        <h1
+          v-if="popupTitle"
+          class="kw-popup__header-title"
+        >
+          {{ popupTitle }}
+        </h1>
+        <kw-checkbox
+          model-value="Y"
+          checked-icon="bookmark_on"
+          unchecked-icon="bookmark_off"
+          class="kw-popup__header-favorite"
+        >
+          <kw-tooltip>
+            {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
+          </kw-tooltip>
+        </kw-checkbox>
+      </div>
       <q-icon
         v-if="isLoadFailed || popupUseClose"
         class="kw-popup__header-close"
@@ -71,7 +83,10 @@ export default {
       popupCtx.value = {};
     }
     function close(result, payload) {
-      emit('close', { result, payload });
+      // resolve occurred errors in grid event chaining that caused by destroy instance
+      setTimeout(() => {
+        emit('close', { result, payload });
+      });
     }
 
     provide(PopupContainerContextKey, {
