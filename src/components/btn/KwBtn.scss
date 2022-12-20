@@ -69,6 +69,13 @@
     .q-icon,
     .q-spinner {
       font-size: $-kw-btn-icon-size;
+
+      @at-root .kw-btn.kw-btn--text-color-normal-text.q-btn .q-btn__content {
+        .q-icon,
+        .q-spinner {
+          color: $black1;
+        }
+      }
     }
 
     // notify!!! The default Hover and active effect is drawn by this area. It's getting darker darker and darker.
