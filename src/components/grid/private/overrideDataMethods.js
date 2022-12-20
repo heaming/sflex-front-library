@@ -1,8 +1,9 @@
-import { defaultsDeep } from 'lodash-es';
+import { cloneDeep, defaultsDeep, map } from 'lodash-es';
 import { LocalTreeDataProvider, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 
 const setFields = 'setFields';
+const addField = 'addField';
 const setRows = 'setRows';
 const removeRow = 'removeRow';
 const removeRows = 'removeRows';
@@ -23,16 +24,30 @@ function setFieldFormatDefaults(field) {
   }
 }
 
+function normalizeField(field) {
+  const normalizedField = cloneDeep(field);
+  setFieldFormatDefaults(normalizedField);
+
+  return normalizedField;
+}
+
+/*
+  필드를 추가로 생성한다
+  */
+export function overrideAddField(data) {
+  wrapMethod(data, addField, (field) => {
+    const normalizedField = normalizeField(field);
+    execOriginal(data, addField, normalizedField);
+  });
+}
+
 /*
   필드셋을 설정한다
   */
 export function overrideSetFields(data) {
   wrapMethod(data, setFields, (fields) => {
-    fields.forEach((field) => {
-      setFieldFormatDefaults(field);
-    });
-
-    execOriginal(data, setFields, fields);
+    const normalizedFields = map(fields, normalizeField);
+    execOriginal(data, setFields, normalizedFields);
   });
 }
 
