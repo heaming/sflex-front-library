@@ -67,6 +67,25 @@
       color: $black1;
     }
 
+    &-favorite {
+      .kw-checkbox {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+
+        .q-checkbox__inner {
+          width: inherit;
+          min-width: initial;
+          height: inherit;
+        }
+      }
+
+      .q-icon {
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
+
     &-close {
       position: absolute;
       top: 20px;
