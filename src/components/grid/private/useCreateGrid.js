@@ -26,8 +26,8 @@ export default (DataClass, ViewClass) => {
   const vm = getCurrentInstance();
   const onInit = toRaw(vm.props.onInit);
 
-  const isCreateData = vm.props.createViewOnly !== true;
   const containerRef = ref();
+  const contextMenuRef = ref();
 
   let data = null;
   let view = null;
@@ -39,6 +39,8 @@ export default (DataClass, ViewClass) => {
       warn(`KwGrid/KwTreeGrid: invalid realgrid license (${window.realGrid2Lic})`);
       return;
     }
+
+    const isCreateData = vm.props.createViewOnly !== true;
 
     if (isCreateData) {
       data = new DataClass(false);
@@ -54,6 +56,7 @@ export default (DataClass, ViewClass) => {
     syncHeadCheckIfAble(view);
 
     onInit?.(data, view);
+    contextMenuRef.value?.setView(view);
   });
 
   onBeforeUnmount(() => {
@@ -77,10 +80,14 @@ export default (DataClass, ViewClass) => {
   useObserverChild(observerChildCtx);
   useClickOutsideGrid();
 
+  const getView = () => view;
+  const getData = () => view?.getDataSource();
+
   return {
     ...useResizeGrid(),
     containerRef,
-    getView: () => view,
-    getData: () => view?.getDataSource(),
+    contextMenuRef,
+    getView,
+    getData,
   };
 };
