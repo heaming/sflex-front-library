@@ -67,6 +67,21 @@
       color: $black1;
     }
 
+    &-favorite {
+      &.kw-checkbox {
+        margin-left: 7px;
+        justify-content: flex-start;
+        width: 16px;
+
+        .q-checkbox__inner {
+          width: inherit;
+          height: 16px;
+          min-width: 16px;
+          font-size: 16px;
+        }
+      }
+    }
+
     &-close {
       position: absolute;
       top: 20px;
