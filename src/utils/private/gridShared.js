@@ -158,7 +158,10 @@ export function isCellEditable(view, column, index) {
 }
 
 export function isCellItemClickable(view, column, index) {
-  const isCellItem = column.button === 'action' || column.renderer?.type === 'button';
+  const isActionButton = (column.button || column._button) === 'action';
+  const isButtonRenderer = (column.renderer || column._renderer)?.type === 'button';
+  const isCellItem = isActionButton || isButtonRenderer;
+
   return isCellItem && view.onCellItemClickable(view, index) !== false;
 }
 
