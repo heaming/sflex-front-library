@@ -167,9 +167,9 @@ interface GridUtil {
    * 지정한 행,필드와 일치하는 셀 포커스
    * @param view 그리드 뷰 또는 트리 뷰
    * @param dataRow 데이터 행
-   * @param fieldName 필드명
+   * @param column 컬럼명
    */
-  focusCellInput(view: GridView | TreeView, dataRow: number, fieldName?: string): Promise<void>;
+  focusCellInput(view: GridView | TreeView, dataRow: number, column?: string): Promise<void>;
 
   /**
    * 지정한 데이터 행의 상태를 가져온다
@@ -407,9 +407,9 @@ interface GridUtil {
    * @param view 그리드 뷰
    * @param dataRow 데이터 행
    * @param rowValue 데이터 행 오브젝트
-   * @param fieldName fieldName을 지정하면 매칭되는 컬럼으로 focus 한다. (`false` 지정시 focus 하지 않는다)
+   * @param column column을 지정하면 매칭되는 컬럼으로 focus 한다. (`false` 지정시 focus 하지 않는다)
    */
-  insertRowAndFocus(view: GridView, dataRow: number, rowValue: RowValue, fieldName?: string | boolean): Promise<boolean>;
+  insertRowAndFocus(view: GridView, dataRow: number, rowValue: RowValue, column?: string | boolean): Promise<boolean>;
 
   /**
    * 현재 데이터를 초기 값으로 지정한다.

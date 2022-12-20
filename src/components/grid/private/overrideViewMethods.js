@@ -1,4 +1,4 @@
-import { defaultsDeep, map, merge } from 'lodash-es';
+import { cloneDeep, defaultsDeep, map, merge } from 'lodash-es';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 import {
@@ -6,7 +6,10 @@ import {
 } from '../../../utils/private/gridShared';
 import i18n from '../../../i18n';
 
+const setColumn = 'setColumn';
 const setColumns = 'setColumns';
+const addColumn = 'addColumn';
+const removeColumn = 'removeColumn';
 const setCellStyleCallback = 'setCellStyleCallback';
 const setColumnLayout = 'setColumnLayout';
 const destroy = 'destroy';
@@ -330,34 +333,104 @@ function setColumnStyleCallback(column) {
   }
 }
 
+function normalizeColumn(column, view) {
+  const normalizedColumn = cloneDeep(column);
+  const data = view.getDataSource();
+  const field = data.fieldByName(column.fieldName);
+
+  setColumnDefault(normalizedColumn, field);
+  setColumnHeader(normalizedColumn, field);
+  setColumnOptions(normalizedColumn, field);
+  setColumnStyleName(normalizedColumn, field);
+  setColumnRenderer(normalizedColumn, field);
+  setColumnEditor(normalizedColumn, field);
+  setColumnCellButton(normalizedColumn, field);
+  setColumnStyleCallback(normalizedColumn, field);
+
+  return normalizedColumn;
+}
+
 /*
-  기존에 설정된 컬럼들을 모두 제거하고 새로운 컬럼들로 그리드를 재구성한다.
+  그리드에 설정된 컬럼의 정보를 변경한다
+  */
+export function overrideSetColumn(view) {
+  wrapMethod(view, setColumn, (column) => {
+    const orgColumn = view.columnByName(column.name);
+
+    if (orgColumn) {
+      const { fieldName } = orgColumn;
+      const normalizedColumn = normalizeColumn({ ...column, fieldName }, view);
+
+      execOriginal(view, setColumn, normalizedColumn);
+
+      const index = view.__columns__.findIndex((e) => e.name === column.name);
+
+      if (index > -1) {
+        view.__columns__[index] = {
+          name: normalizedColumn.name,
+          fieldName: normalizedColumn.fieldName,
+          rules: normalizedColumn.rules,
+          customMessages: normalizedColumn.customMessages,
+          preventCellItemFocus: normalizedColumn.preventCellItemFocus === true,
+        };
+      }
+    }
+  });
+}
+
+/*
+  기존에 설정된 컬럼들을 모두 제거하고 새로운 컬럼들로 그리드를 재구성한다
   */
 export function overrideSetColumns(view) {
   wrapMethod(view, setColumns, (columns) => {
-    const data = view.getDataSource();
+    const normalizedColumns = map(columns, (column) => normalizeColumn(column, view));
+    execOriginal(view, setColumns, normalizedColumns);
 
-    columns.forEach((e) => {
-      const field = data.fieldByName(e.fieldName);
-      setColumnDefault(e, field);
-      setColumnHeader(e, field);
-      setColumnOptions(e, field);
-      setColumnStyleName(e, field);
-      setColumnRenderer(e, field);
-      setColumnEditor(e, field);
-      setColumnCellButton(e, field);
-      setColumnStyleCallback(e, field);
-    });
-
-    view.__metas__ = map(columns, (e) => ({
-      fieldName: e.fieldName,
-      column: e.column || e.fieldName,
-      rules: e.rules,
-      customMessages: e.customMessages,
-      preventCellItemFocus: e.preventCellItemFocus === true,
+    const columnNames = view.getColumns().map((e) => e.name);
+    view.__columns__ = map(normalizedColumns, (normalizedColumn, i) => ({
+      name: columnNames[i],
+      fieldName: normalizedColumn.fieldName,
+      rules: normalizedColumn.rules,
+      customMessages: normalizedColumn.customMessages,
+      preventCellItemFocus: normalizedColumn.preventCellItemFocus === true,
     }));
+  });
+}
 
-    execOriginal(view, setColumns, columns);
+/*
+  설정된 컬럼들 외에 추가로 컬럼을 설정한다
+  */
+export function overrideAddColumn(view) {
+  wrapMethod(view, addColumn, (column, index) => {
+    const normalizedColumn = normalizeColumn(column, view);
+
+    execOriginal(view, addColumn, normalizedColumn, index);
+
+    const columns = view.getColumns();
+    const columnName = columns[index ?? columns.length - 1].name;
+
+    view.__columns__.push({
+      name: columnName,
+      fieldName: normalizedColumn.fieldName,
+      rules: normalizedColumn.rules,
+      customMessages: normalizedColumn.customMessages,
+      preventCellItemFocus: normalizedColumn.preventCellItemFocus === true,
+    });
+  });
+}
+
+/*
+  해당 컬럼을 제거한다
+  */
+export function overrideRemoveColumn(view) {
+  wrapMethod(view, removeColumn, (column) => {
+    execOriginal(view, removeColumn, column);
+
+    const index = view.__columns__.findIndex((e) => e.name === column);
+
+    if (index > -1) {
+      view.__columns__.splice(index, 1);
+    }
   });
 }
 
@@ -396,7 +469,7 @@ export function overrideDestory(view) {
     // private attributes
     delete view.__originalFns__;
     delete view.__registeredEvents__;
-    delete view.__metas__;
+    delete view.__columns__;
     delete view.__validationErrors__;
   });
 }
