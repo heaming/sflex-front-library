@@ -14,7 +14,7 @@
     >
       <kw-item clickable>
         <kw-item-section>
-          컬럼 보기설정
+          {{ $t('MSG_TXT_COL_VIEW_SETTINGS', null, '컬럼 보기 설정') }}
         </kw-item-section>
         <kw-item-section side>
           <kw-icon name="arrow_right" />
@@ -32,12 +32,12 @@
           >
             <kw-item
               v-for="option of contextConfig.viewOptions"
-              :key="option.name"
+              :key="option.column"
               clickable
               @click="onClickViewOption(option)"
             >
               <kw-item-section>
-                {{ option.name }}
+                {{ option.label }}
               </kw-item-section>
               <kw-item-section side>
                 <kw-checkbox
@@ -85,13 +85,22 @@ export default {
 
     function recursiveCreateViewOptions(layouts) {
       const visibleLayouts = layouts.filter((e) => e.visible);
+
       return visibleLayouts.reduce((viewOptions, layout) => {
         if (layout.column) {
-          const { name, visible } = view.columnByName(layout.column);
-          viewOptions.push({ name, visible });
+          const { name, header, visible } = view.columnByName(layout.column);
+
+          viewOptions.push({
+            column: name,
+            label: header.text || name,
+            visible,
+          });
         } else if (layout.items) {
-          viewOptions.push(...recursiveCreateViewOptions(layout.items));
+          viewOptions.push(
+            ...recursiveCreateViewOptions(layout.items),
+          );
         }
+
         return viewOptions;
       }, []);
     }
@@ -119,7 +128,7 @@ export default {
     }
 
     function onClickViewOption(opt) {
-      view.setColumnProperty(opt.name, 'visible', !opt.visible);
+      view.setColumnProperty(opt.column, 'visible', !opt.visible);
       setContextConfig();
     }
 
