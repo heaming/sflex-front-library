@@ -68,21 +68,17 @@
     }
 
     &-favorite {
-      .kw-checkbox {
-        display: inline-block;
+      &.kw-checkbox {
+        margin-left: 7px;
+        justify-content: flex-start;
         width: 16px;
-        height: 16px;
 
         .q-checkbox__inner {
           width: inherit;
-          min-width: initial;
-          height: inherit;
+          height: 16px;
+          min-width: 16px;
+          font-size: 16px;
         }
-      }
-
-      .q-icon {
-        font-size: 16px;
-        cursor: pointer;
       }
     }
 
