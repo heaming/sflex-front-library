@@ -90,7 +90,7 @@
   }
 }
 
-.mobile {
+body.mobile {
   .kw-action {
     // tablet
   }
@@ -117,6 +117,10 @@
           font-weight: 700;
           padding-left: 0 !important;
         }
+      }
+
+      &--top {
+        margin-bottom: 0;
       }
     }
   }
