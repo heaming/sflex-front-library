@@ -11,9 +11,7 @@
     display: none;
   }
 
-  &__scroll-area > .kw-scroll-area__wrapper {
-    max-height: 65vh;
-  }
+  @include native-scrollbar(overlay, auto, true, true);
 }
 
 .kw-menu-dialog {

@@ -80,7 +80,7 @@ export function customOnMouseUp(view) {
   */
 export function overrideOnCurrentChanging(view) {
   wrapEvent(view, onCurrentChanging, (g, oldIndex, newIndex) => {
-    const preventCellItemFocus = g.__metas__.find((e) => e.fieldName === newIndex.fieldName)
+    const preventCellItemFocus = g.__columns__.find((e) => e.name === newIndex.column)
       ?.preventCellItemFocus === true;
 
     if (preventCellItemFocus) {
