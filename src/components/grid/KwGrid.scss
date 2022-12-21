@@ -496,7 +496,7 @@
 
 .kw-grid--two-column-mergedline {
   .rg-body .rg-table tr td {
-    &:nth-child(2n) {
+    &:nth-child(3n) {
       border-right: 1px solid $line-bg;
     }
   }
