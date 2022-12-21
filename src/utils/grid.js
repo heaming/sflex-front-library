@@ -58,9 +58,9 @@ export async function scrollIntoView(view) {
   }
 }
 
-export async function focusCellInput(view, dataRow, fieldName, dropdown = false) {
+export async function focusCellInput(view, dataRow, column, dropdown = false) {
   scrollIntoView(view);
-  view.setCurrent({ dataRow, fieldName });
+  view.setCurrent({ dataRow, column });
   await waitUntilShowEditor(view, dropdown);
 }
 
@@ -270,13 +270,13 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
   return [];
 }
 
-export async function insertRowAndFocus(view, dataRow, rowValue, fieldName) {
+export async function insertRowAndFocus(view, dataRow, rowValue, column) {
   const data = view.getDataSource();
   const isInserted = data.insertRow(dataRow, rowValue);
-  const shoudFocus = isInserted && fieldName !== false;
+  const shoudFocus = isInserted && column !== false;
 
   if (shoudFocus) {
-    await focusCellInput(view, dataRow, fieldName);
+    await focusCellInput(view, dataRow, column);
   }
 
   return isInserted;
@@ -343,12 +343,12 @@ export function confirmIfIsModified(view, message) {
 export async function validateRow(view, dataRow, bails = true) {
   const validationErrors = [];
   const data = view.getDataSource();
-  const metas = view.__metas__.filter((e) => !isEmpty(e.rules));
+  const metas = view.__columns__.filter((e) => !isEmpty(e.rules));
   const values = getOutputRow(data, dataRow);
 
   for (let i = 0; i < metas.length; i += 1) {
-    const { fieldName, rules, customMessages } = metas[i];
-    const column = view.columnByName(fieldName);
+    const { name: columnName, fieldName, rules, customMessages } = metas[i];
+    const column = view.columnByName(columnName);
     const name = column.header.text || column.name;
     const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
@@ -369,6 +369,7 @@ export async function validateRow(view, dataRow, bails = true) {
     if (invalid) {
       validationErrors.push({
         dataRow,
+        column: columnName,
         fieldName,
         errors,
       });
@@ -415,12 +416,12 @@ export async function validate(view, options = {}) {
   if (shouldAlertMessage) {
     const {
       dataRow,
-      fieldName,
+      column,
       errors,
     } = validationErrors[0];
 
     await alert(errors[0]);
-    await focusCellInput(view, dataRow, fieldName);
+    await focusCellInput(view, dataRow, column);
   }
 
   return valid;
