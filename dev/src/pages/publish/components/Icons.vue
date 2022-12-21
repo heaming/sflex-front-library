@@ -109,6 +109,12 @@ const iconList1 = [
   'upload_off',
   'warning',
   'write',
+  'up',
+  'down',
+  'top',
+  'bottom',
+  'cellphone_reject',
+  'cellphone',
 ];
 const iconList2 = [
   'add_list_24',
