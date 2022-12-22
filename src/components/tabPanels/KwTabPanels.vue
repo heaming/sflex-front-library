@@ -22,25 +22,25 @@
 </template>
 
 <script>
-import usePanel, { usePanelProps, usePanelEmits } from './private/usePanel';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import usePanels, { usePanelsProps, usePanelsEmits } from '../../composables/private/usePanels';
 
 export default {
   name: 'KwTabPanels',
   inheritAttrs: false,
 
   props: {
-    ...usePanelProps,
+    ...usePanelsProps,
   },
 
   emits: [
-    ...usePanelEmits,
+    ...usePanelsEmits,
   ],
 
   setup() {
     return {
-      ...usePanel(),
       ...useInheritAttrs(),
+      ...usePanels('KwTabPanel'),
     };
   },
 };

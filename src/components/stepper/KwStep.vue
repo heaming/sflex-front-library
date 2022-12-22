@@ -18,9 +18,7 @@
     :header-nav="headerNav"
     :done="done"
     :error="error"
-  >
-    <slot />
-  </q-step>
+  />
 </template>
 
 <script>
@@ -29,11 +27,12 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 export default {
   name: 'KwStep',
   inheritAttrs: false,
+
   props: {
     // customize props
 
     // fall through props
-    name: { type: String, required: true },
+    name: { type: [String, Number], default: undefined },
     disable: { type: Boolean, default: undefined },
     icon: { type: String, default: undefined },
     color: { type: String, default: undefined },
@@ -50,11 +49,10 @@ export default {
     done: { type: Boolean, default: undefined },
     error: { type: Boolean, default: undefined },
   },
-  setup() {
-    const { styleClassAttrs } = useInheritAttrs();
 
+  setup() {
     return {
-      styleClassAttrs,
+      ...useInheritAttrs(),
     };
   },
 
