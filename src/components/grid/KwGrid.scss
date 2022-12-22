@@ -43,6 +43,10 @@
   }
 }
 
+.rg-row-bar:has(.rg-rowindicator-focus) td {
+  background: rgba($primary, 0.1) !important;
+}
+
 .rg-selection {
   background: rgb(62 100 157 / 20%) !important;
   border: 1px solid rgb(62 100 157 / 67%);
@@ -114,6 +118,30 @@
     left: 4px !important;
     right: 4px !important;
     bottom: 8px !important;
+  }
+
+  .rg-multiline-editor {
+    width: auto !important;
+    height: auto !important;
+    top: 3px !important;
+    left: 5px !important;
+    right: 5px !important;
+    bottom: 3px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  &:has(textarea.rg-multiline-editor) {
+    &::after {
+      content: "";
+      border: 1px solid $line-stroke;
+      position: absolute;
+      background: #fff;
+      top: 2px !important;
+      left: 4px !important;
+      right: 4px !important;
+      bottom: 2px !important;
+    }
   }
 }
 
