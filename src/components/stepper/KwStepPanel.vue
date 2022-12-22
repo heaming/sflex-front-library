@@ -1,10 +1,10 @@
 <template>
-  <div class="q-panel scroll">
+  <div>
     <div
       ref="containerRef"
       tabindex="-1"
-      class="kw-tab-panel"
-      :class="{'kw-tab-panel--disabled': !!disable}"
+      class="kw-step-panel"
+      :class="{'kw-step-panel--disabled': !!disable}"
     >
       <slot />
     </div>
@@ -12,19 +12,16 @@
 </template>
 
 <script>
-import usePageSearch from '../../composables/private/usePageSearch';
 import usePanel, { usePanelProps } from '../../composables/private/usePanel';
 
 export default {
-  name: 'KwTabPanel',
+  name: 'KwStepPanel',
 
   props: {
     ...usePanelProps,
   },
 
   setup() {
-    usePageSearch();
-
     return {
       ...usePanel(),
     };

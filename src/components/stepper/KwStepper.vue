@@ -1,80 +1,84 @@
 <template>
-  <q-stepper
-    ref="quasarRef"
-    v-bind="styleClassAttrs"
-    class="kw-stepper"
-    :dark="dark"
-    :model-value="modelValue"
-    :keep-alive="keepAlive"
-    :keep-alive-include="keepAliveInclude"
-    :keep-alive-exclude="keepAliveExclude"
-    :keep-alive-max="keepAliveMax"
-    :animated="animated"
-    :infinite="infinite"
-    :swipeable="swipeable"
-    :vertical="vertical"
-    :transition-prev="transitionPrev"
-    :transition-next="transitionNext"
-    :transition-duration="transitionDuration"
-    :flat="flat"
-    :bordered="bordered"
-    :alternative-labels="alternativeLabels"
-    :header-nav="headerNav"
-    :contracted="contracted"
-    :header-class="headerClass"
-    :inactive-color="inactiveColor"
-    :inactive-icon="inactiveIcon"
-    :done-icon="doneIcon"
-    :done-color="doneColor"
-    :active-icon="activeIcon"
-    :active-color="activeColor"
-    :error-icon="errorIcon"
-    :error-color="errorColor"
-    @update:model-value="$emit('update:modelValue', $event)"
-    @before-transition="$emit('before-transition', $event)"
-    @transition="$emit('transition', $event)"
+  <div :class="stepperClass">
+    <span
+      v-if="headingText"
+      class="kw-stepper__title"
+    >{{ activeHeader?.props.title }}</span>
+
+    <q-stepper
+      ref="stepperRef"
+      v-bind="styleClassAttrs"
+      :model-value="modelValue"
+      :header-class="headerClass"
+      :header-nav="headerNav"
+      :alternative-labels="alternativeLabels"
+      :inactive-color="inactiveColor"
+      :inactive-icon="inactiveIcon"
+      :done-icon="doneIcon"
+      :done-color="doneColor"
+      :active-icon="activeIcon"
+      :active-color="activeColor"
+      :error-icon="errorIcon"
+      :error-color="errorColor"
+      @update:model-value="$emit('update:modelValue', $event)"
+    >
+      <component
+        :is="header"
+        v-for="header of headers"
+        :key="header.props.name"
+      />
+    </q-stepper>
+  </div>
+  <div
+    v-touch-swipe.mouse="onSwipe"
+    class="kw-stepper__panels q-tab-panels q-panel-parent"
   >
-    <slot />
-
-    <template #navigation>
-      <slot name="navigation" />
-    </template>
-
-    <template #message>
-      <slot name="message" />
-    </template>
-  </q-stepper>
+    <transition
+      v-for="panel of panels"
+      :key="panel.props.name"
+      v-bind="panelTransition"
+    >
+      <keep-alive>
+        <component
+          :is="panel"
+          v-if="isActivePanel(panel)"
+          @touchstart="onBeforeSwipe"
+          @mousedown="onBeforeSwipe"
+        />
+      </keep-alive>
+    </transition>
+  </div>
 </template>
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import usePanels, { usePanelsProps, usePanelsEmits } from '../../composables/private/usePanels';
+import { getNormalizedVNodes } from '../../utils/private/vm';
+
+function getNormalizedHeaders(slots) {
+  const vnodes = slots.default();
+  const normalizedVNodes = getNormalizedVNodes(vnodes);
+
+  const isValidPanel = (v) => v.type.name === 'KwStep' && v.props?.name !== undefined;
+  const headers = normalizedVNodes.filter(isValidPanel);
+
+  return headers;
+}
 
 export default {
   name: 'KwStepper',
   inheritAttrs: false,
-  props: {
-    // customize props
 
-    // fall through props
-    dark: { type: Boolean, default: undefined },
-    modelValue: { type: [Object, Array, Number, String, Boolean, Function], required: true },
-    keepAlive: { type: Boolean, default: true },
-    keepAliveInclude: { type: [String, Array, RegExp], default: undefined },
-    keepAliveExclude: { type: [String, Array, RegExp], default: undefined },
-    keepAliveMax: { type: Number, default: undefined },
-    animated: { type: Boolean, default: undefined },
-    infinite: { type: Boolean, default: undefined },
-    swipeable: { type: Boolean, default: undefined },
-    vertical: { type: Boolean, default: undefined },
-    transitionPrev: { type: String, default: 'fade' },
-    transitionNext: { type: String, default: 'fade' },
-    transitionDuration: { type: [String, Number], default: 0 },
-    flat: { type: Boolean, default: undefined },
-    bordered: { type: Boolean, default: undefined },
+  props: {
+    ...usePanelsProps,
+
+    // customize props
+    headingText: { type: Boolean, default: false },
+
+    // fallthrough props
+    headerClass: { type: Boolean, default: undefined },
+    headerNav: { type: Boolean, default: false },
     alternativeLabels: { type: Boolean, default: undefined },
-    headerNav: { type: Boolean, default: undefined },
-    contracted: { type: Boolean, default: undefined },
-    headerClass: { type: String, default: undefined },
     inactiveColor: { type: String, default: undefined },
     inactiveIcon: { type: String, default: undefined },
     doneIcon: { type: String, default: 'checked_stepper' },
@@ -84,36 +88,30 @@ export default {
     errorIcon: { type: String, default: undefined },
     errorColor: { type: String, default: undefined },
   },
+
   emits: [
-    'update:modelValue',
-    'before-transition',
-    'transition',
+    ...usePanelsEmits,
   ],
 
-  setup() {
-    const quasarRef = ref();
+  setup(props) {
+    const stepperRef = ref();
 
-    const { styleClassAttrs } = useInheritAttrs();
+    const slots = useSlots();
+    const headers = computed(() => getNormalizedHeaders(slots));
+    const activeHeader = computed(() => headers.value.find((v) => v.props.name === props.modelValue));
 
-    function next() {
-      quasarRef.value.next();
-    }
-
-    function previous() {
-      quasarRef.value.previous();
-    }
-
-    function goTo() {
-      quasarRef.value.goTo();
-    }
+    const stepperClass = computed(() => ({
+      'kw-stepper': true,
+      'kw-stepper--heading-text': props.headingText === true,
+    }));
 
     return {
-      quasarRef,
-      styleClassAttrs,
-      next,
-      previous,
-      goTo,
-
+      ...useInheritAttrs(),
+      ...usePanels('KwStepPanel'),
+      stepperRef,
+      headers,
+      activeHeader,
+      stepperClass,
     };
   },
 

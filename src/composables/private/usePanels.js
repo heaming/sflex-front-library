@@ -1,7 +1,7 @@
-import { stop } from '../../../utils/private/event';
-import { getNormalizedVNodes } from '../../../utils/private/vm';
+import { stop } from '../../utils/private/event';
+import { getNormalizedVNodes } from '../../utils/private/vm';
 
-export const usePanelProps = {
+export const usePanelsProps = {
   modelValue: {
     type: [Number, String],
     default: undefined,
@@ -24,34 +24,23 @@ export const usePanelProps = {
   },
 };
 
-export const usePanelChildProps = {
-  name: {
-    type: [Number, String],
-    default: undefined,
-  },
-  disable: {
-    type: Boolean,
-    default: false,
-  },
-};
+export const usePanelsEmits = ['update:modelValue'];
 
-export const usePanelEmits = ['update:modelValue'];
-
-function getNormalizedPanels(slots) {
+function getNormalizedPanels(slots, panelName) {
   const vnodes = slots.default();
   const normalizedVNodes = getNormalizedVNodes(vnodes);
 
-  const isValidPanel = (v) => v.type.name === 'KwTabPanel' && v.props?.name !== undefined;
+  const isValidPanel = (v) => v.type.name === panelName && v.props?.name !== undefined;
   const panels = normalizedVNodes.filter(isValidPanel);
 
   return panels;
 }
 
-export default () => {
+export default (panelName) => {
   const { proxy, props, emit } = getCurrentInstance();
   const slots = useSlots();
 
-  const panels = computed(() => getNormalizedPanels(slots));
+  const panels = computed(() => getNormalizedPanels(slots, panelName));
   const activePanel = computed(() => panels.value.find((v) => v.props.name === props.modelValue));
 
   const isForceUpdated = ref(false);
