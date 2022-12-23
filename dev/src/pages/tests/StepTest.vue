@@ -1,103 +1,80 @@
 <template>
   <kw-page>
     <div class="result-area">
-      <kw-stepper v-model="normalStep">
+      <kw-action-top>
+        <template #left>
+          <kw-input
+            v-model.number="stepCount"
+            type="number"
+          />
+          <kw-checkbox
+            v-model="alternativeLabelsYn"
+            label="AlternativeLabels"
+          />
+          <kw-checkbox
+            v-model="headingTextYn"
+            label="HeadingText"
+          />
+          <kw-checkbox
+            v-model="headerNavYn"
+            label="headerNav"
+          />
+          <kw-checkbox
+            v-model="disableYn"
+            label="Disable"
+          />
+          <kw-checkbox
+            v-model="animatedYn"
+            label="Animated"
+          />
+          <kw-checkbox
+            v-model="infiniteYn"
+            label="Infinite"
+          />
+          <kw-checkbox
+            v-model="swipeableYn"
+            label="Swipeable"
+          />
+        </template>
+        <kw-btn @click="stepperRef.previous()">
+          Previous
+        </kw-btn>
+        <kw-btn @click="stepperRef.next()">
+          Next
+        </kw-btn>
+      </kw-action-top>
+
+      <kw-stepper
+        ref="stepperRef"
+        v-model="selected"
+        :alternative-labels="alternativeLabelsYn === 'Y'"
+        :heading-text="headingTextYn === 'Y'"
+        :header-nav="headerNavYn === 'Y'"
+        :animated="animatedYn === 'Y'"
+        :infinite="infiniteYn === 'Y'"
+        :swipeable="swipeableYn === 'Y'"
+      >
         <kw-step
-          v-for="n of 5"
+          v-for="n of stepCount"
           :key="n"
           :name="n"
-          :title="`step${n}`"
-          :done="normalStep > n"
           :prefix="n"
+          :title="`스탭${n}\n줄바꿈`"
+          :done="selected > n"
+          :disable="disableYn === 'Y'"
+          :icon="n === 2 ? 'close' : undefined"
+          :tooltip="`스탭${n}\n줄바꿈`"
         />
 
         <kw-step-panel
-          v-for="n of 5"
+          v-for="n of stepCount"
           :key="n"
           :name="n"
+          :disable="disableYn === 'Y'"
         >
-          <kw-action-top>
-            <template #left>
-              <span>총</span>
-              <span class="accent pl4">156</span>
-            </template>
-          </kw-action-top>
-          <kw-grid
-            :visible-rows="10"
-          />
-        </kw-step-panel>
-      </kw-stepper>
-    </div>
-    <br>
-    <div class="result-area">
-      <kw-stepper
-        v-model="normalStep"
-        heading-text
-      >
-        <kw-step
-          v-for="n of 5"
-          :key="n"
-          :name="n"
-          :title="`step${n}`"
-          :done="normalStep > n"
-          :prefix="n"
-        >
-          {{ `step${n}` }}
-        </kw-step>
-
-        <kw-step-panel
-          v-for="n of 5"
-          :key="n"
-          :name="n"
-        >
-          <h3>Form</h3>
-          <kw-form>
-            <kw-form-row>
-              <kw-form-item
-                label="new"
-              >
-                <kw-input />
-              </kw-form-item>
-              <kw-form-item
-                label="new"
-              >
-                <kw-input />
-              </kw-form-item>
-            </kw-form-row>
-          </kw-form>
-        </kw-step-panel>
-      </kw-stepper>
-    </div>
-    <br>
-    <div class="result-area">
-      <kw-stepper
-        v-model="normalStep"
-        alternative-labels
-        swipeable
-      >
-        <kw-step
-          v-for="n of 5"
-          :key="n"
-          :name="n"
-          :title="`미팅참석\n합계${n}`"
-          :done="normalStep > n"
-          :prefix="n"
-        />
-
-        <kw-step-panel
-          v-for="n of 5"
-          :key="n"
-          :name="n"
-        >
-          <kw-action-top>
-            <template #left>
-              <span>총</span>
-              <span class="accent pl4">156</span>
-            </template>
-          </kw-action-top>
-          <kw-grid
-            :visible-rows="10"
-          />
+          <div class="h200 bg-blue">
+            스탭 {{ n }} 패널
+          </div>
         </kw-step-panel>
       </kw-stepper>
     </div>
@@ -106,5 +83,17 @@
 
 <script setup>
 
-const normalStep = ref(2);
+const stepperRef = ref();
+
+const stepCount = ref(10);
+const selected = ref(1);
+
+const alternativeLabelsYn = ref('N');
+const headingTextYn = ref('N');
+const headerNavYn = ref('N');
+const disableYn = ref('N');
+const animatedYn = ref('N');
+const infiniteYn = ref('N');
+const swipeableYn = ref('N');
+
 </script>
