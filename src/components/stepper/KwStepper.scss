@@ -171,6 +171,10 @@
   &__panels {
     overflow: hidden;
     position: relative;
+
+    .q-panel {
+      overflow: inherit;
+    }
   }
 }
 
