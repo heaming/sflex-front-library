@@ -42,17 +42,32 @@ export default () => {
     }
   }
 
-  const isMenuRoute = (to) => getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
+  async function close(tabKey, force = false) {
+    const tabView = tabViews.find((e) => e.key === tabKey);
+    const isClosable = force === true || (await tabView?.observerVm.confirmIfIsModified() === true);
 
-  const { currentRoute } = router;
-  if (isMenuRoute(currentRoute.value)) {
-    const { key } = add(currentRoute.value);
+    if (isClosable) {
+      const removedIndex = remove(tabView);
+      const isSelected = selectedKey.value === tabView.key;
+
+      if (isSelected) {
+        selectClosest(removedIndex);
+      }
+    }
+  }
+
+  const isRegistered = (to) => getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const isUnduplicated = (to) => !tabViews.some((v) => v.key === to.name);
+
+  if (isRegistered(router.currentRoute.value)) {
+    const { key } = add(router.currentRoute.value);
     selectedKey.value = key;
   }
 
   const removeBeforeResolve = router.beforeResolve((to) => {
-    to.meta.logging = isMenuRoute(to) && !isDuplicated(to);
+    const shouldLogging = isRegistered(to) && isUnduplicated(to);
+
+    to.meta.logging = shouldLogging;
   });
 
   const removeAfterEach = router.afterEach(
@@ -68,17 +83,27 @@ export default () => {
     },
   );
 
+  router.close = () => close(selectedKey.value);
   onBeforeUnmount(() => {
     removeBeforeResolve();
     removeAfterEach();
+    delete router.close;
   });
+
+  async function onSelect(tabKey) {
+    if (selectedKey.value !== tabKey) {
+      await select(tabKey);
+    }
+  }
+
+  async function onClose(tabKey) {
+    await close(tabKey, false);
+  }
 
   return {
     tabViews,
     selectedKey,
-    add,
-    remove,
-    select,
-    selectClosest,
+    onSelect,
+    onClose,
   };
 };
