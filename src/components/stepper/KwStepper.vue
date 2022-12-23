@@ -125,7 +125,7 @@ export default {
     const tooltips = computed(() => {
       const _tooltips = [];
       headers.value.forEach((e, i) => {
-        if (e.props.tooltip) {
+        if (!!e.props.tooltip && !e.props.disable) {
           _tooltips.push({
             key: e.props.name,
             target: `#${stepperId} > .q-stepper__header > .q-stepper__tab:nth-child(${i + 1})`,
