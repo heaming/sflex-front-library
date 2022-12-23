@@ -50,12 +50,18 @@
               title="" or :title="``"<br>
               :done="stepInitNum > 1"<br>
               prefix="1"<br>
+              :tooltip="'text'"<br>
+              :active-icon=""<br>
+              :done-icon=""
             </td>
             <td>
               Put the number as many as step's number<br>
               Change the title's name as suitable names in Zeplin(:title="``" with alternative-labels)<br>
               Change the same number as the attribute of :name=""<br>
               Put the number as many as step's number<br>
+              Add the text in tooltip<br>
+              Add the icon's name in active-icon<br>
+              Add the icon's name in done-icon<br>
             </td>
           </tr>
         </tbody>
@@ -450,6 +456,78 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Individual icon & tooltip
+      </h3>
+      <p class="kw-guide-description">
+        Some screens are need to be added the active icon and done icon individiually.<br>
+        The commone icon is checked icon and number basically.<br>
+
+        <!-- The common icon is checked icon,however it should be add<br>
+        diffirent, Add icon's name in <b>:done-icon ""</b><br>
+        :active-icon="" is to change active-icon<br> -->
+
+        <b>:done-icon=""</b><br>
+        <span> - Replace icon from done-icon(default:checked icon) to the other icon</span><br>
+        <b>:active-icon=""</b><br>
+        <span> - Replace icon from number(default: number) to the other icon</span><br>
+        <b>:tool-tip=""</b><br>
+        <span> - Write the text</span><br>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-stepper
+            v-model="stepInitNum3"
+            alternative-labels
+          >
+            <kw-step
+              :name="1"
+              :title="`미팅참석\n집계`"
+              :done="stepInitNum3 > 1"
+              prefix="1"
+            />
+            <kw-step
+              :name="2"
+              :title="`수수료\n생성`"
+              :done="stepInitNum3 > 2"
+              prefix="2"
+              :done-icon="'retry'"
+              :done-color="warning"
+            />
+            <kw-step
+              :name="3"
+              :title="`세금\n공제`"
+              :done="stepInitNum3 > 3"
+              prefix="3"
+              :tooltip="'Write the text in here! :3'"
+              :active-icon="'write'"
+              :active-color="'primary'"
+            />
+            <kw-step
+              :name="4"
+              :title="`원천세\n등록`"
+              :done="stepInitNum3 > 4"
+              prefix="4"
+            />
+            <kw-step
+              :name="5"
+              :title="`고용보험\n공제`"
+              :done="stepInitNum3 > 5"
+              prefix="5"
+            />
+          </kw-stepper>
+        </div>
+        <guide-code-view
+          :code-value="[iconTool, iconToolLarge]"
+          :lang="['vue', 'javascript']"
+          multi
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -757,9 +835,55 @@ const stepperGrid = `
   </kw-step-panel>
 </kw-stepper>
 `;
+const iconTool = `
+<kw-stepper
+  v-model="stepInitNum2"
+  alternative-labels
+>
+  <kw-step
+    :name="1"
+   :title="\`미팅참석\\n집계\`"
+    :done="stepInitNum2 > 1"
+    prefix="1"
+  />
+  <kw-step
+    :name="2"
+    :title="\`수수료\\n생성\`"
+    :done="stepInitNum2 > 2"
+    prefix="2"
+    :done-icon="'retry'"
+    :done-color="warning"
+  />
+  <kw-step
+    :name="3"
+    :title="\`세금\\n공제\`"
+    :done="stepInitNum2 > 3"
+    prefix="3"
+    :tooltip="'Write the text in here! :3'"
+    :active-icon="'write'"
+    :active-color="'primary'"
+  />
+  <kw-step
+    :name="4"
+    :title="\`원천세\\n등록\`"
+    :done="stepInitNum2 > 4"
+    prefix="4"
+  />
+  <kw-step
+    :name="5"
+    :title="\`고용보험\\n공제\`"
+    :done="stepInitNum2 > 5"
+    prefix="5"
+  />
+</kw-stepper>
+`;
+const iconToolLarge = `
+const stepInitNum3 = ref(3);
+`;
 
 const stepInitNum = ref(1);
 const stepInitNum2 = ref(2);
+const stepInitNum3 = ref(3);
 
 const guideHistory = [
   {
