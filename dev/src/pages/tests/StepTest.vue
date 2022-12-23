@@ -6,6 +6,7 @@
           <kw-input
             v-model.number="stepCount"
             type="number"
+            max="10"
           />
           <kw-checkbox
             v-model="alternativeLabelsYn"
@@ -62,6 +63,7 @@
           :title="`스탭${n}\n줄바꿈`"
           :done="selected > n"
           :done-icon="selected - 1 === n ? 'retry' : undefined"
+          active-icon="checked_stepper"
           :disable="disableYn === 'Y'"
           :tooltip="`스탭${n}\n줄바꿈`"
         />
