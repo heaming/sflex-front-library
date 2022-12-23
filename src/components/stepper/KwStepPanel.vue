@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-panel scroll">
     <div
       ref="containerRef"
       tabindex="-1"

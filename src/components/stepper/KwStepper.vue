@@ -1,13 +1,16 @@
 <template>
-  <div :class="stepperClass">
+  <div
+    :class="stepperClass"
+    v-bind="styleClassAttrs"
+  >
     <span
-      v-if="headingText"
+      v-if="useHeading"
       class="kw-stepper__title"
     >{{ activeHeader?.props.title }}</span>
 
     <q-stepper
+      :id="stepperId"
       ref="stepperRef"
-      v-bind="styleClassAttrs"
       :model-value="modelValue"
       :header-class="headerClass"
       :header-nav="headerNav"
@@ -25,9 +28,19 @@
       <component
         :is="header"
         v-for="header of headers"
+        id="test"
         :key="header.props.name"
+        :prefix="header.props.icon ? undefined : header.props.prefix"
       />
     </q-stepper>
+
+    <kw-tooltip
+      v-for="tooltip of tooltips"
+      :key="tooltip.key"
+      :target="tooltip.target"
+    >
+      {{ tooltip.content }}
+    </kw-tooltip>
   </div>
   <div
     v-touch-swipe.mouse="onSwipe"
@@ -51,6 +64,8 @@
 </template>
 
 <script>
+import { omit } from 'lodash-es';
+import { uid } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import usePanels, { usePanelsProps, usePanelsEmits } from '../../composables/private/usePanels';
 import { getNormalizedVNodes } from '../../utils/private/vm';
@@ -59,10 +74,10 @@ function getNormalizedHeaders(slots) {
   const vnodes = slots.default();
   const normalizedVNodes = getNormalizedVNodes(vnodes);
 
-  const isValidPanel = (v) => v.type.name === 'KwStep' && v.props?.name !== undefined;
-  const headers = normalizedVNodes.filter(isValidPanel);
+  const isValidStep = (v) => v.type.name === 'KwStep' && v.props?.name !== undefined;
+  const panels = normalizedVNodes.filter(isValidStep);
 
-  return headers;
+  return panels;
 }
 
 export default {
@@ -70,7 +85,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    ...usePanelsProps,
+    ...omit(usePanelsProps, ['vertical']),
 
     // customize props
     headingText: { type: Boolean, default: false },
@@ -78,13 +93,13 @@ export default {
     // fallthrough props
     headerClass: { type: Boolean, default: undefined },
     headerNav: { type: Boolean, default: false },
-    alternativeLabels: { type: Boolean, default: undefined },
+    alternativeLabels: { type: Boolean, default: false },
     inactiveColor: { type: String, default: undefined },
     inactiveIcon: { type: String, default: undefined },
-    doneIcon: { type: String, default: 'checked_stepper' },
-    doneColor: { type: String, default: undefined },
     activeIcon: { type: String, default: 'none' },
     activeColor: { type: String, default: undefined },
+    doneIcon: { type: String, default: 'checked_stepper' },
+    doneColor: { type: String, default: undefined },
     errorIcon: { type: String, default: undefined },
     errorColor: { type: String, default: undefined },
   },
@@ -94,24 +109,43 @@ export default {
   ],
 
   setup(props) {
+    const useHeading = computed(() => props.headingText === true && props.alternativeLabels === false);
+
+    const stepperId = `s_${uid()}`;
     const stepperRef = ref();
+    const stepperClass = computed(() => ({
+      'kw-stepper': true,
+      'kw-stepper--heading-text': useHeading.value,
+    }));
 
     const slots = useSlots();
     const headers = computed(() => getNormalizedHeaders(slots));
-    const activeHeader = computed(() => headers.value.find((v) => v.props.name === props.modelValue));
+    const activeHeader = computed(() => headers.value.find((e) => e.props.name === props.modelValue));
 
-    const stepperClass = computed(() => ({
-      'kw-stepper': true,
-      'kw-stepper--heading-text': props.headingText === true,
-    }));
+    const tooltips = computed(() => {
+      const _tooltips = [];
+      headers.value.forEach((e, i) => {
+        if (e.props.tooltip) {
+          _tooltips.push({
+            key: e.props.name,
+            target: `#${stepperId} > .q-stepper__header > .q-stepper__tab:nth-child(${i + 1})`,
+            content: e.props.tooltip,
+          });
+        }
+      });
+      return _tooltips;
+    });
 
     return {
       ...useInheritAttrs(),
       ...usePanels('KwStepPanel'),
+      useHeading,
+      stepperId,
       stepperRef,
+      stepperClass,
       headers,
       activeHeader,
-      stepperClass,
+      tooltips,
     };
   },
 
