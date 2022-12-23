@@ -6,7 +6,7 @@
     <span
       v-if="useHeading"
       class="kw-stepper__title"
-    >{{ activeHeader?.props.title }}</span>
+    >{{ activeHeader?.props.headingText || activeHeader?.props.title }}</span>
 
     <q-stepper
       :id="stepperId"
