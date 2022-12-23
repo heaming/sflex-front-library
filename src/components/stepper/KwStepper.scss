@@ -35,6 +35,11 @@
           pointer-events: none;
         }
       }
+
+      .q-focus-helper,
+      .q-ripple {
+        display: none;
+      }
     }
 
     &__dot {
