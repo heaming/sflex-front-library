@@ -11,6 +11,28 @@ interface KwTooltipProps {
   modelValue?: number;
 
   /**
+   * CSS selector or DOM element to be used as a custom scroll container instead of the auto detected one
+   */
+  scrollTarget?: number;
+
+  /**
+   * Configure a target element to trigger Tooltip toggle
+   * 'true' means it enables the parent DOM element, 'false' means it disables attaching events to any DOM elements
+   * By using a String (CSS selector) it attaches the events to the specified DOM element (if it exists)
+   */
+  target?: number;
+
+  /**
+   * 툴팁 표시 지연시간
+   */
+  delay?: number;
+
+  /**
+   * 툴팁 숨김 지연시간
+   */
+  hideDelay?: number;
+
+  /**
    * 최대 높이
    */
   maxHeight?: string;

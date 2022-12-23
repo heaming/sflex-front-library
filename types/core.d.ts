@@ -54,6 +54,16 @@ import { Router, RouteRecordRaw } from 'vue-router';
 export const router: Router;
 export function createRoutesByGlobImport(modules: { [key: string]: any }[]): RouteRecordRaw[];
 
+declare module 'vue-router' {
+  export interface Router {
+    /**
+     * 웹 어플리케이션의 탭 뷰가 있을 때만 정의되어 있는 속성으로,
+     * 호출 시 현재 탭을 닫는다.
+     */
+    close?: () => Promise<void>;
+  }
+}
+
 // Modal
 export function registerPopupsByGlobImport(modules: { [key: string]: any }[]): void;
 

@@ -24,7 +24,7 @@
           class="cursor-pointer"
           name="close_24"
           size="12px"
-          @click.stop="onClose(tabView)"
+          @click.stop="onClose(tabView.key)"
         />
       </q-tab>
     </q-tabs>
@@ -66,36 +66,8 @@ export default {
   components: { LoadFailedView },
 
   setup() {
-    const tabViewCtx = useTabView();
-    const {
-      selectedKey,
-      select,
-      selectClosest,
-      remove,
-    } = tabViewCtx;
-
-    async function onSelect(tabKey) {
-      if (selectedKey.value !== tabKey) {
-        await select(tabKey);
-      }
-    }
-
-    async function onClose(tabItem) {
-      const isClosable = await tabItem.observerVm.confirmIfIsModified();
-      if (isClosable) {
-        const removedIndex = remove(tabItem);
-        const isSelected = selectedKey.value === tabItem.key;
-
-        if (isSelected) {
-          selectClosest(removedIndex);
-        }
-      }
-    }
-
     return {
-      ...tabViewCtx,
-      onSelect,
-      onClose,
+      ...useTabView(),
     };
   },
 };

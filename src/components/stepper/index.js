@@ -1,9 +1,9 @@
 import KwStepper from './KwStepper.vue';
 import KwStep from './KwStep.vue';
-import KwStepperNavigation from './KwStepperNavigation.vue';
+import KwStepPanel from './KwStepPanel.vue';
 
 export {
   KwStepper,
   KwStep,
-  KwStepperNavigation,
+  KwStepPanel,
 };

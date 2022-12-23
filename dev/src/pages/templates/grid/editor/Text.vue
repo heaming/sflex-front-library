@@ -76,6 +76,8 @@ function initGrd(data, view) {
   data.setFields(fields);
   view.setColumns(columns);
   view.editOptions.editable = true;
+  view.checkBar.visible = true;
+  view.rowIndicator.visible = true;
 
   data.setRows([
     {

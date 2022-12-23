@@ -3,11 +3,16 @@
     class="kw-tooltip"
     v-bind="styleClassAttrs"
     :model-value="value"
+    :scroll-target="scrollTarget"
+    :target="target"
+    :delay="delay"
+    :hide-delay="hideDelay"
     :max-height="maxHeight"
     :max-width="maxWidth"
     :anchor="anchor"
     :self="self"
     :offset="offset"
+    :transition-duration="0"
     @update:model-value="onUpdateValue"
   >
     <slot />
@@ -22,34 +27,21 @@ export default {
   inheritAttrs: false,
 
   props: {
-    modelValue: {
-      type: Boolean,
-      default: undefined,
-    },
-    maxHeight: {
-      type: String,
-      default: undefined,
-    },
-    maxWidth: {
-      type: String,
-      default: undefined,
-    },
-    anchor: {
-      type: String,
-      default: undefined,
-    },
-    self: {
-      type: String,
-      default: undefined,
-    },
-    offset: {
-      type: Array,
-      default: undefined,
-    },
-    showWhenEllipsised: {
-      type: Boolean,
-      default: false,
-    },
+    // custom props
+    showWhenEllipsised: { type: Boolean, default: false },
+
+    // fallthrough props
+    modelValue: { type: Boolean, default: undefined },
+    scrollTarget: { type: [Element, String], default: undefined },
+    target: { type: [Boolean, String], default: undefined },
+    noParentEvent: { type: Boolean, default: false },
+    delay: { type: Number, default: 100 },
+    hideDelay: { type: Number, default: 0 },
+    maxHeight: { type: String, default: undefined },
+    maxWidth: { type: String, default: undefined },
+    anchor: { type: String, default: undefined },
+    self: { type: String, default: undefined },
+    offset: { type: Array, default: undefined },
   },
 
   emits: [
