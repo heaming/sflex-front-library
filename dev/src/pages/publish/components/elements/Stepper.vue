@@ -126,73 +126,61 @@
         Heading text with stepper
       </h3>
       <p class="kw-guide-description">
-        This is h2 heading text with stepper.<br>
-        <b>div class="kw-guide-example"</b> wrap the all content and title to use stepper.<br>
-        First example, first kw-step has content. and <b>const stepInitNum = ref(1)</b><br>
-        Second example, Second kw-step has content. and <b>const stepInitNum = ref(2)</b><br>
+        <b>Updated Content!</b><br>
+
+        Add Props '<b>heading-text</b> ' in kw-stepper. This will be created heading text automatically.<br>
+        Make sure to wrap the current content by <b>kw-step-panel</b> after using kw-step.<br>
+        And add <b>name="1"</b> in <b>kw-step-panel</b>( It's for current active page number)<br>
         It means every content don't need to be included in one page except of active step <br>
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <div class="kw-stepper-headingtext">
-            <kw-stepper v-model="stepInitNum">
-              <kw-step
-                :name="1"
-                title="step1"
-                :done="stepInitNum > 1"
-                prefix="1"
-              >
-                <h2>title1</h2>
-                <kw-form :cols="2">
-                  <h3>Form</h3>
-                  <kw-form-row>
-                    <kw-form-item
-                      label="기준상품코드"
-                      required
-                      hint-message="abc"
-                    >
-                      <kw-input
-                        placeholder="기준상품코드"
-                        rules="required"
-                      />
-                    </kw-form-item>
-                    <kw-form-item
-                      label="기준상품명"
-                      required
-                      hint-message="abc"
-                    >
-                      <kw-input placeholder="입력" />
-                    </kw-form-item>
-                  </kw-form-row>
-                </kw-form>
-              </kw-step>
-              <kw-step
-                :name="2"
-                title="step2"
-                :done="stepInitNum > 2"
-                prefix="2"
-              >
-                <h2>Step2 title</h2>
-                <h3>Form</h3>
-                <kw-form>
-                  <kw-form-row>
-                    <kw-form-item label="new">
-                      <kw-input />
-                    </kw-form-item>
-                    <kw-form-item label="new">
-                      <kw-input />
-                    </kw-form-item>
-                  </kw-form-row>
-                </kw-form>
-              </kw-step>
-              <kw-step
-                :name="3"
-                title="step3"
-                :done="stepInitNum > 3"
-                prefix="3"
-              />
-            </kw-stepper>
-          </div>
+          <kw-stepper
+            v-model="stepInitNum"
+            heading-text
+          >
+            <kw-step
+              :name="1"
+              title="step1"
+              :done="stepInitNum > 1"
+              prefix="1"
+            />
+            <kw-step
+              :name="2"
+              title="step2"
+              :done="stepInitNum > 2"
+              prefix="2"
+            />
+            <kw-step
+              :name="3"
+              title="step3"
+              :done="stepInitNum > 3"
+              prefix="3"
+            />
+
+            <kw-step-panel :name="1">
+              <h3>Form</h3>
+              <kw-form :cols="2">
+                <kw-form-row>
+                  <kw-form-item
+                    label="기준상품코드"
+                    required
+                  >
+                    <kw-input
+                      placeholder="기준상품코드"
+                      rules="required"
+                    />
+                  </kw-form-item>
+                  <kw-form-item
+                    label="기준상품명"
+                    required
+                  >
+                    <kw-input placeholder="입력" />
+                  </kw-form-item>
+                </kw-form-row>
+              </kw-form>
+            </kw-step-panel>
+          </kw-stepper>
         </div>
         <guide-code-view
           :code-value="[headingStepper, testScript]"
@@ -205,66 +193,40 @@
           <div class="kw-stepper-headingtext">
             <kw-stepper
               v-model="stepInitNum2"
+              heading-text
             >
               <kw-step
                 :name="1"
                 title="step1"
                 :done="stepInitNum2 > 1"
                 prefix="1"
-              >
-                <h2>title1</h2>
-                <kw-form :cols="2">
-                  <h3>Form</h3>
-                  <kw-form-row>
-                    <kw-form-item
-                      label="기준상품코드"
-                      required
-                      hint-message="abc"
-                    >
-                      <kw-input
-                        placeholder="기준상품코드"
-                        rules="required"
-                      />
-                    </kw-form-item>
-                    <kw-form-item
-                      label="기준상품명"
-                      required
-                      hint-message="abc"
-                    >
-                      <kw-input placeholder="입력" />
-                    </kw-form-item>
-                  </kw-form-row>
-                </kw-form>
-              </kw-step>
+              />
               <kw-step
                 :name="2"
                 title="step2"
                 :done="stepInitNum2 > 2"
                 prefix="2"
-              >
-                <h2>Step2 title</h2>
-                <h3>Form</h3>
-                <kw-form>
-                  <kw-form-row>
-                    <kw-form-item
-                      label="new"
-                    >
-                      <kw-input />
-                    </kw-form-item>
-                    <kw-form-item
-                      label="new"
-                    >
-                      <kw-input />
-                    </kw-form-item>
-                  </kw-form-row>
-                </kw-form>
-              </kw-step>
+              />
               <kw-step
                 :name="3"
                 title="step3"
                 :done="stepInitNum2 > 3"
                 prefix="3"
               />
+
+              <kw-step-panel :name="2">
+                <h3>Form</h3>
+                <kw-form>
+                  <kw-form-row>
+                    <kw-form-item label="new">
+                      <kw-input />
+                    </kw-form-item>
+                    <kw-form-item label="new">
+                      <kw-input />
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </kw-step-panel>
             </kw-stepper>
           </div>
         </div>
@@ -294,7 +256,7 @@
           >
             <kw-step
               :name="1"
-              :title="`미팅참석 집계`"
+              :title="`미팅참석\n집계`"
               :done="stepInitNum2 > 1"
               prefix="1"
             />
@@ -382,7 +344,9 @@
       </h3>
       <p class="kw-guide-description">
         The example for stepper with grid in content.<br>
-        The content(Grid in this example) should be wrapped the active <b>kw-step</b>'s tag<br>
+        The content(Grid in this example) should be wrapped
+        <b>kw-step-panel</b>'s tag and put active step number as
+        <b>:name="2"</b> in kw-step-panel<br>
         <router-link to="/Publish/Components/Elements/Elements/Grid">
           The reference page for Grid
         </router-link>
@@ -395,7 +359,7 @@
           >
             <kw-step
               :name="1"
-              :title="`미팅참석 집계`"
+              :title="`미팅참석\n집계`"
               :done="stepInitNum2 > 1"
               prefix="1"
             />
@@ -404,18 +368,7 @@
               :title="`수수료\n생성`"
               :done="stepInitNum2 > 2"
               prefix="2"
-            >
-              <kw-action-top>
-                <template #left>
-                  <span>총</span>
-                  <span class="accent pl4">156</span>
-                </template>
-              </kw-action-top>
-              <kw-grid
-                :visible-rows="10"
-                @init="initGrid"
-              />
-            </kw-step>
+            />
             <kw-step
               :name="3"
               :title="`세금\n공제`"
@@ -476,6 +429,18 @@
               :done="stepInitNum2 > 12"
               prefix="12"
             />
+            <kw-step-panel :name="2">
+              <kw-action-top>
+                <template #left>
+                  <span>총</span>
+                  <span class="accent pl4">156</span>
+                </template>
+              </kw-action-top>
+              <kw-grid
+                :visible-rows="10"
+                @init="initGrid"
+              />
+            </kw-step-panel>
           </kw-stepper>
         </div>
         <guide-code-view
@@ -532,101 +497,92 @@ const stepInitNum = ref(1);
 const testScript2 = `
 const stepInitNum = ref(2);
 `;
-const headingStepper = `
-<div class="kw-stepper-headingtext">
-  <kw-stepper
-    v-model="stepInitNum"
-  >
-  <!-- This is only first step's content -->
-    <kw-step
-      :name="1"
-      title="step1"
-      :done="stepInitNum > 1"
-      prefix="1"
-    >
-      <h2>Step1 title</h2>
-      <kw-form :cols="2">
-        <h3>Form</h3>
-        <kw-form-row>
-          <kw-form-item
-            label="기준상품코드"
-            required
-            hint-message="abc"
-          >
-            <kw-input
-              placeholder="기준상품코드"
-              rules="required"
-            />
-          </kw-form-item>
-          <kw-form-item
-            label="기준상품명"
-            required
-            hint-message="abc"
-          >
-            <kw-input placeholder="입력" />
-          </kw-form-item>
-        </kw-form-row>
-      </kw-form>
-    </kw-step>
-    <kw-step
-      :name="2"
-      title="step2"
-      :done="stepInitNum > 2"
-      prefix="2"
-    />
-    <kw-step
-      :name="3"
-      title="step3"
-      :done="stepInitNum > 3"
-      prefix="3"
-    />
-  </kw-stepper>
-</div>
-`;
 const headingStepper2 = `
-<div class="kw-stepper-headingtext">
-  <kw-stepper
-    ref="stepper"
-    v-model="stepInitNum"
-  >
-    <kw-step
-      :name="1"
-      title="step1"
-      :done="stepInitNum > 1"
-      prefix="1"
-    />
-    <!-- This is only Second step's content -->
-    <kw-step
-      :name="2"
-      title="step2"
-      :done="stepInitNum > 2"
-      prefix="2"
-    >
-      <h2>Step2 title</h2>
-      <h3>Form</h3>
-      <kw-form>
-        <kw-form-row>
-          <kw-form-item
-            label="new"
-          >
-            <kw-input />
-          </kw-form-item>
-          <kw-form-item
-            label="new"
-          >
-            <kw-input />
-          </kw-form-item>
-        </kw-form-row>
-      </kw-form>
-    </kw-step>
-    <kw-step
-      :name="3"
-      title="step3"
-      :done="stepInitNum > 3"
-      prefix="3"
-    />
-  </kw-stepper>
-</div>
+<kw-stepper
+  v-model="stepInitNum"
+  heading-text
+>
+  <kw-step
+    :name="1"
+    title="step1"
+    :done="stepInitNum > 1"
+    prefix="1"
+  />
+  <kw-step
+    :name="2"
+    title="step2"
+    :done="stepInitNum > 2"
+    prefix="2"
+  />
+  <kw-step
+    :name="3"
+    title="step3"
+    :done="stepInitNum > 3"
+    prefix="3"
+  />
+
+  <kw-step-panel :name="2">
+    <h3>Form</h3>
+    <kw-form>
+      <kw-form-row>
+        <kw-form-item label="new">
+          <kw-input />
+        </kw-form-item>
+        <kw-form-item label="new">
+          <kw-input />
+        </kw-form-item>
+      </kw-form-row>
+    </kw-form>
+  </kw-step-panel>
+</kw-stepper>
+`;
+const headingStepper = `
+<kw-stepper
+  v-model="stepInitNum"
+  heading-text
+>
+  <kw-step
+    :name="1"
+    title="step1"
+    :done="stepInitNum > 1"
+    prefix="1"
+  />
+  <kw-step
+    :name="2"
+    title="step2"
+    :done="stepInitNum > 2"
+    prefix="2"
+  />
+  <kw-step
+    :name="3"
+    title="step3"
+    :done="stepInitNum > 3"
+    prefix="3"
+  />
+
+  <kw-step-panel :name="1">
+    <h3>Form</h3>
+    <kw-form :cols="2">
+      <kw-form-row>
+        <kw-form-item
+          label="기준상품코드"
+          required
+        >
+          <kw-input
+            placeholder="기준상품코드"
+            rules="required"
+          />
+        </kw-form-item>
+        <kw-form-item
+          label="기준상품명"
+          required
+        >
+          <kw-input placeholder="입력" />
+        </kw-form-item>
+      </kw-form-row>
+    </kw-form>
+  </kw-step-panel>
+</kw-stepper>
 `;
 const testCodeLarge = `
 <kw-stepper
@@ -726,18 +682,7 @@ const stepperGrid = `
     :title="\`수수료\\n생성\`"
     :done="stepInitNum > 2"
     prefix="2"
-  >
-  <kw-action-top>
-    <template #left>
-      <span>총</span>
-      <span class="accent pl4">156</span>
-    </template>
-  </kw-action-top>
-  <kw-grid
-    :visible-rows="10"
-    @init="initGrid"
   />
-  </kw-step>
   <kw-step
     :name="3"
     :title="\`세금\\n공제\`"
@@ -798,6 +743,18 @@ const stepperGrid = `
     :done="stepInitNum > 12"
     prefix="12"
   />
+  <kw-step-panel :name="2">
+    <kw-action-top>
+      <template #left>
+        <span>총</span>
+        <span class="accent pl4">156</span>
+      </template>
+    </kw-action-top>
+    <kw-grid
+      :visible-rows="10"
+      @init="initGrid"
+    />
+  </kw-step-panel>
 </kw-stepper>
 `;
 
@@ -805,6 +762,10 @@ const stepInitNum = ref(1);
 const stepInitNum2 = ref(2);
 
 const guideHistory = [
+  {
+    timestamp: '2022-12-23',
+    text: 'Add kw-step-panel',
+  },
   {
     timestamp: '2022-10-21',
     text: 'Add stepper with title on the bottm',
