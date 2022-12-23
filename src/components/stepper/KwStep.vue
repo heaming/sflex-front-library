@@ -27,6 +27,7 @@ export default {
 
   props: {
     // customize props
+    headingText: { type: String, default: undefined },
     tooltip: { type: String, default: undefined },
 
     // fall through props
