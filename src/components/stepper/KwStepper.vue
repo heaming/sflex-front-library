@@ -28,7 +28,6 @@
       <component
         :is="header"
         v-for="header of headers"
-        id="test"
         :key="header.props.name"
         :prefix="header.props.icon ? undefined : header.props.prefix"
       />

@@ -61,8 +61,8 @@
           :prefix="n"
           :title="`스탭${n}\n줄바꿈`"
           :done="selected > n"
+          :done-icon="selected - 1 === n ? 'retry' : undefined"
           :disable="disableYn === 'Y'"
-          :icon="n === 2 ? 'close' : undefined"
           :tooltip="`스탭${n}\n줄바꿈`"
         />
 
