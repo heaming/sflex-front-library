@@ -616,6 +616,17 @@ body.mobile:not(.tablet) {
           min-height: 44px !important;
         }
       }
+
+      &--disabled {
+        .q-field__control {
+          color: $kw-field-color-disable;
+
+          &::before {
+            background-color: transparent;
+            border-color: $line-bg;
+          }
+        }
+      }
     }
   }
 

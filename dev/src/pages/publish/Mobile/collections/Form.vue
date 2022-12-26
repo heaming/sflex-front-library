@@ -6,9 +6,6 @@
     <p class="kw-guide-description">
       This is the form example for mobile.
     </p>
-    <guide-history-view
-      :items="guideHistory"
-    />
     <div class="kw-guide-section">
       <h3
         id="default"
@@ -78,10 +75,10 @@
           </h3>
           <kw-input
             label="출발지"
-            placeholder="입력해주세요"
           />
           <kw-select
             label="운행목적"
+            :options="['a', 'b']"
             class="pt20"
           />
           <kw-date-picker
@@ -121,7 +118,6 @@
         <div class="kw-guide-example">
           <kw-field-wrap
             label="주민등록번호"
-            class="pt20"
           >
             <kw-input grow />
             <span>-</span>
@@ -136,13 +132,108 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        id="required"
+        class="kw-guide-title"
+      >
+        required
+      </h3>
+      <p class="kw-guide-description">
+        If you label with <b>*</b> special symbol <br> please add prop required
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-input
+            label="출발지"
+            required
+          />
+          <kw-field-wrap
+            label="주민등록번호"
+            class="pt20"
+            required
+          >
+            <kw-input
+              grow
+            />
+            <span>-</span>
+            <kw-input
+              grow
+            />
+          </kw-field-wrap>
+          <guide-code-view
+            :code-value="requiredCode"
+            lang="vue"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="Disable"
+        class="kw-guide-title"
+      >
+        Disable
+      </h3>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-input
+            label="출발지"
+            disable
+          />
+          <kw-field-wrap
+            label="주민등록번호"
+            class="pt20"
+          >
+            <kw-input
+              disable
+              grow
+            />
+            <span>-</span>
+            <kw-input
+              disable
+              grow
+            />
+          </kw-field-wrap>
+          <guide-code-view
+            :code-value="disableCode"
+            lang="vue"
+          />
+        </div>
+      </q-card>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="AddressExample"
         class="kw-guide-title"
       >
         Address form type
       </h3>
       <p class="kw-guide-description">
-        please add <em>&lt; zwcm-post-code /&gt;</em> in kw-form-item tag
+        please add <em>&lt; zwcm-post-code /&gt;</em>
+        <q-card>
+          <div class="kw-guide-example">
+            <img
+              src="~~dev/assets/images/example_mobile_address.png"
+              alt="address example"
+              style="width: 65%;"
+            >
+          </div>
+
+          <guide-code-view
+            :code-value="AddressCode"
+            lang="vue"
+          />
+        </q-card>
+      </p>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="AddressExample"
+        class="kw-guide-title"
+      >
+        Email form type
+      </h3>
+      <p class="kw-guide-description">
+        please add <em>&lt; zwcm-email-address /&gt;</em>
         <q-card>
           <div class="kw-guide-example">
             <img
@@ -166,10 +257,10 @@
 const example = `
 <kw-input
   label="출발지"
-  placeholder="입력해주세요"
 />
 <kw-select
   label="운행목적"
+  :options="['a', 'b']"
   class="pt20"
 />
 <kw-date-picker
@@ -192,7 +283,6 @@ const example = `
 const combination = `
 <kw-field-wrap
   label="주민등록번호"
-  class="pt20"
 >
   <kw-input grow />
   <span>-</span>
@@ -200,17 +290,55 @@ const combination = `
 </kw-field-wrap>
 `;
 
-const AddressCode = `
-<zwcm-post-code
-  label="주소"
+const requiredCode = `
+<kw-input
+  label="출발지"
+  required
+/>
+<kw-field-wrap
+  label="주민등록번호"
   class="pt20"
+  required
+>
+  <kw-input
+    grow
+  />
+  <span>-</span>
+  <kw-input
+    grow
+  />
+</kw-field-wrap>
+`;
+const disableCode = `
+<kw-input
+  label="출발지"
+  disable
+/>
+<kw-field-wrap
+  label="주민등록번호"
+  class="pt20"
+>
+  <kw-input
+    disable
+    grow
+  />
+  <span>-</span>
+  <kw-input
+    disable
+    grow
+  />
+</kw-field-wrap>
+`;
+
+const AddressCode = `
+<zwcm-email-address
+  label="이메일"
+  required
+/>
+<!-- required  type-->
+<zwcm-email-address
+  label="이메일"
 />
 `;
 
-const guideHistory = [
-  {
-    timestamp: '2022-11-2',
-    text: 'Mobile example',
-  },
-];
 </script>
