@@ -25,7 +25,7 @@ export default {
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
 
     const { applicationId, menuUid } = currentRoute.value.meta;
-    const firstApplicationId = getters['meta/getApps'][0]?.applicationId;
+    const firstApplicationId = getters['meta/getApps'][2]?.applicationId;
 
     commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
     commit('app/setSelectedGlobalMenuKey', menuUid || null);
