@@ -946,6 +946,16 @@ $unit: px;
       line-height: 1.43;
     }
   }
+
+  &--bigger {
+    li {
+      padding-top: 8px;
+
+      span {
+        font-size: 16px;
+      }
+    }
+  }
 }
 
 .filter-box {

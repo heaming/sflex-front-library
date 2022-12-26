@@ -1,119 +1,167 @@
 <template>
-  <q-stepper
-    ref="quasarRef"
+  <div
+    :class="stepperClass"
     v-bind="styleClassAttrs"
-    class="kw-stepper"
-    :dark="dark"
-    :model-value="modelValue"
-    :keep-alive="keepAlive"
-    :keep-alive-include="keepAliveInclude"
-    :keep-alive-exclude="keepAliveExclude"
-    :keep-alive-max="keepAliveMax"
-    :animated="animated"
-    :infinite="infinite"
-    :swipeable="swipeable"
-    :vertical="vertical"
-    :transition-prev="transitionPrev"
-    :transition-next="transitionNext"
-    :transition-duration="transitionDuration"
-    :flat="flat"
-    :bordered="bordered"
-    :alternative-labels="alternativeLabels"
-    :header-nav="headerNav"
-    :contracted="contracted"
-    :header-class="headerClass"
-    :inactive-color="inactiveColor"
-    :inactive-icon="inactiveIcon"
-    :done-icon="doneIcon"
-    :done-color="doneColor"
-    :active-icon="activeIcon"
-    :active-color="activeColor"
-    :error-icon="errorIcon"
-    :error-color="errorColor"
-    @update:model-value="$emit('update:modelValue', $event)"
-    @before-transition="$emit('before-transition', $event)"
-    @transition="$emit('transition', $event)"
   >
-    <slot />
+    <span
+      v-if="useHeading"
+      class="kw-stepper__title"
+    >{{ activeHeader?.props.headingText || activeHeader?.props.title }}</span>
 
-    <template #navigation>
-      <slot name="navigation" />
-    </template>
+    <q-stepper
+      :id="stepperId"
+      ref="stepperRef"
+      :model-value="modelValue"
+      :header-class="headerClass"
+      :header-nav="headerNav"
+      :alternative-labels="alternativeLabels"
+      :inactive-color="inactiveColor"
+      :inactive-icon="inactiveIcon"
+      :done-icon="doneIcon"
+      :done-color="doneColor"
+      :active-icon="activeIcon"
+      :active-color="activeColor"
+      :error-icon="errorIcon"
+      :error-color="errorColor"
+      @update:model-value="$emit('update:modelValue', $event)"
+    >
+      <q-step
+        v-for="header of headers"
+        :key="header.props.name"
+        v-bind="getHeaderProps(header)"
+      />
+    </q-stepper>
 
-    <template #message>
-      <slot name="message" />
-    </template>
-  </q-stepper>
+    <kw-tooltip
+      v-for="tooltip of tooltips"
+      :key="tooltip.key"
+      :target="tooltip.target"
+    >
+      {{ tooltip.content }}
+    </kw-tooltip>
+  </div>
+  <div
+    v-touch-swipe.mouse="onSwipe"
+    class="kw-stepper__panels q-tab-panels q-panel-parent"
+  >
+    <transition
+      v-for="panel of panels"
+      :key="panel.props.name"
+      v-bind="panelTransition"
+    >
+      <keep-alive>
+        <component
+          :is="panel"
+          v-if="isActivePanel(panel)"
+          @touchstart="onBeforeSwipe"
+          @mousedown="onBeforeSwipe"
+        />
+      </keep-alive>
+    </transition>
+  </div>
 </template>
 
 <script>
+import { omit, kebabCase } from 'lodash-es';
+import { uid } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import usePanels, { usePanelsProps, usePanelsEmits } from '../../composables/private/usePanels';
+import { getNormalizedVNodes } from '../../utils/private/vm';
+
+function getNormalizedHeaders(slots) {
+  const vnodes = slots.default();
+  const normalizedVNodes = getNormalizedVNodes(vnodes);
+
+  const isValidStep = (v) => v.type.name === 'KwStep' && v.props?.name !== undefined;
+  const panels = normalizedVNodes.filter(isValidStep);
+
+  return panels;
+}
 
 export default {
   name: 'KwStepper',
   inheritAttrs: false,
-  props: {
-    // customize props
 
-    // fall through props
-    dark: { type: Boolean, default: undefined },
-    modelValue: { type: [Object, Array, Number, String, Boolean, Function], required: true },
-    keepAlive: { type: Boolean, default: true },
-    keepAliveInclude: { type: [String, Array, RegExp], default: undefined },
-    keepAliveExclude: { type: [String, Array, RegExp], default: undefined },
-    keepAliveMax: { type: Number, default: undefined },
-    animated: { type: Boolean, default: undefined },
-    infinite: { type: Boolean, default: undefined },
-    swipeable: { type: Boolean, default: undefined },
-    vertical: { type: Boolean, default: undefined },
-    transitionPrev: { type: String, default: 'fade' },
-    transitionNext: { type: String, default: 'fade' },
-    transitionDuration: { type: [String, Number], default: 0 },
-    flat: { type: Boolean, default: undefined },
-    bordered: { type: Boolean, default: undefined },
-    alternativeLabels: { type: Boolean, default: undefined },
-    headerNav: { type: Boolean, default: undefined },
-    contracted: { type: Boolean, default: undefined },
-    headerClass: { type: String, default: undefined },
+  props: {
+    ...omit(usePanelsProps, ['vertical']),
+
+    // customize props
+    headingText: { type: Boolean, default: false },
+
+    // fallthrough props
+    headerClass: { type: Boolean, default: undefined },
+    headerNav: { type: Boolean, default: false },
+    alternativeLabels: { type: Boolean, default: false },
     inactiveColor: { type: String, default: undefined },
     inactiveIcon: { type: String, default: undefined },
-    doneIcon: { type: String, default: 'checked_stepper' },
-    doneColor: { type: String, default: undefined },
     activeIcon: { type: String, default: 'none' },
     activeColor: { type: String, default: undefined },
+    doneIcon: { type: String, default: 'checked_stepper' },
+    doneColor: { type: String, default: undefined },
     errorIcon: { type: String, default: undefined },
     errorColor: { type: String, default: undefined },
   },
+
   emits: [
-    'update:modelValue',
-    'before-transition',
-    'transition',
+    ...usePanelsEmits,
   ],
 
-  setup() {
-    const quasarRef = ref();
+  setup(props) {
+    const useHeading = computed(() => props.headingText === true && props.alternativeLabels === false);
 
-    const { styleClassAttrs } = useInheritAttrs();
+    const stepperId = `s_${uid()}`;
+    const stepperRef = ref();
+    const stepperClass = computed(() => ({
+      'kw-stepper': true,
+      'kw-stepper--heading-text': useHeading.value,
+    }));
 
-    function next() {
-      quasarRef.value.next();
-    }
+    const slots = useSlots();
+    const headers = computed(() => getNormalizedHeaders(slots));
+    const activeHeader = computed(() => headers.value.find((e) => e.props.name === props.modelValue));
 
-    function previous() {
-      quasarRef.value.previous();
-    }
+    const getHeaderProps = (header) => {
+      const headerProps = {};
+      const propKeys = Object.keys(header.type.props);
 
-    function goTo() {
-      quasarRef.value.goTo();
-    }
+      propKeys.forEach((key) => {
+        headerProps[key] = (header.props[key] || header.props[kebabCase(key)]) ?? header.type.props[key].default;
+      });
+
+      headerProps.prefix = (
+        headerProps.icon
+        || (headerProps.activeIcon && headerProps.name === props.modelValue)
+        || (headerProps.errorIcon && headerProps.error)
+      ) ? undefined : headerProps.prefix;
+
+      return headerProps;
+    };
+
+    const tooltips = computed(() => {
+      const _tooltips = [];
+      headers.value.forEach((e, i) => {
+        if (!!e.props.tooltip && !e.props.disable) {
+          _tooltips.push({
+            key: e.props.name,
+            target: `#${stepperId} > .q-stepper__header > .q-stepper__tab:nth-child(${i + 1})`,
+            content: e.props.tooltip,
+          });
+        }
+      });
+      return _tooltips;
+    });
 
     return {
-      quasarRef,
-      styleClassAttrs,
-      next,
-      previous,
-      goTo,
-
+      ...useInheritAttrs(),
+      ...usePanels('KwStepPanel'),
+      useHeading,
+      stepperId,
+      stepperRef,
+      stepperClass,
+      headers,
+      activeHeader,
+      getHeaderProps,
+      tooltips,
     };
   },
 

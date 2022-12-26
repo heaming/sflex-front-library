@@ -1,7 +1,5 @@
 <template>
   <q-step
-    class="kw-step"
-    v-bind="styleClassAttrs"
     :name="name"
     :disable="disable"
     :icon="icon"
@@ -9,31 +7,31 @@
     :title="title"
     :caption="caption"
     :prefix="prefix"
-    :done-icon="doneIcon"
-    :done-color="doneColor"
     :active-icon="activeIcon"
     :active-color="activeColor"
+    :done-icon="doneIcon"
+    :done-color="doneColor"
     :error-icon="errorIcon"
     :error-color="errorColor"
-    :header-nav="headerNav"
     :done="done"
     :error="error"
-  >
-    <slot />
-  </q-step>
+    :header-nav="headerNav"
+  />
 </template>
 
 <script>
-import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
   name: 'KwStep',
   inheritAttrs: false,
+
   props: {
     // customize props
+    headingText: { type: String, default: undefined },
+    tooltip: { type: String, default: undefined },
 
     // fall through props
-    name: { type: String, required: true },
+    name: { type: [String, Number], default: undefined },
     disable: { type: Boolean, default: undefined },
     icon: { type: String, default: undefined },
     color: { type: String, default: undefined },
@@ -46,15 +44,14 @@ export default {
     activeColor: { type: String, default: undefined },
     errorIcon: { type: String, default: undefined },
     errorColor: { type: String, default: undefined },
-    headerNav: { type: Boolean, default: true },
     done: { type: Boolean, default: undefined },
     error: { type: Boolean, default: undefined },
+    headerNav: { type: Boolean, default: true },
   },
-  setup() {
-    const { styleClassAttrs } = useInheritAttrs();
 
+  setup() {
     return {
-      styleClassAttrs,
+
     };
   },
 

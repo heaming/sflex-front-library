@@ -30,7 +30,7 @@ function getPermissionKeys(permissionValue) {
   return permissionKeys;
 }
 
-function cacheHasPermissions(pageContext) {
+function cachePagePermissions(pageContext) {
   const { pageId } = pageContext;
   const permissionValue = pageContext.permissions;
   cachedPagePermissionKeys[pageId] = getPermissionKeys(permissionValue);
@@ -44,7 +44,7 @@ export function hasPermissionKeyInPage(permissionKey, pageContext) {
   if (pageContext) {
     const { pageId } = pageContext;
     if (cachedPagePermissionKeys[pageId] === undefined) {
-      cacheHasPermissions(pageContext);
+      cachePagePermissions(pageContext);
     }
 
     return cachedPagePermissionKeys[pageId].includes(permissionKey);

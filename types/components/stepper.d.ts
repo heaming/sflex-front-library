@@ -1,43 +1,65 @@
-import { ComponentPublicInstance } from 'vue';
+import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor, QStepperNavigationProps, QStepperNavigationSlots, QStepperProps, QStepperSlots, QStepProps, QStepSlots } from 'quasar';
+import { UsePanelProps, UsePanelsProps } from './private/usePanels';
 
-type FallThroughStepperProps = 'dark' | 'modelValue' | 'keepAlive' | 'keepAliveInclude' | 'keepAliveExclude' | 'keepAliveMax' | 'animated' | 'infinite' | 'swipeable' | 'vertical' | 'transitionPrev' | 'transitionNext' | 'transitionDuration' | 'flat' | 'bordered' | 'alternativeLabels' | 'headerNav' | 'contracted' | 'headerClass' | 'inactiveColor' | 'inactiveIcon' | 'doneIcon' | 'doneColor' | 'activeIcon' | 'activeColor' | 'errorIcon' | 'errorColor' | 'onUpdate:modelValue' | 'onBeforeTransition' | 'onTransition';
+type FallThroughStepperProps = 'alternativeLabels' | 'headerNav' | 'headerClass' | 'inactiveColor' | 'inactiveIcon' | 'doneIcon' | 'doneColor' | 'activeIcon' | 'activeColor' | 'errorIcon' | 'errorColor';
 
 // KwStepper
-interface KwStepperProps extends Pick<QStepperProps, FallThroughStepperProps> {}
-interface KwStepperSlots extends QStepperSlots {}
+interface KwStepperProps extends Pick<QStepperProps, FallThroughStepperProps>, UsePanelsProps {}
+interface KwStepperSlots {
+  /**
+   * 기본 컨텐츠 영역
+   */
+  default: () => VNode[];
+}
 export interface KwStepper extends ComponentPublicInstance<KwStepperProps> {
   /**
-   * Go to next panel
+   * 다음 패널로 이동
    */
   next: () => void;
+
   /**
-   * Go to previous panel
+   * 이전 패널로 이동
    */
   previous: () => void;
+
   /**
-   * Go to specific panel
-   * @param panelName Panel's name, which may be a String or Number; Number does not refers to panel index, but to its name, which may be an Integer
+   * 해당하는 패널로 이동
    */
-  goTo: (panelName: string | number) => void;
+  goTo: (panelName: string) => void;
 }
 
 type FallThroughStepProps = 'name' | 'disable' | 'icon' | 'color' | 'title' | 'caption' | 'prefix' | 'doneIcon' | 'doneColor' | 'activeIcon' | 'activeColor' | 'errorIcon' | 'errorColor' | 'headerNav' | 'done' | 'error';
 
 // KwStep
-interface KwStepProps extends Pick<QStepProps, FallThroughStepProps> {}
+interface KwStepProps extends Pick<QStepProps, FallThroughStepProps> {
+  /**
+   * 표시할 heading text, 지정하지 않으면 title이 나온다
+   */
+  headingText?: string;
+
+  /**
+   * 표시할 툴팁 컨텐츠
+   */
+  tooltip?: string;
+}
 interface KwStepSlots extends QStepSlots {}
 export interface KwStep extends ComponentPublicInstance<KwStepProps> {}
 
-// KwStepperNavigation
-interface KwStepperNavigationProps extends QStepperNavigationProps {}
-interface KwStepperNavigationSlots extends QStepperNavigationSlots {}
-export interface KwStepperNavigation extends ComponentPublicInstance<KwStepperNavigationProps> {}
+// KwStepPanel
+interface KwStepPanelProps extends UsePanelProps {}
+interface KwStepPanelSlots {
+  /**
+   * 기본 컨텐츠 영역
+   */
+  default: () => VNode[];
+}
+export interface KwStepPanel extends ComponentPublicInstance<KwStepPanelProps> {}
 
 declare module '@vue/runtime-core' {
   interface GlobalComponents {
     KwStepper: GlobalComponentConstructor<KwStepperProps, KwStepperSlots>;
     KwStep: GlobalComponentConstructor<KwStepProps, KwStepSlots>;
-    KwStepperNavigation: GlobalComponentConstructor<KwStepperNavigationProps, KwStepperNavigationSlots>;
+    KwStepPanel: GlobalComponentConstructor<KwStepPanelProps, KwStepPanelSlots>;
   }
 }

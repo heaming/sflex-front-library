@@ -214,7 +214,7 @@
               </div>
               <div class="col-auto row">
                 <p class="kw-fc--black1 text-right ml16">
-                  <span>33,624 / 원</span>
+                  <span>33,624원</span>
                 </p>
               </div>
             </div>
@@ -280,10 +280,10 @@
               </div>
               <div class="col-auto row">
                 <p class="kw-fc--black1 text-right">
-                  <span>33,624 / 건</span>
+                  <span>33,624건</span>
                 </p>
                 <p class="kw-fc--black1 text-right ml16">
-                  <span>33,624 / 원</span>
+                  <span>33,624원</span>
                 </p>
               </div>
             </div>
@@ -294,10 +294,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -307,10 +307,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -320,10 +320,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -333,23 +333,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -359,23 +346,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -385,23 +359,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -411,23 +372,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -437,23 +385,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -463,23 +398,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -489,23 +411,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -515,23 +424,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <p class="kw-fc--black3">
-                  <span>11:전집할부</span>
-                </p>
-                <div class="col row">
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
-                  </p>
-                  <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -541,10 +437,10 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -554,7 +450,111 @@
                 </p>
                 <div class="col row">
                   <p class="kw-fc--black1">
-                    <span>2,360,676,770 / 원</span>
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p class="kw-fc--black3">
+                  <span>11:전집할부</span>
+                </p>
+                <div class="col row">
+                  <p class="kw-fc--black1">
+                    <span>2,360,676,770원</span>
                   </p>
                 </div>
               </li>
@@ -683,7 +683,7 @@ const case01 = `
     </div>
     <div class="col-auto row">
       <p class="kw-fc--black1 text-right ml16">
-        <span>33,624 / 원</span>
+        <span>33,624원</span>
       </p>
     </div>
   </div>
@@ -731,10 +731,10 @@ const case02 = `
     </div>
     <div class="col-auto row">
       <p class="kw-fc--black1 text-right">
-        <span>33,624 / 건</span>
+        <span>33,624건</span>
       </p>
       <p class="kw-fc--black1 text-right ml16">
-        <span>33,624 / 원</span>
+        <span>33,624원</span>
       </p>
     </div>
   </div>
@@ -745,10 +745,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -758,10 +758,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -771,10 +771,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -784,23 +784,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -810,23 +797,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -836,23 +810,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -862,23 +823,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -888,23 +836,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -914,23 +849,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -940,23 +862,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -966,23 +875,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-      </div>
-    </li>
-    <li>
-      <p class="kw-fc--black3">
-        <span>11:전집할부</span>
-      </p>
-      <div class="col row">
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
-        </p>
-        <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -992,10 +888,10 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -1005,7 +901,111 @@ const case02 = `
       </p>
       <div class="col row">
         <p class="kw-fc--black1">
-          <span>2,360,676,770 / 원</span>
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
+        </p>
+      </div>
+    </li>
+    <li>
+      <p class="kw-fc--black3">
+        <span>11:전집할부</span>
+      </p>
+      <div class="col row">
+        <p class="kw-fc--black1">
+          <span>2,360,676,770원</span>
         </p>
       </div>
     </li>
@@ -1014,6 +1014,10 @@ const case02 = `
 `;
 
 const historyData = [
+  {
+    timestamp: '2022-12-21',
+    text: 'remove / between 건 and 원',
+  },
   {
     timestamp: '2022-11-01',
     text: 'add new case',

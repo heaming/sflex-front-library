@@ -6,12 +6,14 @@
     :label="label"
     :icon="icon"
     :icon-right="iconRight"
+    icon-remove="close"
     :color="color"
     :text-color="textColor"
     :disable="disable"
     :ripple="false"
     :outline="outline"
     :square="square"
+    :removable="removable"
     @click="onClick"
   >
     <slot />
@@ -63,6 +65,10 @@ export default {
       default: false,
     },
     square: {
+      type: Boolean,
+      default: false,
+    },
+    removable: {
       type: Boolean,
       default: false,
     },
