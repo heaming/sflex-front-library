@@ -1,4 +1,19 @@
 <template>
+  <div class="flex w500 pa50">
+    <kw-field-wrap>
+      <kw-input
+        rules="required"
+        :error="error"
+        error-message="test"
+      />
+      <kw-input
+        rules="required"
+        :error="error"
+        error-message="test"
+      />
+      <kw-btn @click="error = error ? undefined : 'errrrrrror'" />
+    </kw-field-wrap>
+  </div>
   <div
     v-if="false"
     class="w300 h300 bg-deep-orange-1 flex"
@@ -292,6 +307,7 @@ import {
 } from '../../components/test';
 
 const scrollAreaRef = ref();
+const error = ref();
 </script>
 
 <style scoped lang="scss">

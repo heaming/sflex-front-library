@@ -197,9 +197,6 @@
     // standard == underline == mobile default
     &--standard {
       .q-field__control {
-        padding-left: $-kw-field-standard-padding;
-        padding-right: $-kw-field-standard-padding;
-
         &::before {
           border-color: $line-stroke;
         }
@@ -212,6 +209,11 @@
           height: 0; // notice. transform to height
           transform: initial; // turn off animation
         }
+      }
+
+      .q-field__native {
+        padding-left: $-kw-field-standard-padding;
+        padding-right: $-kw-field-standard-padding;
       }
 
       &.q-field--highlighted {
@@ -416,16 +418,13 @@
       &__label {
         display: none; // notice. field-wrap 에 속한 field 의 label 무시
       }
+
+      &__messages {
+        display: none;
+      }
     }
 
     &.q-field {
-      // FIXME: is displayed when processing transition
-      &--error {
-        .q-field__bottom {
-          display: none;
-        }
-      }
-
       &--labeled {
         .q-field__after,
         .q-field__before,
@@ -439,6 +438,12 @@
           .q-field__control {
             margin-top: 0;
           }
+        }
+      }
+
+      &--error {
+        .q-field__messages {
+          display: unset;
         }
       }
     }
@@ -464,7 +469,7 @@
   }
 
   &__bottom {
-    padding: 2px 0 0;
+    padding: 0;
     min-height: $kw-field-font-size-bottom;
     font-size: $kw-field-font-size-bottom;
     line-height: 1;
@@ -503,6 +508,14 @@
       &::after {
         color: $error !important;
         border-color: $error !important;
+      }
+    }
+
+    .kw-field {
+      &.q-field {
+        .q-field__bottom {
+          display: none;
+        }
       }
     }
   }
