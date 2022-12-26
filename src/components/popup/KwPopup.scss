@@ -42,6 +42,12 @@
     min-width: 1460px !important;
   }
 
+  &--4xl {
+    width: 1660px;
+    max-width: 1660px !important;
+    min-width: 1660px !important;
+  }
+
   &__header {
     padding: 20px 16px 10px 26px;
     position: absolute;
