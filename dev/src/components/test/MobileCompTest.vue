@@ -3,6 +3,7 @@
     <mobile-test-page1 />
     <mobile-test-page2 />
     <mobile-test-page3 />
+    <mobile-test-page4 />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import MobileTestPage1 from '~dev/components/test/MobileTestPage1.vue';
 import MobileTestPage2 from '~dev/components/test/MobileTestPage2.vue';
 import MobileTestPage3 from '~dev/components/test/MobileTestPage3.vue';
+import MobileTestPage4 from '~dev/components/test/MobileTestPage4.vue';
 </script>
 
 <style scoped lang="scss">
