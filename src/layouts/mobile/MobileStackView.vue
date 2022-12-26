@@ -1,20 +1,32 @@
 <template>
   <q-page-container class="mobile-stack-view">
-    <router-view v-slot="{ Component, route }">
-      <kw-suspense :key="route.fullPath">
-        <template #default>
-          <component :is="Component" />
-        </template>
-        <template #error>
-          <load-failed-view />
-        </template>
-      </kw-suspense>
-    </router-view>
+    <kw-observer
+      v-for="stackView of stackViews"
+      :key="stackView.key"
+      :ref="(vm) => stackView.observerVm = vm"
+    >
+      <keep-alive>
+        <kw-suspense
+          v-if="stackView.key === selectedKey"
+        >
+          <template #default>
+            <component
+              :is="stackView.component"
+              v-bind="stackView.componentProps"
+            />
+          </template>
+          <template #error>
+            <load-failed-view />
+          </template>
+        </kw-suspense>
+      </keep-alive>
+    </kw-observer>
   </q-page-container>
 </template>
 
 <script>
 import LoadFailedView from './LoadFailedView.vue';
+import useStackView from './private/useStackView';
 
 export default {
   name: 'MobileStackView',
@@ -22,7 +34,7 @@ export default {
 
   setup() {
     return {
-
+      ...useStackView(),
     };
   },
 };
