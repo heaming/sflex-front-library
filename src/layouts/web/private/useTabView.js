@@ -57,7 +57,7 @@ export default () => {
   }
 
   const isRegistered = (to) => getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isUnduplicated = (to) => !tabViews.some((v) => v.key === to.name);
+  const isUnduplicated = (to) => !tabViews.some((v) => v.key === (to.name || to.path));
 
   if (isRegistered(router.currentRoute.value)) {
     const { key } = add(router.currentRoute.value);
