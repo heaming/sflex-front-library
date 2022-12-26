@@ -466,11 +466,6 @@
       <p class="kw-guide-description">
         Some screens are need to be added the active icon and done icon individiually.<br>
         The commone icon is checked icon and number basically.<br>
-
-        <!-- The common icon is checked icon,however it should be add<br>
-        diffirent, Add icon's name in <b>:done-icon ""</b><br>
-        :active-icon="" is to change active-icon<br> -->
-
         <b>:done-icon=""</b><br>
         <span> - Replace icon from done-icon(default:checked icon) to the other icon</span><br>
         <b>:active-icon=""</b><br>
@@ -496,7 +491,6 @@
               :done="stepInitNum3 > 2"
               prefix="2"
               :done-icon="'retry'"
-              :done-color="warning"
             />
             <kw-step
               :name="3"
@@ -505,7 +499,6 @@
               prefix="3"
               :tooltip="'Write the text in here! :3'"
               :active-icon="'write'"
-              :active-color="'primary'"
             />
             <kw-step
               :name="4"
@@ -852,7 +845,6 @@ const iconTool = `
     :done="stepInitNum2 > 2"
     prefix="2"
     :done-icon="'retry'"
-    :done-color="warning"
   />
   <kw-step
     :name="3"
@@ -860,8 +852,7 @@ const iconTool = `
     :done="stepInitNum2 > 3"
     prefix="3"
     :tooltip="'Write the text in here! :3'"
-    :active-icon="'write'"
-    :active-color="'primary'"
+    :active-icon="'wr
   />
   <kw-step
     :name="4"
