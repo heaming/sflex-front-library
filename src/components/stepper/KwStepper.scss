@@ -179,6 +179,8 @@
 }
 
 .kw-step-panel {
+  padding-top: 30px;
+
   &--disabled::before {
     position: absolute;
     content: "";
