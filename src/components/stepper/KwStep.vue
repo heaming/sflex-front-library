@@ -27,6 +27,7 @@ export default {
 
   props: {
     // customize props
+    headingText: { type: String, default: undefined },
     tooltip: { type: String, default: undefined },
 
     // fall through props
@@ -45,7 +46,7 @@ export default {
     errorColor: { type: String, default: undefined },
     done: { type: Boolean, default: undefined },
     error: { type: Boolean, default: undefined },
-    headerNav: { type: Boolean, default: false },
+    headerNav: { type: Boolean, default: true },
   },
 
   setup() {

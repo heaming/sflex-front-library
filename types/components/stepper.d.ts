@@ -32,7 +32,17 @@ export interface KwStepper extends ComponentPublicInstance<KwStepperProps> {
 type FallThroughStepProps = 'name' | 'disable' | 'icon' | 'color' | 'title' | 'caption' | 'prefix' | 'doneIcon' | 'doneColor' | 'activeIcon' | 'activeColor' | 'errorIcon' | 'errorColor' | 'headerNav' | 'done' | 'error';
 
 // KwStep
-interface KwStepProps extends Pick<QStepProps, FallThroughStepProps> {}
+interface KwStepProps extends Pick<QStepProps, FallThroughStepProps> {
+  /**
+   * 표시할 heading text, 지정하지 않으면 title이 나온다
+   */
+  headingText?: string;
+
+  /**
+   * 표시할 툴팁 컨텐츠
+   */
+  tooltip?: string;
+}
 interface KwStepSlots extends QStepSlots {}
 export interface KwStep extends ComponentPublicInstance<KwStepProps> {}
 

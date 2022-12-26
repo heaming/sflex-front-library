@@ -73,10 +73,8 @@
 </template>
 
 <script setup>
-import {
-  usePanelChildProps,
-  usePanelProps,
-} from '../../../../../src/components/tabPanels/private/usePanel';
+import { usePanelsProps } from '../../../../../src/composables/private/usePanels';
+import { usePanelProps } from '../../../../../src/composables/private/usePanel';
 
 const tabsProps = {
   align: {
@@ -103,10 +101,10 @@ const tabProps = {
   },
 };
 const tabPanelsProps = {
-  ...usePanelProps,
+  ...usePanelsProps,
 };
 const tabPanelProps = {
-  ...usePanelChildProps,
+  ...usePanelProps,
 };
 
 const tabsBindingProps = ref(null);

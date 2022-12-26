@@ -6,7 +6,7 @@
     <span
       v-if="useHeading"
       class="kw-stepper__title"
-    >{{ activeHeader?.props.title }}</span>
+    >{{ activeHeader?.props.headingText || activeHeader?.props.title }}</span>
 
     <q-stepper
       :id="stepperId"
@@ -25,11 +25,10 @@
       :error-color="errorColor"
       @update:model-value="$emit('update:modelValue', $event)"
     >
-      <component
-        :is="header"
+      <q-step
         v-for="header of headers"
         :key="header.props.name"
-        :prefix="header.props.icon ? undefined : header.props.prefix"
+        v-bind="getHeaderProps(header)"
       />
     </q-stepper>
 
@@ -63,7 +62,7 @@
 </template>
 
 <script>
-import { omit } from 'lodash-es';
+import { omit, kebabCase } from 'lodash-es';
 import { uid } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import usePanels, { usePanelsProps, usePanelsEmits } from '../../composables/private/usePanels';
@@ -121,6 +120,23 @@ export default {
     const headers = computed(() => getNormalizedHeaders(slots));
     const activeHeader = computed(() => headers.value.find((e) => e.props.name === props.modelValue));
 
+    const getHeaderProps = (header) => {
+      const headerProps = {};
+      const propKeys = Object.keys(header.type.props);
+
+      propKeys.forEach((key) => {
+        headerProps[key] = (header.props[key] || header.props[kebabCase(key)]) ?? header.type.props[key].default;
+      });
+
+      headerProps.prefix = (
+        headerProps.icon
+        || (headerProps.activeIcon && headerProps.name === props.modelValue)
+        || (headerProps.errorIcon && headerProps.error)
+      ) ? undefined : headerProps.prefix;
+
+      return headerProps;
+    };
+
     const tooltips = computed(() => {
       const _tooltips = [];
       headers.value.forEach((e, i) => {
@@ -144,6 +160,7 @@ export default {
       stepperClass,
       headers,
       activeHeader,
+      getHeaderProps,
       tooltips,
     };
   },
