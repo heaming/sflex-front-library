@@ -99,7 +99,7 @@ body.desktop .web-layout {
     position: relative;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    min-width: 40px;
     height: 100%;
     box-sizing: border-box;
     background: $bg-body;
@@ -116,6 +116,7 @@ body.desktop .web-layout {
       width: 40px;
       height: 96px;
       border-bottom: 1px solid $line-line;
+      white-space: pre-wrap;
 
       &--active {
         background-color: $bg-white;
@@ -137,7 +138,7 @@ body.desktop .web-layout {
   }
 
   &__content {
-    flex: 100;
+    flex: 1;
     height: 100%;
 
     > div {
