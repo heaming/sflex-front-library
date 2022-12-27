@@ -51,7 +51,13 @@ export interface KwFieldWrapProps extends UseDenseProps, UseStretchProps {
    *
    * @default true
    */
-  autoHeight?: VueClassProp;
+  autoHeight?: boolean | undefined;
+
+  /**
+   * 에러메세지 카운터 따위가 그려지는 필드 하단 영역을 필요 시에만 그릴 지 여부 지정.
+   * 모바일일 때 기본 값이 true.
+   */
+  hideBottomSpace?: boolean | undefined;
 
   /**
    * 포커스 이벤트
