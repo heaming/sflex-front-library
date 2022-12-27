@@ -16,7 +16,10 @@ export default () => {
       const { result, payload } = await modal({
         component: name,
         componentProps: { ...query },
-        dialogProps: { transitionDuration: 0 },
+        dialogProps: {
+          class: 'global-modal--window',
+          transitionDuration: 0,
+        },
       });
 
       if (result) {
