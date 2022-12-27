@@ -12,7 +12,10 @@
       <kw-btn
         v-for="(content, i) in contents"
         :key="i"
+        class="drawer-mini-btn"
+        :class="{'drawer-mini-btn--active': content === selectedContent}"
         :icon="content.icon"
+        :label="content.label"
         borderless
         @click="onChangeContent(content)"
       />
@@ -49,9 +52,9 @@ export default {
     const { setExpanded } = expandCtx;
 
     const contents = [
-      { component: WebLeftDrawerMenu, icon: '' },
-      { component: WebLeftDrawerFavorite, icon: '' },
-      { component: WebLeftDrawerHistory, icon: '' },
+      { component: WebLeftDrawerMenu, icon: '', label: '메뉴' },
+      { component: WebLeftDrawerFavorite, icon: '', label: '즐겨찾기' },
+      { component: WebLeftDrawerHistory, icon: '', label: '최근링크' },
     ];
     const selectedContent = shallowRef(contents[0]);
 

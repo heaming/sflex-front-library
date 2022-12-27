@@ -17,7 +17,7 @@ body.desktop .web-layout {
     padding: 0 40px;
     width: 100%;
     height: 70px;
-    background: #fff;
+    background: $bg-white;
   }
 
   &__logo {
@@ -96,17 +96,31 @@ body.desktop .web-layout {
   overflow: hidden;
 
   &__mini {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex: 1;
     height: 100%;
-    border-right: 1px solid $line-line;
     box-sizing: border-box;
+    background: $bg-body;
 
-    > .kw-btn {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-right: 1px solid $line-line;
+    }
+
+    .drawer-mini-btn {
       width: 40px;
       height: 96px;
       border-bottom: 1px solid $line-line;
+
+      &--active {
+        background-color: $bg-white;
+        border-right: 1px solid $line-bg;
+      }
     }
   }
 
@@ -116,7 +130,7 @@ body.desktop .web-layout {
     align-items: center;
     height: 50px;
     padding: 0 20px;
-    border-bottom: 1px solid $line-line;
+    border-bottom: 1px solid $line-bg;
     font-weight: 700;
     font-size: 18px;
     color: $black1;
