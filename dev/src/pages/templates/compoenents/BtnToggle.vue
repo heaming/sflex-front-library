@@ -25,6 +25,12 @@
         title="btnStyleProps"
         :props="btnStyleProps"
       />
+
+      <guide-props
+        v-model="bindingProps5"
+        title="fieldWrapProps"
+        :props="fieldWrapProps"
+      />
       <guide-props
         v-model="bindingProps4"
         title="toggleBtnProps"
@@ -37,6 +43,7 @@
           stack: { type: Boolean, default: false },
           noWrap: { type: Boolean, default: false },
           clearable: { type: Boolean, default: false },
+          btnWrap: { type: Boolean, default: false },
         }"
       />
       <kw-separator />
@@ -62,18 +69,29 @@
 import { useFieldProps } from '../../../../../src/composables/private/useField';
 import { useOptionsProps } from '../../../../../src/composables/private/useOptions';
 import { useBtnStyleProps } from '../../../../../src/composables/private/useBtnStyle';
+import { useFieldWrapProps } from '../../../../../src/composables/private/useFieldWrap';
 
 const bindingProps1 = ref(null);
 const bindingProps2 = ref({
-  options: [1, 2, 3],
+  options: [
+    'test',
+    'test2',
+    'test3',
+    'long long long~~~~~~~~~~ word with white space',
+    2313213213213213,
+    2313213213213213,
+    2313213213213213,
+  ],
 });
 const bindingProps3 = ref(null);
 const bindingProps4 = ref(null);
+const bindingProps5 = ref(null);
 const bindingProps = computed(() => ({
   ...bindingProps1.value,
   ...bindingProps2.value,
   ...bindingProps3.value,
   ...bindingProps4.value,
+  ...bindingProps5.value,
 }));
 
 const defaultCode = `
@@ -83,4 +101,5 @@ const defaultCode = `
 const fieldProps = useFieldProps;
 const optionsProps = useOptionsProps;
 const btnStyleProps = useBtnStyleProps;
+const fieldWrapProps = useFieldWrapProps;
 </script>

@@ -1,12 +1,8 @@
 <template>
   <kw-field-wrap
     ref="inputRef"
-    v-bind="stretchProps"
-    :label="label"
-    :required="required"
-    :control-class="controlClass"
-    :auto-height="autoHeight"
-    :hide-bottom-space="hideBottomSpace"
+    v-bind="fieldWrapProps"
+    :required="computedRequired"
     :error="invalid"
     :error-message="invalidMessage"
     @focus="$emit('focus')"
@@ -27,20 +23,16 @@
 
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
-import useStretch, { useStretchProps } from '../../composables/private/useStretch';
+import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFieldWrap';
 
 export default {
   name: 'KwField',
 
   props: {
     ...useFieldProps,
-    ...useStretchProps,
-
+    ...useFieldWrapProps,
     modelValue: { type: [String, Number, Boolean, Array], default: undefined },
     fieldKey: { type: String, default: 'modelValue' },
-    controlClass: { type: [Object, Array, String], default: undefined },
-    autoHeight: { type: Boolean, default: true },
-    hideBottomSpace: { type: Boolean, default: undefined },
   },
 
   emits: [
@@ -48,7 +40,7 @@ export default {
     'focus',
   ],
 
-  setup(props, { attrs }) {
+  setup(props) {
     const fieldCtx = useField();
     const { value } = fieldCtx;
 
@@ -57,8 +49,10 @@ export default {
       [`onUpdate:${props.fieldKey}`](e) { value.value = e; },
     });
 
-    const required = computed(() => {
-      if (attrs.required) {
+    const { fieldWrapProps } = useFieldWrap({ autoHeight: true });
+
+    const computedRequired = computed(() => {
+      if (fieldWrapProps.value.required) {
         return true;
       }
       if (props.rules) {
@@ -75,10 +69,10 @@ export default {
     });
 
     return {
-      ...useStretch(),
       ...fieldCtx,
       fieldBinding,
-      required,
+      fieldWrapProps,
+      computedRequired,
     };
   },
 };
