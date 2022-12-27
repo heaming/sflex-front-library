@@ -155,7 +155,10 @@ export default {
       'kw-item-type--padding': itemClass.value['kw-item-type--padding'] && normalizePaddingTarget.value.includes('self'),
     }));
 
-    const expansionItemStyle = itemStyle;
+    const expansionItemStyle = computed(() => [{
+      ...itemStyle.value,
+      padding: normalizePaddingTarget.value.includes('self') ? itemStyle.value.padding : undefined,
+    }]);
 
     const headerItemClass = computed(() => {
       const classes = [{
@@ -171,7 +174,7 @@ export default {
     const headerItemStyle = computed(() => {
       const style = [{
         ...itemStyle.value,
-        padding: undefined,
+        padding: normalizePaddingTarget.value.includes('header') ? itemStyle.value.padding : undefined,
       }];
       if (props.headerStyle) {
         style.push(props.headerClass);
