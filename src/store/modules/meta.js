@@ -101,13 +101,19 @@ export default {
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
     },
-    async fetchPage({ commit, getters }, key) {
+    async fetchPage({ state, commit, getters }, key) {
       const isCached = getters.getPage(key) !== undefined;
 
       if (!isCached) {
         const response = await http.get(`/sflex/common/common/meta/${key}`);
         const { pageInfo, ...pageMeta } = response.data;
-        const page = { ...pageInfo, ...pageMeta };
+        const { pageId } = pageInfo;
+
+        const page = {
+          ...pageInfo,
+          ...pageMeta,
+          isBookmarkable: find(state.menus, { pageId }) !== undefined,
+        };
 
         commit('addPage', page);
       }
