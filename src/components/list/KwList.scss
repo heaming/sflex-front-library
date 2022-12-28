@@ -76,7 +76,7 @@
       min-height: auto;
 
       & > .kw-field-wrap {
-        max-width: 120px;
+        max-width: 120px !important;
         min-width: 120px;
       }
 
@@ -149,7 +149,7 @@
       flex-direction: row;
 
       & > .kw-field-wrap {
-        max-width: 170px;
+        max-width: 170px !important;
         min-width: 170px;
       }
 
