@@ -1,5 +1,6 @@
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
+import { http } from '../../plugins/http';
 
 export default () => {
   const { getters, commit } = useStore();
@@ -18,7 +19,8 @@ export default () => {
 
   function createHierarchy(nodes, currents) {
     return currents.map((c) => ({
-      ...c, children: createHierarchy(nodes, nodes.filter((n) => n.parentsKey === c.key)),
+      ...c,
+      children: c.isFolder && createHierarchy(nodes, nodes.filter((n) => n.parentsKey === c.key)),
     }));
   }
 
@@ -43,10 +45,28 @@ export default () => {
     expandedKeys.value = expanded;
   }
 
+  async function logging(menuKey) {
+    const menu = getters['meta/getMenu'](menuKey);
+    const logData = {
+      menuLogTypeCode: 'MENU',
+      menuLogObjectId: menu.menuUid,
+      menuName: menu.menuName,
+      appId: menu.applicationId,
+      pageId: menu.fromPageId || menu.pageId,
+    };
+
+    try {
+      await http.post('/sflex/common/common/portal/menus/logging', logData, { useSpinner: false });
+    } catch (e) {
+      // ignore
+    }
+  }
+
   async function handleUpdateSelected(menuKey) {
     try {
       await push({ name: menuKey });
       commit('app/setSelectedGlobalMenuKey', menuKey);
+      logging(menuKey);
     } catch (e) {
       if (isNavigationFailure(e, 1)) { // matcher not found
         await alert(t('MSG_ALT_PAGE_NOT_FOUND'));

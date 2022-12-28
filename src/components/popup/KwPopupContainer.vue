@@ -19,6 +19,7 @@
           {{ popupTitle }}
         </h1>
         <kw-checkbox
+          v-if="ctx.page?.isBookmarkable"
           model-value="Y"
           checked-icon="bookmark_on"
           unchecked-icon="bookmark_off"

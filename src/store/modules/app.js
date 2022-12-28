@@ -55,6 +55,7 @@ export default {
         parentsKey: v.parentsKey || v.parentsMenuUid,
         label: v.label || v.menuName,
         depth: v.depth || v.menuLevel,
+        isFolder: v.folderYn === 'Y',
       }));
 
       commit('setGlobalMenus', normalizedMenus);

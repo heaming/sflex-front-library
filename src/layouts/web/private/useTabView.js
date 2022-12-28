@@ -6,12 +6,13 @@ export default () => {
   const store = useStore();
 
   const tabViews = shallowReactive([]);
-  const selectedKey = computed(() => router.currentRoute.value.name || router.currentRoute.value.path);
+  const selectedKey = computed(() => router.currentRoute.value.name);
 
-  function add(to) {
+  function add(to, from) {
     const index = tabViews.push({
       key: to.name,
       label: to.meta.menuName,
+      parentsKey: to.meta.pageUseCode === 'S' ? from.name : null,
       component: last(to.matched).components.default,
       componentProps: to.params,
     });
@@ -55,32 +56,34 @@ export default () => {
   }
 
   const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isUnduplicated = (to) => !tabViews.some((v) => v.key === (to.name || to.path));
-
-  if (isRegistered(router.currentRoute.value)) {
-    add(router.currentRoute.value);
-  }
-
-  const removeBeforeResolve = router.beforeResolve((to) => {
-    const shouldLogging = isRegistered(to) && isUnduplicated(to);
-
-    to.meta.logging = shouldLogging;
-  });
+  const isUnduplicated = (to) => !tabViews.some((v) => v.key === to.name);
 
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
 
-      // is new tab
-      if (to.meta.logging === true) {
-        add(to);
+      if (isRegistered(to) && isUnduplicated(to)) {
+        add(to, from);
       }
     },
   );
 
-  router.close = () => close(selectedKey.value);
+  if (isRegistered(router.currentRoute.value)) {
+    add(router.currentRoute.value);
+  }
+
+  router.close = async () => {
+    const key = selectedKey.value;
+    const parentsKey = find(tabViews, { key })?.parentsKey;
+
+    await close(key);
+
+    if (parentsKey) {
+      await select(parentsKey);
+    }
+  };
+
   onBeforeUnmount(() => {
-    removeBeforeResolve();
     removeAfterEach();
     delete router.close;
   });
