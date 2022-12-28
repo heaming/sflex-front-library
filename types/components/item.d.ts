@@ -1,24 +1,25 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor, QItemLabelProps, QItemLabelSlots, QItemProps, QItemSectionProps, QItemSectionSlots, QItemSlots } from 'quasar';
 import { UseFontProps } from './private/useFont';
+import { UseItemStyleProps } from './private/useItemStyle';
 
 type FallThroughItemProps = 'tag' | 'active' | 'clickable' | 'dense' | 'insetLevel' | 'tabindex' | 'focused' | 'manualFocus' | 'to' | 'replace' | 'exact' | 'href' | 'target' | 'activeClass' | 'exactActiveClass' | 'disable' | 'onClick';
 
-interface KwItemProps extends Pick<QItemProps, FallThroughItemProps> {
+interface KwItemProps extends Pick<QItemProps, FallThroughItemProps>, UseItemStyleProps {
   /**
-   * 기본 패딩을 적용한다.
-   * `$kw-item-padding` `variable` 을 따른다.
+   * padding 상속 여부를 결정한다.
+   * item 내부의 item 이 중첩해서 들어갈 경우, 필요에 의해 사용한다.
    *
    * @default false
    */
-  padding?: boolean | undefined;
+  blockInheritPadding?: boolean | undefined;
 
   /**
-   * 작은 스타일을 사용한다. 최소 높이는 32px 을 가지며, 폰트 스타일을 14px 스타일로 지정한다.
+   * dense props 상속을 막을 지 여부, dense 상태인 field 내 slot 내부에서 dense 적용가능한 컴포넌트 사용시 상속 없이 명시적으로 지정하고 싶을 때 막는다.
    *
    * @default false
    */
-  dense?: boolean | undefined;
+  blockInheritDense?: boolean | undefined;
 }
 interface KwItemSlots extends QItemSlots {
   /**

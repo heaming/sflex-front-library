@@ -113,6 +113,8 @@ const iconList1 = [
   'down',
   'top',
   'bottom',
+  'up_to',
+  'down_to',
   'cellphone_reject',
   'cellphone',
 ];

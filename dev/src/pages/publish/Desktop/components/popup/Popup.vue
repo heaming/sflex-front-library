@@ -311,6 +311,10 @@ const testCode = `
 
 const guideHistory = [
   {
+    timestamp: '2022-12-27',
+    text: 'added 4xl size',
+  },
+  {
     timestamp: '2022-10-11',
     text: 'remove button spacing helper class & add popup no-close btn case in code',
   },

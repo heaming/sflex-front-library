@@ -12,6 +12,7 @@ const normalizeOptions = (options) => ({
   component: options.component,
   componentProps: options.componentProps || {},
   componentResolved: false,
+  dialogProps: options.dialogProps || {},
   window: options.window === true,
 });
 
