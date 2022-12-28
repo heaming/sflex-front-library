@@ -85,16 +85,22 @@
             label="날짜선택"
             class="pt20"
           />
-          <kw-date-range-picker
-            label="날짜지정"
-            grow
-            class="pt20"
-          />
+          <div
+            class="flex"
+            style="width: 100%;"
+          >
+            <kw-date-range-picker
+              label="날짜지정"
+              grow
+              class="pt20"
+            />
+          </div>
           <kw-input
             icon="qrcode_24"
             label="상품 QR코드"
             placeholder="QR코드 입력"
             class="pt20"
+            disable
           />
         </div>
         <guide-code-view
@@ -112,7 +118,7 @@
       </h3>
       <p class="kw-guide-description">
         If you need one or more components, please wrap div.kw-field-wrap <br>
-        If you need full width of form component in kw-field-wrap add 'grow' prop
+        If you need full width of <b>form component</b> which located in kw-field-wrap add '<b>grow</b>' prop
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -208,7 +214,8 @@
         Address form type
       </h3>
       <p class="kw-guide-description">
-        please add <em>&lt; zwcm-post-code /&gt;</em>
+        please add <em>&lt; zwcm-post-code <b>class="kw-grow"</b> /&gt;</em> <br>
+        "kw-grow" class have to be added
         <q-card>
           <div class="kw-guide-example">
             <img
@@ -237,14 +244,14 @@
         <q-card>
           <div class="kw-guide-example">
             <img
-              src="~~dev/assets/images/example_mobile_address.png"
+              src="~~dev/assets/images/example_mobile_email.png"
               alt="address example"
               style="width: 65%;"
             >
           </div>
 
           <guide-code-view
-            :code-value="AddressCode"
+            :code-value="EmailCode"
             lang="vue"
           />
         </q-card>
@@ -331,6 +338,19 @@ const disableCode = `
 `;
 
 const AddressCode = `
+<zwcm-post-code
+  label="주소"
+  required
+  class="kw-grow"
+/>
+<!-- required  type-->
+<zwcm-post-code
+  label="주소"
+  class="kw-grow"
+/>
+`;
+
+const EmailCode = `
 <zwcm-email-address
   label="이메일"
   required

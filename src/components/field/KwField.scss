@@ -78,7 +78,7 @@
     }
 
     &__label {
-      @include typo("dense");
+      @include typo("dense", 400);
 
       left: 0;
       top: -1 * $kw-field-label-height;
@@ -492,7 +492,7 @@
   }
 
   &__label {
-    @include typo("dense");
+    @include typo("dense", 400);
 
     white-space: nowrap;
     position: absolute;
