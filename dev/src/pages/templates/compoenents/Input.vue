@@ -69,6 +69,9 @@ const inputProps = {
   onBlur: { type: Function, default: undefined },
   onClear: { type: Function, default: undefined },
   onKeydown: { type: Function, default: undefined },
+  align: { type: String, default: undefined },
+  inputClass: { type: [Array, String, Object], default: undefined },
+  inputStyle: { type: [Array, String, Object], default: undefined },
 
   // customize props
   icon: { type: String, default: undefined },
@@ -78,7 +81,6 @@ const inputProps = {
   upperCase: { type: Boolean, default: false },
   lowerCase: { type: Boolean, default: false },
   regex: { type: [String, Object], default: undefined },
-  alignRight: { type: Boolean, default: false },
   spinner: { type: Boolean, default: undefined },
   onClickIcon: { type: Function, default: undefined },
 
