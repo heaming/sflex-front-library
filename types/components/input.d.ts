@@ -1,8 +1,10 @@
 import { ComponentPublicInstance, VNode } from 'vue';
-import { GlobalComponentConstructor } from 'quasar';
+import { GlobalComponentConstructor, QInputProps } from 'quasar';
 import { UseFieldProps, UseFieldStyleProps, UseFieldInstance } from './private/useField';
 
-interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
+type FallThroughProps = 'inputClass' | 'inputStyle';
+
+interface KwInputProps extends Pick<QInputProps, FallThroughProps>, UseFieldProps, UseFieldStyleProps {
   /**
    * 현재 설정된 값
    */
@@ -150,9 +152,9 @@ interface KwInputProps extends UseFieldProps, UseFieldStyleProps {
   regex?: 'alpha' | 'alpha_dash' | 'alpha_num' | 'alpha_spaces' | 'alpha_underscore' | string | RegExp;
 
   /**
-   * 입력 텍스트 우측 정렬 여부
+   * 입력 텍스트 정렬
    */
-  alignRight?: boolean;
+  align?: 'left' | 'right' | 'center' | 'justify';
 
   /**
    * type: number 시 브라우저 기본 spinner 사용 여부
