@@ -89,6 +89,7 @@ class GaugeChart extends DoughnutController {
       }
     }
 
+    super.update();
     super.draw();
 
     const { ctx } = this.chart;
