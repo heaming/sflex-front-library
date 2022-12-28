@@ -16,7 +16,7 @@
         title="optionGroupProps"
       />
       <kw-separator />
-      <div class="flex w700">
+      <div class="w300 h300 bg-green flex">
         <kw-optionGroup
           v-model="model"
           v-bind="bindingProps"
@@ -29,7 +29,7 @@
       description="=default"
       :guide-code="defaultCode"
     >
-      <div class="flex w300">
+      <div class="w300 h300 bg-green flex">
         <kw-optionGroup
           v-model="model"
           v-bind="bindingProps"

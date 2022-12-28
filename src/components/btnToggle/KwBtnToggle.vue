@@ -1,8 +1,7 @@
 <template>
   <kw-field-wrap
     ref="inputRef"
-    v-bind="{...styleClassAttrs, ...stretchProps}"
-    :label="label"
+    v-bind="{...styleClassAttrs, ...fieldWrapProps}"
     :error="invalid"
     :error-message="invalidMessage"
     @focus="$emit('focus')"
@@ -16,7 +15,7 @@
       toggle-text-color="not-use"
       color="not-use"
       text-color="not-use"
-      :dense="buttonStyleProps.dense"
+      :dense="fieldWrapProps.dense"
       :disable="disable"
       :stack="stack"
       :no-wrap="noWrap"
@@ -37,6 +36,7 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import useBtnStyle, { useBtnStyleProps } from '../../composables/private/useBtnStyle';
 import useStretch from '../../composables/private/useStretch';
+import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFieldWrap';
 
 export default {
   name: 'KwBtnToggle',
@@ -47,12 +47,14 @@ export default {
     ...useFieldProps,
     ...useOptionsProps,
     ...useBtnStyleProps,
+    ...useFieldWrapProps,
 
     toggleColor: { type: String, default: 'bg-white' },
     toggleTextColor: { type: String, default: 'primary' },
     toggleBorderColor: { type: String, default: 'primary' },
 
     gap: { type: String, default: '4px' },
+    btnWrap: { type: Boolean, default: false },
 
     modelValue: {
       type: [String, Number, Boolean],
@@ -70,7 +72,12 @@ export default {
 
   setup(props) {
     const { normalizedOptions } = useOptions();
-    const { buttonClass, buttonStyles, buttonStyleProps } = useBtnStyle({
+
+    const { fieldWrapProps } = useFieldWrap({
+      dense: true,
+    });
+
+    const { buttonClass, buttonStyles } = useBtnStyle({
       color: 'bg-white',
       textColor: 'black3',
       borderColor: 'line-stroke',
@@ -88,14 +95,16 @@ export default {
       return classes;
     });
 
-    const { stretchClass, stretchProps } = useStretch();
+    const { stretchClass } = useStretch();
 
     const toggleClass = computed(() => {
       const classes = {
+        'kw-btn-group': true,
         'kw-btn-toggle': true,
         ...stretchClass.value,
       };
       if (props.gap) { classes['kw-btn-toggle--spaced'] = true; }
+      if (props.btnWrap) { classes['kw-btn-group--wrap'] = true; }
       return classes;
     });
 
@@ -115,9 +124,8 @@ export default {
     return {
       ...useInheritAttrs(),
       ...useField(),
-      stretchProps,
+      fieldWrapProps,
       styledOptions,
-      buttonStyleProps,
       toggleClass,
       toggleStyle,
     };

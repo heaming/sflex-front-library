@@ -162,6 +162,22 @@
         <tbody>
           <tr>
             <td>
+              <p class="kw-font-pt24">
+                pt24
+              </p>
+            </td>
+            <td>
+              .kw-font-pt24
+            </td>
+            <td>
+              24px
+            </td>
+            <td>
+              24px
+            </td>
+          </tr>
+          <tr>
+            <td>
               <p class="kw-font-pt22">
                 pt22
               </p>

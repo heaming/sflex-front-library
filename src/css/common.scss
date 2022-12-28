@@ -649,7 +649,7 @@ $unit: px;
       display: none;
     }
 
-    div span {
+    div span:not(.rg-header-sort-ascending):not(.rg-header-sort-descending) {
       position: relative;
 
       &::after {
