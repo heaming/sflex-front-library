@@ -19,10 +19,12 @@
           {{ popupTitle }}
         </h1>
         <kw-checkbox
-          model-value="Y"
+          v-if="isBookmarkable"
+          model-value="N"
           checked-icon="bookmark_on"
           unchecked-icon="bookmark_off"
-          class="kw-popup__header-favorite"
+          class="kw-popup__header-bookmark"
+          @update:model-value="onUpdateBookmark"
         >
           <kw-tooltip>
             {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
@@ -55,6 +57,7 @@
 </template>
 
 <script>
+import { find } from 'lodash-es';
 import { PopupContainerContextKey } from '../../consts/private/symbols';
 import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
 
@@ -129,6 +132,14 @@ export default {
       isLoadFailed.value = true;
     }
 
+    const menus = useStore().getters['meta/getMenus'];
+    const menu = computed(() => find(menus, { pageId: popupCtx.value.page?.pageId }));
+    const isBookmarkable = computed(() => menu.value !== undefined);
+
+    async function onUpdateBookmark() {
+      //
+    }
+
     return {
       ctx: popupCtx,
       close,
@@ -144,6 +155,8 @@ export default {
       isLoadFailed,
       onLoaded,
       onLoadFailed,
+      isBookmarkable,
+      onUpdateBookmark,
     };
   },
 };

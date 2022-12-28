@@ -61,7 +61,9 @@ export default {
     getMenus: (state) => state.menus,
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
     getPages: (state) => state.pages,
-    getPage: (state) => (key) => find(state.pages, (v) => v.pageId === key || v.pageDestinationValue === key),
+    getPage: (state) => (key) => find(state.pages, (v) => (
+      v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key
+    )),
   },
 
   actions: {
@@ -99,11 +101,11 @@ export default {
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
     },
-    async fetchPage({ commit, getters }, key) {
-      const isCached = getters.getPage(key) !== undefined;
+    async fetchPage({ commit, getters }, pageKey) {
+      const isCached = getters.getPage(pageKey) !== undefined;
 
       if (!isCached) {
-        const response = await http.get(`/sflex/common/common/meta/${key}`);
+        const response = await http.get(`/sflex/common/common/meta/${pageKey}`);
         const { pageInfo, ...pageMeta } = response.data;
         const page = { ...pageInfo, ...pageMeta };
 

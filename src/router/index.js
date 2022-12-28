@@ -59,7 +59,7 @@ function replaceGlobRoutes() {
       const matched = find(menus, { applicationId, pageDestinationValue });
 
       if (matched) {
-        const { menuUid, menuName, pageId } = matched;
+        const { menuUid, menuName, pageId, pageUseCode } = matched;
 
         router.addRoute({
           ...route,
@@ -71,6 +71,7 @@ function replaceGlobRoutes() {
             menuUid,
             menuName,
             pageId,
+            pageUseCode,
           },
         });
       }

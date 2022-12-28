@@ -20,6 +20,7 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
+      :outlined="outlined"
       :autofocus="autofocus"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 0)"
@@ -39,6 +40,7 @@
       :dense="dense"
       :underline="underline"
       :borderless="borderless"
+      :outlined="outlined"
       hide-bottom-space
       @update:model-value="onChangeDate($event, 1)"
     />
@@ -50,6 +52,7 @@ import { FormContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFieldWrap';
+import useStretch from '../../composables/private/useStretch';
 
 export default {
   name: 'KwDateRangePicker',
@@ -59,6 +62,18 @@ export default {
   props: {
     ...useFieldProps,
     ...useFieldWrapProps,
+    underline: {
+      type: Boolean,
+      default: false,
+    },
+    borderless: {
+      type: Boolean,
+      default: false,
+    },
+    outlined: {
+      type: Boolean,
+      default: false,
+    },
 
     from: {
       type: String,
@@ -163,6 +178,7 @@ export default {
     return {
       ...useInheritAttrs(),
       ...useFieldWrap(),
+      ...useStretch(),
       ...fieldCtx,
       onChangeDate,
     };

@@ -1,6 +1,7 @@
 .kw-file {
   $-kw-file-header-height: 36px;
-  $-kw-file-header-border: 1px solid $line-stroke;
+  $-kw-file-header-border-size: 1px;
+  $-kw-file-header-border: $-kw-file-header-border-size solid $line-stroke;
   $-kw-file-header-background-color: $line-bg;
 
   &.kw-field {
@@ -116,7 +117,7 @@
     &.kw-field {
       & .q-field {
         &__label {
-          top: -1 * ($-kw-file-header-height + $kw-field-label-height);
+          // top: -1 * ($-kw-file-header-height + $kw-field-label-height);
         }
       }
 
@@ -129,11 +130,11 @@
 
         &--outlined {
           .kw-file__header-container {
-            margin: 1px 1px 0;
+            margin: $-kw-file-header-border-size $-kw-file-header-border-size 0;
           }
 
           .kw-file__file-container {
-            margin: 0 1px 1px;
+            margin: 0 $-kw-file-header-border-size $-kw-file-header-border-size;
           }
 
           > .q-field__inner > .q-field__control {
@@ -184,12 +185,12 @@
 
         &--labeled {
           .kw-file__header-container {
-            margin-top: $kw-field-label-height;
+            margin-top: $kw-field-label-height + $-kw-file-header-border-size;
           }
 
           &.q-field--dense {
             .q-field__label {
-              top: -1 * ($-kw-file-header-height + $kw-field-label-height-dense);
+              // top: -1 * ($-kw-file-header-height + $kw-field-label-height-dense);
             }
 
             .kw-file__header-container {

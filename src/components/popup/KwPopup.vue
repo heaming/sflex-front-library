@@ -17,7 +17,7 @@ import { PopupContainerContextKey } from '../../consts/private/symbols';
 import usePage from '../../composables/private/usePage';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 
-const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl'];
+const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'];
 
 export default {
   name: 'KwPopup',
