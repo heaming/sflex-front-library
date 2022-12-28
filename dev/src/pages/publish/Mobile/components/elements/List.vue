@@ -47,7 +47,7 @@
           </tr>
           <tr>
             <td>
-              padding
+              item-padding/ item-padding=""
             </td>
             <td>
               default top and bottom of kw-item: 16px,
@@ -124,11 +124,11 @@
             v-model:selected="arrModel"
             :items="items"
             separator
-            padding
             checkbox
             hide-select-all
             clickable
             item-key="id"
+            item-padding
           >
             <template #item="{ item }">
               <kw-item-section
@@ -162,7 +162,7 @@
             v-model:selected="arrModel1"
             :items="items"
             separator
-            padding
+            item-padding
             checkbox
             clickable
             item-key="id"
@@ -197,7 +197,7 @@
             v-model:selected="arrModel2"
             :items="items"
             separator
-            padding
+            item-padding
             radio
             hide-select-all
             clickable
@@ -244,7 +244,7 @@
       </h3>
 
       <p class="kw-guide-description">
-        padding is 16px for kw-item. <br>
+        item-padding is 16px for kw-item. <br>
         If you want to add the other padding between kw-item,
         use helper class in kw-item-section amd remove padding props from kw-list.<br>
         No need to add seperator, Remove 'seperator' from kw-list
@@ -257,7 +257,7 @@
           <kw-list
             :items="items"
             separator
-            padding
+            item-padding
             clickable
             item-key="id"
           >
@@ -519,6 +519,33 @@
         />
       </q-card>
     </div>
+    <!-- <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        검색결과 없을 때
+      </h3>
+
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-list
+            v-model:selected="arrModel"
+            :items="items22"
+            separator
+            padding
+            checkbox
+            hide-select-all
+            clickable
+            item-key="id"
+          >
+            <template #placeholder>
+              {{ placeholde }}
+            </template>
+          </kw-list>
+        </div>
+      </q-card>
+    </div> -->
   </kw-page>
 </template>
 
@@ -842,6 +869,7 @@ const items = ref([
   { id: '2', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
   { id: '3', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
 ]);
+// const placeholde = '검색결과 없습니다';
 const items2 = ref([
   {
     id: '1', text: 'text', src: 'https://cdn.quasar.dev/img/mountains.jpg', lorem: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Molestiae autem, illo error nesciunt unde consequuntur atque incidunt, aliquid voluptates tempora veritatis! A illo velit, vitae laudantium tempora incidunt voluptatum quas?' },
