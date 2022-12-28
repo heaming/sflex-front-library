@@ -301,6 +301,11 @@ body.desktop .web-layout {
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+
+        > .q-icon {
+          font-size: 12px;
+          cursor: pointer;
+        }
       }
 
       .q-focus-helper,

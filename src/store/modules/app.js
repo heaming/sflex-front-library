@@ -20,8 +20,8 @@ export default {
     setGlobalApps(state, apps) {
       state.globalApps = apps;
     },
-    setSelectedGlobalAppKey(state, lnbKey) {
-      state.selectedGlobalAppKey = lnbKey;
+    setSelectedGlobalAppKey(state, appKey) {
+      state.selectedGlobalAppKey = appKey;
     },
     setGlobalMenus(state, menus) {
       state.globalMenus = menus;
