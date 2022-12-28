@@ -71,6 +71,14 @@
   }
 }
 
+.kw-btn-group {
+  &--wrap {
+    &.q-btn-group {
+      flex-wrap: wrap;
+    }
+  }
+}
+
 body.desktop {
   @include color-based(".kw-btn.kw-btn--toggle-color-", $semantic-colors) using ($color) {
     &.q-focusable:focus,

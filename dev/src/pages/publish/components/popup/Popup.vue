@@ -38,7 +38,8 @@
               lg <br>
               xl <br>
               2xl <br>
-              3xl
+              3xl <br>
+              4xl
             </td>
             <td>
               kw-popup--sm <br>
@@ -47,6 +48,7 @@
               kw-popup--xl <br>
               kw-popup--2xl <br>
               kw-popup--3xl <br>
+              kw-popup--4xl
             </td>
             <td>
               460px <br>
@@ -55,6 +57,7 @@
               1060px<br>
               1260px<br>
               1460px <br>
+              1660px
             </td>
           </tr>
           <tr>
@@ -306,6 +309,10 @@ const testCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-12-27',
+    text: 'added 4xl size',
+  },
   {
     timestamp: '2022-10-11',
     text: 'remove button spacing helper class & add popup no-close btn case in code',
