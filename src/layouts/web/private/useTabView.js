@@ -8,10 +8,11 @@ export default () => {
   const tabViews = shallowReactive([]);
   const selectedKey = computed(() => router.currentRoute.value.name);
 
-  function add(to) {
+  function add(to, from) {
     const index = tabViews.push({
       key: to.name,
       label: to.meta.menuName,
+      parentsKey: to.meta.pageUseCode === 'S' ? from.name : null,
       component: last(to.matched).components.default,
       componentProps: to.params,
     });
@@ -55,14 +56,14 @@ export default () => {
   }
 
   const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isUnduplicated = (to) => !tabViews.some((v) => v.key === (to.name || to.path));
+  const isUnduplicated = (to) => !tabViews.some((v) => v.key === to.name);
 
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
 
       if (isRegistered(to) && isUnduplicated(to)) {
-        add(to);
+        add(to, from);
       }
     },
   );
@@ -71,7 +72,17 @@ export default () => {
     add(router.currentRoute.value);
   }
 
-  router.close = () => close(selectedKey.value);
+  router.close = async () => {
+    const key = selectedKey.value;
+    const parentsKey = find(tabViews, { key })?.parentsKey;
+
+    await close(key);
+
+    if (parentsKey) {
+      await select(parentsKey);
+    }
+  };
+
   onBeforeUnmount(() => {
     removeAfterEach();
     delete router.close;
