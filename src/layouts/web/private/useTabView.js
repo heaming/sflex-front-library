@@ -1,11 +1,12 @@
-import { last } from 'lodash-es';
+import { last, find, findIndex } from 'lodash-es';
+import consts from '../../../consts';
 
 export default () => {
   const router = useRouter();
-  const { getters } = useStore();
+  const store = useStore();
 
-  const selectedKey = ref();
   const tabViews = shallowReactive([]);
+  const selectedKey = computed(() => router.currentRoute.value.name || router.currentRoute.value.path);
 
   function add(to) {
     const index = tabViews.push({
@@ -18,8 +19,8 @@ export default () => {
     return tabViews[index - 1];
   }
 
-  function remove(tabItem) {
-    const index = tabViews.findIndex((v) => v === tabItem);
+  function remove(key) {
+    const index = findIndex(tabViews, { key });
     tabViews.splice(index, 1);
     return index;
   }
@@ -32,36 +33,32 @@ export default () => {
     }
   }
 
-  async function selectClosest(index) {
-    const { length } = tabViews;
-
-    if (length > 0) {
-      const closestIndex = index === length ? index - 1 : index + 1;
-      const closestItem = tabViews[closestIndex];
-      await select(closestItem.key);
-    }
+  function getClosestKey(key) {
+    const index = findIndex(tabViews, { key });
+    const lastIndex = tabViews.length - 1;
+    const closestIndex = index === lastIndex ? index - 1 : index + 1;
+    return tabViews[closestIndex]?.key;
   }
 
-  async function close(tabKey, force = false) {
-    const tabView = tabViews.find((e) => e.key === tabKey);
+  async function close(key, force = false) {
+    const tabView = find(tabViews, { key });
     const isClosable = force === true || (await tabView?.observerVm.confirmIfIsModified() === true);
 
     if (isClosable) {
-      const removedIndex = remove(tabView);
-      const isSelected = selectedKey.value === tabView.key;
+      const isSelected = selectedKey.value === key;
+      const closestKey = isSelected && getClosestKey(key);
 
-      if (isSelected) {
-        selectClosest(removedIndex);
-      }
+      remove(key);
+
+      await select(closestKey || consts.ROUTE_HOME_NAME);
     }
   }
 
-  const isRegistered = (to) => getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
   const isUnduplicated = (to) => !tabViews.some((v) => v.key === (to.name || to.path));
 
   if (isRegistered(router.currentRoute.value)) {
-    const { key } = add(router.currentRoute.value);
-    selectedKey.value = key;
+    add(router.currentRoute.value);
   }
 
   const removeBeforeResolve = router.beforeResolve((to) => {
@@ -78,8 +75,6 @@ export default () => {
       if (to.meta.logging === true) {
         add(to);
       }
-
-      selectedKey.value = to.name || to.path;
     },
   );
 
@@ -90,14 +85,14 @@ export default () => {
     delete router.close;
   });
 
-  async function onSelect(tabKey) {
-    if (selectedKey.value !== tabKey) {
-      await select(tabKey);
+  async function onSelect(key) {
+    if (selectedKey.value !== key) {
+      await select(key);
     }
   }
 
-  async function onClose(tabKey) {
-    await close(tabKey, false);
+  async function onClose(key) {
+    await close(key, false);
   }
 
   return {
