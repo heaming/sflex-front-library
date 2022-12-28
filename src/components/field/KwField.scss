@@ -197,6 +197,9 @@
     // standard == underline == mobile default
     &--standard {
       .q-field__control {
+        padding-left: $-kw-field-standard-padding;
+        padding-right: $-kw-field-standard-padding;
+
         &::before {
           border-color: $line-stroke;
         }
@@ -209,11 +212,6 @@
           height: 0; // notice. transform to height
           transform: initial; // turn off animation
         }
-      }
-
-      .q-field__native {
-        padding-left: $-kw-field-standard-padding;
-        padding-right: $-kw-field-standard-padding;
       }
 
       &.q-field--highlighted {
@@ -610,6 +608,10 @@ body.tablet {
 body.mobile:not(.tablet) {
   .kw-field {
     & .q-field {
+      &__control-container {
+        position: static;
+      }
+
       &__messages {
         overflow-wrap: anywhere;
       }
