@@ -1,11 +1,11 @@
-import { last } from 'lodash-es';
+import { last, findIndex } from 'lodash-es';
 
 export default () => {
   const router = useRouter();
-  const { getters } = useStore();
+  const store = useStore();
 
   const { currentRoute } = router;
-  const selectedKey = computed(() => currentRoute.value.name || currentRoute.value.path);
+  const selectedKey = computed(() => currentRoute.value.name);
   const stackViews = shallowReactive([]);
 
   function add(to) {
@@ -18,27 +18,28 @@ export default () => {
     return stackViews[index - 1];
   }
 
-  // eslint-disable-next-line no-unused-vars
-  function remove(tabItem) {
-    const index = stackViews.findIndex((v) => v === tabItem);
-    stackViews.splice(index, 1);
-    return index;
-  }
+  const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const removeAfterEach = router.afterEach((to, from, failure) => {
+    if (failure) return;
 
-  const isRegistered = (to) => getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isUnduplicated = (to) => !stackViews.some((v) => v.key === (to.name || to.path));
+    if (isRegistered(to)) {
+      if (to.meta.pageUseCode === 'N') {
+        // if main page then clear all stack
+        stackViews.splice(0);
+      } else {
+        // clear all stack after current stack
+        const key = selectedKey.value;
+        const index = findIndex(stackViews, { key });
+        stackViews.splice(index + 1);
+      }
+
+      add(to);
+    }
+  });
 
   if (isRegistered(router.currentRoute.value)) {
     add(router.currentRoute.value);
   }
-
-  const removeAfterEach = router.afterEach((to, from, failure) => {
-    if (failure) return;
-
-    if (isRegistered(to) && isUnduplicated(to)) {
-      add(to);
-    }
-  });
 
   onBeforeUnmount(() => {
     removeAfterEach();

@@ -6,7 +6,7 @@ export default () => {
   const store = useStore();
 
   const tabViews = shallowReactive([]);
-  const selectedKey = computed(() => router.currentRoute.value.name || router.currentRoute.value.path);
+  const selectedKey = computed(() => router.currentRoute.value.name);
 
   function add(to) {
     const index = tabViews.push({
@@ -57,10 +57,6 @@ export default () => {
   const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
   const isUnduplicated = (to) => !tabViews.some((v) => v.key === (to.name || to.path));
 
-  if (isRegistered(router.currentRoute.value)) {
-    add(router.currentRoute.value);
-  }
-
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
@@ -70,6 +66,10 @@ export default () => {
       }
     },
   );
+
+  if (isRegistered(router.currentRoute.value)) {
+    add(router.currentRoute.value);
+  }
 
   router.close = () => close(selectedKey.value);
   onBeforeUnmount(() => {
