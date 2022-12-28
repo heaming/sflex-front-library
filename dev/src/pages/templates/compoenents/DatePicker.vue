@@ -1,10 +1,10 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Checkbox
+      DatePicker
     </h2>
     <p class="kw-guide-description">
-      Checkbox
+      DatePicker
     </p>
     <guide-section
       title="playground"

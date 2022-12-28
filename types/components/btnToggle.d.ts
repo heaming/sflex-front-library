@@ -60,6 +60,14 @@ interface KwBtnToggleProps extends Pick<QBtnToggleProps, FallThroughProps>, UseF
   gap?: string | undefined;
 
   /**
+   * 버튼의 줄 바꿈을 허용합니다. grow 랑 같이 사용해보세요.
+   *
+   * @see grow
+   * @see noWrap
+   */
+  btnWrap?: boolean | undefined;
+
+  /**
    * 활성화된 버튼의 옵션 값입니다.
    *
    * @default '4px'
