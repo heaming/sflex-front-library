@@ -6,6 +6,10 @@
       &::after {
         top: -12px;
       }
+
+      &.sortable-swap-highlight {
+        background: rgb(47 138 243 / 50%);
+      }
     }
 
     &__node-header::before {

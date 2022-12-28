@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import Sortable from 'sortablejs';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
@@ -74,6 +75,7 @@ export default {
 
     // customize props
     selectLeafOnly: { type: Boolean, default: false },
+    draggable: { type: Boolean, default: false },
   },
 
   emits: [
@@ -126,6 +128,68 @@ export default {
         setExpanded(key, !isExpanded(key));
       }
     }
+
+    let sortableInstances = [];
+
+    function getSortableTargets(el) {
+      const targets = [el];
+      // eslint-disable-next-line no-restricted-syntax
+      for (const child of el.children) {
+        const next = child.querySelector('.q-tree__children');
+        if (next) {
+          targets.push(
+            ...getSortableTargets(next),
+          );
+        }
+      }
+      return targets;
+    }
+
+    function destroySortable() {
+      sortableInstances.forEach((e) => { e.destroy(); });
+      sortableInstances = [];
+    }
+
+    function createSortable() {
+      destroySortable();
+
+      const el = treeRef.value.$el;
+      const targets = getSortableTargets(el);
+
+      targets.forEach((e) => {
+        sortableInstances.push(
+          new Sortable(e, {
+            group: 'nested',
+            animation: 150,
+          }),
+        );
+      });
+    }
+
+    let unwatchNodes;
+    function watchNodes() {
+      unwatchNodes = watch(() => props.nodes, () => {
+        createSortable();
+      }, { deep: true });
+    }
+
+    onMounted(() => {
+      watch(() => props.draggable, (val) => {
+        if (val) {
+          createSortable();
+          watchNodes();
+        } else {
+          destroySortable();
+          unwatchNodes?.();
+        }
+      }, { immediate: true });
+    });
+
+    onBeforeUnmount(() => {
+      if (props.draggable) {
+        destroySortable();
+      }
+    });
 
     return {
       ...useInheritAttrs(),
