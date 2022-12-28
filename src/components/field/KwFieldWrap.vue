@@ -1,6 +1,5 @@
 <template>
   <div
-    class="kw-field-wrap"
     :class="computedClass"
   >
     <div
@@ -69,26 +68,19 @@
 </template>
 
 <script>
-import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
-import useDense, { useDenseProps } from '../../composables/private/useDense';
 import { platform } from '../../plugins/platform';
 import useFormLayout from '../../composables/private/useFormLayout';
-import useStretch, { useStretchProps } from '../../composables/private/useStretch';
+import useStretch from '../../composables/private/useStretch';
+import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
+import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFieldWrap';
 
 export default {
   name: 'KwFieldWrap',
 
   props: {
-    ...useDenseProps,
-    ...useStretchProps,
-
-    label: { type: String, default: undefined },
-    required: { type: Boolean, default: undefined },
-    controlClass: { type: [Object, Array, String], default: undefined },
+    ...useFieldWrapProps,
     error: { type: Boolean, default: undefined },
     errorMessage: { type: String, default: undefined },
-    autoHeight: { type: Boolean, default: true },
-    hideBottomSpace: { type: Boolean, default: undefined },
   },
 
   emits: ['focus'],
@@ -101,31 +93,35 @@ export default {
       invalidMessage,
     } = useFieldStateWrap();
 
-    const computedDense = useDense();
     const { cols } = useFormLayout();
     const { stretchClass } = useStretch();
+    const { fieldWrapProps } = useFieldWrap({ autoHeight: true });
 
-    const computedHideBottom = computed(() => props.hideBottomSpace ?? platform.is.mobile);
     const showErrorMessage = computed(() => props.error || invalid.value);
+    const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
+
+    const showLabel = computed(() => platform.is.mobile && (fieldWrapProps.value.label || slots.label));
+
+    const computedHideBottom = computed(() => fieldWrapProps.value.hideBottomSpace ?? platform.is.mobile);
     const doNotRenderBottom = computed(() => computedHideBottom.value && !showErrorMessage.value);
-    const showLabel = computed(() => platform.is.mobile && (props.label || slots.label));
+    const computedBottomClass = computed(() => {
+      const classes = [];
+      classes.push(platform.is.mobile ? 'kw-field-wrap__bottom--stale' : 'kw-field-wrap__bottom--animated');
+      return classes;
+    });
 
     const computedClass = computed(() => {
       const classes = {
         ...stretchClass.value,
       };
-      classes['kw-field-wrap--error'] = props.error || invalid.value;
-      classes['kw-field-wrap--dense'] = computedDense.value;
+      classes['kw-field-wrap'] = true;
+      classes['kw-field-wrap--error'] = showErrorMessage.value;
+      classes['kw-field-wrap--dense'] = fieldWrapProps.value.dense;
       classes['kw-field-wrap--labeled'] = showLabel.value;
-      classes['kw-field-wrap--required'] = props.required;
-      classes['kw-field-wrap--auto-height'] = props.autoHeight;
+      classes['kw-field-wrap--required'] = fieldWrapProps.value.required;
+      classes['kw-field-wrap--auto-height'] = fieldWrapProps.value.autoHeight;
+      classes['kw-field-wrap--multiline'] = fieldWrapProps.value.multiline;
       classes[`kw-field-wrap--col-${cols.value}`] = !!cols.value;
-      return classes;
-    });
-    const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
-    const computedBottomClass = computed(() => {
-      const classes = [];
-      classes.push(platform.is.mobile ? 'kw-field-wrap__bottom--stale' : 'kw-field-wrap__bottom--animated');
       return classes;
     });
 
@@ -135,7 +131,6 @@ export default {
     }
 
     return {
-      dense: computedDense,
       controlRef,
       showErrorMessage,
       showLabel,

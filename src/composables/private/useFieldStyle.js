@@ -22,10 +22,7 @@ export const useFieldStyleProps = {
     type: Boolean,
     default: false,
   },
-  required: {
-    type: Boolean,
-    default: false,
-  },
+  required: { type: Boolean, default: false },
 };
 
 export default (defaults = {}) => {

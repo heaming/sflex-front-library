@@ -1,8 +1,7 @@
 <template>
   <kw-field-wrap
     class="kw-date-range-picker"
-    v-bind="{...styleClassAttrs, ...stretchProps}"
-    :label="label"
+    v-bind="{...styleClassAttrs, ...fieldWrapProps}"
     :error="invalid"
     :error-message="invalidMessage"
   >
@@ -49,17 +48,17 @@
 <script>
 import { FormContextKey } from '../../consts/private/symbols';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
-import { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useField, { useFieldProps } from '../../composables/private/useField';
-import useStretch, { useStretchProps } from '../../composables/private/useStretch';
+import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFieldWrap';
 
 export default {
   name: 'KwDateRangePicker',
 
+  inheritAttrs: false,
+
   props: {
     ...useFieldProps,
-    ...useFieldStyleProps,
-    ...useStretchProps,
+    ...useFieldWrapProps,
 
     from: {
       type: String,
@@ -163,7 +162,7 @@ export default {
 
     return {
       ...useInheritAttrs(),
-      ...useStretch(),
+      ...useFieldWrap(),
       ...fieldCtx,
       onChangeDate,
     };
