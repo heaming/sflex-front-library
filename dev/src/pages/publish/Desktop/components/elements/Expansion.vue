@@ -1,13 +1,9 @@
 <template>
-  <kw-page
-    class="kw-guide"
-    no-header
-  >
+  <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      [TABLET] Expansion
+      Expansion
     </h2>
     <guide-history-view :items="historyData" />
-    <!-- summary -->
     <div class="kw-guide-section">
       <h3
         id="summary"
@@ -44,501 +40,112 @@
         </tbody>
       </q-markup-table>
     </div>
-
-    <!-- case1 -->
     <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
       >
-        case1
+        Expansion
       </h3>
 
       <p class="kw-guide-description">
-        kw-list > kw-item<br>
-        Use the helper class for kw-expansion-item and text<br>
-        <a href="https://zpl.io/GENPKY9">Zeplin Design</a>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-list>
-            <kw-item>
-              <div class="kw-font-body text-weight-bold mt15">
-                곽재원(21164) | 성수지점
-              </div>
-              <kw-expansion-item>
-                <template #header>
-                  <div class="col">
-                    <div class="row justify-between">
-                      <p class="kw-font-pt14 kw-fc--black3">
-                        결재총액
-                      </p>
-                      <div class="kw-font-pt16 kw-fc--black1 mr8">
-                        30,000 원
-                      </div>
-                    </div>
-                  </div>
-                </template>
-                <div class="py16 px20">
-                  <ul class="card-text card-text--between">
-                    <li>
-                      <p>상품정보</p>
-                      <span>
-                        비데(BK750RWA)
-                      </span>
-                    </li>
-                    <li>
-                      <p>서비스정보</p>
-                      <span>고객 과실</span>
-                    </li>
-                  </ul>
-                </div>
-              </kw-expansion-item>
-            </kw-item>
-            <kw-item>
-              <div class="kw-font-body text-weight-bold mt15">
-                곽재원(21164) | 성수지점
-              </div>
-              <kw-expansion-item>
-                <template #header>
-                  <div class="col">
-                    <div class="row justify-between">
-                      <p class="kw-font-pt14 kw-fc--black3">
-                        결재총액
-                      </p>
-                      <div class="kw-font-pt16 kw-fc--black1 mr8">
-                        30,000 원
-                      </div>
-                    </div>
-                  </div>
-                </template>
-                <div class="py16 px20">
-                  <ul class="card-text card-text--between">
-                    <li>
-                      <p>상품정보</p>
-                      <span>
-                        비데(BK750RWA)
-                      </span>
-                    </li>
-                    <li>
-                      <p>서비스정보</p>
-                      <span>고객 과실</span>
-                    </li>
-                  </ul>
-                </div>
-              </kw-expansion-item>
-            </kw-item>
-          </kw-list>
-        </div>
-        <guide-code-view
-          :code-value="case1"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-
-    <!-- case2 -->
-    <div class="kw-guide-section">
-      <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        case2
-      </h3>
-
-      <p class="kw-guide-description">
-        kw-list > kw-expansion-item<br>
-        Use the helper class for kw-expansion-item and text<br>
-        <a href="https://zpl.io/noN35EA">Zeplin design</a>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-list>
-            <kw-expansion-item>
-              <template #header>
-                <div class="col">
-                  <div class="row justify-between">
-                    <p class="kw-font-pt14 kw-fc--black3">
-                      현금 입금 (총 3건)
-                    </p>
-                    <div class="kw-font-pt16 kw-fc--black1 mr8">
-                      220,000원
-                    </div>
-                  </div>
-                </div>
-              </template>
-              <div class="py16 px20">
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="py16 px20 mt8">
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </div>
-            </kw-expansion-item>
-            <kw-expansion-item>
-              <template #header>
-                <div class="col">
-                  <div class="row justify-between">
-                    <p class="kw-font-pt14 kw-fc--black3">
-                      카드 입금 (총 5건)
-                    </p>
-                    <div class="kw-font-pt16 kw-fc--black1 mr8">
-                      120,000원
-                    </div>
-                  </div>
-                </div>
-              </template>
-              <div class="py16 px20">
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </div>
-            </kw-expansion-item>
-          </kw-list>
-        </div>
-        <guide-code-view
-          :code-value="case2"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-
-    <!-- 우리가 해야하는 것!!  -->
-    <div class="kw-guide-section">
-      <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        case3
-      </h3>
-
-      <p class="kw-guide-description">
-        <a href="https://zpl.io/PqMRBJA">Zeplin design</a>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-list>
-            <kw-expansion-item>
-              <template #header="{read}">
-                <kw-icon :name="read ? 'alert_off_24' : 'alert_on_24'" />
-                <div class="kw-expansion-item-text">
-                  <p>[KSS 전자계약오류] 개인 신용정보 조회 동의 처리 가능한 상태가 아닙니다.</p>
-                  <span>
-                    오후 3:34
-                  </span>
-                </div>
-              </template>
-
-              <div class="py16 px20 kw-font-pt14">
-                계약 고객이 사용하는 통신사에 신용정보 조회 동의를 거부한 상태인 경우에 나타나는 메세지입니다.
-                통신사에 문의 바랍니다.
-              </div>
-            </kw-expansion-item>
-            <kw-expansion-item>
-              <template #header="{read}">
-                <kw-icon :name="read ? 'alert_off_24' : 'alert_on_24'" />
-                <div class="kw-expansion-item-text">
-                  <p>[KSS 전자계약오류] 개인 신용정보 조회 동의 처리 가능한 상태가 아닙니다.</p>
-                  <span>
-                    오후 3:34
-                  </span>
-                </div>
-              </template>
-
-              <div class="py16 px20 kw-font-pt14">
-                계약 고객이 사용하는 통신사에 신용정보 조회 동의를 거부한 상태인 경우에 나타나는 메세지입니다.
-                통신사에 문의 바랍니다.
-              </div>
-            </kw-expansion-item>
-          </kw-list>
-        </div>
-        <guide-code-view
-          :code-value="case3"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-
-    <!-- case1 rework -->
-    <div class="kw-guide-section">
-      <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        case1 rework
-      </h3>
-
-      <p class="kw-guide-description">
-        kw-list > kw-item<br>
-        Use the helper class for kw-expansion-item and text<br>
-        <a href="https://zpl.io/GENPKY9">Zeplin Design</a>
+        Make sure to Wrap <b>kw-expansion-item</b> by kw-list<br>
+        <!-- <em># kw-list</em><br>
+        default spacing top and bottom are 40px<br>
+        dense : top and bottom are 32px<br> -->
+        <em># item-padding</em><br>
+        item-padding's default is 16px (padding top and bottom).<br>
+        If it's needed to change padding, put item-padding="20px 0" in kw-list<br>
+        <em># padding-target</em><br>
+        This padding can be for self , header and put it in kw-expansion-item<br>
+        padding-target="header", It's padding for header<br>
+        padding-target="self" ,  it's whole padding for header and content<br>
+        :padding-target="['header', 'self']", It's header's padding and whole padding for Expansion<br>
+        <em># expansion-icon</em><br>
+        expansion-icon-algin adjust the icon's positon as "top, center,bottom"<br>
+        expand-icon-class= "" : If adjust spacing or style add the heler class in such as "pl8 kw-font-pt24"<br>
+        <em># block-inherit-padding</em><br>
+        default is false : this means affect the padding to kw-item <br>
+        padding affect to the kw-item which is included in kw-list. If no need to put the other padding in kw-item,
+        add affect :block-inherit-padding="true" <br>
+        <a href="https://zpl.io/EmzP6Gl"> the reference page for expansion</a><br>
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-list
-            class="w320"
-            item-padding
             separator
+            item-padding="20px 0"
           >
             <kw-expansion-item
-              group="any-group-name"
+              group="list-group"
               padding-target="header"
-              expand-icon-align="bottom"
-              expand-icon-class="pl8 text-title"
-              block-inherit-padding
+              expansion-icon-align="center"
+              expand-icon-class="kw-font-pt24"
             >
               <template #header>
                 <kw-item-section>
-                  <kw-item-label
-                    font="body"
-                    font-weight="bold"
-                  >
-                    곽재원(21164) | 성수지점
-                  </kw-item-label>
-                  <kw-item-label class="flex justify-between">
-                    <span class="text-dense kw-fc--black3">
-                      결재총액
-                    </span>
-                    <span class="text-body kw-fc--black1">
-                      30,000 원
-                    </span>
+                  <kw-item-label>
+                    <span class="text-bold kw-font-pt18">기본내역</span>
+                    <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
                   </kw-item-label>
                 </kw-item-section>
               </template>
-              <kw-item
-                padding
-                class="px20 bg-bg-body"
-              >
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </kw-item>
-            </kw-expansion-item>
-            <kw-expansion-item
-              group="any-group-name"
-              padding-target="header"
-              expand-icon-align="bottom"
-              expand-icon-class="pl8 text-title"
-              block-inherit-padding
-            >
-              <template #header>
-                <kw-item-section>
-                  <kw-item-label
-                    font="body"
-                    font-weight="bold"
-                  >
-                    곽재원(21164) | 성수지점
-                  </kw-item-label>
-                  <kw-item-label class="flex justify-between">
-                    <span class="text-dense kw-fc--black3">
-                      결재총액
-                    </span>
-                    <span class="text-body kw-fc--black1">
-                      30,000 원
-                    </span>
-                  </kw-item-label>
-                </kw-item-section>
-              </template>
-              <kw-item
-                padding
-                class="px20 bg-bg-body"
-              >
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </kw-item>
-            </kw-expansion-item>
-            <kw-expansion-item
-              group="any-group-name"
-              padding-target="header"
-              expand-icon-align="bottom"
-              expand-icon-class="pl8 text-title"
-              block-inherit-padding
-            >
-              <template #header>
-                <kw-item-section>
-                  <kw-item-label
-                    font="body"
-                    font-weight="bold"
-                  >
-                    곽재원(21164) | 성수지점
-                  </kw-item-label>
-                  <kw-item-label class="flex justify-between">
-                    <span class="text-dense kw-fc--black3">
-                      결재총액
-                    </span>
-                    <span class="text-body kw-fc--black1">
-                      30,000 원
-                    </span>
-                  </kw-item-label>
-                </kw-item-section>
-              </template>
-              <kw-item
-                padding
-                class="px20 bg-bg-body"
-              >
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </kw-item>
-            </kw-expansion-item>
-          </kw-list>
-        </div>
-        <guide-code-view
-          :code-value="case1"
-          lang="vue"
-        />
-      </q-card>
-    </div>
-
-    <!-- case2 rework-->
-    <div class="kw-guide-section">
-      <h3
-        id="default"
-        class="kw-guide-title"
-      >
-        case2
-      </h3>
-
-      <p class="kw-guide-description">
-        kw-list > kw-expansion-item<br>
-        Use the helper class for kw-expansion-item and text<br>
-        <a href="https://zpl.io/noN35EA">Zeplin design</a>
-      </p>
-      <q-card>
-        <div class="kw-guide-example">
-          <kw-list>
-            <kw-expansion-item>
-              <template #header>
-                <div class="col">
-                  <div class="row justify-between">
-                    <p class="kw-font-pt14 kw-fc--black3">
-                      현금 입금 (총 3건)
-                    </p>
-                    <div class="kw-font-pt16 kw-fc--black1 mr8">
-                      220,000원
-                    </div>
-                  </div>
-                </div>
-              </template>
-              <div class="py16 px20">
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="py16 px20 mt8">
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
+              <div class="kw-bc--bg-body">
+                <kw-form
+                  dense
+                  class="px40 py20"
+                >
+                  <kw-form-row>
+                    <kw-form-item label="과표계">
+                      12,345,600
+                    </kw-form-item>
+                    <kw-form-item label="공제계">
+                      123,450
+                    </kw-form-item>
+                    <kw-form-item label="실지급액">
+                      12,345,600
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
               </div>
             </kw-expansion-item>
-            <kw-expansion-item>
+            <kw-expansion-item
+              group="list-group"
+              padding-target="header"
+              expansion-icon-align="center"
+              expand-icon-class="kw-font-pt24"
+            >
               <template #header>
-                <div class="col">
-                  <div class="row justify-between">
-                    <p class="kw-font-pt14 kw-fc--black3">
-                      카드 입금 (총 5건)
-                    </p>
-                    <div class="kw-font-pt16 kw-fc--black1 mr8">
-                      120,000원
-                    </div>
-                  </div>
-                </div>
+                <kw-item-section>
+                  <kw-item-label>
+                    <span class="text-bold kw-font-pt18">기본내역</span>
+                    <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+                  </kw-item-label>
+                </kw-item-section>
               </template>
-              <div class="py16 px20">
-                <ul class="card-text card-text--between">
-                  <li>
-                    <p>상품정보</p>
-                    <span>
-                      비데(BK750RWA)
-                    </span>
-                  </li>
-                  <li>
-                    <p>서비스정보</p>
-                    <span>고객 과실</span>
-                  </li>
-                </ul>
+              <div class="kw-bc--bg-body">
+                <kw-form
+                  dense
+                  class="px40 py20"
+                >
+                  <kw-form-row>
+                    <kw-form-item label="과표계">
+                      12,345,600
+                    </kw-form-item>
+                    <kw-form-item label="공제계">
+                      123,450
+                    </kw-form-item>
+                    <kw-form-item label="실지급액">
+                      12,345,600
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
               </div>
             </kw-expansion-item>
           </kw-list>
         </div>
         <guide-code-view
-          :code-value="case2"
+          :code-value="testCode"
           lang="vue"
         />
       </q-card>
@@ -547,220 +154,86 @@
 </template>
 
 <script setup>
-const case1 = `
+const testCode = `
 <kw-list
-  class="w320"
-  item-padding
-  separator
->
-  <kw-expansion-item
-    group="any-group-name"
-    padding-target="header"
-    expand-icon-align="bottom"
-    expand-icon-class="pl8 text-title"
-    block-inherit-padding
+    separator
+    item-padding="20px 0"
   >
-    <template #header>
-      <kw-item-section>
-        <kw-item-label
-          font="body"
-          font-weight="bold"
-        >
-          곽재원(21164) | 성수지점
-        </kw-item-label>
-        <kw-item-label class="flex justify-between">
-          <span class="text-dense kw-fc--black3">
-            결재총액
-          </span>
-          <span class="text-body kw-fc--black1">
-            30,000 원
-          </span>
-        </kw-item-label>
-      </kw-item-section>
-    </template>
-    <kw-item
-      padding
-      class="px20 bg-bg-body"
+    <kw-expansion-item
+      group="list-group"
+      padding-target="header"
+      expansion-icon-align="center"
+      expand-icon-class="kw-font-pt24"
     >
-      <ul class="card-text card-text--between">
-        <li>
-          <p>상품정보</p>
-          <span>
-            비데(BK750RWA)
-          </span>
-        </li>
-        <li>
-          <p>서비스정보</p>
-          <span>고객 과실</span>
-        </li>
-      </ul>
-    </kw-item>
-  </kw-expansion-item>
-  <kw-expansion-item
-    group="any-group-name"
-    padding-target="header"
-    expand-icon-align="bottom"
-    expand-icon-class="pl8 text-title"
-    block-inherit-padding
-  >
-    <template #header>
-      <kw-item-section>
-        <kw-item-label
-          font="body"
-          font-weight="bold"
+      <template #header>
+        <kw-item-section>
+          <kw-item-label>
+            <span class="text-bold kw-font-pt18">기본내역</span>
+            <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+          </kw-item-label>
+        </kw-item-section>
+      </template>
+      <div class="kw-bc--bg-body">
+        <kw-form
+          dense
+          class="px40 py20"
         >
-          곽재원(21164) | 성수지점
-        </kw-item-label>
-        <kw-item-label class="flex justify-between">
-          <span class="text-dense kw-fc--black3">
-            결재총액
-          </span>
-          <span class="text-body kw-fc--black1">
-            30,000 원
-          </span>
-        </kw-item-label>
-      </kw-item-section>
-    </template>
-    <kw-item
-      padding
-      class="px20 bg-bg-body"
-    >
-      <ul class="card-text card-text--between">
-        <li>
-          <p>상품정보</p>
-          <span>
-            비데(BK750RWA)
-          </span>
-        </li>
-        <li>
-          <p>서비스정보</p>
-          <span>고객 과실</span>
-        </li>
-      </ul>
-    </kw-item>
-  </kw-expansion-item>
-  <kw-expansion-item
-    group="any-group-name"
-    padding-target="header"
-    expand-icon-align="bottom"
-    expand-icon-class="pl8 text-title"
-    block-inherit-padding
-  >
-    <template #header>
-      <kw-item-section>
-        <kw-item-label
-          font="body"
-          font-weight="bold"
-        >
-          곽재원(21164) | 성수지점
-        </kw-item-label>
-        <kw-item-label class="flex justify-between">
-          <span class="text-dense kw-fc--black3">
-            결재총액
-          </span>
-          <span class="text-body kw-fc--black1">
-            30,000 원
-          </span>
-        </kw-item-label>
-      </kw-item-section>
-    </template>
-    <kw-item
-      padding
-      class="px20 bg-bg-body"
-    >
-      <ul class="card-text card-text--between">
-        <li>
-          <p>상품정보</p>
-          <span>
-            비데(BK750RWA)
-          </span>
-        </li>
-        <li>
-          <p>서비스정보</p>
-          <span>고객 과실</span>
-        </li>
-      </ul>
-    </kw-item>
-  </kw-expansion-item>
-</kw-list>
-`;
-const case2 = `
-<kw-list>
-  <kw-expansion-item>
-    <template #header>
-      <div class="col">
-        <div class="row justify-between">
-          <p class="kw-font-pt14 kw-fc--black3">
-            현금 입금 (총 3건)
-          </p>
-          <div class="kw-font-pt16 kw-fc--black1 mr8">
-            220,000원
-          </div>
-        </div>
+          <kw-form-row>
+            <kw-form-item label="과표계">
+              12,345,600
+            </kw-form-item>
+            <kw-form-item label="공제계">
+              123,450
+            </kw-form-item>
+            <kw-form-item label="실지급액">
+              12,345,600
+            </kw-form-item>
+          </kw-form-row>
+        </kw-form>
       </div>
-    </template>
-    <div class="py16 px20">
-      <ul class="card-text card-text--between">
-        <li>
-          <p>상품정보</p>
-          <span>
-            비데(BK750RWA)
-          </span>
-        </li>
-        <li>
-          <p>서비스정보</p>
-          <span>고객 과실</span>
-        </li>
-      </ul>
-    </div>
-    <div class="py16 px20 mt8">
-      <ul class="card-text card-text--between">
-        <li>
-          <p>상품정보</p>
-          <span>
-            비데(BK750RWA)
-          </span>
-        </li>
-        <li>
-          <p>서비스정보</p>
-          <span>고객 과실</span>
-        </li>
-      </ul>
-    </div>
-  </kw-expansion-item>
-  <kw-expansion-item>
-    <template #header>
-      <div class="col">
-        <div class="row justify-between">
-          <p class="kw-font-pt14 kw-fc--black3">
-            카드 입금 (총 5건)
-          </p>
-          <div class="kw-font-pt16 kw-fc--black1 mr8">
-            120,000원
-          </div>
-        </div>
+    </kw-expansion-item>
+    <kw-expansion-item
+      group="list-group"
+      padding-target="header"
+      expansion-icon-align="center"
+      expand-icon-class="kw-font-pt24"
+    >
+      <template #header>
+        <kw-item-section>
+          <kw-item-label>
+            <span class="text-bold kw-font-pt18">기본내역</span>
+            <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+          </kw-item-label>
+        </kw-item-section>
+      </template>
+      <div class="kw-bc--bg-body">
+        <kw-form
+          dense
+          class="px40 py20"
+        >
+          <kw-form-row>
+            <kw-form-item label="과표계">
+              12,345,600
+            </kw-form-item>
+            <kw-form-item label="공제계">
+              123,450
+            </kw-form-item>
+            <kw-form-item label="실지급액">
+              12,345,600
+            </kw-form-item>
+          </kw-form-row>
+        </kw-form>
       </div>
-    </template>
-    <div class="py16 px20">
-      <ul class="card-text card-text--between">
-        <li>
-          <p>상품정보</p>
-          <span>
-            비데(BK750RWA)
-          </span>
-        </li>
-        <li>
-          <p>서비스정보</p>
-          <span>고객 과실</span>
-        </li>
-      </ul>
-    </div>
-  </kw-expansion-item>
-</kw-list>
+    </kw-expansion-item>
+  </kw-list>
 `;
 const historyData = [
   {
-    timestamp: '2022-11-24',
+    timestamp: '2022-12-08',
+    text: 'Updated expansion newly',
+  },
+  {
+    timestamp: '2022-11-04',
     text: 'First added',
   },
 ];

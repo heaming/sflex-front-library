@@ -1,3 +1,9 @@
+.kw-expansion-item {
+  .q-focus-helper {
+    display: none;
+  }
+}
+
 .kw-expansion-item.legacy {
   border-bottom: 1px solid $line-line;
 
