@@ -96,6 +96,7 @@ export default defineConfig(({ mode }) => {
           // 'quasar/lang/en-US',
           // 'quasar/lang/ko-KR',
           'realgrid',
+          'sortablejs',
           'suneditor',
           'suneditor/src/lang',
           'suneditor/src/plugins',

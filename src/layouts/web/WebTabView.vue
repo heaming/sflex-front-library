@@ -21,25 +21,24 @@
           </kw-tooltip>
         </div>
         <q-icon
-          class="cursor-pointer"
           name="close_24"
-          size="12px"
           @click.stop="onClose(tabView.key)"
         />
       </q-tab>
     </q-tabs>
 
-    <q-tab-panels
+    <web-tab-view-panels
       :model-value="selectedKey"
       class="web-tab-view__content"
-      keep-alive
     >
-      <q-tab-panel
+      <web-tab-view-panel
         v-for="tabView of tabViews"
         :key="tabView.key"
         :name="tabView.key"
       >
-        <kw-observer :ref="(vm) => tabView.observerVm = vm">
+        <kw-observer
+          :ref="(vm) => tabView.observerVm = vm"
+        >
           <kw-suspense>
             <template #default>
               <component
@@ -52,18 +51,25 @@
             </template>
           </kw-suspense>
         </kw-observer>
-      </q-tab-panel>
-    </q-tab-panels>
+      </web-tab-view-panel>
+    </web-tab-view-panels>
   </q-page-container>
 </template>
 
 <script>
 import useTabView from './private/useTabView';
+
+import WebTabViewPanels from './WebTabViewPanels.vue';
+import WebTabViewPanel from './WebTabViewPanel.vue';
 import LoadFailedView from './LoadFailedView.vue';
 
 export default {
   name: 'WebTabView',
-  components: { LoadFailedView },
+  components: {
+    WebTabViewPanels,
+    WebTabViewPanel,
+    LoadFailedView,
+  },
 
   setup() {
     return {

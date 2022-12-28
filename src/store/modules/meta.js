@@ -61,7 +61,9 @@ export default {
     getMenus: (state) => state.menus,
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
     getPages: (state) => state.pages,
-    getPage: (state) => (key) => find(state.pages, (v) => v.pageId === key || v.pageDestinationValue === key),
+    getPage: (state) => (key) => find(state.pages, (v) => (
+      v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key
+    )),
   },
 
   actions: {
