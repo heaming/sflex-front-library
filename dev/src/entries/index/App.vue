@@ -48,7 +48,7 @@ function recursiveCreateGlobalMenus(nodes, index = 0) {
   const hasParent = depth > 0 && !nodes.some((e) => e.key === key);
 
   if (hasParent) {
-    const node = { key, label: splited[splited.length - 2] };
+    const node = { key, label: splited[splited.length - 2], isFolder: true };
     return recursiveCreateGlobalMenus([...nodes.splice(0, index), node, ...nodes], index);
   }
 
