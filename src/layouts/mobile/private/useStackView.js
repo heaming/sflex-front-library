@@ -32,25 +32,15 @@ export default () => {
     add(router.currentRoute.value);
   }
 
-  const removeBeforeResolve = router.beforeResolve((to) => {
-    const shouldLogging = isRegistered(to) && isUnduplicated(to);
-
-    console.log(getters['meta/getMenu'](to.meta.menuUid));
-
-    to.meta.logging = shouldLogging;
-  });
-
   const removeAfterEach = router.afterEach((to, from, failure) => {
     if (failure) return;
 
-    // is new stack
-    if (to.meta.logging === true) {
+    if (isRegistered(to) && isUnduplicated(to)) {
       add(to);
     }
   });
 
   onBeforeUnmount(() => {
-    removeBeforeResolve();
     removeAfterEach();
   });
 

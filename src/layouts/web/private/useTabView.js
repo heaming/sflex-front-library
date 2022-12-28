@@ -61,18 +61,11 @@ export default () => {
     add(router.currentRoute.value);
   }
 
-  const removeBeforeResolve = router.beforeResolve((to) => {
-    const shouldLogging = isRegistered(to) && isUnduplicated(to);
-
-    to.meta.logging = shouldLogging;
-  });
-
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
 
-      // is new tab
-      if (to.meta.logging === true) {
+      if (isRegistered(to) && isUnduplicated(to)) {
         add(to);
       }
     },
@@ -80,7 +73,6 @@ export default () => {
 
   router.close = () => close(selectedKey.value);
   onBeforeUnmount(() => {
-    removeBeforeResolve();
     removeAfterEach();
     delete router.close;
   });
