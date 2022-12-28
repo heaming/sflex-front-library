@@ -5,8 +5,8 @@
         <template #left>
           selected: {{ selected }}
         </template>
-        <kw-checkbox v-model="sortableYn">
-          Sortable
+        <kw-checkbox v-model="draggableYn">
+          Draggable
         </kw-checkbox>
         <kw-btn @click="genKey += 1">
           Regenerate
@@ -20,7 +20,7 @@
         v-model:selected="selected"
         v-model:expanded="expanded"
         :nodes="nodes"
-        :sortable="sortableYn === 'Y'"
+        :draggable="draggableYn === 'Y'"
       />
     </div>
   </kw-page>
@@ -29,7 +29,7 @@
 <script setup>
 
 const genKey = ref(1);
-const sortableYn = ref('Y');
+const draggableYn = ref('Y');
 const selected = ref('1');
 const expanded = ref([]);
 const nodes = reactive([
