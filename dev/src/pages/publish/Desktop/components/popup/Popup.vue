@@ -14,7 +14,7 @@
         id="summary"
         class="kw-guide-title"
       >
-        Summary
+        Size
       </h3>
       <q-markup-table class="kw-guide-table">
         <thead>
@@ -25,6 +25,7 @@
             <th>
               class
             </th>
+            <th>prop</th>
             <th>
               px
             </th>
@@ -41,7 +42,7 @@
               3xl <br>
               4xl
             </td>
-            <td>
+            <td class="delete">
               kw-popup--sm <br>
               kw-popup--md <br>
               kw-popup--lg <br>
@@ -49,6 +50,15 @@
               kw-popup--2xl <br>
               kw-popup--3xl <br>
               kw-popup--4xl
+            </td>
+            <td class="kw-fc--error">
+              size="sm" <br>
+              size="md" <br>
+              size="lg" <br>
+              size="xl" <br>
+              size="2xl" <br>
+              size="3xl" <br>
+              size="4xl"
             </td>
             <td>
               460px <br>
@@ -60,15 +70,34 @@
               1660px
             </td>
           </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
+        id="Prop"
+        class="kw-guide-title"
+      >
+        Prop
+      </h3>
+      <q-markup-table class="kw-guide-table">
+        <thead>
+          <tr>
+            <th>prop</th>
+            <th>
+              description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
           <tr>
             <td>
               title="text" <br>
-            </td>
-            <td>
-              <br>
+              no-action <br>
             </td>
             <td>
               Add title when necessary <br>
+              Add prop when no action bottom button
             </td>
           </tr>
         </tbody>
@@ -310,6 +339,10 @@ const testCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-12-28',
+    text: 'updated the usage of adjusting size and added the summary of no-action prop',
+  },
   {
     timestamp: '2022-12-27',
     text: 'added 4xl size',

@@ -92,7 +92,7 @@
       display: inline-block;
     }
 
-    .kw-field {
+    > .kw-field {
       flex: 1 1 0;
       max-width: 100%;
 
@@ -113,7 +113,7 @@
       }
     }
 
-    .kw-field-wrap {
+    > .kw-field-wrap {
       flex: 1 1 0;
       max-width: 100%;
 

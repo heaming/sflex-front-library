@@ -20,8 +20,8 @@ export default {
     setGlobalApps(state, apps) {
       state.globalApps = apps;
     },
-    setSelectedGlobalAppKey(state, lnbKey) {
-      state.selectedGlobalAppKey = lnbKey;
+    setSelectedGlobalAppKey(state, appKey) {
+      state.selectedGlobalAppKey = appKey;
     },
     setGlobalMenus(state, menus) {
       state.globalMenus = menus;
@@ -55,6 +55,7 @@ export default {
         parentsKey: v.parentsKey || v.parentsMenuUid,
         label: v.label || v.menuName,
         depth: v.depth || v.menuLevel,
+        isFolder: v.folderYn === 'Y',
       }));
 
       commit('setGlobalMenus', normalizedMenus);
