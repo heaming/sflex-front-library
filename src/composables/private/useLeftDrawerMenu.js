@@ -10,7 +10,7 @@ export default () => {
   const globalApps = getters['app/getGlobalApps'];
   const globalMenus = getters['app/getGlobalMenus'];
   const selectedGlobalAppKey = computed(() => getters['app/getSelectedGlobalAppKey']);
-  const selectedGlobalMenuKey = computed(() => getters['app/getSelectedGlobalAppKey']);
+  const selectedGlobalMenuKey = computed(() => getters['app/getSelectedGlobalMenuKey']);
 
   const treeRef = ref();
   const title = ref();
@@ -47,12 +47,15 @@ export default () => {
 
   async function logging(menuKey) {
     const menu = getters['meta/getMenu'](menuKey);
+
+    if (menu === undefined) return;
+
     const logData = {
       menuLogTypeCode: 'MENU',
       menuLogObjectId: menu.menuUid,
       menuName: menu.menuName,
       appId: menu.applicationId,
-      pageId: menu.fromPageId || menu.pageId,
+      pageId: menu.pageId,
     };
 
     try {
