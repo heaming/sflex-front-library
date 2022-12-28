@@ -29,7 +29,8 @@
     :min="min"
     :max="max"
     :step="step"
-    :input-class="inputClass"
+    :input-class="computedInputClass"
+    :input-style="inputStyle"
     no-error-icon
     clear-icon="clear"
     @focus="onFocus"
@@ -173,6 +174,9 @@ export default {
     onBlur: { type: Function, default: undefined },
     onClear: { type: Function, default: undefined },
     onKeydown: { type: Function, default: undefined },
+    align: { type: String, default: undefined },
+    inputClass: { type: [Array, String, Object], default: undefined },
+    inputStyle: { type: [Array, String, Object], default: undefined },
 
     // customize props
     icon: { type: String, default: undefined },
@@ -182,7 +186,6 @@ export default {
     upperCase: { type: Boolean, default: false },
     lowerCase: { type: Boolean, default: false },
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
-    alignRight: { type: Boolean, default: false },
     spinner: { type: Boolean, default: undefined },
     onClickIcon: { type: Function, default: undefined },
 
@@ -199,10 +202,14 @@ export default {
     const fieldCtx = useField({ onChangeValue: () => {} });
     const { inputRef, value } = fieldCtx;
 
-    const inputClass = computed(() => ({
-      'text-right': props.alignRight,
-      'q-no-input-spinner': !props.spinner,
-    }));
+    const computedInputClass = computed(() => {
+      const classes = {
+        'q-no-input-spinner': !props.spinner,
+      };
+      if (props.align) { classes[`text-${props.align}`] = true; }
+      if (props.inputClass) { return [props.inputClass, classes]; }
+      return classes;
+    });
 
     const inputCounter = computed(() => {
       if (props.counter === true && props.maxlength > 0) {
@@ -321,7 +328,7 @@ export default {
       ...useInheritAttrs(),
       ...useFieldStyle(),
       ...fieldCtx,
-      inputClass,
+      computedInputClass,
       inputCounter,
       select,
       onKeydownInput,
