@@ -1,5 +1,5 @@
 <template>
-  <div class="web-left-drawer__menu">
+  <div class="web-left-drawer__menu drawer-menu">
     <web-left-drawer-title
       :title="title"
     />
@@ -8,8 +8,8 @@
       <q-tree
         ref="treeRef"
         :key="selectedGlobalAppKey"
-        class="web-left-drawer__menu menu-tree"
-        :class="{'menu-tree--empty': treeNodes.length === 0}"
+        class="web-left-drawer__menu drawer-menu__tree"
+        :class="{'drawer-menu__tree--empty': treeNodes.length === 0}"
         :selected="selectedGlobalMenuKey"
         :expanded="expandedKeys"
         :nodes="treeNodes"
@@ -22,16 +22,16 @@
       >
         <template #default-header="{node, expanded}">
           <div
-            class="menu-tree__node"
-            :class="`menu-tree__node--depth-${node.depth}`"
+            class="drawer-menu__node"
+            :class="`drawer-menu__node--depth-${node.depth}`"
           >
-            <div class="menu-tree__node-content">
+            <div class="drawer-menu__node-content">
               {{ node.label }}
             </div>
             <q-icon
               v-if="node.children?.length"
-              class="menu-tree__arrow"
-              :class="{'menu-tree__arrow--expanded': expanded}"
+              class="drawer-menu__node-arrow"
+              :class="{'drawer-menu__node-arrow--expanded': expanded}"
               name="arrow_down"
             />
           </div>

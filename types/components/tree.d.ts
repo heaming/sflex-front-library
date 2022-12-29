@@ -109,6 +109,11 @@ interface KwTreeProps {
   selectLeafOnly?: boolean;
 
   /**
+   * 트리 노드 draggable 여부
+   */
+  draggable?: boolean;
+
+  /**
    * 노드 확장여부 변경할 때 발생하는 이벤트
    * @param expanded 확장된 노드 키 배열
    */
