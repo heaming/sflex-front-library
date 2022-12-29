@@ -18,10 +18,10 @@
 
     <div class="kw-page-header__tools">
       <kw-checkbox
-        model-value="Y"
+        model-value="N"
         checked-icon="bookmark_on"
         unchecked-icon="bookmark_off"
-        @click="onClickFavorites"
+        @update:model-value="onUpdateBookmark"
       >
         <kw-tooltip>
           {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
@@ -135,11 +135,7 @@ export default {
     const title = computed(() => last(navigations.value)?.label);
     const isAuthenticated = getters['meta/isAuthenticated'];
 
-    function onClickBack() {
-      //
-    }
-
-    function onClickFavorites() {
+    async function onUpdateBookmark() {
       if (isAuthenticated) {
         //
       }
@@ -160,8 +156,7 @@ export default {
     return {
       navigations,
       title,
-      onClickBack,
-      onClickFavorites,
+      onUpdateBookmark,
       onClickNotifications,
       onClickNewWindow,
       onClickHint,

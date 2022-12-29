@@ -214,9 +214,11 @@ body.desktop .web-layout {
     }
   }
 
-  .menu-tree {
-    &--empty {
-      padding: 0 20px;
+  .drawer-menu {
+    &__tree {
+      &--empty {
+        padding: 0 20px;
+      }
     }
 
     &__node {
@@ -258,13 +260,41 @@ body.desktop .web-layout {
       }
     }
 
-    &__arrow {
+    &__node-arrow {
       font-size: inherit;
       transition: transform 0.3s;
 
       &--expanded {
         transform: rotate(180deg);
       }
+    }
+  }
+}
+
+.web-left-drawer__bookmark {
+  .drawer-bookmark {
+    &__action {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 16px 20px 13px;
+
+      .kw-btn.q-btn {
+        flex: 1;
+        padding: 0 8px 0 4px;
+        min-height: 24px;
+        max-height: 24px;
+        font-size: 12px;
+        line-height: 24px;
+
+        .q-icon {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &__tree {
+      padding: 0 16px;
     }
   }
 }
