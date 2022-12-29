@@ -1,6 +1,7 @@
 <template>
   <kw-menu
     v-if="isReady"
+    class="kw-grid__context-menu"
     context-menu
     no-focus
     no-refocus
@@ -30,6 +31,11 @@
             dense
             item-padding="0 10px"
           >
+            <template #placeholder>
+              <div class="flex items-center justify-center px10 h32">
+                No columns to configurable
+              </div>
+            </template>
             <kw-item
               v-for="option of contextConfig.viewOptions"
               :key="option.column"
@@ -108,7 +114,9 @@ export default {
     function setContextConfig() {
       const { column } = clickData || view.getCurrent();
       const layouts = view.saveColumnLayout();
-      const viewOptions = recursiveCreateViewOptions(layouts);
+
+      const viewOptions = view.header.visible
+        ? recursiveCreateViewOptions(layouts) : [];
 
       contextConfig.value = {
         column,
