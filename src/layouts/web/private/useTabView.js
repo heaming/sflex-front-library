@@ -46,12 +46,14 @@ export default () => {
     const isClosable = force === true || (await tabView?.observerVm.confirmIfIsModified() === true);
 
     if (isClosable) {
-      const isSelected = selectedKey.value === key;
-      const closestKey = isSelected && getClosestKey(key);
+      const closestKey = getClosestKey(key);
 
       remove(key);
 
-      await select(closestKey || consts.ROUTE_HOME_NAME);
+      // close selected tab
+      if (selectedKey.value === key) {
+        await select(closestKey || consts.ROUTE_HOME_NAME);
+      }
     }
   }
 
