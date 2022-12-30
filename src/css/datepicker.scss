@@ -261,6 +261,14 @@
   }
 }
 
+.kw-date-range-picker {
+  span {
+    padding: 0 4px;
+    color: #777;
+    font-size: 14px;
+  }
+}
+
 // 폼 내부 최내 너비 예외 처리.
 .kw-form:not(.kw-search) .kw-form-item__field {
   .kw-date-picker {
