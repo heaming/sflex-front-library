@@ -54,7 +54,8 @@ function replaceGlobRoutes() {
     .filter(({ meta }) => meta.glob === true);
 
   routes.forEach((route) => {
-    apps.forEach(({ applicationId, applicationUrl }) => {
+    apps.forEach((app) => {
+      const { applicationId, applicationName, applicationUrl } = app;
       const pageDestinationValue = route.name;
       const matched = find(menus, { applicationId, pageDestinationValue });
 
@@ -68,6 +69,7 @@ function replaceGlobRoutes() {
           meta: {
             requiresAuth: true,
             applicationId,
+            applicationName,
             menuUid,
             menuName,
             pageId,
