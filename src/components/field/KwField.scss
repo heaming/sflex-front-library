@@ -569,6 +569,30 @@
     }
   }
 
+  &.grow {
+    .kw-field-wrap__control-container > .kw-field {
+      flex-grow: 1;
+    }
+  }
+
+  &.grow-off {
+    .kw-field-wrap__control-container > .kw-field {
+      flex-grow: 0;
+    }
+  }
+
+  &.shrink {
+    .kw-field-wrap__control-container > .kw-field {
+      flex-shrink: 1;
+    }
+  }
+
+  &.shrink-off {
+    .kw-field-wrap__control-container > .kw-field {
+      flex-shrink: 0;
+    }
+  }
+
   .q-transition--field-message {
     &-leave-from,
     &-leave-active {

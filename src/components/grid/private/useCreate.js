@@ -2,14 +2,14 @@ import { warn } from 'vue';
 import defaultConfig from './defaultConfig';
 import override from './override';
 import { registerCustomRenderers } from './customRenderer';
-import useClickOutsideGrid from './useClickOutsideGrid';
-import useResizeGrid, { useResizeGridProps } from './useResizeGrid';
+import useResize, { useResizeProps } from './useResize';
+import useHandleClickEvent from './useHandleClickEvent';
 import { syncHeadCheckIfAble, unregisterEventAll } from '../../../utils/private/gridShared';
 import { init, reset, validate, isModified } from '../../../utils/grid';
 import useObserverChild, { useObserverChildProps } from '../../../composables/private/useObserverChild';
 
-export const useCreateGridProps = {
-  ...useResizeGridProps,
+export const useCreateProps = {
+  ...useResizeProps,
   ...useObserverChildProps,
 
   onInit: {
@@ -78,13 +78,13 @@ export default (DataClass, ViewClass) => {
   };
 
   useObserverChild(observerChildCtx);
-  useClickOutsideGrid();
+  useHandleClickEvent(containerRef);
 
   const getView = () => view;
   const getData = () => view?.getDataSource();
 
   return {
-    ...useResizeGrid(),
+    ...useResize(),
     containerRef,
     contextMenuRef,
     getView,
