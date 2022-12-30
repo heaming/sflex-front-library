@@ -50,11 +50,11 @@ export default {
     },
     createGlobalMenus({ commit }, menus) {
       const normalizedMenus = menus.map((v) => ({
-        appKey: v.appKey || v.applicationId,
-        key: v.key || v.menuUid,
-        parentsKey: v.parentsKey || v.parentsMenuUid,
-        label: v.label || v.menuName,
-        depth: v.depth || v.menuLevel,
+        appKey: v.applicationId,
+        key: v.menuUid,
+        parentsKey: v.parentsMenuUid,
+        label: v.menuName,
+        depth: v.menuLevel,
         isFolder: v.folderYn === 'Y',
       }));
 

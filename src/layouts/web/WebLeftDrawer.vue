@@ -4,7 +4,7 @@
     :model-value="true"
     :mini="!isExpanded"
     :mini-width="40"
-    :width="280"
+    :width="303"
     show-if-above
     bordered
   >
@@ -36,14 +36,14 @@
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 import WebLeftDrawerMenu from './WebLeftDrawerMenu.vue';
-import WebLeftDrawerFavorite from './WebLeftDrawerFavorite.vue';
+import WebLeftDrawerBookmark from './WebLeftDrawerBookmark.vue';
 import WebLeftDrawerHistory from './WebLeftDrawerHistory.vue';
 
 export default {
   name: 'WebLeftDrawer',
   components: {
     WebLeftDrawerMenu,
-    WebLeftDrawerFavorite,
+    WebLeftDrawerBookmark,
     WebLeftDrawerHistory,
   },
 
@@ -53,7 +53,7 @@ export default {
 
     const contents = [
       { component: WebLeftDrawerMenu, icon: '', label: '메뉴' },
-      { component: WebLeftDrawerFavorite, icon: '', label: '즐겨찾기' },
+      { component: WebLeftDrawerBookmark, icon: '', label: '즐겨찾기' },
       { component: WebLeftDrawerHistory, icon: '', label: '최근링크' },
     ];
     const selectedContent = shallowRef(contents[0]);

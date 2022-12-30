@@ -16,6 +16,12 @@
       ],
       "~test/*": [
         "test/src/*"
+      ],
+      "~common/*": [
+        "test/src/modules/common/*"
+      ],
+      "~collaboration/*": [
+        "test/src/modules/collaboration/*"
       ]
     },
     "lib": [

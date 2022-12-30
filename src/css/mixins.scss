@@ -397,3 +397,12 @@
     @include native-scrollbar($overflow, $scrollbar-gutter, true, $visible);
   }
 }
+
+@mixin spacing($prefix, $spacing-map: $spacing) {
+  @each $name, $space in $spacing-map {
+    $class-name: $prefix + $name;
+    #{$class-name} {
+      @content($space);
+    }
+  }
+}

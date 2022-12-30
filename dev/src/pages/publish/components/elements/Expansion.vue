@@ -150,6 +150,121 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Expansion with seperator top and bottom
+      </h3>
+
+      <p class="kw-guide-description">
+        There are seperator top and bottom.
+        In this case, add <b>kw-separator</b> after the kw-list and before the kw-list.<br>
+        and add the helper class for adjusting the margin between kw-list and seperator.<br>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-separator class="my0" />
+          <kw-list
+            separator
+            item-padding="20px 0"
+          >
+            <kw-expansion-item
+              group="list-group"
+              padding-target="header"
+              expansion-icon-align="center"
+              expand-icon-class="kw-font-pt24"
+            >
+              <template #header>
+                <kw-item-section>
+                  <kw-item-label>
+                    <span class="text-bold kw-font-pt18">기본내역</span>
+                    <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+                  </kw-item-label>
+                </kw-item-section>
+              </template>
+              <div class="pb20">
+                <kw-form
+                  dense
+                >
+                  <kw-form-row>
+                    <kw-form-item label="과표계">
+                      12,345,600
+                    </kw-form-item>
+                    <kw-form-item label="공제계">
+                      123,450
+                    </kw-form-item>
+                    <kw-form-item label="실지급액">
+                      12,345,600
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="과표계">
+                      12,345,600
+                    </kw-form-item>
+                    <kw-form-item label="공제계">
+                      123,450
+                    </kw-form-item>
+                    <kw-form-item label="실지급액">
+                      12,345,600
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </div>
+            </kw-expansion-item>
+            <kw-expansion-item
+              group="list-group"
+              padding-target="header"
+              expansion-icon-align="center"
+              expand-icon-class="kw-font-pt24"
+            >
+              <template #header>
+                <kw-item-section>
+                  <kw-item-label>
+                    <span class="text-bold kw-font-pt18">기본내역</span>
+                    <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+                  </kw-item-label>
+                </kw-item-section>
+              </template>
+              <div class="pb20">
+                <kw-form
+                  dense
+                >
+                  <kw-form-row>
+                    <kw-form-item label="과표계">
+                      12,345,600
+                    </kw-form-item>
+                    <kw-form-item label="공제계">
+                      123,450
+                    </kw-form-item>
+                    <kw-form-item label="실지급액">
+                      12,345,600
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="과표계">
+                      12,345,600
+                    </kw-form-item>
+                    <kw-form-item label="공제계">
+                      123,450
+                    </kw-form-item>
+                    <kw-form-item label="실지급액">
+                      12,345,600
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </div>
+            </kw-expansion-item>
+          </kw-list>
+          <kw-separator class="my0" />
+        </div>
+        <guide-code-view
+          :code-value="testCode2"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -226,6 +341,102 @@ const testCode = `
       </div>
     </kw-expansion-item>
   </kw-list>
+`;
+
+const testCode2 = `
+<kw-separator class="my0" />
+  <kw-list
+    separator
+    item-padding="20px 0"
+  >
+    <kw-expansion-item
+      group="list-group"
+      padding-target="header"
+      expansion-icon-align="center"
+      expand-icon-class="kw-font-pt24"
+    >
+      <template #header>
+        <kw-item-section>
+          <kw-item-label>
+            <span class="text-bold kw-font-pt18">기본내역</span>
+            <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+          </kw-item-label>
+        </kw-item-section>
+      </template>
+      <div class="pb20">
+        <kw-form
+          dense
+        >
+          <kw-form-row>
+            <kw-form-item label="과표계">
+              12,345,600
+            </kw-form-item>
+            <kw-form-item label="공제계">
+              123,450
+            </kw-form-item>
+            <kw-form-item label="실지급액">
+              12,345,600
+            </kw-form-item>
+          </kw-form-row>
+          <kw-form-row>
+            <kw-form-item label="과표계">
+              12,345,600
+            </kw-form-item>
+            <kw-form-item label="공제계">
+              123,450
+            </kw-form-item>
+            <kw-form-item label="실지급액">
+              12,345,600
+            </kw-form-item>
+          </kw-form-row>
+        </kw-form>
+      </div>
+    </kw-expansion-item>
+    <kw-expansion-item
+      group="list-group"
+      padding-target="header"
+      expansion-icon-align="center"
+      expand-icon-class="kw-font-pt24"
+    >
+      <template #header>
+        <kw-item-section>
+          <kw-item-label>
+            <span class="text-bold kw-font-pt18">기본내역</span>
+            <span class="kw-font-pt14 ml8 kw-fc--black3 text-weight-regular">(단위: 원)</span>
+          </kw-item-label>
+        </kw-item-section>
+      </template>
+      <div class="pb20">
+        <kw-form
+          dense
+        >
+          <kw-form-row>
+            <kw-form-item label="과표계">
+              12,345,600
+            </kw-form-item>
+            <kw-form-item label="공제계">
+              123,450
+            </kw-form-item>
+            <kw-form-item label="실지급액">
+              12,345,600
+            </kw-form-item>
+          </kw-form-row>
+          <kw-form-row>
+            <kw-form-item label="과표계">
+              12,345,600
+            </kw-form-item>
+            <kw-form-item label="공제계">
+              123,450
+            </kw-form-item>
+            <kw-form-item label="실지급액">
+              12,345,600
+            </kw-form-item>
+          </kw-form-row>
+        </kw-form>
+      </div>
+    </kw-expansion-item>
+  </kw-list>
+<kw-separator class="my0" />
 `;
 const historyData = [
   {

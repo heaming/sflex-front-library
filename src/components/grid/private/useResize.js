@@ -1,6 +1,6 @@
 import { waitUntilSetLayout, calcViewHeight } from '../../../utils/private/gridShared';
 
-export const useResizeGridProps = {
+export const useResizeProps = {
   visibleRows: {
     type: [Number, String],
     default: 0,

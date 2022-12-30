@@ -5,12 +5,12 @@
     <div
       ref="controlRef"
       class="kw-field-wrap__control"
-      :class="[controlClass, stretchClass]"
+      :class="stretchClass"
       tabindex="-1"
     >
       <div
         class="kw-field-wrap__control-container"
-        :class="stretchClass"
+        :class="[controlClass, stretchClass]"
       >
         <slot />
         <div

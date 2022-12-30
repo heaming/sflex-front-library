@@ -6,8 +6,8 @@
     }
 
     &--separator {
-      > .q-item-type + .q-item-type,
-      > .q-virtual-scroll__content > .q-item-type + .q-item-type {
+      >.q-item-type + .q-item-type,
+      >.q-virtual-scroll__content > .q-item-type + .q-item-type {
         border-top: 1px solid $line-stroke;
       }
     }

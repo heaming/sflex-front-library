@@ -197,6 +197,8 @@ function initGrid(data, view) {
     { fieldName: 'col4' },
     { fieldName: 'col5' },
     { fieldName: 'col6' },
+    { fieldName: 'col7' },
+    { fieldName: 'col8' },
   ];
 
   const columns = [
@@ -206,13 +208,16 @@ function initGrid(data, view) {
     { fieldName: 'col4', width: '100', styleName: 'text-center rg-button-exceldown', renderer: { type: 'button' } },
     { fieldName: 'col5', width: '100', styleName: 'text-center rg-button-exceldown rg-button-disabled', renderer: { type: 'button' } },
     { fieldName: 'col6', width: '100', styleName: 'text-center rg-button-excelup', renderer: { type: 'button' } },
+    { fieldName: 'col7', width: '100', styleName: 'rg-button-icon--search', button: 'action' },
+    { fieldName: 'col8', width: '100', styleName: 'rg-button-icon--search rg-button-disabled', button: 'action' },
   ];
   data.setFields(fields);
   view.setColumns(columns);
   view.header.visible = false;
+  view.editOptions.editable = true;
 
   data.setRows([
-    { col1: '기본 활성', col2: '기본 비활성', col3: '링크 언더라인', col4: '엑셀 다운로드', col5: '엑셀 다운 비활성', col6: '엑셀 업로드' },
+    { col1: '기본 활성', col2: '기본 비활성', col3: '링크 언더라인', col4: '엑셀 다운로드', col5: '엑셀 다운 비활성', col6: '엑셀 업로드', col7: '액션 검색', col8: '액션 검색비활성' },
   ]);
 }
 `;
