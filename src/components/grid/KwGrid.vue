@@ -19,7 +19,7 @@
 
 <script>
 import { LocalDataProvider, GridView } from 'realgrid';
-import useCreateGrid, { useCreateGridProps } from './private/useCreateGrid';
+import useCreate, { useCreateProps } from './private/useCreate';
 import ContextMenu from './ContextMenu.vue';
 
 export default {
@@ -27,12 +27,12 @@ export default {
   components: { ContextMenu },
 
   props: {
-    ...useCreateGridProps,
+    ...useCreateProps,
   },
 
   setup() {
     return {
-      ...useCreateGrid(LocalDataProvider, GridView),
+      ...useCreate(LocalDataProvider, GridView),
     };
   },
 };

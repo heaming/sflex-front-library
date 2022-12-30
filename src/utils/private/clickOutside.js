@@ -24,7 +24,7 @@ function registerHandler(clickOutsideProps) {
       return;
     }
 
-    const innerEls = innerRefs?.map((v) => getElement(v));
+    const innerEls = (innerRefs?.value || innerRefs)?.map((v) => v && getElement(v));
     const isOutside = !innerEls.some((v) => v?.contains(target));
 
     if (isOutside) {

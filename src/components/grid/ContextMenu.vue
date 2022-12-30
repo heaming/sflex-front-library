@@ -1,6 +1,8 @@
 <template>
   <kw-menu
     v-if="isReady"
+    :ref="(vm) => menuRefs[0] = vm"
+    class="kw-grid__context-menu"
     context-menu
     no-focus
     no-refocus
@@ -20,6 +22,7 @@
           <kw-icon name="arrow_right" />
         </kw-item-section>
         <kw-menu
+          :ref="(vm) => menuRefs[1] = vm"
           anchor="top end"
           self="top start"
           no-focus
@@ -30,6 +33,11 @@
             dense
             item-padding="0 10px"
           >
+            <template #placeholder>
+              <div class="flex items-center justify-center px10 h32">
+                No columns to configurable
+              </div>
+            </template>
             <kw-item
               v-for="option of contextConfig.viewOptions"
               :key="option.column"
@@ -57,6 +65,7 @@
 </template>
 
 <script>
+import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
 
 export default {
   name: 'ContextMenu',
@@ -76,16 +85,29 @@ export default {
       };
     }
 
-    onBeforeUnmount(() => {
+    function clearView() {
       if (view !== undefined) {
         view.onContextMenuPopup = null;
         view = null;
       }
+    }
+
+    const menuRefs = ref([]);
+    const contentEls = computed(() => menuRefs.value.map((e) => e && e.contentEl));
+    const clickOutsideProps = {
+      innerRefs: contentEls,
+      onClickOutside() {
+        menuRefs.value[0]?.hide();
+      },
+    };
+
+    onBeforeUnmount(() => {
+      clearView();
+      removeClickOutside(clickOutsideProps);
     });
 
     function recursiveCreateViewOptions(layouts) {
       const visibleLayouts = layouts.filter((e) => e.visible);
-
       return visibleLayouts.reduce((viewOptions, layout) => {
         if (layout.column) {
           const { name, header, visible } = view.columnByName(layout.column);
@@ -100,7 +122,6 @@ export default {
             ...recursiveCreateViewOptions(layout.items),
           );
         }
-
         return viewOptions;
       }, []);
     }
@@ -108,7 +129,9 @@ export default {
     function setContextConfig() {
       const { column } = clickData || view.getCurrent();
       const layouts = view.saveColumnLayout();
-      const viewOptions = recursiveCreateViewOptions(layouts);
+
+      const viewOptions = view.header.visible
+        ? recursiveCreateViewOptions(layouts) : [];
 
       contextConfig.value = {
         column,
@@ -117,14 +140,15 @@ export default {
     }
 
     function beforeShow() {
-      if (view.isEditing()) {
-        view.commit();
-      }
+      if (view.isEditing()) view.commit();
+
       setContextConfig();
+      addClickOutside(clickOutsideProps);
     }
 
     function beforeHide() {
       clickData = undefined;
+      removeClickOutside(clickOutsideProps);
     }
 
     function onClickViewOption(opt) {
@@ -135,6 +159,7 @@ export default {
     return {
       isReady,
       contextConfig,
+      menuRefs,
       setView,
       beforeShow,
       beforeHide,
