@@ -1,9 +1,5 @@
 import { generateChart } from 'vue-chartjs';
-import {
-  DoughnutController,
-  Chart as ChartJS,
-  registerables,
-} from 'chart.js';
+import { ArcElement, Chart as ChartJS, DoughnutController, registerables } from 'chart.js';
 import { cloneDeep } from 'lodash-es';
 
 ChartJS.register(
@@ -15,17 +11,69 @@ export const toPercentage = (value, dimension) => (typeof value === 'string' && 
   : value / dimension);
 
 class GaugeChart extends DoughnutController {
+  constructor(chart, datasetIndex) {
+    super(chart, datasetIndex);
+
+    this.startValue = undefined;
+    this.showStartValue = undefined;
+    this.endValue = undefined;
+    this.showEndValue = undefined;
+    this.remainColor = undefined;
+    this.percentage = undefined;
+    this.cutout = undefined;
+    this.showGaugeValue = undefined;
+    this.gaugeColor = undefined;
+    this.gaugeOnArc = undefined;
+    this.mainArc = undefined;
+    this.remainArc = undefined;
+    this._drawStartValue = undefined;
+    this._drawEndValue = undefined;
+    this._firstArcValue = undefined;
+    this._totalDelta = undefined;
+    this._portion = undefined;
+  }
+
+  update(mode) {
+    super.update(mode);
+    this.updateData();
+
+    // hide redundant arcs
+    const meta = this._cachedMeta;
+    const elements = meta.data || [];
+    for (let i = 1; i < elements.length; i += 1) {
+      elements[i].hidden = true;
+    }
+
+    const { ctx } = this.chart;
+
+    if (this.mainArc) {
+      this.updateElement(this.mainArc, 1, {
+        endAngle: Math.PI * (1 + this._portion),
+      }, mode);
+      this.mainArc.draw(ctx, this.chartArea);
+    }
+
+    if (this.remainArc) {
+      this.updateElement(this.remainArc, 1, {
+        startAngle: Math.PI * (1 + this._portion),
+        endAngle: Math.PI * 2,
+      }, mode);
+      this.remainArc.draw(ctx, this.chartArea);
+    }
+  }
+
   draw() {
-    const _startValue = this.options.startValue;
-    const _showStartValue = !(this.options.showStartValue === false) && !(_startValue === false);
-    const _endValue = this.options.endValue;
-    const _showEndValue = !(this.options.showEndValue === false) && !(_endValue === false);
-    const _remainColor = this.options.remainColor || '#eeeeee';
-    const _percentage = this.options.percentage;
-    const _cutout = this.options.cutout;
-    const _showGaugeValue = this.options.showGaugeValue;
-    const _gaugeColor = this.options.gaugeColor;
-    const _gaugeOnArc = this.options.gaugeOnArc;
+    this.startValue ??= this.options.startValue;
+    this.showStartValue = !(this.options.showStartValue === false) && !(this.startValue === false);
+    this.endValue ??= this.options.endValue;
+    this.showEndValue = !(this.options.showEndValue === false) && !(this.endValue === false);
+    this.remainColor ??= this.options.remainColor;
+    this.percentage ??= this.options.percentage;
+    this.cutout ??= this.options.cutout;
+    this.showGaugeValue ??= this.options.showGaugeValue;
+    this.gaugeColor ??= this.options.gaugeColor;
+    this.gaugeOnArc ??= this.options.gaugeOnArc;
+
     const dataset = this.getDataset();
     const datasetsLength = this.chart.data.datasets.length;
     const datasetIndex = this.chart.data.datasets.indexOf(dataset);
@@ -34,82 +82,53 @@ class GaugeChart extends DoughnutController {
     if (elements.length < 1) {
       return;
     }
-    const sum = dataset.data.reduce((a, t) => a + t, 0);
-    if (sum <= 0) {
-      throw new Error('Add positive value at least one.');
-    }
-    const startValue = _startValue || 0;
-    const endValue = _endValue || startValue + sum;
-    const totalDelta = endValue - startValue;
 
-    if (totalDelta <= 0) {
-      throw new Error('endValue should be lager then startValue');
+    this.updateData();
+
+    for (let i = 1; i < elements.length; i += 1) {
+      elements[i].hidden = true;
     }
 
-    const firstValue = this.getLabelAndValue(0).value;
-    if (firstValue < 0) {
-      throw new Error('Values are must be positive.');
-    }
-
-    const portion = Math.min(firstValue / totalDelta, 1);
-
-    const firstArc = elements[0];
-    // if (totalDelta !== sum) {
-    this.updateElement(
-      firstArc,
-      0,
-      {
-        endAngle: Math.PI * (1 + portion),
-      },
-      'normal',
-    );
-    // }
-
-    // fill remain arc with gray
-    let secondArc = elements[1];
-    if (!secondArc) {
-      secondArc = cloneDeep(firstArc);
-      elements.push(secondArc);
-    }
-    this.updateElement(
-      secondArc,
-      1,
-      {
-        options: { backgroundColor: _remainColor },
-        startAngle: firstArc.endAngle,
+    // first draw
+    if (!this.remainArc) {
+      this.mainArc = elements[0];
+      this.updateElement(this.mainArc, 1, {
+        endAngle: Math.PI * (1 + this._portion),
+      }, 'normal');
+      this.remainArc = new ArcElement({
+        ...cloneDeep(this.mainArc),
         endAngle: Math.PI * 2,
-      },
-      'none',
-    );
-
-    // hide remain
-    if (elements.length > 2) {
-      for (let i = 2; i < elements.length; i += 1) {
-        elements[i].hidden = true;
-      }
+      });
+      this.updateElement(this.remainArc, 1, {
+        startAngle: Math.PI * (1 + this._portion),
+      }, 'normal');
+      this.remainArc.options.backgroundColor = this.remainColor;
     }
 
-    super.update();
     super.draw();
 
     const { ctx } = this.chart;
+
+    // this.mainArc.draw(ctx, this.chartArea);
+    this.remainArc.draw(ctx, this.chartArea);
+
     ctx.save();
 
     const actualWidth = this.chart.chartArea.width;
     const actualHeight = this.chart.chartArea.height;
-    const innerRadius = toPercentage(_cutout, actualWidth / 2);
+    const innerRadius = toPercentage(this.cutout, actualWidth / 2);
     const radiusWidth = (0.5 * (1 - innerRadius)) / datasetsLength;
 
     const fontFamily = 'Helvetica';
     ctx.textAlign = 'center';
-    ctx.fillStyle = _gaugeColor;
+    ctx.fillStyle = this.gaugeColor;
 
-    if (_showGaugeValue && _gaugeOnArc) {
+    if (this.showGaugeValue && this.gaugeOnArc) {
       ctx.save();
-      const percentage = Number((firstValue * 100) / totalDelta).toPrecision(3);
-      const realValue = Number(startValue) + Number(firstValue);
+      const percentage = Number((this._firstArcValue * 100) / this._totalDelta).toPrecision(3);
+      const realValue = Number(this._drawStartValue) + Number(this._firstArcValue);
 
-      const text = _percentage ? `${percentage}%` : realValue;
+      const text = this.percentage ? `${percentage}%` : realValue;
       const spacing = 0.03 / datasetsLength;
       const fontAreaSize = radiusWidth - 2 * spacing;
       const centerFontSize = Math.floor(actualWidth * fontAreaSize);
@@ -130,12 +149,12 @@ class GaugeChart extends DoughnutController {
       ctx.restore();
     }
 
-    if (_showGaugeValue && !_gaugeOnArc) {
+    if (this.showGaugeValue && !this.gaugeOnArc) {
       ctx.save();
-      const percentage = Number((firstValue * 100) / totalDelta).toPrecision(3);
-      const realValue = Number(startValue) + Number(firstValue);
+      const percentage = Number((this._firstArcValue * 100) / this._totalDelta).toPrecision(3);
+      const realValue = Number(this._drawStartValue) + Number(this._firstArcValue);
 
-      const text = _percentage ? `${percentage}%` : realValue;
+      const text = this.percentage ? `${percentage}%` : realValue;
       const maxFontAreaHeight = innerRadius / 1.5;
       const baseFontSize = 0.1;
       const basePadding = 0.02;
@@ -166,9 +185,9 @@ class GaugeChart extends DoughnutController {
     const padding = actualWidth * 0.02;
     ctx.font = `${minMaxFontSize}px ${fontFamily}`;
 
-    if (_showStartValue) {
+    if (this.showStartValue) {
       ctx.save();
-      let text = `${startValue}`;
+      let text = `${this._drawStartValue}`;
       if (text.length > 5) {
         text = `${text.substring(0, 3)}...`;
       }
@@ -187,9 +206,9 @@ class GaugeChart extends DoughnutController {
       );
       ctx.restore();
     }
-    if (_showEndValue) {
+    if (this.showEndValue) {
       ctx.save();
-      let text = `${endValue}`;
+      let text = `${this._drawEndValue}`;
       if (text.length > 5) {
         text = `${text.substring(0, 3)}...`;
       }
@@ -209,6 +228,32 @@ class GaugeChart extends DoughnutController {
       ctx.restore();
     }
     ctx.restore();
+  }
+
+  updateData() {
+    const data = this.getDataset()?.data;
+    if (!data.length) {
+      return undefined;
+    }
+    const sum = data.reduce((a, t) => a + t, 0);
+    if (sum <= 0) {
+      throw new Error('Add positive value at least one.');
+    }
+    this._drawStartValue = this.startValue || 0;
+    this._drawEndValue = this.endValue || this._drawStartValue + sum;
+    this._totalDelta = this._drawEndValue - this._drawStartValue;
+
+    if (this._totalDelta <= 0) {
+      throw new Error('endValue should be lager then startValue');
+    }
+
+    const drawValue = data[0] ?? 0;
+    this._firstArcValue = drawValue - this._drawStartValue;
+    if (this._firstArcValue < 0 || this._firstArcValue > this._totalDelta) {
+      throw new Error('Values must be between range of chart!');
+    }
+
+    this._portion = Math.min(this._firstArcValue / this._totalDelta, 1);
   }
 }
 
