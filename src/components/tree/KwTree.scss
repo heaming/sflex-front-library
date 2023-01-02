@@ -25,7 +25,11 @@
     }
 
     &__node-body {
-      padding-left: 28px;
+      padding: 0 0 0 4px;
+
+      > div {
+        color: $placeholder;
+      }
     }
 
     &__node--parent {
