@@ -1,5 +1,8 @@
 import { Platform, openURL, uid } from 'quasar';
+import store from '../store';
+import pascalCase from './private/pascalCase';
 
+const name = `${pascalCase(window.location.hash)}P`;
 const openedPopups = {};
 
 let globalMessageEvent;
@@ -108,14 +111,12 @@ export function open(url, windowFeatures) {
 
 function close(result, payload, forceClose = true) {
   const pid = new URLSearchParams(window.location.search).get('pid');
+  const isExternallyAccessible = store.getters['meta/getPage'](name)?.pageExtAccYn === 'Y';
+  const targetOrigin = isExternallyAccessible ? '*' : undefined;
 
-  if (!pid) {
-    throw new Error('Invalid call, there is no pid in search parameters.');
-  }
-
-  window.opener.postMessage({
+  window.opener?.postMessage({
     pid, result, payload,
-  });
+  }, targetOrigin);
 
   if (forceClose) {
     if (globalCloseEvent) {
