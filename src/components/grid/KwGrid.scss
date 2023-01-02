@@ -49,7 +49,7 @@
 
 .rg-selection {
   background: rgb(62 100 157 / 20%) !important;
-  border: 1px solid rgb(62 100 157 / 67%);
+  border: none;
 }
 
 .rg-focus {
@@ -118,6 +118,7 @@
     left: 4px !important;
     right: 4px !important;
     bottom: 8px !important;
+    z-index: 2;
   }
 
   .rg-multiline-editor {
@@ -211,6 +212,30 @@
 //     height: 26px;
 //   }
 // }
+
+.rg-editable {
+  position: relative;
+
+  div {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:not(.rg-data-readonly-cell)::after {
+    content: "";
+    border: 1px solid #ccc;
+    position: absolute;
+    background: #fff;
+    top: 7px !important;
+    left: 3px !important;
+    right: 4px !important;
+    bottom: 7px !important;
+  }
+
+  &:has(.rg-check-renderer, .rg-radio-renderer)::after {
+    display: none;
+  }
+}
 
 /*
   Button
@@ -327,14 +352,18 @@
   cursor: pointer;
 }
 
-.rg-check-renderer-unchecked {
+.rg-check-renderer-unchecked,
+.rg-checkbar-unchecked,
+.rg-checkbar-head-unchecked {
   width: 18px;
   height: 18px;
   background: url(~@assets/images/checkbox_off.svg) no-repeat center;
   background-size: 18px;
 }
 
-.rg-check-renderer-checked {
+.rg-check-renderer-checked,
+.rg-checkbar-checked,
+.rg-checkbar-head-checked {
   width: 18px;
   height: 18px;
   background: url(~@assets/images/checkbox_on.svg) no-repeat center;
@@ -371,6 +400,7 @@
 .rg-data-cell {
   .rg-cell-buttons {
     right: 16px !important;
+    z-index: 3;
 
     .rg-button-action {
       cursor: pointer;
