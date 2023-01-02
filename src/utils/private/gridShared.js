@@ -179,7 +179,6 @@ export async function waitUntilShowEditor(view, dropdown = false) {
   if (index.itemIndex > -1) {
     const column = view.columnByName(index.column);
 
-    console.log('isCellEditable', isCellEditable(view, column, index));
     if (isCellEditable(view, column, index)) {
       view.showEditor(dropdown);
       await timeout();

@@ -15,7 +15,8 @@ export function createCancel() {
   const uid = uniqueId('__axiosCancel__');
 
   function cancelEvent(e) {
-    console.log(e);
+    // console.log(e);
+
     if (e.key === 'Escape' || e.keyCode === 27) {
       controller.abort();
       resolveCancel(uid);
