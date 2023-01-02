@@ -297,6 +297,7 @@
         If you need the case of input with hypen or tilde,
         kindly ask to add the <b>( ex: '&lt;span&gt;-&lt;/span&gt;')</b> between input tag. <br>
         Please find the detail about input width in 'collections/searchform' section.
+        <b>please no more wrap div.row.items-center</b>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -310,11 +311,9 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input(fixed/2columns)">
-                <div class="row items-center w296">
-                  <kw-input />
-                  <span>-</span>
-                  <kw-input />
-                </div>
+                <kw-input />
+                <span>-</span>
+                <kw-input />
               </kw-form-item>
             </kw-form-row>
 
@@ -330,13 +329,11 @@
             </kw-form-row>
             <kw-form-row>
               <kw-form-item label="input(fixed/3columns)">
-                <div class="row items-center w464">
-                  <kw-input />
-                  <span>-</span>
-                  <kw-input />
-                  <span>-</span>
-                  <kw-input />
-                </div>
+                <kw-input />
+                <span>-</span>
+                <kw-input />
+                <span>-</span>
+                <kw-input />
               </kw-form-item>
             </kw-form-row>
             <kw-form-row>
@@ -515,14 +512,13 @@ const hypenInput = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input(fixed/2columns)">
-      <div class="row items-center w296">
-        <kw-input />
-        <span>-</span>
-        <kw-input />
-      </div>
+      <kw-input />
+      <span>-</span>
+      <kw-input />
     </kw-form-item>
   </kw-form-row>
-  <!-- seperator -->
+
+  <kw-separator />
   <kw-form-row>
     <kw-form-item label="input(flex/3columns)">
       <kw-input />
@@ -534,13 +530,11 @@ const hypenInput = `
   </kw-form-row>
   <kw-form-row>
     <kw-form-item label="input(fixed/3columns)">
-      <div class="row items-center w464">
-        <kw-input />
-        <span>-</span>
-        <kw-input />
-        <span>-</span>
-        <kw-input />
-      </div>
+      <kw-input />
+      <span>-</span>
+      <kw-input />
+      <span>-</span>
+      <kw-input />
     </kw-form-item>
   </kw-form-row>
   <kw-form-row>
@@ -623,6 +617,10 @@ const nolabelCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2023.01.02',
+    text: 'no more use div.row.items-center for hypen type',
+  },
   {
     timestamp: '2022.11.22',
     text: 'Add new prop about stretch and dense',
