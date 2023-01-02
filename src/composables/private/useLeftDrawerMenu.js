@@ -20,7 +20,7 @@ export default () => {
   function createHierarchy(nodes, currents) {
     return currents.map((c) => ({
       ...c,
-      children: c.isFolder && createHierarchy(nodes, nodes.filter((n) => n.parentsKey === c.key)),
+      children: c.isFolder ? createHierarchy(nodes, nodes.filter((n) => n.parentsKey === c.key)) : [],
     }));
   }
 

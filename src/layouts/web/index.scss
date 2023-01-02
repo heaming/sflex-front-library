@@ -277,7 +277,7 @@ body.desktop .web-layout {
       display: flex;
       align-items: center;
       gap: 4px;
-      padding: 16px 20px 13px;
+      padding: 16px 20px;
 
       .kw-btn.q-btn {
         flex: 1;
@@ -293,8 +293,58 @@ body.desktop .web-layout {
       }
     }
 
-    &__tree {
+    &__placeholder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -11px;
+      height: 190px;
+
+      > p {
+        text-align: center;
+        white-space: pre;
+        color: $black2;
+      }
+    }
+
+    &__tree.kw-tree {
       padding: 0 16px;
+      margin-top: -20px;
+
+      .q-tree {
+        &__node {
+          &::after {
+            top: -13.5px;
+          }
+        }
+
+        &__node-header {
+          padding: 0 4px;
+          margin-top: 20px;
+
+          &::before {
+            top: -10px;
+          }
+        }
+
+        &__node-header-content {
+          font-size: 14px;
+          color: $black2;
+
+          .q-icon {
+            margin-right: 8px;
+            font-size: inherit;
+          }
+        }
+
+        &__node-body {
+          padding-left: 26px;
+
+          > div {
+            font-size: 12px;
+          }
+        }
+      }
     }
   }
 }

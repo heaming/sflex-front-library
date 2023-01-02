@@ -18,30 +18,29 @@
 
     <div class="kw-page-header__tools">
       <kw-checkbox
-        model-value="N"
+        :model-value="isBookmarked ? 'Y' : 'N'"
         checked-icon="bookmark_on"
         unchecked-icon="bookmark_off"
         @update:model-value="onUpdateBookmark"
       >
         <kw-tooltip>
-          {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
+          {{ $t('MSG_TXT_BKMK') }}
         </kw-tooltip>
       </kw-checkbox>
 
       <kw-icon
         name="alert_on"
         clickable
-        @click="onClickNotifications"
       >
-        {{ $t('MSG_TXT_NTC', null, '알림보기') }}
+        {{ $t('MSG_TXT_NTC') }}
       </kw-icon>
 
       <kw-icon
         name="new_window"
         clickable
-        @click="onClickNewWindow"
+        @click="openNewWindow()"
       >
-        {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
+        {{ $t('MSG_TXT_NEW_WINDOW') }}
       </kw-icon>
     </div>
 
@@ -56,9 +55,8 @@
         <kw-icon
           v-if="i === navigations.length - 1"
           clickable
-          @click="onClickHint"
         >
-          {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
+          {{ $t('MSG_BTN_HINT') }}
         </kw-icon>
       </q-breadcrumbs-el>
     </q-breadcrumbs>
@@ -66,100 +64,47 @@
 </template>
 
 <script>
-import { find, last } from 'lodash-es';
-import { open } from '../../utils/popup';
-
-function creataBreadcrumbs(menus, menuUid) {
-  const matched = find(menus, { menuUid });
-
-  if (matched) {
-    return [
-      ...creataBreadcrumbs(menus, matched.parentsMenuUid),
-      {
-        key: menuUid,
-        label: matched.menuName,
-      },
-    ];
-  }
-
-  return [];
-}
+import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
+import useBookmark from './private/useBookmark';
+import useNewWindow from './private/useNewWindow';
 
 export default {
   name: 'KwPageHeader',
 
   props: {
-    options: {
-      type: Array,
-      default: undefined,
-    },
+    ...useBreadcrumbNavigationProps,
   },
-  setup(props) {
-    const { t } = useI18n();
+
+  async setup() {
     const { getters } = useStore();
-
-    const { currentRoute } = useRouter();
-    const { name: menuUid, path } = currentRoute.value;
-
-    const menus = getters['meta/getMenus'];
-    const matched = find(menus, { menuUid });
-
-    const navigations = computed(() => {
-      if (Array.isArray(props.options)) {
-        return props.options.map((v) => ({ key: v, label: v }));
-      }
-
-      if (matched) {
-        const {
-          applicationId,
-          applicationName,
-        } = getters['meta/getApp'](matched.applicationId);
-
-        return [
-          {
-            key: 'home',
-            label: t('MSG_TXT_HOME', null, '홈'),
-
-          },
-          {
-            key: applicationId,
-            label: applicationName,
-          },
-          ...creataBreadcrumbs(menus, menuUid),
-        ];
-      }
-
-      return [];
-    });
-
-    const title = computed(() => last(navigations.value)?.label);
     const isAuthenticated = getters['meta/isAuthenticated'];
 
-    async function onUpdateBookmark() {
+    const {
+      isBookmarked,
+      fetchBookmark,
+      createBookmark,
+      deleteBookmark,
+    } = useBookmark();
+
+    if (isAuthenticated) fetchBookmark();
+
+    async function onUpdateBookmark(val) {
       if (isAuthenticated) {
-        //
+        const isCreate = val === 'Y';
+
+        if (isCreate) {
+          await createBookmark();
+        } else {
+          await deleteBookmark();
+        }
       }
-    }
-
-    function onClickNotifications() {
-      //
-    }
-
-    function onClickNewWindow() {
-      open(`/popup#${path}`);
-    }
-
-    function onClickHint() {
-      //
     }
 
     return {
-      navigations,
-      title,
+      ...useBreadcrumbNavigation(),
+      ...useNewWindow(),
+      isBookmarked,
       onUpdateBookmark,
-      onClickNotifications,
-      onClickNewWindow,
-      onClickHint,
     };
   },
 };
