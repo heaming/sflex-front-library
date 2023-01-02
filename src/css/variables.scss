@@ -107,6 +107,7 @@ $flex-gutter-xl: ($gutter-base * 5) !default;
 $title: (size: 1.375rem, line-height: 2rem, letter-spacing: normal, weight: 700) !default;
 $pt24: (size: 1.5rem, line-height: 2rem, letter-spacing: normal) !default;
 $pt22: (size: 1.375rem, line-height: 2rem, letter-spacing: normal) !default;
+$pt20: (size: 1.25rem, line-height: 2rem, letter-spacing: normal) !default;
 $subtitle: (size: 1.125rem, line-height: 1.75rem, letter-spacing: normal, weight: 700) !default;
 $pt18: (size: 1.125rem, line-height: 1.75rem, letter-spacing: normal) !default;
 $body: (size: 1rem, line-height: 1.5rem, letter-spacing: normal, weight: 500) !default;
@@ -125,6 +126,7 @@ $font-types: (
   pt14: $pt14,
   pt16: $pt16,
   pt18: $pt18,
+  pt20: $pt20,
   pt22: $pt22,
   pt24: $pt24,
 );
