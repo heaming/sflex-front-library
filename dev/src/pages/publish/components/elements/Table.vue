@@ -220,7 +220,7 @@
             </div>
             <ul class="kw-inquiry-result__list">
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>RDS 적립 총 금액</span>
                 </p>
                 <div class="col row">
@@ -230,7 +230,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>RDS 지급 총 금액</span>
                 </p>
                 <div class="col row">
@@ -240,7 +240,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>RDS 공제 총 금액</span>
                 </p>
                 <div class="col row">
@@ -289,7 +289,7 @@
             </div>
             <ul class="kw-inquiry-result__list kw-inquiry-result__list--2col">
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -302,7 +302,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>12:전집할부</span>
                 </p>
                 <div class="col row">
@@ -315,7 +315,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>13:전집할부</span>
                 </p>
                 <div class="col row">
@@ -328,7 +328,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>14:aaa</span>
                 </p>
                 <div class="col row">
@@ -341,7 +341,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -354,7 +354,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -367,7 +367,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -380,7 +380,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -393,7 +393,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -406,7 +406,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -419,7 +419,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -432,7 +432,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -445,7 +445,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -458,7 +458,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -471,7 +471,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -484,7 +484,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -497,7 +497,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -510,7 +510,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -523,7 +523,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -536,7 +536,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -549,7 +549,7 @@
                 </div>
               </li>
               <li>
-                <p class="kw-fc--black3">
+                <p class="kw-fc--black1">
                   <span>11:전집할부</span>
                 </p>
                 <div class="col row">
@@ -689,7 +689,7 @@ const case01 = `
   </div>
   <ul class="kw-inquiry-result__list">
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>RDS 적립 총 금액</span>
       </p>
       <div class="col row">
@@ -699,7 +699,7 @@ const case01 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>RDS 지급 총 금액</span>
       </p>
       <div class="col row">
@@ -709,7 +709,7 @@ const case01 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>RDS 공제 총 금액</span>
       </p>
       <div class="col row">
@@ -740,7 +740,7 @@ const case02 = `
   </div>
   <ul class="kw-inquiry-result__list">
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -753,7 +753,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>12:전집할부</span>
       </p>
       <div class="col row">
@@ -766,7 +766,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>13:전집할부</span>
       </p>
       <div class="col row">
@@ -779,7 +779,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>14:aaa</span>
       </p>
       <div class="col row">
@@ -792,7 +792,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -805,7 +805,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -818,7 +818,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -831,7 +831,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -844,7 +844,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -857,7 +857,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -870,7 +870,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -883,7 +883,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -896,7 +896,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -909,7 +909,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -922,7 +922,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -935,7 +935,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -948,7 +948,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -961,7 +961,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -974,7 +974,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -987,7 +987,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
@@ -1000,7 +1000,7 @@ const case02 = `
       </div>
     </li>
     <li>
-      <p class="kw-fc--black3">
+      <p class="kw-fc--black1">
         <span>11:전집할부</span>
       </p>
       <div class="col row">
