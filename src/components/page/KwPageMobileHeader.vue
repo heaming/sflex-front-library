@@ -22,9 +22,16 @@
         {{ title }}
       </slot>
     </h1>
+    <div
+      v-if="$slots.etc"
+      class="kw-page-mobile-header__etc"
+    >
+      <slot name="etc" />
+    </div>
     <kw-icon
       v-if="hint || $slots.hint"
       class="kw-page-mobile-header__hint"
+      size="24px"
       name="info_24"
       :tooltip="hint"
     >
