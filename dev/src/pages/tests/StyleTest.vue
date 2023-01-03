@@ -1,11 +1,15 @@
 <template>
-  <div class="flex w500 pa50">
+  <div class="flex column">
+    <kw-separator divider />
+  </div>
+  <div class="flex w500 pa50 bg-white">
     <kw-field-wrap>
       <kw-input
         rules="required"
         :error="error"
         error-message="test"
       />
+
       <kw-input
         rules="required"
         :error="error"

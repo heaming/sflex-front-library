@@ -270,7 +270,7 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
   return [];
 }
 
-export async function insertRowAndFocus(view, dataRow, rowValue, column, shouldCheck = true) {
+export async function insertRowAndFocus(view, dataRow, rowValue, column, shouldCheck = false) {
   const data = view.getDataSource();
   const inserted = data.insertRow(dataRow, rowValue);
 
