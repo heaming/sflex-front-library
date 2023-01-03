@@ -1,9 +1,12 @@
 .kw-popup {
   padding: 4px;
   border: 1px solid $black-btn-line;
-  box-shadow: 8px 10px 10px 0 rgb(0 0 0 / 12%) !important;
-  position: relative !important;
-  overflow: hidden !important;
+
+  &.q-card {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 8px 10px 10px 0 rgb(0 0 0 / 12%);
+  }
 
   &--md {
     width: 660px;
@@ -108,7 +111,7 @@
     overflow-y: scroll;
 
     // min-height: 348px;
-    max-height: calc(100vh - 195px) !important;
+    max-height: calc(100vh - 195px);
     z-index: 10;
 
     & > *:nth-child(1):is(h3) {

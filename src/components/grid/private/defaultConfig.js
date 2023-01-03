@@ -53,7 +53,7 @@ const viewConfig = {
   },
   editOptions: {
     editable: false,
-    editWhenFocused: false,
+    editWhenFocused: true,
     columnEditableFirst: false,
     commitByCell: true,
     commitWhenLeave: true,
