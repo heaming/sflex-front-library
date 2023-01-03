@@ -1,3 +1,4 @@
+import { snakeCase, toUpper } from 'lodash-es';
 import { FormLayoutContextKey } from '../../consts/private/symbols';
 import { platform } from '../../plugins/platform';
 
@@ -20,13 +21,19 @@ export const useFormLayoutProps = {
 };
 
 const DEFAULT_COLS = 3;
-let DEFAULT_LABEL_SIZE;
-if (platform.is.desktop) { DEFAULT_LABEL_SIZE = 150; }
-if (platform.is.tablet) { DEFAULT_LABEL_SIZE = 108; }
-if (platform.is.mobile) { DEFAULT_LABEL_SIZE = 105; }
+const DEFAULT_LABEL_SIZE = {
+  DESKTOP: 150,
+  TABLET: 108,
+  MOBILE: 80,
+};
 const DEFAULT_ALIGN_CONTENT = 'left';
 
 export default (defaults = {}) => {
+  let currentPlatform;
+  if (platform.is.desktop) { currentPlatform = 'desktop'; }
+  if (platform.is.tablet) { currentPlatform = 'tablet'; }
+  if (platform.is.mobile) { currentPlatform = 'mobile'; }
+
   const vm = getCurrentInstance();
   const { props } = vm;
 
@@ -39,7 +46,7 @@ export default (defaults = {}) => {
     labelSize: computed(() => props.labelSize
       ?? injected?.labelSize.value
       ?? defaults.labelSize
-      ?? DEFAULT_LABEL_SIZE),
+      ?? DEFAULT_LABEL_SIZE[toUpper(snakeCase(currentPlatform))]),
     alignContent: computed(() => props.alignContent
       ?? injected?.alignContent.value
       ?? defaults.alignContent
