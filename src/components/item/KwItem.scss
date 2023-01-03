@@ -139,4 +139,26 @@ body.mobile:not(.tablet) {
   .kw-item.q-item--active {
     background-color: inherit;
   }
+
+  .kw-form {
+    &-item {
+      padding: 6px 0;
+      min-height: 22px;
+      line-height: 22px;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      &__label,
+      &__field {
+        line-height: 22px;
+        min-height: 22px;
+      }
+    }
+  }
 }
