@@ -31,6 +31,10 @@
   &.rg-rowindicator-select {
     background-color: #f6f6f8;
   }
+
+  &.rg-rowindicator-cell:hover {
+    background-color: initial;
+  }
 }
 
 .rg-data-row {
@@ -118,7 +122,8 @@
     left: 4px !important;
     right: 4px !important;
     bottom: 8px !important;
-    z-index: 2;
+
+    // z-index: 2;
   }
 
   .rg-multiline-editor {
@@ -210,12 +215,17 @@
   .rg-editable {
     position: relative;
 
-    div {
-      position: relative;
-      z-index: 1;
+    .rg-cell-buttons {
+      display: block !important;
     }
 
-    &:not(.rg-data-readonly-cell)::after {
+    div {
+      position: relative;
+
+      // z-index: 1;
+    }
+
+    &:not(.rg-data-readonly-cell)::before {
       content: "";
       border: 1px solid #ccc;
       position: absolute;
@@ -224,10 +234,6 @@
       left: 3px !important;
       right: 4px !important;
       bottom: 7px !important;
-    }
-
-    &:has(.rg-check-renderer, .rg-radio-renderer)::after {
-      display: none;
     }
   }
 }
@@ -397,10 +403,15 @@
 .rg-data-cell {
   .rg-cell-buttons {
     right: 16px !important;
-    z-index: 3;
+
+    // z-index: 3;
 
     .rg-button-action {
       cursor: pointer;
+    }
+
+    &:has(.rg-button-list, .rg-button-calendar) {
+      display: none;
     }
   }
 
