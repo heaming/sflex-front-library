@@ -25,6 +25,17 @@
             <kw-btn label="test" />
             <kw-btn label="test" />
           </template>
+
+          <template #etc>
+            <kw-btn
+              borderless
+              label="한글 입력"
+            />
+            <kw-btn
+              borderless
+              label="영문 입력"
+            />
+          </template>
         </kw-page-mobile-header>
       </template>
 
