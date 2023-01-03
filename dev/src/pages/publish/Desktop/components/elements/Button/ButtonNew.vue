@@ -41,7 +41,7 @@
               dense
             </td>
             <td style="width: 33.33%;">
-              height: 42px<br>
+              height: 40px<br>
               height: 32px
             </td>
           </tr>
@@ -195,7 +195,7 @@
       </h3>
       <p class="kw-guide-description">
         Add <em>dense</em> prop <br>
-        height 32px / padding 8px 6px
+        height 32px / padding 6px 8px
       </p>
       <q-card>
         <div class="kw-guide-example">

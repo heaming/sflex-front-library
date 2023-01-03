@@ -131,6 +131,7 @@
 
   &__back-btn {
     margin-right: 8px;
+    color: $placeholder;
 
     &.kw-btn {
       @include kw-btn-height-modifier(0, 1em, 1.5rem, 400);
@@ -165,6 +166,7 @@
 
   &__close {
     margin-left: 8px;
+    color: $black1;
 
     &.kw-btn {
       @include kw-btn-height-modifier(0, 1em, 1.5rem, 400);
