@@ -1,7 +1,20 @@
-import { filter, find } from 'lodash-es';
+import { filter, find, some } from 'lodash-es';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
 import { localStorage } from '../../plugins/storage';
+
+const recursiveCreateMenuPath = (menus, menuUid) => {
+  const navigations = [];
+  const matched = find(menus, { menuUid });
+
+  if (matched) {
+    navigations.push(
+      ...recursiveCreateMenuPath(menus, matched.parentsMenuUid),
+      { key: menuUid, label: matched.menuName },
+    );
+  }
+  return navigations;
+};
 
 export default {
   namespaced: true,
@@ -16,6 +29,7 @@ export default {
     linkPages: [],
     apps: [],
     menus: [],
+    bookmarks: [],
     pages: [],
   }),
 
@@ -41,6 +55,9 @@ export default {
     setMenus(state, menus) {
       state.menus = Object.freeze(menus);
     },
+    setBookmarks(state, bookmarks) {
+      state.bookmarks = Object.freeze(bookmarks);
+    },
     addPage(state, page) {
       state.pages.push(Object.freeze(page));
     },
@@ -60,6 +77,9 @@ export default {
     getAppMenus: (state) => (applicationId) => filter(state.menus, { applicationId }),
     getMenus: (state) => state.menus,
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
+    getMenuPath: (state) => (menuUid) => recursiveCreateMenuPath(state.menus, menuUid),
+    getBookmarks: (state) => state.bookmarks,
+    isBookmarked: (state) => (menuUid, pageId) => some(state.bookmarks, { menuUid, pageId }),
     getPages: (state) => state.pages,
     getPage: (state) => (key) => find(state.pages, (v) => (
       v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key
@@ -100,6 +120,32 @@ export default {
 
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
+    },
+    async fetchBookmarks({ commit }) {
+      const response = await http.get('/sflex/common/common/bookmarks');
+      const bookmarks = response.data;
+
+      commit('setBookmarks', bookmarks);
+    },
+    async fetchBookmark({ getters, dispatch }, { menuUid, pageId }) {
+      const params = { menuUid, pageId };
+      const response = await http.get('/sflex/common/common/bookmarks/marked', { params });
+      const marked = response.data;
+
+      const shouldReload = marked !== getters.isBookmarked(menuUid, pageId);
+
+      if (shouldReload) {
+        await dispatch('fetchBookmarks');
+      }
+    },
+    async createBookmark({ dispatch }, { menuUid, pageId, bookmarkName }) {
+      await http.post('/sflex/common/common/bookmarks', { menuUid, pageId, bookmarkName });
+      await dispatch('fetchBookmarks');
+    },
+    async deleteBookmark({ dispatch }, { menuUid, pageId }) {
+      const params = { menuUid, pageId };
+      await http.delete('/sflex/common/common/bookmarks', { params });
+      await dispatch('fetchBookmarks');
     },
     async fetchPage({ commit, getters }, pageKey) {
       const isCached = getters.getPage(pageKey) !== undefined;

@@ -107,6 +107,7 @@ $flex-gutter-xl: ($gutter-base * 5) !default;
 $title: (size: 1.375rem, line-height: 2rem, letter-spacing: normal, weight: 700) !default;
 $pt24: (size: 1.5rem, line-height: 2rem, letter-spacing: normal) !default;
 $pt22: (size: 1.375rem, line-height: 2rem, letter-spacing: normal) !default;
+$pt20: (size: 1.25rem, line-height: 2rem, letter-spacing: normal) !default;
 $subtitle: (size: 1.125rem, line-height: 1.75rem, letter-spacing: normal, weight: 700) !default;
 $pt18: (size: 1.125rem, line-height: 1.75rem, letter-spacing: normal) !default;
 $body: (size: 1rem, line-height: 1.5rem, letter-spacing: normal, weight: 500) !default;
@@ -125,6 +126,7 @@ $font-types: (
   pt14: $pt14,
   pt16: $pt16,
   pt18: $pt18,
+  pt20: $pt20,
   pt22: $pt22,
   pt24: $pt24,
 );
@@ -177,3 +179,28 @@ $kw-scrollbar-track-background-color-active-mobile: $line-stroke !default;
 $kw-scrollbar-thumb-border-mobile: 2px solid transparent;
 $kw-scrollbar-thumb-border-hover-mobile: 2px solid transparent;
 $kw-scrollbar-thumb-border-active-mobile: 2px solid $line-stroke;
+
+// spacing
+$spacing-base: 0.25rem;
+$spacing-xxs: $spacing-base * 1;
+$spacing-xs: $spacing-base * 2;
+$spacing-sm: $spacing-base * 3;
+$spacing-md: $spacing-base * 4;
+$spacing-lg: $spacing-base * 5;
+$spacing-xl: $spacing-base * 6;
+$spacing-xxl: $spacing-base * 7;
+$spacing-3xl: $spacing-base * 8;
+$spacing-4xl: $spacing-base * 9;
+$spacing-5xl: $spacing-base * 10;
+$spacing: (
+  xxs: $spacing-xxs,
+  xs: $spacing-xs,
+  sm: $spacing-sm,
+  md: $spacing-md,
+  lg: $spacing-lg,
+  xl: $spacing-xl,
+  xxl: $spacing-xxl,
+  3xl: $spacing-3xl,
+  4xl: $spacing-4xl,
+  5xl: $spacing-5xl,
+);

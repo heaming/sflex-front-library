@@ -194,6 +194,22 @@
           </tr>
           <tr>
             <td>
+              <p class="kw-font-pt20">
+                pt20
+              </p>
+            </td>
+            <td>
+              .kw-font-pt20
+            </td>
+            <td>
+              20px
+            </td>
+            <td>
+              20px
+            </td>
+          </tr>
+          <tr>
+            <td>
               <p class="kw-font-pt18">
                 pt18
               </p>
