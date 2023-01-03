@@ -149,7 +149,7 @@ interface KwInputProps extends Pick<QInputProps, FallThroughProps>, UseFieldProp
   /**
    * 정규 표현식, 인풋 입력을 제한할때 사용한다
    */
-  regex?: 'alpha' | 'alpha_dash' | 'alpha_num' | 'alpha_spaces' | 'alpha_underscore' | string | RegExp;
+  regex?: 'alpha' | 'alpha_dash' | 'alpha_num' | 'alpha_spaces' | 'alpha_underscore' | 'num' | string | RegExp;
 
   /**
    * 입력 텍스트 정렬
