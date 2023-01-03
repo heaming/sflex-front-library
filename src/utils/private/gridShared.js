@@ -156,12 +156,14 @@ export function isCellEditable(view, column, index) {
     && view.onCellEditable(view, index) !== false;
 }
 
-export function isCellItemClickable(view, column, index) {
+export function isCellItem(view, column) {
   const isActionButton = (column.button || column._button) === 'action';
   const isButtonRenderer = (column.renderer || column._renderer)?.type === 'button';
-  const isCellItem = isActionButton || isButtonRenderer;
+  return isActionButton || isButtonRenderer;
+}
 
-  return isCellItem && view.onCellItemClickable(view, index) !== false;
+export function isCellItemClickable(view, column, index) {
+  return isCellItem(view, column) && view.onCellItemClickable(view, index) !== false;
 }
 
 export function getCellClickEvent(view, el) {

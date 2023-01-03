@@ -1041,6 +1041,12 @@ body.mobile {
       }
     }
   }
+
+  .mobile_label,
+  .kw-label-content {
+    font-size: 14px;
+    color: $black2;
+  }
 }
 
 @include native-scrollbar-to(".kw-scrollbar");

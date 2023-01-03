@@ -1,33 +1,61 @@
 <template>
   <q-separator
     class="kw-separator"
-    v-bind="styleClassAttrs"
-    :spaced="spaced"
-    :vertical="vertical"
-    :inset="inset"
-    :size="size"
-    :color="color"
+    v-bind="{...styleClassAttrs, ...computedProps}"
   />
 </template>
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
+const availablePresets = {
+  default: {
+    spaced: '30px',
+    vertical: false,
+    inset: false,
+    size: undefined,
+    color: 'grey-5',
+  },
+  divider: {
+    vertical: false,
+    size: '8px',
+    spaced: false,
+    color: 'grey-5',
+  },
+};
+
 export default {
   name: 'KwSeparator',
   inheritAttrs: false,
 
   props: {
-    spaced: { type: [Boolean, String], default: '30px' },
-    vertical: { type: Boolean, default: false },
-    inset: { type: Boolean, default: false },
+    divider: { type: Boolean, default: false },
+
+    spaced: { type: [Boolean, String], default: null },
+    vertical: { type: Boolean, default: undefined },
+    inset: { type: Boolean, default: undefined },
     size: { type: String, default: undefined },
-    color: { type: String, default: 'grey-5' }, // can be transparent
+    color: { type: String, default: undefined }, // can be transparent
   },
 
-  setup() {
+  setup(props) {
+    const stylePreset = computed(() => {
+      let preset = availablePresets.default;
+      if (props.divider === true) { preset = availablePresets.divider; }
+      return preset;
+    });
+
+    const computedProps = computed(() => ({
+      spaced: props.spaced ?? stylePreset.value.spaced,
+      vertical: props.vertical ?? stylePreset.value.vertical,
+      inset: props.inset ?? stylePreset.value.inset,
+      size: props.size ?? stylePreset.value.size,
+      color: props.color ?? stylePreset.value.color,
+    }));
+
     return {
       ...useInheritAttrs(),
+      computedProps,
     };
   },
 };
