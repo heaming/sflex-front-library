@@ -403,13 +403,14 @@ interface GridUtil {
   confirmDeleteCheckedRows(view: GridView | TreeView, isIncludeCreated?: boolean): Promise<RowValue[]>;
 
   /**
-   *
+   * 지정된 번호로 행을 추가하고 focus 한다.
    * @param view 그리드 뷰
    * @param dataRow 데이터 행
    * @param rowValue 데이터 행 오브젝트
    * @param column column을 지정하면 매칭되는 컬럼으로 focus 한다. (`false` 지정시 focus 하지 않는다)
+   * @param shouldCheck 추가된 행을 체크할지 여부 default `true`
    */
-  insertRowAndFocus(view: GridView, dataRow: number, rowValue: RowValue, column?: string | boolean): Promise<boolean>;
+  insertRowAndFocus(view: GridView, dataRow: number, rowValue: RowValue, column?: string | boolean, shouldCheck?: boolean): Promise<boolean>;
 
   /**
    * 현재 데이터를 초기 값으로 지정한다.

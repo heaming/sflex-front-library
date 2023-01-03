@@ -270,16 +270,23 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
   return [];
 }
 
-export async function insertRowAndFocus(view, dataRow, rowValue, column) {
+export async function insertRowAndFocus(view, dataRow, rowValue, column, shouldCheck = true) {
   const data = view.getDataSource();
-  const isInserted = data.insertRow(dataRow, rowValue);
-  const shoudFocus = isInserted && column !== false;
+  const inserted = data.insertRow(dataRow, rowValue);
 
-  if (shoudFocus) {
-    await focusCellInput(view, dataRow, column);
+  if (inserted) {
+    const shouldFocus = column !== false;
+
+    if (shouldFocus) {
+      await focusCellInput(view, dataRow, column);
+    }
+    if (shouldCheck) {
+      const exclusive = view.checkBar.exclusive === true;
+      view.checkRow(dataRow, true, exclusive, true);
+    }
   }
 
-  return isInserted;
+  return inserted;
 }
 
 /*
