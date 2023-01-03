@@ -140,7 +140,7 @@
         label="Gauge Chart"
         class="hp-rand-bgc-5 rounded-borders"
         style="margin: 5px;"
-        :default-opened="defaultOpened"
+        :default-opened="false"
       >
         <q-card>
           <q-card-section>
@@ -332,8 +332,8 @@ export default {
         {
           label: 'Data One',
           data: [40],
-          startValue: -40,
-          endValue: undefined,
+          startValue: -50,
+          endValue: 50,
         },
         // {
         //   label: 'Data two',
@@ -347,17 +347,17 @@ export default {
       datasets: [
         {
           label: 'Data One',
-          data: [40, 20, 55, 34, 40, 42],
+          data: [55, 34, 40],
           gaugeOnArc: true,
         },
         {
           label: 'Data two',
-          data: [40, 20, 55, 34, 40, 42],
+          data: [40, 20, 55],
           gaugeOnArc: true,
         },
         {
           label: 'Data three',
-          data: [40, 20, 55, 34, 40, 42],
+          data: [55, 34, 40],
           gaugeOnArc: true,
         },
         // {
@@ -408,7 +408,7 @@ export default {
     };
     function testMethod() {
       for (let i = 0; i < testChartData.datasets.length; i += 1) {
-        testChartData.datasets[i].data = Array.from({ length: 6 }, () => Math.random() * 100);
+        testChartData.datasets[i].data = Array.from({ length: 3 }, () => Math.random() * 100);
       }
     }
 

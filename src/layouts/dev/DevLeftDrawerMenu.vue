@@ -40,11 +40,8 @@ export default {
     const menuCtx = useLeftDrawerMenu();
 
     const { treeRef, selectedGlobalAppKey } = menuCtx;
-    const expandedAll = ref(false);
 
     function setExpandedAll(state) {
-      expandedAll.value = state;
-
       if (state) {
         treeRef.value.expandAll();
       } else {
@@ -56,7 +53,6 @@ export default {
 
     return {
       ...menuCtx,
-      expandedAll,
       setExpandedAll,
     };
   },
