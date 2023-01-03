@@ -384,6 +384,7 @@ export async function validateRow(view, dataRow, bails = true) {
 export async function validate(view, options = {}) {
   const {
     isChangedOnly = true,
+    isCheckedOnly = false,
     isAlertMessage = true,
     bails = true,
   } = options;
@@ -394,7 +395,10 @@ export async function validate(view, options = {}) {
 
   for (let i = 0; i < rowCount; i += 1) {
     const rowState = data.getRowState(i);
-    const shouldValidate = rowState !== RowState.DELETED && (!isChangedOnly || rowState !== RowState.NONE);
+
+    const shouldValidate = rowState !== RowState.DELETED
+      && (!isChangedOnly || rowState !== RowState.NONE)
+      && (!isCheckedOnly || view.isCheckedRow(i));
 
     if (shouldValidate) {
       const result = await validateRow(view, i, bails);

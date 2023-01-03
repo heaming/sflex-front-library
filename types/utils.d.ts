@@ -466,10 +466,11 @@ interface GridUtil {
    * 그리드의 유효성 검사를 수행한다.
    * @param view 그리드 뷰 또는 트리 뷰
    * @param options.isChangedOnly 변경된 행들에 대해서만 유효성 검사를 수행할지 여부, default `true`
+   * @param options.isCheckedOnly 체크된 행들에 대해서만 유효성 검사를 수행할지 여부, default `false`
    * @param options.isAlertMessage 유효성 검사를 수행하고 다이얼로그로 표시할지 여부, default `true`
    * @param options.bails 첫 번째 실패한 규칙에서 유효성 검사가 중지됩니다, default `true`
    */
-  validate(view: GridView | TreeView, options: { isChangedOnly?: boolean; isAlertMessage?: boolean; bails?: boolean }): boolean;
+  validate(view: GridView | TreeView, options: { isChangedOnly?: boolean; isCheckedOnly?: boolean; isAlertMessage?: boolean; bails?: boolean }): boolean;
 
   /**
    * validate 수행 이후에, 오류 목록을 가져온다.
