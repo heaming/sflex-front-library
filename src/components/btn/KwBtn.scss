@@ -185,8 +185,7 @@
   }
 
   &--icon-only {
-    &:not(&.kw-btn--borderless),
-    &:not(&.kw-btn--underline) {
+    &.kw-btn--outlined {
       &.q-btn {
         padding-left: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
         padding-right: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);

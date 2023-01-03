@@ -17,6 +17,13 @@
         >
           <slot name="more" />
         </template>
+
+        <template
+          v-if="$slots.etc"
+          #etc
+        >
+          <slot name="etc" />
+        </template>
       </kw-page-mobile-header>
       <kw-page-header
         v-else
