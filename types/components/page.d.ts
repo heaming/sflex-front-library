@@ -34,6 +34,12 @@ interface KwPageSlots {
 
   /**
    * Mobile only.
+   * 헤더 영역 우측 추가 커스텀 버튼 영역
+   */
+  etc: () => VNode[];
+
+  /**
+   * Mobile only.
    * 헤더와 메인 컨텐츠 사이 영역.
    * POSITIONING 은 TBD.
    *

@@ -192,3 +192,32 @@
     opacity: 0.5;
   }
 }
+
+.mobile {
+  .kw-stepper {
+    // tablet
+  }
+
+  // mobile
+  &:not(.tablet) {
+    .kw-stepper {
+      .q-stepper__header {
+        .q-stepper__tab {
+          &::after {
+            //   margin: 0; 화살표 있으면
+            display: none;
+          }
+
+          .q-stepper__dot {
+            margin-right: 8; // 화살표 있으면 margin-right: 0px
+
+            span {
+              font-size: 13px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}

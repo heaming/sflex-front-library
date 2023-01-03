@@ -3,14 +3,14 @@
     <kw-btn
       v-if="leftBtn === 'back'"
       class="kw-page-mobile-header__back-btn"
-      icon="arrow_right_24"
+      icon="arrow_left_24"
       borderless
       @click="toggleExpanded"
     />
     <kw-btn
       v-if="leftBtn === 'menu'"
       class="kw-page-mobile-header__back-btn"
-      icon="menu"
+      icon="menu_24"
       borderless
       @click="toggleExpanded"
     />
@@ -22,9 +22,16 @@
         {{ title }}
       </slot>
     </h1>
+    <div
+      v-if="$slots.etc"
+      class="kw-page-mobile-header__etc"
+    >
+      <slot name="etc" />
+    </div>
     <kw-icon
       v-if="hint || $slots.hint"
       class="kw-page-mobile-header__hint"
+      size="24px"
       name="info_24"
       :tooltip="hint"
     >
@@ -48,8 +55,8 @@
     <kw-btn
       v-if="showClose"
       class="kw-page-mobile-header__close"
-      icon="close"
-      filled
+      icon="close_24"
+      borderless
       @click="$emit('close')"
     />
   </div>
@@ -63,7 +70,7 @@ export default {
   props: {
     hint: { type: String, default: undefined },
     title: { type: String, default: undefined },
-    leftBtn: { type: String, default: 'back' },
+    leftBtn: { type: String, default: undefined },
     showClose: { type: Boolean, default: false },
   },
   emits: ['close'],

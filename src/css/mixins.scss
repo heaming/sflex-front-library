@@ -59,6 +59,8 @@
 }
 
 @mixin kw-item($min-height) {
+  $current: &;
+
   display: flex;
   min-height: $min-height;
 
@@ -148,6 +150,24 @@
       }
     }
   }
+
+  @at-root body.mobile:not(.tablet) {
+    #{$current} {
+      &__label {
+        width: 80px;
+        padding-right: 12px;
+      }
+    }
+  }
+
+  @at-root body.tablet {
+    #{$current} {
+      &__label {
+        width: 108px;
+        padding-right: 12px;
+      }
+    }
+  }
 }
 
 @mixin kw-row($row-height , $gap, $padding) {
@@ -211,6 +231,7 @@
   min-height: $-min-height;
 
   &.kw-btn--round {
+    padding: 0 8px;
     min-width: $-min-height;
     border-radius: 50%;
   }
@@ -228,7 +249,7 @@
   $-font-type: map-get($font-types, $font-type);
   $-line-height: map-get($-font-type, "line-height");
   $-font-size: map-get($-font-type, "size");
-  $-font-weight: map-get($-font-type, "font-weigth");
+  $-font-weight: map-get($-font-type, "font-weight");
   $-letter-spacing: map-get($-font-type, "letter-spacing");
   $-padding: calc((#{$min-height} - #{$-line-height}) / 2) $side-padding;
 

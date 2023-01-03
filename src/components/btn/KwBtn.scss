@@ -185,8 +185,7 @@
   }
 
   &--icon-only {
-    &:not(&.kw-btn--borderless),
-    &:not(&.kw-btn--underline) {
+    &.kw-btn--outlined {
       &.q-btn {
         padding-left: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
         padding-right: calc((#{$-kw-btn-line-height} + #{ zero-unit(at($-kw-btn-padding, 1) + at($-kw-btn-padding, 3))} - #{$-kw-btn-icon-size}) / 2);
@@ -258,3 +257,108 @@ body.desktop {
 
 // notice! this is exception.
 @include kw-btn-custom-color-action("table-blue", change-color($primary, $alpha: 0.08), change-color($primary, $alpha: 0.18), change-color($primary, $alpha: 0.28));
+
+body.mobile {
+  // T-map button common
+  .kw-btn--tmap-icon {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+
+    @at-root &.kw-btn--round {
+      min-width: 32px !important;
+      min-height: 32px !important;
+
+      .q-btn__content {
+        padding-left: 0;
+        background-position: center;
+        background-size: 20px auto;
+      }
+
+      &.kw-btn--border-color-black-btn-line::after {
+        border-color: rgb(47 138 243 / 12%);
+      }
+    }
+
+    .q-btn__content {
+      padding-left: 20px;
+      background: url(~@assets/images/logo_tmap@2x.png) no-repeat 0 center;
+      background-size: 16px auto;
+    }
+
+    &.kw-btn--border-color-black-btn-line::after {
+      border-color: $line-stroke;
+    }
+
+    &.disabled {
+      .q-btn__content {
+        filter: grayscale(100%);
+        mix-blend-mode: multiply;
+      }
+    }
+  }
+
+  &:not(.tablet) {
+    .kw-btn {
+      // mobile 용
+      $-mobile-kw-btn-padding: 10px 12px 10px 12px;
+      $-mobile-kw-btn-line-height: 20px;
+      $-mobile-kw-btn-font-size: 14px;
+      $-mobile-kw-btn-font-weight: 400;
+      $-mobile-kw-btn-padding-dense: 5px 12px 5px 12px;
+      $-mobile-kw-btn-line-height-dense: 20px;
+      $-mobile-kw-btn-font-size-dense: 12px;
+      $-mobile-kw-btn-font-weight-dense: 400;
+
+      &.q-btn {
+        @include kw-btn-height-modifier($-mobile-kw-btn-padding, $-mobile-kw-btn-line-height, $-mobile-kw-btn-font-size, $-mobile-kw-btn-font-weight);
+
+        &--dense {
+          @include kw-btn-height-modifier($-mobile-kw-btn-padding-dense, $-mobile-kw-btn-line-height-dense, $-mobile-kw-btn-font-size-dense, $-mobile-kw-btn-font-weight-dense);
+        }
+      }
+
+      &--underline {
+        text-decoration: underline;
+
+        &.q-btn {
+          padding: 0;
+
+          &.disabled {
+            background-color: transparent;
+            color: $placeholder;
+
+            .q-btn__content {
+              color: $placeholder;
+            }
+          }
+
+          &--dense {
+            padding: 0;
+          }
+        }
+      }
+
+      &--borderless {
+        background-color: transparent;
+
+        &.q-btn {
+          padding: 0;
+
+          &.disabled {
+            background-color: transparent;
+
+            .q-btn__content {
+              color: $placeholder;
+            }
+          }
+
+          &--dense {
+            padding: 0;
+          }
+        }
+      }
+
+      //// mobile 용
+    }
+  }
+}

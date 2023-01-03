@@ -25,11 +25,11 @@
         opacity: 0.6 !important;
       }
 
-      .q-field__native {
-        .kw-select__placeholder {
-          color: transparent;
-        }
-      }
+      // .q-field__native {
+      //   .kw-select__placeholder {
+      //     color: transparent;
+      //   }
+      // }
     }
   }
 
@@ -177,6 +177,21 @@ body.mobile:not(.tablet) {
       width: 100%;
       background: #fff;
       z-index: 1;
+    }
+  }
+}
+
+body.mobile:not(.tablet) {
+  .kw-select.q-select {
+    & .q-field {
+      &__native {
+        span {
+          &.kw-select__placeholder {
+            color: $placeholder;
+            font-weight: 400;
+          }
+        }
+      }
     }
   }
 }

@@ -89,3 +89,39 @@
     margin: 30px 0 20px;
   }
 }
+
+body.mobile {
+  .kw-action {
+    // tablet
+  }
+
+  // mobile
+  &:not(.tablet) {
+    .kw-action {
+      &__left {
+        p {
+          color: $black2;
+        }
+      }
+
+      &__contents {
+        gap: 4px;
+
+        & > span {
+          color: $black3;
+          font-weight: 400;
+        }
+
+        .accent {
+          color: $black1;
+          font-weight: 700;
+          padding-left: 0 !important;
+        }
+      }
+
+      &--top {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
