@@ -8,7 +8,7 @@
       name="header"
     >
       <kw-page-mobile-header
-        v-if="$g.platform.is.mobile"
+        v-if="$g.platform.is.mobile || $g.platform.is.tablet"
         class="kw-page__header"
       >
         <template
