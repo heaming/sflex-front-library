@@ -2,7 +2,8 @@ import { cloneDeep, defaultsDeep, map, merge } from 'lodash-es';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 import {
-  createCellIndexByDataColumn, getSessionDatetimeFormat, getTextDatetimeFormat, isCellEditable, isCellItemClickable,
+  createCellIndexByDataColumn, getSessionDatetimeFormat, getTextDatetimeFormat,
+  isCellEditable, isCellItem, isCellItemClickable,
 } from '../../../utils/private/gridShared';
 import i18n from '../../../i18n';
 
@@ -76,6 +77,7 @@ function setColumnStyleName(column, { dataType }) {
   const colClass = column.styleName.split(/\s+/).filter((e) => !!e);
   const alignClass = ['text-left', 'text-center', 'text-right'];
 
+  // set align class
   if (!alignClass.some((e) => colClass.includes(e))) {
     if (column.renderer?.type) {
       switch (column.renderer.type) {
@@ -109,12 +111,15 @@ function setColumnStyleName(column, { dataType }) {
     }
   }
 
-  const btnClassCount = colClass.reduce((a, v) => (v.includes('rg-button-') ? a + 1 : a), 0);
-  const hasDisabledClass = colClass.some((v) => v === 'rg-button-disabled');
-  const shouldSetDefaultClass = btnClassCount === 0 || (btnClassCount === 1 && hasDisabledClass);
+  // set button class
+  if (column.renderer?.type === 'button') {
+    const btnClassCount = colClass.reduce((a, v) => (v.includes('rg-button-') ? a + 1 : a), 0);
+    const hasDisabledClass = colClass.some((v) => v === 'rg-button-disabled');
+    const shouldSetDefaultClass = btnClassCount === 0 || (btnClassCount === 1 && hasDisabledClass);
 
-  if (shouldSetDefaultClass) {
-    colClass.push('rg-button-default');
+    if (shouldSetDefaultClass) {
+      colClass.push('rg-button-default');
+    }
   }
 
   column.styleName = colClass.join(' ');
@@ -318,7 +323,7 @@ function overrideStyleCallback(styleCallback, isGlobal = false) {
     if (isCellEditable(g, mergedColumn, index)) {
       classes.push('rg-editable');
     }
-    if (isCellItemClickable(g, mergedColumn, index) === false) {
+    if (isCellItem(g, mergedColumn) && isCellItemClickable(g, mergedColumn, index) === false) {
       classes.push('rg-button-disabled');
     }
 
