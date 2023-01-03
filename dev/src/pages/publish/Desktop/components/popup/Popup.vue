@@ -118,6 +118,7 @@
           <br>
           1. Check there is design screen <br>
           2. Check there is design reference <br>
+          <!-- src="../../../../../assets/images/example_popup2.png" -->
           <img
             src="~~dev/assets/images/example_popup2.png"
             width="500"
