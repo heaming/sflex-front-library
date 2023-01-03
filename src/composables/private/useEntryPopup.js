@@ -9,19 +9,7 @@ export default () => {
   const name = `${pascalCase(path)}P`;
   const matched = popups[name] !== undefined;
 
-  const { getters, dispatch } = useStore();
-
-  async function isExternallyAccessible() {
-    await dispatch('meta/fetchPage', name);
-    return getters['meta/getPage'](name)?.pageExtAccYn === 'Y';
-  }
-
   async function invokeModal() {
-    if (!await isExternallyAccessible()) {
-      cancel();
-      return;
-    }
-
     const { result, payload } = await modal({
       component: name,
       componentProps: { ...query },
@@ -31,14 +19,10 @@ export default () => {
       },
     });
 
-    if (result) {
-      ok(payload);
-    } else {
-      cancel(payload);
-    }
+    (result ? ok : cancel)(payload);
   }
 
-  onMounted(async () => {
+  onMounted(() => {
     if (matched) {
       invokeModal();
     }
