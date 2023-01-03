@@ -2,8 +2,8 @@
   <q-dialog
     v-for="modal of modals"
     :key="modal.uid"
-    v-bind="modal.dialogProps"
     class="global-modal"
+    v-bind="modal.dialogProps"
     :model-value="true"
     persistent
     no-shake

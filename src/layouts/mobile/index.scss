@@ -6,6 +6,16 @@ body.desktop .mobile-layout {
   background: #f3f4f5;
 }
 
+body.mobile:not(.tablet) {
+  .mobile-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 2999;
+    background-color: #fff;
+    overflow: auto;
+  }
+}
+
 /*
   Footer
  */

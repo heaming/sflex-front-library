@@ -10,8 +10,6 @@
       <kw-page-mobile-header
         v-if="$g.platform.is.mobile"
         class="kw-page__header"
-        :hint="hint"
-        :title="'TITLE'"
       >
         <template
           v-if="$slots.more"
