@@ -2,7 +2,8 @@ import { Platform, openURL, uid } from 'quasar';
 import store from '../store';
 import pascalCase from './private/pascalCase';
 
-const name = `${pascalCase(window.location.hash)}P`;
+const path = window.location.hash.split('?')[0];
+const name = `${pascalCase(path)}P`;
 const openedPopups = {};
 
 let globalMessageEvent;

@@ -121,6 +121,17 @@ export default {
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
     },
+    async fetchPage({ commit, getters }, pageKey) {
+      const isCached = getters.getPage(pageKey) !== undefined;
+
+      if (!isCached) {
+        const response = await http.get(`/sflex/common/common/meta/${pageKey}`);
+        const { pageInfo, ...others } = response.data;
+        const page = { ...pageInfo, ...others };
+
+        commit('addPage', page);
+      }
+    },
     async fetchBookmarks({ commit }) {
       const response = await http.get('/sflex/common/common/bookmarks');
       const bookmarks = response.data;
@@ -146,17 +157,6 @@ export default {
       const params = { menuUid, pageId };
       await http.delete('/sflex/common/common/bookmarks', { params });
       await dispatch('fetchBookmarks');
-    },
-    async fetchPage({ commit, getters }, pageKey) {
-      const isCached = getters.getPage(pageKey) !== undefined;
-
-      if (!isCached) {
-        const response = await http.get(`/sflex/common/common/meta/${pageKey}`);
-        const { pageInfo, ...pageMeta } = response.data;
-        const page = { ...pageInfo, ...pageMeta };
-
-        commit('addPage', page);
-      }
     },
   },
 };

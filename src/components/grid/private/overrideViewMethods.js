@@ -239,7 +239,7 @@ function setColumnEditor(column, { dataType }) {
         editor: {
           commitOnSelect: true,
           domainOnly: true,
-          dropDownWhenClick: false,
+          dropDownWhenClick: true,
           textReadOnly: true,
         },
       });
@@ -251,7 +251,7 @@ function setColumnEditor(column, { dataType }) {
         editor: {
           viewGridInside: false,
           commitOnSelect: true,
-          dropDownWhenClick: false,
+          dropDownWhenClick: true,
           textReadOnly: false,
           btOptions: {
             language: i18n.locale.value,
