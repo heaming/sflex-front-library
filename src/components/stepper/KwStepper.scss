@@ -171,6 +171,7 @@
   &__panels {
     overflow: hidden;
     position: relative;
+    background-color: transparent;
 
     .q-panel {
       overflow: inherit;

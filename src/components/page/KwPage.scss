@@ -197,7 +197,8 @@ body.mobile:not(.tablet) {
     }
 
     &__footer {
-      box-shadow: $shadow-up-1; // for DaeYoung Kim.
+      // box-shadow: $shadow-up-1; // for DaeYoung Kim.
+
       flex: none;
     }
 

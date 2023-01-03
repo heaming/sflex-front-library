@@ -135,7 +135,7 @@ body.mobile {
 
     .kw-form-item__field {
       p {
-        @include typo("dense");
+        @include typo("body",400);
 
         color: $black1;
       }
