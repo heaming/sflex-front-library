@@ -16,6 +16,7 @@ export default () => {
       dialogProps: {
         class: 'global-modal--window',
         transitionDuration: 0,
+        maximized: true,
       },
     });
 
