@@ -3,7 +3,7 @@
     <kw-btn
       v-if="leftBtn === 'back'"
       class="kw-page-mobile-header__back-btn"
-      icon="arrow_right_24"
+      icon="arrow_left_24"
       borderless
       @click="toggleExpanded"
     />
