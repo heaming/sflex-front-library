@@ -205,35 +205,30 @@
 /*
   Renderer
   */
-// .rg-editable {
-//   .rg-renderer {
-//     max-width: 100%;
-//     border: 1px solid black;
-//     height: 26px;
-//   }
-// }
-
-.rg-editable {
-  position: relative;
-
-  div {
+.rg-focused-row,
+.rg-checked-row {
+  .rg-editable {
     position: relative;
-    z-index: 1;
-  }
 
-  &:not(.rg-data-readonly-cell)::after {
-    content: "";
-    border: 1px solid #ccc;
-    position: absolute;
-    background: #fff;
-    top: 7px !important;
-    left: 3px !important;
-    right: 4px !important;
-    bottom: 7px !important;
-  }
+    div {
+      position: relative;
+      z-index: 1;
+    }
 
-  &:has(.rg-check-renderer, .rg-radio-renderer)::after {
-    display: none;
+    &:not(.rg-data-readonly-cell)::after {
+      content: "";
+      border: 1px solid #ccc;
+      position: absolute;
+      background: #fff;
+      top: 7px !important;
+      left: 3px !important;
+      right: 4px !important;
+      bottom: 7px !important;
+    }
+
+    &:has(.rg-check-renderer, .rg-radio-renderer)::after {
+      display: none;
+    }
   }
 }
 
@@ -354,7 +349,8 @@
 
 .rg-check-renderer-unchecked,
 .rg-checkbar-unchecked,
-.rg-checkbar-head-unchecked {
+.rg-checkbar-head-unchecked,
+.rg-checkbar-radio-unchecked {
   width: 18px;
   height: 18px;
   background: url(~@assets/images/checkbox_off.svg) no-repeat center;
@@ -363,7 +359,8 @@
 
 .rg-check-renderer-checked,
 .rg-checkbar-checked,
-.rg-checkbar-head-checked {
+.rg-checkbar-head-checked,
+.rg-checkbar-radio-checked {
   width: 18px;
   height: 18px;
   background: url(~@assets/images/checkbox_on.svg) no-repeat center;

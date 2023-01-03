@@ -270,16 +270,23 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
   return [];
 }
 
-export async function insertRowAndFocus(view, dataRow, rowValue, column) {
+export async function insertRowAndFocus(view, dataRow, rowValue, column, shouldCheck = true) {
   const data = view.getDataSource();
-  const isInserted = data.insertRow(dataRow, rowValue);
-  const shoudFocus = isInserted && column !== false;
+  const inserted = data.insertRow(dataRow, rowValue);
 
-  if (shoudFocus) {
-    await focusCellInput(view, dataRow, column);
+  if (inserted) {
+    const shouldFocus = column !== false;
+
+    if (shouldFocus) {
+      await focusCellInput(view, dataRow, column);
+    }
+    if (shouldCheck) {
+      const exclusive = view.checkBar.exclusive === true;
+      view.checkRow(dataRow, true, exclusive, true);
+    }
   }
 
-  return isInserted;
+  return inserted;
 }
 
 /*
@@ -384,6 +391,7 @@ export async function validateRow(view, dataRow, bails = true) {
 export async function validate(view, options = {}) {
   const {
     isChangedOnly = true,
+    isCheckedOnly = false,
     isAlertMessage = true,
     bails = true,
   } = options;
@@ -394,7 +402,10 @@ export async function validate(view, options = {}) {
 
   for (let i = 0; i < rowCount; i += 1) {
     const rowState = data.getRowState(i);
-    const shouldValidate = rowState !== RowState.DELETED && (!isChangedOnly || rowState !== RowState.NONE);
+
+    const shouldValidate = rowState !== RowState.DELETED
+      && (!isChangedOnly || rowState !== RowState.NONE)
+      && (!isCheckedOnly || view.isCheckedRow(i));
 
     if (shouldValidate) {
       const result = await validateRow(view, i, bails);
