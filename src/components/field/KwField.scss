@@ -78,7 +78,7 @@
     }
 
     &__label {
-      @include typo("dense");
+      @include typo("dense", 400);
 
       left: 0;
       top: -1 * $kw-field-label-height;
@@ -464,6 +464,13 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
+    & > span {
+      // margin: auto;
+      padding: 0 4px;
+      font-size: 14px;
+      color: $black3;
+    }
   }
 
   &__bottom {
@@ -483,7 +490,7 @@
   }
 
   &__label {
-    @include typo("dense");
+    @include typo("dense", 400);
 
     white-space: nowrap;
     position: absolute;
@@ -642,13 +649,43 @@ body.mobile:not(.tablet) {
     }
 
     &.q-field {
-      // todo
+      &--auto-height {
+        .kw-field-wrap__control {
+          height: auto;
+          min-height: 44px !important;
+        }
+      }
+
+      &--disabled {
+        .q-field__control {
+          color: $kw-field-color-disable;
+
+          &::before {
+            background-color: transparent;
+            border-color: $line-bg;
+          }
+        }
+      }
     }
   }
 
   .kw-field-wrap {
     &__messages {
       overflow-wrap: anywhere;
+    }
+
+    &__control.selectbox {
+      .kw-field-wrap__control-container {
+        padding: 0 20px;
+        background-color: $bg-body;
+        border-bottom: 1px solid $line-line;
+
+        .kw-select__placeholder {
+          font-size: 14px;
+          color: $black1;
+          font-weight: 400;
+        }
+      }
     }
   }
 }

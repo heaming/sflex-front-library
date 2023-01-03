@@ -119,3 +119,24 @@
 
   // END label
 }
+
+// only mobile
+body.mobile:not(.tablet) {
+  .kw-item:has(.kw-expansion-item) {
+    flex-wrap: wrap;
+    padding: 0;
+    border-bottom: 1px solid $line-line;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .kw-expansion-item {
+      width: 100%;
+    }
+  }
+
+  .kw-item.q-item--active {
+    background-color: inherit;
+  }
+}
