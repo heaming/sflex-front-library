@@ -209,8 +209,10 @@ export default {
               });
             },
             onEnd(evt) {
-              props.onDragUpdate?.(updateCustomEvt, evt);
-              updateCustomEvt = undefined;
+              if (updateCustomEvt) {
+                props.onDragUpdate?.(updateCustomEvt, evt);
+                updateCustomEvt = undefined;
+              }
             },
           }),
         );
