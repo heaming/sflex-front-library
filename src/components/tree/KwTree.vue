@@ -2,7 +2,7 @@
   <q-tree
     ref="treeRef"
     v-bind="styleClassAttrs"
-    class="kw-tree"
+    :class="treeClass"
     :expanded="expanded"
     :selected="selected"
     :nodes="nodes"
@@ -24,6 +24,11 @@
     @update:selected="onUpdateSelected"
   >
     <template #default-header="{node, ...slotProps}">
+      <div
+        v-if="draggable"
+        :data-key="node[nodeKey]"
+        class="hidden"
+      />
       <slot
         name="header"
         v-bind="slotProps"
@@ -76,6 +81,8 @@ export default {
     // customize props
     selectLeafOnly: { type: Boolean, default: false },
     draggable: { type: Boolean, default: false },
+    onDragMove: { type: Function, default: undefined },
+    onDragUpdate: { type: Function, default: undefined },
   },
 
   emits: [
@@ -85,9 +92,23 @@ export default {
 
   setup(props, { emit }) {
     const treeRef = ref();
+    const treeClass = computed(() => ({
+      'kw-tree': true,
+      'kw-tree--empty': props.nodes.length === 0,
+    }));
 
     function getNodeByKey(key) {
       return treeRef.value.getNodeByKey(key);
+    }
+
+    function getNodeByElement(el) {
+      const target = el.querySelector('.q-tree__node-header-content > div');
+      return getNodeByKey(target?.getAttribute('data-key'));
+    }
+
+    function getElementByKey(key) {
+      const el = treeRef.value.$el;
+      return el.querySelector(`.q-tree__node:has(> .q-tree__node-header > .q-tree__node-header-content > div[data-key="${key}"])`);
     }
 
     function getExpandedNodes() {
@@ -156,11 +177,41 @@ export default {
       const el = treeRef.value.$el;
       const targets = getSortableTargets(el);
 
+      let updateCustomEvt;
       targets.forEach((e) => {
         sortableInstances.push(
           new Sortable(e, {
             group: 'nested',
             animation: 150,
+            onMove(evt) {
+              const sourceNode = getNodeByElement(evt.dragged);
+              const targetNode = getNodeByElement(evt.related);
+
+              const moveCustomEvt = {
+                sourceNode,
+                targetNode,
+              };
+
+              if (props.onDragMove?.(moveCustomEvt, evt) === false) {
+                return false;
+              }
+
+              // wait tick for render
+              setTimeout(() => {
+                const { nodeKey } = props;
+
+                updateCustomEvt = {
+                  source: getElementByKey(sourceNode[nodeKey]),
+                  sourceNode,
+                  target: getElementByKey(targetNode[nodeKey]),
+                  targetNode,
+                };
+              });
+            },
+            onEnd(evt) {
+              props.onDragUpdate?.(updateCustomEvt, evt);
+              updateCustomEvt = undefined;
+            },
           }),
         );
       });
@@ -168,9 +219,10 @@ export default {
 
     let unwatchNodes;
     function watchNodes() {
-      unwatchNodes = watch(() => props.nodes, () => {
+      unwatchNodes = watch(() => props.nodes, async () => {
+        await nextTick();
         createSortable();
-      }, { deep: true });
+      });
     }
 
     onMounted(() => {
@@ -194,7 +246,10 @@ export default {
     return {
       ...useInheritAttrs(),
       treeRef,
+      treeClass,
       getNodeByKey,
+      getNodeByElement,
+      getElementByKey,
       getExpandedNodes,
       isExpanded,
       isLeaf,
