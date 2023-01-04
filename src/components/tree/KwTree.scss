@@ -7,8 +7,9 @@
         top: -12px;
       }
 
-      &.sortable-swap-highlight {
-        background: rgb(47 138 243 / 50%);
+      &.sortable-ghost {
+        border: 2px dashed $placeholder;
+        background: rgba($placeholder, 20%);
       }
     }
 

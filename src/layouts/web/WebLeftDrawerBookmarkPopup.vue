@@ -1,0 +1,348 @@
+<template>
+  <kw-popup
+    class="drawer-bookmark__popup bookmark-popup"
+    :title="$t('MSG_TIT_BKMK_EDIT')"
+    @before-close="onBeforeClose"
+  >
+    <kw-action-top>
+      <template #left>
+        <div class="flex gap-xxs">
+          <kw-btn
+            grid-action
+            icon="top"
+            :disable="!selected"
+            @click="onClickMove(-Infinity)"
+          />
+          <kw-btn
+            grid-action
+            icon="up"
+            :disable="!selected"
+            @click="onClickMove(-1)"
+          />
+          <kw-btn
+            grid-action
+            icon="down"
+            :disable="!selected"
+            @click="onClickMove(1)"
+          />
+          <kw-btn
+            grid-action
+            icon="bottom"
+            :disable="!selected"
+            @click="onClickMove(Infinity)"
+          />
+        </div>
+      </template>
+
+      <kw-btn
+        grid-action
+        icon="plus"
+        no-wrap
+        :label="$t('MSG_BTN_ALL_SPREAD')"
+        @click="treeRef.expandAll()"
+      />
+      <kw-btn
+        grid-action
+        icon="minus"
+        no-wrap
+        :label="$t('MSG_BTN_ALL_FOLD')"
+        @click="treeRef.collapseAll()"
+      />
+      <kw-btn
+        grid-action
+        icon=""
+        no-wrap
+        :label="$t('MSG_BTN_FLDR_NEW')"
+        @click="onClickNewFolder"
+      />
+    </kw-action-top>
+
+    <div class="bookmark-popup__tree-container">
+      <kw-tree
+        ref="treeRef"
+        v-model:selected="selected"
+        v-model:expanded="expanded"
+        :nodes="nodes"
+        node-key="bookmarkUid"
+        selected-color="black1"
+        draggable
+        @drag-move="onDragMove"
+        @drag-update="onDrageUpdate"
+      >
+        <template #header="{ node }">
+          <div
+            v-if="node.isDummy"
+            class="bookmark-popup__tree-dummy"
+          />
+          <div
+            v-else-if="node.isFolder"
+            class="row col items-center"
+          >
+            <div class="col">
+              {{ node.bookmarkName }}&nbsp;({{ node.children.filter((e) => !e.isDummy).length }})
+            </div>
+            <kw-icon
+              name="close"
+              clickable
+              @click.stop="onClickDelete(node)"
+            />
+          </div>
+          <div
+            v-else
+            class="row items-center"
+          >
+            <kw-icon
+              name="bookmark_on"
+              clickable
+              @click.stop="onClickDelete(node)"
+            />
+            <div>
+              {{ node.bookmarkName }}
+            </div>
+          </div>
+        </template>
+        <template #body="{ node }">
+          <div v-if="!(node.isFolder || node.isDummy)">
+            {{ node.menuPath }}
+          </div>
+        </template>
+      </kw-tree>
+    </div>
+
+    <template #action>
+      <kw-btn
+        negative
+        :label="$t('MSG_TXT_CANCEL')"
+        @click="cancel()"
+      />
+      <kw-btn
+        primary
+        :label="$t('MSG_TXT_SAVE')"
+        @click="onClickSave"
+      />
+    </template>
+  </kw-popup>
+</template>
+
+<script setup>
+import { cloneDeep, filter, find, findIndex, isEqual } from 'lodash-es';
+import { getUid } from '../../utils/string';
+import { http } from '../../plugins/http';
+import { alert, confirm } from '../../plugins/dialog';
+import useModal from '../../composables/useModal';
+
+const { t } = useI18n();
+const { ok, cancel } = useModal();
+
+const treeRef = ref();
+const selected = ref(null);
+const expanded = ref([]);
+
+let initialBookmarks;
+const bookmarks = shallowRef([]);
+
+const recursiveCreateNode = (_bookmarks, currents) => {
+  currents ||= filter(_bookmarks, { bookmarkLevel: 0 });
+
+  return currents.map((e) => {
+    const bookmarkLevel = e.bookmarkLevel + 1;
+    const parentsBookmarkUid = e.bookmarkUid;
+
+    const isFolder = e.folderYn === 'Y';
+    const children = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
+    const needsFallbackChildren = isFolder && children.length === 0;
+
+    if (needsFallbackChildren) {
+      children.push({
+        bookmarkLevel,
+        bookmarkUid: getUid(),
+        parentsBookmarkUid,
+        isFolder: false,
+        isDummy: true,
+      });
+    }
+
+    return {
+      bookmarkLevel: e.bookmarkLevel,
+      bookmarkUid: e.bookmarkUid,
+      bookmarkName: e.bookmarkName,
+      parentsBookmarkUid: e.parentsBookmarkUid,
+      isFolder,
+      isDummy: e.isDummy === true,
+      children: recursiveCreateNode(_bookmarks, children),
+    };
+  });
+};
+
+const nodes = computed(() => recursiveCreateNode(bookmarks.value));
+
+const recursiveNormalizeBookmarks = (_bookmarks, currents) => {
+  currents ||= filter(_bookmarks, { bookmarkLevel: 0 });
+
+  const normalized = [];
+
+  currents.forEach((e, i) => {
+    const bookmarkLevel = e.bookmarkLevel + 1;
+    const parentsBookmarkUid = e.bookmarkUid;
+    const children = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
+
+    normalized.push(
+      {
+        bookmarkLevel: e.bookmarkLevel,
+        bookmarkUid: e.bookmarkUid,
+        bookmarkName: e.bookmarkName,
+        folderYn: e.folderYn === 'Y' ? 'Y' : 'N',
+        menuUid: e.menuUid,
+        pageId: e.pageId,
+        parentsBookmarkUid: e.parentsBookmarkUid || null,
+        arrayalOrder: i,
+      },
+      ...recursiveNormalizeBookmarks(_bookmarks, children),
+    );
+  });
+
+  return normalized;
+};
+
+async function fetchBookmarks() {
+  const response = await http.get('/sflex/common/common/bookmarks');
+  bookmarks.value = recursiveNormalizeBookmarks(response.data);
+  initialBookmarks = cloneDeep(bookmarks.value);
+}
+
+function onClickNewFolder() {
+  const bookmarkUid = getUid('BMK');
+
+  bookmarks.value = [
+    {
+      bookmarkLevel: 0,
+      bookmarkUid,
+      bookmarkName: t('MSG_TXT_FLDR_NEW'),
+      parentsBookmarkUid: null,
+      menuUid: null,
+      pageId: 'FOLDER',
+      arrayalOrder: 0,
+      folderYn: 'Y',
+    },
+    ...bookmarks.value,
+  ];
+
+  expanded.value.push(bookmarkUid);
+}
+
+function onDragMove(evt) {
+  const sourceIsFolder = evt.sourceNode.isFolder === true;
+
+  if (sourceIsFolder) {
+    const { parentsBookmarkUid } = evt.targetNode;
+    const targetParentIsFolder = treeRef.value.getNodeByKey(parentsBookmarkUid)?.isFolder === true;
+
+    return !targetParentIsFolder;
+  }
+}
+
+function onDrageUpdate(evt) {
+  const _bookmarks = [...bookmarks.value];
+
+  const i = findIndex(_bookmarks, { bookmarkUid: evt.sourceNode.bookmarkUid });
+  const sourceNode = _bookmarks.splice(i, 1)[0];
+  const targetParentNode = treeRef.value.getNodeByKey(evt.targetNode.parentsBookmarkUid);
+
+  if (targetParentNode) {
+    sourceNode.bookmarkLevel = targetParentNode.bookmarkLevel + 1;
+    sourceNode.parentsBookmarkUid = targetParentNode.bookmarkUid;
+  } else {
+    sourceNode.bookmarkLevel = 0;
+    sourceNode.parentsBookmarkUid = null;
+  }
+
+  const compared = evt.source.compareDocumentPosition(evt.target); // forward 4, backward 2
+  const j = findIndex(_bookmarks, { bookmarkUid: evt.targetNode.bookmarkUid });
+  const k = j + (compared === 4 ? 0 : 1);
+
+  const spliced = _bookmarks.splice(k);
+
+  bookmarks.value = [..._bookmarks, sourceNode, ...spliced];
+}
+
+const recursiveDeleteBookmarks = (_bookmarks, current) => {
+  const { bookmarkUid } = current;
+  const i = findIndex(_bookmarks, { bookmarkUid });
+
+  _bookmarks.splice(i, 1);
+
+  const bookmarkLevel = current.bookmarkLevel + 1;
+  const parentsBookmarkUid = bookmarkUid;
+  const children = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
+
+  children.forEach((e) => {
+    recursiveDeleteBookmarks(_bookmarks, e);
+  });
+
+  return _bookmarks;
+};
+
+function onClickMove(offset) {
+  if (!selected.value) return;
+
+  const _bookmarks = [...bookmarks.value];
+  const {
+    bookmarkUid,
+    bookmarkLevel,
+    parentsBookmarkUid,
+  } = treeRef.value.getNodeByKey(selected.value);
+
+  const siblings = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
+  const index = findIndex(siblings, { bookmarkUid });
+  const movedIndex = Math.min(Math.max(0, index + offset), siblings.length - 1);
+  const movedIndexOffset = movedIndex - index; // moved index offset
+
+  if (movedIndexOffset !== 0) {
+    const i = findIndex(_bookmarks, { bookmarkUid });
+    const target = _bookmarks.splice(i, 1)[0];
+
+    const j = i + movedIndexOffset;
+    const spliced = _bookmarks.splice(j);
+
+    bookmarks.value = [
+      ..._bookmarks, target, ...spliced,
+    ];
+  }
+}
+
+async function onClickDelete(node) {
+  const isConfirmed = node.isFolder
+    ? await confirm(t('MSG_TXT_BKMK_WANT_DEL_FLD'))
+    : await confirm(t('MSG_TXT_BKMK_WANT_DEL', [node.bookmarkName]));
+
+  if (isConfirmed) {
+    const _bookmarks = [...bookmarks.value];
+    const { bookmarkUid } = node;
+    const target = find(bookmarks.value, { bookmarkUid });
+
+    bookmarks.value = recursiveDeleteBookmarks(_bookmarks, target);
+  }
+}
+
+function onBeforeClose(result) {
+  return result === true
+    || isEqual(recursiveNormalizeBookmarks(bookmarks.value), initialBookmarks)
+    || confirm(t('MSG_ALT_CHG_CNTN'));
+}
+
+async function onClickSave() {
+  const normalizedBookmarks = recursiveNormalizeBookmarks(bookmarks.value);
+
+  if (isEqual(normalizedBookmarks, initialBookmarks)) {
+    await alert(t('MSG_ALT_NO_CHG_CNTN'));
+    return;
+  }
+
+  if (await confirm(t('MSG_ALT_WANT_SAVE'))) {
+    await http.put('/sflex/common/common/bookmarks', normalizedBookmarks);
+    ok();
+  }
+}
+
+await fetchBookmarks();
+</script>

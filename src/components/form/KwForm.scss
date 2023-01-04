@@ -135,7 +135,7 @@ body.mobile {
 
     .kw-form-item__field {
       p {
-        @include typo("dense");
+        @include typo("body");
 
         color: $black1;
       }
@@ -151,5 +151,39 @@ body.mobile {
     }
 
     //// tablet 용
+  }
+}
+
+body.mobile:not(.tablet) {
+  .kw-form {
+    $-kw-form-row-padding-dense: 2px 0;
+    $-kw-form-item-min-height-dense: 20px;
+
+    .kw-form-item__field {
+      p {
+        @include typo("body",400);
+
+        color: $black1;
+      }
+    }
+
+    &--dense {
+      .kw-form-item {
+        padding: $-kw-form-row-padding-dense;
+        line-height: $-kw-form-item-min-height-dense;
+        min-height: $-kw-form-item-min-height-dense;
+      }
+
+      .kw-form-item__field {
+        p {
+          @include typo("dense",400);
+
+          line-height: $-kw-form-item-min-height-dense;
+        }
+
+        line-height: $-kw-form-item-min-height-dense;
+        min-height: $-kw-form-item-min-height-dense;
+      }
+    }
   }
 }

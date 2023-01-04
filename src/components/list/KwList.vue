@@ -51,6 +51,8 @@
         v-bind="selectAlignProps"
         :key="item.key"
         :clickable="clickable"
+        :class="itemClass"
+        :style="itemStyle"
         :active-class="activeClass"
         :active="activated.includes(item)"
         :disable="disable"
@@ -126,6 +128,8 @@ export default {
     placeholder: { type: String, default: undefined },
     disable: { type: Boolean, default: undefined },
     clickable: { type: Boolean, default: undefined },
+    itemClass: { type: [Array, Object, String], default: undefined },
+    itemStyle: { type: [Array, Object, String], default: undefined },
     activeClass: { type: String, default: undefined },
     // fall through props
     separator: { type: Boolean, default: undefined },
