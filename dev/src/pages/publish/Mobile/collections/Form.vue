@@ -85,22 +85,20 @@
             label="날짜선택"
             class="pt20"
           />
-          <div
-            class="flex"
-            style="width: 100%;"
-          >
-            <kw-date-range-picker
-              label="날짜지정"
-              grow
-              class="pt20"
-            />
-          </div>
+          <kw-date-range-picker
+            label="날짜지정(add grow prop)"
+            grow
+            class="pt20"
+          />
+          <kw-time-picker
+            label="시간선택"
+            class="pt20"
+          />
           <kw-input
             icon="qrcode_24"
             label="상품 QR코드"
             placeholder="QR코드 입력"
             class="pt20"
-            disable
           />
         </div>
         <guide-code-view
@@ -117,17 +115,35 @@
         combination
       </h3>
       <p class="kw-guide-description">
-        If you need one or more components, please wrap div.kw-field-wrap <br>
-        If you need full width of <b>form component</b> which located in kw-field-wrap add '<b>grow</b>' prop
+        If you need one or more components, please wrap div.kw-field-wrap        <br>
+        If you need full width of <b>form component</b> which located in kw-field-wrap add '<b>kw-grow</b>' class
       </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-field-wrap
             label="주민등록번호"
           >
-            <kw-input grow />
+            <kw-input />
             <span>-</span>
-            <kw-input grow />
+            <kw-input />
+          </kw-field-wrap>
+          <kw-field-wrap
+            label="A/S 일정"
+            required
+            class="pt20"
+          >
+            <kw-date-picker />
+            <kw-time-picker class="ml8" />
+          </kw-field-wrap>
+          <kw-field-wrap
+            label="번호"
+            class="pt20"
+          >
+            <kw-input class="kw-grow" />
+            <kw-btn
+              label="조회"
+              class="ml8"
+            />
           </kw-field-wrap>
           <guide-code-view
             :code-value="combination"
@@ -157,13 +173,9 @@
             class="pt20"
             required
           >
-            <kw-input
-              grow
-            />
+            <kw-input />
             <span>-</span>
-            <kw-input
-              grow
-            />
+            <kw-input />
           </kw-field-wrap>
           <guide-code-view
             :code-value="requiredCode"
@@ -172,13 +184,16 @@
         </div>
       </q-card>
     </div>
-    <div class="kw-guide-section">
+    <!-- <div class="kw-guide-section">
       <h3
         id="Disable"
         class="kw-guide-title"
       >
         Disable
       </h3>
+      <p class="kw-guide-description">
+        <b>*</b> Have to add 'disable' prop in each form component which are wrapped by .kw-field-wrap(combination type)
+      </p>
       <q-card>
         <div class="kw-guide-example">
           <kw-input
@@ -191,12 +206,10 @@
           >
             <kw-input
               disable
-              grow
             />
             <span>-</span>
             <kw-input
               disable
-              grow
             />
           </kw-field-wrap>
           <guide-code-view
@@ -205,7 +218,7 @@
           />
         </div>
       </q-card>
-    </div>
+    </div> -->
     <div class="kw-guide-section">
       <h3
         id="AddressExample"
@@ -275,8 +288,12 @@ const example = `
   class="pt20"
 />
 <kw-date-range-picker
-  label="날짜지정"
+  label="날짜지정(add grow prop)"
   grow
+  class="pt20"
+/>
+<kw-time-picker
+  label="시간선택"
   class="pt20"
 />
 <kw-input
@@ -291,9 +308,27 @@ const combination = `
 <kw-field-wrap
   label="주민등록번호"
 >
-  <kw-input grow />
+  <kw-input />
   <span>-</span>
-  <kw-input grow />
+  <kw-input />
+</kw-field-wrap>
+<kw-field-wrap
+  label="A/S 일정"
+  required
+  class="pt20"
+>
+  <kw-date-picker />
+  <kw-time-picker class="ml8" />
+</kw-field-wrap>
+<kw-field-wrap
+  label="번호"
+  class="pt20"
+>
+  <kw-input class="kw-grow" />
+  <kw-btn
+    label="조회"
+    class="ml8"
+  />
 </kw-field-wrap>
 `;
 
@@ -307,35 +342,29 @@ const requiredCode = `
   class="pt20"
   required
 >
-  <kw-input
-    grow
-  />
+  <kw-input />
   <span>-</span>
-  <kw-input
-    grow
-  />
+  <kw-input />
 </kw-field-wrap>
 `;
-const disableCode = `
-<kw-input
-  label="출발지"
-  disable
-/>
-<kw-field-wrap
-  label="주민등록번호"
-  class="pt20"
->
-  <kw-input
-    disable
-    grow
-  />
-  <span>-</span>
-  <kw-input
-    disable
-    grow
-  />
-</kw-field-wrap>
-`;
+// const disableCode = `
+// <kw-input
+//   label="출발지"
+//   disable
+// />
+// <kw-field-wrap
+//   label="주민등록번호"
+//   class="pt20"
+// >
+//   <kw-input
+//     disable
+//   />
+//   <span>-</span>
+//   <kw-input
+//     disable
+//   />
+// </kw-field-wrap>
+// `;
 
 const AddressCode = `
 <zwcm-post-code

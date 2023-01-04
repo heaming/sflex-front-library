@@ -670,6 +670,12 @@ body.mobile:not(.tablet) {
   }
 
   .kw-field-wrap {
+    &__control-container {
+      & > .kw-field {
+        flex: 0 1 50%;
+      }
+    }
+
     &__messages {
       overflow-wrap: anywhere;
     }
