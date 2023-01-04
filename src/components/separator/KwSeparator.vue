@@ -14,13 +14,13 @@ const availablePresets = {
     vertical: false,
     inset: false,
     size: undefined,
-    color: 'grey-5',
+    color: 'gray-5',
   },
   divider: {
     vertical: false,
     size: '8px',
     spaced: false,
-    color: 'grey-5',
+    color: 'bg-body',
   },
 };
 
