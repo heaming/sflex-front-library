@@ -118,8 +118,8 @@ body.mobile:not(.tablet) {
     .q-item {
       padding: 14px 20px;
       flex-direction: row-reverse;
-      background: url(~@assets/icons/dialog_checked_off.svg) no-repeat right 20px center;
-      background-size: 24px auto;
+
+      // background: url(~@assets/icons/dialog_checked_off.svg) no-repeat right 20px center;
 
       &__label {
         color: $black1;
@@ -129,6 +129,7 @@ body.mobile:not(.tablet) {
 
       &--active {
         background: rgba(47 138 243 / 5%) url(~@assets/icons/dialog_checked_on.svg) no-repeat right 20px center;
+        background-size: 24px auto;
 
         .q-item__label {
           color: $primary;

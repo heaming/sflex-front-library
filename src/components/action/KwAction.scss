@@ -98,14 +98,26 @@ body.mobile {
   // mobile
   &:not(.tablet) {
     .kw-action {
+      min-height: 20px;
+      line-height: 20px;
+
       &__left {
+        min-height: 20px;
+        line-height: 20px;
+
         p {
           color: $black2;
         }
       }
 
+      &--top {
+        align-items: center;
+      }
+
       &__contents {
-        gap: 4px;
+        gap: 0;
+        min-height: 20px;
+        line-height: 20px;
 
         & > span {
           color: $black3;
