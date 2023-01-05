@@ -1,29 +1,22 @@
 <template>
   <div class="kw-page-mobile-header">
     <kw-btn
-      v-if="leftBtn === 'back'"
+      v-if="pageTypeIsSub"
       class="kw-page-mobile-header__back-btn"
       icon="arrow_left_24"
       borderless
-      @click="toggleExpanded"
+      @click="$router.back()"
     />
     <kw-btn
-      v-if="leftBtn === 'menu'"
+      v-else
       class="kw-page-mobile-header__back-btn"
       icon="menu_24"
       borderless
-      @click="toggleExpanded"
+      @click="toggleExpanded()"
     />
-    <h1
-      class="kw-page-mobile-header__title"
-    >
-      <template v-if="title">
-        {{ title }}
-      </template>
-      <template v-else>
-        <slot>
-          {{ title }}
-        </slot>
+    <h1 class="kw-page-mobile-header__title">
+      <template v-if="pageTitle">
+        {{ pageTitle }}
       </template>
     </h1>
     <div class="kw-page-mobile-header__tools">
@@ -41,22 +34,15 @@
         </kw-checkbox>
       </div>
       <kw-icon
-        v-if="hint || $slots.hint"
         class="kw-page-mobile-header__hint"
         size="24px"
         name="info_24"
-        :tooltip="hint"
+        clickable
       >
-        <template
-          v-if="$slots.hint"
-          #default
-        >
-          <slot name="hint">
-            {{ hint }}
-          </slot>
-        </template>
+        {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
       </kw-icon>
     </div>
+
     <div
       v-if="$slots.etc"
       class="kw-page-mobile-header__etc"
@@ -71,32 +57,26 @@
     >
       <slot name="more" />
     </kw-btn-dropdown>
-    <kw-btn
-      v-if="showClose"
-      class="kw-page-mobile-header__close"
-      icon="close_24"
-      borderless
-      @click="$emit('close')"
-    />
   </div>
 </template>
 
 <script>
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 import useBookmark from './private/useBookmark';
+import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
 
 export default {
   name: 'KwPageMobileHeader',
+
   props: {
-    hint: { type: String, default: undefined },
-    title: { type: String, default: undefined },
-    leftBtn: { type: String, default: undefined },
-    showClose: { type: Boolean, default: false },
+    ...useHeaderMetaProps,
   },
-  emits: ['close'],
+
   setup() {
     const { getters } = useStore();
     const isAuthenticated = getters['meta/isAuthenticated'];
+
+    const { toggleExpanded } = useLeftDrawerExpand();
 
     const {
       isBookmarked,
@@ -120,7 +100,8 @@ export default {
     }
 
     return {
-      ...useLeftDrawerExpand(),
+      ...useHeaderMeta(),
+      toggleExpanded,
       isBookmarked,
       onUpdateBookmark,
     };
