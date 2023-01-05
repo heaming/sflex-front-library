@@ -10,6 +10,12 @@
       >.q-virtual-scroll__content > .q-item-type + .q-item-type {
         border-top: 1px solid $line-stroke;
       }
+
+      &.kw-list--selectable .kw-list__total-item {
+        & + .q-item-type {
+          border-top: 1px solid $black1;
+        }
+      }
     }
 
     &--padding {
@@ -40,10 +46,10 @@
           padding-top: 0;
           padding-bottom: 8px;
 
-          &:not(:last-child) {
-            margin-bottom: -1px;
-            border-bottom: 1px solid $black1;
-          }
+          // &:not(:last-child) {
+          //   margin-bottom: -1px;
+          //   border-bottom: 1px solid $black1;
+          // }
         }
       }
     }
