@@ -87,9 +87,10 @@ export default {
 
     const { stretchClass } = useStretch();
 
+    const defaultIsTooltip = computed(() => slots.default?.()[0]?.type?.name === 'KwTooltip');
     const radioClass = computed(() => ({
       'kw-radio': true,
-      'kw-radio--no-label': !(props.label || slots.default),
+      'kw-radio--no-label': !(props.label || (slots.default && !defaultIsTooltip.value)),
       'kw-radio--multiline': props.multiline,
       'spaced-sibling': !(props.removeSpacedSibling),
       ...stretchClass.value,
