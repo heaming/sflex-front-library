@@ -285,27 +285,32 @@ const recursiveDeleteBookmarks = (_bookmarks, current) => {
 function onClickMove(offset) {
   if (!selected.value) return;
 
-  const _bookmarks = [...bookmarks.value];
   const {
     bookmarkUid,
     bookmarkLevel,
     parentsBookmarkUid,
   } = treeRef.value.getNodeByKey(selected.value);
 
+  const _bookmarks = [...bookmarks.value];
   const siblings = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
-  const index = findIndex(siblings, { bookmarkUid });
-  const movedIndex = Math.min(Math.max(0, index + offset), siblings.length - 1);
-  const movedIndexOffset = movedIndex - index; // moved index offset
 
-  if (movedIndexOffset !== 0) {
+  const indexInSiblings = findIndex(siblings, { bookmarkUid });
+  const movedIndexInSiblings = Math.min(Math.max(0, indexInSiblings + offset), siblings.length - 1);
+  const movedIndexBookmarkUid = siblings[movedIndexInSiblings].bookmarkUid;
+
+  const index = findIndex(_bookmarks, { bookmarkUid });
+  const actualMovedIndex = findIndex(_bookmarks, { bookmarkUid: movedIndexBookmarkUid });
+  const actualOffset = actualMovedIndex - index;
+
+  if (actualOffset !== 0) {
     const i = findIndex(_bookmarks, { bookmarkUid });
-    const target = _bookmarks.splice(i, 1)[0];
+    const j = i + actualOffset;
 
-    const j = i + movedIndexOffset;
+    const target = _bookmarks.splice(i, 1);
     const spliced = _bookmarks.splice(j);
 
     bookmarks.value = [
-      ..._bookmarks, target, ...spliced,
+      ..._bookmarks, ...target, ...spliced,
     ];
   }
 }
