@@ -76,7 +76,7 @@
               clickable
             </td>
             <td>
-              add it as default all time
+              Add it when click area of whole of kw-expansion-item.
             </td>
           </tr>
           <tr>
@@ -329,8 +329,6 @@
           </h3>
           <kw-list
             :items="items2"
-            separator
-            padding
             item-key="id"
           >
             <template #item="{ item }">
@@ -359,8 +357,6 @@
           </h3>
           <kw-list
             :items="items2"
-            separator
-            padding
             item-key="id"
           >
             <template #item="{ item }">
@@ -397,8 +393,6 @@
           </h3>
           <kw-list
             :items="items2"
-            separator
-            padding
             item-key="id"
           >
             <template #item="{ item }">
@@ -428,8 +422,6 @@
           <kw-list
             :items="items2"
             separator
-            padding
-            clickable
             item-key="id"
           >
             <template #item="{ item }">
@@ -468,6 +460,80 @@
         id="default"
         class="kw-guide-title"
       >
+        item-class
+      </h3>
+
+      <p class="kw-guide-description">
+        <em># item-class</em><br>
+        <b>Side in kw-item-section</b> : It's made flexible width.<br>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <h3 class="my15">
+            padding
+          </h3>
+          <kw-list
+            item-class="kw-bc--error"
+            item-style="kw-bc--error"
+            separator
+            item-padding
+          >
+            <kw-item>
+              <kw-item-section>
+                First
+              </kw-item-section>
+            </kw-item>
+            <kw-item>
+              <kw-item-section>
+                second
+              </kw-item-section>
+            </kw-item>
+          </kw-list>
+          <kw-list
+            :items="items2"
+            item-key="id"
+            item-class="kw-bc--error"
+          >
+            <template #item="{ item }">
+              <div class="w120">
+                <img
+                  :src="item.src"
+                  alt="img"
+                  class="w100"
+                >
+              </div>
+              <div
+                class="row justify-between"
+                style="width: 100%;"
+              >
+                <div>
+                  <p>
+                    p tag
+                  </p>
+                  <span>{{ item.title }}</span>
+                </div>
+                <kw-chip
+                  label="완료"
+                  color="primary"
+                  outline
+                />
+              </div>
+            </template>
+          </kw-list>
+        </div>
+        <guide-code-view
+          :code-value="[case3, script3]"
+          :lang="['vue','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
+
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
         div
       </h3>
 
@@ -481,8 +547,6 @@
           </h3>
           <kw-list
             :items="items2"
-            separator
-            padding
             item-key="id"
           >
             <template #item="{ item }">
@@ -551,18 +615,15 @@
 
 <script setup>
 const case1 = `
-<h3 class="my15">
-  checkbox
-</h3>
 <kw-list
   v-model:selected="arrModel"
   :items="items"
   separator
-  padding
   checkbox
   hide-select-all
   clickable
   item-key="id"
+  item-padding
 >
   <template #item="{ item }">
     <kw-item-section
@@ -593,10 +654,10 @@ const case1 = `
   checkbox with select all
 </h3>
 <kw-list
-  v-model:selected="arrModel"
+  v-model:selected="arrModel1"
   :items="items"
   separator
-  padding
+  item-padding
   checkbox
   clickable
   item-key="id"
@@ -628,10 +689,10 @@ const case1 = `
   Radio
 </h3>
 <kw-list
-  v-model:selected="arrModel"
+  v-model:selected="arrModel2"
   :items="items"
   separator
-  padding
+  item-padding
   radio
   hide-select-all
   clickable
@@ -680,7 +741,7 @@ const case2 = `
 <kw-list
   :items="items"
   separator
-  padding
+  item-padding
   clickable
   item-key="id"
 >
@@ -724,13 +785,8 @@ const items2 = ref([
 ]);
 `;
 const case3 = `
-<h3 class="my15">
-  two side and one of default section
-</h3>
 <kw-list
   :items="items2"
-  separator
-  padding
   item-key="id"
 >
   <template #item="{ item }">
@@ -759,8 +815,6 @@ const case3 = `
 </h3>
 <kw-list
   :items="items2"
-  separator
-  padding
   item-key="id"
 >
   <template #item="{ item }">
@@ -797,8 +851,6 @@ const case3 = `
 </h3>
 <kw-list
   :items="items2"
-  separator
-  padding
   item-key="id"
 >
   <template #item="{ item }">
@@ -822,43 +874,68 @@ const case3 = `
     </kw-item-section>
   </template>
 </kw-list>
+<h3 class="my15">
+  kw-item-label
+</h3>
+<kw-list
+  :items="items2"
+  separator
+  item-key="id"
+>
+  <template #item="{ item }">
+    <kw-item-section center>
+      <kw-item-label>
+        line="2"
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        lines="2"
+      >
+        {{ item.lorem }}
+      </kw-item-label>
+      <kw-item-label>
+        line="1"
+      </kw-item-label>
+      <kw-item-label
+        lines="1"
+      >
+        {{ item.lorem }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
 `;
 const case4 = `
-<h3 class="my15">
-    div
-  </h3>
-  <kw-list
-    :items="items2"
-    separator
-    padding
-    item-key="id"
-  >
-    <template #item="{ item }">
-      <div class="w120">
-        <img
-          :src="item.src"
-          alt="img"
-          class="w100"
-        >
-      </div>
-      <div
-        class="row justify-between"
-        style="width: 100%;"
+<kw-list
+  :items="items2"
+  item-key="id"
+>
+  <template #item="{ item }">
+    <div class="w120">
+      <img
+        :src="item.src"
+        alt="img"
+        class="w100"
       >
-        <div>
-          <p>
-            p tag
-          </p>
-          <span>{{ item.title }}</span>
-        </div>
-        <kw-chip
-          label="완료"
-          color="primary"
-          outline
-        />
+    </div>
+    <div
+      class="row justify-between"
+      style="width: 100%;"
+    >
+      <div>
+        <p>
+          p tag
+        </p>
+        <span>{{ item.title }}</span>
       </div>
-    </template>
-  </kw-list>
+      <kw-chip
+        label="완료"
+        color="primary"
+        outline
+      />
+    </div>
+  </template>
+</kw-list>
 `;
 const arrModel = ref([]);
 const arrModel1 = ref([]);
