@@ -3,6 +3,8 @@
     :class="notifyClass"
     :model-value="isActive"
     :transition-duration="DIALOG_TRANSITION_DURATION"
+    transition-show="fade"
+    transition-hide="fade"
     seamless
   >
     <div class="global-notify__inner">

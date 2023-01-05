@@ -1,6 +1,10 @@
 <template>
   <q-page-container class="web-tab-view">
+    <router-view
+      v-if="isRouteView"
+    />
     <q-tabs
+      v-else
       :model-value="selectedKey"
       class="web-tab-view__header"
       align="left"
@@ -72,8 +76,12 @@ export default {
   },
 
   setup() {
+    const { currentRoute } = useRouter();
+    const isRouteView = computed(() => currentRoute.value.meta.menuUid === undefined);
+
     return {
       ...useTabView(),
+      isRouteView,
     };
   },
 };

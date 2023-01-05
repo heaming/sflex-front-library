@@ -41,10 +41,10 @@ export default () => {
     return [];
   });
 
-  const title = computed(() => last(navigations.value)?.label);
+  const navigationTitle = computed(() => last(navigations.value)?.label);
 
   return {
     navigations,
-    title,
+    navigationTitle,
   };
 };

@@ -51,6 +51,9 @@ export default {
     const expandCtx = useLeftDrawerExpand();
     const { setExpanded } = expandCtx;
 
+    const { currentRoute } = useRouter();
+    const showing = computed(() => currentRoute.value.meta.menuUid !== undefined);
+
     const contents = [
       { component: WebLeftDrawerMenu, icon: '', label: '메뉴' },
       { component: WebLeftDrawerBookmark, icon: '', label: '즐겨찾기' },
@@ -65,6 +68,7 @@ export default {
 
     return {
       ...expandCtx,
+      showing,
       contents,
       selectedContent,
       onChangeContent,

@@ -8,10 +8,12 @@ export default () => {
   const isBookmarked = computed(() => getters['meta/isBookmarked'](menuUid, pageId));
 
   async function fetchBookmark() {
-    try {
-      await dispatch('meta/fetchBookmark', { menuUid, pageId });
-    } catch (e) {
-      // ignore
+    if (menuUid && pageId) {
+      try {
+        await dispatch('meta/fetchBookmark', { menuUid, pageId });
+      } catch (e) {
+        // ignore
+      }
     }
   }
 

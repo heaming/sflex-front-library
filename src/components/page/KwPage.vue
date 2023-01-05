@@ -7,9 +7,15 @@
       v-if="!noHeader"
       name="header"
     >
-      <kw-page-mobile-header
-        v-if="$g.platform.is.mobile || $g.platform.is.tablet"
+      <kw-page-header
+        v-if="$g.platform.is.desktop"
         class="kw-page__header"
+        :title="title"
+      />
+      <kw-page-mobile-header
+        v-else
+        class="kw-page__header"
+        :title="title"
       >
         <template
           v-if="$slots.more"
@@ -17,7 +23,6 @@
         >
           <slot name="more" />
         </template>
-
         <template
           v-if="$slots.etc"
           #etc
@@ -25,10 +30,6 @@
           <slot name="etc" />
         </template>
       </kw-page-mobile-header>
-      <kw-page-header
-        v-else
-        class="kw-page__header"
-      />
     </slot>
 
     <div
@@ -58,9 +59,7 @@
         v-if="$slots.action"
         class="kw-page__action"
       >
-        <slot
-          name="action"
-        />
+        <slot name="action" />
       </div>
     </div>
   </q-page>
@@ -77,8 +76,8 @@ export default {
   props: {
     ...useObserverProps,
 
+    title: { type: String, default: undefined },
     noHeader: { type: Boolean, default: false },
-    hint: { type: String, default: undefined },
   },
 
   setup() {

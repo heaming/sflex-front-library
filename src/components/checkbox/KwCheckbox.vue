@@ -118,9 +118,10 @@ export default {
 
     const { stretchClass } = useStretch();
 
+    const defaultIsTooltip = computed(() => slots.default?.()[0]?.type?.name === 'KwTooltip');
     const checkboxClass = computed(() => ({
       'kw-checkbox': true,
-      'kw-checkbox--no-label': !(props.label || slots.default),
+      'kw-checkbox--no-label': !(props.label || (slots.default && !defaultIsTooltip.value)),
       'kw-checkbox--multiline': props.multiline,
       'spaced-sibling': !(props.removeSpacedSibling),
       ...stretchClass.value,

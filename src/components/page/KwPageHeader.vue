@@ -1,19 +1,20 @@
 <template>
   <div
-    v-if="title"
+    v-if="pageTitle || navigationTitle"
     class="kw-page-header"
   >
     <div class="kw-page-header__title">
-      <!-- <kw-icon
+      <kw-icon
+        v-if="pageTypeIsSub"
         size="24px"
         name="arrow_left_breadcrumbs_24"
         clickable
-        @click="onClickBack"
+        @click="$router.back()"
       >
         {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
-      </kw-icon> -->
+      </kw-icon>
 
-      <h1>{{ title }}</h1>
+      <h1>{{ pageTitle || navigationTitle }}</h1>
     </div>
 
     <div class="kw-page-header__tools">
@@ -24,7 +25,7 @@
         @update:model-value="onUpdateBookmark"
       >
         <kw-tooltip>
-          {{ $t('MSG_TXT_BKMK') }}
+          {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
         </kw-tooltip>
       </kw-checkbox>
 
@@ -40,12 +41,11 @@
         clickable
         @click="openNewWindow()"
       >
-        {{ $t('MSG_TXT_NEW_WINDOW') }}
+        {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
       </kw-icon>
     </div>
 
     <q-space />
-
     <q-breadcrumbs class="kw-page-header__navigation">
       <q-breadcrumbs-el
         v-for="(navigation, i) of navigations"
@@ -56,7 +56,7 @@
           v-if="i === navigations.length - 1"
           clickable
         >
-          {{ $t('MSG_BTN_HINT') }}
+          {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
         </kw-icon>
       </q-breadcrumbs-el>
     </q-breadcrumbs>
@@ -67,12 +67,18 @@
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
 import useBookmark from './private/useBookmark';
 import useNewWindow from './private/useNewWindow';
+import useHeaderMeta from './private/useHeaderMeta';
 
 export default {
   name: 'KwPageHeader',
 
   props: {
     ...useBreadcrumbNavigationProps,
+
+    title: {
+      type: String,
+      default: undefined,
+    },
   },
 
   async setup() {
@@ -103,6 +109,7 @@ export default {
     return {
       ...useBreadcrumbNavigation(),
       ...useNewWindow(),
+      ...useHeaderMeta(),
       isBookmarked,
       onUpdateBookmark,
     };

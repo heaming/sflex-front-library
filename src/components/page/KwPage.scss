@@ -129,6 +129,17 @@
     margin-bottom: 2px; // shift to top for optical illusion.
   }
 
+  &__tools {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    margin-right: auto;
+  }
+
+  &__hint {
+    margin-left: 8px;
+  }
+
   &__back-btn {
     margin-right: 8px;
     color: $black1;
@@ -150,10 +161,6 @@
         margin-left: 1rem;
       }
     }
-  }
-
-  &__hint {
-    margin-left: 8px;
   }
 
   &__more {
