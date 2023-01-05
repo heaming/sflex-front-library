@@ -88,7 +88,7 @@
                 @keydown.esc="onClickFolderName(node, false)"
               >
                 <kw-input
-                  v-model.trim="inputVal"
+                  v-model.trim="inputBookmarkName"
                   dense
                   maxlength="100"
                   autofocus
@@ -235,18 +235,18 @@ async function fetchBookmarks() {
   initialBookmarks = cloneDeep(bookmarks.value);
 }
 
-const inputVal = ref();
+const inputBookmarkName = ref();
 function onClickFolderName(node, isEdit) {
   const { bookmarkUid } = node;
   const target = find(bookmarks.value, { bookmarkUid });
 
   if (isEdit) {
     node.isEdit = true;
-    inputVal.value = '';
+    inputBookmarkName.value = node.bookmarkName;
   } else {
     node.isEdit = false;
-    node.bookmarkName = inputVal.value;
-    target.bookmarkName = inputVal.value;
+    node.bookmarkName = inputBookmarkName.value;
+    target.bookmarkName = inputBookmarkName.value;
   }
 
   treeRef.value.$forceUpdate();
