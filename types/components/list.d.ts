@@ -1,5 +1,6 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor, QListProps, QListSlots } from 'quasar';
+import { VueClassProp, VueStyleProp } from 'quasar/dist/types/api/vue-prop-types';
 
 type FallThroughProps = 'separator' | 'bordered';
 
@@ -140,6 +141,24 @@ interface KwListProps extends Pick<QListProps, FallThroughProps> {
    * @see onClickItem
    */
   clickable?: boolean | undefined;
+
+  /**
+   * 내부에 그려질 `kw-item` 에 연결되는 값
+   *
+   * * if you use default Slot, It will ignored. *
+   *
+   * @see onClickItem
+   */
+  itemClass?: VueClassProp | undefined;
+
+  /**
+   * 내부에 그려질 `kw-item` 에 연결되는 값
+   *
+   * * if you use default Slot, It will ignored. *
+   *
+   * @see onClickItem
+   */
+  itemStyle?: VueStyleProp | undefined;
 
   /**
    * 내부에 그려질 `kw-item` 에 연결되는 값.

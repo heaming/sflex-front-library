@@ -24,6 +24,7 @@
           icon="write"
           no-wrap
           :label="$t('MSG_BTN_EDIT')"
+          @click="onClickEdit"
         />
       </div>
 
@@ -74,6 +75,7 @@
 import { cloneDeep, filter } from 'lodash-es';
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
+import { modal } from '../../plugins/modal';
 
 import WebLeftDrawerTitle from './WebLeftDrawerTitle.vue';
 
@@ -87,15 +89,18 @@ export default {
     const treeRef = ref();
     const selectedKey = ref(null);
 
-    const { getters } = useStore();
+    const { getters, dispatch } = useStore();
     const bookmarks = computed(() => cloneDeep(getters['meta/getBookmarks']));
 
-    const recursiveCreate = (nodes) => nodes.map((node) => {
-      const bookmarkLevel = node.bookmarkLevel + 1;
-      const parentsBookmarkUid = node.bookmarkUid;
+    const recursiveCreate = (currents) => currents.map((e) => {
+      const bookmarkLevel = e.bookmarkLevel + 1;
+      const parentsBookmarkUid = e.bookmarkUid;
       const children = filter(bookmarks.value, { bookmarkLevel, parentsBookmarkUid });
 
-      return { ...node, children };
+      return {
+        ...e,
+        children: recursiveCreate(children),
+      };
     });
 
     const treeNodes = computed(() => {
@@ -128,12 +133,23 @@ export default {
       }
     }
 
+    async function onClickEdit() {
+      const { result } = await modal({
+        component: () => import('./WebLeftDrawerBookmarkPopup.vue'),
+      });
+
+      if (result) {
+        await dispatch('meta/fetchBookmarks');
+      }
+    }
+
     return {
       treeRef,
       treeNodes,
       selectedKey,
       setExpandedAll,
       onUpdateSelected,
+      onClickEdit,
     };
   },
 };

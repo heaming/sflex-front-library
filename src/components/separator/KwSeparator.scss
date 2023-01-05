@@ -1,7 +1,9 @@
-.kw-separator.q-separator {
-  &--vertical-inset {
-    margin-top: 7px;
-    margin-bottom: 7px;
+.kw-separator {
+  &.q-separator {
+    &--vertical-inset {
+      margin-top: 7px;
+      margin-bottom: 7px;
+    }
   }
 }
 

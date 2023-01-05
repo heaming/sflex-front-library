@@ -314,7 +314,7 @@ body.desktop .web-layout {
       .q-tree {
         &__node {
           &::after {
-            top: -13.5px;
+            top: -23.5px;
           }
         }
 
@@ -323,7 +323,7 @@ body.desktop .web-layout {
           margin-top: 20px;
 
           &::before {
-            top: -10px;
+            top: -23.5px;
           }
         }
 
@@ -343,6 +343,61 @@ body.desktop .web-layout {
           > div {
             font-size: 12px;
           }
+        }
+      }
+    }
+  }
+}
+
+.drawer-bookmark__popup {
+  .bookmark-popup {
+    &__tree-container {
+      padding: 10px;
+      min-height: 500px;
+      border: 1px solid #000;
+    }
+  }
+
+  &.bookmark-popup .kw-tree {
+    &.q-tree:not(.kw-tree--empty) {
+      margin-top: -20px;
+    }
+
+    .q-tree {
+      &__node {
+        &::after {
+          top: -23.5px;
+        }
+      }
+
+      &__node-header {
+        padding: 0 4px;
+        margin-top: 20px;
+
+        &::before {
+          top: -23.5px;
+        }
+      }
+
+      &__node--child:has(.bookmark-popup__tree-dummy) {
+        display: none;
+      }
+
+      &__node-header-content {
+        font-size: 14px;
+        color: $black2;
+
+        .q-icon {
+          margin-right: 8px;
+          font-size: inherit;
+        }
+      }
+
+      &__node-body {
+        padding-left: 26px;
+
+        > div {
+          font-size: 12px;
         }
       }
     }
