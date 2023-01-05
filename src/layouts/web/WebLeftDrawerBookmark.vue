@@ -39,7 +39,7 @@
       <kw-tree
         v-else
         ref="treeRef"
-        v-model:selected="selectedKey"
+        :selected="selectedKey"
         class="drawer-bookmark__tree"
         :nodes="treeNodes"
         node-key="bookmarkUid"
@@ -122,13 +122,17 @@ export default {
     async function onUpdateSelected(val) {
       const { menuUid } = treeRef.value.getNodeByKey(val);
 
-      try {
-        await push({ name: menuUid });
-      } catch (e) {
-        if (isNavigationFailure(e, 1)) { // matcher not found
-          await alert(t('MSG_ALT_PAGE_NOT_FOUND'));
-        } else {
-          throw e;
+      if (menuUid) {
+        selectedKey.value = val;
+
+        try {
+          await push({ name: menuUid });
+        } catch (e) {
+          if (isNavigationFailure(e, 1)) { // matcher not found
+            await alert(t('MSG_ALT_PAGE_NOT_FOUND'));
+          } else {
+            throw e;
+          }
         }
       }
     }

@@ -78,9 +78,35 @@
             v-else-if="node.isFolder"
             class="row col items-center"
           >
-            <div class="col">
-              {{ node.bookmarkName }}&nbsp;({{ node.children.filter((e) => !e.isDummy).length }})
+            <kw-click-outside
+              v-if="node.isEdit"
+              @click-outside="onClickFolderName(node, false)"
+            >
+              <div
+                @pointerdown.stop
+                @mousedown.stop
+                @touchstart.stop
+                @click.stop
+                @keypress.stop
+                @keydown.esc="onClickFolderName(node, false)"
+              >
+                <kw-input
+                  v-model.trim="inputBookmarkName"
+                  dense
+                  maxlength="100"
+                  autofocus
+                  validate-on-mount
+                  rules="required"
+                  :label="$t('MSG_TXT_BKMK_NM')"
+                />
+              </div>
+            </kw-click-outside>
+            <div v-else>
+              <span @click.stop="onClickFolderName(node, true)">
+                {{ node.bookmarkName }}&nbsp;({{ node.children.filter((e) => !e.isDummy).length }})
+              </span>
             </div>
+            <kw-space />
             <kw-icon
               name="close"
               clickable
@@ -167,13 +193,14 @@ const recursiveCreateNode = (_bookmarks, currents) => {
       bookmarkUid: e.bookmarkUid,
       bookmarkName: e.bookmarkName,
       parentsBookmarkUid: e.parentsBookmarkUid,
+      menuPath: e.menuPath,
       isFolder,
+      isEdit: false,
       isDummy: e.isDummy === true,
       children: recursiveCreateNode(_bookmarks, children),
     };
   });
 };
-
 const nodes = computed(() => recursiveCreateNode(bookmarks.value));
 
 const recursiveNormalizeBookmarks = (_bookmarks, currents) => {
@@ -194,6 +221,7 @@ const recursiveNormalizeBookmarks = (_bookmarks, currents) => {
         folderYn: e.folderYn === 'Y' ? 'Y' : 'N',
         menuUid: e.menuUid,
         pageId: e.pageId,
+        menuPath: e.menuPath,
         parentsBookmarkUid: e.parentsBookmarkUid || null,
         arrayalOrder: i,
       },
@@ -208,6 +236,24 @@ async function fetchBookmarks() {
   const response = await http.get('/sflex/common/common/bookmarks');
   bookmarks.value = recursiveNormalizeBookmarks(response.data);
   initialBookmarks = cloneDeep(bookmarks.value);
+}
+
+const inputBookmarkName = ref();
+
+function onClickFolderName(node, isEdit) {
+  const { bookmarkUid } = node;
+  const target = find(bookmarks.value, { bookmarkUid });
+
+  if (isEdit) {
+    node.isEdit = true;
+    inputBookmarkName.value = node.bookmarkName;
+  } else {
+    node.isEdit = false;
+    node.bookmarkName = inputBookmarkName.value;
+    target.bookmarkName = inputBookmarkName.value;
+  }
+
+  treeRef.value.$forceUpdate();
 }
 
 function onClickNewFolder() {
@@ -285,27 +331,32 @@ const recursiveDeleteBookmarks = (_bookmarks, current) => {
 function onClickMove(offset) {
   if (!selected.value) return;
 
-  const _bookmarks = [...bookmarks.value];
   const {
     bookmarkUid,
     bookmarkLevel,
     parentsBookmarkUid,
   } = treeRef.value.getNodeByKey(selected.value);
 
+  const _bookmarks = [...bookmarks.value];
   const siblings = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
-  const index = findIndex(siblings, { bookmarkUid });
-  const movedIndex = Math.min(Math.max(0, index + offset), siblings.length - 1);
-  const movedIndexOffset = movedIndex - index; // moved index offset
 
-  if (movedIndexOffset !== 0) {
+  const indexInSiblings = findIndex(siblings, { bookmarkUid });
+  const movedIndexInSiblings = Math.min(Math.max(0, indexInSiblings + offset), siblings.length - 1);
+  const movedIndexBookmarkUid = siblings[movedIndexInSiblings].bookmarkUid;
+
+  const index = findIndex(_bookmarks, { bookmarkUid });
+  const actualMovedIndex = findIndex(_bookmarks, { bookmarkUid: movedIndexBookmarkUid });
+  const actualOffset = actualMovedIndex - index;
+
+  if (actualOffset !== 0) {
     const i = findIndex(_bookmarks, { bookmarkUid });
-    const target = _bookmarks.splice(i, 1)[0];
+    const j = i + actualOffset;
 
-    const j = i + movedIndexOffset;
+    const target = _bookmarks.splice(i, 1);
     const spliced = _bookmarks.splice(j);
 
     bookmarks.value = [
-      ..._bookmarks, target, ...spliced,
+      ..._bookmarks, ...target, ...spliced,
     ];
   }
 }
@@ -330,6 +381,23 @@ function onBeforeClose(result) {
     || confirm(t('MSG_ALT_CHG_CNTN'));
 }
 
+function validate(normalizedBookmarks) {
+  const matched = find(normalizedBookmarks, (e) => !e.bookmarkName);
+
+  if (matched) {
+    const { bookmarkUid, parentsBookmarkUid } = matched;
+    const node = treeRef.value.getNodeByKey(bookmarkUid);
+
+    if (parentsBookmarkUid) {
+      treeRef.value.setExpanded(parentsBookmarkUid, true);
+    }
+
+    onClickFolderName(node, true);
+  }
+
+  return !matched;
+}
+
 async function onClickSave() {
   const normalizedBookmarks = recursiveNormalizeBookmarks(bookmarks.value);
 
@@ -338,7 +406,7 @@ async function onClickSave() {
     return;
   }
 
-  if (await confirm(t('MSG_ALT_WANT_SAVE'))) {
+  if (validate(normalizedBookmarks) && await confirm(t('MSG_ALT_WANT_SAVE'))) {
     await http.put('/sflex/common/common/bookmarks', normalizedBookmarks);
     ok();
   }
