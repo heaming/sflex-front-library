@@ -50,7 +50,7 @@
               item-padding/ item-padding=""
             </td>
             <td>
-              default top and bottom of kw-item: 16px,
+              default top and bottom of kw-item: 20px,
             </td>
           </tr>
           <tr>
