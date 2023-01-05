@@ -83,6 +83,9 @@
               @click-outside="onClickFolderName(node, false)"
             >
               <div
+                @pointerdown.stop
+                @mousedown.stop
+                @touchstart.stop
                 @click.stop
                 @keypress.stop
                 @keydown.esc="onClickFolderName(node, false)"
@@ -236,6 +239,7 @@ async function fetchBookmarks() {
 }
 
 const inputBookmarkName = ref();
+
 function onClickFolderName(node, isEdit) {
   const { bookmarkUid } = node;
   const target = find(bookmarks.value, { bookmarkUid });
