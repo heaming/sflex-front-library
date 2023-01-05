@@ -88,7 +88,7 @@
           </tr>
           <tr>
             <td>side</td>
-            <td>create flexible space width padding 16px </td>
+            <td>create flexible space width padding 8px </td>
           </tr>
         </tbody>
       </q-markup-table>
@@ -311,8 +311,8 @@
       <p class="kw-guide-description">
         <em># section - side props</em><br>
         <b>Side in kw-item-section</b> : It's made flexible width.<br>
-        Add it on left side, it has padding-right: 16px<br>
-        Add it on right side, it has padding-left: 16px<br>
+        Add it on left side, it has padding-right: 8px<br>
+        Add it on right side, it has padding-left: 8px<br>
         <b>no side in kw-item-section</b> : it's the rest of space except of side props in kw-item-section.<br>
         And divide the rest of space equally<br>
         <em># section - top/center/bottom</em><br>
@@ -367,7 +367,7 @@
               <kw-item-section
                 side
               >
-                side<br>(padding-right:16px)
+                side<br>(padding-right:8px)
               </kw-item-section>
               <kw-item-section
                 center
@@ -387,7 +387,7 @@
               <kw-item-section
                 side
               >
-                side<br>(padding-left:16px)
+                side<br>(padding-left:8px)
               </kw-item-section>
             </template>
           </kw-list>
@@ -767,7 +767,7 @@ const case3 = `
     <kw-item-section
       side
     >
-      side<br>(padding-right:16px)
+      side<br>(padding-right:8px)
     </kw-item-section>
     <kw-item-section
       center
@@ -787,7 +787,7 @@ const case3 = `
     <kw-item-section
       side
     >
-      side<br>(padding-left:16px)
+      side<br>(padding-left:8px)
     </kw-item-section>
   </template>
 </kw-list>
