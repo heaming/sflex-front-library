@@ -45,6 +45,15 @@
               4px between kw-form-item
             </td>
           </tr>
+          <tr>
+            <td>
+              'p' tag in kw-form-item
+            </td>
+            <td>
+              class: text-center, text-right
+            </td>
+            <td>Adjust aling text (default: left)</td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
