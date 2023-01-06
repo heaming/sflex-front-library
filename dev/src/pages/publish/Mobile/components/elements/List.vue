@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr>
-            <td rowspan="6">
+            <td rowspan="7">
               kw-list
             </td>
             <td>
@@ -64,7 +64,6 @@
           <tr>
             <td>
               hide-select-all
-              clickable
             </td>
             <td>
               default: false/ Add it, hide the select all button
@@ -80,6 +79,10 @@
             </td>
           </tr>
           <tr>
+            <td>item-class</td>
+            <td>Style for child combinator of kw-item in kw-list</td>
+          </tr>
+          <tr>
             <td rowspan="2">
               kw-item-section
             </td>
@@ -92,6 +95,17 @@
           </tr>
         </tbody>
       </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3 class="kw-guide-title kw-font-pt24">
+        Notice
+      </h3>
+      <p class="kw-guide-description">
+        <em class="kkk"># The sequence of kw-list</em><br>
+        - kw--list > kw-item > kw-item-section > kw-item-label or label<br>
+        - kw--list > kw-item or kw-item-section > kw-item-label or label<br>
+        <b class="kkk">*Use kw-item or kw-item-secton before using 'div' and after kw-item*</b>
+      </p>
     </div>
     <div class="kw-guide-section">
       <h3
@@ -465,22 +479,24 @@
 
       <p class="kw-guide-description">
         <em># item-class</em><br>
-        <b>Side in kw-item-section</b> : It's made flexible width.<br>
+        It's for styling kw-item. It's able to add helper class or create class in kw-list<br>
+        This is for only child combinator of kw-item in kw-list.<br>
+        <em># class</em><br>
+        It's for styling kw-list. It's able to add helper or create class.
       </p>
       <q-card>
         <div class="kw-guide-example">
           <h3 class="my15">
-            padding
+            class
           </h3>
           <kw-list
-            item-class="kw-bc--error"
-            item-style="kw-bc--error"
+            class="kw-fc--positive"
             separator
             item-padding
           >
             <kw-item>
               <kw-item-section>
-                First
+                This is for the class for kw-list
               </kw-item-section>
             </kw-item>
             <kw-item>
@@ -489,41 +505,26 @@
               </kw-item-section>
             </kw-item>
           </kw-list>
+
+          <h3 class="my15">
+            item-class
+          </h3>
           <kw-list
-            :items="items2"
+            :items="items3"
             item-key="id"
-            item-class="kw-bc--error"
+            item-class="example kw-bc--bg-box"
+            class="list-style"
           >
             <template #item="{ item }">
-              <div class="w120">
-                <img
-                  :src="item.src"
-                  alt="img"
-                  class="w100"
-                >
-              </div>
-              <div
-                class="row justify-between"
-                style="width: 100%;"
-              >
-                <div>
-                  <p>
-                    p tag
-                  </p>
-                  <span>{{ item.title }}</span>
-                </div>
-                <kw-chip
-                  label="완료"
-                  color="primary"
-                  outline
-                />
-              </div>
+              <kw-item-section>
+                <span>{{ item.helperclass }}</span>
+              </kw-item-section>
             </template>
           </kw-list>
         </div>
         <guide-code-view
-          :code-value="[case3, script3]"
-          :lang="['vue','javascript']"
+          :code-value="[itemClass, itemscript , itemCss]"
+          :lang="['vue','javascript','css']"
           multi
         />
       </q-card>
@@ -550,29 +551,31 @@
             item-key="id"
           >
             <template #item="{ item }">
-              <div class="w120">
-                <img
-                  :src="item.src"
-                  alt="img"
-                  class="w100"
-                >
-              </div>
-              <div
-                class="row justify-between"
-                style="width: 100%;"
-              >
-                <div>
-                  <p>
-                    p tag
-                  </p>
-                  <span>{{ item.title }}</span>
+              <kw-item-section>
+                <div class="w120">
+                  <img
+                    :src="item.src"
+                    alt="img"
+                    class="w100"
+                  >
                 </div>
-                <kw-chip
-                  label="완료"
-                  color="primary"
-                  outline
-                />
-              </div>
+                <div
+                  class="row justify-between"
+                  style="width: 100%;"
+                >
+                  <div>
+                    <p>
+                      p tag
+                    </p>
+                    <span>{{ item.title }}</span>
+                  </div>
+                  <kw-chip
+                    label="완료"
+                    color="primary"
+                    outline
+                  />
+                </div>
+              </kw-item-section>
             </template>
           </kw-list>
         </div>
@@ -906,36 +909,98 @@ const case3 = `
 </kw-list>
 `;
 const case4 = `
+<h3 class="my15">
+  div
+</h3>
 <kw-list
   :items="items2"
   item-key="id"
 >
   <template #item="{ item }">
-    <div class="w120">
-      <img
-        :src="item.src"
-        alt="img"
-        class="w100"
-      >
-    </div>
-    <div
-      class="row justify-between"
-      style="width: 100%;"
-    >
-      <div>
-        <p>
-          p tag
-        </p>
-        <span>{{ item.title }}</span>
+    <kw-item-section>
+      <div class="w120">
+        <img
+          :src="item.src"
+          alt="img"
+          class="w100"
+        >
       </div>
-      <kw-chip
-        label="완료"
-        color="primary"
-        outline
-      />
-    </div>
+      <div
+        class="row justify-between"
+        style="width: 100%;"
+      >
+        <div>
+          <p>
+            p tag
+          </p>
+          <span>{{ item.title }}</span>
+        </div>
+        <kw-chip
+          label="완료"
+          color="primary"
+          outline
+        />
+      </div>
+    </kw-item-section>
   </template>
 </kw-list>
+`;
+
+const itemClass = `
+<h3 class="my15">
+  class
+</h3>
+<kw-list
+  class="kw-fc--positive"
+  separator
+  item-padding
+>
+  <kw-item>
+    <kw-item-section>
+      This is for the class for kw-list
+    </kw-item-section>
+  </kw-item>
+  <kw-item>
+    <kw-item-section>
+      second
+    </kw-item-section>
+  </kw-item>
+</kw-list>
+
+<h3 class="my15">
+  item-class
+</h3>
+<kw-list
+  :items="items3"
+  item-key="id"
+  item-class="example kw-bc--bg-box"
+  class="list-style"
+>
+  <template #item="{ item }">
+    <kw-item-section>
+      <span>{{ item.helperclass }}</span>
+    </kw-item-section>
+  </template>
+</kw-list>
+`;
+const itemscript = `
+const items3 = ref([
+  {
+    id: '1', helperclass: 'Helper class of background color and create class in item-class' },
+  {
+    id: '2', helperclass: 'The items have border' }
+]);
+`;
+
+const itemCss = `
+::v-deep(.example) {
+  padding: 20px;
+  border: 2px solid $info;
+}
+
+.list-style {
+  color: $black3;
+}
 `;
 const arrModel = ref([]);
 const arrModel1 = ref([]);
@@ -949,13 +1014,72 @@ const items = ref([
 // const placeholde = '검색결과 없습니다';
 const items2 = ref([
   {
-    id: '1', text: 'text', src: 'https://cdn.quasar.dev/img/mountains.jpg', lorem: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Molestiae autem, illo error nesciunt unde consequuntur atque incidunt, aliquid voluptates tempora veritatis! A illo velit, vitae laudantium tempora incidunt voluptatum quas?' },
+    id: '1', text: 'text', src: 'https://cdn.quasar.dev/img/mountains.jpg', lorem: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Molestiae autem, illo error nesciunt unde consequuntur atque incidunt, aliquid voluptates tempora veritatis! A illo velit, vitae laudantium tempora incidunt voluptatum quas?', helperclass: 'Helper class of background color and create class in item-class' },
 ]);
+const items3 = ref([
+  {
+    id: '1', helperclass: 'Helper class of background color and create class in item-class' },
+  {
+    id: '2', helperclass: 'The items have border' },
+]);
+
 const historyData = [
   {
-    timestamp: '2022-12-08',
+    timestamp: '2022-01-06',
     text: 'First added',
   },
 ];
 
 </script>
+
+<style lang="scss" scoped>
+::v-deep(.example) {
+  padding: 20px;
+  border: 2px solid $info;
+}
+
+.list-style {
+  color: $black3;
+}
+
+.kkk {
+  font-size: 22px;
+  animation-duration: 3s;
+  animation-name: rainbow;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    color: #ff2a2a;
+  }
+
+  15% {
+    color: #ff7a2a;
+  }
+
+  30% {
+    color: #ffc52a;
+  }
+
+  45% {
+    color: #43ff2a;
+  }
+
+  60% {
+    color: #2a89ff;
+  }
+
+  75% {
+    color: #202082;
+  }
+
+  90% {
+    color: #6b2aff;
+  }
+
+  100% {
+    color: #e82aff;
+  }
+}
+</style>

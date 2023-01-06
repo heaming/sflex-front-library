@@ -2,6 +2,7 @@ import {
   RestoreMode, IndicatorValue, GridFitStyle, ExitGridWhenTab, SortMode,
   SelectionStyle, ValidationLevel, GridBase, TreeView, RowGroupAdornments, ExpanderVisibility, HandleVisibility,
 } from 'realgrid';
+import i18n from '../../../i18n';
 
 const dataConfig = {
   restoreMode: RestoreMode.AUTO,
@@ -45,7 +46,7 @@ const viewConfig = {
     useFocusClass: true,
     showEmptyMessage: true,
     showEmptyTooltip: false,
-    emptyMessage: 'No data to display',
+    emptyMessage: () => i18n.t('MSG_ALT_NO_INFO_SRCH', null, '조회 결과가 없습니다.'),
     selectionStyle: SelectionStyle.BLOCK,
     fitStyle: GridFitStyle.FILL,
     rowChangeDelay: 100,

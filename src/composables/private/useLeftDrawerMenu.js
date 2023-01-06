@@ -59,7 +59,7 @@ export default () => {
     };
 
     try {
-      await http.post('/sflex/common/common/portal/menus/logging', logData, { useSpinner: false });
+      await http.post('/sflex/common/common/portal/menus/logging', logData, { silent: true });
     } catch (e) {
       // ignore
     }

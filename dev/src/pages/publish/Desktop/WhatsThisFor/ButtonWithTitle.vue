@@ -15,10 +15,10 @@
         button with title
       </h3>
       <p class="kw-guide-description">
-        The reference page for <router-link to="/Publish/Components/Elements/ActionBar/ActionTop">
+        The reference page for <router-link to="/Publish/Desktop/Components/Elements/ActionBar/ActionTop">
           ActionTop
         </router-link><br>
-        The reference page for <router-link to="/Publish/Components/Elements/ActionBar/ActionBottom">
+        The reference page for <router-link to="/Publish/Desktop/Components/Elements/ActionBar/ActionBottom">
           ActionBottom
         </router-link><br>
 

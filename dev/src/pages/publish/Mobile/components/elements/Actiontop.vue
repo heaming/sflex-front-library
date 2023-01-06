@@ -53,7 +53,6 @@
       <p class="kw-guide-description">
         Make sure to use kw-paging-info,This is same way compare to Desktop<br>
         And Adding kw-btn on right side, Exclude from template #left.<br>
-        <a href="https://zpl.io/AmdRNpo">Here is the reference pagem :kw-paiging-info</a>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -97,7 +96,6 @@
       <p class="kw-guide-description">
         Add h3 in template # left <br>
         And Adding kw-btn on right side, Exclude from template #left<br>
-        <a href="https://zpl.io/Q0OkyDR"> Here is the link for reference - leftside : h3 , rightside: btn</a><br>
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -153,8 +151,6 @@
       <p class="kw-guide-description">
         Make sure to add helper class of pl12 on left side between text and number<br>
         Make sure to add helper class of pl14 on right side between text and number<br>
-        <a href="https://zpl.io/Md8YWvR"> Here is the link for reference - leftside: span  rightside: btn</a><br>
-        <a href="https://zpl.io/vMqwj5J"> Here is the link for reference - leftside: p rightside: span</a><br>
       </p>
       <q-card>
         <div class="kw-guide-example">

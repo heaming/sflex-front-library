@@ -353,7 +353,7 @@
         The content(Grid in this example) should be wrapped
         <b>kw-step-panel</b>'s tag and put active step number as
         <b>:name="2"</b> in kw-step-panel<br>
-        <router-link to="/Publish/Components/Elements/Elements/Grid">
+        <router-link to="/Publish/Desktop/Components/Elements/Elements/Grid">
           The reference page for Grid
         </router-link>
       </p>

@@ -794,7 +794,7 @@
         <li>
           Radio and input together in kw-form-item or kw-search-item,<br>
           It should come as select and input in kw-form-item or kw-search-item <br>
-          <router-link to="/Publish/Components/NewUpdate/RadioSelect">
+          <router-link to="/Publish/Desktop/Components/NewUpdate/RadioSelect">
             The link is more detail for Radio + input -> Select + input.
             Make sure to check it out
           </router-link>

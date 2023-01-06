@@ -16,7 +16,7 @@
       </h3>
       <p class="kw-guide-description">
         It should be added as toggle(radio)
-        <router-link to="/Publish/Components/Elements/Button/ButtonNew">
+        <router-link to="/Publish/Desktop/Components/Elements/Button/ButtonNew">
           buttonNew - Toggle(radio)
         </router-link>
         after Date Range Picker
@@ -53,7 +53,7 @@
       </h3>
       <p class="kw-guide-description">
         It should be added as button
-        <router-link to="/Publish/Components/Elements/Button/ButtonNew">
+        <router-link to="/Publish/Desktop/Components/Elements/Button/ButtonNew">
           buttonNew - button(dense) <br>
           no-label and button only in kw-search-item
         </router-link>

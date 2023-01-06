@@ -174,7 +174,7 @@
             </td>
             <td>
               Use the color helper class in
-              <router-link to="/Publish/Components/color">
+              <router-link to="/Publish/Desktop/Components/color">
                 color
               </router-link>
             </td>
@@ -293,7 +293,7 @@
       </h3>
       <p class="kw-guide-description">
         If the grids are located same line(horizontal), refer this guide and sample page
-        <router-link to="/Publish/Components/Temporary/PageSample06">
+        <router-link to="/Publish/Desktop/Components/Temporary/PageSample06">
           samplepage06
         </router-link> <br>
         <b>please set height by style="height:px(include thead height)" in kw-grid tag when it necessary</b>
@@ -323,7 +323,7 @@
         (<b>header: ' '</b> - have to put space between '')<br>
         Apply the backgorund color of first columns in grid.<br>
         Add color name class in styleName<br>
-        <router-link to="/Publish/Components/Temporary/PopupSample03">
+        <router-link to="/Publish/Desktop/Components/Temporary/PopupSample03">
           PopupSample03
         </router-link>
         <br>

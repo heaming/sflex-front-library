@@ -37,14 +37,14 @@ import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 import WebLeftDrawerMenu from './WebLeftDrawerMenu.vue';
 import WebLeftDrawerBookmark from './WebLeftDrawerBookmark.vue';
-import WebLeftDrawerHistory from './WebLeftDrawerHistory.vue';
+import WebLeftDrawerRecentMenu from './WebLeftDrawerRecentMenu.vue';
 
 export default {
   name: 'WebLeftDrawer',
   components: {
     WebLeftDrawerMenu,
     WebLeftDrawerBookmark,
-    WebLeftDrawerHistory,
+    WebLeftDrawerRecentMenu,
   },
 
   setup() {
@@ -54,10 +54,11 @@ export default {
     const { currentRoute } = useRouter();
     const showing = computed(() => currentRoute.value.meta.menuUid !== undefined);
 
+    const { t } = useI18n();
     const contents = [
-      { component: WebLeftDrawerMenu, icon: '', label: '메뉴' },
-      { component: WebLeftDrawerBookmark, icon: '', label: '즐겨찾기' },
-      { component: WebLeftDrawerHistory, icon: '', label: '최근링크' },
+      { component: WebLeftDrawerMenu, icon: '', label: t('MSG_TXT_MENU') },
+      { component: WebLeftDrawerBookmark, icon: '', label: t('MSG_TXT_BKMK') },
+      { component: WebLeftDrawerRecentMenu, icon: '', label: t('MSG_TXT_RECENT_MENU') },
     ];
     const selectedContent = shallowRef(contents[0]);
 
