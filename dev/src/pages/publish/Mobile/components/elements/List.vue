@@ -64,7 +64,6 @@
           <tr>
             <td>
               hide-select-all
-              clickable
             </td>
             <td>
               default: false/ Add it, hide the select all button
