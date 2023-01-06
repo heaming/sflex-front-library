@@ -1,8 +1,11 @@
 <template>
   <div class="web-left-drawer__bookmark drawer-bookmark">
-    <web-left-drawer-title
-      title="즐겨찾기"
-    />
+    <web-left-drawer-title>
+      <div class="drawer-bookmark__title">
+        {{ $t('MSG_TXT_BKMK') }}<span>{{ bookmarkCount }}</span>
+      </div>
+    </web-left-drawer-title>
+
     <kw-scroll-area>
       <div class="drawer-bookmark__action">
         <kw-btn
@@ -72,7 +75,7 @@
 </template>
 
 <script>
-import { cloneDeep, filter } from 'lodash-es';
+import { filter } from 'lodash-es';
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
 import { modal } from '../../plugins/modal';
@@ -86,11 +89,9 @@ export default {
   },
 
   async setup() {
-    const treeRef = ref();
-    const selectedKey = ref(null);
-
     const { getters, dispatch } = useStore();
-    const bookmarks = computed(() => cloneDeep(getters['meta/getBookmarks']));
+    const bookmarks = computed(() => getters['meta/getBookmarks']);
+    const bookmarkCount = computed(() => filter(bookmarks.value, (e) => !!e.menuUid).length);
 
     const recursiveCreate = (currents) => currents.map((e) => {
       const bookmarkLevel = e.bookmarkLevel + 1;
@@ -103,6 +104,8 @@ export default {
       };
     });
 
+    const selectedKey = ref(null);
+    const treeRef = ref();
     const treeNodes = computed(() => {
       const roots = filter(bookmarks.value, { bookmarkLevel: 0 });
       return recursiveCreate(roots);
@@ -148,6 +151,7 @@ export default {
     }
 
     return {
+      bookmarkCount,
       treeRef,
       treeNodes,
       selectedKey,

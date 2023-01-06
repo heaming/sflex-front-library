@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { filter, find, some } from 'lodash-es';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
@@ -29,8 +30,9 @@ export default {
     linkPages: [],
     apps: [],
     menus: [],
-    bookmarks: [],
     pages: [],
+    bookmarks: [],
+    recentMenus: [],
   }),
 
   mutations: {
@@ -55,11 +57,14 @@ export default {
     setMenus(state, menus) {
       state.menus = Object.freeze(menus);
     },
+    addPage(state, page) {
+      state.pages.push(Object.freeze(page));
+    },
     setBookmarks(state, bookmarks) {
       state.bookmarks = Object.freeze(bookmarks);
     },
-    addPage(state, page) {
-      state.pages.push(Object.freeze(page));
+    setRecentMenus(state, recentMenus) {
+      state.recentMenus = Object.freeze(recentMenus);
     },
   },
 
@@ -78,12 +83,11 @@ export default {
     getMenus: (state) => state.menus,
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
     getMenuPath: (state) => (menuUid) => recursiveCreateMenuPath(state.menus, menuUid),
+    getPages: (state) => state.pages,
+    getPage: (state) => (key) => find(state.pages, (v) => (v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key)),
     getBookmarks: (state) => state.bookmarks,
     isBookmarked: (state) => (menuUid, pageId) => some(state.bookmarks, { menuUid, pageId }),
-    getPages: (state) => state.pages,
-    getPage: (state) => (key) => find(state.pages, (v) => (
-      v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key
-    )),
+    getRecentMenus: (state) => state.recentMenus,
   },
 
   actions: {
@@ -139,10 +143,8 @@ export default {
       commit('setBookmarks', bookmarks);
     },
     async fetchBookmark({ getters, dispatch }, { menuUid, pageId }) {
-      const params = { menuUid, pageId };
-      const response = await http.get('/sflex/common/common/bookmarks/marked', { params });
+      const response = await http.get('/sflex/common/common/bookmarks/marked', { params: { menuUid, pageId }, silent: true });
       const marked = response.data;
-
       const shouldReload = marked !== getters.isBookmarked(menuUid, pageId);
 
       if (shouldReload) {
@@ -157,6 +159,12 @@ export default {
       const params = { menuUid, pageId };
       await http.delete('/sflex/common/common/bookmarks', { params });
       await dispatch('fetchBookmarks');
+    },
+    async fetchRecentMenus({ commit }) {
+      const response = await http.get('/sflex/common/common/portal/recent-menus', { silent: true });
+      const recentMenus = response.data;
+
+      commit('setRecentMenus', recentMenus);
     },
   },
 };

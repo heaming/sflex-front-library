@@ -7,21 +7,32 @@ function assignParamsByQuery(to) {
 }
 
 function assignParamsIfIsLinkPage(to) {
-  const {
-    pageId,
-    pageTypeCode,
-    linkPageId,
-  } = store.getters['meta/getMenu'](to.name) || {};
+  const matched = store.getters['meta/getMenu'](to.name);
 
-  const isLinkPage = pageId && pageTypeCode === 'L';
+  if (matched) {
+    const { pageId, pageTypeCode, linkPageId } = matched;
+    const isLinkPage = pageId && pageTypeCode === 'L';
 
-  if (isLinkPage) {
-    const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
+    if (isLinkPage) {
+      const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
 
-    Object.assign(to.params, {
-      ...linkPage?.pageParameter
-        .reduce((a, v) => { a[v.pageParameterName] = v.pageParameterValue; return a; }, {}),
-    });
+      Object.assign(to.params, {
+        ...linkPage?.pageParameter
+          .reduce((a, v) => { a[v.pageParameterName] = v.pageParameterValue; return a; }, {}),
+      });
+    }
+  }
+}
+
+async function fetchRecentMenus(to) {
+  const matched = store.getters['meta/getMenu'](to.name);
+
+  if (matched) {
+    try {
+      await store.dispatch('meta/fetchRecentMenus');
+    } catch (e) {
+      // ignore
+    }
   }
 }
 
@@ -29,4 +40,5 @@ function assignParamsIfIsLinkPage(to) {
 export default async (to, from, failure) => {
   assignParamsByQuery(to);
   assignParamsIfIsLinkPage(to);
+  fetchRecentMenus(to);
 };
