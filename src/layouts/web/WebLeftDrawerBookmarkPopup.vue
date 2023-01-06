@@ -176,10 +176,9 @@ const recursiveCreateNode = (_bookmarks, currents) => {
 
     const isFolder = e.folderYn === 'Y';
     const children = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
-    const needsFallbackChildren = isFolder && children.length === 0;
 
-    if (needsFallbackChildren) {
-      children.push({
+    if (isFolder) {
+      children.unshift({
         bookmarkLevel,
         bookmarkUid: getUid(),
         parentsBookmarkUid,
