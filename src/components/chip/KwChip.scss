@@ -41,3 +41,11 @@
     }
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-chip {
+    &.q-chip {
+      padding: 0 6px;
+    }
+  }
+}
