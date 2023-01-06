@@ -63,7 +63,7 @@
             <li>There is <em class="notice">no more spacing helperclass</em> between buttons (ex. ml8, mr8 )</li>
             <li>
               please remove the spaced px value in kw-separator
-              (refer to <router-link to="/Publish/Components/Elements/Separator">
+              (refer to <router-link to="/Publish/Desktop/Components/Elements/Separator">
                 separator page
               </router-link>)
             </li>
