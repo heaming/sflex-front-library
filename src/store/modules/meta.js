@@ -1,19 +1,36 @@
 /* eslint-disable max-len */
-import { filter, find, some } from 'lodash-es';
+import { filter, find, some, map } from 'lodash-es';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
 import { localStorage } from '../../plugins/storage';
 
-const recursiveCreateMenuPath = (menus, menuUid) => {
+const recursiveCreateMenuPaths = (state, menuUid) => {
   const navigations = [];
-  const matched = find(menus, { menuUid });
+  const matched = find(state.menus, { menuUid });
 
   if (matched) {
-    navigations.push(
-      ...recursiveCreateMenuPath(menus, matched.parentsMenuUid),
-      { key: menuUid, label: matched.menuName },
-    );
+    const {
+      applicationId,
+      menuLevel,
+      menuName,
+      parentsMenuUid,
+    } = matched;
+
+    if (menuLevel === 0) {
+      const { applicationName } = find(state.apps, { applicationId }) || {};
+
+      navigations.push(
+        { key: applicationId, label: applicationName },
+        { key: menuUid, label: menuName },
+      );
+    } else {
+      navigations.push(
+        ...recursiveCreateMenuPaths(state, parentsMenuUid),
+        { key: menuUid, label: menuName },
+      );
+    }
   }
+
   return navigations;
 };
 
@@ -82,7 +99,7 @@ export default {
     getAppMenus: (state) => (applicationId) => filter(state.menus, { applicationId }),
     getMenus: (state) => state.menus,
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
-    getMenuPath: (state) => (menuUid) => recursiveCreateMenuPath(state.menus, menuUid),
+    getMenuPaths: (state) => (menuUid) => recursiveCreateMenuPaths(state, menuUid),
     getPages: (state) => state.pages,
     getPage: (state) => (key) => find(state.pages, (v) => (v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key)),
     getBookmarks: (state) => state.bookmarks,
@@ -136,9 +153,13 @@ export default {
         commit('addPage', page);
       }
     },
-    async fetchBookmarks({ commit }) {
+    async fetchBookmarks({ commit, getters }) {
       const response = await http.get('/sflex/common/common/bookmarks');
-      const bookmarks = response.data;
+      const bookmarks = response.data.map((e) => {
+        const menuPaths = map(getters.getMenuPaths(e.menuUid), 'label');
+        const menuPath = menuPaths.splice(0, menuPaths.length - 1).join(' > ');
+        return { ...e, menuPath };
+      });
 
       commit('setBookmarks', bookmarks);
     },

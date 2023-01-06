@@ -150,6 +150,8 @@ export default {
       }
     }
 
+    await dispatch('meta/fetchBookmarks');
+
     return {
       bookmarkCount,
       treeRef,
