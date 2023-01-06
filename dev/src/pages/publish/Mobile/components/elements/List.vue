@@ -98,6 +98,17 @@
       </q-markup-table>
     </div>
     <div class="kw-guide-section">
+      <h3 class="kw-guide-title kw-font-pt24">
+        Notice
+      </h3>
+      <p class="kw-guide-description">
+        <em class="kkk"># The sequence of kw-list</em><br>
+        - kw--list > kw-item > kw-item-section > kw-item-label or label<br>
+        - kw--list > kw-item or kw-item-section > kw-item-label or label<br>
+        <b class="kkk">*Use kw-item or kw-item-secton before using 'div' and after kw-item*</b>
+      </p>
+    </div>
+    <div class="kw-guide-section">
       <h3
         id="default"
         class="kw-guide-title"
@@ -506,9 +517,9 @@
             class="list-style"
           >
             <template #item="{ item }">
-              <div>
+              <kw-item-section>
                 <span>{{ item.helperclass }}</span>
-              </div>
+              </kw-item-section>
             </template>
           </kw-list>
         </div>
@@ -541,29 +552,31 @@
             item-key="id"
           >
             <template #item="{ item }">
-              <div class="w120">
-                <img
-                  :src="item.src"
-                  alt="img"
-                  class="w100"
-                >
-              </div>
-              <div
-                class="row justify-between"
-                style="width: 100%;"
-              >
-                <div>
-                  <p>
-                    p tag
-                  </p>
-                  <span>{{ item.title }}</span>
+              <kw-item-section>
+                <div class="w120">
+                  <img
+                    :src="item.src"
+                    alt="img"
+                    class="w100"
+                  >
                 </div>
-                <kw-chip
-                  label="완료"
-                  color="primary"
-                  outline
-                />
-              </div>
+                <div
+                  class="row justify-between"
+                  style="width: 100%;"
+                >
+                  <div>
+                    <p>
+                      p tag
+                    </p>
+                    <span>{{ item.title }}</span>
+                  </div>
+                  <kw-chip
+                    label="완료"
+                    color="primary"
+                    outline
+                  />
+                </div>
+              </kw-item-section>
             </template>
           </kw-list>
         </div>
@@ -897,34 +910,39 @@ const case3 = `
 </kw-list>
 `;
 const case4 = `
+<h3 class="my15">
+  div
+</h3>
 <kw-list
   :items="items2"
   item-key="id"
 >
   <template #item="{ item }">
-    <div class="w120">
-      <img
-        :src="item.src"
-        alt="img"
-        class="w100"
-      >
-    </div>
-    <div
-      class="row justify-between"
-      style="width: 100%;"
-    >
-      <div>
-        <p>
-          p tag
-        </p>
-        <span>{{ item.title }}</span>
+    <kw-item-section>
+      <div class="w120">
+        <img
+          :src="item.src"
+          alt="img"
+          class="w100"
+        >
       </div>
-      <kw-chip
-        label="완료"
-        color="primary"
-        outline
-      />
-    </div>
+      <div
+        class="row justify-between"
+        style="width: 100%;"
+      >
+        <div>
+          <p>
+            p tag
+          </p>
+          <span>{{ item.title }}</span>
+        </div>
+        <kw-chip
+          label="완료"
+          color="primary"
+          outline
+        />
+      </div>
+    </kw-item-section>
   </template>
 </kw-list>
 `;
@@ -960,9 +978,9 @@ const itemClass = `
   class="list-style"
 >
   <template #item="{ item }">
-    <div>
+    <kw-item-section>
       <span>{{ item.helperclass }}</span>
-    </div>
+    </kw-item-section>
   </template>
 </kw-list>
 `;
@@ -1008,7 +1026,7 @@ const items3 = ref([
 
 const historyData = [
   {
-    timestamp: '2022-12-08',
+    timestamp: '2022-01-06',
     text: 'First added',
   },
 ];
@@ -1023,5 +1041,46 @@ const historyData = [
 
 .list-style {
   color: $black3;
+}
+
+.kkk {
+  font-size: 22px;
+  animation-duration: 3s;
+  animation-name: rainbow;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    color: #ff2a2a;
+  }
+
+  15% {
+    color: #ff7a2a;
+  }
+
+  30% {
+    color: #ffc52a;
+  }
+
+  45% {
+    color: #43ff2a;
+  }
+
+  60% {
+    color: #2a89ff;
+  }
+
+  75% {
+    color: #202082;
+  }
+
+  90% {
+    color: #6b2aff;
+  }
+
+  100% {
+    color: #e82aff;
+  }
 }
 </style>
