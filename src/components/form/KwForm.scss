@@ -159,6 +159,13 @@ body.mobile:not(.tablet) {
     $-kw-form-row-padding-dense: 2px 0;
     $-kw-form-item-min-height-dense: 20px;
 
+    .kw-form-item__label {
+      @include typo("dense", 400);
+
+      line-height: $-kw-form-item-min-height-dense;
+      min-height: $-kw-form-item-min-height-dense;
+    }
+
     .kw-form-item__field {
       p {
         @include typo("body",400);
