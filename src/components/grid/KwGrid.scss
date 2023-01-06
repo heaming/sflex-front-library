@@ -198,6 +198,13 @@
 
 .rg-empty-grid {
   padding: 0;
+
+  > span {
+    position: absolute;
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+  }
 }
 
 ._rg-row-mover-proxy_ {
