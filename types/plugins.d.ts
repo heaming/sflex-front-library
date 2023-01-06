@@ -89,6 +89,11 @@ export function modal(options: {
    * 윈도우 팝업으로 호출할지 여부
    */
   window?: boolean;
+
+  /**
+   * 윈도우 팝업으로 호출할 때 리다이렉트 케이스 여부, 지정 시 팝업에서 글로벌 닫기 이벤트를 설정하지 않는다.
+   */
+  redirect?: boolean;
 }): Promise<{
   /**
    * 팝업 결과
