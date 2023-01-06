@@ -21,13 +21,8 @@
         Notice
       </h3>
       <ul style="margin: 0; padding-left: 25px;">
-        <li>
-          This is for QA of publishing, so some function can be not provided. <br>
-        </li>
-        <li>
-          Thus, For pages that cannot be implemented with the sample provided below,
-          please use the default case and modify only the title
-        </li>
+        <li>페이지 헤더는 한국의 개발에서 최종 컨트롤 합니다.</li>
+        <li>GDCI에서는 '타이틀', '텍스트버튼', 'more기능'만 코딩하면 됩니다.</li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -44,33 +39,19 @@
               Attribute or slot
             </th>
             <th>Values</th>
-            <th>
-              Description
-            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
-              title <br>
-              left-btn<br>
-              show-close <br>
-              hint or template#hint <br>
+              title="Title" <br>
+              template#etc <br>
               template#more
             </td>
             <td>
-              title text <br>
-              'back': back icon , 'menu': menu icon<br>
-              <br>
-              hint text<br>
-              <br>
-            </td>
-            <td>
-              please insert title text
-              <br>No icon is default type
-              <br>Add this when you need close button like as popup page
-              <br>Add this when you need hint icon in right-side
-              <br>Add this when you need more icon in right-side with dropdown menu
+              kw-page 의 attr<br>
+              Text btn<br>
+              more 기능<br>
             </td>
           </tr>
         </tbody>
@@ -81,29 +62,13 @@
         id="default"
         class="kw-guide-title"
       >
-        Default
+        Default(Only title)
       </h3>
       <q-card>
         <div class="kw-guide-example">
           <kw-page-mobile-header
-            title="Default"
-            left-btn="menu"
-            hint="text"
-          >
-            <!-- you can also put tooltip text in template#hint instead of adding prop -->
-            <!-- <template #hint>
-              hint text
-            </template> -->
-            <!-- // you can also put tooltip text in template#hint instead of adding prop -->
-
-            <!-- more dropdown menu -->
-            <template #more>
-              <kw-btn label="menu1" />
-              <kw-btn label="menu2" />
-              <kw-btn label="menu3" />
-            </template>
-          <!--// more dropdown menu -->
-          </kw-page-mobile-header>
+            title="Title"
+          />
         </div>
         <guide-code-view
           :code-value="defaultCode"
@@ -116,17 +81,23 @@
         id="close"
         class="kw-guide-title"
       >
-        close + no left-side icon
+        Title + More
       </h3>
       <q-card>
         <div class="kw-guide-example">
           <kw-page-mobile-header
-            title="title"
+            title="Title"
             show-close
-          />
+          >
+            <template #more>
+              <kw-btn label="menu1" />
+              <kw-btn label="menu2" />
+              <kw-btn label="menu3" />
+            </template>
+          </kw-page-mobile-header>
         </div>
         <guide-code-view
-          :code-value="closeCode"
+          :code-value="moreCode"
           lang="vue"
         />
       </q-card>
@@ -136,30 +107,60 @@
         id="default"
         class="kw-guide-title"
       >
-        back Button
+        Title + Text btn
       </h3>
       <q-card>
         <div class="kw-guide-example">
           <kw-page-mobile-header
-            title="title"
-            left-btn="back"
+            title="Title"
           >
-            <!-- more dropdown menu -->
-            <template #more>
-              <kw-btn label="menu1" />
-              <kw-btn label="menu2" />
-              <kw-btn label="menu3" />
+            <template #etc>
+              <kw-btn
+                label="Text btn"
+                borderless
+              />
             </template>
             <!--// more dropdown menu -->
           </kw-page-mobile-header>
         </div>
         <guide-code-view
-          :code-value="backCode"
+          :code-value="btnCode"
           lang="vue"
         />
       </q-card>
     </div>
     <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Title + Text btn + More
+      </h3>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-page-mobile-header
+            title="Title"
+          >
+            <template #etc>
+              <kw-btn
+                label="Text btn"
+                borderless
+              />
+            </template>
+            <template #more>
+              <kw-btn label="menu1" />
+              <kw-btn label="menu2" />
+              <kw-btn label="menu3" />
+            </template>
+          </kw-page-mobile-header>
+        </div>
+        <guide-code-view
+          :code-value="totalCode"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+    <!-- <div class="kw-guide-section">
       <h3
         id="subHeader"
         class="kw-guide-title"
@@ -201,89 +202,64 @@
           lang="vue"
         />
       </q-card>
-    </div>
+    </div> -->
   </kw-page>
 </template>
 
 <script setup>
 
 const defaultCode = `
-<template #header>
-  <kw-page-mobile-header
-    title="Default"
-    left-btn="menu"
-    hint="text"
-  >
-    <!-- you can put tooltip text in template#hint instead of adding prop -->
-    <!-- <template #hint>
-      hint text
-    </template> -->
-    <!-- // you can put tooltip text in template#hint instead of adding prop -->
+<kw-page title="Title">
 
-    <!-- more dropdown menu -->
-    <template #more>
-      <kw-btn label="menu1" />
-      <kw-btn label="menu2" />
-      <kw-btn label="menu3" />
-    </template>
-  <!--// more dropdown menu -->
-  </kw-page-mobile-header>
-</template>
+  Page Contents
+
+</kw-page>
 `;
 
-const closeCode = `
-<template #header>
-  <kw-page-mobile-header
-    title="title"
-    show-close
-  />
-</template>
+const moreCode = `
+<kw-page title="Title">
+  <template #more>
+    <kw-btn label="menu1" />
+    <kw-btn label="menu2" />
+    <kw-btn label="menu3" />
+  </template>
+
+  Page Contents
+
+</kw-page>
 `;
 
-const backCode = `
-<template #header>
-  <kw-page-mobile-header
-    title="title"
-    left-btn="back"
-  >
-    <!-- more dropdown menu -->
-    <template #more>
-      <kw-btn label="menu1" />
-      <kw-btn label="menu2" />
-      <kw-btn label="menu3" />
-    </template>
-    <!--// more dropdown menu -->
-  </kw-page-mobile-header>
-</template>
-`;
-
-const subHeader = `
-<template #sub-header>
-  <kw-field-wrap
-    control-class="bg-bg-body px20"
-  >
-    <kw-select
-      v-model="selectModel"
-      label="fit"
-      class="fit"
-      :options="optionsModel"
+const btnCode = `
+<kw-page title="Title">
+  <template #etc>
+    <kw-btn
+      label="Text btn"
       borderless
-      :error="true"
     />
-    <kw-separator
-      vertical
-      spaced
-      inset
-    />
-    <kw-select
-      v-model="selectModel"
+  </template>
+
+  Page Contents
+
+</kw-page>
+`;
+
+const totalCode = `
+<kw-page title="Title">
+  <template #etc>
+    <kw-btn
+      label="Text btn"
       borderless
-      class="fit"
-      :options="optionsModel"
-      stretch
     />
-  </kw-field-wrap>
-</template>
+  </template>
+  <template #more>
+    <kw-btn label="menu1" />
+    <kw-btn label="menu2" />
+    <kw-btn label="menu3" />
+  </template>
+
+  Page Contents
+
+</kw-page>
 `;
 
 const guideHistory = [
