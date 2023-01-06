@@ -30,14 +30,38 @@
         </thead>
         <tbody>
           <tr>
-            <td>
+            <td rowspan="4">
               kw-expansion-item
             </td>
             <td>
-              label="" <br>
+              group=""
             </td>
             <td>
-              The title for Expansion-item
+              same name in group is when one of expansions is opened, the other expansions are closed
+            </td>
+          </tr>
+          <tr>
+            <td>
+              expand-icon-align
+            </td>
+            <td>
+              top , center , bottom
+            </td>
+          </tr>
+          <tr>
+            <td>
+              expand-icon-class
+            </td>
+            <td>
+              helper class or created class
+            </td>
+          </tr>
+          <tr>
+            <td>
+              expand-icon
+            </td>
+            <td>
+              add icon on right side
             </td>
           </tr>
         </tbody>
