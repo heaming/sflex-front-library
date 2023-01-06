@@ -2,6 +2,9 @@ import { popups, modal } from '../../plugins/modal';
 import { registerCloseEvent, ok, cancel } from '../../utils/popup';
 import pascalCase from '../../utils/private/pascalCase';
 
+const searchParams = new URLSearchParams(window.location.search);
+const isRedirect = searchParams.has('redirect');
+
 export default () => {
   const { currentRoute } = useRouter();
   const { path, query } = currentRoute.value;
@@ -29,7 +32,9 @@ export default () => {
     }
   });
 
-  registerCloseEvent();
+  if (isRedirect === false) {
+    registerCloseEvent();
+  }
 
   return {
     useRouterView: !matched,

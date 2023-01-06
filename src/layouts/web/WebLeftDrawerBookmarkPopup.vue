@@ -103,7 +103,7 @@
             </kw-click-outside>
             <div v-else>
               <span @click.stop="onClickFolderName(node, true)">
-                {{ node.bookmarkName }}&nbsp;({{ node.children.filter((e) => !e.isDummy).length }})
+                {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
               </span>
             </div>
             <kw-space />
@@ -175,10 +175,10 @@ const recursiveCreateNode = (_bookmarks, currents) => {
     const parentsBookmarkUid = e.bookmarkUid;
 
     const isFolder = e.folderYn === 'Y';
-    const children = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
+    const nexts = filter(_bookmarks, { bookmarkLevel, parentsBookmarkUid });
 
     if (isFolder) {
-      children.unshift({
+      nexts.unshift({
         bookmarkLevel,
         bookmarkUid: getUid(),
         parentsBookmarkUid,
@@ -186,6 +186,9 @@ const recursiveCreateNode = (_bookmarks, currents) => {
         isDummy: true,
       });
     }
+
+    const children = recursiveCreateNode(_bookmarks, nexts);
+    const actualChildrenLength = filter(children, { isDummy: false }).length;
 
     return {
       bookmarkLevel: e.bookmarkLevel,
@@ -196,7 +199,8 @@ const recursiveCreateNode = (_bookmarks, currents) => {
       isFolder,
       isEdit: false,
       isDummy: e.isDummy === true,
-      children: recursiveCreateNode(_bookmarks, children),
+      children,
+      actualChildrenLength,
     };
   });
 };
