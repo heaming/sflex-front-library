@@ -16,11 +16,11 @@ export function handleConfig(config) {
   config = {
     ...config,
     headers: omitBy(config.headers, isNil),
-    useSpinner: config.useSpinner !== false,
-    useAlert: config.useAlert !== false,
+    spinner: config.silent !== true && config.spinner !== false,
+    alert: config.silent !== true && config.alert !== false,
   };
 
-  if (config.useSpinner) {
+  if (config.spinner) {
     loadSpinner(true);
   }
 
@@ -41,7 +41,7 @@ export function handleConfig(config) {
 export function handleSuccess(response) {
   const { config } = response;
 
-  if (config.useSpinner) {
+  if (config.spinner) {
     loadSpinner(false);
   }
 
@@ -63,7 +63,7 @@ async function handleServerFailureSessionExpired() {
 async function handleServerFailureBiz(response) {
   const { config, data } = response;
 
-  if (config.useAlert) {
+  if (config.alert) {
     await alert(data.errorMessage);
   }
 }
@@ -97,7 +97,7 @@ async function handleServerFailure(response) {
 export async function handleFailure(error) {
   const { config, response, request } = error;
 
-  if (config?.useSpinner) {
+  if (config?.spinner) {
     loadSpinner(false);
   }
 

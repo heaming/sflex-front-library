@@ -37,13 +37,19 @@ export interface CustomAxiosRequestConfig<D = any> extends AxiosRequestConfig<D>
    * API 호출 시 스피너 표시 여부
    * @defaultValue `true`
    */
-  useSpinner?: boolean;
+  spinner?: boolean;
 
   /**
-   * API 호출 결과가 에러 시 다이얼로그 표시 여부, 서버에서 발생한 에러에만 적용 된다.
+   * API 호출 결과가 에러 시 다이얼로그 표시 여부, 서버 비즈니스 에러인 경우에만 적용 된다.
    * @defaultValue `true`
    */
-  useAlert?: boolean;
+  alert?: boolean;
+
+  /**
+   * 모든 경우에 적용되며, 스피너 및 다이얼로그 표시하지 않는다.
+   * @defaultValue `false`
+   */
+  silent?: boolean;
 }
 
 export interface CustomAxiosInstance {
