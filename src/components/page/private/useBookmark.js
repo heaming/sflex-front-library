@@ -1,4 +1,5 @@
 import { notify } from '../../../plugins/notify';
+import { http } from '../../../plugins/http';
 
 export default () => {
   const { currentRoute } = useRouter();
@@ -10,7 +11,13 @@ export default () => {
   async function fetchBookmark() {
     if (menuUid && pageId) {
       try {
-        await dispatch('meta/fetchBookmark', { menuUid, pageId });
+        const response = await http.get('/sflex/common/common/bookmarks/marked', { params: { menuUid, pageId }, silent: true });
+        const marked = response.data;
+        const shouldReload = marked !== isBookmarked.value;
+
+        if (shouldReload) {
+          await dispatch('meta/fetchBookmarks');
+        }
       } catch (e) {
         // ignore
       }
@@ -21,12 +28,15 @@ export default () => {
 
   async function createBookmark() {
     const bookmarkName = menuName;
-    await dispatch('meta/createBookmark', { menuUid, pageId, bookmarkName });
+    await http.post('/sflex/common/common/bookmarks', { menuUid, pageId, bookmarkName });
+    await dispatch('meta/fetchBookmarks');
     notify(t('MSG_ALT_BKMK_ADDED', [menuName]));
   }
 
   async function deleteBookmark() {
-    await dispatch('meta/deleteBookmark', { menuUid, pageId });
+    const params = { menuUid, pageId };
+    await http.delete('/sflex/common/common/bookmarks', { params });
+    await dispatch('meta/fetchBookmarks');
     notify(t('MSG_ALT_BKMK_DELETED', [menuName]));
   }
 

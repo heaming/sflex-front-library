@@ -137,7 +137,10 @@ export default {
     },
     async fetchMenus({ commit, dispatch }) {
       const response = await http.get('/sflex/common/common/portal/menus');
-      const menus = response.data;
+      const menus = response.data.map((e) => ({
+        ...e,
+        parentsMenuUid: e.parentsMenuUid?.trim() || null,
+      }));
 
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
@@ -163,27 +166,13 @@ export default {
 
       commit('setBookmarks', bookmarks);
     },
-    async fetchBookmark({ getters, dispatch }, { menuUid, pageId }) {
-      const response = await http.get('/sflex/common/common/bookmarks/marked', { params: { menuUid, pageId }, silent: true });
-      const marked = response.data;
-      const shouldReload = marked !== getters.isBookmarked(menuUid, pageId);
-
-      if (shouldReload) {
-        await dispatch('fetchBookmarks');
-      }
-    },
-    async createBookmark({ dispatch }, { menuUid, pageId, bookmarkName }) {
-      await http.post('/sflex/common/common/bookmarks', { menuUid, pageId, bookmarkName });
-      await dispatch('fetchBookmarks');
-    },
-    async deleteBookmark({ dispatch }, { menuUid, pageId }) {
-      const params = { menuUid, pageId };
-      await http.delete('/sflex/common/common/bookmarks', { params });
-      await dispatch('fetchBookmarks');
-    },
-    async fetchRecentMenus({ commit }) {
+    async fetchRecentMenus({ commit, getters }) {
       const response = await http.get('/sflex/common/common/portal/recent-menus', { silent: true });
-      const recentMenus = response.data;
+      const recentMenus = response.data.map((e) => {
+        const menuPaths = map(getters.getMenuPaths(e.menuUid), 'label');
+        const menuPath = menuPaths.splice(0, menuPaths.length - 1).join(' > ');
+        return { ...e, menuPath };
+      });
 
       commit('setRecentMenus', recentMenus);
     },

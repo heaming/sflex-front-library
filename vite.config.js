@@ -85,6 +85,7 @@ export default defineConfig(({ mode }) => {
           'chart.js',
           'chartjs-plugin-datalabels',
           'dayjs',
+          'dayjs/locale/ko',
           'dompurify',
           'fast-deep-equal',
           'jquery',

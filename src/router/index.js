@@ -60,7 +60,9 @@ function replaceGlobRoutes() {
       const matched = find(menus, { applicationId, pageDestinationValue });
 
       if (matched) {
-        const { menuUid, menuName, pageId, pageUseCode } = matched;
+        const {
+          menuUid, menuName, parentsMenuUid, pageId, pageUseCode,
+        } = matched;
 
         router.addRoute({
           ...route,
@@ -72,6 +74,7 @@ function replaceGlobRoutes() {
             applicationName,
             menuUid,
             menuName,
+            parentsMenuUid,
             pageId,
             pageUseCode,
           },
@@ -87,6 +90,11 @@ function replaceGlobRoutes() {
 
 export async function isReady() {
   replaceGlobRoutes();
-  await router.isReady();
-  await router.replace(INITIAL_LOCATION);
+
+  try {
+    await router.isReady();
+    await router.replace(INITIAL_LOCATION);
+  } catch (e) {
+    // ignore
+  }
 }

@@ -1,4 +1,6 @@
 import { isFunction } from 'lodash-es';
+import { alert } from '../plugins/dialog';
+import { platform } from '../plugins/platform';
 
 const NativePlugin = {
   Device: 'DevicePlugin',
@@ -7,121 +9,132 @@ const NativePlugin = {
   Pref: 'PrefPlugin',
   Launcher: 'LauncherPlugin',
   Bluetooth: 'BluetoothPlugin',
+  Util: 'UtilPlugin',
 };
 
-function callMethod(pluginName, methodId, eventId, data) {
-  const plugin = window[pluginName];
+function callEvent(resolve) {
+  return window.nativeEventBus.once(async (response) => {
+    const {
+      code, data, message,
+    } = JSON.parse(response);
 
-  if (!isFunction(plugin?.callMethod)) {
-    throw new Error(`failed to invoke ${pluginName}.${methodId}, ${pluginName} is not injected.`);
-  }
+    if (code === 200) {
+      resolve({
+        result: true,
+        payload: data,
+      });
+    } else {
+      await alert(message);
 
-  plugin.callMethod(
-    JSON.stringify({
-      MethodID: methodId,
-      Callback: eventId,
-      Data: data,
-    }),
-  );
+      resolve({
+        result: false,
+        payload: undefined,
+      });
+    }
+  });
+}
+
+function callMethod(pluginName, methodId, data) {
+  return new Promise((resolve) => {
+    const plugin = window[pluginName];
+
+    if (!isFunction(plugin?.callMethod)) {
+      throw new Error(`failed to invoke ${pluginName}.${methodId}, ${pluginName} is not injected.`);
+    }
+
+    const eventId = callEvent(resolve);
+
+    plugin.callMethod(
+      JSON.stringify({
+        MethodID: methodId,
+        Callback: eventId,
+        Data: data,
+      }),
+    );
+  });
 }
 
 /*
   Device
   */
+export function getOsTypeCode() {
+  if (platform.is.android) return 'A';
+  if (platform.is.ios) return 'I';
+  return null;
+}
+
+export function getDeviceTypeCode() {
+  if (platform.is.mobile) return 'M';
+  if (platform.is.tablet) return 'T';
+  return null;
+}
+
 export function getDeviceVersion() {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    callMethod(NativePlugin.Device, 'getVersion', eventId);
-  });
+  return callMethod(NativePlugin.Device, 'getVersion');
 }
 
 export function getDeviceToken() {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    callMethod(NativePlugin.Device, 'getDeviceToken', eventId);
-  });
+  return callMethod(NativePlugin.Device, 'getDeviceToken');
+}
+
+export function getDeviceId() {
+  return callMethod(NativePlugin.Device, 'getDeviceId');
 }
 
 /*
   Photo
   */
 export function openCamera() {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    callMethod(NativePlugin.Photo, 'openCamera', eventId);
-  });
+  return callMethod(NativePlugin.Photo, 'openCamera');
 }
 
 export function openPhotoGallery() {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    callMethod(NativePlugin.Photo, 'openPhotoGallery', eventId);
-  });
+  return callMethod(NativePlugin.Photo, 'openPhotoGallery');
 }
 
 /*
   Barcode
   */
 export function openBarcodeReader() {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    callMethod(NativePlugin.Barcode, 'openBarcodeReader', eventId);
-  });
+  return callMethod(NativePlugin.Barcode, 'openBarcodeReader');
 }
 
 /*
   Preference
   */
 export function setPreference(key, value) {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    const data = { key, value };
-    callMethod(NativePlugin.Pref, 'setPreference', eventId, data);
-  });
+  return callMethod(NativePlugin.Pref, 'setPreference', { key, value });
 }
 
 export function getPreference(key) {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    const data = { key };
-    callMethod(NativePlugin.Pref, 'getPreference', eventId, data);
-  });
+  return callMethod(NativePlugin.Pref, 'getPreference', { key });
 }
 
 /*
   Launcher
  */
 export function openPhone(address) {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    const data = { address };
-    callMethod(NativePlugin.Launcher, 'openPhone', eventId, data);
-  });
+  return callMethod(NativePlugin.Launcher, 'openPhone', { address });
 }
 
 export function openSMS(address, body) {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    const data = { address, body };
-    callMethod(NativePlugin.Launcher, 'openSMS', eventId, data);
-  });
+  return callMethod(NativePlugin.Launcher, 'openSMS', { address, body });
 }
 
 export function openTMap(routeInfo) {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    const data = { routeInfo };
-    callMethod(NativePlugin.Launcher, 'openTMap', eventId, data);
-  });
+  return callMethod(NativePlugin.Launcher, 'openTMap', { routeInfo });
 }
 
 /*
   Bluetooth
  */
 export function openPrint(printType, printString) {
-  return new Promise((resolve) => {
-    const eventId = window.nativeEventBus.once(resolve);
-    const data = { printType, printString };
-    callMethod(NativePlugin.Bluetooth, 'printing', eventId, data);
-  });
+  return callMethod(NativePlugin.Bluetooth, 'printing', { printType, printString });
+}
+
+/*
+  Util
+  */
+export function getNetworkStatus() {
+  return callMethod(NativePlugin.Util, 'getNetworkStatus');
 }

@@ -542,71 +542,96 @@ interface GridUtil {
 
 export const gridUtil: GridUtil;
 
+interface NativeEventResponse<T = any> {
+  result: boolean;
+  payload: T;
+}
+
 // Mobile
 interface MobileUtil {
   /**
+   * get os type code
+   */
+  getOsTypeCode(): 'A' | 'I' | null;
+
+  /**
+   * get device type code
+   */
+  getDeviceTypeCode(): 'M' | 'T' | null;
+
+  /**
    * 디바이스 버전 확인
    */
-  getDeviceVersion(): Promise<any>;
+  getDeviceVersion(): Promise<NativeEventResponse>;
 
   /**
    * 디바이스 토큰 확인
    */
-  getDeviceToken(): Promise<any>;
+  getDeviceToken(): Promise<NativeEventResponse>;
+
+  /**
+   * 디바이스 ID 확인
+   */
+  getDeviceId(): Promise<NativeEventResponse>;
 
   /**
    * 카메라 호출
    */
-  openCamera(): Promise<any>;
+  openCamera(): Promise<NativeEventResponse>;
 
   /**
    * 사진 갤러리 호출
    */
-  openPhotoGallery(): Promise<any>;
+  openPhotoGallery(): Promise<NativeEventResponse>;
 
   /**
    * 바코드 리더기 호출
    */
-  openBarcodeReader(): Promise<any>;
+  openBarcodeReader(): Promise<NativeEventResponse>;
 
   /**
    * Prefernce 설정
    * @param key
    * @param value
    */
-  openBarcodeReader(key: string, value: any): Promise<any>;
+  openBarcodeReader(key: string, value: any): Promise<NativeEventResponse>;
 
   /**
    * Prefernce 가져오기
    * @param key
    */
-  getPreference(key: string): Promise<any>;
+  getPreference(key: string): Promise<NativeEventResponse>;
 
   /**
    * phone 호출
    * @param address
    */
-  openPhone(address: string): Promise<any>;
+  openPhone(address: string): Promise<NativeEventResponse>;
 
   /**
    * SMS 호출
    * @param address
    * @param body
    */
-  openSMS(address: string, body: string): Promise<any>;
+  openSMS(address: string, body: string): Promise<NativeEventResponse>;
 
   /**
    * TMap 호출
    * @param routeInfo
    */
-  openTMap(routeInfo: any): Promise<any>;
+  openTMap(routeInfo: any): Promise<NativeEventResponse>;
 
   /**
    * 프린트 호출
    * @param printType
    * @param printString
    */
-  openPrint(printType: string, printString: string): Promise<any>;
+  openPrint(printType: string, printString: string): Promise<NativeEventResponse>;
+
+  /**
+   * 네트워크 상태 확인
+   */
+  getNetworkStatus(): Promise<NativeEventResponse>;
 }
 
 // Popup

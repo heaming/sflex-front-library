@@ -1,3 +1,4 @@
+import { Platform } from 'quasar';
 import env from '../consts/private/env';
 import { defineGetters } from '../utils/private/globalProperty';
 
@@ -10,6 +11,8 @@ export const platform = {
     server: env.SERVER === true,
     test: env.TEST === true,
     popup: env.VITE_ENTRY_POPUP_PATHNAME === pathname,
+    android: Platform.is.android === true,
+    ios: Platform.is.ios === true,
     desktop: true,
     mobile: false,
     tablet: false,

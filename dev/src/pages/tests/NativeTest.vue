@@ -5,8 +5,24 @@
         <kw-form-row>
           <kw-btn
             class="row"
+            label="mobileUtil.getNetworkStatus"
+            @click="request('getNetworkStatus')"
+          />
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-btn
+            class="row"
             label="mobileUtil.getDeviceVersion"
             @click="request('getDeviceVersion')"
+          />
+        </kw-form-row>
+
+        <kw-form-row>
+          <kw-btn
+            class="row"
+            label="mobileUtil.getDeviceId"
+            @click="request('getDeviceId')"
           />
         </kw-form-row>
 
