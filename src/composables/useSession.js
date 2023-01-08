@@ -1,4 +1,6 @@
 import { Quasar } from 'quasar';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import consts from '../consts';
 import env from '../consts/private/env';
 import { http } from '../plugins/http';
@@ -17,6 +19,7 @@ export default () => {
 
     i18n.locale.value = langId;
     Quasar.locale = langId;
+    dayjs.locale(langId);
   }
 
   async function fetchMetas() {
