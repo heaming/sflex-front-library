@@ -137,7 +137,10 @@ export default {
     },
     async fetchMenus({ commit, dispatch }) {
       const response = await http.get('/sflex/common/common/portal/menus');
-      const menus = response.data;
+      const menus = response.data.map((e) => ({
+        ...e,
+        parentsMenuUid: e.parentsMenuUid?.trim() || null,
+      }));
 
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
