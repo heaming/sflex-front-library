@@ -545,6 +545,16 @@ export const gridUtil: GridUtil;
 // Mobile
 interface MobileUtil {
   /**
+   * get os type code
+   */
+  getOsTypeCode(): 'A' | 'I' | null;
+
+  /**
+   * get device type code
+   */
+  getDeviceTypeCode(): 'M' | 'T' | null;
+
+  /**
    * 디바이스 버전 확인
    */
   getDeviceVersion(): Promise<any>;

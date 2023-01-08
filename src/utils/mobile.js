@@ -1,4 +1,5 @@
 import { isFunction } from 'lodash-es';
+import { platform } from '../plugins/platform';
 
 const NativePlugin = {
   Device: 'DevicePlugin',
@@ -28,6 +29,18 @@ function callMethod(pluginName, methodId, eventId, data) {
 /*
   Device
   */
+export function getOsTypeCode() {
+  if (platform.is.android) return 'A';
+  if (platform.is.ios) return 'I';
+  return null;
+}
+
+export function getDeviceTypeCode() {
+  if (platform.is.mobile) return 'M';
+  if (platform.is.tablet) return 'T';
+  return null;
+}
+
 export function getDeviceVersion() {
   return new Promise((resolve) => {
     const eventId = window.nativeEventBus.once(resolve);
