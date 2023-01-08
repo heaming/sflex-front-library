@@ -60,11 +60,18 @@ export default () => {
   const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
   const isUnduplicated = (to) => !tabViews.some((v) => v.key === to.name);
 
+  const removeBeforeEach = router.beforeEach(
+    (to, from, next) => {
+      const shouldLogging = isRegistered(to) && isUnduplicated(to);
+      to.meta.logging = shouldLogging;
+      next();
+    },
+  );
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
 
-      if (isRegistered(to) && isUnduplicated(to)) {
+      if (to.meta.logging === true) {
         add(to, from);
       }
     },
@@ -86,6 +93,7 @@ export default () => {
   };
 
   onBeforeUnmount(() => {
+    removeBeforeEach();
     removeAfterEach();
     delete router.close;
   });

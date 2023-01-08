@@ -1,4 +1,5 @@
 import store from '../../store';
+import { http } from '../../plugins/http';
 
 function assignParamsByQuery(to) {
   Object.assign(to.params, {
@@ -24,15 +25,21 @@ function assignParamsIfIsLinkPage(to) {
   }
 }
 
-async function fetchRecentMenus(to) {
-  const matched = store.getters['meta/getMenu'](to.name);
+async function loggingIfNeeded(to) {
+  const { meta } = to;
+  const shouldLogging = meta.logging === true && meta.pageUseCode === 'N';
 
-  if (matched) {
-    try {
-      await store.dispatch('meta/fetchRecentMenus');
-    } catch (e) {
-      // ignore
-    }
+  if (shouldLogging) {
+    const logData = {
+      menuLogTypeCode: 'MENU',
+      menuLogObjectId: meta.menuUid,
+      menuName: meta.menuName,
+      appId: meta.applicationId,
+      pageId: meta.pageId,
+    };
+
+    await http.post('/sflex/common/common/portal/menus/logging', logData, { silent: true });
+    await store.dispatch('meta/fetchRecentMenus');
   }
 }
 
@@ -40,5 +47,5 @@ async function fetchRecentMenus(to) {
 export default async (to, from, failure) => {
   assignParamsByQuery(to);
   assignParamsIfIsLinkPage(to);
-  fetchRecentMenus(to);
+  loggingIfNeeded(to);
 };
