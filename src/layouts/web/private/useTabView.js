@@ -12,7 +12,7 @@ export default () => {
     const index = tabViews.push({
       key: to.name,
       label: to.meta.menuName,
-      parentsKey: to.meta.pageUseCode === 'S' ? from.name : null,
+      parentsKey: to.meta.pageUseCode === 'S' ? from?.name : null,
       component: last(to.matched).components.default,
       componentProps: to.params,
     });

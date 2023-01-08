@@ -51,21 +51,26 @@
         @update:selected="onUpdateSelected"
       >
         <template #header="{ node }">
-          <div class="row items-center">
-            <kw-icon
-              v-if="node.folderYn === 'N'"
-              name="bookmark_on"
-            />
-            <div>
-              {{ node.bookmarkName }}
-            </div>
-            <div v-if="node.folderYn === 'Y'">
-              &nbsp;({{ node.children.length }})
-            </div>
+          <div
+            v-if="node.bookmarkName === null"
+            class="drawer-bookmark__tree-dummy"
+          />
+          <div
+            v-else-if="node.folderYn === 'Y'"
+            class="row items-center"
+          >
+            {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
+          </div>
+          <div
+            v-else
+            class="row items-center"
+          >
+            <kw-icon name="bookmark_on" />
+            {{ node.bookmarkName }}
           </div>
         </template>
         <template #body="{ node }">
-          <div v-if="node.folderYn === 'N'">
+          <div v-if="node.menuPath">
             {{ node.menuPath }}
           </div>
         </template>
@@ -79,6 +84,7 @@ import { filter } from 'lodash-es';
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
 import { modal } from '../../plugins/modal';
+import { getUid } from '../../utils/string';
 
 import WebLeftDrawerTitle from './WebLeftDrawerTitle.vue';
 
@@ -97,10 +103,22 @@ export default {
       const bookmarkLevel = e.bookmarkLevel + 1;
       const parentsBookmarkUid = e.bookmarkUid;
       const children = filter(bookmarks.value, { bookmarkLevel, parentsBookmarkUid });
+      const actualChildrenLength = children.length;
+
+      if (e.folderYn === 'Y') {
+        children.unshift({
+          bookmarkLevel,
+          bookmarkUid: getUid(),
+          bookmarkName: null,
+          parentsBookmarkUid,
+          folderYn: 'N',
+        });
+      }
 
       return {
         ...e,
         children: recursiveCreate(children),
+        actualChildrenLength,
       };
     });
 

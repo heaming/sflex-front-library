@@ -327,6 +327,10 @@ body.desktop .web-layout {
           }
         }
 
+        &__node--child:has(.drawer-bookmark__tree-dummy) {
+          display: none;
+        }
+
         &__node-header {
           padding: 0 4px;
           margin-top: 20px;
