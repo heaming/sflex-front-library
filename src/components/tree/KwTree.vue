@@ -141,9 +141,9 @@ export default {
     }
 
     function onUpdateSelected(key) {
-      const shouldSelect = isLeaf(key) || props.selectLeafOnly === false;
+      const shouldUpdate = !key || isLeaf(key) || props.selectLeafOnly === false;
 
-      if (shouldSelect) {
+      if (shouldUpdate) {
         emit('update:selected', key);
       } else {
         setExpanded(key, !isExpanded(key));

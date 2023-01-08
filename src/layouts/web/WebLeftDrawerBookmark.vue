@@ -48,6 +48,7 @@
         node-key="bookmarkUid"
         select-leaf-only
         selected-color="black1"
+        :no-selection-unset="false"
         @update:selected="onUpdateSelected"
       >
         <template #header="{ node }">
@@ -141,7 +142,8 @@ export default {
     const { t } = useI18n();
 
     async function onUpdateSelected(val) {
-      const { menuUid } = treeRef.value.getNodeByKey(val);
+      val ||= selectedKey.value;
+      const { menuUid } = treeRef.value.getNodeByKey(val) || {};
 
       if (menuUid) {
         selectedKey.value = val;

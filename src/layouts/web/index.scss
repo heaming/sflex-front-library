@@ -437,6 +437,60 @@ body.desktop .web-layout {
         }
       }
     }
+
+    &__list {
+      padding: 0 20px;
+
+      .q-separator {
+        margin: 20px 0;
+        background: $line-bg;
+      }
+
+      .q-item {
+        padding: 0;
+        min-height: 40px;
+        font-size: 14px;
+        color: $black1;
+
+        &--active {
+          font-weight: bold;
+        }
+
+        &__label {
+          height: 20px;
+        }
+
+        &__label--header {
+          padding: 0;
+          margin-bottom: 12px;
+          font-size: 14px;
+          color: $black1;
+        }
+
+        &__label--caption {
+          margin-top: 2px;
+          height: 18px;
+          font-size: 12px;
+          color: $placeholder;
+        }
+
+        &__section--side {
+          > .q-icon {
+            cursor: pointer;
+            font-size: 16px;
+            color: $black2;
+          }
+        }
+
+        & + .q-item {
+          margin-top: 20px;
+        }
+
+        .q-focus-helper {
+          display: none;
+        }
+      }
+    }
   }
 }
 
