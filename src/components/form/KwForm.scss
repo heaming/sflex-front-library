@@ -158,17 +158,24 @@ body.mobile:not(.tablet) {
   .kw-form {
     $-kw-form-row-padding-dense: 2px 0;
     $-kw-form-item-min-height-dense: 20px;
+    $-kw-form-item-min-height: 20px;
 
     .kw-form-item__field {
       p {
         @include typo("body",400);
 
+        width: 100%;
         color: $black1;
         word-break: keep-all;
       }
     }
 
     &--dense {
+      .kw-form-item__label {
+        line-height: $-kw-form-item-min-height-dense;
+        min-height: $-kw-form-item-min-height-dense;
+      }
+
       .kw-form-item {
         padding: $-kw-form-row-padding-dense;
         line-height: $-kw-form-item-min-height-dense;

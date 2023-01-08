@@ -88,7 +88,7 @@
       <ul>
         <li>
           When you need to refrence the notification text which is located below grid, please move to
-          <router-link to="/Publish/Components/Temporary/PageSample03">
+          <router-link to="/Publish/Desktop/Components/Temporary/PageSample03">
             Temporary > pagesample03
           </router-link>.
         </li>

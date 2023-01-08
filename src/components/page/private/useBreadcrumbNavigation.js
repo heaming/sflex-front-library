@@ -24,17 +24,12 @@ export default () => {
       }));
     }
 
-    const {
-      applicationId,
-      applicationName,
-      menuUid,
-    } = meta;
+    const { menuUid } = meta;
 
-    if (applicationId && menuUid) {
+    if (menuUid) {
       return [
         { key: 'HOME', label: t('MSG_TXT_HOME', null, '홈') },
-        { key: applicationId, label: applicationName },
-        ...getters['meta/getMenuPath'](menuUid),
+        ...getters['meta/getMenuPaths'](menuUid),
       ];
     }
 

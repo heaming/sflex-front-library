@@ -4,13 +4,13 @@ const normalizeToArray = (components) => (
   Array.isArray(components) ? components : Object.values(components.default || components)
 );
 
-export default (app, modulesOrArray) => {
-  const components = [
+export default (app, { components }) => {
+  const mergedComponents = [
     ...normalizeToArray(autoInstalledComponents),
-    ...normalizeToArray(modulesOrArray),
+    ...normalizeToArray(components),
   ];
 
-  components.forEach((moduleOrComponent) => {
+  mergedComponents.forEach((moduleOrComponent) => {
     const component = moduleOrComponent.default || moduleOrComponent;
     const name = component.name || component.__name;
     app.component(name, component);

@@ -1,6 +1,7 @@
 // createApp
 import { App, Component, Plugin } from 'vue';
 interface CreateAppOptions {
+  devicePlatform?: 'desktop' | 'mobile' | 'tablet';
   components?: Component[];
   plugins?: Plugin[];
   routes?: RouteRecordRaw[];

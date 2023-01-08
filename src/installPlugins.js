@@ -21,16 +21,16 @@ const autoInstalledPlugins = [
   storage,
 ];
 
-export default (app, plugins) => {
-  plugins = [
+export default (app, options) => {
+  const plugins = [
     ...autoInstalledPlugins,
-    ...plugins,
+    ...options.plugins,
   ];
 
   plugins.forEach((plugin) => {
     if (!plugin.__installed) {
       plugin.__installed = true;
-      app.use(plugin);
+      app.use(plugin, options);
     }
   });
 };

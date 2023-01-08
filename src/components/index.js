@@ -42,6 +42,7 @@ export * from './stepper';
 export * from './suspense';
 export * from './tabPanels';
 export * from './tabs';
+export * from './table';
 export * from './timePicker';
 export * from './toggle';
 export * from './tooltip';

@@ -14,6 +14,7 @@ const normalizeOptions = (options) => ({
   componentResolved: false,
   dialogProps: options.dialogProps || {},
   window: options.window === true,
+  redirect: options.redirect === true,
 });
 
 function openWindow(options) {
@@ -23,9 +24,10 @@ function openWindow(options) {
     throw new Error(`No match for ${name}`);
   }
 
+  const search = options.redirect ? '?redirect' : '';
   const kebabCased = kebabCase(name.substring(0, name.length - 1));
-  const search = new URLSearchParams(options.componentProps);
-  const url = `${env.VITE_ENTRY_POPUP_PATHNAME}#/${kebabCased}?${search}`;
+  const routeQuery = new URLSearchParams(options.componentProps);
+  const url = `${env.VITE_ENTRY_POPUP_PATHNAME}${search}/${kebabCased}?${routeQuery}`;
 
   return open(url);
 }

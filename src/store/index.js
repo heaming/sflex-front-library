@@ -27,11 +27,11 @@ const store = createStore({
   strict: env.DEV,
 });
 
-export function installStore(app, modules) {
+export function installStore(app, { storeModules }) {
   defineGetters(app, { store });
 
-  Object.keys(modules).forEach((key) => {
-    store.registerModule(key, modules[key]);
+  Object.keys(storeModules).forEach((key) => {
+    store.registerModule(key, storeModules[key]);
   });
 
   app.use(store);

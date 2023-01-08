@@ -129,7 +129,7 @@ body.desktop .web-layout {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    height: 48px;
     padding: 0 20px;
     border-bottom: 1px solid $line-bg;
     font-weight: 700;
@@ -142,7 +142,7 @@ body.desktop .web-layout {
     height: 100%;
 
     > div {
-      height: calc(100% - 50px);
+      height: calc(100% - 48px);
 
       .kw-scroll-area__wrapper {
         max-height: 100%;
@@ -273,6 +273,15 @@ body.desktop .web-layout {
 
 .web-left-drawer__bookmark {
   .drawer-bookmark {
+    &__title {
+      > span {
+        margin-left: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        color: $primary;
+      }
+    }
+
     &__action {
       display: flex;
       align-items: center;
@@ -397,6 +406,29 @@ body.desktop .web-layout {
         padding-left: 26px;
 
         > div {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.web-left-drawer__recent-menu {
+  .drawer-recent-menu {
+    &__action {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 16px 20px;
+
+      .kw-btn.q-btn {
+        padding: 0 8px 0 4px;
+        min-height: 24px;
+        max-height: 24px;
+        font-size: 12px;
+        line-height: 24px;
+
+        .q-icon {
           font-size: 12px;
         }
       }

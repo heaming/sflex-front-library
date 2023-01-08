@@ -12,6 +12,7 @@ import { GlobalKey } from './consts/private/symbols';
 import { g, defineGetters } from './utils/private/globalProperty';
 
 const normalizeOptions = (options = {}) => ({
+  devicePlatform: options.devicePlatform || 'desktop',
   components: options.components || {},
   plugins: options.plugins || [],
   routes: options.routes || [],
@@ -25,24 +26,20 @@ function provideAppGlobal(app) {
 }
 
 export default (App, options) => {
+  options = normalizeOptions(options);
+
   const wrappedApp = wrapApp(App);
   const app = createApp(wrappedApp);
-  const {
-    components,
-    plugins,
-    storeModules,
-    routes,
-  } = normalizeOptions(options);
 
   installQuasar(app);
   installGlobals();
-  installComponents(app, components);
+  installComponents(app, options);
   installDirectives(app);
-  installPlugins(app, plugins);
+  installPlugins(app, options);
   installValidation();
   installI18n(app);
-  installRouter(app, routes);
-  installStore(app, storeModules);
+  installRouter(app, options);
+  installStore(app, options);
   provideAppGlobal(app);
 
   return app;

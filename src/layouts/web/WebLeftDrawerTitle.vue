@@ -1,8 +1,8 @@
 <template>
   <div class="web-left-drawer__title">
-    <div>
+    <div class="flex items-center">
       <slot>
-        <h1>{{ title }}</h1>
+        {{ title }}
       </slot>
     </div>
 
