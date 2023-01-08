@@ -101,10 +101,6 @@ exports.defineConfig = (config) => {
         // flag indicating the app is test only
         __VUE_TEST_APP__: false,
 
-        // flag indicating the app platform type
-        __VUE_MOBILE_APP__: false,
-        __VUE_TABLET_APP__: false,
-
         // enable/disable Options API support
         // https://github.com/vuejs/core/blob/main/packages/vue/README.md#bundler-build-feature-flags
         __VUE_OPTIONS_API__: true,

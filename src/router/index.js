@@ -39,7 +39,7 @@ function registerHooks() {
   }
 }
 
-export function installRouter(app, routes) {
+export function installRouter(app, { routes }) {
   defineGetters(app, { router });
   registerRoutes(routes);
   registerHooks(router);

@@ -1,17 +1,14 @@
-import { platform } from '~kw-lib';
-
-export function overridePlatformBySearchParams() {
+export function getDevicePlatformBySearchParams() {
   const { search } = window.location;
   const searchParams = new URLSearchParams(search);
 
-  const mobile = searchParams.has('mobile');
-  const tablet = searchParams.has('tablet');
-  const desktop = !mobile && !tablet;
+  if (searchParams.has('mobile')) {
+    return 'mobile';
+  }
 
-  Object.assign(platform.is, {
-    ...platform.is,
-    mobile,
-    tablet,
-    desktop,
-  });
+  if (searchParams.has('tablet')) {
+    return 'tablet';
+  }
+
+  return 'desktop';
 }

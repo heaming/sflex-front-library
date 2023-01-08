@@ -50,8 +50,6 @@ module.exports = {
   globals: {
     __IMPORT_META_ENV__: 'readonly',
     __VUE_TEST_APP__: 'readonly',
-    __VUE_TABLET_APP__: 'readonly',
-    __VUE_MOBILE_APP__: 'readonly',
   },
 
   rules: {
