@@ -204,6 +204,52 @@
               </kw-item-section>
             </template>
           </kw-list>
+          <h3 class="mt15">
+            checkbox with select all + some component in right-side
+          </h3>
+          <p class="kw-font-caption kw-fc--black3 mb15">
+            If components such as buttons need to be located in the upper right corner,
+            please add component in template#action
+          </p>
+          <kw-list
+            v-model:selected="arrModel1"
+            :items="items"
+            separator
+            item-padding
+            checkbox
+            clickable
+            item-key="id"
+          >
+            <template #action>
+              <kw-btn-toggle
+                v-model="strModel2"
+                :options="['선택 자재', '전체 자재']"
+                gap="0px"
+              />
+            </template>
+            <template #item="{ item }">
+              <kw-item-section>
+                <kw-item-label>
+                  {{ item.title }}
+                </kw-item-label>
+                <kw-item-label
+                  font="caption"
+                  class="text-primary"
+                >
+                  {{ item.addressCode }}
+                </kw-item-label>
+                <kw-item-label>
+                  {{ item.address }}
+                </kw-item-label>
+                <kw-item-label
+                  font="caption"
+                  lines="2"
+                >
+                  {{ item.addressDetail }}
+                </kw-item-label>
+              </kw-item-section>
+            </template>
+          </kw-list>
           <h3 class="my15">
             Radio
           </h3>
@@ -653,6 +699,7 @@ const case1 = `
     </kw-item-section>
   </template>
 </kw-list>
+
 <h3 class="my15">
   checkbox with select all
 </h3>
@@ -688,6 +735,54 @@ const case1 = `
     </kw-item-section>
   </template>
 </kw-list>
+
+<h3 class="mt15">
+  checkbox with select all + some component in right-side
+</h3>
+<p class="kw-font-caption kw-fc--black3 mb15">
+  If components such as buttons need to be located in the upper right corner,
+  please add component in template#action
+</p>
+<kw-list
+  v-model:selected="arrModel1"
+  :items="items"
+  separator
+  item-padding
+  checkbox
+  clickable
+  item-key="id"
+>
+  <template #action>
+    <kw-btn-toggle
+      v-model="strModel2"
+      :options="['선택 자재', '전체 자재']"
+      gap="0px"
+    />
+  </template>
+  <template #item="{ item }">
+    <kw-item-section>
+      <kw-item-label>
+        {{ item.title }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        class="text-primary"
+      >
+        {{ item.addressCode }}
+      </kw-item-label>
+      <kw-item-label>
+        {{ item.address }}
+      </kw-item-label>
+      <kw-item-label
+        font="caption"
+        lines="2"
+      >
+        {{ item.addressDetail }}
+      </kw-item-label>
+    </kw-item-section>
+  </template>
+</kw-list>
+
 <h3 class="my15">
   Radio
 </h3>
@@ -813,6 +908,7 @@ const case3 = `
     </kw-item-section>
   </template>
 </kw-list>
+
 <h3 class="my15">
   two side and one two of default sections
 </h3>
@@ -877,6 +973,7 @@ const case3 = `
     </kw-item-section>
   </template>
 </kw-list>
+
 <h3 class="my15">
   kw-item-label
 </h3>
