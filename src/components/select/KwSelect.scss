@@ -195,4 +195,15 @@ body.mobile:not(.tablet) {
       }
     }
   }
+
+  .q-select--multiple:not(.kw-select) {
+    & + .kw-select-options.scroll {
+      .kw-select-options__header + div {
+        position: sticky;
+        background-color: #fff;
+        top: 74px;
+        z-index: 1;
+      }
+    }
+  }
 }
