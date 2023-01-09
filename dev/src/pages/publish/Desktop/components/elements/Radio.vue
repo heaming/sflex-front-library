@@ -363,6 +363,10 @@ const essentialCode = `
 
 const guideHistory = [
   {
+    timestamp: '2022-01-09',
+    text: 'Add single radio element',
+  },
+  {
     timestamp: '2022-10-20',
     text: 'delete code about rules in non-essential type ',
   },
