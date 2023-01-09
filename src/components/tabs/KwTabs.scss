@@ -226,3 +226,62 @@
     border-top: 0;
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-tabs {
+    border: 0;
+    padding: 0;
+
+    .q-tabs__content {
+      height: 40px;
+      border-bottom: none;
+      overflow: visible;
+    }
+
+    .kw-tab {
+      padding: 0;
+      flex: 1 1 50%;
+      min-height: 40px;
+      height: 40px !important;
+      background: none;
+      border: 1px solid $line-stroke;
+      opacity: 1;
+
+      & + .kw-tab {
+        margin-left: -1px;
+      }
+
+      .q-tab__content {
+        padding: 0;
+        height: 38px; // 바깥 border 제외 높이
+        color: $black3;
+      }
+
+      .q-tab__label {
+        @include typo("dense");
+      }
+
+      &.q-tab--active {
+        background: $secondary;
+        border: none;
+
+        .q-tab__label,
+        .q-tab__content {
+          color: #fff;
+        }
+
+        .q-tab__indicator {
+          display: none;
+        }
+
+        & + .kw-tab {
+          border-left: 1px solid $black1;
+        }
+      }
+
+      .q-focus-helper {
+        display: none;
+      }
+    }
+  }
+}
