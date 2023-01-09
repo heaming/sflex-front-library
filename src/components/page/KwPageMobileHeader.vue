@@ -22,14 +22,16 @@
     <div class="kw-page-mobile-header__tools">
       <div class="kw-page-mobile-header__bookmark">
         <kw-checkbox
+          :model-value="isBookmarked"
+          :true-value="true"
+          :false-value="false"
           size="24px"
-          :model-value="isBookmarked ? 'Y' : 'N'"
           checked-icon="bookmark_on"
           unchecked-icon="bookmark_off"
-          @update:model-value="onUpdateBookmark"
+          @update:model-value="updateBookmark"
         >
           <kw-tooltip>
-            {{ $t('MSG_TXT_BKMK') }}
+            {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
           </kw-tooltip>
         </kw-checkbox>
       </div>
@@ -62,7 +64,7 @@
 
 <script>
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
-import useBookmark from './private/useBookmark';
+import useBookmark from '../../composables/private/useBookmark';
 import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
 
 export default {
@@ -73,37 +75,12 @@ export default {
   },
 
   setup() {
-    const { getters } = useStore();
-    const isAuthenticated = getters['meta/isAuthenticated'];
-
     const { toggleExpanded } = useLeftDrawerExpand();
 
-    const {
-      isBookmarked,
-      fetchBookmark,
-      createBookmark,
-      deleteBookmark,
-    } = useBookmark();
-
-    if (isAuthenticated) fetchBookmark();
-
-    async function onUpdateBookmark(val) {
-      if (isAuthenticated) {
-        const isCreate = val === 'Y';
-
-        if (isCreate) {
-          await createBookmark();
-        } else {
-          await deleteBookmark();
-        }
-      }
-    }
-
     return {
+      ...useBookmark(),
       ...useHeaderMeta(),
       toggleExpanded,
-      isBookmarked,
-      onUpdateBookmark,
     };
   },
 };
