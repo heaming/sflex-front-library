@@ -19,10 +19,12 @@
 
     <div class="kw-page-header__tools">
       <kw-checkbox
-        :model-value="isBookmarked ? 'Y' : 'N'"
+        :model-value="isBookmarked"
+        :true-value="true"
+        :false-value="false"
         checked-icon="bookmark_on"
         unchecked-icon="bookmark_off"
-        @update:model-value="onUpdateBookmark"
+        @update:model-value="updateBookmark"
       >
         <kw-tooltip>
           {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
@@ -64,8 +66,8 @@
 </template>
 
 <script>
+import useBookmark from '../../composables/private/useBookmark';
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
-import useBookmark from './private/useBookmark';
 import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
 
@@ -82,36 +84,11 @@ export default {
   },
 
   async setup() {
-    const { getters } = useStore();
-    const isAuthenticated = getters['meta/isAuthenticated'];
-
-    const {
-      isBookmarked,
-      fetchBookmark,
-      createBookmark,
-      deleteBookmark,
-    } = useBookmark();
-
-    if (isAuthenticated) fetchBookmark();
-
-    async function onUpdateBookmark(val) {
-      if (isAuthenticated) {
-        const isCreate = val === 'Y';
-
-        if (isCreate) {
-          await createBookmark();
-        } else {
-          await deleteBookmark();
-        }
-      }
-    }
-
     return {
+      ...useBookmark(),
       ...useBreadcrumbNavigation(),
       ...useNewWindow(),
       ...useHeaderMeta(),
-      isBookmarked,
-      onUpdateBookmark,
     };
   },
 };

@@ -65,6 +65,17 @@
               height: 32px; font-size: 14px
             </td>
           </tr>
+          <tr>
+            <td>
+              kw-radio
+            </td>
+            <td>
+              label="text"
+            </td>
+            <td>
+              If you need single radio option please use kw-radio tag<br>
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -86,7 +97,25 @@
         Default
       </h3>
       <p class="kw-guide-description">
-        Default
+        single
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-form>
+            <kw-form-row>
+              <kw-form-item label="single radio">
+                <kw-radio label="single radio" />
+              </kw-form-item>
+            </kw-form-row>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="singleRadioCode"
+          lang="vue"
+        />
+      </q-card>
+      <p class="kw-guide-description mt30">
+        multiple
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -209,7 +238,9 @@
   </kw-page>
 </template>
 <script setup>
-
+const singleRadioCode = `
+<kw-radio label="single radio" />
+`;
 const groupRadioDefaultCode = `
 <kw-form>
   <kw-form-row>
@@ -331,6 +362,10 @@ const essentialCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2022-01-09',
+    text: 'Add single radio element',
+  },
   {
     timestamp: '2022-10-20',
     text: 'delete code about rules in non-essential type ',

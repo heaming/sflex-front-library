@@ -1,5 +1,5 @@
-import { notify } from '../../../plugins/notify';
-import { http } from '../../../plugins/http';
+import { notify } from '../../plugins/notify';
+import { http } from '../../plugins/http';
 
 export default () => {
   const { currentRoute } = useRouter();
@@ -40,10 +40,24 @@ export default () => {
     notify(t('MSG_ALT_BKMK_DELETED', [menuName]));
   }
 
+  const isAuthenticated = getters['meta/isAuthenticated'];
+
+  async function updateBookmark(isCreate) {
+    if (isAuthenticated) {
+      if (isCreate) {
+        await createBookmark();
+      } else {
+        await deleteBookmark();
+      }
+    }
+  }
+
+  if (isAuthenticated) {
+    fetchBookmark();
+  }
+
   return {
     isBookmarked,
-    fetchBookmark,
-    createBookmark,
-    deleteBookmark,
+    updateBookmark,
   };
 };
