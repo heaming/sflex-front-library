@@ -10,6 +10,7 @@ export const useFieldWrapProps = {
   controlClass: { type: [Object, Array, String], default: undefined },
   autoHeight: { type: Boolean, default: undefined },
   hideBottomSpace: { type: Boolean, default: undefined },
+  stack: { type: Boolean, default: undefined },
 };
 
 export default (defaults = {}) => {
@@ -28,6 +29,7 @@ export default (defaults = {}) => {
     controlClass: props.controlClass ?? defaults.controlClass,
     autoHeight: props.autoHeight ?? defaults.autoHeight,
     hideBottomSpace: props.hideBottomSpace ?? defaults.hideBottomSpace,
+    stack: props.stack ?? defaults.stack,
   }));
 
   return {
