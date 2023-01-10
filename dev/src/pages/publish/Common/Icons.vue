@@ -132,6 +132,7 @@ const iconList2 = [
   'barcode_24',
   'calendar_24',
   'call_24',
+  'check_24',
   'checked_24',
   'close_24',
   'download_24',
