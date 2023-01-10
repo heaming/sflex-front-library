@@ -33,4 +33,12 @@
 const headingText = `
 <h3>h3 Heading-text</h3>
 `;
+
+const historyData = [
+  {
+    timestamp: '2022-01-10',
+    text: 'First added',
+  },
+];
+
 </script>
