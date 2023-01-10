@@ -12,37 +12,34 @@ const NativePlugin = {
   Util: 'UtilPlugin',
 };
 
-function callEvent(resolve) {
-  return window.nativeEventBus.once(async (response) => {
-    const {
-      code, data, message,
-    } = JSON.parse(response);
+function callEvent(resolve, reject) {
+  return window.nativeEventBus.once(
+    async (response) => {
+      const {
+        code, data, message,
+      } = JSON.parse(response);
 
-    if (code === 200) {
-      resolve({
-        result: true,
-        payload: data,
-      });
-    } else {
-      await alert(message);
-
-      resolve({
-        result: false,
-        payload: undefined,
-      });
-    }
-  });
+      if (code !== 200) {
+        await alert(message);
+        reject(new Error(message));
+      } else {
+        resolve(data);
+      }
+    },
+  );
 }
 
 function callMethod(pluginName, methodId, data) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const plugin = window[pluginName];
 
     if (!isFunction(plugin?.callMethod)) {
-      throw new Error(`failed to invoke ${pluginName}.${methodId}, ${pluginName} is not injected.`);
+      throw new Error(
+        `failed to invoke ${pluginName}.${methodId}, ${pluginName} is not injected.`,
+      );
     }
 
-    const eventId = callEvent(resolve);
+    const eventId = callEvent(resolve, reject);
 
     plugin.callMethod(
       JSON.stringify({
