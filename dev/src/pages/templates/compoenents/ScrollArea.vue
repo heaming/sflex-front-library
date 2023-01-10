@@ -18,12 +18,12 @@
       <kw-separator />
       <div class="playground-model">
         <kw-form
-          cols="0"
-          label-size="100"
+          :cols="0"
+          :label-size="100"
         >
           <kw-form-row>
             <kw-form-item label="parent">
-              <kw-field-wrap>
+              <kw-field-wrap control-class="gap-xs">
                 <kw-input v-model="parentStyle.width">
                   <template #before>
                     width
@@ -36,8 +36,10 @@
                 </kw-input>
               </kw-field-wrap>
             </kw-form-item>
+          </kw-form-row>
+          <kw-form-row>
             <kw-form-item label="component">
-              <kw-field-wrap>
+              <kw-field-wrap control-class="gap-xs">
                 <kw-input v-model="componentStyle.width">
                   <template #before>
                     width
@@ -48,10 +50,22 @@
                     height
                   </template>
                 </kw-input>
+                <kw-input v-model="componentStyle.padding">
+                  <template #before>
+                    padding
+                  </template>
+                </kw-input>
+                <kw-input v-model="componentStyle.margin">
+                  <template #before>
+                    margin
+                  </template>
+                </kw-input>
               </kw-field-wrap>
             </kw-form-item>
+          </kw-form-row>
+          <kw-form-row>
             <kw-form-item label="content">
-              <kw-field-wrap>
+              <kw-field-wrap control-class="gap-xs">
                 <kw-input v-model="contentsStyle.width">
                   <template #before>
                     width
@@ -71,7 +85,7 @@
       <div class="scroll-area-test">
         <div
           :style="parentStyle"
-          class="scroll-area-test__parent"
+          class="scroll-area-test__parent flex"
         >
           <kw-scroll-area
             v-bind="bindingProps"
@@ -87,6 +101,7 @@
               <div>{{ `h: ${contentsStyle.height}` }} </div>
             </div>
           </kw-scroll-area>
+          <div>???????????</div>
         </div>
         <div class="scroll-area-test__parent-info">
           <div>parent</div>
@@ -169,8 +184,8 @@ const scrollAreaProps = {
 };
 
 const bindingProps = ref({
-  scrollAreaWidth: '700px',
-  width: '800px',
+  scrollAreaWidth: '',
+  width: '',
 });
 
 const defaultCode = `
@@ -191,11 +206,13 @@ const parentStyle = ref({
 const componentStyle = ref({
   width: '900px',
   height: undefined,
+  padding: '100px',
+  margin: '',
 });
 
 const contentsStyle = ref({
-  width: '100%',
-  height: '1000px',
+  width: '1200px',
+  height: '1200px',
 });
 
 // let timer = null;
