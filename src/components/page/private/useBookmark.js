@@ -1,5 +1,5 @@
-import { notify } from '../../plugins/notify';
-import { http } from '../../plugins/http';
+import { notify } from '../../../plugins/notify';
+import { http } from '../../../plugins/http';
 
 export default () => {
   const { currentRoute } = useRouter();

@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import useBookmark from '../../composables/private/useBookmark';
+import useBookmark from './private/useBookmark';
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
 import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
