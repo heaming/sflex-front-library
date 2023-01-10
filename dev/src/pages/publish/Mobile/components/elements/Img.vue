@@ -47,7 +47,8 @@
           If you need an icon, look it up in the icon list on the <router-link to="/Publish/Common/Icons">
             screen.
           </router-link>
-          And about the new one, tag '@zyekim' or '@sueun' on the Zeplin screen to request it.
+          And about the new one, tag '@zyekim' or '@sueun' on the Zeplin screen to request it. <br>
+          (take 1~2days after check your comment)
         </li>
       </ul>
     </div>
