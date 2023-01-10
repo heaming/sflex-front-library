@@ -64,7 +64,7 @@
             </template>
           </kw-action-top>
 
-          <kw-action-top>
+          <kw-action-top class="mt10">
             <template #left>
               <kw-paging-info
                 :total-count="7"
@@ -113,7 +113,7 @@
             />
           </kw-action-top>
 
-          <kw-action-top>
+          <kw-action-top class="mt10">
             <template #left>
               <h3>작업정보</h3>
             </template>
@@ -122,13 +122,12 @@
               dense
               border-color="line-stroke"
               label="사진"
-              class="w70"
             />
             <kw-btn
               secondary
               dense
               border-color="line-stroke"
-              class="w70"
+              class="ml4"
               label="고객서명"
             />
           </kw-action-top>
@@ -149,8 +148,7 @@
       </h3>
 
       <p class="kw-guide-description">
-        Make sure to add helper class of pl12 on left side between text and number<br>
-        Make sure to add helper class of pl14 on right side between text and number<br>
+        use helper class of margin for it between the space.
       </p>
       <q-card>
         <div class="kw-guide-example">
@@ -158,9 +156,9 @@
             <template #left>
               <span>총주행</span>
               <span class="accent pl4">7</span>
-              <span class=" pl12">업무용</span>
+              <span class="pl12">업무용</span>
               <span class="accent pl4">1734</span>
-              <span class=" pl12">비율</span>
+              <span class="pl12">비율</span>
               <span class="accent pl4">100%</span>
             </template>
             <kw-btn
@@ -170,7 +168,8 @@
               label="편집"
             />
           </kw-action-top>
-          <kw-action-top>
+
+          <kw-action-top class="mt10">
             <template #left>
               <p>가구화코드 202266791613</p>
             </template>
@@ -180,6 +179,33 @@
             <span class="accent pl4">1</span>
             <span class="pl8">미완료</span>
             <span class="accent pl4">1</span>
+          </kw-action-top>
+
+          <kw-action-top class="mt10">
+            <template #left>
+              <span>전체</span>
+              <span class="accent pl4">268</span>
+              <span class="pl8">완료</span>
+              <span class="accent pl4">150</span>
+              <span class="pl8">미완료</span>
+              <span class="accent pl4">118</span>
+              <span class="pl8">취소</span>
+              <span class="accent pl4">0</span>
+            </template>
+            <span class="accent kw-font-pt14">55.97%</span>
+          </kw-action-top>
+
+          <kw-action-top class="mt10">
+            <template #left>
+              <span class="kw-fc--black1">08-09</span>
+              <span class="kw-fc--black1 ml4">오늘</span>
+              <kw-btn
+                icon="sorti"
+                dense
+                borderless
+                class="ml4 h20"
+              />
+            </template>
           </kw-action-top>
         </div>
         <guide-code-view
@@ -202,7 +228,6 @@ const case1 = `
 </kw-action-top>
 
 <kw-action-top>
-  <template #left>
     <kw-paging-info
       :total-count="7"
     />
@@ -239,13 +264,12 @@ const case2 = `
     dense
     border-color="line-stroke"
     label="사진"
-    class="w70"
   />
   <kw-btn
     secondary
     dense
     border-color="line-stroke"
-    class="w70"
+    class="ml4"
     label="고객서명"
   />
 </kw-action-top>
@@ -255,9 +279,9 @@ const case3 = `
   <template #left>
     <span>총주행</span>
     <span class="accent pl4">7</span>
-    <span class=" pl12">업무용</span>
+    <span class="pl12">업무용</span>
     <span class="accent pl4">1734</span>
-    <span class=" pl12">비율</span>
+    <span class="pl12">비율</span>
     <span class="accent pl4">100%</span>
   </template>
   <kw-btn
@@ -267,6 +291,7 @@ const case3 = `
     label="편집"
   />
 </kw-action-top>
+
 <kw-action-top>
   <template #left>
     <p>가구화코드 202266791613</p>
@@ -278,10 +303,37 @@ const case3 = `
   <span class="pl8">미완료</span>
   <span class="accent pl4">1</span>
 </kw-action-top>
+
+<kw-action-top>
+  <template #left>
+    <span>전체</span>
+    <span class="accent pl4">268</span>
+    <span class="pl8">완료</span>
+    <span class="accent pl4">150</span>
+    <span class="pl8">미완료</span>
+    <span class="accent pl4">118</span>
+    <span class="pl8">취소</span>
+    <span class="accent pl4">0</span>
+  </template>
+  <span class="accent kw-font-pt14">55.97%</span>
+</kw-action-top>
+
+<kw-action-top>
+  <template #left>
+    <span class="kw-fc--black1">08-09</span>
+    <span class="kw-fc--black1 ml4">오늘</span>
+    <kw-btn
+      icon="sorti"
+      dense
+      borderless
+      class="ml4 h20"
+    />
+  </template>
+</kw-action-top>
 `;
 const historyData = [
   {
-    timestamp: '2022-12-08',
+    timestamp: '2023-1-09',
     text: 'First added',
   },
 ];

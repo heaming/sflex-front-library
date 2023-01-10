@@ -4,12 +4,8 @@
     no-header
   >
     <h2 class="kw-guide-h2">
-      [Mobile] Page Header
+      [Mobile] Layout & Page Header
     </h2>
-    <p class="kw-guide-description">
-      Use this component if you need headers when composing your page.
-      <!-- <router-link>sample page</router-link> -->
-    </p>
     <guide-history-view
       :items="guideHistory"
     />
@@ -21,8 +17,8 @@
         Notice
       </h3>
       <ul style="margin: 0; padding-left: 25px;">
-        <li>페이지 헤더는 한국의 개발에서 최종 컨트롤 합니다.</li>
-        <li>GDCI에서는 '타이틀', '텍스트버튼', 'more기능'만 코딩하면 됩니다.</li>
+        <li>The page header is finally controlled by the development team in Korea.</li>
+        <li>GDCI only need to code 'Title', 'Text Button', and 'more Function'.</li>
       </ul>
     </div>
     <div class="kw-guide-section">
@@ -62,13 +58,34 @@
         id="default"
         class="kw-guide-title"
       >
-        Default(Only title)
+        Default(Only title, Action)
       </h3>
       <q-card>
         <div class="kw-guide-example">
           <kw-page-mobile-header
             title="Title"
           />
+          <div class="px20 py50">
+            Page Contents
+          </div>
+          <div
+            class="row"
+          >
+            <kw-btn
+              filled
+              negative
+              style="flex-grow: 1; height: 60px;"
+              class="kw-font-pt16"
+              label="취소"
+            />
+            <kw-btn
+              filled
+              primary
+              style="flex-grow: 1; height: 60px;"
+              class="kw-font-pt16"
+              label="확인"
+            />
+          </div>
         </div>
         <guide-code-view
           :code-value="defaultCode"
@@ -213,6 +230,18 @@ const defaultCode = `
 
   Page Contents
 
+  <template #action>
+    <kw-btn
+      filled
+      negative
+      label="취소"
+    />
+    <kw-btn
+      filled
+      primary
+      label="확인"
+    />
+  </template>
 </kw-page>
 `;
 
