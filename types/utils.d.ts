@@ -542,11 +542,6 @@ interface GridUtil {
 
 export const gridUtil: GridUtil;
 
-interface NativeEventResponse<T = any> {
-  result: boolean;
-  payload: T;
-}
-
 // Mobile
 interface MobileUtil {
   /**
@@ -562,76 +557,76 @@ interface MobileUtil {
   /**
    * 디바이스 버전 확인
    */
-  getDeviceVersion(): Promise<NativeEventResponse>;
+  getDeviceVersion(): Promise<any>;
 
   /**
    * 디바이스 토큰 확인
    */
-  getDeviceToken(): Promise<NativeEventResponse>;
+  getDeviceToken(): Promise<any>;
 
   /**
    * 디바이스 ID 확인
    */
-  getDeviceId(): Promise<NativeEventResponse>;
+  getDeviceId(): Promise<any>;
 
   /**
    * 카메라 호출
    */
-  openCamera(): Promise<NativeEventResponse>;
+  openCamera(): Promise<any>;
 
   /**
    * 사진 갤러리 호출
    */
-  openPhotoGallery(): Promise<NativeEventResponse>;
+  openPhotoGallery(): Promise<any>;
 
   /**
    * 바코드 리더기 호출
    */
-  openBarcodeReader(): Promise<NativeEventResponse>;
+  openBarcodeReader(): Promise<any>;
 
   /**
    * Prefernce 설정
    * @param key
    * @param value
    */
-  openBarcodeReader(key: string, value: any): Promise<NativeEventResponse>;
+  openBarcodeReader(key: string, value: any): Promise<any>;
 
   /**
    * Prefernce 가져오기
    * @param key
    */
-  getPreference(key: string): Promise<NativeEventResponse>;
+  getPreference(key: string): Promise<any>;
 
   /**
    * phone 호출
    * @param address
    */
-  openPhone(address: string): Promise<NativeEventResponse>;
+  openPhone(address: string): Promise<any>;
 
   /**
    * SMS 호출
    * @param address
    * @param body
    */
-  openSMS(address: string, body: string): Promise<NativeEventResponse>;
+  openSMS(address: string, body: string): Promise<any>;
 
   /**
    * TMap 호출
    * @param routeInfo
    */
-  openTMap(routeInfo: any): Promise<NativeEventResponse>;
+  openTMap(routeInfo: any): Promise<any>;
 
   /**
    * 프린트 호출
    * @param printType
    * @param printString
    */
-  openPrint(printType: string, printString: string): Promise<NativeEventResponse>;
+  openPrint(printType: string, printString: string): Promise<any>;
 
   /**
    * 네트워크 상태 확인
    */
-  getNetworkStatus(): Promise<NativeEventResponse>;
+  getNetworkStatus(): Promise<any>;
 }
 
 // Popup
