@@ -3,18 +3,15 @@
     v-for="modal of modals"
     :key="modal.uid"
     class="global-modal"
-    v-bind="modal.dialogProps"
-    :model-value="true"
-    persistent
-    no-shake
-    no-refocus
+    v-bind="getDialogProps(modal.dialogProps)"
   >
     <kw-popup-container
-      :draggable="modal.popupCtx?.draggable.value"
       @resolve="onResolve(modal, $event)"
       @close="onClose(modal, $event)"
     >
-      <kw-observer :ref="(vm) => modal.observer = vm">
+      <kw-observer
+        :ref="(vm) => modal.observerVm = vm"
+      >
         <component
           :is="modal.component"
           v-bind="modal.componentProps"
@@ -29,6 +26,7 @@ import { GlobalModalVmKey } from '../../consts/private/symbols';
 import libConfig from '../../consts/private/libConfig';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
+import { platform } from '../../plugins/platform';
 
 const {
   DIALOG_TRANSITION_DURATION,
@@ -49,20 +47,30 @@ export default {
       unregisterGlobalVm(GlobalModalVmKey);
     });
 
+    const getDialogProps = (dialogProps) => ({
+      class: dialogProps.class,
+      maximized: platform.is.mobile || dialogProps.maximized === true,
+      transitionDuration: dialogProps.maximized === true ? 0 : undefined,
+      modelValue: true,
+      persistent: true,
+      noShake: true,
+      noRefocus: true,
+    });
+
     function onResolve(modal, popupCtx) {
       modal.componentResolved = true;
       modal.popupCtx = popupCtx;
     }
 
     async function isClosable(modal, result) {
-      const { observer, popupCtx } = modal;
-      const shouldCheckModified = result === false;
+      const { observerVm, popupCtx } = modal;
+      const { onBeforeClose } = popupCtx;
 
-      if (shouldCheckModified) {
-        if (!await observer.confirmIfIsModified()) { return false; }
+      if (onBeforeClose.value) {
+        return (await onBeforeClose.value?.(result)) !== false;
       }
 
-      return (await popupCtx.onBeforeClose.value?.(result)) !== false;
+      return result !== false || await observerVm.confirmIfIsModified();
     }
 
     async function onClose(modal, { result, payload }) {
@@ -75,6 +83,7 @@ export default {
     return {
       DIALOG_TRANSITION_DURATION,
       modals,
+      getDialogProps,
       onResolve,
       onClose,
     };

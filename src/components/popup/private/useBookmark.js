@@ -1,17 +1,23 @@
-import { notify } from '../../plugins/notify';
-import { http } from '../../plugins/http';
+import { find } from 'lodash-es';
+import { notify } from '../../../plugins/notify';
+import { http } from '../../../plugins/http';
 
-export default () => {
-  const { currentRoute } = useRouter();
-  const { menuUid, pageId, menuName } = currentRoute.value.meta;
-
+export default ({ pageId }) => {
   const { getters, dispatch } = useStore();
+
+  const {
+    menuUid,
+    menuName,
+  } = find(getters['meta/getMenus'], { pageId }) || {};
+
+  const isBookmarkable = menuUid !== undefined;
   const isBookmarked = computed(() => getters['meta/isBookmarked'](menuUid, pageId));
 
   async function fetchBookmark() {
     if (menuUid && pageId) {
       try {
-        const response = await http.get('/sflex/common/common/bookmarks/marked', { params: { menuUid, pageId }, silent: true });
+        const params = { menuUid, pageId };
+        const response = await http.get('/sflex/common/common/bookmarks/marked', { params, silent: true });
         const marked = response.data;
         const shouldReload = marked !== isBookmarked.value;
 
@@ -57,6 +63,7 @@ export default () => {
   }
 
   return {
+    isBookmarkable,
     isBookmarked,
     updateBookmark,
   };

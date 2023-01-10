@@ -378,6 +378,112 @@
       </q-card>
     </div>
 
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        expansion with checkbox
+      </h3>
+
+      <p class="kw-guide-description">
+        This is for example. If there is more diffrent style of expansion, It's okay to create.
+        <a href="https://zpl.io/JEjYBoW">Reference design for it</a>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-expansion-item
+            expand-icon-align="center"
+            expand-icon-class="kw-font-pt16 pr12"
+            class="kw-bc--bg-box border-box"
+            expand-icon="arrow_down"
+            default-opened
+          >
+            <template #header>
+              <kw-item-section class="pl12 content-start">
+                <kw-checkbox
+                  v-model="ynModel"
+                  label="전체동의"
+                  val=""
+                />
+              </kw-item-section>
+            </template>
+            <div class="kw-bc--bg-white">
+              <ul class="py24 px10">
+                <!-- li should be added "mt20" as class except of first li  -->
+                <li class="row justify-between">
+                  <div class="row items-center ">
+                    <kw-checkbox
+                      v-model="ynModel"
+                      label=""
+                      val=""
+                      class="costumed-checkbox"
+                    />
+
+                    <p class="kw-font-dense ml4">
+                      [필수] 개인정보 수집 및 이용 동의
+                    </p>
+                  </div>
+
+                  <kw-btn
+                    borderless
+                    dense
+                    icon="arrow_stepper"
+                  />
+                </li>
+                <li class="row justify-between mt20">
+                  <div class="row items-center ">
+                    <kw-checkbox
+                      v-model="ynModel"
+                      label=""
+                      val=""
+                      class="costumed-checkbox"
+                    />
+
+                    <p class="kw-font-dense ml4">
+                      [필수] 개인정보 제공 동의
+                    </p>
+                  </div>
+
+                  <kw-btn
+                    borderless
+                    dense
+                    icon="arrow_stepper"
+                  />
+                </li>
+                <li class="row justify-between mt20">
+                  <div class="row items-center ">
+                    <kw-checkbox
+                      v-model="ynModel"
+                      label=""
+                      val=""
+                      class="costumed-checkbox"
+                    />
+
+                    <p class="kw-font-dense ml4">
+                      [선택] 통합마케팅 목적 처리 동의
+                    </p>
+                  </div>
+
+                  <kw-btn
+                    borderless
+                    dense
+                    icon="arrow_stepper"
+                  />
+                </li>
+                <!-- // li should be added "mt20" as class except of first li  -->
+              </ul>
+            </div>
+          </kw-expansion-item>
+        </div>
+        <guide-code-view
+          :code-value="[case3,caseCss3,caseScript3]"
+          :lang="['vue','css','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
+
     <!-- 우리가 해야하는 것!!  -->
     <!-- <div class="kw-guide-section">
       <h3
@@ -437,6 +543,8 @@
 </template>
 
 <script setup>
+const ynModel = ref('N');
+
 const case1 = `
 <kw-list
   item-padding="12px 0"
@@ -700,6 +808,114 @@ const historyData = [
     text: 'First added',
   },
 ];
+
+const case3 = `
+<kw-expansion-item
+      expand-icon-align="center"
+      expand-icon-class="kw-font-pt16 pr12"
+      class="kw-bc--bg-box border-box"
+      expand-icon="arrow_down"
+      default-opened
+    >
+      <template #header>
+        <kw-item-section class="pl12 content-start">
+          <kw-checkbox
+            v-model="ynModel"
+            label="전체동의"
+            val=""
+          />
+        </kw-item-section>
+      </template>
+      <div class="kw-bc--bg-white">
+        <ul class="py24 px10">
+          <!-- li should be added "mt20" as class except of first li  -->
+          <li class="row justify-between">
+            <div class="row items-center ">
+              <kw-checkbox
+                v-model="ynModel"
+                label=""
+                val=""
+                class="costumed-checkbox"
+              />
+
+              <p class="kw-font-dense ml4">
+                [필수] 개인정보 수집 및 이용 동의
+              </p>
+            </div>
+
+            <kw-btn
+              borderless
+              dense
+              icon="arrow_stepper"
+            />
+          </li>
+          <li class="row justify-between mt20">
+            <div class="row items-center ">
+              <kw-checkbox
+                v-model="ynModel"
+                label=""
+                val=""
+                class="costumed-checkbox"
+              />
+
+              <p class="kw-font-dense ml4">
+                [필수] 개인정보 제공 동의
+              </p>
+            </div>
+
+            <kw-btn
+              borderless
+              dense
+              icon="arrow_stepper"
+            />
+          </li>
+          <li class="row justify-between mt20">
+            <div class="row items-center ">
+              <kw-checkbox
+                v-model="ynModel"
+                label=""
+                val=""
+                class="costumed-checkbox"
+              />
+
+              <p class="kw-font-dense ml4">
+                [선택] 통합마케팅 목적 처리 동의
+              </p>
+            </div>
+
+            <kw-btn
+              borderless
+              dense
+              icon="arrow_stepper"
+            />
+          </li>
+          <!-- // li should be added "mt20" as class except of first li  -->
+        </ul>
+      </div>
+    </kw-expansion-item>
+`;
+const caseCss3 = `
+::v-deep(.kw-checkbox) {
+  &.costumed-checkbox {
+    &.q-checkbox {
+      .q-checkbox__bg {
+        background: url("~@assets/icons/dialog_checked_off.svg") no-repeat center;
+      }
+
+      .q-checkbox__inner {
+        &--truthy {
+          .q-checkbox__bg {
+            background: url("~@assets/icons/dialog_checked_on.svg") no-repeat center;
+          }
+        }
+      }
+    }
+  }
+}
+`;
+const caseScript3 = `
+const ynModel = ref('N');
+`;
 </script>
 
 <style lang="scss" scoped>
@@ -708,6 +924,24 @@ const historyData = [
 
   & + .kw-expansion-item {
     margin-top: 8px;
+  }
+}
+
+::v-deep(.kw-checkbox) {
+  &.costumed-checkbox {
+    &.q-checkbox {
+      .q-checkbox__bg {
+        background: url("~@assets/icons/dialog_checked_off.svg") no-repeat center;
+      }
+
+      .q-checkbox__inner {
+        &--truthy {
+          .q-checkbox__bg {
+            background: url("~@assets/icons/dialog_checked_on.svg") no-repeat center;
+          }
+        }
+      }
+    }
   }
 }
 </style>

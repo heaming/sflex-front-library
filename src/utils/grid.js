@@ -366,9 +366,16 @@ export async function validateRow(view, dataRow, bails = true) {
     if (shouldInvokeOnValidate) {
       const itemIndex = view.getItemIndex(dataRow);
       const index = createCellIndexByDataColumn(view, itemIndex, column);
-      const error = await view.onValidate(view, index, value, values);
+      const ret = await view.onValidate(view, index, value, values);
+      const retIsError = ret === false || typeof ret === 'string';
 
-      if (error) errors.push(error);
+      if (retIsError) {
+        errors.push(
+          ret === false
+            ? i18n.t('MSG_VAL_INVALID', [name])
+            : ret,
+        );
+      }
     }
 
     const invalid = errors.length > 0;
