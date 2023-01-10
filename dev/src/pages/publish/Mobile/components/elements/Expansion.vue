@@ -383,10 +383,11 @@
         id="default"
         class="kw-guide-title"
       >
-        expansion type3
+        expansion with checkbox
       </h3>
 
       <p class="kw-guide-description">
+        This is for example. If there is more diffrent style of expansion, It's okay to create.
         <a href="https://zpl.io/JEjYBoW">Reference design for it</a>
       </p>
       <q-card>
