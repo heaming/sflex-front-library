@@ -96,7 +96,10 @@
           @click="inputRef.hidePopup()"
         />
       </div>
-      <div v-if="multiple">
+      <div
+        v-if="multiple"
+        class="kw-select-options__select-all"
+      >
         <q-item
           clickable
           @click="toggleAll"
