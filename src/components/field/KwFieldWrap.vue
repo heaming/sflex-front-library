@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="computedClass"
+    :class="fieldWrapClass"
   >
     <div
       ref="controlRef"
@@ -110,7 +110,7 @@ export default {
       return classes;
     });
 
-    const computedClass = computed(() => {
+    const fieldWrapClass = computed(() => {
       const classes = {
         ...stretchClass.value,
       };
@@ -121,6 +121,7 @@ export default {
       classes['kw-field-wrap--required'] = fieldWrapProps.value.required;
       classes['kw-field-wrap--auto-height'] = fieldWrapProps.value.autoHeight;
       classes['kw-field-wrap--multiline'] = fieldWrapProps.value.multiline;
+      classes['kw-field-wrap--stack'] = fieldWrapProps.value.stack;
       classes[`kw-field-wrap--col-${cols.value}`] = !!cols.value;
       return classes;
     });
@@ -134,7 +135,7 @@ export default {
       controlRef,
       showErrorMessage,
       showLabel,
-      computedClass,
+      fieldWrapClass,
       computedErrorMessage,
       computedBottomClass,
       focus,

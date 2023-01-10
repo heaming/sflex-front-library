@@ -569,6 +569,12 @@
     }
   }
 
+  &--stack {
+    .kw-field-wrap__control-container {
+      flex-direction: column;
+    }
+  }
+
   &.grow {
     .kw-field-wrap__control-container > .kw-field {
       flex-grow: 1;
