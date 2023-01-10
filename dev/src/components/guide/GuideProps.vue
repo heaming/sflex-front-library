@@ -50,8 +50,8 @@
           </template>
           <template v-else>
             <kw-input
-              v-model="prop.value"
-              @update:model-value="emitModelValue"
+              :model-value="prop.value !== undefined ? String(prop.value) : ''"
+              @update:model-value="(v) => {prop.value=v; emitModelValue();}"
             />
           </template>
         </div>
