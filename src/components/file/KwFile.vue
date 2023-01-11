@@ -3,7 +3,6 @@
     ref="fileRef"
     v-model="bindValue"
     :counter-label="computedCounterLabel"
-    class="kw-field kw-file"
     :class="fileClass"
     :label="$g.platform.is.mobile ? label : undefined"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
@@ -44,12 +43,12 @@
     </template>
 
     <div
-      v-if="files.length === 0"
+      v-if="showPlaceholder"
       class="kw-file__placeholder"
       :class="placeholderClass"
       :style="placeholderStyle"
     >
-      {{ typeof placeholder === 'function' ? placeholder() : placeholder }}
+      {{ computedPlaceholder }}
     </div>
 
     <!-- prepend -->
@@ -87,33 +86,126 @@
       #after
     >
       <kw-scroll-area
-        v-if="useHeader"
+        v-if="computedUseHeader"
         :ref="(vm) => { headerScrollAreaRef = vm }"
         class="kw-file__header-container"
         :style="headerScrollAreaStyle"
-        :scroll-area-width="scrollHorizontal ? undefined : '100%'"
+        :scroll-area-width="scrollHorizontal ? 'max-content' : '100%'"
         :horizontal-thumb-style="{ visibility: 'hidden' }"
         :visible="false"
         @scroll="onScrollHeader"
       >
-        <div class="kw-file-item kw-file-item--header">
+        <div class="kw-file-item kw-file__header">
           <kw-checkbox
             v-if="computedSelectable"
             v-model="selectAll"
             class="kw-file-item__checkbox"
             :true-value="true"
             :false-value="false"
-            dense
+            :disable="disable"
           />
           <div
-            class="kw-file-item__name"
+            class="kw-file-item__main"
             :style="fileItemNameStyles"
           >
-            {{ $t('MSG_TXT_FILE_NM', null, '파일명') }}
+            <span class="kw-file__header-total">
+              {{ `${$t('MSG_TXT_COM_TOT', null, 'Total')} ${files.length}` }}
+            </span>
+            <span
+              v-if="computedCounter"
+              class="kw-file__header-counter"
+            >
+              {{ `(${computedCounter})` }}
+            </span>
+            <div class="kw-file__multiple-action">
+              <kw-btn
+                v-if="showPickBtn"
+                :label="pickBtnLabel"
+                no-wrap
+                dense
+                @click="pickFiles"
+              />
+              <kw-btn
+                v-if="showUpdateBtn"
+                no-wrap
+                dense
+                :label="updateBtnLabel"
+                @click="updateSelected"
+              />
+              <kw-btn
+                v-if="showUpdateAllBtn"
+                no-wrap
+                dense
+                :label="updateAllBtnLabel"
+                @click="updateAll"
+              />
+              <kw-btn
+                v-if="showRevertBtn"
+                no-wrap
+                dense
+                :label="revertBtnLabel"
+                @click="revertSelected"
+              />
+              <kw-btn
+                v-if="showRevertAllBtn"
+                no-wrap
+                dense
+                :label="revertAllBtnLabel"
+                @click="revertAll"
+              />
+              <kw-btn
+                v-if="showRemoveBtn"
+                no-wrap
+                dense
+                :label="removeBtnLabel"
+                @click="removeSelected"
+              />
+              <kw-btn
+                v-if="showRemoveAllBtn"
+                no-wrap
+                dense
+                :label="removeAllBtnLabel"
+                @click="removeAll"
+              />
+              <kw-btn
+                v-if="showUndeleteBtn"
+                no-wrap
+                dense
+                :label="undeleteBtnLabel"
+                @click="undeleteSelected"
+              />
+              <kw-btn
+                v-if="showUndeleteAllBtn"
+                no-wrap
+                dense
+                :label="undeleteAllBtnLabel"
+                @click="undeleteAll"
+              />
+              <kw-btn
+                v-if="showDownloadBtn"
+                no-wrap
+                dense
+                :label="downloadBtnLabel"
+                @click="downloadSelected"
+              />
+              <kw-btn
+                v-if="showDownloadAllBtn"
+                no-wrap
+                dense
+                :label="downloadAllBtnLabel"
+                @click="() => downloadAll(false)"
+              />
+              <slot
+                :ref="fileRef"
+                name="header-action"
+              />
+            </div>
           </div>
+
           <div
             v-if="$slots['append-header']"
             class="kw-file-item__append"
+            :style="fileItemAppendStyles"
           >
             <slot
               :ref="fileRef"
@@ -125,24 +217,27 @@
             class="kw-file-item__aside"
             :style="fileItemAsideStyles"
           >
-            <div class="kw-file-item__size">
-              {{ $t('MSG_TXT_FILE_SIZE', null, '파일크기') }}
-            </div>
+            <slot name="header-aside" />
           </div>
         </div>
       </kw-scroll-area>
       <div
-        v-if="showDefaultFilePickBtn || $slots.after"
+        v-if="(!multiple && showPickBtn) || $slots.after"
         class="kw-file__after-slot-container"
       >
-        <kw-btn
-          v-if="showDefaultFilePickBtn"
-          color="transparent"
-          padding="12px"
-          :label="'파일선택'"
-          :dense="dense"
-          @click="pickFiles"
-        />
+        <div
+          v-if="!multiple"
+          class="kw-file__single-action"
+        >
+          <kw-btn
+            v-if="showPickBtn"
+            color="transparent"
+            padding="12px"
+            :label="pickBtnLabel"
+            :dense="dense"
+            @click="pickFiles"
+          />
+        </div>
         <slot name="after" />
       </div>
     </template>
@@ -213,7 +308,7 @@
           :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
           :scroll-area-style="fileScrollAreaContentsStyle"
-          :horizontal-thumb-style="scrollHorizontal ? { borderBottomWidth: '4px', height: '14px' } : undefined"
+          :scroll-area-width="scrollHorizontal ? 'max-content' : '100%'"
           @scroll="onScrollFile"
         >
           <div
@@ -225,40 +320,52 @@
             <kw-checkbox
               v-if="computedSelectable"
               v-model="selectedFileIndexes"
-              dense
               class="kw-file-item__checkbox"
               :val="idx"
+              :disable="disable"
+            />
+            <kw-icon
+              class="kw-file-item__icon"
+              :tooltip="file.type"
+              :name="getExtensionIcon(file)"
             />
             <div
-              v-if="computedIsDownloadable(file)"
-              class="kw-file-item__name"
-              :style="fileItemNameStyles"
-              @click.prevent="downloadFile(file)"
-            >
-              {{ file.name }}
-              <kw-tooltip
-                anchor="center middle"
-                show-when-ellipsised
-              >
-                {{ file.name }}
-              </kw-tooltip>
-            </div>
-            <div
-              v-else
-              class="kw-file-item__name"
+              class="kw-file-item__main"
               :style="fileItemNameStyles"
             >
-              {{ file.name }}
-              <kw-tooltip
-                anchor="center middle"
-                show-when-ellipsised
+              <span
+                v-if="computedIsDownloadable(file)"
+                class="kw-file-item__name"
+                @click.prevent="downloadFile(file)"
               >
                 {{ file.name }}
-              </kw-tooltip>
+                <kw-tooltip
+                  anchor="center middle"
+                  show-when-ellipsised
+                >
+                  {{ file.name }}
+                </kw-tooltip>
+              </span>
+              <span
+                v-else
+                class="kw-file-item__name"
+              >
+                {{ file.name }}
+                <kw-tooltip
+                  anchor="center middle"
+                  show-when-ellipsised
+                >
+                  {{ file.name }}
+                </kw-tooltip>
+              </span>
+              <span
+                class="kw-file-item__size"
+              > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}</span>
             </div>
             <div
               v-if="$slots['append-file']"
               class="kw-file-item__append"
+              :style="fileItemAppendStyles"
             >
               <slot
                 :ref="ref"
@@ -271,15 +378,11 @@
               class="kw-file-item__aside"
               :style="fileItemAsideStyles"
             >
-              <div
-                class="kw-file-item__size"
-              >
-                <kw-icon
-                  v-if="isRetryPossible(file)"
-                  name="warning"
-                />
-                <span v-else> {{ multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter }}</span>
-              </div>
+              <kw-icon
+                v-if="isRetryPossible(file)"
+                class="kw-file-item__error-icon"
+                name="warning"
+              />
               <kw-btn
                 v-if="computedIsDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
@@ -317,16 +420,42 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="removable && isReversible(file)"
+                v-if="reversible && isReversible(file)"
                 class="kw-file-item__remove"
-                :icon="removeIcon"
+                :icon="revertIcon"
                 borderless
                 @click.prevent="revertFile(file)"
               >
                 <kw-tooltip
                   anchor="bottom middle"
                 >
+                  {{ 'undo' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-if="!reversible && removable && isRemovable(file)"
+                class="kw-file-item__remove"
+                :icon="removeIcon"
+                borderless
+                @click.prevent="removeFile(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
                   {{ 'remove' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-if="!reversible && undeletePossible && isUndeletePossible(file)"
+                class="kw-file-item__remove"
+                :icon="undeleteIcon"
+                borderless
+                @click.prevent="undeleteFile(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'undelete' }}
                 </kw-tooltip>
               </kw-btn>
             </div>
@@ -358,7 +487,6 @@
 <script>
 import useField, { useFieldProps } from '../../composables/private/useField';
 import { alert } from '../../plugins/dialog';
-import i18n from '../../i18n';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
@@ -371,22 +499,31 @@ import useFileDownload, {
   useFileDownloadProps,
 } from './private/useFileDownload';
 
+const UPDATE_AVAILABLE_OPTIONS = [true, false, 'remove', 'upload'];
+
 export default {
   name: 'KwFile',
   inheritAttrs: false,
 
   props: {
     // customize props
-    removable: { type: Boolean, default: true },
+    reversible: { type: Boolean, default: true },
+    revertIcon: { type: String, default: 'clear' },
+    removable: { type: Boolean, default: undefined },
     removeIcon: { type: String, default: 'clear' },
+    undeletePossible: { type: Boolean, default: undefined },
+    undeleteIcon: { type: String, default: 'clear' },
     retryPossible: { type: Boolean, default: true },
     retryIcon: { type: String, default: 'retry' },
-    instanceUpdate: { type: [Boolean, String], default: false },
+    instanceUpdate: { type: [Boolean, String],
+      default: false,
+      validate: (val) => UPDATE_AVAILABLE_OPTIONS.includes(val) },
     updatable: { type: Boolean, default: true },
     updateIcon: { type: String, default: 'upload_off' },
     rejectMessage: { type: [Function, String], default: undefined },
-    placeholder: { type: [Function, String], default: i18n.t('MSG_TXT_SEL_FILE', null, '파일 선택') },
+    placeholder: { type: [Function, String], default: undefined },
     placeholderClass: { type: [Array, String, Object], default: undefined },
+    hidePlaceholder: { type: Boolean, default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,
@@ -432,6 +569,8 @@ export default {
   ],
 
   setup(props, { emit, slots }) {
+    const { t } = useI18n();
+
     const fieldStyles = useFieldStyle();
     const { fieldStyleProps, fieldClass } = fieldStyles;
 
@@ -457,14 +596,27 @@ export default {
       },
     });
 
-    const editable = computed(() => props.disable !== true && props.readonly !== true);
+    const ables = computed(() => {
+      const editable = props.disable !== true && props.readonly !== true;
+      return {
+        add: editable,
+        update: editable && props.updatable,
+        manualUpdate: editable && props.updatable && props.instanceUpdate !== true,
+        retry: editable && props.updatable && props.retryPossible,
+        revert: editable && props.reversible,
+        remove: editable && (props.reversible || props.removable),
+        undelete: editable && (props.reversible || props.undeletePossible),
+        download: props.disable !== true && !!props.downloadable,
+      };
+    });
 
     const uploadOptions = computed(() => ({
       instanceUpdate: props.instanceUpdate,
-      editable,
     }));
 
-    const uploadCtx = useFileUpload(innerValue, uploadOptions);
+    const selectCtx = {};
+
+    const uploadCtx = useFileUpload(innerValue, uploadOptions, ables, selectCtx);
 
     const { files } = uploadCtx;
 
@@ -478,7 +630,7 @@ export default {
     const uploadings = computed(() => files.value.map(uploadCtx.findUploading));
 
     // select
-    const selectCtx = useFileSelect(uploadCtx);
+    Object.assign(selectCtx, useFileSelect(uploadCtx, ables));
 
     // counter
     const counterCtx = useFileCounter(files);
@@ -488,7 +640,7 @@ export default {
       findUploading: uploadCtx.findUploading,
       downloadFile: uploadCtx.downloadFile,
       isDownloadable: uploadCtx.isDownloadable,
-    });
+    }, ables);
 
     // reject event
     const getRejectMessage = ({ failedPropValidation, file }) => {
@@ -508,22 +660,41 @@ export default {
     };
 
     // warp file comp
-    const headerCtx = useFileHeader();
-    const { useHeaderFileClass } = headerCtx;
+    const headerCtx = useFileHeader(uploadCtx, ables);
+    const { useHeaderFileClass, computedUseHeader } = headerCtx;
+
+    // placeholder
+    const computedHidePlaceholder = computed(() => {
+      if (props.hidePlaceholder !== undefined) {
+        return props.hidePlaceholder;
+      }
+      return !props.multiple;
+    });
+    const showPlaceholder = computed(() => !computedHidePlaceholder.value || files.value.length === 0);
+    const computedPlaceholder = computed(() => {
+      if (props.placeholder) {
+        return typeof props.placeholder === 'function' ? props.placeholder() : props.placeholder;
+      }
+      return props.multiple
+        ? t('FIXME', null, '첨부할 파일을 여기에 놓아주세요.')
+        : t('MSG_TXT_SEL_FILE', null, '파일 선택');
+    });
 
     // styling
     const fileClass = computed(() => ({
       ...fieldClass.value,
+      'kw-file': true,
       'kw-file--multiple': props.multiple,
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
       'kw-file--horizontal-scroll': props.scrollHorizontal,
+      'kw-file--hide-placeholder': computedHidePlaceholder.value,
       ...useHeaderFileClass.value,
     }));
 
-    const emptyAppendCounter = computed(() => !props.multiple
+    const emptyAppendCounter = computed(() => !computedUseHeader.value
       && !(props.counter || slots.counter)
-      && !files.value.length && !props.useHeader
+      && !files.value.length
       && !!counterCtx.computedCounter.value);
 
     function getFileItemClass(file) {
@@ -537,15 +708,16 @@ export default {
     const fileItemClass = computed(() => files.value.map(getFileItemClass));
 
     // event handler
-    const filePickCtx = useFilePicker(fileRef, editable);
+    const filePickCtx = useFilePicker(fileRef, ables);
 
-    // sample codes for attach icon
-    // const getIcon = (file) => {
-    //   if (file.type.indexOf('video/') === 0) return 'movie';
-    //   if (file.type.indexOf('image/') === 0) return 'photo';
-    //   if (file.type.indexOf('audio/') === 0) return 'audiotrack';
-    //   return 'insert_drive_file';
-    // };
+    const getExtensionIcon = (file) => {
+      if (file.type.indexOf('video/') === 0) return 'movie';
+      if (file.type.indexOf('image/') === 0) return 'imgpreview';
+      if (file.type.indexOf('audio/') === 0) return 'audio';
+      if (file.type.indexOf('pdf') > -1) return 'pdf';
+      if (file.type.indexOf('xml') > -1) return 'excel';
+      return 'file';
+    };
 
     return {
       ...useInheritAttrs(),
@@ -564,7 +736,10 @@ export default {
       fileClass,
       fileItemClass,
       emptyAppendCounter,
-      editable,
+      showPlaceholder,
+      computedPlaceholder,
+      innerValue,
+      getExtensionIcon,
     };
   },
 };

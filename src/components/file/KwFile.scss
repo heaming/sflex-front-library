@@ -1,8 +1,9 @@
 .kw-file {
   $-kw-file-header-height: 36px;
-  $-kw-file-header-border-size: 1px;
-  $-kw-file-header-border: $-kw-file-header-border-size solid $line-stroke;
+  $-kw-file-border-size: 1px;
+  $-kw-file-header-border: $-kw-file-border-size solid $line-stroke;
   $-kw-file-header-background-color: $line-bg;
+  $-kw-file-placeholder-height: 30px; // FIXME: 임의값
 
   &.kw-field {
     $-kw-field-gap: 8px;
@@ -20,6 +21,12 @@
         .kw-file-item {
           min-height: $kw-field-height-dense;
         }
+      }
+    }
+
+    & .q-field {
+      &__control-container {
+        padding-bottom: $-kw-file-placeholder-height;
       }
     }
   }
@@ -40,11 +47,61 @@
 
   &__placeholder {
     position: absolute;
-    inset: 0;
+    bottom: 0;
     display: flex;
+    height: $-kw-file-placeholder-height;
     justify-content: flex-start;
     align-items: center;
     color: $placeholder;
+  }
+
+  &--hide-placeholder {
+    &.kw-field .q-field__control-container {
+      padding-bottom: 0;
+    }
+
+    .kw-file__placeholder {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: $placeholder;
+    }
+  }
+
+  &__header {
+    & .kw-file-item {
+      &__main {
+        min-width: max-content;
+        flex: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  &__header-total,
+  &__header-counter {
+    @include typo("dense", 500);
+
+    line-height: 1.5rem;
+    color: $black1;
+  }
+
+  &__header-counter {
+    &::before {
+      display: inline-block;
+      content: " ";
+      width: 4px;
+    }
+  }
+
+  &__multiple-action {
+    margin-left: 16px;
+    display: flex;
+    gap: 8px;
   }
 
   &--blocked {
@@ -77,11 +134,33 @@
         }
       }
     }
+
+    .kw-file-item {
+      &__main {
+        flex: none;
+      }
+
+      &__aside {
+        margin-left: auto;
+      }
+    }
   }
 
   &--use-header {
+    $-kw-file-item-height-use-header: 36px;
+    $-kw-file-item-rows: 3;
+    $-kw-file-item-container-min-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
+
+    &.kw-field {
+      & .q-field {
+        &__control {
+          background-color: $bg-body;
+        }
+      }
+    }
+
     .q-file__filler {
-      height: 116px;
+      height: $-kw-file-item-container-min-height;
     }
 
     .kw-file__placeholder {
@@ -90,7 +169,7 @@
 
     .kw-file__file-container {
       width: unset;
-      height: 116px;
+      height: $-kw-file-item-container-min-height;
     }
 
     .kw-file__header-container {
@@ -130,11 +209,11 @@
 
         &--outlined {
           .kw-file__header-container {
-            margin: $-kw-file-header-border-size $-kw-file-header-border-size 0;
+            margin: $-kw-file-border-size $-kw-file-border-size 0;
           }
 
           .kw-file__file-container {
-            margin: 0 $-kw-file-header-border-size $-kw-file-header-border-size;
+            margin: 0 $-kw-file-border-size $-kw-file-border-size;
           }
 
           > .q-field__inner > .q-field__control {
@@ -185,7 +264,7 @@
 
         &--labeled {
           .kw-file__header-container {
-            margin-top: $kw-field-label-height + $-kw-file-header-border-size;
+            margin-top: $kw-field-label-height + $-kw-file-border-size;
           }
 
           &.q-field--dense {
@@ -235,19 +314,24 @@
   padding: 0 12px;
   min-height: $kw-field-height;
 
-  &__checkbox {
+  &__checkbox,
+  &__icon {
     padding-right: 4px;
   }
 
-  &__name { // you should notice this one's width set by props.
-    min-width: 100px; // width: TBD;
-    flex: 0 1 100%;
+  &__main { // you should notice this one's width set by props.
+    // width: TBD when use scroll horizontal;
+    min-width: 100px;
+    flex: 1 1 100px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    align-items: center;
+    margin-bottom: 1px;
   }
 
   &__append {
+    // width: TBD when use scroll horizontal;
     overflow: hidden;
     flex: none;
     display: flex;
@@ -256,15 +340,13 @@
   }
 
   &__size {
-    text-align: right;
-    font-size: 14px;
+    @include typo("dense");
+
     color: $black3;
-    white-space: nowrap;
   }
 
   &__aside { // you should notice this one's width set by props.
-    // min-width: TBD;
-    margin-left: 16px;
+    // width: TBD when use scroll horizontal;
     width: 122px;
     flex: none;
     display: flex;
@@ -278,30 +360,6 @@
       text-decoration: underline;
       cursor: pointer !important;
       color: $primary;
-    }
-  }
-
-  &--header {
-    color: $black1;
-    font-size: 14px;
-    font-weight: 500;
-
-    .kw-file-item__name {
-      color: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .kw-file-item__size {
-      color: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      white-space: nowrap;
-      text-align: center;
-      width: 100%;
-      margin-right: 0;
     }
   }
 

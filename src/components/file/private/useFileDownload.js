@@ -6,11 +6,11 @@ export const useFileDownloadProps = {
 
 export const useFileDownloadEmits = ['downloaded'];
 
-export default (uploadCtx) => {
+export default (uploadCtx, ables) => {
   const { props, emit } = getCurrentInstance();
 
   const computedIsDownloadable = computed(() => (file) => {
-    if (props.downloadable === false) {
+    if (ables.value.download === false) {
       return false;
     }
     if (typeof props.downloadable === 'function') {
@@ -20,7 +20,7 @@ export default (uploadCtx) => {
   });
 
   const downloadFile = computed(() => async (file) => {
-    if (!props.downloadable) { return; }
+    if (ables.value.download === false) { return; }
     if (!uploadCtx.isDownloadable(file)) { return; }
     const uploading = uploadCtx.findUploading(file);
     const normalizedFile = uploading.file;

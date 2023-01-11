@@ -27,13 +27,12 @@
         <template v-if="$slots.default">
           <slot />
         </template>
-
-        <q-resize-observer
-          :debounce="100"
-          @resize="onResizeContent"
-        />
       </q-scroll-area>
     </div>
+    <q-resize-observer
+      :debounce="100"
+      @resize="onResizeContent"
+    />
   </div>
 </template>
 
@@ -104,15 +103,25 @@ export default {
 
     const computedScrollAreaWidth = computed(() => {
       if (props.scrollAreaWidth) {
-        return props.scrollAreaWidth;
+        return {
+          width: `${props.scrollAreaWidth}`,
+          minWidth: 'unset !important',
+        };
       }
-      return contentObserverStyle.value?.width && `${contentObserverStyle.value.width}px`;
+      return {
+        minWidth: contentObserverStyle.value?.width && `${contentObserverStyle.value.width}px`,
+      };
     });
     const computedScrollAreaHeight = computed(() => {
       if (props.scrollAreaHeight) {
-        return props.scrollAreaHeight;
+        return {
+          height: `${props.scrollAreaWidth}`,
+          minHeight: 'unset !important',
+        };
       }
-      return contentObserverStyle.value?.height && `${contentObserverStyle.value.height}px`;
+      return {
+        minHeight: contentObserverStyle.value?.height && `${contentObserverStyle.value.height}px`,
+      };
     });
 
     const normalizeStyleProps = (pr) => {
@@ -143,16 +152,16 @@ export default {
 
     const computedContentStyle = computed(() => {
       const styles = {
-        'min-width': computedScrollAreaWidth.value,
-        'min-height': computedScrollAreaHeight.value,
+        ...computedScrollAreaWidth.value,
+        ...computedScrollAreaHeight.value,
       };
       return normalizeStyleProps([props.contentStyle, props.scrollAreaStyle, styles]);
     });
 
     const computedContentActiveStyle = computed(() => {
       const styles = {
-        'min-width': computedScrollAreaWidth.value,
-        'min-height': computedScrollAreaHeight.value,
+        ...computedScrollAreaWidth.value,
+        ...computedScrollAreaHeight.value,
       };
       return normalizeStyleProps([props.contentActiveStyle, props.scrollAreaStyle, styles]);
     });

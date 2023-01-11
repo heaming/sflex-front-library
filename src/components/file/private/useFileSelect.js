@@ -2,7 +2,7 @@ export const useFileSelectProps = {
   selectable: { type: Boolean, default: false },
 };
 
-export default ({ files, updateFile, downloadFile, revertFile }) => {
+export default ({ files, updateFile, downloadFile, revertFile, removeFile, undeleteFile }, ables) => {
   const { props } = getCurrentInstance();
 
   const selectedFileIndexes = ref([]);
@@ -25,15 +25,32 @@ export default ({ files, updateFile, downloadFile, revertFile }) => {
   };
 
   const updateSelected = () => {
+    if (!ables.value?.update) { return; }
     selectedFiles.value.forEach(updateFile);
+    clearSelected();
   };
 
   const downloadSelected = () => {
+    if (!ables.value?.download) { return; }
     selectedFiles.value.forEach(downloadFile);
+    clearSelected();
   };
 
   const revertSelected = () => {
+    if (!ables.value?.revert) { return; }
     selectedFiles.value.forEach(revertFile);
+    clearSelected();
+  };
+
+  const removeSelected = () => {
+    if (!ables.value?.remove) { return; }
+    selectedFiles.value.forEach(removeFile);
+    clearSelected();
+  };
+
+  const undeleteSelected = () => {
+    if (!ables.value?.undelete) { return; }
+    selectedFiles.value.forEach(undeleteFile);
     clearSelected();
   };
 
@@ -48,5 +65,7 @@ export default ({ files, updateFile, downloadFile, revertFile }) => {
     updateSelected,
     downloadSelected,
     revertSelected,
+    removeSelected,
+    undeleteSelected,
   };
 };
