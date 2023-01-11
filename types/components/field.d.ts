@@ -60,6 +60,14 @@ export interface KwFieldWrapProps extends UseDenseProps, UseStretchProps {
   hideBottomSpace?: boolean | undefined;
 
   /**
+   * 컨텐츠 스타일 관련 props
+   * 기본은 flex direction : row 의 방향을 바꾼다.
+   *
+   * if stack true, it makes default slot wrap box to flex-direction: column
+   */
+  stack?: boolean | undefined;
+
+  /**
    * 포커스 이벤트
    * @param evt JS event object
    */

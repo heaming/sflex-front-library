@@ -4,7 +4,7 @@ import { QRejectedEntry } from 'quasar/dist/types/api';
 import { VueClassProp } from 'quasar/dist/types/api/vue-prop-types';
 import { UseFieldProps, UseFieldStyleProps } from './private/useField';
 
-type FallThroughSlots = 'prepend' | 'append' | 'before' | 'after' | 'hint' | 'loading';
+type FallThroughSlots = 'prepend' | 'append' | 'before' | 'after' | 'hint' | 'loading' | 'counter' | 'file';
 
 type FallThroughProps = 'prefix' | 'suffix' | 'hint' | 'hideHint' | 'color' | 'bgColor' | 'loading' | 'counter' | 'clearable' | 'clearIcon' | 'disable' | 'readonly' | 'multiple' | 'accept' | 'maxFileSize' | 'maxFiles' | 'maxTotalSize' | 'filter' | 'append' | 'displayValue' | 'tabindex' | 'inputClass' | 'inputStyle';
 
@@ -28,7 +28,47 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
    *
    * @default true
    */
+  reversible?: boolean | undefined;
+
+  /**
+   * 파일 변경 취소 가능 여부와 상관 없이, 파일을 삭제 할 수 있는지 여부를 결정한다.
+   * 업로드 예정인 파일은 삭제하고,
+   * 업로드 된 파일은 삭제 예정 (instance Update 가 remove 를 포함할 경우, 바로 삭제한다.) 상태로 준비한다.
+   *
+   * @see reversible
+   * @default false
+   */
   removable?: boolean | undefined;
+
+  /**
+   * 파일이 변경을 삭제 취소 할 수 있는지 여부를 지정한다.
+   * 업로드 삭제 예정인 파일은 업로드 됨 상태로 되돌린다.
+   *
+   * @see reversible
+   * @default false
+   */
+  undeletePossible?: boolean | undefined;
+
+  /**
+   * remove or upload 실패 시, 재시도 가능 여부를 지정한다.
+   *
+   * @default 'clear'
+   */
+  retryPossible?: boolean | undefined;
+
+  /**
+   * 서버로 요청을 보낼 수 있는지 여부를 결정한다.
+   *
+   * @default true
+   */
+  updatable?: boolean | undefined;
+
+  /**
+   * 변경 취소 아이콘을 지정한다.
+   *
+   * @default 'clear'
+   */
+  revertIcon?: string | undefined;
 
   /**
    * 삭제 아이콘을 지정한다.
@@ -38,11 +78,11 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
   removeIcon?: string | undefined;
 
   /**
-   * remove or upload 실패 시, 재시도 가능 여부를 지정한다.
+   * 삭제 취소 아이콘을 지정한다.
    *
    * @default 'clear'
    */
-  retryPossible?: boolean | undefined;
+  undeleteIcon?: string | undefined;
 
   /**
    * 재시도 아이콘을 지정한다.
@@ -61,13 +101,6 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
    * @default false
    */
   instanceUpdate?: InstanceUpdateType | undefined;
-
-  /**
-   * 서버로 요청을 보낼 수 있는지 여부를 결정한다.
-   *
-   * @default true
-   */
-  updatable?: boolean | undefined;
 
   /**
    * 업데이트 아이콘을 설정한다.
@@ -94,17 +127,24 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
   placeholderClass?: VueClassProp;
 
   /**
+   * 파일이 있을 때 placeholder 를 숨길지 결정한다.
+   */
+  hidePlaceholder?: boolean | undefined;
+
+  /**
    * 파일 컴포넌트 클릭 시, 파일 선택을 할 지 결정한다.
    * 정확히는, input[type='file'] 의 기본 이벤트를 트리거 할지 여부를 결정한다.
    */
   pickFileWhenClick?: boolean | undefined;
 
   /**
-   * 기본 파일 선택 표시 여부를 설정한다.
+   * 파일 선택 버튼의 표시 여부를 설정한다.
    * 미 설정시, pickFileWhenClick 과 반대 값을 따른다.
+   * String 값을 설정 시, 해당 버튼의 label 로 들어간다.
+   *
    * @see pickFileWhenClick
    */
-  pickFileBtn?: boolean | undefined;
+  pickBtn?: boolean | string | undefined;
 
   /**
    * 파일 아이템 앞에 체크박스 표시 여부를 설정한다.
@@ -147,7 +187,7 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
   /**
    * table header 와 같은 영역을 사용할지 여부.
    *
-   * @default false
+   * @default props.multiple ?? false
    */
   useHeader?: boolean | undefined;
 
@@ -164,17 +204,31 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
   /**
    * append-file, append-header slot 앞 쪽 너비를 지정한다.
    * append-file, append-header slot 의 너비가 너무 길어졌을 떄 사용.
+   * scrollHorizontal 을 사용하려면 가능하면 지정하여 사용하세요.
    *
    * @see useHeader
    * @see scrollHorizontal
    * @see append-file
    * @see append-header
    */
-  fileNameWidth?: string | undefined;
+  nameWidth?: string | undefined;
+
+  /**
+   * append-file, append-header 의 너비를 지정한다.
+   * append-file, append-header slot 의 너비가 너무 길어졌을 떄 사용.
+   * scrollHorizontal 을 사용하려면 가능하면 지정하여 사용하세요.
+   *
+   * @see useHeader
+   * @see scrollHorizontal
+   * @see append-file
+   * @see append-header
+   */
+  appendWidth?: string | undefined;
 
   /**
    * append-file, append-header slot 뒤 쪽 너비를 지정한다.
    * append-file, append-header slot 의 너비가 너무 길어졌을 떄 사용.
+   * scrollHorizontal 을 사용하려면 가능하면 지정하여 사용하세요.
    *
    * @see useHeader
    * @see scrollHorizontal
@@ -182,6 +236,86 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
    * @see append-header
    */
   asideWidth?: string | undefined;
+
+  /**
+   * header 영역에 동기화 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see updatable
+   */
+  updateBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 전체동기화 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see updatable
+   */
+  updateAllBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 실행취소 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see reversible
+   */
+  revertBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 전체실행취소 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see reversible
+   */
+  revertAllBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 삭제 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see removable
+   */
+  removeBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 전체삭제 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see removable
+   */
+  removeAllBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 삭제취소 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see undeletePossible
+   */
+  undeleteBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 전체삭제취소 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see undeletePossible
+   */
+  undeleteAllBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 다운로드 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see undeletePossible
+   */
+  downloadBtn?: boolean | string | undefined;
+
+  /**
+   * header 영역에 전체다운로드 버튼을 표시할지 결정한다.
+   * 문자열 값이 들어올 경우 해당 버튼의 label 로 지정한다.
+   *
+   * @see undeletePossible
+   */
+  downloadAllBtn?: boolean | string | undefined;
 
   /**
    * 파일 영역이 스크롤 됬을 때, 이벤트 emit
@@ -324,6 +458,11 @@ interface KwFileSlots extends Pick<QFileSlots, FallThroughSlots> {
      */
     ref: QFile;
   }) => VNode[];
+
+  /**
+   * 헤더 버튼 뒤 쪽 영역
+   */
+  'header-action': (scope: { ref: KwFile }) => VNode[];
 }
 export interface KwFile extends ComponentPublicInstance<KwFileProps> {
   /**
