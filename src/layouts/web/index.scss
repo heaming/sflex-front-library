@@ -364,7 +364,7 @@ body.desktop .web-layout {
 
 .drawer-bookmark__popup {
   .kw-popup__content {
-    overflow: visible;
+    overflow: visible !important;
   }
 
   .kw-scroll-area {
