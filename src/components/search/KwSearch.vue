@@ -25,6 +25,7 @@
     <div class="kw-search__action">
       <slot name="action">
         <kw-btn
+          v-if="noResetBtn === false"
           v-permission:read
           :label="$t('MSG_BTN_RESET', null, '초기화')"
           class="w90"
@@ -90,6 +91,10 @@ export default {
     modifiedTargets: {
       type: Array,
       default: () => [],
+    },
+    noResetBtn: {
+      type: Boolean,
+      default: false,
     },
 
     // override useForm props
