@@ -662,6 +662,18 @@ body.mobile:not(.tablet) {
         }
       }
 
+      &--readonly {
+        .q-field__control {
+          color: $kw-field-color-disable;
+
+          &::before {
+            border-color: $line-bg;
+          }
+
+          background-color: transparent;
+        }
+      }
+
       &--disabled {
         .q-field__control {
           color: $kw-field-color-disable;

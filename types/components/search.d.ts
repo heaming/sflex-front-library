@@ -47,6 +47,12 @@ interface KwSearchProps extends UseObserverProps {
   noResetFocus?: boolean;
 
   /**
+   * 초기화 버튼 미사용 여부
+   * @defaultValue `false`
+   */
+  noResetBtn?: boolean;
+
+  /**
    * `KwObserver, KwForm, KwGrid, KwTreeGrid` name 속성 값이 들어간다.
    *
    * 설정시 타겟들의 데이터 변경 여부를 확인해서, 검색 이벤트를 발생시킬지 결정하는 confirm을 호출한다

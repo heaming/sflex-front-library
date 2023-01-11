@@ -64,7 +64,7 @@
 
 <script>
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
-import useBookmark from '../../composables/private/useBookmark';
+import useBookmark from './private/useBookmark';
 import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
 
 export default {

@@ -1,15 +1,15 @@
 <template>
   <q-virtual-scroll
-    ref="quasarRef"
+    ref="scrollRef"
     v-bind="styleClassAttrs"
     class="kw-virtual-scroll"
     :type="type"
     :items="items"
     :items-fn="itemsFn"
     :items-size="itemsSize"
+    :separator="separator"
     :scroll-target="scrollTarget"
     :virtual-scroll-horizontal="virtualScrollHorizontal"
-    :on-virtual-scroll="onVirtualScroll"
     :virtual-scroll-slice-size="virtualScrollSliceSize"
     :virtual-scroll-slice-ratio-before="virtualScrollSliceRatioBefore"
     :virtual-scroll-slice-ratio-after="virtualScrollSliceRatioAfter"
@@ -17,7 +17,7 @@
     :virtual-scroll-sticky-size-start="virtualScrollStickySizeStart"
     :virtual-scroll-sticky-size-end="virtualScrollStickySizeEnd"
     :table-colspan="tableColspan"
-    @virtual-scroll="$emit('virtual-scroll', $event)"
+    @virtual-scroll="onVirtualScroll"
   >
     <template
       v-if="$slots.default"
@@ -29,16 +29,16 @@
       />
     </template>
     <template
-      v-if="$slots.after"
-      #after
-    >
-      <slot name="after" />
-    </template>
-    <template
       v-if="$slots.before"
       #before
     >
       <slot name="before" />
+    </template>
+    <template
+      v-if="$slots.after"
+      #after
+    >
+      <slot name="after" />
     </template>
   </q-virtual-scroll>
 </template>
@@ -46,22 +46,20 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
-const typeOptions = ['list', 'table', '__qtable'];
+const typeValues = ['list', 'table'];
 
 export default {
   name: 'KwVirtualScroll',
   inheritAttrs: false,
   props: {
-    // customize props
-
     // fall through props
-    type: { type: String, default: 'list', validator: (v) => typeOptions.includes(v) },
+    type: { type: String, default: 'list', validator: (v) => typeValues.includes(v) },
     items: { type: Array, default: () => [] },
     itemsFn: { type: Function, default: undefined },
     itemsSize: { type: Number, default: undefined },
+    separator: { type: Boolean, default: false },
     scrollTarget: { type: [Element, String], default: undefined },
     virtualScrollHorizontal: { type: Function, default: undefined },
-    onVirtualScroll: { type: Function, default: undefined },
     virtualScrollSliceSize: { type: [Number, String], default: undefined },
     virtualScrollSliceRatioBefore: { type: [Number, String], default: 1 },
     virtualScrollSliceRatioAfter: { type: [Number, String], default: 1 },
@@ -70,23 +68,81 @@ export default {
     virtualScrollStickySizeEnd: { type: [Number, String], default: 0 },
     tableColspan: { type: [Number, String], default: undefined },
 
+    // customize props
+    debounce: { type: [Number, String], default: 200 },
+    initialIndex: { type: Number, default: 0 },
+    loadOnMouted: { type: Boolean, default: false },
+    onLoad: { type: Function, default: undefined },
   },
+
   emits: [
     'virtual-scroll',
+    'load',
   ],
-  setup() {
-    const { styleClassAttrs } = useInheritAttrs();
-    const quasarRef = ref();
-    function scrollTo(...args) { quasarRef.value?.scrollTo(...args); }
-    function reset(...args) { quasarRef.value?.reset(...args); }
-    function refresh(...args) { quasarRef.value?.refresh(...args); }
+
+  setup(props, { emit }) {
+    const scrollRef = ref();
+    const loadIndex = ref(props.initialIndex);
+
+    function scrollTo(index, edge) {
+      scrollRef.value?.scrollTo(index, edge);
+    }
+
+    function reset() {
+      scrollRef.value?.reset();
+    }
+
+    function refresh(index) {
+      scrollRef.value?.refresh(index);
+    }
+
+    function setIndex(index) {
+      loadIndex.value = index;
+    }
+
+    let timeoutOnLoad;
+    function onLoad() {
+      clearTimeout(timeoutOnLoad);
+
+      const timeout = setTimeout(() => {
+        loadIndex.value += 1;
+        props.onLoad?.(loadIndex.value);
+      }, props.debounce);
+
+      timeoutOnLoad = timeout;
+    }
+
+    function onVirtualScroll(details) {
+      emit('virtual-scroll', details);
+
+      if (details.direction === 'increase') {
+        const lastIndex = props.itemsFn ? props.itemsSize - 1 : props.items.length - 1;
+        const shouldInvokeOnLoad = details.index === lastIndex;
+
+        if (shouldInvokeOnLoad) {
+          onLoad();
+        }
+      }
+    }
+
+    onMounted(() => {
+      if (props.loadOnMouted === true) {
+        props.onLoad?.(loadIndex.value);
+      }
+    });
+
+    onBeforeUnmount(() => {
+      clearTimeout(timeoutOnLoad);
+    });
 
     return {
-      quasarRef,
-      styleClassAttrs,
+      ...useInheritAttrs(),
+      scrollRef,
       scrollTo,
       reset,
       refresh,
+      setIndex,
+      onVirtualScroll,
     };
   },
 };

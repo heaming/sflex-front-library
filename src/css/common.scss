@@ -1030,6 +1030,12 @@ body.mobile {
     font-size: 14px;
     color: $black2;
   }
+
+  &:not(.tablet) {
+    h3 {
+      margin-top: 0;
+    }
+  }
 }
 
 @include native-scrollbar-to(".kw-scrollbar");

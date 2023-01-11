@@ -1,21 +1,67 @@
 <template>
-  <q-card-section
-    class="kw-popup__content"
+  <q-card
+    ref="containerRef"
+    :style="popupStyle"
+    :class="popupClass"
+    square
   >
-    <slot />
-  </q-card-section>
-  <q-card-section
-    v-if="$slots.action"
-    class="kw-popup__action"
-  >
-    <slot name="action" />
-  </q-card-section>
+    <q-card-section
+      :class="headerClass"
+      v-bind="draggableEvents"
+    >
+      <div class="row items-center">
+        <h1
+          v-if="title !== false"
+          class="kw-popup__header-title"
+        >
+          {{ title || pageCtxTitle }}
+        </h1>
+        <kw-checkbox
+          v-if="isBookmarkable"
+          :model-value="isBookmarked"
+          :true-value="true"
+          :false-value="false"
+          class="kw-popup__header-bookmark"
+          checked-icon="bookmark_on"
+          unchecked-icon="bookmark_off"
+          @update:model-value="updateBookmark"
+        >
+          <kw-tooltip>
+            {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
+          </kw-tooltip>
+        </kw-checkbox>
+      </div>
+      <kw-icon
+        v-if="noCloseBtn === false"
+        class="kw-popup__header-close"
+        size="24px"
+        name="close_24"
+        @mousedown.stop
+        @touchstart.stop
+        @click="onClickClose"
+      />
+    </q-card-section>
+    <q-card-section
+      class="kw-popup__content"
+    >
+      <slot />
+    </q-card-section>
+    <q-card-section
+      v-if="$slots.action"
+      class="kw-popup__action"
+    >
+      <slot name="action" />
+    </q-card-section>
+  </q-card>
 </template>
 
 <script>
 import { PopupContainerContextKey } from '../../consts/private/symbols';
 import usePage from '../../composables/private/usePage';
+import usePageSearch from '../../composables/private/usePageSearch';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
+import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
+import useBookmark from './private/useBookmark';
 
 const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'];
 
@@ -25,70 +71,31 @@ export default {
 
   props: {
     ...useObserverProps,
+    ...useDraggableProps,
 
-    style: {
-      type: [String, Object, Array],
-      default: undefined,
-    },
-    class: {
-      type: [String, Object, Array],
-      default: undefined,
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator: (v) => sizeValues.includes(v),
-    },
-    draggable: {
-      type: Boolean,
-      default: false,
-    },
-    title: {
-      type: String,
-      default: undefined,
-    },
-    noTitle: {
-      type: Boolean,
-      default: false,
-    },
-    noCloseBtn: {
-      type: Boolean,
-      default: false,
-    },
-    onBeforeClose: {
-      type: Function,
-      default: undefined,
-    },
+    style: { type: [String, Object, Array], default: undefined },
+    class: { type: [String, Object, Array], default: undefined },
+    size: { type: String, default: 'md', validator: (v) => sizeValues.includes(v) },
+    title: { type: [Boolean, String], default: undefined },
+    noCloseBtn: { type: Boolean, default: false },
+    onBeforeClose: { type: Function, default: undefined },
   },
 
   async setup(props) {
-    const { t } = useI18n();
-
-    const pageCtx = usePage();
-    const observerCtx = useObserver();
-
     const {
       registerPopup,
       unregisterPopup,
+      close,
     } = inject(PopupContainerContextKey, () => {
       console.error('KwPopup needs to be child of KwPopupContainer');
     });
 
-    const slots = useSlots();
+    const { t } = useI18n();
+    const pageCtx = usePage();
+    const pageCtxTitle = t(pageCtx.pageTitleMessageResourceId || '');
+
     const popupCtx = {
       page: pageCtx,
-
-      // do not set style to reactive
-      // this occur maximum recursive updates exceeded
-      style: props.style,
-      class: props.class,
-
-      // reactive attributes
-      draggable: computed(() => props.draggable === true),
-      size: computed(() => props.size),
-      title: computed(() => (props.noTitle ? null : (props.title || t(pageCtx.pageTitleMessageResourceId || '')))),
-      noCloseBtn: computed(() => props.noCloseBtn === true),
-      noAction: computed(() => slots.action === undefined),
       onBeforeClose: computed(() => props.onBeforeClose),
     };
 
@@ -98,8 +105,50 @@ export default {
       unregisterPopup();
     });
 
+    const containerRef = ref();
+    const {
+      transform,
+      events: draggableEvents,
+    } = useDraggable(containerRef);
+
+    const headerClass = computed(() => ({
+      'kw-popup__header': true,
+      'kw-popup__header--draggable': props.draggable === true,
+    }));
+
+    const popupStyle = computed(() => [
+      `transform: ${transform.value}`,
+      props.style,
+    ]);
+
+    const slots = useSlots();
+    const popupClass = computed(() => [
+      {
+        'kw-popup': true,
+        [`kw-popup--${props.size}`]: true,
+        'kw-popup--no-title': props.title === false,
+        'kw-popup--no-action': slots.action === undefined,
+      },
+      props.class,
+    ]);
+
+    function onClickClose() {
+      close(false);
+    }
+
+    usePageSearch();
+
     return {
-      ...observerCtx,
+      ...useObserver(),
+      ...useDraggable(),
+      ...useBookmark(pageCtx),
+      pageCtxTitle,
+      containerRef,
+      draggableEvents,
+      headerClass,
+      popupStyle,
+      popupClass,
+      onClickClose,
     };
   },
 };

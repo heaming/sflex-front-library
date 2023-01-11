@@ -527,11 +527,11 @@
             :options="['오늘', '주간', '월간']"
           />
           <p class="mt10">
-            full-width (flexible) / gap="0"
+            grow / gap="0"
           </p>
           <kw-btn-toggle
             v-model="strModel2"
-            class="mt10 full-width"
+            class="mt10"
             label="label"
             :options="['남성','여성']"
             gap="0px"
@@ -812,7 +812,7 @@ const toggleRadio = `
 <!-- full-width (flexible) / gap="0" -->
 <kw-btn-toggle
   v-model="strModel2"
-  class="mt10 full-width"
+  class="mt10"
   label="label"
   :options="['남성','여성']"
   gap="0px"

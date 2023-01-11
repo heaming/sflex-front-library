@@ -7,7 +7,7 @@ interface KwPopupProps extends UseObserverProps {
    * 팝업 사이즈
    * @defaultValue `md`
    */
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
 
   /**
    * 팝업 헤더 드래그 기능 사용여부
@@ -17,12 +17,7 @@ interface KwPopupProps extends UseObserverProps {
   /**
    * 팝업 타이틀
    */
-  title?: string;
-
-  /**
-   * 팝업 타이틀 표시 여부
-   */
-  noTitle?: boolean;
+  title?: string | boolean;
 
   /**
    * 팝업 닫기 버튼 표시 여부
