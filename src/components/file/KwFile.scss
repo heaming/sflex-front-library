@@ -3,7 +3,7 @@
   $-kw-file-border-size: 1px;
   $-kw-file-header-border: $-kw-file-border-size solid $line-stroke;
   $-kw-file-header-background-color: $line-bg;
-  $-kw-file-placeholder-height: 30px; // FIXME: 임의값
+  $-kw-file-dnd-hint-height: 30px; // FIXME: 임의값
 
   &.kw-field {
     $-kw-field-gap: 8px;
@@ -21,12 +21,6 @@
         .kw-file-item {
           min-height: $kw-field-height-dense;
         }
-      }
-    }
-
-    & .q-field {
-      &__control-container {
-        padding-bottom: $-kw-file-placeholder-height;
       }
     }
   }
@@ -47,25 +41,32 @@
 
   &__placeholder {
     position: absolute;
-    bottom: 0;
+    inset: 0;
+    height: 100%;
     display: flex;
-    height: $-kw-file-placeholder-height;
     justify-content: flex-start;
     align-items: center;
     color: $placeholder;
   }
 
-  &--hide-placeholder {
+  &__dnd-hint {
+    display: none;
+  }
+
+  &--show-dnd-hint {
     &.kw-field .q-field__control-container {
-      padding-bottom: 0;
+      padding-bottom: $-kw-file-dnd-hint-height;
     }
 
-    .kw-file__placeholder {
+    .kw-file__dnd-hint {
       position: absolute;
-      inset: 0;
-      height: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
-      justify-content: flex-start;
+      height: $-kw-file-dnd-hint-height;
+      max-height: $-kw-file-dnd-hint-height;
+      justify-content: center;
       align-items: center;
       color: $placeholder;
     }

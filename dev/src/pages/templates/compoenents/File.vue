@@ -219,15 +219,13 @@
     </guide-section>
     <guide-section
       title="default slot"
-      description="=default"
+      description="default"
       :guide-code="defaultCode"
     >
       <kw-file
-        use-header
         multiple
-        selectable
+        readonly
         downloadable
-        download-btn
         :max-total-size="100000000"
       />
     </guide-section>

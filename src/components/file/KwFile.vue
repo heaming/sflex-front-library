@@ -43,12 +43,19 @@
     </template>
 
     <div
-      v-if="showPlaceholder"
+      v-if="computedPlaceholder"
       class="kw-file__placeholder"
       :class="placeholderClass"
       :style="placeholderStyle"
     >
       {{ computedPlaceholder }}
+    </div>
+
+    <div
+      v-if="computedDndHint"
+      class="kw-file__dnd-hint"
+    >
+      {{ computedDndHint }}
     </div>
 
     <!-- prepend -->
@@ -523,7 +530,7 @@ export default {
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: undefined },
     placeholderClass: { type: [Array, String, Object], default: undefined },
-    hidePlaceholder: { type: Boolean, default: undefined },
+    dndHint: { type: String, default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,
@@ -664,20 +671,24 @@ export default {
     const { useHeaderFileClass, computedUseHeader } = headerCtx;
 
     // placeholder
-    const computedHidePlaceholder = computed(() => {
-      if (props.hidePlaceholder !== undefined) {
-        return props.hidePlaceholder;
-      }
-      return !props.multiple;
-    });
-    const showPlaceholder = computed(() => !computedHidePlaceholder.value || files.value.length === 0);
     const computedPlaceholder = computed(() => {
+      if (!ables.value.add || files.value.length === 0) {
+        return null;
+      }
       if (props.placeholder) {
         return typeof props.placeholder === 'function' ? props.placeholder() : props.placeholder;
       }
-      return props.multiple
-        ? t('FIXME', null, '첨부할 파일을 여기에 놓아주세요.')
-        : t('MSG_TXT_SEL_FILE', null, '파일 선택');
+      return props.multiple ? null : t('MSG_TXT_SEL_FILE', null, '파일 선택');
+    });
+
+    const computedDndHint = computed(() => {
+      if (!ables.value.add) {
+        return null;
+      }
+      if (props.dndHint) {
+        return props.dndHint;
+      }
+      return computedUseHeader.value ? t('FIXME', null, '첨부할 파일을 여기에 놓아주세요.') : null;
     });
 
     // styling
@@ -688,7 +699,7 @@ export default {
       'kw-file--blocked': !props.pickFileWhenClick,
       'kw-file--empty': files.value.length === 0,
       'kw-file--horizontal-scroll': props.scrollHorizontal,
-      'kw-file--hide-placeholder': computedHidePlaceholder.value,
+      'kw-file--show-dnd-hint': !!computedDndHint.value,
       ...useHeaderFileClass.value,
     }));
 
@@ -736,8 +747,8 @@ export default {
       fileClass,
       fileItemClass,
       emptyAppendCounter,
-      showPlaceholder,
       computedPlaceholder,
+      computedDndHint,
       innerValue,
       getExtensionIcon,
     };
