@@ -54,7 +54,7 @@
   }
 
   &--show-dnd-hint {
-    &.kw-field .q-field__control-container {
+    &.kw-field .q-field__control-container:has(> .kw-file__dnd-hint) {
       padding-bottom: $-kw-file-dnd-hint-height;
     }
 
@@ -153,10 +153,8 @@
     $-kw-file-item-container-min-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
 
     &.kw-field {
-      & .q-field {
-        &__control {
-          background-color: $bg-body;
-        }
+      & .q-field__inner .q-field__control {
+        background-color: $bg-body;
       }
     }
 

@@ -131,7 +131,7 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
    *
    * @default if multiple, '첨부할 파일을 여기에 놓아주세요.' else null
    */
-  dndHint?: string | undefined;
+  dndHint?: boolean | string | undefined;
 
   /**
    * 파일 컴포넌트 클릭 시, 파일 선택을 할 지 결정한다.

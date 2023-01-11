@@ -530,7 +530,7 @@ export default {
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: undefined },
     placeholderClass: { type: [Array, String, Object], default: undefined },
-    dndHint: { type: String, default: undefined },
+    dndHint: { type: [Boolean, String], default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,
@@ -685,7 +685,7 @@ export default {
       if (!ables.value.add) {
         return null;
       }
-      if (props.dndHint) {
+      if (props.dndHint !== undefined) {
         return props.dndHint;
       }
       return computedUseHeader.value ? t('FIXME', null, '첨부할 파일을 여기에 놓아주세요.') : null;
