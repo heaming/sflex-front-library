@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { unionBy, find } from 'lodash-es';
+import { unionBy } from 'lodash-es';
 import beforeEach, { INITIAL_LOCATION } from './hooks/beforeEach';
 import beforeResolve from './hooks/beforeResolve';
 import afterEach from './hooks/afterEach';
 import env from '../consts/private/env';
 import { defineGetters } from '../utils/private/globalProperty';
-import store from '../store';
+import { rebuildRoutes } from './helper';
 
 const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -15,12 +15,12 @@ const router = createRouter({
 
 export default router;
 
-function registerRoutes(routes) {
+function addRoutes(routes) {
   const mergedRoutes = unionBy([
     ...routes,
 
     // default routes
-    // this routes replaced by same named route
+    // this routes replace by same named route
     {
       name: 'ErrorNotFound',
       path: '/:catchAll(.*)*',
@@ -28,10 +28,12 @@ function registerRoutes(routes) {
     },
   ], 'name');
 
-  mergedRoutes.forEach(router.addRoute);
+  mergedRoutes.forEach((e) => {
+    router.addRoute(e);
+  });
 }
 
-function registerHooks() {
+function addHooks() {
   if (env.TEST === false) {
     router.beforeEach(beforeEach);
     router.beforeResolve(beforeResolve);
@@ -41,55 +43,13 @@ function registerHooks() {
 
 export function installRouter(app, { routes }) {
   defineGetters(app, { router });
-  registerRoutes(routes);
-  registerHooks(router);
+  addRoutes(routes);
+  addHooks(router);
   app.use(router);
 }
 
-function replaceGlobRoutes() {
-  const apps = store.getters['meta/getApps'];
-  const menus = store.getters['meta/getMenus'];
-
-  const routes = router.getRoutes()
-    .filter(({ meta }) => meta.glob === true);
-
-  routes.forEach((route) => {
-    apps.forEach((app) => {
-      const { applicationId, applicationName, applicationUrl } = app;
-      const pageDestinationValue = route.name;
-      const matched = find(menus, { applicationId, pageDestinationValue });
-
-      if (matched) {
-        const {
-          menuUid, menuName, parentsMenuUid, pageId, pageUseCode,
-        } = matched;
-
-        router.addRoute({
-          ...route,
-          name: menuUid,
-          path: `/${applicationUrl.toLowerCase()}${route.path}`,
-          meta: {
-            requiresAuth: true,
-            applicationId,
-            applicationName,
-            menuUid,
-            menuName,
-            parentsMenuUid,
-            pageId,
-            pageUseCode,
-          },
-        });
-      }
-    });
-  });
-
-  routes.forEach((route) => {
-    router.removeRoute(route.name);
-  });
-}
-
 export async function isReady() {
-  replaceGlobRoutes();
+  rebuildRoutes(router);
 
   try {
     await router.isReady();

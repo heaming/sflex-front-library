@@ -1,10 +1,11 @@
 export const useFilePickerProps = {
   pickFileWhenClick: { type: Boolean, default: undefined },
-  pickFileBtn: { type: Boolean, default: undefined },
+  pickBtn: { type: [Boolean, String], default: undefined },
 };
 
-export default (ref, editable) => {
+export default (ref, ables) => {
   const { props } = getCurrentInstance();
+  const { t } = useI18n();
 
   function preventIfClick(e) {
     if (e.clientX === 0 && e.clientY === 0) {
@@ -17,20 +18,32 @@ export default (ref, editable) => {
 
   // reference methods
   const pickFiles = () => {
-    if (!unref(editable)) { return; }
+    if (!ables?.value.add) { return; }
     ref.value?.getNativeElement().click();
   };
 
-  const showDefaultFilePickBtn = computed(() => {
-    if (props.pickFileBtn === undefined) {
+  const showPickBtn = computed(() => {
+    if (!ables.value.add) { return false; }
+    if (props.pickBtn === undefined) {
       return !props.pickFileWhenClick;
     }
-    return props.pickFileBtn;
+    return props.pickBtn;
+  });
+
+  const pickBtnLabel = computed(() => {
+    if (!showPickBtn.value) {
+      return '';
+    }
+    if (typeof props.pickBtn === 'string') {
+      return props.pickBtn;
+    }
+    return t('FIXME', undefined, '파일선택');
   });
 
   return {
     preventIfClick,
     pickFiles,
-    showDefaultFilePickBtn,
+    showPickBtn,
+    pickBtnLabel,
   };
 };

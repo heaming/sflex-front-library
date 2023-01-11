@@ -224,8 +224,10 @@ export const STATE = {
   FAIL_TO_REMOVE,
 };
 
-export default (values, options) => {
-  const normalizedOptions = ref(options || {});
+export default (values, options, ables, selectCtx) => {
+  const normalizedOptions = computed(() => ({
+    instanceUpdate: unref(options).instanceUpdate,
+  }));
   const uploadings = ref([]);
 
   function findUploading(file) {
@@ -350,13 +352,13 @@ export default (values, options) => {
   });
 
   function isUpdatable(file) {
-    if (!normalizedOptions.value.editable) { return false; }
+    if (!ables.value.update) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.REMOVE].includes(uploading?.state);
   }
 
   async function updateFile(file) {
-    if (!normalizedOptions.value.editable) { return; }
+    if (!ables.value.update) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.update();
     if (uploading.state === REMOVED) {
@@ -366,20 +368,21 @@ export default (values, options) => {
   }
 
   async function updateAll(evenFailed = false) {
-    if (!normalizedOptions.value.editable) { return; }
+    if (!ables.value.update) { return; }
     const updatings = uploadings.value.map((uploading) => uploading.update(evenFailed));
     await Promise.all(updatings);
     await syncUploadings(fileLikes.value);
+    if (selectCtx?.clearSelected) { selectCtx.clearSelected(); }
   }
 
   function isRetryPossible(file) {
-    if (!normalizedOptions.value.editable) { return false; }
+    if (!ables.value.retry) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE].includes(uploading?.state);
   }
 
   async function retryUpdateFile(file) {
-    if (!normalizedOptions.value.editable) { return; }
+    if (!ables.value.retry) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.retry();
     if (uploading.state === REMOVED) {
@@ -388,14 +391,14 @@ export default (values, options) => {
   }
 
   function isReversible(file) {
-    if (!normalizedOptions.value.editable) { return false; }
+    if (!ables.value.revert) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.UPLOADED, STATE.REMOVE, STATE.FAIL_TO_UPLOAD, STATE.FAIL_TO_REMOVE]
       .includes(uploading?.state);
   }
 
   async function revertFile(file, forced = false) {
-    if (!normalizedOptions.value.editable) { return; }
+    if (!ables.value.revert) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.revert();
     if (!uploading.instanceUpdate && forced) { await uploading.update(); } // Since, revert resolve fail state.
@@ -406,26 +409,76 @@ export default (values, options) => {
   }
 
   async function revertAll(forced = false) {
-    if (!normalizedOptions.value.editable) { return; }
+    if (!ables.value.revert) { return; }
     const removing = uploadings.value.map((uploading) => uploading.revert());
     await Promise.all(removing);
     if (forced) { await updateAll(); }
     await syncUploadings(fileLikes.value);
+    if (selectCtx?.clearSelected) { selectCtx.clearSelected(); }
+  }
+
+  function isRemovable(file) {
+    if (!ables.value.remove) { return false; }
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    return [STATE.UPLOAD, STATE.UPLOADED, STATE.FAIL_TO_UPLOAD]
+      .includes(uploading?.state);
+  }
+
+  async function removeFile(file, forced = false) {
+    if (!isRemovable(file)) { return; }
+    return await revertFile(file, forced);
+  }
+
+  async function removeAll(forced = false) {
+    if (!ables.value.remove) { return; }
+    const removing = uploadings.value
+      .filter(isRemovable)
+      .map((uploading) => uploading.revert());
+    await Promise.all(removing);
+    if (forced) { await updateAll(); }
+    await syncUploadings(fileLikes.value);
+    if (selectCtx?.clearSelected) { selectCtx.clearSelected(); }
+  }
+
+  function isUndeletePossible(file) {
+    if (!ables.value.undelete) { return false; }
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    return [STATE.REMOVE, STATE.FAIL_TO_REMOVE]
+      .includes(uploading?.state);
+  }
+
+  async function undeleteFile(file, forced = false) {
+    if (!isUndeletePossible(file)) { return; }
+    return await revertFile(file, forced);
+  }
+
+  async function undeleteAll(forced = false) {
+    if (!ables.value.undelete) { return; }
+    const removing = uploadings.value
+      .filter(isUndeletePossible)
+      .map((uploading) => uploading.revert());
+    await Promise.all(removing);
+    if (forced) { await updateAll(); }
+    await syncUploadings(fileLikes.value);
+    if (selectCtx?.clearSelected) { selectCtx.clearSelected(); }
   }
 
   function isDownloadable(file) {
+    if (!ables.value.download) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state);
   }
 
   async function downloadFile(file) {
+    if (!ables.value.download) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     await uploading.download();
   }
 
   async function downloadAll(onlyUploaded) {
+    if (!ables.value.download) { return; }
     uploadings.value
-      .filter((uploading) => (onlyUploaded ? uploading.state === UPLOADED : isDownloadable(uploading)))
+      .filter((uploading) => (onlyUploaded === true ? uploading.state === UPLOADED : isDownloadable(uploading)))
       .forEach((uploading) => uploading.download());
   }
 
@@ -446,6 +499,12 @@ export default (values, options) => {
     isReversible,
     revertFile,
     revertAll,
+    isRemovable,
+    removeFile,
+    removeAll,
+    isUndeletePossible,
+    undeleteFile,
+    undeleteAll,
     isDownloadable,
     downloadFile,
     downloadAll,

@@ -1,4 +1,4 @@
-.kw-popup {
+body:not(.mobile) .kw-popup {
   padding: 4px;
   border: 1px solid $black-btn-line;
 
@@ -228,5 +228,70 @@
   .q-scrollarea {
     height: 400px;
     margin-top: 10px;
+  }
+}
+
+body.mobile:not(.tablet) {
+  .q-card__section--vert {
+    padding: initial;
+  }
+
+  .kw-popup {
+    &__header {
+      height: 55px;
+      padding: 14px 0 15px 20px;
+      position: sticky;
+      background: #fff;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 11;
+      border: 1px solid #f8f9fa;
+
+      &-title {
+        @include typo("subtitle");
+
+        color: $black1;
+      }
+
+      &-bookmark {
+        &.kw-checkbox {
+          margin-left: 7px;
+          justify-content: flex-start;
+          width: 16px;
+
+          .q-checkbox__inner {
+            width: inherit;
+            height: 16px;
+            min-width: 16px;
+            font-size: 16px;
+          }
+        }
+      }
+
+      &-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+
+    &__action {
+      position: sticky;
+      padding: 30px 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 11;
+      display: flex;
+      flex-wrap: nowrap;
+
+      button {
+        flex: 1 1 100%;
+        font-size: 16px;
+      }
+    }
   }
 }
