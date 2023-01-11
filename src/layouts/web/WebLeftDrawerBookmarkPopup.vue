@@ -57,83 +57,90 @@
       />
     </kw-action-top>
 
-    <div class="bookmark-popup__tree-container">
-      <kw-tree
-        ref="treeRef"
-        v-model:selected="selected"
-        v-model:expanded="expanded"
-        :nodes="nodes"
-        node-key="bookmarkUid"
-        selected-color="black1"
-        draggable
-        @drag-move="onDragMove"
-        @drag-update="onDrageUpdate"
-      >
-        <template #header="{ node }">
-          <div
-            v-if="node.isDummy"
-            class="bookmark-popup__tree-dummy"
-          />
-          <div
-            v-else-if="node.isFolder"
-            class="row col items-center"
-          >
-            <kw-click-outside
-              v-if="node.isEdit"
-              @click-outside="onClickFolderName(node, false)"
+    <kw-scroll-area>
+      <div class="bookmark-popup__tree-container">
+        <kw-tree
+          ref="treeRef"
+          v-model:selected="selected"
+          v-model:expanded="expanded"
+          :nodes="nodes"
+          node-key="bookmarkUid"
+          selected-color="black1"
+          draggable
+          @drag-move="onDragMove"
+          @drag-update="onDrageUpdate"
+        >
+          <template #header="{ node }">
+            <div
+              v-if="node.isDummy"
+              class="bookmark-popup__tree-dummy"
+            />
+            <div
+              v-else-if="node.isFolder"
+              class="row col items-center"
             >
-              <div
-                @pointerdown.stop
-                @mousedown.stop
-                @touchstart.stop
-                @click.stop
-                @keypress.stop
-                @keydown.esc="onClickFolderName(node, false)"
+              <kw-click-outside
+                v-if="node.isEdit"
+                @click-outside="onClickFolderName(node, false)"
               >
-                <kw-input
-                  v-model.trim="inputBookmarkName"
-                  dense
-                  maxlength="100"
-                  autofocus
-                  validate-on-mount
-                  rules="required"
-                  :label="$t('MSG_TXT_BKMK_NM')"
-                />
+                <div
+                  @pointerdown.stop
+                  @mousedown.stop
+                  @touchstart.stop
+                  @click.stop
+                  @keypress.stop
+                  @keydown.esc="onClickFolderName(node, false)"
+                >
+                  <kw-input
+                    v-model.trim="inputBookmarkName"
+                    dense
+                    maxlength="100"
+                    autofocus
+                    validate-on-mount
+                    rules="required"
+                    :label="$t('MSG_TXT_BKMK_NM')"
+                  />
+                </div>
+              </kw-click-outside>
+              <div v-else>
+                <span @click.stop="onClickFolderName(node, true)">
+                  {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
+                </span>
               </div>
-            </kw-click-outside>
-            <div v-else>
-              <span @click.stop="onClickFolderName(node, true)">
-                {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
-              </span>
+              <kw-space />
+              <kw-icon
+                name="close"
+                clickable
+                @click.stop="onClickDelete(node)"
+              />
             </div>
-            <kw-space />
-            <kw-icon
-              name="close"
-              clickable
-              @click.stop="onClickDelete(node)"
-            />
-          </div>
-          <div
-            v-else
-            class="row items-center"
-          >
-            <kw-icon
-              name="bookmark_on"
-              clickable
-              @click.stop="onClickDelete(node)"
-            />
-            <div>
-              {{ node.bookmarkName }}
+            <div
+              v-else
+              class="row items-center"
+            >
+              <kw-icon
+                name="bookmark_on"
+                clickable
+                @click.stop="onClickDelete(node)"
+              />
+              <div>
+                {{ node.bookmarkName }}
+              </div>
             </div>
-          </div>
-        </template>
-        <template #body="{ node }">
-          <div v-if="!(node.isFolder || node.isDummy)">
-            {{ node.menuPath }}
-          </div>
-        </template>
-      </kw-tree>
-    </div>
+          </template>
+          <template #body="{ node }">
+            <div v-if="!(node.isFolder || node.isDummy)">
+              {{ node.menuPath }}
+            </div>
+          </template>
+        </kw-tree>
+      </div>
+    </kw-scroll-area>
+
+    <ul class="kw-notification">
+      <li>{{ $t('MSG_TXT_BKMK_NOTI01') }}</li>
+      <li>{{ $t('MSG_TXT_BKMK_NOTI02') }}</li>
+    </ul>
 
     <template #action>
       <kw-btn
