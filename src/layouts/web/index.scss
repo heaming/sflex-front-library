@@ -363,11 +363,26 @@ body.desktop .web-layout {
 }
 
 .drawer-bookmark__popup {
+  .kw-popup__content {
+    overflow: visible;
+  }
+
+  .kw-scroll-area {
+    border: 1px solid #000;
+
+    &__wrapper {
+      max-height: calc(100vh - 195px - 210px - 101px);
+    }
+  }
+
+  .kw-notification {
+    margin-top: 13px;
+  }
+
   .bookmark-popup {
     &__tree-container {
       padding: 10px;
-      min-height: 500px;
-      border: 1px solid #000;
+      min-height: calc(100vh - 195px - 210px - 101px);
     }
   }
 
