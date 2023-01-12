@@ -287,6 +287,7 @@ body.mobile:not(.tablet) {
       right: 0;
       z-index: 11;
       display: flex;
+      column-gap: 8px;
       flex-wrap: nowrap;
       background: #fff;
 
