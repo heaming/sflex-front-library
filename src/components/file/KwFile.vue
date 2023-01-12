@@ -676,7 +676,7 @@ export default {
       if (props.placeholder) {
         return typeof props.placeholder === 'function' ? props.placeholder() : props.placeholder;
       }
-      return props.multiple ? null : t('MSG_TXT_SEL_FILE', null, '파일 선택');
+      return props.multiple ? null : t('MSG_TXT_SEL_FILE', null, '파일찾기');
     });
 
     const computedDndHint = computed(() => {
