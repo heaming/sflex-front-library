@@ -201,7 +201,6 @@
           v-if="bindingSlots['append-file']"
           #append-file
         >
-          <kw-input dense />
           {{ bindingSlots['append-file'] }}
         </template>
         <template
@@ -226,11 +225,20 @@
       <kw-file
         multiple
         downloadable
-        :dnd-hint="false"
         :max-total-size="100000000"
       >
         <template
+          #header-action
+        >
+          <kw-input />
+        </template>
+        <template
           #append-file
+        >
+          <kw-input />
+        </template>
+        <template
+          #append-header
         >
           <kw-input />
         </template>
