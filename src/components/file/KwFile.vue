@@ -505,6 +505,7 @@ import useFileDownload, {
   useFileDownloadEmits,
   useFileDownloadProps,
 } from './private/useFileDownload';
+import useDense from '../../composables/private/useDense';
 
 const UPDATE_AVAILABLE_OPTIONS = [true, false, 'remove', 'upload'];
 
@@ -577,9 +578,6 @@ export default {
 
   setup(props, { emit, slots }) {
     const { t } = useI18n();
-
-    const fieldStyles = useFieldStyle();
-    const { fieldStyleProps, fieldClass } = fieldStyles;
 
     const fileRef = ref();
 
@@ -692,6 +690,13 @@ export default {
     });
 
     // styling
+    const fieldStyles = useFieldStyle();
+    const { fieldStyleProps, fieldClass } = fieldStyles;
+
+    if (computedUseHeader.value) {
+      useDense({ dense: true, blockInheritDense: false });
+    } // notify! slots inherited dense when useHeader.
+
     const fileClass = computed(() => ({
       ...fieldClass.value,
       'kw-file': true,

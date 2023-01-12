@@ -75,8 +75,6 @@
   &__header {
     & .kw-file-item {
       &__main {
-        min-width: max-content;
-        flex: none;
         display: flex;
         align-items: center;
       }
@@ -117,7 +115,8 @@
   }
 
   &--empty {
-    .q-field__native {
+    // sorry for long selector, but there is no way to set class for the target.
+    > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
       z-index: 1;
       opacity: 0;
     }
@@ -153,7 +152,7 @@
     $-kw-file-item-container-min-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
 
     &.kw-field {
-      & .q-field__inner .q-field__control {
+      &.q-field > .q-field__inner > .q-field__control {
         background-color: $bg-body;
       }
     }
@@ -193,12 +192,6 @@
     }
 
     &.kw-field {
-      & .q-field {
-        &__label {
-          // top: -1 * ($-kw-file-header-height + $kw-field-label-height);
-        }
-      }
-
       &.q-field {
         position: relative;
 
@@ -267,10 +260,6 @@
           }
 
           &.q-field--dense {
-            .q-field__label {
-              // top: -1 * ($-kw-file-header-height + $kw-field-label-height-dense);
-            }
-
             .kw-file__header-container {
               margin-top: $kw-field-label-height-dense;
             }
