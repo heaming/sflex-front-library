@@ -1,5 +1,5 @@
 export const useFileSelectProps = {
-  selectable: { type: Boolean, default: false },
+  selectable: { type: Boolean, default: true },
 };
 
 export default ({ files, updateFile, downloadFile, revertFile, removeFile, undeleteFile }, ables) => {
