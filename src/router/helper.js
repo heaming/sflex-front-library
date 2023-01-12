@@ -81,7 +81,7 @@ export function rebuildRoutes(router) {
     });
   });
 
-  routes.forEach((route) => {
+  globImportedRoutes.forEach((route) => {
     router.removeRoute(route.name);
   });
 }
