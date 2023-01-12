@@ -671,7 +671,7 @@ export default {
 
     // placeholder
     const computedPlaceholder = computed(() => {
-      if (!ables.value.add || files.value.length === 0) {
+      if (!ables.value.add || files.value.length > 0) {
         return null;
       }
       if (props.placeholder) {
