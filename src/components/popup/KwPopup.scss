@@ -279,6 +279,10 @@ body.mobile:not(.tablet) {
       }
     }
 
+    &__content {
+      min-height: calc(100% - 165px);
+    }
+
     &__action {
       position: sticky;
       padding: 40px 20px 30px;
@@ -292,7 +296,7 @@ body.mobile:not(.tablet) {
       background: #fff;
 
       button {
-        flex: 1 1 100%;
+        flex: 1 1 50%;
         font-size: 16px;
       }
     }
