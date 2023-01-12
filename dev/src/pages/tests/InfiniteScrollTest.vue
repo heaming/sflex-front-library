@@ -38,6 +38,8 @@ const addData = () => {
   }
 };
 
+addData();
+
 const onLoad = (index) => {
   console.log(index);
 

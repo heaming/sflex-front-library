@@ -44,6 +44,7 @@ const viewConfig = {
     minTableRowHeight: 42,
     columnMovable: true,
     useFocusClass: true,
+    showChangeMarker: true,
     showEmptyMessage: true,
     showEmptyTooltip: false,
     emptyMessage: () => i18n.t('MSG_ALT_NO_INFO_SRCH', null, '조회 결과가 없습니다.'),

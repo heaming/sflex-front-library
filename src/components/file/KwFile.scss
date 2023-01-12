@@ -138,10 +138,15 @@
     .kw-file-item {
       &__main {
         flex: none;
+        min-width: max-content;
+      }
+
+      &__append {
+        min-width: max-content;
       }
 
       &__aside {
-        margin-left: auto;
+        min-width: max-content;
       }
     }
   }
@@ -300,6 +305,7 @@
   display: flex;
   align-items: center;
   padding: 0 12px;
+  min-width: 100%;
   min-height: $kw-field-height;
 
   &__checkbox,
@@ -324,7 +330,11 @@
     flex: none;
     display: flex;
     align-items: center;
-    margin: 0 8px;
+    margin-left: auto;
+
+    ~ .kw-file-item__aside {
+      margin-left: 8px;
+    }
   }
 
   &__size {
@@ -341,6 +351,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
+    margin-left: auto;
   }
 
   &--downloadable {

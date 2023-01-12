@@ -1,5 +1,5 @@
 import {
-  LocalDataProvider, GridView, LocalTreeDataProvider, TreeView, ButtonVisibility,
+  LocalDataProvider, GridView, LocalTreeDataProvider, TreeView,
 } from 'realgrid';
 import { cloneDeep } from 'lodash-es';
 import { timeout } from './tick';
@@ -130,7 +130,7 @@ export function createCellIndexByDataColumn(view, itemIndex, dataColumn) {
 
 export function isCellEditable(view, column, index) {
   const { editOptions } = view;
-  const { renderer, editor } = column;
+  const { renderer } = column;
 
   if ((editOptions.columnEditableFirst === false && editOptions.editable === false)
     || column.readOnly === true) {
@@ -139,16 +139,6 @@ export function isCellEditable(view, column, index) {
 
   if (['check', 'radio'].includes(renderer?.type)) {
     return renderer.editable !== false
-      && view.onCellEditable(view, index) !== false;
-  }
-
-  if (['btdate', 'list', 'dropdown'].includes(editor?.type)) {
-    return column.editButtonVisibility !== ButtonVisibility.HIDDEN
-      && view.onCellEditable(view, index) !== false;
-  }
-
-  if (editor?.type === 'number') {
-    return (!editor.showStepButton || column.editButtonVisibility !== ButtonVisibility.HIDDEN)
       && view.onCellEditable(view, index) !== false;
   }
 

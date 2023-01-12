@@ -689,7 +689,7 @@ body.mobile:not(.tablet) {
 
   .kw-field-wrap {
     &__control-container {
-      & > .kw-field {
+      & > .kw-field:not(.grow) {
         flex: 0 1 50%;
       }
     }

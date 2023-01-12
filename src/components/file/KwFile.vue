@@ -97,7 +97,7 @@
         :ref="(vm) => { headerScrollAreaRef = vm }"
         class="kw-file__header-container"
         :style="headerScrollAreaStyle"
-        :scroll-area-width="scrollHorizontal ? 'max-content' : '100%'"
+        :scroll-area-width="scrollHorizontal ? '' : '100%'"
         :horizontal-thumb-style="{ visibility: 'hidden' }"
         :visible="false"
         @scroll="onScrollHeader"
@@ -314,8 +314,9 @@
         <kw-scroll-area
           :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
+          width="100%"
           :scroll-area-style="fileScrollAreaContentsStyle"
-          :scroll-area-width="scrollHorizontal ? 'max-content' : '100%'"
+          :scroll-area-width="scrollHorizontal ? '' : '100%'"
           @scroll="onScrollFile"
         >
           <div
@@ -331,15 +332,15 @@
               :val="idx"
               :disable="disable"
             />
-            <kw-icon
-              class="kw-file-item__icon"
-              :tooltip="file.type"
-              :name="getExtensionIcon(file)"
-            />
             <div
               class="kw-file-item__main"
               :style="fileItemNameStyles"
             >
+              <kw-icon
+                class="kw-file-item__icon"
+                :tooltip="file.type"
+                :name="getExtensionIcon(file)"
+              />
               <span
                 v-if="computedIsDownloadable(file)"
                 class="kw-file-item__name"
@@ -670,7 +671,7 @@ export default {
 
     // placeholder
     const computedPlaceholder = computed(() => {
-      if (!ables.value.add || files.value.length === 0) {
+      if (!ables.value.add || files.value.length > 0) {
         return null;
       }
       if (props.placeholder) {

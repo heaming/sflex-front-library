@@ -146,7 +146,7 @@
           >
             <template #item="{ item }">
               <kw-item-section
-                center
+                :class="item.isDisable ? 'op50': ''"
               >
                 <kw-item-label>
                   {{ item.title }}
@@ -676,7 +676,7 @@ const case1 = `
 >
   <template #item="{ item }">
     <kw-item-section
-      center
+      :class="item.isDisable ? 'op50': ''"
     >
       <kw-item-label>
         {{ item.title }}
@@ -823,12 +823,10 @@ const case1 = `
 
 const script1 = `
 const arrModel = ref([]);
-
 const items = ref([
-  {
-    id: '1', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)' },
-  { id: '2', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)' },
-  { id: '3', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)' },
+  { id: '1', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg', isDisable: false },
+  { id: '2', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg', isDisable: true },
+  { id: '3', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg', isDisable: false },
 ]);
 `;
 
@@ -1103,10 +1101,9 @@ const arrModel = ref([]);
 const arrModel1 = ref([]);
 const arrModel2 = ref([]);
 const items = ref([
-  {
-    id: '1', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
-  { id: '2', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
-  { id: '3', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg' },
+  { id: '1', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg', isDisable: false },
+  { id: '2', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg', isDisable: true },
+  { id: '3', title: '도로명 주소', addressCode: '08050', address: '서울특별시 양천구 신정로 11길 63', addressDetail: '11612번지 푸른마을3단지 아파트 301동 2012호 (양천구, 실미도)', src: 'https://cdn.quasar.dev/img/mountains.jpg', isDisable: false },
 ]);
 // const placeholde = '검색결과 없습니다';
 const items2 = ref([
