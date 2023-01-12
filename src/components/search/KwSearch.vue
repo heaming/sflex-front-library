@@ -28,7 +28,7 @@
           v-if="noResetBtn === false"
           v-permission:read
           :label="$t('MSG_BTN_RESET', null, '초기화')"
-          class="w90"
+          :class="$g.platform.is.mobile ? 'w64' : 'w90'"
           secondary
           dense
           type="reset"
@@ -36,8 +36,9 @@
         <kw-btn
           v-permission:read
           :label="$t('MSG_TXT_SRCH', null, '조회')"
-          class="w90"
+          :class="$g.platform.is.mobile ? 'w64' : 'w90'"
           color="secondary"
+          border-color="secondary"
           text-color="bg-white"
           dense
           type="submit"
