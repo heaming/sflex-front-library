@@ -13,6 +13,6 @@ export default () => {
 
   return {
     pageTitle: title,
-    pageTypeIsSub: meta.pageUseCode === 'S',
+    pageUseIsSub: meta.pageUseCode === 'S',
   };
 };

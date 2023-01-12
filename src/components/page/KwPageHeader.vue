@@ -5,11 +5,11 @@
   >
     <div class="kw-page-header__title">
       <kw-icon
-        v-if="pageTypeIsSub"
+        v-if="pageUseIsSub"
         size="24px"
         name="arrow_left_breadcrumbs_24"
         clickable
-        @click="$router.back()"
+        @click="$router.close()"
       >
         {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
       </kw-icon>
