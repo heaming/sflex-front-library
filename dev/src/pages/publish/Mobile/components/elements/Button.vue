@@ -491,6 +491,13 @@
             class="mr8"
           />
           <kw-btn
+            icon-right="arrow_down"
+            dense
+            borderless
+            label="더보기"
+            class="kw-fc--black3 kw-font-pt14 mr8"
+          />
+          <kw-btn
             round
             filled
             color="bg-box"
@@ -770,12 +777,19 @@ const etcBtn = `
   class="mr8"
 />
 <kw-btn
+dense
+borderless
+text-color="primary"
+icon-right="arrow_right"
+label="TEXT"
+class="mr8"
+/>
+<kw-btn
+  icon-right="arrow_down"
   dense
   borderless
-  text-color="primary"
-  icon-right="arrow_right"
-  label="TEXT"
-  class="mr8"
+  label="더보기"
+  class="kw-fc--black3 kw-font-pt14 mt10"
 />
 <kw-btn
   round
