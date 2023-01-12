@@ -219,17 +219,30 @@
     </guide-section>
     <guide-section
       title="default slot"
-      description="=default"
+      description="default"
       :guide-code="defaultCode"
     >
       <kw-file
-        use-header
         multiple
-        selectable
         downloadable
-        download-btn
         :max-total-size="100000000"
-      />
+      >
+        <template
+          #header-action
+        >
+          <kw-input />
+        </template>
+        <template
+          #append-file
+        >
+          <kw-input />
+        </template>
+        <template
+          #append-header
+        >
+          <kw-input />
+        </template>
+      </kw-file>
     </guide-section>
   </kw-page>
 </template>
@@ -258,7 +271,7 @@ const fileProps = {
   rejectMessage: { type: [Function, String], default: undefined },
   placeholder: { type: [Function, String], default: undefined },
   placeholderClass: { type: [Array, String, Object], default: undefined },
-  hidePlaceholder: { type: Boolean, default: undefined },
+  dndHint: { type: String, default: undefined },
 
   ...useFieldProps,
   ...useFieldStyleProps,

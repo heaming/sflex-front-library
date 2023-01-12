@@ -3,7 +3,7 @@
   $-kw-file-border-size: 1px;
   $-kw-file-header-border: $-kw-file-border-size solid $line-stroke;
   $-kw-file-header-background-color: $line-bg;
-  $-kw-file-placeholder-height: 30px; // FIXME: 임의값
+  $-kw-file-dnd-hint-height: 30px; // FIXME: 임의값
 
   &.kw-field {
     $-kw-field-gap: 8px;
@@ -21,12 +21,6 @@
         .kw-file-item {
           min-height: $kw-field-height-dense;
         }
-      }
-    }
-
-    & .q-field {
-      &__control-container {
-        padding-bottom: $-kw-file-placeholder-height;
       }
     }
   }
@@ -47,25 +41,32 @@
 
   &__placeholder {
     position: absolute;
-    bottom: 0;
+    inset: 0;
+    height: 100%;
     display: flex;
-    height: $-kw-file-placeholder-height;
     justify-content: flex-start;
     align-items: center;
     color: $placeholder;
   }
 
-  &--hide-placeholder {
-    &.kw-field .q-field__control-container {
-      padding-bottom: 0;
+  &__dnd-hint {
+    display: none;
+  }
+
+  &--show-dnd-hint {
+    &.kw-field .q-field__control-container:has(> .kw-file__dnd-hint) {
+      padding-bottom: $-kw-file-dnd-hint-height;
     }
 
-    .kw-file__placeholder {
+    .kw-file__dnd-hint {
       position: absolute;
-      inset: 0;
-      height: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
-      justify-content: flex-start;
+      height: $-kw-file-dnd-hint-height;
+      max-height: $-kw-file-dnd-hint-height;
+      justify-content: center;
       align-items: center;
       color: $placeholder;
     }
@@ -74,8 +75,6 @@
   &__header {
     & .kw-file-item {
       &__main {
-        min-width: max-content;
-        flex: none;
         display: flex;
         align-items: center;
       }
@@ -116,7 +115,8 @@
   }
 
   &--empty {
-    .q-field__native {
+    // sorry for long selector, but there is no way to set class for the target.
+    > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
       z-index: 1;
       opacity: 0;
     }
@@ -152,10 +152,8 @@
     $-kw-file-item-container-min-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
 
     &.kw-field {
-      & .q-field {
-        &__control {
-          background-color: $bg-body;
-        }
+      &.q-field > .q-field__inner > .q-field__control {
+        background-color: $bg-body;
       }
     }
 
@@ -194,12 +192,6 @@
     }
 
     &.kw-field {
-      & .q-field {
-        &__label {
-          // top: -1 * ($-kw-file-header-height + $kw-field-label-height);
-        }
-      }
-
       &.q-field {
         position: relative;
 
@@ -268,10 +260,6 @@
           }
 
           &.q-field--dense {
-            .q-field__label {
-              // top: -1 * ($-kw-file-header-height + $kw-field-label-height-dense);
-            }
-
             .kw-file__header-container {
               margin-top: $kw-field-label-height-dense;
             }
