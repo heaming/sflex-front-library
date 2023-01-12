@@ -2,10 +2,16 @@
   .q-dialog__backdrop {
     background: transparent;
   }
+}
 
-  &--window {
-    .kw-popup {
+body.desktop,
+body.tablet {
+  .global-modal--window {
+    .q-dialog__inner {
       background-color: $line-bg;
+    }
+
+    .kw-popup {
       max-width: unset !important;
       min-width: unset !important;
       inset: 0;
@@ -20,7 +26,7 @@
       }
 
       &.q-card {
-        position: fixed;
+        position: relative;
         overflow: auto;
         box-shadow: unset;
       }
