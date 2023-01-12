@@ -97,7 +97,7 @@
         :ref="(vm) => { headerScrollAreaRef = vm }"
         class="kw-file__header-container"
         :style="headerScrollAreaStyle"
-        :scroll-area-width="scrollHorizontal ? 'max-content' : '100%'"
+        :scroll-area-width="scrollHorizontal ? '' : '100%'"
         :horizontal-thumb-style="{ visibility: 'hidden' }"
         :visible="false"
         @scroll="onScrollHeader"
@@ -316,7 +316,7 @@
           class="kw-file__file-container"
           width="100%"
           :scroll-area-style="fileScrollAreaContentsStyle"
-          :scroll-area-width="scrollHorizontal ? 'unset' : '100%'"
+          :scroll-area-width="scrollHorizontal ? '' : '100%'"
           @scroll="onScrollFile"
         >
           <div
