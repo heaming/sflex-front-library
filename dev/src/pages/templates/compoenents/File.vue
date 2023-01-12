@@ -201,6 +201,7 @@
           v-if="bindingSlots['append-file']"
           #append-file
         >
+          <kw-input dense />
           {{ bindingSlots['append-file'] }}
         </template>
         <template
@@ -219,17 +220,21 @@
     </guide-section>
     <guide-section
       title="default slot"
-      description="=default"
+      description="default"
       :guide-code="defaultCode"
     >
       <kw-file
-        use-header
         multiple
-        selectable
         downloadable
-        download-btn
+        :dnd-hint="false"
         :max-total-size="100000000"
-      />
+      >
+        <template
+          #append-file
+        >
+          <kw-input />
+        </template>
+      </kw-file>
     </guide-section>
   </kw-page>
 </template>
@@ -258,7 +263,7 @@ const fileProps = {
   rejectMessage: { type: [Function, String], default: undefined },
   placeholder: { type: [Function, String], default: undefined },
   placeholderClass: { type: [Array, String, Object], default: undefined },
-  hidePlaceholder: { type: Boolean, default: undefined },
+  dndHint: { type: String, default: undefined },
 
   ...useFieldProps,
   ...useFieldStyleProps,
