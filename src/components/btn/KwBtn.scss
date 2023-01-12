@@ -358,6 +358,20 @@ body.mobile {
         }
       }
 
+      .kw-btn--color-primary + .kw-btn--color-primary {
+        border-left: 1px solid #2a7bd9;
+      }
+
+      &.select-btn {
+        width: 100%;
+        padding: 7px 4px;
+        border-bottom: 1px solid $line-stroke;
+
+        .q-btn__content {
+          justify-content: space-between;
+        }
+      }
+
       //// mobile 용
     }
   }
