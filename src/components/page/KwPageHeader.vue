@@ -19,6 +19,7 @@
 
     <div class="kw-page-header__tools">
       <kw-checkbox
+        v-if="!pageUseIsSub"
         :model-value="isBookmarked"
         :true-value="true"
         :false-value="false"

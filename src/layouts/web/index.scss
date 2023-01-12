@@ -559,7 +559,7 @@ body.desktop .web-layout {
         background-color: $tabs-view-active-bg-color;
       }
 
-      &--active {
+      &--custom-active {
         background-color: $tabs-view-active-bg-color;
 
         .q-tab__content > div {

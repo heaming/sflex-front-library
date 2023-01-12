@@ -12,21 +12,22 @@
       no-caps
     >
       <q-tab
-        v-for="tabView of tabViews"
-        :key="tabView.key"
-        :name="tabView.key"
+        v-for="tab of tabs"
+        :key="tab.key"
+        :name="tab.key"
         :ripple="false"
-        @click="onSelect(tabView.key)"
+        :class="{'q-tab--custom-active': isActive(tab.key)}"
+        @click="onSelect(tab.key)"
       >
         <div class="col text-left">
-          {{ tabView.label }}
+          {{ tab.label }}
           <kw-tooltip show-when-ellipsised>
-            {{ tabView.label }}
+            {{ tab.label }}
           </kw-tooltip>
         </div>
         <q-icon
           name="close_24"
-          @click.stop="onClose(tabView.key)"
+          @click.stop="onClose(tab.key)"
         />
       </q-tab>
     </q-tabs>
