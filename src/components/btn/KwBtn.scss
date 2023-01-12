@@ -358,6 +358,10 @@ body.mobile {
         }
       }
 
+      .kw-btn--color-primary + .kw-btn--color-primary {
+        border-left: 1px solid #2a7bd9;
+      }
+
       //// mobile 용
     }
   }
