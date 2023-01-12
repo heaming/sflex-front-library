@@ -2,6 +2,7 @@
   <q-dialog
     :model-value="true"
     :transition-duration="0"
+    :maximized="$g.platform.is.mobile"
     persistent
     seamless
     square

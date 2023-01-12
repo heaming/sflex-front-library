@@ -1,4 +1,5 @@
-body:not(.mobile) .kw-popup {
+body.desktop .kw-popup,
+body.tablet .kw-popup {
   padding: 4px;
   border: 1px solid $black-btn-line;
 
