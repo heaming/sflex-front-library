@@ -585,11 +585,17 @@
         Date button and time button
       </h3>
       <p class="kw-guide-description">
-        It looks same with picker<br>
-        Add the class "select-btn" in kw-btn
+        It looks same with date picker and time picker.<br>
+        But If there is used button in zeplin, have to use it in <a href="https://zpl.io/1ymW0Pm">this link</a><br>
+        Add the class "select-btn" in kw-btn<br>
       </p>
       <q-card>
         <div class="kw-guide-example">
+          <img
+            src="~~dev/assets/images/select-btn.png"
+            alt="Layout Type 1"
+            class="mb30"
+          >
           <kw-btn
             icon-right="arrow_down"
             class="select-btn"
