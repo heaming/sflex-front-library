@@ -1,7 +1,7 @@
 <template>
   <div class="kw-page-mobile-header">
     <kw-btn
-      v-if="pageTypeIsSub"
+      v-if="pageUseIsSub"
       class="kw-page-mobile-header__back-btn"
       icon="arrow_left_24"
       borderless
