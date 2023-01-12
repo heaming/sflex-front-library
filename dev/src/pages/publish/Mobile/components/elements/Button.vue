@@ -577,6 +577,32 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="toggleButton"
+        class="kw-guide-title"
+      >
+        Date button and time button
+      </h3>
+      <p class="kw-guide-description">
+        It looks same with picker<br>
+        Add the class "select-btn" in kw-btn
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            icon-right="arrow_down"
+            class="select-btn"
+            borderless
+            label="선택"
+          />
+          <guide-code-view
+            :code-value="selectBtn"
+            :lang="vue"
+          />
+        </div>
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -826,6 +852,14 @@ const strModel = ref('오늘');
 const strModel2 = ref('남성');
   `;
 
+const selectBtn = `
+<kw-btn
+  icon-right="arrow_down"
+  class="select-btn"
+  borderless
+  label="선택"
+/>
+`;
 // History
 const guideHistory = [
   {
@@ -833,4 +867,5 @@ const guideHistory = [
     text: 'modified button dropdown case',
   },
 ];
+
 </script>
