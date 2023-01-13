@@ -1,7 +1,7 @@
 <template>
   <div class="window-height row justify-center items-center bg-blue-grey-1">
     <q-card
-      style="min-width: 320px;"
+      style="width: 320px; padding: 20px 40px 30px;"
       bordered
       flat
     >
