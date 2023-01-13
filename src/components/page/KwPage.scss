@@ -187,8 +187,7 @@ body.mobile:not(.tablet) {
     position: relative;
     display: flex;
     flex-flow: column;
-    min-height: 100vh;
-    max-height: 100vh;
+    max-height: 0;
 
     &__header {
       flex: none;
