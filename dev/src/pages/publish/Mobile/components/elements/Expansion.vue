@@ -243,7 +243,10 @@
                 </div>
               </div>
             </kw-expansion-item>
-            <kw-separator class="my0" />
+            <kw-separator
+              class="my0"
+              color="line-bg"
+            />
           </kw-list>
         </div>
         <guide-code-view
@@ -305,7 +308,7 @@
                   group="list-group"
                   expand-icon-align="top"
                   expand-icon-class="kw-font-pt16 pr12 mt12"
-                  class="kw-bc--bg-box"
+                  class="kw-bc--bg-box onlyforhere"
                   expand-icon="arrow_down"
                 >
                   <template #header>
@@ -688,7 +691,10 @@ const case1 = `
       </div>
     </div>
   </kw-expansion-item>
-  <kw-separator class="my0" />
+  <kw-separator
+      class="my0"
+      color="line-bg"
+    />
 </kw-list>
 `;
 const case2 = `
@@ -920,10 +926,12 @@ const ynModel = ref('N');
 
 <style lang="scss" scoped>
 ::v-deep(.kw-expansion-item) {
-  margin-top: 20px;
+  &.onlyforhere {
+    margin-top: 20px;
 
-  & + .kw-expansion-item {
-    margin-top: 8px;
+    & + .kw-expansion-item {
+      margin-top: 8px;
+    }
   }
 }
 
