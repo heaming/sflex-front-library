@@ -156,7 +156,7 @@ function setColumnRenderer(column, { dataType }) {
       merge(column.renderer, {
         setCheckedCallback(g, itemIndex, dataColumn, oldValue, newValue) {
           const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
-          if (g.onCellEditable(g, index) === false) {
+          if (isCellEditable(g, dataColumn, index) === false) {
             return oldValue;
           }
 

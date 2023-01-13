@@ -10,6 +10,7 @@ export default (to, from, next) => {
     );
     next('/');
   } else {
+    to.meta.redirectedFrom = undefined;
     to.meta.logging = false;
     next();
   }

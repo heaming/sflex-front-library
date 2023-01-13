@@ -233,10 +233,8 @@ export function customOnCellEditable(view) {
   */
 export function overrideOnShowEditor(view) {
   wrapEvent(view, onShowEditor, (g, index) => {
-    if (g.onCellEditable(g, index) === false) {
-      return false;
-    }
-    return true;
+    const column = g.columnByName(index.column);
+    return isCellEditable(g, column, index);
   });
 }
 

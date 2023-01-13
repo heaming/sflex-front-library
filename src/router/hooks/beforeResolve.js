@@ -2,7 +2,10 @@ import store from '../../store';
 
 function throwIfSubIsNotRoutedFromMain(to, from) {
   const { pageUseCode, parentsMenuUid } = to.meta;
-  const shouldThrow = pageUseCode === 'S' && from?.name !== parentsMenuUid;
+  const actualFrom = from?.meta.redirectedFrom || from;
+
+  const pageUseIsSub = pageUseCode === 'S';
+  const shouldThrow = pageUseIsSub && actualFrom?.name !== parentsMenuUid;
 
   if (shouldThrow) {
     throw new Error('sub menu can only routed from it`s parents menu');
