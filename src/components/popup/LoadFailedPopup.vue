@@ -3,7 +3,7 @@
     :title="false"
     no-close-btn
   >
-    <div class="row justify-center pt10 pb20">
+    <div class="row justify-center">
       <q-icon
         class="full-width"
         size="40px"
