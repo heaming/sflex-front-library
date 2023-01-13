@@ -60,9 +60,10 @@ declare module 'vue-router' {
     /**
      * 웹 어플리케이션의 탭 뷰가 있을 때만 정의되어 있는 속성으로,
      * 호출 시 현재 탭을 닫는다.
+     * @param delta default `0`
      * @param force default `false`
      */
-    close?: (force?: boolean) => Promise<void>;
+    close?: (delta?: number, force?: boolean) => Promise<void>;
   }
 }
 

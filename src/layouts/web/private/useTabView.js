@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { last, filter, find, findIndex } from 'lodash-es';
+import { last, filter, find, findIndex, map } from 'lodash-es';
 import consts from '../../../consts';
 import { alert, confirm } from '../../../plugins/dialog';
 
@@ -14,14 +14,27 @@ export default () => {
   const tabs = computed(() => filter(tabViews, { parentsKey: false }));
   const selectedKey = computed(() => router.currentRoute.value.name);
 
-  function recursiveGetKeys(key) {
+  function recursiveGetChildren(key) {
     const matched = find(tabViews, { parentsKey: key });
-    const childrenKeys = matched ? recursiveGetKeys(matched.key) : [];
-    return [key, ...childrenKeys];
+    return matched ? [matched, ...recursiveGetChildren(matched.key)] : [];
   }
 
-  function getChildren(key) {
-    return recursiveGetKeys(key).map((e) => find(tabViews, { key: e }));
+  function recursiveGetParents(key) {
+    const parentsKey = find(tabViews, { key })?.parentsKey;
+    const matched = find(tabViews, { key: parentsKey });
+    return matched ? [matched, ...recursiveGetParents(matched.key)] : [];
+  }
+
+  function getChildren(key, iteratee = (e) => e) {
+    const matched = find(tabViews, { key });
+    const children = matched ? [matched, ...recursiveGetChildren(key)] : [];
+    return map(children, iteratee);
+  }
+
+  function getParents(key, iteratee = (e) => e) {
+    const matched = find(tabViews, { key });
+    const parents = matched ? [matched, ...recursiveGetParents(key)] : [];
+    return map(parents, iteratee);
   }
 
   async function confirmIsModified(key) {
@@ -47,7 +60,7 @@ export default () => {
   }
 
   function remove(key) {
-    const keys = recursiveGetKeys(key);
+    const keys = getChildren(key, 'key');
 
     while (keys.length) {
       const _key = keys.pop();
@@ -90,8 +103,8 @@ export default () => {
     return isClosable;
   }
 
-  const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
-  const isUnduplicated = (to) => !tabViews.some((v) => v.key === to.name);
+  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
 
   const removeBeforeEach = router.beforeEach(
     async (to, from, next) => {
@@ -106,7 +119,7 @@ export default () => {
       }
 
       // check whether already opened
-      const shouldLogging = isRegistered(to) && isUnduplicated(to);
+      const shouldLogging = isMenu(to) && !isDuplicated(to);
       to.meta.logging = shouldLogging;
 
       // always check opened tab count except case subpage
@@ -132,16 +145,17 @@ export default () => {
     },
   );
 
-  if (isRegistered(router.currentRoute.value)) {
+  if (isMenu(router.currentRoute.value)) {
     add(router.currentRoute.value);
   }
 
-  router.close = async (force = false) => {
-    const key = selectedKey.value;
-    const tabView = find(tabViews, { key });
+  router.close = async (delta = 0, force = false) => {
+    const parents = getParents(selectedKey.value);
+    const index = Math.max(0, Math.min(delta, parents.length - 1));
+    const target = parents[index];
 
-    if (tabView) {
-      const { parentsKey } = tabView;
+    if (target) {
+      const { key, parentsKey } = target;
 
       await close(key, force, parentsKey !== false);
 
@@ -158,7 +172,7 @@ export default () => {
   });
 
   function isActive(key) {
-    return recursiveGetKeys(key).includes(selectedKey.value);
+    return getChildren(key, 'key').includes(selectedKey.value);
   }
 
   async function onSelect(key) {
