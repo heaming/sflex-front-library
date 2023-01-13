@@ -77,6 +77,19 @@
               label="조회"
             />
           </kw-action-top>
+
+          <kw-action-top class="mt10">
+            <template #left>
+              <kw-paging-info
+                :total-count="7"
+              />
+            </template>
+          </kw-action-top>
+          <kw-separator
+            color="black1"
+            spaced="0"
+            class="mt12"
+          />
         </div>
         <guide-code-view
           :code-value="case1"
@@ -239,6 +252,18 @@ const case1 = `
     label="조회"
   />
 </kw-action-top>
+<kw-action-top class="mt10">
+  <template #left>
+    <kw-paging-info
+      :total-count="7"
+    />
+  </template>
+</kw-action-top>
+<kw-separator
+  color="black1"
+  spaced="0"
+  class="mt12"
+/>
 `;
 const case2 = `
 <kw-action-top>

@@ -294,3 +294,9 @@ body.mobile {
     }
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-guide .q-card:not(.kw-card) .kw-guide-code pre {
+    overflow: auto;
+  }
+}

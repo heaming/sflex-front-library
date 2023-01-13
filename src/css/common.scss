@@ -4,7 +4,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: #222;
-  overflow: overlay;
+  overflow: overlay !important;
   scrollbar-gutter: stable;
 
   &:not(.q-body--layout-animate) .q-layout--prevent-focus {

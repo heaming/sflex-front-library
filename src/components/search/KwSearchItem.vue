@@ -4,10 +4,10 @@
     :class="itemClass"
   >
     <div
-      v-if="!noLabel"
+      v-if="showLabel"
       class="kw-form-item__label"
       :class="labelClass"
-      :style="{width: labelWidth}"
+      :style="labelStyle"
     >
       <div class="kw-label-content">
         <slot name="label">
@@ -45,6 +45,7 @@
 <script>
 import useFormType, { FORM_TYPE } from '../../composables/private/useFormType';
 import useFormItem, { useFormItemProps } from '../../composables/private/useFormItem';
+import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwSearchItem',
@@ -58,11 +59,17 @@ export default {
     },
   },
 
-  setup() {
+  setup(props) {
     useFormType(FORM_TYPE.SEARCH);
 
+    const formItemCtx = useFormItem();
+
+    if (platform.is.mobile && props.noLabel === undefined) {
+      formItemCtx.showLabel = false;
+    }
+
     return {
-      ...useFormItem(),
+      ...formItemCtx,
     };
   },
 };

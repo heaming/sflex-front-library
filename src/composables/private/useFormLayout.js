@@ -20,7 +20,11 @@ export const useFormLayoutProps = {
   },
 };
 
-const DEFAULT_COLS = 3;
+const DEFAULT_COLS = {
+  DESKTOP: 3,
+  TABLET: 3,
+  MOBILE: 0,
+};
 const DEFAULT_LABEL_SIZE = {
   DESKTOP: 150,
   TABLET: 108,
@@ -42,7 +46,7 @@ export default (defaults = {}) => {
     cols: computed(() => props.cols
       ?? injected?.cols.value
       ?? defaults.cols
-      ?? DEFAULT_COLS),
+      ?? DEFAULT_COLS[toUpper(snakeCase(currentPlatform))]),
     labelSize: computed(() => props.labelSize
       ?? injected?.labelSize.value
       ?? defaults.labelSize

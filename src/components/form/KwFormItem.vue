@@ -4,10 +4,10 @@
     :class="itemClass"
   >
     <div
-      v-if="!noLabel"
+      v-if="showLabel"
       class="kw-form-item__label"
       :class="labelClass"
-      :style="{width: labelWidth}"
+      :style="labelStyle"
     >
       <div class="kw-label-content">
         <slot name="label">

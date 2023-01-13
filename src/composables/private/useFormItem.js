@@ -12,7 +12,7 @@ export const useFormItemProps = {
   },
   noLabel: {
     type: Boolean,
-    default: false,
+    default: undefined,
   },
   hint: {
     type: String,
@@ -33,16 +33,23 @@ export default () => {
   const alignContent = computed(() => props.alignContent ?? injected?.alignContent.value);
 
   const itemClass = computed(() => props.colspan > 1 && `kw-form-item--colspan-${props.colspan}`);
+  const showLabel = computed(() => {
+    if (props.noLabel !== undefined) {
+      return props.noLabel;
+    }
+    return labelSize.value && labelSize.value > 0;
+  });
   const labelClass = computed(() => (props.required ? 'kw-form-item__label--required' : null));
-  const labelWidth = computed(() => `${labelSize.value}px`);
+  const labelStyle = computed(() => ({ width: `${labelSize.value}px` }));
   const fieldClass = computed(() => [alignContent.value && `kw-form-item__field--align-${alignContent.value}`]);
-  const fieldWidth = computed(() => `calc(100% - ${labelSize.value}px)`);
+  const fieldStyle = computed(() => ({ width: `calc(100% - ${labelSize.value}px)` }));
 
   return {
     itemClass,
+    showLabel,
     labelClass,
-    labelWidth,
+    labelStyle,
     fieldClass,
-    fieldWidth,
+    fieldStyle,
   };
 };

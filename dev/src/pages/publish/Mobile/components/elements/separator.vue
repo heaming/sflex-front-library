@@ -53,6 +53,10 @@
               8px / bg-color
             </td>
           </tr>
+          <tr>
+            <td>color</td>
+            <td>add the color name</td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -98,7 +102,7 @@
         <div class="kw-guide-example">
           <kw-separator
             spaced="0"
-            class="kw-bc--black1"
+            color="black1"
           />
 
           <img
@@ -151,7 +155,7 @@ const case1 = `
 const case2 = `
 <kw-separator
   spaced="0"
-  class="kw-bc--black1"
+  color="black1"
 />
 `;
 const case3 = `

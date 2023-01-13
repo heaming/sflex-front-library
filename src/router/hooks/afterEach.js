@@ -8,7 +8,8 @@ function assignParamsByQuery(to) {
 }
 
 function assignParamsIfIsLinkPage(to) {
-  const matched = store.getters['meta/getMenu'](to.name);
+  const { menuUid } = to.meta;
+  const matched = store.getters['meta/getMenu'](menuUid);
 
   if (matched) {
     const { pageId, pageTypeCode, linkPageId } = matched;
@@ -38,8 +39,12 @@ async function loggingIfNeeded(to) {
       pageId: meta.pageId,
     };
 
-    await http.post('/sflex/common/common/portal/menus/logging', logData, { silent: true });
-    await store.dispatch('meta/fetchRecentMenus');
+    try {
+      await http.post('/sflex/common/common/portal/menus/logging', logData, { silent: true });
+      await store.dispatch('meta/fetchRecentMenus');
+    } catch (e) {
+      // ignore
+    }
   }
 }
 
