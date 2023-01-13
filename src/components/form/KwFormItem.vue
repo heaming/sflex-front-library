@@ -35,7 +35,7 @@
     <div
       class="kw-form-item__field"
       :class="fieldClass"
-      :style="{width: fieldWidth}"
+      :style="fieldStyle"
     >
       <slot />
     </div>
