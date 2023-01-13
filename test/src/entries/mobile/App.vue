@@ -6,7 +6,10 @@
       <mobile-stack-view />
     </template>
     <template #unauthenticated>
-      <mobile-fallback-login />
+      <mobile-fallback-login
+        tenant-id="TNT_WELLS"
+        portal-id="MBL_DEF"
+      />
     </template>
   </mobile-layout>
 </template>

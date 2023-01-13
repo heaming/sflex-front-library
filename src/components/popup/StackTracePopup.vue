@@ -2,6 +2,7 @@
   <kw-popup
     class="stack-trace-popup"
     size="xl"
+    :title="false"
     no-close-btn
   >
     <h1 class="stack-trace-popup__title">
@@ -12,6 +13,7 @@
         {{ errorDetailMessage }}
       </p>
     </q-scroll-area>
+
     <template #action>
       <kw-btn
         negative

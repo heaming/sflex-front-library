@@ -81,7 +81,7 @@ export default {
     onBeforeClose: { type: Function, default: undefined },
   },
 
-  async setup(props) {
+  setup(props) {
     const {
       registerPopup,
       unregisterPopup,
