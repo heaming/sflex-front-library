@@ -10,6 +10,7 @@
           >
         </template>
       </web-header>
+      <web-footer />
       <web-left-drawer />
       <web-tab-view />
     </template>
@@ -22,7 +23,7 @@
 <script setup>
 import {
   useSession,
-  WebLayout, WebHeader, WebLeftDrawer, WebTabView, WebFallbackLogin,
+  WebLayout, WebHeader, WebFooter, WebLeftDrawer, WebTabView, WebFallbackLogin,
 } from '~kw-lib';
 
 const {
