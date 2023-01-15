@@ -75,20 +75,15 @@ export default {
     const contextConfig = ref({});
 
     let view;
-    let clickData;
 
     function setView(_view) {
       isReady.value = true;
       view = _view;
-      view.onContextMenuPopup = (g, x, y, _clickData) => {
-        clickData = { ..._clickData };
-      };
     }
 
     function clearView() {
       if (view !== undefined) {
-        view.onContextMenuPopup = null;
-        view = null;
+        view = undefined;
       }
     }
 
@@ -127,7 +122,7 @@ export default {
     }
 
     function setContextConfig() {
-      const { column } = clickData || view.getCurrent();
+      const { column } = view.__contextMenuClickData__ || view.getCurrent();
       const layouts = view.saveColumnLayout();
 
       const viewOptions = view.header.visible
@@ -147,7 +142,6 @@ export default {
     }
 
     function beforeHide() {
-      clickData = undefined;
       removeClickOutside(clickOutsideProps);
     }
 
