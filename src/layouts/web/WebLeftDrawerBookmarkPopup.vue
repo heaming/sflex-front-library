@@ -50,7 +50,7 @@
       />
       <kw-btn
         grid-action
-        icon=""
+        icon="new_folder"
         no-wrap
         :label="$t('MSG_BTN_FLDR_NEW')"
         @click="onClickNewFolder"
@@ -109,7 +109,7 @@
               </div>
               <kw-space />
               <kw-icon
-                name="close"
+                name="delete"
                 clickable
                 @click.stop="onClickDelete(node)"
               />

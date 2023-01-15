@@ -368,7 +368,7 @@ body.desktop .web-layout {
   }
 
   .kw-scroll-area {
-    border: 1px solid #000;
+    border: 1px solid $line-stroke;
 
     &__wrapper {
       max-height: calc(100vh - 195px - 210px - 101px);
@@ -381,7 +381,7 @@ body.desktop .web-layout {
 
   .bookmark-popup {
     &__tree-container {
-      padding: 10px;
+      padding: 20px 26px;
       min-height: calc(100vh - 195px - 210px - 101px);
     }
   }
@@ -418,6 +418,10 @@ body.desktop .web-layout {
         .q-icon {
           margin-right: 8px;
           font-size: inherit;
+        }
+
+        .q-space + .q-icon {
+          margin-right: 0;
         }
       }
 
