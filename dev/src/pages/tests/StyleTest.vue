@@ -273,16 +273,6 @@
       </div>
     </div>
   </q-expansion-item>
-  <!-- file -->
-  <q-expansion-item
-    v-if="false"
-    label="file"
-    :default-opened="true"
-  >
-    <div class="result-area">
-      <file-form />
-    </div>
-  </q-expansion-item>
   <!-- avatar -->
   <q-expansion-item
     v-if="true"
@@ -306,7 +296,6 @@ import {
   BtnDropdownForm,
   RadioForm,
   ToggleForm,
-  FileForm,
   Forms,
 } from '../../components/test';
 
