@@ -103,8 +103,10 @@
 
     &__header--alternative-labels {
       padding: 30px 0 20px;
-      border: 1px solid #ddd;
-      box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
+      border-bottom: 1px solid #ddd;
+
+      // box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%);
+      margin: 0 -40px;
       border-radius: 0;
 
       .q-stepper__tab {
@@ -204,13 +206,21 @@
     .kw-stepper {
       .q-stepper__header {
         .q-stepper__tab {
+          & + .q-stepper__tab {
+            margin-left: 16px;
+
+            &::before {
+              left: -16px;
+            }
+          }
+
           &::after {
             //   margin: 0; 화살표 있으면
             display: none;
           }
 
           .q-stepper__dot {
-            margin-right: 8; // 화살표 있으면 margin-right: 0px
+            margin-right: 0; // 화살표 있으면 margin-right: 0px
 
             span {
               font-size: 13px;
@@ -218,6 +228,24 @@
             }
           }
         }
+      }
+
+      &__title {
+        font-weight: 500;
+        font-size: 18px;
+        color: $black1;
+      }
+
+      &--heading-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0 12px;
+        border: none;
+      }
+
+      .q-stepper__label {
+        display: none;
       }
     }
   }
