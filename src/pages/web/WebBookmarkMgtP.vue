@@ -1,6 +1,6 @@
 <template>
   <kw-popup
-    class="drawer-bookmark__popup bookmark-popup"
+    class="web-bookmark-mgt bookmark-popup"
     :title="$t('MSG_TIT_BKMK_EDIT')"
     @before-close="onBeforeClose"
   >

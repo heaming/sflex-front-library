@@ -182,6 +182,7 @@ export default {
         sortableInstances.push(
           new Sortable(e, {
             group: 'nested',
+            swapThreshold: 0.5,
             animation: 150,
             onMove(evt) {
               const sourceNode = getNodeByElement(evt.dragged);

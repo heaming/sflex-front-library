@@ -162,7 +162,7 @@ export default {
 
     async function onClickEdit() {
       const { result } = await modal({
-        component: () => import('./WebLeftDrawerBookmarkPopup.vue'),
+        component: () => import('../../pages/web/WebBookmarkMgtP.vue'),
       });
 
       if (result) {
