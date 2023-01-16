@@ -47,6 +47,18 @@
 
     .kw-carousel-slide {
       padding: 0;
+
+      & .kw-carousel__placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 180px;
+
+        @include typo("body", 400);
+
+        color: $black3;
+        border: 1px solid $line-stroke;
+      }
     }
 
     .kw-carousel-control {
