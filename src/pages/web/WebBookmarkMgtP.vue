@@ -1,6 +1,6 @@
 <template>
   <kw-popup
-    class="web-bookmark-mgt bookmark-popup"
+    class="web-bookmark-mgt"
     :title="$t('MSG_TIT_BKMK_EDIT')"
     @before-close="onBeforeClose"
   >
@@ -58,11 +58,12 @@
     </kw-action-top>
 
     <kw-scroll-area>
-      <div class="bookmark-popup__tree-container">
+      <div class="web-bookmark-mgt__tree-container">
         <kw-tree
           ref="treeRef"
           v-model:selected="selected"
           v-model:expanded="expanded"
+          class="web-bookmark-mgt__tree"
           :nodes="nodes"
           node-key="bookmarkUid"
           selected-color="black1"
@@ -73,7 +74,7 @@
           <template #header="{ node }">
             <div
               v-if="node.isDummy"
-              class="bookmark-popup__tree-dummy"
+              class="web-bookmark-mgt__tree-dummy"
             />
             <div
               v-else-if="node.isFolder"
@@ -145,12 +146,12 @@
     <template #action>
       <kw-btn
         negative
-        :label="$t('MSG_TXT_CANCEL')"
+        :label="$t('MSG_BTN_CANCEL')"
         @click="cancel()"
       />
       <kw-btn
         primary
-        :label="$t('MSG_TXT_SAVE')"
+        :label="$t('MSG_BTN_SAVE')"
         @click="onClickSave"
       />
     </template>
