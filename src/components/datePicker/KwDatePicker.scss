@@ -1,267 +1,103 @@
-// .kw-date {
-//   margin: 5px 12px 11px;
+.kw-date {
+  margin: 5px 12px 11px;
 
-//   &__container {
-//     width: 224px;
+  &__container {
+    width: 224px;
+  }
+}
 
-//     .datepicker-inline {
-//       width: 224px;
-//     }
-//   }
+.kw-date-picker {
+  // width: 250px;
 
-//   & .datepicker.datepicker-inline th {
-//     color: $black3;
-//     font-size: 12px;
-//     font-weight: 400;
+  &.kw-field {
+    & .q-field {
+      &__control {
+        cursor: text;
+      }
 
-//     &.prev,
-//     &.datepicker-switch,
-//     &.next {
-//       color: $black1;
-//       font-size: 16px;
-//       font-weight: 500;
-//       height: 46px;
+      &__append {
+        // don't fix
+        // this has side effects to picker events
+        padding-left: 0 !important;
+        cursor: text !important;
 
-//       &:hover {
-//         background: none;
-//       }
-//     }
+        > div {
+          display: flex;
+          align-items: center;
+          height: 100%;
 
-//     &.prev {
-//       background: url(~@assets/images/ic_arrow_left.svg) no-repeat center;
-//       background-size: 16px;
-//       font-size: 0;
-//     }
+          // replaced that q-field__append padding-left
+          padding-left: 20px;
+        }
+      }
 
-//     &.next {
-//       background: url(~@assets/images/ic_arrow_right.svg) no-repeat center;
-//       background-size: 16px;
-//       font-size: 0;
-//     }
-//   }
+      &__marginal .q-icon {
+        opacity: 1 !important;
+        cursor: pointer;
+      }
+    }
 
-//   & .datepicker table {
-//     border-spacing: 0;
+    &.q-field {
+      &--dense {
+        .q-field__append > div {
+          padding-left: 6px;
+        }
+      }
 
-//     & tr td {
-//       border-radius: 50%;
-//       width: 32px;
-//       height: 32px;
-//       border: 2px solid #fff;
-//       color: $black1;
-//       font-size: 14px;
-//     }
-//   }
+      &--readonly,
+      &--disabled {
+        .q-field__marginal .q-icon {
+          opacity: 0.6 !important;
+          cursor: default;
+        }
+      }
+    }
+  }
 
-//   & .datepicker table tr td.today {
-//     background-color: rgba($primary, 0.1);
-//     border: 2px solid #fff !important;
+  &__menu.q-menu {
+    border: 1px solid $black1;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
-//     &:active {
-//       background-color: rgba($primary, 0.1);
-//     }
-//   }
+  &__menu.q-dialog {
+    .kw-date {
+      margin: auto;
+    }
+  }
+}
 
-//   & .day {
-//     &.old,
-//     &.new {
-//       color: rgba($black1, 0.3);
-//     }
+.kw-date-range-picker {
+  span {
+    padding: 0 4px;
+    color: #777;
+    font-size: 14px;
+  }
+}
 
-//     &.sunday {
-//       color: $accent;
+// 폼 내부 최내 너비 예외 처리.
+.kw-form:not(.kw-search) .kw-form-item__field {
+  .kw-date-picker {
+    flex: 0 1 250px !important;
 
-//       &.old,
-//       &.new {
-//         color: rgba($accent, 0.3);
-//       }
-//     }
-//   }
+    &.grow {
+      flex-grow: 1 !important;
+    }
 
-//   & .datepicker table thead tr th.dow:first-child {
-//     color: $accent;
-//   }
+    &.shrink-off {
+      flex-shrink: 0 !important;
+    }
+  }
 
-//   .datepicker table tr td.day:not(.today):not(.active):not(.disabled):not(.old):not(.new).saturday {
-//     color: $black1;
+  // .kw-date-range-picker {
+  //   flex: 0 1 250px !important;
 
-//     &.old {
-//       color: rgba($black1, 0.3);
-//     }
-//   }
+  //   &.grow {
+  //     flex-grow: 1 !important;
+  //   }
 
-//   .datepicker table tr td.active.active,
-//   .datepicker table tr td.active.highlighted.active,
-//   .datepicker table tr td.active.highlighted:active,
-//   .datepicker table tr td.active:active {
-//     border-color: #fff !important;
-//     background-color: $primary;
-//     font-weight: 400;
-//   }
-
-//   @at-root [lang=ko-KR] & .datepicker {
-//     .datepicker-months {
-//       .datepicker-switch::after {
-//         content: "년";
-//         display: inline;
-//       }
-//     }
-
-//     .datepicker-years {
-//       span.year::after {
-//         content: "년";
-//         display: inline;
-//       }
-//     }
-//   }
-
-//   .datepicker .datepicker-months,
-//   .datepicker .datepicker-years {
-//     .table-condensed {
-//       width: 100%;
-//     }
-
-//     td {
-//       border: 0;
-//     }
-
-//     .year {
-//       font-size: 12px;
-//     }
-
-//     .month,
-//     .year {
-//       width: 46px;
-//       height: 46px;
-//       line-height: 46px;
-//       border-radius: 50%;
-//       margin: 2px 6px;
-
-//       &.old,
-//       &.new {
-//         color: $black1;
-//       }
-
-//       &:nth-child(4n - 3) {
-//         margin-left: 2px;
-//       }
-
-//       &:nth-child(4n) {
-//         margin-right: 0;
-//       }
-
-//       &:nth-child(1),
-//       &:nth-child(2),
-//       &:nth-child(3),
-//       &:nth-child(4) {
-//         margin-top: 0;
-//       }
-
-//       &:nth-child(9),
-//       &:nth-child(10),
-//       &:nth-child(11),
-//       &:nth-child(12) {
-//         margin-bottom: 0;
-//       }
-//     }
-//   }
-
-//   .datepicker table tr td span.active.active,
-//   .datepicker table tr td span.active.disabled.active,
-//   .datepicker table tr td span.active.disabled:active,
-//   .datepicker table tr td span.active.disabled:hover.active,
-//   .datepicker table tr td span.active.disabled:hover:active,
-//   .datepicker table tr td span.active:active,
-//   .datepicker table tr td span.active:hover.active,
-//   .datepicker table tr td span.active:hover:active {
-//     background-color: $primary;
-//   }
-// }
-
-// .kw-date-picker {
-//   // width: 250px;
-
-//   &.kw-field {
-//     & .q-field {
-//       &__control {
-//         cursor: text;
-//       }
-
-//       &__append {
-//         // don't fix
-//         // this has side effects to picker events
-//         padding-left: 0 !important;
-//         cursor: text !important;
-
-//         > div {
-//           display: flex;
-//           align-items: center;
-//           height: 100%;
-
-//           // replaced that q-field__append padding-left
-//           padding-left: 20px;
-//         }
-//       }
-
-//       &__marginal .q-icon {
-//         opacity: 1 !important;
-//         cursor: pointer;
-//       }
-//     }
-
-//     &.q-field {
-//       &--dense {
-//         .q-field__append > div {
-//           padding-left: 6px;
-//         }
-//       }
-
-//       &--readonly,
-//       &--disabled {
-//         .q-field__marginal .q-icon {
-//           opacity: 0.6 !important;
-//           cursor: default;
-//         }
-//       }
-//     }
-//   }
-
-//   &__menu.q-menu {
-//     border: 1px solid $black1;
-//     border-radius: 0;
-//     box-shadow: none;
-//   }
-
-//   &__menu.q-dialog {
-//     .kw-date {
-//       margin: auto;
-//     }
-//   }
-// }
-
-// // 폼 내부 최내 너비 예외 처리.
-// .kw-form:not(.kw-search) .kw-form-item__field {
-//   .kw-date-picker {
-//     flex: 0 1 250px !important;
-
-//     &.grow {
-//       flex-grow: 1 !important;
-//     }
-
-//     &.shrink-off {
-//       flex-shrink: 0 !important;
-//     }
-//   }
-
-//   // .kw-date-range-picker {
-//   //   flex: 0 1 250px !important;
-
-//   //   &.grow {
-//   //     flex-grow: 1 !important;
-//   //   }
-
-//   //   &.shrink-off {
-//   //     flex-shrink: 0 !important;
-//   //   }
-//   // }
-// }
+  //   &.shrink-off {
+  //     flex-shrink: 0 !important;
+  //   }
+  // }
+}

@@ -32,9 +32,8 @@
         </thead>
         <tbody>
           <tr>
-            <td>
-              kw-steper<br>
-              kw-step
+            <td rowspan="2">
+              kw-steper
             </td>
             <td>
               v-model="stepInitNum"<br>
@@ -44,6 +43,10 @@
               Default<br>
               The number is same as step's number
             </td>
+          </tr>
+          <tr>
+            <td>heading-text</td>
+            <td>Add the title on leftside</td>
           </tr>
         </tbody>
       </q-markup-table>
@@ -96,6 +99,51 @@
         />
       </q-card>
     </div>
+
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        Stepper with heading-text
+      </h3>
+      <p class="kw-guide-description">
+        Add the heading-text in kw-stepper and put tilte's name in kw-step
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-stepper
+            v-model="stepInitNum"
+            heading-text
+          >
+            <kw-step
+              :name="1"
+              :done="stepInitNum > 1"
+              prefix="1"
+            />
+            <kw-step
+              :name="2"
+              :done="stepInitNum > 2"
+              prefix="2"
+            />
+            <kw-step
+              :name="3"
+              :done="stepInitNum > 3"
+              prefix="3"
+              title="계약확인"
+            />
+            <kw-step-panel :name="3">
+              <p>content</p>
+            </kw-step-panel>
+          </kw-stepper>
+        </div>
+        <guide-code-view
+          :code-value="[testCode2, testScript2]"
+          :lang="['vue', 'javascript']"
+          multi
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -130,6 +178,33 @@ const testCode = `
   </kw-stepper>
 `;
 
+const testCode2 = `
+<kw-stepper
+  v-model="stepInitNum"
+  heading-text
+>
+  <kw-step
+    :name="1"
+    :done="stepInitNum > 1"
+    prefix="1"
+    title="ss"
+  />
+  <kw-step
+    :name="2"
+    :done="stepInitNum > 2"
+    prefix="2"
+  />
+  <kw-step
+    :name="3"
+    :done="stepInitNum > 3"
+    prefix="3"
+    title="계약확인"
+  />
+  <kw-step-panel :name="3">
+    <p>content</p>
+  </kw-step-panel>
+</kw-stepper>
+`;
 const testScript2 = `
 const stepInitNum = ref(3);
 `;

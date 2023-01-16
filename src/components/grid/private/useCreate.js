@@ -54,9 +54,9 @@ export default (DataClass, ViewClass) => {
     registerCustomRenderers(view);
     override(view, vm);
     syncHeadCheckIfAble(view);
+    contextMenuRef.value?.setView(view);
 
     onInit?.(data, view);
-    contextMenuRef.value?.setView(view);
   });
 
   onBeforeUnmount(() => {

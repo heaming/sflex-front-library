@@ -22,6 +22,7 @@ const onGetEditValue = 'onGetEditValue';
 const onCellPasting = 'onCellPasting';
 const onTopIndexChanged = 'onTopIndexChanged';
 const onScrollToBottom = 'onScrollToBottom';
+const onContextMenuPopup = 'onContextMenuPopup';
 const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
 const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
 const dataDropOptionsDropCallback = 'dataDropOptions._callback';
@@ -395,6 +396,15 @@ export function overrideOnTopIndexChanged(view) {
 export function overrideOnScrollToBottom(view) {
   wrapEvent(view, onScrollToBottom, () => {
     // ignore
+  });
+}
+
+/*
+  좌표와 함께 ContextMenu 표시를 결정하는 콜백
+  */
+export function overrideOnContextMenuPopup(view) {
+  wrapEvent(view, onContextMenuPopup, (g, x, y, _clickData) => {
+    view.__contextMenuClickData__ = { ..._clickData };
   });
 }
 

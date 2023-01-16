@@ -3,7 +3,7 @@ import { ObserverContextKey } from '../../consts/private/symbols';
 export const useObserverChildProps = {
   name: {
     type: String,
-    default: null,
+    default: undefined,
   },
   ignoreOnModified: {
     type: Boolean,

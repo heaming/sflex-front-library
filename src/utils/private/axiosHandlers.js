@@ -75,7 +75,9 @@ async function handleServerFailureDefault(response) {
   } = response.data;
 
   if (ENABLE_STACK_TRACE_LOG && errorDetailMessage) {
-    await showStackTraceLog(errorMessage, errorDetailMessage);
+    // do not set await
+    // modal is lower z-index than spinner
+    showStackTraceLog(errorMessage, errorDetailMessage);
   } else {
     await alert(errorMessage);
   }

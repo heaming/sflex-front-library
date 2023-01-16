@@ -212,26 +212,6 @@ body.tablet .kw-popup {
   }
 }
 
-.stack-trace-popup {
-  &__title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #222;
-    text-align: center;
-  }
-
-  &__content {
-    padding: 10px;
-    white-space: pre;
-    background-color: #eee;
-  }
-
-  .q-scrollarea {
-    height: 400px;
-    margin-top: 10px;
-  }
-}
-
 body.mobile:not(.tablet) {
   .q-card__section--vert {
     padding: initial;
@@ -300,5 +280,25 @@ body.mobile:not(.tablet) {
         font-size: 16px;
       }
     }
+  }
+}
+
+.stack-trace-popup {
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+  }
+
+  &__content {
+    padding: 10px;
+    white-space: pre;
+    background-color: #eee;
+  }
+
+  .q-scrollarea {
+    height: 400px;
+    margin-top: 10px;
   }
 }

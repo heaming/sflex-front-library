@@ -1,7 +1,7 @@
 <template>
   <q-layout
     class="web-layout"
-    view="hHh LpR fFf"
+    view="hHh LpR lff"
   >
     <slot
       v-if="isAuthenticated"

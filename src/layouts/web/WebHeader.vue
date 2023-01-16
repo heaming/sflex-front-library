@@ -43,6 +43,27 @@
           clickable
         />
 
+        <div>
+          <kw-icon
+            class="web-header__icon"
+            name="setting_24"
+            clickable
+          />
+          <kw-menu
+            class="web-header__dropdown"
+            anchor="bottom left"
+            self="top middle"
+          >
+            <kw-btn
+              v-close-popup
+              grow
+              :label="$t('MSG_TIT_HOME_MGT')"
+              borderless
+              @click="openHomeMgtPopup"
+            />
+          </kw-menu>
+        </div>
+
         <kw-btn
           dense
           underline
@@ -58,23 +79,30 @@
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
 import consts from '../../consts';
+import { modal } from '../../plugins/modal';
 
 export default {
   name: 'WebHeader',
 
   setup() {
     const { push } = useRouter();
+    const { logout } = useSession();
 
     function goToHome() {
       push({ name: consts.ROUTE_HOME_NAME });
     }
 
-    const { logout } = useSession();
+    function openHomeMgtPopup() {
+      modal({
+        component: () => import('../../pages/web/WebHomeMgtP.vue'),
+      });
+    }
 
     return {
       ...useHeaderApp(),
       logout,
       goToHome,
+      openHomeMgtPopup,
     };
   },
 };

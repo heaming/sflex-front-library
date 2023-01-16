@@ -23,6 +23,13 @@
 @import "../layouts/web/index";
 
 /*
+  Pages
+  */
+@import "../pages/mobile/index";
+@import "../pages/tablet/index";
+@import "../pages/web/index";
+
+/*
   Plugins
   */
 @import "../components/globalDialog/GlobalDialog";

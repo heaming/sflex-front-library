@@ -83,9 +83,26 @@ body.desktop .web-layout {
     font-size: 24px;
   }
 
+  &__dropdown {
+    display: flex;
+    flex-direction: column;
+
+    > .kw-btn--borderless.q-btn {
+      padding: 8px 16px;
+    }
+  }
+
   &.q-layout__section--marginal {
     color: $black2;
   }
+}
+
+/*
+  Footer
+  */
+.web-footer {
+  height: 50px;
+  background: #fff;
 }
 
 /*
@@ -356,76 +373,6 @@ body.desktop .web-layout {
           > div {
             font-size: 12px;
           }
-        }
-      }
-    }
-  }
-}
-
-.drawer-bookmark__popup {
-  .kw-popup__content {
-    overflow: visible !important;
-  }
-
-  .kw-scroll-area {
-    border: 1px solid #000;
-
-    &__wrapper {
-      max-height: calc(100vh - 195px - 210px - 101px);
-    }
-  }
-
-  .kw-notification {
-    margin-top: 13px;
-  }
-
-  .bookmark-popup {
-    &__tree-container {
-      padding: 10px;
-      min-height: calc(100vh - 195px - 210px - 101px);
-    }
-  }
-
-  &.bookmark-popup .kw-tree {
-    &.q-tree:not(.kw-tree--empty) {
-      margin-top: -20px;
-    }
-
-    .q-tree {
-      &__node {
-        &::after {
-          top: -23.5px;
-        }
-      }
-
-      &__node-header {
-        padding: 0 4px;
-        margin-top: 20px;
-
-        &::before {
-          top: -23.5px;
-        }
-      }
-
-      &__node--child:has(.bookmark-popup__tree-dummy) {
-        display: none;
-      }
-
-      &__node-header-content {
-        font-size: 14px;
-        color: $black2;
-
-        .q-icon {
-          margin-right: 8px;
-          font-size: inherit;
-        }
-      }
-
-      &__node-body {
-        padding-left: 26px;
-
-        > div {
-          font-size: 12px;
         }
       }
     }
