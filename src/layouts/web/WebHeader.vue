@@ -51,14 +51,14 @@
           />
           <kw-menu
             class="web-header__dropdown"
-            anchor="bottom left"
+            anchor="bottom middle"
             self="top middle"
           >
             <kw-btn
               v-close-popup
+              borderless
               grow
               :label="$t('MSG_TIT_HOME_MGT')"
-              borderless
               @click="openHomeMgtPopup"
             />
           </kw-menu>
