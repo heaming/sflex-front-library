@@ -15,15 +15,13 @@
     margin-top: 13px;
   }
 
-  .bookmark-popup {
-    &__tree-container {
-      padding: 20px 26px;
-      min-height: calc(100vh - 195px - 210px - 101px);
-    }
+  &__tree-container {
+    padding: 20px 26px;
+    min-height: calc(100vh - 195px - 210px - 101px);
   }
 
-  &.bookmark-popup .kw-tree {
-    &.q-tree:not(.kw-tree--empty) {
+  &__tree.kw-tree.q-tree {
+    &:not(.kw-tree--empty) {
       margin-top: -20px;
     }
 
@@ -45,7 +43,7 @@
         }
       }
 
-      &__node--child:has(.bookmark-popup__tree-dummy) {
+      &__node--child:has(.web-bookmark-mgt__tree-dummy) {
         display: none;
       }
 
