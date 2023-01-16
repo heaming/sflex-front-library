@@ -25,15 +25,14 @@ const AVAILABLE_STATES = {
   [ERROR]: [REMOVED],
 };
 
-const key = Symbol('FILE_LIKE_KEY');
+const privateKeyField = Symbol('FILE_LIKE_KEY');
 
-const generateFileLikeKey = (fileLike) => {
-  // const isNative = isProxy(fileLike) ? fileLike.target instanceof File : fileLike instanceof File;
-  if (Object.hasOwn(fileLike, key)) { return fileLike[key]; }
+export const generateFileLikeKey = (fileLike) => {
+  if (Object.hasOwn(fileLike, privateKeyField)) { return fileLike[privateKeyField]; }
   const isNative = fileLike instanceof File;
   return (isNative
     ? fileLike.webkitRelativePath + (fileLike.lastModified || new Date().getTime()) + fileLike.name + fileLike.size
-    : fileLike.fileUid || fileLike.serverFileName);
+    : fileLike.serverFile?.fileUid || fileLike.serverFile?.serverFileName);
 };
 
 const removeDuplicate = (fileLikes) => {
@@ -49,7 +48,7 @@ const removeDuplicate = (fileLikes) => {
 };
 
 const normalizeFileLike = (fileLike = {}) => {
-  if (Object.hasOwn(fileLike, key)) {
+  if (Object.hasOwn(fileLike, privateKeyField)) {
     return fileLike;
   }
   if (fileLike instanceof File) {
@@ -60,7 +59,8 @@ const normalizeFileLike = (fileLike = {}) => {
       lastModified: fileLike.lastModified || new Date().getTime(),
       dummy: false,
       nativeFile: fileLike,
-      [key]: generateFileLikeKey(fileLike),
+      [privateKeyField]: generateFileLikeKey(fileLike),
+      getKey() { return this[privateKeyField]; },
     };
   }
   return {
@@ -71,11 +71,10 @@ const normalizeFileLike = (fileLike = {}) => {
     lastModified: fileLike.lastModified || new Date().getTime(),
     dummy: true,
     nativeFile: null,
+    serverFile: fileLike.serverFile,
     targetPath: fileLike.targetPath,
-    serverFileName: fileLike.serverFileName,
-    fileUid: fileLike.fileUid,
-    myFileYn: fileLike.myFileYn,
-    [key]: generateFileLikeKey(fileLike),
+    [privateKeyField]: generateFileLikeKey(fileLike),
+    getKey() { return this[privateKeyField]; },
   };
 };
 
@@ -83,6 +82,22 @@ const getInitialState = (fileLike) => (fileLike.dummy ? UPLOADED : UPLOAD);
 
 function Uploading(fileLike, options) {
   const file = normalizeFileLike(fileLike);
+  const targetPath = file.targetPath
+    || options?.targetPath || 'temp'; // server root folder 를 결정한다.
+  const targetedUpload = async () => {
+    const { nativeFile } = file;
+    // head up!!! it is not upload to targetPath! only to temp!
+    return await upload(nativeFile, 'temp');
+  };
+  const targetedDownload = async () => {
+    const { serverFile } = file;
+    return await download(serverFile, targetPath);
+  };
+  const uploadFunction = options.upload ?? targetedUpload;
+  const downloadFunction = options.download ?? targetedDownload;
+  // head up!!! server remove process
+  // SFLEX 에서는 그냥 새 목록을 보내면 backoffice 에서 없는 목록을 지워버리기 때문에 불필요.
+  const removeFunction = options.remove ?? null;
 
   let state;
 
@@ -96,9 +111,6 @@ function Uploading(fileLike, options) {
     }
   }
 
-  const targetPath = file.targetPath
-    || options?.targetPath || 'temp'; // server root folder 를 결정한다.
-
   async function update(evenFailed) {
     if (evenFailed) {
       if (state === FAIL_TO_REMOVE) {
@@ -111,13 +123,7 @@ function Uploading(fileLike, options) {
     if (state === UPLOAD) {
       setState(UPDATING);
       try {
-        // head up!!! it is not upload to targetPath! only to temp!
-        const uploadResult = await upload(file.nativeFile, 'temp');
-        file.serverFileName = uploadResult.serverFileName;
-        // head up!!! originalFileName same with name! FileLike only use name Field
-        // file.originalFileName = uploadResult.originalFileName;
-        file.fileUid = uploadResult.fileUid;
-        file.myFileYn = uploadResult.myFileYn;
+        file.serverFile = await uploadFunction(file);
         setState(UPLOADED);
       } catch (e) {
         setState(FAIL_TO_UPLOAD);
@@ -127,12 +133,14 @@ function Uploading(fileLike, options) {
     if (state === REMOVE) {
       setState(UPDATING);
 
-      // head up!!! server remove process
-      // SFLEX 에서는 그냥 새 목록을 보내면 backoffice 에서 없는 목록을 지워버리기 때문에 불필요.
-
-      // if (targetPath === 'storage') {
-      //   await sflexDelete(file);
-      // }
+      if (removeFunction && typeof removeFunction === 'function') {
+        try {
+          await removeFunction(file);
+          setState(REMOVED);
+        } catch (e) {
+          setState(FAIL_TO_UPLOAD);
+        }
+      }
 
       setState(REMOVED);
     }
@@ -185,8 +193,12 @@ function Uploading(fileLike, options) {
 
   async function downloadFile() {
     if (state === UPLOADED) {
-      await download(file, targetPath);
-    } else if (state === UPLOAD) {
+      try {
+        await downloadFunction(file);
+      } catch (e) {
+        throw new Error('Fail To Download!');
+      }
+    } else if (state === UPLOAD && file.nativeFile) {
       downloadBlob(file.nativeFile, file.name);
     } else {
       throw new Error(`${state} file is can not download.`);
@@ -227,6 +239,10 @@ export const STATE = {
 export default (values, options, ables, selectCtx) => {
   const normalizedOptions = computed(() => ({
     instanceUpdate: unref(options).instanceUpdate,
+    download: unref(options).download,
+    upload: unref(options).upload,
+    remove: unref(options).remove,
+    targetPath: unref(options).targetPath,
   }));
   const uploadings = ref([]);
 
@@ -235,7 +251,7 @@ export default (values, options, ables, selectCtx) => {
       .value
       .find((uploading) => uploading.file === file
         || uploading.file?.nativeFile === file
-        || uploading.file[key] === generateFileLikeKey(file));
+        || uploading.file[privateKeyField] === generateFileLikeKey(file));
   }
 
   async function syncUploadings(newFiles) {
@@ -247,18 +263,18 @@ export default (values, options, ables, selectCtx) => {
 
     const restoreUploadings = rawUploadings
       .filter((uploading) => uploading.state === REMOVED)
-      .filter((uploading) => newFiles.map((file) => file[key]).includes(uploading.file[key]));
+      .filter((uploading) => newFiles.map((file) => file[privateKeyField]).includes(uploading.file[privateKeyField]));
 
     restoreUploadings.forEach((uploading) => {
       uploading.state = UPLOAD;
     });
 
-    const removed = differenceBy(oldFiles, newFiles, key);
+    const removed = differenceBy(oldFiles, newFiles, privateKeyField);
     rawUploadings = rawUploadings
       .filter((uploading) => !removed.includes(uploading.file));
 
     const updatePromises = [];
-    const updated = intersectionBy(oldFiles, newFiles, key);
+    const updated = intersectionBy(oldFiles, newFiles, privateKeyField);
     rawUploadings
       .filter((uploading) => updated.includes(uploading.file))
       .forEach((uploading) => {
@@ -267,7 +283,7 @@ export default (values, options, ables, selectCtx) => {
         }
       });
 
-    const added = differenceBy(newFiles, oldFiles, key);
+    const added = differenceBy(newFiles, oldFiles, privateKeyField);
 
     const addedPromises = [];
     added.forEach((file) => {
@@ -302,7 +318,7 @@ export default (values, options, ables, selectCtx) => {
 
   function updateFileExceptInternal(origin, update) {
     const newFileKeys = Reflect.ownKeys(update);
-    const ignoreUpdateKeys = [key, 'name', 'size', 'type', 'lastModified', 'dummy', 'nativeFile', 'serverFileName', 'fileUid'];
+    const ignoreUpdateKeys = [privateKeyField, 'name', 'size', 'type', 'lastModified', 'dummy', 'nativeFile', 'serverFile', 'getKey'];
     newFileKeys
       .filter((k) => !ignoreUpdateKeys.includes(k))
       .forEach((k) => {
