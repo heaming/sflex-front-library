@@ -1,3 +1,6 @@
+import { intersection } from 'lodash-es';
+import { generateFileLikeKey } from './useFileUpload';
+
 export const useFileSelectProps = {
   selectable: { type: Boolean, default: true },
 };
@@ -5,23 +8,29 @@ export const useFileSelectProps = {
 export default ({ files, updateFile, downloadFile, revertFile, removeFile, undeleteFile }, ables) => {
   const { props } = getCurrentInstance();
 
-  const selectedFileIndexes = ref([]);
+  const selectedFileKeys = ref([]);
+  const fileKeys = computed(() => (files.value ? files.value.map((f) => generateFileLikeKey(f)) : []));
+  watch(fileKeys, (newKeys) => {
+    selectedFileKeys.value = intersection(selectedFileKeys.value, newKeys);
+  });
 
   const selectAll = computed({
-    get: () => selectedFileIndexes.value.length === files.value?.length && selectedFileIndexes.value.length > 0,
+    get: () => selectedFileKeys.value.length === files.value?.length && selectedFileKeys.value.length > 0,
     set(val) {
       if (val) {
-        selectedFileIndexes.value = files.value ? files.value.map((f, idx) => idx) : [];
+        selectedFileKeys.value = fileKeys.value;
       } else {
-        selectedFileIndexes.value = [];
+        selectedFileKeys.value = [];
       }
     },
   });
 
-  const selectedFiles = computed(() => selectedFileIndexes.value.map((idx) => files.value?.[idx]));
+  const selectedFiles = computed(() => selectedFileKeys.value.map(
+    (k) => files.value.find((f) => generateFileLikeKey(f) === k),
+  ));
 
   const clearSelected = () => {
-    selectedFileIndexes.value = [];
+    selectedFileKeys.value = [];
   };
 
   const updateSelected = () => {
@@ -58,7 +67,8 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
 
   return {
     computedSelectable,
-    selectedFileIndexes,
+    selectedFileKeys,
+    fileKeys,
     selectedFiles,
     selectAll,
     clearSelected,

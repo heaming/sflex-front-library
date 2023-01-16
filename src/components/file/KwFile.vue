@@ -33,7 +33,7 @@
     bottom-slots
     no-error-icon
     @rejected="onRejected"
-    @click="preventIfClick"
+    @click="onClick"
   >
     <!-- default -->
     <template
@@ -229,11 +229,11 @@
         </div>
       </kw-scroll-area>
       <div
-        v-if="(!multiple && showPickBtn) || $slots.after"
+        v-if="(!computedUseHeader && showPickBtn) || $slots.after"
         class="kw-file__after-slot-container"
       >
         <div
-          v-if="!multiple"
+          v-if="!computedUseHeader"
           class="kw-file__single-action"
         >
           <kw-btn
@@ -265,10 +265,12 @@
 
     <!-- hint -->
     <template
-      v-if="$slots.hint"
+      v-if="$slots.hint || acceptHint"
       #hint
     >
-      <slot name="hint" />
+      <slot name="hint">
+        {{ acceptHint }}
+      </slot>
     </template>
 
     <!-- counter -->
@@ -315,6 +317,8 @@
           :ref="(vm) => { fileScrollAreaRef = vm}"
           class="kw-file__file-container"
           width="100%"
+          :min-height="fileContainerMinHeight"
+          :max-height="fileContainerMaxHeight"
           :scroll-area-style="fileScrollAreaContentsStyle"
           :scroll-area-width="scrollHorizontal ? '' : '100%'"
           @scroll="onScrollFile"
@@ -327,9 +331,9 @@
           >
             <kw-checkbox
               v-if="computedSelectable"
-              v-model="selectedFileIndexes"
+              v-model="selectedFileKeys"
               class="kw-file-item__checkbox"
-              :val="idx"
+              :val="fileKeys[idx]"
               :disable="disable"
             />
             <div
@@ -532,7 +536,9 @@ export default {
     rejectMessage: { type: [Function, String], default: undefined },
     placeholder: { type: [Function, String], default: undefined },
     placeholderClass: { type: [Array, String, Object], default: undefined },
-    dndHint: { type: [Boolean, String], default: undefined },
+    dndHint: { type: [Boolean, String], default: false },
+    upload: { type: Function, default: undefined },
+    download: { type: Function, default: undefined },
 
     ...useFieldProps,
     ...useFieldStyleProps,
@@ -583,7 +589,7 @@ export default {
     const fileRef = ref();
 
     const fieldCtx = useField();
-    const { value } = fieldCtx;
+    const { value, invalid, resetValidation } = fieldCtx;
 
     const innerValue = computed({
       get: () => {
@@ -618,6 +624,8 @@ export default {
 
     const uploadOptions = computed(() => ({
       instanceUpdate: props.instanceUpdate,
+      upload: props.upload,
+      download: props.download,
     }));
 
     const selectCtx = {};
@@ -665,7 +673,7 @@ export default {
       alert(rejectMessage);
     };
 
-    // warp file comp
+    // header
     const headerCtx = useFileHeader(uploadCtx, ables);
     const { useHeaderFileClass, computedUseHeader } = headerCtx;
 
@@ -726,6 +734,16 @@ export default {
 
     // event handler
     const filePickCtx = useFilePicker(fileRef, ables);
+    const { preventIfClick } = filePickCtx;
+
+    const onClick = async (evt) => {
+      if (invalid.value) {
+        evt.preventDefault();
+        await resetValidation();
+        return;
+      }
+      preventIfClick(evt);
+    };
 
     const getExtensionIcon = (file) => {
       if (file.type.indexOf('video/') === 0) return 'movie';
@@ -735,6 +753,11 @@ export default {
       if (file.type.indexOf('xml') > -1) return 'excel';
       return 'file';
     };
+
+    const acceptHint = computed(() => {
+      if (!props.accept) { return; }
+      return `업로드 가능 파일 :${props.accept}`; // FIXME: msg
+    });
 
     return {
       ...useInheritAttrs(),
@@ -749,6 +772,7 @@ export default {
       ...downloadCtx,
       ...headerCtx,
       ...filePickCtx,
+      onClick,
       onRejected,
       fileClass,
       fileItemClass,
@@ -757,6 +781,7 @@ export default {
       computedDndHint,
       innerValue,
       getExtensionIcon,
+      acceptHint,
     };
   },
 };
