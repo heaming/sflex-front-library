@@ -280,6 +280,13 @@ body.mobile:not(.tablet) {
         font-size: 16px;
       }
     }
+
+    &--no-action {
+      .kw-popup__content {
+        min-height: calc(100% - 55px);
+        padding-bottom: 30px;
+      }
+    }
   }
 }
 

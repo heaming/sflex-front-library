@@ -15,6 +15,22 @@ export function downloadBlob(blob, fileName) {
   }
 }
 
+const normalizeUploadResponse = (info) => ({
+  ...info,
+  serverFileName: info?.serverFileName,
+  originalFileName: info?.originalFileName,
+  size: info?.size,
+  fileType: info?.fileType,
+});
+
+const normalizeDownloadRequest = (info) => ({
+  ...info,
+  fileUid: info?.fileUid,
+  originalFileName: info?.originalFileName,
+  serverFileName: info?.serverFileName,
+  myFileYn: info?.myFileYn,
+});
+
 function throwIfIsInvalidTargetPath(targetPath) {
   if (!targetPaths.includes(targetPath)) {
     throw new Error(`invalid targetPath, ${targetPath}`);
@@ -31,14 +47,15 @@ export async function upload(file, targetPath = targetPaths[0]) {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-  return response.data;
+  return normalizeUploadResponse(response.data);
 }
 
 export async function download(fileInfo, targetPath = targetPaths[0]) {
   throwIfIsInvalidTargetPath(targetPath);
+  const params = normalizeDownloadRequest(fileInfo);
 
   const response = await http.get(`/sflex/common/common/file/${targetPath}/download`, {
-    params: fileInfo,
+    params,
     responseType: 'blob',
   });
 

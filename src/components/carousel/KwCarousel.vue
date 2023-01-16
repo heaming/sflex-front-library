@@ -82,7 +82,7 @@ export default {
     vertical: { type: Boolean, default: undefined },
     autoplay: { type: [Number, Boolean], default: false },
     padding: { type: Boolean, default: undefined },
-    arrows: { type: Boolean, default: true },
+    arrows: { type: Boolean, default: undefined },
     prevIcon: { type: String, default: 'arrow_left_24' },
     nextIcon: { type: String, default: 'arrow_right_24' },
     navigation: { type: Boolean, default: undefined },

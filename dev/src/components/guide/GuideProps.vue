@@ -1,63 +1,74 @@
 <template>
-  <div class="guide-props">
-    <div
-      v-if="title"
-      class="guide-props__title"
-    >
-      {{ title }}
-    </div>
-    <div class="guide-props__props-container">
-      <div
-        v-for="prop in innerValue"
-        :key="prop.propKey"
-        class="guide-prop"
-      >
-        <div class="guide-prop__label">
-          <div class="guide-prop__key">
-            {{ prop.propKey }}
-          </div>
-          <div class="guide-prop__type">
-            {{ prop.type.name || prop.type.map(t => t.name) }}
-          </div>
-        </div>
-        <div class="guide-prop__value">
-          <template
-            v-if="prop.type === Boolean"
-          >
-            <kw-toggle
-              v-model="prop.value"
-              :true-value="true"
-              :false-value="false"
-              @update:model-value="emitModelValue"
-            />
-          </template>
-          <template
-            v-else-if="prop.type === Number"
-          >
-            <kw-input
-              v-model="prop.value"
-              type="number"
-              @update:model-value="emitModelValue"
-            />
-          </template>
-          <template
-            v-else-if="prop.type === String"
-          >
-            <kw-input
-              v-model="prop.value"
-              @update:model-value="emitModelValue"
-            />
-          </template>
-          <template v-else>
-            <kw-input
-              :model-value="prop.value !== undefined ? String(prop.value) : ''"
-              @update:model-value="(v) => {prop.value=v; emitModelValue();}"
-            />
-          </template>
-        </div>
-      </div>
-    </div>
-  </div>
+  <kw-expansion-item
+    class="guide-props"
+    header-class="guide-props__title"
+    padding-target="header"
+    padding="10px 0"
+  >
+    <template #header>
+      <kw-item-section>
+        <kw-item-label
+          v-if="title"
+          font="subtitle"
+        >
+          {{ title }}
+        </kw-item-label>
+      </kw-item-section>
+    </template>
+    <suspense>
+      <kw-list class="guide-props__props-container">
+        <kw-item
+          v-for="prop in innerValue"
+          :key="prop.propKey"
+          class="guide-prop"
+        >
+          <kw-item-section class="guide-prop__label">
+            <kw-item-label class="guide-prop__key">
+              {{ prop.propKey }}
+            </kw-item-label>
+            <kw-item-label class="guide-prop__type">
+              {{ prop.type.name || prop.type.map(t => t.name) }}
+            </kw-item-label>
+          </kw-item-section>
+          <kw-item-section class="guide-prop__value">
+            <template
+              v-if="prop.type === Boolean"
+            >
+              <kw-toggle
+                v-model="prop.value.value"
+                :true-value="true"
+                :false-value="false"
+                @update:model-value="emitModelValue"
+              />
+            </template>
+            <template
+              v-else-if="prop.type === Number"
+            >
+              <kw-input
+                v-model="prop.value.value"
+                type="number"
+                @update:model-value="emitModelValue"
+              />
+            </template>
+            <template
+              v-else-if="prop.type === String"
+            >
+              <kw-input
+                v-model="prop.value.value"
+                @update:model-value="emitModelValue"
+              />
+            </template>
+            <template v-else>
+              <kw-input
+                :model-value="prop.value.value !== undefined ? String(prop.value.value) : ''"
+                @update:model-value="(v) => {prop.value.value=v; emitModelValue();}"
+              />
+            </template>
+          </kw-item-section>
+        </kw-item>
+      </kw-list>
+    </suspense>
+  </kw-expansion-item>
 </template>
 
 <script setup>
@@ -101,7 +112,7 @@ for (const propKey of Object.getOwnPropertyNames(innerProps.props)) {
 
   innerValue.push({
     propKey,
-    value,
+    value: ref(value),
     type: propDefineObject.type,
     isPrimitive,
   });
@@ -118,6 +129,7 @@ const emitModelValue = () => {
   // eslint-disable-next-line no-restricted-syntax
   for (const innerElement of innerValue) {
     let { value } = innerElement;
+    value = unref(value);
     if (!innerElement.isPrimitive) {
       try {
         value = JSON.parse(value);
@@ -133,26 +145,24 @@ const emitModelValue = () => {
     }
   }
 
-  console.log(ev);
-
   emit('update:modelValue', ev);
 };
 
 emitModelValue();
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "~@css/mixins";
 
+.guide-props__title {
+  @include typo("subtitle");
+
+  border-bottom: 1px dotted $info;
+}
+
 .guide-props {
-  &__title {
-    @include typo("subtitle");
-
-    border-bottom: 1px dotted $info;
-    margin-bottom: 20px;
-  }
-
   &__props-container {
+    margin-top: 20px;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
