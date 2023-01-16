@@ -204,6 +204,8 @@
   // mobile
   &:not(.tablet) {
     .kw-stepper {
+      padding: 0 20px;
+
       .q-stepper__header {
         .q-stepper__tab {
           & + .q-stepper__tab {
@@ -240,7 +242,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 30px 0 12px;
+        padding: 20px 20px 0;
         border: none;
       }
 
