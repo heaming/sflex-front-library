@@ -40,4 +40,30 @@
       }
     }
   }
+
+  &.kw-carousel--counter {
+    height: inherit;
+    padding-top: 46px;
+
+    .kw-carousel-slide {
+      padding: 0;
+
+      & .kw-carousel__placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 180px;
+
+        @include typo("body", 400);
+
+        color: $black3;
+        border: 1px solid $line-stroke;
+      }
+    }
+
+    .kw-carousel-control {
+      margin: 0;
+      height: 26px;
+    }
+  }
 }

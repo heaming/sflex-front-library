@@ -21,8 +21,8 @@ export default {
     // customize props
 
     // fall through props
-    position: { type: String, default: 'bottom-right' },
-    offset: { type: Array, default: () => [18, 18] },
+    position: { type: String, default: 'top' },
+    offset: { type: Array, default: () => [0, 0] },
   },
   setup() {
     const { styleClassAttrs } = useInheritAttrs();
