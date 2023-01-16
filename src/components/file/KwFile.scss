@@ -73,6 +73,8 @@
   }
 
   &__header {
+    height: $-kw-file-header-height;
+
     & .kw-file-item {
       &__main {
         display: flex;
@@ -153,8 +155,9 @@
 
   &--use-header {
     $-kw-file-item-height-use-header: 36px;
-    $-kw-file-item-rows: 3;
-    $-kw-file-item-container-min-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
+    $-kw-file-item-rows: 5;
+    $-kw-file-item-container-min-height: $-kw-file-item-height-use-header;
+    $-kw-file-item-container-max-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
 
     &.kw-field {
       &.q-field > .q-field__inner > .q-field__control {
@@ -172,7 +175,7 @@
 
     .kw-file__file-container {
       width: unset;
-      height: $-kw-file-item-container-min-height;
+      min-height: $-kw-file-item-container-min-height;
     }
 
     .kw-file__header-container {
@@ -193,7 +196,7 @@
     }
 
     .kw-file-item {
-      min-height: 36px;
+      min-height: $-kw-file-item-height-use-header;
     }
 
     &.kw-field {
