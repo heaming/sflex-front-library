@@ -40,4 +40,18 @@
       }
     }
   }
+
+  &.kw-carousel--counter {
+    height: inherit;
+    padding-top: 46px;
+
+    .kw-carousel-slide {
+      padding: 0;
+    }
+
+    .kw-carousel-control {
+      margin: 0;
+      height: 26px;
+    }
+  }
 }
