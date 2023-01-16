@@ -151,6 +151,17 @@
                 </kw-field>
               </kw-form-item>
             </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="Checkbox">
+                <kw-checkbox
+                  v-model="checkTemp"
+                  label="플러스서비스"
+                  checked-icon="check_24"
+                  unchecked-icon="check_24"
+                  class="check-btn"
+                />
+              </kw-form-item>
+            </kw-form-row>
           </kw-form>
         </div>
         <guide-code-view
@@ -368,7 +379,7 @@
   </kw-page>
 </template>
 <script setup>
-
+const checkTemp = ref('Y');
 const checkboxDefaultCode = `
 <kw-form>
   <kw-form-row>

@@ -225,3 +225,38 @@ body.desktop {
     }
   }
 }
+
+body.mobile {
+  .kw-checkbox.q-checkbox {
+    &.check-btn {
+      padding: 7px 12px 7px 8px;
+      border: 1px solid $line-stroke;
+      justify-content: flex-start;
+      flex: 1 1 auto;
+
+      @at-root .spaced-sibling + .spaced-sibling {
+        margin-left: 8px;
+      }
+    }
+
+    .q-checkbox__icon {
+      color: $black3;
+    }
+
+    .q-checkbox__label {
+      @include typo("dense", 400);
+
+      color: $black3;
+    }
+
+    .q-checkbox__inner--truthy {
+      .q-checkbox__icon {
+        color: $primary;
+      }
+
+      & ~ .q-checkbox__label {
+        color: $primary;
+      }
+    }
+  }
+}

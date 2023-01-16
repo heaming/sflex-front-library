@@ -83,6 +83,15 @@ body.desktop .web-layout {
     font-size: 24px;
   }
 
+  &__dropdown {
+    display: flex;
+    flex-direction: column;
+
+    > .kw-btn--borderless.q-btn {
+      padding: 8px 16px;
+    }
+  }
+
   &.q-layout__section--marginal {
     color: $black2;
   }
