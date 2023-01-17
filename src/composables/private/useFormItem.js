@@ -35,7 +35,7 @@ export default () => {
   const itemClass = computed(() => props.colspan > 1 && `kw-form-item--colspan-${props.colspan}`);
   const showLabel = computed(() => {
     if (props.noLabel !== undefined) {
-      return props.noLabel;
+      return !props.noLabel;
     }
     return labelSize.value && labelSize.value > 0;
   });
