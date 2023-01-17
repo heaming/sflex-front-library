@@ -61,15 +61,15 @@
               :label="$t('MSG_TIT_HOME_MGT')"
               @click="openHomeMgtPopup"
             />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              :label="$t('MSG_TXT_LOGOUT')"
+              @click="logout"
+            />
           </kw-menu>
         </div>
-
-        <kw-btn
-          dense
-          underline
-          label="LOGOUT"
-          @click="logout"
-        />
       </div>
     </q-toolbar>
   </q-header>

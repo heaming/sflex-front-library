@@ -7,13 +7,6 @@
       borderless
       @click="$router.back()"
     />
-    <kw-btn
-      v-else
-      class="kw-page-mobile-header__back-btn"
-      icon="menu_24"
-      borderless
-      @click="toggleExpanded()"
-    />
     <h1 class="kw-page-mobile-header__title">
       <template v-if="pageTitle">
         {{ pageTitle }}
@@ -63,7 +56,6 @@
 </template>
 
 <script>
-import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 import useBookmark from './private/useBookmark';
 import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
 
@@ -75,12 +67,9 @@ export default {
   },
 
   setup() {
-    const { toggleExpanded } = useLeftDrawerExpand();
-
     return {
       ...useBookmark(),
       ...useHeaderMeta(),
-      toggleExpanded,
     };
   },
 };
