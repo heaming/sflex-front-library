@@ -33,6 +33,7 @@ exports.defineConfig = (config) => {
   // https://vitejs.dev/config/
   return defineConfig(({ mode, command }) => {
     const isBuild = command === 'build';
+    const enableEslint = !isBuild || mode === 'dev';
     const pluginArgs = { mode, command, ...config };
 
     const defaultOptimizeDepsInclude = isInternalContext() ? [] : [
@@ -63,7 +64,7 @@ exports.defineConfig = (config) => {
           sassVariables: config.quasarSassVariables,
         }),
 
-        eslint(),
+        enableEslint && eslint(),
 
         autoImport({
           // targets to transform

@@ -48,7 +48,7 @@ module.exports = {
   ],
 
   globals: {
-    __IMPORT_META_ENV__: 'readonly',
+    __VUE_IMPORT_META_ENV__: 'readonly',
     __VUE_TEST_APP__: 'readonly',
   },
 

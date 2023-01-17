@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      [Mobile] separator
+      [Mobile] Separator
     </h2>
     <guide-history-view :items="historyData" />
     <div class="kw-guide-section">
