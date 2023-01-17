@@ -47,4 +47,5 @@ export * from './timePicker';
 export * from './toggle';
 export * from './tooltip';
 export * from './tree';
+export * from './video';
 export * from './virtualScroll';
