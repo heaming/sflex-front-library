@@ -1,5 +1,5 @@
 // https://vitejs-kr.github.io/guide/env-and-mode.html
-const env = __IMPORT_META_ENV__;
+const env = __VUE_IMPORT_META_ENV__;
 
 const isLocal = window.location.host.startsWith('localhost:');
 const isServer = env.PROD && !isLocal;
