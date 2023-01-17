@@ -11,135 +11,207 @@
       description="playground"
     >
       <guide-props
-        v-model="bindingProps"
+        v-model="bindingProps1"
         :props="fileProps"
         title="fileProps"
       />
+      <guide-props
+        v-model="bindingProps2"
+        :props="useFieldProps"
+        title="useFieldProps"
+      />
+      <guide-props
+        v-model="bindingProps3"
+        :props="useFieldStyleProps"
+        title="useFieldStyleProps"
+      />
+      <guide-props
+        v-model="bindingProps4"
+        :props="useFilePickerProps"
+        title="useFilePickerProps"
+      />
+      <guide-props
+        v-model="bindingProps5"
+        :props="useFileSelectProps"
+        title="useFileSelectProps"
+      />
+      <guide-props
+        v-model="bindingProps6"
+        :props="useFileCounterProps"
+        title="useFileCounterProps"
+      />
+      <guide-props
+        v-model="bindingProps7"
+        :props="useFileDownloadProps"
+        title="useFileDownloadProps"
+      />
+      <guide-props
+        v-model="bindingProps8"
+        :props="useFileHeaderProps"
+        title="useFileHeaderProps"
+      />
+      <guide-props
+        v-model="bindingProps9"
+        :props="quasarProps"
+        title="quasarProps"
+      />
+      <kw-expansion-item
+        class="guide-props"
+        header-class="guide-props__title"
+        padding-target="header"
+        padding="10px 0"
+      >
+        <template #header>
+          <kw-item-section>
+            <kw-item-label font="subtitle">
+              class and style
+            </kw-item-label>
+          </kw-item-section>
+        </template>
+        <kw-list class="guide-props__props-container">
+          <kw-item class="guide-prop">
+            <kw-item-section class="guide-prop__label">
+              <kw-item-label class="guide-prop__key">
+                class
+              </kw-item-label>
+              <kw-item-label class="guide-prop__type">
+                VueClassProps
+              </kw-item-label>
+            </kw-item-section>
+            <kw-item-section class="guide-prop__value">
+              <kw-input v-model="bindingProps.class" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section class="guide-prop__label">
+              <kw-item-label class="guide-prop__key">
+                style
+              </kw-item-label>
+              <kw-item-label class="guide-prop__type">
+                VueStyleProps
+              </kw-item-label>
+            </kw-item-section>
+            <kw-item-section class="guide-prop__value">
+              <kw-input v-model="bindingProps.style" />
+            </kw-item-section>
+          </kw-item>
+        </kw-list>
+      </kw-expansion-item>
+      <kw-expansion-item
+        class="guide-props"
+        header-class="guide-props__title"
+        padding-target="header"
+        padding="10px 0"
+      >
+        <template #header>
+          <kw-item-section>
+            <kw-item-label font="subtitle">
+              slots
+            </kw-item-label>
+          </kw-item-section>
+        </template>
+        <kw-list class="guide-props__props-container">
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              default
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.default" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              prepend
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.prepend" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              before
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.before" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              before
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.after" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              hint
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.hint" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              counter
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.counter" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              loading
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.loading" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              file
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.file" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              selected
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots.selected" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              append-header
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots['append-header']" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              append-file
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots['append-file']" />
+            </kw-item-section>
+          </kw-item>
+          <kw-item class="guide-prop">
+            <kw-item-section side>
+              header-action
+            </kw-item-section>
+            <kw-item-section>
+              <kw-input v-model="bindingSlots['header-action']" />
+            </kw-item-section>
+          </kw-item>
+        </kw-list>
+      </kw-expansion-item>
+
       <kw-separator />
-      <kw-item-label font="subtitle">
-        class and style
-      </kw-item-label>
-      <kw-list class="row gap-md">
-        <kw-item>
-          <kw-item-section side>
-            class
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingProps.class" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            style
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.style" />
-          </kw-item-section>
-        </kw-item>
-      </kw-list>
-      <kw-separator />
-      <kw-item-label font="subtitle">
-        slots
-      </kw-item-label>
-      <kw-list class="row gap-md">
-        <kw-item>
-          <kw-item-section side>
-            default
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.default" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            prepend
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.prepend" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            before
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.before" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            before
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.after" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            hint
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.hint" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            counter
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.counter" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            loading
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.loading" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            file
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.file" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            selected
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots.selected" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            append-header
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots['append-header']" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            append-file
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots['append-file']" />
-          </kw-item-section>
-        </kw-item>
-        <kw-item>
-          <kw-item-section side>
-            header-action
-          </kw-item-section>
-          <kw-item-section>
-            <kw-input v-model="bindingSlots['header-action']" />
-          </kw-item-section>
-        </kw-item>
-      </kw-list>
-      <kw-separator />
+
       <kw-file
         v-model="file"
         v-bind="bindingProps"
@@ -223,9 +295,13 @@
       :guide-code="defaultCode"
     >
       <kw-file
+        v-model="dummyFiles"
         multiple
         downloadable
+        instance-update
         :max-total-size="100000000"
+        :upload="testUpload"
+        :download="testDownload"
       >
         <template
           #header-action
@@ -243,6 +319,10 @@
           <kw-input />
         </template>
       </kw-file>
+      <kw-btn
+        label="add"
+        @click="addFile"
+      />
     </guide-section>
   </kw-page>
 </template>
@@ -255,6 +335,7 @@ import { useFileSelectProps } from '../../../../../src/components/file/private/u
 import { useFileCounterProps } from '../../../../../src/components/file/private/useFileCounter';
 import { useFileDownloadProps } from '../../../../../src/components/file/private/useFileDownload';
 import { useFileHeaderProps } from '../../../../../src/components/file/private/useFileHeader';
+import { downloadBlob } from '../../../../../src/utils/file';
 
 const fileProps = {
   reversible: { type: Boolean, default: true },
@@ -272,16 +353,9 @@ const fileProps = {
   placeholder: { type: [Function, String], default: undefined },
   placeholderClass: { type: [Array, String, Object], default: undefined },
   dndHint: { type: String, default: undefined },
+};
 
-  ...useFieldProps,
-  ...useFieldStyleProps,
-  ...useFilePickerProps,
-  ...useFileSelectProps,
-  ...useFileCounterProps,
-  ...useFileDownloadProps,
-  ...useFileHeaderProps,
-
-  // fall through props
+const quasarProps = {
   prefix: { type: String, default: undefined },
   suffix: { type: String, default: undefined },
   hint: { type: String, default: undefined },
@@ -312,22 +386,66 @@ const fileProps = {
 
 const file = ref([]);
 
-const bindingProps = ref({
-  maxTotalSize: 100000000,
-  // useHeader: true,
-  // selectable: true,
-  // multiple: true,
-  // removable: false,
-  // removeBtn: false,
-  // removeAllBtn: false,
-  // undeletePossible: false,
-  // undeleteBtn: false,
-  // undeleteAllBtn: false,
-  // downloadable: true,
-  // downloadBtn: true,
-  // downloadAllBtn: true,
+const bindingProps1 = ref({
+  label: 'label',
 });
+const bindingProps2 = ref(null);
+const bindingProps3 = ref(null);
+const bindingProps4 = ref(null);
+const bindingProps5 = ref(null);
+const bindingProps6 = ref(null);
+const bindingProps7 = ref(null);
+const bindingProps8 = ref(null);
+const bindingProps9 = ref(null);
+const bindingProps = computed(() => ({
+  ...bindingProps1.value,
+  ...bindingProps2.value,
+  ...bindingProps3.value,
+  ...bindingProps4.value,
+  ...bindingProps5.value,
+  ...bindingProps6.value,
+  ...bindingProps7.value,
+  ...bindingProps8.value,
+  ...bindingProps9.value,
+}));
 const bindingSlots = ref({});
+const testUpload = (f) => new Promise((resolve) => {
+  setTimeout(() => {
+    const response = {
+      hello: 'is a test response',
+      serverFileName: f.name,
+    };
+    resolve(response);
+  }, 1000);
+});
+
+const testDownload = (f) => new Promise((resolve) => {
+  setTimeout(() => {
+    if (f.nativeFile) {
+      downloadBlob(f.nativeFile, f.name);
+    } else {
+      downloadBlob(new Blob([]), 'is-dummy');
+    }
+    resolve(true);
+  }, 1000);
+});
+
+const dummyFiles = ref([]);
+
+const dummyFile = {
+  serverFile: {
+    targetPath: 'targetPath',
+    serverFileName: 'serverFileName',
+    fileUid: 'fileUid',
+  },
+  name: 'dummy',
+  size: Number.parseInt('21352', 10) || 0,
+  type: undefined,
+};
+
+const addFile = () => {
+  dummyFiles.value = [dummyFile];
+};
 
 const defaultCode = `
       <kw-file

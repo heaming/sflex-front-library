@@ -169,7 +169,8 @@
       }
 
       &.q-field--highlighted {
-        .q-field__control {
+        // we use field in field.... sorry for this.
+        > .q-field__inner > .q-field__control {
           &:hover::before {
             border-color: transparent;
           }
