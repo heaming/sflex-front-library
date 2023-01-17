@@ -36,6 +36,7 @@ export * from './scrollPicker';
 export * from './search';
 export * from './select';
 export * from './separator';
+export * from './sign';
 export * from './slider';
 export * from './space';
 export * from './stepper';
