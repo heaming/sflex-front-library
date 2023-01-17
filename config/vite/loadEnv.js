@@ -1,17 +1,15 @@
 const { loadEnv } = require('vite');
 const { resolve } = require('path');
-const isInternalContext = require('../utils/isInternalContext');
 const getPackageJson = require('../utils/getPackageJson');
 
 const context = process.cwd();
-const isOuterContext = !isInternalContext();
-const { name, version } = getPackageJson();
+const { version } = getPackageJson();
 
 const NODE_ENV_PRODUCTION = 'production';
 const NODE_ENV_DEVELOPMENT = 'development';
 const MODE_DEV = 'dev';
 
-function configPlugin(mode, command, envDir, shouldTransform) {
+module.exports = ({ mode, command, envDir }) => {
   const absolutePath = resolve(context, envDir || '');
   const env = loadEnv(mode, absolutePath);
   const metaEnv = {
@@ -31,70 +29,14 @@ function configPlugin(mode, command, envDir, shouldTransform) {
   });
 
   return {
-    name: 'load-env:config',
+    name: 'load-env',
     config() {
-      if (shouldTransform) {
-        return {
-          optimizeDeps: {
-            exclude: [`${name}/dist/env`],
-          },
-          define: {
-            __VUE_PROD_DEVTOOLS__: enableProdDevTools,
-          },
-        };
-      }
-
       return {
         define: {
-          __IMPORT_META_ENV__: metaEnv,
+          __VUE_IMPORT_META_ENV__: metaEnv,
           __VUE_PROD_DEVTOOLS__: enableProdDevTools,
         },
       };
     },
   };
-}
-
-function transformPlugin(pages, pagesDir) {
-  const isMPA = Object.keys(pages).length > 0;
-
-  const entryRegex = isMPA ? new RegExp(`${pagesDir}/\\w+/main\\.js$`) : /src\/main\.js$/;
-  const envRegex = new RegExp(`node_modules/${name}/dist/env\\.js`);
-
-  return {
-    name: 'load-env:transform',
-    transform(src, id) {
-      if (entryRegex.test(id)) {
-        return {
-          code: `import "${name}/dist/env"\n${src}`,
-          map: null,
-        };
-      }
-
-      if (envRegex.test(id)) {
-        return {
-          code: `const __IMPORT_META_ENV__ = import.meta.env;\n${src}`,
-          map: null,
-        };
-      }
-    },
-  };
-}
-
-module.exports = ({
-  mode, command, envDir, pages, pagesDir,
-}) => {
-  const shouldTransform = isOuterContext
-    && command === 'build';
-
-  const plugins = [
-    configPlugin(mode, command, envDir, shouldTransform),
-  ];
-
-  if (shouldTransform) {
-    plugins.push(
-      transformPlugin(pages, pagesDir),
-    );
-  }
-
-  return plugins;
 };
