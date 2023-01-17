@@ -14,6 +14,7 @@ export const useFileHeaderProps = {
   undeleteAllBtn: { type: [Boolean, String], default: undefined },
   downloadBtn: { type: [Boolean, String], default: true },
   downloadAllBtn: { type: [Boolean, String], default: undefined },
+  rows: { type: Number, default: 5 },
 };
 
 export const useFileHeaderEmits = ['scroll:file', 'scroll:header'];
@@ -339,6 +340,10 @@ export default (uploadCtx, ables, defaults = {}) => {
     }
     return t('FIXME', null, '전체다운로드');
   });
+  // computedUseHeader.value ? $-kw-file-item-height-use-header : $kw-field-height
+  const fileItemHeight = computed(() => (computedUseHeader.value ? 36 : 40));
+  const fileContainerMinHeight = computed(() => `${1 * fileItemHeight.value}px`);
+  const fileContainerMaxHeight = computed(() => (props.rows ? `${props.rows * fileItemHeight.value}px` : undefined));
 
   onUpdated(() => {
     headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
@@ -385,5 +390,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     downloadBtnLabel,
     showDownloadAllBtn,
     downloadAllBtnLabel,
+    fileContainerMinHeight,
+    fileContainerMaxHeight,
   };
 };

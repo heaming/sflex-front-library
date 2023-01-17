@@ -1,7 +1,7 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Checkbox
+      [Mobile] Checkbox
     </h2>
     <p class="kw-guide-description">
       Default design is same with desktop. <br>
