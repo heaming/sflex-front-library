@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.210",
+  "version": "0.1.211",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -83,6 +83,7 @@
     "suneditor": "^2.43.8",
     "unplugin-auto-import": "^0.8.4",
     "vee-validate": "^4.5.11",
+    "video.js": "^7.20.3",
     "vite": "^2.9.15",
     "vite-plugin-chunk-split": "^0.2.2",
     "vite-plugin-eslint": "^1.6.0",
@@ -92,6 +93,7 @@
     "vue-chartjs": "^4.1.1",
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.15",
+    "vue-video-player": "^6.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
