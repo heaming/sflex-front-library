@@ -4,7 +4,7 @@
     no-header
   >
     <h2 class="kw-guide-h2">
-      [MOBILE] Expansion
+      [Mobile] Expansion
     </h2>
     <guide-history-view :items="historyData" />
     <div class="kw-guide-section">
