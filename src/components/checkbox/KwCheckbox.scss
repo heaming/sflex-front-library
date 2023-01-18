@@ -236,25 +236,25 @@ body.mobile {
       @at-root .spaced-sibling + .spaced-sibling {
         margin-left: 8px;
       }
-    }
 
-    .q-checkbox__icon {
-      color: $black3;
-    }
-
-    .q-checkbox__label {
-      @include typo("dense", 400);
-
-      color: $black3;
-    }
-
-    .q-checkbox__inner--truthy {
       .q-checkbox__icon {
-        color: $primary;
+        color: $black3;
       }
 
-      & ~ .q-checkbox__label {
-        color: $primary;
+      .q-checkbox__label {
+        @include typo("dense", 400);
+
+        color: $black3;
+      }
+
+      .q-checkbox__inner--truthy {
+        .q-checkbox__icon {
+          color: $primary;
+        }
+
+        & ~ .q-checkbox__label {
+          color: $primary;
+        }
       }
     }
   }
