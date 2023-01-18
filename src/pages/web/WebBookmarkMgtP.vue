@@ -163,6 +163,7 @@ import { cloneDeep, filter, find, findIndex, isEqual } from 'lodash-es';
 import { getUid } from '../../utils/string';
 import { http } from '../../plugins/http';
 import { alert, confirm } from '../../plugins/dialog';
+import { notify } from '../../plugins/notify';
 import useModal from '../../composables/useModal';
 
 const { t } = useI18n();
@@ -419,6 +420,8 @@ async function onClickSave() {
 
   if (validate(normalizedBookmarks) && await confirm(t('MSG_ALT_WANT_SAVE'))) {
     await http.put('/sflex/common/common/bookmarks', normalizedBookmarks);
+
+    notify(t('MSG_ALT_SAVE_DATA'));
     ok();
   }
 }
