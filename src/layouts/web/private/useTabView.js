@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { last, filter, find, findIndex, map } from 'lodash-es';
 import consts from '../../../consts';
-import { alert, confirm } from '../../../plugins/dialog';
+import { confirm } from '../../../plugins/dialog';
 
-const MAX_COUNT = 10;
+const TAB_MAX_COUNT = 10;
 
 export default () => {
   const { t } = useI18n();
@@ -103,11 +102,22 @@ export default () => {
     return isClosable;
   }
 
+  function closeByIndex(index, force, autoSelect) {
+    const { key } = tabViews[index];
+    return close(key, force, autoSelect);
+  }
+
   const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
   const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
 
+  let routingIsBlocked = false;
   const removeBeforeEach = router.beforeEach(
     async (to, from, next) => {
+      if (routingIsBlocked === true) {
+        next(false);
+        return;
+      }
+
       // redirect if subpage is already opened
       const parentsKey = to.meta.menuUid;
       const matched = find(tabViews, { parentsKey });
@@ -123,13 +133,21 @@ export default () => {
       to.meta.logging = shouldLogging;
 
       // always check opened tab count except case subpage
-      const isOverCount = tabs.value.length >= MAX_COUNT;
-      const shouldPrevent = shouldLogging && isOverCount && to.meta.pageUseCode !== 'S';
+      const isOverMaxCount = tabs.value.length >= TAB_MAX_COUNT;
+      const shouldPrevent = shouldLogging && isOverMaxCount && to.meta.pageUseCode !== 'S';
 
       if (shouldPrevent) {
-        alert(t('MSG_ALT_HIS_TAB_MAX'));
-        next(false);
-        return;
+        routingIsBlocked = true;
+        const isCanceled = await confirm(t('MSG_ALT_HIS_TAB_MAX')) === false;
+
+        if (isCanceled) {
+          next(false);
+          routingIsBlocked = false;
+          return;
+        }
+
+        await closeByIndex(0);
+        routingIsBlocked = false;
       }
 
       next();

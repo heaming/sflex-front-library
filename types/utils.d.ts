@@ -183,7 +183,7 @@ interface GridUtil {
    * @param view 그리드 뷰 또는 트리 뷰
    * @param dataRow 데이터 행
    */
-  isNoneRow(view: GridView | TreeView, dataRow: number): boolean;
+  isReadRow(view: GridView | TreeView, dataRow: number): boolean;
 
   /**
    * 지정한 데이터 행의 상태가 RowState.CREATED 인지 확인
