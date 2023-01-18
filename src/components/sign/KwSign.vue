@@ -91,7 +91,7 @@ export default {
       const image = new Image();
       image.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg/2338px-%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg';
       image.crossOrigin = 'Anonymous';
-      image.onload = function () {
+      image.onload = () => {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       };
     }

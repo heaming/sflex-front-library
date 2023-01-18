@@ -66,7 +66,7 @@ export function getRowState(view, dataRow) {
   return data.hasData(dataRow) ? data.getRowState(dataRow) : null;
 }
 
-export function isNoneRow(view, dataRow) {
+export function isReadRow(view, dataRow) {
   return getRowState(view, dataRow) === RowState.NONE;
 }
 
