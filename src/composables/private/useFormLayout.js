@@ -26,9 +26,9 @@ const DEFAULT_COLS = {
   MOBILE: 0,
 };
 const DEFAULT_LABEL_SIZE = {
-  DESKTOP: 150,
-  TABLET: 108,
-  MOBILE: 80,
+  DESKTOP: 150, // 134 + padding-left 16px
+  TABLET: 124, // 108 + padding-left 16px
+  MOBILE: 92, // 80 + padding-left 12px
 };
 const DEFAULT_ALIGN_CONTENT = 'left';
 

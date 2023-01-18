@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import eslint from 'vite-plugin-eslint';
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import autoImport from 'unplugin-auto-import/vite';
 import visualizer from 'rollup-plugin-visualizer';
 
@@ -44,13 +43,6 @@ export default defineConfig(({ mode }) => {
           enabled: true,
           filepath: resolve(__dirname, 'config/eslint/autoImport.json'),
           globalsPropValue: 'readonly',
-        },
-      }),
-
-      chunkSplitPlugin({
-        strategy: 'all-in-one',
-        customSplitting: {
-          env: [/src\/consts\/private\/env/],
         },
       }),
 

@@ -1,17 +1,11 @@
 /* eslint-disable no-await-in-loop */
 import {
-  omit, keyBy, isEmpty,
-  every as _every,
-  filter as _filter,
-  find as _find,
-  forEach as _forEach,
-  map as _map,
-  reduce as _reduce,
-  some as _some,
+  omit, keyBy,
+  every as _every, filter as _filter, find as _find, forEach as _forEach, map as _map, reduce as _reduce, some as _some,
 } from 'lodash-es';
 import { date } from 'quasar';
 import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
-import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView } from './private/gridShared';
+import { waitUntilShowEditor, createCellIndexByDataColumn, isCellEditable, cloneView, destroyCloneView } from './private/gridShared';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
@@ -347,48 +341,73 @@ export function confirmIfIsModified(view, message) {
 /*
   Validation
  */
+async function validateRules(view, column, value, values, bails) {
+  const {
+    rules, customMessages,
+  } = _find(view.__columns__, { name: column.name }) || {};
+
+  if (rules) {
+    const name = column.header.text || column.name;
+    const { errors } = await _validate(value, rules, {
+      name, values, customMessages, bails,
+    });
+
+    return errors;
+  }
+
+  return [];
+}
+
+async function validateCallback(view, column, index, value, values) {
+  const result = await view.onValidate(view, index, value, values);
+  const resultIsError = result === false || typeof result === 'string';
+
+  if (resultIsError) {
+    const name = column.header.text || column.name;
+    const error = resultIsError === false ? i18n.t('MSG_VAL_INVALID', [name]) : result;
+
+    return [error];
+  }
+
+  return [];
+}
+
 export async function validateRow(view, dataRow, bails = true) {
   const validationErrors = [];
   const data = view.getDataSource();
-  const metas = view.__columns__.filter((e) => !isEmpty(e.rules));
+  const itemIndex = view.getItemIndex(dataRow);
+  const columns = view.getColumns();
   const values = getOutputRow(data, dataRow);
 
-  for (let i = 0; i < metas.length; i += 1) {
-    const { name: columnName, fieldName, rules, customMessages } = metas[i];
-    const column = view.columnByName(columnName);
-    const name = column.header.text || column.name;
-    const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
+  for (let i = 0; i < columns.length; i += 1) {
+    const column = columns[i];
+    const index = createCellIndexByDataColumn(view, itemIndex, column);
 
-    const result = await _validate(value, rules, { name, values, customMessages, bails });
-    const errors = [...result.errors];
-    const shouldInvokeOnValidate = result.valid || !bails;
+    if (isCellEditable(view, column, index)) {
+      const { name, fieldName } = column;
+      const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
-    if (shouldInvokeOnValidate) {
-      const itemIndex = view.getItemIndex(dataRow);
-      const index = createCellIndexByDataColumn(view, itemIndex, column);
-      const ret = await view.onValidate(view, index, value, values);
-      const retIsError = ret === false || typeof ret === 'string';
+      const errors = await validateRules(view, column, value, values, bails);
+      const ignoreCallback = errors.length > 0 && bails === true;
 
-      if (retIsError) {
+      if (ignoreCallback === false) {
         errors.push(
-          ret === false
-            ? i18n.t('MSG_VAL_INVALID', [name])
-            : ret,
+          ...(await validateCallback(view, column, index, value, values)),
         );
       }
-    }
 
-    const invalid = errors.length > 0;
+      const invalid = errors.length > 0;
 
-    if (invalid) {
-      validationErrors.push({
-        dataRow,
-        column: columnName,
-        fieldName,
-        errors,
-      });
+      if (invalid) {
+        validationErrors.push({
+          dataRow,
+          column: name,
+          fieldName,
+          errors,
+        });
 
-      if (bails) break;
+        if (bails) break;
+      }
     }
   }
 
