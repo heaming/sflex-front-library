@@ -94,7 +94,7 @@ export default {
 
     function openHomeMgtPopup() {
       modal({
-        component: () => import('../../pages/web/WebHomeMgtP.vue'),
+        component: () => import('../../pages/web/WebDashboardMgtP.vue'),
       });
     }
 
