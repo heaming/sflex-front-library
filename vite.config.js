@@ -72,6 +72,7 @@ export default defineConfig(({ mode }) => {
         // into your library
         external: [
           '@vee-validate',
+          '@videojs-player/vue',
           'axios',
           'bootstrap-datepicker',
           'chart.js',
@@ -94,6 +95,7 @@ export default defineConfig(({ mode }) => {
           'suneditor/src/lang',
           'suneditor/src/plugins',
           'vee-validate',
+          'video.js',
           'vue',
           'vue-chartjs',
           'vue-i18n',
