@@ -1,0 +1,10 @@
+<svg data-name="sms" id="sms" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <g data-name="ballon txt" style="fill:none">
+        <path d="M2 9h-3V-1h14V9H5.6L2 12z" style="stroke:none" transform="translate(2 3)"/>
+        <path d="M3.5 8.797 5.057 7.5h6.444v-7H.5v7H3.5v1.297M2 12V9h-3V-1h14V9H5.6L2 12z" style="fill:#222;stroke:none" transform="translate(2 3)"/>
+    </g>
+    <path data-name="사각형 151484" transform="translate(7.3 6)" style="fill:#222" d="M0 0h1.5v1.5H0z"/>
+    <path data-name="사각형 151659" transform="translate(4.3 6)" style="fill:#222" d="M0 0h1.5v1.5H0z"/>
+    <path data-name="사각형 151658" transform="translate(10.3 6)" style="fill:#222" d="M0 0h1.5v1.5H0z"/>
+</svg>
