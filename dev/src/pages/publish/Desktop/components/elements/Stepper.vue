@@ -852,7 +852,7 @@ const iconTool = `
     :done="stepInitNum2 > 3"
     prefix="3"
     :tooltip="'Write the text in here! :3'"
-    :active-icon="'wr
+    :active-icon="'write'"
   />
   <kw-step
     :name="4"
