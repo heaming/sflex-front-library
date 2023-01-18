@@ -117,6 +117,7 @@ const iconList1 = [
   'down_to',
   'cellphone_reject',
   'cellphone',
+  'sms',
 ];
 const iconList2 = [
   'add_list_24',

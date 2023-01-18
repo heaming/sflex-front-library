@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr>
-            <td rowspan="2">
+            <td rowspan="3">
               kw-form
             </td>
             <td>
@@ -43,6 +43,14 @@
             </td>
             <td>
               4px between kw-form-item
+            </td>
+          </tr>
+          <tr>
+            <td>
+              label-size=""
+            </td>
+            <td>
+              if the label size is diffrent, adjust it
             </td>
           </tr>
           <tr>
@@ -80,7 +88,7 @@
 
       <p class="kw-guide-description">
         default -  label : 14px / p : 16px<br>
-        label- width: 80px / pading-right: 12px<br>
+        label- width: 92px including padding-right /  pading-right: 12px<br>
         padding- 12px between kw-form-item<br>
         <br>
         No need to add kw-form-row!<br>
@@ -115,7 +123,7 @@
 
       <p class="kw-guide-description">
         dense - label : 14px / p : 14px<br>
-        label- width: 80px / pading-right: 12px<br>
+        label- width: 92px including padding-right / pading-right: 12px<br>
         padding- 4px between kw-form-item<br>
       </p>
       <q-card>
@@ -133,6 +141,45 @@
         </div>
         <guide-code-view
           :code-value="case2"
+          lang="vue"
+        />
+      </q-card>
+    </div>
+
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        label-size
+      </h3>
+
+      <p class="kw-guide-description">
+        default of label-size is 92px with padding right 12px.<br>
+        However, If the label-size is needed to adjust according to design, Put it <b>:label-size</b> in kw-form
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <h3>
+            This is for 102px (including padding-right: 12px).
+          </h3>
+          <kw-form
+            dense
+            class="mt20"
+            :label-size="102"
+          >
+            <kw-form-item
+              label="연락처"
+            >
+              <p>010-8426-2759</p>
+            </kw-form-item>
+            <kw-form-item label="연락처">
+              <p>010-8426-2759</p>
+            </kw-form-item>
+          </kw-form>
+        </div>
+        <guide-code-view
+          :code-value="case3"
           lang="vue"
         />
       </q-card>
@@ -169,7 +216,30 @@ const case2 = `
 </kw-form>
 `;
 
+const case3 = `
+<h3>
+  This is for 102px (including padding-right: 12px).
+</h3>
+<kw-form
+  dense
+  class="mt20"
+  :label-size="102"
+>
+  <kw-form-item
+    label="연락처"
+  >
+    <p>010-8426-2759</p>
+  </kw-form-item>
+  <kw-form-item label="연락처">
+    <p>010-8426-2759</p>
+  </kw-form-item>
+</kw-form>
+`;
 const historyData = [
+  {
+    timestamp: '2023-01-18',
+    text: 'add case3 - label-size',
+  },
   {
     timestamp: '2023-01-06',
     text: 'First added',
