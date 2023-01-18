@@ -94,14 +94,14 @@
               label="플러스서비스"
               checked-icon="check_24"
               unchecked-icon="check_24"
-              class="check-btn"
+              class="check-btn col"
             />
             <kw-checkbox
               v-model="checkTemp2"
-              label="플러스서비스"
+              label="플러스"
               checked-icon="check_24"
               unchecked-icon="check_24"
-              class="check-btn"
+              class="check-btn col"
             />
           </div>
           <div class="row items-center mt8">
@@ -110,14 +110,14 @@
               label="플러스서비스"
               checked-icon="check_24"
               unchecked-icon="check_24"
-              class="check-btn"
+              class="check-btn col"
             />
             <kw-checkbox
               v-model="checkTemp4"
-              label="플러스서비스"
+              label="서비스"
               checked-icon="check_24"
               unchecked-icon="check_24"
-              class="check-btn"
+              class="check-btn col"
             />
           </div>
         </div>
@@ -160,20 +160,23 @@ const checkboxDefaultCode = `
 `;
 
 const checkboxLayout = `
+<!-- This is a just example, so it is neither a must nor an answer.
+  According to the design screen, you can style the spacing, width, etc.
+  by using the helper class of quasar or using your own css. -->
 <div class="row items-center">
   <kw-checkbox
     v-model="checkTemp1"
     label="플러스서비스"
     checked-icon="check_24"
     unchecked-icon="check_24"
-    class="check-btn"
+    class="check-btn col"
   />
   <kw-checkbox
     v-model="checkTemp2"
-    label="플러스서비스"
+    label="플러스"
     checked-icon="check_24"
     unchecked-icon="check_24"
-    class="check-btn"
+    class="check-btn col"
   />
 </div>
 <div class="row items-center mt8">
@@ -182,14 +185,14 @@ const checkboxLayout = `
     label="플러스서비스"
     checked-icon="check_24"
     unchecked-icon="check_24"
-    class="check-btn"
+    class="check-btn col"
   />
   <kw-checkbox
     v-model="checkTemp4"
-    label="플러스서비스"
+    label="서비스"
     checked-icon="check_24"
     unchecked-icon="check_24"
-    class="check-btn"
+    class="check-btn col"
   />
 </div>
 `;

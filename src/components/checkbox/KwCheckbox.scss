@@ -232,7 +232,6 @@ body.mobile {
       padding: 7px 12px 7px 8px;
       border: 1px solid $line-stroke;
       justify-content: flex-start;
-      flex: 1 1 auto;
 
       @at-root .spaced-sibling + .spaced-sibling {
         margin-left: 8px;
