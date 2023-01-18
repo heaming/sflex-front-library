@@ -6,20 +6,22 @@
 
 body.desktop,
 body.tablet {
-  .global-modal--window {
+  .global-modal--window:not(.kw-popup--window-consult) {
     .q-dialog__inner {
       background-color: $line-bg;
     }
 
     .kw-popup {
+      width: 100% !important;
       max-width: unset !important;
       min-width: unset !important;
+      background: transparent !important;
       inset: 0;
-      padding: 0; // fixme
+      padding: 0 0 40px;
       border: unset;
 
       > div {
-        width: 840px; // fixme
+        width: 100%;
         max-width: 100vw;
         margin-left: auto;
         margin-right: auto;
@@ -32,9 +34,20 @@ body.tablet {
       }
 
       &__header {
+        width: 1212px;
+        margin: 0 auto;
+        padding: 40px 0 20px;
         inset: unset;
         position: relative;
-        background-color: transparent;
+        background: $line-bg;
+
+        &-close {
+          display: none;
+        }
+
+        &-title {
+          font-size: 20px;
+        }
 
         &::after {
           display: none;
@@ -43,12 +56,19 @@ body.tablet {
 
       &__content {
         max-height: unset;
+        width: 1212px;
+        margin: 0 auto;
+        padding: 30px 40px;
         background-color: $bg-white;
       }
 
       &__action {
         inset: unset;
         position: relative;
+      }
+
+      .kw-separator + .kw-tabs {
+        padding: 0 0 30px;
       }
     }
   }
