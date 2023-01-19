@@ -286,17 +286,23 @@
                     <span class="kw-font-pt12">09:30</span>
                     <div class="column ml12">
                       <div class="row items-center">
-                        <span class="text-weight-bold">김교원</span>
-                        <span class="text-weight-bold ml4 kw-fc--primary">VIP</span>
+                        <span class="text-weight-medium">김교원</span>
+                        <span class="text-weight-medium ml4 kw-fc--primary">VIP</span>
                         <kw-chip
                           label="특이"
                           color="primary"
                           outline
                           class="ml4"
                         />
+                        <kw-chip
+                          label="재발행"
+                          color="primary"
+                          outline
+                          class="ml4"
+                        />
                       </div>
                       <span class="kw-font-pt14 kw-fc--placeholder">(2022-0532864)</span>
-                      <span class="kw-font-pt14 kw-fc--black1">경기 파주시 후곡로 50 414동 1800호
+                      <span class="kw-font-pt14 kw-fc--black1 mt8">경기 파주시 후곡로 50 414동 1800호
                         (금촌동, 후곡마을뜨란채)</span>
                     </div>
                   </div>
@@ -308,7 +314,7 @@
                   group="list-group"
                   expand-icon-align="top"
                   expand-icon-class="kw-font-pt16 pr12 mt12"
-                  class="kw-bc--bg-box onlyforhere"
+                  class="kw-bc--bg-box mt20"
                   expand-icon="arrow_down"
                 >
                   <template #header>
@@ -709,23 +715,33 @@ const case2 = `
       <div class="row justify-between no-wrap">
         <div class="row items-start no-wrap">
           <span class="kw-font-pt12">09:30</span>
-          <div class="column ml12">
+          <div
+            class="column ml12"
+          >
             <div class="row items-center">
-              <span class="text-weight-bold">김교원</span>
-              <span class="text-weight-bold ml4 kw-fc--primary">VIP</span>
+              <span class="text-weight-medium">김교원</span>
+              <span class="text-weight-medium ml4 kw-fc--primary">VIP</span>
               <kw-chip
                 label="특이"
                 color="primary"
                 outline
                 class="ml4"
               />
+              <kw-chip
+                label="재발행"
+                color="primary"
+                outline
+                class="ml4"
+              />
             </div>
             <span class="kw-font-pt14 kw-fc--placeholder">(2022-0532864)</span>
-            <span class="kw-font-pt14 kw-fc--black1">경기 파주시 후곡로 50 414동 1800호
+            <span class="kw-font-pt14 kw-fc--black1 mt8">경기 파주시 후곡로 50 414동 1800호
               (금촌동, 후곡마을뜨란채)</span>
           </div>
         </div>
-        <div class="kw-font-pt12 text-weight-medium text-no-wrap kw-fc--primary w45 text-right">
+        <div
+          class="kw-font-pt12 text-weight-medium text-no-wrap kw-fc--primary w45 text-right"
+        >
           완료
         </div>
       </div>
