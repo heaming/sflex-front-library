@@ -476,6 +476,11 @@
         <div class="kw-guide-example">
           <kw-btn
             dense
+            icon="plus"
+            class="mr8"
+          />
+          <kw-btn
+            dense
             underline
             text-color="black3"
             icon-right="plus"
@@ -802,19 +807,16 @@ const customBtn = `
 const etcBtn = `
 <kw-btn
   dense
-  underline
-  text-color="black3"
-  icon-right="plus"
-  label="TEXT"
+  icon="plus"
   class="mr8"
 />
 <kw-btn
-dense
-borderless
-text-color="primary"
-icon-right="arrow_right"
-label="TEXT"
-class="mr8"
+  dense
+  borderless
+  text-color="primary"
+  icon-right="arrow_right"
+  label="TEXT"
+  class="mr8"
 />
 <kw-btn
   icon-right="arrow_down"
