@@ -546,6 +546,29 @@
 }
 
 .rg-header-cell {
+  .rg-header-renderer > span:first-child {
+    position: relative;
+  }
+
+  &.rg-header-cell--required > .rg-header-renderer > span:first-child::after {
+    content: "*";
+    position: absolute;
+    right: -7px;
+    color: $error;
+  }
+
+  &__hint {
+    position: absolute;
+    display: inline-block;
+    top: 23%;
+    width: 14px;
+    height: 14px;
+    margin-left: 8px;
+    color: rgb(255 255 255 / 0%);
+    background: url(~@assets/images/ic_info_default_16.svg) no-repeat center center;
+    background-size: 14px;
+  }
+
   .rg-header-filtering {
     display: none !important;
   }
@@ -553,12 +576,6 @@
   &:hover .rg-header-filtering,
   .rg-header-filtering.filter-activated {
     display: inline-block !important;
-  }
-
-  &.rg-header-cell--required > .rg-header-renderer > span:first-child::after {
-    content: "*";
-    position: absolute;
-    color: $error;
   }
 }
 
