@@ -34,7 +34,7 @@ body.tablet {
       }
 
       &__header {
-        width: 1212px;
+        width: 1212px !important;
         margin: 0 auto;
         padding: 40px 0 20px;
         inset: unset;
@@ -56,7 +56,7 @@ body.tablet {
 
       &__content {
         max-height: unset;
-        width: 1212px;
+        width: 1212px !important;
         margin: 0 auto;
         padding: 30px 40px;
         background-color: $bg-white;
