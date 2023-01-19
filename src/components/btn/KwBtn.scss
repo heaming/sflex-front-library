@@ -367,7 +367,7 @@ body.mobile {
             padding-right: calc((#{$-mobile-kw-btn-line-height} + #{ zero-unit(at($-mobile-kw-btn-padding, 1) + at($-mobile-kw-btn-padding, 3))} - #{$-mobile-kw-btn-icon-size}) / 2);
 
             &--dense {
-              padding-left: calc((#{$-mobile-kw-btn-line-height-dense} + #{ zero-unit(at($-mobile-kw-btn-padding-dense, 1) + at($-mobile-kw-btn-padding-dense, 3))} - #{$-mobile-kw-btn-icon-size-dense}) / 2); /* stylelint-disable */
+              padding-left: calc((#{$-mobile-kw-btn-line-height-dense} + #{ zero-unit(at($-mobile-kw-btn-padding-dense, 1) + at($-mobile-kw-btn-padding-dense, 3))} - #{$-mobile-kw-btn-icon-size-dense}) / 2); /* stylelint-disable max-line-length */
               padding-right: calc((#{$-mobile-kw-btn-line-height-dense} + #{ zero-unit(at($-mobile-kw-btn-padding-dense, 1) + at($-mobile-kw-btn-padding-dense, 3))} - #{$-mobile-kw-btn-icon-size-dense}) / 2);
             }
           }
