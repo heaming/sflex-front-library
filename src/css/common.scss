@@ -262,7 +262,7 @@ p {
   &__item {
     position: relative;
     padding: 0 40px;
-    flex: 1 1 auto;
+    flex: 1 1 calc(100% / 3);
     display: flex;
     column-gap: 16px;
     align-items: center;
@@ -281,12 +281,10 @@ p {
   &__label {
     flex: 0 1 80px;
     max-width: 134px;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.43;
-    color: $black3;
+
+    @include typo("dense", 400);
+
+    color: $black1;
   }
 
   &__data {

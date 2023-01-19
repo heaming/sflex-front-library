@@ -308,6 +308,8 @@ body.mobile {
       $-mobile-kw-btn-line-height-dense: 20px;
       $-mobile-kw-btn-font-size-dense: 12px;
       $-mobile-kw-btn-font-weight-dense: 400;
+      $-mobile-kw-btn-icon-size: 1em;
+      $-mobile-kw-btn-icon-size-dense: 16px; // design concept.
 
       &.q-btn {
         @include kw-btn-height-modifier($-mobile-kw-btn-padding, $-mobile-kw-btn-line-height, $-mobile-kw-btn-font-size, $-mobile-kw-btn-font-weight);
@@ -354,6 +356,20 @@ body.mobile {
 
           &--dense {
             padding: 0;
+          }
+        }
+      }
+
+      &--icon-only {
+        &.kw-btn--outlined {
+          &.q-btn {
+            padding-left: calc((#{$-mobile-kw-btn-line-height} + #{ zero-unit(at($-mobile-kw-btn-padding, 1) + at($-mobile-kw-btn-padding, 3))} - #{$-mobile-kw-btn-icon-size}) / 2);
+            padding-right: calc((#{$-mobile-kw-btn-line-height} + #{ zero-unit(at($-mobile-kw-btn-padding, 1) + at($-mobile-kw-btn-padding, 3))} - #{$-mobile-kw-btn-icon-size}) / 2);
+
+            &--dense {
+              padding-left: calc((#{$-mobile-kw-btn-line-height-dense} + #{ zero-unit(at($-mobile-kw-btn-padding-dense, 1) + at($-mobile-kw-btn-padding-dense, 3))} - #{$-mobile-kw-btn-icon-size-dense}) / 2); /* stylelint-disable */
+              padding-right: calc((#{$-mobile-kw-btn-line-height-dense} + #{ zero-unit(at($-mobile-kw-btn-padding-dense, 1) + at($-mobile-kw-btn-padding-dense, 3))} - #{$-mobile-kw-btn-icon-size-dense}) / 2);
+            }
           }
         }
       }

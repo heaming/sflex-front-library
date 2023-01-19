@@ -89,7 +89,7 @@
             <li class="grid-fix-footer__item">
               <span class="grid-fix-footer__label">환경건수</span>
               <p class="grid-fix-footer__data">
-                100,000
+                100
               </p>
             </li>
           </ul>
