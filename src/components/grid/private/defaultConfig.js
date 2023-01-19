@@ -2,6 +2,7 @@ import {
   RestoreMode, IndicatorValue, GridFitStyle, ExitGridWhenTab, SortMode,
   SelectionStyle, ValidationLevel, GridBase, TreeView, RowGroupAdornments, ExpanderVisibility, HandleVisibility,
 } from 'realgrid';
+import env from '../../../consts/private/env';
 import i18n from '../../../i18n';
 
 const dataConfig = {
@@ -19,9 +20,8 @@ const viewConfig = {
   footers: {
     visible: false,
   },
-
   stateBar: {
-    visible: false,
+    visible: env.VITE_REALGRID_STATUSBAR,
     footText: '',
   },
   checkBar: {
@@ -116,7 +116,7 @@ const viewConfig = {
 
   scrollBarWidth: 10,
   scrollBarHeight: 10,
-  hideDeletedRows: true,
+  hideDeletedRows: env.VITE_REALGRID_HIDE_DELETE_ROWS,
   undoable: false,
 };
 

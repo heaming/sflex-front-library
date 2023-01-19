@@ -458,7 +458,10 @@
   .rg-rowbarcontainer .rg-table tr td {
     border-right: 0;
     border-bottom-color: $line-bg;
-    background: #fff;
+
+    &:not(.rg-statebar-cell.rg-statebar-updated,.rg-statebar-deleted,.rg-statebar-created) {
+      background: #fff;
+    }
   }
 
   .rg-head,

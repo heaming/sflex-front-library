@@ -1,15 +1,19 @@
 <template>
   <video-player
+    ref="playerRef"
     :src="src"
     :poster="poster"
     controls
     :autoplay="autoplay"
-    :loop="loop"
+    @ready="initVideo($event)"
   />
 </template>
 
 <script>
 import { VideoPlayer } from '@videojs-player/vue';
+
+import videojs from 'video.js';
+import 'videojs-landscape-fullscreen';
 
 export default {
   name: 'KwVideo',
@@ -21,6 +25,15 @@ export default {
     poster: { type: String, default: undefined },
     autoplay: { type: Boolean, default: false },
     loop: { type: Boolean, default: false },
+  },
+  setup() {
+    return {
+      initVideo(event) {
+        const player = videojs.getPlayer(event.target);
+        console.log(player);
+        player.landscapeFullscreen();
+      },
+    };
   },
 };
 </script>
