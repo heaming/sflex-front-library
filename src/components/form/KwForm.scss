@@ -156,6 +156,8 @@ body.mobile {
 
 body.mobile:not(.tablet) {
   .kw-form {
+    width: 100%;
+
     $-kw-form-row-padding-dense: 2px 0;
     $-kw-form-item-min-height-dense: 20px;
     $-kw-form-item-min-height: 20px;
