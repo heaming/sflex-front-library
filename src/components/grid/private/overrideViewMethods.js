@@ -6,6 +6,7 @@ import {
   isCellEditable, isCellItem, isCellItemClickable,
 } from '../../../utils/private/gridShared';
 import i18n from '../../../i18n';
+import { sanitize } from '../../../plugins/sanitize';
 
 const setColumn = 'setColumn';
 const setColumns = 'setColumns';
@@ -32,15 +33,20 @@ function setColumnHeader(column) {
   column.header = typeof column.header === 'string' ? { text: column.header } : column.header;
   column.header.tooltip = column.header.tooltip || column.header.text;
 
+  const headerClass = [column.header.styleName];
+
   // required
   if (column.required === true || column.rules?.includes('required')) {
-    const headerClass = [
-      column.header.styleName,
-      'rg-header-cell--required',
-    ];
-
-    column.header.styleName = headerClass.join(' ').trim();
+    headerClass.push('rg-header-cell--required');
   }
+  // hint
+  if (column.hint) {
+    const text = column.header.text || column.name || column.fieldName;
+    column.header.template ||= `${text} <i class=rg-header-cell__hint title=${column.hint} />`;
+  }
+
+  column.header.template = sanitize(column.header.template);
+  column.header.styleName = headerClass.join(' ').trim();
 }
 
 function setColumnOptions(column) {
