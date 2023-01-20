@@ -48,7 +48,7 @@ interface KwDateProps {
   /**
    * 캘린더 컨텐츠 표시할 때, 아이템(일자, 월, 년)에 대한 속성 지정하는 콜백
    */
-  beforeShow: (
+  beforeShow?: (
     currentView: 0 | 1 | 2,
     formattedDate: string,
   ) =>

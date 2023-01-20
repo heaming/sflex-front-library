@@ -3,6 +3,7 @@
     class="web-dashboard-mgt"
     size="4xl"
     :title="$t('MSG_TIT_HOME_MGT')"
+    @before-close="onBeforeClose"
   >
     <div class="web-dashboard-mgt__inner">
       <web-dashboard-mgt-p-select
@@ -10,6 +11,7 @@
         :auth-cards="authCards"
       />
       <web-dashboard-mgt-p-drag
+        ref="dragRef"
         v-model:user-cards="userCards"
       />
     </div>
@@ -30,14 +32,19 @@
 </template>
 
 <script setup>
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, isEqual } from 'lodash-es';
 import { http } from '../../plugins/http';
-import { confirm } from '../../plugins/dialog';
+import { alert, confirm } from '../../plugins/dialog';
+import { notify } from '../../plugins/notify';
+import useModal from '../../composables/useModal';
 
 import WebDashboardMgtPSelect from './WebDashboardMgtPSelect.vue';
 import WebDashboardMgtPDrag from './WebDashboardMgtPDrag.vue';
 
 const { t } = useI18n();
+const { ok } = useModal();
+
+const dragRef = ref();
 
 let initialUserCards;
 const userCards = shallowRef([]);
@@ -50,7 +57,10 @@ async function fetchAuthCards() {
 
 async function fetchUserCards() {
   const response = await http.get('/sflex/common/common/user-homecards');
-  userCards.value = response.data;
+
+  userCards.value = response.data.sort((a, b) => (a.rowPosition === b.rowPosition
+    ? (a.columnPosition - b.columnPosition) : (a.rowPosition - b.rowPosition)));
+
   initialUserCards = cloneDeep(userCards.value);
 }
 
@@ -59,6 +69,12 @@ await Promise.all([
   fetchUserCards(),
 ]);
 
+function onBeforeClose(result) {
+  return result
+    || isEqual(userCards.value, initialUserCards)
+    || confirm(t('MSG_ALT_CHG_CNTN'));
+}
+
 async function onClickReset() {
   if (await confirm(t('MSG_ALT_WANT_RESET'))) {
     userCards.value = cloneDeep(initialUserCards);
@@ -66,7 +82,16 @@ async function onClickReset() {
 }
 
 async function onClickSave() {
-  //
+  if (isEqual(userCards.value, initialUserCards)) {
+    await alert(t('MSG_ALT_NO_CHG_CNTN'));
+    return;
+  }
+
+  const saveUserCards = dragRef.value.getSaveUserCards();
+  await http.post('/sflex/common/common/user-homecards', saveUserCards);
+
+  notify(t('MSG_ALT_SAVE_DATA'));
+  ok();
 }
 
 </script>

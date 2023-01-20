@@ -13,17 +13,20 @@
         :selected="selectedGlobalMenuKey"
         :expanded="expandedKeys"
         :nodes="treeNodes"
-        :duration="100"
         node-key="key"
         label-key="label"
+        no-transition
         no-connectors
         @update:expanded="onUpdateExpanded"
         @update:selected="onUpdateSelected"
       >
         <template #default-header="{node, expanded}">
           <div
-            class="drawer-menu__node"
-            :class="`drawer-menu__node--depth-${node.depth}`"
+            :class="{
+              'drawer-menu__node': true,
+              'drawer-menu__node--selected': isSelected(node.key),
+              [`drawer-menu__node--depth-${node.depth}`]: true,
+            }"
           >
             <div class="drawer-menu__node-content">
               {{ node.label }}

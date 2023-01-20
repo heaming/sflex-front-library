@@ -201,29 +201,23 @@ body.desktop .web-layout {
         font-weight: 700;
         color: $black1;
       }
+
+      &:has(> .drawer-menu__node--selected) {
+        font-weight: 700;
+        color: $black1;
+      }
     }
 
     &__children {
-      padding: 14px 0;
       background: $bg-box;
+
+      &:has(> .q-tree__node) {
+        padding: 14px 0;
+      }
 
       .q-tree__children {
         padding: 0;
       }
-    }
-
-    &__node--parent {
-      &:has(.q-tree__node-collapsible > .q-tree__children > .q-tree__node > .q-tree__node--selected) {
-        > .q-tree__node-header .q-tree__node-header-content {
-          font-weight: 700;
-          color: $black1;
-        }
-      }
-    }
-
-    &__node--selected .q-tree__node-header-content {
-      font-weight: 700;
-      color: $black1;
     }
 
     &__arrow {
@@ -234,7 +228,7 @@ body.desktop .web-layout {
   .drawer-menu {
     &__tree {
       &--empty {
-        padding: 0 20px;
+        padding: 10.5px 20px;
       }
     }
 
@@ -278,8 +272,10 @@ body.desktop .web-layout {
     }
 
     &__node-arrow {
-      font-size: inherit;
-      transition: transform 0.3s;
+      &.q-icon {
+        font-size: inherit;
+        transition: none;
+      }
 
       &--expanded {
         transform: rotate(180deg);
