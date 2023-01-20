@@ -6,12 +6,12 @@
 
 body.desktop,
 body.tablet {
-  .global-modal--window:not(.kw-popup--window-consult) {
+  .global-modal--window {
     .q-dialog__inner {
       background-color: $line-bg;
     }
 
-    .kw-popup {
+    .kw-popup:not(.kw-popup--window-consult) {
       width: 100% !important;
       max-width: unset !important;
       min-width: unset !important;
@@ -33,7 +33,7 @@ body.tablet {
         box-shadow: unset;
       }
 
-      &__header {
+      .kw-popup__header {
         width: 1212px !important;
         margin: 0 auto;
         padding: 40px 0 20px;
@@ -54,7 +54,7 @@ body.tablet {
         }
       }
 
-      &__content {
+      .kw-popup__content {
         max-height: unset;
         width: 1212px !important;
         margin: 0 auto;
@@ -62,7 +62,7 @@ body.tablet {
         background-color: $bg-white;
       }
 
-      &__action {
+      .kw-popup__action {
         inset: unset;
         position: relative;
       }
