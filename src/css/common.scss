@@ -4,6 +4,8 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: #222;
+
+  // noinspection CssInvalidPropertyValue
   overflow: overlay !important;
   scrollbar-gutter: stable;
 
@@ -197,6 +199,10 @@ p {
 
 @include color-based(".bg-", $semantic-colors) using ($color) {
   background-color: $color !important;
+}
+
+@include color-based(".border-color-", $semantic-colors) using ($color) {
+  border-color: $color !important;
 }
 
 // ul,li
