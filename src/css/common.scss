@@ -196,7 +196,7 @@ p {
 .result-area,
 .normal-area {
   .kw-tabs {
-    @include tabs-padding(0, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
+    @include kw-tabs-padding(0, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
   }
 }
 
@@ -228,7 +228,7 @@ p {
         border-right: 1px solid $line-line; // imitate search box border
         box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%); // imitate search box border
 
-        @include tabs-padding(20px 40px 0 40px, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
+        @include kw-tabs-padding(20px 40px 0 40px, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
 
         // region can be replaced by using `activeLine` props in kw-tabs
         &::before {
@@ -304,8 +304,8 @@ p {
           $-custom-border: 1px solid $line-line;
           $-custom-active-border: 1px solid $line-line;
 
-          @include tab-border($-custom-border);
-          @include tab-active-border($-custom-active-border);// endregion
+          @include kw-tab-border($-custom-border);
+          @include kw-tab-active-border($-custom-active-border);// endregion
 
           // region can be replaced by using `active-*` props in kw-tabs
           &--active {

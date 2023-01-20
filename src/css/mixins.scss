@@ -256,6 +256,251 @@
   @include kw-btn-height-modifier($-padding, $-line-height, $-font-size, $-font-weight, $-letter-spacing);
 }
 
+@mixin kw-tab-active-border($active-border, $active-line-position: null, $inactive-line-width: null) {
+  $-active-line-width: 1px;
+  $-active-line-style: solid;
+  $-active-line-color: $black1;
+
+  @if type-of($active-border) == "list" {
+    @if length($active-border) >= 3 {
+      $-active-line-width: nth($active-border, 1);
+      $-active-line-style: nth($active-border, 2);
+      $-active-line-color: nth($active-border, 3);
+    }
+
+    @if length($active-border) == 2 {
+      $-active-line-width: nth($active-border, 1);
+      $-active-line-style: nth($active-border, 2);
+    }
+
+    @if length($active-border) == 1 {
+      $-active-line-width: nth($active-border, 1);
+    }
+  } @else {
+    $-active-line-color: $active-border;
+  }
+
+  $-inactive-line-width: $-active-line-width;
+
+  @if $inactive-line-width {
+    $-inactive-line-width: $inactive-line-width;
+  }
+
+  @if not($active-line-position) {
+    &::before {
+      border: none;
+    }
+  }
+
+  @if $active-line-position == "top" {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1 * $-inactive-line-width;
+      border-top: $active-border;
+    }
+  }
+
+  @if $active-line-position == "left" {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1 * $-inactive-line-width;
+      border-left: $active-border;
+    }
+  }
+
+  @if $active-line-position == "bottom" {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1 * $-inactive-line-width;
+      border-bottom: $active-border;
+    }
+  }
+
+  @if $active-line-position == "right" {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1 * $-inactive-line-width;
+      border-right: $active-border;
+    }
+  }
+
+  &--active {
+    $-default-content-relative-top: 1px;
+
+    border-width: $-active-line-width;
+    border-style: $-active-line-style;
+    border-color: $-active-line-color;
+
+    &::before {
+      display: none;
+    }
+
+    @if not($active-line-position) {
+      > .kw-tab__content {
+        top: $-default-content-relative-top;
+      }
+    }
+
+    @if $active-line-position == "top" {
+      border-top-width: 0;
+
+      > .kw-tab__content {
+        top: $-default-content-relative-top + ($-active-line-width / 2);
+      }
+    }
+
+    @if $active-line-position == "left" {
+      border-left-width: 0;
+
+      > .kw-tab__content {
+        left: ($-active-line-width / 2);
+      }
+    }
+
+    @if $active-line-position == "bottom" {
+      border-bottom-width: 0;
+
+      > .kw-tab__content {
+        top: $-default-content-relative-top - ($-active-line-width / 2);
+      }
+    }
+
+    @if $active-line-position == "right" {
+      border-right-width: 0;
+
+      > .kw-tab__content {
+        right: ($-active-line-width / 2);
+      }
+    }
+  }
+}
+
+@mixin kw-tab-border($border, $vertical: false) {
+  $-line-width: 1px;
+  $-line-style: solid;
+  $-line-color: inherit;
+
+  @if type-of($border) == "list" {
+    @if length($border) == 3 {
+      $-line-width: nth($border, 1);
+      $-line-style: nth($border, 2);
+      $-line-color: nth($border, 3);
+    }
+
+    @if length($border) == 2 {
+      $-line-width: nth($border, 1);
+      $-line-style: nth($border, 2);
+    }
+
+    @if length($border) == 1 {
+      $-line-width: nth($border, 1);
+    }
+  } @else {
+    $-line-color: $border;
+  }
+
+  border-width: $-line-width;
+  border-style: $-line-style;
+  border-color: $-line-color;
+
+  @if $vertical {
+    border-bottom-width: 0;
+
+    &:last-of-type {
+      border-bottom-width: $-line-width;
+    }
+  } @else {
+    border-right-width: 0;
+
+    &:last-of-type {
+      border-right-width: $-line-width;
+    }
+  }
+
+  &--active {
+    @if $vertical {
+      & ~ .kw-tab {
+        border-top-width: 0;
+        border-bottom-width: $-line-width;
+      }
+    } @else {
+      & ~ .kw-tab {
+        border-left-width: 0;
+        border-right-width: $-line-width;
+      }
+    }
+  }
+}
+
+// must use mixin when change padding for tabs.
+// Cause the arrow position depends on padding.
+@mixin kw-tabs-padding($padding, $arrow-width, $arrow-height) {
+  &.q-tabs {
+    &--scrollable {
+      &.q-tabs__arrows--outside {
+        &.q-tabs--horizontal {
+          padding-right: $arrow-width + at($padding, 2);
+          padding-left: $arrow-width + at($padding, 4);
+        }
+
+        &.q-tabs--vertical {
+          padding-top: $arrow-height + at($padding, 1);
+          padding-bottom: $arrow-height + at($padding, 3);
+        }
+      }
+    }
+
+    &--horizontal {
+      .q-tabs__arrow {
+        height: $arrow-height;
+
+        &--left {
+          top: at($padding, 1);
+          bottom: at($padding, 3);
+          left: at($padding, 4);
+        }
+
+        &--right {
+          top: at($padding, 1);
+          bottom: at($padding, 3);
+          right: at($padding, 2);
+        }
+      }
+    }
+
+    &--vertical {
+      width: $arrow-width;
+
+      .q-tabs__arrow {
+        &--left {
+          top: at($padding, 1);
+          right: at($padding, 2);
+          left: at($padding, 4);
+        }
+
+        &--right {
+          right: at($padding, 2);
+          bottom: at($padding, 3);
+          left: at($padding, 4);
+        }
+      }
+    }
+  }
+
+  padding: $padding;
+
+  &::before {
+    top: at($padding, 1);
+    right: at($padding, 2);
+    bottom: at($padding, 3);
+    left: at($padding, 4);
+  }
+}
+
 // If, you don't want common hover, active effect. use this.
 @mixin kw-btn-custom-color-action($name, $color, $hover-color, $action-color) {
   .kw-btn--filled,
