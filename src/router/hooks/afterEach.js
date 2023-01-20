@@ -1,3 +1,4 @@
+import { map } from 'lodash-es';
 import store from '../../store';
 import { http } from '../../plugins/http';
 
@@ -48,9 +49,25 @@ async function loggingIfNeeded(to) {
   }
 }
 
+function setSelectedGlobalKeys(to) {
+  const appKey = to.meta.applicationId || null;
+  let menuKey = to.meta.menuUid || null;
+
+  // sub page
+  if (to.meta.pageUseCode === 'S') {
+    const menuPaths = store.getters['meta/getMenuPaths'](menuKey);
+    const parentsMenuUids = map(menuPaths, 'key');
+    menuKey = parentsMenuUids[parentsMenuUids.length - 2];
+  }
+
+  store.commit('app/setSelectedGlobalAppKey', appKey);
+  store.commit('app/setSelectedGlobalMenuKey', menuKey);
+}
+
 // eslint-disable-next-line no-unused-vars
 export default async (to, from, failure) => {
   assignParamsByQuery(to);
   assignParamsIfIsLinkPage(to);
   loggingIfNeeded(to);
+  setSelectedGlobalKeys(to);
 };

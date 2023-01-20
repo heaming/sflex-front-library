@@ -1,4 +1,5 @@
 import { isNavigationFailure } from 'vue-router';
+import { union } from 'lodash-es';
 import { alert } from '../../plugins/dialog';
 
 export default () => {
@@ -15,6 +16,7 @@ export default () => {
   const title = ref();
   const treeNodes = ref([]);
   const expandedKeys = ref([]);
+  const selectedKeys = ref([]);
 
   function createHierarchy(nodes, currents) {
     return currents.map((c) => ({
@@ -34,11 +36,21 @@ export default () => {
     return matched ? [...recursiveGetKeys(appKey, matched.parentsKey), menuKey] : [];
   }
 
+  function isSelected(key) {
+    return selectedKeys.value.includes(key);
+  }
+
   watch(selectedGlobalAppKey, (appKey) => {
     title.value = globalApps.find((v) => v.key === appKey)?.label;
     treeNodes.value = createNodes(appKey);
-    expandedKeys.value = recursiveGetKeys(appKey, selectedGlobalMenuKey.value);
+    selectedKeys.value = recursiveGetKeys(appKey, selectedGlobalMenuKey.value);
+    expandedKeys.value = [...selectedKeys.value];
   }, { immediate: true });
+
+  watch(selectedGlobalMenuKey, (menuKey) => {
+    selectedKeys.value = recursiveGetKeys(selectedGlobalAppKey.value, menuKey);
+    expandedKeys.value = union([...expandedKeys.value, ...selectedKeys.value]);
+  });
 
   function onUpdateExpanded(expanded) {
     expandedKeys.value = expanded;
@@ -82,6 +94,7 @@ export default () => {
     title,
     treeNodes,
     expandedKeys,
+    isSelected,
     onUpdateExpanded,
     onUpdateSelected,
   };
