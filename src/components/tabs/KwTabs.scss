@@ -1,219 +1,308 @@
-.kw-tab-panel {
-  padding: 0;
-
-  & .kw-tabs:not(.kw-tabs--dense) {
-    & + .kw-tab-panels {
-      box-shadow: 2px 4px 7px -4px rgb(0 0 0 / 7%);
-    }
-  }
-}
-
-.kw-tab-panels > .q-panel > .kw-tab-panel > .kw-search {
-  border-top: 0;
-}
-
-.kw-tabs {
-  padding: 24px 40px 0;
-  border: 1px solid $line-line;
-  border-bottom: none;
-  background: #fff;
-
-  .q-tabs__content {
-    border-bottom: 1px solid $black1;
-    height: 40px;
-    overflow: visible;
-  }
-
-  .kw-tab {
-    min-height: 40px;
-    height: 40px;
-    padding: 0 28px;
-    background: $bg-box;
-    border: 1px solid $placeholder;
-    border-bottom: 1px solid $black1;
-    opacity: 1;
-
-    .q-tab__label {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: $black3;
-    }
-
-    .q-tab__content {
-      padding: 0;
-      min-width: initial;
-    }
-
-    &[aria-selected="false"] {
-      height: 38px;
-    }
-
-    & + .kw-tab {
-      margin-left: -1px;
-    }
-
-    &.q-tab--active {
-      background: #fff;
-      border-color: $black1;
-      border-bottom: none;
-
-      .q-tab__label {
-        font-weight: 500;
-        color: $black1;
-      }
-
-      .q-tab__indicator {
-        background: #fff;
-        height: 2px;
-      }
-
-      & + .kw-tab {
-        border-left: 1px solid $black1;
-      }
-    }
-
-    .q-focus-helper {
+.kw-tab {
+  & .q-tab {
+    &__indicator {
+      // animation 핸들링 할 것 아니면 안 쓰는 것이 더 좋습니다.
       display: none;
     }
   }
 
-  .result-area &,
-  .normal-area & {
-    padding: 0;
-    border: none !important;
+  &.q-tab {
+    min-height: $kw-tab-height;
+    padding: $kw-tab-padding;
+    transition: none;
+
+    &--inactive {
+      opacity: 1;
+    }
   }
 
-  // navy tab
+  > .q-focus-helper {
+    display: none;
+  }
+
+  @include kw-tab-border(1px solid inherit, false);
+  @include kw-tab-active-border($kw-tab-border-active);
+
+  background: $kw-tab-background-color;
+  color: inherit; // notify!! tabs inherit color!
+  flex-flow: column nowrap; // notify!! align props will must be override.
+
+  &::after {
+    @include typo("body", 500);
+
+    display: block;
+    position: relative;
+    content: attr(text)/"";
+    height: 2px;
+    flex: none;
+    color: transparent;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  &__content {
+    position: relative;
+    top: 1px;
+    padding: 0;
+    min-width: initial;
+    min-height: $kw-tab-height;
+
+    > .q-tab__label {
+      @include typo("body", 400);
+    }
+  }
+
+  &--active {
+    background: $kw-tab-background-color-active;
+    color: $black1;
+
+    .kw-tab__content > .q-tab__label {
+      font-weight: 500;
+    }
+  }
+
   &--dense {
-    border: 0;
-    padding: 0;
-
-    .q-tabs__content {
-      height: 34px;
-      border-bottom: none;
-      overflow: visible;
+    &.q-tab {
+      padding: $kw-tab-padding-dense;
     }
 
-    .kw-tab {
-      min-height: 34px;
-      height: 34px !important;
-      padding: 0 20px;
-      background: none;
-      border: 1px solid $line-stroke;
-      font-size: 14px;
-      opacity: 1;
-
-      & + .kw-tab {
-        margin-left: -1px;
-      }
-
-      .q-tab__content {
-        padding: 0;
-        height: 32px; // 바깥 border 제외 높이
-        color: $black3;
-      }
-
-      .q-tab__label {
-        font-size: 14px;
-        line-height: 1;
-      }
-
-      &.q-tab--active {
-        background: $secondary;
-        border: none;
-
-        .q-tab__label,
-        .q-tab__content {
-          font-weight: 500;
-          color: #fff;
-        }
-
-        .q-tab__indicator {
-          display: none;
-        }
-
-        & + .kw-tab {
-          border-left: 1px solid $black1;
-        }
-      }
-
-      .q-focus-helper {
-        display: none;
-      }
-    }
-  }
-}
-
-// tab in tab
-.kw-tab-panels {
-  .kw-tabs:not(.kw-tabs--dense) {
-    border-top: 0;
-    border-bottom: 0;
-
-    .q-tabs__content {
-      height: 34px;
-      border-bottom: none;
-      overflow: visible;
+    &::after {
+      @include typo("dense", 500);
     }
 
-    .kw-tab {
-      min-height: 34px;
-      height: 34px;
-      padding: 0 20px;
-      background: none;
-      border: 1px solid $line-stroke;
-      font-size: 14px;
-      opacity: 1;
+    .kw-tab__content {
+      min-height: $kw-tab-height-dense;
 
-      & + .kw-tab {
-        margin-left: -1px;
-      }
-
-      .q-tab__content {
-        padding: 0;
-        height: 32px; // 바깥 border 제외 높이
-      }
-
-      .q-tab__label {
-        font-size: 14px;
-        line-height: 1;
-      }
-
-      &.q-tab--active {
-        background: $secondary;
-        border: none;
-
-        .q-tab__label {
-          font-weight: 500;
-          color: #fff;
-        }
-
-        .q-tab__indicator {
-          display: none;
-        }
-
-        & + .kw-tab {
-          border-left: 1px solid $black1;
-        }
-      }
-
-      .q-focus-helper {
-        display: none;
+      > .q-tab__label {
+        @include typo("dense", 400);
       }
     }
-  }
-}
-
-.kw-tab-panel {
-  .normal-area {
-    border: none;
   }
 }
 
 .kw-tabs {
-  border: none;
+  $-kw-tabs-padding: 24px 40px 0 40px;
+  $-kw-tabs-padding-dense: 0;
+  $-kw-tabs-content-background-color: $bg-box;
+
+  @include kw-tabs-padding($-kw-tabs-padding, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
+
+  & .q-tabs {
+    // sorry for override directly. cuase q does not provide the way to set class for target.
+    &__arrow {
+      $-arrow-padding: (($kw-tabs-arrow-height - 18px) / 2) (($kw-tabs-arrow-width - 18px) / 2);
+
+      font-size: 16px;
+      min-width: $kw-tabs-arrow-width;
+      text-shadow: none;
+      transition: none;
+
+      &.q-icon {
+        > svg {
+          padding: $-arrow-padding;
+          background-color: $-kw-tabs-content-background-color;
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      &--left {
+        &.q-icon {
+          > svg {
+            border-width: nth($kw-tab-border, 1);
+            border-style: nth($kw-tab-border, 2);
+            border-color: inherit;
+          }
+        }
+
+        &.q-tabs__arrow--faded {
+          &.q-icon {
+            > svg {
+              border-right: none;
+              padding-right: at($-arrow-padding, 4) + 1px;
+            }
+          }
+        }
+      }
+
+      &--right {
+        &.q-icon {
+          > svg {
+            border-width: nth($kw-tab-border, 1);
+            border-style: nth($kw-tab-border, 2);
+            border-color: inherit;
+          }
+        }
+
+        &.q-tabs__arrow--faded {
+          &.q-icon {
+            > svg {
+              border-left: none;
+              padding-right: at($-arrow-padding, 2) + 1px;
+            }
+          }
+        }
+      }
+    }
+
+    &__content--align-justify .q-tab {
+      flex: unset;
+    }
+  }
+
+  &.q-tabs {
+    &--scrollable {
+      &.q-tabs__arrows--outside {
+        .q-tabs__arrow--faded {
+          opacity: 1;
+        }
+      }
+    }
+
+    // dense will be inherited!
+    &--dense {
+      .q-tab {
+        min-height: $kw-tabs-arrow-height-dense;
+
+        &--full {
+          min-height: $kw-tabs-arrow-height-dense;
+        }
+      }
+
+      .q-tabs__arrow {
+        $-arrow-padding: (($kw-tabs-arrow-height-dense - 18px) / 2) (($kw-tabs-arrow-width-dense - 18px) / 2);
+
+        min-width: $kw-tabs-arrow-width-dense;
+
+        &.q-icon {
+          > svg {
+            padding: $-arrow-padding;
+          }
+        }
+
+        &--left {
+          &.q-tabs__arrow--faded {
+            &.q-icon {
+              > svg {
+                padding-right: at($-arrow-padding, 4) + 1px;
+              }
+            }
+          }
+        }
+
+        &--right {
+          &.q-tabs__arrow--faded {
+            &.q-icon {
+              > svg {
+                padding-right: at($-arrow-padding, 2) + 1px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  background: #fff;
+  height: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+  }
+
+  &__content {
+    background-color: $-kw-tabs-content-background-color; // inactive tab has transparent bg-color by default, so it will displayed.
+    color: $black3; // notify!! inherit to inactive tab.
+    border-color: $placeholder; // notify!! inherit to inactive tab.
+    height: $kw-tabs-content-height;
+    flex: 0 1 auto; // notify!! should override align props handle classes.
+
+    // align props handle classes.
+    &.items-justify {
+      flex-grow: 1;
+    }
+  }
+
+  @include color-based("&__content.border-color-", $semantic-colors) using ($color) {
+    ~ .q-tabs__arrow {
+      border-color: $color;
+    }
+  }
+
+  &--dense {
+    @include kw-tabs-padding($-kw-tabs-padding-dense, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
+  }
+
+  &--no-padding {
+    @include kw-tabs-padding(0, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
+
+    &.kw-tabs--dense {
+      @include kw-tabs-padding(0, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
+    }
+  }
+
+  &--show-indicator {
+    .q-tab__indicator {
+      display: block;
+    }
+  }
+
+  $-aligns: start end left right center;
+
+  @each $align in $-aligns {
+    #{'&--align-' + $align} {
+      justify-content: $align;
+    }
+  }
+
+  &--align-justify {
+    .kw-tabs__content {
+      flex-grow: 1;
+    }
+
+    .kw-tab {
+      flex-grow: 1;
+    }
+  }
+
+  $-active-line-positions: top bottom left right;
+
+  @each $-position in $-active-line-positions {
+    #{'&--active-line-' + $-position} {
+      &::before {
+        #{'border-' + $-position}: $kw-tab-border-active;
+      }
+
+      .kw-tab {
+        @include kw-tab-active-border($kw-tab-border, #{$-position});
+      }
+    }
+  }
+
+  @include color-based("&--active-border-", $semantic-colors) using ($color) {
+    .kw-tab {
+      &--active {
+        border-color: $color;
+      }
+    }
+  }
+
+  @include color-based("&--active-line-", $semantic-colors) using ($color) {
+    &::before {
+      border-color: $color;
+    }
+
+    .kw-tab {
+      &::before {
+        border-color: $color;
+      }
+    }
+  }
 }
+
+/*
+// FIXME THIS.
 
 .kw-popup:has(.kw-search),
 .kw-page:has(.kw-search) {
@@ -285,3 +374,5 @@ body.mobile:not(.tablet) {
     }
   }
 }
+
+*/
