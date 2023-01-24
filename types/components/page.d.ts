@@ -13,6 +13,30 @@ interface KwPageProps extends UseObserverProps {
    * 헤더 영역에 hint 를 표시한다.
    */
   hint?: string | undefined;
+
+  /**
+   * Mobile only.
+   * initial load index
+   */
+  initialLoadIndex?: number;
+
+  /**
+   * Mobile only.
+   * load event debounce
+   */
+  loadDebounce?: string | number;
+
+  /**
+   * Mobile only.
+   * invoke load event when onMounted until has scroll
+   */
+  loadOnMounted?: boolean;
+
+  /**
+   * Mobile only.
+   * load event
+   */
+  onLoad?: Function;
 }
 interface KwPageSlots {
   /**
