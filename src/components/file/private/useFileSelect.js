@@ -1,5 +1,6 @@
 import { intersection } from 'lodash-es';
 import { generateFileLikeKey } from './useFileUpload';
+import { notify } from '../../../plugins/notify';
 
 export const useFileSelectProps = {
   selectable: { type: Boolean, default: true },
@@ -7,6 +8,7 @@ export const useFileSelectProps = {
 
 export default ({ files, updateFile, downloadFile, revertFile, removeFile, undeleteFile }, ables) => {
   const { props } = getCurrentInstance();
+  const { t } = useI18n();
 
   const selectedFileKeys = ref([]);
   const fileKeys = computed(() => (files.value ? files.value.map((f) => generateFileLikeKey(f)) : []));
@@ -25,6 +27,8 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
     },
   });
 
+  const empty = computed(() => !selectedFileKeys.value.length);
+
   const selectedFiles = computed(() => selectedFileKeys.value.map(
     (k) => files.value.find((f) => generateFileLikeKey(f) === k),
   ));
@@ -34,30 +38,45 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
   };
 
   const updateSelected = () => {
+    if (empty.value) {
+      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+    }
     if (!ables.value?.update) { return; }
     selectedFiles.value.forEach(updateFile);
     clearSelected();
   };
 
   const downloadSelected = () => {
+    if (empty.value) {
+      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+    }
     if (!ables.value?.download) { return; }
     selectedFiles.value.forEach(downloadFile);
     clearSelected();
   };
 
   const revertSelected = () => {
+    if (empty.value) {
+      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+    }
     if (!ables.value?.revert) { return; }
     selectedFiles.value.forEach(revertFile);
     clearSelected();
   };
 
   const removeSelected = () => {
+    if (empty.value) {
+      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+    }
     if (!ables.value?.remove) { return; }
     selectedFiles.value.forEach(removeFile);
     clearSelected();
   };
 
   const undeleteSelected = () => {
+    if (empty.value) {
+      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+    }
     if (!ables.value?.undelete) { return; }
     selectedFiles.value.forEach(undeleteFile);
     clearSelected();
