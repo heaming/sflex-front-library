@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.221",
+  "version": "0.1.223",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -83,6 +83,7 @@
     "stylelint-order": "^5.0.0",
     "suneditor": "^2.43.8",
     "unplugin-auto-import": "^0.8.4",
+    "v3-infinite-loading": "^1.2.2",
     "vee-validate": "^4.5.11",
     "video.js": "^7.20.3",
     "videojs-landscape-fullscreen": "^11.1111.0",

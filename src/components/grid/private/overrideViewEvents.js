@@ -32,13 +32,13 @@ const dataDropOptionsDropCallback = 'dataDropOptions._callback';
   */
 export function overrideOnShowTooltip(view) {
   wrapEvent(view, onShowTooltip, (g, index, value) => {
-    let returnValue;
+    let originalResult;
 
     if (hasOriginal(g, onShowTooltip)) {
-      returnValue = execOriginal(g, onShowTooltip, g, index, value);
+      originalResult = execOriginal(g, onShowTooltip, g, index, value);
     }
 
-    if (!returnValue) {
+    if (!originalResult) {
       const { renderer } = g.columnByName(index.column);
 
       // checkbox
@@ -46,12 +46,12 @@ export function overrideOnShowTooltip(view) {
         const { dataType, booleanFormat } = g.getDataSource().fieldByName(index.fieldName);
 
         if (dataType === ValueType.BOOLEAN) {
-          returnValue = booleanFormat?.split(':')[value === 'true' ? 1 : 0];
+          originalResult = booleanFormat?.split(':')[value === 'true' ? 1 : 0];
         }
       }
     }
 
-    return sanitize(returnValue || value);
+    return sanitize(originalResult || value);
   });
 }
 
@@ -109,13 +109,13 @@ export function overrideOnCurrentChanging(view) {
     }
 
     if (hasOriginal(g, onCurrentChanging)) {
-      const returnValue = execOriginal(g, onCurrentChanging, g, oldIndex, newIndex);
-      const isPromise = returnValue instanceof Promise;
+      const originalResult = execOriginal(g, onCurrentChanging, g, oldIndex, newIndex);
+      const isPromise = originalResult instanceof Promise;
 
       if (isPromise) {
         g._view.layoutManager._topIndex = oldIndex.itemIndex;
 
-        returnValue.then((value) => {
+        originalResult.then((value) => {
           if (value !== false) {
             fixTopIndexIfInvalid(g);
             g.__ignoreOnCurrentChanging__ = true;
@@ -132,7 +132,7 @@ export function overrideOnCurrentChanging(view) {
       g.__blockOnCurrentChanging__ = true;
       setTimeout(() => { g.__blockOnCurrentChanging__ = false; });
 
-      return isPromise ? false : returnValue;
+      return isPromise ? false : originalResult;
     }
   });
 }
