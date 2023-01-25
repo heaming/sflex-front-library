@@ -128,7 +128,7 @@ function setColumnStyleName(column, { dataType }) {
     }
   }
 
-  column.styleName = colClass.join(' ');
+  column.styleName = colClass.join(' ').trim();
 }
 
 function setColumnRenderer(column, { dataType }) {
@@ -311,7 +311,7 @@ function setColumnCellButton(column) {
 }
 
 function overrideStyleCallback(styleCallback, isGlobal = false) {
-  const normalizeReturnValue = (val) => (typeof val === 'string' ? { styleName: val } : { ...val });
+  const normalizeOriginalResult = (val) => (typeof val === 'string' ? { styleName: val } : { ...val });
 
   return (g, model) => {
     const { column, itemIndex } = model.index;
@@ -319,9 +319,9 @@ function overrideStyleCallback(styleCallback, isGlobal = false) {
 
     if (shouldIgnore) return;
 
-    const returnValue = normalizeReturnValue(styleCallback?.(g, model));
-    const classes = [(returnValue.styleName || column.styleName).trim()];
-    const mergedColumn = { ...column, ...returnValue };
+    const originalResult = normalizeOriginalResult(styleCallback?.(g, model));
+    const classes = [(originalResult.styleName || column.styleName).trim()];
+    const mergedColumn = { ...column, ...originalResult };
 
     const { dataColumn } = model;
     const index = createCellIndexByDataColumn(g, itemIndex, dataColumn);
@@ -333,8 +333,8 @@ function overrideStyleCallback(styleCallback, isGlobal = false) {
       classes.push('rg-button-disabled');
     }
 
-    returnValue.styleName = classes.join(' ');
-    return returnValue;
+    originalResult.styleName = classes.join(' ').trim();
+    return originalResult;
   };
 }
 
