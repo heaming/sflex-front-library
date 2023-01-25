@@ -18,11 +18,11 @@ export default () => {
     return stackViews[index - 1];
   }
 
-  const isRegistered = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
   const removeAfterEach = router.afterEach((to, from, failure) => {
     if (failure) return;
 
-    if (isRegistered(to)) {
+    if (isMenu(to)) {
       if (to.meta.pageUseCode === 'N') {
         // if main page then clear all stack
         stackViews.splice(0);
@@ -37,7 +37,7 @@ export default () => {
     }
   });
 
-  if (isRegistered(router.currentRoute.value)) {
+  if (isMenu(router.currentRoute.value)) {
     add(router.currentRoute.value);
   }
 
