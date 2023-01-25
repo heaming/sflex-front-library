@@ -100,3 +100,16 @@ body.desktop {
     }
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-btn-toggle {
+    &.q-btn-toggle {
+      .kw-btn {
+        &.q-btn {
+          // 너비 동일하게
+          flex: 1;
+        }
+      }
+    }
+  }
+}

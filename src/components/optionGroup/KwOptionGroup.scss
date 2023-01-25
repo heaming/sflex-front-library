@@ -1,10 +1,10 @@
 .kw-option-group {
-  .q-option-group {
+  .kw-option-group__control {
     margin-right: 0;
     margin-left: 0;
     height: auto;
     display: flex;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     align-items: center;
 
     & > div {
@@ -40,8 +40,8 @@
     }
   }
 
-  &.kw-option-group--multi-line {
-    .q-option-group.kw-option-group__control {
+  &--multi-line {
+    .kw-option-group__control {
       flex-wrap: wrap;
       row-gap: 6px;
       column-gap: 10px;
@@ -51,6 +51,22 @@
 
         & + div {
           margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &--vertical {
+    .kw-option-group__control {
+      flex-flow: column nowrap;
+      align-items: flex-start;
+
+      & > div {
+        padding-left: 0;
+
+        & + div {
+          margin-left: 0;
+          margin-top: $spacing-xxs; // FIXME
         }
       }
     }

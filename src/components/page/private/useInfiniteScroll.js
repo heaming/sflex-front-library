@@ -6,7 +6,7 @@ const DEFAULT_DEBOUNCE = 100;
 export const useInfiniteScrollProps = {
   initialLoadIndex: {
     type: Number,
-    default: 0,
+    default: 1,
   },
   loadDebounce: {
     type: [String, Number],

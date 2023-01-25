@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, VNode } from 'vue';
+import { ComponentPublicInstance } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
 import { UseFieldProps, UseFieldInstance } from './private/useField';
 import { UseOptionsProps } from './private/useOptions';
@@ -30,6 +30,13 @@ interface KwOptionGroupProps extends UseFieldProps, UseOptionsProps {
    * (type toggle인 경우 default true)
    */
   leftLabel?: boolean;
+
+  /**
+   * 옵션들을 세로로 나래비 한다
+   *
+   * set flex-direction to column.
+   */
+  vertical?: boolean;
 
   /**
    * 'v-model:modelValue'에서 값 변경을 위해 사용

@@ -159,6 +159,7 @@
         <div class="kw-guide-example">
           <kw-tabs
             model-value="2"
+            class="example-search-form"
           >
             <kw-tab
               name="1"
@@ -459,5 +460,14 @@ const denseTabs = `
 <style lang="scss" scoped>
 .example-form {
   border: none !important;
+}
+
+.example-search-form {
+  border: 1px solid $line-line;
+  border-bottom: 0;
+}
+
+::v-deep(.kw-search) {
+  border-top: 0;
 }
 </style>
