@@ -11,6 +11,15 @@ body.tablet {
       background-color: $line-bg;
     }
 
+    &:has(.kw-popup--window-consult) {
+      position: absolute;
+
+      & > .q-dialog__inner {
+        position: relative;
+        min-width: 1900px !important;
+      }
+    }
+
     .kw-popup:not(.kw-popup--window-consult) {
       width: 100% !important;
       max-width: unset !important;
