@@ -475,12 +475,17 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-btn
+            borderless
+            icon="sms_24"
+            style="font-size: 24px;"
+            class="mr8"
+          />
+          <kw-btn
             dense
             icon="plus"
             class="mr8"
           />
           <kw-btn
-            dense
             underline
             text-color="black3"
             icon-right="plus"
@@ -488,7 +493,6 @@
             class="mr8"
           />
           <kw-btn
-            dense
             borderless
             text-color="primary"
             icon-right="arrow_right"
@@ -497,10 +501,9 @@
           />
           <kw-btn
             icon-right="arrow_down"
-            dense
             borderless
             label="더보기"
-            class="kw-fc--black3 kw-font-pt14 mr8"
+            class="kw-fc--black3 mr8"
           />
           <kw-btn
             round
@@ -806,12 +809,24 @@ const customBtn = `
 
 const etcBtn = `
 <kw-btn
+  borderless
+  icon="sms_24"
+  style="font-size: 24px;"
+  class="mr8"
+/>
+<kw-btn
   dense
   icon="plus"
   class="mr8"
 />
 <kw-btn
-  dense
+  underline
+  text-color="black3"
+  icon-right="plus"
+  label="TEXT"
+  class="mr8"
+/>
+<kw-btn
   borderless
   text-color="primary"
   icon-right="arrow_right"
@@ -820,10 +835,9 @@ const etcBtn = `
 />
 <kw-btn
   icon-right="arrow_down"
-  dense
   borderless
   label="더보기"
-  class="kw-fc--black3 kw-font-pt14 mt10"
+  class="kw-fc--black3 mr8"
 />
 <kw-btn
   round
@@ -885,8 +899,8 @@ const selectBtn = `
 // History
 const guideHistory = [
   {
-    timestamp: '2022.11.25',
-    text: 'modified button dropdown case',
+    timestamp: '2023.01.25',
+    text: 'modified etc button case ',
   },
 ];
 

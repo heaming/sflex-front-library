@@ -4,7 +4,7 @@
     ref="canvas"
     :width="width"
     :height="height"
-    style="border: 1px solid black;position: relative;"
+    style="border: 1px solid #ccc;position: relative;"
   />
 </template>
 
