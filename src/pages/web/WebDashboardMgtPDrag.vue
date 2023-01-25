@@ -25,7 +25,7 @@
     </kw-scroll-area>
 
     <div class="dashboard-drag__guide">
-      점선 위로 한 화면에서 스크롤없이 볼 수 있습니다.
+      {{ $t('MSG_TXT_HCARD_GUIDE') }}
     </div>
   </div>
 </template>

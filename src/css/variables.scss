@@ -204,3 +204,19 @@ $spacing: (
   4xl: $spacing-4xl,
   5xl: $spacing-5xl,
 );
+
+// tabs
+$kw-tab-height: $kw-field-height;
+$kw-tab-height-dense: 34px;
+$kw-tabs-content-height: $kw-tab-height;
+$kw-tabs-content-height-dense: $kw-tab-height-dense;
+$kw-tab-padding: 0 28px;
+$kw-tab-padding-dense: 0 20px;
+$kw-tab-border: 1px solid $placeholder;
+$kw-tab-border-active: 1px solid $black1;
+$kw-tab-background-color: transparent;
+$kw-tab-background-color-active: $bg-white;
+$kw-tabs-arrow-width: $kw-tabs-content-height;
+$kw-tabs-arrow-width-dense: $kw-tabs-content-height-dense;
+$kw-tabs-arrow-height: $kw-tabs-content-height;
+$kw-tabs-arrow-height-dense: $kw-tabs-content-height-dense;

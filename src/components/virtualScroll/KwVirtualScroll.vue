@@ -71,7 +71,7 @@ export default {
     // customize props
     debounce: { type: [Number, String], default: 200 },
     initialIndex: { type: Number, default: 0 },
-    loadOnMouted: { type: Boolean, default: false },
+    loadOnMounted: { type: Boolean, default: false },
     onLoad: { type: Function, default: undefined },
   },
 
@@ -126,7 +126,7 @@ export default {
     }
 
     onMounted(() => {
-      if (props.loadOnMouted === true) {
+      if (props.loadOnMounted === true) {
         props.onLoad?.(loadIndex.value);
       }
     });

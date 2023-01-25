@@ -6,6 +6,8 @@
     transition-show="fade"
     transition-hide="fade"
     seamless
+    no-focus
+    no-refocus
   >
     <div class="global-notify__inner">
       <span class="global-notify__message">

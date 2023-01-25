@@ -40,6 +40,7 @@
     </div>
 
     <div
+      ref="scrollTarget"
       class="kw-page__content"
     >
       <div
@@ -48,6 +49,11 @@
       >
         <slot />
       </div>
+      <q-scroll-observer
+        v-if="infiniteIsEnabled"
+        :scroll-target="scrollTarget"
+        @scroll="onScroll"
+      />
     </div>
 
     <div
@@ -69,12 +75,14 @@
 import usePage from '../../composables/private/usePage';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 import usePageSearch from '../../composables/private/usePageSearch';
+import useInfiniteScroll, { useInfiniteScrollProps } from './private/useInfiniteScroll';
 
 export default {
   name: 'KwPage',
 
   props: {
     ...useObserverProps,
+    ...useInfiniteScrollProps,
 
     title: { type: String, default: undefined },
     noHeader: { type: Boolean, default: false },
@@ -92,8 +100,8 @@ export default {
 
     return {
       ...useObserver(),
+      ...useInfiniteScroll(),
       styleFn,
-
     };
   },
 };

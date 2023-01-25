@@ -13,10 +13,11 @@ export default (defaults = {}) => {
 
   const injected = inject(DenseContextKey, null);
   const computedDense = computed(() => {
-    if (props.dense !== undefined) { return props.dense; }
+    if (typeof props.dense === 'boolean') { return props.dense; }
     if (isSearchContext) { return true; }
-    if (injected?.dense !== undefined) { return injected?.dense?.value; }
-    return defaults.dense;
+    if (typeof injected?.dense?.value === 'boolean') { return injected.dense.value; }
+    if (typeof defaults.dense === 'boolean') { return defaults.dense; }
+    return undefined;
   });
 
   provide(DenseContextKey, {
