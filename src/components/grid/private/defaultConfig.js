@@ -22,6 +22,7 @@ const viewConfig = {
   },
   stateBar: {
     visible: env.VITE_REALGRID_STATUSBAR,
+    width: 50,
     footText: '',
   },
   checkBar: {

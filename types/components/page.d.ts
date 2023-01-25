@@ -17,18 +17,21 @@ interface KwPageProps extends UseObserverProps {
   /**
    * Mobile only.
    * initial load index
+   * @default 1
    */
   initialLoadIndex?: number;
 
   /**
    * Mobile only.
    * load event debounce
+   * @default 100
    */
   loadDebounce?: string | number;
 
   /**
    * Mobile only.
    * invoke load event when onMounted until has scroll
+   * @default false
    */
   loadOnMounted?: boolean;
 
