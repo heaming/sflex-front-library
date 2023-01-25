@@ -205,10 +205,21 @@ const defaultCode = `
 </script>
 <style scoped lang="scss">
 .warping-box {
-  background-color: $lime-2;
-  display: flex;
+  background-color: $lime-1;
   width: 1000px;
   height: 200px;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+
+  > .kw-tabs {
+    background-color: $lime-2;
+  }
+
+  > .kw-tab-panels {
+    width: 100%;
+    background-color: $lime-3;
+  }
 
   > .q-tabs {
     max-width: 100%;

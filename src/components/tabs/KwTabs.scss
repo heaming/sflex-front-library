@@ -96,11 +96,11 @@
       min-width: $kw-tabs-arrow-width;
       text-shadow: none;
       transition: none;
+      background-color: $-kw-tabs-content-background-color;
 
       &.q-icon {
         > svg {
           padding: $-arrow-padding;
-          background-color: $-kw-tabs-content-background-color;
           width: 16px;
           height: 16px;
         }
@@ -227,6 +227,18 @@
   @include color-based("&__content.border-color-", $semantic-colors) using ($color) {
     ~ .q-tabs__arrow {
       border-color: $color;
+    }
+  }
+
+  @include color-based("&__content.bg-", $semantic-colors) using ($color) {
+    ~ .q-tabs__arrow {
+      background-color: $color;
+    }
+  }
+
+  @include color-based("&__content.text-", $semantic-colors) using ($color) {
+    ~ .q-tabs__arrow {
+      color: $color;
     }
   }
 
