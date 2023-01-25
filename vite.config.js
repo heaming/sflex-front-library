@@ -94,6 +94,7 @@ export default defineConfig(({ mode }) => {
           'suneditor',
           'suneditor/src/lang',
           'suneditor/src/plugins',
+          'v3-infinite-loading',
           'vee-validate',
           'viewerjs',
           'video.js',

@@ -20,6 +20,7 @@ export * from './file';
 export * from './form';
 export * from './grid';
 export * from './icon';
+export * from './infiniteScroll';
 export * from './input';
 export * from './item';
 export * from './list';
