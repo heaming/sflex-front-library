@@ -59,7 +59,7 @@ export async function download(fileInfo, targetPath = targetPaths[0]) {
     responseType: 'blob',
   });
 
-  downloadBlob(response.data, fileInfo.name);
+  downloadBlob(response.data, params.originalFileName);
 }
 
 export async function readExcel(file, columns = [], header = 1) {
