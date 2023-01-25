@@ -71,6 +71,10 @@ export default {
       type: Boolean,
       default: undefined,
     },
+    vertical: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -84,6 +88,7 @@ export default {
       ...fieldClass.value,
       'kw-option-group': true,
       [`kw-option-group--${props.type}`]: true,
+      'kw-option-group--vertical': props.vertical,
     }));
 
     const itemLeftLabel = computed(() => {

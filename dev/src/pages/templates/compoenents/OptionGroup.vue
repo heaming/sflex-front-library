@@ -16,11 +16,21 @@
         title="optionGroupProps"
       />
       <kw-separator />
-      <div class="w300 h300 bg-green flex">
-        <kw-optionGroup
+      <q-option-group
+        :model-value="model"
+        :options="options"
+        inline
+      />
+      <div class="w1200 h300 bg-green flex">
+        <q-option-group
+          :model-value="model"
+          :options="options"
+        />
+      </div>
+      <div class="w1200 h300 bg-green flex">
+        <kw-option-group
           v-model="model"
           v-bind="bindingProps"
-          class="shrink"
         />
       </div>
     </guide-section>
@@ -60,11 +70,18 @@ const optionGroupProps = {
     type: Boolean,
     default: undefined,
   },
+  vertical: {
+    type: Boolean,
+    default: undefined,
+  },
 };
 
-const model = ref(1);
+const model = ref('test test test');
+const options = ['test test test', 'somewhere over the rainbow', 'how can i handle it!'].map((s) => ({ label: s, value: s }));
 const bindingProps = ref({
-  options: ['test test test', 'somewhere over the rainbow', 'how can i handle it!'],
+  optionValue: 'value',
+  optionLabel: 'label',
+  options,
 });
 
 const defaultCode = `
