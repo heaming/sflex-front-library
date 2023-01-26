@@ -394,7 +394,7 @@ function initGrid(data, view) {
   ];
 
   const columns = [
-    { fieldName: 'col1', header: '고객 번호', width: '100', styleName: 'text-center' },
+    { fieldName: 'col1', header: '고객 번호',  width: '150', styleName: 'text-center', hint: 'HINT TEXT'  },
     { fieldName: 'col2', header: '고객 유형', width: '100', styleName: 'text-center' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '180' },
     { fieldName: 'col4', header: '이름/담당자', width: '80', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
@@ -694,7 +694,7 @@ function initGrid(data, view) {
   ];
 
   const columns = [
-    { fieldName: 'col1', header: '고객 번호', width: '100', styleName: 'text-center' },
+    { fieldName: 'col1', header: '고객 번호', width: '150', styleName: 'text-center', hint: 'HINT TEXT' },
     { fieldName: 'col2', header: '고객 유형', width: '100', styleName: 'text-center' },
     { fieldName: 'col3', header: '법인명(점포명)', width: '180' },
     { fieldName: 'col4', header: '이름/담당자', width: '80', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
@@ -949,6 +949,10 @@ const testCode5 = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2023.01.26',
+    text: 'Add thead hint case',
+  },
   {
     timestamp: '2022.10.11',
     text: 'Add more detail of case #6',

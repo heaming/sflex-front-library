@@ -563,9 +563,10 @@
   &__hint {
     position: absolute;
     display: inline-block;
-    top: 23%;
+    top: 50%;
+    transform: translateY(-50%);
     width: 14px;
-    height: 14px;
+    height: 20px;
     margin-left: 8px;
     color: rgb(255 255 255 / 0%);
     background: url(~@assets/images/ic_info_default_16.svg) no-repeat center center;
