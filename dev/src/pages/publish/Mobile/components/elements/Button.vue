@@ -52,7 +52,7 @@
               height(toggle-raido)
             </td>
             <td style="width: 33.33%;">
-              dense="false"<br>
+              :dense="false"<br>
               default
             </td>
             <td style="width: 33.33%;">
@@ -550,7 +550,7 @@
             label="label"
             :options="['남성','여성']"
             gap="0px"
-            dense="false"
+            :dense="false"
             grow
           />
         </div>
@@ -878,7 +878,7 @@ const toggleRadio = `
   label="label"
   :options="['남성','여성']"
   gap="0px"
-  dense="false"
+  :dense="false"
   grow
 />
 `;
@@ -898,6 +898,10 @@ const selectBtn = `
 `;
 // History
 const guideHistory = [
+  {
+    timestamp: '2023.01.26',
+    text: 'modified :dense="false" ',
+  },
   {
     timestamp: '2023.01.25',
     text: 'modified etc button case ',
