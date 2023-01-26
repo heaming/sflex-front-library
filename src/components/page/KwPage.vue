@@ -75,6 +75,7 @@
 import usePage from '../../composables/private/usePage';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 import usePageSearch from '../../composables/private/usePageSearch';
+import usePageUniqueId from '../../composables/private/usePageUniqueId';
 import useInfiniteScroll, { useInfiniteScrollProps } from './private/useInfiniteScroll';
 
 export default {
@@ -91,6 +92,7 @@ export default {
   setup() {
     usePage();
     usePageSearch();
+    usePageUniqueId();
 
     const styleFn = (offset, height) => {
       const el = document.querySelector('.web-tab-view > .web-tab-view__header');

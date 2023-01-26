@@ -39,7 +39,7 @@
         &__total-item.kw-item {
           min-height: unset;
           padding-top: 0;
-          padding-bottom: 8px;
+          padding-bottom: 12px;
 
           .kw-item__section.q-item__section--side {
             padding-right: 4px;
@@ -205,6 +205,20 @@
           }
         }
       }
+
+      // &--selectable {
+      // 토글버튼(dense) 최소너비가 오른쪽 위치했을 때로만 한정되면 해당css 사용하기
+      //   &.q-list {
+      //     & .kw-list {
+      //       &__action-container {
+      //         .kw-btn-toggle.q-btn-toggle .kw-btn.q-btn--dense {
+
+      //           min-width: 54px;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 }
