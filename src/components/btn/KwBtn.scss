@@ -321,7 +321,7 @@ body.mobile {
         }
 
         &--dense {
-          @include kw-btn-height-modifier($-mobile-kw-btn-padding-dense, $-mobile-kw-btn-line-height-dense, $-mobile-kw-btn-font-size-dense, $-mobile-kw-btn-font-weight-dense);
+          @include kw-btn-height-modifier($-mobile-kw-btn-padding-dense, $-mobile-kw-btn-line-height-dense, $-mobile-kw-btn-font-size, $-mobile-kw-btn-font-weight-dense);
         }
       }
 
