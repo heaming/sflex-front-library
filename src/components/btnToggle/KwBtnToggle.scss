@@ -108,6 +108,14 @@ body.mobile:not(.tablet) {
         &.q-btn {
           // 너비 동일하게
           flex: 1;
+          padding: 10px 6px;
+
+          &--dense {
+            padding: 5px 8px;
+
+            // 최소사이즈 추가됨
+            min-width: 54px;
+          }
         }
       }
     }
