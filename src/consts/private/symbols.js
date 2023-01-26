@@ -1,4 +1,4 @@
-export const GlobalKey = Symbol.for('__GlobalKey__');
+export const GlobalContextKey = Symbol.for('__GlobalContextKey__');
 export const PageContextKey = Symbol.for('__PageContextKey__');
 export const PageSearchContextKey = Symbol.for('__PageSearchContextKey__');
 export const PopupContainerContextKey = Symbol.for('__PopupContainerContextKey__');

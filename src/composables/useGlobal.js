@@ -1,3 +1,3 @@
-import { GlobalKey } from '../consts/private/symbols';
+import { GlobalContextKey } from '../consts/private/symbols';
 
-export default () => inject(GlobalKey);
+export default () => inject(GlobalContextKey);
