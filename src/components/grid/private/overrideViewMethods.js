@@ -42,7 +42,7 @@ function setColumnHeader(column) {
   // hint
   if (column.hint) {
     const text = column.header.text || column.name || column.fieldName;
-    column.header.template ||= `${text} <i class=rg-header-cell__hint title=${column.hint} />`;
+    column.header.template ||= `${text} <i class="rg-header-cell__hint" title="${column.hint}" />`;
   }
 
   column.header.template = sanitize(column.header.template);
