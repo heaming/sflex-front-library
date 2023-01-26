@@ -269,7 +269,9 @@
       #hint
     >
       <slot name="hint">
-        {{ acceptHint }}
+        <template v-if="multiple">
+          {{ acceptHint }}
+        </template>
       </slot>
     </template>
 
@@ -678,6 +680,11 @@ export default {
     const { useHeaderFileClass, computedUseHeader } = headerCtx;
 
     // placeholder
+    const acceptHint = computed(() => {
+      if (!props.accept) { return; }
+      return `업로드 가능 파일 :${props.accept}`; // FIXME: msg
+    });
+
     const computedPlaceholder = computed(() => {
       if (!ables.value.add || files.value.length > 0) {
         return null;
@@ -685,7 +692,7 @@ export default {
       if (props.placeholder) {
         return typeof props.placeholder === 'function' ? props.placeholder() : props.placeholder;
       }
-      return props.multiple ? null : t('MSG_TXT_SEL_FILE', null, '파일찾기');
+      return props.multiple ? t('TODO', null, '첨부할 파일을 여기에 놓아주세요.') : (acceptHint.value || t('MSG_TXT_SEL_FILE', null, '파일찾기'));
     });
 
     const computedDndHint = computed(() => {
@@ -753,11 +760,6 @@ export default {
       if (file.type.indexOf('xml') > -1) return 'excel';
       return 'file';
     };
-
-    const acceptHint = computed(() => {
-      if (!props.accept) { return; }
-      return `업로드 가능 파일 :${props.accept}`; // FIXME: msg
-    });
 
     return {
       ...useInheritAttrs(),
