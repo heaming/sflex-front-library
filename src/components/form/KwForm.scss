@@ -169,6 +169,8 @@ body.mobile:not(.tablet) {
     }
 
     .kw-form-item__field {
+      align-self: flex-start !important;
+
       p {
         @include typo("body",400);
 

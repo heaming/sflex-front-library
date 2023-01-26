@@ -455,14 +455,14 @@
             class="mt10"
             :label="'label'"
             :options="['오늘', '주간', '월간']"
-            dense="false"
+            :dense="false"
           />
           <kw-btn-toggle
             v-model="strModel3"
             class="mt10"
             :label="'label'"
             :options="['A', 'B', 'C']"
-            dense="false"
+            :dense="false"
             gap="0px"
           />
           <!-- 추후에 필요하면 추가 -->
@@ -887,14 +887,14 @@ const toggleRadio = `
   v-model="strModel"
   :label="'label'"
   :options="['오늘', '주간', '월간']"
-  dense="false"
+  :dense="false"
 />
 <!-- gap="0" -->
 <kw-btn-toggle
   v-model="strModel"
   :label="'label'"
   :options="['A', 'B', 'C']"
-  dense="false"
+  :dense="false"
   gap="0px"
 />
 `;
@@ -920,6 +920,10 @@ const dropdownBtn = `
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2023.01.26',
+    text: 'modified :dense="false" ',
+  },
   {
     timestamp: '2022.10.14',
     text: 'modified button dropdown case',
