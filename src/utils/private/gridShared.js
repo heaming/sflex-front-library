@@ -6,8 +6,6 @@ import { timeout } from './tick';
 import consts from '../../consts';
 import store from '../../store';
 
-const GRID_BORDER_WIDTH = 2;
-
 /*
   Common
   */
@@ -81,12 +79,14 @@ export function waitUntilSetLayout(view) {
 
 export function calcViewHeight(view, rows) {
   const { layoutManager } = view._view;
+  const { _container } = view._container;
+  const { borderTopWidth } = getComputedStyle(_container);
 
   return layoutManager.headerBounds.height
         + layoutManager.footerBounds.height
         + (layoutManager.hscrollBar ? layoutManager.scrollBarHeight : 0)
         + layoutManager.minItemHeight * rows
-        + GRID_BORDER_WIDTH;
+        + Math.ceil(parseFloat(borderTopWidth, 10));
 }
 
 export async function syncHeadCheckIfAble(view) {
@@ -211,7 +211,7 @@ export async function cloneView(view, options) {
   const copyView = new ViewClass(container);
   copyView.setDataSource(copyData);
   copyView.setColumns(cloneDeep(view.getColumns()));
-  copyView.setColumnLayout(options.exportLayout || cloneDeep(view.saveColumnLayout()));
+  copyView.setColumnLayout(options.exportLayout || view.__originalLayouts__ || cloneDeep(view.saveColumnLayout()));
   copyView.setRowIndicator(cloneDeep(view.getRowIndicator()));
   copyView.setCheckBar(cloneDeep(view.getCheckBar()));
   copyView.setHeader(cloneDeep(view.getHeader()));

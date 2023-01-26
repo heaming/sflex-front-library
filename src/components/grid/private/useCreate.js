@@ -2,11 +2,12 @@ import { warn } from 'vue';
 import defaultConfig from './defaultConfig';
 import override from './override';
 import { registerCustomRenderers } from './customRenderer';
-import useResize, { useResizeProps } from './useResize';
-import useHandleClickEvent from './useHandleClickEvent';
 import { syncHeadCheckIfAble, unregisterEventAll } from '../../../utils/private/gridShared';
 import { init, reset, validate, isModified } from '../../../utils/grid';
 import useObserverChild, { useObserverChildProps } from '../../../composables/private/useObserverChild';
+import useHandleClickEvent from './useHandleClickEvent';
+import useResize, { useResizeProps } from './useResize';
+import useStorage from './usePersonalize';
 
 export const useCreateProps = {
   ...useResizeProps,
@@ -24,7 +25,7 @@ export const useCreateProps = {
 
 export default (DataClass, ViewClass) => {
   const vm = getCurrentInstance();
-  const onInit = toRaw(vm.props.onInit);
+  const { onInit } = vm.props;
 
   const containerRef = ref();
   const contextMenuRef = ref();
@@ -57,6 +58,14 @@ export default (DataClass, ViewClass) => {
     contextMenuRef.value?.setView(view);
 
     onInit?.(data, view);
+
+    try {
+      const layouts = vm.proxy.getSavedLayouts();
+      view.__originalLayouts__ = view.saveColumnLayout();
+      view.setColumnLayout(layouts);
+    } catch (e) {
+      // ignore
+    }
   });
 
   onBeforeUnmount(() => {
@@ -85,6 +94,7 @@ export default (DataClass, ViewClass) => {
 
   return {
     ...useResize(),
+    ...useStorage(),
     containerRef,
     contextMenuRef,
     getView,

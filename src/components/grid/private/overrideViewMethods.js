@@ -479,8 +479,10 @@ export function overrideDestory(view) {
 
     // private attributes
     delete view.__originalFns__;
+    delete view.__originalLayouts__;
     delete view.__registeredEvents__;
     delete view.__columns__;
     delete view.__validationErrors__;
+    delete view.__treeKey__;
   });
 }

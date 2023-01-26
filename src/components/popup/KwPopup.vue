@@ -59,6 +59,7 @@
 import { PopupContainerContextKey } from '../../consts/private/symbols';
 import usePage from '../../composables/private/usePage';
 import usePageSearch from '../../composables/private/usePageSearch';
+import usePageUniqueId from '../../composables/private/usePageUniqueId';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
 import useBookmark from './private/useBookmark';
@@ -137,6 +138,7 @@ export default {
     }
 
     usePageSearch();
+    usePageUniqueId();
 
     return {
       ...useObserver(),

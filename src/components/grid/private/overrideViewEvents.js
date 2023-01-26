@@ -11,6 +11,7 @@ const onMouseUp = 'onMouseUp'; // custom
 const onCurrentChanging = 'onCurrentChanging';
 const onSortingChanged = 'onSortingChanged';
 const onLayoutPropertyChanged = 'onLayoutPropertyChanged';
+const onColumnPropertyChanged = 'onColumnPropertyChanged';
 const onCellItemClickable = 'onCellItemClickable'; // custom
 const onCellItemClicked = 'onCellItemClicked';
 const onCellButtonClicked = 'onCellButtonClicked';
@@ -92,7 +93,7 @@ export function overrideOnCurrentChanging(view) {
         g.__cellClickTarget__ = { el, evt, index: newIndex };
 
         // set topIndex to old itemIndex
-        // although cancel this event, top index are change..
+        // although cancel this event, top index are changed..
         g._view.layoutManager._topIndex = oldIndex.itemIndex;
 
         return false;
@@ -164,6 +165,22 @@ export function overrideOnLayoutPropertyChanged(view, vm) {
     }
 
     vm.proxy.onResize?.();
+  });
+}
+
+/*
+  Column의 속성 중 displayWidth, displayIndex, visible 속성값이 변경되었음을 알리는 콜백
+  */
+export function overrideOnColumnPropertyChanged(view, vm) {
+  wrapEvent(view, onColumnPropertyChanged, (g, column, property, newValue, oldValue) => {
+    if (hasOriginal(g, onColumnPropertyChanged)) {
+      execOriginal(g, onColumnPropertyChanged, g, column, property, newValue, oldValue);
+    }
+
+    // save personalize
+    if (['displayIndex', 'visible'].includes(property)) {
+      vm.proxy.saveLayouts?.();
+    }
   });
 }
 

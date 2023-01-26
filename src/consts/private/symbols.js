@@ -1,6 +1,8 @@
+// Composables
 export const GlobalContextKey = Symbol.for('__GlobalContextKey__');
 export const PageContextKey = Symbol.for('__PageContextKey__');
 export const PageSearchContextKey = Symbol.for('__PageSearchContextKey__');
+export const PageUniqueIdContextKey = Symbol.for('__PageUniqueIdContextKey__');
 export const PopupContainerContextKey = Symbol.for('__PopupContainerContextKey__');
 export const ObserverContextKey = Symbol.for('__ObserverContextKey__');
 export const FormContextKey = Symbol.for('__FormContextKey__');
