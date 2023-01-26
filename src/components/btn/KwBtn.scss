@@ -342,6 +342,8 @@ body.mobile {
 
           &--dense {
             @include kw-btn-height-modifier(0, 1em, $-mobile-kw-btn-font-size-dense, inherit);
+
+            vertical-align: top;
           }
         }
       }
