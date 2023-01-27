@@ -29,6 +29,18 @@
   @return $number;
 }
 
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function rem-to-px($value) {
+  @if unit($value) == "rem" {
+    @return strip-unit($value) * $html-font-size;
+  }
+
+  @return $value;
+}
+
 @mixin typo($type, $font-weight: null) {
   $-typed: map-get($font-types, $type);
 
@@ -251,7 +263,7 @@
   $-font-size: map-get($-font-type, "size");
   $-font-weight: map-get($-font-type, "font-weight");
   $-letter-spacing: map-get($-font-type, "letter-spacing");
-  $-padding: calc((#{$min-height} - #{$-line-height}) / 2) $side-padding;
+  $-padding: ((rem-to-px($min-height) - rem-to-px($-line-height)) / 2) $side-padding;
 
   @include kw-btn-height-modifier($-padding, $-line-height, $-font-size, $-font-weight, $-letter-spacing);
 }
