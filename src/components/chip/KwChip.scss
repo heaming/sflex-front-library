@@ -15,7 +15,11 @@
       }
 
       &.bg-primary {
-        background-color: rgb(47 138 243 / 10%) !important;
+        background: rgba($primary, 10%) !important;
+      }
+
+      &.bg-bg-orange {
+        background: rgba($bg-orange, 10%) !important;
       }
     }
 

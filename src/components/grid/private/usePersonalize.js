@@ -1,3 +1,4 @@
+import { isEmpty, pick } from 'lodash-es';
 import { PageUniqueIdContextKey } from '../../../consts/private/symbols';
 import { localStorage } from '../../../plugins/storage';
 
@@ -9,7 +10,13 @@ export default () => {
   } = inject(PageUniqueIdContextKey, {});
 
   const vm = getCurrentInstance();
-  const storageKey = createUniqueId(vm.props.name || vm.uid); // use name props in useObserverChildProps
+  const { name } = vm.props;
+
+  if (isEmpty(name)) {
+    return;
+  }
+
+  const storageKey = createUniqueId(name); // use name props in useObserverChildProps
   const storageLayoutsKey = `${storageKey}__layouts`;
 
   registerUniqueId(storageKey);
@@ -18,38 +25,46 @@ export default () => {
     unregisterUniqueId(storageKey);
   });
 
-  function getSavedLayouts() {
-    return localStorage.getItem(storageLayoutsKey);
-  }
+  function applySavedLayouts() {
+    const view = vm.proxy.getView?.();
 
-  function recursiveGetLayouts(view, layouts) {
-    layouts ||= view.saveColumnLayout();
+    if (view) {
+      view.beginUpdate();
+      view.__ignoreOnColumnPropertyChanged__ = true;
 
-    return layouts.map((e) => {
-      const layout = { ...e };
+      try {
+        const { layouts, columns } = localStorage.getItem(storageLayoutsKey);
 
-      if (layout.column) {
-        const { visible } = view.columnByName(layout.column);
-        layout.visible = visible;
-      } else if (layout.items) {
-        layout.items = recursiveGetLayouts(view, e.items);
+        if (layouts) {
+          view.setColumnLayout(layouts);
+
+          columns.forEach((e) => {
+            view.setColumnProperty(e.name, 'visible', e.visible === true);
+          });
+        }
+      } catch (e) {
+      // ignore
       }
 
-      return layout;
-    });
+      view.endUpdate();
+      setTimeout(() => {
+        view.__ignoreOnColumnPropertyChanged__ = false;
+      });
+    }
   }
 
   function saveLayouts() {
     const view = vm.proxy.getView?.();
 
     if (view) {
-      const layouts = recursiveGetLayouts(view);
-      localStorage.set(storageLayoutsKey, layouts);
+      const layouts = view.saveColumnLayout();
+      const columns = view.getColumns().map((e) => pick(e, ['name', 'visible']));
+      localStorage.set(storageLayoutsKey, { layouts, columns });
     }
   }
 
   return {
-    getSavedLayouts,
+    applySavedLayouts,
     saveLayouts,
   };
 };

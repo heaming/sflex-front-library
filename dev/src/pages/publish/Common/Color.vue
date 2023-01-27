@@ -396,6 +396,23 @@
               />
             </td>
           </tr>
+          <tr>
+            <td>
+              $bg-orange
+            </td>
+            <td>
+              #ff8f1f
+            </td>
+            <td>
+              kw-fc--bg-orange<br>
+              kw-bc--bg-orange
+            </td>
+            <td>
+              <div
+                class="color-box bg-orange"
+              />
+            </td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
@@ -498,6 +515,10 @@ const guideHistory = [
 
     &.bg-grid {
       background: $bg-grid;
+    }
+
+    &.bg-orange {
+      background: $bg-orange;
     }
   }
 }
