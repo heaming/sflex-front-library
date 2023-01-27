@@ -258,4 +258,16 @@ body.mobile {
       }
     }
   }
+
+  .kw-checkbox .q-checkbox {
+    &__inner {
+      &--falsy {
+        & ~ .q-checkbox__label {
+          &:hover {
+            color: $black3;
+          }
+        }
+      }
+    }
+  }
 }
