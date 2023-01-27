@@ -84,6 +84,11 @@
   $-kw-tabs-padding: 24px 40px 0 40px;
   $-kw-tabs-padding-dense: 0;
   $-kw-tabs-content-background-color: $bg-box;
+  $-kw-tabs-content-border-color: $placeholder;
+  $-kw-tabs-content-color: $disabled;
+  $-kw-tabs-content-background-color-dense: $bg-white;
+  $-kw-tabs-content-border-color-dense: $line-stroke;
+  $-kw-tabs-content-color-dense: $disabled;
 
   @include kw-tabs-padding($-kw-tabs-padding, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
 
@@ -97,6 +102,7 @@
       text-shadow: none;
       transition: none;
       background-color: $-kw-tabs-content-background-color;
+      border-color: $-kw-tabs-content-border-color;
 
       &.q-icon {
         > svg {
@@ -213,14 +219,30 @@
 
   &__content {
     background-color: $-kw-tabs-content-background-color; // inactive tab has transparent bg-color by default, so it will displayed.
-    color: $black3; // notify!! inherit to inactive tab.
-    border-color: $placeholder; // notify!! inherit to inactive tab.
+    color: $-kw-tabs-content-color; // notify!! inherit to inactive tab.
+    border-color: $-kw-tabs-content-border-color; // notify!! inherit to inactive tab.
     height: $kw-tabs-content-height;
     flex: 0 1 auto; // notify!! should override align props handle classes.
 
     // align props handle classes.
     &.items-justify {
       flex-grow: 1;
+    }
+  }
+
+  &--dense {
+    @include kw-tabs-padding($-kw-tabs-padding-dense, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
+
+    .kw-tabs__content {
+      background-color: $-kw-tabs-content-background-color-dense; // inactive tab has transparent bg-color by default, so it will displayed.
+      color: $-kw-tabs-content-color-dense; // notify!! inherit to inactive tab.
+      border-color: $-kw-tabs-content-border-color-dense; // notify!! inherit to inactive tab.
+      height: $kw-tabs-content-height-dense;
+
+      ~ .q-tabs__arrow {
+        background-color: $-kw-tabs-content-background-color-dense;
+        border-color: $-kw-tabs-content-border-color-dense;
+      }
     }
   }
 
@@ -240,10 +262,6 @@
     ~ .q-tabs__arrow {
       color: $color;
     }
-  }
-
-  &--dense {
-    @include kw-tabs-padding($-kw-tabs-padding-dense, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
   }
 
   &--no-padding {
