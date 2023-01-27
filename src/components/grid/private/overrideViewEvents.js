@@ -164,7 +164,12 @@ export function overrideOnLayoutPropertyChanged(view, vm) {
       execOriginal(g, onLayoutPropertyChanged, g, layout, property, newValue, oldValue);
     }
 
-    vm.proxy.onResize?.();
+    // resize
+    if (['displayWidth', 'visible'].includes(property)) {
+      setTimeout(() => {
+        vm.proxy.onResize?.();
+      });
+    }
   });
 }
 
@@ -173,6 +178,10 @@ export function overrideOnLayoutPropertyChanged(view, vm) {
   */
 export function overrideOnColumnPropertyChanged(view, vm) {
   wrapEvent(view, onColumnPropertyChanged, (g, column, property, newValue, oldValue) => {
+    if (view.__ignoreOnColumnPropertyChanged__ === true) {
+      return;
+    }
+
     if (hasOriginal(g, onColumnPropertyChanged)) {
       execOriginal(g, onColumnPropertyChanged, g, column, property, newValue, oldValue);
     }
@@ -180,6 +189,13 @@ export function overrideOnColumnPropertyChanged(view, vm) {
     // save personalize
     if (['displayIndex', 'visible'].includes(property)) {
       vm.proxy.saveLayouts?.();
+    }
+
+    // resize
+    if (['displayWidth', 'visible'].includes(property)) {
+      setTimeout(() => {
+        vm.proxy.onResize?.();
+      });
     }
   });
 }

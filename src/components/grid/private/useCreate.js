@@ -33,7 +33,7 @@ export default (DataClass, ViewClass) => {
   let data = null;
   let view = null;
 
-  onMounted(() => {
+  onMounted(async () => {
     try {
       view = new ViewClass(containerRef.value);
     } catch (e) {
@@ -57,15 +57,11 @@ export default (DataClass, ViewClass) => {
     syncHeadCheckIfAble(view);
     contextMenuRef.value?.setView(view);
 
-    onInit?.(data, view);
+    await onInit?.(data, view);
 
-    try {
-      const layouts = vm.proxy.getSavedLayouts();
-      view.__originalLayouts__ = view.saveColumnLayout();
-      view.setColumnLayout(layouts);
-    } catch (e) {
-      // ignore
-    }
+    // after initialized
+    view.__originalLayouts__ = view.saveColumnLayout();
+    vm.proxy.applySavedLayouts?.();
   });
 
   onBeforeUnmount(() => {
