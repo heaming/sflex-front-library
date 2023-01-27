@@ -244,6 +244,7 @@ body.mobile:not(.tablet) {
     &__header {
       padding: 0 16px;
       height: 3.5rem;
+      flex: none;
       background-color: $bg-white;
     }
 

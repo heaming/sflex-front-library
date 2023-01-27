@@ -8,7 +8,7 @@ import installValidation from './installValidation';
 import { installI18n } from './i18n';
 import { installRouter } from './router';
 import { installStore } from './store';
-import { GlobalKey } from './consts/private/symbols';
+import { GlobalContextKey } from './consts/private/symbols';
 import { g, defineGetters } from './utils/private/globalProperty';
 
 const normalizeOptions = (options = {}) => ({
@@ -22,7 +22,7 @@ const normalizeOptions = (options = {}) => ({
 function provideAppGlobal(app) {
   const q = app.config.globalProperties.$q;
   defineGetters(app, { q });
-  app.provide(GlobalKey, g);
+  app.provide(GlobalContextKey, g);
 }
 
 export default (App, options) => {

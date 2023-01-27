@@ -9,17 +9,22 @@ export const useResizeProps = {
 
 export default () => {
   const vm = getCurrentInstance();
+  const { props } = vm;
 
   const resizedHeight = ref(null);
-  const visibleRows = toRef(vm.props, 'visibleRows');
+  const visibleRows = computed(() => parseInt(props.visibleRows, 10) || 0);
 
   async function onResize() {
     const view = vm.proxy.getView?.();
 
     if (view) {
       await waitUntilSetLayout(view);
-      resizedHeight.value = visibleRows.value > 0
-        ? `${calcViewHeight(view, visibleRows.value)}px` : null;
+
+      if (visibleRows.value > 0) {
+        resizedHeight.value = `${calcViewHeight(view, visibleRows.value)}px`;
+      } else {
+        resizedHeight.value = null;
+      }
     }
   }
 

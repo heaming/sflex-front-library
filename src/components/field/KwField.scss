@@ -653,6 +653,10 @@ body.mobile:not(.tablet) {
       &__messages {
         overflow-wrap: anywhere;
       }
+
+      &__label {
+        line-height: 20px !important;
+      }
     }
 
     &.q-field {

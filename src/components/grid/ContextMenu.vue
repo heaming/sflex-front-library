@@ -123,7 +123,7 @@ export default {
 
     function setContextConfig() {
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
-      const layouts = view.saveColumnLayout();
+      const layouts = view.__originalLayouts__ || view.saveColumnLayout();
 
       const viewOptions = view.header.visible
         ? recursiveCreateViewOptions(layouts) : [];
