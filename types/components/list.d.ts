@@ -161,6 +161,16 @@ interface KwListProps extends Pick<QListProps, FallThroughProps> {
   itemStyle?: VueStyleProp | undefined;
 
   /**
+   * 내부에 그려지는 item 을 `kw-expansion-item` 으로 대체한다.
+   * 일부만 expansion item 으로 처리하고 싶을 경우 items 에 바인딩 되는 특정 item 에 expansion field 를 truthy 로 설정하라.
+   *
+   * * if you use default Slot, It will ignored. *
+   *
+   * @see onClickItem
+   */
+  expansion?: boolean | undefined;
+
+  /**
    * 내부에 그려질 `kw-item` 에 연결되는 값.
    *
    * * if you use default Slot, It will ignored. *
@@ -215,6 +225,17 @@ interface KwListSlots extends QListSlots {
    * 각 아이템을 표현한다. kw-item-section 들로 감싸서 그리는 것을 기본 사용으로 한다.
    */
   item: (scope: { item: object | string | number }) => VNode[];
+
+  /**
+   * item 이 expansion item 으로 표시될 경우 (item 객체의 expansion 이 truthy 이거나 list 의 expansion props 가 true 일 경우)
+   * 해당 슬롯을 사용 가능하며, item 슬롯의 경우 header item 을, expansion slot 의 경우 expansion item 의 확장 영역을 표시한다.
+   *
+   * 반드시 kw-item 을 쓸 필요는 없으나, 쓰면 padding inherit 이 가능하다.
+   *
+   * @see expansion
+   *
+   */
+  expansion: (scope: { item: object | string | number }) => VNode[];
 
   /**
    * placeholder 영역

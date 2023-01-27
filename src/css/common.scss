@@ -1180,3 +1180,58 @@ body.mobile {
 @include spacing(".gap-") using ($space) {
   gap: $space;
 }
+
+// mobile 레이아웃 요소
+// card action button layout
+.card-button-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .kw-btn {
+    flex: 1 1 30%;
+  }
+
+  &--quarter {
+    .kw-btn {
+      flex-basis: 40%;
+    }
+  }
+}
+
+// 삳단 상태박스 (ex:W-MP-U-0124M01)
+.state-boxes {
+  $self: &;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  &__item {
+    padding: 12px;
+    flex: 1 1 30%;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    color: #555;
+  }
+
+  &__nums {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 26px;
+    text-decoration: underline;
+  }
+
+  &--quarter {
+    #{$self}__item {
+      flex: 1 1 40%;
+    }
+  }
+}

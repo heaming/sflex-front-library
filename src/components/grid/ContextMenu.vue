@@ -102,31 +102,28 @@ export default {
     });
 
     function recursiveCreateViewOptions(layouts) {
-      const visibleLayouts = layouts.filter((e) => e.visible);
-      return visibleLayouts.reduce((viewOptions, layout) => {
+      return layouts.reduce((options, layout) => {
         if (layout.column) {
           const { name, header, visible } = view.columnByName(layout.column);
 
-          viewOptions.push({
+          options.push({
             column: name,
             label: header.text || name,
             visible,
           });
         } else if (layout.items) {
-          viewOptions.push(
+          options.push(
             ...recursiveCreateViewOptions(layout.items),
           );
         }
-        return viewOptions;
+        return options;
       }, []);
     }
 
-    function setContextConfig() {
+    function updateContextConfig() {
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
-      const layouts = view.__originalLayouts__ || view.saveColumnLayout();
-
-      const viewOptions = view.header.visible
-        ? recursiveCreateViewOptions(layouts) : [];
+      const layouts = view.saveColumnLayout();
+      const viewOptions = view.header.visible ? recursiveCreateViewOptions(layouts) : [];
 
       contextConfig.value = {
         column,
@@ -137,7 +134,7 @@ export default {
     function beforeShow() {
       if (view.isEditing()) view.commit();
 
-      setContextConfig();
+      updateContextConfig();
       addClickOutside(clickOutsideProps);
     }
 
@@ -147,7 +144,7 @@ export default {
 
     function onClickViewOption(opt) {
       view.setColumnProperty(opt.column, 'visible', !opt.visible);
-      setContextConfig();
+      updateContextConfig();
     }
 
     return {

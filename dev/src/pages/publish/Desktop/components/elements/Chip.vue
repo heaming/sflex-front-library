@@ -96,6 +96,13 @@
             text-color="primary"
             class="ma2"
           />
+          <kw-chip
+            label="가구대표"
+            color="bg-orange"
+            square
+            text-color="bg-orange"
+            class="ma2"
+          />
         </div>
         <guide-code-view
           :code-value="chipCode"
@@ -137,9 +144,20 @@ const chipCode = `
   text-color="primary"
   class="ma2"
 />
+<kw-chip
+  label="가구대표"
+  color="bg-orange"
+  square
+  text-color="bg-orange"
+  class="ma2"
+/>
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2023-01-27',
+    text: 'Add new type chip',
+  },
   {
     timestamp: '2022-10-18',
     text: 'Add new type chip and updated guide',
