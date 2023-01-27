@@ -1,6 +1,9 @@
 <template>
   <slot />
-  <InfiniteLoading @infinite="load" />
+  <InfiniteLoading
+    :target="target"
+    @infinite="load"
+  />
 </template>
 
 <script>
@@ -14,6 +17,10 @@ export default {
   },
   props: {
     modelValue: { type: Array, default: () => ([]) },
+    target: {
+      type: String,
+      default: 'window',
+    },
     infiniteHandler: {
       type: Function,
       default: undefined,

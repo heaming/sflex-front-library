@@ -29,46 +29,31 @@
 
   // END quasar overrides
 
+  &__item {
+    &--selected {
+      font-weight: 500;
+    }
+  }
+
   &__placeholder {
     // fixme
   }
 
   &--selectable {
-    &.q-list {
-      & .kw-list {
-        &__total-item.kw-item {
+    & .kw-list {
+      &__item--total {
+        &.kw-item {
           min-height: unset;
           padding-top: 0;
           padding-bottom: 12px;
+        }
 
-          .kw-item__section.q-item__section--side {
-            padding-right: 4px;
-          }
-
-          // &:not(:last-child) {
-          //   margin-bottom: -1px;
-          //   border-bottom: 1px solid $black1;
-          // }
+        .kw-list__select-section {
+          padding-right: 4px;
         }
       }
     }
   }
-
-  /*
-
-  &--padding {
-    > .kw-item-type {
-      @extend %kw-item-type-padding;
-    }
-  }
-
-  &--dense {
-    > .kw-item-type {
-      @extend %kw-item-type-dense;
-    }
-  }
-
-   */
 
   // START kw-search > 체크박스 목록
   &.checkbox-group {

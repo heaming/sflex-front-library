@@ -126,7 +126,7 @@ const tabsProps = {
   bgColor: { type: String, default: undefined },
   borderColor: { type: String, default: undefined },
   activeBorderColor: { type: String, default: undefined },
-  activeLine: { type: String, default: 'bottom' },
+  activeLine: { type: String, default: undefined },
   align: { type: String, default: 'left' },
   indicator: { type: Boolean, default: undefined },
   noPadding: { type: Boolean, default: undefined },
