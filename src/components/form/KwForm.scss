@@ -163,6 +163,8 @@ body.mobile:not(.tablet) {
     $-kw-form-item-min-height: 20px;
 
     .kw-form-item__label {
+      align-items: center;
+
       .kw-label-content {
         color: $black2;
       }
