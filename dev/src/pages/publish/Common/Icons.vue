@@ -117,6 +117,11 @@ const iconList1 = [
   'down_to',
   'cellphone_reject',
   'cellphone',
+  'cellphone_off',
+  'holding',
+  'break',
+  'release',
+  'pause',
   'sms',
 ];
 const iconList2 = [
