@@ -1,12 +1,10 @@
 <template>
   <q-tabs
     :class="tabsClass"
-    v-bind="styleClassAttrs"
+    v-bind="styleProps"
     :model-value="modelValue"
     :vertical="vertical"
     :active-class="computedActiveClass"
-    :active-color="activeColor"
-    :active-bg-color="activeBgColor"
     :indicator-color="indicatorColor"
     :left-icon="leftIcon"
     :right-icon="rightIcon"
@@ -28,6 +26,12 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
 
+const densePreset = {
+  activeLine: false,
+  activeColor: 'white',
+  activeBgColor: 'secondary',
+};
+
 export default {
   name: 'KwTabs',
   inheritAttrs: false,
@@ -37,7 +41,7 @@ export default {
     bgColor: { type: String, default: undefined },
     borderColor: { type: String, default: undefined },
     activeBorderColor: { type: String, default: undefined },
-    activeLine: { type: String, default: 'bottom' },
+    activeLine: { type: String, default: undefined },
     align: { type: String, default: 'left' },
     indicator: { type: Boolean, default: undefined },
     noPadding: { type: Boolean, default: undefined },
@@ -67,7 +71,11 @@ export default {
   ],
 
   setup(props) {
-    const activeLineColor = computed(() => props.activeBorderColor ?? 'black1');
+    const stylePreset = computed(() => (props.dense ? densePreset : {}));
+
+    const activeLineColor = computed(() => props.activeBorderColor ?? stylePreset.value?.activeBorderColor ?? 'black1');
+
+    const activeLinePosition = computed(() => props.activeLine ?? stylePreset.value?.activeLine ?? 'bottom');
 
     const tabsClass = computed(() => {
       const classes = {
@@ -80,8 +88,9 @@ export default {
       if (props.activeBorderColor) {
         classes[`kw-tabs--active-border-${props.activeBorderColor}`] = true;
       }
-      if (props.activeLine) {
-        classes[`kw-tabs--active-line-${props.activeLine}`] = true;
+
+      if (activeLinePosition.value) {
+        classes[`kw-tabs--active-line-${activeLinePosition.value}`] = true;
         classes[`kw-tabs--active-line-${activeLineColor.value}`] = true;
       }
       if (props.align) {
@@ -118,12 +127,20 @@ export default {
 
     const computedDense = useDense();
 
+    const { styleClassAttrs } = useInheritAttrs();
+
+    const styleProps = computed(() => ({
+      ...styleClassAttrs.value,
+      activeBgColor: props.activeBgColor ?? stylePreset.value?.activeBgColor,
+      activeColor: props.activeColor ?? stylePreset.value?.activeColor,
+    }));
+
     return {
-      ...useInheritAttrs(),
       tabsClass,
       computedDense,
       computedContentClass,
       computedActiveClass,
+      styleProps,
     };
   },
 };
