@@ -1095,14 +1095,6 @@ $unit: px;
       }
     }
   }
-
-  @at-root body.mobile:not(.tablet) & {
-    li {
-      p {
-        color: $black2;
-      }
-    }
-  }
 }
 
 .filter-box {
