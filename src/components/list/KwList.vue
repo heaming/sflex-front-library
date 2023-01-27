@@ -6,22 +6,26 @@
     :separator="separator"
   >
     <slot>
+      <!-- select all && actions -->
       <kw-item
         v-if="showSelectAll || $slots.counter || $slots.action"
-        class="kw-list__total-item"
+        :class="selectAllItemClass"
+        :clickable="clickable"
+        @click="onClickSelectAllItem"
       >
         <kw-item-section
           v-if="showSelectAll"
+          class="kw-list__select-all"
           side
           v-bind="selectAllAlignProps"
         >
           <kw-checkbox
             :model-value="innerSelectAll"
-            class="kw-list__select-all"
+            class="kw-list__select-section"
             :label="$t('MSG_BTN_SELT_ALL', undefined, '전체선택')"
+            dense
             :true-value="true"
             :false-value="false"
-            dense
             @update:model-value="onUpdateSelectAll"
           />
         </kw-item-section>
@@ -46,45 +50,100 @@
           <slot name="action" />
         </kw-item-section>
       </kw-item>
-      <kw-item
+      <!-- items -->
+      <template
         v-for="(item) in innerItems"
-        v-bind="selectAlignProps"
         :key="item.key"
-        :clickable="clickable"
-        :class="itemClass"
-        :style="itemStyle"
-        :active-class="activeClass"
-        :active="activated.includes(item)"
-        :disable="disable"
-        :dense="dense"
-        :tag="itemTag"
-        @click="onClick(item)"
       >
-        <kw-item-section
-          v-if="selectComponent"
-          side
+        <kw-expansion-item
+          v-if="expansion || item.expansion"
+          :clickable="clickable"
+          :class="computedItemClass[item.key]"
+          :style="itemStyle"
+          :active-class="activeClass"
+          :disable="disable"
+          :dense="dense"
+          @click="onClick(item)"
+        >
+          <template #header>
+            <kw-item-section
+              v-if="selectComponent"
+              class="kw-list__select-section"
+              side
+              v-bind="selectAlignProps"
+            >
+              <kw-radio
+                v-if="selectComponent === 'radio'"
+                v-model="innerSelected"
+                :val="item.key"
+                @change="emitUpdateSelected"
+              />
+              <kw-checkbox
+                v-if="selectComponent === 'checkbox'"
+                v-model="innerSelected"
+                :val="item.key"
+                @change="emitUpdateSelected"
+              />
+            </kw-item-section>
+            <slot
+              name="item"
+              :item="item.value"
+            >
+              <kw-item-section>
+                {{ item.key }}
+              </kw-item-section>
+            </slot>
+          </template>
+          <template #default>
+            <slot
+              name="expansion"
+              :item="item.value"
+            >
+              <kw-item>
+                {{ item.expansion }}
+              </kw-item>
+            </slot>
+          </template>
+        </kw-expansion-item>
+        <kw-item
+          v-else
           v-bind="selectAlignProps"
+          :class="computedItemClass[item.key]"
+          :clickable="clickable"
+          :style="itemStyle"
+          :active-class="activeClass"
+          :disable="disable"
+          :dense="dense"
+          :tag="itemTag"
+          @click="onClick(item)"
         >
-          <kw-radio
-            v-if="selectComponent === 'radio'"
-            v-model="innerSelected"
-            :val="item.key"
-            @change="emitUpdateSelected"
-          />
-          <kw-checkbox
-            v-if="selectComponent === 'checkbox'"
-            v-model="innerSelected"
-            :val="item.key"
-            @change="emitUpdateSelected"
-          />
-        </kw-item-section>
-        <slot
-          name="item"
-          :item="item.value"
-        >
-          {{ item.key }}
-        </slot>
-      </kw-item>
+          <kw-item-section
+            v-if="selectComponent"
+            class="kw-list__select-section"
+            side
+            v-bind="selectAlignProps"
+          >
+            <kw-radio
+              v-if="selectComponent === 'radio'"
+              v-model="innerSelected"
+              :val="item.key"
+              @change="emitUpdateSelected"
+            />
+            <kw-checkbox
+              v-if="selectComponent === 'checkbox'"
+              v-model="innerSelected"
+              :val="item.key"
+              @change="emitUpdateSelected"
+            />
+          </kw-item-section>
+          <slot
+            name="item"
+            :item="item.value"
+          >
+            {{ item.key }}
+          </slot>
+        </kw-item>
+      </template>
       <div
         v-if="showPlaceholder"
         class="kw-list__placeholder"
@@ -101,6 +160,7 @@
 </template>
 
 <script>
+import { normalizeClass } from 'vue';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { getNumberWithComma } from '../../utils/string';
 import { ListContextKey } from '../../consts/private/symbols';
@@ -131,32 +191,90 @@ export default {
     itemClass: { type: [Array, Object, String], default: undefined },
     itemStyle: { type: [Array, Object, String], default: undefined },
     activeClass: { type: String, default: undefined },
+    expansion: { type: Boolean, default: undefined },
     // fall through props
     separator: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
     onClickItem: { type: Function, default: undefined },
   },
   emits: ['update:selected', 'clickItem'],
-  setup(props, { emit, slots }) {
+  setup(props, {
+    emit,
+    slots,
+  }) {
     const { styleClassAttrs } = useInheritAttrs();
 
-    const activated = ref([]);
-    const selectComponent = computed(() => {
-      if (props.radio) { return 'radio'; }
-      if (props.checkbox) { return 'checkbox'; }
-      return undefined;
-    });
-    const multipleSelect = computed(() => selectComponent.value === 'checkbox');
-    const innerSelected = ref(props.selected ?? (multipleSelect.value ? [] : undefined));
     const normalizeItem = (item) => ({
       key: item[props.itemKey] ?? item,
       value: item,
+      expansion: item.expansion,
     });
 
     const innerItems = computed(() => {
-      if (Array.isArray(props.items)) { return props.items.map(normalizeItem); }
+      if (Array.isArray(props.items)) {
+        return props.items.map(normalizeItem);
+      }
       return [];
     });
+
+    const keyDict = computed(() => {
+      const registrationItem = (dict, item) => {
+        const itemKey = item.key;
+        dict[itemKey] = true;
+        return dict;
+      };
+      return innerItems.value.reduce(registrationItem, {});
+    });
+
+    const updateItems = (val) => {
+      if (val && Array.isArray(val)) {
+        innerItems.value = val.map(normalizeItem);
+      }
+    };
+
+    watch(() => props.items, updateItems);
+
+    // activate
+    const focused = ref();
+
+    // select
+    const selectComponent = computed(() => {
+      if (props.radio) {
+        return 'radio';
+      }
+      if (props.checkbox) {
+        return 'checkbox';
+      }
+      return undefined;
+    });
+    const multipleSelect = computed(() => selectComponent.value === 'checkbox');
+    const innerSelected = ref();
+    const selectedKeyDict = computed(() => {
+      if (!innerSelected.value) {
+        return {};
+      }
+      if (!multipleSelect.value) {
+        return { [innerSelected.value]: true };
+      }
+      const registrationItem = (dict, key) => {
+        dict[key] = true;
+        return dict;
+      };
+      return innerSelected.value.reduce(registrationItem, {});
+    });
+
+    const updateSelected = (val) => {
+      if (!val) {
+        innerSelected.value = multipleSelect.value ? [] : undefined;
+      } else {
+        innerSelected.value = multipleSelect.value ? [...val] : val;
+      }
+    };
+
+    watch(multipleSelect, () => updateSelected(props.selected));
+    watch(() => props.selected, updateSelected, { immediate: true });
+
+    // counter
     const totalCountWithComma = computed(() => (
       multipleSelect.value
         ? getNumberWithComma(innerItems.value.length)
@@ -168,39 +286,21 @@ export default {
         : undefined
     ));
 
-    const updateSelected = (val) => {
-      if (!val) { return; }
-      if (multipleSelect.value) {
-        innerSelected.value = [...val];
-      }
-      innerSelected.value = val;
-    };
-
-    watch(() => props.selected, updateSelected);
-
-    const updateItems = (val) => {
-      if (val && Array.isArray(val)) {
-        innerItems.value = val.map(normalizeItem);
-      }
-    };
-
-    watch(() => props.items, updateItems);
-
     const emitUpdateSelected = () => {
       emit('update:selected', innerSelected.value);
     };
 
     const innerSelectAll = computed(() => {
-      if (!multipleSelect.value) { return; }
-      if (!innerItems.value.length) { return false; }
-      if (innerItems.value.length !== innerSelected.value.length) { return false; }
-      const registrationItem = (dict, item) => {
-        const itemKey = item.key;
-        dict[itemKey] = true;
-        return dict;
-      };
-      const dict = innerItems.value.reduce(registrationItem, {});
-      const checkExist = (selectedItemKey) => dict[selectedItemKey];
+      if (!multipleSelect.value) {
+        return;
+      }
+      if (!innerItems.value.length) {
+        return false;
+      }
+      if (innerItems.value.length !== innerSelected.value.length) {
+        return false;
+      }
+      const checkExist = (selectedItemKey) => keyDict.value[selectedItemKey];
       return innerSelected.value.every(checkExist);
     });
 
@@ -213,7 +313,9 @@ export default {
     };
 
     const toggleSelected = (item) => {
-      if (!multipleSelect.value) { return; }
+      if (!multipleSelect.value) {
+        return;
+      }
       const { key } = item;
       const targetIdx = innerSelected.value.indexOf(key);
       if (targetIdx > -1) {
@@ -237,12 +339,22 @@ export default {
         props.onClickItem(item);
         return;
       }
-      activated.value = [item];
+      focused.value = item.value;
       if (multipleSelect.value) {
         toggleSelected(item);
       } else {
         setSelected(item);
       }
+    };
+
+    const onClickSelectAllItem = () => {
+      if (!props.clickable) {
+        return;
+      }
+      if (!multipleSelect.value) {
+        return;
+      }
+      onUpdateSelectAll(!innerSelectAll.value);
     };
 
     const showSelectAll = computed(() => !props.hideSelectAll && multipleSelect.value);
@@ -262,6 +374,7 @@ export default {
     const showPlaceholder = computed(() => (innerItems.value?.length === 0)
       && (props.placeholder || slots.placeholder));
 
+    // style
     const computedDense = useDense();
 
     const listClass = computed(() => ({
@@ -274,6 +387,34 @@ export default {
     const listProvideContext = {
       padding: computed(() => props.itemPadding),
     };
+
+    const basicItemClass = computed(() => {
+      let classes = 'kw-list__item';
+      classes = normalizeClass(classes);
+      const propsClass = normalizeClass(props.itemClass);
+      if (propsClass) {
+        classes += ` ${propsClass}`;
+      }
+      return classes;
+    });
+
+    const computedItemClass = computed(() => {
+      const itemClasses = {};
+
+      innerItems.value.forEach((item) => {
+        itemClasses[item.key] = {
+          [basicItemClass.value]: true,
+        };
+        itemClasses[item.key]['kw-list__item--selected'] = !!selectedKeyDict.value[item.key];
+      });
+      return itemClasses;
+    });
+
+    const selectAllItemClass = computed(() => ({
+      [basicItemClass.value]: true,
+      'kw-list__item--total': true,
+      'kw-list__item--selected': innerSelectAll.value,
+    }));
 
     provide(ListContextKey, listProvideContext);
 
@@ -288,12 +429,16 @@ export default {
       onUpdateSelectAll,
       emitUpdateSelected,
       onClick,
+      onClickSelectAllItem,
       showSelectAll,
-      activated,
       selectComponent,
       selectAllAlignProps,
       selectAlignProps,
+      selectAllItemClass,
       showPlaceholder,
+      basicItemClass,
+      computedItemClass,
+      onBlur: () => { console.log('blur'); },
     };
   },
 };

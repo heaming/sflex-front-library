@@ -1,10 +1,10 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      Expension
+      Expansion
     </h2>
     <p class="kw-guide-description">
-      Expension
+      Expansion
     </p>
 
     <guide-section title="test">
@@ -192,7 +192,7 @@
     >
       <guide-props
         v-model="bindingProps"
-        title="listProps"
+        title="expansionItemProps"
         :props="expansionItemProps"
       />
       <kw-separator />
@@ -202,14 +202,7 @@
       >
         <kw-expansion-item
           v-bind="bindingProps"
-        >
-          <template #header>
-            header
-          </template>
-          <template #default>
-            default
-          </template>
-        </kw-expansion-item>
+        />
         <kw-expansion-item
           v-bind="bindingProps"
         >
