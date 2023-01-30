@@ -2,7 +2,7 @@
   $-kw-file-header-height: 36px;
   $-kw-file-border-size: 1px;
   $-kw-file-header-border: $-kw-file-border-size solid $line-stroke;
-  $-kw-file-header-background-color: $line-bg;
+  $-kw-file-header-background-color: $bg-grid;
   $-kw-file-dnd-hint-height: 30px; // FIXME: 임의값
 
   &.kw-field {
@@ -47,6 +47,12 @@
     justify-content: flex-start;
     align-items: center;
     color: $placeholder;
+
+    > span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 
   &__dnd-hint {
@@ -78,17 +84,27 @@
     & .kw-file-item {
       &__main {
         display: flex;
+        flex-flow: row nowrap;
         align-items: center;
+
+        + .kw-file-item__aside {
+          display: none;
+        }
       }
     }
   }
 
   &__header-total,
+  &__header-total-count,
   &__header-counter {
-    @include typo("dense", 500);
+    @include typo("dense", 400);
 
     line-height: 1.5rem;
     color: $black1;
+
+    > b {
+      color: $black1; // 위에서 이상한 스타일이 내려와요.
+    }
   }
 
   &__header-counter {
@@ -100,9 +116,13 @@
   }
 
   &__multiple-action {
+    display: inline-flex;
     margin-left: 16px;
-    display: flex;
     gap: 8px;
+
+    > .kw-btn {
+      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px);
+    }
   }
 
   &--blocked {
@@ -154,16 +174,12 @@
   }
 
   &--use-header {
-    $-kw-file-item-height-use-header: 36px;
+    $-kw-file-file-container-padding-use-header: rem-to-px($spacing-xs);
+    $-kw-file-item-height-use-header: 24px;
+    $-kw-file-item-gap: 4px;
     $-kw-file-item-rows: 5;
-    $-kw-file-item-container-min-height: $-kw-file-item-height-use-header;
-    $-kw-file-item-container-max-height: $-kw-file-item-rows * $-kw-file-item-height-use-header;
-
-    &.kw-field {
-      &.q-field > .q-field__inner > .q-field__control {
-        background-color: $bg-body;
-      }
-    }
+    $-kw-file-item-container-min-height: $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
+    $-kw-file-item-container-max-height: $-kw-file-item-rows * $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
 
     .q-file__filler {
       height: $-kw-file-item-container-min-height;
@@ -197,6 +213,21 @@
 
     .kw-file-item {
       min-height: $-kw-file-item-height-use-header;
+
+      &__main {
+        font-weight: 400;
+        line-height: 1em;
+      }
+
+      &--selected {
+        .kw-file-item__name {
+          font-weight: 500;
+        }
+      }
+
+      + .kw-file-item {
+        margin-top: $-kw-file-item-gap;
+      }
     }
 
     &.kw-field {
@@ -258,7 +289,13 @@
 
         &--standard {
           .kw-file__header-container {
+            padding-left: 4px; // $-kw-field-standard-padding
+            padding-right: 4px; // $-kw-field-standard-padding
             background-color: transparent;
+
+            &::before {
+              display: none; // 이재평 프로님 의견 반영 ^^
+            }
           }
         }
 
@@ -316,6 +353,10 @@
     padding-right: 4px;
   }
 
+  &__icon {
+    font-size: 18px;
+  }
+
   &__main { // you should notice this one's width set by props.
     // width: TBD when use scroll horizontal;
     min-width: 100px;
@@ -324,7 +365,6 @@
     white-space: nowrap;
     overflow: hidden;
     align-items: center;
-    margin-bottom: 1px;
   }
 
   &__append {
@@ -348,7 +388,6 @@
 
   &__aside { // you should notice this one's width set by props.
     // width: TBD when use scroll horizontal;
-    width: 122px;
     flex: none;
     display: flex;
     justify-content: flex-end;
