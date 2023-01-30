@@ -68,38 +68,40 @@ export default () => {
   }
 
   async function mountedFunc() {
-    if (infiniteIsEnabled.value === true && props.loadOnMounted === true) {
-      await nextTick();
-      let isContinue = true;
-      loadIndex.value -= 1;
+    await nextTick();
+    let isContinue = true;
+    loadIndex.value -= 1;
 
-      while (isContinue) {
-        const el = scrollTarget.value;
-        const { clientHeight, scrollHeight } = el;
+    while (isContinue) {
+      const el = scrollTarget.value;
+      const { clientHeight, scrollHeight } = el;
 
-        if (clientHeight !== scrollHeight) {
-          isContinue = false;
-        } else {
-          // eslint-disable-next-line no-await-in-loop
-          await fetch();
-        }
+      if (clientHeight !== scrollHeight) {
+        isContinue = false;
+      } else {
+        // eslint-disable-next-line no-await-in-loop
+        await fetch();
       }
     }
   }
 
   onMounted(async () => {
-    await mountedFunc();
+    if (infiniteIsEnabled.value === true && props.loadOnMounted === true) {
+      await mountedFunc();
+    }
   });
 
   async function stopLoad() {
     stopLoading.value = true;
   }
 
-  async function resetLoad() {
-    stopLoading.value = false;
-    loadIndex.value = props.initialLoadIndex;
+  async function startLoad() {
+    if (infiniteIsEnabled.value === true) {
+      stopLoading.value = false;
+      loadIndex.value = props.initialLoadIndex;
 
-    await mountedFunc();
+      await mountedFunc();
+    }
   }
 
   return {
@@ -107,6 +109,6 @@ export default () => {
     infiniteIsEnabled,
     onScroll,
     stopLoad,
-    resetLoad,
+    startLoad,
   };
 };

@@ -30,7 +30,7 @@ const pageRef = ref();
 
 async function resetLoad() {
   count.value = 5;
-  await pageRef.value.resetLoad();
+  await pageRef.value.startLoad();
 }
 async function onLoad(pageIdx) {
   console.log(pageIdx);
