@@ -23,7 +23,7 @@
             :model-value="innerSelectAll"
             class="kw-list__select-section"
             :label="$t('MSG_BTN_SELT_ALL', undefined, '전체선택')"
-            dense
+            :dense="$g.platform.is.mobile ? true : false"
             :true-value="true"
             :false-value="false"
             @update:model-value="onUpdateSelectAll"

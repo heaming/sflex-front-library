@@ -2,7 +2,7 @@
   $-kw-file-header-height: 36px;
   $-kw-file-border-size: 1px;
   $-kw-file-header-border: $-kw-file-border-size solid $line-stroke;
-  $-kw-file-header-background-color: $bg-grid;
+  $-kw-file-header-background-color: $bg-box;
   $-kw-file-dnd-hint-height: 30px; // FIXME: 임의값
 
   &.kw-field {
@@ -100,7 +100,7 @@
     @include typo("dense", 400);
 
     line-height: 1.5rem;
-    color: $black1;
+    color: $black3;
 
     > b {
       color: $black1; // 위에서 이상한 스타일이 내려와요.
@@ -175,8 +175,8 @@
 
   &--use-header {
     $-kw-file-file-container-padding-use-header: rem-to-px($spacing-xs);
-    $-kw-file-item-height-use-header: 24px;
-    $-kw-file-item-gap: 4px;
+    $-kw-file-item-height-use-header: 20px;
+    $-kw-file-item-gap: 8px;
     $-kw-file-item-rows: 5;
     $-kw-file-item-container-min-height: $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
     $-kw-file-item-container-max-height: $-kw-file-item-rows * $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
@@ -199,7 +199,8 @@
       height: $-kw-file-header-height;
       position: absolute;
       top: 0;
-      background-color: $-kw-file-header-background-color; // fixme
+      background-color: $-kw-file-header-background-color;
+
       // left: TBD;
       // right: TBD;
 
@@ -213,6 +214,10 @@
 
     .kw-file-item {
       min-height: $-kw-file-item-height-use-header;
+
+      &__icon {
+        display: inline-flex;
+      }
 
       &__main {
         font-weight: 400;
@@ -312,6 +317,12 @@
         }
       }
     }
+
+    &.kw-file--empty {
+      > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
+        min-height: 44px;
+      }
+    }
   }
 
   &--download-only {
@@ -348,13 +359,15 @@
   min-width: 100%;
   min-height: $kw-field-height;
 
-  &__checkbox,
-  &__icon {
-    padding-right: 4px;
+  &__checkbox {
+    padding-right: 8px;
   }
 
   &__icon {
-    font-size: 18px;
+    display: none;
+    padding-right: 4px;
+
+    // font-size: 18px;
   }
 
   &__main { // you should notice this one's width set by props.
@@ -365,6 +378,10 @@
     white-space: nowrap;
     overflow: hidden;
     align-items: center;
+  }
+
+  &__name {
+    @include typo("dense",400);
   }
 
   &__append {
@@ -380,10 +397,26 @@
     }
   }
 
-  &__size {
-    @include typo("dense");
+  &__error-text {
+    @include typo("caption");
 
-    color: $black3;
+    color: $error;
+  }
+
+  &__retry-btn {
+    &.kw-btn {
+      @include kw-btn-height-modifier-by-font-type(20px, "caption", 8px);
+
+      .q-icon {
+        color: $black-btn-line !important;
+      }
+    }
+  }
+
+  &__size {
+    @include typo("dense", 400);
+
+    color: $black2;
   }
 
   &__aside { // you should notice this one's width set by props.
