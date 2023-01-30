@@ -214,6 +214,10 @@ body.mobile {
       position: relative;
       background-color: $bg-white;
       border: 1px solid $line-bg;
+
+      &:has(.kw-search) {
+        padding: 0;
+      }
     }
 
     &__footer {
