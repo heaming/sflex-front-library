@@ -67,7 +67,7 @@ export function getDeviceTypeCode() {
 }
 
 export function getDeviceVersion() {
-  return callMethod(NativePlugin.Device, 'getVersion');
+  return callMethod(NativePlugin.Device, 'getVersion').versionName;
 }
 
 export function getDeviceToken() {
