@@ -409,7 +409,7 @@
             default-opened
           >
             <template #header>
-              <kw-item-section class="pl12 content-start">
+              <kw-item-section class="pl12 content-start h40">
                 <kw-checkbox
                   v-model="ynModel"
                   label="전체동의"
@@ -420,8 +420,8 @@
             <div class="kw-bc--bg-white">
               <ul class="py24 px10">
                 <!-- li should be added "mt20" as class except of first li  -->
-                <li class="row justify-between">
-                  <div class="row items-center ">
+                <li class="row justify-between no-wrap">
+                  <div class="row items-center no-wrap">
                     <kw-checkbox
                       v-model="ynModel"
                       label=""
@@ -440,8 +440,8 @@
                     icon="arrow_stepper"
                   />
                 </li>
-                <li class="row justify-between mt20">
-                  <div class="row items-center ">
+                <li class="row justify-between no-wrap mt20">
+                  <div class="row items-center no-wrap">
                     <kw-checkbox
                       v-model="ynModel"
                       label=""
@@ -460,8 +460,8 @@
                     icon="arrow_stepper"
                   />
                 </li>
-                <li class="row justify-between mt20">
-                  <div class="row items-center ">
+                <li class="row justify-between no-wrap mt20">
+                  <div class="row items-center no-wrap">
                     <kw-checkbox
                       v-model="ynModel"
                       label=""
@@ -826,6 +826,10 @@ const caseCss2 = `
 `;
 const historyData = [
   {
+    timestamp: '2022-01-30',
+    text: 'Modified "expansion with checkbox" code',
+  },
+  {
     timestamp: '2022-01-06',
     text: 'First added',
   },
@@ -840,7 +844,7 @@ const case3 = `
       default-opened
     >
       <template #header>
-        <kw-item-section class="pl12 content-start">
+        <kw-item-section class="pl12 content-start h40">
           <kw-checkbox
             v-model="ynModel"
             label="전체동의"
@@ -851,8 +855,8 @@ const case3 = `
       <div class="kw-bc--bg-white">
         <ul class="py24 px10">
           <!-- li should be added "mt20" as class except of first li  -->
-          <li class="row justify-between">
-            <div class="row items-center ">
+          <li class="row justify-between no-wrap">
+            <div class="row items-center no-wrap">
               <kw-checkbox
                 v-model="ynModel"
                 label=""
@@ -871,8 +875,8 @@ const case3 = `
               icon="arrow_stepper"
             />
           </li>
-          <li class="row justify-between mt20">
-            <div class="row items-center ">
+          <li class="row justify-between no-wrap mt20">
+            <div class="row items-center no-wrap">
               <kw-checkbox
                 v-model="ynModel"
                 label=""
@@ -891,8 +895,8 @@ const case3 = `
               icon="arrow_stepper"
             />
           </li>
-          <li class="row justify-between mt20">
-            <div class="row items-center ">
+          <li class="row justify-between no-wrap mt20">
+            <div class="row items-center no-wrap">
               <kw-checkbox
                 v-model="ynModel"
                 label=""
@@ -931,6 +935,18 @@ const caseCss3 = `
           }
         }
       }
+
+      &[aria-checked="false"] {
+        & + p {
+          color: $black2;
+        }
+      }
+
+      &[aria-checked="true"] {
+        & + p {
+          color: $black1;
+        }
+      }
     }
   }
 }
@@ -963,6 +979,18 @@ const ynModel = ref('N');
           .q-checkbox__bg {
             background: url("~@assets/icons/dialog_checked_on.svg") no-repeat center;
           }
+        }
+      }
+
+      &[aria-checked="false"] {
+        & + p {
+          color: $black2;
+        }
+      }
+
+      &[aria-checked="true"] {
+        & + p {
+          color: $black1;
         }
       }
     }
