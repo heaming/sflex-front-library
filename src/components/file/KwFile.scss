@@ -214,6 +214,7 @@
 
     .kw-file-item {
       min-height: $-kw-file-item-height-use-header;
+      padding: 0 12px;
 
       &__icon {
         display: inline-flex;
@@ -355,7 +356,6 @@
 .kw-file-item {
   display: flex;
   align-items: center;
-  padding: 0 12px;
   min-width: 100%;
   min-height: $kw-field-height;
 
