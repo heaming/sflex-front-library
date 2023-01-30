@@ -399,11 +399,10 @@
               class="kw-file-item__aside"
               :style="fileItemAsideStyles"
             >
-              <kw-icon
+              <span
                 v-if="isRetryPossible(file)"
-                class="kw-file-item__error-icon"
-                name="warning"
-              />
+                class="kw-file-item__error-text"
+              >Fail</span>
               <kw-btn
                 v-if="computedIsDownloadable(file) && downloadIcon"
                 :icon="downloadIcon"
@@ -428,10 +427,13 @@
                   {{ 'update' }}
                 </kw-tooltip>
               </kw-btn>
+              <!-- v-if="retryPossible && isRetryPossible(file)" -->
               <kw-btn
-                v-if="retryPossible && isRetryPossible(file)"
                 :icon="retryIcon"
-                borderless
+                label="재시도"
+                dense
+                secondary
+                class="kw-file-item__retry-btn"
                 @click.prevent="retryUpdateFile(file)"
               >
                 <kw-tooltip
