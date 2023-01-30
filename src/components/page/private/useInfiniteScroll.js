@@ -24,8 +24,8 @@ export const useInfiniteScrollProps = {
 
 export default () => {
   const { props } = getCurrentInstance();
-
-  const infiniteIsEnabled = computed(() => platform.is.mobile && typeof props.onLoad === 'function');
+  const stopLoading = ref(false);
+  const infiniteIsEnabled = computed(() => platform.is.mobile && typeof props.onLoad === 'function' && stopLoading.value === false);
   const isFetching = ref(false);
 
   const scrollTarget = ref();
@@ -67,8 +67,9 @@ export default () => {
     }
   }
 
-  onMounted(async () => {
+  async function mountedFunc() {
     if (infiniteIsEnabled.value === true && props.loadOnMounted === true) {
+      await nextTick();
       let isContinue = true;
       loadIndex.value -= 1;
 
@@ -84,11 +85,28 @@ export default () => {
         }
       }
     }
+  }
+
+  onMounted(async () => {
+    await mountedFunc();
   });
+
+  async function stopLoad() {
+    stopLoading.value = true;
+  }
+
+  async function resetLoad() {
+    stopLoading.value = false;
+    loadIndex.value = props.initialLoadIndex;
+
+    await mountedFunc();
+  }
 
   return {
     scrollTarget,
     infiniteIsEnabled,
     onScroll,
+    stopLoad,
+    resetLoad,
   };
 };
