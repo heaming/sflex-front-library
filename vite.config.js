@@ -77,6 +77,7 @@ export default defineConfig(({ mode }) => {
           'bootstrap-datepicker',
           'chart.js',
           'chartjs-plugin-datalabels',
+          'crypto-js',
           'dayjs',
           'dayjs/locale/ko',
           'dompurify',
