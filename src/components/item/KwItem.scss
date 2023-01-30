@@ -159,6 +159,10 @@ body.mobile:not(.tablet) {
         line-height: 22px;
         min-height: 22px;
       }
+
+      &-type {
+        min-height: 22px;
+      }
     }
   }
 }
