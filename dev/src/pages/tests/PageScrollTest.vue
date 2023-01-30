@@ -1,8 +1,12 @@
 <template>
   <kw-page
+    ref="pageRef"
     load-on-mounted
     @load="onLoad"
   >
+    <button @click="resetLoad">
+      reset
+    </button>
     <div class="result-area">
       <div class="bg-grey">
         <div
@@ -21,16 +25,24 @@
 <script setup>
 import { loadSpinner, delay } from '~kw-lib';
 
-const count = ref(5);
+const count = ref(10);
+const pageRef = ref();
 
-async function onLoad(index) {
-  console.log(index);
+async function resetLoad() {
+  count.value = 5;
+  await pageRef.value.startLoad();
+}
+async function onLoad(pageIdx) {
+  console.log(pageIdx);
 
   loadSpinner(true);
 
   await delay(500);
-  count.value += 5;
+  count.value += 10;
   loadSpinner(false);
+  if (count.value === 50) {
+    await pageRef.value.stopLoad();
+  }
 }
 
 </script>
