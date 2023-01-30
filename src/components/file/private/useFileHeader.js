@@ -331,7 +331,7 @@ export default (uploadCtx, ables, defaults = {}) => {
 
   const headerScrollAreaStyle = ref({});
   // $-kw-file-file-container-padding-use-header
-  const fileScrollAreaPaddingWhenUseHeader = 12;
+  const fileScrollAreaPaddingWhenUseHeader = 8;
   const fileItemGap = 4;
   const fileScrollAreaContentsStyle = computed(() => {
     let style = '';

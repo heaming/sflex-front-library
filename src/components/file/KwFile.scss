@@ -175,8 +175,8 @@
 
   &--use-header {
     $-kw-file-file-container-padding-use-header: rem-to-px($spacing-xs);
-    $-kw-file-item-height-use-header: 20px;
-    $-kw-file-item-gap: 8px;
+    $-kw-file-item-height-use-header: 24px;
+    $-kw-file-item-gap: 4px;
     $-kw-file-item-rows: 5;
     $-kw-file-item-container-min-height: $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
     $-kw-file-item-container-max-height: $-kw-file-item-rows * $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
