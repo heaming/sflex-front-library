@@ -56,8 +56,8 @@
 
   // section
   &__section {
-    $-kw-item-section-side-padding-right: 8px; // if you change default, you can handle it.
-    $-kw-item-section-side-padding-left: 8px; // if you change default, you can handle it.
+    $-kw-item-section-side-padding-right: 20px; // if you change default, you can handle it.
+    $-kw-item-section-side-padding-left: 20px; // if you change default, you can handle it.
 
     &.q-item__section {
       &--side {
@@ -120,44 +120,48 @@
   // END label
 }
 
-// only mobile
-body.mobile:not(.tablet) {
-  // .kw-item:has(.kw-expansion-item) {
-  //   flex-wrap: wrap;
-  //   padding: 0;
-  //   border-bottom: 1px solid $line-line;
+body.mobile {
+  // only mobile
+  &:not(.tablet) {
+    .kw-item {
+      &__section {
+        $-kw-item-section-side-padding-right: 8px;
+        $-kw-item-section-side-padding-left: 8px;
 
-  //   &:last-child {
-  //     border-bottom: none;
-  //   }
+        &.q-item__section {
+          &--side {
+            padding-right: $-kw-item-section-side-padding-right;
+          }
 
-  //   .kw-expansion-item {
-  //     width: 100%;
-  //   }
-  // }
-
-  // .kw-item.q-item--active {
-  //   background-color: inherit;
-  // }
-
-  .kw-form {
-    &-item {
-      padding: 6px 0;
-      min-height: 22px;
-      line-height: 22px;
-
-      &:first-child {
-        padding-top: 0;
+          &--main {
+            & ~ .q-item__section--side {
+              padding-right: 0;
+              padding-left: $-kw-item-section-side-padding-left;
+            }
+          }
+        }
       }
+    }
 
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      &__label,
-      &__field {
-        line-height: 22px;
+    .kw-form {
+      &-item {
+        padding: 6px 0;
         min-height: 22px;
+        line-height: 22px;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+
+        &__label,
+        &__field {
+          line-height: 22px;
+          min-height: 22px;
+        }
       }
     }
   }
