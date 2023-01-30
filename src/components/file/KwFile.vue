@@ -14,7 +14,7 @@
     :color="color"
     :bg-color="bgColor"
     :loading="loading"
-    :counter="counter"
+    :counter="counter || (!computedUseHeader && multiple)"
     :clearable="clearable"
     :clear-icon="clearIcon"
     :disable="disable"
@@ -48,7 +48,9 @@
       :class="placeholderClass"
       :style="placeholderStyle"
     >
-      {{ computedPlaceholder }}
+      <span>
+        {{ computedPlaceholder }}
+      </span>
     </div>
 
     <div
@@ -68,11 +70,11 @@
 
     <!-- append -->
     <template
-      v-if="!multiple || $slots.append"
+      v-if="!computedUseHeader || $slots.append"
       #append
     >
       <div
-        v-if="emptyAppendCounter"
+        v-if="showAppendCounter"
         class="kw-file-item__size"
       >
         {{ computedCounter }}
@@ -109,27 +111,30 @@
             class="kw-file-item__checkbox"
             :true-value="true"
             :false-value="false"
+            :dense="computedUseHeader"
             :disable="disable"
           />
           <div
             class="kw-file-item__main"
             :style="fileItemNameStyles"
           >
-            <span class="kw-file__header-total">
-              {{ `${$t('MSG_TXT_COM_TOT', null, 'Total')} ${files.length}` }}
-            </span>
-            <span
-              v-if="computedCounter"
-              class="kw-file__header-counter"
-            >
-              {{ `(${computedCounter})` }}
-            </span>
+            <div class="ellipsis shrink">
+              <span class="kw-file__header-total">
+                {{ `${$t('MSG_TXT_COM_TOT', null, 'Total')} ` }}
+                <b>{{ `${files.length}` }}</b>
+              </span>
+              <span
+                v-if="computedCounter"
+                class="kw-file__header-counter"
+              >
+                {{ `(${computedCounter})` }}
+              </span>
+            </div>
             <div class="kw-file__multiple-action">
               <kw-btn
                 v-if="showPickBtn"
                 :label="pickBtnLabel"
                 no-wrap
-                dense
                 @click="pickFiles"
               />
               <kw-btn
@@ -269,7 +274,7 @@
       #hint
     >
       <slot name="hint">
-        <template v-if="multiple">
+        <template v-if="acceptHint">
           {{ acceptHint }}
         </template>
       </slot>
@@ -336,6 +341,7 @@
               v-model="selectedFileKeys"
               class="kw-file-item__checkbox"
               :val="fileKeys[idx]"
+              :dense="computedUseHeader"
               :disable="disable"
             />
             <div
@@ -374,7 +380,8 @@
               </span>
               <span
                 class="kw-file-item__size"
-              > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}</span>
+              > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
+              </span> <!-- 단건 업로드며, 파일 제한이 있는 경우는 파일 제한을 표시하랍니다. ^^. 왜 그러는 걸까요. -->
             </div>
             <div
               v-if="$slots['append-file']"
@@ -499,8 +506,8 @@
 </template>
 
 <script>
-import useField, { useFieldProps } from '../../composables/private/useField';
 import { alert } from '../../plugins/dialog';
+import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useFileUpload from './private/useFileUpload';
@@ -692,7 +699,9 @@ export default {
       if (props.placeholder) {
         return typeof props.placeholder === 'function' ? props.placeholder() : props.placeholder;
       }
-      return props.multiple ? t('TODO', null, '첨부할 파일을 여기에 놓아주세요.') : (acceptHint.value || t('MSG_TXT_SEL_FILE', null, '파일찾기'));
+      return computedUseHeader.value
+        ? t('TODO', null, '첨부할 파일을 여기에 놓아주세요.')
+        : '';
     });
 
     const computedDndHint = computed(() => {
@@ -724,16 +733,21 @@ export default {
       ...useHeaderFileClass.value,
     }));
 
-    const emptyAppendCounter = computed(() => !computedUseHeader.value
+    const showAppendCounter = computed(() => (!computedUseHeader.value && !props.multiple)
       && !(props.counter || slots.counter)
       && !files.value.length
       && !!counterCtx.computedCounter.value);
 
     function getFileItemClass(file) {
       let classes = 'kw-file-item ';
-      classes += (downloadCtx.computedIsDownloadable.value(file) && !props.downloadIcon) ? 'kw-file-item--downloadable ' : '';
+      if (downloadCtx.computedIsDownloadable.value(file) && !props.downloadIcon) {
+        classes += 'kw-file-item--downloadable ';
+      }
       const uploadingState = uploadCtx.findUploading(file)?.state;
       classes += uploadingState ? `kw-file-item--${uploadingState} ` : '';
+      if (selectCtx.selectedFiles?.value.includes(file)) {
+        classes += 'kw-file-item--selected ';
+      }
       return classes;
     }
 
@@ -778,7 +792,7 @@ export default {
       onRejected,
       fileClass,
       fileItemClass,
-      emptyAppendCounter,
+      showAppendCounter,
       computedPlaceholder,
       computedDndHint,
       innerValue,
