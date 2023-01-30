@@ -162,35 +162,31 @@
 }
 
 .mobile {
-  .kw-expansion-item {
-    // tablet
-  }
+  .kw-list {
+    &.q-list {
+      &--separator {
+        >.q-item-type + .q-item-type,
+        >.q-virtual-scroll__content > .q-item-type + .q-item-type {
+          border-top: 1px solid rgba($line-bg, 1);
+          transition: border 0.7s;
+        }
 
-  // mobile
-  &:not(.tablet) {
-    .kw-list {
-      &.q-list {
-        &--separator {
-          >.q-item-type + .q-item-type,
-          >.q-virtual-scroll__content > .q-item-type + .q-item-type {
-            border-top: 1px solid rgba($line-bg, 1);
-            transition: border 0.7s;
+        & .q-expansion-item--expanded {
+          &.q-item-type + .q-item-type {
+            border-top: 1px solid rgba($line-bg, 0);
           }
+        }
 
-          & .q-expansion-item--expanded {
-            &.q-item-type + .q-item-type {
-              border-top: 1px solid rgba($line-bg, 0);
-            }
-          }
-
-          &.kw-list--selectable .kw-list__total-item {
-            & + .q-item-type {
-              border-top: 1px solid $black1;
-            }
+        &.kw-list--selectable .kw-list__item--total {
+          & + .q-item-type.kw-item-type {
+            border-top: 1px solid $black1 !important;
           }
         }
       }
+    }
 
+    // mobile
+    &:not(.tablet) {
       // &--selectable {
       // 토글버튼(dense) 최소너비가 오른쪽 위치했을 때로만 한정되면 해당css 사용하기
       //   &.q-list {
