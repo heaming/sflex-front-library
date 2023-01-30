@@ -240,8 +240,16 @@
       &.q-field {
         position: relative;
 
+        .q-field__label {
+          top: -1 * ($kw-field-label-height + $-kw-file-header-height);
+        }
+
         > .q-field__inner > .q-field__control {
           padding-top: $-kw-file-header-height;
+        }
+
+        > .q-field__inner > .q-field__control > .q-field__control-container {
+          position: relative;
         }
 
         &--outlined {
