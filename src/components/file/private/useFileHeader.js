@@ -217,18 +217,6 @@ export default (uploadCtx, ables, defaults = {}) => {
     };
   };
 
-  const headerScrollAreaStyle = ref({});
-
-  const fileScrollAreaContentsStyle = computed(() => {
-    if (!computedProps.value.scrollHorizontal) {
-      return 'width: 100%; ';
-    }
-    if (computedProps.value.useHeader) {
-      return 'padding-bottom: 10px; ';
-    }
-    return undefined;
-  });
-
   // header actions
   const showUpdateBtn = computed(() => (ables.value.manualUpdate
     && !!computedProps.value.updateBtn));
@@ -340,10 +328,38 @@ export default (uploadCtx, ables, defaults = {}) => {
     }
     return t('FIXME', null, '전체다운로드');
   });
+
+  const headerScrollAreaStyle = ref({});
+  // $-kw-file-file-container-padding-use-header
+  const fileScrollAreaPaddingWhenUseHeader = 8;
+  const fileItemGap = 4;
+  const fileScrollAreaContentsStyle = computed(() => {
+    let style = '';
+    if (!computedProps.value.scrollHorizontal) {
+      style += 'width: 100%; ';
+    }
+    if (computedProps.value.useHeader) {
+      style += `padding-top: ${fileScrollAreaPaddingWhenUseHeader}px; padding-bottom: ${fileScrollAreaPaddingWhenUseHeader}px; `;
+    }
+    return style;
+  });
   // computedUseHeader.value ? $-kw-file-item-height-use-header : $kw-field-height
-  const fileItemHeight = computed(() => (computedUseHeader.value ? 36 : 40));
-  const fileContainerMinHeight = computed(() => `${1 * fileItemHeight.value}px`);
-  const fileContainerMaxHeight = computed(() => (props.rows ? `${props.rows * fileItemHeight.value}px` : undefined));
+  const fileItemHeight = computed(() => (computedUseHeader.value ? 24 : 40));
+  const fileContainerMinHeight = computed(() => {
+    let minHeight = 1 * fileItemHeight.value;
+    if (computedUseHeader.value) {
+      minHeight += 2 * fileScrollAreaPaddingWhenUseHeader;
+    }
+    return `${minHeight}px`;
+  });
+  const fileContainerMaxHeight = computed(() => {
+    if (!props.rows) { return; }
+    let maxHeight = props.rows * fileItemHeight.value;
+    if (computedUseHeader.value) {
+      maxHeight += ((props.rows - 1) * fileItemGap) + (2 * fileScrollAreaPaddingWhenUseHeader);
+    }
+    return `${maxHeight}px`;
+  });
 
   onUpdated(() => {
     headerScrollAreaStyle.value = getHeaderScrollAreaStyle();

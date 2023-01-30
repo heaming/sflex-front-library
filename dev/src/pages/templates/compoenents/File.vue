@@ -214,7 +214,12 @@
 
       <kw-file
         v-model="file"
+        class="w300"
         v-bind="bindingProps"
+        :multiple="undefined"
+        :use-header="undefined"
+        :max-total-size="1000000"
+        accept=".txt"
       >
         <template
           v-if="bindingSlots.default"

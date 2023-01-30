@@ -346,63 +346,47 @@
   }
 }
 
-body.mobile:not(.tablet) {
-  .kw-tabs {
-    border: 0;
-    padding: 0;
+*/
 
-    .q-tabs__content {
-      height: 40px;
-      border-bottom: none;
-      overflow: visible;
+body.mobile:not(.tablet) {
+  $-kw-tab-padding: 0 10px;
+  $-kw-tabs-padding: 0;
+  $-kw-tabs-content-background-color: $bg-white;
+  $-kw-tabs-content-border-color: $line-stroke;
+  $-kw-tabs-content-color: $disabled;
+  $kw-tab-background-color-active: $secondary;
+
+  .kw-tab {
+    &.q-tab {
+      padding: $-kw-tab-padding;
+      flex: 1;
     }
 
-    .kw-tab {
-      padding: 0;
-      flex: 1 1 50%;
-      min-height: 40px;
-      height: 40px !important;
-      background: none;
-      border: 1px solid $line-stroke;
-      opacity: 1;
+    @include kw-tab-active-border($kw-tab-background-color);
 
-      & + .kw-tab {
-        margin-left: -1px;
-      }
+    background-color: $-kw-tabs-content-background-color;
+    color: $-kw-tabs-content-color;
+    border-color: $-kw-tabs-content-border-color;
+    height: $kw-tabs-content-height;
 
-      .q-tab__content {
-        padding: 0;
-        height: 38px; // 바깥 border 제외 높이
-        color: $black3;
-      }
+    &--active {
+      background-color: $kw-tab-background-color-active;
+      color: $bg-white;
+    }
 
-      .q-tab__label {
-        @include typo("dense");
-      }
-
-      &.q-tab--active {
-        background: $secondary;
-        border: none;
-
-        .q-tab__label,
-        .q-tab__content {
-          color: #fff;
-        }
-
-        .q-tab__indicator {
-          display: none;
-        }
-
-        & + .kw-tab {
-          border-left: 1px solid $black1;
-        }
-      }
-
-      .q-focus-helper {
-        display: none;
+    &__content {
+      > .q-tab__label {
+        @include typo("dense", 400);
       }
     }
   }
-}
 
-*/
+  .kw-tabs {
+    @include kw-tabs-padding($-kw-tabs-padding, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
+
+    &__content {
+      display: flex;
+      flex-grow: 1;
+    }
+  }
+}
