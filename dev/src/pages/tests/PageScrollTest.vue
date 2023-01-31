@@ -7,6 +7,9 @@
     <button @click="resetLoad">
       reset
     </button>
+    <button @click="stopLoad">
+      stop
+    </button>
     <div class="result-area">
       <div class="bg-grey">
         <div
@@ -31,6 +34,9 @@ const pageRef = ref();
 async function resetLoad() {
   count.value = 5;
   await pageRef.value.startLoad();
+}
+async function stopLoad() {
+  await pageRef.value.stopLoad();
 }
 async function onLoad(pageIdx) {
   console.log(pageIdx);

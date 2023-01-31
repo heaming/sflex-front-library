@@ -32,6 +32,7 @@ export * from './pagination';
 export * from './pagingInfo';
 export * from './popup';
 export * from './radio';
+export * from './rating';
 export * from './scrollArea';
 export * from './scrollPicker';
 export * from './search';
