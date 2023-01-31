@@ -5,7 +5,10 @@
   background: #f3f4f5;
 
   body.desktop & {
-    min-width: 1900px;
+    & > .dev-header,
+    & > .q-page-container {
+      min-width: 1900px;
+    }
   }
 }
 
