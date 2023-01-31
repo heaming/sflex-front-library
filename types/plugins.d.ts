@@ -160,4 +160,12 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $g: KwVueGlobals;
   }
+  interface ComponentCustomProps {
+    [`v-permission:print`]?: boolean;
+    [`v-permission:download`]?: boolean;
+    [`v-permission:delete`]?: boolean;
+    [`v-permission:update`]?: boolean;
+    [`v-permission:create`]?: boolean;
+    [`v-permission:read`]?: boolean;
+  }
 }

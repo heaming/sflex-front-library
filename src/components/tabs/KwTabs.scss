@@ -305,7 +305,7 @@
       }
 
       .kw-tab {
-        @include kw-tab-active-border($kw-tab-border, #{$-position});
+        @include kw-tab-active-border($kw-tab-border-active, #{$-position});
       }
     }
   }
