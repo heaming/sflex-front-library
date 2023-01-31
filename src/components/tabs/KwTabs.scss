@@ -353,8 +353,6 @@ body.mobile:not(.tablet) {
   $-kw-tabs-padding: 0;
   $-kw-tabs-content-background-color: $bg-white;
   $-kw-tabs-content-border-color: $line-stroke;
-  $-kw-tabs-content-color: $disabled;
-  $kw-tab-background-color-active: $secondary;
 
   .kw-tab {
     &.q-tab {
@@ -365,14 +363,8 @@ body.mobile:not(.tablet) {
     @include kw-tab-active-border($kw-tab-background-color);
 
     background-color: $-kw-tabs-content-background-color;
-    color: $-kw-tabs-content-color;
     border-color: $-kw-tabs-content-border-color;
     height: $kw-tabs-content-height;
-
-    &--active {
-      background-color: $kw-tab-background-color-active;
-      color: $bg-white;
-    }
 
     &__content {
       > .q-tab__label {
@@ -383,10 +375,5 @@ body.mobile:not(.tablet) {
 
   .kw-tabs {
     @include kw-tabs-padding($-kw-tabs-padding, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
-
-    &__content {
-      display: flex;
-      flex-grow: 1;
-    }
   }
 }
