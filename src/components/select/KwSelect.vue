@@ -189,6 +189,14 @@
     >
       {{ label ?? label }}
     </template>
+
+    <!-- icon slot -->
+    <template
+      v-if="$slots.append"
+      #append
+    >
+      <slot name="append" />
+    </template>
   </q-select>
 </template>
 
