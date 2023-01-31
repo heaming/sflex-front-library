@@ -23,8 +23,16 @@
 </template>
 
 <script>
+import { platform } from '../../plugins/platform';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
+
+const mobilePreset = {
+  align: 'justify',
+  activeLine: false,
+  activeColor: 'white',
+  activeBgColor: 'secondary',
+};
 
 const densePreset = {
   activeLine: false,
@@ -71,7 +79,15 @@ export default {
   ],
 
   setup(props) {
-    const stylePreset = computed(() => (props.dense ? densePreset : {}));
+    const stylePreset = computed(() => {
+      if (props.dense) {
+        return densePreset;
+      }
+      if (platform.is.mobile) {
+        return mobilePreset;
+      }
+      return {};
+    });
 
     const activeLineColor = computed(() => props.activeBorderColor ?? stylePreset.value?.activeBorderColor ?? 'black1');
 
@@ -93,8 +109,9 @@ export default {
         classes[`kw-tabs--active-line-${activeLinePosition.value}`] = true;
         classes[`kw-tabs--active-line-${activeLineColor.value}`] = true;
       }
-      if (props.align) {
-        classes[`kw-tabs--align-${props.align}`] = true;
+      const tabAlign = props.align ?? stylePreset.value?.align;
+      if (tabAlign) {
+        classes[`kw-tabs--align-${tabAlign}`] = true;
       }
       return classes;
     });
