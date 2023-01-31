@@ -44,8 +44,8 @@
       &__item--total {
         &.kw-item {
           min-height: unset;
-          padding-top: 0;
-          padding-bottom: 12px;
+          padding-top: 0 !important;
+          padding-bottom: 12px !important;
         }
 
         .kw-list__select-section {
