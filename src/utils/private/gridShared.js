@@ -211,6 +211,9 @@ export async function cloneView(view, options) {
   const copyView = new ViewClass(container);
   copyView.setDataSource(copyData);
   copyView.setColumns(cloneDeep(view.getColumns()));
+  view.__originalColumnInfos__.forEach((e) => {
+    copyView.setColumnProperty(e.name, 'visible', e.visible === true);
+  });
   copyView.setColumnLayout(options.exportLayout || view.__originalLayouts__ || cloneDeep(view.saveColumnLayout()));
   copyView.setRowIndicator(cloneDeep(view.getRowIndicator()));
   copyView.setCheckBar(cloneDeep(view.getCheckBar()));

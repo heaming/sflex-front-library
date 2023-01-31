@@ -1,4 +1,5 @@
 import { warn } from 'vue';
+import { pick } from 'lodash-es';
 import defaultConfig from './defaultConfig';
 import override from './override';
 import { registerCustomRenderers } from './customRenderer';
@@ -7,7 +8,7 @@ import { init, reset, validate, isModified } from '../../../utils/grid';
 import useObserverChild, { useObserverChildProps } from '../../../composables/private/useObserverChild';
 import useHandleClickEvent from './useHandleClickEvent';
 import useResize, { useResizeProps } from './useResize';
-import useStorage from './usePersonalize';
+import usePersonalize from './usePersonalize';
 
 export const useCreateProps = {
   ...useResizeProps,
@@ -61,6 +62,7 @@ export default (DataClass, ViewClass) => {
 
     // after initialized
     view.__originalLayouts__ = view.saveColumnLayout();
+    view.__originalColumnInfos__ = view.getColumns().map((e) => pick(e, ['name', 'visible']));
     vm.proxy.applySavedLayouts?.();
   });
 
@@ -90,7 +92,7 @@ export default (DataClass, ViewClass) => {
 
   return {
     ...useResize(),
-    ...useStorage(),
+    ...usePersonalize(),
     containerRef,
     contextMenuRef,
     getView,
