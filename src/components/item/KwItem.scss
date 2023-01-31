@@ -60,6 +60,8 @@
     $-kw-item-section-side-padding-left: 20px; // if you change default, you can handle it.
 
     &.q-item__section {
+      flex-wrap: nowrap;
+
       &--side {
         color: inherit;
         padding-right: $-kw-item-section-side-padding-right;
