@@ -121,7 +121,7 @@
     gap: 8px;
 
     > .kw-btn {
-      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px);
+      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px, null, true);
     }
   }
 
@@ -413,7 +413,7 @@
 
   &__retry-btn {
     &.kw-btn {
-      @include kw-btn-height-modifier-by-font-type(20px, "caption", 8px);
+      @include kw-btn-height-modifier-by-font-type(20px, "caption", 8px, null, true);
 
       .q-icon {
         color: $black-btn-line !important;
