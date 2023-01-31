@@ -96,8 +96,8 @@ export default () => {
   }
 
   async function startLoad() {
+    stopLoading.value = false;
     if (infiniteIsEnabled.value === true) {
-      stopLoading.value = false;
       loadIndex.value = props.initialLoadIndex;
 
       await mountedFunc();
