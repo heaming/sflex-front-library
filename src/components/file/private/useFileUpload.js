@@ -373,6 +373,12 @@ export default (values, options, ables, selectCtx) => {
     return [STATE.UPLOAD, STATE.REMOVE].includes(uploading?.state);
   }
 
+  function isUpdating(file) {
+    if (!ables.value.update) { return false; }
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    return STATE.UPDATING === uploading?.state;
+  }
+
   async function updateFile(file) {
     if (!ables.value.update) { return; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
@@ -527,5 +533,6 @@ export default (values, options, ables, selectCtx) => {
     isRetryPossible,
     retryUpdateFile,
     getUploadedFiles,
+    isUpdating,
   };
 };

@@ -86,10 +86,6 @@
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
-
-        + .kw-file-item__aside {
-          display: none;
-        }
       }
     }
   }
@@ -330,6 +326,12 @@
     &.kw-file--empty {
       > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
         min-height: 44px;
+      }
+    }
+
+    &.kw-file--collapsed {
+      > .q-field__inner {
+        display: none;
       }
     }
   }
