@@ -23,7 +23,36 @@
       <q-space />
 
       <div class="web-header__tools">
+        <kw-select
+          ref="selectRef"
+          class="web-header__search"
+          :model-value="null"
+          :options="options"
+          option-value="value"
+          option-label="label"
+          :emit-value="false"
+          :clearable="true"
+          :fill-input="true"
+          :input-debounce="300"
+          :readonly="false"
+          placeholder="메뉴검색"
+          underline
+          use-input
+          hide-dropdown-icon
+          ignore-on-modified
+          ignore-on-reset
+          @filter="onFilter"
+          @update:model-value="onUpdateValue"
+        >
+          <template #append>
+            <kw-icon
+              name="search_24"
+              clickable
+            />
+          </template>
+        </kw-select>
         <kw-input
+          v-if="false"
           class="web-header__search"
           placeholder="메뉴검색"
           underline
