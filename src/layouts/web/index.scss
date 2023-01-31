@@ -73,9 +73,23 @@ body.desktop .web-layout {
   &__search {
     width: 220px;
 
-    .q-field__append .q-icon {
-      font-size: 24px;
-      opacity: 1 !important;
+    .q-field__inner .q-field__control {
+      font-size: 14px;
+      height: 32px !important;
+      min-height: 32px !important;
+
+      .q-field__native {
+        min-height: 20px !important;
+      }
+    }
+
+    .q-field__append {
+      height: 32px !important;
+
+      .q-icon {
+        font-size: 24px;
+        opacity: 1 !important;
+      }
     }
   }
 
