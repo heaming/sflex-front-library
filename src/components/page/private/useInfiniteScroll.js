@@ -76,7 +76,7 @@ export default () => {
       const el = scrollTarget.value;
       const { clientHeight, scrollHeight } = el;
 
-      if (clientHeight !== scrollHeight) {
+      if (clientHeight !== scrollHeight || stopLoading.value === true) {
         isContinue = false;
       } else {
         // eslint-disable-next-line no-await-in-loop

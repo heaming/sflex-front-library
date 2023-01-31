@@ -230,6 +230,15 @@
             :style="fileItemAsideStyles"
           >
             <slot name="header-aside" />
+            <kw-checkbox
+              v-if="collapsible"
+              v-model="collapsed"
+              checked-icon="arrow_down"
+              indeterminate-icon="arrow_up"
+              unchecked-icon="arrow_up"
+              :true-value="true"
+              :false-value="false"
+            />
           </div>
         </div>
       </kw-scroll-area>
@@ -416,8 +425,10 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="updatable && !(instanceUpdate === true) && isUpdatable(file)"
+                v-if="updatable && !(instanceUpdate === true) && (isUpdatable(file) || isUpdating(file))"
                 :icon="updateIcon"
+                :disable="isUpdating(file)"
+                :loading="isUpdating(file)"
                 borderless
                 @click.prevent="updateFile(file)"
               >
@@ -427,8 +438,8 @@
                   {{ 'update' }}
                 </kw-tooltip>
               </kw-btn>
-              <!-- v-if="retryPossible && isRetryPossible(file)" -->
               <kw-btn
+                v-if="retryPossible && isRetryPossible(file)"
                 :icon="retryIcon"
                 label="재시도"
                 dense
@@ -686,7 +697,7 @@ export default {
 
     // header
     const headerCtx = useFileHeader(uploadCtx, ables);
-    const { useHeaderFileClass, computedUseHeader } = headerCtx;
+    const { useHeaderFileClass, computedUseHeader, collapsed } = headerCtx;
 
     // placeholder
     const acceptHint = computed(() => {
@@ -732,6 +743,7 @@ export default {
       'kw-file--empty': files.value.length === 0,
       'kw-file--horizontal-scroll': props.scrollHorizontal,
       'kw-file--show-dnd-hint': !!computedDndHint.value,
+      'kw-file--collapsed': collapsed.value === true,
       ...useHeaderFileClass.value,
     }));
 

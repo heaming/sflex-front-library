@@ -232,40 +232,65 @@
   }
 }
 
-@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight, $letter-spacing: normal, $border-radius: null) {
+@mixin kw-btn-height-modifier($padding, $line-height, $font-size, $font-weight, $letter-spacing: normal, $border-radius: null, $important: null) {
   $-min-height: calc(#{$line-height} + #{ zero-unit(at($padding, 1) + at($padding, 3))});
 
-  font-size: $font-size;
-  line-height: $line-height;
-  padding: $padding;
-  font-weight: $font-weight;
-  letter-spacing: $letter-spacing;
-  min-height: $-min-height;
+  @if $important {
+    font-size: $font-size !important;
+    line-height: $line-height !important;
+    padding: $padding !important;
+    font-weight: $font-weight !important;
+    letter-spacing: $letter-spacing !important;
+    min-height: $-min-height !important;
 
-  &.kw-btn--round {
-    padding: 0 8px;
-    min-width: $-min-height;
-    border-radius: 50%;
-  }
+    &.kw-btn--round {
+      padding: 0 8px !important;
+      min-width: $-min-height !important;
+      border-radius: 50% !important;
+    }
 
-  &.kw-btn--rounded {
-    @if $border-radius {
-      border-radius: $border-radius;
-    } @else {
-      border-radius: max(#{at($padding, 4)}, #{at($padding, 1)}) max(#{at($padding, 1)}, #{at($padding, 2)}) max(#{at($padding, 2)}, #{at($padding, 3)}) max(#{at($padding, 3)}, #{at($padding, 4)});
+    &.kw-btn--rounded {
+      @if $border-radius {
+        border-radius: $border-radius !important;
+      } @else {
+        $-radius: max(#{at($padding, 4)}, #{at($padding, 1)}) max(#{at($padding, 1)}, #{at($padding, 2)}) max(#{at($padding, 2)}, #{at($padding, 3)}) max(#{at($padding, 3)}, #{at($padding, 4)});
+
+        border-radius: $-radius !important;
+      }
+    }
+  } @else {
+    font-size: $font-size;
+    line-height: $line-height;
+    padding: $padding;
+    font-weight: $font-weight;
+    letter-spacing: $letter-spacing;
+    min-height: $-min-height;
+
+    &.kw-btn--round {
+      padding: 0 8px;
+      min-width: $-min-height;
+      border-radius: 50%;
+    }
+
+    &.kw-btn--rounded {
+      @if $border-radius {
+        border-radius: $border-radius;
+      } @else {
+        border-radius: max(#{at($padding, 4)}, #{at($padding, 1)}) max(#{at($padding, 1)}, #{at($padding, 2)}) max(#{at($padding, 2)}, #{at($padding, 3)}) max(#{at($padding, 3)}, #{at($padding, 4)});
+      }
     }
   }
 }
 
-@mixin kw-btn-height-modifier-by-font-type($min-height, $font-type, $side-padding: 12px) {
+@mixin kw-btn-height-modifier-by-font-type($min-height, $font-type, $side-padding: 12px, $border-radius: null, $important: null) {
   $-font-type: map-get($font-types, $font-type);
   $-line-height: map-get($-font-type, "line-height");
   $-font-size: map-get($-font-type, "size");
-  $-font-weight: map-get($-font-type, "font-weight");
+  $-font-weight: map-get($-font-type, "weight");
   $-letter-spacing: map-get($-font-type, "letter-spacing");
   $-padding: ((rem-to-px($min-height) - rem-to-px($-line-height)) / 2) $side-padding;
 
-  @include kw-btn-height-modifier($-padding, $-line-height, $-font-size, $-font-weight, $-letter-spacing);
+  @include kw-btn-height-modifier($-padding, $-line-height, $-font-size, $-font-weight, $-letter-spacing, $border-radius, $important);
 }
 
 @mixin kw-tab-active-border($active-border, $active-line-position: null, $inactive-line-width: null) {

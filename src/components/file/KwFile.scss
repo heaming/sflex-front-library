@@ -86,10 +86,6 @@
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
-
-        + .kw-file-item__aside {
-          display: none;
-        }
       }
     }
   }
@@ -121,7 +117,7 @@
     gap: 8px;
 
     > .kw-btn {
-      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px);
+      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px, null, true);
     }
   }
 
@@ -332,6 +328,12 @@
         min-height: 44px;
       }
     }
+
+    &.kw-file--collapsed {
+      > .q-field__inner {
+        display: none;
+      }
+    }
   }
 
   &--download-only {
@@ -413,7 +415,7 @@
 
   &__retry-btn {
     &.kw-btn {
-      @include kw-btn-height-modifier-by-font-type(20px, "caption", 8px);
+      @include kw-btn-height-modifier-by-font-type(20px, "caption", 8px, null, true);
 
       .q-icon {
         color: $black-btn-line !important;

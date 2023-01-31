@@ -15,6 +15,7 @@ export const useFileHeaderProps = {
   downloadBtn: { type: [Boolean, String], default: true },
   downloadAllBtn: { type: [Boolean, String], default: undefined },
   rows: { type: Number, default: 5 },
+  collapsible: { type: Boolean, default: undefined },
 };
 
 export const useFileHeaderEmits = ['scroll:file', 'scroll:header'];
@@ -39,6 +40,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     undeleteAllBtn: props.undeleteAllBtn ?? defaults.undeleteAllBtn,
     downloadBtn: props.downloadBtn ?? defaults.downloadBtn,
     downloadAllBtn: props.downloadAllBtn ?? defaults.downloadAllBtn,
+    collapsible: props.collapsible ?? defaults.collapsible,
   }));
 
   const computedUseHeader = computed(() => computedProps.value.useHeader);
@@ -361,6 +363,9 @@ export default (uploadCtx, ables, defaults = {}) => {
     return `${maxHeight}px`;
   });
 
+  // add expanded
+  const collapsed = ref(typeof computedProps.value.collapsible === 'boolean' ? false : undefined);
+
   onUpdated(() => {
     headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
     placeholderStyle.value = getPlaceholderStyle();
@@ -408,5 +413,6 @@ export default (uploadCtx, ables, defaults = {}) => {
     downloadAllBtnLabel,
     fileContainerMinHeight,
     fileContainerMaxHeight,
+    collapsed,
   };
 };
