@@ -42,7 +42,6 @@
   &__placeholder {
     position: absolute;
     inset: 0;
-    height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -183,29 +182,21 @@
 
     .kw-file__placeholder {
       justify-content: center;
+      top: $-kw-file-header-height;
     }
 
     .kw-file__file-container {
-      width: unset;
       min-height: $-kw-file-item-container-min-height;
     }
 
+    .kw-file__prepend-native {
+      order: -1;
+      border-bottom: $-kw-file-header-border;
+    }
+
     .kw-file__header-container {
-      width: unset;
       height: $-kw-file-header-height;
-      position: absolute;
-      top: 0;
       background-color: $-kw-file-header-background-color;
-
-      // left: TBD;
-      // right: TBD;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-bottom: $-kw-file-header-border;
-      }
     }
 
     .kw-file-item {
@@ -234,27 +225,24 @@
 
     &.kw-field {
       &.q-field {
-        position: relative;
-
-        .q-field__label {
-          top: -1 * ($kw-field-label-height + $-kw-file-header-height);
-        }
-
-        > .q-field__inner > .q-field__control {
-          padding-top: $-kw-file-header-height;
+        &--auto-height {
+          .q-field__control {
+            height: auto;
+            min-height: $-kw-file-header-height;
+          }
         }
 
         > .q-field__inner > .q-field__control > .q-field__control-container {
-          position: relative;
+          flex-direction: column;
+
+          > .q-field__native {
+            position: relative;
+          }
         }
 
         &--outlined {
-          .kw-file__header-container {
-            margin: $-kw-file-border-size $-kw-file-border-size 0;
-          }
-
-          .kw-file__file-container {
-            margin: 0 $-kw-file-border-size $-kw-file-border-size;
+          > .q-field__inner > .q-field__control > .q-field__control-container {
+            padding: 1px;
           }
 
           > .q-field__inner > .q-field__control {
@@ -299,39 +287,33 @@
 
         &--standard {
           .kw-file__header-container {
-            padding-left: 4px; // $-kw-field-standard-padding
-            padding-right: 4px; // $-kw-field-standard-padding
             background-color: transparent;
-
-            &::before {
-              display: none; // 이재평 프로님 의견 반영 ^^
-            }
           }
         }
-
-        &--labeled {
-          .kw-file__header-container {
-            margin-top: $kw-field-label-height + $-kw-file-border-size;
-          }
-
-          &.q-field--dense {
-            .kw-file__header-container {
-              margin-top: $kw-field-label-height-dense;
-            }
-          }
-        }
-      }
-    }
-
-    &.kw-file--empty {
-      > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
-        min-height: 44px;
       }
     }
 
     &.kw-file--collapsed {
-      > .q-field__inner {
+      .kw-file__prepend-native {
+        border-bottom: none;
+      }
+
+      > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
+        min-height: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .kw-file__placeholder {
         display: none;
+      }
+    }
+
+    &.kw-file--dnd-header {
+      > .q-field__inner > .q-field__control > .q-field__control-container > .q-field__native {
+        padding-top: $-kw-file-header-height;
+        margin-top: -1 * $-kw-file-header-height;
+        z-index: 1;
       }
     }
   }

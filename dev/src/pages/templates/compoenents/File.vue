@@ -405,8 +405,11 @@ const bindingProps4 = ref(null);
 const bindingProps5 = ref(null);
 const bindingProps6 = ref(null);
 const bindingProps7 = ref(null);
-const bindingProps8 = ref(null);
+const bindingProps8 = ref({
+  collapsible: true,
+});
 const bindingProps9 = ref({
+  multiple: true,
   maxTotalSize: 10000000000,
   accept: '.txt',
 });
