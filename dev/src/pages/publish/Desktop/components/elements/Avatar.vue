@@ -73,10 +73,10 @@
         >
           <kw-avatar
             size="48px"
-            font-size="30px"
+            font-size="28px"
             color="line-bg"
             text-color="primary"
-            icon="check_24"
+            icon="visual_check"
           />
           <kw-avatar
             size="48px"
@@ -94,6 +94,12 @@
           >
             A
           </kw-avatar>
+          <kw-avatar
+            size="60px"
+            font-size="36px"
+            color="line-bg"
+            icon="visual_payment"
+          />
         </div>
         <guide-code-view
           :code-value="defaultCase"
@@ -118,10 +124,10 @@
         >
           <kw-avatar
             size="48px"
-            font-size="30px"
+            font-size="28px"
             color="line-bg"
             text-color="primary"
-            icon="check_24"
+            icon="visual_check"
             square
           />
           <kw-avatar
@@ -144,7 +150,7 @@
           </kw-avatar>
         </div>
         <guide-code-view
-          :code-value="defaultCase"
+          :code-value="squareCase"
           :lang="vue"
         />
       </q-card>
@@ -166,10 +172,10 @@
         >
           <kw-avatar
             size="48px"
-            font-size="30px"
+            font-size="28px"
             color="line-bg"
             text-color="primary"
-            icon="check_24"
+            icon="visual_check"
             rounded
           />
           <kw-avatar
@@ -192,7 +198,7 @@
           </kw-avatar>
         </div>
         <guide-code-view
-          :code-value="defaultCase"
+          :code-value="roundedCase"
           :lang="vue"
         />
       </q-card>
@@ -205,10 +211,10 @@
 const defaultCase = `
 <kw-avatar
   size="48px"
-  font-size="30px"
+  font-size="28px"
   color="line-bg"
   text-color="primary"
-  icon="check_24"
+  icon="visual_check"
 />
 <kw-avatar
   size="48px"
@@ -223,6 +229,70 @@ const defaultCase = `
   font-size="28px"
   color="line-bg"
   text-color="error"
+>
+  A
+</kw-avatar>
+
+<kw-avatar
+  size="60px"
+  font-size="36px"
+  color="line-bg"
+  icon="visual_payment"
+/>
+`;
+
+const squareCase = `
+<kw-avatar
+  size="48px"
+  font-size="28px"
+  color="line-bg"
+  text-color="primary"
+  icon="visual_check"
+  square
+/>
+<kw-avatar
+  size="48px"
+  square
+>
+  <img
+    src="~~dev/assets/images/test_image.png"
+    alt="test"
+  >
+</kw-avatar>
+<kw-avatar
+  size="48px"
+  font-size="28px"
+  color="line-bg"
+  text-color="error"
+  square
+>
+  A
+</kw-avatar>
+`;
+const roundedCase = `
+<kw-avatar
+  size="48px"
+  font-size="28px"
+  color="line-bg"
+  text-color="primary"
+  icon="visual_check"
+  rounded
+/>
+<kw-avatar
+  size="48px"
+  rounded
+>
+  <img
+    src="~~dev/assets/images/test_image.png"
+    alt="test"
+  >
+</kw-avatar>
+<kw-avatar
+  size="48px"
+  font-size="28px"
+  color="line-bg"
+  text-color="error"
+  rounded
 >
   A
 </kw-avatar>
