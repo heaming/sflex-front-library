@@ -34,6 +34,7 @@
     no-error-icon
     @rejected="onRejected"
     @click="onClick"
+    @dragleave="onDragLeave"
   >
     <!-- default -->
     <template
@@ -43,62 +44,13 @@
     </template>
 
     <div
-      v-if="computedPlaceholder"
-      class="kw-file__placeholder"
-      :class="placeholderClass"
-      :style="placeholderStyle"
-    >
-      <span>
-        {{ computedPlaceholder }}
-      </span>
-    </div>
-
-    <div
-      v-if="computedDndHint"
-      class="kw-file__dnd-hint"
-    >
-      {{ computedDndHint }}
-    </div>
-
-    <!-- prepend -->
-    <template
-      v-if="$slots.prepend"
-      #prepend
-    >
-      <slot name="prepend" />
-    </template>
-
-    <!-- append -->
-    <template
-      v-if="!computedUseHeader || $slots.append"
-      #append
-    >
-      <div
-        v-if="showAppendCounter"
-        class="kw-file-item__size"
-      >
-        {{ computedCounter }}
-      </div>
-      <slot name="append" />
-    </template>
-
-    <!-- before -->
-    <template
-      v-if="$slots.before"
-      #before
-    >
-      <slot name="before" />
-    </template>
-
-    <!-- after -->
-    <template
-      #after
+      class="kw-file__prepend-native"
+      @dragover="onDragOver"
     >
       <kw-scroll-area
         v-if="computedUseHeader"
         :ref="(vm) => { headerScrollAreaRef = vm }"
         class="kw-file__header-container"
-        :style="headerScrollAreaStyle"
         :scroll-area-width="scrollHorizontal ? '' : '100%'"
         :horizontal-thumb-style="{ visibility: 'hidden' }"
         :visible="false"
@@ -112,7 +64,7 @@
             :true-value="true"
             :false-value="false"
             :dense="computedUseHeader"
-            :disable="disable"
+            :disable="disable || files.length === 0"
           />
           <div
             class="kw-file-item__main"
@@ -242,6 +194,60 @@
           </div>
         </div>
       </kw-scroll-area>
+    </div>
+
+    <div
+      v-if="computedPlaceholder"
+      class="kw-file__placeholder"
+      :class="placeholderClass"
+      :style="placeholderStyle"
+    >
+      <span>
+        {{ computedPlaceholder }}
+      </span>
+    </div>
+
+    <div
+      v-if="computedDndHint"
+      class="kw-file__dnd-hint"
+    >
+      {{ computedDndHint }}
+    </div>
+
+    <!-- prepend -->
+    <template
+      v-if="$slots.prepend"
+      #prepend
+    >
+      <slot name="prepend" />
+    </template>
+
+    <!-- append -->
+    <template
+      v-if="!computedUseHeader || $slots.append"
+      #append
+    >
+      <div
+        v-if="showAppendCounter"
+        class="kw-file-item__size"
+      >
+        {{ computedCounter }}
+      </div>
+      <slot name="append" />
+    </template>
+
+    <!-- before -->
+    <template
+      v-if="$slots.before"
+      #before
+    >
+      <slot name="before" />
+    </template>
+
+    <!-- after -->
+    <template
+      #after
+    >
       <div
         v-if="(!computedUseHeader && showPickBtn) || $slots.after"
         class="kw-file__after-slot-container"
@@ -532,7 +538,8 @@ import useFileDownload, {
   useFileDownloadEmits,
   useFileDownloadProps,
 } from './private/useFileDownload';
-import useDense from '../../composables/private/useDense';
+import { stopAndPrevent } from '../../utils/private/event';
+import { DenseContextKey } from '../../consts/private/symbols';
 
 const UPDATE_AVAILABLE_OPTIONS = [true, false, 'remove', 'upload'];
 
@@ -727,12 +734,26 @@ export default {
       return computedUseHeader.value ? t('FIXME', null, '첨부할 파일을 여기에 놓아주세요.') : null;
     });
 
+    const draggingToHeader = ref(false);
+
+    const onDragOver = (evt) => {
+      stopAndPrevent(evt);
+      draggingToHeader.value = true;
+    };
+
+    const onDragLeave = (evt) => {
+      stopAndPrevent(evt);
+      draggingToHeader.value = false;
+    };
+
     // styling
     const fieldStyles = useFieldStyle();
     const { fieldStyleProps, fieldClass } = fieldStyles;
 
     if (computedUseHeader.value) {
-      useDense({ dense: true, blockInheritDense: false });
+      provide(DenseContextKey, {
+        dense: computedUseHeader.value,
+      });
     } // notify! slots inherited dense when useHeader.
 
     const fileClass = computed(() => ({
@@ -744,6 +765,7 @@ export default {
       'kw-file--horizontal-scroll': props.scrollHorizontal,
       'kw-file--show-dnd-hint': !!computedDndHint.value,
       'kw-file--collapsed': collapsed.value === true,
+      'kw-file--dnd-header': draggingToHeader.value === true,
       ...useHeaderFileClass.value,
     }));
 
@@ -812,6 +834,8 @@ export default {
       innerValue,
       getExtensionIcon,
       acceptHint,
+      onDragOver,
+      onDragLeave,
     };
   },
 };

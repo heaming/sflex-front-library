@@ -165,37 +165,6 @@ export default (uploadCtx, ables, defaults = {}) => {
     'kw-file--use-header': computedProps.value.useHeader,
   }));
 
-  const getHeaderScrollAreaStyle = () => {
-    const componentRootEl = proxy.$el;
-    if (!componentRootEl) {
-      return undefined;
-    }
-    let left = 0;
-    const beforeSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__before');
-    if (beforeSlotEl) {
-      left += beforeSlotEl.getBoundingClientRect().width;
-    }
-    const prefixSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__prefix');
-    if (prefixSlotEl) {
-      left += prefixSlotEl.getBoundingClientRect().width;
-    }
-    let right = 0;
-    const suffixSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__inner>.q-field__control>.q-field__control-container>.q-field__suffix');
-    if (suffixSlotEl) {
-      right += suffixSlotEl.getBoundingClientRect().width;
-    }
-    const afterSlotEl = componentRootEl.querySelector('.kw-file.q-file.q-field>.q-field__after');
-    if (afterSlotEl) {
-      right += afterSlotEl.getBoundingClientRect().width;
-    }
-    // const width = fileScrollAreaRef.value && fileScrollAreaRef.value.$el.getBoundingClientRect().width;
-    // width: width ?? `${width}px`,
-    return {
-      left: `${left}px`,
-      right: `${right}px`,
-    };
-  };
-
   const placeholderStyle = ref({});
 
   const getPlaceholderStyle = () => {
@@ -331,7 +300,6 @@ export default (uploadCtx, ables, defaults = {}) => {
     return t('FIXME', null, '전체다운로드');
   });
 
-  const headerScrollAreaStyle = ref({});
   // $-kw-file-file-container-padding-use-header
   const fileScrollAreaPaddingWhenUseHeader = 8;
   const fileItemGap = 4;
@@ -367,13 +335,11 @@ export default (uploadCtx, ables, defaults = {}) => {
   const collapsed = ref(typeof computedProps.value.collapsible === 'boolean' ? false : undefined);
 
   onUpdated(() => {
-    headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
     placeholderStyle.value = getPlaceholderStyle();
     updateFileItemLayout();
   });
 
   onMounted(() => {
-    headerScrollAreaStyle.value = getHeaderScrollAreaStyle();
     placeholderStyle.value = getPlaceholderStyle();
     updateFileItemLayout();
   });
@@ -388,7 +354,6 @@ export default (uploadCtx, ables, defaults = {}) => {
     fileItemAsideStyles,
     onScrollFile,
     onScrollHeader,
-    headerScrollAreaStyle,
     placeholderStyle,
     fileScrollAreaContentsStyle,
     showUpdateBtn,

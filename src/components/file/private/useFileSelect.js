@@ -3,7 +3,7 @@ import { generateFileLikeKey } from './useFileUpload';
 import { notify } from '../../../plugins/notify';
 
 export const useFileSelectProps = {
-  selectable: { type: Boolean, default: true },
+  selectable: { type: Boolean, default: undefined },
 };
 
 export default ({ files, updateFile, downloadFile, revertFile, removeFile, undeleteFile }, ables) => {
@@ -82,7 +82,7 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
     clearSelected();
   };
 
-  const computedSelectable = computed(() => (props.multiple && props.selectable));
+  const computedSelectable = computed(() => props.selectable ?? (props.multiple && ables.value.add));
 
   return {
     computedSelectable,
