@@ -320,6 +320,22 @@ interface KwFileProps extends Pick<QFileProps, FallThroughProps>, UseFieldProps,
   downloadAllBtn?: boolean | string | undefined;
 
   /**
+   * 스크롤이 발생하는 파일 갯수를 지정한다.
+   * 0 일 경우 스크롤 없이 전부 표시한다.
+   *
+   * @default 5
+   */
+  rows?: number | undefined;
+
+  /**
+   * 사용시, 파일 영역을 접을 수 있는 체크박스를 헤더 영역 우측에 렌더링한다.
+   * useHeader 가 true 일 때만 동작한다.
+   *
+   * @see useHeader
+   */
+  collapsible?: boolean | undefined;
+
+  /**
    * 파일 영역이 스크롤 됬을 때, 이벤트 emit
    *
    * @see scrollHorizontal

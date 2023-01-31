@@ -216,10 +216,6 @@
         v-model="file"
         class="w300"
         v-bind="bindingProps"
-        :multiple="undefined"
-        :use-header="undefined"
-        :max-total-size="1000000"
-        accept=".txt"
       >
         <template
           v-if="bindingSlots.default"
@@ -303,27 +299,10 @@
         v-model="dummyFiles"
         multiple
         downloadable
-        instance-update
         :max-total-size="100000000"
         :upload="testUpload"
         :download="testDownload"
-      >
-        <template
-          #header-action
-        >
-          <kw-input />
-        </template>
-        <template
-          #append-file
-        >
-          <kw-input />
-        </template>
-        <template
-          #append-header
-        >
-          <kw-input />
-        </template>
-      </kw-file>
+      />
       <kw-btn
         label="add"
         @click="addFile"
@@ -358,6 +337,8 @@ const fileProps = {
   placeholder: { type: [Function, String], default: undefined },
   placeholderClass: { type: [Array, String, Object], default: undefined },
   dndHint: { type: String, default: undefined },
+  upload: { type: Function, default: undefined },
+  download: { type: Function, default: undefined },
 };
 
 const quasarProps = {
@@ -391,29 +372,6 @@ const quasarProps = {
 
 const file = ref([]);
 
-const bindingProps1 = ref({
-  label: 'label',
-});
-const bindingProps2 = ref(null);
-const bindingProps3 = ref(null);
-const bindingProps4 = ref(null);
-const bindingProps5 = ref(null);
-const bindingProps6 = ref(null);
-const bindingProps7 = ref(null);
-const bindingProps8 = ref(null);
-const bindingProps9 = ref(null);
-const bindingProps = computed(() => ({
-  ...bindingProps1.value,
-  ...bindingProps2.value,
-  ...bindingProps3.value,
-  ...bindingProps4.value,
-  ...bindingProps5.value,
-  ...bindingProps6.value,
-  ...bindingProps7.value,
-  ...bindingProps8.value,
-  ...bindingProps9.value,
-}));
-const bindingSlots = ref({});
 const testUpload = (f) => new Promise((resolve) => {
   setTimeout(() => {
     const response = {
@@ -421,7 +379,7 @@ const testUpload = (f) => new Promise((resolve) => {
       serverFileName: f.name,
     };
     resolve(response);
-  }, 1000);
+  }, 5000);
 });
 
 const testDownload = (f) => new Promise((resolve) => {
@@ -434,6 +392,36 @@ const testDownload = (f) => new Promise((resolve) => {
     resolve(true);
   }, 1000);
 });
+
+const bindingProps1 = ref({
+  download: testDownload,
+  upload: testUpload,
+});
+const bindingProps2 = ref({
+  label: 'label',
+});
+const bindingProps3 = ref(null);
+const bindingProps4 = ref(null);
+const bindingProps5 = ref(null);
+const bindingProps6 = ref(null);
+const bindingProps7 = ref(null);
+const bindingProps8 = ref(null);
+const bindingProps9 = ref({
+  maxTotalSize: 10000000000,
+  accept: '.txt',
+});
+const bindingProps = computed(() => ({
+  ...bindingProps1.value,
+  ...bindingProps2.value,
+  ...bindingProps3.value,
+  ...bindingProps4.value,
+  ...bindingProps5.value,
+  ...bindingProps6.value,
+  ...bindingProps7.value,
+  ...bindingProps8.value,
+  ...bindingProps9.value,
+}));
+const bindingSlots = ref({});
 
 const dummyFiles = ref([]);
 
