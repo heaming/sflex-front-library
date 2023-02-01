@@ -65,22 +65,6 @@
         </kw-item-section>
       </kw-item>
     </guide-section>
-    <guide-section
-      title="default slot"
-      description="=default"
-      :guide-code="defaultCode"
-    >
-      <div class="flex items-center bg-lime-1 w500 h500">
-        <kw-toggle
-          v-model="model"
-          v-bind="bindingProps"
-        />
-      </div>
-      <kw-toggle
-        v-model="model"
-        v-bind="bindingProps"
-      />
-    </guide-section>
   </kw-page>
 </template>
 
@@ -93,9 +77,4 @@ const toggleProps = omit(KwToggle.props, 'modelValue');
 const bindingProps = ref(null);
 
 const model = ref('Y');
-
-const defaultCode = `
-      <kw-toggle
-        v-bind="bindingProps"
-      />`;
 </script>

@@ -68,15 +68,6 @@
         </kw-item-section>
       </kw-item>
     </guide-section>
-    <guide-section
-      title="default slot"
-      description="=default"
-      :guide-code="defaultCode"
-    >
-      <kw-checkbox
-        v-bind="bindingProps"
-      />
-    </guide-section>
   </kw-page>
 </template>
 
@@ -88,9 +79,4 @@ const checkboxProps = KwCheckbox.props;
 const model = ref('Y');
 
 const bindingProps = ref(null);
-
-const defaultCode = `
-      <kw-checkbox
-        v-bind="bindingProps"
-      />`;
 </script>
