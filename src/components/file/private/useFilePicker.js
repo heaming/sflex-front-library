@@ -37,7 +37,7 @@ export default (ref, ables) => {
     if (typeof props.pickBtn === 'string') {
       return props.pickBtn;
     }
-    return t('FIXME', undefined, '파일선택');
+    return t('FIXME', undefined, '파일찾기');
   });
 
   return {

@@ -353,6 +353,8 @@ body.mobile:not(.tablet) {
   $-kw-tabs-padding: 0;
   $-kw-tabs-content-background-color: $bg-white;
   $-kw-tabs-content-border-color: $line-stroke;
+  $-kw-tabs-content-color: $disabled;
+  $kw-tab-background-color-active: $secondary;
 
   .kw-tab {
     &.q-tab {
@@ -364,6 +366,7 @@ body.mobile:not(.tablet) {
 
     background-color: $-kw-tabs-content-background-color;
     border-color: $-kw-tabs-content-border-color;
+    color: $-kw-tabs-content-color;
     height: $kw-tabs-content-height;
 
     &__content {
@@ -375,5 +378,12 @@ body.mobile:not(.tablet) {
 
   .kw-tabs {
     @include kw-tabs-padding($-kw-tabs-padding, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
+
+    color: $-kw-tabs-content-color;
+
+    &__content {
+      display: flex;
+      flex-grow: 1;
+    }
   }
 }
