@@ -4,9 +4,9 @@
     v-bind="styleClassAttrs"
     :class="checkboxClass"
     :model-value="modelValue"
-    :true-value="trueValue"
-    :false-value="falseValue"
-    :indeterminate-value="indeterminateValue"
+    :true-value="computedTrueValue"
+    :false-value="computedFalseValue"
+    :indeterminate-value="computedIndeterminateValue"
     :toggle-order="toggleOrder"
     :toggle-indeterminate="toggleIndeterminate"
     :val="val"
@@ -31,6 +31,11 @@ import useSearchChild from '../../composables/private/useSearchChild';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
 import useStretch, { useStretchProps } from '../../composables/private/useStretch';
 
+const DEFAULT_VALUE = {
+  TRUE: 'Y',
+  FALSE: 'N',
+  INDETERMINATE: undefined,
+};
 export default {
   name: 'KwCheckbox',
   inheritAttrs: false,
@@ -45,11 +50,11 @@ export default {
     },
     trueValue: {
       type: [String, Number, Boolean],
-      default: 'Y',
+      default: undefined,
     },
     falseValue: {
       type: [String, Number, Boolean],
-      default: 'N',
+      default: undefined,
     },
     indeterminateValue: {
       type: [String, Number, Boolean],
@@ -107,6 +112,10 @@ export default {
       type: Boolean,
       default: undefined,
     },
+    booleanValue: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -127,6 +136,24 @@ export default {
       ...stretchClass.value,
     }));
 
+    const computedTrueValue = computed(() => {
+      if (props.trueValue !== undefined) { return props.trueValue; }
+      if (props.booleanValue) { return true; }
+      return DEFAULT_VALUE.TRUE;
+    });
+
+    const computedFalseValue = computed(() => {
+      if (props.falseValue !== undefined) { return props.falseValue; }
+      if (props.booleanValue) { return false; }
+      return DEFAULT_VALUE.FALSE;
+    });
+
+    const computedIndeterminateValue = computed(() => {
+      if (props.indeterminateValue !== undefined) { return props.indeterminateValue; }
+      if (props.booleanValue) { return undefined; }
+      return DEFAULT_VALUE.INDETERMINATE;
+    });
+
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
@@ -136,6 +163,9 @@ export default {
       toggle() {
         checkRef.value.toggle();
       },
+      computedTrueValue,
+      computedFalseValue,
+      computedIndeterminateValue,
     };
   },
 };

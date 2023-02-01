@@ -4,9 +4,9 @@
     v-bind="styleClassAttrs"
     :class="toggleClass"
     :model-value="modelValue"
-    :true-value="trueValue"
-    :false-value="falseValue"
-    :indeterminate-value="indeterminateValue"
+    :true-value="computedTrueValue"
+    :false-value="computedFalseValue"
+    :indeterminate-value="computedIndeterminateValue"
     :toggle-order="toggleOrder"
     :toggle-indeterminate="toggleIndeterminate"
     :val="val"
@@ -19,6 +19,8 @@
     :indeterminate-icon="indeterminateIcon"
     :disable="disable"
     :tabindex="tabindex"
+    :icon="icon"
+    :icon-color="iconColor"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <slot />
@@ -30,6 +32,12 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useSearchChild from '../../composables/private/useSearchChild';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
 import useStretch, { useStretchProps } from '../../composables/private/useStretch';
+
+const DEFAULT_VALUE = {
+  TRUE: 'Y',
+  FALSE: 'N',
+  INDETERMINATE: undefined,
+};
 
 export default {
   name: 'KwToggle',
@@ -45,11 +53,11 @@ export default {
     },
     trueValue: {
       type: [String, Number, Boolean],
-      default: 'Y',
+      default: undefined,
     },
     falseValue: {
       type: [String, Number, Boolean],
-      default: 'N',
+      default: undefined,
     },
     indeterminateValue: {
       type: [String, Number, Boolean],
@@ -107,6 +115,18 @@ export default {
       type: Boolean,
       default: undefined,
     },
+    booleanValue: {
+      type: Boolean,
+      default: false,
+    },
+    icon: {
+      type: String,
+      default: undefined,
+    },
+    iconColor: {
+      type: String,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -126,6 +146,24 @@ export default {
       ...stretchClass.value,
     }));
 
+    const computedTrueValue = computed(() => {
+      if (props.trueValue !== undefined) { return props.trueValue; }
+      if (props.booleanValue) { return true; }
+      return DEFAULT_VALUE.TRUE;
+    });
+
+    const computedFalseValue = computed(() => {
+      if (props.falseValue !== undefined) { return props.falseValue; }
+      if (props.booleanValue) { return false; }
+      return DEFAULT_VALUE.FALSE;
+    });
+
+    const computedIndeterminateValue = computed(() => {
+      if (props.indeterminateValue !== undefined) { return props.indeterminateValue; }
+      if (props.booleanValue) { return undefined; }
+      return DEFAULT_VALUE.INDETERMINATE;
+    });
+
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
@@ -135,6 +173,9 @@ export default {
         toggleRef.value.toggle();
       },
       toggleClass,
+      computedTrueValue,
+      computedFalseValue,
+      computedIndeterminateValue,
     };
   },
 };
