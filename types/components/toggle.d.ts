@@ -4,60 +4,6 @@ import { KwCheckboxProps } from './checkbox';
 
 interface KwToggleProps extends KwCheckboxProps {
   /**
-   * 현재 선택된 값
-   */
-  modelValue?: string | number | boolean | Array<any>;
-
-  /**
-   * true 상태의 값
-   * @defaultValue `Y`
-   */
-  trueValue?: string | number | boolean;
-
-  /**
-   * false 상태의 값
-   * @defaultValue `N`
-   */
-  falseValue?: string | number | boolean;
-
-  /**
-   * indeterminate 상태의 값
-   */
-  indeterminateValue?: string | number | boolean;
-
-  /**
-   * 값 변경 순서
-   * @defaultValue `tf`
-   */
-  toggleOrder?: 'tf' | 'ft';
-
-  /**
-   * 값 변경 시 indeterminate 사용 여부
-   */
-  toggleIndeterminate?: boolean;
-
-  /**
-   * 선택시 설정할 값
-   */
-  val?: string | number | boolean;
-
-  /**
-   * 표시할 텍스트
-   */
-  label?: string;
-
-  /**
-   * Label 위치 왼쪽으로 설정 여부
-   * @defaultValue `true`
-   */
-  leftLabel?: boolean;
-
-  /**
-   * 아이콘 사이즈, px 단위 사용
-   */
-  size?: string;
-
-  /**
    * defualt icon
    */
   icon?: string;
@@ -66,27 +12,6 @@ interface KwToggleProps extends KwCheckboxProps {
    * true 일 때 표기되는 icon 의 color
    */
   iconColor?: string;
-
-  /**
-   * indeterminate 커스텀 아이콘
-   */
-  indeterminateIcon?: string;
-
-  /**
-   * 컴포넌트 비활성화 모드
-   */
-  disable?: boolean;
-
-  /**
-   * Tabindex HTML attribute value
-   */
-  tabindex?: number | string;
-
-  /**
-   * 'v-model:modelValue'에서 값 변경을 위해 사용
-   * @param modelValue 선택된 값
-   */
-  'onUpdate:modelValue'?: (modelValue: string | number | boolean | Array<any>) => void;
 }
 
 interface KwToggleSlots {
