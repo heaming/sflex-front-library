@@ -18,99 +18,6 @@ body.tablet {
         position: relative;
         min-width: 1540px !important;
       }
-
-      &.kw-popup--window-consult--style {
-        width: 100%;
-        max-width: 100% !important;
-        min-width: 1500px !important;
-        box-shadow: none !important;
-        border: none;
-        padding: 0;
-
-        .kw-popup__header {
-          display: none;
-          width: 100% !important;
-        }
-
-        .kw-popup__content {
-          padding: 0;
-          width: 100% !important;
-          overflow: auto;
-          min-height: 100vh;
-        }
-
-        .normal-area--two-column {
-          display: flex;
-          min-width: 1536px;
-          width: 100%;
-          padding: 20px 0 20px 20px;
-          height: 100vh;
-          box-sizing: border-box;
-          border: none;
-        }
-
-        .normal-area--first-column {
-          min-width: 1116px;
-          width: inherit;
-          flex: 10000 1 0%;
-        }
-
-        .normal-area--second-column {
-          width: 300px;
-          min-width: 300px;
-          max-width: 300px;
-        }
-
-        .kw-form {
-          &.kw-form--small {
-            &.kw-form--dense .kw-form-row {
-              align-items: center;
-              gap: 20px;
-              padding: 1px 0;
-
-              &--cols-3 {
-                min-height: 20px !important;
-
-                .kw-form-item {
-                  width: calc((100% - (20px * (3 - 1))) / 3) !important;
-                }
-
-                .kw-form-item--colspan-2 {
-                  width: calc((100% - (20px * (3 - 1))) / 3 * 2 + 20px * 1) !important;
-                }
-              }
-            }
-
-            .kw-form-item__field p {
-              font-size: 14px;
-            }
-
-            .kw-btn {
-              word-break: keep-all;
-            }
-          }
-        }
-
-        .kw-tabs__content {
-          min-height: 36px;
-          height: 36px;
-        }
-
-        .kw-tab__content {
-          min-height: 36px;
-          height: 36px;
-
-          & > .q-tab__label {
-            font-size: 14px !important;
-          }
-        }
-
-        .kw-tab {
-          &.q-tab {
-            min-height: 36px;
-          }
-        }
-      }
     }
 
     .kw-popup:not(.kw-popup--window-consult) {
@@ -171,6 +78,101 @@ body.tablet {
 
       .kw-separator + .kw-tabs {
         padding: 0 0 30px;
+      }
+    }
+  }
+}
+
+body.desktop {
+  .kw-popup--window-consult.kw-popup--window-consult--style {
+    width: 100%;
+    max-width: 100% !important;
+    min-width: 1500px !important;
+    box-shadow: none !important;
+    border: none;
+    padding: 0;
+
+    .kw-popup__header {
+      display: none;
+      width: 100% !important;
+    }
+
+    .kw-popup__content {
+      padding: 0;
+      width: 100% !important;
+      overflow: auto;
+      min-height: 100vh;
+    }
+
+    .normal-area--two-column {
+      display: flex;
+      min-width: 1536px;
+      width: 100%;
+      padding: 20px 0 20px 20px;
+      height: 100vh;
+      box-sizing: border-box;
+      border: none;
+    }
+
+    .normal-area--first-column {
+      min-width: 1116px;
+      width: inherit;
+      flex: 10000 1 0%;
+    }
+
+    .normal-area--second-column {
+      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
+    }
+
+    .kw-form {
+      &.kw-form--small {
+        &.kw-form--dense .kw-form-row {
+          align-items: center;
+          gap: 20px;
+          padding: 1px 0;
+
+          &--cols-3 {
+            min-height: 20px !important;
+
+            .kw-form-item {
+              width: calc((100% - (20px * (3 - 1))) / 3) !important;
+            }
+
+            .kw-form-item--colspan-2 {
+              width: calc((100% - (20px * (3 - 1))) / 3 * 2 + 20px * 1) !important;
+            }
+          }
+        }
+
+        .kw-form-item__field p {
+          font-size: 14px;
+        }
+
+        .kw-btn {
+          word-break: keep-all;
+        }
+      }
+    }
+
+    .kw-tabs__content {
+      min-height: 36px;
+      height: 36px;
+    }
+
+    .kw-tab__content {
+      min-height: 36px;
+      height: 36px;
+
+      & > .q-tab__label {
+        font-size: 14px !important;
+      }
+    }
+
+    .kw-tab {
+      &.q-tab {
+        min-height: 36px;
       }
     }
   }
