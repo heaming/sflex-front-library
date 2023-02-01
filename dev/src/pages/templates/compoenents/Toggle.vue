@@ -1,11 +1,8 @@
 <template>
   <kw-page class="kw-guide">
     <h2 class="kw-guide-h2">
-      toggle
+      {{ KwToggle.name }}
     </h2>
-    <p class="kw-guide-description">
-      toggle
-    </p>
     <guide-section
       title="playground"
       description="playground"
@@ -16,9 +13,57 @@
         title="toggleProps"
       />
       <kw-separator />
-      <kw-toggle
-        v-bind="bindingProps"
-      />
+      <kw-item>
+        <kw-item-section side>
+          result
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            component
+          </kw-item-label>
+          <kw-item-label>
+            <kw-toggle
+              v-bind="bindingProps"
+              v-model="model"
+            />
+          </kw-item-label>
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            model
+          </kw-item-label>
+          <kw-item-label>
+            {{ model }}
+          </kw-item-label>
+        </kw-item-section>
+      </kw-item>
+      <kw-item>
+        <kw-item-section side>
+          sizing
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            block
+          </kw-item-label>
+          <div class="items-center bg-lime-5 w100 h100">
+            <kw-toggle
+              v-bind="bindingProps"
+              v-model="model"
+            />
+          </div>
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            in flex container
+          </kw-item-label>
+          <div class="flex items-center bg-lime-5 w100 h100">
+            <kw-toggle
+              v-bind="bindingProps"
+              v-model="model"
+            />
+          </div>
+        </kw-item-section>
+      </kw-item>
     </guide-section>
     <guide-section
       title="default slot"
@@ -40,70 +85,10 @@
 </template>
 
 <script setup>
-import { useDenseProps } from '../../../../../src/composables/private/useDense';
-import { useStretchProps } from '../../../../../src/composables/private/useStretch';
+import { omit } from 'lodash-es';
+import { KwToggle } from '../../../../../src/components/toggle';
 
-const toggleProps = {
-  ...useDenseProps,
-  ...useStretchProps,
-
-  trueValue: {
-    type: [String, Number, Boolean],
-    default: 'Y',
-  },
-  falseValue: {
-    type: [String, Number, Boolean],
-    default: 'N',
-  },
-  indeterminateValue: {
-    type: [String, Number, Boolean],
-    default: undefined,
-  },
-  toggleOrder: {
-    type: String,
-    default: undefined,
-  },
-  toggleIndeterminate: {
-    type: Boolean,
-    default: false,
-  },
-  val: {
-    type: [String, Number, Boolean],
-    default: undefined,
-  },
-  label: {
-    type: String,
-    default: undefined,
-  },
-  leftLabel: {
-    type: Boolean,
-    default: true,
-  },
-  size: {
-    type: String,
-    default: undefined,
-  },
-  checkedIcon: {
-    type: String,
-    default: undefined,
-  },
-  uncheckedIcon: {
-    type: String,
-    default: undefined,
-  },
-  indeterminateIcon: {
-    type: String,
-    default: undefined,
-  },
-  disable: {
-    type: Boolean,
-    default: undefined,
-  },
-  tabindex: {
-    type: [String, Number],
-    default: undefined,
-  },
-};
+const toggleProps = omit(KwToggle.props, 'modelValue');
 
 const bindingProps = ref(null);
 

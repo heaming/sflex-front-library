@@ -16,13 +16,57 @@
         title="checkboxProps"
       />
       <kw-separator />
-      <div class="flex items-center bg-lime-1 w500 h500">
-        <kw-checkbox
-          v-model="model"
-          v-bind="bindingProps"
-          :label="model"
-        />
-      </div>
+      <kw-item>
+        <kw-item-section side>
+          result
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            component
+          </kw-item-label>
+          <kw-item-label>
+            <kw-checkbox
+              v-bind="bindingProps"
+              v-model="model"
+            />
+          </kw-item-label>
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            model
+          </kw-item-label>
+          <kw-item-label>
+            {{ model }}
+          </kw-item-label>
+        </kw-item-section>
+      </kw-item>
+      <kw-item>
+        <kw-item-section side>
+          sizing
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            block
+          </kw-item-label>
+          <div class="items-center bg-lime-5 w100 h100">
+            <kw-checkbox
+              v-bind="bindingProps"
+              v-model="model"
+            />
+          </div>
+        </kw-item-section>
+        <kw-item-section>
+          <kw-item-label font="caption">
+            in flex container
+          </kw-item-label>
+          <div class="flex items-center bg-lime-5 w100 h100">
+            <kw-checkbox
+              v-bind="bindingProps"
+              v-model="model"
+            />
+          </div>
+        </kw-item-section>
+      </kw-item>
     </guide-section>
     <guide-section
       title="default slot"
@@ -37,70 +81,10 @@
 </template>
 
 <script setup>
-import { useDenseProps } from '../../../../../src/composables/private/useDense';
-import { useStretchProps } from '../../../../../src/composables/private/useStretch';
+import { KwCheckbox } from '../../../../../src/components/checkbox';
 
-const checkboxProps = {
-  ...useDenseProps,
-  ...useStretchProps,
+const checkboxProps = KwCheckbox.props;
 
-  trueValue: {
-    type: [String, Number, Boolean],
-    default: 'Y',
-  },
-  falseValue: {
-    type: [String, Number, Boolean],
-    default: 'N',
-  },
-  indeterminateValue: {
-    type: [String, Number, Boolean],
-    default: undefined,
-  },
-  toggleOrder: {
-    type: String,
-    default: undefined,
-  },
-  toggleIndeterminate: {
-    type: Boolean,
-    default: false,
-  },
-  val: {
-    type: [String, Number, Boolean],
-    default: undefined,
-  },
-  label: {
-    type: String,
-    default: undefined,
-  },
-  leftLabel: {
-    type: Boolean,
-    default: undefined,
-  },
-  size: {
-    type: String,
-    default: undefined,
-  },
-  checkedIcon: {
-    type: String,
-    default: undefined,
-  },
-  uncheckedIcon: {
-    type: String,
-    default: undefined,
-  },
-  indeterminateIcon: {
-    type: String,
-    default: undefined,
-  },
-  disable: {
-    type: Boolean,
-    default: undefined,
-  },
-  tabindex: {
-    type: [String, Number],
-    default: undefined,
-  },
-};
 const model = ref('Y');
 
 const bindingProps = ref(null);

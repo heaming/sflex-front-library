@@ -1,9 +1,8 @@
 import { ComponentPublicInstance, VNode } from 'vue';
 import { GlobalComponentConstructor } from 'quasar';
-import { UseDenseProps } from './private/useDense';
-import { UseStretchProps } from './private/useStretch';
+import { KwCheckboxProps } from './checkbox';
 
-interface KwToggleProps extends UseDenseProps, UseStretchProps {
+interface KwToggleProps extends KwCheckboxProps {
   /**
    * 현재 선택된 값
    */
@@ -59,14 +58,14 @@ interface KwToggleProps extends UseDenseProps, UseStretchProps {
   size?: string;
 
   /**
-   * checked 커스텀 아이콘
+   * defualt icon
    */
-  checkedIcon?: string;
+  icon?: string;
 
   /**
-   * unchecked 커스텀 아이콘
+   * true 일 때 표기되는 icon 의 color
    */
-  uncheckedIcon?: string;
+  iconColor?: string;
 
   /**
    * indeterminate 커스텀 아이콘
