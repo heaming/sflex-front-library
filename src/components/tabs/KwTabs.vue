@@ -28,7 +28,7 @@ import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
 
 const mobilePreset = {
-  align: 'justify',
+  // align: 'justify',
   activeLine: false,
   activeColor: 'white',
   activeBgColor: 'secondary',

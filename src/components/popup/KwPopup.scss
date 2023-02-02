@@ -210,6 +210,13 @@ body.tablet .kw-popup {
   h3 + .kw-form {
     margin-top: 20px;
   }
+
+  // 자동 로그아웃 popup
+  &.auto-logout {
+    .kw-popup__header {
+      display: none;
+    }
+  }
 }
 
 body.mobile:not(.tablet) {

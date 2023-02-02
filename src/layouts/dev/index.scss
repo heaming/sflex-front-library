@@ -2,12 +2,11 @@
   Layout
  */
 .dev-layout {
-  background: #f3f4f5;
-
   body.desktop & {
     & > .dev-header,
     & > .q-page-container {
       min-width: 1900px;
+      background: #f3f4f5;
     }
   }
 }
