@@ -64,6 +64,8 @@
           :disable="disable"
           :dense="dense"
           :group="group"
+          :padding-target="paddingTarget"
+          :expand-icon-class="computedExpandIconClass"
           @click="onClick(item)"
         >
           <template #header>
@@ -198,6 +200,9 @@ export default {
     bordered: { type: Boolean, default: undefined },
     onClickItem: { type: Function, default: undefined },
     group: { type: String, default: undefined },
+    paddingTarget: { type: [Array, String], default: () => ['self'] },
+    expandIconAlign: { type: String, default: undefined },
+    expandIconClass: { type: [Array, String, Object], default: undefined },
   },
   emits: ['update:selected', 'clickItem'],
   setup(props, {
@@ -418,6 +423,17 @@ export default {
       'kw-list__item--selected': innerSelectAll.value,
     }));
 
+    const computedExpandSideSectionClass = computed(() => {
+      const classes = ['kw-item__section'];
+      if (props.expandIconAlign) {
+        classes.push(`kw-item__section--${props.expandIconAlign}`);
+      }
+      if (props.expandIconClass) {
+        classes.push(props.expandIconClass);
+      }
+      return classes;
+    });
+
     provide(ListContextKey, listProvideContext);
 
     return {
@@ -440,6 +456,7 @@ export default {
       showPlaceholder,
       basicItemClass,
       computedItemClass,
+      computedExpandIconClass: computedExpandSideSectionClass,
       onBlur: () => { console.log('blur'); },
     };
   },
