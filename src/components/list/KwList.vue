@@ -63,6 +63,7 @@
           :active-class="activeClass"
           :disable="disable"
           :dense="dense"
+          :group="group"
           @click="onClick(item)"
         >
           <template #header>
@@ -196,6 +197,7 @@ export default {
     separator: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
     onClickItem: { type: Function, default: undefined },
+    group: { type: String, default: undefined },
   },
   emits: ['update:selected', 'clickItem'],
   setup(props, {

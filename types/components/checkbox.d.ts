@@ -83,6 +83,15 @@ interface KwCheckboxProps extends UseDenseProps, UseStretchProps {
   tabindex?: number | string;
 
   /**
+   * set true to trueValue, false to falseValue, undefined to indeterminate Value
+   *
+   * @see trueValue
+   * @see falseValue
+   * @see indeterminateValue
+   */
+  booleanValue?: boolean | undefined;
+
+  /**
    * 'v-model:modelValue'에서 값 변경을 위해 사용
    * @param modelValue 선택된 값
    */
