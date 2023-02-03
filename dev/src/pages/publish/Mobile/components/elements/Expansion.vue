@@ -493,6 +493,91 @@
       </q-card>
     </div>
 
+    <div class="kw-guide-section">
+      <h3
+        id="default"
+        class="kw-guide-title"
+      >
+        expansion with checkbox and select all
+      </h3>
+
+      <p class="kw-guide-description">
+        <em># group</em><br>
+        one of expansions is opened, the other expansions are closed
+        <em># expand-icon-align</em><br>
+        align-item: top , center , bottom (default: center)<br>
+        <em># expand-icon-class</em><br>
+        style for the icon on the right side<br>
+        <em># padding-target</em><br>
+        padding-target="header" header padding is adjusted<br>
+        <a href="https://zpl.io/jZX41Pq">Reference design for it</a>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-list
+            v-model:selected="arrModel"
+            :items="items"
+            separator
+            checkbox
+            item-key="id"
+            select-align="center"
+            expansion
+            class="mt20"
+            group
+          >
+            <template #item="{ item }">
+              <kw-item-section class="my16">
+                <kw-item-label>
+                  {{ item.title }}
+                </kw-item-label>
+              </kw-item-section>
+              <kw-item-section side>
+                {{ item.price }}
+              </kw-item-section>
+            </template>
+            <template #expansion="{ item }">
+              <div class="kw-bc--bg-box pa20">
+                <kw-form dense>
+                  <kw-form-row>
+                    <kw-form-item label="계약번호">
+                      <p>{{ item.expansion.number }}</p>
+                    </kw-form-item>
+                    <kw-form-item label="제품군">
+                      <p>{{ item.expansion.productType }}</p>
+                    </kw-form-item>
+                    <kw-form-item label="모델명">
+                      <p>{{ item.expansion.productName }}</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="월회비">
+                      <p>{{ item.expansion.monthPrice }}</p>
+                    </kw-form-item>
+                    <kw-form-item label="납부자명">
+                      <p>{{ item.expansion.name }}</p>
+                    </kw-form-item>
+                    <kw-form-item label="이체정보">
+                      <p>{{ item.expansion.accountInfo }}</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                  <kw-form-row>
+                    <kw-form-item label="계좌/카드번호">
+                      <p>{{ item.expansion.accountNumber }}</p>
+                    </kw-form-item>
+                  </kw-form-row>
+                </kw-form>
+              </div>
+            </template>
+          </kw-list>
+        </div>
+        <guide-code-view
+          :code-value="[case4,caseScript4]"
+          :lang="['vue','javascript']"
+          multi
+        />
+      </q-card>
+    </div>
+
     <!-- 우리가 해야하는 것!!  -->
     <!-- <div class="kw-guide-section">
       <h3
@@ -553,6 +638,51 @@
 
 <script setup>
 const ynModel = ref('N');
+const arrModel = ref([]);
+const items = ref([
+  {
+    id: '1',
+    title: '비데 (WELLS-1234567AB)',
+    price: '100,000',
+    expansion: {
+      number: '2022-0532864-001',
+      productType: '비데',
+      productName: 'WELLS-1234567AB',
+      monthPrice: '100,000',
+      name: '양납부',
+      accountInfo: '계좌/국민은행/25일',
+      accountNumber: '1234*********56',
+    },
+  },
+  {
+    id: '2',
+    title: '비데 (WELLS-1234567AB)',
+    price: '100,000',
+    expansion: {
+      number: '2022-0532864-001',
+      productType: '비데',
+      productName: 'WELLS-1234567AB',
+      monthPrice: '100,000',
+      name: '양납부',
+      accountInfo: '계좌/국민은행/25일',
+      accountNumber: '1234*********56',
+    },
+  },
+  {
+    id: '3',
+    title: '비데 (WELLS-1234567AB)',
+    price: '100,000',
+    expansion: {
+      number: '2022-0532864-001',
+      productType: '비데',
+      productName: 'WELLS-1234567AB',
+      monthPrice: '100,000',
+      name: '양납부',
+      accountInfo: '계좌/국민은행/25일',
+      accountNumber: '1234*********56',
+    },
+  },
+]);
 
 const case1 = `
 <kw-list
@@ -953,6 +1083,117 @@ const caseCss3 = `
 `;
 const caseScript3 = `
 const ynModel = ref('N');
+`;
+
+const case4 = `
+<kw-list
+    v-model:selected="arrModel"
+    :items="items"
+    separator
+    checkbox
+    item-key="id"
+    select-align="center"
+    expansion
+    class="mt20"
+    group
+  >
+    <template #item="{ item }">
+      <kw-item-section class="my16">
+        <kw-item-label>
+          {{ item.title }}
+        </kw-item-label>
+      </kw-item-section>
+      <kw-item-section side>
+        {{ item.price }}
+      </kw-item-section>
+    </template>
+    <template #expansion="{ item }">
+      <div
+        class="kw-bc--bg-box pa20"
+      >
+        <kw-form
+          dense
+        >
+          <kw-form-row>
+            <kw-form-item label="계약번호">
+              <p>{{ item.expansion.number }}</p>
+            </kw-form-item>
+            <kw-form-item label="제품군">
+              <p>{{ item.expansion.productType }}</p>
+            </kw-form-item>
+            <kw-form-item label="모델명">
+              <p>{{ item.expansion.productName }}</p>
+            </kw-form-item>
+          </kw-form-row>
+          <kw-form-row>
+            <kw-form-item label="월회비">
+              <p>{{ item.expansion.monthPrice }}</p>
+            </kw-form-item>
+            <kw-form-item label="납부자명">
+              <p>{{ item.expansion.name }}</p>
+            </kw-form-item>
+            <kw-form-item label="이체정보">
+              <p>{{ item.expansion.accountInfo }}</p>
+            </kw-form-item>
+          </kw-form-row>
+          <kw-form-row>
+            <kw-form-item label="계좌/카드번호">
+              <p>{{ item.expansion.accountNumber }}</p>
+            </kw-form-item>
+          </kw-form-row>
+        </kw-form>
+      </div>
+    </template>
+  </kw-list>
+`;
+
+const caseScript4 = `
+const arrModel = ref([]);
+const items = ref([
+  {
+    id: '1',
+    title: '비데 (WELLS-1234567AB)',
+    price: '100,000',
+    expansion: {
+      number: '2022-0532864-001',
+      productType: '비데',
+      productName: 'WELLS-1234567AB',
+      monthPrice: '100,000',
+      name: '양납부',
+      accountInfo: '계좌/국민은행/25일',
+      accountNumber: '1234*********56',
+    },
+  },
+  {
+    id: '2',
+    title: '비데 (WELLS-1234567AB)',
+    price: '100,000',
+    expansion: {
+      number: '2022-0532864-001',
+      productType: '비데',
+      productName: 'WELLS-1234567AB',
+      monthPrice: '100,000',
+      name: '양납부',
+      accountInfo: '계좌/국민은행/25일',
+      accountNumber: '1234*********56',
+    },
+  },
+  {
+    id: '3',
+    title: '비데 (WELLS-1234567AB)',
+    price: '100,000',
+    expansion: {
+      number: '2022-0532864-001',
+      productType: '비데',
+      productName: 'WELLS-1234567AB',
+      monthPrice: '100,000',
+      name: '양납부',
+      accountInfo: '계좌/국민은행/25일',
+      accountNumber: '1234*********56',
+    },
+  },
+]);
+
 `;
 </script>
 
