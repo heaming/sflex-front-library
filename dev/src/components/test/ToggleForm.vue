@@ -79,12 +79,12 @@
       <kw-form-item label="icon">
         <q-toggle
           v-model="boolModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
         />
         <kw-toggle
           v-model="ynModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
         />
       </kw-form-item>

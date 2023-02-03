@@ -135,6 +135,39 @@ body.desktop .web-layout {
     box-sizing: border-box;
     background: $bg-body;
 
+    .drawer-mini-btn {
+      .q-icon {
+        color: $placeholder;
+      }
+
+      .q-btn__content {
+        position: relative;
+      }
+
+      &.drawer-mini-btn--active,
+      &:hover {
+        .q-icon {
+          color: $primary;
+        }
+      }
+    }
+
+    .q-drawer--mini & {
+      background: #fff;
+
+      .drawer-mini-btn {
+        .q-icon {
+          color: $black1 !important;
+        }
+
+        &:hover {
+          .q-icon {
+            color: $primary !important;
+          }
+        }
+      }
+    }
+
     &::before {
       content: "";
       position: absolute;
@@ -180,6 +213,14 @@ body.desktop .web-layout {
       }
     }
   }
+}
+
+.lnb_tooltip.q-tooltip--style {
+  font-size: 12px;
+  color: $black1;
+  background: #fff;
+  border: 1px solid $line-line;
+  border-radius: 0;
 }
 
 .web-left-drawer__menu {
