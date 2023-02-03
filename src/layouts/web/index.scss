@@ -1,9 +1,33 @@
 /*
   Layout
  */
-body.desktop .web-layout {
-  min-width: 1900px;
-  background: #f3f4f5;
+.web-layout {
+  body.desktop & {
+    & > .web-header,
+    & > .q-page-container {
+      min-width: 1900px;
+      background: #f3f4f5;
+    }
+  }
+}
+
+// mobile
+.mobile {
+  &:not(.tablet) {
+    .web-layout {
+      background: inherit;
+    }
+  }
+}
+
+// tablet
+.web-layout {
+  body.tablet & {
+    & > .web-header,
+    & > .q-page-container {
+      background: #f3f4f5;
+    }
+  }
 }
 
 /*
