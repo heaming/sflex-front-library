@@ -49,8 +49,16 @@
         }
 
         .kw-list__select-section {
-          padding-right: 4px;
+          // padding-right: 4px;
         }
+      }
+    }
+
+    .kw-list__select-all {
+      padding-right: 8px !important;
+
+      .q-checkbox__label {
+        font-size: 14px !important;
       }
     }
   }
