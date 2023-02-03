@@ -272,20 +272,20 @@
         />
         <kw-checkbox
           v-model="nModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
         <kw-checkbox
           v-model="indeterminateModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
         <kw-checkbox
           v-model="ynModel"
           :label="ynModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
@@ -294,21 +294,21 @@
         <kw-checkbox
           v-model="yModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
         <kw-checkbox
           v-model="nModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
         <kw-checkbox
           v-model="indeterminateModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
@@ -316,7 +316,7 @@
           v-model="ynModel"
           :label="ynModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
         />
@@ -327,21 +327,21 @@
       <kw-form-item label="icon disable">
         <kw-checkbox
           v-model="yModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
         />
         <kw-checkbox
           v-model="nModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
         />
         <kw-checkbox
           v-model="indeterminateModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -349,7 +349,7 @@
         <kw-checkbox
           v-model="ynModel"
           :label="ynModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -359,7 +359,7 @@
         <kw-checkbox
           v-model="yModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -367,7 +367,7 @@
         <kw-checkbox
           v-model="nModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -375,7 +375,7 @@
         <kw-checkbox
           v-model="indeterminateModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -384,7 +384,7 @@
           v-model="ynModel"
           :label="ynModel"
           dense
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -398,21 +398,21 @@
       >
         <kw-checkbox
           v-model="yModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
         />
         <kw-checkbox
           v-model="nModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
         />
         <kw-checkbox
           v-model="indeterminateModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
@@ -420,7 +420,7 @@
         <kw-checkbox
           v-model="ynModel"
           :label="ynModel"
-          checked-icon="bookmark_on_16"
+          checked-icon="bookmark_on"
           unchecked-icon="bookmark_off_16"
           indeterminate-icon="close_24"
           disable
