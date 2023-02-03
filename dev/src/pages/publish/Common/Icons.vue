@@ -142,6 +142,7 @@ const iconList2 = [
   'checked_24',
   'close_24',
   'download_24',
+  'gnb_menu',
   'filter_24',
   'id_24',
   'imgpreview_24',
