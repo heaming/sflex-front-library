@@ -211,5 +211,24 @@ body.mobile:not(.tablet) {
         }
       }
     }
+
+    &.kw-select--small {
+      height: 20px;
+
+      .kw-field .q-field__control {
+        min-height: 20px;
+      }
+
+      .q-field__native {
+        min-height: 20px;
+        height: 20px;
+        font-weight: normal;
+      }
+
+      .q-field__marginal {
+        min-height: 20px;
+        height: 20px;
+      }
+    }
   }
 }

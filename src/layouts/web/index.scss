@@ -94,6 +94,12 @@
     gap: 20px;
   }
 
+  &__separator {
+    width: 1px;
+    height: 20px;
+    background-color: #ddd;
+  }
+
   &__search {
     width: 220px;
 
