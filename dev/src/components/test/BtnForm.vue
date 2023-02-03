@@ -42,14 +42,14 @@
           disable
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           label="test"
           color="primary"
           text-color="negative"
           borderless
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           color="bg-white"
           outlined
         />
@@ -121,7 +121,7 @@
           :label="'label label label label'"
           stack
         >
-          <q-icon name="bookmark_on_16" />
+          <q-icon name="bookmark_on" />
           <span>label</span>
           <div>
             div
@@ -133,26 +133,26 @@
           stack
         />
         <q-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           flat
-          :icon="'bookmark_on_16'"
-        />
-        <q-btn
-          flat
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+        />
+        <q-btn
+          flat
+          :label="'label'"
+          :icon-right="'bookmark_on'"
         />
 
         <q-btn
           no-wrap
-          :icon-right="'bookmark_on_16'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -164,31 +164,31 @@
           fab
         />
         <q-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           fab
         />
         <q-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           fab-mini
         />
         <q-btn
           flat
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           flat
           :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon-right="'bookmark_on'"
         />
 
         <q-btn
           no-wrap
-          :icon-right="'bookmark_on_16'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -230,18 +230,18 @@
           dense
         />
         <q-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           dense
         />
         <q-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           flat
           dense
         />
         <q-btn
           dense
           :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -253,25 +253,25 @@
           disable
         />
         <q-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           disable
         />
         <q-btn
           flat
           disable
-          :icon="'bookmark_on_16'"
-        />
-        <q-btn
-          flat
-          disable
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           flat
           disable
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+        />
+        <q-btn
+          flat
+          disable
+          :label="'label'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -285,29 +285,29 @@
         />
         <q-btn
           class="kw-btn--old"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           class="kw-btn--old"
           flat
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           class="kw-btn--old kw-btn--old--icon-only"
           flat
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           class="kw-btn--old"
           flat
           :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           class="kw-btn--old"
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -318,21 +318,21 @@
           :label="'label'"
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
           flat
-          :icon="'bookmark_on_16'"
-        />
-        <kw-btn
-          flat
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+        />
+        <kw-btn
+          flat
+          :label="'label'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -346,28 +346,28 @@
         />
         <q-btn
           class="kw-btn--old"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           disable
         />
         <q-btn
           class="kw-btn--old"
           flat
           disable
-          :icon="'bookmark_on_16'"
-        />
-        <q-btn
-          class="kw-btn--old"
-          flat
-          disable
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <q-btn
           class="kw-btn--old"
           flat
           disable
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+        />
+        <q-btn
+          class="kw-btn--old"
+          flat
+          disable
+          :label="'label'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -380,17 +380,17 @@
           :label="'label'"
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -401,24 +401,24 @@
           :label="'label'"
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
-        />
-        <kw-btn
-          flat
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
           flat
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+        />
+        <kw-btn
+          flat
+          :label="'label'"
+          :icon-right="'bookmark_on'"
         />
       </kw-form-item>
     </kw-form-row>
@@ -431,24 +431,24 @@
           disable
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           disable
         />
         <kw-btn
           flat
-          :icon="'bookmark_on_16'"
-          disable
-        />
-        <kw-btn
-          flat
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           disable
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+          disable
+        />
+        <kw-btn
+          flat
+          :label="'label'"
+          :icon-right="'bookmark_on'"
           disable
         />
       </kw-form-item>
@@ -461,24 +461,24 @@
           dense
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           dense
         />
         <kw-btn
           flat
-          :icon="'bookmark_on_16'"
-          dense
-        />
-        <kw-btn
-          flat
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           dense
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+          dense
+        />
+        <kw-btn
+          flat
+          :label="'label'"
+          :icon-right="'bookmark_on'"
           dense
         />
       </kw-form-item>
@@ -491,24 +491,24 @@
           dense
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           dense
         />
         <kw-btn
           flat
-          :icon="'bookmark_on_16'"
-          dense
-        />
-        <kw-btn
-          flat
-          :label="'label'"
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           dense
         />
         <kw-btn
           flat
           :label="'label'"
-          :icon-right="'bookmark_on_16'"
+          :icon="'bookmark_on'"
+          dense
+        />
+        <kw-btn
+          flat
+          :label="'label'"
+          :icon-right="'bookmark_on'"
           dense
         />
       </kw-form-item>
@@ -524,7 +524,7 @@
           outlined
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           outlined
         />
         <kw-btn
@@ -541,7 +541,7 @@
           filled
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           filled
         />
         <kw-btn
@@ -558,7 +558,7 @@
           underline
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           underline
         />
         <kw-btn
@@ -568,7 +568,7 @@
         />
         <kw-btn
           :label="'underline'"
-          :icon-right="'bookmark_on_16'"
+          :icon-right="'bookmark_on'"
           underline
           disable
           style="font-size: 30px; line-height: 1.2em;"
@@ -582,7 +582,7 @@
           borderless
         />
         <kw-btn
-          :icon="'bookmark_on_16'"
+          :icon="'bookmark_on'"
           borderless
         />
         <kw-btn
