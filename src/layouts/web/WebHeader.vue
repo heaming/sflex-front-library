@@ -99,6 +99,12 @@
             />
           </kw-menu>
         </div>
+        <div class="web-header__separator" />
+        <kw-icon
+          class="web-header__icon"
+          name="gnb_menu"
+          clickable
+        />
       </div>
     </q-toolbar>
   </q-header>
