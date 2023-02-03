@@ -15,10 +15,20 @@
         class="drawer-mini-btn"
         :class="{'drawer-mini-btn--active': content === selectedContent}"
         :icon="content.icon"
-        :label="content.label"
         borderless
         @click="onChangeContent(content)"
-      />
+      >
+        <q-tooltip
+          anchor="center right"
+          self="center left"
+          class="lnb_tooltip"
+          :transition-show="false"
+          :transition-hide="false"
+          :offset="[-8, 10]"
+        >
+          {{ content.label }}
+        </q-tooltip>
+      </kw-btn>
     </div>
 
     <div class="web-left-drawer__content">
@@ -56,9 +66,9 @@ export default {
 
     const { t } = useI18n();
     const contents = [
-      { component: WebLeftDrawerMenu, icon: '', label: t('MSG_TXT_MENU') },
-      { component: WebLeftDrawerBookmark, icon: '', label: t('MSG_TXT_BKMK') },
-      { component: WebLeftDrawerRecentMenu, icon: '', label: t('MSG_TXT_RECENT_MENU') },
+      { component: WebLeftDrawerMenu, icon: 'lnb_menu', label: t('MSG_TXT_MENU') },
+      { component: WebLeftDrawerBookmark, icon: 'lnb_bookmark', label: t('MSG_TXT_BKMK') },
+      { component: WebLeftDrawerRecentMenu, icon: 'lnb_history', label: t('MSG_TXT_RECENT_MENU') },
     ];
     const selectedContent = shallowRef(contents[0]);
 

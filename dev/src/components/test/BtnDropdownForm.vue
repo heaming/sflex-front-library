@@ -12,7 +12,7 @@
           icon="bookmark_off_16"
           icon-right="bookmark_off_16"
           no-caps
-          dropdown-icon="bookmark_on_16"
+          dropdown-icon="bookmark_on"
           color="primary"
           toggle-aria-label="toggle-aria-label"
           :split="false"

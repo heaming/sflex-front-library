@@ -1,0 +1,14 @@
+<svg id="lnb_menu" data-name="menu(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="pause_h16_" data-name="pause(h16)">
+    <g id="keyline_16px" data-name="keyline/16px" transform="translate(0 0.001)">
+      <g id="bounding-box">
+        <path id="shape" style="fill: none;" d="M0,0H16V16H0Z" transform="translate(0 -0.001)"/>
+      </g>
+    </g>
+    <g id="icon" transform="translate(2 4.001)">
+      <line id="선_2821" data-name="선 2821" style="fill: none;stroke: currentColor; stroke-width: 1.5px;" x2="12" transform="translate(0 8.999)"/>
+      <line id="선_2821-2" data-name="선 2821" style="fill: none;stroke: currentColor; stroke-width: 1.5px;" x2="12" transform="translate(0 3.999)"/>
+      <line id="선_2821-3" data-name="선 2821" style="fill: none;stroke: currentColor; stroke-width: 1.5px;" x2="12" transform="translate(0 -1.001)"/>
+    </g>
+  </g>
+</svg>
