@@ -329,24 +329,12 @@
       }
     }
   }
-}
 
-/*
-// FIXME THIS.
-
-.kw-popup:has(.kw-search),
-.kw-page:has(.kw-search) {
-  .kw-tabs {
-    border: 1px solid #ddd;
-    border-bottom: 0;
-  }
-
-  .kw-tab-panel .kw-tabs {
-    border-top: 0;
+  // form 있을 시 border: none
+  &.form-border {
+    border: none !important;
   }
 }
-
-*/
 
 body.mobile:not(.tablet) {
   $-kw-tab-padding: 0 10px;
