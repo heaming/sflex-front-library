@@ -24,7 +24,7 @@
       >
         <li
           v-for="icon in iconList1"
-          :key="`${icon.name}`"
+          :key="`${icon.index}`"
           class="temp_icons__item"
         >
           <p class="temp_icons__name">
@@ -44,7 +44,7 @@
       >
         <li
           v-for="icon in iconList2"
-          :key="`${icon.name}`"
+          :key="`${icon.index}`"
           class="temp_icons__item"
         >
           <p class="temp_icons__name">
@@ -52,6 +52,29 @@
           </p>
           <p class="temp_icons__icon  temp_icons__icon--24px">
             <kw-icon :name="icon" />
+          </p>
+        </li>
+      </ul>
+      <kw-separator />
+      <h4 class="mb10">
+        Tablet visual img icons <span class="ml10 kw-fc--black3">{{ visuals.length }} 개</span>
+      </h4>
+      <ul
+        class="temp_icons"
+      >
+        <li
+          v-for="visual in visuals"
+          :key="`${visual.index}`"
+          class="temp_icons__item"
+        >
+          <p class="temp_icons__name">
+            {{ visual }}
+          </p>
+          <p class="temp_icons__icon ">
+            <kw-icon
+              :name="visual"
+              style="font-size: 36px;"
+            />
           </p>
         </li>
       </ul>
@@ -166,6 +189,12 @@ const iconList2 = [
   'warning_24',
   'write_24',
   'qrcode_24',
+];
+
+const visuals = [
+  'visual_check',
+  'visual_edit',
+  'visual_payment',
 ];
 const guideHistory = [
   {

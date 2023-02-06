@@ -85,25 +85,6 @@ body.tablet {
 
 body.desktop {
   .kw-popup--window-consult--style {
-    width: 100%;
-    max-width: 100% !important;
-    min-width: 1500px !important;
-    box-shadow: none !important;
-    border: none;
-    padding: 0;
-
-    .kw-popup__header {
-      display: none;
-      width: 100% !important;
-    }
-
-    .kw-popup__content {
-      padding: 0;
-      width: 100% !important;
-      overflow: auto;
-      min-height: 100vh;
-    }
-
     .normal-area--two-column {
       display: flex;
       min-width: 1536px;
