@@ -11,6 +11,9 @@
       "~kw-lib": [
         "src/index"
       ],
+      "@assets": [
+        "dev/src/assets"
+      ],
       "~dev/*": [
         "dev/src/*"
       ],
