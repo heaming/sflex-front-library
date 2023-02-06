@@ -358,6 +358,8 @@ body.mobile:not(.tablet) {
     height: $kw-tabs-content-height;
 
     &__content {
+      background-color: #fff;
+
       > .q-tab__label {
         @include typo("dense", 400);
       }
