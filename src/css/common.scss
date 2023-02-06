@@ -194,7 +194,8 @@ p {
 }
 
 .result-area,
-.normal-area {
+.normal-area,
+.kw-popup {
   .kw-tabs {
     @include kw-tabs-padding(0, $kw-tabs-arrow-width, $kw-tabs-arrow-height);
   }
