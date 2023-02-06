@@ -210,13 +210,6 @@ body.tablet .kw-popup {
   h3 + .kw-form {
     margin-top: 20px;
   }
-
-  // 자동 로그아웃 popup
-  &.auto-logout {
-    .kw-popup__header {
-      display: none;
-    }
-  }
 }
 
 body.mobile:not(.tablet) {
@@ -314,5 +307,12 @@ body.mobile:not(.tablet) {
   .q-scrollarea {
     height: 400px;
     margin-top: 10px;
+  }
+}
+
+.kw-popup.auto-logout {
+  // 자동 로그아웃 popup
+  .kw-popup__header {
+    display: none;
   }
 }
