@@ -1,5 +1,5 @@
 export default () => {
-  const imageSources = import.meta.globEager('~dev/assets/images/*');
+  const imageSources = import.meta.globEager('@assets/images/*');
   const keys = Object.keys(imageSources);
 
   const getImageSourceUrl = (src) => {

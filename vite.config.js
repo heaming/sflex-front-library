@@ -10,6 +10,9 @@ export default defineConfig(({ mode }) => {
   const openVisualizer = mode === 'visualizer';
 
   return {
+    alias: {
+      '@assets': resolve(__dirname, './dev/src/assets'),
+    },
     plugins: [
       vue({
         template: transformAssetUrls,
