@@ -11,11 +11,21 @@
   }
 }
 
+// mobile
 .mobile {
-  // mobile
   &:not(.tablet) {
     .dev-layout {
       background: inherit;
+    }
+  }
+}
+
+// tablet
+.dev-layout {
+  body.tablet & {
+    & > .dev-header,
+    & > .q-page-container {
+      background: #f3f4f5;
     }
   }
 }
