@@ -6,6 +6,9 @@
     <p class="kw-guide-description">
       This is the form example for mobile.
     </p>
+    <guide-history-view
+      :items="guideHistory"
+    />
     <div class="kw-guide-section">
       <h3
         id="default"
@@ -100,6 +103,18 @@
             placeholder="QR코드 입력"
             class="pt20"
           />
+          <div class="row pt20">
+            <kw-time-picker
+              label="시간선택"
+              class="col"
+            />
+            <kw-input
+              icon="qrcode_24"
+              label="상품 QR코드"
+              placeholder="QR코드 입력"
+              class="ml8 col"
+            />
+          </div>
         </div>
         <guide-code-view
           :code-value="example"
@@ -115,7 +130,7 @@
         combination
       </h3>
       <p class="kw-guide-description">
-        If you need one or more components, please wrap div.kw-field-wrap        <br>
+        If you need one or more components and have <b>one label</b>, please wrap div.kw-field-wrap        <br>
         If you need full width of <b>form component</b> which located in kw-field-wrap add '<b>kw-grow</b>' class
       </p>
       <q-card>
@@ -302,6 +317,18 @@ const example = `
   placeholder="QR코드 입력"
   class="pt20"
 />
+<div class="row pt20">
+  <kw-time-picker
+    label="시간선택"
+    class="col"
+  />
+  <kw-input
+    icon="qrcode_24"
+    label="상품 QR코드"
+    placeholder="QR코드 입력"
+    class="ml8 col"
+  />
+</div>
 `;
 
 const combination = `
@@ -390,4 +417,10 @@ const EmailCode = `
 />
 `;
 
+const guideHistory = [
+  {
+    timestamp: '2023-02-06',
+    text: 'add example case',
+  },
+];
 </script>
