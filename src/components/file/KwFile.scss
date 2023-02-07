@@ -13,6 +13,7 @@
         padding-left: 0;
 
         .kw-file__after-slot-container {
+          display: flex;
           padding-left: $-kw-field-gap;
         }
       }
