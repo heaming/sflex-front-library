@@ -150,6 +150,12 @@ body.mobile {
       }
     }
 
+    &--dense {
+      .kw-form-row {
+        @include kw-row($-kw-form-row-height-dense, $-kw-form-row-gap-dense, $-kw-form-row-padding-dense);
+      }
+    }
+
     //// tablet 용
   }
 }
@@ -161,6 +167,7 @@ body.mobile:not(.tablet) {
     $-kw-form-row-padding-dense: 2px 0;
     $-kw-form-item-min-height-dense: 20px;
     $-kw-form-item-min-height: 20px;
+    $-kw-form-row-gap: 60px;
 
     .kw-form-item__label {
       align-items: center;
