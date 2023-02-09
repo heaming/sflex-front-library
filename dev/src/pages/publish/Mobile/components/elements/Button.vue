@@ -552,6 +552,7 @@
             gap="0px"
             :dense="false"
             grow
+            disable
           />
         </div>
         <guide-code-view
@@ -880,6 +881,7 @@ const toggleRadio = `
   gap="0px"
   :dense="false"
   grow
+  disable
 />
 `;
 

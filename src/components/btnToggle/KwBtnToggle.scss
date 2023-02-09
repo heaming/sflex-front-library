@@ -6,11 +6,11 @@
           z-index: 1;
 
           &.disabled {
-            background-color: $line-line !important; // 좀 더 진해야 할까? sorry for using !important.
+            // background-color: $line-line !important; // 좀 더 진해야 할까? sorry for using !important.
 
-            .q-btn__content {
-              color: $bg-white !important;
-            }
+            // .q-btn__content {
+            //   color: $bg-white !important;
+            // }
           }
         }
       }
@@ -19,7 +19,7 @@
         margin-left: -1px;
 
         &.q-btn {
-          &[aria-pressed="true"] {
+          &[aria-pressed="false"] {
             &.disabled {
               background-color: $line-bg !important;
 
