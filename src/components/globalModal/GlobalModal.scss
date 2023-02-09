@@ -193,6 +193,26 @@ body.desktop {
 
         .kw-btn {
           word-break: keep-all;
+          min-height: 32px;
+          max-height: 32px;
+          font-size: 14px;
+          line-height: 1em;
+        }
+
+        .kw-field {
+          .q-field__control {
+            min-height: 32px;
+            height: 32px;
+            font-size: 14px;
+          }
+
+          .q-field__marginal {
+            height: 32px;
+          }
+
+          .q-field__native {
+            min-height: 32px;
+          }
         }
       }
     }
