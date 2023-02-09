@@ -1,5 +1,4 @@
 <template>
-  tjaksndlfkjnasdlkjfnaskljdnfaskljdfn
   <q-drawer
     class="tablet-left-drawer"
     :model-value="isExpanded"
