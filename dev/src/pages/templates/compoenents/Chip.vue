@@ -64,7 +64,11 @@ const chipProps = {
   },
   onClick: {
     type: Function,
-    default: undefined,
+    default: () => console.log('click'),
+  },
+  onRemove: {
+    type: Function,
+    default: () => console.log('remove'),
   },
   outline: {
     type: Boolean,
@@ -73,6 +77,10 @@ const chipProps = {
   square: {
     type: Boolean,
     default: false,
+  },
+  removable: {
+    type: Boolean,
+    default: true,
   },
 };
 
