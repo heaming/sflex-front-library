@@ -13,8 +13,10 @@
     :ripple="false"
     :outline="outline"
     :square="square"
+    :clickable="clickable"
     :removable="removable"
     @click="onClick"
+    @remove="onRemove"
   >
     <slot />
   </q-chip>
@@ -57,6 +59,10 @@ export default {
       default: false,
     },
     onClick: {
+      type: Function,
+      default: undefined,
+    },
+    onRemove: {
       type: Function,
       default: undefined,
     },
