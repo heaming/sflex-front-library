@@ -19,7 +19,7 @@ export default {
   HTTP_ERROR_UNSUPPORTED_DEVICE: 'D',
 
   LOCAL_STORAGE_ACCESS_TOKEN: 'accessToken',
-
+  LOCAL_STORAGE_ZOOM_SIZE: 'zoomSize',
   PERMISSION_KEY_PRINT: 'print',
   PERMISSION_KEY_DOWNLOAD: 'download',
   PERMISSION_KEY_DELETE: 'delete',

@@ -90,6 +90,22 @@
               :label="$t('MSG_TIT_HOME_MGT')"
               @click="openHomeMgtPopup"
             />
+            <q-btn-toggle
+              v-model="zoomSize"
+              v-close-popup
+              spread
+              no-caps
+              unelevated
+              toggle-color="primary"
+              color="white"
+              text-color="primary"
+              :options="[
+                {label: '67%', value: 67},
+                {label: '80%', value: 80},
+                {label: '100%', value: 100}
+              ]"
+              @update:model-value="setZoomSize()"
+            />
             <kw-btn
               v-close-popup
               borderless
@@ -115,7 +131,9 @@ import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
+import { localStorage } from '../../plugins/storage';
 
+const zoomSize = ref(true);
 export default {
   name: 'WebHeader',
 
@@ -133,11 +151,22 @@ export default {
       });
     }
 
+    function setZoomSize() {
+      document.body.style.zoom = `${zoomSize.value}%`;
+      localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
+    }
+
+    onMounted(() => {
+      zoomSize.value = localStorage.getItem(consts.LOCAL_STORAGE_ZOOM_SIZE);
+    });
+
     return {
       ...useHeaderApp(),
       logout,
       goToHome,
       openHomeMgtPopup,
+      setZoomSize,
+      zoomSize,
     };
   },
 };

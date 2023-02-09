@@ -81,6 +81,10 @@ export default () => {
     } else if (env.VITE_LOGIN_URL) {
       locationReplace(env.VITE_LOGIN_URL); // redirect to sso
     }
+
+    if (localStorage.has(consts.LOCAL_STORAGE_ZOOM_SIZE)) {
+      document.body.style.zoom = `${localStorage.getItem(consts.LOCAL_STORAGE_ZOOM_SIZE)}%`;
+    }
   }
 
   async function login({ tenantId, portalId, languageId, loginId, password }) {
