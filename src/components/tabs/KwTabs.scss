@@ -358,8 +358,6 @@ body.mobile:not(.tablet) {
     height: $kw-tabs-content-height;
 
     &__content {
-      background-color: #fff;
-
       > .q-tab__label {
         @include typo("dense", 400);
       }
@@ -372,8 +370,14 @@ body.mobile:not(.tablet) {
     color: $-kw-tabs-content-color;
 
     &__content {
+      background-color: #fff;
       display: flex;
       flex-grow: 1;
     }
   }
+}
+
+.q-tabs--scrollable > div {
+  padding-left: 40px;
+  padding-right: 40px;
 }
