@@ -207,7 +207,6 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import i18n from '../../i18n';
-import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwSelect',
@@ -262,10 +261,7 @@ export default {
       val ??= (props.multiple ? [] : '');
 
       innerValue.value = val;
-
-      if (platform.is.mobile === false) {
-        value.value = val;
-      }
+      value.value = val;
     }
 
     const optionsCtx = useOptions({
