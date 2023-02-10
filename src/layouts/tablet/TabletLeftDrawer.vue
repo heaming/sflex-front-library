@@ -4,7 +4,7 @@
     :model-value="isExpanded"
     :mini-width="40"
     :width="280"
-    behavior="tablet"
+    behavior="mobile"
     show-if-above
     bordered
     @update:model-value="setExpanded"
