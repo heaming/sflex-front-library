@@ -179,12 +179,18 @@ export default {
       if (platform.is.desktop) {
         style.width = '6px'; // $kw-scrollbar-width
       }
+      if (platform.is.tablet) {
+        style.width = '6px'; // $kw-scrollbar-width
+      }
       return [props.verticalBarStyle, style];
     });
 
     const computedHorizontalBarStyle = computed(() => {
       const style = {};
       if (platform.is.desktop) {
+        style.height = '6px'; // $kw-scrollbar-height
+      }
+      if (platform.is.tablet) {
         style.height = '6px'; // $kw-scrollbar-height
       }
       return normalizeStyleProps([props.horizontalBarStyle, style]);
@@ -196,6 +202,9 @@ export default {
       style.opacity = 1;
 
       if (platform.is.desktop) {
+        style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color
+      }
+      if (platform.is.tablet) {
         style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color
       }
       if (platform.is.mobile) {
@@ -217,6 +226,13 @@ export default {
         style.borderTop = '5px solid transparent';
         style.borderBottom = '5px solid transparent';
       }
+      if (platform.is.tablet) {
+        style.width = '6px'; // $kw-scrollbar-width
+        style.borderRadius = '0';
+        style.marginRight = '4px';
+        style.borderTop = '5px solid transparent';
+        style.borderBottom = '5px solid transparent';
+      }
       if (platform.is.mobile) {
         style.width = '6px'; // $kw-scrollbar-width
         style.borderRadius = '0';
@@ -231,6 +247,10 @@ export default {
     const computedHorizontalThumbStyle = computed(() => {
       const style = {};
       if (platform.is.desktop) {
+        style.height = '6px'; // $kw-scrollbar-width
+        style.marginBottom = '4px';
+      }
+      if (platform.is.tablet) {
         style.height = '6px'; // $kw-scrollbar-width
         style.marginBottom = '4px';
       }
