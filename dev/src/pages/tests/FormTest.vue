@@ -75,8 +75,9 @@
           <kw-form-item label="Input">
             <kw-input
               name="input"
-              rules="required"
+              :rules="validateTest"
               placeholder="입력해주세요"
+              :custom-messages="{ validateTest: '테스트', 'required': 'required' }"
             />
           </kw-form-item>
           <kw-form-item label="Input (TextArea)">
@@ -251,6 +252,7 @@
 
 <script setup>
 import { alert } from '~kw-lib';
+import { http } from '../../../../src/plugins/http';
 
 const formKey = ref(0);
 const formRef = ref();
@@ -283,6 +285,11 @@ watch(autofocus, () => {
 
 const noResetFocus = ref(true);
 const cols = ref(4);
+
+async function validateTest() {
+  const res = await http.get('http://localhost:8080/api/v1/anonymous/sflex/common/common/health-check');
+  return res.data !== 'OK';
+}
 
 function onSubmit(values) {
   console.log('onSubmit', values);
