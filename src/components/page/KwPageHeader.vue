@@ -51,16 +51,16 @@
     <q-space />
     <q-breadcrumbs class="kw-page-header__navigation">
       <q-breadcrumbs-el
-        v-for="(navigation, i) of navigations"
+        v-for="(navigation) of navigations"
         :key="navigation.key"
         :label="navigation.label"
       >
-        <kw-icon
+        <!-- <kw-icon
           v-if="i === navigations.length - 1"
           clickable
         >
           {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
-        </kw-icon>
+        </kw-icon> -->
       </q-breadcrumbs-el>
     </q-breadcrumbs>
   </div>
