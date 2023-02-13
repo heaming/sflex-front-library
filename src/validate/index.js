@@ -15,8 +15,9 @@ async function validate(value, rule, options) {
       };
     }
 
-    const { name, params } = options;
-    const defaultMessage = i18n.t('MSG_VAL_INVALID', [name, ...params]);
+    const { name, params, customMessages } = options;
+
+    const defaultMessage = customMessages[rule.name] ? customMessages[rule.name] : i18n.t('MSG_VAL_INVALID', [name, ...params]);
 
     return {
       valid: !!result,
