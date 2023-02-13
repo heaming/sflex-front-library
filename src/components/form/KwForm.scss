@@ -32,7 +32,8 @@
 
       ::before {
         content: " ";
-        width: 4px;
+        display: inline-block;
+        margin-left: 4px;
       }
     }
   }
