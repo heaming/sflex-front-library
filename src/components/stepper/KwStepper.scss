@@ -198,7 +198,12 @@
 
 .mobile {
   .kw-stepper {
-    // tablet
+    &__title {
+      font-size: 18px;
+      color: $black1;
+      font-weight: bold;
+      line-height: 1.44;
+    }
   }
 
   // mobile
