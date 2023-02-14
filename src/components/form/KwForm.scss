@@ -28,13 +28,10 @@
     }
 
     &__hint {
-      display: contents;
-
-      ::before {
-        content: " ";
-        display: inline-block;
-        margin-left: 4px;
-      }
+      display: inline-block;
+      width: 16px;
+      margin-left: 4px;
+      vertical-align: 1px;
     }
   }
 
