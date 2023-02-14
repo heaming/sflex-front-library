@@ -13,6 +13,7 @@
           icon="plus"
           no-wrap
           :label="$t('MSG_BTN_ALL_SPREAD')"
+          border-color="line-line"
           @click="setExpandedAll(true)"
         />
         <kw-btn
@@ -20,6 +21,7 @@
           icon="minus"
           no-wrap
           :label="$t('MSG_BTN_ALL_FOLD')"
+          border-color="line-line"
           @click="setExpandedAll(false)"
         />
         <kw-btn
@@ -27,6 +29,7 @@
           icon="write"
           no-wrap
           :label="$t('MSG_BTN_EDIT')"
+          border-color="line-line"
           @click="onClickEdit"
         />
       </div>

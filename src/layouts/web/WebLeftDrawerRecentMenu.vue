@@ -12,6 +12,7 @@
           no-wrap
           :disable="menus.length === 0"
           :label="$t('MSG_BTN_DEL_ALL')"
+          border-color="line-line"
           @click="onClickDeleteAll"
         />
       </div>
