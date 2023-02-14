@@ -376,6 +376,12 @@
   }
 }
 
+.q-tree__node--selected .q-tree__node-header-content {
+  background: rgb($primary, 15%);
+  color: $primary;
+  font-weight: 700;
+}
+
 .web-left-drawer__bookmark {
   .drawer-bookmark {
     &__title {
