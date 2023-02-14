@@ -196,7 +196,9 @@ const iconList2 = [
 const visuals = [
   'visual_check',
   'visual_edit',
+  'visual_online',
   'visual_payment',
+  'visual_partner',
 ];
 const guideHistory = [
   {
