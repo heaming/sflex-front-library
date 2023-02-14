@@ -79,13 +79,13 @@
                 v-if="selectComponent === 'radio'"
                 v-model="innerSelected"
                 :val="item.key"
-                @change="emitUpdateSelected"
+                @update:model-value="emitUpdateSelected"
               />
               <kw-checkbox
                 v-if="selectComponent === 'checkbox'"
                 v-model="innerSelected"
                 :val="item.key"
-                @change="emitUpdateSelected"
+                @update:model-value="emitUpdateSelected"
               />
             </kw-item-section>
             <slot
@@ -130,13 +130,13 @@
               v-if="selectComponent === 'radio'"
               v-model="innerSelected"
               :val="item.key"
-              @change="emitUpdateSelected"
+              @update:model-value="emitUpdateSelected"
             />
             <kw-checkbox
               v-if="selectComponent === 'checkbox'"
               v-model="innerSelected"
               :val="item.key"
-              @change="emitUpdateSelected"
+              @update:model-value="emitUpdateSelected"
             />
           </kw-item-section>
           <slot
