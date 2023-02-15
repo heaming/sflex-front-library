@@ -302,7 +302,7 @@
       background: rgb($primary, 5%);
 
       &:has(> .q-tree__node) {
-        padding: 12px 0;
+        padding: 11px 0;
       }
 
       .q-tree__children {
@@ -311,6 +311,7 @@
 
       .drawer-menu__node-content {
         color: $black2;
+        font-weight: 400;
       }
     }
 
@@ -385,7 +386,7 @@
 
     .drawer-menu__node-content {
       color: $primary !important;
-      font-weight: 700;
+      font-weight: 700 !important;
     }
   }
 }
