@@ -44,17 +44,18 @@ function recursiveBuildPath(app, menu) {
 function addRoutesByMenu(router, route, app, menu) {
   router.addRoute({
     ...route,
-    name: menu.menuUid,
+    name: menu.menuUid ? menu.menuUid : menu.pageId,
     path: recursiveBuildPath(app, menu).join('/'),
     meta: {
       requiresAuth: true,
       applicationId: app.applicationId,
       applicationName: app.applicationName,
-      menuUid: menu.menuUid,
-      menuName: menu.menuName,
+      menuUid: menu.menuUid ? menu.menuUid : menu.pageId,
+      menuName: menu.menuName ? menu.menuName : menu.pageId,
       parentsMenuUid: menu.parentsMenuUid,
       pageId: menu.pageId,
       pageUseCode: menu.pageUseCode,
+      pageName: menu.pageDestinationValue,
     },
   });
 }
@@ -72,10 +73,30 @@ function addRoutesByApp(router, route, app) {
 
 export function rebuildRoutes(router) {
   const routes = router.getRoutes();
-  const globImportedRoutes = filter(routes, (e) => e.meta.glob === true);
+  const globImportedRoutes = filter(routes, (route) => route.meta.glob === true);
   const apps = store.getters['meta/getApps'];
-
+  const extAccPages = store.getters['meta/getExtAccPages'];
   globImportedRoutes.forEach((route) => {
+    const extPage = filter(extAccPages, (p) => p.pageDestinationValue === route.name);
+    if (extPage.length > 0) {
+      const pageInfo = extPage[0];
+      router.addRoute({
+        ...route,
+        name: pageInfo.pageName ? pageInfo.pageName : pageInfo.pageId,
+        path: `/${kebabCase(pageInfo.pageDestinationValue.substring(0, pageInfo.pageDestinationValue.length - 1))}`,
+        meta: {
+          requiresAuth: false,
+          applicationId: null,
+          applicationName: null,
+          menuUid: pageInfo.pageId,
+          menuName: pageInfo.pageDestinationValue,
+          parentsMenuUid: null,
+          pageId: pageInfo.pageId,
+          pageUseCode: 'S',
+          pageName: pageInfo.pageDestinationValue,
+        },
+      });
+    }
     apps.forEach((app) => {
       addRoutesByApp(router, route, app);
     });
