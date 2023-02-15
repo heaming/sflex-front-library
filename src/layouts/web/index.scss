@@ -3,9 +3,13 @@
  */
 .web-layout {
   body.desktop & {
-    & > .web-header,
+    & > .web-header {
+      min-width: 1656px;
+      background: #f3f4f5;
+    }
+
     & > .q-page-container {
-      min-width: 1900px;
+      min-width: 1536px;
       background: #f3f4f5;
     }
   }
@@ -273,20 +277,20 @@
 
     &__node-header-content {
       padding: 0 10px;
-      margin: 2px 12px;
+      margin: 1px 12px;
       font-size: 14px;
-      font-weight: 400;
-      color: $black3;
+      font-weight: 500;
+      color: $black1;
 
       .q-icon {
         font-size: inherit;
         transition: transform 0.3s;
       }
 
-      &:hover {
-        font-weight: 700;
-        color: $black1;
-      }
+      // &:hover {
+      //   font-weight: 700;
+      //   color: $black1;
+      // }
 
       // &:has(> .drawer-menu__node--selected) {
       //   font-weight: 700;
@@ -298,11 +302,16 @@
       background: rgb($primary, 5%);
 
       &:has(> .q-tree__node) {
-        padding: 14px 0;
+        padding: 11px 0;
       }
 
       .q-tree__children {
         padding: 0;
+      }
+
+      .drawer-menu__node-content {
+        color: $black2;
+        font-weight: 400;
       }
     }
 
@@ -358,6 +367,8 @@
     }
 
     &__node-arrow {
+      color: #777;
+
       &.q-icon {
         font-size: inherit;
         transition: none;
@@ -365,21 +376,19 @@
 
       &--expanded {
         transform: rotate(180deg);
+        color: #222;
       }
     }
   }
 
-  .drawer-menu__node--selected .q-tree__node-header-content {
-    background: rgb($primary, 15%);
-    color: $primary;
-    font-weight: 700;
-  }
-}
+  .q-tree__children .q-tree__node--selected .q-tree__node-header-content {
+    background: rgb($primary, 15%) !important;
 
-.q-tree__node--selected .q-tree__node-header-content {
-  background: rgb($primary, 15%);
-  color: $primary;
-  font-weight: 700;
+    .drawer-menu__node-content {
+      color: $primary !important;
+      font-weight: 700 !important;
+    }
+  }
 }
 
 .web-left-drawer__bookmark {
@@ -558,7 +567,7 @@
   $tabs-view-active-bg-color: #f4f5f6;
 
   &__header {
-    padding: 0 30px 0 64px !important;
+    padding: 0 40px !important;
     height: 40px;
     background: $tabs-view-bg-color;
 
@@ -570,6 +579,17 @@
       border: 0;
       background-color: $tabs-view-bg-color;
       cursor: default !important;
+
+      &.q-tab--custom-active,
+      &:hover {
+        &::before {
+          display: none !important;
+        }
+
+        & + .q-tab::before {
+          display: none !important;
+        }
+      }
 
       &__content {
         padding: 0 10px;
