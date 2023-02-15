@@ -3,9 +3,13 @@
  */
 .web-layout {
   body.desktop & {
-    & > .web-header,
+    & > .web-header {
+      min-width: 1656px;
+      background: #f3f4f5;
+    }
+
     & > .q-page-container {
-      min-width: 1900px;
+      min-width: 1536px;
       background: #f3f4f5;
     }
   }
@@ -558,7 +562,7 @@
   $tabs-view-active-bg-color: #f4f5f6;
 
   &__header {
-    padding: 0 30px 0 64px !important;
+    padding: 0 40px !important;
     height: 40px;
     background: $tabs-view-bg-color;
 
@@ -570,6 +574,17 @@
       border: 0;
       background-color: $tabs-view-bg-color;
       cursor: default !important;
+
+      &.q-tab--custom-active,
+      &:hover {
+        &::before {
+          display: none !important;
+        }
+
+        & + .q-tab::before {
+          display: none !important;
+        }
+      }
 
       &__content {
         padding: 0 10px;
