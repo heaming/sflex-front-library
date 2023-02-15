@@ -8,7 +8,7 @@
 
     <kw-icon
       class="web-left-drawer__btn"
-      name="arrow_prev"
+      name="arrow_prev_lnb"
       size="16px"
       clickable
       @click="setExpanded(false)"

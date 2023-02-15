@@ -3,9 +3,13 @@
  */
 .dev-layout {
   body.desktop & {
-    & > .dev-header,
+    & > .dev-header {
+      min-width: 1656px;
+      background: #f3f4f5;
+    }
+
     & > .q-page-container {
-      min-width: 1900px;
+      min-width: 1536px;
       background: #f3f4f5;
     }
   }
