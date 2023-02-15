@@ -277,20 +277,20 @@
 
     &__node-header-content {
       padding: 0 10px;
-      margin: 2px 12px;
+      margin: 1px 12px;
       font-size: 14px;
-      font-weight: 400;
-      color: $black3;
+      font-weight: 500;
+      color: $black1;
 
       .q-icon {
         font-size: inherit;
         transition: transform 0.3s;
       }
 
-      &:hover {
-        font-weight: 700;
-        color: $black1;
-      }
+      // &:hover {
+      //   font-weight: 700;
+      //   color: $black1;
+      // }
 
       // &:has(> .drawer-menu__node--selected) {
       //   font-weight: 700;
@@ -302,11 +302,15 @@
       background: rgb($primary, 5%);
 
       &:has(> .q-tree__node) {
-        padding: 14px 0;
+        padding: 12px 0;
       }
 
       .q-tree__children {
         padding: 0;
+      }
+
+      .drawer-menu__node-content {
+        color: $black2;
       }
     }
 
@@ -362,6 +366,8 @@
     }
 
     &__node-arrow {
+      color: #777;
+
       &.q-icon {
         font-size: inherit;
         transition: none;
@@ -369,21 +375,19 @@
 
       &--expanded {
         transform: rotate(180deg);
+        color: #222;
       }
     }
   }
 
-  .drawer-menu__node--selected .q-tree__node-header-content {
-    background: rgb($primary, 15%);
-    color: $primary;
-    font-weight: 700;
-  }
-}
+  .q-tree__children .q-tree__node--selected .q-tree__node-header-content {
+    background: rgb($primary, 15%) !important;
 
-.q-tree__node--selected .q-tree__node-header-content {
-  background: rgb($primary, 15%);
-  color: $primary;
-  font-weight: 700;
+    .drawer-menu__node-content {
+      color: $primary !important;
+      font-weight: 700;
+    }
+  }
 }
 
 .web-left-drawer__bookmark {
