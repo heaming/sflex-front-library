@@ -115,8 +115,8 @@ const viewConfig = {
     lineVisible: true,
   },
 
-  scrollBarWidth: 10,
-  scrollBarHeight: 10,
+  scrollBarWidth: 14, // 10 -> 14
+  scrollBarHeight: 14, // 10 -> 14
   hideDeletedRows: env.VITE_REALGRID_HIDE_DELETE_ROWS,
   undoable: false,
 };
