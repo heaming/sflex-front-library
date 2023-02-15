@@ -43,6 +43,10 @@ function initGrd(data, view) {
       fieldName: 'number03',
       dataType: 'number',
     },
+    {
+      fieldName: 'number04',
+      dataType: 'number',
+    },
   ];
 
   const columns = [
@@ -73,6 +77,19 @@ function initGrd(data, view) {
         editFormat: '#,##0.###',
       },
     },
+    {
+      fieldName: 'number04',
+      header: 'With Stepper',
+      styleName: 'rg-number-step',
+      numberFormat: '#,##0.##', // default value, 생략 가능
+      editor: {
+        type: 'number',
+        maxIntegerLength: 13, // default value, 생략 가능
+        showStepButton: true, // 숫자 편집 버튼 표시 여부
+        direction: 'horizontal', // 버튼 표시 방향 설정, "vertical" 설정 시 세로방향
+        step: 1, // 버튼 클릭 시 값 증감 단위
+      },
+    },
   ];
 
   data.setFields(fields);
@@ -84,16 +101,19 @@ function initGrd(data, view) {
       number01: 123456789,
       number02: 1234,
       number03: 123456789,
+      number04: 123465,
     },
     {
       number01: 123456789.123,
       number02: 1234.123,
       number03: 123456789.1,
+      number04: 123465.1,
     },
     {
       number01: 123456789.123456,
       number02: 1234.123456,
       number03: 123456789.123,
+      number04: 123465.22,
     },
   ]);
 }
@@ -119,6 +139,10 @@ const sampleCode = `
       fieldName: 'number03',
       dataType: 'number',
     },
+    {
+      fieldName: 'number04',
+      dataType: 'number',
+    },
   ];
 
   const columns = [
@@ -149,6 +173,19 @@ const sampleCode = `
         editFormat: '#,##0.###',
       },
     },
+    {
+      fieldName: 'number04',
+      header: 'Default',
+      styleName: 'rg-number-step',
+      numberFormat: '#,##0.######', // default value, 생략 가능
+      editor: {
+        type: 'number',
+        maxIntegerLength: 13, // default value, 생략 가능
+        showStepButton: true, // 숫자 편집 버튼 표시 여부
+        direction: 'horizontal', // 버튼 표시 방향 설정, "vertical" 설정 시 세로방향
+        step: 1, // 버튼 클릭 시 값 증감 단위
+      },
+    },
   ];
 
   data.setFields(fields);
@@ -170,6 +207,11 @@ const sampleCode = `
       number01: 123456789.123456,
       number02: 1234.123456,
       number03: 123456789.123,
+    },
+    {
+      number01: 123456789,
+      number02: 1234,
+      number03: 123456789,
     },
   ]);
 `;
