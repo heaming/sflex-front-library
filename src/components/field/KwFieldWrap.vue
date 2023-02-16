@@ -19,6 +19,17 @@
         >
           <slot name="label">
             {{ label ?? label }}
+            <q-icon
+              size="16px"
+              name="info"
+              @click="toggleHint"
+            >
+              <kw-tooltip v-model="showingHint">
+                <slot name="hint">
+                  {{ hint }}
+                </slot>
+              </kw-tooltip>
+            </q-icon>
           </slot>
         </div>
       </div>
@@ -95,7 +106,7 @@ export default {
 
     const { cols } = useFormLayout();
     const { stretchClass } = useStretch();
-    const { fieldWrapProps } = useFieldWrap({ autoHeight: true });
+    const { fieldWrapProps, showingHint, toggleHint } = useFieldWrap({ autoHeight: true });
 
     const showErrorMessage = computed(() => props.error || invalid.value);
     const computedErrorMessage = computed(() => props.errorMessage || invalidMessage.value);
@@ -141,6 +152,8 @@ export default {
       focus,
       stretchClass,
       doNotRenderBottom,
+      showingHint,
+      toggleHint,
     };
   },
 };

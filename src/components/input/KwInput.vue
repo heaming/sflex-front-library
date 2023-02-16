@@ -116,6 +116,17 @@
       #label
     >
       {{ label ?? label }}
+      <q-icon
+        size="16px"
+        name="info"
+        @click="toggleHint"
+      >
+        <kw-tooltip v-model="showingHint">
+          <slot name="hint">
+            {{ hint }}
+          </slot>
+        </kw-tooltip>
+      </q-icon>
     </template>
   </q-input>
 </template>
@@ -188,7 +199,6 @@ export default {
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
     spinner: { type: Boolean, default: undefined },
     onClickIcon: { type: Function, default: undefined },
-
     // when use mask props, keydown event not fired.
     // so use this to block form submit
     preventSubmit: { type: Boolean, default: false },
@@ -200,7 +210,7 @@ export default {
 
   setup(props) {
     const fieldCtx = useField({ onChangeValue: () => {} });
-    const { inputRef, value } = fieldCtx;
+    const { inputRef, value, showingHint, toggleHint } = fieldCtx;
 
     const computedInputClass = computed(() => {
       const classes = {
@@ -335,6 +345,8 @@ export default {
       onClearInput,
       onChangeInput,
       onUpdateValue,
+      showingHint,
+      toggleHint,
     };
   },
 };

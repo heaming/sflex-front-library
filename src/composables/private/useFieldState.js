@@ -10,6 +10,10 @@ export const useFieldStateProps = {
     type: String,
     default: undefined,
   },
+  hint: {
+    type: String,
+    default: undefined,
+  },
   error: {
     type: Boolean,
     default: false,

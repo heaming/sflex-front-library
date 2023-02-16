@@ -46,6 +46,8 @@ export default (options = {}) => {
   const rules = toRef(props, 'rules');
   const customMessages = toRef(props, 'customMessages');
 
+  const showingHint = ref(false);
+
   const {
     values,
     registerField,
@@ -186,6 +188,10 @@ export default (options = {}) => {
     }
   }
 
+  function toggleHint() {
+    showingHint.value = !showingHint.value;
+  }
+
   onMounted(() => {
     if (props.validateOnMount) {
       validate();
@@ -204,6 +210,8 @@ export default (options = {}) => {
     isModified,
     focus,
     blur,
+    toggleHint,
+    showingHint,
   };
 
   registerField?.(fieldCtx);

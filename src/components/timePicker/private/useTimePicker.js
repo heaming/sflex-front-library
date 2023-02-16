@@ -43,7 +43,7 @@ export default () => {
   const isExpanded = ref(false);
   const showing = computed(() => !isReadonlyOrDisable.value && isExpanded.value);
 
-  const { fieldStyleProps, fieldClass } = useFieldStyle();
+  const { fieldStyleProps, fieldClass, showingHint, toggleHint } = useFieldStyle();
   const fieldClasses = computed(() => ({ ...fieldClass.value, 'q-field--highlighted': showing.value }));
 
   const fieldCtx = useField();
@@ -199,5 +199,8 @@ export default () => {
     onChangeInput,
     onChangeTime,
     onConfirm,
+
+    showingHint,
+    toggleHint,
   };
 };
