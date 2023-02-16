@@ -189,6 +189,7 @@
     >
       {{ label ?? label }}
       <q-icon
+        v-if="hint"
         size="16px"
         name="info"
         @click="toggleHint"
