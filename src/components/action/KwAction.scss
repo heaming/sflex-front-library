@@ -109,7 +109,6 @@ body.mobile {
 
     &--top {
       align-items: center;
-      margin-bottom: 0;
     }
   }
 
@@ -135,6 +134,10 @@ body.mobile {
           font-weight: 700;
           padding-left: 0 !important;
         }
+      }
+
+      &--top {
+        margin-bottom: 0;
       }
     }
   }
