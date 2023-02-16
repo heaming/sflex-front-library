@@ -188,6 +188,17 @@
       #label
     >
       {{ label ?? label }}
+      <q-icon
+        size="16px"
+        name="info"
+        @click="toggleHint"
+      >
+        <kw-tooltip v-model="showingHint">
+          <slot name="hint">
+            {{ hint }}
+          </slot>
+        </kw-tooltip>
+      </q-icon>
     </template>
 
     <!-- icon slot -->
@@ -252,7 +263,7 @@ export default {
 
   setup(props) {
     const fieldCtx = useField();
-    const { inputRef, value } = fieldCtx;
+    const { inputRef, value, showingHint, toggleHint } = fieldCtx;
 
     const innerValue = ref();
     const computedValue = computed(() => innerValue.value ?? value.value ?? '');
@@ -341,6 +352,8 @@ export default {
       onConfirm,
       computedUseInput,
       selectedText,
+      showingHint,
+      toggleHint,
     };
   },
 };

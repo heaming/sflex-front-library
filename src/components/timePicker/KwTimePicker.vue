@@ -59,6 +59,17 @@
       #label
     >
       {{ label ?? label }}
+      <q-icon
+        size="16px"
+        name="info"
+        @click="toggleHint"
+      >
+        <kw-tooltip v-model="showingHint">
+          <slot name="hint">
+            {{ hint }}
+          </slot>
+        </kw-tooltip>
+      </q-icon>
     </template>
 
     <!-- error -->
