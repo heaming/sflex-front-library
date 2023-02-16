@@ -231,4 +231,8 @@ body.mobile:not(.tablet) {
       }
     }
   }
+
+  .no-pointer-events.q-field__label {
+    pointer-events: all !important;
+  }
 }

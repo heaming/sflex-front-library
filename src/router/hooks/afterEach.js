@@ -60,7 +60,7 @@ function setSelectedGlobalKeys(to) {
     menuKey = parentsMenuUids[parentsMenuUids.length - 2];
   }
 
-  store.commit('app/setSelectedGlobalAppKey', appKey);
+  if (appKey) store.commit('app/setSelectedGlobalAppKey', appKey);
   store.commit('app/setSelectedGlobalMenuKey', menuKey);
 }
 

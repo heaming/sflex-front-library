@@ -64,6 +64,18 @@
       #label
     >
       {{ label ?? label }}
+      <q-icon
+        v-if="hint"
+        size="16px"
+        name="info"
+        @click="toggleHint"
+      >
+        <kw-tooltip v-model="showingHint">
+          <slot name="hint">
+            {{ hint }}
+          </slot>
+        </kw-tooltip>
+      </q-icon>
     </template>
 
     <!-- error -->
@@ -156,7 +168,7 @@ export default {
     const menuRef = ref();
 
     const fieldCtx = useField();
-    const { inputRef, value } = fieldCtx;
+    const { inputRef, value, showingHint, toggleHint } = fieldCtx;
 
     const fieldStyles = useFieldStyle();
     const { fieldClass } = fieldStyles;
@@ -320,6 +332,8 @@ export default {
       onChangeDate,
       onConfirm,
       focus,
+      showingHint,
+      toggleHint,
     };
   },
 };
