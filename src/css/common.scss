@@ -1238,3 +1238,16 @@ body.mobile {
     }
   }
 }
+
+// mobile,tablet underline
+.blue-line-link {
+  color: $primary;
+  text-decoration: underline;
+
+  &:visited,
+  &:hover,
+  &:focus,
+  &:visited {
+    color: $primary;
+  }
+}

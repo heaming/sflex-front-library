@@ -2,6 +2,8 @@
   &.q-btn-toggle {
     .kw-btn {
       &.q-btn {
+        font-size: 14px;
+
         &[aria-pressed="true"] {
           z-index: 1;
 

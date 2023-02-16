@@ -135,7 +135,10 @@
               <p>010-8426-2759</p>
             </kw-form-item>
             <kw-form-item label="연락처">
-              <p>010-8426-2759</p>
+              <a
+                href="tel:"
+                class="blue-line-link"
+              >010-8426-2759</a>
             </kw-form-item>
           </kw-form>
         </div>

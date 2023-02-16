@@ -245,7 +245,7 @@
             </kw-expansion-item>
             <kw-separator
               class="my0"
-              color="line-bg"
+              color="line-line"
             />
           </kw-list>
         </div>
@@ -829,7 +829,7 @@ const case1 = `
   </kw-expansion-item>
   <kw-separator
       class="my0"
-      color="line-bg"
+      color="line-line"
     />
 </kw-list>
 `;
