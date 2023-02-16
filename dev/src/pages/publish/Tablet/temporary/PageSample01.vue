@@ -19,6 +19,9 @@
       <!-- //located left side -->
       <!-- located right side -->
       <div class="tablet-action-right">
+        <div class="kw-font-subtitle kw-fc--primary mr8">
+          354,000원
+        </div>
         <kw-btn
           primary
           label="체크고객 이관"
