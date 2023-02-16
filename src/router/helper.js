@@ -85,14 +85,14 @@ export function rebuildRoutes(router) {
         name: pageInfo.pageName ? pageInfo.pageName : pageInfo.pageId,
         path: `/${kebabCase(pageInfo.pageDestinationValue.substring(0, pageInfo.pageDestinationValue.length - 1))}`,
         meta: {
-          requiresAuth: false,
+          requiresAuth: true,
           applicationId: null,
           applicationName: null,
           menuUid: pageInfo.pageId,
           menuName: pageInfo.pageDestinationValue,
           parentsMenuUid: null,
           pageId: pageInfo.pageId,
-          pageUseCode: 'S',
+          pageUseCode: pageInfo.pageUseCode,
           pageName: pageInfo.pageDestinationValue,
         },
       });
