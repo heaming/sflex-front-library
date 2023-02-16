@@ -127,8 +127,10 @@ body.mobile.tablet {
     &.q-btn-toggle {
       .kw-btn {
         &.q-btn {
-          font-size: 14px;
-          line-height: 1.42;
+          .q-btn__content {
+            font-size: 14px;
+            line-height: 20px;
+          }
         }
       }
     }
