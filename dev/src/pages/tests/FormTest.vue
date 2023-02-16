@@ -74,6 +74,7 @@
         <kw-form-row>
           <kw-form-item label="Input">
             <kw-input
+              :validate-on-value-update="false"
               name="input"
               :rules="validateTest"
               placeholder="입력해주세요"
@@ -288,7 +289,7 @@ const cols = ref(4);
 
 async function validateTest() {
   const res = await http.get('http://localhost:8080/api/v1/anonymous/sflex/common/common/health-check');
-  return res.data !== 'OK';
+  return res.data === 'OK';
 }
 
 function onSubmit(values) {
