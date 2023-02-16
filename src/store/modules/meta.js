@@ -48,7 +48,7 @@ export default {
     apps: [],
     menus: [],
     pages: [],
-    extAccPages: [],
+    noMenuPages: [],
     bookmarks: [],
     recentMenus: [],
   }),
@@ -75,8 +75,8 @@ export default {
     setMenus(state, menus) {
       state.menus = Object.freeze(menus);
     },
-    setExtAccPages(state, extAccPages) {
-      state.extAccPages = Object.freeze(extAccPages);
+    setNoMenuPages(state, noMenuPages) {
+      state.noMenuPages = Object.freeze(noMenuPages);
     },
     addPage(state, page) {
       state.pages.push(Object.freeze(page));
@@ -105,8 +105,8 @@ export default {
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
     getMenuPaths: (state) => (menuUid) => recursiveCreateMenuPaths(state, menuUid),
     getPages: (state) => state.pages,
-    getExtAccPages: (state) => state.extAccPages,
-    getExtAccPage: (state) => (pageId) => find(state.extAccPages, { pageId }),
+    getNoMenuPages: (state) => state.noMenuPages,
+    getNoMenuPage: (state) => (pageId) => find(state.noMenuPages, { pageId }),
     getPage: (state) => (key) => find(state.pages, (v) => (v.pageId === key || v.fromPageId === key || v.pageDestinationValue === key)),
     getBookmarks: (state) => state.bookmarks,
     isBookmarked: (state) => (menuUid, pageId) => some(state.bookmarks, { menuUid, pageId }),
@@ -142,16 +142,16 @@ export default {
       dispatch('app/createGlobalApps', apps, { root: true });
     },
     async fetchMenus({ commit, dispatch }) {
-      const response = await http.get('/sflex/common/common/portal/menus');
-      const menus = response.data.map((e) => ({
+      const menuPageRes = await http.get('/sflex/common/common/portal/menus');
+      const menus = menuPageRes.data.map((e) => ({
         ...e,
         parentsMenuUid: e.parentsMenuUid?.trim() || null,
       }));
 
       // 메뉴와 상관없이 무조건 라우팅해야되는 페이지들을 긁어옴.
-      const extRes = await http.get('/sflex/common/common/meta/ext-acc-pages');
-      const extAccPages = extRes.data;
-      commit('setExtAccPages', extAccPages);
+      const noMenuPageRes = await http.get('/sflex/common/common/meta/no-menu-pages');
+      const noMenuPages = noMenuPageRes.data;
+      commit('setNoMenuPages', noMenuPages);
 
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
