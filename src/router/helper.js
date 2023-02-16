@@ -94,6 +94,7 @@ export function rebuildRoutes(router) {
           pageId: pageInfo.pageId,
           pageUseCode: pageInfo.pageUseCode,
           pageName: pageInfo.pageDestinationValue,
+          noMenuPage: true,
         },
       });
     }
