@@ -2,8 +2,6 @@
   &.q-btn-toggle {
     .kw-btn {
       &.q-btn {
-        font-size: 14px;
-
         &[aria-pressed="true"] {
           z-index: 1;
 
@@ -118,6 +116,19 @@ body.mobile {
             // 최소사이즈 추가됨
             min-width: 54px;
           }
+        }
+      }
+    }
+  }
+}
+
+body.mobile.tablet {
+  .kw-btn-toggle {
+    &.q-btn-toggle {
+      .kw-btn {
+        &.q-btn {
+          font-size: 14px;
+          line-height: 1.42;
         }
       }
     }
