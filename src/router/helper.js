@@ -75,11 +75,11 @@ export function rebuildRoutes(router) {
   const routes = router.getRoutes();
   const globImportedRoutes = filter(routes, (route) => route.meta.glob === true);
   const apps = store.getters['meta/getApps'];
-  const extAccPages = store.getters['meta/getExtAccPages'];
+  const noMenuPages = store.getters['meta/getNoMenuPages'];
   globImportedRoutes.forEach((route) => {
-    const extPage = filter(extAccPages, (p) => p.pageDestinationValue === route.name);
-    if (extPage.length > 0) {
-      const pageInfo = extPage[0];
+    const noMenuPage = filter(noMenuPages, (p) => p.pageDestinationValue === route.name);
+    if (noMenuPage.length > 0) {
+      const pageInfo = noMenuPage[0];
       router.addRoute({
         ...route,
         name: pageInfo.pageName ? pageInfo.pageName : pageInfo.pageId,
