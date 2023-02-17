@@ -28,8 +28,10 @@ function throwIfInvalidRoute(to, from) {
 
 async function throwIfUnauthorized(to) {
   if (to.meta.requiresAuth === true) {
+    let pageId;
     const menuUid = to.name;
-    const { pageId } = store.getters['meta/getMenu'](menuUid) ?? to.meta;
+    if (to.meta.noMenuPage) pageId = to.meta.pageId;
+    else pageId = store.getters['meta/getMenu'](menuUid).pageId;
 
     try {
       await store.dispatch('meta/fetchPage', pageId);

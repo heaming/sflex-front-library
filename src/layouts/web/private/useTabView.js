@@ -107,7 +107,7 @@ export default () => {
     return close(key, force, autoSelect);
   }
 
-  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getExtAccPage'](to.meta.pageId) !== undefined;
+  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getNoMenuPage'](to.meta.pageId) !== undefined;
   const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
 
   let routingIsBlocked = false;
