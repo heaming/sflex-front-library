@@ -89,7 +89,7 @@ export function rebuildRoutes(router) {
           applicationId: null,
           applicationName: null,
           menuUid: pageInfo.pageId,
-          menuName: pageInfo.pageDestinationValue,
+          menuName: pageInfo.pageName,
           parentsMenuUid: null,
           pageId: pageInfo.pageId,
           pageUseCode: pageInfo.pageUseCode,

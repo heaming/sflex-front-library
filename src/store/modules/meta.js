@@ -20,13 +20,13 @@ const recursiveCreateMenuPaths = (state, menuUid) => {
       const { applicationName } = find(state.apps, { applicationId }) || {};
 
       navigations.push(
-        { key: applicationId, label: applicationName },
-        { key: menuUid, label: menuName },
+        { key: applicationId, label: applicationName, menuLevel },
+        { key: menuUid, label: menuName, menuLevel },
       );
     } else {
       navigations.push(
         ...recursiveCreateMenuPaths(state, parentsMenuUid),
-        { key: menuUid, label: menuName },
+        { key: menuUid, label: menuName, menuLevel },
       );
     }
   }
