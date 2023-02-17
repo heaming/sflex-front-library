@@ -14,5 +14,6 @@ export default () => {
   return {
     pageTitle: title,
     pageUseIsSub: meta.pageUseCode === 'S',
+    noMenuPage: meta.noMenuPage,
   };
 };
