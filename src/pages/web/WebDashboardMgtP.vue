@@ -19,7 +19,7 @@
     <template #action>
       <kw-btn
         negative
-        :label="$t('MSG_BTN_RESET')"
+        :label="$t('MSG_BTN_INTL')"
         @click="onClickReset"
       />
       <kw-btn

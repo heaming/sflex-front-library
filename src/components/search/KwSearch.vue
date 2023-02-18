@@ -27,7 +27,7 @@
         <kw-btn
           v-if="noResetBtn === false"
           v-permission:read
-          :label="$t('MSG_BTN_RESET', null, '초기화')"
+          :label="$t('MSG_BTN_INTL', null, '초기화')"
           :class="$g.platform.is.mobile ? 'w64' : 'w90'"
           secondary
           dense
