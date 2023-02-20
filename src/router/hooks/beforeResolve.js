@@ -18,10 +18,9 @@ function throwIfInvalidRoute(to, from) {
     const actualFrom = from?.meta.redirectedFrom || from;
     const fromIsParents = actualFrom?.meta.menuUid === toParentsMenuUid;
 
-    if (!toIsParents && !fromIsParents) {
-      throw new Error(
-        `Navigation aborted to ${to.fullPath}, sub route can only routed from it's parents.`,
-      );
+    const isSiblings = to.meta.parentsMenuUid === from.meta.parentsMenuUid;
+    if (!toIsParents && !fromIsParents && !isSiblings) {
+      throw new Error(`Navigation aborted to ${to.fullPath}, sub route can only routed from it's parents.`);
     }
   }
 }

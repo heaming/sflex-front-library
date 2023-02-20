@@ -121,8 +121,7 @@ export default () => {
       // redirect if subpage is already opened
       const parentsKey = to.meta.menuUid;
       const matched = find(tabViews, { parentsKey });
-
-      if (matched) {
+      if (matched && matched.key !== from.name) {
         from.meta.redirectedFrom = to;
         next({ name: matched.key });
         return;
@@ -171,12 +170,15 @@ export default () => {
     const parents = getParents(selectedKey.value);
     const index = Math.max(0, Math.min(delta, parents.length - 1));
     const target = parents[index];
+    const children = getChildren(target.key, 'key');
 
     if (target) {
       const { key, parentsKey } = target;
 
       await close(key, force, parentsKey !== false);
-
+      children.forEach(async (child) => {
+        await close(child, force);
+      });
       if (parentsKey) {
         await select(parentsKey);
       }
