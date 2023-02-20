@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax, no-await-in-loop */
 import { validate as _validate } from 'vee-validate';
-import { isFunction, isString } from 'lodash-es';
+import { isFunction, isString, isEmpty } from 'lodash-es';
 import { normalizeRules, normalizeRule } from './helper';
 import i18n from '../i18n';
 
@@ -17,7 +17,9 @@ async function validate(value, rule, options) {
 
     const { name, params, customMessages } = options;
 
-    const defaultMessage = customMessages[rule.name] ? customMessages[rule.name] : i18n.t('MSG_VAL_INVALID', [name, ...params]);
+    const defaultMessage = !isEmpty(customMessages) && customMessages[rule.name]
+      ? customMessages[rule.name]
+      : i18n.t('MSG_VAL_INVALID', [name, ...params]);
 
     return {
       valid: !!result,
