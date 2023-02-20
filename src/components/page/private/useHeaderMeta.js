@@ -10,10 +10,10 @@ export default () => {
   const { currentRoute } = useRouter();
   const meta = { ...currentRoute.value.meta };
   const title = computed(() => props.title || meta.menuName);
-
+  const isSubPage = computed(() => meta.pageUseCode === 'S');
   return {
     pageTitle: title,
-    pageUseIsSub: meta.pageUseCode === 'S',
+    pageUseIsSub: isSubPage,
     noMenuPage: meta.noMenuPage,
   };
 };
