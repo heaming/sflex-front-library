@@ -880,3 +880,10 @@
   box-shadow: none;
   transform: translate(-4px, -8px);
 }
+
+.rg-fixed-column-bar {
+  border: 0 !important;
+  width: 1px !important;
+  background: $black1;
+  margin-left: 1px;
+}
