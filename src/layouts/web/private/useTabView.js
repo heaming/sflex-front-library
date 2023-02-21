@@ -14,14 +14,24 @@ export default () => {
   const selectedKey = computed(() => router.currentRoute.value.name);
 
   function recursiveGetChildren(key) {
-    const matched = find(tabViews, { parentsKey: key });
-    return matched ? [matched, ...recursiveGetChildren(matched.key)] : [];
+    const children = filter(tabViews, { parentsKey: key });
+    const childrenWithSiblings = [];
+    children.forEach((child) => {
+      childrenWithSiblings.push(child);
+      childrenWithSiblings.push(...recursiveGetChildren(child.key));
+    });
+    return childrenWithSiblings;
   }
 
   function recursiveGetParents(key) {
     const parentsKey = find(tabViews, { key })?.parentsKey;
-    const matched = find(tabViews, { key: parentsKey });
-    return matched ? [matched, ...recursiveGetParents(matched.key)] : [];
+    const matchedParents = filter(tabViews, { key: parentsKey });
+    const parentsWithSiblings = [];
+    matchedParents.forEach((parent) => {
+      parentsWithSiblings.push(parent);
+      parentsWithSiblings.push(...recursiveGetParents(parent.key));
+    });
+    return parentsWithSiblings;
   }
 
   function getChildren(key, iteratee = (e) => e) {
@@ -79,24 +89,30 @@ export default () => {
   function getClosestKey(key) {
     const index = findIndex(tabViews, { key });
     const lastIndex = tabViews.length - 1;
+    const parents = getParents(key);
+    const me = find(parents, (parent) => parent.key === key);
+    const parentKeyIndex = findIndex(tabViews, (tabView) => tabView.key === me?.parentsKey);
     const closestIndex = index === lastIndex ? index - 1 : index + 1;
-    return tabViews[closestIndex]?.key;
+    let result;
+    if (parentKeyIndex >= 0) result = tabViews[parentKeyIndex].key;
+    else if (tabViews[closestIndex]?.parentsKey) result = getClosestKey(tabViews[closestIndex]?.key);
+    else result = tabViews[closestIndex]?.key;
+    return result;
   }
 
-  async function close(key, force = false, autoSelect = true) {
+  async function close(key, force = false, autoSelect = true, goToHome = false) {
     const isClosable = force === true
       || await confirmIsModified(key) === true;
 
     if (isClosable) {
       // must get closest key before remove
       const closestKey = getClosestKey(key);
-
       remove(key);
 
       // when close current selected tab
-      if (autoSelect && selectedKey.value === key) {
+      if (!goToHome && autoSelect && selectedKey.value === key) {
         await select(closestKey || consts.ROUTE_HOME_NAME);
-      }
+      } else if (goToHome) await select(consts.ROUTE_HOME_NAME);
     }
 
     return isClosable;
@@ -174,7 +190,6 @@ export default () => {
 
     if (target) {
       const { key, parentsKey } = target;
-
       await close(key, force, parentsKey !== false);
       children.forEach(async (child) => {
         await close(child, force);
@@ -196,13 +211,17 @@ export default () => {
   }
 
   async function onSelect(key) {
-    if (selectedKey.value !== key) {
+    const children = getChildren(key, 'key');
+    if (selectedKey.value !== key && !children.includes(selectedKey.value)) {
       await select(key);
     }
   }
 
   async function onClose(key) {
-    await close(key, false);
+    const children = getChildren(key);
+    children.forEach(async (child) => {
+      await close(child.key, true, true, tabViews.length < 1);
+    });
   }
 
   return {
