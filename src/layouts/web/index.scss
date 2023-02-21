@@ -623,6 +623,9 @@
       &--custom-active {
         background-color: $tabs-view-active-bg-color;
 
+        // 서브페이지도 같은 색으로 보이도록 설정.
+        opacity: 1;
+
         .q-tab__content > div {
           color: $black1;
         }
