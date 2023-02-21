@@ -19,7 +19,7 @@
 
     <div class="kw-page-header__tools">
       <kw-checkbox
-        v-if="!pageUseIsSub"
+        v-if="!pageUseIsSub && !noMenuPage"
         :model-value="isBookmarked"
         :true-value="true"
         :false-value="false"
@@ -49,7 +49,10 @@
     </div>
 
     <q-space />
-    <q-breadcrumbs class="kw-page-header__navigation">
+    <q-breadcrumbs
+      v-if="!noMenuPage"
+      class="kw-page-header__navigation"
+    >
       <q-breadcrumbs-el
         v-for="(navigation) of navigations"
         :key="navigation.key"

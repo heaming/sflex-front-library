@@ -6,7 +6,7 @@ import env from '../consts/private/env';
 import { http } from '../plugins/http';
 import { loadSpinner } from '../plugins/loading';
 import { localStorage } from '../plugins/storage';
-import { getOsTypeCode, getDeviceTypeCode, getDeviceToken } from '../utils/mobile';
+// import { getOsTypeCode, getDeviceTypeCode, getDeviceToken } from '../utils/mobile';
 import { isReady as routerIsReady } from '../router';
 
 export default () => {
@@ -44,19 +44,19 @@ export default () => {
     i18n.mergeLocaleMessage(locale, localeMessages);
   }
 
-  async function saveDeviceTokenIfNeeded() {
-    const data = {
-      userId: store.getters['meta/getUserInfo'].userId,
-      osTypeCode: getOsTypeCode(),
-      deviceTypeCode: getDeviceTypeCode(),
-      pushDeviceTokenValue: await getDeviceToken().catch(() => null),
-    };
-    const shouldIgnore = Object.values(data).some((e) => !e);
-
-    if (!shouldIgnore) {
-      await http.post('/sflex/common/common/push-users', data);
-    }
-  }
+  // async function saveDeviceTokenIfNeeded() {
+  //   const data = {
+  //     userId: store.getters['meta/getUserInfo'].userId,
+  //     osTypeCode: getOsTypeCode(),
+  //     deviceTypeCode: getDeviceTypeCode(),
+  //     pushDeviceTokenValue: await getDeviceToken().catch(() => null),
+  //   };
+  //   const shouldIgnore = Object.values(data).some((e) => !e);
+  //
+  //   if (!shouldIgnore) {
+  //     await http.post('/sflex/common/common/push-users', data);
+  //   }
+  // }
 
   async function initSession() {
     try {
@@ -65,7 +65,7 @@ export default () => {
       await Promise.all([
         fetchMetas(),
         fetchLangs(),
-        saveDeviceTokenIfNeeded(),
+        // saveDeviceTokenIfNeeded(),
       ]);
     } finally {
       loadSpinner(false);
