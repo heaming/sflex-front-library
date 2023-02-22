@@ -226,10 +226,6 @@ body.tablet .kw-popup {
   }
 }
 
-body.tablet .kw-popup__content {
-  max-height: 720px;
-}
-
 body.mobile:not(.tablet) {
   .q-card__section--vert {
     padding: initial;
