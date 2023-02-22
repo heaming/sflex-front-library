@@ -64,7 +64,7 @@ import useObserver, { useObserverProps } from '../../composables/private/useObse
 import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
 import useBookmark from './private/useBookmark';
 
-const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'];
+const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', 'full'];
 
 export default {
   name: 'KwPopup',
