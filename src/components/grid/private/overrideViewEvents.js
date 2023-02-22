@@ -266,9 +266,31 @@ export function customOnCellEditable(view) {
   Cell 별로 열리는 Editor 의 표시를 결정하는 콜백
   */
 export function overrideOnShowEditor(view) {
-  wrapEvent(view, onShowEditor, (g, index) => {
+  wrapEvent(view, onShowEditor, (g, index, props, attrs) => {
     const column = g.columnByName(index.column);
-    return isCellEditable(g, column, index);
+
+    const isEditable = isCellEditable(g, column, index);
+
+    if (isEditable) {
+      const { styleName } = column;
+      attrs['attr-for-selector'] = 'aria';
+
+      setTimeout(() => {
+        const element = document.querySelector('input[attr-for-selector="aria"]');
+        element.classList.remove(...['text-left', 'text-center', 'text-right']);
+        element.classList.add(...styleName.split(' '));
+        const dropdownId = element.getAttribute('aria-owns');
+        const dropdownEl = document.getElementById(dropdownId);
+        dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right']);
+        dropdownEl.classList.add(...styleName.split(' '));
+      });
+
+      if (hasOriginal(g, onShowEditor)) {
+        execOriginal(g, onShowEditor, g, index, props, attrs);
+      }
+    }
+
+    return isEditable;
   });
 }
 
