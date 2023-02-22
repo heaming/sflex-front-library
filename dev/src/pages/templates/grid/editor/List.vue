@@ -55,6 +55,7 @@ function initGrd(data, view) {
       fieldName: 'list01',
       header: 'Default',
       options,
+      styleName: 'text-right',
       editor: { type: 'list' },
     },
     {
@@ -63,6 +64,7 @@ function initGrd(data, view) {
       options: options.map((v) => ({ value: v.codeId, label: v.codeName })),
       optionValue: 'value',
       optionLabel: 'label',
+      styleName: 'text-center',
       editor: { type: 'list' },
       firstOption: 'select', // preset: 'all', 'select'
       firstOptionValue: '', // default value, 생략 가능
