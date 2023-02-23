@@ -275,7 +275,7 @@ export function overrideOnShowEditor(view) {
       const styles = column.styleName.split(' ');
       let textAlignStyle = null;
       if (styles.includes('text-left')) textAlignStyle = 'text-left';
-      else if (styles.includes('text-center')) textAlignStyle = 'text-right';
+      else if (styles.includes('text-center')) textAlignStyle = 'text-center';
       else if (styles.includes('text-right')) textAlignStyle = 'text-right';
 
       if (textAlignStyle) {
