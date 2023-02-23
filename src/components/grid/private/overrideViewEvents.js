@@ -272,18 +272,24 @@ export function overrideOnShowEditor(view) {
     const isEditable = isCellEditable(g, column, index);
 
     if (isEditable) {
-      const { styleName } = column;
-      attrs['attr-for-selector'] = 'aria';
+      const styles = column.styleName.split(' ');
+      let textAlignStyle = null;
+      if (styles.includes('text-left')) textAlignStyle = 'text-left';
+      else if (styles.includes('text-center')) textAlignStyle = 'text-center';
+      else if (styles.includes('text-right')) textAlignStyle = 'text-right';
 
-      setTimeout(() => {
-        const element = document.querySelector('input[attr-for-selector="aria"]');
-        element.classList.remove(...['text-left', 'text-center', 'text-right']);
-        element.classList.add(...styleName.split(' '));
-        const dropdownId = element.getAttribute('aria-owns');
-        const dropdownEl = document.getElementById(dropdownId);
-        dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right']);
-        dropdownEl.classList.add(...styleName.split(' '));
-      });
+      if (textAlignStyle) {
+        attrs['attr-for-selector'] = 'aria';
+        setTimeout(() => {
+          const element = document.querySelector('input[attr-for-selector="aria"]');
+          element.classList.remove(...['text-left', 'text-center', 'text-right']);
+          element.classList.add(textAlignStyle);
+          const dropdownId = element.getAttribute('aria-owns');
+          const dropdownEl = document.getElementById(dropdownId);
+          dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right']);
+          dropdownEl.classList.add(textAlignStyle);
+        });
+      }
 
       if (hasOriginal(g, onShowEditor)) {
         execOriginal(g, onShowEditor, g, index, props, attrs);
