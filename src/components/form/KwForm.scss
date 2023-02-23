@@ -39,7 +39,7 @@
     p {
       font-size: 16px;
       font-weight: 500;
-      line-height: 1.5;
+      line-height: 1.5; // 24px
       color: $black1;
     }
 
@@ -110,13 +110,13 @@
 body.mobile {
   .kw-form {
     // tablet 용
-    $-kw-form-row-height: $kw-field-height;
+    $-kw-form-row-height: $kw-field-height; // 40px
     $-kw-form-row-gap: 60px;
     $-kw-form-row-padding: 8px 0 8px 0;
     $-kw-form-row-height-dense: 24px;
     $-kw-form-row-gap-dense: 60px;
     $-kw-form-row-padding-dense: 6px 0;
-    $-kw-form-item-min-height: $kw-field-height;
+    $-kw-form-item-min-height: $kw-field-height; // 40px
     $-kw-form-item-min-height-dense: 24px;
 
     @at-root .kw-form-row {
@@ -128,13 +128,14 @@ body.mobile {
     }
 
     .kw-form-item__label {
-      @include typo("dense",400);
+      font-size: 14px;
+      font-weight: 400;
     }
 
     .kw-form-item__field {
       p {
-        @include typo("body");
-
+        font-size: 16px;
+        font-weight: 500;
         color: $black1;
       }
 
@@ -152,6 +153,10 @@ body.mobile {
       .kw-form-row {
         @include kw-row($-kw-form-row-height-dense, $-kw-form-row-gap-dense, $-kw-form-row-padding-dense);
       }
+
+      .kw-form-item {
+        @include kw-item($-kw-form-item-min-height-dense);
+      }
     }
 
     //// tablet 용
@@ -159,55 +164,56 @@ body.mobile {
 }
 
 body.mobile:not(.tablet) {
+  // mobile 용 : kw-form-row 감싸지 않음
   .kw-form {
     width: 100%;
 
+    $-kw-form-row-padding: 6px 0;
     $-kw-form-row-padding-dense: 2px 0;
+    $-kw-form-item-min-height: 24px;
     $-kw-form-item-min-height-dense: 20px;
-    $-kw-form-item-min-height: 20px;
     $-kw-form-row-gap: 60px;
 
-    .kw-form-item__label {
-      align-items: center;
+    .kw-form-item {
+      @include kw-item($-kw-form-item-min-height);
 
+      padding: $-kw-form-row-padding;
+
+      &:first-of-type {
+        padding-top: 0;
+      }
+
+      &:last-of-type {
+        padding-bottom: 0;
+      }
+    }
+
+    .kw-form-item__label {
       .kw-label-content {
         color: $black2;
       }
     }
 
     .kw-form-item__field {
-      align-self: flex-start !important;
-
-      p {
-        @include typo("body",400);
-
-        width: 100%;
-        color: $black1;
+      p,
+      a {
+        font-weight: 400;
         word-break: keep-all;
       }
     }
 
     &--dense {
-      .kw-form-item__label {
-        line-height: $-kw-form-item-min-height-dense;
-        min-height: $-kw-form-item-min-height-dense;
-      }
-
       .kw-form-item {
+        @include kw-item($-kw-form-item-min-height-dense);
+
         padding: $-kw-form-row-padding-dense;
-        line-height: $-kw-form-item-min-height-dense;
-        min-height: $-kw-form-item-min-height-dense;
       }
 
       .kw-form-item__field {
-        p {
-          @include typo("dense",400);
-
-          line-height: $-kw-form-item-min-height-dense;
+        p,
+        a {
+          font-size: 14px;
         }
-
-        line-height: $-kw-form-item-min-height-dense;
-        min-height: $-kw-form-item-min-height-dense;
       }
     }
   }
