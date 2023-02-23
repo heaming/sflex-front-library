@@ -15,6 +15,18 @@
   }
 }
 
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
 .rg-header-focus {
   background-color: inherit;
 }
@@ -104,7 +116,7 @@
   }
 
   .rg-list-editor {
-    width: auto !important;
+    // width: auto !important; // list-editor가 활성화될 때 inputbox 내부의 텍스트가 이동하는 현상 방지
     height: auto !important;
     top: 9px !important;
     left: 5px !important;
