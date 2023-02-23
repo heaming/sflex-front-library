@@ -30,7 +30,7 @@ export default () => {
         // clear all stack after current stack
         const key = selectedKey.value;
         const index = findIndex(stackViews, { key });
-        stackViews.splice(index + 1);
+        if (index >= 0) stackViews.splice(index + 1);
       }
 
       add(to);
