@@ -62,7 +62,9 @@ body.tablet .kw-popup {
     border: 0 !important;
 
     .kw-popup__content {
-      max-height: 100% !important;
+      // max-height: 100% !important;
+      height: calc(100vh - 8px);
+      max-height: calc(100vh - 8px);
     }
   }
 
