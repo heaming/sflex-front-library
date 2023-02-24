@@ -189,6 +189,8 @@ body.mobile:not(.tablet) {
     }
 
     .kw-form-item__label {
+      padding-right: 12px !important;
+
       .kw-label-content {
         color: $black2;
       }
