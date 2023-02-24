@@ -302,7 +302,8 @@ body.mobile:not(.tablet) {
       > .kw-btn.q-btn {
         @include kw-btn-height-modifier-by-font-type (60px, "body");
 
-        flex-grow: 1;
+        font-weight: 400;
+        flex: 1;
       }
     }
   }
