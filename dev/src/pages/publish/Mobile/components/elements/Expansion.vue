@@ -64,6 +64,11 @@
               add icon on right side
             </td>
           </tr>
+          <tr>
+            <td>kw-list</td>
+            <td>no-spacing</td>
+            <td>Make min-height as inherit</td>
+          </tr>
         </tbody>
       </q-markup-table>
     </div>
