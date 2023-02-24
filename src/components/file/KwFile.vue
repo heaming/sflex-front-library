@@ -664,7 +664,7 @@ export default {
     const { files } = uploadCtx;
 
     const bindValue = computed({
-      get: () => (props.multiple ? files.value : files.value?.[0]),
+      get: () => files.value,
       set: (val) => {
         files.value = (props.multiple ? val : [val]);
       },
