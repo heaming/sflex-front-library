@@ -115,12 +115,18 @@
             />
           </kw-menu>
         </div>
-        <div class="web-header__separator" />
-        <kw-icon
-          class="web-header__icon"
-          name="gnb_menu"
-          clickable
+        <div
+          class="web-header__separator"
         />
+        <div
+          @dblclick="openSetSessionP"
+        >
+          <kw-icon
+            class="web-header__icon"
+            name="gnb_menu"
+            clickable
+          />
+        </div>
       </div>
     </q-toolbar>
   </q-header>
@@ -141,6 +147,12 @@ export default {
     const { push } = useRouter();
     const { logout } = useSession();
 
+    async function openSetSessionP() {
+      console.log('openSetSession');
+      modal({
+        component: () => import('../../pages/web/WebSessionSettingP.vue'),
+      });
+    }
     function goToHome() {
       push({ name: consts.ROUTE_HOME_NAME });
     }
@@ -167,6 +179,7 @@ export default {
       openHomeMgtPopup,
       setZoomSize,
       zoomSize,
+      openSetSessionP,
     };
   },
 };
