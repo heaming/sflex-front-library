@@ -570,6 +570,7 @@
     padding: 0 40px !important;
     height: 40px;
     background: $tabs-view-bg-color;
+    z-index: 1;
 
     .q-tab {
       padding: 0;
@@ -582,6 +583,9 @@
 
       &.q-tab--custom-active,
       &:hover {
+        border-left: 1px solid #e3e4e6;
+        border-right: 1px solid #e3e4e6;
+
         &::before {
           display: none !important;
         }
@@ -589,6 +593,18 @@
         & + .q-tab::before {
           display: none !important;
         }
+      }
+
+      &:hover::after {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: 0;
+        right: -1px;
+        left: -1px;
+        height: 1px;
+        background: #d9d9d9;
+        z-index: 1000;
       }
 
       &__content {
@@ -644,6 +660,8 @@
 
   &__content {
     background-color: transparent;
+    border-top: 1px solid #d9d9d9;
+    margin-top: -1px;
 
     .q-tab-panel {
       padding: 0;
