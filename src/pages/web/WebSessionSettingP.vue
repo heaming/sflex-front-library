@@ -7,6 +7,7 @@
     <kw-form
       ref="frmMainRef"
       :cols="2"
+      style="margin-top: 30px;margin-bottom: 30px;"
     >
       <kw-form-row>
         <kw-form-item label="회사코드">
