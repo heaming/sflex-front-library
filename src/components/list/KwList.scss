@@ -25,9 +25,15 @@
       min-height: unset;
       padding: unset;
     }
+
+    &.no-spacing {
+      .kw-item-type {
+        min-height: inherit !important;
+      }
+    }
   }
 
-  // END quasar overrides
+  // END quasar overridesp
 
   &__item {
     &--selected {

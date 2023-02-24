@@ -37,7 +37,7 @@ const viewConfig = {
     displayValue: IndicatorValue.INDEX,
     displayOrder: 1,
     zeroBase: (view) => view instanceof TreeView,
-    headText: 'NO',
+    headText: 'No',
     footText: '',
   },
 
