@@ -9,6 +9,7 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
+    'no-plusplus': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? ['warn', { allow: ['error'] }] : 'off',
   },
 };
