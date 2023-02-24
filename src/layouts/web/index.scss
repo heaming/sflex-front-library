@@ -335,6 +335,11 @@
 
     &__node-content {
       flex: 1 1 0%;
+
+      &:hover {
+        font-weight: 500 !important;
+        color: #222 !important;
+      }
     }
 
     &__node--depth-0 {
