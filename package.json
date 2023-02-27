@@ -6,13 +6,15 @@
   "types": "types/index.d.ts",
   "workspaces": [
     "dev",
-    "test"
+    "test",
+    "mtest"
   ],
   "scripts": {
     "build-dev": "npm run -w dev build",
     "build-lib": "vite build",
     "lint": "eslint --ext .js,.jsx,.vue . --fix && stylelint **/*.{css,scss,vue} --fix",
     "lint-staged": "lint-staged",
+    "mtest": "npm run -w mtest serve",
     "prepare": "husky install",
     "prettier": "prettier --write **/*.ts **/*.html",
     "preview": "npm run -w dev preview",
