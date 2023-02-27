@@ -257,6 +257,10 @@
   border-radius: 0;
 }
 
+.lnb_depth_tooltip {
+  left: 284px !important;
+}
+
 .web-left-drawer__menu {
   &.q-tree {
     .q-focus-helper {
@@ -348,7 +352,7 @@
     }
 
     &__node--depth-1 {
-      padding-right: 40px;
+      // padding-right: 40px;
       min-height: 35px;
 
       // &::before {
