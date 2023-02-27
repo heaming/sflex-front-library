@@ -28,16 +28,29 @@
           <q-item-label
             v-if="needsHeader(menu, i)"
             header
+            class="px20"
           >
             {{ normalizeHeader(menu.menuLogDate) }}
           </q-item-label>
           <q-item
             clickable
             :active="isActiveItem(menu)"
+            class="px20"
             @click="onClickItem(menu)"
           >
             <q-item-section>
-              <q-item-label>{{ menu.menuName }}</q-item-label>
+              <q-item-label>
+                <div class="ellipsis">
+                  {{ menu.menuName }}
+                </div>
+                <kw-tooltip
+                  anchor="center right"
+                  self="center start"
+                  class="lnb_tooltip lnb_depth_tooltip"
+                >
+                  {{ menu.menuName }}
+                </kw-tooltip>
+              </q-item-label>
               <q-item-label caption>
                 {{ menu.menuPath }}
               </q-item-label>
@@ -151,3 +164,15 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.ellipsis {
+  width: 190px;
+}
+
+::v-deep(.q-focusable) {
+  &:hover {
+    background: rgb($primary, 5%);
+  }
+}
+</style>

@@ -90,6 +90,48 @@
             spaced="0"
             class="mt6"
           />
+
+          <kw-action-top class="mt10">
+            <template #left>
+              <kw-paging-info
+                :total-count="6"
+              />
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span>합산청구</span>
+              <span class="accent pl4">250,000원</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span>신용카드</span>
+              <span class="accent pl4">150,000원</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span>가상계좌</span>
+              <span class="accent pl4">150,000원</span>
+              <kw-separator
+                spaced
+                vertical
+                inset
+              />
+              <span>페이결제</span>
+              <span class="accent pl4">0원</span>
+            </template>
+            <p class="kw-font-pt14 text-weight-regular w108 mr16">
+              총 금액
+            </p>
+            <h3 class="kw-font-subtitle">
+              94,000원
+            </h3>
+          </kw-action-top>
         </div>
         <guide-code-view
           :code-value="case1"
@@ -136,8 +178,54 @@ const case1 = `
   spaced="0"
   class="mt6"
 />
+
+<kw-action-top>
+  <template #left>
+    <kw-paging-info
+      :total-count="6"
+    />
+    <kw-separator
+      spaced
+      vertical
+      inset
+    />
+    <span>합산청구</span>
+    <span class="accent pl4">250,000원</span>
+    <kw-separator
+      spaced
+      vertical
+      inset
+    />
+    <span>신용카드</span>
+    <span class="accent pl4">150,000원</span>
+    <kw-separator
+      spaced
+      vertical
+      inset
+    />
+    <span>가상계좌</span>
+    <span class="accent pl4">150,000원</span>
+    <kw-separator
+      spaced
+      vertical
+      inset
+    />
+    <span>페이결제</span>
+    <span class="accent pl4">0원</span>
+  </template>
+  <p class="kw-font-pt14 text-weight-regular w108 mr16">
+    총 금액
+  </p>
+  <h3 class="kw-font-subtitle">
+    94,000원
+  </h3>
+</kw-action-top>
 `;
 const historyData = [
+  {
+    timestamp: '2023-02-27',
+    text: 'add new Case',
+  },
   {
     timestamp: '2023-01-31',
     text: 'First added',
