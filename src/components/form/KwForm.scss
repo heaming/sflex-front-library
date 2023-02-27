@@ -127,6 +127,10 @@ body.mobile {
       @include kw-item($-kw-form-item-min-height);
     }
 
+    @at-root .kw-label-content {
+      color: $black1;
+    }
+
     .kw-form-item__label {
       font-size: 14px;
       font-weight: 400;

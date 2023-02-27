@@ -28,8 +28,15 @@
               [`drawer-menu__node--depth-${node.depth}`]: true,
             }"
           >
-            <div class="drawer-menu__node-content">
+            <div class="drawer-menu__node-content ellipsis">
               {{ node.label }}
+              <kw-tooltip
+                anchor="center right"
+                self="center start"
+                class="lnb_tooltip lnb_depth_tooltip"
+              >
+                {{ node.label }}
+              </kw-tooltip>
             </div>
             <q-icon
               v-if="node.children?.length"
@@ -61,3 +68,8 @@ export default {
   },
 };
 </script>
+<style scoped lang="scss">
+.ellipsis {
+  width: 202px;
+}
+</style>
