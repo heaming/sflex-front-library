@@ -34,7 +34,6 @@
                 anchor="center right"
                 self="center start"
                 class="lnb_tooltip lnb_depth_tooltip"
-                :model-value="true"
               >
                 {{ node.label }}
               </kw-tooltip>

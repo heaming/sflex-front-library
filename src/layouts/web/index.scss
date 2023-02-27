@@ -513,7 +513,7 @@
     }
 
     &__list {
-      padding: 0 20px;
+      padding: 0;
 
       .q-separator {
         margin: 20px 0;
@@ -521,7 +521,7 @@
       }
 
       .q-item {
-        padding: 0;
+        padding: 7px 0 5px;
         min-height: 40px;
         font-size: 14px;
         color: $black1;
@@ -536,7 +536,7 @@
 
         &__label--header {
           padding: 0;
-          margin-bottom: 12px;
+          margin-bottom: 7px;
           font-size: 14px;
           color: $black1;
         }
@@ -557,7 +557,7 @@
         }
 
         & + .q-item {
-          margin-top: 20px;
+          margin-top: 8px;
         }
 
         .q-focus-helper {
