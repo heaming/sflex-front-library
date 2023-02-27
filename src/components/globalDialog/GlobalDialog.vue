@@ -24,7 +24,7 @@
       <q-card-section class="global-dialog__action">
         <kw-btn
           v-if="activeDialog.isConfirm"
-          :label="$t('MSG_BTN_NO', null, '취소')"
+          :label="$t('MSG_BTN_CANCEL', null, '취소')"
           negative
           @click="onClick(false)"
         />

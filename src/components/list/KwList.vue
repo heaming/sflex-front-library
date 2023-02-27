@@ -66,6 +66,7 @@
           :group="group"
           :padding-target="paddingTarget"
           :expand-icon-class="computedExpandIconClass"
+          :expand-icon="computedExpandIcon"
           @click="onClick(item)"
         >
           <template #header>
@@ -165,6 +166,7 @@
 <script>
 import { normalizeClass } from 'vue';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import { platform } from '../../plugins/platform';
 import { getNumberWithComma } from '../../utils/string';
 import { ListContextKey } from '../../consts/private/symbols';
 import useDense, { useDenseProps } from '../../composables/private/useDense';
@@ -200,7 +202,9 @@ export default {
     bordered: { type: Boolean, default: undefined },
     onClickItem: { type: Function, default: undefined },
     group: { type: String, default: undefined },
+    // expansion
     paddingTarget: { type: [Array, String], default: () => ['self'] },
+    expandIcon: { type: String, default: undefined },
     expandIconAlign: { type: String, default: undefined },
     expandIconClass: { type: [Array, String, Object], default: undefined },
   },
@@ -434,6 +438,9 @@ export default {
       return classes;
     });
 
+    const defaultExpandIcon = platform.is.tablet ? 'arrow_down' : 'arrow_down_24';
+    const computedExpandIcon = computed(() => props.expandIcon ?? defaultExpandIcon);
+
     provide(ListContextKey, listProvideContext);
 
     return {
@@ -456,6 +463,7 @@ export default {
       showPlaceholder,
       basicItemClass,
       computedItemClass,
+      computedExpandIcon,
       computedExpandIconClass: computedExpandSideSectionClass,
       onBlur: () => { console.log('blur'); },
     };

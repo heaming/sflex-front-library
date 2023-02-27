@@ -1,4 +1,5 @@
 import { Platform, openURL, uid } from 'quasar';
+import { isEmpty } from 'lodash-es';
 import store from '../store';
 import pascalCase from './private/pascalCase';
 
@@ -9,15 +10,14 @@ const openedPopups = {};
 let globalMessageEvent;
 let globalCloseEvent;
 
-function registerMessageEvent() {
+function registerMessageEvent(deletePid = true) {
   globalMessageEvent = (e) => {
-    const { pid, result, payload } = e.data;
-
-    if (pid && openedPopups[pid]) {
+    const { pid, result, payload, shouldPostMessage } = e.data;
+    if (pid && openedPopups[pid] && shouldPostMessage) {
       const resolve = openedPopups[pid];
       delete openedPopups[pid];
 
-      if (Object.keys(openedPopups).length === 0) {
+      if (Object.keys(openedPopups).length === 0 && (deletePid || !isEmpty(payload))) {
         window.removeEventListener('message', globalMessageEvent, false);
         globalMessageEvent = null;
       }
@@ -34,9 +34,9 @@ function registerMessageEvent() {
   window.addEventListener('message', globalMessageEvent, false);
 }
 
-function registerOpenedPopup(pid, resolve) {
+function registerOpenedPopup(pid, resolve, deletePid = true) {
   if (!globalMessageEvent) {
-    registerMessageEvent();
+    registerMessageEvent(deletePid);
   }
 
   openedPopups[pid] = resolve;
@@ -88,7 +88,7 @@ function parseFeatures(windowFeatures) {
   return parsedFeatures;
 }
 
-export function open(url, windowFeatures) {
+export async function open(url, windowFeatures, deletePid = true) {
   return new Promise((resolve, reject) => {
     const {
       origin,
@@ -106,7 +106,7 @@ export function open(url, windowFeatures) {
       );
     }, parseFeatures(windowFeatures));
 
-    registerOpenedPopup(pid, resolve);
+    registerOpenedPopup(pid, resolve, deletePid);
   });
 }
 
