@@ -62,15 +62,27 @@
           <div
             v-else-if="node.folderYn === 'Y'"
             class="row items-center"
+            style="width: 100%;"
           >
-            {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
+            <div
+              class="ellipsis"
+            >
+              {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
+            </div>
           </div>
           <div
             v-else
             class="row items-center"
+            style="width: 100%;"
           >
-            <kw-icon name="bookmark_on" />
-            {{ node.bookmarkName }}
+            <div
+              class="ellipsis"
+            >
+              <kw-icon
+                name="bookmark_on"
+                class="mt-4"
+              />{{ node.bookmarkName }}
+            </div>
           </div>
         </template>
         <template #body="{ node }">
@@ -187,3 +199,12 @@ export default {
   },
 };
 </script>
+<style scoped lang="scss">
+::v-deep(.kw-scroll-area__scrollarea .q-scrollarea__content) {
+  min-width: 262px !important;
+}
+
+::v-deep(.q-hoverable:hover > .q-focus-helper) {
+  background: rgb($primary, 5%) !important;
+}
+</style>
