@@ -182,7 +182,7 @@ export default {
       return style;
     });
 
-    const defaultExpandIcon = platform.is.mobile ? 'arrow_down' : 'arrow_down_24';
+    const defaultExpandIcon = platform.is.tablet ? 'arrow_down' : 'arrow_down_24';
 
     const computedExpandIcon = computed(() => props.expandIcon ?? defaultExpandIcon);
 
