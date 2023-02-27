@@ -1,6 +1,7 @@
 node_modules
 dist
 public
+static
 
 # Fix all config files
 !.*.js
