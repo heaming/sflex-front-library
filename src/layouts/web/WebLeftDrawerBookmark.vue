@@ -69,6 +69,14 @@
             >
               {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
             </div>
+            <kw-tooltip
+              anchor="center right"
+              self="center start"
+              class="lnb_tooltip lnb_depth_tooltip"
+              :model-value="true"
+            >
+              {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
+            </kw-tooltip>
           </div>
           <div
             v-else
@@ -83,6 +91,14 @@
                 class="mt-4"
               />{{ node.bookmarkName }}
             </div>
+            <kw-tooltip
+              anchor="center right"
+              self="center start"
+              class="lnb_tooltip lnb_depth_tooltip"
+              :model-value="true"
+            >
+              {{ node.bookmarkName }}
+            </kw-tooltip>
           </div>
         </template>
         <template #body="{ node }">
