@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr>
-            <td rowspan="3">
+            <td rowspan="4">
               kw-form
             </td>
             <td>
@@ -54,13 +54,8 @@
             </td>
           </tr>
           <tr>
-            <td>
-              'p' tag in kw-form-item
-            </td>
-            <td>
-              class: text-center, text-right
-            </td>
-            <td>Adjust aling text (default: left)</td>
+            <td>align-content="right" or align-content="center"</td>
+            <td>Adjust align-right / align-center in p tag of kw-form-item</td>
           </tr>
         </tbody>
       </q-markup-table>
