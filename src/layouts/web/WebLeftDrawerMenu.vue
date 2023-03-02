@@ -68,8 +68,3 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss">
-.ellipsis {
-  width: 202px;
-}
-</style>

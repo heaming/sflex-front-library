@@ -20,6 +20,9 @@
       "~test/*": [
         "test/src/*"
       ],
+      "~mtest/*": [
+        "mtest/src/*"
+      ],
       "~common/*": [
         "test/src/modules/common/*"
       ],

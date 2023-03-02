@@ -4,6 +4,10 @@ module.exports = {
     'stylelint-config-standard-scss',
   ],
 
+  ignoreFiles: [
+    'static/**/*.css',
+  ],
+
   plugins: [
     'stylelint-order',
   ],
