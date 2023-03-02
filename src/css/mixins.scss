@@ -196,12 +196,16 @@
 
   &:first-of-type:not(h3+.kw-form-row) {
     padding-top: 0;
-    min-height: $kw-field-line-height + at($padding, 3);
+    min-height: $kw-field-line-height;
+
+    // min-height: $kw-field-line-height + at($padding, 3);
   }
 
   &:last-of-type {
     padding-bottom: 0;
-    min-height: $kw-field-line-height + at($padding, 1);
+    min-height: $kw-field-line-height;
+
+    // min-height: $kw-field-line-height + at($padding, 1);
   }
 
   &:first-of-type:last-of-type {

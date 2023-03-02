@@ -67,7 +67,7 @@ export function getDeviceTypeCode() {
 }
 
 export function getDeviceVersion() {
-  return callMethod(NativePlugin.Device, 'getVersion').versionName;
+  return callMethod(NativePlugin.Device, 'getVersion');
 }
 
 export function getDeviceToken() {
@@ -87,6 +87,13 @@ export function openCamera() {
 
 export function openPhotoGallery() {
   return callMethod(NativePlugin.Photo, 'openPhotoGallery');
+}
+
+export function getImageData() {
+  /* eslint-disable-next-line */
+  alert(PhotoPlugin?.getImageData());
+  /* eslint-disable-next-line */
+  return PhotoPlugin?.getImageData();
 }
 
 /*
