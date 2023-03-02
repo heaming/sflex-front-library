@@ -90,22 +90,22 @@
               :label="$t('MSG_TIT_HOME_MGT')"
               @click="openHomeMgtPopup"
             />
-            <q-btn-toggle
-              v-model="zoomSize"
-              v-close-popup
-              spread
-              no-caps
-              unelevated
-              toggle-color="primary"
-              color="white"
-              text-color="primary"
-              :options="[
-                {label: '67%', value: 67},
-                {label: '80%', value: 80},
-                {label: '100%', value: 100}
-              ]"
-              @update:model-value="setZoomSize()"
-            />
+            <!--            <q-btn-toggle-->
+            <!--              v-model="zoomSize"-->
+            <!--              v-close-popup-->
+            <!--              spread-->
+            <!--              no-caps-->
+            <!--              unelevated-->
+            <!--              toggle-color="primary"-->
+            <!--              color="white"-->
+            <!--              text-color="primary"-->
+            <!--              :options="[-->
+            <!--                {label: '67%', value: 67},-->
+            <!--                {label: '80%', value: 80},-->
+            <!--                {label: '100%', value: 100}-->
+            <!--              ]"-->
+            <!--              @update:model-value="setZoomSize()"-->
+            <!--            />-->
             <kw-btn
               v-close-popup
               borderless
@@ -163,10 +163,10 @@ export default {
       });
     }
 
-    function setZoomSize() {
-      document.body.style.zoom = `${zoomSize.value}%`;
-      localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
-    }
+    // function setZoomSize() {
+    //   document.body.style.zoom = `${zoomSize.value}%`;
+    //   localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
+    // }
 
     onMounted(() => {
       zoomSize.value = localStorage.getItem(consts.LOCAL_STORAGE_ZOOM_SIZE);
@@ -177,7 +177,7 @@ export default {
       logout,
       goToHome,
       openHomeMgtPopup,
-      setZoomSize,
+      // setZoomSize,
       zoomSize,
       openSetSessionP,
     };
