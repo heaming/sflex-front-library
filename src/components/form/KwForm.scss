@@ -62,23 +62,23 @@
       @include kw-item($-kw-form-item-min-height-dense);
     }
 
-    & {
-      .kw-form-row:first-of-type {
-        padding-top: 0;
-        min-height: $-kw-form-row-height-dense + at($-kw-form-row-padding-dense, 3);
-      }
+    // & {
+    //   .kw-form-row:first-of-type {
+    //     padding-top: 0;
+    //     min-height: $-kw-form-row-height-dense + at($-kw-form-row-padding-dense, 3);
+    //   }
 
-      .kw-form-row:last-of-type {
-        padding-bottom: 0;
-        min-height: $-kw-form-row-height-dense + at($-kw-form-row-padding-dense, 1);
-      }
+    //   .kw-form-row:last-of-type {
+    //     padding-bottom: 0;
+    //     min-height: $-kw-form-row-height-dense + at($-kw-form-row-padding-dense, 1);
+    //   }
 
-      .kw-form-row:first-of-type:last-of-type {
-        padding-top: 0;
-        padding-bottom: 0;
-        min-height: $-kw-form-row-height-dense;
-      }
-    }
+    //   .kw-form-row:first-of-type:last-of-type {
+    //     padding-top: 0;
+    //     padding-bottom: 0;
+    //     min-height: $-kw-form-row-height-dense;
+    //   }
+    // }
   }
 
   // 가상 선택자 has 가 samsung internet 에서 지원 여부가 불확실 함...
