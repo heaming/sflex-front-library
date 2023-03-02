@@ -166,10 +166,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.ellipsis {
-  width: 190px;
-}
-
 ::v-deep(.q-focusable) {
   &:hover {
     background: rgb($primary, 5%);

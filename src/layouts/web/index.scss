@@ -316,6 +316,10 @@
       .drawer-menu__node-content {
         color: $black2;
         font-weight: 400;
+
+        &.ellipsis {
+          width: 202px;
+        }
       }
     }
 
@@ -564,6 +568,10 @@
           display: none;
         }
       }
+    }
+
+    .ellipsis {
+      width: 190px;
     }
   }
 }
