@@ -281,19 +281,22 @@ body.mobile:not(.tablet) {
 
     &__action {
       position: sticky;
-      padding: 40px 20px 30px;
+
+      // padding: 40px 20px 30px;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: 11;
       display: flex;
-      column-gap: 8px;
+
+      // column-gap: 8px;
       flex-wrap: nowrap;
       background: #fff;
 
       button {
-        flex: 1 1 50%;
+        flex: 1 0 50%;
         font-size: 16px;
+        height: 60px;
       }
     }
 
