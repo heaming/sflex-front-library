@@ -18,7 +18,7 @@
         borderless
         @click="onChangeContent(content)"
       >
-        <q-tooltip
+        <kw-tooltip
           anchor="center right"
           self="center left"
           class="lnb_tooltip"
@@ -27,7 +27,7 @@
           :offset="[-8, 10]"
         >
           {{ content.label }}
-        </q-tooltip>
+        </kw-tooltip>
       </kw-btn>
     </div>
 
