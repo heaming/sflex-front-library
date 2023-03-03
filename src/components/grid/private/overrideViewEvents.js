@@ -281,7 +281,7 @@ export function overrideOnShowEditor(view) {
       if (textAlignStyle) {
         attrs['attr-for-selector'] = 'aria';
         setTimeout(() => {
-          const element = document.querySelector('input[attr-for-selector="aria"]');
+          const element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
           element.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
           element.classList.add(textAlignStyle);
           if (textAlignStyle === 'text-right') {
