@@ -42,14 +42,15 @@
               <q-item-label>
                 <div class="ellipsis">
                   {{ menu.menuName }}
+                  <kw-tooltip
+                    show-when-ellipsised
+                    anchor="center right"
+                    self="center start"
+                    class="lnb_tooltip lnb_depth_tooltip"
+                  >
+                    {{ menu.menuName }}
+                  </kw-tooltip>
                 </div>
-                <kw-tooltip
-                  anchor="center right"
-                  self="center start"
-                  class="lnb_tooltip lnb_depth_tooltip"
-                >
-                  {{ menu.menuName }}
-                </kw-tooltip>
               </q-item-label>
               <q-item-label caption>
                 {{ menu.menuPath }}

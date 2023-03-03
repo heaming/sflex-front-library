@@ -31,6 +31,7 @@
             <div class="drawer-menu__node-content ellipsis">
               {{ node.label }}
               <kw-tooltip
+                show-when-ellipsised
                 anchor="center right"
                 self="center start"
                 class="lnb_tooltip lnb_depth_tooltip"
