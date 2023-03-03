@@ -345,10 +345,10 @@
         id="mobile"
         class="kw-guide-title"
       >
-        underline blue helperclass (only Mobile & Tablet)
+        underline blue helper class (only Mobile & Tablet)
       </h3>
       <p class="kw-guide-description">
-        This is a guide for typography helper class
+        this is a helper class for blue colored underline text or button
       </p>
       <q-markup-table class="kw-guide-table mt20">
         <colgroup>
