@@ -11,7 +11,13 @@
       }
 
       &.disabled {
-        opacity: 0.3 !important;
+        opacity: 1 !important;
+
+        .q-btn__content {
+          .q-icon {
+            color: $placeholder;
+          }
+        }
       }
     }
 
@@ -30,6 +36,31 @@
       &[aria-current="true"] {
         font-weight: bold;
       }
+
+      &.disabled {
+        opacity: 1 !important;
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: 1 !important;
+
+    .q-btn__content {
+      span.block,
+      .q-icon {
+        color: $placeholder;
+      }
+    }
+
+    .q-pagination__middle .q-focus-helper::before {
+      background: $bg-box !important;
+      opacity: 1 !important;
+      transition: none !important;
+    }
+
+    .q-pagination__middle .q-focus-helper::after {
+      display: none;
     }
   }
 }
