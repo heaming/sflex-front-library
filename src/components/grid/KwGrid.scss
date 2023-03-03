@@ -79,6 +79,7 @@
 
   & > input {
     background-color: initial;
+    font-weight: 700;
   }
 
   .rg-btdate-editor {
@@ -254,6 +255,12 @@
       left: 3px !important;
       right: 4px !important;
       bottom: 4px !important;
+    }
+
+    &:not(.rg-data-readonly-cell) {
+      .rg-renderer {
+        font-weight: 700;
+      }
     }
   }
 }
@@ -578,6 +585,10 @@
     &:last-child {
       border-right: none;
     }
+  }
+
+  .rg-head {
+    border-bottom: 1px solid $line-line !important;
   }
 
   .rg-head .rg-table tr td {
