@@ -282,12 +282,18 @@ export function overrideOnShowEditor(view) {
         attrs['attr-for-selector'] = 'aria';
         setTimeout(() => {
           const element = document.querySelector('input[attr-for-selector="aria"]');
-          element.classList.remove(...['text-left', 'text-center', 'text-right']);
+          element.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
           element.classList.add(textAlignStyle);
+          if (textAlignStyle === 'text-right') {
+            element.classList.add('pr-21');
+          }
           const dropdownId = element.getAttribute('aria-owns');
           const dropdownEl = document.getElementById(dropdownId);
-          dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right']);
+          dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
           dropdownEl.classList.add(textAlignStyle);
+          if (textAlignStyle === 'text-right') {
+            dropdownEl.classList.add('pr-21');
+          }
         });
       }
 
