@@ -23,7 +23,6 @@
         </q-item-section>
       </q-item>
     </q-list>
-
     <div
       class="kw-scroll-picker__highlight"
       :style="centralPositionStyle"

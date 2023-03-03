@@ -225,7 +225,7 @@
       </p>
       <q-card>
         <div class="kw-guide-example">
-          <kw-form>
+          <kw-form :cols="4">
             <kw-form-row>
               <kw-form-item label="TimePicker">
                 <kw-time-picker />
