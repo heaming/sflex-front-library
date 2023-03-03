@@ -537,11 +537,37 @@
     }
   }
 
+  .rg-header:not([aria-hidden="true"]) {
+    // border-bottom: 1px solid $line-line !important;
+
+    &::before {
+      content: "";
+      width: 100%;
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      background: $line-line;
+      z-index: 1;
+    }
+
+    &::after {
+      content: "";
+      width: 1px;
+      position: absolute;
+      right: 0;
+      top: 1px;
+      bottom: 1px;
+      background: #f8f8f8;
+    }
+  }
+
   .rg-head,
   .rg-header .rg-table tr td {
     background: #f8f8f8;
-    border-bottom: 1px solid $line-line;
-    border-right: 1px solid $line-bg;
+    border-bottom: 1px solid $line-bg !important;
+    border-right: 1px solid $line-bg !important;
 
     & div,
     span {
@@ -577,6 +603,12 @@
     border-right: 1px solid $black1;
   }
 
+  .rg-fixed-row-bar-cell {
+    background: $black1 !important;
+    border-top: 1px solid #fff !important;
+    border-bottom: 1px solid #fff !important;
+  }
+
   .rg-scrolltrack {
     background: $line-bg;
     border: none;
@@ -601,6 +633,23 @@
       background: url(~@assets/icons/grid_scroll_arrow_left.svg) center center no-repeat;
       border: none;
     }
+  }
+
+  .rg-header-renderer {
+    margin-right: 0 !important;
+
+    &:has(.rg-header-sort-ascending, .rg-header-sort-descending) {
+      span { color: $primary !important; }
+    }
+  }
+
+  .rg-header-sort-ascending {
+    background: url(~@assets/icons/grid_sorting_arrow.svg) center center no-repeat;
+  }
+
+  .rg-header-sort-descending {
+    transform: rotate(180deg);
+    background: url(~@assets/icons/grid_sorting_arrow.svg) center center no-repeat;
   }
 
   .rg-scrolledge {
