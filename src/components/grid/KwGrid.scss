@@ -125,6 +125,10 @@
     bottom: 9px !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
+
+    &.pr-21 {
+      padding-right: 21px !important;
+    }
   }
 
   &::after {
@@ -173,6 +177,10 @@
   border-right: 1px solid $line-stroke;
   padding-left: 7px;
   transform: translateX(-4px);
+
+  &.text-right .rg-dropdown-item {
+    padding-right: 27px !important;
+  }
 
   .rg-dropdown-item {
     height: 34px;
@@ -520,6 +528,10 @@
 .rg-fixed-body .rg-table tr td {
   color: $black1;
 
+  &.text-right .rg-renderer {
+    padding-right: 19px;
+  }
+
   .rg-renderer {
     padding: 0 12px;
   }
@@ -682,6 +694,10 @@
 }
 
 .rg-header-cell {
+  .rg-header-renderer {
+    margin-right: 0 !important;
+  }
+
   .rg-header-renderer > span:first-child {
     position: relative;
   }
