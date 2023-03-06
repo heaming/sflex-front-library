@@ -21,7 +21,7 @@
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="조직유형코드">
-          <kw-input v-model="userInfoForSetting.orgTpCd" />
+          <kw-input v-model="userInfoForSetting.ogTpCd" />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
