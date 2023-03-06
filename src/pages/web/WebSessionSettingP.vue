@@ -28,6 +28,11 @@
         <kw-form-item label="부서명">
           <kw-input v-model="userInfoForSetting.departmentName" />
         </kw-form-item>
+        <kw-form-row>
+          <kw-form-item label="사번">
+            <kw-input v-model="userInfoForSetting.employeeIDNumber" />
+          </kw-form-item>
+        </kw-form-row>
       </kw-form-row>
     </kw-form>
     <template #action>
