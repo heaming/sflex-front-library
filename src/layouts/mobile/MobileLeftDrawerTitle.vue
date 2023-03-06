@@ -2,7 +2,11 @@
   <div class="mobile-left-drawer__title">
     <div>
       <slot>
-        <h1>{{ title }}</h1>
+        <div @click.stop="openSetSessionP">
+          <h1>
+            {{ title }}
+          </h1>
+        </div>
       </slot>
     </div>
 
@@ -17,6 +21,7 @@
 </template>
 
 <script>
+import { modal } from '~kw-lib';
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 export default {
@@ -30,8 +35,15 @@ export default {
   },
 
   setup() {
+    async function openSetSessionP() {
+      console.log('openSetSession');
+      modal({
+        component: () => import('../../pages/web/WebSessionSettingP.vue'),
+      });
+    }
     return {
       ...useLeftDrawerExpand(),
+      openSetSessionP,
     };
   },
 };

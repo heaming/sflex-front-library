@@ -6,13 +6,15 @@
   >
     <kw-form
       ref="frmMainRef"
-      :cols="2"
+      :cols="1"
       style="margin-top: 30px;margin-bottom: 30px;"
     >
       <kw-form-row>
         <kw-form-item label="회사코드">
           <kw-input v-model="userInfoForSetting.companyCode" />
         </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
         <kw-form-item label="회사명">
           <kw-input v-model="userInfoForSetting.companyName" />
         </kw-form-item>
@@ -21,6 +23,8 @@
         <kw-form-item label="부서코드">
           <kw-input v-model="userInfoForSetting.departmentId" />
         </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
         <kw-form-item label="부서명">
           <kw-input v-model="userInfoForSetting.departmentName" />
         </kw-form-item>

@@ -28,14 +28,6 @@
           </kw-tooltip>
         </kw-checkbox>
       </div>
-      <kw-icon
-        class="kw-page-mobile-header__hint"
-        size="24px"
-        name="info_24"
-        clickable
-      >
-        {{ $t('MSG_BTN_HINT', null, '도움말 보기') }}
-      </kw-icon>
     </div>
 
     <div

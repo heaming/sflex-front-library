@@ -34,7 +34,7 @@ export default {
   props: {
     pageIndex: {
       type: Number,
-      default: 0,
+      default: 1,
     },
     pageSize: {
       type: Number,
@@ -42,7 +42,7 @@ export default {
     },
     totalCount: {
       type: Number,
-      default: 0,
+      default: 1,
     },
     disable: {
       type: Boolean,
@@ -57,7 +57,7 @@ export default {
   ],
 
   setup(props, { emit }) {
-    const max = computed(() => Math.ceil(props.totalCount / props.pageSize));
+    const max = computed(() => Math.ceil(props.totalCount / props.pageSize) || 1);
 
     const {
       getRegisteredSearch,

@@ -291,6 +291,13 @@
       <slot name="hint">
         <template v-if="acceptHint">
           {{ acceptHint }}
+          <kw-tooltip
+            v-if="accept.split(', ').length > 3"
+            anchor="bottom start"
+            self="top left"
+          >
+            {{ accept }}
+          </kw-tooltip>
         </template>
       </slot>
     </template>
@@ -469,7 +476,7 @@
                 <kw-tooltip
                   anchor="bottom middle"
                 >
-                  {{ 'undo' }}
+                  {{ 'clear' }}
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
@@ -709,7 +716,9 @@ export default {
     // placeholder
     const acceptHint = computed(() => {
       if (!props.accept) { return; }
-      return `업로드 가능 파일 :${props.accept}`; // FIXME: msg
+      const acceptFiles = props.accept.split(', ');
+      const acceptFilesText = acceptFiles.length > 3 ? `${acceptFiles.slice(0, 3).join(', ')}, ...` : props.accept;
+      return `${t('MSG_TXT_ULD_PSB_FILE')} : ${acceptFilesText}`;
     });
 
     const computedPlaceholder = computed(() => {
@@ -720,7 +729,7 @@ export default {
         return typeof props.placeholder === 'function' ? props.placeholder() : props.placeholder;
       }
       return computedUseHeader.value
-        ? t('TODO', null, '첨부할 파일을 여기에 놓아주세요.')
+        ? t('MSG_TXT_DROP_FILE_TO_ATTH')
         : '';
     });
 
@@ -731,7 +740,7 @@ export default {
       if (props.dndHint !== undefined) {
         return props.dndHint;
       }
-      return computedUseHeader.value ? t('FIXME', null, '첨부할 파일을 여기에 놓아주세요.') : null;
+      return computedUseHeader.value ? t('MSG_TXT_DROP_FILE_TO_ATTH') : null;
     });
 
     const draggingToHeader = ref(false);

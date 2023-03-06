@@ -198,7 +198,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.updateBtn === 'string') {
       return computedProps.value.updateBtn;
     }
-    return t('FIXME', null, '동기화');
+    return t('MSG_TXT_SYNCRN');
   });
   const showUpdateAllBtn = computed(() => (ables.value.manualUpdate
     && !!computedProps.value.updateAllBtn));
@@ -209,7 +209,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.updateAllBtn === 'string') {
       return computedProps.value.updateAllBtn;
     }
-    return t('FIXME', null, '전체동기화');
+    return t('MSG_TXT_WO_SYNCRN');
   });
   const showRevertBtn = computed(() => (ables.value.revert
     && !!computedProps.value.revertBtn));
@@ -220,7 +220,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.revertBtn === 'string') {
       return computedProps.value.revertBtn;
     }
-    return t('FIXME', null, '실행취소');
+    return t('MSG_TXT_PRTC_CAN');
   });
   const showRevertAllBtn = computed(() => (ables.value.revert
     && !!computedProps.value.revertAllBtn));
@@ -231,7 +231,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.revertAllBtn === 'string') {
       return computedProps.value.revertAllBtn;
     }
-    return t('FIXME', null, '전체실행취소');
+    return t('MSG_TXT_WO_PRTC_CAN');
   });
   const showRemoveBtn = computed(() => (ables.value.remove
     && !!computedProps.value.removeBtn));
@@ -253,7 +253,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.removeAllBtn === 'string') {
       return computedProps.value.removeAllBtn;
     }
-    return t('FIXME', null, '전체삭제');
+    return t('MSG_BTN_DEL_ALL');
   });
   const showUndeleteBtn = computed(() => (ables.value.undelete
     && !!computedProps.value.undeleteBtn));
@@ -264,7 +264,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.undeleteBtn === 'string') {
       return computedProps.value.undeleteBtn;
     }
-    return t('FIXME', null, '삭제취소');
+    return t('MSG_BTN_DEL_CNCL');
   });
   const showUndeleteAllBtn = computed(() => (ables.value.undelete
     && !!computedProps.value.undeleteAllBtn));
@@ -275,7 +275,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.undeleteAllBtn === 'string') {
       return computedProps.value.undeleteAllBtn;
     }
-    return t('FIXME', null, '전체삭제취소');
+    return t('MSG_TXT_WO_DL_CAN');
   });
   const showDownloadBtn = computed(() => (ables.value.download
     && !!computedProps.value.downloadBtn));
@@ -286,7 +286,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.downloadBtn === 'string') {
       return computedProps.value.downloadBtn;
     }
-    return t('FIXME', null, '다운로드');
+    return t('MSG_BTN_DLOAD');
   });
   const showDownloadAllBtn = computed(() => (ables.value.download
     && !!computedProps.value.downloadAllBtn));
@@ -297,7 +297,7 @@ export default (uploadCtx, ables, defaults = {}) => {
     if (typeof computedProps.value.downloadAllBtn === 'string') {
       return computedProps.value.downloadAllBtn;
     }
-    return t('FIXME', null, '전체다운로드');
+    return t('MSG_TXT_WO_DLD');
   });
 
   // $-kw-file-file-container-padding-use-header
