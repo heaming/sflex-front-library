@@ -39,7 +39,7 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
 
   const updateSelected = () => {
     if (empty.value) {
-      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+      notify(t('MSG_ALT_NOT_SELECTED_FILE'));
     }
     if (!ables.value?.update) { return; }
     selectedFiles.value.forEach(updateFile);
@@ -48,7 +48,7 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
 
   const downloadSelected = () => {
     if (empty.value) {
-      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+      notify(t('MSG_ALT_NOT_SELECTED_FILE'));
     }
     if (!ables.value?.download) { return; }
     selectedFiles.value.forEach(downloadFile);
@@ -57,7 +57,7 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
 
   const revertSelected = () => {
     if (empty.value) {
-      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+      notify(t('MSG_ALT_NOT_SELECTED_FILE'));
     }
     if (!ables.value?.revert) { return; }
     selectedFiles.value.forEach(revertFile);
@@ -66,7 +66,7 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
 
   const removeSelected = () => {
     if (empty.value) {
-      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+      notify(t('MSG_ALT_NOT_SELECTED_FILE'));
     }
     if (!ables.value?.remove) { return; }
     selectedFiles.value.forEach(removeFile);
@@ -75,7 +75,7 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
 
   const undeleteSelected = () => {
     if (empty.value) {
-      notify(t('TODO', null, '선택된 파일이 없습니다.')); // FIXME: msg
+      notify(t('MSG_ALT_NOT_SELECTED_FILE'));
     }
     if (!ables.value?.undelete) { return; }
     selectedFiles.value.forEach(undeleteFile);
