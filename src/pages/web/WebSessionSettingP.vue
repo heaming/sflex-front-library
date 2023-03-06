@@ -20,6 +20,11 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
+        <kw-form-item label="조직유형코드">
+          <kw-input v-model="userInfoForSetting.orgTpCd" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
         <kw-form-item label="부서코드">
           <kw-input v-model="userInfoForSetting.departmentId" />
         </kw-form-item>
@@ -28,11 +33,11 @@
         <kw-form-item label="부서명">
           <kw-input v-model="userInfoForSetting.departmentName" />
         </kw-form-item>
-        <kw-form-row>
-          <kw-form-item label="사번">
-            <kw-input v-model="userInfoForSetting.employeeIDNumber" />
-          </kw-form-item>
-        </kw-form-row>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="사번">
+          <kw-input v-model="userInfoForSetting.employeeIDNumber" />
+        </kw-form-item>
       </kw-form-row>
     </kw-form>
     <template #action>
