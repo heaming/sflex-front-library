@@ -734,11 +734,27 @@
 
 .rg-data-cell {
   &:has(.rg-changed-marker) {
-    background-color: rgba($accent, 10%) !important;
+    // background-color: rgba($accent, 10%) !important;
+    border: 1px solid #ff8f1f !important;
   }
 
   .rg-changed-marker {
     display: none !important;
+  }
+}
+
+.rg-updated-row {
+  background: rgb(255 143 31 / 5%) !important;
+  background-color: rgb(255 143 31 / 5%) !important;
+
+  .rg-checkbar-cell {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .rg-rowindicator-cell {
+    background: transparent !important;
+    background-color: transparent !important;
   }
 }
 
