@@ -4,8 +4,10 @@
 .web-layout {
   body.desktop & {
     & > .web-header {
-      min-width: 1656px;
+      // min-width: 1656px;
       background: #f3f4f5;
+      position: absolute;
+      min-width: 1536px;
     }
 
     & > .q-page-container {
