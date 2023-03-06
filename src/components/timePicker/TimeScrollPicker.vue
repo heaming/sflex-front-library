@@ -1,17 +1,24 @@
 <template>
   <div class="time-scroll-picker">
-    <kw-scroll-picker
+    <template
       v-for="(items, i) in itemsList"
       :key="i"
-      :model-value="innerValue[i]"
-      :items="items"
-      :item-size="$g.platform.is.mobile ? undefined : 32"
-      :infinite="!$g.platform.is.mobile || i > 0"
-      :rotate-y="$g.platform.is.mobile ? (i - 1) * 9 : undefined"
-      :step="!$g.platform.is.mobile"
-      animate-on-value-update
-      @update:model-value="onChange(i, $event)"
-    />
+    >
+      <kw-scroll-picker
+        :model-value="innerValue[i]"
+        :items="items"
+        :item-size="$g.platform.is.mobile ? undefined : 32"
+        :infinite="!$g.platform.is.mobile || i > 0"
+        :rotate-y="$g.platform.is.mobile ? (i - 1) * 9 : undefined"
+        :step="!$g.platform.is.mobile"
+        animate-on-value-update
+        @update:model-value="onChange(i, $event)"
+      />
+      <span
+        v-if="i+1 < itemsList.length"
+        class="timepicker_colon"
+      >:</span>
+    </template>
   </div>
 </template>
 
