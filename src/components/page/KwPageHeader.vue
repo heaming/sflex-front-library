@@ -50,7 +50,7 @@
 
     <q-space />
     <q-breadcrumbs
-      v-if="!noMenuPage"
+      v-if="!noMenuPage && !pageUseIsSub"
       class="kw-page-header__navigation"
     >
       <q-breadcrumbs-el
