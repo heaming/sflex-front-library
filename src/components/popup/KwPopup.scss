@@ -295,7 +295,7 @@ body.mobile:not(.tablet) {
 
       button {
         flex: 1 0 50%;
-        font-size: 16px;
+        font-size: 16px !important;
         height: 60px;
       }
     }

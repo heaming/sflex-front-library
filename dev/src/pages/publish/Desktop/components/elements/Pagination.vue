@@ -30,7 +30,7 @@
               kw-pagination
             </td>
             <td>
-              :model-value="1"<br>
+              :page-index="1"<br>
               :total-count="100"
             </td>
             <td>
@@ -54,7 +54,7 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-pagination
-            :model-value="1"
+            :page-index="1"
             :total-count="100"
           />
         </div>
@@ -68,10 +68,9 @@
 </template>
 
 <script setup>
-
 const pagination = `
 <kw-pagination
-  :model-value="1"
+  :page-index="1"
   :total-count="100"
 />
 `;

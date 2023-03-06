@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.297",
+  "version": "0.1.300",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -18,7 +18,7 @@
     "prepare": "husky install",
     "prettier": "prettier --write **/*.ts **/*.html",
     "preview": "npm run -w dev preview",
-    "serve": "npm run -w dev serve",
+    "serve": "npm run -w dev serve -- --host",
     "sort-package-json": "sort-package-json package.json dev/package.json",
     "test": "npm run -w test serve -- --host"
   },

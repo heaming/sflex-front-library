@@ -342,6 +342,49 @@
     </div>
     <div class="kw-guide-section">
       <h3
+        id="mobile"
+        class="kw-guide-title"
+      >
+        underline blue helper class (only Mobile & Tablet)
+      </h3>
+      <p class="kw-guide-description">
+        this is a helper class for blue colored underline text or button
+      </p>
+      <q-markup-table class="kw-guide-table mt20">
+        <colgroup>
+          <col style="width: 40%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>
+              Example
+            </th>
+            <th>
+              Class
+            </th>
+            <th>color & text-underline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p class="blue-line-link">
+                010-1234-1234
+              </p>
+            </td>
+            <td>
+              .blue-line-link
+            </td>
+            <td>
+              color: $primary <br>
+              text-decoration: underline
+            </td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+    <div class="kw-guide-section">
+      <h3
         id="example"
         class="kw-guide-title"
       >
@@ -382,6 +425,19 @@
           lang="vue"
         />
       </q-card>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-btn
+            label="02-111-2222"
+            underline
+            class="kw-font-pt16 blue-line-link"
+          />
+        </div>
+        <guide-code-view
+          :code-value="testCode3"
+          lang="vue"
+        />
+      </q-card>
     </div>
   </kw-page>
 </template>
@@ -408,7 +464,19 @@ const testCode2 = `
 </p>
 `;
 
+const testCode3 = `
+<kw-btn
+  label="02-111-2222"
+  underline
+  class="kw-font-pt16 blue-line-link"
+/>
+`;
+
 const historyData = [
+  {
+    timestamp: '2023-03-03',
+    text: 'add new case',
+  },
   {
     timestamp: '2022-11-15',
     text: 'add new guide',
