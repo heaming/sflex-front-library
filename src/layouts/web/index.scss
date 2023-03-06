@@ -75,18 +75,39 @@
     text-decoration: none;
     cursor: pointer;
 
+    &::after {
+      width: 0;
+      height: 4px;
+      content: "";
+      position: absolute;
+      display: block;
+      bottom: -1px;
+      right: 0;
+      left: 0;
+      margin: auto;
+      background: $primary;
+      transition: all 0.3s;
+    }
+
+    &:hover::after, {
+      font-weight: 700;
+      width: 100%;
+    }
+
     &--active {
       font-weight: 700;
 
       &::after {
+        width: 100%;
+        height: 4px;
         content: "";
         position: absolute;
         display: block;
         bottom: -1px;
         right: 0;
         left: 0;
-        height: 4px;
         background: $primary;
+        transition: all 0.3s;
       }
     }
   }
@@ -567,11 +588,11 @@
         .q-focus-helper {
           display: none;
         }
-      }
-    }
 
-    .ellipsis {
-      width: 190px;
+        .ellipsis {
+          width: 190px;
+        }
+      }
     }
   }
 }
