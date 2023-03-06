@@ -36,7 +36,8 @@
           <kw-item-section>
             <kw-item-label
               class="kw-list__count"
-              font="dense"
+              font="pt14"
+              font-weight="700"
             >
               {{ `${selectedCountWithComma}/${totalCountWithComma}` }}
             </kw-item-label>
