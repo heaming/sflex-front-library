@@ -14,10 +14,22 @@
       square
     >
       <q-card-section class="global-dialog__content">
+        <div
+          v-if="activeDialog.icon"
+          class="dialog-icon"
+        >
+          <kw-icon
+            :name="activeDialog.icon"
+            size="24px"
+          />
+        </div>
         <p>
           {{ activeDialog.message }}
         </p>
-        <p v-if="activeDialog.subMessage">
+        <p
+          v-if="activeDialog.subMessage"
+          class="sub-message"
+        >
           {{ activeDialog.subMessage }}
         </p>
       </q-card-section>
