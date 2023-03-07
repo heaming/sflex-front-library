@@ -21,7 +21,13 @@
       >
         <div class="col text-left">
           {{ tab.label }}
-          <kw-tooltip show-when-ellipsised>
+          <kw-tooltip
+            show-when-ellipsised
+            :offset="[-20, 5]"
+            anchor="bottom start"
+            self="center start"
+            class="tab_tooltip"
+          >
             {{ tab.label }}
           </kw-tooltip>
         </div>
