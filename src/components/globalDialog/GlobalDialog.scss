@@ -47,3 +47,32 @@
     }
   }
 }
+
+body.mobile:not(.tablet) {
+  .global-dialog {
+    &__inner {
+      width: 280px;
+      border: none;
+      box-shadow: none !important;
+    }
+
+    &__content {
+      &.sub-message {
+        margin-top: 12px;
+      }
+    }
+
+    &__action {
+      padding-top: 40px;
+      padding-bottom: 0;
+
+      .q-btn {
+        flex: 1 0 50%;
+      }
+
+      .q-btn + .q-btn {
+        margin-left: 0;
+      }
+    }
+  }
+}
