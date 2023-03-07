@@ -67,8 +67,8 @@
   </kw-popup>
 </template>
 <script setup>
-import { useModal } from '~kw-lib';
 import { cloneDeep, indexOf } from 'lodash-es';
+import useModal from '../../composables/useModal';
 import { localStorage } from '../../plugins/storage';
 import { sanitize } from '../../plugins/sanitize';
 import consts from '../../consts';
