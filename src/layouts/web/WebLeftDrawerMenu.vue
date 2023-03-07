@@ -32,9 +32,9 @@
               {{ node.label }}
               <kw-tooltip
                 show-when-ellipsised
-                anchor="center right"
+                anchor="bottom start"
                 self="center start"
-                class="lnb_tooltip lnb_depth_tooltip"
+                class="grey_tooltip"
               >
                 {{ node.label }}
               </kw-tooltip>
