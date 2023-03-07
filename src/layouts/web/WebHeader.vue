@@ -23,7 +23,7 @@
       <q-space />
 
       <div class="web-header__tools">
-        <kw-select
+        <!-- <kw-select
           ref="selectRef"
           class="web-header__search"
           :model-value="null"
@@ -50,21 +50,16 @@
               clickable
             />
           </template>
-        </kw-select>
+        </kw-select> -->
         <kw-input
-          v-if="false"
+          v-model="searchText"
           class="web-header__search"
           placeholder="메뉴검색"
+          icon="search"
           underline
           dense
-        >
-          <template #append>
-            <kw-icon
-              name="search_24"
-              clickable
-            />
-          </template>
-        </kw-input>
+          :on-click-icon="() => openMenuSearchPopup()"
+        />
 
         <kw-icon
           class="web-header__icon"
@@ -140,6 +135,7 @@ import { modal } from '../../plugins/modal';
 import { localStorage } from '../../plugins/storage';
 
 const zoomSize = ref(true);
+const searchText = ref('');
 export default {
   name: 'WebHeader',
 
@@ -163,6 +159,15 @@ export default {
       });
     }
 
+    async function openMenuSearchPopup() {
+      console.log('asdasdasd');
+      const { result, payload } = await modal({
+        component: () => import('../../pages/web/WebMenuListP.vue'),
+        componentProps: { searchText: searchText.value },
+      });
+
+      console.log(result, payload);
+    }
     // function setZoomSize() {
     //   document.body.style.zoom = `${zoomSize.value}%`;
     //   localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
@@ -180,6 +185,8 @@ export default {
       // setZoomSize,
       zoomSize,
       openSetSessionP,
+      openMenuSearchPopup,
+      searchText,
     };
   },
 };
