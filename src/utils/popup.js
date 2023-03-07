@@ -10,14 +10,14 @@ const openedPopups = {};
 let globalMessageEvent;
 let globalCloseEvent;
 
-function registerMessageEvent(deletePid = true) {
+function registerMessageEvent() {
   globalMessageEvent = (e) => {
     const { pid, result, payload, shouldPostMessage } = e.data;
     if (pid && openedPopups[pid] && shouldPostMessage) {
       const resolve = openedPopups[pid];
       delete openedPopups[pid];
 
-      if (Object.keys(openedPopups).length === 0 && (deletePid || !isEmpty(payload))) {
+      if (Object.keys(openedPopups).length === 0 && !isEmpty(payload)) {
         window.removeEventListener('message', globalMessageEvent, false);
         globalMessageEvent = null;
       }
@@ -34,9 +34,9 @@ function registerMessageEvent(deletePid = true) {
   window.addEventListener('message', globalMessageEvent, false);
 }
 
-function registerOpenedPopup(pid, resolve, deletePid = true) {
+function registerOpenedPopup(pid, resolve) {
   if (!globalMessageEvent) {
-    registerMessageEvent(deletePid);
+    registerMessageEvent();
   }
 
   openedPopups[pid] = resolve;
@@ -88,7 +88,7 @@ function parseFeatures(windowFeatures) {
   return parsedFeatures;
 }
 
-export async function open(url, windowFeatures, deletePid = true) {
+export async function open(url, windowFeatures) {
   return new Promise((resolve, reject) => {
     const {
       origin,
@@ -106,7 +106,7 @@ export async function open(url, windowFeatures, deletePid = true) {
       );
     }, parseFeatures(windowFeatures));
 
-    registerOpenedPopup(pid, resolve, deletePid);
+    registerOpenedPopup(pid, resolve);
   });
 }
 
@@ -114,7 +114,6 @@ function close(result, payload, forceClose = true) {
   const pid = new URLSearchParams(window.location.search).get('pid');
   const isExternallyAccessible = store.getters['meta/getPage'](name)?.pageExtAccYn === 'Y';
   const targetOrigin = isExternallyAccessible ? '*' : undefined;
-
   window.opener?.postMessage({
     pid, result, payload,
   }, targetOrigin);

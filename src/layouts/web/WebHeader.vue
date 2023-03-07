@@ -23,34 +23,6 @@
       <q-space />
 
       <div class="web-header__tools">
-        <!-- <kw-select
-          ref="selectRef"
-          class="web-header__search"
-          :model-value="null"
-          :options="options"
-          option-value="value"
-          option-label="label"
-          :emit-value="false"
-          :clearable="true"
-          :fill-input="true"
-          :input-debounce="300"
-          :readonly="false"
-          placeholder="메뉴검색"
-          underline
-          use-input
-          hide-dropdown-icon
-          ignore-on-modified
-          ignore-on-reset
-          @filter="onFilter"
-          @update:model-value="onUpdateValue"
-        >
-          <template #append>
-            <kw-icon
-              name="search_24"
-              clickable
-            />
-          </template>
-        </kw-select> -->
         <kw-input
           v-model="searchText"
           class="web-header__search"
@@ -137,8 +109,10 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash-es';
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
+import useGlobal from '../../composables/useGlobal';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
 import { localStorage } from '../../plugins/storage';
@@ -150,6 +124,8 @@ export default {
   setup() {
     const { push } = useRouter();
     const { logout } = useSession();
+    const { notify } = useGlobal();
+    const { t } = useI18n();
 
     async function openSetSessionP() {
       console.log('openSetSession');
@@ -168,14 +144,27 @@ export default {
     }
 
     async function openMenuSearchPopup() {
-      console.log('asdasdasd');
+      if (searchText.value.trim().length <= 0) {
+        notify(t('MSG_ALT_SRCH_INPUT'));
+        return;
+      }
+
+      const localStorageData = localStorage.getItem(consts.LOCAL_STORAGE_RECENT_KEYWORD);
+      let recentKeywords = [];
+      if (localStorageData) {
+        localStorageData.unshift(searchText.value);
+        recentKeywords = cloneDeep(localStorageData);
+      } else recentKeywords.unshift(searchText.value);
+      localStorage.set(consts.LOCAL_STORAGE_RECENT_KEYWORD, recentKeywords);
+
       const { result, payload } = await modal({
         component: () => import('../../pages/web/WebMenuListP.vue'),
         componentProps: { searchText: searchText.value },
       });
 
-      console.log(result, payload);
+      if (result) push({ name: payload.menuUid });
     }
+
     function setZoomSize() {
       document.body.style.zoom = `${zoomSize.value}%`;
       localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
