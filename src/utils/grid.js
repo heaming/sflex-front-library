@@ -511,7 +511,7 @@ export async function exportView(view, options) {
   }
 
   if (options.timePostfix) {
-    const postfix = date.formatDate(new Date(), 'YYYYMMHHHHmmss');
+    const postfix = date.formatDate(new Date(), 'YYYYMMDDHHmmss');
     options.fileName = `${options.fileName}_${postfix}`;
   }
 

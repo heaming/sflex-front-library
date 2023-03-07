@@ -7,22 +7,20 @@
       It is in progress. Please wait for it to complete.
     </p>
     <div class="kw-guide-section">
-      <h3
-        id="summary"
-        class="kw-guide-title"
-      >
-        Summary
-      </h3>
+      <div class="kw-guide-section">
+        <h3
+          id="props"
+          class="kw-guide-title"
+        >
+          Props
+        </h3>
+      </div>
       <q-markup-table class="kw-guide-table">
         <thead>
           <tr>
             <th>
-              the Element(tag's name)
-            </th>
-            <th>
-              Attr or Class
-            </th>
-            <th>
+              props
+            </th><th>
               Description
             </th>
           </tr>
@@ -30,13 +28,26 @@
         <tbody>
           <tr>
             <td>
-              kw-form-item (sample)
+              message
             </td>
             <td>
-              essential (sample)
+              기본으로 나오는 메세지
+            </td>
+          </tr>
+          <tr>
+            <td>
+              (options) subMessage
             </td>
             <td>
-              add the class "essential" in the tag of kw-form-item. (sample)
+              하위에 서브로 나오는 메세지
+            </td>
+          </tr>
+          <tr>
+            <td>
+              (options) icon
+            </td>
+            <td>
+              상단 icon 명
             </td>
           </tr>
         </tbody>
@@ -47,14 +58,22 @@
         id="default"
         class="kw-guide-title"
       >
-        Default
+        Sample
       </h3>
-      <p class="kw-guide-description">
-        description
-      </p>
       <q-card>
         <div class="kw-guide-example">
-          It is in progress. Please wait for it to complete.
+          <kw-btn
+            label="기본 alert"
+            @click="sample1"
+          />
+          <kw-btn
+            label="서브메세지"
+            @click="sample2"
+          />
+          <kw-btn
+            label="with Icon"
+            @click="sample3"
+          />
         </div>
         <guide-code-view
           :code-value="testCode"
@@ -66,8 +85,29 @@
 </template>
 
 <script setup>
+import { alert } from '~kw-lib';
+
+async function sample1() {
+  alert('기본메세지');
+}
+async function sample2() {
+  alert('기본메세지', { subMessage: '서브메세지' });
+}
+async function sample3() {
+  alert('아이콘 나오는 ALERT', { subMessage: 'icon은 warning_24 넣음', icon: 'warning_24' });
+}
 
 const testCode = `
-It is in progress. Please wait for it to complete.
+import { alert } from '~kw-lib';
+
+async function sample1() {
+  alert('기본메세지');
+}
+async function sample2() {
+  alert('기본메세지', { subMessage: '서브메세지' });
+}
+async function sample3() {
+  alert('아이콘 나오는 ALERT', { subMessage: 'icon은 warning_24 넣음', icon: 'warning_24' });
+}
 `;
 </script>
