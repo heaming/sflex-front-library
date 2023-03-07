@@ -219,9 +219,12 @@ export default () => {
 
   async function onClose(key) {
     const children = getChildren(key);
-    children.forEach(async (child) => {
-      await close(child.key, true, true, tabViews.length < 1);
-    });
+    const forceCloseAllTab = await confirmIsModified(key) === true;
+    if (forceCloseAllTab) {
+      children.forEach(async (child) => {
+        await close(child.key, true, true, tabViews.length < 1);
+      });
+    }
   }
 
   return {
