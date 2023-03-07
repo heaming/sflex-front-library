@@ -381,3 +381,49 @@ body.mobile:not(.tablet) {
 //   padding-left: 40px;
 //   padding-right: 40px;
 // }
+
+// ellipsis 커스텀
+body:not(.mobile) :not(.web-tab-view__header) {
+  .kw-tab.q-tab {
+    width: 180px;
+    padding: 0 12px;
+
+    .kw-tab__content {
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      line-height: 39px;
+    }
+
+    .kw-tab.q-tab {
+      width: 120px;
+
+      .kw-tab__content {
+        line-height: 34px;
+      }
+    }
+  }
+
+  .kw-tabs--dense .kw-tab.q-tab {
+    width: 120px;
+
+    .kw-tab__content {
+      line-height: 34px;
+    }
+  }
+}
+
+.tab_tooltip.q-tooltip--style {
+  font-size: 12px;
+  color: #fff;
+  background: $black2;
+  border: none;
+  border-radius: 0;
+  height: 28px;
+  line-height: 1;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
+}

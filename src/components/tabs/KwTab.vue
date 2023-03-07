@@ -4,13 +4,24 @@
     :class="tabClass"
     :content-class="computedContentClass"
     :name="name"
-    :label="label"
     :disable="disable"
     :tabindex="tabindex"
     :ripple="false"
     no-caps
     :text="label"
   >
+    <template v-if="label">
+      {{ label }}
+      <kw-tooltip
+        show-when-ellipsised
+        :offset="[-20, 7]"
+        anchor="bottom start"
+        self="center start"
+        class="tab_tooltip"
+      >
+        {{ label }}
+      </kw-tooltip>
+    </template>
     <slot />
   </q-tab>
 </template>
