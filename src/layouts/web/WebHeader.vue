@@ -152,6 +152,8 @@ export default {
       const localStorageData = localStorage.getItem(consts.LOCAL_STORAGE_RECENT_KEYWORD);
       let recentKeywords = [];
       if (localStorageData) {
+        const keywordIndex = localStorageData.findIndex((x) => x === searchText.value.trim());
+        if (keywordIndex >= 0) localStorageData.splice(keywordIndex, 1);
         localStorageData.unshift(searchText.value);
         recentKeywords = cloneDeep(localStorageData);
       } else recentKeywords.unshift(searchText.value);
