@@ -21,7 +21,11 @@
       line-height: 1.5;
       white-space: pre-wrap;
 
-      &:nth-child(2) {
+      &.dialog-icon {
+        margin-bottom: 4px;
+      }
+
+      &.sub-message {
         margin-top: 8px;
         font-size: 14px;
         font-weight: 400;
