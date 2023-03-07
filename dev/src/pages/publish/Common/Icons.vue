@@ -181,6 +181,7 @@ const iconList2 = [
   'preview_img_24',
   'price_24',
   'price_cycle_24',
+  'profile_none',
   'pw_24',
   'search_24',
   'search_doc_24',
@@ -195,6 +196,7 @@ const iconList2 = [
 
 const visuals = [
   'visual_check',
+  'visual_campus',
   'visual_edit',
   'visual_online',
   'visual_payment',

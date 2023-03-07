@@ -66,7 +66,6 @@
           name="alert_off_24"
           clickable
         />
-
         <div>
           <kw-icon
             class="web-header__icon"
@@ -85,22 +84,22 @@
               :label="$t('MSG_TIT_HOME_MGT')"
               @click="openHomeMgtPopup"
             />
-            <!--            <q-btn-toggle-->
-            <!--              v-model="zoomSize"-->
-            <!--              v-close-popup-->
-            <!--              spread-->
-            <!--              no-caps-->
-            <!--              unelevated-->
-            <!--              toggle-color="primary"-->
-            <!--              color="white"-->
-            <!--              text-color="primary"-->
-            <!--              :options="[-->
-            <!--                {label: '67%', value: 67},-->
-            <!--                {label: '80%', value: 80},-->
-            <!--                {label: '100%', value: 100}-->
-            <!--              ]"-->
-            <!--              @update:model-value="setZoomSize()"-->
-            <!--            />-->
+            <q-btn-toggle
+              v-model="zoomSize"
+              v-close-popup
+              spread
+              no-caps
+              unelevated
+              toggle-color="primary"
+              color="white"
+              text-color="primary"
+              :options="[
+                {label: '67%', value: 67},
+                {label: '80%', value: 80},
+                {label: '100%', value: 100}
+              ]"
+              @update:model-value="setZoomSize()"
+            />
             <kw-btn
               v-close-popup
               borderless
@@ -109,6 +108,16 @@
               @click="logout"
             />
           </kw-menu>
+        </div>
+        <div
+          class=""
+          style="border-radius: 70%;overflow: hidden;"
+        >
+          <kw-icon
+            name="profile_none"
+            size="32px"
+            clickable
+          />
         </div>
         <div
           class="web-header__separator"
@@ -138,7 +147,6 @@ const zoomSize = ref(true);
 const searchText = ref('');
 export default {
   name: 'WebHeader',
-
   setup() {
     const { push } = useRouter();
     const { logout } = useSession();
@@ -168,10 +176,10 @@ export default {
 
       console.log(result, payload);
     }
-    // function setZoomSize() {
-    //   document.body.style.zoom = `${zoomSize.value}%`;
-    //   localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
-    // }
+    function setZoomSize() {
+      document.body.style.zoom = `${zoomSize.value}%`;
+      localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
+    }
 
     onMounted(() => {
       zoomSize.value = localStorage.getItem(consts.LOCAL_STORAGE_ZOOM_SIZE);
@@ -182,7 +190,7 @@ export default {
       logout,
       goToHome,
       openHomeMgtPopup,
-      // setZoomSize,
+      setZoomSize,
       zoomSize,
       openSetSessionP,
       openMenuSearchPopup,

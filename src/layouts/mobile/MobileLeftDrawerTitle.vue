@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { modal } from '~kw-lib';
+import { modal } from '../../plugins/modal';
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 export default {

@@ -11,6 +11,10 @@
         border-top: 1px solid rgba($line-line, 1);
         transition: border 0.7s;
       }
+
+      >.q-expansion-item:last-child.q-item-type {
+        border-bottom: 1px solid rgba($line-line, 1);
+      }
     }
 
     &--padding {
@@ -190,11 +194,15 @@
           border-top: 1px solid rgba($line-line, 1); // mo/ta expansion 사이 #ddd
         }
 
-        & .q-expansion-item--expanded {
-          &.q-item-type + .q-item-type {
-            border-top: 1px solid transparent !important;
-          }
+        >.q-expansion-item:last-child.q-item-type {
+          border-bottom: 1px solid rgba($line-line, 1);
         }
+
+        // & .q-expansion-item--expanded {
+        //   &.q-item-type + .q-item-type {
+        //     border-top: 1px solid transparent !important;
+        //   }
+        // }
 
         &.kw-list--selectable .kw-list__item--total {
           & + .q-item-type.kw-item-type {
