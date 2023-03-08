@@ -23,7 +23,7 @@
           {{ tab.label }}
           <kw-tooltip
             show-when-ellipsised
-            :offset="[-20, 5]"
+            :offset="[-10, 15]"
             anchor="bottom start"
             self="center start"
             class="tab_tooltip"

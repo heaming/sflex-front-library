@@ -52,6 +52,11 @@ export default () => {
     return !isModified || confirm(t('MSG_ALT_HIS_TAB_MOD'));
   }
 
+  const preventReload = (event) => {
+    event.preventDefault();
+    event.returnValue = '';
+  };
+
   function add(to) {
     const {
       name, meta, matched, params,
@@ -65,6 +70,9 @@ export default () => {
       componentProps: params,
     });
 
+    window.removeEventListener('beforeunload', preventReload);
+    window.addEventListener('beforeunload', preventReload);
+
     return tabViews[index - 1];
   }
 
@@ -75,6 +83,9 @@ export default () => {
       const _key = keys.pop();
       const index = findIndex(tabViews, { key: _key });
       tabViews.splice(index, 1);
+    }
+    if (tabViews.length === 0) {
+      window.removeEventListener('beforeunload', preventReload);
     }
   }
 
@@ -219,9 +230,12 @@ export default () => {
 
   async function onClose(key) {
     const children = getChildren(key);
-    children.forEach(async (child) => {
-      await close(child.key, true, true, tabViews.length < 1);
-    });
+    const forceCloseAllTab = await confirmIsModified(key) === true;
+    if (forceCloseAllTab) {
+      children.forEach(async (child) => {
+        await close(child.key, true, true, tabViews.length < 1);
+      });
+    }
   }
 
   return {

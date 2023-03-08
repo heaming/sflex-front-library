@@ -20,6 +20,7 @@ export default {
 
   LOCAL_STORAGE_ACCESS_TOKEN: 'accessToken',
   LOCAL_STORAGE_ZOOM_SIZE: 'zoomSize',
+  LOCAL_STORAGE_RECENT_KEYWORD: 'recentKeyword',
   PERMISSION_KEY_PRINT: 'print',
   PERMISSION_KEY_DOWNLOAD: 'download',
   PERMISSION_KEY_DELETE: 'delete',

@@ -113,7 +113,7 @@ export default {
 
       watch(() => props.readonly, (val) => {
         editor.readOnly(val);
-      });
+      }, { immediate: true });
     });
 
     onBeforeUnmount(() => {
