@@ -26,6 +26,9 @@ export default (containerRef) => {
         || evt.target === containerRef.value.querySelector('.rg-body');
 
       if (shouldPrevent) stopAndPrevent(evt);
+
+      const view = proxy.getView();
+      if (evt.button === 0 && !isClickedOutsideEditor(view, evt.target)) view.commit();
     };
 
     addClickOutside(clickOutsideProps);

@@ -134,7 +134,18 @@ export function getAllRowValues(view, isIncludeDeleted = false) {
     .filter((e) => isIncludeDeleted || e.rowState !== RowState.DELETED);
 }
 
+export async function alertIfIsNotChecked(view, message) {
+  const checkedRows = view.getCheckedRows();
+
+  if (!checkedRows.length) {
+    await alert(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+  }
+
+  return checkedRows > 0;
+}
+
 export function getCheckedRowValues(view, isChangedOnly = false) {
+  if (!alertIfIsNotChecked(view)) return;
   const checkedRows = view.getCheckedRows().sort((a, b) => a - b);
   return getRowValues(view, checkedRows)
     .filter((e) => !isChangedOnly || e.rowState !== RowState.NONE);
@@ -245,6 +256,8 @@ export async function confirmDeleteSelectedRows(view, isIncludeCreated = false) 
 }
 
 export function deleteCheckedRows(view, isIncludeCreated = false) {
+  if (!alertIfIsNotChecked(view)) return;
+
   const checkedRows = view.getCheckedRows();
   const deletedRowValues = getRowValues(view, checkedRows)
     .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
@@ -254,10 +267,8 @@ export function deleteCheckedRows(view, isIncludeCreated = false) {
 }
 
 export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
-  if (!view.getCheckedRows().length) {
-    await alert(i18n.t('MSG_ALT_NOT_SEL_ITEM'));
-    return [];
-  }
+  if (!alertIfIsNotChecked(view)) return;
+
   if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
     return deleteCheckedRows(view, isIncludeCreated);
   }

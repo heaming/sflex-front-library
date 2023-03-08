@@ -229,7 +229,7 @@ body.tablet .kw-popup {
 }
 
 body.mobile:not(.tablet) {
-  .q-card__section--vert {
+  .q-card__section--vert:not(.global-dialog__content, .global-dialog__action) {
     padding: initial;
   }
 
