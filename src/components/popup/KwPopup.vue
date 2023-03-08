@@ -127,7 +127,7 @@ export default {
       {
         'kw-popup': true,
         [`kw-popup--${props.size}`]: true,
-        'kw-popup--no-title': props.title === false,
+        'kw-popup--no-title': props.title === undefined,
         'kw-popup--no-action': slots.action === undefined,
       },
       props.class,
