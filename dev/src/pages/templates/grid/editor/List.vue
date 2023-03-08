@@ -12,7 +12,7 @@
       </kw-action-bar>
       <kw-grid
         ref="grdRef"
-        :visible-rows="3"
+        :visible-rows="6"
         @init="initGrd"
       />
 
@@ -28,6 +28,10 @@
 import { alert, gridUtil } from '~kw-lib';
 
 const grdRef = ref();
+
+function onCellClicked(grid, clickData) {
+  console.log(grid, clickData);
+}
 
 function initGrd(data, view) {
   const options = [
@@ -86,7 +90,7 @@ function initGrd(data, view) {
   data.setFields(fields);
   view.setColumns(columns);
   view.editOptions.editable = true;
-
+  view.onCellClicked = onCellClicked;
   data.setRows([
     {
       list01: '',
