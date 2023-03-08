@@ -47,6 +47,10 @@ function initGrd(data, view) {
       fieldName: 'number04',
       dataType: 'number',
     },
+    {
+      fieldName: 'number05',
+      dataType: 'number',
+    },
   ];
 
   const columns = [
@@ -90,6 +94,17 @@ function initGrd(data, view) {
         step: 1, // 버튼 클릭 시 값 증감 단위
       },
     },
+    {
+      fieldName: 'number05',
+      header: 'renderer',
+      numberFormat: '#,##0',
+      styleName: 'rg-button-link text-right',
+      renderer: { type: 'button' },
+      editor: {
+        type: 'number',
+        editFormat: '#,##0.###',
+      },
+    },
   ];
 
   data.setFields(fields);
@@ -102,18 +117,21 @@ function initGrd(data, view) {
       number02: 1234,
       number03: 123456789,
       number04: 123465,
+      number05: 0,
     },
     {
       number01: 123456789.123,
       number02: 1234.123,
       number03: 123456789.1,
       number04: 123465.1,
+      number05: 0,
     },
     {
       number01: 123456789.123456,
       number02: 1234.123456,
       number03: 123456789.123,
       number04: 123465.22,
+      number05: 12341234,
     },
   ]);
 }

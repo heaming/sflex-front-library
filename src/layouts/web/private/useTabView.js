@@ -1,5 +1,6 @@
 import { last, filter, find, findIndex, map } from 'lodash-es';
 import consts from '../../../consts';
+import env from '../../../consts/private/env';
 import { confirm } from '../../../plugins/dialog';
 
 const TAB_MAX_COUNT = 10;
@@ -53,8 +54,10 @@ export default () => {
   }
 
   const preventReload = (event) => {
-    event.preventDefault();
-    event.returnValue = '';
+    if (!env.LOCAL) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
   };
 
   function add(to) {
