@@ -100,6 +100,7 @@
                     validate-on-mount
                     rules="required"
                     :label="$t('MSG_TXT_BKMK_NM')"
+                    @keydown.enter="onClickFolderName(node, false)"
                   />
                 </div>
               </kw-click-outside>
@@ -260,6 +261,7 @@ function onClickFolderName(node, isEdit) {
     node.isEdit = true;
     inputBookmarkName.value = node.bookmarkName;
   } else {
+    if (inputBookmarkName.value.trim().length <= 0) return;
     node.isEdit = false;
     node.bookmarkName = inputBookmarkName.value;
     target.bookmarkName = inputBookmarkName.value;
