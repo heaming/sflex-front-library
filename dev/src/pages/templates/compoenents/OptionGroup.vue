@@ -77,7 +77,7 @@ const optionGroupProps = {
 };
 
 const model = ref('test test test');
-const options = ['test test test', 'somewhere over the rainbow', 'how can i handle it!'].map((s) => ({ label: s, value: s }));
+const options = ['test test test', 'somewhere over the rainbow', 'how can i handle it!'].map((s) => ({ label: s, value: s, disable: s === 'somewhere over the rainbow' }));
 const bindingProps = ref({
   optionValue: 'value',
   optionLabel: 'label',

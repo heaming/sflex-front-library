@@ -6,7 +6,7 @@ export default () => {
   const { path } = currentRoute.value;
 
   function openNewWindow() {
-    open(`${consts.ENTRY_POPUP_PATHNAME}#${path}`);
+    open(`${consts.ENTRY_POPUP_PATHNAME}#${path}`, { height: window.screen.height, width: window.screen.width });
   }
 
   return {

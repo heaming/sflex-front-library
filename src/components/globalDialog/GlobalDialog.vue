@@ -23,6 +23,14 @@
             size="24px"
           />
         </div>
+        <kw-icon
+          class="kw-popup__header-close"
+          size="24px"
+          name="close_24"
+          @mousedown.stop
+          @touchstart.stop
+          @click="onClick(false)"
+        />
         <p>
           {{ activeDialog.message }}
         </p>
