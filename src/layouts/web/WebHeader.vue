@@ -24,10 +24,11 @@
 
       <div class="web-header__tools">
         <kw-input
-          v-model="searchText"
+          v-model.trim="searchText"
           class="web-header__search"
           placeholder="메뉴검색"
           icon="search"
+          maxlength="25"
           underline
           dense
           :on-click-icon="() => openMenuSearchPopup()"
@@ -144,7 +145,7 @@ export default {
     }
 
     async function openMenuSearchPopup() {
-      if (searchText.value.trim().length <= 0) {
+      if (searchText.value.length <= 0) {
         notify(t('MSG_ALT_SRCH_INPUT'));
         return;
       }
@@ -152,7 +153,7 @@ export default {
       const localStorageData = localStorage.getItem(consts.LOCAL_STORAGE_RECENT_KEYWORD);
       let recentKeywords = [];
       if (localStorageData) {
-        const keywordIndex = localStorageData.findIndex((x) => x === searchText.value.trim());
+        const keywordIndex = localStorageData.findIndex((x) => x === searchText.value);
         if (keywordIndex >= 0) localStorageData.splice(keywordIndex, 1);
         localStorageData.unshift(searchText.value);
         recentKeywords = cloneDeep(localStorageData);
