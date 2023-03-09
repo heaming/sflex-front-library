@@ -264,6 +264,7 @@ function setColumnEditor(column, { dataType }) {
           commitOnSelect: true,
           dropDownWhenClick: true,
           textReadOnly: false,
+          maxDate: new Date('9999-12-31'),
           btOptions: {
             language: i18n.locale.value,
             keyboardNavigation: false,
