@@ -114,7 +114,7 @@
   &__multiple-action {
     display: inline-flex;
     margin-left: 16px;
-    gap: 8px;
+    gap: 4px;
 
     > .kw-btn {
       @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px, null, true);
