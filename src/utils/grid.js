@@ -494,6 +494,7 @@ const normalizeExportOptions = (options = {}) => ({
   exportData: options.exportData,
   lookupDisplay: options.lookupDisplay !== false,
   treeKey: options.treeKey,
+  searchCondition: options.searchCondition !== false,
 });
 
 function exportGrid(view, options, onProgress, onComplete) {
@@ -515,6 +516,40 @@ function exportGrid(view, options, onProgress, onComplete) {
 export async function exportView(view, options) {
   options = normalizeExportOptions(options);
 
+  if (options.searchCondition && !!options.exportData) {
+    let message = '[검색조건]\n';
+    const formItems = document.querySelectorAll('.kw-search .kw-form-item');
+    formItems.forEach((formItem) => {
+      const label = formItem.querySelector('.kw-label-content__label').innerHTML;
+
+      const values = formItem.querySelectorAll('input');
+      let value = '';
+      values.forEach((v, i) => {
+        if (i === 0) {
+          value += v.value;
+        } else {
+          value += ` | ${v.value}`;
+        }
+      });
+      // radio 인경우
+      const radios = formItem.querySelectorAll('div.q-option-group .q-radio');
+      radios.forEach((radio) => {
+        if (radio.getAttribute('aria-checked') === 'true') {
+          value = radio.getAttribute('aria-label');
+        }
+      });
+      message += `${label} : ${value}  \n`;
+    });
+
+    options.documentTitle = {
+      message,
+      visible: true,
+      spaceTop: 0,
+      spaceBottom: 0,
+      height: 100,
+      styleName: 'documentStyle',
+    };
+  }
   const shouldClone = !!options.exportData;
 
   if (shouldClone) {
