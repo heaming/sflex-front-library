@@ -86,6 +86,13 @@
       v-if="$g.platform.is.mobile || multiple"
       #before-options
     >
+      <!-- 마우스 드래그로 dialog 닫기 -->
+      <div
+        v-touch-pan.prevent.mouse="handlePan"
+        v-touch-pan.prevent.touch="handlePan"
+        style="height: 40px; text-align: center;"
+      />
+      <!-- // 마우스 드래그로 dialog 닫기 -->
       <div
         v-if="$g.platform.is.mobile"
         class="kw-select-options__header"
@@ -269,6 +276,7 @@ export default {
     const innerValue = ref();
     const computedValue = computed(() => innerValue.value ?? value.value ?? '');
 
+    const qSelectDialog = document.getElementsByClassName('q-select__dialog');
     function onUpdateValue(val) {
       val ??= (props.multiple ? [] : '');
 
@@ -337,6 +345,17 @@ export default {
       inputRef.value.hidePopup();
     }
 
+    function handlePan({ evt, ...newInfo }) {
+      const info = newInfo;
+      const height = `${info.position.top}px`;
+      qSelectDialog[0].style.top = height;
+      if (info.isFinal) {
+        qSelectDialog[0].style.top = null;
+      } else if (info.distance.y >= 100) {
+        inputRef.value.hidePopup();
+      }
+    }
+
     return {
       ...useInheritAttrs(),
       ...useFieldStyle(),
@@ -355,6 +374,7 @@ export default {
       selectedText,
       showingHint,
       toggleHint,
+      handlePan,
     };
   },
 };
