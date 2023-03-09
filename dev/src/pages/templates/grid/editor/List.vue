@@ -12,7 +12,7 @@
       </kw-action-bar>
       <kw-grid
         ref="grdRef"
-        :visible-rows="3"
+        :visible-rows="6"
         @init="initGrd"
       />
 
@@ -28,6 +28,10 @@
 import { alert, gridUtil } from '~kw-lib';
 
 const grdRef = ref();
+
+function onCellClicked(grid, clickData) {
+  console.log(grid, clickData);
+}
 
 function initGrd(data, view) {
   const options = [
@@ -47,6 +51,9 @@ function initGrd(data, view) {
     },
     {
       fieldName: 'list03',
+    },
+    {
+      fieldName: 'list04',
     },
   ];
 
@@ -81,12 +88,28 @@ function initGrd(data, view) {
         return i > -1 ? ` [${values[i]}] ${labels[i]}` : '';
       },
     },
+    {
+      fieldName: 'list04',
+      header: 'MultiCheckList',
+      options: options.map((v) => ({ value: v.codeId, label: v.codeName })),
+      optionValue: 'value',
+      optionLabel: 'label',
+      styleName: 'text-center',
+      editor: { type: 'checklist', itemSortStyle: 'descending' },
+      firstOption: 'select', // preset: 'all', 'select'
+      firstOptionValue: '', // default value, 생략 가능
+      firstOptionLabel: '선택', // default value, 생략 가능
+      displayCallback(g, index, value) {
+        console.log(value);
+        return value;
+      },
+    },
   ];
 
   data.setFields(fields);
   view.setColumns(columns);
   view.editOptions.editable = true;
-
+  view.onCellClicked = onCellClicked;
   data.setRows([
     {
       list01: '',

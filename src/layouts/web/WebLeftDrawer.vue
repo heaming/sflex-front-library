@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { watch } from 'vue';
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 import WebLeftDrawerMenu from './WebLeftDrawerMenu.vue';
@@ -60,6 +61,7 @@ export default {
   setup() {
     const expandCtx = useLeftDrawerExpand();
     const { setExpanded } = expandCtx;
+    const { getters } = useStore();
 
     const { currentRoute } = useRouter();
     const showing = computed(() => currentRoute.value.meta.menuUid !== undefined);
@@ -76,6 +78,11 @@ export default {
       selectedContent.value = content;
       setExpanded(true);
     }
+
+    // application 선택하면 매뉴 모드로 변경.
+    watch(() => getters['app/getSelectedGlobalAppKey'], () => {
+      selectedContent.value = contents[0];
+    });
 
     return {
       ...expandCtx,

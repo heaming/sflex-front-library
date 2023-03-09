@@ -3,8 +3,14 @@
     <div class="result-area">
       <kw-action-top>
         <!--  -->
+        <kw-btn
+          @click="onClickTest"
+        >
+          체크여부 테스트
+        </kw-btn>
       </kw-action-top>
       <kw-grid
+        ref="grdMainRef"
         :visible-rows="10"
         @init="initGrid"
       />
@@ -13,7 +19,9 @@
 </template>
 
 <script setup>
+import { gridUtil } from '~kw-lib';
 
+const grdMainRef = ref(null);
 function initGrid(data, view) {
   const fields = [
     { fieldName: 'col1' },
@@ -69,5 +77,11 @@ function initGrid(data, view) {
     { col1: '041028502', col2: '개인', col3: '(주)포워딩코리아(종로점)', col4: '우담당', col5: '여성', col6: '-', col7: '-', col8: '서울 서초구 서문로 122', col9: '상세', col10: '미인증', col11: '미가입', col12: '20220624', col13: '20020620' },
     { col1: '041076733', col2: '개인', col3: '-', col4: '이엄마', col5: '여성', col6: '19650210', col7: '010-1111-2222', col8: '서울 서초구 서초대로 385', col9: '상세', col10: '인증', col11: '가입', col12: '20040215', col13: '20040215' },
   ]);
+}
+
+function onClickTest() {
+  const view = grdMainRef.value.getView();
+  console.log(view);
+  console.log(gridUtil.getCheckedRowValues(view));
 }
 </script>

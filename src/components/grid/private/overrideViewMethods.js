@@ -194,7 +194,7 @@ function setColumnRenderer(column, { dataType }) {
         editable: false,
         sortable: styleName.includes('rg-button-link'),
         renderer: {
-          hideWhenEmpty: !styleName.includes('rg-button-icon'),
+          hideWhenEmpty: !styleName.includes('rg-button-icon') && dataType !== ValueType.NUMBER,
         },
       });
       break;

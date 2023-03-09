@@ -134,7 +134,18 @@ export function getAllRowValues(view, isIncludeDeleted = false) {
     .filter((e) => isIncludeDeleted || e.rowState !== RowState.DELETED);
 }
 
+export async function alertIfIsNotChecked(view, message) {
+  const checkedRows = view.getCheckedRows();
+
+  if (!checkedRows.length) {
+    await alert(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+  }
+
+  return checkedRows > 0;
+}
+
 export function getCheckedRowValues(view, isChangedOnly = false) {
+  if (!alertIfIsNotChecked(view)) return;
   const checkedRows = view.getCheckedRows().sort((a, b) => a - b);
   return getRowValues(view, checkedRows)
     .filter((e) => !isChangedOnly || e.rowState !== RowState.NONE);
@@ -245,6 +256,8 @@ export async function confirmDeleteSelectedRows(view, isIncludeCreated = false) 
 }
 
 export function deleteCheckedRows(view, isIncludeCreated = false) {
+  if (!alertIfIsNotChecked(view)) return;
+
   const checkedRows = view.getCheckedRows();
   const deletedRowValues = getRowValues(view, checkedRows)
     .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
@@ -254,10 +267,8 @@ export function deleteCheckedRows(view, isIncludeCreated = false) {
 }
 
 export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
-  if (!view.getCheckedRows().length) {
-    await alert(i18n.t('MSG_ALT_NOT_SEL_ITEM'));
-    return [];
-  }
+  if (!alertIfIsNotChecked(view)) return;
+
   if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
     return deleteCheckedRows(view, isIncludeCreated);
   }
@@ -483,6 +494,7 @@ const normalizeExportOptions = (options = {}) => ({
   exportData: options.exportData,
   lookupDisplay: options.lookupDisplay !== false,
   treeKey: options.treeKey,
+  searchCondition: options.searchCondition !== false,
 });
 
 function exportGrid(view, options, onProgress, onComplete) {
@@ -504,6 +516,40 @@ function exportGrid(view, options, onProgress, onComplete) {
 export async function exportView(view, options) {
   options = normalizeExportOptions(options);
 
+  if (options.searchCondition && !!options.exportData) {
+    let message = '[검색조건]\n';
+    const formItems = document.querySelectorAll('.kw-search .kw-form-item');
+    formItems.forEach((formItem) => {
+      const label = formItem.querySelector('.kw-label-content__label').innerHTML;
+
+      const values = formItem.querySelectorAll('input');
+      let value = '';
+      values.forEach((v, i) => {
+        if (i === 0) {
+          value += v.value;
+        } else {
+          value += ` | ${v.value}`;
+        }
+      });
+      // radio 인경우
+      const radios = formItem.querySelectorAll('div.q-option-group .q-radio');
+      radios.forEach((radio) => {
+        if (radio.getAttribute('aria-checked') === 'true') {
+          value = radio.getAttribute('aria-label');
+        }
+      });
+      message += `${label} : ${value}  \n`;
+    });
+
+    options.documentTitle = {
+      message,
+      visible: true,
+      spaceTop: 0,
+      spaceBottom: 0,
+      height: 100,
+      styleName: 'documentStyle',
+    };
+  }
   const shouldClone = !!options.exportData;
 
   if (shouldClone) {

@@ -12,7 +12,7 @@
       </kw-action-bar>
       <kw-grid
         ref="grdRef"
-        :visible-rows="3"
+        :visible-rows="5"
         @init="initGrd"
       />
 

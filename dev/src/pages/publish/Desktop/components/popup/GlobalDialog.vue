@@ -74,6 +74,10 @@
             label="with Icon"
             @click="sample3"
           />
+          <kw-btn
+            label="confirm"
+            @click="sample4"
+          />
         </div>
         <guide-code-view
           :code-value="testCode"
@@ -85,7 +89,7 @@
 </template>
 
 <script setup>
-import { alert } from '~kw-lib';
+import { alert, confirm } from '~kw-lib';
 
 async function sample1() {
   alert('기본메세지');
@@ -95,6 +99,10 @@ async function sample2() {
 }
 async function sample3() {
   alert('아이콘 나오는 ALERT', { subMessage: 'icon은 warning_24 넣음', icon: 'warning_24' });
+}
+
+async function sample4() {
+  confirm('아이콘 나오는 ALERT', { subMessage: 'icon은 warning_24 넣음', icon: 'warning_24' });
 }
 
 const testCode = `
