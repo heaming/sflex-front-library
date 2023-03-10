@@ -29,7 +29,7 @@ function callEvent(resolve, reject) {
   );
 }
 
-function callMethod(pluginName, methodId, data) {
+async function callMethod(pluginName, methodId, data) {
   return new Promise((resolve, reject) => {
     const plugin = window[pluginName];
 
@@ -78,22 +78,22 @@ export function getDeviceId() {
   return callMethod(NativePlugin.Device, 'getDeviceId');
 }
 
+export async function getImageData() {
+  /* eslint-disable-next-line */
+  return await PhotoPlugin?.getImageData();
+}
+
 /*
   Photo
   */
-export function openCamera() {
-  return callMethod(NativePlugin.Photo, 'openCamera');
+export async function openCamera() {
+  await callMethod(NativePlugin.Photo, 'openCamera');
+  return getImageData();
 }
 
-export function openPhotoGallery() {
-  return callMethod(NativePlugin.Photo, 'openPhotoGallery');
-}
-
-export function getImageData() {
-  /* eslint-disable-next-line */
-  alert(PhotoPlugin?.getImageData());
-  /* eslint-disable-next-line */
-  return PhotoPlugin?.getImageData();
+export async function openPhotoGallery() {
+  await callMethod(NativePlugin.Photo, 'openPhotoGallery');
+  return getImageData();
 }
 
 /*
