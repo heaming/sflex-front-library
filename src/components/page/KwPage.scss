@@ -213,7 +213,6 @@ body.mobile {
       overflow: auto;
       position: relative;
       background-color: $bg-white;
-      border: 1px solid transparent;
 
       &:has(.kw-search) {
         padding: 0;

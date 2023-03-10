@@ -248,10 +248,10 @@
                 </div>
               </div>
             </kw-expansion-item>
-            <kw-separator
+            <!-- <kw-separator
               class="my0"
               color="line-line"
-            />
+            /> -->
           </kw-list>
         </div>
         <guide-code-view
@@ -832,10 +832,6 @@ const case1 = `
       </div>
     </div>
   </kw-expansion-item>
-  <kw-separator
-      class="my0"
-      color="line-line"
-    />
 </kw-list>
 `;
 const case2 = `
