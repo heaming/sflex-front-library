@@ -249,9 +249,18 @@ export async function confirmDeleteSelectedRows(view, isIncludeCreated = false) 
     await alert(i18n.t('MSG_ALT_NOT_SEL_ITEM'));
     return [];
   }
-  if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
+
+  const selectedDataRows = view.getSelectedRows();
+  const changedDataRows = getChangedRowValues(view).map((row) => row.dataRow);
+
+  if (selectedDataRows.every((row) => changedDataRows.includes(row))) {
+    if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
+      return deleteSelectedRows(view, isIncludeCreated);
+    }
+  } else if (await confirm(i18n.t('MSG_ALT_CHK_CHGD_ROW'))) {
     return deleteSelectedRows(view, isIncludeCreated);
   }
+
   return [];
 }
 
@@ -269,9 +278,17 @@ export function deleteCheckedRows(view, isIncludeCreated = false) {
 export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
   if (!alertIfIsNotChecked(view)) return;
 
-  if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
+  const checkedDataRows = view.getCheckedRows();
+  const changedDataRows = getChangedRowValues(view).map((row) => row.dataRow);
+
+  if (checkedDataRows.every((row) => changedDataRows.includes(row))) {
+    if (await confirm(i18n.t('MSG_ALT_WANT_DEL_SEL_ITEM'))) {
+      return deleteCheckedRows(view, isIncludeCreated);
+    }
+  } else if (await confirm(i18n.t('MSG_ALT_CHK_CHGD_ROW'))) {
     return deleteCheckedRows(view, isIncludeCreated);
   }
+
   return [];
 }
 
