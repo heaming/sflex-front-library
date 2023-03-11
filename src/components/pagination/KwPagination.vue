@@ -5,7 +5,7 @@
     :model-value="pageIndex"
     :max="max"
     :max-pages="9"
-    :disable="disable"
+    :disable="computedDisabled"
     unelevated
     direction-links
     boundary-links
@@ -34,7 +34,7 @@ export default {
   props: {
     pageIndex: {
       type: Number,
-      default: 1,
+      default: undefined,
     },
     pageSize: {
       type: Number,
@@ -46,7 +46,7 @@ export default {
     },
     disable: {
       type: Boolean,
-      default: false,
+      default: null,
     },
   },
 
@@ -58,6 +58,8 @@ export default {
 
   setup(props, { emit }) {
     const max = computed(() => Math.ceil(props.totalCount / props.pageSize) || 1);
+
+    const computedDisabled = computed(() => (props.disable !== null ? props.disable : props.totalCount === 0));
 
     const {
       getRegisteredSearch,
@@ -87,6 +89,7 @@ export default {
       onUpdateValue,
       paginationRef,
       set,
+      computedDisabled,
       setByOffset,
     };
   },
