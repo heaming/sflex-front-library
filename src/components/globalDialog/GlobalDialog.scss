@@ -2,7 +2,7 @@
   z-index: 9999;
 
   .q-dialog__backdrop {
-    background: rgb(0 0 0 / 60%);
+    background: transparent;
   }
 
   &__inner {
@@ -50,6 +50,10 @@
 
 body.mobile:not(.tablet) {
   .global-dialog {
+    .q-dialog__backdrop {
+      background: rgb(0 0 0 / 60%);
+    }
+
     &__inner {
       width: 280px;
       border: none;
