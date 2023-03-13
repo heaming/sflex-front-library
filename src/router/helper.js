@@ -42,6 +42,12 @@ function recursiveBuildPath(app, menu) {
 }
 
 function addRoutesByMenu(router, route, app, menu) {
+  const { pageTypeCode, pageId, linkPageId } = menu;
+  let linkParams = [];
+  if (pageTypeCode === 'L') {
+    const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
+    linkParams = (linkPage?.pageParameter || []);
+  }
   router.addRoute({
     ...route,
     name: menu.menuUid ? menu.menuUid : menu.pageId,
@@ -56,6 +62,7 @@ function addRoutesByMenu(router, route, app, menu) {
       pageId: menu.pageId,
       pageUseCode: menu.pageUseCode,
       pageName: menu.pageDestinationValue,
+      linkPageParam: linkParams.length > 0 ? linkParams[0].pageParameterValue : '',
     },
   });
 }
