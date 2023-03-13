@@ -214,7 +214,7 @@
 
       <kw-file
         v-model="file"
-        class="w300"
+        :class="$g.platform.is.mobile ? 'w320' : ''"
         v-bind="bindingProps"
       >
         <template
