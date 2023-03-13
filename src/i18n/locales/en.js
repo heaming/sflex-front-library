@@ -29,6 +29,7 @@ export default {
   MSG_VAL_REGEX: 'The {0} field format is invalid.',
   MSG_VAL_REQUIRED: 'The {0} field is required.',
   MSG_VAL_URL: 'The {0} field is not a valid URL.',
+  MSG_VAL_TELEPHONE: 'The {0} field is not a invalid telephone format.',
 
   // HTTP
   MSG_ALT_ERR_CONTACT_ADMIN: 'Error has occurred. Contact administrator.',

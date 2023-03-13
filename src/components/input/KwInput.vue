@@ -14,7 +14,7 @@
     :rows="rows"
     :cols="cols"
     :autogrow="autogrow"
-    :mask="mask"
+    :mask="computedMask"
     :fill-mask="fillMask"
     :reverse-fill-mask="reverseFillMask"
     :unmasked-value="unmaskedValue"
@@ -323,6 +323,20 @@ export default {
           return onUpdateTextValue(val);
       }
     }
+    const computedMask = computed(() => {
+      const newVal = inputRef?.value?.modelValue;
+      if (props.mask === 'telephone') {
+        if (newVal?.startsWith('02')) {
+          if (newVal?.length <= 9) return '##-###-#####';
+          return '##-####-####';
+        }
+
+        if (newVal?.length <= 10) return '###-###-#####';
+        return '###-####-####';
+      }
+
+      return props.mask;
+    });
 
     onMounted(() => {
       if (props.preventSubmit) {
@@ -348,6 +362,7 @@ export default {
       onUpdateValue,
       showingHint,
       toggleHint,
+      computedMask,
     };
   },
 };
