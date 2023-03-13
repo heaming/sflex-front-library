@@ -85,7 +85,7 @@ const viewConfig = {
     enabled: true,
     commitBeforeFiltering: true,
     handleVisibility: HandleVisibility.VISIBLE,
-    keepFocusedRow: true,
+    keepFocusedRow: false,
   },
   filteringOptions: {
     enabled: false,
