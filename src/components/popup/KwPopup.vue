@@ -42,9 +42,15 @@
       />
     </q-card-section>
     <q-card-section
+      ref="scrollTarget"
       class="kw-popup__content"
     >
       <slot />
+      <q-scroll-observer
+        v-if="infiniteIsEnabled"
+        :scroll-target="scrollTarget"
+        @scroll="onScroll"
+      />
     </q-card-section>
     <q-card-section
       v-if="$slots.action"
@@ -63,6 +69,7 @@ import usePageUniqueId from '../../composables/private/usePageUniqueId';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 import useDraggable, { useDraggableProps } from '../../composables/private/useDraggable';
 import useBookmark from './private/useBookmark';
+import useInfiniteScroll, { useInfiniteScrollProps } from '../page/private/useInfiniteScroll';
 
 const sizeValues = ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', 'full'];
 
@@ -73,6 +80,7 @@ export default {
   props: {
     ...useObserverProps,
     ...useDraggableProps,
+    ...useInfiniteScrollProps,
 
     style: { type: [String, Object, Array], default: undefined },
     class: { type: [String, Object, Array], default: undefined },
@@ -144,6 +152,7 @@ export default {
       ...useObserver(),
       ...useDraggable(),
       ...useBookmark(pageCtx),
+      ...useInfiniteScroll(),
       pageCtxTitle,
       containerRef,
       draggableEvents,
