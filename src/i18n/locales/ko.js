@@ -29,6 +29,7 @@ export default {
   MSG_VAL_REGEX: '{0} 항목은 형식에 맞지 않습니다.',
   MSG_VAL_REQUIRED: '{0} 항목은 필수 입력 항목입니다.',
   MSG_VAL_URL: '{0} 항목은 유효한 URL이 아닙니다.',
+  MSG_VAL_TELEPHONE: '{0} 항목은 유효한 전화번호 형식이 아닙니다.',
 
   // HTTP
   MSG_ALT_ERR_CONTACT_ADMIN: '오류가 발생하였습니다. 관리자에게 문의하세요.',

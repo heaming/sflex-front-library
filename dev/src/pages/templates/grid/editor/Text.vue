@@ -44,6 +44,9 @@ function initGrd(data, view) {
     {
       fieldName: 'text04',
     },
+    {
+      fieldName: 'text05',
+    },
   ];
 
   const columns = [
@@ -70,6 +73,14 @@ function initGrd(data, view) {
       editor: {
         type: 'multiline',
       },
+    },
+    {
+      fieldName: 'text05',
+      header: 'telephone',
+      editor: {
+        type: 'telephone',
+      },
+      rules: 'telephone',
     },
   ];
 
@@ -101,11 +112,12 @@ function initGrd(data, view) {
   ]);
 }
 
-function checkCurrentRowValue() {
+async function checkCurrentRowValue() {
   const view = grdRef.value.getView();
   const rowValue = gridUtil.getSelectedRowValues(view)[0] || {};
 
   alert(JSON.stringify(rowValue, null, '\t'));
+  await gridUtil.validate(view);
 }
 
 const sampleCode = `

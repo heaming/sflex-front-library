@@ -354,6 +354,14 @@ export function overrideOnGetEditValue(view) {
     const { editor } = g.columnByName(index.column);
     const type = editor?.type;
 
+    if (type === 'telephone') {
+      if (value?.startsWith('02')) {
+        if (value?.length <= 9) value = `${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5)}`;
+        else value = `${value.substring(0, 2)}-${value.substring(2, 6)}-${value.substring(6)}`;
+      } else if (value?.length <= 10) value = `${value.substring(0, 3)}-${value.substring(3, 6)}-${value.substring(6)}`;
+      else value = `${value.substring(0, 3)}-${value.substring(3, 7)}-${value.substring(7)}`;
+    }
+
     // text
     if ([undefined, 'text', 'line', 'multiline'].includes(type)) {
       value = value?.trim();
