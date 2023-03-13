@@ -261,6 +261,110 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3 class="kw-guide-title">
+        Case 05
+      </h3>
+      <p class="kw-guide-description notice">
+        kw-action top is allowed only less than 10 buttons.<br>
+        But this example has 11 button in Action-top.<br>
+        <b>This is only for the example</b>. Please, have a reference in below the link!!<br>
+        <a href="https://kyowon.atlassian.net/wiki/spaces/KGDC/pages/80380020/Buttons+in+right-side+of+action-top+and+action-bottom">
+          Here is the detail of kw-action-top button!
+        </a>
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <kw-action-top>
+            <template #left>
+              <kw-paging-info
+                :page-size="30"
+                :page-size-options="[30,60,90,120]"
+                :total-count="7"
+              />
+            </template>
+            <kw-btn
+              label="수정"
+              grid-action
+            />
+            <kw-btn
+              label="삭제"
+              grid-action
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced
+            />
+            <kw-btn
+              label="행추가"
+              grid-action
+            />
+            <kw-btn
+              label="저장"
+              grid-action
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced
+            />
+            <kw-btn
+              label="리포트 보기"
+              icon="report"
+              dense
+            />
+            <kw-btn
+              icon="download_off"
+              dense
+              secondary
+              label="양식 다운로드"
+            />
+            <kw-btn
+              icon="upload_on"
+              dense
+              secondary
+              label="엑셀 업로드"
+            />
+            <kw-btn
+              icon="download_on"
+              dense
+              secondary
+              label="엑셀 다운로드"
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced
+            />
+            <kw-btn
+              label="링크/팝업"
+              secondary
+              dense
+            />
+            <kw-btn
+              label="부기능"
+              secondary
+              dense
+            />
+            <kw-separator
+              vertical
+              inset
+              spaced
+            />
+            <kw-btn
+              label="주기능"
+              primary
+              dense
+            />
+          </kw-action-top>
+        </div>
+        <guide-code-view
+          :code-value="testCode5"
+          :lang="'vue'"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 
@@ -401,8 +505,97 @@ const testCode4 = `
   />
   </kw-action-top>
 `;
+const testCode5 = `
+<kw-action-top>
+  <template #left>
+    <kw-paging-info
+      :page-size="30"
+      :page-size-options="[30,60,90,120]"
+      :total-count="7"
+    />
+  </template>
+  <kw-btn
+    label="수정"
+    grid-action
+  />
+  <kw-btn
+    label="삭제"
+    grid-action
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced
+  />
+  <kw-btn
+    label="행추가"
+    grid-action
+  />
+  <kw-btn
+    label="저장"
+    grid-action
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced
+  />
+  <kw-btn
+    label="리포트 보기"
+    icon="report"
+    dense
+  />
+  <kw-btn
+    icon="download_off"
+    dense
+    secondary
+    label="양식 다운로드"
+  />
+  <kw-btn
+    icon="upload_on"
+    dense
+    secondary
+    label="엑셀 업로드"
+  />
+  <kw-btn
+    icon="download_on"
+    dense
+    secondary
+    label="엑셀 다운로드"
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced
+  />
+  <kw-btn
+    label="링크/팝업"
+    secondary
+    dense
+  />
+  <kw-btn
+    label="부기능"
+    secondary
+    dense
+  />
+  <kw-separator
+    vertical
+    inset
+    spaced
+  />
+  <kw-btn
+    label="주기능"
+    primary
+    dense
+  />
+</kw-action-top>
+`;
 
 const guideHistory = [
+  {
+    timestamp: '2023.03.13',
+    text: 'add sample 5',
+  },
   {
     timestamp: '2022.11.15',
     text: 'updated inside of template #left in action-top',
