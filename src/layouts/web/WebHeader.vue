@@ -102,6 +102,11 @@
             class="web-header__icon"
             name="gnb_menu"
             clickable
+            @click="openTotalMenuP"
+          />
+          <web-total-menu-p
+            v-if="totalMenu"
+            @close-tot="closeTotalMenuP"
           />
         </div>
       </div>
@@ -117,16 +122,31 @@ import useGlobal from '../../composables/useGlobal';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
 import { localStorage } from '../../plugins/storage';
+import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
 
 const zoomSize = ref(true);
 const searchText = ref('');
+const totalMenu = ref(false);
+
 export default {
   name: 'WebHeader',
+  components: { WebTotalMenuP },
   setup() {
     const { push } = useRouter();
     const { logout } = useSession();
     const { notify } = useGlobal();
     const { t } = useI18n();
+
+    async function openTotalMenuP() {
+      // modal({
+      //   component: () => import('../../pages/web/WebTotalMenuP.vue'),
+      // });
+      totalMenu.value = true;
+    }
+
+    async function closeTotalMenuP() {
+      totalMenu.value = false;
+    }
 
     async function openSetSessionP() {
       console.log('openSetSession');
@@ -185,8 +205,11 @@ export default {
       setZoomSize,
       zoomSize,
       openSetSessionP,
+      openTotalMenuP,
       openMenuSearchPopup,
       searchText,
+      totalMenu,
+      closeTotalMenuP,
     };
   },
 };
