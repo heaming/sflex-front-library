@@ -9,6 +9,7 @@
     <guide-section
       title="playground"
       description="playground"
+      :guide-code="defaultCode2"
     >
       <guide-props
         v-model="bindingProps"
@@ -55,6 +56,53 @@
             />
           </kw-stepper-navigation>
         </template>
+      </kw-stepper>
+      <kw-separator />
+      <div>
+        헤더 클릭 시 이동방식은, kw-stepper에 header-nav 속성을 주면 이동이 가능하다.
+        <br>
+        active-icon을 통해 현재 step에 해당하는 아이콘, done-icon을 통해 완료된 step의 아이콘 변경이 가능하며,
+        <br>
+        done 에 특정 조건값을 주면 done 처리, 그렇지 않으면 단순 헤더 이동만 할수도 있다.
+        <br>
+        <br>
+      </div>
+      <kw-stepper
+        ref="stepper"
+        v-model="currentStep"
+        header-nav
+      >
+        <kw-step
+          :name="1"
+          title="step1 - done 처리 없음"
+          prefix="1"
+          icon="break"
+          active-icon="write"
+        />
+        <kw-step
+          :name="2"
+          title="step2 - done 처리 있음"
+          prefix="2"
+          icon="sms"
+          :done="currentStep > 2"
+          active-icon="release"
+        />
+        <kw-step
+          :name="3"
+          title="step3  - done 처리 있음"
+          prefix="3"
+          icon="close"
+          :done="currentStep > 3"
+          done-icon="bookmark_on"
+          active-icon="arrow_right"
+        />
+        <kw-step
+          :name="4"
+          title="step4  - done 처리 없음"
+          prefix="4"
+          icon="top"
+          active-icon="imgpreview"
+        />
       </kw-stepper>
     </guide-section>
     <guide-section
@@ -132,4 +180,43 @@ const defaultCode = `
       <kw-stepper
         v-bind="bindingProps"
       />`;
+
+const defaultCode2 = `
+<kw-stepper
+        ref="stepper"
+        v-model="currentStep"
+        header-nav
+      >
+        <kw-step
+          :name="1"
+          title="step1 - done 처리 없음"
+          prefix="1"
+          icon="break"
+          active-icon="write"
+        />
+        <kw-step
+          :name="2"
+          title="step2 - done 처리 있음"
+          prefix="2"
+          icon="sms"
+          :done="currentStep > 2"
+          active-icon="release"
+        />
+        <kw-step
+          :name="3"
+          title="step3  - done 처리 있음"
+          prefix="3"
+          icon="close"
+          :done="currentStep > 3"
+          done-icon="bookmark_on"
+          active-icon="arrow_right"
+        />
+        <kw-step
+          :name="4"
+          title="step4  - done 처리 없음"
+          prefix="4"
+          icon="top"
+          active-icon="imgpreview"
+        />
+      </kw-stepper>`;
 </script>
