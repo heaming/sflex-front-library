@@ -144,7 +144,7 @@ onMounted(async () => {
     });
     ScrollTrigger.create({
       scroller: '#gnb_menu',
-      markers: true,
+      // markers: true, //스크롤위치 확인용 마커
       trigger: targetElem,
       start: 'top 10%+=170',
       end: 'bottom 10%+=170',
