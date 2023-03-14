@@ -66,7 +66,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import { isNavigationFailure } from 'vue-router';
-import { alert } from '~kw-lib';
+import { alert } from '../../plugins/dialog';
 import { http } from '../../plugins/http';
 
 const { getters, commit } = useStore();
@@ -100,7 +100,7 @@ async function handleUpdateSelected(menuKey) {
     commit('app/setSelectedGlobalMenuKey', menuKey);
     emit('closeTot');
   } catch (e) {
-    if (isNavigationFailure(e, 1)) { // matcher not found
+    if (isNavigationFailure(e, 1)) { // matcher not found..
       await alert(t('MSG_ALT_PAGE_NOT_FOUND'));
     } else {
       throw e;
