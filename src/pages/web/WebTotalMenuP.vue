@@ -278,7 +278,7 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
-import { http } from '~kw-lib';
+import { http } from '../../plugins/http';
 
 const { getters } = useStore();
 
