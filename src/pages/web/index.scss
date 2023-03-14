@@ -419,6 +419,10 @@
         text-decoration: none;
         word-break: keep-all;
       }
+
+      &:hover a {
+        color: $primary;
+      }
     }
   }
 

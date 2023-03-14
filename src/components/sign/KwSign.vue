@@ -1,19 +1,43 @@
 <template>
-  <canvas
-    id="drawCanvas"
-    ref="canvas"
-    :width="width"
-    :height="height"
-    style="border: 1px solid #ccc;position: relative;"
-  />
+  <div class="kw-sign">
+    <div class="kw-sign__canvas-area">
+      <canvas
+        id="drawCanvas"
+        ref="canvas"
+        :width="$g.platform.is.mobile ? '320' : '536'"
+        :height="$g.platform.is.mobile ? '180' : '300'"
+        class="kw-sign__canvas"
+      />
+      <p
+        v-if="true"
+        class="kw-sign__placeholder"
+      >
+        여기에 서명해 주세요
+      </p>
+    </div>
+    <div class="kw-sign__action">
+      <kw-btn
+        label="최근서명"
+        secondary
+        dense
+        :border-color="$g.platform.is.mobile ? 'line-stroke' : '' "
+      />
+      <kw-btn
+        label="재입력"
+        secondary
+        dense
+        :border-color="$g.platform.is.mobile ? 'line-stroke' : '' "
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'KwSign',
   props: {
-    width: { type: String, default: '400' },
-    height: { type: String, default: '300' },
+    // width: { type: String, default: '400' },
+    // height: { type: String, default: '300' },
   },
   setup() {
     let canvas;
