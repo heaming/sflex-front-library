@@ -1,38 +1,24 @@
 <template>
-  <div class="gnb_menu">
+  <div
+    id="gnb_menu"
+    ref="gnbRef"
+    class="gnb_menu"
+  >
     <div class="gnb_menu--header scrollpanels">
       <h1>전체메뉴</h1>
       <nav>
         <ul class="">
           <li class="nav-item curr">
-            <a href="#">상품</a>
+            <a href="#info1">상품</a>
           </li>
           <li class="nav-item">
-            <a href="#">고객</a>
+            <a href="#info2">고객</a>
           </li>
           <li class="nav-item">
-            <a href="#">판매</a>
+            <a href="#info3">판매</a>
           </li>
           <li class="nav-item">
-            <a href="#">역량/총무</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">인사/조직</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">수수료</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">수납</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">영업마감</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">채권</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">서비스</a>
+            <a href="#info4">역량/총무</a>
           </li>
         </ul>
       </nav>
@@ -152,7 +138,7 @@
       </li>
       <li
         id="info3"
-        class="section panel test"
+        class="section panel"
       >
         <h2>판매</h2>
         <ul class="gnb_menu--ul-depth2">
@@ -217,7 +203,10 @@
           </li>
         </ul>
       </li>
-      <li>
+      <li
+        id="info4"
+        class="section panel"
+      >
         <h2>역량/총무</h2>
         <ul class="gnb_menu--ul-depth2">
           <li>
@@ -289,58 +278,11 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
-import { onMounted } from 'vue';
+import { http } from '~kw-lib';
+
+const { getters } = useStore();
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-onMounted(() => {
-  const navLinks = gsap.utils.toArray('.nav-item');
-  navLinks.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      console.log('test!!');
-      gsap.to('.gnb_menu', {
-        duration: 1,
-        scrollTo: { y: `#info${index + 1}`, offsetY: 0 },
-      });
-      document.querySelector(`#info${index + 1}`).classList.add('curr');
-    });
-  });
-
-  ScrollTrigger.create({
-    trigger: '.scrollpanels',
-    start: 'top',
-    endTrigger: '.scrollpanels-content',
-    end: '9999999',
-    pin: true,
-    pinSpacing: false,
-    scrub: 1,
-  });
-
-  const panels = gsap.utils.toArray('.panel');
-  panels.forEach((panel, i) => {
-    console.log(panel);
-    ScrollTrigger.create({
-      trigger: panel,
-      start: 'top center',
-      end: 'bottom center',
-
-      onEnter: () => {
-        console.log(`onEnter!!!      ${i}`);
-        navLinks.forEach((e) => {
-          e.classList.remove('curr');
-        });
-        navLinks[i].classList.add('curr');
-      },
-      onEnterBack: () => {
-        console.log(`onEnterBack!!!      ${i}`);
-        navLinks.forEach((e) => {
-          e.classList.remove('curr');
-        });
-        navLinks[i].classList.add('curr');
-      },
-    });
-  });
-});
 
 const emit = defineEmits([
   'closeTot',
@@ -348,4 +290,66 @@ const emit = defineEmits([
 async function onClickClose() {
   emit('closeTot');
 }
+
+// function createHierarchyData(menus, key) {
+//   return menus
+//     .filter((v) => (key !== 'ROOT' ? key.endsWith(v.parentsMenuUid) : v.menuLevel === 0))
+//     .reduce((a, v) => { v.key = `${key}.${v.menuUid}`;
+//     a.push(v, ...createHierarchyData(menus, v.key)); return a; }, []);
+// }
+
+async function fetchMenus() {
+  const apps = getters['meta/getApps'];
+  console.log(apps);
+  const menuPageRes = await http.get('/sflex/common/common/portal/menus-without-auth');
+  console.log(menuPageRes);
+  // const hierarchyData = [
+  //   {
+  //     key: 'ROOT',
+  //     portalId,
+  //     applicationId,
+  //     menuLevel: -1,
+  //     menuName: t('MSG_TXT_MENU'),
+  //     folderYn: 'Y',
+  //   },
+  //   ...createHierarchyData(menus, 'ROOT'),
+  // ];
+}
+await fetchMenus();
+
+const gnbRef = ref();
+onMounted(() => {
+  const navLinks = gsap.utils.toArray('.nav-item');
+  function setActive(link) {
+    navLinks.forEach((el) => el.classList.remove('active'));
+    link.classList.add('active');
+  }
+  navLinks.forEach((btn) => {
+    const targetElem = document.querySelector(btn.querySelector('a').getAttribute('href'));
+    const linkST = ScrollTrigger.create({
+      scroller: '#gnb_menu',
+      trigger: targetElem,
+      start: 'top top',
+    });
+    ScrollTrigger.create({
+      scroller: '#gnb_menu',
+      trigger: targetElem,
+      start: 'top center',
+      end: 'bottom center',
+      toggleClass: 'active',
+      // onEnter: () => {
+      //   setActive(btn);
+      // },
+      onToggle: (self) => self.isActive && setActive(btn),
+    });
+    btn.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      gsap.to('.gnb_menu', {
+        duration: 1,
+        scrollTo: { y: linkST.start, offsetY: 170 },
+        // scrollTo: { y: `#info${index + 1}`, offsetY: 170 },
+      });
+    });
+  });
+});
 </script>

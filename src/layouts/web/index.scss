@@ -4,14 +4,14 @@
 .web-layout {
   body.desktop & {
     & > .web-header {
-      // min-width: 1656px;
+      min-width: 1656px;
       background: #f3f4f5;
-      position: absolute;
-      min-width: 1536px;
+      position: sticky;
+      top: 0 !important;
     }
 
     & > .q-page-container {
-      min-width: 1536px;
+      min-width: 1656px;
       background: #f3f4f5;
     }
   }
@@ -91,7 +91,7 @@
       transition: all 0.3s;
     }
 
-    &:hover::after, {
+    &:hover::after {
       font-weight: 700;
       width: 100%;
     }
@@ -614,6 +614,8 @@
   View
  */
 .web-tab-view {
+  padding-top: 0 !important;
+
   $tabs-view-bg-color: #dedfe0;
   $tabs-view-active-bg-color: #f4f5f6;
 

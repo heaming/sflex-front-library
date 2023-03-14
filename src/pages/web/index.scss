@@ -295,7 +295,7 @@
             font-weight: 500;
           }
 
-          &.curr {
+          &.active {
             border-bottom: 4px solid $primary;
             margin-bottom: -1px;
 
@@ -418,6 +418,10 @@
         color: $black2;
         text-decoration: none;
         word-break: keep-all;
+      }
+
+      &:hover a {
+        color: $primary;
       }
     }
   }
