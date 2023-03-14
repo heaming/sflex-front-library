@@ -66,7 +66,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import { isNavigationFailure } from 'vue-router';
-import { alert } from '~kw-lib';
+import { alert } from '../../plugins/dialog';
 import { http } from '../../plugins/http';
 
 const { getters, commit } = useStore();
