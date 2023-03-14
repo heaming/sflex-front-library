@@ -6,10 +6,12 @@
     & > .dev-header {
       min-width: 1656px;
       background: #f3f4f5;
+      position: sticky;
+      top: 0 !important;
     }
 
     & > .q-page-container {
-      min-width: 1536px;
+      min-width: 1656px;
       background: #f3f4f5;
     }
   }
