@@ -2,7 +2,6 @@
   <q-layout
     class="web-layout"
     view="hHh LpR lff"
-    @scroll="onScroll"
   >
     <slot
       v-if="isAuthenticated"
@@ -31,14 +30,8 @@ export default {
     commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
     commit('app/setSelectedGlobalMenuKey', menuUid || null);
 
-    function onScroll(evt) {
-      const el = document.getElementsByClassName('web-header');
-      el[0].style.top = `${evt.position}px`;
-    }
-
     return {
       isAuthenticated,
-      onScroll,
     };
   },
 };
