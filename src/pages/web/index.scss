@@ -327,6 +327,10 @@
       display: flex;
       padding: 40px 40px 0;
       border-bottom: 1px solid $line-line;
+
+      &.lastTarget {
+        height: calc(100vh - 170px);
+      }
     }
   }
 

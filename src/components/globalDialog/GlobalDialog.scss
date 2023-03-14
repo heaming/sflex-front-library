@@ -46,6 +46,14 @@
       margin-left: 8px;
     }
   }
+
+  &__close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 0;
+    cursor: pointer;
+  }
 }
 
 body.mobile:not(.tablet) {
