@@ -13,7 +13,7 @@ function setFieldFormatDefaults(field) {
   switch (field.dataType) {
     case ValueType.DATE:
     case ValueType.DATETIME:
-      defaultsDeep(field, { datetimeFormat: 'yyyyMMdd' });
+      defaultsDeep(field, { datetimeFormat: 'yyyyMMddhhmmss' });
       break;
     case ValueType.BOOLEAN:
       defaultsDeep(field, { booleanFormat: 'N:Y' });

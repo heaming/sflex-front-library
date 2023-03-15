@@ -34,7 +34,7 @@ function initGrd(data, view) {
   const fields = [
     {
       fieldName: 'date01',
-      dataType: 'text', // default value, 생략 가능
+      dataType: 'datetime', // default value, 생략 가능
     },
     {
       fieldName: 'date02',
@@ -83,12 +83,12 @@ function initGrd(data, view) {
       date03: dayjs().add(-1, 'M').format('YYYYMMDDHHmmss'),
     },
     {
-      date01: dayjs().format('YYYYMMDD'),
+      date01: dayjs().format('YYYYMMDDHHmmss'),
       date02: dayjs().format('YYYYMMDDHHmmss'),
       date03: dayjs().format('YYYYMMDDHHmmss'),
     },
     {
-      date01: dayjs().add(1, 'M').format('YYYYMMDD'),
+      date01: dayjs().add(1, 'M').format('YYYYMMDDHH'),
       date02: dayjs().add(1, 'M').format('YYYYMMDDHHmmss'),
       date03: dayjs().add(1, 'M').format('YYYYMMDDHHmmss'),
     },
