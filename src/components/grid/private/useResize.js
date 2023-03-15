@@ -5,6 +5,14 @@ export const useResizeProps = {
     type: [Number, String],
     default: 0,
   },
+  pageSize: {
+    type: [Number, String],
+    default: null,
+  },
+  totalCount: {
+    type: [Number, String],
+    default: null,
+  },
 };
 
 export default () => {
@@ -12,7 +20,16 @@ export default () => {
   const { props } = vm;
 
   const resizedHeight = ref(null);
-  const visibleRows = computed(() => parseInt(props.visibleRows, 10) || 0);
+
+  const visibleRows = computed(() => {
+    if (props.visibleRows) {
+      return parseInt(props.visibleRows, 10) || 0;
+    }
+    if (!!props.pageSize && !!props.totalCount) {
+      return Math.max(10, Math.min(props.pageSize, props.totalCount));
+    }
+    return 0;
+  });
 
   async function onResize() {
     const view = vm.proxy.getView?.();

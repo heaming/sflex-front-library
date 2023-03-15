@@ -135,10 +135,8 @@ onMounted(async () => {
     navLinks.forEach((el) => el.classList.remove('active'));
     link.classList.add('active');
   }
-  navLinks.forEach((btn) => {
-    console.log(btn);
+  navLinks.forEach((btn, idx) => {
     const targetElem = document.querySelector(btn.querySelector('a').getAttribute('href'));
-    console.log(targetElem);
     const linkST = ScrollTrigger.create({
       scroller: '#gnb_menu',
       trigger: targetElem,
@@ -146,10 +144,10 @@ onMounted(async () => {
     });
     ScrollTrigger.create({
       scroller: '#gnb_menu',
-      markers: true,
+      // markers: true, //스크롤위치 확인용 마커
       trigger: targetElem,
-      start: 'top center',
-      end: 'bottom center',
+      start: 'top 10%+=170',
+      end: 'bottom 10%+=170',
       toggleClass: 'active',
       onToggle: (self) => self.isActive && setActive(btn),
     });
@@ -161,6 +159,11 @@ onMounted(async () => {
         // scrollTo: { y: `#info${index + 1}`, offsetY: 170 },
       });
     });
+
+    if (navLinks.length === idx + 1) {
+      console.log(targetElem);
+      targetElem.classList.add('lastTarget');
+    }
   });
 });
 </script>

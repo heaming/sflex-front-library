@@ -229,81 +229,91 @@ body.tablet .kw-popup {
 }
 
 body.mobile:not(.tablet) {
-  .q-card__section--vert:not(.global-dialog__content, .global-dialog__action) {
-    padding: initial;
+  // .q-card__section--vert {
+  //   padding: initial;
+  // }
+
+  .q-card__section--vert {
+    &:not(.global-dialog .q-card__section--vert) {
+      padding: initial;
+    }
   }
 
   .kw-popup {
-    &__header {
-      height: 55px;
-      padding: 14px 0 15px 20px;
-      position: sticky;
-      background: #fff;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 11;
-      border: 1px solid #f8f9fa;
+    $this: ".kw-popup";
 
-      &-title {
-        @include typo("subtitle");
+    &.q-card {
+      #{$this}__header {
+        height: 55px;
+        padding: 14px 0 15px 20px;
+        position: sticky;
+        background: #fff;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 11;
+        border: 1px solid #f8f9fa;
 
-        color: $black1;
-      }
+        &-title {
+          @include typo("subtitle");
 
-      &-bookmark {
-        &.kw-checkbox {
-          margin-left: 7px;
-          justify-content: flex-start;
-          width: 16px;
+          color: $black1;
+        }
 
-          .q-checkbox__inner {
-            width: inherit;
-            height: 16px;
-            min-width: 16px;
-            font-size: 16px;
+        &-bookmark {
+          &.kw-checkbox {
+            margin-left: 7px;
+            justify-content: flex-start;
+            width: 16px;
+
+            .q-checkbox__inner {
+              width: inherit;
+              height: 16px;
+              min-width: 16px;
+              font-size: 16px;
+            }
           }
+        }
+
+        &-close {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          padding: 0;
+          cursor: pointer;
         }
       }
 
-      &-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        padding: 0;
-        cursor: pointer;
+      #{$this}__content {
+        min-height: calc(100% - 115px);
       }
-    }
 
-    &__content {
-      min-height: calc(100% - 115px);
-    }
+      #{$this}__action {
+        position: sticky;
 
-    &__action {
-      position: sticky;
+        // padding: 40px 20px 30px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 11;
+        display: flex;
 
-      // padding: 40px 20px 30px;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 11;
-      display: flex;
+        // column-gap: 8px;
+        flex-wrap: nowrap;
+        background: #fff;
 
-      // column-gap: 8px;
-      flex-wrap: nowrap;
-      background: #fff;
-
-      button {
-        flex: 1 0 50%;
-        font-size: 16px !important;
-        height: 60px;
+        button {
+          flex: 1 0 50%;
+          font-size: 16px !important;
+          height: 60px;
+        }
       }
-    }
 
-    &--no-action {
-      .kw-popup__content {
-        min-height: calc(100% - 55px);
-        padding-bottom: 30px;
+      #{$this}--no-action {
+        .kw-popup__content {
+          min-height: calc(100% - 55px);
+          padding-bottom: 30px;
+        }
       }
     }
   }

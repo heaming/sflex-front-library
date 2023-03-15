@@ -24,7 +24,7 @@
           />
         </div>
         <kw-icon
-          class="kw-popup__header-close"
+          class="global-dialog__close-btn"
           size="24px"
           name="close_24"
           @mousedown.stop
