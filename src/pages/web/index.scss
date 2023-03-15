@@ -295,7 +295,7 @@
             font-weight: 500;
           }
 
-          &.curr {
+          &.active {
             border-bottom: 4px solid $primary;
             margin-bottom: -1px;
 
@@ -327,6 +327,10 @@
       display: flex;
       padding: 40px 40px 0;
       border-bottom: 1px solid $line-line;
+
+      &.lastTarget {
+        height: calc(100vh - 170px);
+      }
     }
   }
 

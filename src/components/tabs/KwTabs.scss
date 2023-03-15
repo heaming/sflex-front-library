@@ -47,16 +47,20 @@
     min-width: initial;
     min-height: $kw-tab-height;
 
-    > .q-tab__label {
-      @include typo("body", 400);
-    }
+    // > .q-tab__label {
+    @include typo("body", 400);
+
+    // }
   }
 
   &--active {
     background: $kw-tab-background-color-active;
     color: $black1;
 
-    .kw-tab__content > .q-tab__label {
+    // .kw-tab__content > .q-tab__label {
+    //   font-weight: 500;
+    // }
+    .kw-tab__content {
       font-weight: 500;
     }
   }
