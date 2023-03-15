@@ -28,7 +28,7 @@ export default () => {
     if (!!props.pageSize && !!props.totalCount) {
       return Math.max(10, Math.min(props.pageSize, props.totalCount));
     }
-    return 0;
+    return 10;
   });
 
   async function onResize() {

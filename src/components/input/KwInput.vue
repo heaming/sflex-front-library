@@ -136,7 +136,7 @@
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
-import { getMaxByteString, getByte } from '../../utils/string';
+import { getMaxByteString, getByte, getNumberWithComma } from '../../utils/string';
 import { preventSubmitEnter, stopAndPrevent } from '../../utils/private/event';
 import i18n from '../../i18n';
 
@@ -224,7 +224,7 @@ export default {
 
     const inputCounter = computed(() => {
       if (props.counter === true && props.maxlength > 0) {
-        return `${getByte(value.value ?? '')} / ${props.maxlength}`;
+        return `${getNumberWithComma(getByte(value.value ?? ''))} / ${getNumberWithComma(props.maxlength)}`;
       }
     });
 

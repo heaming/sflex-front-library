@@ -65,6 +65,11 @@ export default () => {
       name, meta, matched, params,
     } = to;
 
+    Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
+    if (router.options.history.state?.stateParam) {
+      router.options.history.state.stateParam = {};
+    }
+
     const index = tabViews.push({
       key: name,
       label: meta.menuName,
