@@ -24,6 +24,7 @@ export default (to, from, next) => {
   } else if (to.meta.pageUseCode === 'S' && from.fullPath === '/') {
     const targetPath = recursiveGetParentPath(to.meta.menuUid);
     const splitedPath = to.fullPath.split(`/${targetPath}`);
+    window.history.replaceState({}, '');
     next(splitedPath[0]);
   } else {
     to.meta.redirectedFrom = undefined;
