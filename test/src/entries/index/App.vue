@@ -25,8 +25,8 @@
       <web-header>
         <template #logo="{ goToHome }">
           <img
-            :src="tenantLogoUrl"
-            :alt="tenantLogoAlt"
+            src="~~@assets/images/kstation_standard.svg"
+            alt="K-Station"
             @click="goToHome()"
           >
         </template>
