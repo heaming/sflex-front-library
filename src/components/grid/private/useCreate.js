@@ -61,10 +61,13 @@ export default (DataClass, ViewClass) => {
     await onInit?.(data, view);
 
     // after initialized
-    view.__originalLayouts__ = view.saveColumnLayout();
+
     view.__gridName__ = name;
     view.__originalColumnInfos__ = view.getColumns().map((e) => pick(e, ['name', 'visible']));
     vm.proxy.applySavedLayouts?.();
+    setTimeout(() => {
+      view.__originalLayouts__ = view.saveColumnLayout();
+    });
   });
 
   onBeforeUnmount(() => {
