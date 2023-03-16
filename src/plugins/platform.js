@@ -55,6 +55,9 @@ export default {
         desktop: devicePlatform === 'desktop',
         mobile: devicePlatform === 'mobile',
         tablet: devicePlatform === 'tablet',
+        // desktop: false, // 테스트 시 원하는 모드의 값을 true로 변경
+        // mobile: false, // 테스트 시 원하는 모드의 값을 true로 변경
+        // tablet: true, // 테스트 시 원하는 모드의 값을 true로 변경
       }),
     );
 
