@@ -505,8 +505,11 @@ const normalizeExportOptions = (options = {}) => ({
   ...options,
   type: options.exportType || ExportType.EXCEL,
   target: ExportTarget.LOCAL,
-  indicator: options.indicator || 'hidden',
-  checkBar: options.checkBar || 'hidden',
+  indicator: options.indicator || 'default',
+  checkBar: options.checkBar || 'default',
+  footer: options.footer || 'default',
+  header: options.header || 'default',
+  headerSummary: options.headerSummary || 'default',
   fileName: options.fileName?.replace(/\.\w+$/, '') || 'export',
   timePostfix: options.timePostfix === true,
   exportLayout: options.exportLayout,
@@ -532,9 +535,28 @@ function exportGrid(view, options, onProgress, onComplete) {
   });
 }
 
+function getLayoutWidthByColumn(layout, columns) {
+  let width;
+  if (layout.items?.length > 0) {
+    layout.items.forEach((item) => { item.width = getLayoutWidthByColumn(item, columns) + 15; });
+  } else {
+    const column = columns.find((col) => col._name === layout.column);
+    width = column._width + 15;
+  }
+  return width;
+}
+
 export async function exportView(view, options) {
   options = normalizeExportOptions(options);
-
+  if (!options.exportLayout) {
+    options.exportLayout = view.__originalLayouts__;
+    if (options.exportLayout.includes(undefined)) {
+      view.__originalLayouts__ = view.saveColumnLayout();
+      options.exportLayout = view.__originalLayouts__;
+    }
+    const columns = view.getColumns();
+    options.exportLayout.forEach((layout) => { layout.width = getLayoutWidthByColumn(layout, columns); });
+  }
   if (options.searchCondition && !!options.exportData) {
     let message = '[검색조건]\n';
     const formItems = document.querySelectorAll('.kw-search .kw-form-item');
