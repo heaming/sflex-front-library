@@ -378,6 +378,10 @@
     &__node-content {
       flex: 1 1 0%;
 
+      &.ellipsis {
+        width: 186px;
+      }
+
       &:hover {
         font-weight: 500 !important;
         color: #222 !important;
@@ -514,6 +518,10 @@
           .q-icon {
             margin-right: 8px;
             font-size: inherit;
+          }
+
+          .ellipsis {
+            width: 220px;
           }
         }
 
