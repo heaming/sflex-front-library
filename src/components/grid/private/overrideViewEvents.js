@@ -188,7 +188,9 @@ export function overrideOnColumnPropertyChanged(view, vm) {
 
     // save personalize
     if (['displayIndex', 'visible'].includes(property)) {
-      vm.proxy.saveLayouts?.();
+      // 그리드 직접 수정시에는 레이아웃 저장을 막고
+      // 컨텍스트 메뉴로 띄워서 저장하도록 설정.
+      // vm.proxy.saveLayouts?.();
     }
 
     // resize
@@ -282,17 +284,19 @@ export function overrideOnShowEditor(view) {
         attrs['attr-for-selector'] = 'aria';
         setTimeout(() => {
           const element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
-          element.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
-          element.classList.add(textAlignStyle);
-          if (textAlignStyle === 'text-right') {
-            element.classList.add('pr-21');
-          }
-          const dropdownId = element.getAttribute('aria-owns');
-          const dropdownEl = document.getElementById(dropdownId);
-          dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
-          dropdownEl.classList.add(textAlignStyle);
-          if (textAlignStyle === 'text-right') {
-            dropdownEl.classList.add('pr-21');
+          if (element) {
+            element.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
+            element.classList.add(textAlignStyle);
+            if (textAlignStyle === 'text-right') {
+              element.classList.add('pr-21');
+            }
+            const dropdownId = element.getAttribute('aria-owns');
+            const dropdownEl = document.getElementById(dropdownId);
+            dropdownEl.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
+            dropdownEl.classList.add(textAlignStyle);
+            if (textAlignStyle === 'text-right') {
+              dropdownEl.classList.add('pr-21');
+            }
           }
         });
       }

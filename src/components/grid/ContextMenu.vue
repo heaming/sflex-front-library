@@ -60,12 +60,54 @@
           </kw-list>
         </kw-menu>
       </kw-item>
+      <kw-item clickable>
+        <kw-item-section>
+          {{ $t('MSG_TXT_GRID_PERSONALIZE', null, '그리드 개인화') }}
+        </kw-item-section>
+        <kw-item-section side>
+          <kw-icon name="arrow_right" />
+        </kw-item-section>
+        <kw-menu
+          :ref="(vm) => menuRefs[2] = vm"
+          anchor="top end"
+          self="top start"
+          no-focus
+          no-refocus
+          :transition-duration="0"
+        >
+          <kw-list
+            dense
+            item-padding="0 10px"
+          >
+            <kw-item
+              clickable
+              @click="onClickSaveLayouts"
+            >
+              <kw-item-section>
+                개인화 저장
+              </kw-item-section>
+            </kw-item>
+            <kw-item
+              clickable
+              @click="onClickInitLayouts"
+            >
+              <kw-item-section>
+                초기화
+              </kw-item-section>
+            </kw-item>
+          </kw-list>
+        </kw-menu>
+      </kw-item>
     </kw-list>
   </kw-menu>
 </template>
 
 <script>
+import { pick } from 'lodash-es';
 import { addClickOutside, removeClickOutside } from '../../utils/private/clickOutside';
+import { localStorage } from '../../plugins/storage';
+import { PageUniqueIdContextKey } from '../../consts/private/symbols';
+import { notify } from '../../plugins/notify';
 
 export default {
   name: 'ContextMenu',
@@ -86,6 +128,13 @@ export default {
         view = undefined;
       }
     }
+
+    const {
+      createUniqueId,
+    } = inject(PageUniqueIdContextKey, {});
+
+    let storageLayoutsKey;
+    let storageKey;
 
     const menuRefs = ref([]);
     const contentEls = computed(() => menuRefs.value.map((e) => e && e.contentEl));
@@ -122,8 +171,11 @@ export default {
 
     function updateContextConfig() {
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
+      const gridName = view.__gridName__;
       const layouts = view.saveColumnLayout();
       const viewOptions = view.header.visible ? recursiveCreateViewOptions(layouts) : [];
+      storageKey = createUniqueId(gridName); // use name props in useObserverChildProps
+      storageLayoutsKey = `${storageKey}__layouts`;
 
       contextConfig.value = {
         column,
@@ -133,7 +185,6 @@ export default {
 
     function beforeShow() {
       if (view.isEditing()) view.commit();
-
       updateContextConfig();
       addClickOutside(clickOutsideProps);
     }
@@ -147,6 +198,45 @@ export default {
       updateContextConfig();
     }
 
+    function initLayouts() {
+      if (view) {
+        view.beginUpdate();
+        view.__ignoreOnColumnPropertyChanged__ = true;
+
+        view.setColumnLayout(view.__originalLayouts__);
+
+        view.__originalColumnInfos__.forEach((e) => {
+          view.setColumnProperty(e.name, 'visible', e.visible === true);
+        });
+
+        view.endUpdate();
+        setTimeout(() => {
+          view.__ignoreOnColumnPropertyChanged__ = false;
+        });
+      }
+    }
+
+    function onClickSaveLayouts() {
+      console.log(storageLayoutsKey);
+      if (view) {
+        const layouts = view.saveColumnLayout();
+        const columns = view.getColumns().map((e) => pick(e, ['name', 'visible']));
+        localStorage.set(storageLayoutsKey, { layouts, columns });
+        notify('개인화 저장이 완료되었습니다.');
+        menuRefs.value[0]?.hide();
+      }
+    }
+
+    function onClickInitLayouts() {
+      console.log(storageLayoutsKey);
+      if (view) {
+        initLayouts();
+        localStorage.remove(storageLayoutsKey);
+        notify('개인화가 초기화되었습니다.');
+        menuRefs.value[0]?.hide();
+      }
+    }
+
     return {
       isReady,
       contextConfig,
@@ -155,6 +245,9 @@ export default {
       beforeShow,
       beforeHide,
       onClickViewOption,
+      onClickSaveLayouts,
+      onClickInitLayouts,
+      initLayouts,
     };
   },
 };

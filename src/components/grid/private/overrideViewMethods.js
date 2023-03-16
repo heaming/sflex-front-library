@@ -1,4 +1,5 @@
 import { cloneDeep, defaultsDeep, map, merge } from 'lodash-es';
+import dayjs from 'dayjs';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 import {
@@ -217,7 +218,15 @@ function setColumnRenderer(column, { dataType }) {
 
         if (ValueType.TEXT) {
           defaultsDeep(column, {
-            textFormat: getTextDatetimeFormat(column.datetimeFormat),
+            ...(column.datetimeFormat === 'yyyy-MM-dd' ? {
+              displayCallback: (g, i, v) => {
+                if (v) {
+                  if (v?.length >= 9) return dayjs(v, 'YYYYMMDDHH24MISS').format('YYYY-MM-DD');
+                  return dayjs(v, 'YYYYMMDD').format('YYYY-MM-DD');
+                }
+                return v;
+              },
+            } : { textFormat: getTextDatetimeFormat(column.datetimeFormat) }),
           });
         }
       }
@@ -286,9 +295,6 @@ function setColumnEditor(column, { dataType }) {
       column.editor.datetimeFormat = getSessionDatetimeFormat(column.editor.datetimeFormat).replace(/[^ymdhms]/gi, '');
 
       defaultsDeep(column, {
-        ...(dataType === ValueType.TEXT ? {
-          textFormat: getTextDatetimeFormat(column.datetimeFormat),
-        } : {}),
         editor: {
           mask: {
             editMask: column.editor.datetimeFormat.replace(/[ymdhms]/gi, '9'),
@@ -298,6 +304,19 @@ function setColumnEditor(column, { dataType }) {
         },
       });
 
+      if (dataType === ValueType.TEXT) {
+        defaultsDeep(column, {
+          ...(column.datetimeFormat === 'yyyy-MM-dd' ? {
+            displayCallback: (g, i, v) => {
+              if (v) {
+                if (v?.length >= 9) return dayjs(v, 'YYYYMMDDHH24MISS').format('YYYY-MM-DD');
+                return dayjs(v, 'YYYYMMDD').format('YYYY-MM-DD');
+              }
+              return v;
+            },
+          } : { textFormat: getTextDatetimeFormat(column.datetimeFormat) }),
+        });
+      }
       break;
     }
   }
@@ -483,6 +502,7 @@ export function overrideDestory(view) {
     delete view.__originalLayouts__;
     delete view.__originalColumnInfos__;
     delete view.__registeredEvents__;
+    delete view.__gridName__;
     delete view.__columns__;
     delete view.__validationErrors__;
     delete view.__treeKey__;

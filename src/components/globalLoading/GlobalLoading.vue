@@ -5,15 +5,28 @@
     class="global-loading"
     tabindex="-1"
   >
-    <q-circular-progress
-      v-if="isProgress"
-      show-value
-      :value="progressValue"
-      :animation-speed="LOADING_PROGRESS_ANIMATION_SPEED"
-    />
-    <q-spinner
-      v-else
-    />
+    <!--    <q-circular-progress-->
+    <!--      v-if="isProgress"-->
+    <!--      show-value-->
+    <!--      :value="progressValue"-->
+    <!--      :animation-speed="LOADING_PROGRESS_ANIMATION_SPEED"-->
+    <!--    />-->
+    <div
+      class="loading-fading-circle"
+    >
+      <div class="loading-circle1 loading-circle" />
+      <div class="loading-circle2 loading-circle" />
+      <div class="loading-circle3 loading-circle" />
+      <div class="loading-circle4 loading-circle" />
+      <div class="loading-circle5 loading-circle" />
+      <div class="loading-circle6 loading-circle" />
+      <div class="loading-circle7 loading-circle" />
+      <div class="loading-circle8 loading-circle" />
+      <div class="loading-circle9 loading-circle" />
+      <div class="loading-circle10 loading-circle" />
+      <div class="loading-circle11 loading-circle" />
+      <div class="loading-circle12 loading-circle" />
+    </div>
   </div>
 </template>
 

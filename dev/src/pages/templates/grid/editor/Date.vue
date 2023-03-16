@@ -34,7 +34,8 @@ function initGrd(data, view) {
   const fields = [
     {
       fieldName: 'date01',
-      dataType: 'datetime', // default value, 생략 가능
+      // dataType: 'date', // default value, 생략 가능
+      // datetimeFormat: 'yyyy/MM/dd',
     },
     {
       fieldName: 'date02',
@@ -51,17 +52,21 @@ function initGrd(data, view) {
       datetimeFormat: 'date', // default value, 생략 가능
       editor: {
         type: 'btdate',
-        datetimeFormat: 'date', // default value, 생략 가능
+        // datetimeFormat: 'date', // default value, 생략 가능
       },
     },
     {
       fieldName: 'date02',
       header: 'Custom (datetimeFormat)',
       datetimeFormat: 'datetime',
-      editor: {
-        type: 'btdate',
-        // datetimeFormat: 'datetime', // 없을 시, column.datetimeFormat으로 설정 (즉, column.datetimeFormat과 같으면 생략 가능)
-      },
+      // editor: {
+      //   type: 'btdate',
+      //   datetimeFormat: 'datetime', // 없을 시, column.datetimeFormat으로 설정 (즉, column.datetimeFormat과 같으면 생략 가능)
+      // },
+      // displayCallback(g, i, v) {
+      //   console.log(g, i, v);
+      //   return 'test';
+      // },
     },
     {
       fieldName: 'date03',
@@ -78,7 +83,7 @@ function initGrd(data, view) {
 
   data.setRows([
     {
-      date01: dayjs().add(-1, 'M').format('YYYYMMDD'),
+      date01: dayjs().add(-1, 'M').format('YYYYMMDDHHmmss'),
       date02: dayjs().add(-1, 'M').format('YYYYMMDDHHmmss'),
       date03: dayjs().add(-1, 'M').format('YYYYMMDDHHmmss'),
     },
