@@ -502,6 +502,7 @@ export function overrideDestory(view) {
     delete view.__originalLayouts__;
     delete view.__originalColumnInfos__;
     delete view.__registeredEvents__;
+    delete view.__gridName__;
     delete view.__columns__;
     delete view.__validationErrors__;
     delete view.__treeKey__;

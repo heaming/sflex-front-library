@@ -26,7 +26,7 @@ export const useCreateProps = {
 
 export default (DataClass, ViewClass) => {
   const vm = getCurrentInstance();
-  const { onInit } = vm.props;
+  const { onInit, name } = vm.props;
 
   const containerRef = ref();
   const contextMenuRef = ref();
@@ -62,6 +62,7 @@ export default (DataClass, ViewClass) => {
 
     // after initialized
     view.__originalLayouts__ = view.saveColumnLayout();
+    view.__gridName__ = name;
     view.__originalColumnInfos__ = view.getColumns().map((e) => pick(e, ['name', 'visible']));
     vm.proxy.applySavedLayouts?.();
   });

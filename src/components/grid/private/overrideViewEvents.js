@@ -188,7 +188,9 @@ export function overrideOnColumnPropertyChanged(view, vm) {
 
     // save personalize
     if (['displayIndex', 'visible'].includes(property)) {
-      vm.proxy.saveLayouts?.();
+      // 그리드 직접 수정시에는 레이아웃 저장을 막고
+      // 컨텍스트 메뉴로 띄워서 저장하도록 설정.
+      // vm.proxy.saveLayouts?.();
     }
 
     // resize
