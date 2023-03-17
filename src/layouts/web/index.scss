@@ -460,7 +460,7 @@
       padding: 16px 20px;
 
       .kw-btn.q-btn {
-        flex: 1;
+        // flex: 1;
         padding: 0 8px 0 4px;
         min-height: 24px;
         max-height: 24px;
@@ -518,6 +518,10 @@
           .q-icon {
             margin-right: 8px;
             font-size: inherit;
+
+            & + .ellipsis {
+              width: 198px;
+            }
           }
 
           .ellipsis {
