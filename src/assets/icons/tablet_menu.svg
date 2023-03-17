@@ -1,0 +1,19 @@
+<svg id="tablet_menu" data-name="full_view(24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g data-name="사각형 151642" style="stroke:#fff;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h8v8H0z" transform="translate(3 3)"/>
+        <path style="fill:none" d="M.75.75h6.5v6.5H.75z" transform="translate(3 3)"/>
+    </g>
+    <g data-name="사각형 151643" style="stroke:#fff;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h8v8H0z" transform="translate(13 3)"/>
+        <path style="fill:none" d="M.75.75h6.5v6.5H.75z" transform="translate(13 3)"/>
+    </g>
+    <g data-name="사각형 151644" style="stroke:#fff;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h8v8H0z" transform="translate(3 13)"/>
+        <path style="fill:none" d="M.75.75h6.5v6.5H.75z" transform="translate(3 13)"/>
+    </g>
+    <g data-name="사각형 151645" style="stroke:#fff;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h8v8H0z" transform="translate(13 13)"/>
+        <path style="fill:none" d="M.75.75h6.5v6.5H.75z" transform="translate(13 13)"/>
+    </g>
+</svg>

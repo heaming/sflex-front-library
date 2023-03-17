@@ -27,7 +27,7 @@
           v-model.trim="searchText"
           class="web-header__search"
           placeholder="메뉴검색"
-          icon="search"
+          icon="search_24"
           maxlength="25"
           underline
           dense
