@@ -12,9 +12,10 @@ body.desktop .mobile-layout {
 .mobile-footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 50px;
   padding: 0 20px;
-  background: #fff;
+  background: #ccc; // 아이콘이 하얀색이라 임시로 배경 컬러 수정
 }
 
 /*

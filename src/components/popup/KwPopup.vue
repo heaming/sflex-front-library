@@ -6,6 +6,7 @@
     square
   >
     <q-card-section
+      v-if="!noHeader"
       :class="headerClass"
       v-bind="draggableEvents"
     >
@@ -88,6 +89,7 @@ export default {
     title: { type: [Boolean, String], default: undefined },
     noCloseBtn: { type: Boolean, default: false },
     onBeforeClose: { type: Function, default: undefined },
+    noHeader: { type: Boolean, default: false },
   },
 
   setup(props) {

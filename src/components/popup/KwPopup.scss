@@ -349,3 +349,9 @@ body.mobile:not(.tablet) {
 .q-dialog__inner--minimized:has(div.kw-popup--full) {
   padding: 0;
 }
+
+body.tablet {
+  .fixed-full {
+    left: 62px !important;
+  }
+}
