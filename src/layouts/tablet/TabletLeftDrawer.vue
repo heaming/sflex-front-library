@@ -22,18 +22,12 @@
       </div>
 
       <div class="tablet-left-drawer__content__bottom">
-        <!-- 아이콘은 flex-direction이 column-reverse 라서 역순으로 나온다. -->
-        <!-- <q-icon
-          class="mt25 mb30"
-          size="35px"
-          name="gnb_menu"
-          @click.stop="openMenuPopup"
-        /> -->
         <kw-btn
           borderless
           icon="tablet_menu"
           style="font-size: 24px;"
           class="menu_icon curr"
+          @click="openTotalMenu"
         />
         <kw-btn
           borderless
@@ -59,21 +53,26 @@
 </template>
 
 <script>
+import { modal } from '../../plugins/modal';
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
+const showTotalMenu = ref(false);
 export default {
   name: 'TabletLeftDrawer',
-  components: {
-  },
-
   setup() {
-    function openMenuPopup() {
-      console.log('test');
+    async function openTotalMenu() {
+      if (showTotalMenu.value) return;
+      showTotalMenu.value = true;
+      await modal({
+        component: async () => await import('../../pages/tablet/TabletTotalMenuP.vue'),
+      });
+      showTotalMenu.value = false;
     }
 
     return {
       ...useLeftDrawerExpand(),
-      openMenuPopup,
+      openTotalMenu,
+      showTotalMenu,
     };
   },
 };
