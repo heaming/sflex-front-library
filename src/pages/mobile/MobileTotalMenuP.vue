@@ -1,15 +1,12 @@
 <template>
   <kw-popup
-    title="태블릿 전체메뉴"
+    title="모바일 전체메뉴"
     no-header
-    class="tablet"
+    class="mobile"
     size="full"
   >
-    <div
-      id="gnb_menu_tablet"
-      class="gnb_menu_tablet"
-    >
-      <div class="gnb_menu_tablet--header">
+    <div class="gnb_menu_mobile">
+      <div class="gnb_menu_mobile--header">
         <kw-btn
           borderless
           icon-right="arrow_right_24"
@@ -24,55 +21,21 @@
             style="font-size: 24px;"
             class="alert_on"
           /><!-- 아이콘명은 그대로 두고 알림이 있을 시 클래스 : alert_on, 없을 시 클래스 : alert_off -->
-          <span>
-            <kw-btn
-              borderless
-              icon="setting_24"
-              style="font-size: 24px;"
-              class="ml20"
-            />
-            <kw-menu
-              class="mb10 w154 py8 px16"
-              anchor="bottom left"
-              self="top middle"
-              :offset="[30, 5]"
-            >
-              <kw-btn
-                borderless
-                label="비밀번호 변경"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              />
-              <kw-btn
-                borderless
-                label="개인 홈 설정"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              />
-              <kw-btn
-                borderless
-                label="모바일프린터 초기화"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              />
-              <kw-btn
-                borderless
-                label="공문조회"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              />
-              <kw-btn
-                borderless
-                label="로그아웃"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              />
-            </kw-menu>
-          </span>
+          <kw-btn
+            borderless
+            icon="setting_24"
+            style="font-size: 24px;"
+            class="ml20"
+          /><!-- 클릭시 버텀시트 활성 -->
         </div>
       </div>
-      <div class="gnb_menu_tablet--body">
-        <nav class="gnb_menu_tablet--nav">
+      <div class="gnb_menu_mobile--body">
+        <nav class="gnb_menu_mobile--nav">
           <ul>
             <li
               v-for="(menu, menuIdx) in depth2Menus"
               :key="menuIdx"
-              class="tablet-menu__nav-item"
+              class="mobile-menu__nav-item"
             >
               <a
                 :href="`menu__${menuIdx}`"
@@ -84,8 +47,8 @@
           </ul>
         </nav>
         <ul
-          id="gnb_menu_tablet--ul-depth1"
-          class="gnb_menu_tablet--ul-depth1"
+          id="gnb_menu_mobile--ul-depth1"
+          class="gnb_menu_mobile--ul-depth1"
         >
           <li
             v-for="(depth3Menu, menuIdx) in groupedDepth3Menus"
@@ -106,13 +69,13 @@
             </h2>
             <ul
               :ref="depth3Menu.editable !== undefined ? 'sortableUl' : 'nonSortableUl'"
-              class="gnb_menu_tablet--ul-depth2"
+              class="gnb_menu_mobile--ul-depth2"
               :class="{'sortable-menu': depth3Menu.editable !== undefined }"
             >
               <li
-                v-for="(depth3SubMenu, subIdx) in depth3Menu.menus"
-                :key="subIdx"
-                :data-id="subIdx"
+                v-for="(depth3SubMenu, subIndex) in depth3Menu.menus"
+                :key="subIndex"
+                :data-id="subIndex"
               >
                 <a
                   href="#"
@@ -243,6 +206,7 @@ async function updateBookmark(isCreate, menu) {
     } else {
       await deleteBookmark(menu);
     }
+
     groupedDepth3Menus.value.shift();
     groupedDepth3Menus.value.unshift(bookmarks.value);
   }
@@ -270,24 +234,24 @@ function makeScroll(navLinks) {
     const targetElem = document.getElementById(btn.querySelector('a').getAttribute('href'));
 
     const linkST = ScrollTrigger.create({
-      scroller: '#gnb_menu_tablet--ul-depth1',
+      scroller: '#gnb_menu_mobile--ul-depth1',
       trigger: targetElem,
       start: 'top top',
     });
 
     ScrollTrigger.create({
-      scroller: '#gnb_menu_tablet--ul-depth1',
+      scroller: '#gnb_menu_mobile--ul-depth1',
       // markers: true, // 스크롤위치 확인용 마커
       start: 'top 10%+=10',
       trigger: targetElem,
-      end: 'bottom 10%+=10',
+      end: 'bottom 10%-=10',
       toggleClass: 'curr',
       onToggle: (self) => self.isActive && setActive(navLinks, btn),
     });
 
     btn.addEventListener('click', (evt) => {
       evt.preventDefault();
-      gsap.to('.gnb_menu_tablet--ul-depth1', {
+      gsap.to('.gnb_menu_mobile--ul-depth1', {
         duration: 1,
         scrollTo: { y: linkST.start, offsetY: 10 },
       });
@@ -328,7 +292,7 @@ function createSortable() {
 
 onMounted(() => {
   setTimeout(() => {
-    const navLinks = computed(() => gsap.utils.toArray('.tablet-menu__nav-item'));
+    const navLinks = computed(() => gsap.utils.toArray('.mobile-menu__nav-item'));
     makeScroll(navLinks);
     createSortable();
   }, 50);
