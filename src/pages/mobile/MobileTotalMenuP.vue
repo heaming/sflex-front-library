@@ -192,9 +192,6 @@ async function saveBookmarks(order) {
   }));
   await http.put('/sflex/common/common/bookmarks', saveParams);
   await dispatch('meta/fetchBookmarks');
-
-  groupedDepth3Menus.value.shift();
-  groupedDepth3Menus.value.unshift(bookmarks.value);
 }
 
 const isAuthenticated = getters['meta/isAuthenticated'];
