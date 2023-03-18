@@ -26,6 +26,7 @@ export default () => {
     await Promise.all([
       store.dispatch('meta/fetchApps'),
       store.dispatch('meta/fetchMenus'),
+      store.dispatch('meta/fetchBookmarks'),
     ]);
   }
 
