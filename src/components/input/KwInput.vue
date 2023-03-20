@@ -307,6 +307,12 @@ export default {
         } else if (props.lowerCase) {
           val = val.toLowerCase();
         }
+
+        if (props.mask === 'number') {
+          val = getNumberWithComma(Number(val.replace(/,/gi, '')));
+          if (val === 'NaN') val = '';
+          if (val > Number.MAX_SAFE_INTEGER) val = value.value;
+        }
       }
 
       const el = inputRef.value.getNativeElement();
@@ -323,16 +329,29 @@ export default {
           return onUpdateTextValue(val);
       }
     }
+
     const computedMask = computed(() => {
       const newVal = inputRef?.value?.modelValue;
       if (props.mask === 'telephone') {
         if (newVal?.startsWith('02')) {
+          if (!props.unmaskedValue) {
+            if (newVal?.length <= 11) return '##-###-#####';
+            return '##-####-####';
+          }
           if (newVal?.length <= 9) return '##-###-#####';
           return '##-####-####';
         }
 
+        if (!props.unmaskedValue) {
+          if (newVal?.length <= 12) return '###-###-#####';
+          return '###-####-####';
+        }
         if (newVal?.length <= 10) return '###-###-#####';
         return '###-####-####';
+      }
+
+      if (props.mask === 'number') {
+        return undefined;
       }
 
       return props.mask;
