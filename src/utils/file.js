@@ -50,6 +50,23 @@ export async function upload(file, targetPath = targetPaths[0]) {
   return normalizeUploadResponse(response.data);
 }
 
+export async function getImageSrcFromFile(fileUid) {
+  const params = normalizeDownloadRequest({ fileUid });
+
+  const response = await http.get('/sflex/common/common/file/storage/download', {
+    params,
+    responseType: 'blob',
+  });
+  const imageBlob = new Blob([response.data], { type: 'image/png' });
+  const reader = new FileReader();
+  return new Promise((resolve) => {
+    reader.onload = (ev) => {
+      resolve(ev.target.result);
+    };
+    reader.readAsDataURL(imageBlob);
+  });
+}
+
 export async function download(fileInfo, targetPath = targetPaths[0]) {
   throwIfIsInvalidTargetPath(targetPath);
   const params = normalizeDownloadRequest(fileInfo);
