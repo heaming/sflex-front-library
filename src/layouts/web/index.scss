@@ -515,17 +515,22 @@
           font-size: 14px;
           color: $black2;
 
+          .drawer-bookmark__wrap-text {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            min-width: 0;
+          }
+
           .q-icon {
             margin-right: 8px;
             font-size: inherit;
-
-            & + .ellipsis {
-              width: 198px;
-            }
+            flex: 0 0 auto;
           }
 
           .ellipsis {
-            width: 220px;
+            // width: 220px;
+            flex: 1 1 auto;
           }
         }
 

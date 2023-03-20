@@ -61,45 +61,38 @@
           />
           <div
             v-else-if="node.folderYn === 'Y'"
-            class="row items-center"
-            style="width: 100%;"
+            class="drawer-bookmark__wrap-text"
           >
-            <div
-              class="ellipsis"
+            <div class="ellipsis">
+              {{ node.bookmarkName }}
+            </div>&nbsp;({{ node.actualChildrenLength }})
+            <kw-tooltip
+              show-when-ellipsised
+              anchor="center right"
+              self="center start"
+              class="lnb_tooltip lnb_depth_tooltip"
             >
               {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
-              <kw-tooltip
-                show-when-ellipsised
-                anchor="center right"
-                self="center start"
-                class="lnb_tooltip lnb_depth_tooltip"
-              >
-                {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
-              </kw-tooltip>
-            </div>
+            </kw-tooltip>
           </div>
           <div
             v-else
-            class="row items-center"
-            style="width: 100%;"
+            class="drawer-bookmark__wrap-text"
           >
-            <div
-              class="ellipsis"
-            >
-              <kw-icon
-                name="bookmark_on"
-                class="mt-4"
-              />
+            <kw-icon
+              name="bookmark_on"
+            />
+            <div class="ellipsis">
               {{ node.bookmarkName }}
-              <kw-tooltip
-                show-when-ellipsised
-                anchor="center right"
-                self="center start"
-                class="lnb_tooltip lnb_depth_tooltip"
-              >
-                {{ node.bookmarkName }}
-              </kw-tooltip>
             </div>
+            <kw-tooltip
+              show-when-ellipsised
+              anchor="center right"
+              self="center start"
+              class="lnb_tooltip lnb_depth_tooltip"
+            >
+              {{ node.bookmarkName }}
+            </kw-tooltip>
           </div>
         </template>
         <template #body="{ node }">
