@@ -97,6 +97,12 @@ interface FileUtil {
    * @param header 헤더가 끝나는 행 번호, default `1`
    */
   readExcel(file: File, columns?: string[], header?: number): Promise<Array<Record<string, any>>>;
+
+  /**
+   * image파일의 src를 리턴한다 (data:image/png;base64,데이터)
+   * @param fileUid
+   */
+  readExcel(fileUid: string): string;
 }
 
 export const fileUtil: FileUtil;
