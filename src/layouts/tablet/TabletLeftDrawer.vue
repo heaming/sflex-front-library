@@ -65,6 +65,7 @@ export default {
       showTotalMenu.value = true;
       await modal({
         component: async () => await import('../../pages/tablet/TabletTotalMenuP.vue'),
+        dialogProps: { 'transition-duration': 50 },
       });
       showTotalMenu.value = false;
     }
