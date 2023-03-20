@@ -57,6 +57,13 @@
               :label="$t('MSG_TIT_HOME_MGT')"
               @click="openHomeMgtPopup"
             />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              label="(임시) 세션변경"
+              @click="openSetSessionP"
+            />
             <q-btn-toggle
               v-model="zoomSize"
               v-close-popup
@@ -95,20 +102,16 @@
         <div
           class="web-header__separator"
         />
-        <div
-          @dblclick="openSetSessionP"
-        >
-          <kw-icon
-            class="web-header__icon"
-            name="gnb_menu"
-            clickable
-            @click="openTotalMenuP"
-          />
-          <web-total-menu-p
-            v-if="totalMenu"
-            @close-tot="closeTotalMenuP"
-          />
-        </div>
+        <kw-icon
+          class="web-header__icon"
+          name="gnb_menu"
+          clickable
+          @click="openTotalMenuP"
+        />
+        <web-total-menu-p
+          v-if="totalMenu"
+          @close-tot="closeTotalMenuP"
+        />
       </div>
     </q-toolbar>
   </q-header>
