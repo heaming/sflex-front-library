@@ -295,4 +295,8 @@ onMounted(() => {
   }, 50);
 });
 
+onBeforeUnmount(() => {
+  destroySortable();
+});
+
 </script>
