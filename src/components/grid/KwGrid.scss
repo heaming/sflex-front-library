@@ -537,6 +537,12 @@
   }
 }
 
+.rg-footer-cell {
+  .rg-footer-renderer {
+    padding: 0 19px 0 12px;
+  }
+}
+
 .rg-grid {
   border: 0;
   border-top: 1px solid $black1;

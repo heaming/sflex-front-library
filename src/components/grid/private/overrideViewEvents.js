@@ -354,22 +354,24 @@ export function overrideOnEditChange(view) {
 export function overrideOnGetEditValue(view) {
   wrapEvent(view, onGetEditValue, (g, index, editResult) => {
     let { value } = editResult;
-
+    value = value?.trim();
     const { editor } = g.columnByName(index.column);
     const type = editor?.type;
 
     if (type === 'telephone') {
+      const regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
       if (value?.startsWith('02')) {
-        if (value?.length <= 9) value = `${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5)}`;
-        else value = `${value.substring(0, 2)}-${value.substring(2, 6)}-${value.substring(6)}`;
-      } else if (value?.length <= 10) value = `${value.substring(0, 3)}-${value.substring(3, 6)}-${value.substring(6)}`;
-      else value = `${value.substring(0, 3)}-${value.substring(3, 7)}-${value.substring(7)}`;
+        value = value.replace(/-/gi, '');
+        if (value?.length <= 9) value = value.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+        else value = value.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+      } else if (value?.length <= 10) value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      else value = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+
+      if (!regex.test(value)) value = '';
     }
 
     // text
     if ([undefined, 'text', 'line', 'multiline'].includes(type)) {
-      value = value?.trim();
-
       if (value && editor?.maxLength) {
         value = getMaxByteString(value, editor.maxLength);
       }
