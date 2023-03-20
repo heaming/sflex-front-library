@@ -155,7 +155,7 @@ export default {
     const fileImageSrc = ref('');
     onMounted(async () => {
       if (props.fileUid) {
-        const src = await getImageSrcFromFile('FIL-C089DF0F-DF62-4EDE-94E0-99BE88FBDA52');
+        const src = await getImageSrcFromFile(props.fileUid);
         fileImageSrc.value = src;
       }
     });
