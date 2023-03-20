@@ -33,11 +33,11 @@ export default {
     ...useStretchProps,
 
     modelValue: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default: undefined,
     },
     val: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default: undefined,
     },
     label: {

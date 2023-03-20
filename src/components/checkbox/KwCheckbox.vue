@@ -45,7 +45,7 @@ export default {
     ...useStretchProps,
 
     modelValue: {
-      type: [String, Number, Boolean, Array],
+      type: [String, Number, Boolean, Array, Object],
       default: undefined,
     },
     trueValue: {
@@ -69,7 +69,7 @@ export default {
       default: false,
     },
     val: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default: undefined,
     },
     label: {
