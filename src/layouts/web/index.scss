@@ -460,7 +460,7 @@
       padding: 16px 20px;
 
       .kw-btn.q-btn {
-        // flex: 1;
+        flex: 1;
         padding: 0 8px 0 4px;
         min-height: 24px;
         max-height: 24px;
@@ -515,17 +515,22 @@
           font-size: 14px;
           color: $black2;
 
+          .drawer-bookmark__wrap-text {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            min-width: 0;
+          }
+
           .q-icon {
             margin-right: 8px;
             font-size: inherit;
-
-            & + .ellipsis {
-              width: 198px;
-            }
+            flex: 0 0 auto;
           }
 
           .ellipsis {
-            width: 220px;
+            // width: 220px;
+            flex: 1 1 auto;
           }
         }
 

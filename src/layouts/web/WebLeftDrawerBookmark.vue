@@ -7,67 +7,65 @@
     </web-left-drawer-title>
 
     <kw-scroll-area>
-      <div class="drawer-bookmark__action">
-        <kw-btn
-          dense
-          icon="plus"
-          no-wrap
-          :label="$t('MSG_BTN_ALL_SPREAD')"
-          border-color="line-line"
-          @click="setExpandedAll(true)"
-        />
-        <kw-btn
-          dense
-          icon="minus"
-          no-wrap
-          :label="$t('MSG_BTN_ALL_FOLD')"
-          border-color="line-line"
-          @click="setExpandedAll(false)"
-        />
-        <kw-btn
-          dense
-          icon="write"
-          no-wrap
-          :label="$t('MSG_BTN_EDIT')"
-          border-color="line-line"
-          @click="onClickEdit"
-        />
-      </div>
-
-      <div
-        v-if="treeNodes.length === 0"
-        class="drawer-bookmark__placeholder"
-      >
-        <p>
-          {{ $t('MSG_TXT_BKMK_PLACEHOLDER') }}
-        </p>
-      </div>
-      <kw-tree
-        v-else
-        ref="treeRef"
-        :selected="selectedKey"
-        class="drawer-bookmark__tree"
-        :nodes="treeNodes"
-        node-key="bookmarkUid"
-        select-leaf-only
-        selected-color="black1"
-        :no-selection-unset="false"
-        @update:selected="onUpdateSelected"
-      >
-        <template #header="{ node }">
-          <div
-            v-if="node.bookmarkName === null"
-            class="drawer-bookmark__tree-dummy"
+      <div class="w262">
+        <div class="drawer-bookmark__action">
+          <kw-btn
+            dense
+            icon="plus"
+            no-wrap
+            :label="$t('MSG_BTN_ALL_SPREAD')"
+            border-color="line-line"
+            @click="setExpandedAll(true)"
           />
-          <div
-            v-else-if="node.folderYn === 'Y'"
-            class="row items-center"
-            style="width: 100%;"
-          >
+          <kw-btn
+            dense
+            icon="minus"
+            no-wrap
+            :label="$t('MSG_BTN_ALL_FOLD')"
+            border-color="line-line"
+            @click="setExpandedAll(false)"
+          />
+          <kw-btn
+            dense
+            icon="write"
+            no-wrap
+            :label="$t('MSG_BTN_EDIT')"
+            border-color="line-line"
+            @click="onClickEdit"
+          />
+        </div>
+        <div
+          v-if="treeNodes.length === 0"
+          class="drawer-bookmark__placeholder"
+        >
+          <p>
+            {{ $t('MSG_TXT_BKMK_PLACEHOLDER') }}
+          </p>
+        </div>
+        <kw-tree
+          v-else
+          ref="treeRef"
+          :selected="selectedKey"
+          class="drawer-bookmark__tree"
+          :nodes="treeNodes"
+          node-key="bookmarkUid"
+          select-leaf-only
+          selected-color="black1"
+          :no-selection-unset="false"
+          @update:selected="onUpdateSelected"
+        >
+          <template #header="{ node }">
             <div
-              class="ellipsis"
+              v-if="node.bookmarkName === null"
+              class="drawer-bookmark__tree-dummy"
+            />
+            <div
+              v-else-if="node.folderYn === 'Y'"
+              class="drawer-bookmark__wrap-text"
             >
-              {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
+              <div class="ellipsis">
+                {{ node.bookmarkName }}
+              </div>&nbsp;({{ node.actualChildrenLength }})
               <kw-tooltip
                 show-when-ellipsised
                 anchor="center right"
@@ -77,20 +75,16 @@
                 {{ node.bookmarkName }}&nbsp;({{ node.actualChildrenLength }})
               </kw-tooltip>
             </div>
-          </div>
-          <div
-            v-else
-            class="row items-center"
-            style="width: 100%;"
-          >
             <div
-              class="ellipsis"
+              v-else
+              class="drawer-bookmark__wrap-text"
             >
               <kw-icon
                 name="bookmark_on"
-                class="mt-4"
               />
-              {{ node.bookmarkName }}
+              <div class="ellipsis">
+                {{ node.bookmarkName }}
+              </div>
               <kw-tooltip
                 show-when-ellipsised
                 anchor="center right"
@@ -100,14 +94,14 @@
                 {{ node.bookmarkName }}
               </kw-tooltip>
             </div>
-          </div>
-        </template>
-        <template #body="{ node }">
-          <div v-if="node.menuPath">
-            {{ node.menuPath }}
-          </div>
-        </template>
-      </kw-tree>
+          </template>
+          <template #body="{ node }">
+            <div v-if="node.menuPath">
+              {{ node.menuPath }}
+            </div>
+          </template>
+        </kw-tree>
+      </div>
     </kw-scroll-area>
   </div>
 </template>
