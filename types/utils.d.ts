@@ -102,13 +102,14 @@ interface FileUtil {
    * image파일의 src를 리턴한다 (data:image/png;base64,데이터)
    * @param fileUid
    */
-  readExcel(fileUid: string): string;
+  getImageSrcFromFile(fileUid: string): string;
 }
 
 export const fileUtil: FileUtil;
 
 // Grid
 import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider, RowState } from 'realgrid';
+import { getImageSrcFromFile } from '../src/utils/file';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
