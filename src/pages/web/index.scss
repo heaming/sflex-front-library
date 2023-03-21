@@ -437,3 +437,111 @@
     z-index: 20;
   }
 }
+
+// gnb depth 메뉴
+.gnb_depth_menu {
+  position: absolute;
+  top: 71px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
+  z-index: 6000;
+  padding-left: 228px;
+  height: 410px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    background-clip: padding-box;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
+  & > ul {
+    width: 1416px !important;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    & > li {
+      padding: 24px 16px;
+      width: 175px;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: 24px;
+        bottom: 24px;
+        width: 1px;
+        background: $line-bg;
+      }
+
+      &:nth-child(8n)::after,
+      &:last-child::after {
+        display: none;
+      }
+
+      &:nth-child(8n+1)::before {
+        width: 1400px;
+        height: 1px;
+        content: "";
+        position: absolute;
+        left: 16px;
+        top: 0;
+        background: $line-bg;
+      }
+
+      &:first-child::before {
+        display: none;
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: $black1;
+        line-height: 24px;
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+
+      & > ul > li {
+        height: 35px;
+        line-height: 35px;
+
+        a {
+          width: 156px;
+          color: $black2;
+          font-size: 14px;
+          font-weight: 400;
+          text-decoration: none;
+          display: block;
+          height: 35px;
+          line-height: 35px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+
+          &:hover {
+            color: $primary;
+            text-decoration: underline;
+          }
+        }
+
+        &.curr a {
+          color: $primary;
+        }
+      }
+    }
+  }
+}

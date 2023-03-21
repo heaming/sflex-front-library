@@ -67,7 +67,6 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
-import { http } from '../../plugins/http';
 
 const { getters, commit } = useStore();
 const { push } = useRouter();
@@ -110,7 +109,8 @@ async function handleUpdateSelected(menuKey) {
 
 async function fetchMenus() {
   const apps = getters['meta/getApps'];
-  const menuPageRes = await http.get('/sflex/common/common/portal/menus-without-auth');
+  const menuPageRes = getters['meta/getTotalMenus'];
+  // const menuPageRes = await http.get('/sflex/common/common/portal/menus-without-auth');
 
   apps.forEach((app) => {
     const menus = menuPageRes.data.filter((v) => v.applicationId === app.applicationId);
@@ -130,7 +130,6 @@ await fetchMenus();
 const gnbRef = ref();
 onMounted(async () => {
   const navLinks = gsap.utils.toArray('.nav-item');
-  console.log(navLinks);
   function setActive(link) {
     navLinks.forEach((el) => el.classList.remove('active'));
     link.classList.add('active');
@@ -161,7 +160,6 @@ onMounted(async () => {
     });
 
     if (navLinks.length === idx + 1) {
-      console.log(targetElem);
       targetElem.classList.add('lastTarget');
     }
   });
