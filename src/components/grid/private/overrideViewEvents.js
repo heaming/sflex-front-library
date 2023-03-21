@@ -354,7 +354,7 @@ export function overrideOnEditChange(view) {
 export function overrideOnGetEditValue(view) {
   wrapEvent(view, onGetEditValue, (g, index, editResult) => {
     let { value } = editResult;
-    value = value?.trim();
+    value = value && typeof value !== 'number' ? value.trim() : value;
     const { editor } = g.columnByName(index.column);
     const type = editor?.type;
 
