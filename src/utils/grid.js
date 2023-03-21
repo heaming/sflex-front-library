@@ -517,6 +517,7 @@ const normalizeExportOptions = (options = {}) => ({
   lookupDisplay: options.lookupDisplay !== false,
   treeKey: options.treeKey,
   searchCondition: options.searchCondition !== false,
+  allColumns: options.allColumns === true,
 });
 
 function exportGrid(view, options, onProgress, onComplete) {
@@ -555,7 +556,10 @@ export async function exportView(view, options) {
       options.exportLayout = view.__originalLayouts__;
     }
     const columns = view.getColumns();
-    options.exportLayout.forEach((layout) => { layout.width = getLayoutWidthByColumn(layout, columns); });
+    options.exportLayout.forEach((layout) => {
+      layout.width = getLayoutWidthByColumn(layout, columns);
+      if (!options.allColumns) layout.visible = columns.find((col) => col._name === layout.column)?.visible;
+    });
   }
   if (options.searchCondition && !!options.exportData) {
     let message = '[검색조건]\n';
