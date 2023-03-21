@@ -1,5 +1,13 @@
 <template>
+  <img
+    v-if="fileUid"
+    :alt="fileUid"
+    :src="fileImageSrc"
+    :width="width"
+    :height="height"
+  >
   <q-img
+    v-else
     class="kw-image"
     :class="imageClass"
     v-bind="styleClassAttrs"
@@ -35,6 +43,7 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useImage from '../../composables/private/useImage';
+import { getImageSrcFromFile } from '../../utils/file';
 
 export default {
   name: 'KwImage',
@@ -129,6 +138,10 @@ export default {
       type: String,
       default: '16px',
     },
+    fileUid: {
+      typr: String,
+      default: '',
+    },
   },
 
   setup(props) {
@@ -139,12 +152,20 @@ export default {
     ]);
 
     const imgSrc = (src) => (imgCtx.getImageSourceUrl(src) ? imgCtx.getImageSourceUrl(src) : src);
+    const fileImageSrc = ref('');
+    onMounted(async () => {
+      if (props.fileUid) {
+        const src = await getImageSrcFromFile(props.fileUid);
+        fileImageSrc.value = src;
+      }
+    });
 
     return {
       ...useInheritAttrs(),
       ...useImage,
       imageClass,
       imgSrc,
+      fileImageSrc,
     };
   },
 };

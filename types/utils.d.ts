@@ -97,12 +97,19 @@ interface FileUtil {
    * @param header 헤더가 끝나는 행 번호, default `1`
    */
   readExcel(file: File, columns?: string[], header?: number): Promise<Array<Record<string, any>>>;
+
+  /**
+   * image파일의 src를 리턴한다 (data:image/png;base64,데이터)
+   * @param fileUid
+   */
+  getImageSrcFromFile(fileUid: string): string;
 }
 
 export const fileUtil: FileUtil;
 
 // Grid
 import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider, RowState } from 'realgrid';
+import { getImageSrcFromFile } from '../src/utils/file';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
