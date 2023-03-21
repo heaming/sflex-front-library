@@ -400,10 +400,12 @@
 
   &--required {
     & .q-field {
-      &__label::after {
-        content: "*";
-        display: contents;
-        color: $accent;
+      &__label {
+        > span:is(:first-of-type)::after {
+          content: "*";
+          display: contents;
+          color: $accent;
+        }
       }
     }
   }
