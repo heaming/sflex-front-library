@@ -84,10 +84,10 @@ async function fetchMenus() {
 }
 await fetchMenus();
 
-async function handleUpdateSelected(menuKey) {
+async function handleUpdateSelected(menuUid) {
   try {
-    await push({ name: menuKey });
-    commit('app/setSelectedGlobalMenuKey', menuKey);
+    await push({ name: menuUid });
+    commit('app/setSelectedGlobalMenuKey', menuUid || null);
     emit('closeGnbMenu');
   } catch (e) {
     if (isNavigationFailure(e, 1)) { // matcher not found..

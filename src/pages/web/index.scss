@@ -507,12 +507,17 @@
       }
 
       h3 {
+        display: block;
+        width: 143px;
         font-size: 16px;
         font-weight: 700;
         color: $black1;
         line-height: 24px;
         margin-top: 0;
         margin-bottom: 8px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
       & > ul > li {
@@ -520,7 +525,7 @@
         line-height: 35px;
 
         a {
-          width: 156px;
+          width: 143px;
           color: $black2;
           font-size: 14px;
           font-weight: 400;
