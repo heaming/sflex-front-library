@@ -96,6 +96,7 @@ const iconList1 = [
   'bookmark_on',
   'bookmark_outline',
   'calendar',
+  'camera',
   'checked',
   'checked_stepper',
   'clear',
