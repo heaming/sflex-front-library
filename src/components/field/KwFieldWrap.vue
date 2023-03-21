@@ -18,11 +18,12 @@
           class="kw-field-wrap__label"
         >
           <slot name="label">
-            {{ label ?? label }}
+            <span>{{ label ?? label }}</span>
             <q-icon
               v-if="hint"
               size="16px"
               name="info"
+              style="vertical-align: -3px;"
               @click="toggleHint"
             >
               <kw-tooltip v-model="showingHint">

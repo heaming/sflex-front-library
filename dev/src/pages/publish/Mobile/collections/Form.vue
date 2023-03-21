@@ -78,6 +78,9 @@
           </h3>
           <kw-input
             label="출발지"
+            required
+            hint="등록된 정보 외 연락처로 컨택한 경우
+        사유와 통화자명을 필수로 입력해주세요."
           />
           <kw-select
             label="운행목적"
@@ -292,6 +295,9 @@
 const example = `
 <kw-input
   label="출발지"
+  required
+  hint="등록된 정보 외 연락처로 컨택한 경우
+사유와 통화자명을 필수로 입력해주세요."
 />
 <kw-select
   label="운행목적"
