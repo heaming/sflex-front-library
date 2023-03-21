@@ -8,17 +8,30 @@
         />
       </div>
 
-      <div class="web-header__apps">
-        <a
-          v-for="{key, label} of apps"
-          :key="key"
-          class="web-header__link"
-          :class="{'web-header__link--active': isSelected(key)}"
-          @click="updateSelected(key)"
-        >
-          {{ label }}
-        </a>
-      </div>
+      <kw-click-outside
+        @click-outside="closeGnbMenu"
+      >
+        <div class="web-header__apps">
+          <template
+            v-for="{key, label} of apps"
+            :key="key"
+          >
+            <a
+              :id="'header_' + key"
+              class="web-header__link"
+              @mouseover="openGnbMenu(key, $event)"
+              @focus="openGnbMenu(key)"
+            >
+              {{ label }}
+            </a>
+          </template>
+          <web-gnb-menu-p
+            v-if="gnbMenu"
+            :app-key="getSelectedKey"
+            @close-gnb-menu="closeGnbMenu"
+          />
+        </div>
+      </kw-click-outside>
 
       <q-space />
 
@@ -126,24 +139,24 @@ import consts from '../../consts';
 import { modal } from '../../plugins/modal';
 import { localStorage } from '../../plugins/storage';
 import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
+import WebGnbMenuP from '../../pages/web/WebGnbMenuP.vue';
 
 const zoomSize = ref(true);
 const searchText = ref('');
 const totalMenu = ref(false);
+const gnbMenu = ref(false);
 
 export default {
   name: 'WebHeader',
-  components: { WebTotalMenuP },
+  components: { WebTotalMenuP, WebGnbMenuP },
   setup() {
     const { push } = useRouter();
     const { logout } = useSession();
     const { notify } = useGlobal();
     const { t } = useI18n();
+    const { getters } = useStore();
 
     async function openTotalMenuP() {
-      // modal({
-      //   component: () => import('../../pages/web/WebTotalMenuP.vue'),
-      // });
       totalMenu.value = true;
     }
 
@@ -152,7 +165,6 @@ export default {
     }
 
     async function openSetSessionP() {
-      console.log('openSetSession');
       modal({
         component: () => import('../../pages/web/WebSessionSettingP.vue'),
       });
@@ -165,6 +177,32 @@ export default {
       modal({
         component: () => import('../../pages/web/WebDashboardMgtP.vue'),
       });
+    }
+
+    async function getActiveClass() {
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--active');
+      });
+      const selected = getters['app/getSelectedGlobalAppKey'];
+      document.querySelector(`#header_${selected}`).classList.add('web-header__link--active');
+    }
+
+    const getSelectedKey = ref('');
+    function openGnbMenu(key, ev) {
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--active');
+      });
+      ev.target.classList.add('web-header__link--active');
+      getSelectedKey.value = key;
+      gnbMenu.value = true;
+    }
+
+    function closeGnbMenu() {
+      gnbMenu.value = false;
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--active');
+      });
+      getActiveClass();
     }
 
     async function openMenuSearchPopup() {
@@ -210,9 +248,14 @@ export default {
       openSetSessionP,
       openTotalMenuP,
       openMenuSearchPopup,
+      openGnbMenu,
       searchText,
       totalMenu,
+      gnbMenu,
+      getSelectedKey,
+      getActiveClass,
       closeTotalMenuP,
+      closeGnbMenu,
     };
   },
 };

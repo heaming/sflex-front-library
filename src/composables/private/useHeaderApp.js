@@ -39,7 +39,8 @@ export default () => {
   return {
     apps,
     isSelected,
-    updateSelected,
+    selectedKey,
+    // updateSelected,
     onUpdateValue,
   };
 };

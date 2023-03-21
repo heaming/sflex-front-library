@@ -47,6 +47,7 @@ export default {
     linkPages: [],
     apps: [],
     menus: [],
+    totalMenus: [],
     pages: [],
     noMenuPages: [],
     bookmarks: [],
@@ -75,6 +76,9 @@ export default {
     setMenus(state, menus) {
       state.menus = Object.freeze(menus);
     },
+    setTotalMenus(state, menus) {
+      state.totalMenus = Object.freeze(menus);
+    },
     setNoMenuPages(state, noMenuPages) {
       state.noMenuPages = Object.freeze(noMenuPages);
     },
@@ -102,6 +106,7 @@ export default {
     getApp: (state) => (applicationId) => find(state.apps, { applicationId }),
     getAppMenus: (state) => (applicationId) => filter(state.menus, { applicationId }),
     getMenus: (state) => state.menus,
+    getTotalMenus: (state) => state.totalMenus,
     getMenu: (state) => (menuUid) => find(state.menus, { menuUid }),
     getMenuPaths: (state) => (menuUid) => recursiveCreateMenuPaths(state, menuUid),
     getPages: (state) => state.pages,
@@ -152,6 +157,10 @@ export default {
       const noMenuPageRes = await http.get('/sflex/common/common/meta/no-menu-pages');
       const noMenuPages = noMenuPageRes.data;
       commit('setNoMenuPages', noMenuPages);
+
+      // 전체메뉴 가져옴
+      const menuPageWithOutAuthRes = await http.get('/sflex/common/common/portal/menus-without-auth');
+      commit('setTotalMenus', menuPageWithOutAuthRes);
 
       commit('setMenus', menus);
       dispatch('app/createGlobalMenus', menus, { root: true });
