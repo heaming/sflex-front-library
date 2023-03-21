@@ -37,7 +37,7 @@
 
 <script setup>
 import { isNavigationFailure } from 'vue-router';
-import { alert } from '~kw-lib';
+import { alert } from '../../plugins/dialog';
 
 const { getters, commit } = useStore();
 const { push } = useRouter();
