@@ -695,6 +695,11 @@ $unit: px;
       text-align: center;
     }
 
+    .blue-line-link {
+      line-height: inherit;
+      vertical-align: text-bottom;
+    }
+
     ul {
       list-style: none;
       padding: 4px 0 0;
