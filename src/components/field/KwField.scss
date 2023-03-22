@@ -565,10 +565,16 @@
   }
 
   &--required {
-    & .kw-field-wrap__label::after {
-      content: "*";
-      display: contents;
-      color: $accent;
+    & .kw-field-wrap__label {
+      > span:is(:first-of-type) {
+        padding: 0;
+
+        &::after {
+          content: "*";
+          display: contents;
+          color: $accent;
+        }
+      }
     }
   }
 
