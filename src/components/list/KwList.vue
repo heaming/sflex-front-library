@@ -68,7 +68,7 @@
           :padding-target="paddingTarget"
           :expand-icon-class="computedExpandIconClass"
           :expand-icon="computedExpandIcon"
-          @click="onClick(item)"
+          :expand-icon-toggle="expandIconToggle"
         >
           <template #header>
             <kw-item-section
@@ -81,12 +81,14 @@
                 v-if="selectComponent === 'radio'"
                 v-model="innerSelected"
                 :val="item.key"
+                :disable="item.value.disable"
                 @update:model-value="emitUpdateSelected"
               />
               <kw-checkbox
                 v-if="selectComponent === 'checkbox'"
                 v-model="innerSelected"
                 :val="item.key"
+                :disable="item.value.disable"
                 @update:model-value="emitUpdateSelected"
               />
             </kw-item-section>
@@ -120,7 +122,6 @@
           :disable="disable"
           :dense="dense"
           :tag="itemTag"
-          @click="onClick(item)"
         >
           <kw-item-section
             v-if="selectComponent"
@@ -132,12 +133,14 @@
               v-if="selectComponent === 'radio'"
               v-model="innerSelected"
               :val="item.key"
+              :disable="item.value.disable"
               @update:model-value="emitUpdateSelected"
             />
             <kw-checkbox
               v-if="selectComponent === 'checkbox'"
               v-model="innerSelected"
               :val="item.key"
+              :disable="item.value.disable"
               @update:model-value="emitUpdateSelected"
             />
           </kw-item-section>
@@ -208,6 +211,7 @@ export default {
     expandIcon: { type: String, default: undefined },
     expandIconAlign: { type: String, default: undefined },
     expandIconClass: { type: [Array, String, Object], default: undefined },
+    expandIconToggle: { type: Boolean, default: undefined },
   },
   emits: ['update:selected', 'clickItem'],
   setup(props, {
@@ -303,13 +307,14 @@ export default {
     };
 
     const innerSelectAll = computed(() => {
+      const filteredDisabledItems = innerItems.value.filter((item) => !item.value.disable);
       if (!multipleSelect.value) {
         return;
       }
-      if (!innerItems.value.length) {
+      if (!filteredDisabledItems.length) {
         return false;
       }
-      if (innerItems.value.length !== innerSelected.value.length) {
+      if (filteredDisabledItems.length !== innerSelected.value.length) {
         return false;
       }
       const checkExist = (selectedItemKey) => keyDict.value[selectedItemKey];
@@ -318,10 +323,11 @@ export default {
 
     const onUpdateSelectAll = (value) => {
       if (value) {
-        innerSelected.value = innerItems.value.map((item) => (item.key));
+        innerSelected.value = innerItems.value.filter((item) => !item.value.disable).map((item) => (item.key));
       } else {
         innerSelected.value = [];
       }
+      emitUpdateSelected();
     };
 
     const toggleSelected = (item) => {
