@@ -585,6 +585,62 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3
+        id="popup action button"
+        class="kw-guide-title"
+      >
+        Popup action button
+      </h3>
+      <q-card>
+        <div class="kw-guide-example">
+          <p class="kw-font-body mb8">
+            secondary
+          </p>
+          <kw-btn
+            class="mx4"
+            label="초기화"
+            secondary
+          />
+          <kw-btn
+            class="mx4"
+            label="임시저장"
+            secondary
+          />
+          <p class="kw-font-body mb8">
+            negative
+          </p>
+          <kw-btn
+            class="mx4"
+            label="닫기"
+            negative
+          />
+          <kw-btn
+            class="mx4"
+            label="취소"
+            negative
+          />
+          <p class="kw-font-body mb8">
+            primary
+          </p>
+          <kw-btn
+            class="mx4"
+            label="확인"
+            primary
+          />
+          <kw-btn
+            class="mx4"
+            label="발송"
+            primary
+          />
+        </div>
+        <guide-code-view
+          :code-value="[popupButton]"
+          :lang="['vue']"
+          multi
+        />
+      </q-card>
+    </div>
     <!-- <div class="kw-guide-section">
       <h3
         id="toggleButton"
@@ -917,9 +973,55 @@ const dropdownBtn = `
   />
 </kw-btn-dropdown>
 `;
+const popupButton = `
+<!-- remove margin helper class -->
+<p class="kw-font-body mb8">
+  secondary
+</p>
+<kw-btn
+  class="mx4"
+  label="초기화"
+  secondary
+/>
+<kw-btn
+  class="mx4"
+  label="임시저장"
+  secondary
+/>
+<p class="kw-font-body mb8">
+  negative
+</p>
+<kw-btn
+  class="mx4"
+  label="닫기"
+  negative
+/>
+<kw-btn
+  class="mx4"
+  label="취소"
+  negative
+/>
+<p class="kw-font-body mb8">
+  primary
+</p>
+<kw-btn
+  class="mx4"
+  label="확인"
+  primary
+/>
+<kw-btn
+  class="mx4"
+  label="발송"
+  primary
+/>
+`;
 
 // History
 const guideHistory = [
+  {
+    timestamp: '2023.03.22',
+    text: 'add popup action button sample ',
+  },
   {
     timestamp: '2023.01.26',
     text: 'modified :dense="false" ',
