@@ -185,40 +185,32 @@
   // END kw-search > 체크박스 목록
 }
 
-.mobile:not(.tablet) {
-  // mobile
-  .kw-list {
-    &.q-list {
-      &--separator {
-        >.q-item-type + .q-item-type,
-        >.q-virtual-scroll__content > .q-item-type + .q-item-type {
-          border-top: 1px solid rgba($line-bg, 1); // mo list 사이 #eee
-          transition: border 0.7s;
-        }
+.mobile {
+  &:not(.tablet) {
+    // mobile
+    .kw-list {
+      &.q-list {
+        &--separator {
+          >.q-item-type + .q-item-type,
+          >.q-virtual-scroll__content > .q-item-type + .q-item-type {
+            border-top: 1px solid rgba($line-bg, 1); // mo list 사이 #eee
+            transition: border 0.7s;
+          }
 
-        // >.q-expansion-item.q-item-type + .q-expansion-item.q-item-type {
-        //   border-top: 1px solid rgba($line-bg, 1);  // mo expansion 사이 ##eee
-        // }
+          >.q-expansion-item:last-child.q-item-type {
+            border-bottom: 1px solid rgba($line-bg, 1);
+          }
 
-        >.q-expansion-item:last-child.q-item-type {
-          border-bottom: 1px solid rgba($line-bg, 1);
-        }
-
-        // & .q-expansion-item--expanded {
-        //   &.q-item-type + .q-item-type {
-        //     border-top: 1px solid transparent !important;
-        //   }
-        // }
-
-        &.kw-list--selectable .kw-list__item--total {
-          & + .q-item-type.kw-item-type {
-            border-top: 1px solid $black1 !important;
+          &.kw-list--selectable .kw-list__item--total {
+            & + .q-item-type.kw-item-type {
+              border-top: 1px solid $black1 !important;
+            }
           }
         }
-      }
 
-      .kw-list__select-all {
-        padding-right: 4px !important;
+        .kw-list__select-all {
+          padding-right: 4px !important;
+        }
       }
     }
   }
@@ -228,6 +220,20 @@
     .kw-list {
       &.q-list {
         &--separator {
+          >.q-item-type + .q-item-type,
+          > .q-virtual-scroll__content > .q-item-type + .q-item-type {
+            border-top: 1px solid rgba($line-bg, 1); // ta list 사이 #eee
+            transition: border 0.7s;
+          }
+
+          >.q-expansion-item.q-item-type + .q-expansion-item.q-item-type {
+            border-top: 1px solid rgba($line-line, 1); // mo expansion 사이 #ddd
+          }
+
+          >.q-expansion-item:last-child.q-item-type {
+            border-bottom: 1px solid rgba($line-line, 1);
+          }
+
           & .q-expansion-item--expanded {
             &.q-item-type + .q-item-type {
               border-top: 1px solid rgba($line-line, 1) !important; // tablet에서 border 있음
