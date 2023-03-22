@@ -14,6 +14,7 @@ function registerHandler(clickOutsideProps) {
       target === undefined
       || target.nodeType === 8
       || target.classList.contains('no-pointer-events') === true
+      || target.tagName === 'HTML'
     ) {
       return;
     }

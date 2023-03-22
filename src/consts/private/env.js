@@ -14,7 +14,7 @@ export default {
   SERVER: isServer,
   TEST: __VUE_TEST_APP__ === true,
 
-  VITE_ENTRY_POPUP_PATHNAME: env.VITE_POPUP_PATHNAME || '/popup',
+  VITE_ENTRY_POPUP_PATHNAME: env.VITE_POPUP_PATHNAME || '/popup#',
 
   VITE_TENANT_ID: env.VITE_TENANT_ID,
   VITE_PORTAL_ID: env.VITE_PORTAL_ID,
