@@ -19,6 +19,7 @@
             <a
               :id="'header_' + key"
               class="web-header__link"
+              @click="updateSelected(key)"
               @mouseover="openGnbMenu(key, $event)"
               @focus="openGnbMenu(key)"
             >
