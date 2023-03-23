@@ -264,6 +264,10 @@ function setColumnEditor(column, { dataType }) {
         },
       });
       break;
+    case 'date':
+      column.editor.type = 'btdate';
+      setColumnEditor(column, { dataType });
+      break;
     case 'btdate': {
       defaultsDeep(column, {
         editButtonVisibility: ButtonVisibility.ALWAYS,
