@@ -27,7 +27,7 @@ function openWindow(options) {
   const search = options.redirect ? '?redirect' : '';
   const kebabCased = kebabCase(name.substring(0, name.length - 1));
   const routeQuery = new URLSearchParams(options.componentProps);
-  const url = `${env.VITE_ENTRY_POPUP_PATHNAME}${search}/${kebabCased}?${routeQuery}`;
+  const url = `${env.VITE_ENTRY_POPUP_PATHNAME}#${search}/${kebabCased}?${routeQuery}`;
 
   return open(url);
 }
