@@ -50,7 +50,7 @@ export default {
       showTotalMenu.value = true;
       await modal({
         component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue'),
-        dialogProps: { 'transition-duration': 50 },
+        dialogProps: { maximized: true },
       });
       showTotalMenu.value = false;
     }
