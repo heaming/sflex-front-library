@@ -9,7 +9,7 @@
         class="kw-sign__canvas"
       />
       <p
-        v-if="true"
+        v-if="!isSignExist"
         class="kw-sign__placeholder"
       >
         여기에 서명해 주세요
@@ -21,12 +21,14 @@
         secondary
         dense
         :border-color="$g.platform.is.mobile ? 'line-stroke' : '' "
+        @click="recentSign"
       />
       <kw-btn
         label="재입력"
         secondary
         dense
         :border-color="$g.platform.is.mobile ? 'line-stroke' : '' "
+        @click="reset"
       />
     </div>
   </div>
@@ -42,6 +44,7 @@ export default {
   setup() {
     let canvas;
     let ctx;
+    const isSignExist = ref(false);
 
     function setBackground() {
       ctx.fillStyle = '#ffffff';
@@ -96,6 +99,7 @@ export default {
         ctx.beginPath();
         ctx.moveTo(mouse.x, mouse.y);
         started = true;
+        isSignExist.value = true;
       };
 
       canvas.onmouseup = function onMouseUp() {
@@ -107,6 +111,7 @@ export default {
 
     function reset() {
       ctx.reset();
+      isSignExist.value = false;
       setBackground();
     }
 
@@ -117,6 +122,7 @@ export default {
       image.crossOrigin = 'Anonymous';
       image.onload = () => {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        isSignExist.value = true;
       };
     }
 
@@ -138,6 +144,7 @@ export default {
       reset,
       recentSign,
       setBackground,
+      isSignExist,
     };
   },
 };
