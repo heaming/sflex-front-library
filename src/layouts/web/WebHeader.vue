@@ -77,22 +77,6 @@
               label="(임시) 세션변경"
               @click="openSetSessionP"
             />
-            <q-btn-toggle
-              v-model="zoomSize"
-              v-close-popup
-              spread
-              no-caps
-              unelevated
-              toggle-color="primary"
-              color="white"
-              text-color="primary"
-              :options="[
-                {label: '67%', value: 67},
-                {label: '80%', value: 80},
-                {label: '100%', value: 100}
-              ]"
-              @update:model-value="setZoomSize()"
-            />
             <kw-btn
               v-close-popup
               borderless
@@ -141,7 +125,6 @@ import { localStorage } from '../../plugins/storage';
 import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
 import WebGnbMenuP from '../../pages/web/WebGnbMenuP.vue';
 
-const zoomSize = ref(true);
 const searchText = ref('');
 const totalMenu = ref(false);
 const gnbMenu = ref(false);
@@ -157,10 +140,12 @@ export default {
     const { getters } = useStore();
 
     async function openTotalMenuP() {
+      document.querySelector('body').classList.add('q-body--prevent-scroll');
       totalMenu.value = true;
     }
 
     async function closeTotalMenuP() {
+      document.querySelector('body').classList.remove('q-body--prevent-scroll');
       totalMenu.value = false;
     }
 
@@ -194,6 +179,7 @@ export default {
       });
       ev.target.classList.add('web-header__link--active');
       getSelectedKey.value = key;
+      document.querySelector('body').classList.add('q-body--prevent-scroll');
       gnbMenu.value = true;
     }
 
@@ -202,6 +188,7 @@ export default {
       document.querySelectorAll('.web-header__link').forEach((item) => {
         item.classList.remove('web-header__link--active');
       });
+      document.querySelector('body').classList.remove('q-body--prevent-scroll');
       getActiveClass();
     }
 
@@ -229,22 +216,11 @@ export default {
       if (result) push({ name: payload.menuUid });
     }
 
-    function setZoomSize() {
-      document.body.style.zoom = `${zoomSize.value}%`;
-      localStorage.set(consts.LOCAL_STORAGE_ZOOM_SIZE, zoomSize.value);
-    }
-
-    onMounted(() => {
-      zoomSize.value = localStorage.getItem(consts.LOCAL_STORAGE_ZOOM_SIZE);
-    });
-
     return {
       ...useHeaderApp(),
       logout,
       goToHome,
       openHomeMgtPopup,
-      setZoomSize,
-      zoomSize,
       openSetSessionP,
       openTotalMenuP,
       openMenuSearchPopup,
