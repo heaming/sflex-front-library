@@ -140,10 +140,12 @@ export default {
     const { getters } = useStore();
 
     async function openTotalMenuP() {
+      document.querySelector('body').classList.add('q-body--prevent-scroll');
       totalMenu.value = true;
     }
 
     async function closeTotalMenuP() {
+      document.querySelector('body').classList.remove('q-body--prevent-scroll');
       totalMenu.value = false;
     }
 
@@ -177,6 +179,7 @@ export default {
       });
       ev.target.classList.add('web-header__link--active');
       getSelectedKey.value = key;
+      document.querySelector('body').classList.add('q-body--prevent-scroll');
       gnbMenu.value = true;
     }
 
@@ -185,6 +188,7 @@ export default {
       document.querySelectorAll('.web-header__link').forEach((item) => {
         item.classList.remove('web-header__link--active');
       });
+      document.querySelector('body').classList.remove('q-body--prevent-scroll');
       getActiveClass();
     }
 
