@@ -12,6 +12,6 @@
     <path data-name="사각형 151652" transform="translate(8.714 14.794)" style="fill:#fff" d="M0 0h7.163v1.5H0z"/>
     <g>
         <path data-name="패스 210450" d="M0 3.411 2.328 0l2.325 3.411v13.643H0z" transform="rotate(-137 14.977 6.96)" style="opacity:.2"/>
-        <path data-name="패스 210445" d="M0 3.411 2.328 0l2.325 3.411v13.643H0z" transform="rotate(-137 14.188 6.054)" style="fill:#f69545"/>
+        <path data-name="패스 210445" d="M0 3.411 2.328 0l2.325 3.411v13.643H0z" transform="rotate(-137 14.188 6.054)" style="fill:#ff8f1f"/>
     </g>
 </svg>
