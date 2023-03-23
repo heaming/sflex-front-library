@@ -342,6 +342,18 @@ export function overrideOnEditChange(view) {
       }
     }
 
+    // checklist 의 경우 itemSortStyle 이 적용되어있으면 해당 적용된 내용으로 세팅해준다.
+    if (['checklist'].includes(type)) {
+      if (editor?.itemSortStyle && value) {
+        const arr = value.split(',');
+        arr.sort();
+        if (editor?.itemSortStyle === 'descending') {
+          arr.reverse();
+        }
+        g.setEditValue(arr.join(','));
+      }
+    }
+
     if (hasOriginal(g, onEditChange)) {
       execOriginal(g, onEditChange, g, index, value);
     }
