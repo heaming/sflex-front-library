@@ -112,7 +112,7 @@
 </template>
 
 <script setup>
-import { chain, find, get, sortBy, cloneDeep } from 'lodash-es';
+import { get, find, groupBy, sortBy, cloneDeep } from 'lodash-es';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
@@ -141,17 +141,15 @@ const depth3Menus = ref(sortBy(
 ));
 
 depth2Menus.value.unshift({ menuName: '즐겨찾기', menuUid: 'bookmarks' });
+const groupByParentsMenuUid = groupBy(depth3Menus.value, (menu) => menu.parentsMenuUid);
+const menuValues = Object.values(groupByParentsMenuUid);
 
-const groupedDepth3Menus = ref(sortBy(chain(depth3Menus.value).groupBy('parentsMenuUid').map((v, i) => ({
-  parentMenuName: get(find(totalMenus.value, (menu) => menu.menuUid === i), 'menuName'),
-  parentMenu: i,
+const groupedDepth3Menus = ref(sortBy(menuValues.map((v) => ({
+  parentMenuName: get(find(totalMenus.value, (menu) => menu.menuUid === v[0].parentsMenuUid), 'menuName'),
+  parentMenu: v[0].parentsMenuUid,
   applicationName: get(find(v, 'applicationName'), 'applicationName'),
-  menus: chain(v).groupBy('menuUid').map((val, ind) => ({
-    menuName: get(find(val, 'menuName'), 'menuName'),
-    menuUid: ind,
-    pageId: get(find(val, 'pageId'), 'pageId'),
-  })).value(),
-})).value(), ['applicationName', 'parentMenuName']));
+  menus: v,
+})), ['applicationName', 'parentMenuName']));
 
 const bookmarks = computed(() => ({
   parentMenuName: '즐겨찾기',
