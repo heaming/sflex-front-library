@@ -149,8 +149,7 @@
 </template>
 
 <script setup>
-import { find, get, sortBy, cloneDeep } from 'lodash-es';
-import chain from 'lodash/chain';
+import { chain, find, get, sortBy, cloneDeep } from 'lodash-es';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
