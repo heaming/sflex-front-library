@@ -449,7 +449,7 @@
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
   z-index: 6000;
   padding-left: 228px;
-  height: 410px;
+  height: 390px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -474,7 +474,7 @@
     grid-template-columns: repeat(8, 1fr);
 
     & > li {
-      padding: 24px 16px;
+      padding: 24px 16px 20px;
       width: 175px;
       position: relative;
 
@@ -505,6 +505,10 @@
 
       &:first-child::before {
         display: none;
+      }
+
+      &:nth-child(n+9) {
+        padding: 20px 16px;
       }
 
       h3 {
