@@ -264,6 +264,7 @@ function setColumnEditor(column, { dataType }) {
         },
       });
       break;
+    case 'date':
     case 'btdate': {
       defaultsDeep(column, {
         editButtonVisibility: ButtonVisibility.ALWAYS,
