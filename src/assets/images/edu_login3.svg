@@ -2,8 +2,8 @@
     <path data-name="36x36" style="fill:none" d="M0 0h36v36H0z"/>
     <g data-name="그룹 153034">
         <path data-name="사각형 151736" transform="translate(4 4)" style="fill:#3890f6" d="M0 0h20v28H0z"/>
-        <path data-name="사각형 151713" transform="translate(8 8)" style="opacity:.8;fill:#fff" d="M0 0h12v1.5H0z"/>
-        <path data-name="사각형 151714" transform="translate(8 12)" style="opacity:.8;fill:#fff" d="M0 0h8v1.5H0z"/>
+        <path data-name="사각형 151713" transform="translate(8 8)" style="fill:#fff" d="M0 0h12v1.5H0z"/>
+        <path data-name="사각형 151714" transform="translate(8 12)" style="fill:#fff" d="M0 0h8v1.5H0z"/>
     </g>
     <g data-name="그룹 153035" transform="translate(-65 11)">
         <circle data-name="타원 5247" cx="7" cy="7" r="7" transform="translate(84 7)" style="fill:#ff8f1f"/>
