@@ -13,9 +13,45 @@ body.desktop .mobile-layout {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
-  padding: 0 20px;
-  background: #ccc; // 아이콘이 하얀색이라 임시로 배경 컬러 수정
+  height: 60px;
+  padding: 0;
+  background: #fff; // 아이콘이 하얀색이라 임시로 배경 컬러 수정
+
+  button {
+    flex: 1 1 auto;
+    height: 60px;
+
+    & > .q-btn__content {
+      display: block;
+      padding-top: 7px;
+
+      & > .on-left {
+        margin-right: 0;
+
+        & + span {
+          color: $black1;
+          font-size: 11px;
+          height: 16px;
+          line-height: 16px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  &:has(.curr) {
+    button {
+      opacity: 0.5;
+
+      &.curr {
+        opacity: 1;
+
+        & > .q-btn__content > .on-left + span {
+          font-weight: 500;
+        }
+      }
+    }
+  }
 }
 
 /*
