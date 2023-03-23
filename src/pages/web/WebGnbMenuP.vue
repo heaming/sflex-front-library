@@ -7,7 +7,18 @@
         v-for="(folder, idx) in appMenu.children"
         :key="idx"
       >
-        <h3>{{ folder.menuName }}</h3>
+        <h3>
+          {{ folder.menuName }}
+          <kw-tooltip
+            show-when-ellipsised
+            :offset="[-20, 7]"
+            anchor="bottom start"
+            self="center start"
+            class="tab_tooltip"
+          >
+            {{ folder.menuName }}
+          </kw-tooltip>
+        </h3>
         <ul>
           <li
             v-for="(menu, idx2) in folder.children"
