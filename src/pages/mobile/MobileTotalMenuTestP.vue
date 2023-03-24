@@ -110,14 +110,6 @@
                           </kw-item-label>
                         </div>
                       </div>
-                      <div>
-                        <kw-avatar size="24px">
-                          <img
-                            src="~~dev/assets/images/test_image.png"
-                            alt="test"
-                          >
-                        </kw-avatar>
-                      </div>
                     </div>
                     <div class="row justify-end">
                       <zwcm-counter
