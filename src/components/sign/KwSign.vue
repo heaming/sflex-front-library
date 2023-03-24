@@ -127,7 +127,6 @@ export default {
     }
 
     function downSign() {
-      console.log('downSign ... ');
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
       link.target = '_blank';

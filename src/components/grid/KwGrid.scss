@@ -131,6 +131,21 @@
     }
   }
 
+  .rg-multicheck-editor {
+    // width: auto !important; // list-editor가 활성화될 때 inputbox 내부의 텍스트가 이동하는 현상 방지
+    height: auto !important;
+    top: 9px !important;
+    left: 5px !important;
+    right: 44px !important;
+    bottom: 9px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+
+    &.pr-21 {
+      padding-right: 21px !important;
+    }
+  }
+
   &::after {
     content: "";
     border: 1px solid $line-stroke;

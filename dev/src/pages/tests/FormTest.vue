@@ -74,9 +74,8 @@
         <kw-form-row>
           <kw-form-item label="Input">
             <kw-input
-              :validate-on-value-update="false"
               name="input"
-              type="telephone"
+              mask="telephone"
               rules="required|telephone"
               placeholder="전화번호형식"
             />

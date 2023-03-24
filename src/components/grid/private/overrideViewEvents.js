@@ -283,7 +283,12 @@ export function overrideOnShowEditor(view) {
       if (textAlignStyle) {
         attrs['attr-for-selector'] = 'aria';
         setTimeout(() => {
-          const element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
+          let element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
+
+          if (!element) {
+            console.log('no element!');
+            element = document.querySelector('input[attr-for-selector="aria"].rg-multicheck-editor');
+          }
           if (element) {
             element.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
             element.classList.add(textAlignStyle);
@@ -327,7 +332,7 @@ export function customOnValidate(view) {
   */
 export function overrideOnEditChange(view) {
   wrapEvent(view, onEditChange, (g, index, value) => {
-    const { editor } = g.columnByName(index.column);
+    const { editor, values } = g.columnByName(index.column);
     const type = editor?.type;
 
     // text
@@ -342,15 +347,25 @@ export function overrideOnEditChange(view) {
       }
     }
 
-    // checklist 의 경우 itemSortStyle 이 적용되어있으면 해당 적용된 내용으로 세팅해준다.
+    // checklist 의 경우 보여지는 value에 따라  해당 적용된 내용으로 세팅해준다.
     if (['checklist'].includes(type)) {
-      if (editor?.itemSortStyle && value) {
+      if (editor?.itemSortStyle) {
         const arr = value.split(',');
         arr.sort();
         if (editor?.itemSortStyle === 'descending') {
           arr.reverse();
         }
-        g.setEditValue(arr.join(','));
+        if (value !== arr.join(',')) {
+          g.setEditValue(arr.join(','));
+        }
+        return;
+      }
+      if (value.includes(',')) {
+        const arr = value.split(',');
+        if (values.filter((it) => arr.includes(it)).join(',') !== value) {
+          g.setEditValue(values.filter((it) => arr.includes(it)).join(','));
+          return;
+        }
       }
     }
 
