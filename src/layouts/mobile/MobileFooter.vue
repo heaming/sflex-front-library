@@ -31,6 +31,7 @@
       style="font-size: 24px;"
       class="menu_icon"
       label="결제바구니"
+      @click="openTotalMenuTest"
     />
     <kw-btn
       borderless
@@ -61,9 +62,20 @@ export default {
       showTotalMenu.value = false;
     }
 
+    async function openTotalMenuTest() {
+      if (showTotalMenu.value) return;
+      showTotalMenu.value = true;
+      await modal({
+        component: async () => await import('../../pages/mobile/MobileTotalMenuTestP.vue'),
+        dialogProps: { maximized: true },
+      });
+      showTotalMenu.value = false;
+    }
+
     return {
       openTotalMenu,
       showTotalMenu,
+      openTotalMenuTest,
     };
   },
 };

@@ -283,7 +283,12 @@ export function overrideOnShowEditor(view) {
       if (textAlignStyle) {
         attrs['attr-for-selector'] = 'aria';
         setTimeout(() => {
-          const element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
+          let element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
+
+          if (!element) {
+            console.log('no element!');
+            element = document.querySelector('input[attr-for-selector="aria"].rg-multicheck-editor');
+          }
           if (element) {
             element.classList.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
             element.classList.add(textAlignStyle);
@@ -350,13 +355,17 @@ export function overrideOnEditChange(view) {
         if (editor?.itemSortStyle === 'descending') {
           arr.reverse();
         }
-        g.setEditValue(arr.join(','));
+        if (value !== arr.join(',')) {
+          g.setEditValue(arr.join(','));
+        }
         return;
       }
       if (value.includes(',')) {
         const arr = value.split(',');
-        g.setEditValue(values.filter((it) => arr.includes(it)).join(','));
-        return;
+        if (values.filter((it) => arr.includes(it)).join(',') !== value) {
+          g.setEditValue(values.filter((it) => arr.includes(it)).join(','));
+          return;
+        }
       }
     }
 
