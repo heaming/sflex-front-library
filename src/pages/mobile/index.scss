@@ -22,7 +22,7 @@
 
   &--nav {
     width: 128px;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 115px);
     overflow-y: auto;
     padding: 6px 0;
     background: $bg-box;
@@ -54,7 +54,7 @@
 
   &--ul-depth1 {
     flex-grow: 1;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 115px);
     overflow-y: auto;
     padding: 16px;
 

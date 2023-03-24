@@ -6,6 +6,17 @@ body.desktop .mobile-layout {
   background: #f3f4f5;
 }
 
+.mobile {
+  .fixed-full,
+  .gnb_menu_mobile {
+    bottom: 60px !important;
+
+    .kw-popup--full {
+      box-shadow: none;
+    }
+  }
+}
+
 /*
   Footer
  */
@@ -16,6 +27,7 @@ body.desktop .mobile-layout {
   height: 60px;
   padding: 0;
   background: #fff; // 아이콘이 하얀색이라 임시로 배경 컬러 수정
+  z-index: 6001;
 
   button {
     flex: 1 1 auto;
