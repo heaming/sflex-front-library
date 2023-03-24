@@ -171,5 +171,8 @@ export default {
   &:hover {
     background: rgb($primary, 5%);
   }
+
+  transition: none !important;
 }
+
 </style>

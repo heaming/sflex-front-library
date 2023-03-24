@@ -214,8 +214,4 @@ export default {
 ::v-deep(.kw-scroll-area__scrollarea .q-scrollarea__content) {
   min-width: 262px !important;
 }
-
-::v-deep(.q-hoverable:hover > .q-focus-helper) {
-  background: rgb($primary, 5%) !important;
-}
 </style>
