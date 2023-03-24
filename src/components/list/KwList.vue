@@ -69,6 +69,7 @@
           :expand-icon-class="computedExpandIconClass"
           :expand-icon="computedExpandIcon"
           :expand-icon-toggle="expandIconToggle"
+          @click="onClick(item)"
         >
           <template #header>
             <kw-item-section
@@ -122,6 +123,7 @@
           :disable="disable"
           :dense="dense"
           :tag="itemTag"
+          @click="onClick(item)"
         >
           <kw-item-section
             v-if="selectComponent"
@@ -164,6 +166,46 @@
         </slot>
       </div>
     </slot>
+    <q-dialog
+      v-if="$g.platform.is.mobile && useDialog"
+      ref="dialogRef"
+      v-bind="styleClassAttrs"
+      :model-value="showing"
+      :class="dialogClass"
+      :persistent="persistent"
+      :no-refocus="noRefocus"
+      :no-focus="noFocus"
+      :no-shake="true"
+      transition-show="jump-up"
+      transition-hide="jump-down"
+      @update:model-value="onUpdateShowing"
+    >
+      <div>
+        <kw-scroll-area class="kw-menu-dialog__scroll-area">
+          <div class="kw-menu-dialog__header">
+            <h1>{{ dialogTitle }}</h1>
+            <q-icon
+              name="close"
+              @click="onUpdateShowing(false)"
+            />
+          </div>
+          <!-- start//  dialog 옵션 리스트 -->
+          <div class="kw-menu-dialog__content">
+            <div
+              v-for="(dialogOption, dialogIdx) in dialogOptions"
+              :key="dialogIdx"
+            >
+              {{ dialogOption[dialogOptionLabel] }}
+            </div>
+          </div>
+          <!-- end//  dialog 옵션 리스트 -->
+          <div class="kw-menu-dialog__action">
+            <slot name="dialogAction" />
+          </div>
+          <!-- start//  dialog 버튼 리스트 -->
+        </kw-scroll-area>
+      </div>
+    </q-dialog>
   </q-list>
 </template>
 
@@ -204,7 +246,7 @@ export default {
     // fall through props
     separator: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
-    onClickItem: { type: Function, default: undefined },
+    onClickItem: { type: Function, default: () => null },
     group: { type: String, default: undefined },
     // expansion
     paddingTarget: { type: [Array, String], default: () => ['self'] },
@@ -212,6 +254,14 @@ export default {
     expandIconAlign: { type: String, default: undefined },
     expandIconClass: { type: [Array, String, Object], default: undefined },
     expandIconToggle: { type: Boolean, default: undefined },
+    persistent: { type: Boolean, default: false },
+    noRefocus: { type: Boolean, default: false },
+    noFocus: { type: Boolean, default: false },
+    dialogOptions: { type: Array, default: undefined },
+    useDialog: { type: Boolean, default: false },
+    dialogTitle: { type: String, default: undefined },
+    dialogOptionLabel: { type: String, default: 'label' },
+    dialogOptionValue: { type: String, default: 'value' },
   },
   emits: ['update:selected', 'clickItem'],
   setup(props, {
@@ -250,9 +300,20 @@ export default {
 
     watch(() => props.items, updateItems);
 
-    // activate
-    const focused = ref();
+    // dialog 옵션
+    const showing = ref(false);
+    function onUpdateShowing(val) {
+      const onUpdateModelValue = props['onUpdate:modelValue'];
+      if (onUpdateModelValue) onUpdateModelValue(val);
+      else showing.value = val;
+    }
 
+    const dialogClass = computed(() => ({
+      'kw-menu-dialog': true,
+      'kw-menu-dialog--no-action': slots.dialogAction === undefined,
+    }));
+
+    // activate
     // select
     const selectComponent = computed(() => {
       if (props.radio) {
@@ -330,39 +391,17 @@ export default {
       emitUpdateSelected();
     };
 
-    const toggleSelected = (item) => {
-      if (!multipleSelect.value) {
-        return;
-      }
-      const { key } = item;
-      const targetIdx = innerSelected.value.indexOf(key);
-      if (targetIdx > -1) {
-        innerSelected.value.splice(targetIdx, 1);
-      } else {
-        innerSelected.value.push(key);
-      }
-      emitUpdateSelected();
-    };
-
-    const setSelected = (item) => {
-      innerSelected.value = item.key;
-      emitUpdateSelected();
-    };
-
     const onClick = (item) => {
       if (!props.clickable) {
         return;
       }
+      if (props.useDialog) {
+        onUpdateShowing(!showing.value);
+      }
       if (props.onClickItem) {
         props.onClickItem(item);
-        return;
       }
-      focused.value = item.value;
-      if (multipleSelect.value) {
-        toggleSelected(item);
-      } else {
-        setSelected(item);
-      }
+      emit('clickItem', item);
     };
 
     const onClickSelectAllItem = () => {
@@ -473,6 +512,9 @@ export default {
       computedExpandIcon,
       computedExpandIconClass: computedExpandSideSectionClass,
       onBlur: () => { console.log('blur'); },
+      onUpdateShowing,
+      showing,
+      dialogClass,
     };
   },
 };
