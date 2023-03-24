@@ -327,7 +327,7 @@ export function customOnValidate(view) {
   */
 export function overrideOnEditChange(view) {
   wrapEvent(view, onEditChange, (g, index, value) => {
-    const { editor } = g.columnByName(index.column);
+    const { editor, values } = g.columnByName(index.column);
     const type = editor?.type;
 
     // text
@@ -342,15 +342,21 @@ export function overrideOnEditChange(view) {
       }
     }
 
-    // checklist 의 경우 itemSortStyle 이 적용되어있으면 해당 적용된 내용으로 세팅해준다.
+    // checklist 의 경우 보여지는 value에 따라  해당 적용된 내용으로 세팅해준다.
     if (['checklist'].includes(type)) {
-      if (editor?.itemSortStyle && value) {
+      if (editor?.itemSortStyle) {
         const arr = value.split(',');
         arr.sort();
         if (editor?.itemSortStyle === 'descending') {
           arr.reverse();
         }
         g.setEditValue(arr.join(','));
+        return;
+      }
+      if (value.includes(',')) {
+        const arr = value.split(',');
+        g.setEditValue(values.filter((it) => arr.includes(it)).join(','));
+        return;
       }
     }
 
