@@ -469,13 +469,13 @@
   }
 
   & > ul {
-    width: 1416px !important;
+    width: 1520px !important;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 
     & > li {
       padding: 24px 16px 20px;
-      width: 175px;
+      width: 190px;
       position: relative;
 
       &::after {
@@ -494,7 +494,7 @@
       }
 
       &:nth-child(8n+1)::before {
-        width: 1400px;
+        width: 1504px;
         height: 1px;
         content: "";
         position: absolute;
@@ -513,7 +513,7 @@
 
       h3 {
         display: block;
-        width: 140px;
+        width: 162px;
         font-size: 16px;
         font-weight: 700;
         color: $black1;
@@ -530,7 +530,7 @@
         line-height: 35px;
 
         a {
-          width: 140px;
+          width: 162px;
           color: $black2;
           font-size: 14px;
           font-weight: 400;
