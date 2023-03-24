@@ -24,23 +24,23 @@
     }
 
     &.prev {
-      background: url(~@assets/images/ic_arrow_left.svg) no-repeat center;
+      background: url(~@assets/images/ic_arrow_left.svg) no-repeat center 14px;
       background-size: 16px;
       font-size: 0;
 
       &:hover {
-        background: url(~@assets/images/ic_arrow_left.svg) no-repeat center;
+        background: url(~@assets/images/ic_arrow_left.svg) no-repeat center 14px;
         background-size: 16px;
       }
     }
 
     &.next {
-      background: url(~@assets/images/ic_arrow_right.svg) no-repeat center;
+      background: url(~@assets/images/ic_arrow_right.svg) no-repeat center 14px;
       background-size: 16px;
       font-size: 0;
 
       &:hover {
-        background: url(~@assets/images/ic_arrow_right.svg) no-repeat center;
+        background: url(~@assets/images/ic_arrow_right.svg) no-repeat center 14px;
         background-size: 16px;
       }
     }
@@ -283,8 +283,17 @@
 }
 
 .reservation-datepicker {
+  width: 268px !important;
+
   .datepicker-months,
   .datepicker-years {
     width: 234px !important;
   }
+}
+
+.datepicker.datepicker-inline th.prev,
+.datepicker.datepicker-inline th.datepicker-switch,
+.datepicker.datepicker-inline th.next {
+  height: 40px;
+  padding-top: 3px;
 }
