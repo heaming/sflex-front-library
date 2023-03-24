@@ -469,7 +469,7 @@
     }
 
     &__tree.kw-tree {
-      padding: 0 16px;
+      padding: 0 16px 16px;
       margin-top: -20px;
 
       .q-tree {
@@ -521,6 +521,40 @@
           > div {
             font-size: 12px;
           }
+        }
+      }
+    }
+  }
+
+  .q-focus-helper {
+    background: none !important;
+    opacity: 0 !important;
+    transition: none !important;
+  }
+
+  .q-tree__node--child {
+    &:hover::before {
+      position: absolute;
+      top: -7px;
+      right: -16px;
+      left: -50px;
+      bottom: -8px;
+      content: "";
+      background: rgb($primary, 5%);
+    }
+  }
+
+  .q-tree__node--parent {
+    & > .q-tree__node-header {
+      &:hover {
+        &::after {
+          position: absolute;
+          top: -7px;
+          right: -16px;
+          left: -50px;
+          bottom: -8px;
+          content: "";
+          background: rgb($primary, 5%);
         }
       }
     }
