@@ -350,13 +350,17 @@ export function overrideOnEditChange(view) {
         if (editor?.itemSortStyle === 'descending') {
           arr.reverse();
         }
-        g.setEditValue(arr.join(','));
+        if (value !== arr.join(',')) {
+          g.setEditValue(arr.join(','));
+        }
         return;
       }
       if (value.includes(',')) {
         const arr = value.split(',');
-        g.setEditValue(values.filter((it) => arr.includes(it)).join(','));
-        return;
+        if (values.filter((it) => arr.includes(it)).join(',') !== value) {
+          g.setEditValue(values.filter((it) => arr.includes(it)).join(','));
+          return;
+        }
       }
     }
 
