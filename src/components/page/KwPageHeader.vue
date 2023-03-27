@@ -46,6 +46,13 @@
       >
         {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
       </kw-icon>
+
+      <span
+        v-if="!env.isServer"
+        style="color: transparent;"
+      >
+        {{ pageSource }}
+      </span>
     </div>
 
     <q-space />
@@ -74,6 +81,7 @@ import useBookmark from './private/useBookmark';
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
 import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
+import env from '../../consts/private/env';
 
 export default {
   name: 'KwPageHeader',
@@ -85,6 +93,10 @@ export default {
       type: String,
       default: undefined,
     },
+    pageSource: {
+      type: String,
+      default: undefined,
+    },
   },
 
   async setup() {
@@ -93,6 +105,7 @@ export default {
       ...useBreadcrumbNavigation(),
       ...useNewWindow(),
       ...useHeaderMeta(),
+      env,
     };
   },
 };
