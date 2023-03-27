@@ -178,30 +178,29 @@
       :no-shake="true"
       transition-show="jump-up"
       transition-hide="jump-down"
+      class="custom_bottom_sheet"
       @update:model-value="onUpdateShowing"
     >
       <div>
         <kw-scroll-area class="kw-menu-dialog__scroll-area">
           <div class="kw-menu-dialog__header">
             <h1>{{ dialogTitle }}</h1>
-            <q-icon
-              name="close"
-              @click="onUpdateShowing(false)"
-            />
           </div>
           <!-- start//  dialog 옵션 리스트 -->
-          <div class="kw-menu-dialog__content">
-            <div
+          <ul
+            class="kw-menu-dialog__content"
+          >
+            <li
               v-for="(dialogOption, dialogIdx) in dialogOptions"
               :key="dialogIdx"
             >
               {{ dialogOption[dialogOptionLabel] }}
-            </div>
-          </div>
+            </li>
+          </ul>
           <!-- end//  dialog 옵션 리스트 -->
-          <div class="kw-menu-dialog__action">
+          <!-- <div class="kw-menu-dialog__action">
             <slot name="dialogAction" />
-          </div>
+          </div> -->
           <!-- start//  dialog 버튼 리스트 -->
         </kw-scroll-area>
       </div>

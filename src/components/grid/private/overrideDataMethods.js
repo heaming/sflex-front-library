@@ -11,13 +11,11 @@ const destroy = 'destroy';
 
 function setFieldFormatDefaults(field) {
   switch (field.dataType) {
-    case ValueType.DATE:
-    case ValueType.DATETIME:
-      defaultsDeep(field, { datetimeFormat: 'yyyyMMddhhmmss' });
-      break;
     case ValueType.BOOLEAN:
       defaultsDeep(field, { booleanFormat: 'N:Y' });
       break;
+    case ValueType.DATE:
+    case ValueType.DATETIME:
     case undefined:
       field.dataType = ValueType.TEXT;
       break;
