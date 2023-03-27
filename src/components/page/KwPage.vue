@@ -11,6 +11,7 @@
         v-if="$g.platform.is.desktop"
         class="kw-page__header"
         :title="title"
+        :page-source="pageCtx.pageDestinationValue"
       />
       <kw-page-mobile-header
         v-else
@@ -90,7 +91,7 @@ export default {
   },
 
   setup() {
-    usePage();
+    const pageCtx = usePage();
     usePageSearch();
     usePageUniqueId();
 
@@ -104,6 +105,7 @@ export default {
       ...useObserver(),
       ...useInfiniteScroll(),
       styleFn,
+      pageCtx,
     };
   },
 };
