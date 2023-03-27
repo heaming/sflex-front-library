@@ -215,8 +215,7 @@ function setColumnRenderer(column, { dataType }) {
         });
       } else if (column.datetimeFormat) {
         column.datetimeFormat = getSessionDatetimeFormat(column.datetimeFormat);
-
-        if (ValueType.TEXT) {
+        if (dataType === ValueType.TEXT) {
           defaultsDeep(column, {
             ...(column.datetimeFormat === 'yyyy-MM-dd' ? {
               displayCallback: (g, i, v) => {
