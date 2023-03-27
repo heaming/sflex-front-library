@@ -24,6 +24,7 @@ const onCellPasting = 'onCellPasting';
 const onTopIndexChanged = 'onTopIndexChanged';
 const onScrollToBottom = 'onScrollToBottom';
 const onContextMenuPopup = 'onContextMenuPopup';
+const onItemChecked = 'onItemChecked';
 const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
 const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
 const dataDropOptionsDropCallback = 'dataDropOptions._callback';
@@ -495,6 +496,16 @@ export function overrideOnTopIndexChanged(view) {
         execOriginal(view, onScrollToBottom, view);
       }
     }
+  });
+}
+
+export function overrideOnItemChecked(view) {
+  wrapEvent(view, onItemChecked, (g, itemIndex) => {
+    if (hasOriginal(view, onItemChecked)) {
+      execOriginal(g, onItemChecked, g, itemIndex);
+    }
+
+    g.setCurrent({ itemIndex });
   });
 }
 
