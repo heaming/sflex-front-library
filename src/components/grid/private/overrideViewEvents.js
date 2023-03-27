@@ -499,6 +499,9 @@ export function overrideOnTopIndexChanged(view) {
   });
 }
 
+/*
+  그리드 행 체크시 발생하는 콜백
+*/
 export function overrideOnItemChecked(view) {
   wrapEvent(view, onItemChecked, (g, itemIndex) => {
     if (hasOriginal(view, onItemChecked)) {

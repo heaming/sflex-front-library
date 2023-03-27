@@ -248,3 +248,22 @@
     }
   }
 }
+
+.mobile {
+  .custom_bottom_sheet {
+    .kw-menu-dialog__header {
+      h1 { text-align: left !important; }
+    }
+
+    .kw-menu-dialog__content {
+      li {
+        height: 48px;
+        padding: 9px 20px;
+      }
+    }
+
+    .q-scrollarea__content {
+      padding-bottom: 24px;
+    }
+  }
+}
