@@ -7,19 +7,19 @@ body.desktop .mobile-layout {
 }
 
 .mobile {
-  .fixed-full,
-  .gnb_menu_mobile {
-    bottom: 60px !important;
-
-    .kw-popup--full {
-      box-shadow: none;
-    }
+  .kw-popup--full,
+  .q-dialog__inner--maximized > div {
+    box-shadow: none;
   }
 }
 
 /*
   Footer
  */
+.main-menu-modal {
+  bottom: 60px !important;
+}
+
 .mobile-footer {
   display: flex;
   align-items: center;
