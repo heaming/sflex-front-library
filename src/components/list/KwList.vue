@@ -193,6 +193,7 @@
             <li
               v-for="(dialogOption, dialogIdx) in dialogOptions"
               :key="dialogIdx"
+              @click="onClickOption(dialogOption)"
             >
               {{ dialogOption[dialogOptionLabel] }}
             </li>
@@ -262,7 +263,7 @@ export default {
     dialogOptionLabel: { type: String, default: 'label' },
     dialogOptionValue: { type: String, default: 'value' },
   },
-  emits: ['update:selected', 'clickItem'],
+  emits: ['update:selected', 'clickItem', 'click-option'],
   setup(props, {
     emit,
     slots,
@@ -403,6 +404,11 @@ export default {
       emit('clickItem', item);
     };
 
+    function onClickOption(option) {
+      emit('click-option', option);
+      onUpdateShowing(false);
+    }
+
     const onClickSelectAllItem = () => {
       if (!props.clickable) {
         return;
@@ -514,6 +520,7 @@ export default {
       onUpdateShowing,
       showing,
       dialogClass,
+      onClickOption,
     };
   },
 };
