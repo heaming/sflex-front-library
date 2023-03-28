@@ -81,6 +81,7 @@
                 use-dialog
                 :dialog-title="'다이얼로그 제목'"
                 @click-item="openPopup"
+                @click-option="clickOption"
               >
                 <template #item="{ item }">
                   <kw-item-section>
@@ -200,6 +201,10 @@ const options = ref([
 function setActive(navLinks, link) {
   navLinks.value.forEach((el) => el?.classList.remove('curr'));
   link?.classList.add('curr');
+}
+
+function clickOption(option) {
+  console.log('???', option);
 }
 
 function makeScroll(navLinks) {
