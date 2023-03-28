@@ -151,6 +151,11 @@ export function openPrint(printType, printString) {
   return callMethod(NativePlugin.Bluetooth, 'printing', { printType, printString });
 }
 
+// 블루투스 프린터 정보 초기화
+export function initBluetoothPrinter() {
+  return callMethod(NativePlugin.Bluetooth, 'initBluetoothPrinter');
+}
+
 /*
   App
   */
