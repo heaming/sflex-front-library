@@ -362,9 +362,10 @@ body.mobile:not(.tablet) {
     height: $kw-tabs-content-height;
 
     &__content {
-      > .q-tab__label {
-        @include typo("dense", 400);
-      }
+      // > .q-tab__label {
+      @include typo("dense", 400);
+
+      // }
     }
   }
 
