@@ -583,6 +583,21 @@ export async function exportView(view, options) {
           value = radio.getAttribute('aria-label');
         }
       });
+
+      // value가 없는경우 disable 된 콤보 필드일수도 있다.
+      if (value === '') {
+        const disableField = formItem.querySelector('.q-field--disabled');
+        if (disableField) {
+          const spans = disableField.querySelectorAll('.q-field__native span');
+          spans.forEach((v, i) => {
+            if (i === 0) {
+              value += v.innerText;
+            } else {
+              value += ` | ${v.innerText}`;
+            }
+          });
+        }
+      }
       message += `${label} : ${value}  \n`;
     });
 
