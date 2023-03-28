@@ -202,6 +202,7 @@ export default {
     regex: { type: [String, Object], default: undefined, validator: (v) => v instanceof RegExp || !!NAMED_REGEX[v] },
     spinner: { type: Boolean, default: undefined },
     onClickIcon: { type: Function, default: undefined },
+    onKeydownNoClick: { type: Boolean, default: false },
     // when use mask props, keydown event not fired.
     // so use this to block form submit
     preventSubmit: { type: Boolean, default: false },
@@ -235,7 +236,7 @@ export default {
       if (e.keyCode === 13) {
         const disabled = props.disable || props.disableIcon;
 
-        if (!disabled && props.icon) {
+        if (!disabled && props.icon && !props.onKeydownNoClick) {
           stopAndPrevent(e);
           props.onClickIcon?.();
         }
