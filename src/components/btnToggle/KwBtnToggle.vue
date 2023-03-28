@@ -6,6 +6,7 @@
     :error-message="invalidMessage"
     @focus="$emit('focus')"
   >
+    <!-- eslint-disable vue/no-deprecated-v-on-native-modifier -->
     <q-btn-toggle
       :model-value="value ?? ''"
       :class="toggleClass"
@@ -26,7 +27,9 @@
       rectangle
       :ripple="false"
       @update:model-value="value = $event"
+      @click.native="onClick"
     />
+    <!-- eslint-enable vue/no-deprecated-v-on-native-modifier -->
   </kw-field-wrap>
 </template>
 
@@ -66,6 +69,7 @@ export default {
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
+    onClick: { type: Function, default: null },
   },
 
   emits: ['update:modelValue', 'focus'],
