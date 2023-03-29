@@ -94,14 +94,12 @@ export async function getImageData() {
   */
 // 카메라 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openCamera() {
-  await callMethod(NativePlugin.Photo, 'openCamera');
-  return getImageData();
+  return await callMethod(NativePlugin.Photo, 'openCamera');
 }
 
 // 사진첩 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openPhotoGallery() {
-  await callMethod(NativePlugin.Photo, 'openPhotoGallery');
-  return getImageData();
+  return await callMethod(NativePlugin.Photo, 'openPhotoGallery');
 }
 
 /*
@@ -147,8 +145,8 @@ export function openTMap(routeInfo) {
   Bluetooth
  */
 // ET-291(IOS, AND) 또는 ET-233 (AND) 블루투스 프린터기에 문자열 출력
-export function openPrint(printType, printString) {
-  return callMethod(NativePlugin.Bluetooth, 'printing', { printType, printString });
+export function openPrint(printString) {
+  return callMethod(NativePlugin.Bluetooth, 'printing', { printMsg: printString });
 }
 
 // 블루투스 프린터 정보 초기화
@@ -220,5 +218,5 @@ export function getGPS() {
 // callStartTime : 통화발생시간
 // only Android
 export function getCallLog() {
-  return callMethod(NativePlugin.Call, 'getCallLog');
+  return callMethod(NativePlugin.Call, 'getCallLog', {});
 }
