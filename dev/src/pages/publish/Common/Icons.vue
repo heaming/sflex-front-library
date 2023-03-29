@@ -197,6 +197,7 @@ const iconList2 = [
 
 const visuals = [
   'visual_check',
+  'visual_search',
   'visual_campus',
   'visual_edit',
   'visual_online',

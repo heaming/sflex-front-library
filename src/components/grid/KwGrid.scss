@@ -1043,3 +1043,7 @@
     font-size: 12px !important;
   }
 }
+
+.rg-data-row td:first-child:is(.rg-merged-cell) {
+  border-left: 0;
+}
