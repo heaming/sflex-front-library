@@ -4,7 +4,7 @@ export default {
   namespaced: true,
 
   state: () => ({
-    isLeftExist: false,
+    isLeftExist: true,
     leftDrawerExpanded: !platform.is.mobile,
 
     globalApps: [],

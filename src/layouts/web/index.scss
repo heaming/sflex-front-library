@@ -638,6 +638,14 @@
           width: 190px;
         }
       }
+
+      .q-focusable {
+        &:hover {
+          background: rgb($primary, 5%);
+        }
+
+        transition: none !important;
+      }
     }
   }
 }
