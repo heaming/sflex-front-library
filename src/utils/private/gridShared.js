@@ -220,6 +220,7 @@ export async function cloneView(view, options) {
   copyView.setHeader(cloneDeep(view.getHeader()));
   copyView.setDisplayOptions(cloneDeep(view.getDisplayOptions()));
   copyView.setFooters(cloneDeep(view.getFooters()));
+  copyView.setHeaderSummaries(cloneDeep(view.getHeaderSummaries()));
 
   if (isGridView && view.isGrouped()) {
     await timeout();
