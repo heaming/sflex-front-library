@@ -167,12 +167,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-::v-deep(.q-focusable) {
-  &:hover {
-    background: rgb($primary, 5%);
-  }
-
-  transition: none !important;
-}
-
-</style>
+ </style>
