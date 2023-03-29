@@ -9,10 +9,14 @@ export default () => {
   const stackViews = shallowReactive([]);
 
   function add(to) {
+    const { params } = to;
+
+    Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
+
     const index = stackViews.push({
       key: to.name,
       component: last(to.matched).components.default,
-      componentProps: to.params,
+      componentProps: params,
     });
 
     return stackViews[index - 1];
