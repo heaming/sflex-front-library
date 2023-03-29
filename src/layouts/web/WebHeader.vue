@@ -124,6 +124,7 @@ import { modal } from '../../plugins/modal';
 import { localStorage } from '../../plugins/storage';
 import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
 import WebGnbMenuP from '../../pages/web/WebGnbMenuP.vue';
+import store from '../../store';
 
 const searchText = ref('');
 const totalMenu = ref(false);
@@ -156,6 +157,7 @@ export default {
     }
     function goToHome() {
       push({ name: consts.ROUTE_HOME_NAME });
+      store.commit('app/setLeftExist', false);
     }
 
     function openHomeMgtPopup() {
