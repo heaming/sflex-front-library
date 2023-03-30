@@ -1,45 +1,48 @@
 <template>
-  <q-drawer
-    class="web-left-drawer"
-    :model-value="true"
-    :mini="!isExpanded"
-    :mini-width="40"
-    :width="303"
-    show-if-above
-    bordered
-  >
-    <div class="web-left-drawer__mini">
-      <kw-btn
-        v-for="(content, i) in contents"
-        :key="i"
-        class="drawer-mini-btn"
-        :class="{'drawer-mini-btn--active': content === selectedContent}"
-        :icon="content.icon"
-        borderless
-        @click="onChangeContent(content)"
-      >
-        <kw-tooltip
-          anchor="center right"
-          self="center left"
-          class="lnb_tooltip"
-          :transition-show="false"
-          :transition-hide="false"
-          :offset="[-8, 10]"
+  <keep-alive>
+    <q-drawer
+      v-if="isLeftExist"
+      class="web-left-drawer"
+      :model-value="true"
+      :mini="!isExpanded"
+      :mini-width="40"
+      :width="303"
+      show-if-above
+      bordered
+    >
+      <div class="web-left-drawer__mini">
+        <kw-btn
+          v-for="(content, i) in contents"
+          :key="i"
+          class="drawer-mini-btn"
+          :class="{'drawer-mini-btn--active': content === selectedContent}"
+          :icon="content.icon"
+          borderless
+          @click="onChangeContent(content)"
         >
-          {{ content.label }}
-        </kw-tooltip>
-      </kw-btn>
-    </div>
+          <kw-tooltip
+            anchor="center right"
+            self="center left"
+            class="lnb_tooltip"
+            :transition-show="false"
+            :transition-hide="false"
+            :offset="[-8, 10]"
+          >
+            {{ content.label }}
+          </kw-tooltip>
+        </kw-btn>
+      </div>
 
-    <div class="web-left-drawer__content">
-      <keep-alive>
-        <component
-          :is="selectedContent.component"
-          :key="selectedContent.component.name"
-        />
-      </keep-alive>
-    </div>
-  </q-drawer>
+      <div class="web-left-drawer__content">
+        <keep-alive>
+          <component
+            :is="selectedContent.component"
+            :key="selectedContent.component.name"
+          />
+        </keep-alive>
+      </div>
+    </q-drawer>
+  </keep-alive>
 </template>
 
 <script>
