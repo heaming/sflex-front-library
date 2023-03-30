@@ -13,6 +13,7 @@ export default () => {
   function updateSelected(appKey) {
     commit('app/setSelectedGlobalAppKey', appKey);
     commit('app/setSelectedGlobalMenuKey', null);
+    commit('app/setLeftExist', true);
   }
 
   if (!selectedKey.value) {

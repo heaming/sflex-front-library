@@ -4,6 +4,7 @@ export default {
   namespaced: true,
 
   state: () => ({
+    isLeftExist: true,
     leftDrawerExpanded: !platform.is.mobile,
 
     globalApps: [],
@@ -14,6 +15,13 @@ export default {
   }),
 
   mutations: {
+    setLeftExist(state, exist) {
+      state.isLeftExist = exist;
+      if (!exist) {
+        // LEFT가 없는 상황에서는 gnb 의 select 표시를 없앤다. (null처리)
+        state.selectedGlobalAppKey = null;
+      }
+    },
     setLeftDrawerExpanded(state, expanded) {
       state.leftDrawerExpanded = expanded;
     },
@@ -32,6 +40,7 @@ export default {
   },
 
   getters: {
+    getLeftExist: (state) => state.isLeftExist,
     getLeftDrawerExpanded: (state) => state.leftDrawerExpanded,
     getGlobalApps: (state) => state.globalApps,
     getSelectedGlobalAppKey: (state) => state.selectedGlobalAppKey,
