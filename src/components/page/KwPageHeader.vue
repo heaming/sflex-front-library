@@ -24,7 +24,7 @@
         :true-value="true"
         :false-value="false"
         checked-icon="bookmark_on"
-        unchecked-icon="bookmark_off"
+        unchecked-icon="bookmark_outline"
         @update:model-value="updateBookmark"
       >
         <kw-tooltip>
@@ -33,10 +33,18 @@
       </kw-checkbox>
 
       <kw-icon
-        name="alert_on"
+        name="alert_outline"
         clickable
       >
-        {{ $t('MSG_TXT_NTC') }}
+        {{ $t('MSG_TXT_NTFY') }}
+      </kw-icon>
+
+      <kw-icon
+        v-if="true"
+        name="report"
+        clickable
+      >
+        {{ $t('MSG_TXT_MANU') }}
       </kw-icon>
 
       <kw-icon
