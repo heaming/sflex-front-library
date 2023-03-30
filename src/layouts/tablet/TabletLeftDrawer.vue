@@ -14,38 +14,27 @@
     <div class="tablet-left-drawer__content">
       <div class="tablet-left-drawer__content__top">
         <kw-btn
+          v-for="(menu, menuIdx) in leftDrawerTopMenus"
+          :key="menuIdx"
           borderless
-          icon="tablet_home"
+          :icon="menu.icon"
           style="font-size: 24px;"
           class="menu_icon"
+          :class="{ 'curr': menu.icon === curr }"
+          @click="openMenu(menu)"
         />
       </div>
 
       <div class="tablet-left-drawer__content__bottom">
         <kw-btn
+          v-for="(menu, menuIdx) in leftDrawerBottomMenus"
+          :key="menuIdx"
           borderless
-          icon="tablet_menu"
-          style="font-size: 24px;"
-          class="menu_icon curr"
-          @click="openTotalMenu"
-        />
-        <kw-btn
-          borderless
-          icon="tablet_basket"
+          :icon="menu.icon"
           style="font-size: 24px;"
           class="menu_icon"
-        />
-        <kw-btn
-          borderless
-          icon="tablet_recently"
-          style="font-size: 24px;"
-          class="menu_icon"
-        />
-        <kw-btn
-          borderless
-          icon="tablet_task"
-          style="font-size: 24px;"
-          class="menu_icon"
+          :class="{ 'curr': menu.icon === curr }"
+          @click="openMenu(menu)"
         />
       </div>
     </div>
@@ -55,25 +44,47 @@
 <script>
 import { modal } from '../../plugins/modal';
 import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
+import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
+import { GlobalModalVmKey } from '../../consts/private/symbols';
 
-const showTotalMenu = ref(false);
 export default {
   name: 'TabletLeftDrawer',
   setup() {
-    async function openTotalMenu() {
-      if (showTotalMenu.value) return;
-      showTotalMenu.value = true;
-      await modal({
-        component: async () => await import('../../pages/tablet/TabletTotalMenuP.vue'),
-        dialogProps: { maximized: true },
-      });
-      showTotalMenu.value = false;
+    const curr = ref(0);
+    const leftDrawerTopMenus = ref([
+      { icon: 'tablet_home' },
+    ]);
+
+    const leftDrawerBottomMenus = ref([
+      { icon: 'tablet_menu', component: async () => await import('../../pages/tablet/TabletTotalMenuP.vue') },
+      { icon: 'tablet_basket' },
+      { icon: 'tablet_recently' },
+      { icon: 'tablet_task' },
+    ]);
+
+    async function openMenu(menu) {
+      curr.value = menu.icon;
+
+      const globalModals = getGlobalData(GlobalModalVmKey);
+      if (globalModals.length > 0) {
+        const mainMenuModals = globalModals.filter((globalModal) => globalModal.dialogProps.class === 'main-menu-modal');
+        mainMenuModals.forEach((mainMenuModal) => removeGlobalData(mainMenuModal.uid));
+      }
+
+      if (menu.component) {
+        await modal({
+          component: menu.component,
+          dialogProps: { maximized: true, class: 'main-menu-modal' },
+        });
+      }
     }
 
     return {
       ...useLeftDrawerExpand(),
-      openTotalMenu,
-      showTotalMenu,
+      openMenu,
+      leftDrawerTopMenus,
+      leftDrawerBottomMenus,
+      curr,
     };
   },
 };
