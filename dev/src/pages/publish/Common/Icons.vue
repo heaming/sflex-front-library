@@ -85,6 +85,7 @@
 
 const iconList1 = [
   'alert_on',
+  'alert_outline',
   'arrow_down',
   'arrow_left',
   'arrow_next',
