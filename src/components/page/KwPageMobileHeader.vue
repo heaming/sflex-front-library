@@ -18,15 +18,22 @@
           :model-value="isBookmarked"
           :true-value="true"
           :false-value="false"
-          size="24px"
+          size="16px"
           checked-icon="bookmark_on"
-          unchecked-icon="bookmark_off"
+          unchecked-icon="bookmark_outline"
           @update:model-value="updateBookmark"
         >
           <kw-tooltip>
             {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
           </kw-tooltip>
         </kw-checkbox>
+        <kw-icon
+          v-if="true"
+          name="report"
+          clickable
+        >
+          {{ $t('MSG_TXT_MANU') }}
+        </kw-icon>
       </div>
     </div>
 

@@ -5,77 +5,59 @@
   >
     <!-- 버튼 활성화 될 경우 .curr -->
     <kw-btn
-      borderless
-      icon="mob_home"
+      v-for="(footerMenu, footerIdx) in footerMenus"
+      :key="footerIdx"
+      :icon="footerMenu.icon"
+      :label="footerMenu.label"
       style="font-size: 24px;"
-      class="menu_icon curr"
-      label="홈"
-    />
-    <kw-btn
       borderless
-      icon="mob_task"
-      style="font-size: 24px;"
       class="menu_icon"
-      label="작업목록"
-    />
-    <kw-btn
-      borderless
-      icon="mob_recently"
-      style="font-size: 24px;"
-      class="menu_icon"
-      label="최근작업"
-    />
-    <kw-btn
-      borderless
-      icon="mob_basket"
-      style="font-size: 24px;"
-      class="menu_icon"
-      label="결제바구니"
-      @click="openTotalMenuTest"
-    />
-    <kw-btn
-      borderless
-      icon="mob_menu"
-      style="font-size: 24px;"
-      class="menu_icon"
-      label="전체보기"
-      @click="openTotalMenu"
+      :class="{ 'curr': curr === footerIdx }"
+      @click="openMenu(footerMenu, footerIdx)"
     />
   </q-footer>
 </template>
 
 <script>
 import { modal } from '../../plugins/modal';
+import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
+import { GlobalModalVmKey } from '../../consts/private/symbols';
 
-const showTotalMenu = ref(false);
 export default {
   name: 'MobileFooter',
 
   setup() {
-    async function openTotalMenu() {
-      if (showTotalMenu.value) return;
-      showTotalMenu.value = true;
-      await modal({
-        component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue'),
-        dialogProps: { maximized: true },
-      });
-      showTotalMenu.value = false;
-    }
+    const { t } = useI18n();
+    const curr = ref(0);
+    const footerMenus = ref([
+      { icon: 'mob_home', label: t('MSG_TXT_HOME') },
+      { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
+      { icon: 'mob_recently', label: t('MSG_TXT_RECENT_WORK') },
+      { icon: 'mob_basket', label: t('MSG_TXT_STLM_BASKET'), component: async () => await import('../../pages/mobile/MobileTotalMenuTestP.vue') },
+      { icon: 'mob_menu', label: t('MSG_BTN_ALL_VIEW'), component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue') },
+    ]);
 
-    async function openTotalMenuTest() {
-      if (showTotalMenu.value) return;
-      showTotalMenu.value = true;
-      await modal({
-        component: async () => await import('../../pages/mobile/MobileTotalMenuTestP.vue'),
-        dialogProps: { maximized: true },
-      });
-      showTotalMenu.value = false;
+    async function openMenu(menu, idx) {
+      curr.value = idx;
+
+      const globalModals = getGlobalData(GlobalModalVmKey);
+      if (globalModals.length > 0) {
+        const mainMenuModals = globalModals.filter((globalModal) => globalModal.dialogProps.class === 'main-menu-modal');
+        mainMenuModals.forEach((mainMenuModal) => removeGlobalData(mainMenuModal.uid));
+      }
+
+      if (menu.component) {
+        await modal({
+          component: menu.component,
+          dialogProps: { maximized: true, class: 'main-menu-modal' },
+        });
+      }
     }
 
     return {
-      openTotalMenu,
-      showTotalMenu,
-      openTotalMenuTest,
+      openMenu,
+      footerMenus,
+      curr,
     };
   },
 };
