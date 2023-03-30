@@ -206,6 +206,10 @@ body.desktop {
             font-size: 14px;
           }
 
+          &.q-textarea .q-field__control {
+            height: auto !important;
+          }
+
           .q-field__marginal {
             height: 32px;
           }
