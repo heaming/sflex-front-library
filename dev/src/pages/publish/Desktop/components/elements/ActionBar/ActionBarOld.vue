@@ -122,7 +122,7 @@
         Case 01
       </h3>
       <p class="kw-guide-description notice">
-        This case is not currently used because the button coding method and the location of each role have changed.
+        This case is not currently used because the button coding method and the location of each role have changed.<br>
       </p>
       <q-card>
         <div class="kw-guide-example">
