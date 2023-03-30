@@ -215,8 +215,8 @@ function onClickEditAndComplete(depth3Menu) {
 }
 
 function moveToPage(menu) {
-  router.push({ name: menu.menuUid });
   ok();
+  router.push({ name: menu.menuUid });
 }
 
 function setActive(navLinks, link) {

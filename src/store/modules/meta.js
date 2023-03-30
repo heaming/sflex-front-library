@@ -52,6 +52,7 @@ export default {
     noMenuPages: [],
     bookmarks: [],
     recentMenus: [],
+    isLocatedFromHistory: false,
   }),
 
   mutations: {
@@ -91,6 +92,9 @@ export default {
     setRecentMenus(state, recentMenus) {
       state.recentMenus = Object.freeze(recentMenus);
     },
+    setIsLocatedFromHistory(state, isLocatedFromHistory) {
+      state.isLocatedFromHistory = isLocatedFromHistory;
+    },
   },
 
   getters: {
@@ -116,6 +120,7 @@ export default {
     getBookmarks: (state) => state.bookmarks,
     isBookmarked: (state) => (menuUid, pageId) => some(state.bookmarks, { menuUid, pageId }),
     getRecentMenus: (state) => state.recentMenus,
+    getIsLocatedFromHistory: (state) => state.isLocatedFromHistory,
   },
 
   actions: {
@@ -195,6 +200,9 @@ export default {
       });
 
       commit('setRecentMenus', recentMenus);
+    },
+    fetchLocatedFromHistory({ commit }, data) {
+      commit('setIsLocatedFromHistory', data);
     },
   },
 };
