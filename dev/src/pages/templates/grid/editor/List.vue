@@ -95,14 +95,7 @@ function initGrd(data, view) {
       optionValue: 'value',
       optionLabel: 'label',
       styleName: 'text-center',
-      editor: { type: 'checklist', itemSortStyle: 'descending' },
-      firstOption: 'select', // preset: 'all', 'select'
-      firstOptionValue: '', // default value, 생략 가능
-      firstOptionLabel: '선택', // default value, 생략 가능
-      displayCallback(g, index, value) {
-        console.log(value);
-        return value;
-      },
+      editor: { type: 'checklist', itemSortStyle: 'descending', showAllCheck: true, allCheckText: '전체' },
     },
   ];
 
@@ -198,14 +191,7 @@ const sampleCode = `
       optionValue: 'value',
       optionLabel: 'label',
       styleName: 'text-center',
-      editor: { type: 'checklist', itemSortStyle: 'descending' },
-      firstOption: 'select', // preset: 'all', 'select'
-      firstOptionValue: '', // default value, 생략 가능
-      firstOptionLabel: '선택', // default value, 생략 가능
-      displayCallback(g, index, value) {
-        console.log(value);
-        return value;
-      },
+      editor: { type: 'checklist', itemSortStyle: 'descending', showAllCheck: true, allCheckText: '전체' },
     },
   ];
 
