@@ -2,6 +2,8 @@
   Layout
  */
 .dev-layout {
+  z-index: 2;
+
   body.desktop & {
     & > .dev-header {
       min-width: 1656px;
