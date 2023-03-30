@@ -629,6 +629,14 @@ $unit: px;
       & * {
         font-weight: $value !important;
       }
+
+      & .text- {
+        @each $weight,$value in $text-weights {
+          &weight-#{$weight} {
+            font-weight: $value !important;
+          }
+        }
+      }
     }
   }
 }
