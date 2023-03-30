@@ -190,6 +190,14 @@ export default () => {
 
       if (to.meta.logging === true) {
         add(to, from);
+      } else {
+        // tabView가 이미 떠 있는 상황이면 tabView를 추가하지 못하면서,
+        // router.push 에 state로 params를 넘겨줄 경우 받아내지 못한다.
+        // 그래서 화면이 이동했을 때 meta.logging 이 false 이면 해당 tabview를 찾아내서 그 tabview에 props를 넣어줌
+        const { params } = to;
+        Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
+        const tabView = tabViews.find((v) => v.key === to.name);
+        tabView.componentProps = params;
       }
     },
   );
