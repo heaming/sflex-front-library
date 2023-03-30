@@ -95,14 +95,7 @@ function initGrd(data, view) {
       optionValue: 'value',
       optionLabel: 'label',
       styleName: 'text-center',
-      editor: { type: 'checklist', itemSortStyle: 'descending' },
-      firstOption: 'select', // preset: 'all', 'select'
-      firstOptionValue: '', // default value, 생략 가능
-      firstOptionLabel: '선택', // default value, 생략 가능
-      displayCallback(g, index, value) {
-        console.log(value);
-        return value;
-      },
+      editor: { type: 'checklist', itemSortStyle: 'descending', showAllCheck: true, allCheckText: '전체' },
     },
   ];
 
@@ -155,6 +148,9 @@ const sampleCode = `
     {
       fieldName: 'list03',
     },
+    {
+      fieldName: 'list04',
+    },
   ];
 
   const columns = [
@@ -162,6 +158,7 @@ const sampleCode = `
       fieldName: 'list01',
       header: 'Default',
       options,
+      styleName: 'text-right',
       editor: { type: 'list' },
     },
     {
@@ -170,6 +167,7 @@ const sampleCode = `
       options: options.map((v) => ({ value: v.codeId, label: v.codeName })),
       optionValue: 'value',
       optionLabel: 'label',
+      styleName: 'text-center',
       editor: { type: 'list' },
       firstOption: 'select', // preset: 'all', 'select'
       firstOptionValue: '', // default value, 생략 가능
@@ -183,15 +181,24 @@ const sampleCode = `
       displayCallback(g, index, value) {
         const { values, labels } = g.columnByName(index.column);
         const i = values.findIndex((v) => v === value);
-        return i > -1 ? \`[\${values[i]}] \${labels[i]}\` : '';
+        return i > -1 ? \` [\${values[i]}] \${labels[i]}\` : '';
       },
+    },
+    {
+      fieldName: 'list04',
+      header: 'MultiCheckList',
+      options: options.map((v) => ({ value: v.codeId, label: v.codeName })),
+      optionValue: 'value',
+      optionLabel: 'label',
+      styleName: 'text-center',
+      editor: { type: 'checklist', itemSortStyle: 'descending', showAllCheck: true, allCheckText: '전체' },
     },
   ];
 
   data.setFields(fields);
   view.setColumns(columns);
   view.editOptions.editable = true;
-
+  view.onCellClicked = onCellClicked;
   data.setRows([
     {
       list01: '',
