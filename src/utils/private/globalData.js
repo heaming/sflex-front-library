@@ -1,5 +1,8 @@
-import { uniqueId } from 'lodash-es';
+import { uniqueId, debounce } from 'lodash-es';
 import { updateGlobalVm } from './globalVm';
+import { GlobalModalVmKey } from '../../consts/private/symbols';
+import store from '../../store';
+import { platform } from '../../plugins/platform';
 
 const globalData = [];
 
@@ -8,14 +11,8 @@ const normalizeData = (data) => ({
   vmKey: data.vmKey,
 });
 
-export function addGlobalData(data) {
-  data = normalizeData(data);
-
-  const { vmKey } = data;
-  data.uid = uniqueId(vmKey);
-
-  globalData.push(data);
-  updateGlobalVm(vmKey, data);
+export function getGlobalData(vmKey) {
+  return globalData.filter((v) => !vmKey || v.vmKey === vmKey);
 }
 
 export function removeGlobalData(e) {
@@ -28,8 +25,35 @@ export function removeGlobalData(e) {
 
   globalData.splice(index, 1);
   updateGlobalVm(vmKey);
+
+  const modals = getGlobalData(GlobalModalVmKey);
+  if (modals.length <= 0) {
+    /* eslint-disable-next-line no-use-before-define */
+    window.removeEventListener('popstate', closeModal);
+  }
 }
 
-export function getGlobalData(vmKey) {
-  return globalData.filter((v) => !vmKey || v.vmKey === vmKey);
+const removeModalWhenHistoryBack = debounce(() => {
+  const modals = getGlobalData(GlobalModalVmKey);
+  if (modals.length > 0) removeGlobalData(modals[modals.length - 1].uid);
+}, 100);
+
+const closeModal = () => {
+  store.dispatch('meta/fetchLocatedFromHistory', true);
+  removeModalWhenHistoryBack();
+};
+
+export function addGlobalData(data) {
+  data = normalizeData(data);
+
+  const { vmKey } = data;
+  data.uid = uniqueId(vmKey);
+
+  globalData.push(data);
+  updateGlobalVm(vmKey, data);
+
+  if (!platform.is.desktop) {
+    window.removeEventListener('popstate', closeModal);
+    window.addEventListener('popstate', closeModal);
+  }
 }

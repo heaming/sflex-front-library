@@ -66,6 +66,7 @@ function setSelectedGlobalKeys(to) {
 
 // eslint-disable-next-line no-unused-vars
 export default async (to, from, failure) => {
+  if (failure) return;
   assignParamsByQuery(to);
   assignParamsIfIsLinkPage(to);
   loggingIfNeeded(to);

@@ -1,5 +1,8 @@
 import { isEmpty, pick, find, kebabCase } from 'lodash-es';
 import store from '../../store';
+import { GlobalModalVmKey } from '../../consts/private/symbols';
+import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
+import { platform } from '../../plugins/platform';
 
 export const INITIAL_LOCATION = {};
 
@@ -15,20 +18,37 @@ export function recursiveGetParentPath(menuUid) {
 }
 
 export default (to, from, next) => {
-  if (isEmpty(INITIAL_LOCATION)) {
-    Object.assign(
-      INITIAL_LOCATION,
-      pick(to, ['path', 'query']),
-    );
-    next('/');
-  } else if (to.meta.pageUseCode === 'S' && from.fullPath === '/') {
-    const targetPath = recursiveGetParentPath(to.meta.menuUid);
-    const splitedPath = to.fullPath.split(`/${targetPath}`);
-    window.history.replaceState({}, '');
-    next(splitedPath[0]);
-  } else {
-    to.meta.redirectedFrom = undefined;
-    to.meta.logging = false;
-    next();
-  }
+  setTimeout(() => {
+    const isLocatedFromHistory = store.getters['meta/getIsLocatedFromHistory'];
+    const modals = getGlobalData(GlobalModalVmKey);
+
+    if (platform.is.desktop && modals.length > 0) {
+      next(false);
+      return;
+    }
+
+    if (isLocatedFromHistory) {
+      store.dispatch('meta/fetchLocatedFromHistory', false);
+      next(false);
+    } else {
+      modals.forEach((modal) => removeGlobalData(modal.uid));
+    }
+
+    if (isEmpty(INITIAL_LOCATION)) {
+      Object.assign(
+        INITIAL_LOCATION,
+        pick(to, ['path', 'query']),
+      );
+      next('/');
+    } else if (to.meta.pageUseCode === 'S' && from.fullPath === '/') {
+      const targetPath = recursiveGetParentPath(to.meta.menuUid);
+      const splitedPath = to.fullPath.split(`/${targetPath}`);
+      window.history.replaceState({}, '');
+      next(splitedPath[0]);
+    } else {
+      to.meta.redirectedFrom = undefined;
+      to.meta.logging = false;
+      next();
+    }
+  });
 };
