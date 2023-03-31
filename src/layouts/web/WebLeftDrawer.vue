@@ -1,9 +1,8 @@
 <template>
   <keep-alive>
     <q-drawer
-      v-if="isLeftExist"
       class="web-left-drawer"
-      :model-value="true"
+      :model-value="isLeftExist"
       :mini="!isExpanded"
       :mini-width="40"
       :width="303"
