@@ -62,6 +62,7 @@ function addRoutesByMenu(router, route, app, menu) {
       pageId: menu.pageId,
       pageUseCode: menu.pageUseCode,
       pageName: menu.pageDestinationValue,
+      portalId: app.portalId,
       linkPageParam: linkParams.length > 0 ? linkParams[0].pageParameterValue : '',
     },
   });
