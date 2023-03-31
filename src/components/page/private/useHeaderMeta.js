@@ -11,9 +11,11 @@ export default () => {
   const meta = { ...currentRoute.value.meta };
   const title = computed(() => props.title || meta.menuName);
   const isSubPage = computed(() => meta.pageUseCode === 'S');
+  const portalId = computed(() => meta.portalId);
   return {
     pageTitle: title,
     pageUseIsSub: isSubPage,
     noMenuPage: meta.noMenuPage,
+    portalId,
   };
 };
