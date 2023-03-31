@@ -25,7 +25,7 @@ export const useInfiniteScrollProps = {
 export default () => {
   const { props } = getCurrentInstance();
   const stopLoading = ref(false);
-  const infiniteIsEnabled = computed(() => platform.is.mobile && typeof props.onLoad === 'function' && stopLoading.value === false);
+  const infiniteIsEnabled = computed(() => (platform.is.mobile || platform.is.tablet) && typeof props.onLoad === 'function' && stopLoading.value === false);
   const isFetching = ref(false);
 
   const scrollTarget = ref();
