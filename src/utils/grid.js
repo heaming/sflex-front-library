@@ -498,6 +498,10 @@ export function getValidationErrors(view) {
   return view.__validationErrors__ || [];
 }
 
+export function getPageIndexOffset(pageInfo) {
+  return (pageInfo.value.pageIndex - 1) * pageInfo.value.pageSize;
+}
+
 /*
   Excel
   */

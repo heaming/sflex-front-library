@@ -20,6 +20,7 @@
 
 <script>
 import { modal } from '../../plugins/modal';
+import { getPreference } from '../../utils/mobile';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import { GlobalModalVmKey } from '../../consts/private/symbols';
 
@@ -27,6 +28,9 @@ export default {
   name: 'MobileFooter',
 
   setup() {
+    const { getters } = useStore();
+    const { userId } = getters['meta/getUserInfo'];
+    const { push } = useRouter();
     const { t } = useI18n();
     const curr = ref(0);
     const footerMenus = ref([
@@ -51,6 +55,13 @@ export default {
           component: menu.component,
           dialogProps: { maximized: true, class: 'main-menu-modal' },
         });
+
+        return;
+      }
+
+      if (idx === 2 && userId) {
+        const name = await getPreference(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`);
+        push({ name });
       }
     }
 
