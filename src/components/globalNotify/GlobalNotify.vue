@@ -69,7 +69,7 @@ export default {
       await pending();
     }
 
-    registerGlobalVm(GlobalNotifyVmKey, vm, async (notification) => {
+    registerGlobalVm(GlobalNotifyVmKey, vm, (notification) => {
       if (notification) {
         let offsetTop;
         let offsetLeft;
