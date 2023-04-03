@@ -12,7 +12,10 @@
         {{ pageTitle }}
       </template>
     </h1>
-    <div class="kw-page-mobile-header__tools">
+    <div
+      v-if="portalId && portalId !== 'NO_SESSION'"
+      class="kw-page-mobile-header__tools"
+    >
       <div class="kw-page-mobile-header__bookmark">
         <kw-checkbox
           :model-value="isBookmarked"

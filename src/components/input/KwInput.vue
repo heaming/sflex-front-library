@@ -175,7 +175,7 @@ export default {
     unmaskedValue: { type: Boolean, default: true },
     prefix: { type: String, default: undefined },
     suffix: { type: String, default: undefined },
-    clearable: { type: Boolean, default: false },
+    clearable: { type: Boolean, default: true },
     color: { type: String, default: undefined },
     bgColor: { type: String, default: undefined },
     autofocus: { type: Boolean, default: false },
