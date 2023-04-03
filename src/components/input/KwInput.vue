@@ -125,9 +125,13 @@
         @click="toggleHint"
       >
         <kw-tooltip v-model="showingHint">
-          <slot name="hint">
-            {{ hint }}
+          <!-- eslint-disable vue/no-v-html -->
+          <slot
+            name="hint"
+          >
+            <div v-html="sanitize(hint)" />
           </slot>
+          <!-- eslint-enable vue/no-v-html -->
         </kw-tooltip>
       </q-icon>
     </template>
@@ -141,6 +145,7 @@ import useFieldStyle, { useFieldStyleProps } from '../../composables/private/use
 import { getMaxByteString, getByte, getNumberWithComma } from '../../utils/string';
 import { preventSubmitEnter, stopAndPrevent } from '../../utils/private/event';
 import i18n from '../../i18n';
+import { sanitize } from '../../plugins/sanitize';
 
 const NAMED_REGEX = {
   alpha: /^[A-Z]*$/i,
@@ -385,6 +390,7 @@ export default {
       showingHint,
       toggleHint,
       computedMask,
+      sanitize,
     };
   },
 };

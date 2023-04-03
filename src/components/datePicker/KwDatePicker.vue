@@ -73,9 +73,13 @@
         @click="toggleHint"
       >
         <kw-tooltip v-model="showingHint">
-          <slot name="hint">
-            {{ hint }}
+          <!-- eslint-disable vue/no-v-html -->
+          <slot
+            name="hint"
+          >
+            <div v-html="sanitize(hint)" />
           </slot>
+          <!-- eslint-enable vue/no-v-html -->
         </kw-tooltip>
       </q-icon>
     </template>
@@ -105,6 +109,7 @@ import { addClickOutside, removeClickOutside } from '../../utils/private/clickOu
 import { stopAndPrevent, preventSubmitEnter, addEvt, removeEvt } from '../../utils/private/event';
 import { platform } from '../../plugins/platform';
 import i18n from '../../i18n';
+import { sanitize } from '../../plugins/sanitize';
 
 const typeValues = ['date', 'month', 'year'];
 const typeFormats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
@@ -336,6 +341,7 @@ export default {
       focus,
       showingHint,
       toggleHint,
+      sanitize,
     };
   },
 };
