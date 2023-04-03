@@ -4,7 +4,7 @@
   .q-dialog__inner {
     position: relative;
     top: 134px;
-    padding: 0 40px 0 104px !important;
+    padding: 0 !important;
 
     > div {
       max-width: initial;
@@ -15,7 +15,7 @@
 
   &--minimized {
     .q-dialog__inner {
-      padding: 0 40px 0 343px !important;
+      padding: 0 !important;
     }
   }
 
