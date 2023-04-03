@@ -204,9 +204,13 @@
         @click="toggleHint"
       >
         <kw-tooltip v-model="showingHint">
-          <slot name="hint">
-            {{ hint }}
+          <!-- eslint-disable vue/no-v-html -->
+          <slot
+            name="hint"
+          >
+            <div v-html="sanitize(hint)" />
           </slot>
+          <!-- eslint-enable vue/no-v-html -->
         </kw-tooltip>
       </q-icon>
     </template>
@@ -228,6 +232,7 @@ import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import i18n from '../../i18n';
+import { sanitize } from '../../plugins/sanitize';
 
 export default {
   name: 'KwSelect',
@@ -377,6 +382,7 @@ export default {
       showingHint,
       toggleHint,
       handlePan,
+      sanitize,
     };
   },
 };

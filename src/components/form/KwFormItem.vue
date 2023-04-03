@@ -24,9 +24,13 @@
             name="info"
           >
             <kw-tooltip>
-              <slot name="hint">
-                {{ hint }}
+              <!-- eslint-disable vue/no-v-html -->
+              <slot
+                name="hint"
+              >
+                <div v-html="sanitize(hint)" />
               </slot>
+              <!-- eslint-enable vue/no-v-html -->
             </kw-tooltip>
           </q-icon>
         </span>
@@ -45,6 +49,7 @@
 <script>
 import useFormType, { FORM_TYPE } from '../../composables/private/useFormType';
 import useFormItem, { useFormItemProps } from '../../composables/private/useFormItem';
+import { sanitize } from '../../plugins/sanitize';
 
 export default {
   name: 'KwFormItem',
@@ -63,6 +68,7 @@ export default {
 
     return {
       ...useFormItem(),
+      sanitize,
     };
   },
 };

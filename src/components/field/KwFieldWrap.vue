@@ -27,9 +27,13 @@
               @click="toggleHint"
             >
               <kw-tooltip v-model="showingHint">
-                <slot name="hint">
-                  {{ hint }}
+                <!-- eslint-disable vue/no-v-html -->
+                <slot
+                  name="hint"
+                >
+                  <div v-html="sanitize(hint)" />
                 </slot>
+                <!-- eslint-enable vue/no-v-html -->
               </kw-tooltip>
             </q-icon>
           </slot>
@@ -86,6 +90,7 @@ import useFormLayout from '../../composables/private/useFormLayout';
 import useStretch from '../../composables/private/useStretch';
 import useFieldStateWrap from '../../composables/private/useFieldStateWrap';
 import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFieldWrap';
+import { sanitize } from '../../plugins/sanitize';
 
 export default {
   name: 'KwFieldWrap',
@@ -156,6 +161,7 @@ export default {
       doNotRenderBottom,
       showingHint,
       toggleHint,
+      sanitize,
     };
   },
 };
