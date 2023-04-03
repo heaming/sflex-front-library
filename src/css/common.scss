@@ -15,21 +15,21 @@ body {
 }
 
 // 전체 bg 잘리는 부분 처리
-#app {
-  position: relative;
-  z-index: 1;
+// #app {
+//   position: relative;
+//   z-index: 1;
 
-  &::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background: #f3f4f5;
-    z-index: 1;
-  }
-}
+//   &::after {
+//     content: "";
+//     position: fixed;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     top: 0;
+//     background: #f3f4f5;
+//     z-index: 1;
+//   }
+// }
 
 [disabled] {
   opacity: 1 !important;
