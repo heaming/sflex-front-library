@@ -6,6 +6,7 @@
     transition-show="fade"
     transition-hide="fade"
     seamless
+    :style="{'top': popupOffsetTop, 'padding-left': popupPaddingLeft, 'padding-right': popupPaddingRight }"
     no-focus
     no-refocus
   >
@@ -28,6 +29,13 @@ const {
   DIALOG_TRANSITION_DURATION,
 } = libConfig;
 
+const DEFAULT_PADDING_LEFT_WITH_DRAWER = 343;
+const DEFAULT_PADDING_LEFT_NO_DRAWER = 80;
+const DEFAULT_PADDING_RIGHT = 40;
+const DEFAULT_OFFSET_TOP = 0;
+const DEFAULT_OFFSET_TOP_POPUP = -110;
+const DEFAULT_PADDING_LEFT_POPUP = 40;
+
 export default {
   name: 'GlobalNotify',
 
@@ -46,7 +54,9 @@ export default {
 
     const isPending = ref(false);
     const isActive = computed(() => !isPending.value && notifications.value.length > 0);
-
+    const popupOffsetTop = ref(`${DEFAULT_OFFSET_TOP}`);
+    const popupPaddingLeft = ref(`${DEFAULT_PADDING_LEFT_WITH_DRAWER}px`);
+    const popupPaddingRight = ref(`${DEFAULT_PADDING_RIGHT}px`);
     async function pending() {
       isPending.value = true;
       await timeout();
@@ -59,8 +69,49 @@ export default {
       await pending();
     }
 
-    registerGlobalVm(GlobalNotifyVmKey, vm, (notification) => {
+    registerGlobalVm(GlobalNotifyVmKey, vm, async (notification) => {
       if (notification) {
+        let offsetTop;
+        let offsetLeft;
+        const isPopup = window.location.pathname.indexOf('/popup') >= 0;
+        if (isPopup) {
+          offsetLeft = DEFAULT_PADDING_LEFT_POPUP;
+          offsetTop = DEFAULT_OFFSET_TOP_POPUP;
+        } else {
+          offsetLeft = isLeftExpanded.value ? DEFAULT_PADDING_LEFT_WITH_DRAWER : DEFAULT_PADDING_LEFT_NO_DRAWER;
+          offsetTop = DEFAULT_OFFSET_TOP;
+        }
+        const offsetRight = DEFAULT_PADDING_RIGHT;
+
+        popupOffsetTop.value = `${offsetTop}px`;
+        popupPaddingLeft.value = `${offsetLeft}px`;
+        popupPaddingRight.value = `${offsetRight}px`;
+
+        // await timeout();
+        // const popups = window.$('div.kw-popup');
+        // let offsetTop;
+        // let offsetLeft;
+        // let offsetRight;
+        // const isPopup = window.location.pathname.indexOf('/popup') >= 0;
+        // if (popups.length > 0) {
+        //   offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 140;
+        //   offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left;
+        //   offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left;
+        // } else {
+        //   if (isPopup) {
+        //     offsetLeft = DEFAULT_PADDING_LEFT_POPUP;
+        //     offsetTop = DEFAULT_OFFSET_TOP_POPUP;
+        //   } else {
+        //     offsetLeft = isLeftExpanded.value ? DEFAULT_PADDING_LEFT_WITH_DRAWER : DEFAULT_PADDING_LEFT_NO_DRAWER;
+        //     offsetTop = DEFAULT_OFFSET_TOP;
+        //   }
+
+        //   offsetRight = DEFAULT_PADDING_RIGHT;
+        // }
+        // popupOffsetTop.value = `${offsetTop}px`;
+        // popupPaddingLeft.value = `${offsetLeft}px`;
+        // popupPaddingRight.value = `${offsetRight}px`;
+
         notification.timeout = setTimeout(() => {
           close(notification);
         }, libConfig.NOTIFY_TIMEOUT);
@@ -83,6 +134,9 @@ export default {
       notifications,
       activeNotification,
       isActive,
+      popupOffsetTop,
+      popupPaddingLeft,
+      popupPaddingRight,
     };
   },
 };
