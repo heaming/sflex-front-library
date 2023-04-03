@@ -68,9 +68,13 @@
         @click="toggleHint"
       >
         <kw-tooltip v-model="showingHint">
-          <slot name="hint">
-            {{ hint }}
+          <!-- eslint-disable vue/no-v-html -->
+          <slot
+            name="hint"
+          >
+            <div v-html="sanitize(hint)" />
           </slot>
+          <!-- eslint-enable vue/no-v-html -->
         </kw-tooltip>
       </q-icon>
     </template>
@@ -94,6 +98,7 @@
 <script>
 import useTimePicker, { useTimePickerProps, useTimePickerEmits } from './private/useTimePicker';
 import TimeScrollPicker from './TimeScrollPicker.vue';
+import { sanitize } from '../../plugins/sanitize';
 
 export default {
   name: 'KwTimePicker',
@@ -110,6 +115,7 @@ export default {
   setup() {
     return {
       ...useTimePicker(),
+      sanitize,
     };
   },
 };
