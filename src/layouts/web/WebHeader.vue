@@ -171,7 +171,10 @@ export default {
         item.classList.remove('web-header__link--active');
       });
       const selected = getters['app/getSelectedGlobalAppKey'];
-      document.querySelector(`#header_${selected}`).classList.add('web-header__link--active');
+      const el = document.querySelector(`#header_${selected}`);
+      if (el !== null) {
+        el.classList.add('web-header__link--active');
+      }
     }
 
     const getSelectedKey = ref('');
