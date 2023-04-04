@@ -23,6 +23,7 @@ import { modal } from '../../plugins/modal';
 import { getPreference } from '../../utils/mobile';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import { GlobalModalVmKey } from '../../consts/private/symbols';
+import consts from '../../consts';
 
 export default {
   name: 'MobileFooter',
@@ -59,8 +60,8 @@ export default {
         return;
       }
 
-      if (idx === 2 && userId) {
-        const name = await getPreference(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`);
+      if (idx === 2 && userId) { // 최근 메뉴 라우팅
+        const name = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
         push({ name });
       }
     }

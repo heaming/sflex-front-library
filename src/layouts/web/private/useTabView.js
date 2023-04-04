@@ -197,7 +197,9 @@ export default () => {
         const { params } = to;
         Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
         const tabView = tabViews.find((v) => v.key === to.name);
-        tabView.componentProps = params;
+        if (tabView !== undefined) {
+          tabView.componentProps = params;
+        }
       }
     },
   );
