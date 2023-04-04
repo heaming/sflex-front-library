@@ -64,7 +64,8 @@ export default {
     },
     tooltipOffset: {
       type: Array,
-      default: undefined,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: [0, 3],
     },
     onClick: {
       type: Function,
