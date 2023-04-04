@@ -16,7 +16,7 @@
           </span>
         </slot>
         <span
-          v-if="hint"
+          v-if="hint || $slots.hint"
           class="kw-label-content__hint"
         >
           <q-icon
