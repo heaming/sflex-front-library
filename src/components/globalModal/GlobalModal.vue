@@ -66,7 +66,7 @@ export default {
       const { observerVm, popupCtx } = modal;
       const { onBeforeClose } = popupCtx;
 
-      if (onBeforeClose.value) {
+      if (onBeforeClose?.value) {
         return (await onBeforeClose.value?.(result)) !== false;
       }
 
