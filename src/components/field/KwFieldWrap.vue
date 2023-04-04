@@ -26,7 +26,10 @@
               style="vertical-align: -3px;"
               @click="toggleHint"
             >
-              <kw-tooltip v-model="showingHint">
+              <kw-tooltip
+                v-model="showingHint"
+                :offset="[0, 3]"
+              >
                 <!-- eslint-disable vue/no-v-html -->
                 <slot
                   name="hint"
@@ -55,6 +58,7 @@
           {{ computedErrorMessage }}
           <kw-tooltip
             anchor="center middle"
+            :offset="[0, 3]"
             show-when-ellipsised
           >
             {{ computedErrorMessage }}
@@ -73,6 +77,7 @@
             {{ computedErrorMessage }}
             <kw-tooltip
               anchor="center middle"
+              :offset="[0, 3]"
               show-when-ellipsised
             >
               {{ computedErrorMessage }}

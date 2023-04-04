@@ -23,7 +23,7 @@
             size="16px"
             name="info"
           >
-            <kw-tooltip>
+            <kw-tooltip :offset="[0, 3]">
               <!-- eslint-disable vue/no-v-html -->
               <slot
                 name="hint"

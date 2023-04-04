@@ -36,6 +36,7 @@
       v-for="tooltip of tooltips"
       :key="tooltip.key"
       :target="tooltip.target"
+      :offset="[0, 3]"
     >
       {{ tooltip.content }}
     </kw-tooltip>
