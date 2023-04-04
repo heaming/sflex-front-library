@@ -23,6 +23,7 @@ import { modal } from '../../plugins/modal';
 import { getPreference } from '../../utils/mobile';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import { GlobalModalVmKey } from '../../consts/private/symbols';
+import useGlobal from '../../composables/useGlobal';
 
 export default {
   name: 'MobileFooter',
@@ -33,6 +34,7 @@ export default {
     const { push } = useRouter();
     const { t } = useI18n();
     const curr = ref(0);
+    const { alert } = useGlobal();
     const footerMenus = ref([
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
       { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
@@ -59,9 +61,17 @@ export default {
         return;
       }
 
-      if (idx === 2 && userId) {
-        const name = (await getPreference(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`)).value;
-        push({ name });
+      if (idx === 2) {
+        await alert(userId);
+
+        if (userId) {
+          await alert(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`);
+
+          const name = (await getPreference(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`)).value;
+          await alert(name);
+
+          push({ name });
+        }
       }
     }
 
