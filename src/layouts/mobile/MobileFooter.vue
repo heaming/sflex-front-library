@@ -60,7 +60,7 @@ export default {
       }
 
       if (idx === 2 && userId) {
-        const name = await getPreference(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`);
+        const name = (await getPreference(`CMM_RECENT_WORK_MENU_PATH_${userId.toUpperCase()}`)).value;
         push({ name });
       }
     }
