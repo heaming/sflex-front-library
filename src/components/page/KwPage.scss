@@ -15,13 +15,15 @@
   //     width: calc(1212px + 104px);
   //     margin: 0 auto;
   //   }
-  //   &--auth {
-  //     margin: 0 auto;
-  //     padding: 40px 0;
-  //     min-width: 1000px;
-  //     width: 1000px;
-  //   }
   // }
+  @at-root body.desktop {
+    &--auth {
+      margin: 0 auto;
+      padding: 40px 0;
+      min-width: 1000px;
+      width: 1000px;
+    }
+  }
 }
 
 .kw-page-header {
