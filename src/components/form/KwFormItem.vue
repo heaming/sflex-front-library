@@ -16,14 +16,14 @@
           </span>
         </slot>
         <span
-          v-if="hint"
+          v-if="hint || $slots.hint"
           class="kw-label-content__hint"
         >
           <q-icon
             size="16px"
             name="info"
           >
-            <kw-tooltip>
+            <kw-tooltip :offset="[0, 3]">
               <!-- eslint-disable vue/no-v-html -->
               <slot
                 name="hint"

@@ -31,6 +31,7 @@
       {{ invalidMessage }}
       <kw-tooltip
         anchor="center middle"
+        :offset="[0, 3]"
         show-when-ellipsised
       >
         {{ invalidMessage }}

@@ -25,7 +25,10 @@
         :name="`tip-${n}`"
         v-bind="scoped || {}"
       >
-        <kw-tooltip v-if="normalizedTooltip[n-1]">
+        <kw-tooltip
+          v-if="normalizedTooltip[n-1]"
+          :offset="[0, 3]"
+        >
           {{ normalizedTooltip[n-1] }}
         </kw-tooltip>
       </slot>
