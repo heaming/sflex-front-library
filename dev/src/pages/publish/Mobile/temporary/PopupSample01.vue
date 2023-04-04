@@ -120,10 +120,12 @@
         <kw-btn
           negative
           label="취소"
+          @click="onClickClose"
         />
         <kw-btn
           primary
           label="확인"
+          @click="onClickOk"
         />
       </template>
     </kw-popup>
@@ -131,6 +133,17 @@
 </template>
 
 <script setup>
+import { useModal } from '~kw-lib';
+
+const { ok, cancel } = useModal();
+
+function onClickClose() {
+  cancel();
+}
+
+function onClickOk() {
+  ok();
+}
 
 const sampleVueCode = `
 <kw-popup

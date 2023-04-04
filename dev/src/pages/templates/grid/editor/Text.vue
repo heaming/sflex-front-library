@@ -25,7 +25,9 @@
 </template>
 
 <script setup>
-import { alert, gridUtil } from '~kw-lib';
+import { alert, gridUtil, useGlobal } from '~kw-lib';
+
+const { modal } = useGlobal();
 
 const grdRef = ref();
 
@@ -53,6 +55,9 @@ function initGrd(data, view) {
     {
       fieldName: 'text01',
       header: 'Default',
+      styleName: 'rg-button-link',
+      renderer: { type: 'button' },
+      editable: true,
     },
     {
       fieldName: 'text02',
@@ -89,6 +94,12 @@ function initGrd(data, view) {
   view.editOptions.editable = true;
   view.checkBar.visible = true;
   view.rowIndicator.visible = true;
+
+  view.onCellItemClicked = async () => {
+    await modal({
+      component: async () => await import('../../../publish/Mobile/temporary/PopupSample01.vue'),
+    });
+  };
 
   data.setRows([
     {
