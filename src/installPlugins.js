@@ -1,4 +1,5 @@
 /* eslint-disable import/no-named-as-default */
+import drag from 'v-drag';
 import cookies from './plugins/cookies';
 import dialog from './plugins/dialog';
 import http from './plugins/http';
@@ -19,6 +20,7 @@ const autoInstalledPlugins = [
   platform,
   sanitize,
   storage,
+  drag,
 ];
 
 export default (app, options) => {
