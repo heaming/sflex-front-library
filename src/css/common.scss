@@ -102,6 +102,12 @@ h2 {
   &.h2-small {
     font-size: 18px;
     border-bottom: 2px solid $black1;
+
+    & p {
+      min-width: 400px;
+      text-align: right;
+      margin-left: 10px;
+    }
   }
 }
 
