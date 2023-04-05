@@ -1,67 +1,187 @@
-<!-- eslint-disable vue/no-v-html -->
 <template>
   <kw-popup
     title="메뉴찾기"
-    size="xl"
+    size="md"
   >
-    <div class="row q-gutter-x-sm">
-      <div class="column no-wrap col">
-        <h3 class="mt0">
-          <span class="kw-fc--primary">{{ `‘${props.searchText}’` }}</span>
-          에 대한 검색결과 (총
-          <span class="ml3">{{ mappedMenus.length }}</span>
-          건)
-        </h3>
-        <kw-scroll-area
-          visible
-          min-height="300px"
-          max-height="500px"
-          class="border-box pa0 mt20"
+    <div class="sticky-area">
+      <kw-input
+        v-model="inputText"
+        icon="search"
+        :on-click-icon="onClickSearch"
+      />
+      <div class="row items-center mt8 h32">
+        <kw-checkbox
+          v-model="reSearchInResult"
+          :true-value="true"
+          :false-value="false"
+          label="결과 내 재검색"
+        />
+        <div
+          class="row items-center ml20"
         >
-          <ul class="keyword-result">
-            <li
-              v-for="(menu, menuIndex) in mappedMenus"
-              :key="menuIndex"
-              class="keyword-result__item"
-            >
-              <p class="kw-fc--black3">
-                {{ menu.parentsMenuPath }}&nbsp;
-              </p>
-              <p
-                class="text-underline kw-fc--black1 cursor-pointer"
-                @click="moveToMenu(menu)"
-                v-html="sanitize(getHighlightedMenuName(menu.menuName))"
-              />
-            </li>
-          </ul>
-        </kw-scroll-area>
+          <kw-chip
+            v-for="(reSearchText, reIdx) in reSearchTexts"
+            :key="reIdx"
+            class="blue-chip"
+            removable
+            @remove="onClickDeleteReSearchText(reIdx)"
+          >
+            {{ reSearchText }}
+          </kw-chip>
+        </div>
       </div>
-      <div class="w320 column no-wrap col">
-        <h3 class="mt0">
-          최근검색어
-        </h3>
-        <kw-scroll-area
-          visible
-          class="border-box pa0 mt20 kw-scroll-area--auto-height"
+    </div>
+    <div class="row items-center mt10">
+      <p class="kw-font-pt18 text-weight-medium">
+        최근 메뉴명 검색어
+        <span>(<span class="kw-fc--primary">{{ recentKeywords.length }}</span>건)</span>
+      </p>
+      <kw-icon
+        tooltip="최근 한 달 이내 검색한 메뉴명이 노출됩니다(최대 20개)"
+        name="info_24"
+        class="ml4 kw-font-pt24"
+      />
+    </div>
+    <div class="recent-keywords">
+      <div
+        v-if="recentKeywords.length"
+        class="recent-keywords__chips"
+      >
+        <kw-chip
+          v-for="(recentKeyword, rcntIdx) in recentKeywords"
+          :key="rcntIdx"
+          class="blue-chip"
+          clickable
+          removable
+          @click="onClickRecentKeyword(recentKeyword)"
+          @remove="onClickDeleteRecentKeyword(recentKeyword, rcntIdx)"
         >
-          <ul class="recent-search">
-            <li
-              v-for="(keyword, keywordIndex) in recentKeywords"
-              :key="keywordIndex"
-              class="recent-search__item"
+          {{ recentKeyword }}
+        </kw-chip>
+      </div>
+      <div
+        v-else
+        class="recent-keywords__placeholder"
+      >
+        <p>최근 검색하신 메뉴명이 없습니다</p>
+      </div>
+    </div>
+    <p class="kw-font-pt18 text-weight-medium mt30">
+      '<span class="kw-fc--primary">{{ reSearchTexts.join(', ') }}</span>' 검색결과
+      총 <span class="kw-fc--primary">{{ totalMenuCount }}</span>건
+    </p>
+    <div class="result-section">
+      <div
+        v-if="totalMenuCount"
+        class="result-section__results"
+      >
+        <div
+          class="result-section__sort-area"
+        >
+          <kw-btn-toggle
+            ref="btnToggle"
+            v-model="currentMenuKey"
+            class="result-section__depth-btns"
+            :class="{'show-more': showMore}"
+            :options="menuGroups"
+            option-value="value"
+            option-label="label"
+            gap="8px"
+          />
+          <kw-btn
+            v-if="showBtnToggle"
+            :icon-right="showMore ? 'arrow_up' : 'arrow_down'"
+            dense
+            borderless
+            label="더보기"
+            class="kw-fc--black3 kw-font-pt14 self-start h32"
+            @click="(val) => showMore = !showMore"
+          />
+        </div>
+        <kw-list
+          item-padding="10px 0"
+          class="py10"
+        >
+          <kw-item
+            v-for="(filteredMenu, menuKey) in filteredMenus"
+            :key="menuKey"
+          >
+            <kw-item-section
+              side
+              top
+              class="w120 mr12 pr0"
             >
-              <p class="kw-fc--black1">
-                {{ keyword }}
-              </p>
-              <kw-btn
-                borderless
-                dense
-                icon="delete"
-                :on-click="() => onClickDeleteRecentKeyword(keyword, keywordIndex)"
-              />
-            </li>
-          </ul>
-        </kw-scroll-area>
+              <kw-item-label
+                font="body"
+                font-weight="500"
+              >
+                {{ filteredMenu.menuName }}
+                (<span class="kw-fc--primary">{{ filteredMenu.childCount }}</span>건)
+              </kw-item-label>
+            </kw-item-section>
+            <kw-item-section center>
+              <ul class="depth-list">
+                <template
+                  v-for="(childMenu, childIdx) in filteredMenu.children"
+                  :key="childIdx"
+                >
+                  <li
+                    v-for="(menu, menuIdx) in childMenu.children"
+                    :key="menuIdx"
+                    class="depth-list__item"
+                  >
+                    <div class="bread-crumb">
+                      <p class="bread-crumb__depth disable">
+                        {{ menu.applicationName }}
+                      </p>
+                      <p class="bread-crumb__depth disable">
+                        {{ menu.parentsMenuName }}
+                      </p>
+                      <!-- eslint-disable vue/no-v-html -->
+                      <a
+                        href="#"
+                        class="bread-crumb__depth"
+                        @click="moveToMenu(menu)"
+                        v-html="sanitize(getHighlightedMenuName(menu.menuName))"
+                      />
+                      <!-- eslint-enable vue/no-v-html -->
+                    </div>
+                    <kw-checkbox
+                      v-if="menu.menuUid && menu.pageId"
+                      :model-value="isBookmarkedPage(menu.menuUid, menu.pageId)"
+                      :true-value="true"
+                      :false-value="false"
+                      class="ml4"
+                      checked-icon="bookmark_on"
+                      unchecked-icon="bookmark_off"
+                      @update:model-value="(val) => updateBookmark(val, menu)"
+                    >
+                      <kw-tooltip>
+                        {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
+                      </kw-tooltip>
+                    </kw-checkbox>
+                  </li>
+                </template>
+              </ul>
+            </kw-item-section>
+          </kw-item>
+        </kw-list>
+      </div>
+      <div
+        v-else
+        class="result-section__placeholder"
+      >
+        <kw-avatar
+          size="60px"
+          font-size="28px"
+          color="line-bg"
+          text-color="primary"
+          icon="visual_search"
+        />
+        <p class="mt16 text-center full-width">
+          메뉴명 검색결과가 없습니다.<br>
+          다시 입력해 주세요.
+        </p>
       </div>
     </div>
   </kw-popup>
@@ -69,44 +189,166 @@
 <script setup>
 import { cloneDeep, indexOf } from 'lodash-es';
 import useModal from '../../composables/useModal';
+import useGlobal from '../../composables/useGlobal';
 import { localStorage } from '../../plugins/storage';
 import { sanitize } from '../../plugins/sanitize';
 import consts from '../../consts';
+import { http } from '../../plugins/http';
 
-const { getters } = useStore();
+const { getters, dispatch } = useStore();
 const { ok } = useModal();
+const { alert, notify } = useGlobal();
 
-const menus = getters['meta/getMenus'];
+const menus = getters['meta/getTotalMenus'];
+const apps = readonly(getters['meta/getApps']);
+
 const props = defineProps({
   searchText: { type: String, default: null },
 });
 
-const mappedMenus = ref([]);
+const inputText = ref('');
+const currInputText = ref('');
+const reSearchTexts = ref([]);
+if (props.searchText) inputText.value = cloneDeep(props.searchText);
+
+const groupedMenus = ref([]);
+const filteredMenus = ref([]);
 const recentKeywords = ref([]);
-const regExp = new RegExp(props.searchText, 'gi');
+const reSearchInResult = ref(false);
+const currentMenuKey = ref('');
+const totalMenuCount = ref(10);
+const btnToggle = ref();
+
+const showBtnToggle = ref(false);
+
+const showMore = ref(false);
+const menuGroups = ref([]);
+
+async function validate(text) {
+  if (text.trim().length < 2) {
+    await alert('2글자 이상 입력해 주세요.');
+    return false;
+  }
+  if (reSearchInResult.value && reSearchTexts.value.length >= 2) {
+    await alert('결과내 재검색은 2번 까지만 가능합니다.');
+    return false;
+  }
+
+  return true;
+}
+
+function defineShowBtnToggle() {
+  if (btnToggle.value?.el?.firstChild?.clientHeight > 32) showBtnToggle.value = true;
+  else showBtnToggle.value = false;
+}
 
 function getRecentKeywords() {
   const localStorageData = localStorage.getItem(consts.LOCAL_STORAGE_RECENT_KEYWORD);
-  recentKeywords.value = cloneDeep(localStorageData);
+  recentKeywords.value = cloneDeep(localStorageData.slice(0, 20));
 }
 
-async function getMenus() {
-  const filteredMenus = cloneDeep(menus.filter((x) => {
-    const isMatched = x.menuName.match(regExp);
-    return isMatched !== null && x.menuLevel >= 1 && x.pageUseCode !== 'S';
-  }));
+function addRecentKeyword() {
+  const localStorageData = localStorage.getItem(consts.LOCAL_STORAGE_RECENT_KEYWORD);
+  let keywords = [];
+  if (localStorageData) {
+    const keywordIndex = localStorageData.findIndex((x) => x === inputText.value);
+    if (keywordIndex >= 0) localStorageData.splice(keywordIndex, 1);
+    localStorageData.unshift(inputText.value);
+    keywords = cloneDeep(localStorageData);
+  } else keywords.unshift(inputText.value);
+  localStorage.set(consts.LOCAL_STORAGE_RECENT_KEYWORD, keywords);
+}
 
-  mappedMenus.value = filteredMenus.map((menu) => {
-    const menuNameIndex = menu.menuPath.lastIndexOf(menu.menuName);
-    const parentsMenuPath = menu.menuPath.slice(0, menuNameIndex);
-    return { ...menu, parentsMenuPath };
+function getTotalCount(arr) {
+  let count = 0;
+  arr.forEach((x) => {
+    x.childCount = 0;
+    x.children.forEach((m) => {
+      count += m.children.length;
+      x.childCount += m.children.length;
+    });
   });
-
-  getRecentKeywords();
+  return count;
 }
+
+function filterMenus() {
+  if (currentMenuKey.value.trim().length) {
+    filteredMenus.value = cloneDeep(groupedMenus.value.filter((grpMenu) => grpMenu.menuName === currentMenuKey.value));
+  } else filteredMenus.value = cloneDeep(groupedMenus.value);
+}
+
+function afterSearch(arr) {
+  totalMenuCount.value = getTotalCount(arr);
+  filterMenus();
+}
+
+function beforeSearch() {
+  if (reSearchTexts.value.find((x) => x === inputText.value)) return;
+  if (!reSearchInResult.value) reSearchTexts.value = [];
+  reSearchTexts.value.push(inputText.value);
+
+  currInputText.value = inputText.value;
+  currentMenuKey.value = '';
+}
+
+function setMenuGroups() {
+  const keys = filteredMenus.value.map((menu) => menu.menuName);
+  const mapped = keys.map((key) => ({
+    label: key, value: key,
+  }));
+  mapped.unshift({ label: '전체', value: '' });
+  menuGroups.value = cloneDeep(mapped);
+}
+
+function createHierarchyData(appMenus, key) {
+  return appMenus
+    .filter((v) => {
+      if (key !== 'ROOT') return key.endsWith(v.parentsMenuUid) && reSearchTexts.value.every((text) => v.menuName.indexOf(text) >= 0);
+      return v.menuLevel === 0;
+    })
+    .reduce((a, v) => {
+      v.key = `${key}.${v.menuUid}`;
+      v.children = createHierarchyData(appMenus, v.key);
+      a.push(v); return a;
+    }, []);
+}
+
+async function fetchMenus(reFetch = false) {
+  const arr = [];
+  apps.forEach((app) => {
+    const appMenus = menus.data.filter((v) => v.applicationId === app.applicationId);
+    const hierarchyData = {
+      key: 'ROOT',
+      portalId: app.portalId,
+      applicationId: app.applicationId,
+      menuLevel: -1,
+      menuName: app.applicationName,
+      folderYn: 'Y',
+      children: createHierarchyData(appMenus, 'ROOT'),
+    };
+    arr.push(cloneDeep(hierarchyData));
+  });
+  getTotalCount(arr);
+  groupedMenus.value = cloneDeep(arr.filter((x) => x.childCount > 0));
+
+  afterSearch(groupedMenus.value);
+  if (!reFetch) {
+    addRecentKeyword();
+    getRecentKeywords();
+  }
+  setMenuGroups();
+}
+
+watch(currentMenuKey, () => {
+  filterMenus();
+});
 
 function getHighlightedMenuName(menuName) {
-  const highlightedMenuName = menuName.replace(regExp, `<span class="keyword-result__keyword">${props.searchText}</span>`);
+  let highlightedMenuName = menuName;
+  reSearchTexts.value.forEach((text) => {
+    const regExp = new RegExp(text, 'gi');
+    highlightedMenuName = highlightedMenuName.replace(regExp, `<span class="kw-fc--primary">${text}</span>`);
+  });
   return highlightedMenuName;
 }
 
@@ -118,12 +360,251 @@ function onClickDeleteRecentKeyword(keyword, fromIndex) {
   getRecentKeywords();
 }
 
+async function onClickRecentKeyword(keyword) {
+  reSearchInResult.value = false;
+  inputText.value = keyword;
+  if (!await validate(keyword)) return;
+  beforeSearch();
+  fetchMenus();
+}
+
 function moveToMenu(menu) {
   ok(menu);
 }
 
-onMounted(() => {
-  getMenus();
+async function onClickSearch() {
+  if (!await validate(inputText.value)) return;
+
+  beforeSearch();
+  await fetchMenus(reSearchInResult.value);
+  defineShowBtnToggle();
+}
+
+function onClickDeleteReSearchText(index) {
+  if (reSearchTexts.value.length >= 2) {
+    reSearchTexts.value.splice(index, 1);
+    reSearchInResult.value = false;
+    inputText.value = reSearchTexts.value[0];
+    onClickSearch();
+  }
+}
+
+const isBookmarkedPage = computed(() => (
+  (menuUid, pageId) => getters['meta/isBookmarked'](menuUid, pageId)
+));
+
+async function createBookmark(menu) {
+  const { menuUid, pageId, menuName: bookmarkName } = menu;
+  await http.post('/sflex/common/common/bookmarks', { menuUid, pageId, bookmarkName });
+  await dispatch('meta/fetchBookmarks');
+}
+
+async function deleteBookmark(menu) {
+  const { menuUid, pageId } = menu;
+  const params = { menuUid, pageId };
+  await http.delete('/sflex/common/common/bookmarks', { params });
+  await dispatch('meta/fetchBookmarks');
+}
+
+const isAuthenticated = getters['meta/isAuthenticated'];
+
+async function updateBookmark(isCreate, menu) {
+  if (isAuthenticated) {
+    if (isCreate) {
+      await createBookmark(menu);
+      notify(`${menu.menuName}이 즐겨찾기에 추가되었습니다.`);
+    } else {
+      await deleteBookmark(menu);
+      notify(`${menu.menuName}이 즐겨찾기에서 해제되었습니다.`);
+    }
+  }
+}
+
+onMounted(async () => {
+  beforeSearch();
+  await fetchMenus();
+  defineShowBtnToggle();
 });
 
 </script>
+<style lang="scss" scoped>
+.blue-chip {
+  padding: 6px 12px;
+  flex-wrap: wrap;
+  height: 32px;
+  background-color: rgba(47 138 243 / 10%);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 16px;
+
+  ::v-deep(.q-chip__content) {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  ::v-deep(.q-chip__icon--remove) {
+    margin: 0 1px 0 8px;
+    align-self: flex-start;
+    height: 20px;
+  }
+
+  &:has(.q-chip__icon--remove) {
+    ::v-deep(.q-chip__content) {
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-position: from-font;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.sticky-area {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  border-bottom: 20px solid #fff;
+  z-index: 3;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: #fff;
+  }
+}
+
+.recent-keywords {
+  margin-top: 12px;
+
+  &__chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 14px;
+    line-height: 20px;
+    color: $disabled;
+    border: 1px solid $line-line;
+  }
+}
+
+.result-section {
+  margin-top: 20px;
+
+  &__sort-area {
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 60px;
+  }
+
+  &__depth-btns {
+    overflow: hidden;
+    height: 32px;
+
+    ::v-deep(.q-btn-group) {
+      padding-left: 1px;
+      flex-flow: row wrap;
+    }
+
+    flex-basis: calc(100% - 120px);
+
+    &.show-more {
+      overflow: initial;
+      height: initial;
+    }
+  }
+
+  &__placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.bread-crumb {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 20px);
+
+  &__depth {
+    flex-shrink: 0;
+    display: block;
+    max-height: 20px;
+    color: $black2;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    text-decoration: none;
+
+    &:not(:first-child) {
+      padding-left: 24px;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        content: "";
+        width: 16px;
+        height: 16px;
+        background: url("~@assets/icons/arrow_stepper.svg") center;
+        background-size: cover;
+      }
+    }
+
+    &:is(a) {
+      flex-shrink: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-position: from-font;
+      }
+    }
+
+    &.disable {
+      color: $placeholder;
+
+      &:is(a) {
+        cursor: not-allowed;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.depth-list {
+  &__item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 20px;
+
+    &:not(:first-of-type) {
+      margin-top: 12px;
+    }
+  }
+}
+</style>
