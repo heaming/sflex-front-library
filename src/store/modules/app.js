@@ -4,6 +4,7 @@ export default {
   namespaced: true,
 
   state: () => ({
+    isHomecardChanged: false,
     isLeftExist: true,
     leftDrawerExpanded: !platform.is.mobile,
 
@@ -15,6 +16,9 @@ export default {
   }),
 
   mutations: {
+    setUserHomecardChanged(state, exist) {
+      state.isHomecardChanged = exist;
+    },
     setLeftExist(state, exist) {
       state.isLeftExist = exist;
       if (!exist) {
@@ -40,6 +44,7 @@ export default {
   },
 
   getters: {
+    getUserHomecardChanged: (state) => state.isHomecardChanged,
     getLeftExist: (state) => state.isLeftExist,
     getLeftDrawerExpanded: (state) => state.leftDrawerExpanded,
     getGlobalApps: (state) => state.globalApps,

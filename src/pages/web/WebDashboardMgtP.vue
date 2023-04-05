@@ -90,8 +90,8 @@ async function onClickSave() {
   const saveUserCards = dragRef.value.getSaveUserCards();
   await http.post('/sflex/common/common/user-homecards', saveUserCards);
 
-  notify(t('MSG_ALT_SAVE_DATA'));
   ok();
+  notify(t('MSG_ALT_SAVE_DATA'));
 }
 
 </script>
