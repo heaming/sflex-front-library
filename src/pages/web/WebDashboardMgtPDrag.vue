@@ -48,7 +48,7 @@ const emit = defineEmits([
 const containerRef = ref();
 const getStyle = (card) => {
   const sizeTypeCodeSplited = card.homeCardSizeTypeCode.split('');
-  const [row, column] = sizeTypeCodeSplited.map((e) => parseInt(e, 10));
+  const [column, row] = sizeTypeCodeSplited.map((e) => parseInt(e, 10));
 
   return {
     width: `${322 * column - 20}px`,

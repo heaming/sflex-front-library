@@ -138,7 +138,7 @@ export default {
     const { logout } = useSession();
     const { notify } = useGlobal();
     const { t } = useI18n();
-    const { getters } = useStore();
+    const { getters, commit } = useStore();
 
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
@@ -160,10 +160,14 @@ export default {
       store.commit('app/setLeftExist', false);
     }
 
-    function openHomeMgtPopup() {
-      modal({
+    async function openHomeMgtPopup() {
+      const res = await modal({
         component: () => import('../../pages/web/WebDashboardMgtP.vue'),
       });
+
+      if (res.result) {
+        commit('app/setUserHomecardChanged', true);
+      }
     }
 
     async function getActiveClass() {
