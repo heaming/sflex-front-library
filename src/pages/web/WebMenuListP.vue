@@ -153,7 +153,7 @@
                       :false-value="false"
                       class="ml4"
                       checked-icon="bookmark_on"
-                      unchecked-icon="bookmark_off"
+                      unchecked-icon="bookmark_outline"
                       @update:model-value="(val) => updateBookmark(val, menu)"
                     >
                       <kw-tooltip>
