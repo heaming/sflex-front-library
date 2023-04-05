@@ -556,7 +556,7 @@
   }
 }
 
-.blue-chip {
+.kw-chip.q-chip.blue-chip {
   padding: 6px 12px;
   flex-wrap: wrap;
   height: 32px;
@@ -565,19 +565,19 @@
   font-weight: 500;
   border-radius: 16px;
 
-  ::v-deep(.q-chip__content) {
+  .q-chip__content {
     flex-wrap: wrap;
     white-space: normal;
   }
 
-  ::v-deep(.q-chip__icon--remove) {
+  .q-chip__icon--remove {
     margin: 0 1px 0 8px;
     align-self: flex-start;
     height: 20px;
   }
 
   &:has(.q-chip__icon--remove) {
-    ::v-deep(.q-chip__content) {
+    .q-chip__content {
       max-width: 260px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -644,7 +644,7 @@
     overflow: hidden;
     height: 32px;
 
-    ::v-deep(.q-btn-group) {
+    .q-btn-group {
       padding-left: 1px;
       flex-flow: row wrap;
     }
@@ -732,6 +732,10 @@
 
     &:not(:first-of-type) {
       margin-top: 12px;
+    }
+
+    .kw-checkbox .q-checkbox__icon.q-icon {
+      font-size: 14px;
     }
   }
 }
