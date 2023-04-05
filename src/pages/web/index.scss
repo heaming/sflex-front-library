@@ -555,3 +555,183 @@
     }
   }
 }
+
+.blue-chip {
+  padding: 6px 12px;
+  flex-wrap: wrap;
+  height: 32px;
+  background-color: rgba(47 138 243 / 10%);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 16px;
+
+  ::v-deep(.q-chip__content) {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  ::v-deep(.q-chip__icon--remove) {
+    margin: 0 1px 0 8px;
+    align-self: flex-start;
+    height: 20px;
+  }
+
+  &:has(.q-chip__icon--remove) {
+    ::v-deep(.q-chip__content) {
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-position: from-font;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.sticky-area {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  border-bottom: 20px solid #fff;
+  z-index: 3;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: #fff;
+  }
+}
+
+.recent-keywords {
+  margin-top: 12px;
+
+  &__chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 14px;
+    line-height: 20px;
+    color: $disabled;
+    border: 1px solid $line-line;
+  }
+}
+
+.result-section {
+  margin-top: 20px;
+
+  &__sort-area {
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 60px;
+  }
+
+  &__depth-btns {
+    overflow: hidden;
+    height: 32px;
+
+    ::v-deep(.q-btn-group) {
+      padding-left: 1px;
+      flex-flow: row wrap;
+    }
+
+    flex-basis: calc(100% - 120px);
+
+    &.show-more {
+      overflow: initial;
+      height: initial;
+    }
+  }
+
+  &__placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.bread-crumb {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 20px);
+
+  &__depth {
+    flex-shrink: 0;
+    display: block;
+    max-height: 20px;
+    color: $black2;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    text-decoration: none;
+
+    &:not(:first-child) {
+      padding-left: 24px;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        content: "";
+        width: 16px;
+        height: 16px;
+        background: url("~@assets/icons/arrow_stepper.svg") center;
+        background-size: cover;
+      }
+    }
+
+    &:is(a) {
+      flex-shrink: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-position: from-font;
+      }
+    }
+
+    &.disable {
+      color: $placeholder;
+
+      &:is(a) {
+        cursor: not-allowed;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.depth-list {
+  &__item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 20px;
+
+    &:not(:first-of-type) {
+      margin-top: 12px;
+    }
+  }
+}
