@@ -16,10 +16,13 @@ export default () => {
     commit('app/setLeftExist', true);
   }
 
-  if (!selectedKey.value) {
-    const appKey = apps[0]?.key || null;
-    updateSelected(appKey);
-  }
+  // if (!selectedKey.value) {
+  //   const appKey = apps[0]?.key || null;
+  //
+  //   console.log('test');
+  //   console.log(appKey);
+  //   updateSelected(appKey);
+  // }
 
   async function onUpdateValue(val) {
     const { menuUid } = val || {};

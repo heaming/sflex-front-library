@@ -115,13 +115,11 @@
 </template>
 
 <script>
-import { cloneDeep } from 'lodash-es';
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
 import useGlobal from '../../composables/useGlobal';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
-import { localStorage } from '../../plugins/storage';
 import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
 import WebGnbMenuP from '../../pages/web/WebGnbMenuP.vue';
 import store from '../../store';
@@ -138,7 +136,7 @@ export default {
     const { logout } = useSession();
     const { notify } = useGlobal();
     const { t } = useI18n();
-    const { getters } = useStore();
+    const { getters, commit } = useStore();
 
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
@@ -160,10 +158,14 @@ export default {
       store.commit('app/setLeftExist', false);
     }
 
-    function openHomeMgtPopup() {
-      modal({
+    async function openHomeMgtPopup() {
+      const res = await modal({
         component: () => import('../../pages/web/WebDashboardMgtP.vue'),
       });
+
+      if (res.result) {
+        commit('app/setUserHomecardChanged', true);
+      }
     }
 
     async function getActiveClass() {
@@ -202,16 +204,6 @@ export default {
         notify(t('MSG_ALT_SRCH_INPUT'));
         return;
       }
-
-      const localStorageData = localStorage.getItem(consts.LOCAL_STORAGE_RECENT_KEYWORD);
-      let recentKeywords = [];
-      if (localStorageData) {
-        const keywordIndex = localStorageData.findIndex((x) => x === searchText.value);
-        if (keywordIndex >= 0) localStorageData.splice(keywordIndex, 1);
-        localStorageData.unshift(searchText.value);
-        recentKeywords = cloneDeep(localStorageData);
-      } else recentKeywords.unshift(searchText.value);
-      localStorage.set(consts.LOCAL_STORAGE_RECENT_KEYWORD, recentKeywords);
 
       const { result, payload } = await modal({
         component: () => import('../../pages/web/WebMenuListP.vue'),
