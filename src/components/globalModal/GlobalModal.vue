@@ -14,6 +14,13 @@
       >
         <component
           :is="modal.component"
+          v-if="getDraggable(modal)"
+          v-drag
+          v-bind="modal.componentProps"
+        />
+        <component
+          :is="modal.component"
+          v-else
           v-bind="modal.componentProps"
         />
       </kw-observer>
@@ -22,6 +29,7 @@
 </template>
 
 <script>
+
 import { GlobalModalVmKey } from '../../consts/private/symbols';
 import libConfig from '../../consts/private/libConfig';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
@@ -57,6 +65,10 @@ export default {
       noRefocus: true,
     });
 
+    function getDraggable(modal) {
+      return modal.dialogProps?.draggable === true;
+    }
+
     function onResolve(modal, popupCtx) {
       modal.componentResolved = true;
       modal.popupCtx = popupCtx;
@@ -86,6 +98,7 @@ export default {
       getDialogProps,
       onResolve,
       onClose,
+      getDraggable,
     };
   },
 };
