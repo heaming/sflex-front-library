@@ -59,27 +59,32 @@
       #label
     >
       <span>{{ label ?? label }}</span>
-      <q-icon
-        v-if="hint"
-        size="16px"
-        name="info"
-        class="ml4"
-        style="vertical-align: -3px;"
-        @click="toggleHint"
+      <kw-click-outside
+        @click-outside="showingHint = false"
       >
-        <kw-tooltip
-          v-model="showingHint"
-          :offset="[0, 3]"
+        <q-icon
+          v-if="hint"
+          size="16px"
+          name="info"
+          class="ml4"
+          style="vertical-align: -3px;"
+          @click.capture.stop.prevent="toggleHint"
         >
-          <!-- eslint-disable vue/no-v-html -->
-          <slot
-            name="hint"
+          <kw-tooltip
+            v-model="showingHint"
+            :offset="[0, 3]"
+            :no-parent-event="$g.platform.is.mobile"
           >
-            <div v-html="sanitize(hint)" />
-          </slot>
-          <!-- eslint-enable vue/no-v-html -->
-        </kw-tooltip>
-      </q-icon>
+            <!-- eslint-disable vue/no-v-html -->
+            <slot
+              name="hint"
+            >
+              <div v-html="sanitize(hint)" />
+            </slot>
+            <!-- eslint-enable vue/no-v-html -->
+          </kw-tooltip>
+        </q-icon>
+      </kw-click-outside>
     </template>
 
     <!-- error -->

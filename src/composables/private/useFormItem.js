@@ -1,3 +1,4 @@
+import { debounce } from 'lodash-es';
 import { FormLayoutContextKey } from '../../consts/private/symbols';
 import { FIELD_ALIGNS } from './useFormLayout';
 
@@ -44,6 +45,15 @@ export default () => {
   const fieldClass = computed(() => [alignContent.value && `kw-form-item__field--align-${alignContent.value}`]);
   const fieldStyle = computed(() => ({ width: `calc(100% - ${labelSize.value}px)` }));
 
+  const showingHint = ref(false);
+  async function doToggle() {
+    showingHint.value = !showingHint.value;
+  }
+
+  const toggleHint = debounce(() => {
+    doToggle();
+  }, 0);
+
   return {
     itemClass,
     showLabel,
@@ -51,5 +61,7 @@ export default () => {
     labelStyle,
     fieldClass,
     fieldStyle,
+    toggleHint,
+    showingHint,
   };
 };
