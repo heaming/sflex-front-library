@@ -188,9 +188,13 @@ export default (options = {}) => {
     }
   }
 
-  function toggleHint() {
+  async function doToggle() {
     showingHint.value = !showingHint.value;
   }
+
+  const toggleHint = debounce(() => {
+    doToggle();
+  }, 0);
 
   onMounted(() => {
     if (props.validateOnMount) {

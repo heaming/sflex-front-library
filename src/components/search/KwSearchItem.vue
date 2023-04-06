@@ -19,20 +19,29 @@
           v-if="hint"
           class="kw-label-content__hint"
         >
-          <q-icon
-            size="16px"
-            name="info"
+          <kw-click-outside
+            @click-outside="showingHint = false"
           >
-            <kw-tooltip :offset="[0, 3]">
-              <!-- eslint-disable vue/no-v-html -->
-              <slot
-                name="hint"
+            <q-icon
+              size="16px"
+              name="info"
+              @click.capture.stop.prevent="toggleHint"
+            >
+              <kw-tooltip
+                v-model="showingHint"
+                :offset="[0, 3]"
+                :no-parent-event="$g.platform.is.mobile"
               >
-                <div v-html="sanitize(hint)" />
-              </slot>
-              <!-- eslint-enable vue/no-v-html -->
-            </kw-tooltip>
-          </q-icon>
+                <!-- eslint-disable vue/no-v-html -->
+                <slot
+                  name="hint"
+                >
+                  <div v-html="sanitize(hint)" />
+                </slot>
+                <!-- eslint-enable vue/no-v-html -->
+              </kw-tooltip>
+            </q-icon>
+          </kw-click-outside>
         </span>
       </div>
     </div>

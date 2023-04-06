@@ -7,6 +7,7 @@
     :target="target"
     :delay="delay"
     :hide-delay="hideDelay"
+    :no-parent-event="noParentEvent"
     :max-height="maxHeight"
     :max-width="maxWidth"
     :anchor="anchor"
