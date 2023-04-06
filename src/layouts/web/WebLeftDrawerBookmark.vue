@@ -111,7 +111,7 @@
 <script>
 import { filter } from 'lodash-es';
 import { isNavigationFailure } from 'vue-router';
-import { http } from '~kw-lib';
+import { http } from '../../plugins/http';
 import { alert, confirm } from '../../plugins/dialog';
 import { modal } from '../../plugins/modal';
 import { getUid } from '../../utils/string';
