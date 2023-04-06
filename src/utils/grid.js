@@ -5,7 +5,7 @@ import {
 } from 'lodash-es';
 import { date } from 'quasar';
 import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
-import { waitUntilShowEditor, createCellIndexByDataColumn, isCellEditable, cloneView, destroyCloneView } from './private/gridShared';
+import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView } from './private/gridShared';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
@@ -413,32 +413,32 @@ export async function validateRow(view, dataRow, bails = true) {
     const column = columns[i];
     const index = createCellIndexByDataColumn(view, itemIndex, column);
 
-    if (isCellEditable(view, column, index)) {
-      const { name, fieldName } = column;
-      const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
+    // if (isCellEditable(view, column, index)) { // editable false 인 셀들도 모두 validation
+    const { name, fieldName } = column;
+    const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
-      const errors = await validateRules(view, column, value, values, bails);
-      const ignoreCallback = errors.length > 0 && bails === true;
+    const errors = await validateRules(view, column, value, values, bails);
+    const ignoreCallback = errors.length > 0 && bails === true;
 
-      if (ignoreCallback === false) {
-        errors.push(
-          ...(await validateCallback(view, column, index, value, values)),
-        );
-      }
-
-      const invalid = errors.length > 0;
-
-      if (invalid) {
-        validationErrors.push({
-          dataRow,
-          column: name,
-          fieldName,
-          errors,
-        });
-
-        if (bails) break;
-      }
+    if (ignoreCallback === false) {
+      errors.push(
+        ...(await validateCallback(view, column, index, value, values)),
+      );
     }
+
+    const invalid = errors.length > 0;
+
+    if (invalid) {
+      validationErrors.push({
+        dataRow,
+        column: name,
+        fieldName,
+        errors,
+      });
+
+      if (bails) break;
+    }
+    // }
   }
 
   return validationErrors;
