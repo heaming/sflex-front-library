@@ -488,6 +488,8 @@ export function overrideSetColumnLayout(view, vm) {
     execOriginal(view, setColumnLayout, layout);
 
     setTimeout(() => {
+      // 의도적인 setColumnLayout 시에는 original Layouts 을 변경해준다.
+      view.__originalLayouts__ = view.saveColumnLayout();
       vm.proxy.onResize?.();
     });
   });
