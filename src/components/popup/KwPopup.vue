@@ -90,6 +90,7 @@ export default {
     noCloseBtn: { type: Boolean, default: false },
     onBeforeClose: { type: Function, default: undefined },
     noHeader: { type: Boolean, default: false },
+    noTitle: { type: Boolean, default: false },
   },
 
   setup(props) {
@@ -137,7 +138,7 @@ export default {
       {
         'kw-popup': true,
         [`kw-popup--${props.size}`]: true,
-        'kw-popup--no-title': props.title === false,
+        'kw-popup--no-title': props.title === false || props.noTitle === true,
         'kw-popup--no-action': slots.action === undefined,
       },
       props.class,
