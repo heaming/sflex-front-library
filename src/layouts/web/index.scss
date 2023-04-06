@@ -255,27 +255,34 @@
   }
 }
 
-.lnb_tooltip.q-tooltip--style {
-  font-size: 12px;
-  color: $black1;
-  background: #fff;
-  border: 1px solid $line-line;
-  border-radius: 0;
+.lnb_tooltip.kw-tooltip {
+  &.q-tooltip {
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: $black1;
+    background: #fff;
+    border: 1px solid $line-line;
+    border-radius: 0;
+  }
 }
 
-.grey_tooltip.q-tooltip--style {
-  left: 70px !important;
-  font-size: 12px;
-  color: #fff;
-  background: $black2;
-  border: none;
-  border-radius: 0;
-  height: 28px;
-  line-height: 1;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-top: -2px;
-  box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
+.grey_tooltip.kw-tooltip {
+  &.q-tooltip {
+    left: 70px !important;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: $black2;
+    border: none;
+    border-radius: 0;
+    height: 28px;
+    line-height: 1;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-top: -2px;
+    box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
+  }
 }
 
 .web-left-drawer__menu {
