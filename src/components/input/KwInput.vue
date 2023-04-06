@@ -17,7 +17,7 @@
     :mask="computedMask"
     :fill-mask="fillMask"
     :reverse-fill-mask="reverseFillMask"
-    :unmasked-value="unmaskedValue"
+    :unmasked-value="computedUnmaskedValue"
     :prefix="prefix"
     :suffix="suffix"
     :clearable="clearable"
@@ -186,7 +186,7 @@ export default {
     mask: { type: String, default: undefined },
     fillMask: { type: [Boolean, String], default: false },
     reverseFillMask: { type: Boolean, default: false },
-    unmaskedValue: { type: Boolean, default: true },
+    unmaskedValue: { type: Boolean, default: undefined },
     prefix: { type: String, default: undefined },
     suffix: { type: String, default: undefined },
     clearable: { type: Boolean, default: true },
@@ -220,13 +220,16 @@ export default {
     // when use mask props, keydown event not fired.
     // so use this to block form submit
     preventSubmit: { type: Boolean, default: false },
+    telNo0: { type: [String, Number], default: '' },
+    telNo1: { type: [String, Number], default: '' },
+    telNo2: { type: [String, Number], default: '' },
   },
 
   emits: [
-    'update:modelValue',
+    'update:modelValue', 'update:telNo0', 'update:telNo1', 'update:telNo2',
   ],
 
-  setup(props) {
+  setup(props, { emit }) {
     const fieldCtx = useField({ onChangeValue: () => {} });
     const { inputRef, value, showingHint, toggleHint } = fieldCtx;
 
@@ -243,6 +246,39 @@ export default {
       if (props.counter === true && props.maxlength > 0) {
         return `${getNumberWithComma(getByte(value.value ?? ''))} / ${getNumberWithComma(props.maxlength)}`;
       }
+    });
+
+    const computedMask = computed(() => {
+      const newVal = inputRef?.value?.modelValue;
+      if (props.mask === 'telephone') {
+        if (newVal?.startsWith('02')) {
+          if (!props.unmaskedValue) {
+            if (newVal?.length <= 11) return '##-###-#####';
+            return '##-####-####';
+          }
+          if (newVal?.length <= 9) return '##-###-#####';
+          return '##-####-####';
+        }
+
+        if (!props.unmaskedValue) {
+          if (newVal?.length <= 12) return '###-###-#####';
+          return '###-####-####';
+        }
+        if (newVal?.length <= 10) return '###-###-#####';
+        return '###-####-####';
+      }
+
+      if (props.mask === 'number') {
+        return undefined;
+      }
+
+      return props.mask;
+    });
+
+    const computedUnmaskedValue = computed(() => {
+      if (props.unmaskedValue) return props.unmaskedValue;
+      if (props.mask === 'telephone') return false;
+      return true;
     });
 
     function onKeydownInput(e) {
@@ -336,6 +372,13 @@ export default {
 
       el.value = val;
       value.value = val;
+
+      if (props.mask === 'telephone') {
+        const telephoneNumber = val.split('-');
+        emit('update:telNo0', telephoneNumber[0]);
+        emit('update:telNo1', telephoneNumber[1]);
+        emit('update:telNo2', telephoneNumber[2]);
+      }
     }
 
     function onUpdateValue(val) {
@@ -346,33 +389,6 @@ export default {
           return onUpdateTextValue(val);
       }
     }
-
-    const computedMask = computed(() => {
-      const newVal = inputRef?.value?.modelValue;
-      if (props.mask === 'telephone') {
-        if (newVal?.startsWith('02')) {
-          if (!props.unmaskedValue) {
-            if (newVal?.length <= 11) return '##-###-#####';
-            return '##-####-####';
-          }
-          if (newVal?.length <= 9) return '##-###-#####';
-          return '##-####-####';
-        }
-
-        if (!props.unmaskedValue) {
-          if (newVal?.length <= 12) return '###-###-#####';
-          return '###-####-####';
-        }
-        if (newVal?.length <= 10) return '###-###-#####';
-        return '###-####-####';
-      }
-
-      if (props.mask === 'number') {
-        return undefined;
-      }
-
-      return props.mask;
-    });
 
     onMounted(() => {
       if (props.preventSubmit) {
@@ -400,6 +416,7 @@ export default {
       toggleHint,
       computedMask,
       sanitize,
+      computedUnmaskedValue,
     };
   },
 };
