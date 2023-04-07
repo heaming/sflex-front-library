@@ -69,79 +69,89 @@
       <div class="gnb_menu_tablet--body">
         <nav class="gnb_menu_tablet--nav">
           <ul>
-            <li
-              v-for="(menu, menuIdx) in depth2Menus"
-              :key="menuIdx"
-              class="tablet-menu__nav-item"
+            <template
+              v-for="(depth1Menu, depthIdx) in totalMenus"
+              :key="depthIdx"
             >
-              <a
-                :href="`menu__${menuIdx}`"
-                @click="currIdx = menuIdx"
+              <li
+                v-for="(depth2Menu, depth2Idx) in depth1Menu.children"
+                :key="depth2Idx"
+                class="tablet-menu__nav-item"
               >
-                {{ menu.menuName }}
-              </a>
-            </li>
+                <a
+                  :href="`menu__${depth2Menu.menuUid}`"
+                  @click="currIdx = depth2Idx"
+                >
+                  {{ depth2Menu.menuName }}
+                </a>
+              </li>
+            </template>
           </ul>
         </nav>
         <ul
           id="gnb_menu_tablet--ul-depth1"
           class="gnb_menu_tablet--ul-depth1"
         >
-          <li
-            v-for="(depth3Menu, menuIdx) in groupedDepth3Menus"
-            :id="`menu__${menuIdx}`"
-            :key="menuIdx"
+          <template
+            v-for="(depth1Menu, depth1Idx) in totalMenus"
+            :key="depth1Idx"
           >
-            <h2>
-              {{ depth3Menu.parentMenuName }}
-              <kw-btn
-                v-if="depth3Menu.parentMenu === 'bookmarks'"
-                dense
-                :label="depth3Menu.editable ? '완료' : '편집'"
-                style="font-size: 12px; padding: 0 8px;"
-                class="h24"
-                border-color="line-line"
-                @click="onClickEditAndComplete(depth3Menu)"
-              />
-            </h2>
-            <ul
-              :ref="depth3Menu.editable !== undefined ? 'sortableUl' : 'nonSortableUl'"
-              class="gnb_menu_tablet--ul-depth2"
-              :class="{'sortable-menu': depth3Menu.editable !== undefined }"
+            <li
+              v-for="(depth2Menu, depth2Idx) in depth1Menu.children"
+              :id="`menu__${depth2Menu.menuUid}`"
+              :key="depth2Idx"
             >
-              <li
-                v-for="(depth3SubMenu, subIdx) in depth3Menu.menus"
-                :key="subIdx"
-                :data-id="subIdx"
-              >
-                <a
-                  href="#"
-                  @click.prevent="moveToPage(depth3SubMenu)"
-                >
-                  {{ depth3SubMenu.menuName }}
-                </a>
-                <kw-checkbox
-                  v-if="!depth3Menu.editable"
-                  :model-value="isBookmarkedPage(depth3SubMenu.menuUid, depth3SubMenu.pageId)"
-                  :true-value="true"
-                  :false-value="false"
-                  checked-icon="bookmark_on"
-                  unchecked-icon="bookmark_off"
-                  @update:model-value="(val) => updateBookmark(val, depth3SubMenu)"
-                >
-                  <kw-tooltip>
-                    {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
-                  </kw-tooltip>
-                </kw-checkbox>
+              <h2>
+                {{ depth2Menu.menuName }}
                 <kw-btn
-                  v-else
-                  borderless
-                  class="handle"
-                  icon="menu_24"
+                  v-if="depth2Menu.applicationId === 'bookmarks'"
+                  dense
+                  :label="depth2Menu.editable ? '완료' : '편집'"
+                  style="font-size: 12px; padding: 0 8px;"
+                  class="h24"
+                  border-color="line-line"
+                  @click="onClickEditAndComplete(depth2Menu)"
                 />
-              </li>
-            </ul>
-          </li>
+              </h2>
+              <ul
+                :ref="depth2Menu.editable !== undefined ? 'sortableUl' : 'nonSortableUl'"
+                class="gnb_menu_tablet--ul-depth2"
+                :class="{'sortable-menu': depth2Menu.editable !== undefined }"
+              >
+                <li
+                  v-for="(depth3Menu, depth3Idx) in depth2Menu.children"
+                  :key="depth3Idx"
+                  :data-id="depth3Idx"
+                >
+                  <a
+                    href="#"
+                    @click.prevent="moveToPage(depth3Menu)"
+                  >
+                    {{ depth3Menu.menuName }}
+                  </a>
+                  <kw-checkbox
+                    v-if="!depth2Menu.editable"
+                    :model-value="isBookmarkedPage(depth3Menu.menuUid, depth3Menu.pageId)"
+                    :true-value="true"
+                    :false-value="false"
+                    checked-icon="bookmark_on"
+                    unchecked-icon="bookmark_off"
+                    @update:model-value="(val) => updateBookmark(val, depth3Menu)"
+                  >
+                    <kw-tooltip>
+                      {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
+                    </kw-tooltip>
+                  </kw-checkbox>
+                  <kw-btn
+                    v-else
+                    borderless
+                    class="handle"
+                    icon="menu_24"
+                  />
+                </li>
+              </ul>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -149,62 +159,87 @@
 </template>
 
 <script setup>
-import { get, find, groupBy, sortBy, cloneDeep } from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
-import useHeaderApp from '../../composables/private/useHeaderApp';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
-const { apps } = useHeaderApp();
 const { getters, dispatch } = useStore();
+
+const apps = readonly(getters['meta/getApps']);
 const router = useRouter();
 const { ok } = useModal();
 
 const currIdx = ref(0);
 const sortable = ref([]);
-const totalMenus = ref(getters['meta/getMenus']);
-const depth2Menus = ref(sortBy(
-  totalMenus.value.filter((menu) => menu.menuLevel === 0 && apps.map((app) => app.key).includes(menu.applicationId)),
-  ['applicationName', 'menuName'],
-));
-const depth3Menus = ref(sortBy(
-  totalMenus.value.filter((menu) => menu.menuLevel === 1 && apps.map((app) => app.key).includes(menu.applicationId)),
-));
-
-depth2Menus.value.unshift({ menuName: '즐겨찾기', menuUid: 'bookmarks' });
-const groupByParentsMenuUid = groupBy(depth3Menus.value, (menu) => menu.parentsMenuUid);
-const menuValues = Object.values(groupByParentsMenuUid);
-
-const groupedDepth3Menus = ref(sortBy(menuValues.map((v) => ({
-  parentMenuName: get(find(totalMenus.value, (menu) => menu.menuUid === v[0].parentsMenuUid), 'menuName'),
-  parentMenu: v[0].parentsMenuUid,
-  applicationName: get(find(v, 'applicationName'), 'applicationName'),
-  menus: v,
-})), ['applicationName', 'parentMenuName']));
-
-const bookmarks = computed(() => ({
-  parentMenuName: '즐겨찾기',
-  parentMenu: 'bookmarks',
-  applicationName: 'bookmarks',
-  editable: false,
-  menus: getters['meta/getBookmarks'].filter((menu) => menu.folderYn === 'N').map((bookmark) => (
-    {
-      ...bookmark,
-      menuName: bookmark.bookmarkName,
-    })).sort((a, b) => a.arrayalOrder - b.arrayalOrder),
-}));
-
-groupedDepth3Menus.value.unshift(bookmarks.value);
+const totalMenus = ref([]);
+const menus = getters['meta/getTotalMenus'];
 
 const isBookmarkedPage = computed(() => (
   (menuUid, pageId) => getters['meta/isBookmarked'](menuUid, pageId)
 ));
+
+function createHierarchyData(appMenus, key) {
+  return appMenus
+    .filter((v) => (key !== 'ROOT' ? key.endsWith(v.parentsMenuUid) : v.menuLevel === 0))
+    .reduce((a, v) => {
+      v.key = `${key}.${v.menuUid}`;
+      v.children = createHierarchyData(appMenus, v.key);
+      a.push(v); return a;
+    }, []);
+}
+
+const bookmarks = computed(() => ({
+  key: 'ROOT',
+  portalId: 'bookmarks',
+  applicationId: 'bookmarks',
+  menuLevel: -1,
+  menuName: '즐겨찾기',
+  folderYn: 'Y',
+  editable: false,
+  children: [
+    {
+      key: 'ROOT',
+      portalId: 'bookmarks',
+      applicationId: 'bookmarks',
+      menuLevel: -1,
+      menuName: '즐겨찾기',
+      folderYn: 'Y',
+      children: getters['meta/getBookmarks'].filter((menu) => menu.folderYn === 'N').map((bookmark) => (
+        {
+          ...bookmark,
+          menuName: bookmark.bookmarkName,
+        })).sort((a, b) => a.arrayalOrder - b.arrayalOrder),
+      editable: false,
+    },
+  ],
+}
+));
+
+async function fetchMenus() {
+  const arr = [];
+  apps.forEach((app) => {
+    const appMenus = menus.data.filter((v) => v.applicationId === app.applicationId);
+    const hierarchyData = {
+      key: 'ROOT',
+      portalId: app.portalId,
+      applicationId: app.applicationId,
+      menuLevel: -1,
+      menuName: app.applicationName,
+      folderYn: 'Y',
+      children: createHierarchyData(appMenus, 'ROOT'),
+    };
+    arr.push(cloneDeep(hierarchyData));
+  });
+  totalMenus.value = cloneDeep(arr);
+  totalMenus.value.unshift(bookmarks.value);
+}
 
 async function createBookmark(menu) {
   const { menuUid, pageId, menuName: bookmarkName } = menu;
@@ -220,7 +255,7 @@ async function deleteBookmark(menu) {
 }
 
 async function saveBookmarks(order) {
-  const cloneBookmark = cloneDeep(bookmarks.value.menus);
+  const cloneBookmark = cloneDeep(bookmarks.value.children[0].children);
   const saveParams = cloneBookmark.map((bookmark, idx) => ({
     ...bookmark,
     arrayalOrder: order.findIndex((ord) => Number(ord) === idx),
@@ -238,8 +273,8 @@ async function updateBookmark(isCreate, menu) {
     } else {
       await deleteBookmark(menu);
     }
-    groupedDepth3Menus.value.shift();
-    groupedDepth3Menus.value.unshift(bookmarks.value);
+    totalMenus.value.shift();
+    totalMenus.value.unshift(bookmarks.value);
   }
 }
 
@@ -251,8 +286,8 @@ function onClickEditAndComplete(depth3Menu) {
 }
 
 function moveToPage(menu) {
-  router.push({ name: menu.menuUid });
   ok();
+  router.push({ name: menu.menuUid });
 }
 
 function setActive(navLinks, link) {
@@ -263,7 +298,6 @@ function setActive(navLinks, link) {
 function makeScroll(navLinks) {
   navLinks.value.forEach((btn, idx) => {
     const targetElem = document.getElementById(btn.querySelector('a').getAttribute('href'));
-
     const linkST = ScrollTrigger.create({
       scroller: '#gnb_menu_tablet--ul-depth1',
       trigger: targetElem,
@@ -275,7 +309,7 @@ function makeScroll(navLinks) {
       // markers: true, // 스크롤위치 확인용 마커
       start: 'top 10%+=10',
       trigger: targetElem,
-      end: 'bottom 10%+=10',
+      end: 'bottom 10%-=10',
       toggleClass: 'curr',
       onToggle: (self) => self.isActive && setActive(navLinks, btn),
     });
@@ -306,8 +340,6 @@ function createSortable() {
 
   const el = sortableUl.value;
   const targets = el;
-
-  // let updateCustomEvt;
   targets.forEach((e) => {
     sortable.value.push(
       new Sortable(e, {
@@ -322,7 +354,8 @@ function createSortable() {
 }
 
 onMounted(() => {
-  setTimeout(() => {
+  setTimeout(async () => {
+    await fetchMenus();
     const navLinks = computed(() => gsap.utils.toArray('.tablet-menu__nav-item'));
     makeScroll(navLinks);
     createSortable();
