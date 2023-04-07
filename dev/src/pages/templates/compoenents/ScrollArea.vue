@@ -82,6 +82,20 @@
         </kw-form>
       </div>
       <kw-separator />
+      <kw-scroll-area
+        v-bind="bindingProps"
+        :style="componentStyle"
+        class="scroll-area-test__component"
+      >
+        <div
+          class="scroll-area-test__content"
+          :style="contentsStyle"
+        >
+          <div>Content</div>
+          <div>{{ `w: ${contentsStyle.width}` }} </div>
+          <div>{{ `h: ${contentsStyle.height}` }} </div>
+        </div>
+      </kw-scroll-area>
       <div class="scroll-area-test">
         <div
           :style="parentStyle"
@@ -101,7 +115,6 @@
               <div>{{ `h: ${contentsStyle.height}` }} </div>
             </div>
           </kw-scroll-area>
-          <div>???????????</div>
         </div>
         <div class="scroll-area-test__parent-info">
           <div>parent</div>
@@ -154,38 +167,12 @@
 </template>
 
 <script setup>
-const scrollAreaProps = {
-  height: { type: String, default: undefined },
-  minHeight: { type: String, default: '10px' },
-  maxHeight: { type: String, default: undefined },
-  width: { type: String, default: undefined },
-  minWidth: { type: String, default: '10px' },
-  maxWidth: { type: String, default: undefined },
-  // about scroll area size
-  // if you kill vertical scroll use this with value 100%
-  scrollAreaHeight: { type: String, default: undefined },
-  // if you kill horizontal scroll use this with value 100%
-  scrollAreaWidth: { type: String, default: undefined },
-  scrollAreaStyle: { type: String, default: undefined },
+import KwScrollArea from '../../../../../src/components/scrollArea/KwScrollArea.vue';
 
-  // fall through props
-  thumbStyle: { type: Object, default: undefined },
-  verticalThumbStyle: { type: Object, default: undefined },
-  horizontalThumbStyle: { type: Object, default: undefined }, // { borderBottomWidth: '4px', height: '14px' }
-  barStyle: { type: [Array, String, Object], default: undefined },
-  verticalBarStyle: { type: [Array, String, Object], default: undefined },
-  horizontalBarStyle: { type: [Array, String, Object], default: undefined },
-  contentStyle: { type: [Array, String, Object], default: undefined },
-  contentActiveStyle: { type: [Array, String, Object], default: undefined },
-  delay: { type: [String, Number], default: 1000 },
-  visible: { type: Boolean, default: null },
-  tabindex: { type: [String, Number], default: undefined },
-  onScroll: { type: Function, default: undefined },
-};
+const scrollAreaProps = KwScrollArea.props;
 
 const bindingProps = ref({
-  scrollAreaWidth: '',
-  width: '',
+  maxHeight: '500px',
 });
 
 const defaultCode = `
@@ -199,20 +186,20 @@ const defaultCode = `
       </kw-scroll-area>`;
 
 const parentStyle = ref({
-  width: '1000px',
-  height: '300px',
+  width: undefined,
+  height: undefined,
 });
 
 const componentStyle = ref({
-  width: '900px',
+  width: undefined,
   height: undefined,
-  padding: '100px',
-  margin: '',
+  padding: undefined,
+  margin: undefined,
 });
 
 const contentsStyle = ref({
-  width: '1200px',
-  height: '1200px',
+  width: undefined,
+  height: undefined,
 });
 
 // let timer = null;
@@ -324,6 +311,7 @@ const vScrollbar = {
     align-items: center;
     justify-content: center;
     background: radial-gradient(#f69d3c, #000);
+    border: 10px solid $error;
     color: #fff;
     font-size: 4rem;
   }

@@ -371,6 +371,7 @@
 
     &--auto-height {
       .q-field__control,
+      .q-field__marginal,
       .q-field__native {
         height: auto;
         min-height: $kw-field-height;
@@ -384,6 +385,7 @@
 
       &.q-field--dense {
         .q-field__control,
+        .q-field__marginal,
         .q-field__native {
           min-height: $kw-field-height-dense;
         }
