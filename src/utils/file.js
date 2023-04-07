@@ -67,6 +67,17 @@ export async function getImageSrcFromFile(fileUid) {
   });
 }
 
+export async function getImageSrcFromNativeFile(nativeFile) {
+  const reader = new FileReader();
+
+  return new Promise((resolve) => {
+    reader.onload = (ev) => {
+      resolve(ev.target.result);
+    };
+    reader.readAsDataURL(nativeFile);
+  });
+}
+
 export async function download(fileInfo, targetPath = targetPaths[0]) {
   throwIfIsInvalidTargetPath(targetPath);
   const params = normalizeDownloadRequest(fileInfo);
