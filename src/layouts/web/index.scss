@@ -919,7 +919,7 @@
     padding-bottom: 70px;
     margin: 8px 0 0;
     width: max-content;
-    min-height: 712px; // 720 - 8
+    min-height: calc(100vh - 168px);
   }
 
   &_el {
