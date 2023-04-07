@@ -33,14 +33,16 @@ export function removeGlobalData(e) {
   }
 }
 
-const removeModalWhenHistoryBack = debounce(() => {
-  const modals = getGlobalData(GlobalModalVmKey);
+const removeModalWhenHistoryBack = debounce((modals) => {
   if (modals.length > 0) removeGlobalData(modals[modals.length - 1].uid);
 }, 100);
 
 const closeModal = () => {
-  store.dispatch('meta/fetchLocatedFromHistory', true);
-  removeModalWhenHistoryBack();
+  const modals = getGlobalData(GlobalModalVmKey);
+  if (modals.length > 0) {
+    store.dispatch('meta/fetchLocatedFromHistory', true);
+    removeModalWhenHistoryBack(modals);
+  }
 };
 
 export function addGlobalData(data) {
