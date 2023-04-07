@@ -81,6 +81,8 @@
             >
               <kw-icon
                 name="bookmark_on"
+                clickable
+                @click.stop="onClickDelete(node)"
               />
               <div class="ellipsis">
                 {{ node.bookmarkName }}
@@ -109,7 +111,8 @@
 <script>
 import { filter } from 'lodash-es';
 import { isNavigationFailure } from 'vue-router';
-import { alert } from '../../plugins/dialog';
+import { http } from '../../plugins/http';
+import { alert, confirm } from '../../plugins/dialog';
 import { modal } from '../../plugins/modal';
 import { getUid } from '../../utils/string';
 
@@ -196,6 +199,19 @@ export default {
       }
     }
 
+    async function onClickDelete(node) {
+      const isConfirmed = node.isFolder
+        ? await confirm(t('MSG_TXT_BKMK_WANT_DEL_FLD'))
+        : await confirm(t('MSG_TXT_BKMK_WANT_DEL', [node.bookmarkName]));
+
+      if (isConfirmed) {
+        const { pageId, menuUid } = node;
+        console.log(node);
+        await http.delete('/sflex/common/common/bookmarks', { params: { pageId, menuUid } });
+        await dispatch('meta/fetchBookmarks');
+      }
+    }
+
     await dispatch('meta/fetchBookmarks');
 
     return {
@@ -206,6 +222,7 @@ export default {
       setExpandedAll,
       onUpdateSelected,
       onClickEdit,
+      onClickDelete,
     };
   },
 };

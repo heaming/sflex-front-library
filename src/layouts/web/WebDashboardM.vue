@@ -91,7 +91,10 @@ import WebFooter from './WebFooter.vue';
 const { getters, commit } = useStore();
 
 const props = defineProps({
-  importedComponents: { type: [], default: undefined },
+  importedComponents: {
+    type: Array,
+    default: undefined,
+  },
 });
 
 const area = ref('총괄');
