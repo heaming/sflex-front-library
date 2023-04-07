@@ -1,7 +1,6 @@
 <template>
   <tablet-layout>
     <template #default>
-      <tablet-footer />
       <tablet-left-drawer />
       <tablet-stack-view />
     </template>
@@ -17,7 +16,7 @@
 <script setup>
 import {
   useSession,
-  TabletLayout, TabletFooter, TabletLeftDrawer, TabletStackView, TabletFallbackLogin,
+  TabletLayout, TabletLeftDrawer, TabletStackView, TabletFallbackLogin,
 } from '~kw-lib';
 
 const {

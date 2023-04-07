@@ -8,17 +8,6 @@ body.tablet .tablet-layout {
 }
 
 /*
-  Footer
- */
-.tablet-footer {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  padding: 0 20px;
-  background: #fff;
-}
-
-/*
   Left Drawer
  */
 .tablet-left-drawer {
@@ -210,12 +199,12 @@ body.tablet .tablet-layout {
 
 .tablet-left-drawer__content:has(.curr) {
   .menu_icon {
-    ::v-deep(.q-icon) {
+    .q-icon {
       opacity: 0.8;
     }
 
     &.curr {
-      ::v-deep(.q-icon) {
+      .q-icon {
         opacity: 1;
       }
     }

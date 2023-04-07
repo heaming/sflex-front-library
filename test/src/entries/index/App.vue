@@ -2,9 +2,7 @@
   <tablet-layout v-if="$g.platform.is.tablet">
     <template #default>
       <tablet-left-drawer />
-      <tablet-right-drawer />
       <tablet-stack-view />
-      <tablet-footer />
     </template>
     <template #unauthenticated>
       <tablet-fallback-login />
@@ -13,7 +11,6 @@
   <mobile-layout v-if="$g.platform.is.mobile">
     <template #default>
       <mobile-footer />
-      <mobile-left-drawer />
       <mobile-stack-view />
     </template>
     <template #unauthenticated>
@@ -45,8 +42,8 @@
 <script setup>
 import {
   useSession,
-  TabletLayout, TabletFooter, TabletLeftDrawer, TabletStackView, TabletFallbackLogin, TabletRightDrawer,
-  MobileLayout, MobileFooter, MobileLeftDrawer, MobileStackView, MobileFallbackLogin,
+  TabletLayout, TabletLeftDrawer, TabletStackView, TabletFallbackLogin,
+  MobileLayout, MobileFooter, MobileStackView, MobileFallbackLogin,
   WebLayout, WebHeader, WebLeftDrawer, WebTabView, WebFallbackLogin,
 } from '~kw-lib';
 
