@@ -24,6 +24,7 @@ import libConfig from '../../consts/private/libConfig';
 import { registerGlobalVm, unregisterGlobalVm } from '../../utils/private/globalVm';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import { timeout } from '../../utils/private/tick';
+import { platform } from '../../plugins/platform';
 
 const {
   DIALOG_TRANSITION_DURATION,
@@ -35,6 +36,13 @@ const DEFAULT_PADDING_RIGHT = 40;
 const DEFAULT_OFFSET_TOP = 0;
 const DEFAULT_OFFSET_TOP_POPUP = -110;
 const DEFAULT_PADDING_LEFT_POPUP = 40;
+
+const DEFAULT_PADDING_MOBILE = 0;
+const DEFAULT_OFFSET_TOP_MOBILE = -125;
+
+const DEFAULT_PADDING_LEFT_TABLET = 30;
+const DEFAULT_PADDING_RIGHT_TABLET = 92;
+const DEFAULT_OFFSET_TOP_TABLET = -110;
 
 export default {
   name: 'GlobalNotify',
@@ -93,19 +101,26 @@ export default {
         let offsetLeft;
         let offsetRight;
         const isPopup = window.location.pathname.indexOf('/popup') >= 0;
+
         if (popups.length > 0) {
           offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 140;
           offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left;
           offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left;
+        } else if (platform.is.mobile) {
+          offsetLeft = DEFAULT_PADDING_MOBILE;
+          offsetTop = DEFAULT_OFFSET_TOP_MOBILE;
+          offsetRight = DEFAULT_PADDING_MOBILE;
+        } else if (platform.is.tablet) {
+          offsetLeft = DEFAULT_PADDING_LEFT_TABLET;
+          offsetTop = DEFAULT_OFFSET_TOP_TABLET;
+          offsetRight = DEFAULT_PADDING_RIGHT_TABLET;
+        } else if (isPopup) {
+          offsetLeft = DEFAULT_PADDING_LEFT_POPUP;
+          offsetTop = DEFAULT_OFFSET_TOP_POPUP;
+          offsetRight = DEFAULT_PADDING_RIGHT;
         } else {
-          if (isPopup) {
-            offsetLeft = DEFAULT_PADDING_LEFT_POPUP;
-            offsetTop = DEFAULT_OFFSET_TOP_POPUP;
-          } else {
-            offsetLeft = isLeftExpanded.value ? DEFAULT_PADDING_LEFT_WITH_DRAWER : DEFAULT_PADDING_LEFT_NO_DRAWER;
-            offsetTop = DEFAULT_OFFSET_TOP;
-          }
-
+          offsetLeft = isLeftExpanded.value ? DEFAULT_PADDING_LEFT_WITH_DRAWER : DEFAULT_PADDING_LEFT_NO_DRAWER;
+          offsetTop = DEFAULT_OFFSET_TOP;
           offsetRight = DEFAULT_PADDING_RIGHT;
         }
         popupOffsetTop.value = `${offsetTop}px`;

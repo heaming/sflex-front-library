@@ -33,7 +33,7 @@ export default {
     const { userId } = getters['meta/getUserInfo'];
     const { push } = useRouter();
     const { t } = useI18n();
-    const curr = ref(0);
+    const curr = ref(-1);
     const footerMenus = ref([
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
       { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
@@ -43,20 +43,24 @@ export default {
     ]);
 
     async function openMenu(menu, idx) {
-      curr.value = idx;
-
       const globalModals = getGlobalData(GlobalModalVmKey);
       if (globalModals.length > 0) {
         const mainMenuModals = globalModals.filter((globalModal) => globalModal.dialogProps.class === 'main-menu-modal');
         mainMenuModals.forEach((mainMenuModal) => removeGlobalData(mainMenuModal.uid));
+        if (curr.value === idx) {
+          curr.value = -1;
+          return;
+        }
       }
 
+      curr.value = idx;
       if (menu.component) {
         await modal({
           component: menu.component,
           dialogProps: { maximized: true, class: 'main-menu-modal' },
         });
 
+        curr.value = -1;
         return;
       }
 
