@@ -63,19 +63,25 @@ export default {
     ]);
 
     async function openMenu(menu) {
-      curr.value = menu.icon;
-
       const globalModals = getGlobalData(GlobalModalVmKey);
       if (globalModals.length > 0) {
         const mainMenuModals = globalModals.filter((globalModal) => globalModal.dialogProps.class === 'main-menu-modal');
         mainMenuModals.forEach((mainMenuModal) => removeGlobalData(mainMenuModal.uid));
+        if (curr.value === menu.icon) {
+          curr.value = -1;
+          return;
+        }
       }
+
+      curr.value = menu.icon;
 
       if (menu.component) {
         await modal({
           component: menu.component,
           dialogProps: { maximized: true, class: 'main-menu-modal' },
         });
+
+        curr.value = -1;
       }
     }
 
