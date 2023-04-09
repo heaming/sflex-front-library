@@ -1,21 +1,22 @@
-<!-- eslint-disable vue/no-v-html -->
 <template>
   <div
     class="kw-scroll-area"
     v-bind="styleClassAttrs"
   >
     <div
-      class="kw-scroll-area__wrapper"
-      :style="scrollAreaWrapperStyle"
+      class="kw-scroll-area__offset"
+      :style="computedOffsetStyle"
     >
       <q-scroll-area
         ref="quasarRef"
-        class="kw-scroll-area__scrollarea"
+        class="kw-scroll-area__client"
+        :class="clientClass"
+        :style="clientStyle"
         :thumb-style="computedThumbStyle"
-        :horizontal-thumb-style="computedHorizontalThumbStyle"
         :vertical-thumb-style="computedVerticalThumbStyle"
+        :horizontal-thumb-style="computedHorizontalThumbStyle"
         :bar-style="computedBarStyle"
-        :vertical-bar-style="computedBarStyle"
+        :vertical-bar-style="computedVerticalBarStyle"
         :horizontal-bar-style="computedHorizontalBarStyle"
         :content-style="computedContentStyle"
         :content-active-style="computedContentActiveStyle"
@@ -39,6 +40,7 @@
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import { platform } from '../../plugins/platform';
+import { castStylePropToObject } from '../../utils/style';
 
 export default {
   name: 'KwScrollArea',
@@ -46,24 +48,28 @@ export default {
 
   props: {
     // customize props
-    // about client size
+    // about offset size
     height: { type: String, default: undefined },
     minHeight: { type: String, default: '10px' },
     maxHeight: { type: String, default: undefined },
     width: { type: String, default: undefined },
     minWidth: { type: String, default: '10px' },
     maxWidth: { type: String, default: undefined },
+    offsetStyle: { type: [Array, String, Object], default: undefined },
+
+    clientClass: { type: [String, Array, Object], default: undefined },
+    clientStyle: { type: [Array, String, Object], default: undefined },
     // about scroll area size
-    // if you kill vertical scroll use this with value 100%
-    scrollAreaHeight: { type: String, default: undefined },
-    // if you kill horizontal scroll use this with value 100%
-    scrollAreaWidth: { type: String, default: undefined },
-    scrollAreaStyle: { type: [Object, Array, String], default: undefined },
+    /* if you kill vertical scroll use this with value 100% */
+    scrollHeight: { type: String, default: undefined },
+    /* if you kill horizontal scroll use this with value 100% */
+    scrollWidth: { type: String, default: undefined },
+    scrollStyle: { type: [Array, String, Object], default: undefined },
 
     // fall through props
-    thumbStyle: { type: Object, default: undefined },
-    verticalThumbStyle: { type: Object, default: undefined },
-    horizontalThumbStyle: { type: Object, default: undefined }, // { borderBottomWidth: '4px', height: '14px' }
+    thumbStyle: { type: [Array, String, Object], default: undefined },
+    verticalThumbStyle: { type: [Array, String, Object], default: undefined },
+    horizontalThumbStyle: { type: [Array, String, Object], default: undefined },
     barStyle: { type: [Array, String, Object], default: undefined },
     verticalBarStyle: { type: [Array, String, Object], default: undefined },
     horizontalBarStyle: { type: [Array, String, Object], default: undefined },
@@ -79,7 +85,7 @@ export default {
   setup(props, { emit }) {
     const quasarRef = ref();
 
-    const scrollAreaWrapperStyle = computed(() => {
+    const computedOffsetStyle = computed(() => {
       let styles = '';
       if (props.height) {
         styles += props.height ? `height: ${props.height}; ` : '';
@@ -93,77 +99,52 @@ export default {
         styles += props.minWidth ? `min-width: ${props.minWidth}; ` : '';
         styles += props.maxWidth ? `max-width: ${props.maxWidth}; ` : '';
       }
-      return styles;
+      return castStylePropToObject(styles, props.offsetStyle);
     });
 
-    const contentObserverStyle = ref({
+    const observedClientBoxSize = ref({
       width: undefined,
       height: undefined,
     });
 
-    const computedScrollAreaWidth = computed(() => {
-      if (props.scrollAreaWidth) {
+    const computedScrollWidth = computed(() => {
+      if (props.scrollWidth) {
         return {
-          width: `${props.scrollAreaWidth}`,
+          width: `${props.scrollWidth}`,
           minWidth: 'unset !important',
         };
       }
       return {
-        minWidth: contentObserverStyle.value?.width && `${contentObserverStyle.value.width}px`,
+        minWidth: observedClientBoxSize.value?.width && `${observedClientBoxSize.value.width}px`,
       };
     });
-    const computedScrollAreaHeight = computed(() => {
-      if (props.scrollAreaHeight) {
+
+    const computedScrollHeight = computed(() => {
+      if (props.scrollHeight) {
         return {
-          height: `${props.scrollAreaWidth}`,
+          height: `${props.scrollHeight}`,
           minHeight: 'unset !important',
         };
       }
       return {
-        minHeight: contentObserverStyle.value?.height && `${contentObserverStyle.value.height}px`,
+        minHeight: observedClientBoxSize.value?.height && `${observedClientBoxSize.value.height}px`,
       };
     });
 
-    const normalizeStyleProps = (pr) => {
-      if (!pr) { return []; }
-      if (typeof pr === 'string') {
-        return pr
-          .split(';')
-          .map((rule) => rule.trim())
-          .filter((rule) => rule.length);
-      }
-      if (Array.isArray(pr)) {
-        const flatter = (acc, cur) => acc.concat(...normalizeStyleProps(cur));
-        return pr.reduce(flatter, []);
-      }
-      return Object.entries(pr).map(([key, value]) => {
-        if (value === true) {
-          return normalizeStyleProps(key);
-        }
-        if (value) {
-          if (typeof key === 'string' && !key.includes(':') && !key.includes(';')) {
-            return `${key}: ${value}`;
-          }
-          return normalizeStyleProps(key);
-        }
-        return [];
-      }).flat();
-    };
-
     const computedContentStyle = computed(() => {
       const styles = {
-        ...computedScrollAreaWidth.value,
-        ...computedScrollAreaHeight.value,
+        ...computedScrollWidth.value,
+        ...computedScrollHeight.value,
       };
-      return normalizeStyleProps([props.contentStyle, props.scrollAreaStyle, styles]);
+      return castStylePropToObject(props.contentStyle, props.scrollStyle, styles);
     });
 
     const computedContentActiveStyle = computed(() => {
       const styles = {
-        ...computedScrollAreaWidth.value,
-        ...computedScrollAreaHeight.value,
+        ...computedScrollWidth.value,
+        ...computedScrollHeight.value,
       };
-      return normalizeStyleProps([props.contentActiveStyle, props.scrollAreaStyle, styles]);
+      return castStylePropToObject(props.contentActiveStyle, props.scrollStyle, styles);
     });
 
     const computedBarStyle = computed(() => {
@@ -171,7 +152,7 @@ export default {
       if (platform.is.desktop) {
         // fixme
       }
-      return normalizeStyleProps([props.barStyle, style]);
+      return castStylePropToObject(style, props.barStyle);
     });
 
     const computedVerticalBarStyle = computed(() => {
@@ -182,7 +163,7 @@ export default {
       if (platform.is.tablet) {
         style.width = '6px'; // $kw-scrollbar-width
       }
-      return [props.verticalBarStyle, style];
+      return castStylePropToObject(style, props.verticalBarStyle);
     });
 
     const computedHorizontalBarStyle = computed(() => {
@@ -193,7 +174,7 @@ export default {
       if (platform.is.tablet) {
         style.height = '6px'; // $kw-scrollbar-height
       }
-      return normalizeStyleProps([props.horizontalBarStyle, style]);
+      return castStylePropToObject(style, props.horizontalBarStyle);
     });
 
     const computedThumbStyle = computed(() => {
@@ -202,19 +183,16 @@ export default {
       style.opacity = 1;
 
       if (platform.is.desktop) {
-        style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color
+        style.backgroundColor = '#ccc'; // $kw-scrollbar-track-background-color
       }
       if (platform.is.tablet) {
         style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color
       }
       if (platform.is.mobile) {
         style.border = '2px solid transparent';
-        style.backgroundColor = '#ccc'; // $kw-scrollThumb-track-background-color-mobile
+        style.backgroundColor = '#ccc'; // $kw-scrollbar-track-background-color-mobile
       }
-      return {
-        ...style,
-        ...props.thumbStyle,
-      };
+      return castStylePropToObject(style, props.thumbStyle);
     });
 
     const computedVerticalThumbStyle = computed(() => {
@@ -238,10 +216,7 @@ export default {
         style.borderRadius = '0';
         style.marginRight = '4px';
       }
-      return {
-        ...style,
-        ...props.verticalThumbStyle,
-      };
+      return castStylePropToObject(style, props.verticalThumbStyle);
     });
 
     const computedHorizontalThumbStyle = computed(() => {
@@ -258,14 +233,12 @@ export default {
         style.height = '6px'; // $kw-scrollbar-width
         style.borderRadius = '0';
       }
-      return {
-        ...style,
-        ...props.horizontalThumbStyle,
-      };
+      return castStylePropToObject(style, props.horizontalThumbStyle);
     });
 
     const onResizeContent = (resizeInfo) => {
-      contentObserverStyle.value = resizeInfo;
+      console.log('resizeInfo', resizeInfo.width, resizeInfo.height);
+      observedClientBoxSize.value = resizeInfo;
       emit('resize:content', resizeInfo);
     };
 
@@ -295,7 +268,7 @@ export default {
     return {
       ...useInheritAttrs(),
       quasarRef,
-      scrollAreaWrapperStyle,
+      computedOffsetStyle,
       computedContentStyle,
       computedContentActiveStyle,
       computedBarStyle,

@@ -4,7 +4,11 @@
     view="hHh LpR lff"
   >
     <slot
-      v-if="isAuthenticated"
+      v-if="isCustDomain"
+      name="custdomain"
+    />
+    <slot
+      v-else-if="isAuthenticated"
     />
     <slot
       v-else
@@ -14,6 +18,7 @@
 </template>
 
 <script>
+import env from '../../consts/private/env';
 
 export default {
   name: 'WebLayout',
@@ -23,7 +28,7 @@ export default {
     const { currentRoute } = useRouter();
 
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
-
+    const isCustDomain = env.VITE_HTTP_ORIGIN === env.VITE_HTTP_CUST_ORIGIN;
     const { menuUid } = currentRoute.value.meta;
 
     // commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
@@ -32,6 +37,7 @@ export default {
 
     return {
       isAuthenticated,
+      isCustDomain,
     };
   },
 };
