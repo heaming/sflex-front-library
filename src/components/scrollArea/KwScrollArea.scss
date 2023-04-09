@@ -5,14 +5,14 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 
-  &__wrapper {
+  &__offset {
     position: relative;
     max-width: 100%;
     max-height: 100%;
     overflow: hidden;
   }
 
-  &__scrollarea {
+  &__client {
     &.q-scrollarea {
       contain: none;
       width: 100%;
@@ -55,13 +55,13 @@
     contain: strict;
     flex-grow: 1;
 
-    .kw-scroll-area__wrapper {
+    .kw-scroll-area__offset {
       position: absolute;
       width: 100%;
       height: 100%;
     }
 
-    .kw-scroll-area__scrollarea {
+    .kw-scroll-area__client {
       &.q-scrollarea {
         position: absolute;
       }

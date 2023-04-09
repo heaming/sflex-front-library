@@ -39,3 +39,4 @@ export * as gridUtil from './utils/grid';
 export * as mobileUtil from './utils/mobile';
 export * as popupUtil from './utils/popup';
 export * as stringUtil from './utils/string';
+export * as styleUtil from './utils/style';
