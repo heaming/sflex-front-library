@@ -109,7 +109,6 @@ export const fileUtil: FileUtil;
 
 // Grid
 import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider, RowState } from 'realgrid';
-import { getImageSrcFromFile } from '../src/utils/file';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
@@ -736,3 +735,15 @@ interface StringUtil {
 }
 
 export declare const stringUtil: StringUtil;
+
+type StyleProps = string | Array<StyleProps> | object;
+
+declare interface StyleUtil {
+  /**
+   * css props 들를 object 형태로 변환한다.
+   * @param styleProps style props
+   */
+  castStylePropToObject(...styleProps: StyleProps[]): object;
+}
+
+export declare const styleUtil: StyleUtil;

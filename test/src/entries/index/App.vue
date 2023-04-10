@@ -18,6 +18,9 @@
     </template>
   </mobile-layout>
   <web-layout v-if="$g.platform.is.desktop">
+    <template #custdomain>
+      <cust-doamin-error />
+    </template>
     <template #default>
       <web-header>
         <template #logo="{ goToHome }">
@@ -44,7 +47,7 @@ import {
   useSession,
   TabletLayout, TabletLeftDrawer, TabletStackView, TabletFallbackLogin,
   MobileLayout, MobileFooter, MobileStackView, MobileFallbackLogin,
-  WebLayout, WebHeader, WebLeftDrawer, WebTabView, WebFallbackLogin,
+  WebLayout, WebHeader, WebLeftDrawer, WebTabView, WebFallbackLogin, CustDoaminError,
 } from '~kw-lib';
 
 const {
