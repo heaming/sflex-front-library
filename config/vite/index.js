@@ -46,6 +46,7 @@ exports.defineConfig = (config) => {
       'vue-i18n',
       'vue-router',
       'vuex',
+      'viewerjs',
     ];
 
     return {
