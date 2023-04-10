@@ -15,6 +15,7 @@ export default () => {
   const { getters } = useStore();
 
   const meta = { ...currentRoute.value.meta };
+  const isSubPage = meta.pageUseCode === 'S';
 
   const navigations = computed(() => {
     if (Array.isArray(props.options)) {
@@ -41,5 +42,6 @@ export default () => {
   return {
     navigations,
     navigationTitle,
+    isSubPage,
   };
 };

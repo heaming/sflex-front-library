@@ -276,7 +276,7 @@ export default {
     });
 
     const computedUnmaskedValue = computed(() => {
-      if (props.unmaskedValue) return props.unmaskedValue;
+      if (props.unmaskedValue !== undefined) return props.unmaskedValue;
       if (props.mask === 'telephone') return false;
       return true;
     });
@@ -394,6 +394,11 @@ export default {
       if (props.preventSubmit) {
         const el = inputRef.value.getNativeElement();
         preventSubmitEnter(el);
+      }
+
+      if (props.mask === 'telephone' && !props.modelValue) {
+        const val = [props.telNo0, props.telNo1, props.telNo2].join('-');
+        onUpdateTextValue(val);
       }
     });
 
