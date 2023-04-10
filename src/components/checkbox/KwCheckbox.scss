@@ -247,6 +247,10 @@ body.mobile {
         color: $black3;
       }
 
+      &[aria-checked="true"] {
+        border: 1px solid $primary;
+      }
+
       .q-checkbox__inner--truthy {
         .q-checkbox__icon {
           color: $primary;

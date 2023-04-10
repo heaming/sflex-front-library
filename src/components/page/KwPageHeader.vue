@@ -48,6 +48,7 @@
       </kw-icon>
 
       <kw-icon
+        v-if="!isSubPage"
         name="new_window"
         clickable
         @click="openNewWindow()"
