@@ -12,21 +12,25 @@
     >
       <guide-props
         v-model="bindingProps"
+        title="KwAvatarProps"
+        :props="avatarProps"
+      />
+      <guide-props
+        v-model="bindingAttrs"
+        title="Style attrs"
         :props="{
-          size: { type: String, default: undefined },
-          fontSize: { type: String, default: undefined },
-          color: { type: String, default: undefined },
-          textColor: { type: String, default: undefined },
-          icon: { type: String, default: undefined },
-          square: { type: Boolean, default: undefined },
-          rounded: { type: Boolean, default: undefined },
+          class: {type: String, default: undefined},
+          style: {type: String, default: undefined},
         }"
       />
       <kw-separator />
       <kw-avatar
-        v-bind="bindingProps"
+        v-bind="{...bindingAttrs, ...bindingProps}"
       >
         !
+      </kw-avatar>
+      <kw-avatar border-color="primary">
+        1
       </kw-avatar>
     </guide-section>
     <guide-section
@@ -93,6 +97,8 @@
 </template>
 
 <script setup>
+import KwAvatar from '../../../../../src/components/avatar/KwAvatar.vue';
+
 const defaultCode = `
           <kw-avatar>
             <img
@@ -143,5 +149,8 @@ const googleCode = `
       >
         E
       </kw-avatar>`;
+
+const avatarProps = KwAvatar.props;
 const bindingProps = ref(null);
+const bindingAttrs = ref(null);
 </script>
