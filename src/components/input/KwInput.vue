@@ -395,6 +395,11 @@ export default {
         const el = inputRef.value.getNativeElement();
         preventSubmitEnter(el);
       }
+
+      if (props.mask === 'telephone' && !props.modelValue) {
+        const val = [props.telNo0, props.telNo1, props.telNo2].join('-');
+        onUpdateTextValue(val);
+      }
     });
 
     function select() {
