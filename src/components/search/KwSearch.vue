@@ -26,6 +26,7 @@
       <slot name="action">
         <kw-btn
           v-if="noResetBtn === false"
+          ref="resetBtn"
           v-permission:read
           :label="$t('MSG_BTN_INTL', null, '초기화')"
           :class="$g.platform.is.mobile ? 'w64' : 'w90'"
@@ -34,6 +35,7 @@
           type="reset"
         />
         <kw-btn
+          ref="searchBtn"
           v-permission:read
           :label="$t('MSG_TXT_SRCH', null, '조회')"
           :class="$g.platform.is.mobile ? 'w64' : 'w90'"
@@ -125,6 +127,9 @@ export default {
     const pageCtx = inject(PageContextKey, null);
     const hasReadPermission = () => env.TEST === true || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
 
+    const resetBtn = ref();
+    const searchBtn = ref();
+
     async function validate() {
       await formCtx.validate(false, false);
 
@@ -192,6 +197,14 @@ export default {
       cols: props.oneRow ? ONE_ROW_DEFAULT_COLS : undefined,
     });
 
+    function focusResetBtn() {
+      resetBtn.value.$el.focus();
+    }
+
+    function focusSearchBtn() {
+      searchBtn.value.$el.focus();
+    }
+
     return {
       ...useInheritAttrs(),
       ...formCtx,
@@ -199,6 +212,10 @@ export default {
       validate,
       onSubmit,
       onReset,
+      focusSearchBtn,
+      focusResetBtn,
+      searchBtn,
+      resetBtn,
     };
   },
 };
