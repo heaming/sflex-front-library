@@ -819,14 +819,16 @@
   }
 }
 
+// start dashboard style
 .dashboard {
   width: 1840px;
+  flex: auto;
 
   &_summary {
     display: flex;
     background: $secondary;
-    height: 80px;
-    padding: 24px 0 24px 24px;
+    height: 64px;
+    padding: 16px 0 14px 24px;
 
     & > * {
       color: #fff;
@@ -909,13 +911,15 @@
   &_wrap {
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 415px;
-    grid-template-columns: repeat(4, 445px);
-    gap: 20px;
-    padding-bottom: 60px;
-    margin: 30px 0;
+    grid-template-rows: 346px;
+    grid-template-columns: repeat(4, 454px);
+    gap: 8px;
+
+    // padding-bottom: 60px;
+    padding-bottom: 70px;
+    margin: 8px 0 0;
     width: max-content;
-    min-height: 860px;
+    min-height: calc(100vh - 168px);
   }
 
   &_el {
@@ -923,43 +927,54 @@
     padding: 24px;
 
     &_1by1 {
-      width: 445px;
-      height: 415px;
+      width: 454px;
+      height: 346px;
       grid-area: auto / auto / span 1 / span 1;
     }
 
     &_1by2 {
-      width: 445px;
-      height: 850px;
+      width: 454px;
+      height: 700px; // 346 * 2 + 8
       grid-area: auto / auto / span 2 / span 1;
     }
 
     &_2by1 {
-      width: 910px;
-      height: 415px;
+      width: 916px; // 454 * 2 + 8
+      height: 346px;
       grid-area: auto / auto / span 1 / span 2;
     }
 
     &_2by2 {
-      width: 910px;
-      height: 850px;
+      width: 916px; // 454 *2 + 8
+      height: 700px; // 346 * 2 + 8
       grid-area: auto / auto / span 2 / span 2;
     }
-  }
 
-  .kw-list.q-list--separator {
-    &.kw-list--card {
-      > .q-item-type + .q-item-type {
-        border-color: $line-bg;
-      }
+    // line-height
+    .kw-font-pt20 {
+      line-height: 1.813rem !important;
+    }
+
+    .kw-font-pt14 {
+      line-height: 1.25rem !important;
+    }
+
+    // simple table
+    .kw-table--normal tbody tr td {
+      padding: 10px 4px;
     }
   }
 }
 
 .main_footer {
-  margin: 0 -40px -30px;
+  // margin: 0 -40px -30px;
+  margin: 0;
+  position: absolute;
+  bottom: -12px;
+  left: -40px;
+  right: -40px;
   height: 70px;
-  padding: 14px 40px;
+  padding: 11px 40px;
   background: #fff;
   display: flex;
 
@@ -990,6 +1005,10 @@
       }
     }
   }
+
+  .family-site {
+    margin-left: auto;
+  }
 }
 
 .organization-status {
@@ -1000,8 +1019,8 @@
 
   li {
     width: calc((100% /2) - 4px);
-    padding: 16px 20px;
-    min-height: 96px;
+    padding: 12px 16px;
+    min-height: 79px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -1009,13 +1028,13 @@
   }
 
   &-left {
+    flex-grow: 0;
     text-align: left;
-    max-width: 70px;
+    max-width: 90px;
     word-break: keep-all;
-    display: flex;
-    flex-direction: column;
 
     span {
+      display: block;
       margin-top: 2px;
       font-size: 12px;
       color: $black3;
@@ -1023,11 +1042,11 @@
   }
 
   &-right {
+    flex-grow: 0;
     text-align: right;
-    display: flex;
-    flex-direction: column;
 
     span {
+      display: block;
       margin-top: 4px;
       font-size: 14px;
       color: $black3;
@@ -1041,10 +1060,10 @@
   }
 
   &-number {
-    line-height: 1.5;
-    font-size: 20px;
+    font-size: 18px;
     color: $black1;
     font-weight: 700;
+    line-height: 1.625rem;
   }
 }
 
@@ -1057,12 +1076,24 @@
   &-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background: $bg-box;
     width: calc((100% /2) - 4px);
-    padding: 10px 12px 8px;
+    min-height: 46px;
+    padding: 8px 12px;
 
-    &--full-size {
-      width: 100%;
+    .kw-font-pt18 {
+      line-height: 1.625rem !important;
+    }
+
+    &--column {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .kw-font-pt18 {
+        margin-left: auto;
+        margin-top: 2px;
+      }
     }
   }
 }
@@ -1081,18 +1112,9 @@
   }
 }
 
-// line-height
-.kw-font-pt20 {
-  line-height: 1.813rem !important;
-}
-
-.kw-font-pt14 {
-  line-height: 1.25rem !important;
-}
-
 // card 1
 .current-states {
-  margin-top: 8px;
+  margin-top: 6px;
 
   &__total {
     display: flex;
@@ -1170,3 +1192,21 @@
     }
   }
 }
+
+.kw-list.q-list--separator {
+  &.kw-list--card {
+    > .q-item-type + .q-item-type {
+      border-color: $line-bg;
+    }
+
+    .q-item-type:first-of-type {
+      padding-top: 0;
+    }
+
+    .q-item-type:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// end dashboard style
