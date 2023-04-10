@@ -276,7 +276,7 @@ export default {
     });
 
     const computedUnmaskedValue = computed(() => {
-      if (props.unmaskedValue) return props.unmaskedValue;
+      if (props.unmaskedValue !== undefined) return props.unmaskedValue;
       if (props.mask === 'telephone') return false;
       return true;
     });
