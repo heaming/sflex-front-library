@@ -12,6 +12,11 @@
     :configs="computedConfigs"
     :layers="layers"
     :event-handlers="eventHandlers"
+    @update:zoom-level="onUpdateZoomLevel"
+    @update:selected-nodes="onUpdateSelectedNodes"
+    @update:selected-edges="onUpdateSelectedEdges"
+    @update:selected-paths="onUpdateSelectedPaths"
+    @update:layouts="onUpdateLayouts"
   />
 </template>
 
@@ -35,6 +40,11 @@ export default {
     configs: { type: Object, default: () => null },
     layers: { type: Object, default: () => {} },
     eventHandlers: { type: Object, default: () => {} },
+    onUpdateZoomLevel: { type: Function, default: undefined },
+    onUpdateSelectedNodes: { type: Function, default: undefined },
+    onUpdateSelectedEdges: { type: Function, default: undefined },
+    onUpdateSelectedPaths: { type: Function, default: undefined },
+    onUpdateLayouts: { type: Function, default: undefined },
   },
   setup(props) {
     const computedConfigs = ref(null);
