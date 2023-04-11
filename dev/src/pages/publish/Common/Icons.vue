@@ -148,6 +148,7 @@ const iconList1 = [
   'release',
   'pause',
   'sms',
+  'redo',
 ];
 const iconList2 = [
   'add_list_24',

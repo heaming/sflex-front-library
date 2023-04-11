@@ -12,79 +12,8 @@
     >
       <guide-props
         v-model="bindingProps1"
-        title="content"
-        :props="{
-          label: { type: [Number, String], default: undefined },
-          icon: { type: String, default: undefined },
-          iconRight: { type: String, default: undefined },
-
-          // about innerClasses
-          align: { type: String, default: 'center' },
-          stack: { type: Boolean, default: false },
-          noWrap: { type: Boolean, default: false },
-          stretch: { type: Boolean, default: false },
-          grow: { type: Boolean, default: false },
-          loading: { type: Boolean, default: false },
-          percentage: { type: Number, default: undefined },
-          darkPercentage: { type: Boolean, default: undefined },
-        }"
-      />
-      <guide-props
-        v-model="bindingProps2"
-        title="Style presets"
-        :props="{
-          // presets for color and design
-          primary: { type: Boolean, default: false },
-          negative: { type: Boolean, default: false },
-          secondary: { type: Boolean, default: false },
-          gridAction: { type: Boolean, default: false },
-          preset: { type: String, default: '' },
-        }"
-      />
-      <guide-props
-        v-model="bindingProps3"
-        title="Styles"
-        :props="{
-          dense: { type: Boolean, default: undefined },
-          blockInheritDense: { type: Boolean, default: undefined },
-          padding: { type: String, default: undefined },
-          minWidth: { type: String, default: undefined },
-
-          round: { type: Boolean, default: false },
-          rounded: { type: Boolean, default: false },
-
-          // design on quasar unelevated style.
-          filled: { type: Boolean, default: false },
-          underline: { type: Boolean, default: false },
-          borderless: { type: Boolean, default: false },
-          outlined: { type: Boolean, default: false },
-
-          // color props
-          color: { type: String, default: undefined }, // this one should be solid color.
-          textColor: { type: String, default: undefined }, // this one should be solid color.
-          borderColor: { type: String, default: undefined }, // this one should be solid color.
-          // glossy: { type: Boolean, default: false }, // about background tweak. we will not use.
-
-          // presets for color and design
-          size: { type: String, default: undefined },
-          fontSize: { type: String, default: undefined },
-          color: { type: String, default: undefined },
-          textColor: { type: String, default: undefined },
-          icon: { type: String, default: undefined },
-        }"
-      />
-      <guide-props
-        v-model="bindingProps4"
-        title="behavior"
-        :props="{
-          type: { type: String, default: 'button' },
-          tabindex: { type: [Number, String], default: undefined },
-          disable: { type: Boolean, default: false },
-          to: { type: String, default: undefined },
-          replace: { type: Boolean, default: undefined },
-          href: { type: String, default: undefined },
-          target: { type: String, default: undefined },
-        }"
+        title="props"
+        :props="kwBtn.props"
       />
       <kw-separator />
       <kw-form>
@@ -157,6 +86,8 @@
 </template>
 
 <script setup>
+import kwBtn from '../../../../../src/components/btn/KwBtn.vue';
+
 const bindingProps1 = ref({
   label: 'label',
 });
