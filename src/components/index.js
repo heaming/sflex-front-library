@@ -21,6 +21,7 @@ export * from './form';
 export * from './grid';
 export * from './icon';
 export * from './image';
+export * from './imagePreview';
 export * from './infiniteScroll';
 export * from './input';
 export * from './item';
