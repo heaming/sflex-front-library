@@ -329,7 +329,7 @@ const fileProps = {
   undeletePossible: { type: Boolean, default: undefined },
   undeleteIcon: { type: String, default: 'clear' },
   retryPossible: { type: Boolean, default: true },
-  retryIcon: { type: String, default: 'retry' },
+  retryIcon: { type: String, default: 'redo' },
   instanceUpdate: { type: [Boolean, String], default: false },
   updatable: { type: Boolean, default: true },
   updateIcon: { type: String, default: 'upload_off' },
