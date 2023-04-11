@@ -1,24 +1,26 @@
 <template>
-  <div class="gallery_area">
+  <div
+    class="gallery_area"
+  >
     <kw-icon
       name="arrow_left"
       clickable
       @click="rotateImage(1)"
     />
     <div
-      id="gallery_container"
+      id="gallery-container"
     >
       <div id="gallery">
         <ul class="pictures">
           <li
-            v-for="(image, imageIdx) in props.images"
-            :key="imageIdx"
+            v-for="(img, imgIdx) in imgs"
+            :key="imgIdx"
           >
             <img
               v-show="false"
-              :src="image.src"
-              :data-original="image.src"
-              alt="test"
+              :src="img.src"
+              :data-original="img.src"
+              alt=""
             >
           </li>
         </ul>
@@ -32,56 +34,80 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import Viewer from 'viewerjs';
 import 'viewerjs/dist/viewer.css';
+import { getImageSrcFromFile } from '../../utils/file';
 
-const props = defineProps({
-  images: { type: Array, default: () => [] },
-});
+export default {
+  name: 'KwImagePreview',
+  props: {
+    images: { type: Array, default: () => [] },
+  },
+  emits: ['update:image-index'],
+  setup(props, { emit }) {
+    const viewer = ref();
+    const imgs = ref([]);
 
-const viewer = ref();
+    async function initImages() {
+      const promises = props.images.map(async (image) => {
+        const temp = {};
+        temp.file = image;
+        temp.src = await getImageSrcFromFile(image);
+        imgs.value.push(temp);
+      });
 
-function rotateImage(number) {
-  if (number === 1) viewer?.value.next(true);
-  else viewer?.value.prev(true);
-}
+      await Promise.all(promises);
+    }
 
-function makeViewer() {
-  const gallery = document.getElementById('gallery');
-  viewer.value = new Viewer(gallery, {
-    inline: true,
-    toolbar: false,
-    backdrop: false,
-    navbar: false,
-    title: false,
-    button: false,
-    transition: false,
-    container: '#gallery_container',
-    fullscreen: false,
-  });
-  viewer?.value.show();
-  console.log(viewer.value);
-}
+    function rotateImage(number) {
+      if (number === 1) viewer?.value.next(true);
+      else viewer?.value.prev(true);
 
-onMounted(() => {
-  makeViewer();
-});
+      emit('update:image-index', { curr: viewer?.value.index, total: viewer?.value.images?.length });
+    }
 
-onBeforeUnmount(() => {
-  viewer?.value.destroy();
-});
+    function makeViewer() {
+      const gallery = document.getElementById('gallery');
+      viewer.value = new Viewer(gallery, {
+        inline: true,
+        toolbar: false,
+        backdrop: false,
+        navbar: false,
+        title: false,
+        button: false,
+        transition: false,
+        container: '#gallery_container',
+        fullscreen: false,
+      });
 
-function zoomIn() {
-  viewer?.value.zoom(0.5);
-}
+      viewer?.value.show();
+    }
 
-function zoomOut() {
-  viewer?.value.zoom(-0.5);
-}
+    onMounted(async () => {
+      await initImages();
+      makeViewer();
+    });
 
-defineExpose({
-  zoomIn,
-  zoomOut,
-});
+    onBeforeUnmount(() => {
+      viewer?.value.destroy();
+    });
+
+    function zoomIn() {
+      viewer?.value.zoom(0.5);
+    }
+
+    function zoomOut() {
+      viewer?.value.zoom(-0.5);
+    }
+
+    return {
+      zoomIn,
+      zoomOut,
+      viewer,
+      imgs,
+      rotateImage,
+    };
+  },
+};
 </script>
