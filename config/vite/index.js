@@ -48,7 +48,9 @@ exports.defineConfig = (config) => {
       'vuex',
       'viewerjs',
     ];
-
+    console.log('optimizeDepsInclude', defaultOptimizeDepsInclude);
+    console.log('pluginArgs', pluginArgs);
+    console.log('config', config);
     return {
       plugins: [
         vue({
