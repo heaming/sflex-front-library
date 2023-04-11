@@ -47,8 +47,11 @@ exports.defineConfig = (config) => {
       'vue-router',
       'vuex',
       'viewerjs',
+      'jquery',
     ];
-
+    console.log('optimizeDepsInclude', defaultOptimizeDepsInclude);
+    console.log('pluginArgs', pluginArgs);
+    console.log('config', config);
     return {
       plugins: [
         vue({
