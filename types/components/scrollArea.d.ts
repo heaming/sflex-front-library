@@ -1,12 +1,12 @@
 import { ComponentPublicInstance } from 'vue';
 import { GlobalComponentConstructor, QScrollAreaProps, QScrollAreaSlots } from 'quasar';
-import { VueStyleProp } from 'quasar/dist/types/api/vue-prop-types';
+import { VueClassProp, VueStyleProp } from 'quasar/dist/types/api/vue-prop-types';
 
 type FallThroughProps = 'thumbStyle' | 'verticalThumbStyle' | 'horizontalThumbStyle' | 'barStyle' | 'verticalBarStyle' | 'horizontalBarStyle' | 'contentStyle' | 'contentActiveStyle' | 'delay' | 'visible' | 'tabindex' | 'onScroll';
 
 interface KwScrollAreaProps extends Pick<QScrollAreaProps, FallThroughProps> {
   /**
-   * client height 와 같은 값.
+   * offset height 와 같은 값.
    * 컴포넌트의 높이는 offset height 와 상등하다.
    * 컴포넌트의 기본 높이는 100% 이다.
    *
@@ -14,7 +14,7 @@ interface KwScrollAreaProps extends Pick<QScrollAreaProps, FallThroughProps> {
   height?: string | undefined;
 
   /**
-   * client height 의 min-height
+   * offset height 의 min-height
    * height 가 지정되었을 시 무시된다.
    * @see height
    * @default 10px
@@ -22,21 +22,21 @@ interface KwScrollAreaProps extends Pick<QScrollAreaProps, FallThroughProps> {
   minHeight?: string | undefined;
 
   /**
-   * client height 의 max-height
+   * offset height 의 max-height
    * height 가 지정되었을 시 무시된다.
    * @see height
    */
   maxHeight?: string | undefined;
 
   /**
-   * client width 와 같은 값.
+   * offset width 와 같은 값.
    * 컴포넌트의 너비는 offset width 와 상등하다.
    * 컴포넌트의 기본 너비는 100% 이다.
    */
   width?: string | undefined;
 
   /**
-   * client width 의 min-width
+   * offset width 의 min-width
    * width 가 지정되었을 시 무시된다.
    * @see width
    * @default 10px
@@ -44,32 +44,46 @@ interface KwScrollAreaProps extends Pick<QScrollAreaProps, FallThroughProps> {
   minWidth?: string | undefined;
 
   /**
-   * client width 의 max-width
+   * offset width 의 max-width
    * width 가 지정되었을 시 무시된다.
    * @see width
    */
   maxWidth?: string | undefined;
 
   /**
+   * client box (= quasar scroll area) 의 클래스을 지정한다.
+   * 높이와 너비는 offset 에 상대적으로 지정되므로, 강한 의도가 없다면 따라가자.
+   * @example 'pr20'
+   */
+  clientClass?: VueClassProp;
+
+  /**
+   * client box (= quasar scroll area) 의 스타일을 지정한다.
+   * 높이와 너비는 offset 에 상대적으로 지정되므로, 강한 의도가 없다면 따라가자.
+   * @example 'padding-right: 20px;'
+   */
+  clientStyle?: VueStyleProp;
+
+  /**
    * 컨텐츠를 감싸는 div 의 높이를 지정한다.
    * @see contentStyle
    * @see contentActiveStyle
    */
-  scrollAreaHeight?: string | undefined;
+  scrollHeight?: string | undefined;
 
   /**
    * 컨텐츠를 감싸는 div 의 너비를 지정한다.
    * @see contentStyle
    * @see contentActiveStyle
    */
-  scrollAreaWidth?: string | undefined;
+  scrollWidth?: string | undefined;
 
   /**
    * 컨텐츠를 감싸는 div 의 스타일을 지정한다.
    * @see contentStyle
    * @see contentActiveStyle
    */
-  scrollAreaStyle?: VueStyleProp;
+  scrollStyle?: VueStyleProp;
 }
 
 interface KwScrollAreaSlots extends QScrollAreaSlots {}

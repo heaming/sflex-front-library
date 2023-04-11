@@ -5,6 +5,11 @@
   >
     <slot
       v-if="isAuthenticated"
+      name="default"
+    />
+    <slot
+      v-else-if="isCustDomain"
+      name="custdomain"
     />
     <slot
       v-else
@@ -14,6 +19,7 @@
 </template>
 
 <script>
+import env from '../../consts/private/env';
 
 export default {
   name: 'WebLayout',
@@ -23,7 +29,8 @@ export default {
     const { currentRoute } = useRouter();
 
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
-
+    console.log(env.VITE_HTTP_ORIGIN, env.VITE_HTTP_CUST_ORIGIN);
+    const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN;
     const { menuUid } = currentRoute.value.meta;
 
     // commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
@@ -32,6 +39,7 @@ export default {
 
     return {
       isAuthenticated,
+      isCustDomain,
     };
   },
 };

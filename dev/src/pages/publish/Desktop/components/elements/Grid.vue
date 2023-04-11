@@ -403,8 +403,8 @@ function initGrid(data, view) {
     { fieldName: 'col7', header: '휴대전화번호', width: '160', styleName: 'text-center' },
     { fieldName: 'col8', header: '주소', width: '296' },
     { fieldName: 'col9', header: '약관동의', width: '100', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
-    { fieldName: 'col10', header: '본인인증', width: '100', styleName: 'text-center text-red' },
-    { fieldName: 'col11', header: '통합고객', width: '100', styleName: 'text-center text-blue' },
+    { fieldName: 'col10', header: '본인인증', width: '100', styleName: 'text-center kw-fc--error' }, // 데이터값에 따라 구분이 필요할경우 글씨색상 참고 부탁드립니다
+    { fieldName: 'col11', header: '통합고객', width: '100', styleName: 'text-center kw-fc--primary' }, // 데이터값에 따라 구분이 필요할경우 글씨색상 참고 부탁드립니다
     { fieldName: 'col12', header: '최종 수정일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
     { fieldName: 'col13', header: '최종 등록일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
   ];
@@ -703,8 +703,8 @@ function initGrid(data, view) {
     { fieldName: 'col7', header: '휴대전화번호', width: '160', styleName: 'text-center' },
     { fieldName: 'col8', header: '주소', width: '296' },
     { fieldName: 'col9', header: '약관동의', width: '100', styleName: 'text-center rg-button-link', renderer: { type: 'button' } },
-    { fieldName: 'col10', header: '본인인증', width: '100', styleName: 'text-center text-red' },
-    { fieldName: 'col11', header: '통합고객', width: '100', styleName: 'text-center text-blue' },
+    { fieldName: 'col10', header: '본인인증', width: '100', styleName: 'text-center kw-fc--error' },
+    { fieldName: 'col11', header: '통합고객', width: '100', styleName: 'text-center kw-fc--primary' },
     { fieldName: 'col12', header: '최종 수정일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
     { fieldName: 'col13', header: '최종 등록일', width: '100', styleName: 'text-center', datetimeFormat: 'yyyy-MM-dd' },
   ];

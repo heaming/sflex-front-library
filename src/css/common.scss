@@ -1055,7 +1055,7 @@ $unit: px;
 //   }
 // }
 
-.q-scrollarea:not(.kw-scroll-area__scrollarea) {
+.q-scrollarea:not(.kw-scroll-area__client) {
   flex-grow: 1;
 
   .q-scrollarea__bar {

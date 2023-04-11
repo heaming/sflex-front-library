@@ -3,6 +3,7 @@ import store from '../../store';
 import { GlobalModalVmKey } from '../../consts/private/symbols';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import { platform } from '../../plugins/platform';
+import env from '../../consts/private/env';
 
 export const INITIAL_LOCATION = {};
 
@@ -33,7 +34,16 @@ export default (to, from, next) => {
     } else {
       modals.forEach((modal) => removeGlobalData(modal.uid));
     }
-
+    // 고객용 도메인인 경우/popup /mobile이 아니거나 홈화면으로의 이동은 막는다.
+    if (env.VITE_HTTP_CUST_ORIGIN === window.location.origin) {
+      if (window.location.pathname.indexOf('/popup') < 0
+          && window.location.pathname.indexOf('/mobile') < 0
+          && window.location.pathname.indexOf('/tablet') < 0) {
+        next(false);
+      } else if (to.path === '/') {
+        next(false);
+      }
+    }
     if (isEmpty(INITIAL_LOCATION)) {
       Object.assign(
         INITIAL_LOCATION,

@@ -5,6 +5,7 @@ import WebLeftDrawer from './WebLeftDrawer.vue';
 import WebTabView from './WebTabView.vue';
 import WebRouterView from './WebRouterView.vue';
 import WebFallbackLogin from './WebFallbackLogin.vue';
+import CustDoaminError from './CustDoaminError.vue';
 import WebDashboardM from './WebDashboardM.vue';
 
 export {
@@ -15,5 +16,6 @@ export {
   WebTabView,
   WebRouterView,
   WebFallbackLogin,
+  CustDoaminError,
   WebDashboardM,
 };
