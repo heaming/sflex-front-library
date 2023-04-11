@@ -36,7 +36,6 @@
 
 <script>
 import Viewer from 'viewerjs';
-import 'viewerjs/dist/viewer.css';
 import { getImageSrcFromFile } from '../../utils/file';
 
 export default {
