@@ -1,0 +1,10 @@
+.gallery_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .gallery_container {
+    width: 766px;
+    height: 500px;
+  }
+}
