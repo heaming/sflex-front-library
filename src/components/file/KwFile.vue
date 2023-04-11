@@ -563,7 +563,7 @@ export default {
     undeletePossible: { type: Boolean, default: undefined },
     undeleteIcon: { type: String, default: 'clear' },
     retryPossible: { type: Boolean, default: true },
-    retryIcon: { type: String, default: 'retry' },
+    retryIcon: { type: String, default: 'redo' },
     instanceUpdate: { type: [Boolean, String],
       default: false,
       validate: (val) => UPDATE_AVAILABLE_OPTIONS.includes(val) },
