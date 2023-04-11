@@ -139,7 +139,7 @@ export default {
       default: '16px',
     },
     fileUid: {
-      typr: String,
+      type: String,
       default: '',
     },
   },
