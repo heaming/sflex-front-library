@@ -1,9 +1,14 @@
 import { isEmpty } from 'lodash-es';
-import { date } from 'quasar';
+import dayjs from 'dayjs';
 
 export default {
-  validator: ([from, to], [years]) => isEmpty(from || to)
-    || (date.extractDate(to, 'YYYYMMDD').valueOf()
-      <= date.addToDate(date.extractDate(from, 'YYYYMMDD'), { years }).valueOf()),
+  validator: (([from, to], [years]) => {
+    if (isEmpty(from || to)) return false;
+    if (dayjs(from, 'YYYY').format('YYYY') === 'Invalid Date' || dayjs(to, 'YYYY').format('YYYY') === 'Invalid Date') return false;
+    const dateTo = dayjs(to, 'YYYY');
+    const fromAfterYears = dayjs(from, 'YYYY').add(years, 'year');
+    if (fromAfterYears.diff(dateTo, 'year') < 0) return false;
+    return true;
+  }),
   message: 'MSG_VAL_DATE_RANGE_YEARS',
 };
