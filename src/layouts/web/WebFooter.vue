@@ -12,21 +12,49 @@
       <br>
       <span>COPYRIGHT© KYOWON, ALL RIGHTS RESERVED.</span>
     </div>
+    <div class="row items-center px0 family-site">
+      <p class="kw-font-pt14 w80 mr12">
+        관련사이트
+      </p>
+      <kw-select
+        class="w240"
+        dense
+        :model-value="selectedLink"
+        :options="quickLinks"
+        option-label="quickLinkName"
+        option-value="quickLinkUrl"
+        :placeholder="quickLinks[0].quickLinkName"
+        @update:model-value="goQuickLink"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import consts from '../../consts';
+import { http } from '../../plugins/http';
 
 export default {
   name: 'WebFooter',
 
-  setup() {
+  async setup() {
     const { currentRoute } = useRouter();
     const showing = computed(() => currentRoute.value.name === consts.ROUTE_HOME_NAME);
+    const quickLinks = ref([]);
+    const selectedLink = ref(null);
 
+    const res = await http.get('/sflex/common/common/quick-links');
+    if (res) {
+      quickLinks.value = res.data;
+    }
+    function goQuickLink(link) {
+      window.location.href = link;
+    }
     return {
       showing,
+      quickLinks,
+      goQuickLink,
+      selectedLink,
     };
   },
 };
