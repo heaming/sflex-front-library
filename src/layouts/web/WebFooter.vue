@@ -23,7 +23,7 @@
         :options="quickLinks"
         option-label="quickLinkName"
         option-value="quickLinkUrl"
-        :placeholder="quickLinks[0].quickLinkName"
+        :placeholder="quickLinks[0]?.quickLinkName"
         @update:model-value="goQuickLink"
       />
     </div>
