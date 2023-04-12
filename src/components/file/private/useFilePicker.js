@@ -1,10 +1,12 @@
+export const useFilePickerEmits = ['update:deletedFileUid'];
+
 export const useFilePickerProps = {
   pickFileWhenClick: { type: Boolean, default: undefined },
   pickBtn: { type: [Boolean, String], default: undefined },
 };
 
 export default (ref, ables) => {
-  const { props } = getCurrentInstance();
+  const { emit, props } = getCurrentInstance();
   const { t } = useI18n();
 
   function preventIfClick(e) {
@@ -18,6 +20,13 @@ export default (ref, ables) => {
 
   // reference methods
   const pickFiles = () => {
+    if (props.fileUidMode && ref.value.modelValue.length > 0) {
+      const { attachFile } = ref.value.modelValue[0];
+      // attachFile 이 있다는것은 실제 서버에 저장된 파일이라는것을 의미한다.
+      if (attachFile) {
+        emit('update:deletedFileUid', attachFile.fileUid);
+      }
+    }
     if (!ables?.value.add) { return; }
     ref.value?.getNativeElement().click();
   };
