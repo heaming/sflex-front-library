@@ -82,6 +82,14 @@
       }
     }
   }
+
+  &.disabled {
+    opacity: 1 !important;
+
+    .kw-tab__content {
+      opacity: 0.5;
+    }
+  }
 }
 
 .kw-tabs {

@@ -120,10 +120,6 @@
             </q-item-label>
           </q-item-section>
         </q-item>
-        <kw-separator
-          color="line-bg"
-          spaced="0px"
-        />
       </div>
     </template>
 

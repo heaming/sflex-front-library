@@ -2,43 +2,65 @@
   padding-top: 16px;
 
   .q-pagination {
-    &__content > .q-btn {
-      width: 24px;
-      height: 24px;
+    &__content {
+      margin-top: -4px; // override --q-pagination-gutter-parent
+      margin-left: -4px; // override --q-pagination-gutter-parent
+      .q-btn {
+        .q-focus-helper {
+          display: none;
+        }
 
-      .q-icon {
-        font-size: 16px;
+        &:not(.disabled):hover {
+          background-color: $bg-box;
+        }
       }
 
-      &.disabled {
-        opacity: 1 !important;
+      > .q-btn {
+        width: 24px;
+        height: 24px;
+        margin-top: 4px; // override --q-pagination-gutter-child
+        margin-left: 4px; // override --q-pagination-gutter-child
 
-        .q-btn__content {
-          .q-icon {
-            color: $placeholder;
+        .q-icon {
+          font-size: 16px;
+        }
+
+        &.disabled {
+          opacity: 1 !important;
+
+          .q-btn__content {
+            .q-icon {
+              color: rgba($black1, 0.3);
+            }
           }
         }
       }
     }
 
-    &__middle > .q-btn {
-      padding: 0 8px !important;
-      min-width: 26px !important;
-      height: 24px;
-      font-size: 14px;
-      line-height: 1.43;
+    &__middle {
+      margin-top: 2px;
 
-      &::before {
-        box-shadow: none !important;
-      }
+      > .q-btn {
+        padding: 0 8px !important;
+        margin-top: 2px;
+        margin-left: 2px;
+        min-width: 26px !important;
+        height: 24px;
+        font-size: 14px;
+        line-height: 1.43;
 
-      // 현재 페이지
-      &[aria-current="true"] {
-        font-weight: bold;
-      }
+        &::before {
+          box-shadow: none !important;
+        }
 
-      &.disabled {
-        opacity: 1 !important;
+        // 현재 페이지
+        &[aria-current="true"] {
+          font-weight: bold;
+        }
+
+        &.disabled {
+          opacity: 1 !important;
+        }
       }
     }
   }
@@ -53,14 +75,8 @@
       }
     }
 
-    .q-pagination__middle .q-focus-helper::before {
-      background: $bg-box !important;
-      opacity: 1 !important;
-      transition: none !important;
-    }
-
-    .q-pagination__middle .q-focus-helper::after {
-      display: none;
+    .q-pagination__middle > .q-btn {
+      background: $bg-box;
     }
   }
 }
