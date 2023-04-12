@@ -444,7 +444,7 @@ export default (values, options, ables, selectCtx) => {
     const { attachFile } = file;
     // attachFile 이 있다는것은 실제 서버에 저장된 파일이라는것을 의미한다.
     if (attachFile) {
-      emit('update:deletedFileUid', attachFile.fileUid);
+      emit('update:deleted-file-uid', attachFile.fileUid);
     }
     revertFile(file);
   }

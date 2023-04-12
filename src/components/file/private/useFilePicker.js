@@ -1,4 +1,4 @@
-export const useFilePickerEmits = ['update:deletedFileUid'];
+export const useFilePickerEmits = ['update:deleted-file-uid'];
 
 export const useFilePickerProps = {
   pickFileWhenClick: { type: Boolean, default: undefined },
@@ -46,7 +46,7 @@ export default (ref, ables) => {
     if (typeof props.pickBtn === 'string') {
       return props.pickBtn;
     }
-    return t('MSG_BTN_SCH_FILE');
+    return t('MSG_BTN_SCH_FILE', '파일찾기');
   });
 
   return {
