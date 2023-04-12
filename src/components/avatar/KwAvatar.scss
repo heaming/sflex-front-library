@@ -1,0 +1,31 @@
+.kw-avatar {
+  $-color-list: $semantic-colors;
+
+  &.q-avatar {
+    &.rounded-borders {
+      &::after {
+        border-radius: $generic-border-radius;
+      }
+    }
+
+    &--square {
+      &::after {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: max(1px, 0.025em) solid transparent;
+  }
+
+  @include color-based("&.kw-avatar--border-color-", $-color-list) using($color) {
+    &::after {
+      border-color: $color;
+    }
+  }
+}

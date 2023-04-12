@@ -1,0 +1,11 @@
+<svg id="redo" data-name="redo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" style="fill: none;"/>
+    </g>
+  </g>
+  <g id="icon_12px" transform="translate(4 3.245)">
+    <path id="패스_210144" data-name="패스 210144" d="M2,0,0,2,2,4" transform="translate(6.764 4.109) rotate(-144)" style=" fill: none;stroke: currentColor;stroke-width: 1.5px;"/>
+    <path id="타원_5062" data-name="타원 5062" style="fill: currentColor;" d="M5,0A5,5,0,1,1,0,5H0S0,5,0,5s0,0,0,0,0,0,0,0V4.969H0v0H0V4.937H0v0H0V4.905H0v0H0v0H0V4.869H0v0H0v0H0V4.832H0v0H0V4.8H0v0H0v0H0V4.769h0v0h0V4.619h0V4.593h0v0h0V4.557h0v0h0V4.525h0V4.516h0v-.02h0V4.485h0V4.463h0v0h0V4.4h0v0h0v0h0v0h0v0h0V4.365h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0v0h0V4.316h0v0h0v0h0v0h0v0h0v0h0v0h0V4.281h0v0h0v0h0v0h0v0h0v0h0l0-.013h0v0h0v0h0v0h0v0h0l0-.013h0v0h0v0h0v0h0v0h0v0h0V4.184h0v0h0v0h0v0h0v0h0v0h0v0h0V4.149h0V4.132h0v0h0v0h0l0-.009h0v0h0V4.1h0v0h0l0-.017h0V4.071h0v0h0v0h0l0-.013h0v0h0v0h0v0h0v0h0v0h0l0-.013h0v0h0v0h0V4h0V4h0l0-.017h0v0h0v0h0v0h0l0-.017h0v0h0v0h0v0h0v0h0l0-.017h0v0h0v0h0v0h0v0h0l0-.013h0v0h0v0h0v0h0v0h0v0h0l0-.013h0v0h0v0h0v0h0v0h0l0-.017h0v0h0v0h0v0h0l0-.017h0v0h0v0h0v0h0v0h0l0-.017h0l0-.008h0l.009-.034h0l.016-.059h0l.009-.034h0L.2,3.593h0v0h0A5,5,0,0,1,1.53,1.4h0l0,0,0,0,.012-.012h0l0,0h0l0,0,0,0,0,0h0l.009-.009,0,0,0,0,0,0,0,0,0,0h0l.006-.006,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0h0l.008-.007,0,0,0,0,0,0,0,0,0,0h0l.016-.015,0,0h0q.071-.062.144-.122l.948,1.162A3.5,3.5,0,1,0,5,1.5V0Z" transform="translate(9 -0.245) rotate(90)"/>
+  </g>
+</svg>
