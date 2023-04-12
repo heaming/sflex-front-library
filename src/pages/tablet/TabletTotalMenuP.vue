@@ -340,7 +340,7 @@ function createSortable() {
 
   const el = sortableUl.value;
   const targets = el;
-  targets.forEach((e) => {
+  targets?.forEach((e) => {
     sortable.value.push(
       new Sortable(e, {
         group: 'nested',
