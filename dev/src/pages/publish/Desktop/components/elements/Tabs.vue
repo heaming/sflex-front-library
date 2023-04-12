@@ -158,7 +158,7 @@
       <q-card>
         <div class="kw-guide-example">
           <kw-tabs
-            model-value="2"
+            model-value="3"
             class="example-search-form"
           >
             <kw-tab
@@ -168,12 +168,17 @@
             <kw-tab
               name="2"
               label="searchform"
+              disable
+            />
+            <kw-tab
+              name="3"
+              label="searchform"
             />
           </kw-tabs>
           <kw-tab-panels
-            model-value="2"
+            model-value="3"
           >
-            <kw-tab-panel name="2">
+            <kw-tab-panel name="3">
               <kw-search
                 :cols="2"
                 class="kw-form--textright"
