@@ -2,6 +2,7 @@ body.desktop .kw-popup,
 body.tablet .kw-popup {
   padding: 4px;
   border: 1px solid $black-btn-line;
+  min-height: 180px;
 
   &.q-card {
     position: relative;
