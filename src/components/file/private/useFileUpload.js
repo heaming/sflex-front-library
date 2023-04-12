@@ -237,6 +237,7 @@ export const STATE = {
 };
 
 export default (values, options, ables, selectCtx) => {
+  const { emit } = getCurrentInstance();
   const normalizedOptions = computed(() => ({
     instanceUpdate: unref(options).instanceUpdate,
     download: unref(options).download,
@@ -439,6 +440,15 @@ export default (values, options, ables, selectCtx) => {
     if (selectCtx?.clearSelected) { selectCtx.clearSelected(); }
   }
 
+  async function revertFileAtFileUidMode(file) {
+    const { attachFile } = file;
+    // attachFile 이 있다는것은 실제 서버에 저장된 파일이라는것을 의미한다.
+    if (attachFile) {
+      emit('update:deletedFileUid', attachFile.fileUid);
+    }
+    revertFile(file);
+  }
+
   function isRemovable(file) {
     if (!ables.value.remove) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
@@ -518,6 +528,7 @@ export default (values, options, ables, selectCtx) => {
     isUpdatable,
     updateFile,
     updateAll,
+    revertFileAtFileUidMode,
     isReversible,
     revertFile,
     revertAll,

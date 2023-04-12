@@ -467,7 +467,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="reversible && isReversible(file)"
+                v-if="reversible && isReversible(file) && !fileUidMode"
                 class="kw-file-item__remove"
                 :icon="revertIcon"
                 borderless
@@ -480,7 +480,20 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!reversible && removable && isRemovable(file)"
+                v-if="fileUidMode"
+                class="kw-file-item__remove"
+                :icon="removeIcon"
+                borderless
+                @click.prevent="revertFileAtFileUidMode(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'remove' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-if="!reversible && removable && isRemovable(file) && !fileUidMode"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -493,7 +506,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!reversible && undeletePossible && isUndeletePossible(file)"
+                v-if="!reversible && undeletePossible && isUndeletePossible(file) && !fileUidMode"
                 class="kw-file-item__remove"
                 :icon="undeleteIcon"
                 borderless
@@ -540,7 +553,7 @@ import useFileUpload from './private/useFileUpload';
 import useFileCounter, { useFileCounterProps } from './private/useFileCounter';
 import useFileSelect, { useFileSelectProps } from './private/useFileSelect';
 import useFileHeader, { useFileHeaderProps, useFileHeaderEmits } from './private/useFileHeader';
-import useFilePicker, { useFilePickerProps } from './private/useFilePicker';
+import useFilePicker, { useFilePickerProps, useFilePickerEmits } from './private/useFilePicker';
 import useFileDownload, {
   useFileDownloadEmits,
   useFileDownloadProps,
@@ -556,6 +569,7 @@ export default {
 
   props: {
     // customize props
+    fileUidMode: { type: Boolean, default: false },
     reversible: { type: Boolean, default: true },
     revertIcon: { type: String, default: 'clear' },
     removable: { type: Boolean, default: undefined },
@@ -617,6 +631,7 @@ export default {
     'rejected',
     ...useFileDownloadEmits,
     ...useFileHeaderEmits,
+    ...useFilePickerEmits,
   ],
 
   setup(props, { emit, slots }) {
