@@ -25,6 +25,7 @@ const normalizeConfig = (config = {}) => ({
   cssDevSourcemap: config.cssDevSourcemap === true,
   buildSourcemap: config.buildSourcemap === true,
   optimizeDepsInclude: config.optimizeDepsInclude || [],
+  rollupOptions: config.rollupOptions || {},
 });
 
 exports.defineConfig = (config) => {
