@@ -125,6 +125,7 @@ exports.defineConfig = (config) => {
 
       build: {
         sourcemap: config.buildSourcemap,
+        rollupOptions: config.rollupOptions,
       },
 
       optimizeDeps: {
