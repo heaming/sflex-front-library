@@ -376,7 +376,20 @@
                 :name="getExtensionIcon(file)"
               />
               <span
-                v-if="computedIsDownloadable(file)"
+                v-if="isFile(file)"
+                class="kw-file-item__name img_file"
+                @click.prevent="openImagePreview(file)"
+              >
+                {{ file.name }}
+                <kw-tooltip
+                  anchor="center middle"
+                  show-when-ellipsised
+                >
+                  {{ file.name }}
+                </kw-tooltip>
+              </span>
+              <span
+                v-else-if="computedIsDownloadable(file)"
                 class="kw-file-item__name"
                 @click.prevent="downloadFile(file)"
               >
@@ -560,8 +573,10 @@ import useFileDownload, {
 } from './private/useFileDownload';
 import { stopAndPrevent } from '../../utils/private/event';
 import { DenseContextKey } from '../../consts/private/symbols';
+import { modal } from '../../plugins/modal';
 
 const UPDATE_AVAILABLE_OPTIONS = [true, false, 'remove', 'upload'];
+const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
 
 export default {
   name: 'KwFile',
@@ -684,7 +699,6 @@ export default {
     const uploadCtx = useFileUpload(innerValue, uploadOptions, ables, selectCtx);
 
     const { files } = uploadCtx;
-
     const bindValue = computed({
       get: () => files.value,
       set: (val) => {
@@ -835,6 +849,15 @@ export default {
       return 'file';
     };
 
+    const isFile = (file) => IMAGE_EXTENSION.includes(file.attachFile?.fileExtensionName.toLowerCase());
+
+    async function openImagePreview(file) {
+      await modal({
+        component: 'ZwcmzImagePreviewP',
+        componentProps: { images: [file.attachFile.fileUid] },
+      });
+    }
+
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
@@ -860,11 +883,9 @@ export default {
       acceptHint,
       onDragOver,
       onDragLeave,
+      isFile,
+      openImagePreview,
     };
   },
 };
 </script>
-
-<style scoped>
-
-</style>

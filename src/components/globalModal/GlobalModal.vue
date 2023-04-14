@@ -82,7 +82,7 @@ export default {
         return (await onBeforeClose.value?.(result)) !== false;
       }
 
-      return result !== false || await observerVm.confirmIfIsModified();
+      return result !== false || await observerVm?.confirmIfIsModified();
     }
 
     async function onClose(modal, { result, payload }) {
