@@ -44,7 +44,7 @@ export default {
   ],
 
   setup(props, { emit }) {
-    const meridiems = ['AM', 'PM'].map((value) => ({ value, label: i18n.t(`MSG_TXT_${value}`, null, value) }));
+    const meridiems = ['오전', '오후'].map((value) => ({ value, label: i18n.t(`MSG_TXT_${value}`, null, value) }));
     const hours = [...Array(12).keys()].map((v) => v + 1).map((value) => ({ value, label: value }));
     const minutes = [...Array(60).keys()].map((value) => ({ value, label: value }));
     const itemsList = [meridiems, hours, minutes];
@@ -74,7 +74,7 @@ export default {
     watch(() => props.modelValue, updateInnerValue, { immediate: true });
 
     function updateValue() {
-      const hour24 = (innerValue[0] === 'AM' ? 0 : 12) + (innerValue[1] % 12);
+      const hour24 = (innerValue[0] === '오전' ? 0 : 12) + (innerValue[1] % 12);
       const minute = innerValue[2];
       const date = dayjs().set('h', hour24).set('m', minute);
       const value = date.format(timeFormat.value);
@@ -95,7 +95,7 @@ export default {
       const isChanged = Math.max(x, y) >= 12 - m && Math.min(x, y) <= -1 + m;
 
       if (isChanged) {
-        innerValue[0] = innerValue[0] === 'AM' ? 'PM' : 'AM';
+        innerValue[0] = innerValue[0] === '오전' ? '오후' : '오전';
       }
 
       innerValue[1] = e;
