@@ -237,7 +237,6 @@ export default {
     });
 
     const onResizeContent = (resizeInfo) => {
-      console.log('resizeInfo', resizeInfo.width, resizeInfo.height);
       observedClientBoxSize.value = resizeInfo;
       emit('resize:content', resizeInfo);
     };
