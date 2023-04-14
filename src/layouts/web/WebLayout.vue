@@ -31,10 +31,10 @@ export default {
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
     console.log(env.VITE_HTTP_ORIGIN, env.VITE_HTTP_CUST_ORIGIN);
     const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN;
-    const { menuUid } = currentRoute.value.meta;
+    const { applicationId, menuUid } = currentRoute.value.meta;
 
     // commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
-    commit('app/setSelectedGlobalAppKey', null);
+    commit('app/setSelectedGlobalAppKey', applicationId || null); // 새로고침 시 leftDrawer에 현재 메뉴 표시가 되지 않아 수정함
     commit('app/setSelectedGlobalMenuKey', menuUid || null);
 
     return {
