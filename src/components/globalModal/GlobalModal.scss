@@ -26,7 +26,9 @@ body.tablet {
       min-width: unset !important;
       background: transparent !important;
       inset: 0;
-      padding: 0 0 40px;
+
+      // padding: 0 0 40px;
+      padding: 0 40px 40px;
       border: unset;
 
       > div {
