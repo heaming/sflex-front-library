@@ -60,8 +60,8 @@ export default {
     }
 
     function rotateImage(number) {
-      if (number === 1) viewer?.value.next(true);
-      else viewer?.value.prev(true);
+      if (number === 1) viewer?.value?.next(true);
+      else viewer?.value?.prev(true);
 
       emit('update:image-index', { curr: viewer?.value.index, total: viewer?.value.images?.length });
     }
@@ -80,7 +80,7 @@ export default {
         fullscreen: false,
       });
 
-      viewer?.value.show();
+      viewer?.value?.show();
     }
 
     onMounted(async () => {
@@ -89,15 +89,15 @@ export default {
     });
 
     onBeforeUnmount(() => {
-      viewer?.value.destroy();
+      viewer?.value?.destroy();
     });
 
     function zoomIn() {
-      viewer?.value.zoom(0.5);
+      viewer?.value?.zoom(0.5);
     }
 
     function zoomOut() {
-      viewer?.value.zoom(-0.5);
+      viewer?.value?.zoom(-0.5);
     }
 
     return {
