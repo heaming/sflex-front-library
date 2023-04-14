@@ -1288,3 +1288,30 @@ body.mobile {
     color: $primary;
   }
 }
+
+// equal division in search item
+.equal_division {
+  &--2 {
+    label {
+      width: calc(50% - 8px);
+    }
+  }
+
+  &--3 {
+    label {
+      width: calc(33.33% - 8px);
+    }
+  }
+
+  &--4 {
+    label {
+      width: calc(25% - 8px);
+    }
+  }
+
+  &--5 {
+    label {
+      width: calc(20% - 8px);
+    }
+  }
+}
