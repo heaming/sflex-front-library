@@ -284,11 +284,14 @@ export default {
     function onKeydownInput(e) {
       // enter
       if (e.keyCode === 13) {
-        const disabled = props.disable || props.disableIcon;
+        if (props.onKeydownNoClick) stopAndPrevent(e);
+        else {
+          const disabled = props.disable || props.disableIcon;
 
-        if (!disabled && props.icon && !props.onKeydownNoClick) {
-          stopAndPrevent(e);
-          props.onClickIcon?.();
+          if (!disabled && props.icon && !props.onKeydownNoClick) {
+            stopAndPrevent(e);
+            props.onClickIcon?.();
+          }
         }
       }
 
