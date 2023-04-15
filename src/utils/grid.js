@@ -44,12 +44,7 @@ function getOutputRow(data, dataRow) {
  */
 export async function scrollIntoView(view) {
   const el = view._view.container._containerDiv;
-
-  if (el.scrollIntoViewIfNeeded) {
-    el.scrollIntoViewIfNeeded(false);
-  } else {
-    el.scrollIntoView(false);
-  }
+  window.scroll({ top: el.offsetTop });
 }
 
 export async function focusCellInput(view, dataRow, column, dropdown = false) {
