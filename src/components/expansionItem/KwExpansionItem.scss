@@ -9,8 +9,11 @@
     // tablet
     .q-expansion-item__container {
       .kw-item {
+        align-items: center;
+
         .kw-item__section {
           .q-expansion-item__toggle-icon {
+            margin-top: auto;
             font-size: inherit;
           }
         }
@@ -24,6 +27,8 @@
       // tablet
       .q-expansion-item__container {
         .kw-item {
+          align-items: center;
+
           .kw-item__section {
             .q-expansion-item__toggle-icon {
               font-size: 16px !important;

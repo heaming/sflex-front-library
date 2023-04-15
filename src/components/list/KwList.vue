@@ -69,7 +69,6 @@
           :expand-icon-class="computedExpandIconClass"
           :expand-icon="computedExpandIcon"
           :expand-icon-toggle="expandIconToggle"
-          @click="onClick(item)"
         >
           <template #header>
             <kw-item-section
@@ -81,6 +80,7 @@
               <kw-radio
                 v-if="selectComponent === 'radio'"
                 v-model="innerSelected"
+                :dense="$g.platform.is.mobile"
                 :val="item.key"
                 :disable="item.value.disable"
                 @update:model-value="emitUpdateSelected"
@@ -88,19 +88,32 @@
               <kw-checkbox
                 v-if="selectComponent === 'checkbox'"
                 v-model="innerSelected"
+                :dense="$g.platform.is.mobile"
                 :val="item.key"
                 :disable="item.value.disable"
                 @update:model-value="emitUpdateSelected"
               />
             </kw-item-section>
-            <slot
-              name="item"
-              :item="item.value"
+            <kw-item
+              v-bind="selectAlignProps"
+              :class="computedItemClass[item.key]"
+              :clickable="clickable"
+              :style="itemStyle"
+              :active-class="activeClass"
+              :disable="disable"
+              :dense="dense"
+              :tag="itemTag"
+              @click="onClick(item)"
             >
-              <kw-item-section>
-                {{ item.key }}
-              </kw-item-section>
-            </slot>
+              <slot
+                name="item"
+                :item="item.value"
+              >
+                <kw-item-section>
+                  {{ item.key }}
+                </kw-item-section>
+              </slot>
+            </kw-item>
           </template>
           <template #default>
             <slot
@@ -135,12 +148,14 @@
               v-if="selectComponent === 'radio'"
               v-model="innerSelected"
               :val="item.key"
+              :dense="$g.platform.is.mobile"
               :disable="item.value.disable"
               @update:model-value="emitUpdateSelected"
             />
             <kw-checkbox
               v-if="selectComponent === 'checkbox'"
               v-model="innerSelected"
+              :dense="$g.platform.is.mobile"
               :val="item.key"
               :disable="item.value.disable"
               @update:model-value="emitUpdateSelected"
@@ -182,7 +197,10 @@
       @update:model-value="onUpdateShowing"
     >
       <div>
-        <kw-scroll-area class="kw-menu-dialog__scroll-area">
+        <kw-scroll-area
+          class="kw-menu-dialog__scroll-area"
+          :class="{'single-select-list': !dialogOptionMultiple}"
+        >
           <div class="kw-menu-dialog__header">
             <h1>{{ dialogTitle }}</h1>
           </div>
@@ -190,18 +208,32 @@
           <ul
             class="kw-menu-dialog__content"
           >
-            <li
-              v-for="(dialogOption, dialogIdx) in dialogOptions"
-              :key="dialogIdx"
-              @click="onClickOption(dialogOption)"
+            <kw-list
+              v-model:selected="dialogOptionSelected"
+              :items="dialogOptions"
+              :checkbox="dialogOptionMultiple"
             >
-              {{ dialogOption[dialogOptionLabel] }}
-            </li>
+              <template #item="{ item }">
+                <li
+                  @click="dialogOptionMultiple? '' : onClickOption(item)"
+                >
+                  {{ item[dialogOptionLabel] }}
+                </li>
+              </template>
+            </kw-list>
           </ul>
           <!-- end//  dialog 옵션 리스트 -->
-          <!-- <div class="kw-menu-dialog__action">
-            <slot name="dialogAction" />
-          </div> -->
+          <div
+            v-if="dialogOptionMultiple"
+            class="kw-menu-dialog__action"
+          >
+            <kw-btn
+              grow
+              primary
+              :label="$t('MSG_BTN_CONFIRM', null, '확인')"
+              @click="onConfirm"
+            />
+          </div>
           <!-- start//  dialog 버튼 리스트 -->
         </kw-scroll-area>
       </div>
@@ -253,7 +285,7 @@ export default {
     expandIcon: { type: String, default: undefined },
     expandIconAlign: { type: String, default: undefined },
     expandIconClass: { type: [Array, String, Object], default: undefined },
-    expandIconToggle: { type: Boolean, default: undefined },
+    expandIconToggle: { type: Boolean, default: true },
     persistent: { type: Boolean, default: false },
     noRefocus: { type: Boolean, default: false },
     noFocus: { type: Boolean, default: false },
@@ -262,14 +294,15 @@ export default {
     dialogTitle: { type: String, default: undefined },
     dialogOptionLabel: { type: String, default: 'label' },
     dialogOptionValue: { type: String, default: 'value' },
+    dialogOptionMultiple: { type: Boolean, default: false },
   },
-  emits: ['update:selected', 'clickItem', 'click-option'],
+  emits: ['update:selected', 'click-item', 'click-option'],
   setup(props, {
     emit,
     slots,
   }) {
     const { styleClassAttrs } = useInheritAttrs();
-
+    const dialogOptionSelected = ref();
     const normalizeItem = (item) => ({
       key: item[props.itemKey] ?? item,
       value: item,
@@ -401,11 +434,16 @@ export default {
       if (props.onClickItem) {
         props.onClickItem(item);
       }
-      emit('clickItem', item);
+      emit('click-item', item);
     };
 
     function onClickOption(option) {
       emit('click-option', option);
+      onUpdateShowing(false);
+    }
+
+    function onConfirm() {
+      emit('click-option', dialogOptionSelected.value);
       onUpdateShowing(false);
     }
 
@@ -468,6 +506,8 @@ export default {
           [basicItemClass.value]: true,
         };
         itemClasses[item.key]['kw-list__item--selected'] = !!selectedKeyDict.value[item.key];
+        itemClasses[item.key]['mobile-item'] = platform.is.mobile;
+        itemClasses[item.key]['tablet-item'] = platform.is.tablet;
       });
       return itemClasses;
     });
@@ -521,6 +561,8 @@ export default {
       showing,
       dialogClass,
       onClickOption,
+      onConfirm,
+      dialogOptionSelected,
     };
   },
 };
