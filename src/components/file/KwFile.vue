@@ -858,10 +858,6 @@ export default {
       });
     }
 
-    async function isFileModified() {
-      return await isModified();
-    }
-
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
@@ -889,7 +885,7 @@ export default {
       onDragLeave,
       isFile,
       openImagePreview,
-      isFileModified,
+      isModified,
     };
   },
 };
