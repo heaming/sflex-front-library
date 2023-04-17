@@ -104,6 +104,7 @@
     border-color: #fff !important;
     background-color: $primary;
     font-weight: 400;
+    text-shadow: none;
   }
 
   &-months,
@@ -194,6 +195,7 @@
 
 .datepicker-days td {
   position: relative;
+  z-index: 0;
 }
 
 .kw-date .datepicker.datepicker-inline table tbody td {
