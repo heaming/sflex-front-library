@@ -860,13 +860,13 @@
       line-height: 20px;
       color: $black1;
       background: #f8f8f8;
-      border-left: 1px solid $line-bg;
+      border-right: 1px solid $line-bg;
       border-bottom: 1px solid $line-line;
       font-weight: 500;
       font-size: 14px;
 
-      &:first-child {
-        border-left: 0;
+      &:last-child {
+        border-right: 0;
       }
     }
   }
@@ -878,30 +878,23 @@
       line-height: 20px;
       color: $black1;
       background: #f8f8f8;
-      border-left: 1px solid $line-bg;
+      border-right: 1px solid $line-bg;
       border-bottom: 1px solid $line-line;
       font-weight: 500;
       font-size: 14px;
 
-      &:first-child {
-        border-left: 0;
+      &:last-child {
+        border-right: 0;
       }
     }
 
     td {
       height: 43px;
       border-left: none;
+      background-color: $bg-white;
       border-bottom: 1px solid $line-bg;
       padding: 11px 4px;
       font-size: 14px;
-    }
-  }
-
-  &--veritcal-header {
-    tbody tr {
-      th {
-        border-bottom: 1px solid $line-bg;
-      }
     }
   }
 
@@ -917,6 +910,22 @@
     width: 1px;
     bottom: 0;
     background: #fff;
+  }
+
+  &--vertical-header {
+    tbody tr {
+      th:is(:first-of-type) {
+        border-bottom: 1px solid $line-bg;
+      }
+
+      &:has(th[rowspan]) th {
+        border-bottom-color: $line-bg;
+      }
+    }
+
+    &::before {
+      content: none;
+    }
   }
 }
 
