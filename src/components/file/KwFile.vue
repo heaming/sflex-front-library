@@ -655,7 +655,7 @@ export default {
     const fileRef = ref();
 
     const fieldCtx = useField();
-    const { value, invalid, resetValidation } = fieldCtx;
+    const { value, invalid, resetValidation, isModified } = fieldCtx;
 
     const innerValue = computed({
       get: () => {
@@ -858,6 +858,10 @@ export default {
       });
     }
 
+    async function isFileModified() {
+      return await isModified();
+    }
+
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
@@ -885,6 +889,7 @@ export default {
       onDragLeave,
       isFile,
       openImagePreview,
+      isFileModified,
     };
   },
 };
