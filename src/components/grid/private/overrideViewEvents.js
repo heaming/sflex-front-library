@@ -275,38 +275,6 @@ export function overrideOnShowEditor(view) {
     const isEditable = isCellEditable(g, column, index);
 
     if (isEditable) {
-      const styles = column.styleName.split(' ');
-      let textAlignStyle = null;
-      if (styles.includes('text-left')) textAlignStyle = 'text-left';
-      else if (styles.includes('text-center')) textAlignStyle = 'text-center';
-      else if (styles.includes('text-right')) textAlignStyle = 'text-right';
-
-      if (textAlignStyle) {
-        attrs['attr-for-selector'] = 'aria';
-        setTimeout(() => {
-          let element = document.querySelector('input[attr-for-selector="aria"].rg-list-editor');
-
-          if (!element) {
-            console.log('no element!');
-            element = document.querySelector('input[attr-for-selector="aria"].rg-multicheck-editor');
-          }
-          if (element) {
-            element.classList?.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
-            element.classList?.add(textAlignStyle);
-            if (textAlignStyle === 'text-right') {
-              element.classList?.add('pr-21');
-            }
-            const dropdownId = element.getAttribute('aria-owns');
-            const dropdownEl = document.getElementById(dropdownId);
-            dropdownEl.classList?.remove(...['text-left', 'text-center', 'text-right', 'pr-21']);
-            dropdownEl.classList?.add(textAlignStyle);
-            if (textAlignStyle === 'text-right') {
-              dropdownEl.classList?.add('pr-21');
-            }
-          }
-        });
-      }
-
       if (hasOriginal(g, onShowEditor)) {
         execOriginal(g, onShowEditor, g, index, props, attrs);
       }
