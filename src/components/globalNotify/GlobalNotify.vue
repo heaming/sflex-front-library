@@ -15,7 +15,8 @@
         <kw-icon
           v-if="activeNotification.icon"
           :name="activeNotification.icon"
-          size="24px"
+          size="16px"
+          class="mr4"
         />
         {{ activeNotification.message }}
       </span>
