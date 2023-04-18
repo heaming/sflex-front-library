@@ -149,6 +149,7 @@ const iconList1 = [
   'pause',
   'sms',
   'redo',
+  'qrcode',
 ];
 const iconList2 = [
   'add_list_24',
