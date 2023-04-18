@@ -118,13 +118,18 @@
           <kw-btn
             borderless
             dense
-            icon="search_24"
+            icon="search"
             class="mr8"
           />
           <kw-btn
             dense
             secondary
-            icon="search_24"
+            icon="search"
+            class="mr8"
+          />
+          <kw-btn
+            secondary
+            icon="search"
             class="mr8"
           />
           <kw-btn
@@ -259,18 +264,19 @@
 <script setup>
 
 const iconButton = `
-<!--  mr8:gutter margin-right:10px  -->
   <kw-btn
     borderless
     dense
-    icon="search_24"
-    class="mr8"
+    icon="search"
   />
   <kw-btn
     dense
     secondary
-    icon="search_24"
-    class="mr8"
+    icon="search"
+  />
+  <kw-btn
+    secondary
+    icon="search"
   />
   <kw-btn
     secondary
@@ -345,6 +351,10 @@ const printCode = `
 `;
 // History
 const guideHistory = [
+  {
+    timestamp: '2023.04.17',
+    text: 'add new button with searchIcon (40*40)',
+  },
   {
     timestamp: '2022.10.06',
     text: 'edit icon name in code',
