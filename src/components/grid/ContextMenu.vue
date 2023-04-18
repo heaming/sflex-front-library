@@ -25,6 +25,7 @@
           :ref="(vm) => menuRefs[1] = vm"
           anchor="top end"
           self="top start"
+          class="kw-grid__context-menu sub-menu"
           no-focus
           no-refocus
           :transition-duration="0"
@@ -71,6 +72,7 @@
           :ref="(vm) => menuRefs[2] = vm"
           anchor="top end"
           self="top start"
+          class="kw-grid__context-menu sub-menu"
           no-focus
           no-refocus
           :transition-duration="0"
