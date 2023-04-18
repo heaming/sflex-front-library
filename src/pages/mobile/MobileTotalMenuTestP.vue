@@ -8,6 +8,21 @@
       class="gnb_menu_mobile"
       style="top: 62px;"
     >
+      <kw-btn-toggle
+        v-model="dataaa"
+        :options="[{codeId: 'Y', codeName: 'Y'},{codeId: 'N', codeName: 'N'}]"
+        gap="0px"
+        :dense="false"
+        grow
+        :on-click="testtt"
+      />
+      <kw-input
+        :model-value="dataTest"
+        icon="search"
+        :on-click-icon="clickTest"
+        :on-keydown="keydownTest"
+        on-keydown-no-click
+      />
       <div class="gnb_menu_mobile--header">
         <kw-btn
           borderless
@@ -75,11 +90,15 @@
               :class="{'sortable-menu': depth3Menu.editable !== undefined }"
             >
               <kw-list
+                v-model:selected="test12345"
                 :items="depth3Menu.menus"
-                :dialog-options="options"
                 clickable
+                checkbox
                 use-dialog
                 :dialog-title="'다이얼로그 제목'"
+                :dialog-options="options"
+                :dialog-option-multiple="false"
+                :dialog-option-selected="test344555"
                 @click-item="openPopup"
                 @click-option="clickOption"
               >
@@ -93,23 +112,6 @@
                         <kw-item-label class="text-weight-medium">
                           {{ item.menuName }}
                         </kw-item-label>
-                        <div class="row">
-                          <kw-item-label
-                            class="kw-font-pt14 kw-fc--placeholder"
-                          >
-                            {{ item.parentMenuName }}
-                          </kw-item-label>
-                          <kw-separator
-                            spaced
-                            vertical
-                            class="my2"
-                          />
-                          <kw-item-label
-                            class="kw-font-pt14 kw-fc--placeholder"
-                          >
-                            {{ item.menuUid }}{{ $t('MSG_TXT_GRD_CNT') }}
-                          </kw-item-label>
-                        </div>
                       </div>
                     </div>
                     <div class="row justify-end">
@@ -150,16 +152,15 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import Sortable from 'sortablejs';
 import useHeaderApp from '../../composables/private/useHeaderApp';
 import useMeta from '../../composables/useMeta';
+import useGlobal from '../../composables/useGlobal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
 const { apps } = useHeaderApp();
 const { getters } = useStore();
-
-const openPopup = debounce((item) => {
-  console.log('item', item);
-});
-
+const { notify } = useGlobal();
+const dataaa = ref('Y');
+const dataTest = ref('Y');
 const currIdx = ref(0);
 const sortable = ref([]);
 const totalMenus = ref(getters['meta/getMenus']);
@@ -174,6 +175,22 @@ const depth3Menus = ref(sortBy(
 depth2Menus.value.unshift({ menuName: '즐겨찾기', menuUid: 'bookmarks' });
 const groupByParentsMenuUid = groupBy(depth3Menus.value, (menu) => menu.parentsMenuUid);
 const menuValues = Object.values(groupByParentsMenuUid);
+
+const test12345 = ref([]);
+const test344555 = ref();
+
+function testtt() {
+  notify('test');
+  console.log('ttttt', dataaa.value);
+}
+
+function clickTest() {
+  console.log('click', dataaa.value);
+}
+
+function keydownTest() {
+  console.log('keydown', dataaa.value);
+}
 
 const groupedDepth3Menus = ref(sortBy(menuValues.map((v) => ({
   parentMenuName: get(find(totalMenus.value, (menu) => menu.menuUid === v[0].parentsMenuUid), 'menuName'),
@@ -197,6 +214,11 @@ const options = ref([
   { label: 'test4', value: 'test4' },
   { label: 'test5', value: 'test5' },
 ]);
+
+const openPopup = debounce((item) => {
+  options.value[0].label = item.value.menuName;
+  console.log('item', item);
+});
 
 function setActive(navLinks, link) {
   navLinks.value.forEach((el) => el?.classList.remove('curr'));
