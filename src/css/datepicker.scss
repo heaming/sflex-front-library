@@ -1,47 +1,66 @@
 @import "bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css";
 
 .datepicker {
-  &-inline {
-    width: 224px;
+  font-family: "Noto Sans KR", sans-serif;
+
+  .table-condensed {
+    width: 100%;
   }
 
-  &.datepicker-inline th {
-    color: $black3;
-    font-size: 12px;
-    font-weight: 400;
+  &.datepicker-inline {
+    width: 224px;
 
-    &.prev,
-    &.datepicker-switch,
-    &.next {
-      color: $black1;
-      font-size: 16px;
-      font-weight: 500;
-      height: 46px;
-
-      &:hover {
-        background: none;
-      }
+    thead {
+      position: relative;
     }
 
-    &.prev {
-      background: url(~@assets/images/ic_arrow_left.svg) no-repeat center 14px;
-      background-size: 16px;
-      font-size: 0;
+    th {
+      color: $black3;
+      font-size: 12px;
+      font-weight: 400;
 
-      &:hover {
+      &.prev,
+      &.datepicker-switch,
+      &.next {
+        color: $black1;
+        font-size: 16px;
+        font-weight: 500;
+        height: 40px;
+        padding-top: 3px;
+
+        &:hover {
+          background: none;
+        }
+      }
+
+      &.prev {
+        position: absolute;
+        top: 1px;
+        left: 50%;
+        transform: translateX(calc(-50% - 80px));
         background: url(~@assets/images/ic_arrow_left.svg) no-repeat center 14px;
         background-size: 16px;
+        font-size: 0;
+
+        &:hover {
+          background: url(~@assets/images/ic_arrow_left.svg) no-repeat center 14px;
+          background-size: 16px;
+        }
       }
-    }
 
-    &.next {
-      background: url(~@assets/images/ic_arrow_right.svg) no-repeat center 14px;
-      background-size: 16px;
-      font-size: 0;
-
-      &:hover {
+      &.next {
+        position: absolute;
+        top: 1px;
+        right: 50%;
+        transform: translateX(calc(50% + 80px));
         background: url(~@assets/images/ic_arrow_right.svg) no-repeat center 14px;
         background-size: 16px;
+        font-size: 0;
+
+        &:hover {
+          background: url(~@assets/images/ic_arrow_right.svg) no-repeat center 14px;
+          background-size: 16px;
+        }
       }
     }
   }
@@ -57,15 +76,51 @@
       // border: 2px solid #fff;
       color: $black1;
       font-size: 14px;
-    }
-  }
 
-  table tr td.today {
-    background-color: rgba($primary, 0.1);
-    border: 2px solid #fff !important;
+      &.dow:first-child {
+        color: $accent;
+      }
 
-    &:active {
-      background-color: rgba($primary, 0.1);
+      &.day:not(.today):not(.active):not(.disabled):not(.old):not(.new).saturday {
+        color: $black1;
+
+        &.old {
+          color: rgba($black1, 0.3);
+        }
+      }
+
+      &.active.highlighted.active,
+      &.active.highlighted:active,
+      &.active:active,
+      &.active.active,
+      & span.active:hover,
+      & span.active.active,
+      & span.active:hover.active,
+      & span.active:hover:active,
+      & span.active:hover.active:hover,
+      & span.active:hover:active:hover {
+        border-color: #fff !important;
+        background-color: $primary;
+        font-weight: 400;
+        text-shadow: none;
+      }
+
+      &.focused {
+        background: rgb(47 138 243 / 10%) !important;
+      }
+
+      & .month.focused,
+      & .year.focused {
+        background: none;
+        text-shadow: none;
+
+        //  현재 날짜에 focused color가 존재하는 경우
+        //   background: rgb(47 138 243 / 10%) !important;
+
+        &.active {
+          background: $primary !important;
+        }
+      }
     }
   }
 
@@ -83,35 +138,67 @@
         color: rgba($accent, 0.3);
       }
     }
-  }
 
-  table thead tr th.dow:first-child {
-    color: $accent;
-  }
+    &.today {
+      background-color: rgba($primary, 0.1);
+      border: 2px solid #fff !important;
 
-  table tr td.day:not(.today):not(.active):not(.disabled):not(.old):not(.new).saturday {
-    color: $black1;
+      &:hover,
+      &.active:hover,
+      &:active:hover {
+        background-color: rgba(47 138 243 / 10%) !important;
+        color: $black1;
+      }
 
-    &.old {
-      color: rgba($black1, 0.3);
+      &:active {
+        background-color: rgba($primary, 0.1);
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        width: 28px;
+        height: 28px;
+        background: rgb(47 138 243 / 10%) !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
     }
-  }
 
-  table tr td.active.active,
-  table tr td.active.highlighted.active,
-  table tr td.active.highlighted:active,
-  table tr td.active:active {
-    border-color: #fff !important;
-    background-color: $primary;
-    font-weight: 400;
-    text-shadow: none;
+    &.active {
+      background: none !important;
+
+      &:hover::before {
+        background: rgb(47 138 243) !important;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        width: 28px;
+        height: 28px;
+        background: rgb(47 138 243) !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+    }
+
+    // &:not(.today):not(.active):hover {
+    //   background-color: $line-bg;
+    // }
   }
 
   &-months,
   &-years {
-    .table-condensed {
-      width: 100%;
-    }
+    width: 224px !important;
+    margin: 0 auto;
+    padding: 0 !important;
 
     td {
       border: 0;
@@ -158,22 +245,11 @@
     }
   }
 
-  table tr td span.active.active,
-  table tr td span.active.disabled.active,
-  table tr td span.active.disabled:active,
-  table tr td span.active.disabled:hover.active,
-  table tr td span.active.disabled:hover:active,
-  table tr td span.active:active,
-  table tr td span.active:hover.active,
-  table tr td span.active:hover:active {
-    background-color: $primary;
-  }
-
   &.datepicker-inline td,
   &.datepicker-inline th,
   &.dropdown-menu td,
   &.dropdown-menu th {
-    padding: 0 1px;
+    padding: 0;
   }
 }
 
@@ -198,92 +274,6 @@
   z-index: 0;
 }
 
-.kw-date .datepicker.datepicker-inline table tbody td {
-  &.today {
-    border: none !important;
-    background: none !important;
-  }
-}
-
-.day:not(.today):not(.active):hover,
-.datepicker table tr td.focused {
-  background: none !important;
-}
-
-.today {
-  &:hover::before {
-    background: rgb(47 138 243 / 10%) !important;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 28px;
-    height: 28px;
-    background: rgb(47 138 243 / 10%) !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-  }
-}
-
-.active.day {
-  background: none !important;
-
-  &:hover::before {
-    background: rgb(47 138 243) !important;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 28px;
-    height: 28px;
-    background: rgb(47 138 243) !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-  }
-}
-
-// .kw-date .datepicker.datepicker-inline table tbody td.day:hover::before,
-// .kw-date .datepicker.datepicker-inline table tbody td.focused::before {
-//   background: #eee !important;
-// }
-
-.datepicker.datepicker-inline thead {
-  position: relative;
-}
-
-.table-condensed {
-  width: 100%;
-}
-
-.datepicker.datepicker-inline th.prev {
-  position: absolute;
-  left: 50%;
-  transform: translateX(calc(-50% - 70px));
-  top: 1px;
-}
-
-.datepicker.datepicker-inline th.next {
-  position: absolute;
-  right: 50%;
-  transform: translateX(calc(50% + 70px));
-  top: 1px;
-}
-
-.datepicker-months,
-.datepicker-years {
-  width: 224px !important;
-  margin: 0 auto;
-  padding: 0 !important;
-}
-
 .reservation-datepicker {
   width: 268px !important;
 
@@ -291,11 +281,4 @@
   .datepicker-years {
     width: 234px !important;
   }
-}
-
-.datepicker.datepicker-inline th.prev,
-.datepicker.datepicker-inline th.datepicker-switch,
-.datepicker.datepicker-inline th.next {
-  height: 40px;
-  padding-top: 3px;
 }
