@@ -27,8 +27,8 @@ export default () => {
   const stopLoading = ref(false);
   const infiniteIsEnabled = computed(() => (platform.is.mobile || platform.is.tablet) && typeof props.onLoad === 'function' && stopLoading.value === false);
   const isFetching = ref(false);
-
   const scrollTarget = ref();
+  const containerRef = ref();
   const loadIndex = ref(props.initialLoadIndex);
 
   async function fetch() {
@@ -54,14 +54,14 @@ export default () => {
     return debounce(fetch, Number.isNaN(wait) ? DEFAULT_DEBOUNCE : wait);
   });
 
-  function onScroll(evt) {
+  function onScroll(evt, newEl = null) {
     if (infiniteIsEnabled.value === false || isFetching.value === true) {
       return;
     }
 
-    const el = scrollTarget.value;
-    const isOnBottom = evt.direction === 'down' && evt.position.top === el.scrollHeight - el.clientHeight;
+    const el = newEl ? newEl.$el : scrollTarget.value.$el ?? scrollTarget.value;
 
+    const isOnBottom = evt.direction === 'down' && evt.position.top === el.scrollHeight - el.clientHeight;
     if (isOnBottom) {
       deobuncedFetch.value();
     }
@@ -73,8 +73,17 @@ export default () => {
     loadIndex.value -= 1;
 
     while (isContinue) {
-      const el = scrollTarget.value;
-      const { clientHeight, scrollHeight } = el;
+      let el;
+      if (platform.is.mobile) {
+        el = containerRef.value.$el ?? scrollTarget.value.$el ?? scrollTarget.value;
+      } else el = scrollTarget.value.$el ?? scrollTarget.value;
+
+      let clientHeight;
+      let scrollHeight;
+      if (el) {
+        clientHeight = el.clientHeight;
+        scrollHeight = el.scrollHeight;
+      }
 
       if (clientHeight !== scrollHeight || stopLoading.value === true) {
         isContinue = false;
@@ -110,5 +119,6 @@ export default () => {
     onScroll,
     stopLoad,
     startLoad,
+    containerRef,
   };
 };
