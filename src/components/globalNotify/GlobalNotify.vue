@@ -12,6 +12,11 @@
   >
     <div class="global-notify__inner">
       <span class="global-notify__message">
+        <kw-icon
+          v-if="activeNotification.icon"
+          :name="activeNotification.icon"
+          size="24px"
+        />
         {{ activeNotification.message }}
       </span>
     </div>

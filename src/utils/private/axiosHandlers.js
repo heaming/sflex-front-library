@@ -52,7 +52,7 @@ export function handleSuccess(response) {
   Response Failure
   */
 const SESSION_EXPIRED_REPLACE_URL = env.VITE_LOGIN_URL || window.location.pathname;
-const ENABLE_STACK_TRACE_LOG = env.DEV || env.MODE === 'dev';
+const ENABLE_STACK_TRACE_LOG = env.DEV || env.MODE === 'dev' || env.MODE === 'qa';
 
 async function handleServerFailureSessionExpired() {
   await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
