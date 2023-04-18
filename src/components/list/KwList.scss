@@ -190,11 +190,6 @@
     // mobile
     .kw-list {
       &.q-list {
-        .mobile-item {
-          align-items: center;
-          width: 100%;
-        }
-
         &--separator {
           >.q-item-type + .q-item-type,
           >.q-virtual-scroll__content > .q-item-type + .q-item-type {
@@ -224,11 +219,6 @@
   &.tablet {
     .kw-list {
       &.q-list {
-        .tablet-item {
-          align-items: center;
-          width: 100%;
-        }
-
         &--separator {
           >.q-item-type + .q-item-type,
           > .q-virtual-scroll__content > .q-item-type + .q-item-type {
