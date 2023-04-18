@@ -49,8 +49,8 @@
       <slot />
       <q-scroll-observer
         v-if="infiniteIsEnabled"
-        :scroll-target="scrollTarget"
-        @scroll="onScroll"
+        :scroll-target="$g.platform.is.mobile ? containerRef : scrollTarget"
+        @scroll="(evt) => onScroll(evt, $g.platform.is.mobile ? containerRef : scrollTarget)"
       />
     </q-card-section>
     <q-card-section
@@ -110,18 +110,17 @@ export default {
       page: pageCtx,
       onBeforeClose: computed(() => props.onBeforeClose),
     };
-
+    const infiniteScroll = useInfiniteScroll();
     registerPopup(popupCtx);
 
     onBeforeUnmount(() => {
       unregisterPopup();
     });
 
-    const containerRef = ref();
     const {
       transform,
       events: draggableEvents,
-    } = useDraggable(containerRef);
+    } = useDraggable(infiniteScroll.containerRef);
 
     const headerClass = computed(() => ({
       'kw-popup__header': true,
@@ -155,9 +154,8 @@ export default {
       ...useObserver(),
       ...useDraggable(),
       ...useBookmark(pageCtx),
-      ...useInfiniteScroll(),
+      ...infiniteScroll,
       pageCtxTitle,
-      containerRef,
       draggableEvents,
       headerClass,
       popupStyle,
