@@ -119,6 +119,10 @@
 
 <script setup>
 
+import { notify } from '~kw-lib';
+
+notify('notify message', { icon: 'warning' });
+
 const selectData = { model: '10',
   options: [
     '10', '20', '30', '40', '50',

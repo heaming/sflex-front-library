@@ -28,9 +28,11 @@
           display: inline-block;
           vertical-align: middle;
           width: 16px;
-          height: 20px;
-          background: url(~@assets/images/arrow_stepper.svg) no-repeat center;
-          background-size: 16px auto;
+          height: 1px;
+          background-color: $line-line;
+
+          // background: url(~@assets/images/arrow_stepper.svg) no-repeat center;
+          // background-size: 16px auto;
           cursor: default;
           pointer-events: none;
         }
