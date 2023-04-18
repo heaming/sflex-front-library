@@ -129,6 +129,10 @@ function setColumnStyleName(column, { dataType }) {
     }
   }
 
+  if (column.editor?.type === 'list' || column.editor?.type === 'dropdown') {
+    colClass.push('rg-list-editor');
+  }
+
   column.styleName = colClass.join(' ').trim();
 }
 

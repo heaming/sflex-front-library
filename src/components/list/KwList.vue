@@ -62,6 +62,7 @@
           :class="computedItemClass[item.key]"
           :style="itemStyle"
           :active-class="activeClass"
+          block-inherit-padding
           :disable="disable"
           :dense="dense"
           :group="group"
@@ -94,26 +95,28 @@
                 @update:model-value="emitUpdateSelected"
               />
             </kw-item-section>
-            <kw-item
-              v-bind="selectAlignProps"
-              :class="computedItemClass[item.key]"
-              :clickable="clickable"
-              :style="itemStyle"
-              :active-class="activeClass"
-              :disable="disable"
-              :dense="dense"
-              :tag="itemTag"
-              @click="onClick(item)"
-            >
-              <slot
-                name="item"
-                :item="item.value"
+            <kw-item-section>
+              <kw-item
+                v-bind="selectAlignProps"
+                :class="computedItemClass[item.key]"
+                :clickable="clickable"
+                :style="itemStyle"
+                :active-class="activeClass"
+                :disable="disable"
+                :dense="dense"
+                :tag="itemTag"
+                @click="onClick(item)"
               >
-                <kw-item-section>
-                  {{ item.key }}
-                </kw-item-section>
-              </slot>
-            </kw-item>
+                <slot
+                  name="item"
+                  :item="item.value"
+                >
+                  <kw-item-section>
+                    {{ item.key }}
+                  </kw-item-section>
+                </slot>
+              </kw-item>
+            </kw-item-section>
           </template>
           <template #default>
             <slot
