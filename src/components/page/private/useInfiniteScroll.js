@@ -74,7 +74,8 @@ export default () => {
 
     while (isContinue) {
       let el;
-      if (platform.is.mobile) {
+      // FIXME 오류수정 일단 되게해놓음.
+      if (platform.is.mobile && containerRef.value) {
         el = containerRef.value.$el ?? scrollTarget.value.$el ?? scrollTarget.value;
       } else el = scrollTarget.value.$el ?? scrollTarget.value;
 
