@@ -5,7 +5,7 @@ import {
 } from 'lodash-es';
 import { date } from 'quasar';
 import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
-import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView } from './private/gridShared';
+import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView, isCellEditable } from './private/gridShared';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { loadProgress } from '../plugins/loading';
@@ -397,7 +397,7 @@ async function validateCallback(view, column, index, value, values) {
   return [];
 }
 
-export async function validateRow(view, dataRow, bails = true) {
+export async function validateRow(view, dataRow, bails = true, includeUneditable = false) {
   const validationErrors = [];
   const data = view.getDataSource();
   const itemIndex = view.getItemIndex(dataRow);
@@ -408,32 +408,32 @@ export async function validateRow(view, dataRow, bails = true) {
     const column = columns[i];
     const index = createCellIndexByDataColumn(view, itemIndex, column);
 
-    // if (isCellEditable(view, column, index)) { // editable false 인 셀들도 모두 validation
-    const { name, fieldName } = column;
-    const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
+    if (isCellEditable(view, column, index) || includeUneditable) { // editable false 인 셀들도 모두 validation
+      const { name, fieldName } = column;
+      const value = Number.isNaN(values[fieldName]) ? null : values[fieldName];
 
-    const errors = await validateRules(view, column, value, values, bails);
-    const ignoreCallback = errors.length > 0 && bails === true;
+      const errors = await validateRules(view, column, value, values, bails);
+      const ignoreCallback = errors.length > 0 && bails === true;
 
-    if (ignoreCallback === false) {
-      errors.push(
-        ...(await validateCallback(view, column, index, value, values)),
-      );
+      if (ignoreCallback === false) {
+        errors.push(
+          ...(await validateCallback(view, column, index, value, values)),
+        );
+      }
+
+      const invalid = errors.length > 0;
+
+      if (invalid) {
+        validationErrors.push({
+          dataRow,
+          column: name,
+          fieldName,
+          errors,
+        });
+
+        if (bails) break;
+      }
     }
-
-    const invalid = errors.length > 0;
-
-    if (invalid) {
-      validationErrors.push({
-        dataRow,
-        column: name,
-        fieldName,
-        errors,
-      });
-
-      if (bails) break;
-    }
-    // }
   }
 
   return validationErrors;
@@ -444,6 +444,7 @@ export async function validate(view, options = {}) {
     isChangedOnly = true,
     isCheckedOnly = false,
     isAlertMessage = true,
+    includeUneditable = false,
     bails = true,
   } = options;
 
@@ -459,7 +460,7 @@ export async function validate(view, options = {}) {
       && (!isCheckedOnly || view.isCheckedRow(i));
 
     if (shouldValidate) {
-      const result = await validateRow(view, i, bails);
+      const result = await validateRow(view, i, bails, includeUneditable);
       const invalid = result.length > 0;
 
       if (invalid) {
