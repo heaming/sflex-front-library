@@ -252,6 +252,11 @@
   font-size: 16px;
 }
 
+// dropdown(select) 편집모드일 때 정렬 : 좌측 최우선
+.rg-focused-row .rg-editable.rg-list-editor .rg-renderer {
+  text-align: left !important;
+}
+
 /*
   Renderer
   */
