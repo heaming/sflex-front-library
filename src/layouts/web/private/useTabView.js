@@ -199,7 +199,6 @@ export default () => {
 
         // router.push 등으로 이동한 경우
         // 서브페이지인데, to가 부모페이지인 경우 tabView 에서 삭제해야함.
-        console.log(from, to);
         if (from.meta?.parentsMenuUid === to.meta?.menuUid) {
           const delIndex = findIndex(tabViews, { key: from.name });
           if (delIndex > 0) {
