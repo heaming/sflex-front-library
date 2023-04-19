@@ -196,6 +196,16 @@ export default () => {
         // 그래서 화면이 이동했을 때 meta.logging 이 false 이면 해당 tabview를 찾아내서 그 tabview에 props를 넣어줌
         const { params } = to;
         Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
+
+        // router.push 등으로 이동한 경우
+        // 서브페이지인데, to가 부모페이지인 경우 tabView 에서 삭제해야함.
+        console.log(from, to);
+        if (from.meta?.parentsMenuUid === to.meta?.menuUid) {
+          const delIndex = findIndex(tabViews, { key: from.name });
+          if (delIndex > 0) {
+            tabViews.splice(delIndex, 1);
+          }
+        }
         const tabView = tabViews.find((v) => v.key === to.name);
         if (tabView !== undefined) {
           tabView.componentProps = params;
