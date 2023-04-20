@@ -119,6 +119,7 @@ body.mobile:not(.tablet) {
 
     .q-item {
       padding: 14px 20px;
+      height: 48px;
       flex-direction: row-reverse;
 
       // background: url(~@assets/icons/dialog_checked_off.svg) no-repeat right 20px center;
@@ -155,13 +156,14 @@ body.mobile:not(.tablet) {
         flex: 1;
         font-size: 16px;
         font-weight: 700;
+        line-height: 1.5rem;
         color: $black1;
         text-align: left;
       }
 
       > .q-icon {
-        width: 20px;
-        font-size: 20px;
+        width: 24px;
+        font-size: 24px;
         cursor: pointer;
       }
     }
