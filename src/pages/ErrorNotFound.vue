@@ -47,7 +47,7 @@
 <script setup>
 //
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .scoped-error {
   &--h1 {
     font-size: 24px;
