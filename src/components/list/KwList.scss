@@ -251,32 +251,30 @@
 
 .mobile {
   .custom_bottom_sheet {
-    .kw-menu-dialog__header {
-      h1 { text-align: left !important; }
-    }
+    .kw-menu-dialog {
+      &__content {
+        li {
+          padding: 14px 20px;
+          height: 48px;
+          cursor: pointer;
 
-    .kw-menu-dialog__content {
-      padding: 0 10px;
+          @include typo("dense");
+        }
+      }
 
-      li {
-        height: 48px;
-        padding: 9px 20px;
-        cursor: pointer;
+      &__action {
+        position: sticky;
+        bottom: 0;
+        display: flex;
+        padding: 24px 20px 32px;
+        width: 100%;
+        background: #fff;
+        z-index: 1;
       }
     }
 
-    .kw-menu-dialog__action {
-      position: sticky;
-      bottom: 0;
-      display: flex;
-      padding: 24px 20px 32px;
-      width: 100%;
-      background: #fff;
-      z-index: 1;
-    }
-
     .q-scrollarea__content {
-      padding-bottom: 24px;
+      padding-bottom: 32px;
     }
   }
 }
