@@ -93,7 +93,7 @@
       >
         <h1>{{ placeholder }}</h1>
         <q-icon
-          name="close"
+          name="close_24"
           @click="inputRef.hidePopup()"
         />
       </div>
