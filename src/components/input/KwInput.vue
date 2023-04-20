@@ -16,7 +16,7 @@
     :autogrow="autogrow"
     :mask="computedMask"
     :fill-mask="fillMask"
-    :reverse-fill-mask="reverseFillMask"
+    :reverse-fill-mask="computedReverseFillMask"
     :unmasked-value="computedUnmaskedValue"
     :prefix="prefix"
     :suffix="suffix"
@@ -269,10 +269,16 @@ export default {
       }
 
       if (props.mask === 'number') {
-        return undefined;
+        return '###,###,###,###,###';
       }
 
       return props.mask;
+    });
+
+    const computedReverseFillMask = computed(() => {
+      if (props.reverseFillMask) return props.reverseFillMask;
+      if (props.mask === 'number') return true;
+      return false;
     });
 
     const computedUnmaskedValue = computed(() => {
@@ -363,12 +369,6 @@ export default {
         } else if (props.lowerCase) {
           val = val.toLowerCase();
         }
-
-        if (props.mask === 'number') {
-          val = getNumberWithComma(Number(val.replace(/,/gi, '')));
-          if (val === 'NaN') val = '';
-          if (val > Number.MAX_SAFE_INTEGER) val = value.value;
-        }
       }
 
       const el = inputRef.value.getNativeElement();
@@ -423,6 +423,7 @@ export default {
       showingHint,
       toggleHint,
       computedMask,
+      computedReverseFillMask,
       sanitize,
       computedUnmaskedValue,
     };
