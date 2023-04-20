@@ -206,7 +206,7 @@
           <div class="kw-menu-dialog__header">
             <h1>{{ dialogTitle }}</h1>
             <q-icon
-              name="close"
+              name="close_24"
               @click="onUpdateShowing(false)"
             />
           </div>
