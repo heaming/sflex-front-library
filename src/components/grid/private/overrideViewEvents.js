@@ -7,6 +7,7 @@ import {
 } from '../../../utils/private/gridShared';
 
 const onShowTooltip = 'onShowTooltip';
+const onShowHeaderTooltip = 'onShowHeaderTooltip';
 const onMouseUp = 'onMouseUp'; // custom
 const onCurrentChanging = 'onCurrentChanging';
 const onSortingChanged = 'onSortingChanged';
@@ -40,9 +41,8 @@ export function overrideOnShowTooltip(view) {
       originalResult = execOriginal(g, onShowTooltip, g, index, value);
     }
 
+    const { renderer, styleName } = g.columnByName(index.column);
     if (!originalResult) {
-      const { renderer } = g.columnByName(index.column);
-
       // checkbox
       if (renderer?.type === 'check') {
         const { dataType, booleanFormat } = g.getDataSource().fieldByName(index.fieldName);
@@ -53,7 +53,66 @@ export function overrideOnShowTooltip(view) {
       }
     }
 
-    return sanitize(originalResult || value);
+    const cell = g.getCellBounds(index.itemIndex, index.column);
+    let alignStyle;
+    const alignArr = ['text-left', 'text-center', 'text-right'];
+    if (styleName) {
+      const styleArr = styleName.split(' ');
+      let styleIdx;
+      const isAlignStyle = styleArr.some((style, i) => {
+        if (alignArr.includes(style)) {
+          styleIdx = i;
+          return true;
+        }
+        return false;
+      });
+
+      if (isAlignStyle) alignStyle = styleArr[styleIdx];
+      else alignStyle = 'text-left';
+    }
+    const res = `<div class="${alignStyle} rg-tooltip__custom" style="min-width: ${cell.width}px; padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">`
+      + `<span class="rg-tooltip__custom__span">${originalResult || value}</span>`
+      + '</div>';
+    return sanitize(res);
+  });
+}
+
+/*
+  데이터 헤더의 툴팁이 표시되었음을 알리는 콜백
+  */
+export function overrideOnShowHeaderTooltip(view) {
+  wrapEvent(view, onShowHeaderTooltip, (g, column, value) => {
+    let originalResult;
+
+    if (hasOriginal(g, onShowHeaderTooltip)) {
+      originalResult = execOriginal(g, onShowHeaderTooltip, g, column, value);
+    }
+
+    const { styleName } = column.header;
+    const { _fitWidth } = column.layout;
+    const { displayWidth } = column;
+    let alignStyle;
+    const alignArr = ['text-left', 'text-center', 'text-right'];
+    if (styleName) {
+      const styleArr = styleName.split(' ');
+      let styleIdx;
+      const isAlignStyle = styleArr.some((style, i) => {
+        if (alignArr.includes(style)) {
+          styleIdx = i;
+          return true;
+        }
+        return false;
+      });
+
+      if (isAlignStyle) alignStyle = styleArr[styleIdx];
+    }
+
+    if (!alignStyle) alignStyle = 'text-center';
+
+    const res = `<div class="${alignStyle} rg-tooltip__custom" style="min-width: ${_fitWidth || displayWidth}px; padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">`
+    + `<span class="rg-tooltip__custom__span">${originalResult || value}</span>`
+    + '</div>';
+    return sanitize(res);
   });
 }
 
