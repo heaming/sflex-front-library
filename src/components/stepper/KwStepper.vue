@@ -17,6 +17,7 @@
       :alternative-labels="alternativeLabels"
       :inactive-color="inactiveColor"
       :inactive-icon="inactiveIcon"
+      :vertical="vertical"
       :done-icon="doneIcon"
       :done-color="doneColor"
       :active-icon="activeIcon"
@@ -25,11 +26,16 @@
       :error-color="errorColor"
       @update:model-value="$emit('update:modelValue', $event)"
     >
-      <q-step
-        v-for="header of headers"
-        :key="header.props.name"
-        v-bind="getHeaderProps(header)"
-      />
+      <template v-if="!vertical">
+        <q-step
+          v-for="header of headers"
+          :key="header.props.name"
+          v-bind="getHeaderProps(header)"
+        />
+      </template>
+      <template v-else>
+        <slot />
+      </template>
     </q-stepper>
 
     <kw-tooltip
@@ -63,7 +69,7 @@
 </template>
 
 <script>
-import { omit, kebabCase } from 'lodash-es';
+import { kebabCase } from 'lodash-es';
 import { uid } from 'quasar';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import usePanels, { usePanelsProps, usePanelsEmits } from '../../composables/private/usePanels';
@@ -84,7 +90,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    ...omit(usePanelsProps, ['vertical']),
+    ...usePanelsProps,
 
     // customize props
     headingText: { type: Boolean, default: false },

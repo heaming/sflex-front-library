@@ -202,42 +202,26 @@
       <div>
         <kw-scroll-area
           class="kw-menu-dialog__scroll-area"
-          :class="{'single-select-list': !dialogOptionMultiple}"
         >
           <div class="kw-menu-dialog__header">
             <h1>{{ dialogTitle }}</h1>
+            <q-icon
+              name="close"
+              @click="onUpdateShowing(false)"
+            />
           </div>
           <!-- start//  dialog 옵션 리스트 -->
           <ul
             class="kw-menu-dialog__content"
           >
-            <kw-list
-              v-model:selected="dialogOptionSelected"
-              :items="dialogOptions"
-              :checkbox="dialogOptionMultiple"
+            <li
+              v-for="(dialogOption, dialogIdx) in dialogOptions"
+              :key="dialogIdx"
+              @click="onClickOption(dialogOption)"
             >
-              <template #item="{ item }">
-                <li
-                  @click="dialogOptionMultiple? '' : onClickOption(item)"
-                >
-                  {{ item[dialogOptionLabel] }}
-                </li>
-              </template>
-            </kw-list>
+              {{ dialogOption[dialogOptionLabel] }}
+            </li>
           </ul>
-          <!-- end//  dialog 옵션 리스트 -->
-          <div
-            v-if="dialogOptionMultiple"
-            class="kw-menu-dialog__action"
-          >
-            <kw-btn
-              grow
-              primary
-              :label="$t('MSG_BTN_CONFIRM', null, '확인')"
-              @click="onConfirm"
-            />
-          </div>
-          <!-- start//  dialog 버튼 리스트 -->
         </kw-scroll-area>
       </div>
     </q-dialog>
@@ -297,7 +281,6 @@ export default {
     dialogTitle: { type: String, default: undefined },
     dialogOptionLabel: { type: String, default: 'label' },
     dialogOptionValue: { type: String, default: 'value' },
-    dialogOptionMultiple: { type: Boolean, default: false },
   },
   emits: ['update:selected', 'click-item', 'click-option'],
   setup(props, {
@@ -305,7 +288,6 @@ export default {
     slots,
   }) {
     const { styleClassAttrs } = useInheritAttrs();
-    const dialogOptionSelected = ref();
     const normalizeItem = (item) => ({
       key: item[props.itemKey] ?? item,
       value: item,
@@ -445,11 +427,6 @@ export default {
       onUpdateShowing(false);
     }
 
-    function onConfirm() {
-      emit('click-option', dialogOptionSelected.value);
-      onUpdateShowing(false);
-    }
-
     const onClickSelectAllItem = () => {
       if (!props.clickable) {
         return;
@@ -564,8 +541,6 @@ export default {
       showing,
       dialogClass,
       onClickOption,
-      onConfirm,
-      dialogOptionSelected,
     };
   },
 };

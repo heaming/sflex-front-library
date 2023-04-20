@@ -16,7 +16,9 @@
     :done="done"
     :error="error"
     :header-nav="headerNav"
-  />
+  >
+    <slot />
+  </q-step>
 </template>
 
 <script>
