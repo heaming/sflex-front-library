@@ -94,9 +94,9 @@ export default () => {
     }
   }
 
-  async function select(key) {
+  async function select(key, param = null) {
     try {
-      await router.push({ name: key });
+      await router.push({ name: key, state: { stateParam: param } });
     } catch (e) {
       // ignore
     }
@@ -116,7 +116,7 @@ export default () => {
     return result;
   }
 
-  async function close(key, force = false, autoSelect = true, goToHome = false) {
+  async function close(key, force = false, autoSelect = true, goToHome = false, param = null) {
     const isClosable = force === true
       || await confirmIsModified(key) === true;
 
@@ -127,7 +127,7 @@ export default () => {
 
       // when close current selected tab
       if (!goToHome && autoSelect && selectedKey.value === key) {
-        await select(closestKey || consts.ROUTE_HOME_NAME);
+        await select(closestKey || consts.ROUTE_HOME_NAME, param);
       } else if (goToHome) await select(consts.ROUTE_HOME_NAME);
     }
 
@@ -217,20 +217,26 @@ export default () => {
     add(router.currentRoute.value);
   }
 
-  router.close = async (delta = 0, force = false) => {
+  router.close = async (delta = 0, force = false, params = null) => {
     const parents = getParents(selectedKey.value);
     const index = Math.max(0, Math.min(delta, parents.length - 1));
     const target = parents[index];
     const children = getChildren(target.key, 'key');
 
+    const param = {
+      closed: true,
+      currTimestamp: new Date().getTime(), // watch로 잡을 때, 값이 변하지 않아 watch 이벤트가 발생하지 않을 수 있는 현상 방지 용도
+      ...params,
+    };
+
     if (target) {
       const { key, parentsKey } = target;
-      await close(key, force, parentsKey !== false);
+      await close(key, force, parentsKey !== false, false, param);
       children.forEach(async (child) => {
-        await close(child, force);
+        await close(child, force, true, false, param);
       });
       if (parentsKey) {
-        await select(parentsKey);
+        await select(parentsKey, param);
       }
     }
   };
