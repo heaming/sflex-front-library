@@ -3,6 +3,7 @@
     v-for="modal of modals"
     :key="modal.uid"
     class="global-modal"
+    :class="isModalPopup ? 'modal-popup' : ''"
     v-bind="getDialogProps(modal.dialogProps)"
   >
     <kw-popup-container
@@ -55,6 +56,9 @@ export default {
       unregisterGlobalVm(GlobalModalVmKey);
     });
 
+    const urlSearchParams = new URLSearchParams(new URL(window.location.href).search);
+    const isModalPopup = urlSearchParams?.get('modal-popup') === 'true';
+
     const getDialogProps = (dialogProps) => ({
       class: dialogProps.class,
       maximized: platform.is.mobile || dialogProps.maximized === true,
@@ -99,6 +103,7 @@ export default {
       onResolve,
       onClose,
       getDraggable,
+      isModalPopup,
     };
   },
 };

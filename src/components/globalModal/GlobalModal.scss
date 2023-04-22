@@ -250,3 +250,14 @@ body.desktop {
     }
   }
 }
+
+body.desktop .global-modal--window:has(.kw-popup--window-consult).modal-popup {
+  .q-dialog__inner {
+    min-width: auto !important;
+    background: transparent !important;
+  }
+
+  .kw-popup__content {
+    max-height: 100vh !important;
+  }
+}
