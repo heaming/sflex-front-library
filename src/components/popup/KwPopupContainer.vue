@@ -45,7 +45,8 @@ export default {
       close,
     });
 
-    function onResolve() {
+    async function onResolve() {
+      await nextTick(); /* cause, there is no-async setup component, suspense can not wait those components register. */
       emit('resolve', popupCtx.value);
     }
 
