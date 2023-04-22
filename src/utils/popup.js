@@ -84,11 +84,10 @@ function parseFeatures(windowFeatures) {
       parsedFeatures[`${key}=${value}`] = true;
     }
   });
-
   return parsedFeatures;
 }
 
-export async function open(url, windowFeatures) {
+export async function open(url, windowFeatures, params = null) {
   return new Promise((resolve, reject) => {
     const {
       origin,
@@ -98,7 +97,14 @@ export async function open(url, windowFeatures) {
     } = new URL(url, /^https?:\/\//.test(url) ? undefined : window.location.origin);
 
     const pid = uid();
-    const urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
+    let urlWithUid;
+    if (params && typeof params === 'object') {
+      let paramUrl = '';
+      Object.keys(params).forEach((key) => {
+        paramUrl += `&${key}=${params[key]}`;
+      });
+      urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${paramUrl.trim().length > 0 ? paramUrl : ''}${hash}`;
+    } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
 
     openURL(urlWithUid, () => {
       reject(
