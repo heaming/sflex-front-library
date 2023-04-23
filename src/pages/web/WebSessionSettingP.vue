@@ -39,6 +39,16 @@
           <kw-input v-model="userInfoForSetting.employeeIDNumber" />
         </kw-form-item>
       </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="기본권한코드">
+          <kw-input v-model="userInfoForSetting.baseRleCd" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="겸직여부">
+          <kw-input v-model="userInfoForSetting.ccpsYn" />
+        </kw-form-item>
+      </kw-form-row>
     </kw-form>
     <template #action>
       <kw-btn
