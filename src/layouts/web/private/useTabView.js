@@ -173,15 +173,32 @@ export default () => {
     }
   };
 
-  // const getOriginMenu = function (menu) {
-  //   if (menu.meta?.pageUseCode === 'N') {
-  //     return menu.meta.menuUid;
-  //   }
-  //   const parent = menu.meta?.parentsMenuUid;
-  // };
-  // const isSameOriginMenu = function (from, to) {
-  //
-  // };
+  function throwIfInvalidRoute(to, from) {
+    const pageUseIsSub = to.meta.pageUseCode === 'S';
+
+    if (pageUseIsSub) {
+      // case route sub to parents
+      const fromMenuUid = from?.meta.menuUid;
+      const fromMenuPaths = store.getters['meta/getMenuPaths'](fromMenuUid);
+      const fromParentsMenuUids = map(fromMenuPaths, 'key');
+
+      const toMenuUid = to.meta.menuUid;
+      const toIsParents = fromParentsMenuUids.includes(toMenuUid);
+
+      // case route parents to sub
+      const toParentsMenuUid = to.meta.parentsMenuUid;
+      const actualFrom = from?.meta.redirectedFrom || from;
+      const fromIsParents = actualFrom?.meta.menuUid === toParentsMenuUid;
+
+      const isSiblings = to.meta.parentsMenuUid === from.meta.parentsMenuUid;
+
+      const isAlreadyExists = findIndex(tabViews, { key: toMenuUid }) > -1;
+
+      if (!toIsParents && !fromIsParents && !isSiblings && !isAlreadyExists) {
+        throw new Error(`Navigation aborted to ${to.fullPath}, sub route can only routed from it's parents.`);
+      }
+    }
+  }
 
   let routingIsBlocked = false;
   const removeBeforeEach = router.beforeEach(
@@ -228,6 +245,11 @@ export default () => {
     },
   );
 
+  const removeBeforeResolve = router.beforeResolve(async (to, from, next) => {
+    throwIfInvalidRoute(to, from);
+    next();
+  });
+
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
@@ -248,7 +270,8 @@ export default () => {
         }
 
         // siblings 여도 from을 삭제.
-        if (to.meta.parentsMenuUid === from.meta.parentsMenuUid
+        if (to.meta.pageUseCode === 'S'
+            && to.meta.parentsMenuUid === from.meta.parentsMenuUid
             && to.name !== from.name) {
           const delIndex = findIndex(tabViews, { key: from.name });
           if (delIndex > 0) {
@@ -293,6 +316,7 @@ export default () => {
 
   onBeforeUnmount(() => {
     removeBeforeEach();
+    removeBeforeResolve();
     removeAfterEach();
     delete router.close;
   });
