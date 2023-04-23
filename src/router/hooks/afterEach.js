@@ -56,7 +56,8 @@ function setSelectedGlobalKeys(to) {
   // sub page
   if (to.meta.pageUseCode === 'S') {
     const menuPaths = store.getters['meta/getMenuPaths'](menuKey);
-    const matched = find(menuPaths, { menuLavel: 1 });
+    const matched = find(menuPaths, { menuLevel: 1 });
+    console.log(matched, menuPaths);
     // const parentsMenuUids = map(menuPaths, 'key');
     menuKey = matched.key;
   }
