@@ -1,4 +1,4 @@
-import { map } from 'lodash-es';
+import { find } from 'lodash-es';
 import store from '../../store';
 import { http } from '../../plugins/http';
 
@@ -56,8 +56,9 @@ function setSelectedGlobalKeys(to) {
   // sub page
   if (to.meta.pageUseCode === 'S') {
     const menuPaths = store.getters['meta/getMenuPaths'](menuKey);
-    const parentsMenuUids = map(menuPaths, 'key');
-    menuKey = parentsMenuUids[parentsMenuUids.length - 2];
+    const matched = find(menuPaths, { menuLavel: 1 });
+    // const parentsMenuUids = map(menuPaths, 'key');
+    menuKey = matched.key;
   }
 
   if (appKey) store.commit('app/setSelectedGlobalAppKey', appKey);

@@ -142,6 +142,47 @@ export default () => {
   const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getNoMenuPage'](to.meta.pageId) !== undefined;
   const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
 
+  const isAncestor = function (from, to) {
+    let parentUid = from.meta?.parentsMenuUid;
+    const ancestorUid = to.meta?.menuUid;
+    while (parentUid && parentUid !== null && parentUid !== '' && parentUid !== '/') {
+      if (parentUid === ancestorUid) {
+        return true;
+      }
+      const matched = find(tabViews, { key: parentUid });
+      if (!matched) break;
+      parentUid = matched.parentsKey;
+    }
+    return false;
+  };
+
+  const reomveDescendants = function (to) {
+    let parentsKey = to.name;
+
+    while (parentsKey) {
+      const matched = find(tabViews, { parentsKey });
+      if (matched) {
+        const delIndex = findIndex(tabViews, { parentsKey });
+        parentsKey = matched.key;
+        if (delIndex > 0) {
+          tabViews.splice(delIndex, 1);
+        }
+      } else {
+        break;
+      }
+    }
+  };
+
+  // const getOriginMenu = function (menu) {
+  //   if (menu.meta?.pageUseCode === 'N') {
+  //     return menu.meta.menuUid;
+  //   }
+  //   const parent = menu.meta?.parentsMenuUid;
+  // };
+  // const isSameOriginMenu = function (from, to) {
+  //
+  // };
+
   let routingIsBlocked = false;
   const removeBeforeEach = router.beforeEach(
     async (to, from, next) => {
@@ -151,12 +192,14 @@ export default () => {
       }
 
       // redirect if subpage is already opened
-      const parentsKey = to.meta.menuUid;
-      const matched = find(tabViews, { parentsKey });
-      if (matched && matched.key !== from.name) {
-        from.meta.redirectedFrom = to;
-        next({ name: matched.key });
-        return;
+      if (!isAncestor(from, to)) {
+        const parentsKey = to.meta.menuUid;
+        const matched = find(tabViews, { parentsKey });
+        if (matched && matched.key !== from.name) {
+          from.meta.redirectedFrom = to;
+          next({ name: matched.key });
+          return;
+        }
       }
 
       // check whether already opened
@@ -184,6 +227,7 @@ export default () => {
       next();
     },
   );
+
   const removeAfterEach = router.afterEach(
     (to, from, failure) => {
       if (failure) return;
@@ -198,8 +242,14 @@ export default () => {
         Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
 
         // router.push 등으로 이동한 경우
-        // 서브페이지인데, to가 부모페이지인 경우 tabView 에서 삭제해야함.
-        if (from.meta?.parentsMenuUid === to.meta?.menuUid) {
+        // 서브페이지인데, to가 부모페이지(혹은 조상님)인 경우 tabView 에서 삭제해야함.
+        if (isAncestor(from, to)) {
+          reomveDescendants(to);
+        }
+
+        // siblings 여도 from을 삭제.
+        if (to.meta.parentsMenuUid === from.meta.parentsMenuUid
+            && to.name !== from.name) {
           const delIndex = findIndex(tabViews, { key: from.name });
           if (delIndex > 0) {
             tabViews.splice(delIndex, 1);
