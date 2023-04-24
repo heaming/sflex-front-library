@@ -26,6 +26,7 @@
             icon="setting_24"
             style="font-size: 24px;"
             class="ml20"
+            @click="openSetSessionP"
           /><!-- 클릭시 버텀시트 활성 -->
         </div>
       </div>
@@ -130,6 +131,7 @@ import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
+import { modal } from '../../plugins/modal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
@@ -313,6 +315,12 @@ function createSortable() {
         handle: '.handle',
       }),
     );
+  });
+}
+
+async function openSetSessionP() {
+  modal({
+    component: () => import('../web/WebSessionSettingP.vue'),
   });
 }
 
