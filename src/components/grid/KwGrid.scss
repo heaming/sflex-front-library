@@ -1083,3 +1083,7 @@
 .kw-grid__context-menu {
   max-width: 500px !important; // 화면 끝에서 호출 시 글자가 짤리는 현상 방지
 }
+
+td.rg-sum-cell.rg-rowindicator-sum {
+  text-indent: -9999px;
+}
