@@ -43,6 +43,7 @@ const viewConfig = {
 
   displayOptions: {
     minTableRowHeight: 42,
+    minCellWidth: 10,
     columnMovable: true,
     useFocusClass: true,
     showChangeMarker: true,
