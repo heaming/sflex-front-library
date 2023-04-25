@@ -150,6 +150,7 @@ const iconList1 = [
   'sms',
   'redo',
   'qrcode',
+  'viewer',
 ];
 const iconList2 = [
   'add_list_24',
@@ -208,6 +209,10 @@ const visuals = [
   'visual_partner',
 ];
 const guideHistory = [
+  {
+    timestamp: '2023-04-25',
+    text: 'add viewer icon for file component',
+  },
   {
     timestamp: '2022-10-14',
     text: 'add minus 16px and change name(plus/minus_box -> group_minus/plus)',
