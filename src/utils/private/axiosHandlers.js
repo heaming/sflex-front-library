@@ -32,6 +32,8 @@ export function handleConfig(config) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
+  config.headers['Access-Control-Allow-Origin'] = '*';
+
   return config;
 }
 
