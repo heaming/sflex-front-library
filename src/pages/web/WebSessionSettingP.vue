@@ -20,11 +20,6 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
-        <kw-form-item label="조직유형코드">
-          <kw-input v-model="userInfoForSetting.ogTpCd" />
-        </kw-form-item>
-      </kw-form-row>
-      <kw-form-row>
         <kw-form-item label="부서코드">
           <kw-input v-model="userInfoForSetting.departmentId" />
         </kw-form-item>
@@ -32,6 +27,21 @@
       <kw-form-row>
         <kw-form-item label="부서명">
           <kw-input v-model="userInfoForSetting.departmentName" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="직급코드">
+          <kw-input v-model="userInfoForSetting.careerLevelCode" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="직급명">
+          <kw-input v-model="userInfoForSetting.careerLevelName" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="조직유형코드">
+          <kw-input v-model="userInfoForSetting.ogTpCd" />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
@@ -47,6 +57,11 @@
       <kw-form-row>
         <kw-form-item label="겸직여부">
           <kw-input v-model="userInfoForSetting.ccpsYn" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="재직상택코드">
+          <kw-input v-model="userInfoForSetting.irsdSttCd" />
         </kw-form-item>
       </kw-form-row>
     </kw-form>
