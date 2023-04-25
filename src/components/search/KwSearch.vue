@@ -119,11 +119,10 @@ export default {
   setup(props, { emit }) {
     const formCtx = useForm();
     const formExpandableCtx = useFormExpandable();
-
     const {
       getRegisteredChild,
     } = inject(ObserverContextKey, {});
-
+    const { t } = useI18n();
     const pageCtx = inject(PageContextKey, null);
     const hasReadPermission = () => env.TEST === true || hasPermissionKeyInPage(consts.PERMISSION_KEY_READ, pageCtx);
 
@@ -166,8 +165,12 @@ export default {
     }, libConfig.DEFAULT_DEBOUNCE_WAIT, { leading: true });
 
     async function onReset() {
-      await formCtx.reset();
-      emit('reset');
+      if (await formCtx.alertIfIsNotModified()) return;
+
+      if (await formCtx.confirmIfIsModified(t('MSG_ALT_SRCH_RESET'))) {
+        await formCtx.reset();
+        emit('reset');
+      }
     }
 
     const {

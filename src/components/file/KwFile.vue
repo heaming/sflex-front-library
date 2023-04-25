@@ -502,7 +502,7 @@
                 <kw-tooltip
                   anchor="bottom middle"
                 >
-                  {{ 'remove' }}
+                  {{ 'clear' }}
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
@@ -515,7 +515,7 @@
                 <kw-tooltip
                   anchor="bottom middle"
                 >
-                  {{ 'remove' }}
+                  {{ 'clear' }}
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
