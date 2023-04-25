@@ -5,7 +5,7 @@ import langEn from 'quasar/lang/en-US';
 import consts from './consts';
 
 function loadIcons() {
-  const imported = import.meta.glob('./assets/icons/*.svg', { as: 'url' });
+  const imported = import.meta.globEager('./assets/icons/*.svg', { as: 'url' });
   const keys = Object.keys(imported);
 
   return keys.reduce((icons, key) => {
@@ -17,7 +17,7 @@ function loadIcons() {
     }
 
     const name = matched.pop();
-    icons[name] = new URL(imported[key].name, import.meta.url).href;
+    icons[name] = imported[key].default;
 
     return icons;
   }, {});
