@@ -21,10 +21,6 @@
       line-height: 1.5;
       white-space: pre-wrap;
 
-      &.dialog-icon {
-        margin-bottom: 4px;
-      }
-
       &.sub-message {
         margin-top: 8px;
         font-size: 14px;
@@ -32,6 +28,10 @@
         line-height: 1.57;
         color: $black2;
       }
+    }
+
+    .dialog-icon {
+      margin-bottom: 8px;
     }
   }
 

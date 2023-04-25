@@ -14,6 +14,10 @@ body {
   }
 }
 
+.q-body--prevent-scroll__header {
+  position: fixed !important;
+}
+
 // 전체 bg 잘리는 부분 처리
 // #app {
 //   position: relative;

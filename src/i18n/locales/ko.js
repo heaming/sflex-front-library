@@ -10,7 +10,7 @@ export default {
   MSG_VAL_CONFIRMED: '{0} 항목의 값이 일치하지 않습니다.',
   MSG_VAL_DATE_RANGE_DAYS: '기간은 {1}일 이내로 설정하여야 합니다.',
   MSG_VAL_DATE_RANGE_MONTHS: '기간은 {1}개월 이내로 설정하여야 합니다.',
-  MSG_VAL_DATE_RANGE_REQUIRED: '{0} 항목은 필수 입력 항목입니다.',
+  MSG_VAL_DATE_RANGE_REQUIRED: '{0} 은(는) 필수 입력 항목입니다.',
   MSG_VAL_DATE_RANGE_YEARS: '기간은 {1}년 이내로 설정하여야 합니다.',
   MSG_VAL_DIGITS: '{0} 항목의 값은 {1}자리의 숫자여야 합니다.',
   MSG_VAL_EMAIL: '{0} 항목은 유효한 이메일이 아닙니다.',
@@ -27,7 +27,7 @@ export default {
   MSG_VAL_NUMERIC: '{0} 항목에는 숫자만 사용할 수 있습니다.',
   MSG_VAL_ONE_OF: '{0} 항목의 값이 유효하지 않습니다.',
   MSG_VAL_REGEX: '{0} 항목은 형식에 맞지 않습니다.',
-  MSG_VAL_REQUIRED: '{0} 항목은 필수 입력 항목입니다.',
+  MSG_VAL_REQUIRED: '{0} 은(는) 필수 입력 항목입니다.',
   MSG_VAL_URL: '{0} 항목은 유효한 URL이 아닙니다.',
   MSG_VAL_TELEPHONE: '{0} 항목은 유효한 전화번호 형식이 아닙니다.',
 
