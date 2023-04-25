@@ -8,6 +8,7 @@ import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
 import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView, isCellEditable } from './private/gridShared';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
+import { notify } from '../plugins/notify';
 import { loadProgress } from '../plugins/loading';
 import _validate from '../validate';
 import i18n from '../i18n';
@@ -129,19 +130,21 @@ export function getAllRowValues(view, isIncludeDeleted = false) {
     .filter((e) => isIncludeDeleted || e.rowState !== RowState.DELETED);
 }
 
-export async function alertIfIsNotChecked(view, message) {
+export function alertIfIsNotChecked(view, message) {
   const checkedRows = view.getCheckedRows();
   if (!checkedRows.length) {
-    await alert(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+    notify(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+    // await alert(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
   }
 
   return checkedRows.length > 0;
 }
 
-export async function alertIfIsNotSelected(view, message) {
+export function alertIfIsNotSelected(view, message) {
   const selectedRows = view.getSelectedRows();
   if (!selectedRows.length) {
-    await alert(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+    notify(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
+    // await alert(message || i18n.t('MSG_ALT_NOT_SEL_ITEM'));
   }
 
   return selectedRows.length > 0;
@@ -247,7 +250,7 @@ export function deleteSelectedRows(view, isIncludeCreated = false) {
 }
 
 export async function confirmDeleteSelectedRows(view, isIncludeCreated = false) {
-  if (!await alertIfIsNotSelected(view)) return;
+  if (!alertIfIsNotSelected(view)) return;
 
   const selectedDataRows = view.getSelectedRows();
   const changedDataRows = getChangedRowValues(view).map((row) => row.dataRow);
@@ -273,7 +276,7 @@ export function deleteCheckedRows(view, isIncludeCreated = false) {
 }
 
 export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
-  if (!await alertIfIsNotChecked(view)) return [];
+  if (!alertIfIsNotChecked(view)) return [];
 
   const checkedDataRows = view.getCheckedRows();
   const changedDataRows = getChangedRowValues(view).map((row) => row.dataRow);
@@ -349,11 +352,12 @@ export function isModified(view) {
       || data.getStateRows(RowState.DELETED).length > 0;
 }
 
-export async function alertIfIsNotModified(view, message) {
+export function alertIfIsNotModified(view, message) {
   const isNotModified = !isModified(view);
 
   if (isNotModified) {
-    await alert(message || i18n.t('MSG_ALT_NO_CHG_CNTN'));
+    notify(message || i18n.t('MSG_ALT_NO_CHG_CNTN'));
+    // await alert();
   }
 
   return isNotModified;
