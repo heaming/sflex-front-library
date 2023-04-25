@@ -32,6 +32,7 @@ export function handleConfig(config) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
+  // FIXME : 테스트용
   config.headers['Access-Control-Allow-Origin'] = '*';
 
   return config;
