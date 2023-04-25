@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
   const openVisualizer = mode === 'visualizer';
 
   return {
+    assetsInclude: ['**/*.svg'],
     alias: {
       '@assets': resolve(__dirname, './dev/src/assets'),
     },
