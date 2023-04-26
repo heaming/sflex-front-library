@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.518",
+  "version": "0.1.517",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -112,7 +112,7 @@
   },
   "peerDependencies": {
     "quasar": "2.10.2",
-    "vite": "2.9.15"
+    "vite": "^2.9.15"
   },
   "publishConfig": {
     "registry": "http://nexus.kyowon.co.kr/repository/npm-hosted-sflex-releases/"
