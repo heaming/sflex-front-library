@@ -236,7 +236,7 @@ const recursiveNormalizeBookmarks = (_bookmarks, currents) => {
         pageId: e.pageId,
         menuPath: e.menuPath,
         parentsBookmarkUid: e.parentsBookmarkUid || null,
-        arrayalOrder: i,
+        arrayalOrder: currents.length - i,
       },
       ...recursiveNormalizeBookmarks(_bookmarks, children),
     );
