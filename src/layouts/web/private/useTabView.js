@@ -142,7 +142,7 @@ export default () => {
   const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getNoMenuPage'](to.meta.pageId) !== undefined;
   const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
 
-  const isAncestor = function (from, to) {
+  const isAncestor = (from, to) => {
     let parentUid = from.meta?.parentsMenuUid;
     const ancestorUid = to.meta?.menuUid;
     while (parentUid && parentUid !== null && parentUid !== '' && parentUid !== '/') {
@@ -156,7 +156,7 @@ export default () => {
     return false;
   };
 
-  const reomveDescendants = function (to) {
+  const reomveDescendants = (to) => {
     let parentsKey = to.name;
 
     while (parentsKey) {
