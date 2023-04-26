@@ -52,6 +52,16 @@
           name="alert_off_24"
           clickable
         />
+        <kw-menu
+          class="web-header__dropdown"
+          fit
+          anchor="bottom right"
+          self="top middle"
+        >
+          <div>
+            알람 개발은 알람기획을 기다리고 있습니다.
+          </div>
+        </kw-menu>
         <div>
           <kw-icon
             class="web-header__icon"
