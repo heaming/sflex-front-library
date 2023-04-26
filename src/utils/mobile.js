@@ -94,12 +94,14 @@ export async function getImageData() {
   */
 // 카메라 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openCamera() {
-  return await callMethod(NativePlugin.Photo, 'openCamera');
+  await callMethod(NativePlugin.Photo, 'openCamera');
+  return getImageData();
 }
 
 // 사진첩 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openPhotoGallery() {
-  return await callMethod(NativePlugin.Photo, 'openPhotoGallery');
+  await callMethod(NativePlugin.Photo, 'openPhotoGallery');
+  return getImageData();
 }
 
 /*
