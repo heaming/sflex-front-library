@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.517",
+  "version": "0.1.516",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -93,6 +93,7 @@
     "video.js": "^7.20.3",
     "videojs-landscape-fullscreen": "^11.1111.0",
     "viewerjs": "^1.11.3",
+    "vite": "~2.9.15",
     "vite-plugin-eslint": "^1.6.0",
     "vite-plugin-html-template": "^1.1.5",
     "vite-plugin-mpa": "^1.1.3",
@@ -111,8 +112,7 @@
     "vue-highlight-code": "^0.1.16"
   },
   "peerDependencies": {
-    "quasar": "2.10.2",
-    "vite": "^2.9.15"
+    "quasar": "2.10.2"
   },
   "publishConfig": {
     "registry": "http://nexus.kyowon.co.kr/repository/npm-hosted-sflex-releases/"
