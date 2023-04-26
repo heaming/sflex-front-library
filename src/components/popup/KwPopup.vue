@@ -17,7 +17,7 @@
         >
           {{ title || pageCtxTitle }}
         </h1>
-        <kw-checkbox
+        <!-- <kw-checkbox
           v-if="isBookmarkable"
           :model-value="isBookmarked"
           :true-value="true"
@@ -30,7 +30,7 @@
           <kw-tooltip>
             {{ $t('MSG_BTN_FAVORITES', null, '즐겨찾기') }}
           </kw-tooltip>
-        </kw-checkbox>
+        </kw-checkbox> -->
       </div>
       <kw-icon
         v-if="noCloseBtn === false"
