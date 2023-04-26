@@ -5,5 +5,8 @@
     background: $black2;
     border-radius: 0;
     box-shadow: 8px 10px 10px 0 rgb(0 0 0 / 12%);
+    color: $bg-white;
+
+    @include typo("dense", 400);
   }
 }
