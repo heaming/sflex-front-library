@@ -510,7 +510,7 @@ const normalizeExportOptions = (options = {}) => ({
   type: options.exportType || ExportType.EXCEL,
   target: ExportTarget.LOCAL,
   indicator: options.indicator || 'default',
-  checkBar: options.checkBar || 'default',
+  checkBar: options.checkBar || 'hidden',
   footer: options.footer || 'default',
   header: options.header || 'default',
   headerSummary: options.headerSummary || 'default',
