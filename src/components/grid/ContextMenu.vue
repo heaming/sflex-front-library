@@ -207,7 +207,7 @@ export default {
 
         view.setColumnLayout(view.__originalLayouts__);
 
-        view.__originalColumnInfos__.forEach((e) => {
+        view.__originalColumnInfos__?.forEach((e) => {
           view.setColumnProperty(e.name, 'visible', e.visible === true);
         });
 

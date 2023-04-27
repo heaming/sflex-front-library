@@ -51,7 +51,6 @@ export default (app) => {
   $q.iconMapFn = (s) => {
     const [def, viewBox = defaultViewBox] = s.split('|');
     const icon = icons[def] ? `svguse:${icons[def]}#${def}|${viewBox}` : 'none';
-    console.log(icon);
     return { icon };
   };
 };
