@@ -237,7 +237,7 @@
 // no-result
 .rg-empty-grid {
   padding: 0;
-  max-height: 420px !important;
+  border-bottom: 1px solid $line-bg;
 
   > span {
     position: absolute;
