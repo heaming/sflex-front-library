@@ -1,6 +1,7 @@
 import { ValueType } from 'realgrid';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
+import { modal } from '../../../plugins/modal';
 import { isOverByte, getMaxByteLength, getMaxByteString } from '../../../utils/string';
 import {
   fixTopIndexIfInvalid, registerEvent, createCellIndexByDataColumn, getCellClickEvent, isCellEditable,
@@ -70,7 +71,7 @@ export function overrideOnShowTooltip(view) {
       if (isAlignStyle) alignStyle = styleArr[styleIdx];
       else alignStyle = 'text-left';
     }
-    const res = `<div class="${alignStyle} rg-tooltip__custom" style="min-width: ${cell.width}px; padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">`
+    const res = `<div class="${alignStyle} rg-tooltip__custom" style="min-width: ${cell?.width}px; padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">`
       + `<span class="rg-tooltip__custom__span">${originalResult || value}</span>`
       + '</div>';
     return sanitize(res);
@@ -280,10 +281,36 @@ export function customOnCellItemClickable(view) {
   그리드 셀에 포함된 엘리먼트가 클릭되었음을 알리는 콜백
   */
 export function overrideOnCellItemClicked(view) {
-  wrapEvent(view, onCellItemClicked, (g, index) => {
+  wrapEvent(view, onCellItemClicked, async (g, index) => {
     // fix to CellIndex
     if (typeof index.column === 'object') {
       index = createCellIndexByDataColumn(g, index.itemIndex, index.column);
+    }
+
+    const editor = g.getColumnProperty(index.column, 'editor');
+
+    if (editor?.type === 'file') {
+      const dp = g.getDataSource();
+      const dataRow = dp.getOutputRow({}, index.dataRow);
+      const componentProps = {
+        modelValue: dataRow[index.column] ?? [],
+        attachDocumentId: dataRow[editor.attachDocumentId] ?? editor.attachDocumentId,
+        attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
+        fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
+        fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
+        multiple: dataRow[editor.multiple] ?? editor.multiple,
+        downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
+        editable: dataRow[editor.editable] ?? editor.editable,
+      };
+
+      const result = await modal({
+        component: 'ZwcmzAttachFileMgtP',
+        componentProps,
+      });
+
+      if (result.result && result.payload?.length > 0) {
+        dp.setValue(index.dataRow, index.fieldName, result.payload);
+      }
     }
 
     if (g.onCellItemClickable(g, index) === false) {

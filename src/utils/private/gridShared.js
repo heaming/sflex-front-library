@@ -172,7 +172,7 @@ export async function waitUntilShowEditor(view, dropdown = false) {
     const column = view.columnByName(index.column);
 
     if (isCellEditable(view, column, index)) {
-      view.showEditor(dropdown);
+      // view.showEditor(dropdown); // 행추가시 강제 editor show 막음
       await timeout();
 
       if (view.isEditing()) {
@@ -187,9 +187,14 @@ export async function waitUntilShowEditor(view, dropdown = false) {
 export function getOutsideEditorElements(view) {
   const { delegate } = view._view;
   const cellEditors = delegate._cellEditors;
-
   return Object.values(cellEditors)
-    .map((e) => e._list?._element).filter((e) => !!e);
+    .map((e) => {
+      const arr = [];
+      arr.push(e._line?._element);
+      arr.push(e._list?._element);
+      arr.push(e._number?._element);
+      return arr;
+    }).filter((e) => !!e);
 }
 
 /*

@@ -11,6 +11,10 @@ const destroy = 'destroy';
 
 function setFieldFormatDefaults(field) {
   switch (field.dataType) {
+    case 'file':
+      field.dataType = ValueType.OBJECT;
+      field.objectKey = 'fileUid';
+      break;
     case ValueType.BOOLEAN:
       defaultsDeep(field, { booleanFormat: 'N:Y' });
       break;

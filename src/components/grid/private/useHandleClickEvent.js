@@ -7,7 +7,7 @@ export default (containerRef) => {
 
   function isClickedOutsideEditor(view, target) {
     const els = getOutsideEditorElements(view);
-    return els.some((e) => e.contains(target));
+    return els.some((e) => e?.contains(target));
   }
 
   onMounted(() => {
