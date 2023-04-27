@@ -143,6 +143,10 @@ function setColumnRenderer(column, { dataType }) {
     };
   }
 
+  if (column.editor?.type === 'file') {
+    column.renderer = { type: 'button' };
+  }
+
   defaultsDeep(column, {
     renderer: {
       showTooltip: true,
@@ -241,8 +245,15 @@ function setColumnRenderer(column, { dataType }) {
 
 function setColumnEditor(column, { dataType }) {
   const { editor } = column;
-
   switch (editor?.type) {
+    case 'file':
+      defaultsDeep(column, {
+        objectKey: 'fileUid',
+        editable: false,
+        displayCallback: () => '파일찾기',
+        objectCallback: () => '파일찾기',
+      });
+      break;
     case 'number':
       defaultsDeep(column, {
         editButtonVisibility: ButtonVisibility.ALWAYS,

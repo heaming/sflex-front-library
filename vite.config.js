@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     assetsInclude: ['**/*.svg'],
+    assetsInlineLimit: 0,
     alias: {
       '@assets': resolve(__dirname, './dev/src/assets'),
     },
