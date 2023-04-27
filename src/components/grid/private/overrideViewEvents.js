@@ -16,6 +16,7 @@ const onLayoutPropertyChanged = 'onLayoutPropertyChanged';
 const onColumnPropertyChanged = 'onColumnPropertyChanged';
 const onCellItemClickable = 'onCellItemClickable'; // custom
 const onCellItemClicked = 'onCellItemClicked';
+const onCellClicked = 'onCellClicked';
 const onCellButtonClicked = 'onCellButtonClicked';
 const onCellEditable = 'onCellEditable'; // custom
 const onShowEditor = 'onShowEditor';
@@ -31,6 +32,7 @@ const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
 const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
 const dataDropOptionsDropCallback = 'dataDropOptions._callback';
 
+let isChecked = false;
 /*
   데이터 셀의 툴팁이 표시되었음을 알리는 콜백
   */
@@ -323,6 +325,29 @@ export function overrideOnCellItemClicked(view) {
 }
 
 /*
+  그리드 셀이 클릭되었음을 알리는 콜백
+  */
+export function overrideOnCellClicked(view) {
+  wrapEvent(view, onCellClicked, async (g, clickData) => {
+    if (g.checkBar.visible) {
+      const isCheckedRow = g.isCheckedRow(clickData.dataRow);
+      if (!isChecked) {
+        if (!isCheckedRow) g.checkRow(clickData.dataRow, true, false, false);
+        else if (isCheckedRow && (!clickData.editable || clickData.readOnly)) {
+          g.checkRow(clickData.dataRow, !isCheckedRow, false, false);
+        }
+      }
+      isChecked = false;
+      g.setCurrent({ itemIndex: clickData.itemIndex });
+    }
+
+    if (hasOriginal(g, onCellClicked)) {
+      execOriginal(g, onCellClicked, g, clickData);
+    }
+  });
+}
+
+/*
   사용자가 데이터 셀 내부의 action 버튼을 클릭했을 때 호출한다.
   */
 export function overrideOnCellButtonClicked(view) {
@@ -563,6 +588,7 @@ export function overrideOnItemChecked(view) {
     }
 
     g.setCurrent({ itemIndex });
+    isChecked = true;
   });
 }
 
