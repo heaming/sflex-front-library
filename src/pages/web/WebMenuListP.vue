@@ -17,10 +17,11 @@
           label="결과 내 재검색"
         />
         <div
-          class="row items-center ml20"
+          class="row items-center ml20 recent-keywords__chips"
         >
           <kw-chip
             v-for="(reSearchText, reIdx) in reSearchTexts"
+            v-show="reSearchInResult"
             :key="reIdx"
             class="blue-chip"
             removable
@@ -37,7 +38,7 @@
         <span>(<span class="kw-fc--primary">{{ recentKeywords.length }}</span>건)</span>
       </p>
       <kw-icon
-        tooltip="최근 한 달 이내 검색한 메뉴명이 노출됩니다(최대 20개)"
+        :tooltip="t('MSG_TXT_RECENT_MENU_SRCH_TOOLTIP')"
         name="info_24"
         class="ml4 kw-font-pt24"
       />
@@ -195,6 +196,8 @@ import { sanitize } from '../../plugins/sanitize';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
 
+const { t } = useI18n();
+
 const { getters, dispatch } = useStore();
 const { ok } = useModal();
 const { alert, notify } = useGlobal();
@@ -229,10 +232,10 @@ async function validate(text) {
     await alert('2글자 이상 입력해 주세요.');
     return false;
   }
-  if (reSearchInResult.value && reSearchTexts.value.length >= 2) {
-    await alert('결과내 재검색은 2번 까지만 가능합니다.');
-    return false;
-  }
+  // if (reSearchInResult.value && reSearchTexts.value.length >= 1) {
+  //   await alert('결과내 재검색은 2번 까지만 가능합니다.');
+  //   return false;
+  // }
 
   return true;
 }
