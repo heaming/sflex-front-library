@@ -100,9 +100,14 @@ export default {
       viewer?.value?.zoom(-0.5);
     }
 
+    function zoomTo(ratio) {
+      viewer?.value?.zoomTo(ratio);
+    }
+
     return {
       zoomIn,
       zoomOut,
+      zoomTo,
       viewer,
       imgs,
       rotateImage,
