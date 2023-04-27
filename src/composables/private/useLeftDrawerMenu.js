@@ -1,5 +1,5 @@
 import { isNavigationFailure } from 'vue-router';
-import { union } from 'lodash-es';
+import { union, cloneDeep } from 'lodash-es';
 import { alert } from '../../plugins/dialog';
 
 export default () => {
@@ -15,6 +15,7 @@ export default () => {
   const treeRef = ref();
   const title = ref();
   const treeNodes = ref([]);
+  const tempNodes = ref([]);
   const expandedKeys = ref([]);
   const selectedKeys = ref([]);
 
@@ -40,15 +41,31 @@ export default () => {
     return selectedKeys.value.includes(key);
   }
 
+  function reOrderForSelectedMenu(nodes) {
+    let depth2MenuIdx;
+    nodes.forEach((depth2Menu, menuIdx) => {
+      if (isSelected(depth2Menu.key)) depth2MenuIdx = menuIdx;
+    });
+    if (depth2MenuIdx) {
+      const tempMenu = nodes[depth2MenuIdx];
+      nodes.splice(depth2MenuIdx, 1);
+      nodes.unshift(tempMenu);
+    }
+  }
+
   watch(selectedGlobalAppKey, (appKey) => {
     title.value = globalApps.find((v) => v.key === appKey)?.label;
-    treeNodes.value = createNodes(appKey);
+    tempNodes.value = createNodes(appKey);
+    treeNodes.value = cloneDeep(tempNodes.value);
     selectedKeys.value = recursiveGetKeys(appKey, selectedGlobalMenuKey.value);
+    reOrderForSelectedMenu(treeNodes.value);
     expandedKeys.value = [...selectedKeys.value];
   }, { immediate: true });
 
   watch(selectedGlobalMenuKey, (menuKey) => {
     selectedKeys.value = recursiveGetKeys(selectedGlobalAppKey.value, menuKey);
+    treeNodes.value = cloneDeep(tempNodes.value);
+    reOrderForSelectedMenu(treeNodes.value);
     expandedKeys.value = union([...expandedKeys.value, ...selectedKeys.value]);
   });
 

@@ -1076,6 +1076,7 @@
       margin-right: -6px;
       background: #555;
       box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
+      display: inline-block;
     }
   }
 }
@@ -1090,4 +1091,42 @@
 
 td.rg-sum-cell.rg-rowindicator-sum {
   text-indent: -9999px;
+}
+
+// 그리드 부분합, 푸터, 상단요약 색상조정
+.rg-header-summary,
+.rg-sum {
+  background: transparent;
+}
+
+.rg-footer-cell,
+.rg-foot-cell,
+.rg-header-summary-cell,
+.rg-sum-cell {
+  border-bottom: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  background: rgb(47 138 243 / 30%);
+
+  .rg-footer-renderer,
+  .rg-header-summary-renderer {
+    font-weight: bold;
+  }
+}
+
+tr:not(.rg-focused-row).rg-rowgroup-footer {
+  background: rgb(47 138 243 / 5%);
+
+  .rg-rowgroup-footer-renderer {
+    font-weight: 500;
+  }
+}
+
+tr.rg-focused-row.rg-rowgroup-footer {
+  background: rgba($primary, 0.1) !important;
+
+  .rg-rowgroup-footer-renderer {
+    font-weight: 500;
+  }
 }
