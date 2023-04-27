@@ -101,7 +101,9 @@
     }
 
     &__content {
-      // display: none;
+      .q-stepper__step-inner {
+        padding: 0;
+      }
     }
 
     &__header--alternative-labels {
