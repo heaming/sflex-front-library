@@ -69,7 +69,7 @@ const { create } = SunEditor.init({
   },
   // historyStackDelayTime: 400, // undo 시 영향.
   lineAttrReset: 'style',
-  defaultStyle: 'font-family: 굴림; font-size: 10px;',
+  defaultStyle: 'font-family: 굴림; font-size: 16px;',
   // endregion
 
   // region [contents define & tag limit]

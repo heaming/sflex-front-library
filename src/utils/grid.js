@@ -510,7 +510,7 @@ const normalizeExportOptions = (options = {}) => ({
   type: options.exportType || ExportType.EXCEL,
   target: ExportTarget.LOCAL,
   indicator: options.indicator || 'default',
-  checkBar: options.checkBar || 'default',
+  checkBar: options.checkBar || 'hidden',
   footer: options.footer || 'default',
   header: options.header || 'default',
   headerSummary: options.headerSummary || 'default',
@@ -588,9 +588,10 @@ export async function exportView(view, options) {
         }
       });
 
-      // value가 없는경우 disable 된 콤보 필드일수도 있다.
+      // value가 없는경우 disable (혹은 readonly)된 콤보 필드일수도 있다.
       if (value === '') {
-        const disableField = formItem.querySelector('.q-field--disabled');
+        let disableField = formItem.querySelector('.q-field--disabled');
+        if (!disableField) disableField = formItem.querySelector('.q-field--readonly');
         if (disableField) {
           const spans = disableField.querySelectorAll('.q-field__native span');
           spans.forEach((v, i) => {
