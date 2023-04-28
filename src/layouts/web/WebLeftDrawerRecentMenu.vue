@@ -132,7 +132,7 @@ export default {
     }
 
     async function onClickDeleteAll() {
-      if (!await confirm(t('MSG_ALT_DEL'))) return;
+      if (!await confirm(t('MSG_ALT_WANT_DEL'))) return;
 
       const deleteMenus = menus.value.map(({ menuLogDate, menuUid }) => ({ menuLogDate, menuUid }));
       await deleteRecentMenus(deleteMenus);
@@ -142,7 +142,7 @@ export default {
     }
 
     async function onClickDelete({ menuLogDate, menuUid }) {
-      if (!await confirm(t('MSG_ALT_DEL'))) return;
+      if (!await confirm(t('MSG_ALT_WANT_DEL'))) return;
 
       await deleteRecentMenus([{ menuLogDate, menuUid }]);
       await dispatch('meta/fetchRecentMenus');

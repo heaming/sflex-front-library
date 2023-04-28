@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.525",
+  "version": "0.1.527",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -52,6 +52,7 @@
     "@videojs-player/vue": "^1.0.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "axios": "^0.27.2",
+    "axios-jsonp": "^1.0.4",
     "bootstrap-datepicker": "^1.9.0",
     "chart.js": "^3.8.0",
     "chartjs-plugin-datalabels": "^2.0.0",

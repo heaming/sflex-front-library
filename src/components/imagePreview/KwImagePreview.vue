@@ -93,16 +93,21 @@ export default {
     });
 
     function zoomIn() {
-      viewer?.value?.zoom(0.5);
+      viewer?.value?.zoom(0.1);
     }
 
     function zoomOut() {
-      viewer?.value?.zoom(-0.5);
+      viewer?.value?.zoom(-0.1);
+    }
+
+    function zoomTo(ratio) {
+      viewer?.value?.zoomTo(ratio);
     }
 
     return {
       zoomIn,
       zoomOut,
+      zoomTo,
       viewer,
       imgs,
       rotateImage,

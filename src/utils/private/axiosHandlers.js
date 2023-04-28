@@ -44,7 +44,7 @@ export function handleConfig(config) {
 export function handleSuccess(response) {
   const { config } = response;
 
-  if (config.spinner) {
+  if (config?.spinner) {
     loadSpinner(false);
   }
 
