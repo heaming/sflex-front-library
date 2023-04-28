@@ -127,7 +127,7 @@
     <template #option="{ itemProps, selected, opt, toggleOption }">
       <q-item
         :active="selected"
-        v-bind="{...itemProps, onClick: () => toggleOption(opt, $g.platform.is.mobile) }"
+        v-bind="{...itemProps, onClick: () => toggleOption(opt, $g.platform.is.mobile && multiple) }"
       >
         <q-item-section
           v-if="multiple"
@@ -138,7 +138,7 @@
             dense
             :true-value="true"
             :false-value="false"
-            @update:model-value="toggleOption(opt, $g.platform.is.mobile)"
+            @update:model-value="toggleOption(opt, $g.platform.is.mobile && multiple)"
           />
         </q-item-section>
         <q-item-section>
@@ -152,7 +152,7 @@
 
     <!-- after-options -->
     <template
-      v-if="$g.platform.is.mobile"
+      v-if="$g.platform.is.mobile && multiple"
       #after-options
     >
       <div class="kw-select-options__action">
