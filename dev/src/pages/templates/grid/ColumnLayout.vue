@@ -120,7 +120,48 @@ function initGrd(data, view) {
   data.setFields(fields);
   view.setColumns(columns);
 
-  data.setRows([{}, {}, {}]);
+  data.setRows([{
+    col1: 'col1',
+    col2: 'col2',
+    col3: 'col3',
+    col4: 'col4',
+    col5: 'col5',
+    col6: 'col6',
+    col7: 'col7',
+    col8: 'col8',
+    col9: 'col9',
+    col10: 'col10',
+    col11: 'col11',
+    col12: 'col12',
+    col13: 'col13' }, {
+    col1: '2-col1',
+    col2: '2-col2',
+    col3: '2-col3',
+    col4: '2-col4',
+    col5: '2-col5',
+    col6: '2-col6',
+    col7: '2-col7',
+    col8: '2-col8',
+    col9: '2-col9',
+    col10: '2-col10',
+    col11: '2-col11',
+    col12: '2-col12',
+    col13: '2-col13',
+  }, {
+    col1: '3-col1',
+    col2: '3-col2',
+    col3: '3-col3',
+    col4: '3-col4',
+    col5: '3-col5',
+    col6: '3-col6',
+    col7: '3-col7',
+    col8: '3-col8',
+    col9: '3-col9',
+    col10: '3-col10',
+    col11: '3-col11',
+    col12: '3-col12',
+    col13: '3-col13',
+  }]);
 
   setLayout(1);
 }
@@ -215,7 +256,48 @@ function initGrd(data, view) {
   data.setFields(fields);
   view.setColumns(columns);
 
-  data.setRows([{}, {}, {}]);
+  data.setRows([{
+    col1: 'col1',
+    col2: 'col2',
+    col3: 'col3',
+    col4: 'col4',
+    col5: 'col5',
+    col6: 'col6',
+    col7: 'col7',
+    col8: 'col8',
+    col9: 'col9',
+    col10: 'col10',
+    col11: 'col11',
+    col12: 'col12',
+    col13: 'col13' }, {
+    col1: '2-col1',
+    col2: '2-col2',
+    col3: '2-col3',
+    col4: '2-col4',
+    col5: '2-col5',
+    col6: '2-col6',
+    col7: '2-col7',
+    col8: '2-col8',
+    col9: '2-col9',
+    col10: '2-col10',
+    col11: '2-col11',
+    col12: '2-col12',
+    col13: '2-col13',
+  }, {
+    col1: '3-col1',
+    col2: '3-col2',
+    col3: '3-col3',
+    col4: '3-col4',
+    col5: '3-col5',
+    col6: '3-col6',
+    col7: '3-col7',
+    col8: '3-col8',
+    col9: '3-col9',
+    col10: '3-col10',
+    col11: '3-col11',
+    col12: '3-col12',
+    col13: '3-col13',
+  }]);
 
   setLayout(1);
 }
