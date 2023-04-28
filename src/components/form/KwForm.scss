@@ -8,15 +8,15 @@
   $-kw-form-row-padding-dense: 6px 0;
   $-kw-form-item-min-height-dense: 24px;
 
-  @at-root .kw-form-row {
+  .kw-form-row {
     @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
   }
 
-  @at-root .kw-form-item {
+  .kw-form-item {
     @include kw-item($-kw-form-item-min-height);
   }
 
-  @at-root .kw-label-content {
+  .kw-label-content {
     // In this context, use only inline elements.
     font-size: $kw-field-font-size-dense;
     line-height: $kw-field-line-height-dense;
@@ -119,15 +119,15 @@ body.mobile {
     $-kw-form-item-min-height: $kw-field-height; // 40px
     $-kw-form-item-min-height-dense: 24px;
 
-    @at-root .kw-form-row {
+    @at-root body:not(.desktop) .kw-form-row {
       @include kw-row($-kw-form-row-height, $-kw-form-row-gap, $-kw-form-row-padding);
     }
 
-    @at-root .kw-form-item {
+    @at-root body:not(.desktop) .kw-form-item {
       @include kw-item($-kw-form-item-min-height);
     }
 
-    @at-root .kw-label-content {
+    .kw-label-content {
       color: $black1;
     }
 
