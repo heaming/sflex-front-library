@@ -68,7 +68,6 @@ export default defineConfig(({ mode }) => {
         name: 'KwLib',
         formats: ['es'],
         fileName: 'index',
-        emitAssets: true,
       },
 
       rollupOptions: {
