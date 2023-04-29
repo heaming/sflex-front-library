@@ -287,6 +287,10 @@
 }
 
 .web-left-drawer__menu {
+  .drawer-menu__tree > .q-tree__node:last-child {
+    height: calc(100vh - 120px);
+  }
+
   &.q-tree {
     .q-focus-helper {
       display: none;
