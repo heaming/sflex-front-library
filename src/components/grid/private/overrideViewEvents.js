@@ -333,7 +333,10 @@ export function overrideOnCellClicked(view) {
       const isCheckedRow = g.isCheckedRow(clickData.dataRow);
       if (!isChecked) {
         if (!isCheckedRow) g.checkRow(clickData.dataRow, true, false, false);
-        else if (isCheckedRow && (!clickData.editable || clickData.readOnly)) {
+        else if (
+          isCheckedRow
+          && ((!clickData.editable || clickData.readOnly) || g.onCellEditable(g, clickData) === false)
+        ) {
           g.checkRow(clickData.dataRow, !isCheckedRow, false, false);
         }
       }
