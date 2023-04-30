@@ -178,16 +178,20 @@ export default {
       }
     }
 
+    const selectedGlobalAppKey = computed(() => getters['app/getSelectedGlobalAppKey']);
     async function getActiveClass() {
       document.querySelectorAll('.web-header__link').forEach((item) => {
         item.classList.remove('web-header__link--active');
       });
-      const selected = getters['app/getSelectedGlobalAppKey'];
-      const el = document.querySelector(`#header_${selected}`);
+      const el = document.querySelector(`#header_${selectedGlobalAppKey.value}`);
       if (el !== null) {
         el.classList.add('web-header__link--active');
       }
     }
+
+    watch(selectedGlobalAppKey, () => {
+      getActiveClass();
+    });
 
     const getSelectedKey = ref('');
     function openGnbMenu(key, ev) {
@@ -222,6 +226,10 @@ export default {
 
       if (result) push({ name: payload.menuUid });
     }
+
+    onMounted(() => {
+      getActiveClass();
+    });
 
     return {
       ...useHeaderApp(),

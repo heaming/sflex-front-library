@@ -159,6 +159,7 @@ import { sanitize } from '../../plugins/sanitize';
 const NAMED_REGEX = {
   alpha: /^[A-Z]*$/i,
   alpha_dash: /^[0-9A-Z_-]*$/i,
+  alpha_dot_dash: /^[0-9A-Z._-]*$/i,
   alpha_num: /^[0-9A-Z]*$/i,
   alpha_spaces: /^[A-Z\s]*$/i,
   alpha_underscore: /^[0-9A-Z_]*$/i,
