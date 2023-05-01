@@ -1,4 +1,4 @@
-import { ValueType, RowState } from 'realgrid';
+import { ValueType } from 'realgrid';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { modal } from '../../../plugins/modal';
@@ -317,6 +317,7 @@ export function overrideOnCellItemClicked(view) {
         multiple: dataRow[editor.multiple] ?? editor.multiple,
         downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
         editable: dataRow[editor.editable] ?? editor.editable,
+        existFiles: dataRow[index.column].files ?? [],
       };
 
       const result = await modal({
@@ -326,11 +327,17 @@ export function overrideOnCellItemClicked(view) {
 
       if (result.result) {
         if (result.payload?.isModified) {
-          dp.setValue(index.dataRow, index.fieldName, result.payload.files);
+          const data = {};
+          data.files = result.payload.files;
+          data.__origin = dataRow[index.column].__origin;
+          dp.setValue(index.dataRow, index.fieldName, data);
         }
 
         if (result.payload?.initFiles) {
-          dp.setRowState(index.dataRow, RowState.NONE, true);
+          const data = {};
+          data.files = dataRow[index.column].__origin.files;
+          data.__origin = dataRow[index.column].__origin;
+          dp.setValue(index.dataRow, index.fieldName, data);
         }
       }
     }
