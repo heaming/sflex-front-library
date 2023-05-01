@@ -317,6 +317,7 @@ export function overrideOnCellItemClicked(view) {
         multiple: dataRow[editor.multiple] ?? editor.multiple,
         downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
         editable: dataRow[editor.editable] ?? editor.editable,
+        existFiles: dataRow[index.column].files ?? [],
       };
 
       const result = await modal({
@@ -324,8 +325,20 @@ export function overrideOnCellItemClicked(view) {
         componentProps,
       });
 
-      if (result.result && result.payload?.length > 0) {
-        dp.setValue(index.dataRow, index.fieldName, result.payload);
+      if (result.result) {
+        if (result.payload?.isModified) {
+          const data = {};
+          data.files = result.payload.files;
+          data.__origin = dataRow[index.column].__origin;
+          dp.setValue(index.dataRow, index.fieldName, data);
+        }
+
+        if (result.payload?.initFiles) {
+          const data = {};
+          data.files = dataRow[index.column].__origin.files;
+          data.__origin = dataRow[index.column].__origin;
+          dp.setValue(index.dataRow, index.fieldName, data);
+        }
       }
     }
 
@@ -343,7 +356,7 @@ export function overrideOnCellItemClicked(view) {
   */
 export function overrideOnCellClicked(view) {
   wrapEvent(view, onCellClicked, async (g, clickData) => {
-    if (g.checkBar.visible) {
+    if (g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {
       const isCheckedRow = g.isCheckedRow(clickData.dataRow);
       if (!isChecked) {
         if (!isCheckedRow) g.checkRow(clickData.dataRow, true, false, false);
