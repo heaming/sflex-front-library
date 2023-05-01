@@ -29,8 +29,7 @@
           <kw-input v-model="userInfoForSetting.departmentName" />
         </kw-form-item>
       </kw-form-row>
-      <!-- 임시로 직급코드, 직급명 비활성화. 임직원들의 직급명, 코드가 나오면 안된다고 함. -->
-      <!-- <kw-form-row>
+      <kw-form-row>
         <kw-form-item label="직급코드">
           <kw-input
             v-model="userInfoForSetting.careerLevelCode"
@@ -45,7 +44,7 @@
             placeholder="변경된 값은 저장 되나, 보여지지는 않습니다. (고객사 요청)"
           />
         </kw-form-item>
-      </kw-form-row> -->
+      </kw-form-row>
       <kw-form-row>
         <kw-form-item label="조직유형코드">
           <kw-input v-model="userInfoForSetting.ogTpCd" />
