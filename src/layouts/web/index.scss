@@ -1,6 +1,7 @@
 /*
   Layout
  */
+
 .web-layout {
   body.desktop & {
     & > .web-header {
@@ -17,6 +18,13 @@
   }
 
   z-index: 2;
+}
+
+// webHeader 에 hover 시 다른 것보다 항상 위에 오도록 (kwSelect 보다는 위에 오기 위해 )
+.q-body--prevent-scroll__header {
+  .web-layout {
+    z-index: 6001;
+  }
 }
 
 // mobile
