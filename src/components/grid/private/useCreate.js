@@ -3,7 +3,7 @@ import { pick } from 'lodash-es';
 import defaultConfig from './defaultConfig';
 import override from './override';
 import { registerCustomRenderers } from './customRenderer';
-import { syncHeadCheckIfAble, unregisterEventAll } from '../../../utils/private/gridShared';
+import { syncHeadCheckIfAble, unregisterEventAll, objectValueCallback } from '../../../utils/private/gridShared';
 import { init, reset, validate, isModified } from '../../../utils/grid';
 import useObserverChild, { useObserverChildProps } from '../../../composables/private/useObserverChild';
 import useHandleClickEvent from './useHandleClickEvent';
@@ -64,31 +64,11 @@ export default (DataClass, ViewClass) => {
 
     view.__gridName__ = name;
     view.__originalColumnInfos__ = view.getColumns().map((e) => pick(e, ['name', 'visible']));
+    data.valuesCallback = objectValueCallback;
     vm.proxy.applySavedLayouts?.();
     setTimeout(() => {
       view.__originalLayouts__ = view.saveColumnLayout();
     });
-
-    // data.valuesCallback = (ds, values) => {
-    //   const row = [];
-    //   if (values) {
-    //     for (let i = 0, cnt = ds.getFieldCount(); i < cnt; i++) {
-    //       const fld = ds.getOrgFieldName(i);
-    //       const fName = Object.keys(values).find((key) => key.toLowerCase() === fld.toLowerCase());
-    //       const fieldData = ds.fieldByName(fName);
-
-    //       if (fieldData?.dataType === 'object' && (typeof values[fName] !== '
-    // object' || (typeof values[fName] === 'object' && !values[fName]))) {
-    //         const objData = {};
-    //         objData[fieldData.objectKey] = values[fName];
-    //         row[i] = objData;
-    //       } else if (values[fName]) {
-    //         row[i] = values[fName];
-    //       }
-    //     }
-    //   }
-    //   return row;
-    // };
   });
 
   onBeforeUnmount(() => {
