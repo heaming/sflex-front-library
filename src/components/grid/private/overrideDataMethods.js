@@ -13,7 +13,7 @@ function setFieldFormatDefaults(field) {
   switch (field.dataType) {
     case 'file':
       field.dataType = ValueType.OBJECT;
-      field.objectKey = 'fileUid';
+      field.objectKey = 'files';
       break;
     case ValueType.BOOLEAN:
       defaultsDeep(field, { booleanFormat: 'N:Y' });
