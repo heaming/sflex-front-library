@@ -144,7 +144,7 @@ function setColumnRenderer(column, { dataType }) {
   }
 
   if (column.editor?.type === 'file') {
-    column.renderer = { type: 'button' };
+    column.renderer = { type: 'button', hideWhenEmpty: false };
   }
 
   defaultsDeep(column, {
@@ -248,10 +248,9 @@ function setColumnEditor(column, { dataType }) {
   switch (editor?.type) {
     case 'file':
       defaultsDeep(column, {
-        objectKey: 'fileUid',
         editable: false,
-        displayCallback: () => '파일찾기',
-        objectCallback: () => '파일찾기',
+        displayCallback: () => '파일 찾기',
+        objectCallback: () => '파일 찾기',
       });
       break;
     case 'number':
