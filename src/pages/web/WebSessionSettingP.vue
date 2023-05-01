@@ -31,12 +31,18 @@
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="직급코드">
-          <kw-input v-model="userInfoForSetting.careerLevelCode" />
+          <kw-input
+            v-model="userInfoForSetting.careerLevelCode"
+            placeholder="변경된 값은 저장 되나, 보여지지는 않습니다. (고객사 요청)"
+          />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="직급명">
-          <kw-input v-model="userInfoForSetting.careerLevelName" />
+          <kw-input
+            v-model="userInfoForSetting.careerLevelName"
+            placeholder="변경된 값은 저장 되나, 보여지지는 않습니다. (고객사 요청)"
+          />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
@@ -88,9 +94,10 @@ import { useSession } from '../../index';
 const {
   isReady,
 } = useSession();
-const { getUserInfo } = useMeta();
 const { ok } = useModal();
 const userInfoForSetting = ref(cloneDeep(useMeta().getUserInfo()));
+userInfoForSetting.value.careerLevelCode = '';
+userInfoForSetting.value.careerLevelName = '';
 
 async function onClickSave() {
   const accessToken = localStorage.getItem(consts.LOCAL_STORAGE_ACCESS_TOKEN) || null;
@@ -99,7 +106,6 @@ async function onClickSave() {
   });
 
   await isReady();
-  console.log(getUserInfo());
   ok();
   await notify('세션변경이 완료되었습니다.');
 }
