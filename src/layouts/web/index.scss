@@ -8,6 +8,7 @@
       min-width: 1656px;
       background: #f3f4f5;
       position: sticky;
+      z-index: 3000;
       top: 0 !important;
     }
 
@@ -21,7 +22,9 @@
 }
 
 // webHeader 에 hover 시 다른 것보다 항상 위에 오도록 (kwSelect 보다는 위에 오기 위해 )
-.q-body--prevent-scroll__header {
+body.q-body--prevent-scroll__header {
+  z-index: 6001;
+
   .web-layout {
     z-index: 6001;
   }
