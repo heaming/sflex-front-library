@@ -68,6 +68,26 @@ export default (DataClass, ViewClass) => {
     setTimeout(() => {
       view.__originalLayouts__ = view.saveColumnLayout();
     });
+
+    data.valuesCallback = (ds, values) => {
+      const row = [];
+      if (values) {
+        for (let i = 0, cnt = ds.getFieldCount(); i < cnt; i++) {
+          const fld = ds.getOrgFieldName(i);
+          const fName = Object.keys(values).find((key) => key.toLowerCase() === fld.toLowerCase());
+          const fieldData = ds.fieldByName(fName);
+
+          if (fieldData?.dataType === 'object' && (typeof values[fName] !== 'object' || (typeof values[fName] === 'object' && !values[fName]))) {
+            const objData = {};
+            objData[fieldData.objectKey] = values[fName];
+            row[i] = objData;
+          } else if (values[fName]) {
+            row[i] = values[fName];
+          }
+        }
+      }
+      return row;
+    };
   });
 
   onBeforeUnmount(() => {

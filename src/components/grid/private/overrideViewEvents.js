@@ -1,4 +1,4 @@
-import { ValueType } from 'realgrid';
+import { ValueType, RowState } from 'realgrid';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { modal } from '../../../plugins/modal';
@@ -324,8 +324,14 @@ export function overrideOnCellItemClicked(view) {
         componentProps,
       });
 
-      if (result.result && result.payload?.length > 0) {
-        dp.setValue(index.dataRow, index.fieldName, result.payload);
+      if (result.result) {
+        if (result.payload?.isModified) {
+          dp.setValue(index.dataRow, index.fieldName, result.payload.files);
+        }
+
+        if (result.payload?.initFiles) {
+          dp.setRowState(index.dataRow, RowState.NONE, true);
+        }
       }
     }
 
