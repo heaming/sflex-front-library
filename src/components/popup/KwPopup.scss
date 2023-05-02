@@ -129,7 +129,7 @@ body.tablet .kw-popup {
     overflow-y: scroll;
 
     // min-height: 348px;
-    max-height: 890px;
+    max-height: calc(900px - 58px + 60px);
     z-index: 10;
 
     & > *:nth-child(1):is(h3) {
