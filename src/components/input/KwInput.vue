@@ -20,7 +20,7 @@
     :unmasked-value="computedUnmaskedValue"
     :prefix="prefix"
     :suffix="suffix"
-    :clearable="clearable"
+    :clearable="type !== 'textarea' && clearable"
     :color="color"
     :bg-color="bgColor"
     :autofocus="autofocus"
