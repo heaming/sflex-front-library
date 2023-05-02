@@ -73,8 +73,22 @@ export function overrideOnShowTooltip(view) {
       if (isAlignStyle) alignStyle = styleArr[styleIdx];
       else alignStyle = 'text-left';
     }
-    const res = `<div class="${alignStyle} rg-tooltip__custom" style="min-width: ${cell?.width}px; padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">`
-      + `<span class="rg-tooltip__custom__span">${originalResult || value}</span>`
+
+    // document.append();
+    const tempSpan = document.createElement('span');
+    tempSpan.setAttribute('id', 'tempSpan');
+    tempSpan.style.visibility = 'hidden';
+    tempSpan.append(`${originalResult || value}`);
+    document.body.append(tempSpan);
+    const doc = document.getElementById('tempSpan');
+    const textWidth = doc.offsetWidth ?? doc.clientWidth;
+    document.body.removeChild(tempSpan);
+
+    const res = `<div class="${alignStyle} rg-tooltip__custom"`
+      + `style="min-width: ${cell?.width < 100 ? 100 : cell?.width}px;`
+      + `${cell?.width && textWidth > cell?.width ? 'max-width: 400px; word-wrap: break-word;' : ''}`
+      + `padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">` // DIV 설정
+      + `<span class="rg-tooltip__custom__span" ${textWidth > cell?.width ? 'style="display: block; white-space: break-spaces;"' : ''}>${originalResult || value}</span>`
       + '</div>';
     return sanitize(res);
   });
@@ -303,6 +317,7 @@ export function overrideOnCellItemClicked(view) {
         multiple: dataRow[editor.multiple] ?? editor.multiple,
         downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
         editable: dataRow[editor.editable] ?? editor.editable,
+        existFiles: dataRow[index.column].files ?? [],
       };
 
       const result = await modal({
@@ -310,8 +325,20 @@ export function overrideOnCellItemClicked(view) {
         componentProps,
       });
 
-      if (result.result && result.payload?.length > 0) {
-        dp.setValue(index.dataRow, index.fieldName, result.payload);
+      if (result.result) {
+        if (result.payload?.isModified) {
+          const data = {};
+          data.files = result.payload.files;
+          data.__origin = dataRow[index.column].__origin;
+          dp.setValue(index.dataRow, index.fieldName, data);
+        }
+
+        if (result.payload?.initFiles) {
+          const data = {};
+          data.files = dataRow[index.column].__origin.files;
+          data.__origin = dataRow[index.column].__origin;
+          dp.setValue(index.dataRow, index.fieldName, data);
+        }
       }
     }
 
@@ -329,11 +356,14 @@ export function overrideOnCellItemClicked(view) {
   */
 export function overrideOnCellClicked(view) {
   wrapEvent(view, onCellClicked, async (g, clickData) => {
-    if (g.checkBar.visible) {
+    if (g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {
       const isCheckedRow = g.isCheckedRow(clickData.dataRow);
       if (!isChecked) {
         if (!isCheckedRow) g.checkRow(clickData.dataRow, true, false, false);
-        else if (isCheckedRow && (!clickData.editable || clickData.readOnly)) {
+        else if (
+          isCheckedRow
+          && ((!clickData.editable || clickData.readOnly) || g.onCellEditable(g, clickData) === false)
+        ) {
           g.checkRow(clickData.dataRow, !isCheckedRow, false, false);
         }
       }

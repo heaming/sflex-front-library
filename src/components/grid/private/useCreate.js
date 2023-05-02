@@ -3,7 +3,7 @@ import { pick } from 'lodash-es';
 import defaultConfig from './defaultConfig';
 import override from './override';
 import { registerCustomRenderers } from './customRenderer';
-import { syncHeadCheckIfAble, unregisterEventAll } from '../../../utils/private/gridShared';
+import { syncHeadCheckIfAble, unregisterEventAll, objectValueCallback } from '../../../utils/private/gridShared';
 import { init, reset, validate, isModified } from '../../../utils/grid';
 import useObserverChild, { useObserverChildProps } from '../../../composables/private/useObserverChild';
 import useHandleClickEvent from './useHandleClickEvent';
@@ -64,6 +64,7 @@ export default (DataClass, ViewClass) => {
 
     view.__gridName__ = name;
     view.__originalColumnInfos__ = view.getColumns().map((e) => pick(e, ['name', 'visible']));
+    data.valuesCallback = objectValueCallback;
     vm.proxy.applySavedLayouts?.();
     setTimeout(() => {
       view.__originalLayouts__ = view.saveColumnLayout();

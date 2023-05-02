@@ -165,7 +165,7 @@ export default {
     }, libConfig.DEFAULT_DEBOUNCE_WAIT, { leading: true });
 
     async function onReset() {
-      if (await formCtx.alertIfIsNotModified()) return;
+      if (await formCtx.alertIfIsNotModified(t('MSG_ALT_NO_INIT_DATA'))) return;
 
       if (await formCtx.confirmIfIsModified(t('MSG_ALT_SRCH_RESET'))) {
         await formCtx.reset();
