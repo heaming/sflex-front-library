@@ -1,0 +1,17 @@
+<svg id="visual_online" data-name="login_online studit(h36)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path style="fill:none" d="M0 0h36v36H0z"/>
+    <path data-name="guide" d="M0 0h28v28H0z" transform="translate(4 4)" style="fill:none"/>
+    <path data-name="사각형 151772" transform="translate(5.97 7.43)" style="fill:#3890f6" d="M0 0h24v17.51H0z"/>
+    <path data-name="사각형 151773" transform="translate(5.97 21.2)" style="opacity:.2" d="M0 0h24v3.74H0z"/>
+    <g data-name="사각형 151774" style="stroke:#2d73c5;fill:#fff">
+        <path style="stroke:none" d="M0 0h1.49v3.74H0z" transform="translate(17.225 23.43)"/>
+        <path style="fill:none" d="M.5.5h.49v2.74H.5z" transform="translate(17.225 23.43)"/>
+    </g>
+    <path data-name="사각형 151775" transform="translate(11.055 27.17)" style="fill:#2d73c5" d="M0 0h13.83v2.4H0z"/>
+    <path data-name="사각형 151650" style="fill:#fff" d="M0 0h10.745v1.5H0z" transform="translate(8.714 11.077)"/>
+    <path data-name="사각형 151652" transform="translate(8.714 14.794)" style="fill:#fff" d="M0 0h7.163v1.5H0z"/>
+    <g>
+        <path data-name="패스 210450" d="M0 3.411 2.328 0l2.325 3.411v13.643H0z" transform="rotate(-137 14.977 6.96)" style="opacity:.2"/>
+        <path data-name="패스 210445" d="M0 3.411 2.328 0l2.325 3.411v13.643H0z" transform="rotate(-137 14.188 6.054)" style="fill:#ff8f1f"/>
+    </g>
+</svg>

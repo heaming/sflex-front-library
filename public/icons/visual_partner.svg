@@ -1,0 +1,20 @@
+<svg id="visual_partner" data-name="login_partner_05(h36)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path style="fill:none" d="M0 0h36v36H0z"/>
+    <path data-name="guide" d="M0 0h28v28H0z" transform="translate(4 4)" style="fill:none"/>
+    <g>
+        <path data-name="합치기 401" d="M0 13.95V3.688h1.7V0l4.491 3.688H16V13.95z" transform="rotate(180 16.593 16.188)" style="fill:#ff8f1f"/>
+        <g data-name="...2">
+            <path data-name="패스 210501" d="M.916 0A.916.916 0 1 1 0 .916.916.916 0 0 1 .916 0z" style="fill:#fff" transform="translate(20.499 23.001)"/>
+            <path data-name="패스 210502" d="M.916 0A.916.916 0 1 1 0 .916.916.916 0 0 1 .916 0z" transform="translate(24.165 23.001)" style="fill:#fff"/>
+            <path data-name="패스 210503" d="M.916 0A.916.916 0 1 1 0 .916.916.916 0 0 1 .916 0z" transform="translate(27.83 23.001)" style="fill:#fff"/>
+        </g>
+        <g>
+            <path data-name="합치기 400" d="M2.4 16.709H0V0h26.872v16.709H8.4l-6 5.285z" transform="translate(3.999 3.928)" style="fill:#2f8af3"/>
+            <g data-name="...1">
+                <path data-name="패스 210498" d="M1.237 0A1.237 1.237 0 1 1 0 1.237 1.237 1.237 0 0 1 1.237 0z" style="fill:#fff" transform="translate(11.249 11.124)"/>
+                <path data-name="패스 210499" d="M1.237 0A1.237 1.237 0 1 1 0 1.237 1.237 1.237 0 0 1 1.237 0z" transform="translate(16.196 11.124)" style="fill:#fff"/>
+                <path data-name="패스 210500" d="M1.237 0A1.237 1.237 0 1 1 0 1.237 1.237 1.237 0 0 1 1.237 0z" transform="translate(21.144 11.124)" style="fill:#fff"/>
+            </g>
+        </g>
+    </g>
+</svg>

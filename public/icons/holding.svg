@@ -1,0 +1,8 @@
+<svg data-name="holding" id="holding" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <g data-name="타원 5062" style="stroke:currentColor;stroke-width:1.5px;fill:none" transform="translate(1 1)">
+        <circle cx="7" cy="7" r="7" style="stroke:none"/>
+        <circle cx="7" cy="7" r="6.25" style="fill:none"/>
+    </g>
+    <text data-name="!" transform="translate(8 12)" style="fill:currentColor;font-size:10px;font-family:NotoSansKR-Bold,Noto Sans KR;font-weight:700"><tspan x="-1.85" y="0">!</tspan></text>
+</svg>

@@ -1,0 +1,14 @@
+<svg id="arrow_down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g transform="translate(0)">
+    <g id="icon_16down" data-name="icon / h16 /down" transform="translate(15.539 16) rotate(180)">
+      <g id="keyline_16px" data-name="keyline/16px" transform="translate(15.539) rotate(90)">
+        <g id="bounding-box">
+          <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+        </g>
+      </g>
+      <g id="icon" transform="translate(4.258 2.82)">
+        <path id="패스_202519" data-name="패스 202519" d="M18277.213-3412.96l-5,5,5,5" transform="translate(-3404.679 -18269.533) rotate(90)" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

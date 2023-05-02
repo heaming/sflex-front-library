@@ -1,0 +1,10 @@
+<svg id="pw_24" data-name="pw(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g style="opacity:.5">
+        <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    </g>
+    <g data-name="사각형 151162" style="stroke:currentColor;stroke-width:1.5px;fill:none">
+        <path style="stroke:none" d="M0 0h16v11H0z" transform="translate(4 10)"/>
+        <path style="fill:none" d="M.75.75h14.5v9.5H.75z" transform="translate(4 10)"/>
+    </g>
+    <path data-name="패스 210147" d="M.5 7.55V5.712a4.212 4.212 0 0 1 8.423 0V7.55" transform="translate(7.288 1.5)" style="stroke-miterlimit:10;stroke:currentColor;stroke-width:1.5px;fill:none"/>
+</svg>
