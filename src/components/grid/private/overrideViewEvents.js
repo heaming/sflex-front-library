@@ -360,12 +360,12 @@ export function overrideOnCellClicked(view) {
     if (g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {
       const isCheckedRow = g.isCheckedRow(clickData.dataRow);
       if (!isChecked) {
-        if (!isCheckedRow) g.checkRow(clickData.dataRow, true, false, false);
+        if (!isCheckedRow) g.checkRow(clickData.dataRow, true, g.checkBar.exclusive, false);
         else if (
           isCheckedRow
           && ((!clickData.editable || clickData.readOnly) || g.onCellEditable(g, clickData) === false)
         ) {
-          g.checkRow(clickData.dataRow, !isCheckedRow, false, false);
+          g.checkRow(clickData.dataRow, !isCheckedRow, g.checkBar.exclusive, false);
         }
       }
       isChecked = false;
