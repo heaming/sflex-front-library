@@ -1,0 +1,17 @@
+<svg id="preview_24" data-name="preview(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g transform="translate(3 3)">
+        <path data-name="사각형 151624" transform="translate(.001)" style="fill:#222" d="M0 0h18v1.5H0z"/>
+        <path data-name="사각형 151625" transform="translate(.001 16.5)" style="fill:#222" d="M0 0h7v1.5H0z"/>
+        <path data-name="사각형 151626" transform="rotate(90 .75 .75)" style="fill:#222" d="M0 0h17.25v1.5H0z"/>
+        <path data-name="사각형 151627" transform="rotate(90 9 9)" style="fill:#222" d="M0 0h11v1.5H0z"/>
+        <circle data-name="타원 5198" cx="4.5" cy="4.5" r="4.5" transform="translate(6.501 7)" style="fill:#fff"/>
+        <g>
+            <path data-name="선 3158" transform="translate(13.379 14.212)" style="stroke-linejoin:round;stroke:#222;stroke-width:1.5px;fill:none" d="m0 0 2.621 2.621"/>
+            <g data-name="타원 5194" style="stroke:#222;stroke-width:1.5px;fill:none" transform="translate(6.879 7.712)">
+                <circle cx="4" cy="4" r="4" style="stroke:none"/>
+                <circle cx="4" cy="4" r="3.25" style="fill:none"/>
+            </g>
+        </g>
+    </g>
+</svg>

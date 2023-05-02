@@ -1,0 +1,8 @@
+<svg id="checked_24" data-name="checked(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <path data-name="사각형 151624" transform="translate(3.001 3)" style="fill:#222" d="M0 0h11v1.5H0z"/>
+    <path data-name="사각형 151625" transform="translate(3.001 19.5)" style="fill:#222" d="M0 0h17.25v1.5H0z"/>
+    <path data-name="사각형 151626" transform="rotate(90 .75 3.75)" style="fill:#222" d="M0 0h17.25v1.5H0z"/>
+    <path data-name="사각형 151627" transform="rotate(90 5 16)" style="fill:#222" d="M0 0h10v1.5H0z"/>
+    <path data-name="패스 210104" d="m4.561 6.559 3.519 3.518 8.665-8.665" transform="translate(3 4)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg id="barcode_24" data-name="barcode_24" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g data-name="그룹 149038">
+        <path data-name="패스 210128" d="M0 0h3.5" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none" transform="translate(3.25 6.3)"/>
+        <path data-name="패스 210127" d="M.3-.766v3.5" transform="translate(2.951 7.066)" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none"/>
+    </g>
+    <g data-name="그룹 149041">
+        <path data-name="패스 210128" d="M0 0h3.5" transform="translate(3.25 17.8)" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none"/>
+        <path data-name="패스 210127" d="M.3 2.734v-3.5" transform="translate(2.951 15.066)" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none"/>
+    </g>
+    <g data-name="그룹 149039">
+        <path data-name="패스 210128" d="M3.5 0H0" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none" transform="translate(17.25 6.3)"/>
+        <path data-name="패스 210127" d="M.3-.766v3.5" transform="translate(20.451 7.066)" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none"/>
+    </g>
+    <g data-name="그룹 149040">
+        <path data-name="패스 210128" d="M3.5 0H0" transform="translate(17.25 17.8)" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none"/>
+        <path data-name="패스 210127" d="M.3 2.734v-3.5" transform="translate(20.451 15.066)" style="stroke-width:1.5px;stroke-linecap:square;stroke:#222;fill:none"/>
+    </g>
+    <g data-name="그룹 149042">
+        <path data-name="패스 210129" d="M6.5 0H0" transform="rotate(90 -1.168 7.633)" style="stroke-width:1.5px;stroke:#222;fill:none"/>
+        <path data-name="패스 210131" d="M6.5 0H0" transform="rotate(90 3.332 12.133)" style="stroke-width:1.5px;stroke:#222;fill:none"/>
+        <path data-name="패스 210136" d="M6.5 0H0" transform="rotate(90 1.832 10.633)" style="stroke-width:1.5px;stroke:#222;fill:none"/>
+        <path data-name="패스 210132" d="M6.5 0H0" transform="rotate(90 .332 9.133)" style="stroke:#222;fill:none"/>
+        <path data-name="패스 210134" d="M6.5 0H0" transform="rotate(90 4.832 13.633)" style="stroke:#222;fill:none"/>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg id="preview_img_24" data-name="preview_img_24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <path data-name="사각형 151638" style="fill:#222" d="M0 0h1.5v18H0z" transform="translate(2 2)"/>
+    <path data-name="사각형 151639" transform="rotate(90 9 11)" style="fill:#222" d="M0 0h1.5v18H0z"/>
+    <path data-name="사각형 151640" transform="rotate(180 10 5)" style="fill:#222" d="M0 0h1.5v8H0z"/>
+    <path data-name="사각형 151641" transform="rotate(90 -4.089 14.411)" style="fill:#222" d="M0 0h1.5v8.322H0z"/>
+    <path data-name="패스 210141" d="M5.216 5.062 7.5 1.808l3.01 2.323" transform="translate(.47 10.479)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+    <path data-name="패스 210142" d="M5.083 4.568 8.568.03" transform="translate(5.238 9.663)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+    <path data-name="패스 210143" d="m4.755 4.547 2.15-2.863" transform="rotate(90 6.113 11.25)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
+    <g data-name="타원 5201" transform="translate(6.224 5.193)" style="stroke:#222;stroke-width:1.5px;fill:none">
+        <circle cx="2.1" cy="2.1" r="2.1" style="stroke:none"/>
+        <circle cx="2.1" cy="2.1" r="1.35" style="fill:none"/>
+    </g>
+    <path data-name="선 3158" transform="translate(19.185 19.212)" style="stroke-linejoin:round;stroke:#222;stroke-width:1.5px;fill:none" d="m0 0 2.121 2.288"/>
+    <g data-name="타원 5203" transform="translate(13.806 12.856)" style="stroke:#222;stroke-width:1.5px;fill:none">
+        <circle cx="3.75" cy="3.75" r="3.75" style="stroke:none"/>
+        <circle cx="3.75" cy="3.75" r="3" style="fill:none"/>
+    </g>
+</svg>

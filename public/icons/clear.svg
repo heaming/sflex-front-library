@@ -1,0 +1,10 @@
+<svg id="clear" data-name="delete(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <g transform="translate(-1.5 -4.237)">
+        <circle data-name="타원 5062" cx="7" cy="7" r="7" transform="translate(2.5 5.237)" style="fill:#ccc"/>
+        <g data-name="icon">
+            <path data-name="선 2820" transform="translate(6.5 9.236)" style="stroke:#fff;stroke-width:1.5px;fill:none" d="m0 6 6-6"/>
+            <path data-name="선 2821" transform="translate(6.5 9.236)" style="stroke:#fff;stroke-width:1.5px;fill:none" d="M6 6 0 0"/>
+        </g>
+    </g>
+</svg>

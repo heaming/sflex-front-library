@@ -1,0 +1,8 @@
+<svg id="info_24" data-name="info(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g data-name="타원 5062" transform="translate(2 2)" style="stroke:#222;stroke-width:1.5px;fill:none">
+        <circle cx="10" cy="10" r="10" style="stroke:none"/>
+        <circle cx="10" cy="10" r="9.25" style="fill:none"/>
+    </g>
+    <text data-name="!" transform="translate(12 17)" style="fill:#222;font-size:14px;font-family:NotoSansKR-Bold,Noto Sans KR;font-weight:700"><tspan x="-2.59" y="0">!</tspan></text>
+</svg>

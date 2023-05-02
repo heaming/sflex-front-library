@@ -1,0 +1,11 @@
+<svg data-name="edit_info(h36)" id="visual_edit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path data-name="사각형 151467" style="fill:none" d="M0 0h36v36H0z"/>
+    <path data-name="사각형 151648" transform="translate(8 6)" style="fill:#3890f6" d="M0 0h20v24H0z"/>
+    <path data-name="사각형 151649" transform="translate(8 6)" style="opacity:.2" d="M0 0h20v5H0z"/>
+    <g data-name="그룹 149086">
+        <path data-name="사각형 151650" transform="translate(11 17.027)" style="fill:#fff" d="M0 0h9v1.5H0z"/>
+        <path data-name="사각형 151653" transform="translate(11 19.777)" style="fill:#fff" d="M0 0h9v1.5H0z"/>
+        <path data-name="사각형 151652" transform="translate(11 14.277)" style="fill:#fff" d="M0 0h6v1.5H0z"/>
+    </g>
+    <path data-name="패스 210244" d="m0-1 2.5-3.25L5-1v13H0z" transform="rotate(-135 18.435 8.404)" style="fill:#ff8f1f"/>
+</svg>
