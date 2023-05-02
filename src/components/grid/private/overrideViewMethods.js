@@ -144,6 +144,9 @@ function setColumnRenderer(column, { dataType }) {
   }
 
   if (column.editor?.type === 'file') {
+    const styleNames = column.styleName.split(' ');
+    styleNames.push('rg-file-button');
+    column.styleName = styleNames.join(' ');
     column.renderer = { type: 'button', hideWhenEmpty: false };
   }
 
@@ -249,8 +252,7 @@ function setColumnEditor(column, { dataType }) {
     case 'file':
       defaultsDeep(column, {
         editable: false,
-        displayCallback: () => '파일 찾기',
-        objectCallback: () => '파일 찾기',
+        objectCallback: () => '',
       });
       break;
     case 'number':
