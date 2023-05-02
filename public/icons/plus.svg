@@ -1,0 +1,5 @@
+<svg id="plus" data-name="plus(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <path data-name="선 3168" transform="translate(8 2)" style="stroke:currentColor;stroke-width:1.5px;fill:none" d="M0 0v12"/>
+    <path data-name="선 3169" transform="translate(2 8)" style="stroke:currentColor;stroke-width:1.5px;fill:none" d="M0 0h12"/>
+</svg>

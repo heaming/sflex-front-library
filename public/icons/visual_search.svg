@@ -1,0 +1,8 @@
+<svg id="visual_search" data-name="visual_search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+    <path d="M0 0h28v28H0z" style="fill:none" data-name="keyline/24px"/>
+    <path data-name="패스 210085" d="m1809.5 380.922 6.839 6.313" transform="translate(-1791.176 -362.238)" style="stroke:#2f8af3;stroke-width:3px;fill:none"/>
+    <g data-name="타원 5175" style="stroke:#2f8af3;stroke-width:3px;fill:none" transform="translate(3 3)">
+        <circle cx="10" cy="10" r="10" style="stroke:none"/>
+        <circle cx="10" cy="10" r="8.5" style="fill:none"/>
+    </g>
+</svg>

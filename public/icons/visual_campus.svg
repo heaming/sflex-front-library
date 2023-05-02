@@ -1,0 +1,15 @@
+<svg id="visual_campus" data-name="login_smart campus(h36)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path style="fill:none" d="M0 0h36v36H0z"/>
+    <path data-name="사각형 151772" transform="translate(5 7.331)" style="fill:#3890f6" d="M0 0h25.147v18.347H0z"/>
+    <path data-name="사각형 151773" transform="translate(5 21.759)" style="opacity:.2" d="M0 0h25.147v3.919H0z"/>
+    <g data-name="사각형 151774" style="stroke:#2d73c5;fill:#fff">
+        <path style="stroke:none" d="M0 0h1.561v3.919H0z" transform="translate(16.793 24.096)"/>
+        <path style="fill:none" d="M.5.5h.561v2.919H.5z" transform="translate(16.793 24.096)"/>
+    </g>
+    <path data-name="사각형 151775" transform="translate(10.328 28.014)" style="fill:#2d73c5" d="M0 0h14.491v2.515H0z"/>
+    <g data-name="그룹 153181" transform="translate(-2.433 -5.007)">
+        <circle data-name="타원 5266" cx="6" cy="6" r="6" transform="translate(15.007 11.007)" style="opacity:.2"/>
+        <circle data-name="타원 5267" cx="6" cy="6" r="6" transform="translate(14.007 10.007)" style="fill:#ff8f1f"/>
+        <path data-name="다각형 25" d="m2.253 0 2.252 3.6H0z" transform="rotate(90 4.252 18.008)" style="fill:#fff"/>
+    </g>
+</svg>

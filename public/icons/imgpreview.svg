@@ -1,0 +1,16 @@
+<svg id="imgpreview" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <g data-name="imgpreview(h16)">
+        <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+        <g data-name="사각형 151631" style="stroke:currentColor;stroke-width:1.5px;fill:none">
+            <path style="stroke:none" d="M0 0h14v13H0z" transform="translate(1 1.5)"/>
+            <path style="fill:none" d="M.75.75h12.5v11.5H.75z" transform="translate(1 1.5)"/>
+        </g>
+        <g transform="translate(3.82 4.601)">
+            <g data-name="그룹 147938">
+                <path data-name="패스 210137" d="M0 2.43 2.233 0l1.8 1.722" transform="translate(-.193 4.023)" style="stroke:currentColor;stroke-width:1.5px;fill:none"/>
+                <path data-name="패스 210138" d="M0 2.647 2.624 0l3.19 3.173" transform="translate(2.78 3.099)" style="stroke:currentColor;stroke-width:1.5px;fill:none"/>
+            </g>
+            <circle data-name="타원 5199" cx="1" cy="1" r="1" transform="translate(-.02 -.001)" style="fill:currentColor"/>
+        </g>
+    </g>
+</svg>

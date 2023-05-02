@@ -1,0 +1,9 @@
+<svg id="price_24" data-name="price_24" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
+    <g data-name="타원 5193" transform="translate(2 2)" style="stroke-width:1.5px;stroke:#222;fill:none">
+        <circle cx="10" cy="10" r="10" style="stroke:none"/>
+        <circle cx="10" cy="10" r="9.25" style="fill:none"/>
+    </g>
+    <text transform="translate(7 16)" style="fill:#222;stroke-width:.3px;font-size:12px;font-family:NotoSansKR-Medium,Noto Sans KR;font-weight:500;stroke:#222"><tspan x="0" y="0">w</tspan></text>
+    <path data-name="선 3149" transform="translate(6.5 12.5)" style="stroke-width:1.5px;stroke:#222;fill:none" d="m0 0 11 .097"/>
+</svg>
