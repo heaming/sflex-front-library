@@ -303,6 +303,10 @@ export function overrideOnCellItemClicked(view) {
       index = createCellIndexByDataColumn(g, index.itemIndex, index.column);
     }
 
+    if (g.onCellItemClickable(g, index) === false) {
+      return;
+    }
+
     const editor = g.getColumnProperty(index.column, 'editor');
 
     if (editor?.type === 'file') {
@@ -342,9 +346,6 @@ export function overrideOnCellItemClicked(view) {
       }
     }
 
-    if (g.onCellItemClickable(g, index) === false) {
-      return;
-    }
     if (hasOriginal(g, onCellItemClicked)) {
       execOriginal(g, onCellItemClicked, g, index);
     }
