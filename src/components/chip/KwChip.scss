@@ -43,6 +43,27 @@
     & + h2 {
       padding-top: 8px;
     }
+
+    // remove quasar hover effect
+    &.q-hoverable {
+      &:hover {
+        .q-focus-helper {
+          display: none;
+
+          &::before,
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    // remove quasar focus effect
+    &.q-chip--clickable {
+      &:focus {
+        box-shadow: none;
+      }
+    }
   }
 }
 
