@@ -5,6 +5,7 @@ import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import eslint from 'vite-plugin-eslint';
 import autoImport from 'unplugin-auto-import/vite';
 import visualizer from 'rollup-plugin-visualizer';
+import copy from 'rollup-plugin-copy';
 
 export default defineConfig(({ mode }) => {
   const openVisualizer = mode === 'visualizer';
@@ -108,6 +109,13 @@ export default defineConfig(({ mode }) => {
           'vue-i18n',
           'vue-router',
           'vuex',
+        ],
+        plugins: [
+          copy({
+            targets: [
+              { src: 'src/assets/**/*', dest: 'dist/public' },
+            ],
+          }),
         ],
       },
     },
