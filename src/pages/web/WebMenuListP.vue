@@ -232,10 +232,10 @@ async function validate(text) {
     await alert('2글자 이상 입력해 주세요.');
     return false;
   }
-  // if (reSearchInResult.value && reSearchTexts.value.length >= 1) {
-  //   await alert('결과내 재검색은 2번 까지만 가능합니다.');
-  //   return false;
-  // }
+  if (reSearchInResult.value && reSearchTexts.value.length >= 2) {
+    await alert('최대 2회까지 검색 가능합니다.');
+    return false;
+  }
 
   return true;
 }
