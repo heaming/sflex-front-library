@@ -196,6 +196,27 @@ export function getOutsideEditorElements(view) {
     }).filter((e) => !!e);
 }
 
+export function objectValueCallback(ds, values) {
+  const row = [];
+  if (values) {
+    for (let i = 0, cnt = ds.getFieldCount(); i < cnt; i++) {
+      const fld = ds.getOrgFieldName(i);
+      const fName = Object.keys(values).find((key) => key.toLowerCase() === fld.toLowerCase());
+      const fieldData = ds.fieldByName(fName);
+
+      if (fieldData?.dataType === 'object' && (typeof values[fName] !== 'object' || (typeof values[fName] === 'object' && !values[fName]))) {
+        const objData = {};
+        objData[fieldData.objectKey] = values[fName];
+        objData.__origin = cloneDeep(objData);
+        row[i] = objData;
+      } else if (values[fName] || fieldData?.dataType === 'number') {
+        row[i] = values[fName];
+      }
+    }
+  }
+  return row;
+}
+
 /*
   Excel
   */
@@ -209,11 +230,12 @@ export async function cloneView(view, options) {
   const DataClass = isGridView ? LocalDataProvider : LocalTreeDataProvider;
   const copyData = new DataClass(false);
   copyData.setFields(cloneDeep(view.getDataSource().getFields()));
-  copyData.setRows(options.exportData, isGridView ? undefined : (options.treeKey || view.__treeKey__));
 
   const ViewClass = isGridView ? GridView : TreeView;
   const copyView = new ViewClass(container);
   copyView.setDataSource(copyData);
+  copyView.getDataSource().valuesCallback = objectValueCallback;
+  copyData.setRows(options.exportData, isGridView ? undefined : (options.treeKey || view.__treeKey__));
   copyView.setColumns(cloneDeep(view.getColumns()));
   view.__originalColumnInfos__.forEach((e) => {
     copyView.setColumnProperty(e.name, 'visible', e.visible === true);
@@ -245,27 +267,6 @@ export function destroyCloneView(view) {
   data.destroy();
 
   document.body.removeChild(container);
-}
-
-export function objectValueCallback(ds, values) {
-  const row = [];
-  if (values) {
-    for (let i = 0, cnt = ds.getFieldCount(); i < cnt; i++) {
-      const fld = ds.getOrgFieldName(i);
-      const fName = Object.keys(values).find((key) => key.toLowerCase() === fld.toLowerCase());
-      const fieldData = ds.fieldByName(fName);
-
-      if (fieldData?.dataType === 'object' && (typeof values[fName] !== 'object' || (typeof values[fName] === 'object' && !values[fName]))) {
-        const objData = {};
-        objData[fieldData.objectKey] = values[fName];
-        objData.__origin = cloneDeep(objData);
-        row[i] = objData;
-      } else if (values[fName]) {
-        row[i] = values[fName];
-      }
-    }
-  }
-  return row;
 }
 
 /*
