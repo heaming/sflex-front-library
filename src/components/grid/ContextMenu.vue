@@ -61,7 +61,10 @@
           </kw-list>
         </kw-menu>
       </kw-item>
-      <kw-item clickable>
+      <kw-item
+        v-if="canPersonalize"
+        clickable
+      >
         <kw-item-section>
           {{ $t('MSG_TXT_GRID_PERSONALIZE', null, '그리드 개인화') }}
         </kw-item-section>
@@ -117,6 +120,7 @@ export default {
   setup() {
     const isReady = ref();
     const contextConfig = ref({});
+    const canPersonalize = ref(false);
 
     let view;
 
@@ -187,6 +191,8 @@ export default {
 
     function beforeShow() {
       if (view.isEditing()) view.commit();
+      console.log(view);
+      canPersonalize.value = !!view.__gridName__;
       updateContextConfig();
       addClickOutside(clickOutsideProps);
     }
@@ -250,6 +256,7 @@ export default {
       onClickSaveLayouts,
       onClickInitLayouts,
       initLayouts,
+      canPersonalize,
     };
   },
 };
