@@ -357,7 +357,12 @@ export function overrideOnCellItemClicked(view) {
   */
 export function overrideOnCellClicked(view) {
   wrapEvent(view, onCellClicked, async (g, clickData) => {
-    if (g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {
+    let preventCheck;
+    if (hasOriginal(g, onCellClicked)) {
+      preventCheck = execOriginal(g, onCellClicked, g, clickData);
+    }
+
+    if (preventCheck !== false && g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {
       const isCheckedRow = g.isCheckedRow(clickData.dataRow);
       if (!isChecked) {
         if (!isCheckedRow) g.checkRow(clickData.dataRow, true, g.checkBar.exclusive, false);
@@ -370,10 +375,6 @@ export function overrideOnCellClicked(view) {
       }
       isChecked = false;
       g.setCurrent({ itemIndex: clickData.itemIndex });
-    }
-
-    if (hasOriginal(g, onCellClicked)) {
-      execOriginal(g, onCellClicked, g, clickData);
     }
   });
 }
