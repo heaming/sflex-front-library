@@ -187,6 +187,10 @@ body.mobile:not(.tablet) {
       width: 100%;
       background: #fff;
       z-index: 1;
+
+      .kw-btn {
+        @include kw-btn-height-modifier(8px, 1.5rem, 16px, 400, normal);
+      }
     }
 
     &__select-all {
