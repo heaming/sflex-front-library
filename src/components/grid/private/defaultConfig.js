@@ -64,6 +64,7 @@ const viewConfig = {
     commitLevel: ValidationLevel.ERROR,
     crossWhenExitLast: true,
     exitGridWhenTab: ExitGridWhenTab.GRID,
+    exceptDataClickWhenButton: true,
   },
   editorOptions: {
     viewGridInside: false,
