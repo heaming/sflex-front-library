@@ -1,7 +1,0 @@
-<svg id="group_plus" data-name="plus(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-  <rect id="bb" width="16" height="16" fill="#eee"/>
-  <g id="_-" data-name="-" transform="translate(4 8)">
-    <line id="선_2933" data-name="선 2933" x2="8" fill="none" stroke="#222" stroke-width="1.5"/>
-    <line id="선_2934" data-name="선 2934" x2="8" transform="translate(4 -4) rotate(90)" fill="none" stroke="#222" stroke-width="1.5"/>
-  </g>
-</svg>

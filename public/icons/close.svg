@@ -1,5 +1,0 @@
-<svg id="close" data-name="close(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
-    <path data-name="선 2820" transform="translate(3 3)" style="stroke:currentColor;stroke-width:1.5px;fill:none" d="M0 10 10 0"/>
-    <path data-name="선 2821" transform="translate(3 3)" style="stroke:currentColor;stroke-width:1.5px;fill:none" d="M10 10 0 0"/>
-</svg>

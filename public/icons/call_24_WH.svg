@@ -1,8 +1,0 @@
-<svg id="call_24_WH" data-name="call(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
-    <g data-name="사각형 151471" style="stroke:#222;stroke-width:1.5px;fill:#fff">
-        <path style="stroke:none" d="M0 0h14v20H0z" transform="translate(5 2)"/>
-        <path style="fill:none" d="M.75.75h12.5v18.5H.75z" transform="translate(5 2)"/>
-    </g>
-    <path data-name="선 3157" transform="translate(10 5)" style="stroke-linejoin:round;stroke:#222;stroke-width:1.5px;fill:none" d="M4 0H0"/>
-</svg>

@@ -1,9 +1,0 @@
-<svg data-name="pause" id="pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
-    <path data-name="사각형 151675" transform="translate(5.5 5)" style="fill:currentColor" d="M0 0h1.5v6H0z"/>
-    <path data-name="사각형 151676" transform="translate(9 5)" style="fill:currentColor" d="M0 0h1.5v6H0z"/>
-    <g data-name="타원 5204" transform="translate(1 1)" style="stroke:currentColor;stroke-width:1.5px;fill:none">
-        <circle cx="7" cy="7" r="7" style="stroke:none"/>
-        <circle cx="7" cy="7" r="6.25" style="fill:none"/>
-    </g>
-</svg>

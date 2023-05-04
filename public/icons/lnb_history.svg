@@ -1,8 +1,0 @@
-<svg id="lnb_history" data-name="history menu(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-  <g id="icon" transform="translate(1.5 2)">
-    <path id="패스_210112" data-name="패스 210112" style="stroke: currentColor; stroke-width: 1.5px;" d="M0,0,2.241,2.68,4.719.6" transform="matrix(0.766, 0.643, -0.643, 0.766, 5.656, 3)"/>
-    <path id="빼기_172" data-name="빼기 172" style="fill: currentColor;" d="M12756.006,23525.012H12756a7,7,0,1,1,7.007-7h-1.528a5.475,5.475,0,1,0-5.476,5.473h.007v1.523Z" transform="translate(-12749.512 -23512.016)"/>
-    <rect id="사각형_151654" data-name="사각형 151654" style="fill: currentColor;" width="5.5" height="1.5" transform="translate(8.996 8.633)"/>
-    <rect id="사각형_151657" data-name="사각형 151657" style="fill: currentColor;" width="5.5" height="1.5" transform="translate(8.996 11.496)"/>
-  </g>
-</svg>
