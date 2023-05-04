@@ -1,8 +1,0 @@
-<svg id="clock" data-name="clock(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
-    <path data-name="패스 210112" d="m5.166 6.6 2.941 3.517 3.253-2.73" transform="rotate(40 10.463 8.7)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
-    <g data-name="타원 5195" transform="translate(1 1)" style="stroke:#222;stroke-width:1.5px;fill:none">
-        <circle cx="7" cy="7" r="7" style="stroke:none"/>
-        <circle cx="7" cy="7" r="6.25" style="fill:none"/>
-    </g>
-</svg>

@@ -1,9 +1,0 @@
-<svg id="mob_basket" data-name="payment_basket(24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
-    <g data-name="패스 210162" style="fill:none">
-        <path d="M0 0h14l1 15.486H-1z" style="stroke:none" transform="translate(5 6.514)"/>
-        <path d="M1.406 1.5.6 13.986h12.8L12.594 1.5H1.406M0 0h14l1 15.486H-1L0 0z" style="fill:#222;stroke:none" transform="translate(5 6.514)"/>
-    </g>
-    <path data-name="패스 210164" d="M4.113 3.45S3.751-1.8 7.364-1.8c3.368 0 3.251 5.251 3.251 5.251" transform="translate(4.636 4.175)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
-    <path data-name="선 3263" transform="translate(8.5 10.5)" style="stroke:#222;stroke-width:1.5px;fill:none" d="M0 0h7"/>
-</svg>

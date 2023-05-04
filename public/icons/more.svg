@@ -1,8 +1,0 @@
-<svg id="more" data-name="more(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
-    <g transform="translate(6.998 2)">
-        <circle data-name="타원 5176" cx="1" cy="1" r="1" style="fill:#222"/>
-        <circle data-name="타원 5187" cx="1" cy="1" r="1" transform="translate(0 5)" style="fill:#222"/>
-        <circle data-name="타원 5188" cx="1" cy="1" r="1" transform="translate(0 10)" style="fill:#222"/>
-    </g>
-</svg>

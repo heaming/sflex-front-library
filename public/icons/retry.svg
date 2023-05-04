@@ -1,5 +1,0 @@
-<svg id="retry" data-name="Undo(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
-    <path data-name="패스 210144" d="M3 6 0 3l3-3" transform="translate(3 7.999)" style="stroke:#555;stroke-width:1.5px;fill:none"/>
-    <path data-name="패스 210507" d="M6 1.5a3.5 3.5 0 0 1 0 7H0v-7h6M6 0H0v10h6A5 5 0 0 0 6 0z" transform="translate(3 2)" style="fill:#555"/>
-</svg>

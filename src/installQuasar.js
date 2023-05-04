@@ -5,8 +5,10 @@ import langEn from 'quasar/lang/en-US';
 import consts from './consts';
 
 function loadIcons() {
-  const imported = import.meta.globEager('../public/icons/*.svg');
+  const imported = import.meta.globEager('./assets/icons/*.svg');
   const keys = Object.keys(imported);
+
+  console.log(keys);
 
   return keys.reduce((icons, key) => {
     const matched = key.match(/\/([-\w]+)\.svg$/);

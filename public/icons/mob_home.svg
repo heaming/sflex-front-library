@@ -1,8 +1,0 @@
-<svg id="mob_home" data-name="home(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M0 0h24v24H0z" style="fill:none"/>
-    <g data-name="패스 210161" style="fill:none">
-        <path d="m-1 5 9.007-7.067L17 5v13H-1z" style="stroke:none" transform="translate(4 4)"/>
-        <path d="M8.006-.16.5 5.73V16.5h15V5.729L8.006-.161m.001-1.906L17 5v13H-1V5l9.007-7.067z" style="fill:#222;stroke:none" transform="translate(4 4)"/>
-    </g>
-    <path data-name="선 3262" transform="translate(12 13.5)" style="stroke:#222;stroke-width:1.5px;fill:none" d="M0 0v4.5"/>
-</svg>

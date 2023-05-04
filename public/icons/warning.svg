@@ -1,9 +1,0 @@
-<svg id="warning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16.5">
-    <g data-name="warning_16">
-        <path d="M0 0h16v16H0z" style="fill:none" transform="translate(0 .5)" data-name="keyline/16px"/>
-        <g transform="translate(1 1.5)">
-            <circle data-name="타원 5062" cx="7" cy="7" r="7" style="fill:#ed1941"/>
-            <text data-name="!" transform="translate(7 10.5)" style="fill:#fff;font-size:10px;font-family:NotoSansKR-Bold,Noto Sans KR;font-weight:700"><tspan x="-1.85" y="0">!</tspan></text>
-        </g>
-    </g>
-</svg>
