@@ -36,7 +36,7 @@
         name="alert_outline"
         clickable
       >
-        {{ $t('MSG_TXT_NTFY') }}
+        {{ $t('MSG_TXT_BIZ_NOTICE') }}
       </kw-icon>
 
       <kw-icon
