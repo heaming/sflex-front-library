@@ -4,8 +4,8 @@
       <canvas
         id="drawCanvas"
         ref="canvas"
-        :width="$g.platform.is.mobile ? '320' : '536'"
-        :height="$g.platform.is.mobile ? '180' : '300'"
+        :width="computedWidth"
+        :height="computedHeight"
         class="kw-sign__canvas"
       />
       <p
@@ -35,13 +35,15 @@
 </template>
 
 <script>
+import { platform } from '../../plugins/platform';
+
 export default {
   name: 'KwSign',
   props: {
-    // width: { type: String, default: '400' },
-    // height: { type: String, default: '300' },
+    width: { type: [String, Number], default: undefined },
+    height: { type: [String, Number], default: undefined },
   },
-  setup() {
+  setup(props) {
     let canvas;
     let ctx;
     const isSignExist = ref(false);
@@ -134,6 +136,20 @@ export default {
       link.click();
     }
 
+    const computedWidth = computed(() => {
+      if (props.width) return props.width;
+      if (platform.is.desktop) return 300;
+      if (platform.is.mobile) return 320;
+      if (platform.is.tablet) return 536;
+    });
+
+    const computedHeight = computed(() => {
+      if (props.height) return props.height;
+      if (platform.is.desktop) return 150;
+      if (platform.is.mobile) return 180;
+      if (platform.is.tablet) return 300;
+    });
+
     onMounted(() => {
       initDraw();
     });
@@ -144,6 +160,8 @@ export default {
       recentSign,
       setBackground,
       isSignExist,
+      computedWidth,
+      computedHeight,
     };
   },
 };
