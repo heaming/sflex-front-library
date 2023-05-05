@@ -24,6 +24,7 @@
       :active-color="activeColor"
       :error-icon="errorIcon"
       :error-color="errorColor"
+      @click="onClickStep"
       @update:model-value="$emit('update:modelValue', $event)"
     >
       <template v-if="!vertical">
@@ -107,6 +108,7 @@ export default {
     doneColor: { type: String, default: undefined },
     errorIcon: { type: String, default: undefined },
     errorColor: { type: String, default: undefined },
+    onClickStep: { type: Function, default: () => {} },
   },
 
   emits: [
