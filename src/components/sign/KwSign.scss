@@ -1,9 +1,10 @@
 .kw-sign {
+  // 이제 width, height은 kw-sign props에서 관리하도록 변경
   // tablet size
-  $-kw-sign-tablet-width: 536px;
-  $-kw-sign-tablet-height: 300px;
+  // $-kw-sign-tablet-width: 536px;
+  // $-kw-sign-tablet-height: 300px;
 
-  width: $-kw-sign-tablet-width;
+  // width: $-kw-sign-tablet-width;
 
   &__canvas-area {
     position: relative;
@@ -38,11 +39,12 @@
 
 body.mobile:not(.tablet) {
   .kw-sign {
+    // 이제 width, height은 kw-sign props에서 관리하도록 변경
     // mobile size
-    $-kw-sign-mobile-width: 320px;
-    $-kw-sign-mobile-height: 180px;
+    // $-kw-sign-mobile-width: 320px;
+    // $-kw-sign-mobile-height: 180px;
 
-    width: $-kw-sign-mobile-width;
+    // width: $-kw-sign-mobile-width;
 
     &__canvas {
       width: 100%;
