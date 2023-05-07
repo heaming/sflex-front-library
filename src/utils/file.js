@@ -15,6 +15,21 @@ export function downloadBlob(blob, fileName) {
   }
 }
 
+export async function convertBlobToFile(blob, fileName) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const arrayBuffer = fileReader.result;
+      const file = new File([arrayBuffer], fileName, { type: blob.type });
+      resolve(file);
+    };
+    fileReader.onerror = () => {
+      reject(new Error('Error occurred while converting Blob to File'));
+    };
+    fileReader.readAsArrayBuffer(blob);
+  });
+}
+
 const normalizeUploadResponse = (info) => ({
   ...info,
   serverFileName: info?.serverFileName,
