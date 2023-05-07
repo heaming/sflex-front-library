@@ -77,6 +77,12 @@ interface FileUtil {
   downloadBlob(blob: Blob, fileName: string): void;
 
   /**
+   * Blob을 File로 변환한다.
+   * @param blob
+   */
+  convertBlobToFile(blob: Blob): Promise<File>;
+
+  /**
    * 파일을 업로드한다.
    * @param file
    * @param targetPath default `temp`
@@ -109,6 +115,7 @@ export const fileUtil: FileUtil;
 
 // Grid
 import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider, RowState } from 'realgrid';
+import { convertBlobToFile } from '../src/utils/file';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
