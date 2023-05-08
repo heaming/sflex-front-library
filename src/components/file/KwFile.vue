@@ -376,35 +376,14 @@
                 :name="getExtensionIcon(file)"
               />
               <span
-                v-if="isFile(file)"
-                class="kw-file-item__name img_file"
-                @click.prevent="openImagePreview(file)"
-              >
-                {{ file.name }}
-                <kw-tooltip
-                  anchor="center middle"
-                  show-when-ellipsised
-                >
-                  {{ file.name }}
-                </kw-tooltip>
-              </span>
-              <span
-                v-else-if="computedIsDownloadable(file)"
-                class="kw-file-item__name"
-                @click.prevent="downloadFile(file)"
-              >
-                {{ file.name }}
-                <kw-tooltip
-                  anchor="center middle"
-                  show-when-ellipsised
-                >
-                  {{ file.name }}
-                </kw-tooltip>
-              </span>
-              <span
-                v-else
                 class="kw-file-item__name"
               >
+                <!-- <div>
+                  {{ file.name.substring(0, file.name.lastIndexOf('.')) }}
+                </div>
+                <div>
+                  {{ `.${file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length).toLowerCase()}` }}
+                </div> -->
                 {{ file.name }}
                 <kw-tooltip
                   anchor="center middle"
@@ -416,7 +395,7 @@
               <span
                 class="kw-file-item__size"
               > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
-              </span> <!-- 단건 업로드며, 파일 제한이 있는 경우는 파일 제한을 표시하랍니다. ^^. 왜 그러는 걸까요. -->
+              </span>
             </div>
             <div
               v-if="$slots['append-file']"
@@ -490,6 +469,18 @@
                   anchor="bottom middle"
                 >
                   {{ 'clear' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-if="previewable"
+                class="kw-file-item__preview"
+                :icon="previewIcon"
+                borderless
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'preview (개발중)' }}
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
@@ -639,6 +630,8 @@ export default {
     tabindex: { type: [Number, String], default: undefined },
     inputClass: { type: [Array, String, Object], default: undefined },
     inputStyle: { type: [Array, String, Object], default: undefined },
+    previewIcon: { type: String, default: 'viewer' },
+    previewable: { type: Boolean, default: true },
   },
 
   emits: [
