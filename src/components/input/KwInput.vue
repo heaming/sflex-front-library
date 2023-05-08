@@ -262,6 +262,7 @@ export default {
           if (newVal?.length <= 9) return '##-###-#####';
           return '##-####-####';
         }
+        if (newVal?.length <= 9) return '####-#####';
 
         if (!props.unmaskedValue) {
           if (newVal?.length <= 12) return '###-###-#####';
@@ -277,6 +278,17 @@ export default {
 
       return props.mask;
     });
+
+    watch(computedMask, (newVal, oldVal) => {
+      if (oldVal !== newVal) { // 마스킹 변경?
+        setTimeout(() => {
+          const { nativeEl } = inputRef.value;
+          const { _value } = nativeEl;
+          nativeEl.selectionStart = _value.length;
+          nativeEl.selectionEnd = _value.length;
+        });
+      }
+    }, { deep: true });
 
     const computedReverseFillMask = computed(() => {
       if (props.reverseFillMask) return props.reverseFillMask;
@@ -381,9 +393,14 @@ export default {
 
       if (props.mask === 'telephone') {
         const telephoneNumber = val.split('-');
-        emit('update:telNo0', telephoneNumber[0]);
-        emit('update:telNo1', telephoneNumber[1]);
-        emit('update:telNo2', telephoneNumber[2]);
+        if (computedMask.value === '####-#####') {
+          emit('update:telNo0', telephoneNumber[0]);
+          emit('update:telNo2', telephoneNumber[1]);
+        } else {
+          emit('update:telNo0', telephoneNumber[0]);
+          emit('update:telNo1', telephoneNumber[1]);
+          emit('update:telNo2', telephoneNumber[2]);
+        }
       }
     }
 
