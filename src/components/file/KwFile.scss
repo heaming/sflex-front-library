@@ -171,8 +171,9 @@
 
   &--use-header {
     $-kw-file-file-container-padding-use-header: rem-to-px($spacing-xs);
-    $-kw-file-item-height-use-header: 24px;
-    $-kw-file-item-gap: 4px;
+    $-kw-file-item-height-use-header: 28px;
+
+    // $-kw-file-item-gap: 4px;
     $-kw-file-item-rows: 5;
     $-kw-file-item-container-min-height: $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
     $-kw-file-item-container-max-height: $-kw-file-item-rows * $-kw-file-item-height-use-header + (2 * $-kw-file-file-container-padding-use-header);
@@ -203,6 +204,7 @@
     .kw-file-item {
       min-height: $-kw-file-item-height-use-header;
       padding: 0 12px;
+      column-gap: 0;
 
       &__icon {
         display: inline-flex;
@@ -214,13 +216,30 @@
       }
 
       &--selected {
+        background-color: $bg-box;
+
         .kw-file-item__name {
           font-weight: 500;
+          color: $black1;
         }
       }
 
-      + .kw-file-item {
-        margin-top: $-kw-file-item-gap;
+      &__name {
+        @include typo("dense",400);
+
+        color: $black2;
+
+        & ~ span:is(.kw-file-item__size) {
+          margin-left: 4px;
+          color: $black2;
+        }
+      }
+
+      // + .kw-file-item {
+      //   margin-top: $-kw-file-item-gap;
+      // }
+      &__aside {
+        margin-left: min(20px);
       }
     }
 
@@ -374,6 +393,7 @@
 .kw-file-item {
   display: flex;
   align-items: center;
+  column-gap: 20px;
   min-width: 100%;
   min-height: $kw-field-height;
 
@@ -390,16 +410,34 @@
 
   &__main { // you should notice this one's width set by props.
     // width: TBD when use scroll horizontal;
+    display: flex;
+    flex-flow: row nowrap;
     min-width: 100px;
     flex: 1 1 100px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     align-items: center;
+    max-width: calc(100% - 90px);
   }
 
   &__name {
-    @include typo("dense",400);
+    display: flex;
+    flex-direction: row;
+
+    @include typo("body",500);
+
+    max-width: calc(100% - 150px);
+
+    & ~ span:is(.kw-file-item__size) {
+      margin-left: 8px;
+    }
+  }
+
+  // 확장자명
+  &__name-ext {
+    flex-shrink: 0;
+    display: block;
   }
 
   &__append {
@@ -434,7 +472,8 @@
   &__size {
     @include typo("dense", 400);
 
-    color: $black2;
+    color: $placeholder;
+    flex-shrink: 0;
   }
 
   &__aside { // you should notice this one's width set by props.
@@ -445,6 +484,7 @@
     align-items: center;
     gap: 8px;
     margin-left: auto;
+    flex-shrink: 0;
 
     .kw-checkbox .q-checkbox__inner {
       margin-left: 20px;
