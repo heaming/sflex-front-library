@@ -395,6 +395,7 @@ export default {
         const telephoneNumber = val.split('-');
         if (computedMask.value === '####-#####') {
           emit('update:telNo0', telephoneNumber[0]);
+          emit('update:telNo1', undefined);
           emit('update:telNo2', telephoneNumber[1]);
         } else {
           emit('update:telNo0', telephoneNumber[0]);
