@@ -51,7 +51,9 @@
 
 .rg-data-row {
   &.rg-focused-row {
-    background: rgba($primary, 0.1) !important;
+    .rg-data-cell {
+      background-color: rgba($primary, 0.1) !important;
+    }
   }
 
   &:has(td.rg-merged-cell) td {
@@ -60,7 +62,7 @@
 }
 
 .rg-row-bar:has(.rg-rowindicator-focus) td {
-  background: rgba($primary, 0.1) !important;
+  background-color: rgba($primary, 0.1) !important;
 }
 
 .rg-selection {
@@ -597,7 +599,7 @@
     border-bottom-color: $line-bg;
 
     &:not(.rg-statebar-cell.rg-statebar-updated,.rg-statebar-deleted,.rg-statebar-created) {
-      background: #fff;
+      background-color: #fff;
     }
   }
 
@@ -789,17 +791,10 @@
 }
 
 .rg-updated-row {
-  background: rgb(255 143 31 / 5%) !important;
-  background-color: rgb(255 143 31 / 5%) !important;
-
-  .rg-checkbar-cell {
-    background: transparent !important;
-    background-color: transparent !important;
-  }
-
-  .rg-rowindicator-cell {
-    background: transparent !important;
-    background-color: transparent !important;
+  .rg-checkbar-cell,
+  .rg-rowindicator-cell,
+  .rg-data-cell {
+    background-color: rgb(255 143 31 / 5%) !important;
   }
 }
 
@@ -1124,7 +1119,7 @@ tr:not(.rg-focused-row).rg-rowgroup-footer {
 }
 
 tr.rg-focused-row.rg-rowgroup-footer {
-  background: rgba($primary, 0.1) !important;
+  background-color: rgba($primary, 0.1) !important;
 
   .rg-rowgroup-footer-renderer {
     font-weight: 500;
@@ -1141,4 +1136,8 @@ tr.rg-focused-row.rg-rowgroup-footer {
       border: none;
     }
   }
+}
+
+.rg-rowbarcontainer .rg-table tr td.rg-rowindicator-editing {
+  background: url("~@assets/icons/write.svg") no-repeat center;
 }

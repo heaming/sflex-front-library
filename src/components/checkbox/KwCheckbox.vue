@@ -122,7 +122,7 @@ export default {
     'update:modelValue',
   ],
 
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const checkRef = ref();
 
     const { stretchClass } = useStretch();
@@ -154,15 +154,19 @@ export default {
       return DEFAULT_VALUE.INDETERMINATE;
     });
 
+    function toggle() {
+      checkRef.value.toggle();
+    }
+
+    expose({ toggle });
+
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
       dense: useDense(),
       checkRef,
       checkboxClass,
-      toggle() {
-        checkRef.value.toggle();
-      },
+      toggle,
       computedTrueValue,
       computedFalseValue,
       computedIndeterminateValue,
