@@ -262,6 +262,7 @@ export default {
           if (newVal?.length <= 9) return '##-###-#####';
           return '##-####-####';
         }
+        if (newVal?.length <= 9) return '####-#####';
 
         if (!props.unmaskedValue) {
           if (newVal?.length <= 12) return '###-###-#####';
@@ -277,6 +278,17 @@ export default {
 
       return props.mask;
     });
+
+    watch(computedMask, (newVal, oldVal) => {
+      if (oldVal !== newVal) { // 마스킹 변경?
+        setTimeout(() => {
+          const { nativeEl } = inputRef.value;
+          const { _value } = nativeEl;
+          nativeEl.selectionStart = _value.length;
+          nativeEl.selectionEnd = _value.length;
+        });
+      }
+    }, { deep: true });
 
     const computedReverseFillMask = computed(() => {
       if (props.reverseFillMask) return props.reverseFillMask;
