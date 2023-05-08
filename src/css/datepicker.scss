@@ -281,3 +281,58 @@
     width: 234px !important;
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-date__container,
+  .kw-menu-dialog__content .datepicker.datepicker-inline {
+    width: 322px;
+
+    .datepicker {
+      table tr th {
+        height: 32px;
+
+        &.datepicker-switch {
+          padding-bottom: 14px;
+          padding-top: 0;
+          height: 24px;
+        }
+
+        &.prev,
+        &.next {
+          width: 24px;
+          height: 24px;
+          padding-top: 0;
+          background-position-y: 4px;
+        }
+      }
+
+      table tr td {
+        width: 42px;
+        height: 46px;
+        font-size: 16px;
+
+        &.day {
+          background: none;
+
+          &::before {
+            width: 42px;
+            height: 42px;
+          }
+        }
+      }
+    }
+  }
+
+  .datepicker-months,
+  .datepicker-years {
+    width: 320px !important;
+
+    .month,
+    .year {
+      width: 71px;
+      height: 71px;
+      line-height: 71px;
+      font-size: 16px;
+    }
+  }
+}
