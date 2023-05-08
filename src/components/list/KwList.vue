@@ -53,11 +53,12 @@
       </kw-item>
       <!-- items -->
       <template
-        v-for="(item) in innerItems"
+        v-for="(item, index) in innerItems"
         :key="item.key"
       >
         <kw-expansion-item
           v-if="expansion || item.expansion"
+          :ref="'KwExpansionItem' + index"
           :clickable="clickable"
           :class="computedItemClass[item.key]"
           :style="itemStyle"
@@ -80,6 +81,7 @@
             >
               <kw-radio
                 v-if="selectComponent === 'radio'"
+                :ref="'SelectableComponent' + index"
                 v-model="innerSelected"
                 :dense="$g.platform.is.mobile"
                 :val="item.key"
@@ -87,7 +89,8 @@
                 @update:model-value="emitUpdateSelected"
               />
               <kw-checkbox
-                v-if="selectComponent === 'checkbox'"
+                v-else-if="selectComponent === 'checkbox'"
+                :ref="'SelectableComponent' + index"
                 v-model="innerSelected"
                 :dense="$g.platform.is.mobile"
                 :val="item.key"
@@ -105,7 +108,7 @@
                 :disable="disable"
                 :dense="dense"
                 :tag="itemTag"
-                @click="onClick(item)"
+                @click="onClick(item, $refs['KwExpansionItem' + index], $refs['SelectableComponent' + index])"
               >
                 <slot
                   name="item"
@@ -139,7 +142,6 @@
           :disable="disable"
           :dense="dense"
           :tag="itemTag"
-          @click="onClick(item)"
         >
           <kw-item-section
             v-if="selectComponent"
@@ -149,6 +151,7 @@
           >
             <kw-radio
               v-if="selectComponent === 'radio'"
+              :ref="'SelectableComponent' + index"
               v-model="innerSelected"
               :val="item.key"
               :dense="$g.platform.is.mobile"
@@ -156,7 +159,8 @@
               @update:model-value="emitUpdateSelected"
             />
             <kw-checkbox
-              v-if="selectComponent === 'checkbox'"
+              v-else-if="selectComponent === 'checkbox'"
+              :ref="'SelectableComponent' + index"
               v-model="innerSelected"
               :dense="$g.platform.is.mobile"
               :val="item.key"
@@ -164,12 +168,28 @@
               @update:model-value="emitUpdateSelected"
             />
           </kw-item-section>
-          <slot
-            name="item"
-            :item="item.value"
-          >
-            {{ item.key }}
-          </slot>
+          <kw-item-section>
+            <kw-item
+              v-bind="selectAlignProps"
+              :class="computedItemClass[item.key]"
+              :clickable="clickable"
+              :style="itemStyle"
+              :active-class="activeClass"
+              :disable="disable"
+              :dense="dense"
+              :tag="itemTag"
+              @click="onClick(item, null, $refs['SelectableComponent' + index])"
+            >
+              <slot
+                name="item"
+                :item="item.value"
+              >
+                <kw-item-section>
+                  {{ item.key }}
+                </kw-item-section>
+              </slot>
+            </kw-item>
+          </kw-item-section>
         </kw-item>
       </template>
       <div
@@ -185,7 +205,7 @@
       </div>
     </slot>
     <q-dialog
-      v-if="$g.platform.is.mobile && useDialog"
+      v-if="isShowBottomSheet"
       ref="dialogRef"
       v-bind="styleClassAttrs"
       :model-value="showing"
@@ -276,7 +296,7 @@ export default {
     persistent: { type: Boolean, default: false },
     noRefocus: { type: Boolean, default: false },
     noFocus: { type: Boolean, default: false },
-    dialogOptions: { type: Array, default: undefined },
+    dialogOptions: { type: Array, default: () => [] },
     useDialog: { type: Boolean, default: false },
     dialogTitle: { type: String, default: undefined },
     dialogOptionLabel: { type: String, default: 'label' },
@@ -409,13 +429,27 @@ export default {
       emitUpdateSelected();
     };
 
-    const onClick = (item) => {
+    const isShowBottomSheet = computed(() => platform.is.mobile && props.useDialog && props.dialogOptions.length);
+
+    const onClick = (item, elementExpansionItem, elementSelectableComponent) => {
       if (!props.clickable) {
         return;
       }
+
+      if (selectComponent.value && elementSelectableComponent) {
+        if (selectComponent.value === 'radio') {
+          elementSelectableComponent[0].set();
+        } else if (selectComponent.value === 'checkbox') {
+          elementSelectableComponent[0].toggle();
+        }
+      } else if (isShowBottomSheet && elementExpansionItem) {
+        elementExpansionItem[0].toggle();
+      }
+
       if (props.useDialog) {
         onUpdateShowing(!showing.value);
       }
+
       if (props.onClickItem) {
         props.onClickItem(item);
       }
@@ -541,6 +575,7 @@ export default {
       showing,
       dialogClass,
       onClickOption,
+      isShowBottomSheet,
     };
   },
 };

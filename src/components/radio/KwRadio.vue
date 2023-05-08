@@ -1,5 +1,6 @@
 <template>
   <q-radio
+    ref="radioRef"
     v-bind="styleClassAttrs"
     :class="radioClass"
     :model-value="modelValue"
@@ -82,7 +83,7 @@ export default {
     'update:modelValue',
   ],
 
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const radioRef = ref();
 
     const { stretchClass } = useStretch();
@@ -96,14 +97,18 @@ export default {
       ...stretchClass.value,
     }));
 
+    function set() {
+      radioRef.value?.set();
+    }
+
+    expose({ set });
+
     return {
       ...useInheritAttrs(),
       ...useSearchChild(),
       dense: useDense(),
       radioRef,
-      set() {
-        radioRef.value.set();
-      },
+      set,
       radioClass,
     };
   },
