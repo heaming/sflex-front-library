@@ -117,7 +117,7 @@ export default {
     'after-show',
     'after-hide',
   ],
-  setup(props, { emit }) {
+  setup(props, { emit, expose }) {
     const quasarRef = ref();
     const showing = ref(props.defaultOpened);
     const toggleCount = ref(0);
@@ -206,6 +206,8 @@ export default {
     function toggle(evt) { quasarRef.value?.toggle(evt); }
 
     // endregion quasar component method transfer
+
+    expose({ toggle });
 
     return {
       ...useInheritAttrs(),
