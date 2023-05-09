@@ -30,6 +30,7 @@ export * from './plugins/notify';
 export * from './plugins/platform';
 export * from './plugins/sanitize';
 export * from './plugins/storage';
+export * as cti from './plugins/cti';
 
 // Utils
 export * from './globalUtils';
