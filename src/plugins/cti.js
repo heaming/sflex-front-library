@@ -88012,15 +88012,15 @@ const global = {};
         null,
       ],
     };
-    if (
-      typeof module !== "undefined" &&
-      module.exports &&
-      !global["encoding-indexes"]
-    ) {
-      global["encoding-indexes"] = require("./encoding-indexes.js")[
-        "encoding-indexes"
-      ];
-    }
+    // if (
+    //   typeof module !== "undefined" &&
+    //   module.exports &&
+    //   !global["encoding-indexes"]
+    // ) {
+    //   global["encoding-indexes"] = require("./encoding-indexes.js")[
+    //     "encoding-indexes"
+    //   ];
+    // }
 
     function inRange(a, min, max) {
       return min <= a && a <= max;
