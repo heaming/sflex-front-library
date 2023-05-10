@@ -32,8 +32,9 @@
         </kw-tooltip>
       </kw-checkbox>
 
+      <!-- 활성화 시 notice_on -->
       <kw-icon
-        name="alert_outline"
+        name="notice_off"
         clickable
       >
         {{ $t('MSG_TXT_BIZ_NOTICE') }}
