@@ -119,6 +119,8 @@ const iconList1 = [
   'minus',
   'more',
   'new_window',
+  'notice_off',
+  'notice_on',
   'pdf',
   'plus',
   'price',

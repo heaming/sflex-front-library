@@ -764,7 +764,7 @@ function initGrid2(data, view) {
   view.setColumns(columns);
   view.setColumnLayout(layouts);
   view.groupBy(groupFields);
-  view.rowIndicator.visible = true;
+  view.rowIndicator.visible = false;
   // eslint-disable-next-line no-template-curly-in-string
   view.rowGroup.footerStatement = '${groupValue} 총수료인원 (대상자 ${rowCount}명)';
 
@@ -824,7 +824,7 @@ function initGrid3(data, view) {
   view.setColumns(columns);
   view.setColumnLayout(layouts);
   view.groupBy(groupFields);
-  view.rowIndicator.visible = true;
+  view.rowIndicator.visible = false;
   view.rowGroup.mergeMode = true;
 
   data.setRows([
