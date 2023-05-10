@@ -172,7 +172,7 @@ export async function waitUntilShowEditor(view, dropdown = false) {
     const column = view.columnByName(index.column);
 
     if (isCellEditable(view, column, index)) {
-      // view.showEditor(dropdown); // 행추가시 강제 editor show 막음
+      view.showEditor(dropdown);
       await timeout();
 
       if (view.isEditing()) {
