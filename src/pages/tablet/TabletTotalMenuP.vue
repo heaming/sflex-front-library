@@ -215,6 +215,7 @@ const bookmarks = computed(() => ({
         {
           ...bookmark,
           menuName: bookmark.bookmarkName,
+          editable: false,
         })).sort((a, b) => a.arrayalOrder - b.arrayalOrder),
       editable: false,
     },
@@ -276,13 +277,6 @@ async function updateBookmark(isCreate, menu) {
     totalMenus.value.shift();
     totalMenus.value.unshift(bookmarks.value);
   }
-}
-
-function onClickEditAndComplete(depth3Menu) {
-  if (depth3Menu.editable && sortable.value[0]) { // 현재 editable true = 편집 완료해야 함.
-    saveBookmarks(sortable.value[0].toArray());
-  }
-  depth3Menu.editable = !depth3Menu.editable;
 }
 
 function moveToPage(menu) {
@@ -353,12 +347,21 @@ function createSortable() {
   });
 }
 
+function onClickEditAndComplete(depth3Menu) {
+  if (depth3Menu.editable && sortable.value[0]) { // 현재 editable true = 편집 완료해야 함.
+    saveBookmarks(sortable.value[0].toArray());
+    destroySortable();
+  } else {
+    createSortable();
+  }
+  depth3Menu.editable = !depth3Menu.editable;
+}
+
 onMounted(() => {
   setTimeout(async () => {
     await fetchMenus();
     const navLinks = computed(() => gsap.utils.toArray('.tablet-menu__nav-item'));
     makeScroll(navLinks);
-    createSortable();
   }, 50);
 });
 
