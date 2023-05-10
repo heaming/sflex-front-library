@@ -130,7 +130,7 @@
                     {{ depth3Menu.menuName }}
                   </a>
                   <kw-checkbox
-                    v-if="!depth2Menu.editable"
+                    v-if="!depth2Menu.editable && depth3Menu.menuUid && depth3Menu.pageId"
                     :model-value="isBookmarkedPage(depth3Menu.menuUid, depth3Menu.pageId)"
                     :true-value="true"
                     :false-value="false"
@@ -279,7 +279,7 @@ async function updateBookmark(isCreate, menu) {
 }
 
 function onClickEditAndComplete(depth3Menu) {
-  if (depth3Menu.editable) { // 현재 editable true = 편집 완료해야 함.
+  if (depth3Menu.editable && sortable.value[0]) { // 현재 editable true = 편집 완료해야 함.
     saveBookmarks(sortable.value[0].toArray());
   }
   depth3Menu.editable = !depth3Menu.editable;
