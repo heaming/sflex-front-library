@@ -312,16 +312,18 @@ export function overrideOnCellItemClicked(view) {
     if (editor?.type === 'file') {
       const dp = g.getDataSource();
       const dataRow = dp.getOutputRow({}, index.dataRow);
+      let attachDocumentId = dataRow[editor.attachDocumentId] ?? editor.attachDocumentId;
+      if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId?.files;
+
       const componentProps = {
-        modelValue: dataRow[index.column] ?? [],
-        attachDocumentId: dataRow[editor.attachDocumentId] ?? editor.attachDocumentId,
+        attachDocumentId,
         attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
         fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
         fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
         multiple: dataRow[editor.multiple] ?? editor.multiple,
         downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
         editable: dataRow[editor.editable] ?? editor.editable,
-        existFiles: dataRow[index.column].files ?? [],
+        existFiles: dataRow[index.column]?.files ?? [],
       };
 
       const result = await modal({
