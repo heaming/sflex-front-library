@@ -78,7 +78,7 @@
                 />
               </h2>
               <ul
-                ref="sortableRef"
+                :id="`gnb_menu_mobile--ul-depth2-${depth2Menu.applicationId}`"
                 class="gnb_menu_mobile--ul-depth2"
                 :class="{'sortable-menu': depth2Menu.editable !== undefined }"
               >
@@ -287,8 +287,6 @@ function makeScroll(navLinks) {
   });
 }
 
-const sortableRef = ref();
-
 function destroySortable() {
   sortable.value.forEach((e) => { e.destroy(); });
   sortable.value = [];
@@ -297,19 +295,15 @@ function destroySortable() {
 function createSortable() {
   destroySortable();
 
-  const el = sortableRef.value;
-  const targets = el;
-  targets?.forEach((e) => {
-    sortable.value.push(
-      new Sortable(e, {
-        group: 'nested',
-        dataIdAttr: 'data-id',
-        swapThreshold: 0.5,
-        animation: 150,
-        handle: '.handle',
-      }),
-    );
-  });
+  const el = document.getElementById('gnb_menu_mobile--ul-depth2-bookmarks');
+  const target = el;
+  sortable.value.push(
+    new Sortable(target, {
+      dataIdAttr: 'data-id',
+      animation: 150,
+      handle: '.handle',
+    }),
+  );
 }
 
 async function onClickEditAndComplete(depth3Menu) {
