@@ -107,7 +107,7 @@
                     </kw-tooltip>
                   </kw-checkbox>
                   <kw-btn
-                    v-else
+                    v-else-if="depth2Menu.editable"
                     borderless
                     class="handle"
                     icon="menu_24"
