@@ -369,12 +369,12 @@ export function overrideOnCellClicked(view) {
     if (preventCheck !== false && g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {
       const isCheckedRow = g.isCheckedRow(clickData.dataRow);
       if (!isChecked) {
-        if (!isCheckedRow) g.checkRow(clickData.dataRow, true, g.checkBar.exclusive, false);
+        if (!isCheckedRow) g.checkRow(clickData.dataRow, true, g.checkBar.exclusive, true);
         else if (
           isCheckedRow
           && ((!clickData.editable || clickData.readOnly) || g.onCellEditable(g, clickData) === false)
         ) {
-          g.checkRow(clickData.dataRow, !isCheckedRow, g.checkBar.exclusive, false);
+          g.checkRow(clickData.dataRow, !isCheckedRow, g.checkBar.exclusive, true);
         }
       }
       isChecked = false;
