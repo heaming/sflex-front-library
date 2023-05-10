@@ -17,6 +17,7 @@
     </div>
     <div class="kw-sign__action">
       <kw-btn
+        v-if="needRecentSign"
         label="최근서명"
         secondary
         dense
@@ -40,6 +41,7 @@ import { platform } from '../../plugins/platform';
 export default {
   name: 'KwSign',
   props: {
+    needRecentSign: { type: Boolean, default: true },
     width: { type: [String, Number], default: undefined },
     height: { type: [String, Number], default: undefined },
   },
