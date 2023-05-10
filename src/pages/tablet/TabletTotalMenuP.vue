@@ -114,7 +114,7 @@
                 />
               </h2>
               <ul
-                :ref="depth2Menu.editable !== undefined ? 'sortableUl' : 'nonSortableUl'"
+                :ref="`${depth2Menu.applicationId}Ref`"
                 class="gnb_menu_tablet--ul-depth2"
                 :class="{'sortable-menu': depth2Menu.editable !== undefined }"
               >
@@ -322,7 +322,7 @@ function makeScroll(navLinks) {
   });
 }
 
-const sortableUl = ref();
+const bookmarksRef = ref();
 
 function destroySortable() {
   sortable.value.forEach((e) => { e.destroy(); });
@@ -332,7 +332,7 @@ function destroySortable() {
 function createSortable() {
   destroySortable();
 
-  const el = sortableUl.value;
+  const el = bookmarksRef.value;
   const targets = el;
   targets?.forEach((e) => {
     sortable.value.push(
@@ -347,12 +347,14 @@ function createSortable() {
   });
 }
 
-function onClickEditAndComplete(depth3Menu) {
+async function onClickEditAndComplete(depth3Menu) {
   if (depth3Menu.editable && sortable.value[0]) { // 현재 editable true = 편집 완료해야 함.
     saveBookmarks(sortable.value[0].toArray());
     destroySortable();
   } else {
-    createSortable();
+    await nextTick(() => {
+      createSortable();
+    });
   }
   depth3Menu.editable = !depth3Menu.editable;
 }
