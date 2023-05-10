@@ -78,7 +78,7 @@
                 />
               </h2>
               <ul
-                :ref="`${depth2Menu.applicationId}Ref`"
+                ref="sortableRef"
                 class="gnb_menu_mobile--ul-depth2"
                 :class="{'sortable-menu': depth2Menu.editable !== undefined }"
               >
@@ -287,7 +287,7 @@ function makeScroll(navLinks) {
   });
 }
 
-const bookmarksRef = ref();
+const sortableRef = ref();
 
 function destroySortable() {
   sortable.value.forEach((e) => { e.destroy(); });
@@ -297,7 +297,7 @@ function destroySortable() {
 function createSortable() {
   destroySortable();
 
-  const el = bookmarksRef.value;
+  const el = sortableRef.value;
   const targets = el;
   targets?.forEach((e) => {
     sortable.value.push(
