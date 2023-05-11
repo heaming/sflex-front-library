@@ -312,10 +312,11 @@ export function overrideOnCellItemClicked(view) {
     if (editor?.type === 'file') {
       const dp = g.getDataSource();
       const dataRow = dp.getOutputRow({}, index.dataRow);
+
       let attachDocumentId = dataRow[editor.attachDocumentId] ?? editor.attachDocumentId;
       if (typeof attachDocumentId === 'object' && typeof attachDocumentId?.files === 'object') {
         attachDocumentId = attachDocumentId?.files.attachDocumentId || attachDocumentId?.files[0]?.attachDocumentId;
-      } else if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId.files;
+      } else if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId?.files;
 
       const componentProps = {
         attachDocumentId,
@@ -337,14 +338,14 @@ export function overrideOnCellItemClicked(view) {
         if (result.payload?.isModified) {
           const data = {};
           data.files = result.payload.files;
-          data.__origin = dataRow[index.column].__origin;
+          data.__origin = dataRow[index.column]?.__origin;
           dp.setValue(index.dataRow, index.fieldName, data);
         }
 
         if (result.payload?.initFiles) {
           const data = {};
-          data.files = dataRow[index.column].__origin.files;
-          data.__origin = dataRow[index.column].__origin;
+          data.files = dataRow[index.column]?.__origin?.files;
+          data.__origin = dataRow[index.column]?.__origin;
           dp.setValue(index.dataRow, index.fieldName, data);
         }
       }
