@@ -1,4 +1,5 @@
 import { ValueType } from 'realgrid';
+import { isEmpty } from 'lodash-es';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { modal } from '../../../plugins/modal';
@@ -314,9 +315,11 @@ export function overrideOnCellItemClicked(view) {
       const dataRow = dp.getOutputRow({}, index.dataRow);
 
       let attachDocumentId = dataRow[editor.attachDocumentId] ?? editor.attachDocumentId;
-      if (typeof attachDocumentId === 'object' && typeof attachDocumentId?.files === 'object') {
-        attachDocumentId = attachDocumentId?.files?.attachDocumentId || attachDocumentId?.files[0]?.attachDocumentId;
-      } else if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId?.files;
+      if (!isEmpty(attachDocumentId)) {
+        if (typeof attachDocumentId === 'object' && typeof attachDocumentId?.files === 'object') {
+          attachDocumentId = attachDocumentId?.files?.attachDocumentId || attachDocumentId?.files[0]?.attachDocumentId;
+        } else if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId?.files;
+      }
 
       const componentProps = {
         attachDocumentId,
