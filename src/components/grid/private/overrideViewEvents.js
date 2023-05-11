@@ -1,5 +1,5 @@
 import { ValueType } from 'realgrid';
-import { isEmpty } from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { modal } from '../../../plugins/modal';
@@ -314,22 +314,15 @@ export function overrideOnCellItemClicked(view) {
       const dp = g.getDataSource();
       const dataRow = dp.getOutputRow({}, index.dataRow);
 
-      let attachDocumentId = dataRow[editor.attachDocumentId] ?? editor.attachDocumentId;
-      if (!isEmpty(attachDocumentId)) {
-        if (typeof attachDocumentId === 'object' && typeof attachDocumentId?.files === 'object' && attachDocumentId?.files) {
-          attachDocumentId = attachDocumentId?.files?.attachDocumentId || attachDocumentId?.files[0]?.attachDocumentId;
-        } else if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId?.files;
-      }
-
       const componentProps = {
-        attachDocumentId,
+        attachDocumentId: dataRow[editor.attachDocumentId]?.__atthDocumentId ?? editor.attachDocumentId,
         attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
         fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
         fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
         multiple: dataRow[editor.multiple] ?? editor.multiple,
         downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
         editable: dataRow[editor.editable] ?? editor.editable,
-        existFiles: dataRow[index.column]?.files ?? [],
+        existFiles: dataRow[index.column]?.files,
       };
 
       const result = await modal({
@@ -339,16 +332,16 @@ export function overrideOnCellItemClicked(view) {
 
       if (result.result) {
         if (result.payload?.isModified) {
-          const data = {};
+          const data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
           data.files = result.payload.files;
-          data.__origin = dataRow[index.column]?.__origin;
+          data.__isModified = true;
           dp.setValue(index.dataRow, index.fieldName, data);
         }
 
         if (result.payload?.initFiles) {
-          const data = {};
-          data.files = dataRow[index.column]?.__origin?.files;
-          data.__origin = dataRow[index.column]?.__origin;
+          const data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
+          data.files = null;
+          data.__isModified = false;
           dp.setValue(index.dataRow, index.fieldName, data);
         }
       }

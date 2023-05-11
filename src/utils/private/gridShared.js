@@ -206,8 +206,9 @@ export function objectValueCallback(ds, values) {
 
       if (fieldData?.dataType === 'object' && (typeof values[fName] !== 'object' || (typeof values[fName] === 'object' && !values[fName]))) {
         const objData = {};
-        objData[fieldData.objectKey] = values[fName];
-        objData.__origin = cloneDeep(objData);
+        objData[fieldData.objectKey] = null;
+        objData.__atthDocumentId = values[fName];
+        objData.__isModified = false;
         row[i] = objData;
       } else if (values[fName] || fieldData?.dataType === 'number') {
         row[i] = values[fName];
