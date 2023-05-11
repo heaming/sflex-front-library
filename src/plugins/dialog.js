@@ -6,6 +6,7 @@ const normalizeOptions = (options = {}) => ({
   icon: options.icon,
   subMessage: options.subMessage,
   refocus: options.refocus !== false,
+  customBtns: options.customBtns,
 });
 
 export function alert(message, options = {}) {
