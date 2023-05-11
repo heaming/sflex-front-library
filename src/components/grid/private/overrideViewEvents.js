@@ -316,7 +316,7 @@ export function overrideOnCellItemClicked(view) {
 
       let attachDocumentId = dataRow[editor.attachDocumentId] ?? editor.attachDocumentId;
       if (!isEmpty(attachDocumentId)) {
-        if (typeof attachDocumentId === 'object' && typeof attachDocumentId?.files === 'object') {
+        if (typeof attachDocumentId === 'object' && typeof attachDocumentId?.files === 'object' && attachDocumentId?.files) {
           attachDocumentId = attachDocumentId?.files?.attachDocumentId || attachDocumentId?.files[0]?.attachDocumentId;
         } else if (typeof attachDocumentId === 'object') attachDocumentId = attachDocumentId?.files;
       }
