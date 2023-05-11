@@ -49,6 +49,12 @@
           @click="onClick(false)"
         />
         <kw-btn
+          v-for="(btn, idx) in activeDialog.customBtns"
+          :key="idx"
+          :label="btn.btnLabel"
+          @click="onClickCustomBtn(btn)"
+        />
+        <kw-btn
           ref="okRef"
           :label="$t('MSG_BTN_CONFIRM', null, '확인')"
           primary
@@ -116,12 +122,19 @@ export default {
       }
     }
 
+    async function onClickCustomBtn(btn) {
+      const res = await btn.btnCallback();
+
+      await onClick(res);
+    }
+
     return {
       DIALOG_TRANSITION_DURATION,
       activeDialog,
       isActive,
       okRef,
       onClick,
+      onClickCustomBtn,
     };
   },
 };
