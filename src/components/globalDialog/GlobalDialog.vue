@@ -123,7 +123,7 @@ export default {
     }
 
     async function onClickCustomBtn(btn) {
-      const res = await btn.btnCallback();
+      const res = await btn.btnCallback?.();
 
       await onClick(res);
     }
