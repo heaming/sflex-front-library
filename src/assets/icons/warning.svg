@@ -1,9 +1,5 @@
-<svg id="warning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16.5">
-    <g data-name="warning_16">
-        <path d="M0 0h16v16H0z" style="fill:none" transform="translate(0 .5)" data-name="keyline/16px"/>
-        <g transform="translate(1 1.5)">
-            <circle data-name="타원 5062" cx="7" cy="7" r="7" style="fill:#ed1941"/>
-            <text data-name="!" transform="translate(7 10.5)" style="fill:#fff;font-size:10px;font-family:NotoSansKR-Bold,Noto Sans KR;font-weight:700"><tspan x="-1.85" y="0">!</tspan></text>
-        </g>
-    </g>
+<svg id="warning" data-name="warning(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <path data-name="다각형 26" d="m8 0 8 14H0z" transform="translate(0 1)" style="fill:#ed1941"/>
+    <path data-name="패스 210526" d="M-2.213-16.893h1.154l.252-4.291.06-1.616h-1.779l.06 1.616zm.577 3.093A1.1 1.1 0 0 0-.53-14.916a1.088 1.088 0 0 0-1.106-1.116 1.078 1.078 0 0 0-1.094 1.116A1.085 1.085 0 0 0-1.636-13.8z" transform="translate(9.607 27.808)" style="fill:#fff"/>
 </svg>
