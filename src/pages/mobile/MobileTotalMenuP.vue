@@ -78,7 +78,7 @@
                 />
               </h2>
               <ul
-                :ref="depth2Menu.editable !== undefined ? 'sortableUl' : 'nonSortableUl'"
+                :id="`gnb_menu_mobile--ul-depth2-${depth2Menu.applicationId}`"
                 class="gnb_menu_mobile--ul-depth2"
                 :class="{'sortable-menu': depth2Menu.editable !== undefined }"
               >
@@ -180,6 +180,7 @@ const bookmarks = computed(() => ({
         {
           ...bookmark,
           menuName: bookmark.bookmarkName,
+          editable: false,
         })).sort((a, b) => a.arrayalOrder - b.arrayalOrder),
       editable: false,
     },
@@ -243,13 +244,6 @@ async function updateBookmark(isCreate, menu) {
   }
 }
 
-function onClickEditAndComplete(depth3Menu) {
-  if (depth3Menu.editable && sortable.value[0]) { // 현재 editable true = 편집 완료해야 함.
-    saveBookmarks(sortable.value[0].toArray());
-  }
-  depth3Menu.editable = !depth3Menu.editable;
-}
-
 function moveToPage(menu) {
   ok();
   router.push({ name: menu.menuUid });
@@ -293,8 +287,6 @@ function makeScroll(navLinks) {
   });
 }
 
-const sortableUl = ref();
-
 function destroySortable() {
   sortable.value.forEach((e) => { e.destroy(); });
   sortable.value = [];
@@ -303,19 +295,27 @@ function destroySortable() {
 function createSortable() {
   destroySortable();
 
-  const el = sortableUl.value;
-  const targets = el;
-  targets?.forEach((e) => {
-    sortable.value.push(
-      new Sortable(e, {
-        group: 'nested',
-        dataIdAttr: 'data-id',
-        swapThreshold: 0.5,
-        animation: 150,
-        handle: '.handle',
-      }),
-    );
-  });
+  const el = document.getElementById('gnb_menu_mobile--ul-depth2-bookmarks');
+  const target = el;
+  sortable.value.push(
+    new Sortable(target, {
+      dataIdAttr: 'data-id',
+      animation: 150,
+      handle: '.handle',
+    }),
+  );
+}
+
+async function onClickEditAndComplete(depth3Menu) {
+  if (depth3Menu.editable && sortable.value[0]) { // 현재 editable true = 편집 완료해야 함.
+    saveBookmarks(sortable.value[0].toArray());
+    destroySortable();
+  } else {
+    await nextTick(() => {
+      createSortable();
+    });
+  }
+  depth3Menu.editable = !depth3Menu.editable;
 }
 
 async function openSetSessionP() {
@@ -329,7 +329,6 @@ onMounted(() => {
     await fetchMenus();
     const navLinks = computed(() => gsap.utils.toArray('.mobile-menu__nav-item'));
     makeScroll(navLinks);
-    createSortable();
   }, 50);
 });
 

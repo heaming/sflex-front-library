@@ -13,6 +13,10 @@
           .q-expansion-item__toggle-icon {
             font-size: inherit;
           }
+
+          .q-expansion-item__toggle-focus + .q-expansion-item__toggle-icon {
+            margin-top: 0;
+          }
         }
       }
     }

@@ -10,14 +10,14 @@
       <kw-item
         v-if="showSelectAll || $slots.counter || $slots.action"
         :class="selectAllItemClass"
-        :clickable="clickable"
-        @click="onClickSelectAllItem"
       >
         <kw-item-section
           v-if="showSelectAll"
           class="kw-list__select-all"
           side
           v-bind="selectAllAlignProps"
+          :clickable="clickable"
+          @click="onClickSelectAllItem"
         >
           <kw-checkbox
             :model-value="innerSelectAll"
@@ -277,7 +277,7 @@ export default {
     itemTag: { type: String, default: undefined },
     placeholder: { type: String, default: undefined },
     disable: { type: Boolean, default: undefined },
-    clickable: { type: Boolean, default: undefined },
+    clickable: { type: Boolean, default: false },
     itemClass: { type: [Array, Object, String], default: undefined },
     itemStyle: { type: [Array, Object, String], default: undefined },
     activeClass: { type: String, default: undefined },
@@ -285,7 +285,6 @@ export default {
     // fall through props
     separator: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: undefined },
-    onClickItem: { type: Function, default: () => null },
     group: { type: String, default: undefined },
     // expansion
     paddingTarget: { type: [Array, String], default: () => ['self'] },
@@ -432,6 +431,12 @@ export default {
     const isShowBottomSheet = computed(() => platform.is.mobile && props.useDialog && props.dialogOptions.length);
 
     const onClick = (item, elementExpansionItem, elementSelectableComponent) => {
+      emit('click-item', item);
+
+      if (isShowBottomSheet) {
+        onUpdateShowing(!showing.value);
+      }
+
       if (!props.clickable) {
         return;
       }
@@ -445,15 +450,6 @@ export default {
       } else if (isShowBottomSheet && elementExpansionItem) {
         elementExpansionItem[0].toggle();
       }
-
-      if (props.useDialog) {
-        onUpdateShowing(!showing.value);
-      }
-
-      if (props.onClickItem) {
-        props.onClickItem(item);
-      }
-      emit('click-item', item);
     };
 
     function onClickOption(option) {
