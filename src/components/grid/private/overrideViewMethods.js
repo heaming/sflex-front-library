@@ -527,5 +527,6 @@ export function overrideDestory(view) {
     delete view.__columns__;
     delete view.__validationErrors__;
     delete view.__treeKey__;
+    delete view.__searchConditionText__;
   });
 }
