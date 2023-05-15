@@ -42,9 +42,11 @@ export default {
   name: 'KwSign',
   props: {
     needRecentSign: { type: Boolean, default: true },
+    recentSignSrc: { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg/2338px-%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg' },
     width: { type: [String, Number], default: undefined },
     height: { type: [String, Number], default: undefined },
   },
+
   setup(props) {
     let canvas;
     let ctx;
@@ -53,6 +55,9 @@ export default {
     function setBackground() {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    function getSignData() {
+      return canvas.toDataURL();
     }
 
     function initDraw() {
@@ -66,6 +71,7 @@ export default {
         startX: 0,
         startY: 0,
       };
+
       function setMousePosition(ev) {
         if (ev.layerX || ev.layerX === 0) { // Firefox 브라우저
           mouse.x = ev.offsetX;
@@ -122,7 +128,7 @@ export default {
     function recentSign() {
       reset();
       const image = new Image();
-      image.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg/2338px-%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg';
+      image.src = props.recentSignSrc;
       image.crossOrigin = 'Anonymous';
       image.onload = () => {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -164,6 +170,7 @@ export default {
       isSignExist,
       computedWidth,
       computedHeight,
+      getSignData,
     };
   },
 };
