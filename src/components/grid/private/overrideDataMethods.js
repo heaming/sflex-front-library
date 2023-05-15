@@ -5,6 +5,7 @@ import { wrapMethod, execOriginal } from './overrideWrap';
 const setFields = 'setFields';
 const addField = 'addField';
 const setRows = 'setRows';
+const addRows = 'addRows';
 const removeRow = 'removeRow';
 const removeRows = 'removeRows';
 const destroy = 'destroy';
@@ -53,6 +54,50 @@ export function overrideSetFields(data) {
   });
 }
 
+function setSearchConditionMessage(view) {
+  // 검색조건 메세지 세팅
+  let message = '[검색조건]\n';
+  const formItems = document.querySelectorAll('.kw-search .kw-form-item');
+  formItems.forEach((formItem) => {
+    const label = formItem.querySelector('.kw-label-content__label').innerHTML;
+
+    const values = formItem.querySelectorAll('input');
+    let value = '';
+    values.forEach((v, i) => {
+      if (i === 0) {
+        value += v.value;
+      } else {
+        value += ` | ${v.value}`;
+      }
+    });
+    // radio 인경우
+    const radios = formItem.querySelectorAll('div.q-option-group .q-radio');
+    radios.forEach((radio) => {
+      if (radio.getAttribute('aria-checked') === 'true') {
+        value = radio.getAttribute('aria-label');
+      }
+    });
+
+    // value가 없는경우 disable (혹은 readonly)된 콤보 필드일수도 있다.
+    if (value === '') {
+      let disableField = formItem.querySelector('.q-field--disabled');
+      if (!disableField) disableField = formItem.querySelector('.q-field--readonly');
+      if (disableField) {
+        const spans = disableField.querySelectorAll('.q-field__native span');
+        spans.forEach((v, i) => {
+          if (i === 0) {
+            value += v.innerText;
+          } else {
+            value += ` | ${v.innerText}`;
+          }
+        });
+      }
+    }
+    message += `${label} : ${value}  \n`;
+  });
+
+  view.__searchConditionText__ = message;
+}
 /*
   데이터 셋을 채운다
   */
@@ -75,48 +120,20 @@ export function overrideSetRows(data, vm) {
       view.__treeKey__ = treeKey;
     }
 
-    // 검색조건 메세지 세팅
-    let message = '[검색조건]\n';
-    const formItems = document.querySelectorAll('.kw-search .kw-form-item');
-    formItems.forEach((formItem) => {
-      const label = formItem.querySelector('.kw-label-content__label').innerHTML;
+    setSearchConditionMessage(view);
+  });
+}
 
-      const values = formItem.querySelectorAll('input');
-      let value = '';
-      values.forEach((v, i) => {
-        if (i === 0) {
-          value += v.value;
-        } else {
-          value += ` | ${v.value}`;
-        }
-      });
-      // radio 인경우
-      const radios = formItem.querySelectorAll('div.q-option-group .q-radio');
-      radios.forEach((radio) => {
-        if (radio.getAttribute('aria-checked') === 'true') {
-          value = radio.getAttribute('aria-label');
-        }
-      });
+/*
+  데이터 셋을 추가한다.
+  */
+export function overrideAddRows(data, vm) {
+  wrapMethod(data, addRows, (...args) => {
+    execOriginal(data, addRows, ...args);
 
-      // value가 없는경우 disable (혹은 readonly)된 콤보 필드일수도 있다.
-      if (value === '') {
-        let disableField = formItem.querySelector('.q-field--disabled');
-        if (!disableField) disableField = formItem.querySelector('.q-field--readonly');
-        if (disableField) {
-          const spans = disableField.querySelectorAll('.q-field__native span');
-          spans.forEach((v, i) => {
-            if (i === 0) {
-              value += v.innerText;
-            } else {
-              value += ` | ${v.innerText}`;
-            }
-          });
-        }
-      }
-      message += `${label} : ${value}  \n`;
-    });
+    const view = vm.proxy.getView();
 
-    view.__searchConditionText__ = message;
+    setSearchConditionMessage(view);
   });
 }
 
