@@ -499,15 +499,19 @@ export function overrideOnGetEditValue(view) {
     const type = editor?.type;
 
     if (type === 'telephone') {
+      const temp = value.split('-');
+      value = temp.join('');
       const regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+      const corpNumberRegex = /^\d{4}-\d{4}$/;
       if (value?.startsWith('02')) {
         value = value.replace(/-/gi, '');
         if (value?.length <= 9) value = value.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
         else value = value.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-      } else if (value?.length <= 10) value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      } else if (value?.length === 8) value = value.replace(/(\d{4})(\d{4})/, '$1-$2');
+      else if (value?.length <= 10) value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       else value = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 
-      if (!regex.test(value)) value = '';
+      if (!regex.test(value) && !corpNumberRegex.test(value)) value = '';
     }
 
     // text
@@ -531,7 +535,6 @@ export function overrideOnGetEditValue(view) {
         }
       }
     }
-
     editResult.value = value;
 
     if (hasOriginal(g, onGetEditValue)) {
