@@ -222,11 +222,16 @@ body.desktop {
 
     &--filled,
     &--outlined {
-      &.q-focusable:focus,
-      &.q-manual-focusable--focused,
       &.q-hoverable:hover {
         &::before {
           background-color: adjust-color(#fff, $lightness: -10%);
+        }
+      }
+
+      &.q-focusable:focus,
+      &.q-manual-focusable--focused {
+        &::before {
+          background-color: transparent;
         }
       }
 
@@ -237,11 +242,16 @@ body.desktop {
       }
 
       &.kw-btn--color-bg-white {
-        &.q-focusable:focus,
-        &.q-manual-focusable--focused,
         &.q-hoverable:hover {
           &::before {
             background-color: adjust-color(#fff, $lightness: -5%);
+          }
+        }
+
+        &.q-focusable:focus,
+        &.q-manual-focusable--focused {
+          &::before {
+            background-color: transparent;
           }
         }
 
