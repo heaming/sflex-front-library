@@ -1319,3 +1319,47 @@ body.mobile {
     }
   }
 }
+
+// 조직도 트리 관련 h3 마진영역수정
+
+.w451 {
+  h3 {
+    margin-bottom: 18px;
+  }
+
+  .row.justify-between {
+    margin-top: 30px;
+    margin-bottom: 12px !important;
+    min-height: 32px;
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .row:is(.mt30) {
+      margin-top: 0 !important;
+    }
+  }
+
+  & + div {
+    > h3 {
+      margin-bottom: 18px;
+    }
+
+    > .row {
+      margin-top: 30px;
+      margin-bottom: 12px;
+      min-height: 32px;
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .row:is(.mt30) {
+        margin-top: 0 !important;
+      }
+    }
+  }
+}
