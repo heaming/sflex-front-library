@@ -57,8 +57,8 @@ export default {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
-    function getSignData() {
-      return canvas.toDataURL();
+    function getSignData(type = 'image/png') {
+      return canvas.toDataURL(type);
     }
 
     async function initDraw() {
