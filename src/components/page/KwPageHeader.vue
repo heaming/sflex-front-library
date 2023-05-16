@@ -36,6 +36,7 @@
       <kw-icon
         name="notice_off"
         clickable
+        @click="showPageNotice = true"
       >
         {{ $t('MSG_TXT_BIZ_NOTICE') }}
       </kw-icon>
@@ -84,9 +85,30 @@
       </q-breadcrumbs-el>
     </q-breadcrumbs>
   </div>
+  <div
+    v-if="pageNoticeCntn && showPageNotice"
+    class="notice-popup"
+  >
+    <div class="notice-popup__inner">
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        class="notice-popup__body"
+        v-html="sanitize(pageNoticeCntn)"
+      />
+      <!-- eslint-enable vue/no-v-html -->
+    </div>
+    <kw-btn
+      borderless
+      icon="close"
+      text-color="bg-white"
+      class="self-start"
+      @click="showPageNotice = false"
+    />
+  </div>
 </template>
 
 <script>
+import { sanitize } from '../../plugins/sanitize';
 import useBookmark from './private/useBookmark';
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
 import useNewWindow from './private/useNewWindow';
@@ -110,12 +132,15 @@ export default {
   },
 
   async setup() {
+    const showPageNotice = ref(true);
     return {
       ...useBookmark(),
       ...useBreadcrumbNavigation(),
       ...useNewWindow(),
       ...useHeaderMeta(),
       env,
+      showPageNotice,
+      sanitize,
     };
   },
 };
