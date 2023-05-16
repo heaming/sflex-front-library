@@ -460,7 +460,7 @@ export async function validate(view, options = {}) {
     const rowState = data.getRowState(i);
 
     const shouldValidate = rowState !== RowState.DELETED
-      && (!isChangedOnly || rowState !== RowState.NONE)
+      && (isCheckedOnly || !isChangedOnly || rowState !== RowState.NONE)// isCheckedOnly 가 true면 true
       && (!isCheckedOnly || view.isCheckedRow(i));
 
     if (shouldValidate) {
