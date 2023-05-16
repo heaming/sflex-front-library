@@ -2,7 +2,7 @@ import SunEditor from 'suneditor';
 import { ko } from 'suneditor/src/lang';
 import {
   blockquote, align, font, fontSize, fontColor, table,
-  formatBlock, lineHeight, template, link, image,
+  formatBlock, lineHeight, template, link, image, list,
 } from 'suneditor/src/plugins';
 
 const { create } = SunEditor.init({
@@ -50,7 +50,7 @@ const { create } = SunEditor.init({
     // ['removeFormat'],
     // '/', // Line break
     ['outdent', 'indent'],
-    ['align', 'horizontalRule', 'list', 'lineHeight'],
+    ['align', 'list', 'lineHeight'],
     // ['table', 'link', 'image', 'video'],
     ['table', 'image', 'link'],
     ['fullScreen', 'showBlocks', 'codeView'],
@@ -61,15 +61,15 @@ const { create } = SunEditor.init({
 
   // region [edit default]
   defaultTag: 'p', // 문단을 구성하는 tag
-  textTags: {
-    bold: 'b', // or strong
-    underline: 'u', // or ins
-    italic: 'i', // or em
-    strike: 's', // or strike
-  },
+  // textTags: {
+  //   bold: 'strong', // or strong
+  //   underline: 'ins', // or ins
+  //   italic: 'em', // or em
+  //   strike: 'strike', // or strike
+  // },
   // historyStackDelayTime: 400, // undo 시 영향.
   lineAttrReset: 'style',
-  defaultStyle: 'font-family: 굴림; font-size: 16px;',
+  defaultStyle: 'font-family: "Noto Sans KR", sans-serif; font-size: 16px;',
   // endregion
 
   // region [contents define & tag limit]
@@ -112,6 +112,7 @@ const { create } = SunEditor.init({
     template,
     link,
     image,
+    list,
   ],
   // image
   // font
@@ -123,6 +124,7 @@ const { create } = SunEditor.init({
     '바탕',
     '궁서',
     '궁서체',
+    '"Noto Sans KR", sans-serif',
     'Arial',
     'tahoma',
     'Courier New,Courier',

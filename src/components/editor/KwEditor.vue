@@ -96,12 +96,6 @@ export default {
         ...props.options,
       });
 
-      // const updateValueByEditorContents = () => {
-      //   const contents = editor.getContents();
-      //   value.value = isEmptyContents(contents) ? '' : contents;
-      //   console.log('onInput');
-      // };
-
       editor.onChange = (contents) => {
         value.value = isEmptyContents(contents) ? '' : contents;
       };
