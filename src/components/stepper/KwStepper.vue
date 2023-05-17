@@ -6,7 +6,10 @@
     <span
       v-if="useHeading"
       class="kw-stepper__title"
-    >{{ activeHeader?.props.headingText || activeHeader?.props.title }}</span>
+    >
+      {{ activeHeader?.props.headingText || activeHeader?.props.title }}
+      {{ activeHeader?.props['sub-text'] ? ` / ${activeHeader?.props['sub-text']}` : '' }}
+    </span>
 
     <q-stepper
       :id="stepperId"
@@ -95,7 +98,7 @@ export default {
 
     // customize props
     headingText: { type: Boolean, default: false },
-
+    subText: { type: Boolean, default: false },
     // fallthrough props
     headerClass: { type: Boolean, default: undefined },
     headerNav: { type: Boolean, default: false },
