@@ -315,7 +315,8 @@ export function overrideOnCellItemClicked(view) {
       const dataRow = dp.getOutputRow({}, index.dataRow);
 
       const componentProps = {
-        attachDocumentId: dataRow[editor.attachDocumentId]?.__atthDocumentId ?? editor.attachDocumentId,
+        attachDocumentId: dataRow[editor.attachDocumentId]?.__atthDocumentId
+          || dataRow[editor.attachDocumentId] || editor.attachDocumentId,
         attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
         fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
         fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,

@@ -3,10 +3,18 @@
     :class="stepperClass"
     v-bind="styleClassAttrs"
   >
-    <span
+    <p
       v-if="useHeading"
       class="kw-stepper__title"
-    >{{ activeHeader?.props.headingText || activeHeader?.props.title }}</span>
+    >
+      {{ activeHeader?.props.headingText || activeHeader?.props.title }}
+      <span
+        v-if=" activeHeader?.props['sub-text']"
+        class="kw-stepper__subtitle"
+      >
+        <b class="kw-font-pt20 text-weight-bold kw-fc--black1">/</b> {{ ` ${activeHeader?.props['sub-text']}` }}
+      </span>
+    </p>
 
     <q-stepper
       :id="stepperId"
@@ -95,7 +103,7 @@ export default {
 
     // customize props
     headingText: { type: Boolean, default: false },
-
+    subText: { type: Boolean, default: false },
     // fallthrough props
     headerClass: { type: Boolean, default: undefined },
     headerNav: { type: Boolean, default: false },

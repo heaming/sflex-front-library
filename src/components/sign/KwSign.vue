@@ -43,6 +43,7 @@ export default {
   props: {
     needRecentSign: { type: Boolean, default: true },
     recentSignSrc: { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg/2338px-%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg' },
+    oriSignSrc: { type: String, default: '' },
     width: { type: [String, Number], default: undefined },
     height: { type: [String, Number], default: undefined },
   },
@@ -56,11 +57,11 @@ export default {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
-    function getSignData() {
-      return canvas.toDataURL();
+    function getSignData(type = 'image/png') {
+      return canvas.toDataURL(type);
     }
 
-    function initDraw() {
+    async function initDraw() {
       canvas = document.getElementById('drawCanvas');
       ctx = canvas.getContext('2d');
       setBackground();
@@ -136,6 +137,16 @@ export default {
       };
     }
 
+    function setOriginalSign() {
+      const image = new Image();
+      image.src = props.oriSignSrc;
+      image.crossOrigin = 'Anonymous';
+      image.onload = () => {
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        isSignExist.value = true;
+      };
+    }
+
     function downSign() {
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
@@ -158,8 +169,9 @@ export default {
       if (platform.is.tablet) return 300;
     });
 
-    onMounted(() => {
-      initDraw();
+    onMounted(async () => {
+      await initDraw();
+      setOriginalSign();
     });
 
     return {
