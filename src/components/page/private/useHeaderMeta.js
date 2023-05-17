@@ -14,11 +14,12 @@ export default () => {
   const title = computed(() => props.title || meta.menuName);
   const isSubPage = computed(() => meta.pageUseCode === 'S');
   const portalId = computed(() => meta.portalId);
-  const pageNoticeCntn = ref();
+  const pageNoticeCntn = ref(null);
   async function getPageNotice() {
-    const res = await http.get(`/sflex/common/common/page-notices/page/${meta.pageId}`);
-    if (res.data) pageNoticeCntn.value = res.data.noticeCntn;
-    else pageNoticeCntn.value = null;
+    if (meta.pageId) {
+      const res = await http.get(`/sflex/common/common/page-notices/page/${meta.pageId}`);
+      if (res.data) pageNoticeCntn.value = res.data.noticeCntn;
+    }
   }
 
   getPageNotice();
