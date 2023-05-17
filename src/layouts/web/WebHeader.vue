@@ -53,13 +53,49 @@
           clickable
         />
         <kw-menu
-          class="web-header__dropdown"
+          class="web-header__dropdown w400 h344"
           fit
-          anchor="bottom right"
-          self="top middle"
+          :offset="[135,-2]"
         >
-          <div>
-            알람 개발은 알람기획을 기다리고 있습니다.
+          <div class="px16">
+            <kw-list
+              :items="items"
+              separator
+              item-padding="12px 0"
+              clickable
+              item-key="id"
+              class="kw-list-alert"
+            >
+              <template #item="{ item }">
+                <kw-item-section
+                  side
+                  top
+                >
+                  <kw-icon :name="item.selected ? 'alert_on' : 'alert_outline' " />
+                </kw-item-section>
+                <kw-item-section>
+                  <kw-item-label
+                    lines="1"
+                    class="kw-font-pt14"
+                  >
+                    {{ item.content }}
+                    <kw-tooltip
+                      class="alert_tooltip"
+                      anchor="bottom start"
+                      self="top start"
+                      :offset="[-1, -1]"
+                    >
+                      {{ item.content }}
+                    </kw-tooltip>
+                  </kw-item-label>
+                  <kw-item-label>
+                    <p class="kw-fc--black3 kw-font-pt14 mt4">
+                      {{ item.date }}
+                    </p>
+                  </kw-item-label>
+                </kw-item-section>
+              </template>
+            </kw-list>
           </div>
         </kw-menu>
         <div>
@@ -137,7 +173,15 @@ import store from '../../store';
 const searchText = ref('');
 const totalMenu = ref(false);
 const gnbMenu = ref(false);
-
+const items = ref([
+  { id: '1', selected: true, date: '2023-05-11 15:30PM', content: '[판매] 비정도영업 조치결과 신청 승인완료 되었습니다.' },
+  { id: '2', selected: false, date: '2023-05-11 15:30PM', content: '[조직] 조직 화상 교사에서 등록 승인 요청건이 있습니다.' },
+  { id: '3', selected: false, date: '2023-05-11 15:30PM', content: '[판매] 비정도영업 조치결과 신청 승인완료 되었습니다.' },
+  { id: '4', selected: false, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
+  { id: '5', selected: true, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
+  { id: '6', selected: true, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
+  { id: '7', selected: true, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
+]);
 export default {
   name: 'WebHeader',
   components: { WebTotalMenuP, WebGnbMenuP },
@@ -242,6 +286,7 @@ export default {
       openGnbMenu,
       searchText,
       totalMenu,
+      items,
       gnbMenu,
       getSelectedKey,
       getActiveClass,
