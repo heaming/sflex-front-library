@@ -162,9 +162,24 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
     font-size: 20px;
     font-weight: 700;
     color: $black1;
+    min-height: 30px;
+  }
+
+  &__subtitle {
+    margin-left: 8px;
+
+    @include typo("body");
+
+    color: $black1;
+
+    b {
+      vertical-align: -2px;
+    }
   }
 
   &--heading-text {
