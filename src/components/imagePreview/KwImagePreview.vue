@@ -51,8 +51,13 @@ export default {
     async function initImages() {
       const promises = props.images.map(async (image) => {
         const temp = {};
-        temp.file = image;
-        temp.src = await getImageSrcFromFile(image);
+        if (image.fileUid) {
+          temp.file = image;
+          temp.src = await getImageSrcFromFile(image);
+        } else {
+          temp.file = image;
+          temp.src = URL.createObjectURL(image.file.nativeFile);
+        }
         imgs.value.push(temp);
       });
 
