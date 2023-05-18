@@ -16,6 +16,7 @@
           style="font-size: 20px;"
           :label="`${userInfo.userName}님`"
           class="text-weight-bold"
+          @click="openUserInfoPopup"
         />
         <div>
           <kw-btn
@@ -167,6 +168,7 @@ import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
+import { modal } from '../../plugins/modal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
@@ -351,6 +353,12 @@ async function onClickEditAndComplete(depth3Menu) {
     });
   }
   depth3Menu.editable = !depth3Menu.editable;
+}
+
+async function openUserInfoPopup() {
+  await modal({
+    component: () => import('./TabletUserInfoP.vue'),
+  });
 }
 
 onMounted(() => {
