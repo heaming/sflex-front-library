@@ -1,5 +1,8 @@
 <template>
-  <div class="time-scroll-picker">
+  <div
+    class="time-scroll-picker"
+    :class="$g.platform.is.mobile ? 'px20': ''"
+  >
     <template
       v-for="(items, i) in itemsList"
       :key="i"
@@ -15,7 +18,7 @@
         @update:model-value="onChange(i, $event)"
       />
       <span
-        v-if="i+1 < itemsList.length"
+        v-if="!$g.platform.is.mobile && i+1 < itemsList.length"
         class="timepicker_colon"
       >:</span>
     </template>
