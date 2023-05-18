@@ -13,6 +13,7 @@
           style="font-size: 20px;"
           :label="`${userInfo.userName}님`"
           class="text-weight-bold"
+          @click="openUserInfoPopup"
         />
         <div>
           <kw-btn
@@ -321,6 +322,12 @@ async function onClickEditAndComplete(depth3Menu) {
 async function openSetSessionP() {
   modal({
     component: () => import('../web/WebSessionSettingP.vue'),
+  });
+}
+
+async function openUserInfoPopup() {
+  await modal({
+    component: () => import('./MobileUserInfoP.vue'),
   });
 }
 

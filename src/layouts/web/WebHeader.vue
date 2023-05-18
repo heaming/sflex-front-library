@@ -104,6 +104,7 @@
             name="profile_none"
             size="32px"
             clickable
+            @click="openUserInfoPopup"
           />
         </div>
         <div
@@ -227,6 +228,12 @@ export default {
       if (result) push({ name: payload.menuUid });
     }
 
+    async function openUserInfoPopup() {
+      await modal({
+        component: () => import('../../pages/web/WebUserInfoP.vue'),
+      });
+    }
+
     onMounted(() => {
       getActiveClass();
     });
@@ -247,6 +254,7 @@ export default {
       getActiveClass,
       closeTotalMenuP,
       closeGnbMenu,
+      openUserInfoPopup,
     };
   },
 };
