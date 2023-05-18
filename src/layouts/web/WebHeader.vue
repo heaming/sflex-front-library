@@ -47,19 +47,68 @@
           :on-click-icon="() => openMenuSearchPopup()"
         />
 
-        <kw-icon
-          class="web-header__icon"
-          name="alert_off_24"
-          clickable
-        />
-        <kw-menu
-          class="web-header__dropdown"
-          fit
-          anchor="bottom right"
-          self="top middle"
+        <kw-btn
+          icon="alert_off_24"
+          borderless
+          style="font-size: 24px;"
         >
-          <div>
-            알람 개발은 알람기획을 기다리고 있습니다.
+          <q-badge
+            rounded
+            floating
+            color="primary"
+            :label="alarms?.filter((alarm) => alarm.readYn === 'N').length"
+            class="alert-badge"
+          />
+        </kw-btn>
+        <kw-menu
+          class="web-header__dropdown w400 h344"
+          fit
+          :offset="[135,-2]"
+        >
+          <div class="px16">
+            <kw-list
+              v-if="alarms.length > 0"
+              :items="alarms"
+              separator
+              item-padding="12px 0"
+              clickable
+              item-key="alarmId"
+              class="kw-list-alert"
+              @click-item="readAlarm"
+            >
+              <template #item="{ item }">
+                <kw-item-section
+                  side
+                  top
+                >
+                  <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
+                </kw-item-section>
+                <kw-item-section>
+                  <kw-item-label
+                    lines="1"
+                    class="kw-font-pt14"
+                  >
+                    {{ item.alarmMsg }}
+                    <kw-tooltip
+                      class="alert_tooltip"
+                      anchor="bottom start"
+                      self="top start"
+                      :offset="[-1, -1]"
+                    >
+                      {{ item.alarmMsg }}
+                    </kw-tooltip>
+                  </kw-item-label>
+                  <kw-item-label>
+                    <p class="kw-fc--black3 kw-font-pt14 mt4">
+                      {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
+                    </p>
+                  </kw-item-label>
+                </kw-item-section>
+              </template>
+            </kw-list>
+            <div v-else>
+              알림이 없습니다.
+            </div>
           </div>
         </kw-menu>
         <div>
@@ -126,8 +175,10 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
+import useAlarm from '../../composables/private/useAlarm';
 import useGlobal from '../../composables/useGlobal';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
@@ -138,7 +189,6 @@ import store from '../../store';
 const searchText = ref('');
 const totalMenu = ref(false);
 const gnbMenu = ref(false);
-
 export default {
   name: 'WebHeader',
   components: { WebTotalMenuP, WebGnbMenuP },
@@ -148,6 +198,9 @@ export default {
     const { notify } = useGlobal();
     const { t } = useI18n();
     const { getters, commit } = useStore();
+    const { readAlarm } = useAlarm();
+    const alarms = computed(() => getters['meta/getAlarms']);
+    dayjs.locale('en');
 
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
@@ -255,6 +308,9 @@ export default {
       closeTotalMenuP,
       closeGnbMenu,
       openUserInfoPopup,
+      readAlarm,
+      dayjs,
+      alarms,
     };
   },
 };

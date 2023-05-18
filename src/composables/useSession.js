@@ -27,6 +27,7 @@ export default () => {
       store.dispatch('meta/fetchApps'),
       store.dispatch('meta/fetchMenus'),
       store.dispatch('meta/fetchBookmarks'),
+      store.dispatch('meta/fetchAlarms'),
     ]);
   }
 
