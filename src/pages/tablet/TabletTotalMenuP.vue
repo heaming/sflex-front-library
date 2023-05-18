@@ -23,8 +23,17 @@
             borderless
             icon="alert_off_24"
             style="font-size: 24px;"
-            class="alert_on"
-          /><!-- 아이콘명은 그대로 두고 알림이 있을 시 클래스 : alert_on, 없을 시 클래스 : alert_off -->
+            @click="openAlarmListPopup"
+          >
+            <q-badge
+              rounded
+              floating
+              color="primary"
+              :label="alarms.filter((alarm) => alarm.readYn === 'N').length"
+              class="alert-badge"
+            />
+          </kw-btn>
+          <!-- 아이콘명은 그대로 두고 알림이 있을 시 클래스 : alert_on, 없을 시 클래스 : alert_off -->
           <span>
             <kw-btn
               borderless
@@ -175,6 +184,7 @@ const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
 
 const apps = readonly(getters['meta/getApps']);
+const alarms = computed(() => getters['meta/getAlarms']);
 const router = useRouter();
 const { ok } = useModal();
 
@@ -358,6 +368,12 @@ async function onClickEditAndComplete(depth3Menu) {
 async function openUserInfoPopup() {
   await modal({
     component: () => import('./TabletUserInfoP.vue'),
+  });
+}
+
+async function openAlarmListPopup() {
+  await modal({
+    component: () => import('./TabletAlarmListP.vue'),
   });
 }
 

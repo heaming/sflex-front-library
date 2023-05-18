@@ -20,8 +20,16 @@
             borderless
             icon="alert_off_24"
             style="font-size: 24px;"
-            class="alert_on"
-          /><!-- 아이콘명은 그대로 두고 알림이 있을 시 클래스 : alert_on, 없을 시 클래스 : alert_off -->
+            @click="openAlarmListPopup"
+          >
+            <q-badge
+              rounded
+              floating
+              color="primary"
+              :label="alarms.filter((alarm) => alarm.readYn === 'N').length"
+              class="alert-badge"
+            />
+          </kw-btn>
           <kw-btn
             borderless
             icon="setting_24"
@@ -142,6 +150,7 @@ const apps = readonly(getters['meta/getApps']);
 const router = useRouter();
 const { ok } = useModal();
 
+const alarms = computed(() => getters['meta/getAlarms']);
 const currIdx = ref(0);
 const sortable = ref([]);
 const totalMenus = ref([]);
@@ -328,6 +337,12 @@ async function openSetSessionP() {
 async function openUserInfoPopup() {
   await modal({
     component: () => import('./MobileUserInfoP.vue'),
+  });
+}
+
+async function openAlarmListPopup() {
+  await modal({
+    component: () => import('./MobileAlarmListP.vue'),
   });
 }
 
