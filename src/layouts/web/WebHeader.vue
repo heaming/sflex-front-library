@@ -46,24 +46,26 @@
           dense
           :on-click-icon="() => openMenuSearchPopup()"
         />
-
         <kw-btn
           icon="alert_off_24"
           borderless
           style="font-size: 24px;"
+          class="alert-btn"
         >
           <q-badge
             rounded
             floating
             color="primary"
-            :label="alarms?.filter((alarm) => alarm.readYn === 'N').length"
+            :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
             class="alert-badge"
           />
         </kw-btn>
         <kw-menu
+          ref="alarmRef"
+          target=".alert-btn"
           class="web-header__dropdown w400 h344"
           fit
-          :offset="[135,-2]"
+          :offset="[0,3]"
         >
           <div class="px16">
             <kw-list
@@ -201,7 +203,6 @@ export default {
     const { readAlarm } = useAlarm();
     const alarms = computed(() => getters['meta/getAlarms']);
     dayjs.locale('en');
-
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
       totalMenu.value = true;
