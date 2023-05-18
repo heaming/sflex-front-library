@@ -53,6 +53,7 @@ export default {
     bookmarks: [],
     recentMenus: [],
     isLocatedFromHistory: false,
+    alarms: [],
   }),
 
   mutations: {
@@ -95,6 +96,9 @@ export default {
     setIsLocatedFromHistory(state, isLocatedFromHistory) {
       state.isLocatedFromHistory = isLocatedFromHistory;
     },
+    setAlarms(state, alarms) {
+      state.alarms = Object.freeze(alarms);
+    },
   },
 
   getters: {
@@ -121,6 +125,7 @@ export default {
     isBookmarked: (state) => (menuUid, pageId) => some(state.bookmarks, { menuUid, pageId }),
     getRecentMenus: (state) => state.recentMenus,
     getIsLocatedFromHistory: (state) => state.isLocatedFromHistory,
+    getAlarms: (state) => state.alarms,
   },
 
   actions: {
@@ -203,6 +208,10 @@ export default {
     },
     fetchLocatedFromHistory({ commit }, data) {
       commit('setIsLocatedFromHistory', data);
+    },
+    async fetchAlarms({ commit }) {
+      const res = await http.get('/sflex/common/common/alarm');
+      commit('setAlarms', res.data);
     },
   },
 };
