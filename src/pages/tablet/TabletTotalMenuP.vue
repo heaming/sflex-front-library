@@ -29,7 +29,7 @@
               rounded
               floating
               color="primary"
-              :label="alarms.filter((alarm) => alarm.readYn === 'N').length"
+              :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
               class="alert-badge"
             />
           </kw-btn>
