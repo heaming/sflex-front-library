@@ -184,7 +184,7 @@ const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
 
 const apps = readonly(getters['meta/getApps']);
-const alarms = getters['meta/getAlarms'];
+const alarms = computed(() => getters['meta/getAlarms']);
 const router = useRouter();
 const { ok } = useModal();
 
