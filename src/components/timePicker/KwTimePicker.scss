@@ -99,3 +99,30 @@
   color: $black3;
   font-size: 14px;
 }
+
+body.mobile:not(.tablet) {
+  .time-scroll-picker {
+    .kw-scroll-picker {
+      &__options {
+        .q-item {
+          padding: 0;
+          font-size: 20px;
+          font-weight: 400;
+          color: rgb(34 34 34 / 30%);
+        }
+      }
+
+      &__highlight {
+        &::before {
+          background: rgba($primary, 5%);
+        }
+
+        .kw-scroll-picker__options {
+          .q-item {
+            color: $black1;
+          }
+        }
+      }
+    }
+  }
+}
