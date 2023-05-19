@@ -5,7 +5,7 @@
     <kw-icon
       name="arrow_left"
       clickable
-      @click="rotateImage(1)"
+      @click="rotateImage(-1)"
     />
     <div
       id="gallery-container"
@@ -29,7 +29,7 @@
     <kw-icon
       name="arrow_right"
       clickable
-      @click="rotateImage(-1)"
+      @click="rotateImage(1)"
     />
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
         const temp = {};
         if (image.fileUid) {
           temp.file = image;
-          temp.src = await getImageSrcFromFile(image);
+          temp.src = await getImageSrcFromFile(image.fileUid);
         } else {
           temp.file = image;
           temp.src = URL.createObjectURL(image.file.nativeFile);
@@ -62,13 +62,16 @@ export default {
       });
 
       await Promise.all(promises);
+
+      const tempIdx = props.images.map((image) => image.fileUid);
+      imgs.value.sort((a, b) => tempIdx.indexOf(a.file.fileUid) - tempIdx.indexOf(b.file.fileUid));
     }
 
     function rotateImage(number) {
       if (number === 1) viewer?.value?.next(true);
       else viewer?.value?.prev(true);
 
-      emit('update:image-index', { curr: viewer?.value.index, total: viewer?.value.images?.length });
+      emit('update:image-index', { curr: viewer?.value?.index, total: viewer?.value?.images?.length });
     }
 
     function makeViewer() {
