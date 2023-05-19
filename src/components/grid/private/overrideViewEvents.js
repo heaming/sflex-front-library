@@ -100,37 +100,11 @@ export function overrideOnShowTooltip(view) {
   */
 export function overrideOnShowHeaderTooltip(view) {
   wrapEvent(view, onShowHeaderTooltip, (g, column, value) => {
-    let originalResult;
-
     if (hasOriginal(g, onShowHeaderTooltip)) {
-      originalResult = execOriginal(g, onShowHeaderTooltip, g, column, value);
+      execOriginal(g, onShowHeaderTooltip, g, column, value);
     }
 
-    const { styleName } = column.header;
-    const { _fitWidth } = column.layout;
-    const { displayWidth } = column;
-    let alignStyle;
-    const alignArr = ['text-left', 'text-center', 'text-right'];
-    if (styleName) {
-      const styleArr = styleName.split(' ');
-      let styleIdx;
-      const isAlignStyle = styleArr.some((style, i) => {
-        if (alignArr.includes(style)) {
-          styleIdx = i;
-          return true;
-        }
-        return false;
-      });
-
-      if (isAlignStyle) alignStyle = styleArr[styleIdx];
-    }
-
-    if (!alignStyle) alignStyle = 'text-center';
-
-    const res = `<div class="${alignStyle} rg-tooltip__custom" style="min-width: ${_fitWidth || displayWidth}px; padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">`
-    + `<span class="rg-tooltip__custom__span">${originalResult || value}</span>`
-    + '</div>';
-    return sanitize(res);
+    return '';
   });
 }
 
