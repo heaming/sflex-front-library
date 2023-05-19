@@ -37,6 +37,7 @@
 
       <div class="web-header__tools">
         <kw-input
+          ref="menuSearchRef"
           v-model.trim="searchText"
           class="web-header__search"
           placeholder="메뉴검색"
@@ -204,6 +205,7 @@ export default {
     const { getters, commit } = useStore();
     const { readAlarm } = useAlarm();
     const alarms = computed(() => getters['meta/getAlarms']);
+    const menuSearchRef = ref();
     dayjs.locale('en');
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
@@ -273,6 +275,7 @@ export default {
     async function openMenuSearchPopup() {
       if (searchText.value.length <= 0) {
         notify(t('MSG_ALT_SRCH_INPUT'));
+        menuSearchRef.value?.focus();
         return;
       }
 
@@ -314,6 +317,7 @@ export default {
       readAlarm,
       dayjs,
       alarms,
+      menuSearchRef,
     };
   },
 };
