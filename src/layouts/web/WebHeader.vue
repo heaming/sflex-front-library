@@ -46,73 +46,75 @@
           dense
           :on-click-icon="() => openMenuSearchPopup()"
         />
-        <kw-btn
-          icon="alert_off_24"
-          borderless
-          style="font-size: 24px;"
-          class="alert-btn"
-        >
-          <q-badge
-            rounded
-            floating
-            color="primary"
-            :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
-            class="alert-badge"
-          />
-        </kw-btn>
-        <kw-menu
-          ref="alarmRef"
-          target=".alert-btn"
-          class="web-header__dropdown w400 h344"
-          fit
-          :offset="[0,3]"
-        >
-          <div class="px16">
-            <kw-list
-              v-if="alarms.length > 0"
-              :items="alarms"
-              separator
-              item-padding="12px 0"
-              clickable
-              item-key="alarmId"
-              class="kw-list-alert"
-              @click-item="readAlarm"
-            >
-              <template #item="{ item }">
-                <kw-item-section
-                  side
-                  top
-                >
-                  <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
-                </kw-item-section>
-                <kw-item-section>
-                  <kw-item-label
-                    lines="1"
-                    class="kw-font-pt14"
+        <div>
+          <kw-btn
+            icon="alert_off_24"
+            borderless
+            style="font-size: 24px;"
+            class="alert-btn"
+          >
+            <q-badge
+              rounded
+              floating
+              color="primary"
+              :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
+              class="alert-badge"
+            />
+          </kw-btn>
+          <kw-menu
+            v-if="alarms.length > 0"
+            ref="alarmRef"
+            target=".alert-btn"
+            class="web-header__dropdown w400 h344"
+            fit
+            :offset="[0,3]"
+          >
+            <div class="px16">
+              <kw-list
+                :items="alarms"
+                separator
+                item-padding="12px 0"
+                clickable
+                item-key="alarmId"
+                class="kw-list-alert"
+                @click-item="readAlarm"
+              >
+                <template #item="{ item }">
+                  <kw-item-section
+                    side
+                    top
                   >
-                    {{ item.alarmMsg }}
-                    <kw-tooltip
-                      class="alert_tooltip"
-                      anchor="bottom start"
-                      self="top start"
-                      :offset="[-1, -1]"
+                    <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
+                  </kw-item-section>
+                  <kw-item-section>
+                    <kw-item-label
+                      lines="1"
+                      class="kw-font-pt14"
                     >
                       {{ item.alarmMsg }}
-                    </kw-tooltip>
-                  </kw-item-label>
-                  <kw-item-label>
-                    <p class="kw-fc--black3 kw-font-pt14 mt4">
-                      {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
-                    </p>
-                  </kw-item-label>
-                </kw-item-section>
-              </template>
-            </kw-list>
-            <div v-else>
-              알림이 없습니다.
+                      <kw-tooltip
+                        class="alert_tooltip"
+                        anchor="bottom start"
+                        self="top start"
+                        :offset="[-1, -1]"
+                      >
+                        {{ item.alarmMsg }}
+                      </kw-tooltip>
+                    </kw-item-label>
+                    <kw-item-label>
+                      <p class="kw-fc--black3 kw-font-pt14 mt4">
+                        {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
+                      </p>
+                    </kw-item-label>
+                  </kw-item-section>
+                </template>
+              </kw-list>
             </div>
-          </div>
-        </kw-menu>
+          </kw-menu>
+          <kw-tooltip v-else>
+            알림이 없습니다.
+          </kw-tooltip>
+        </div>
         <div>
           <kw-icon
             class="web-header__icon"
