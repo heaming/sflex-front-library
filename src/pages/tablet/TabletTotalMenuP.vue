@@ -372,6 +372,7 @@ async function openUserInfoPopup() {
 }
 
 async function openAlarmListPopup() {
+  if (alarms.value?.length <= 0) return;
   await modal({
     component: () => import('./TabletAlarmListP.vue'),
   });
