@@ -568,14 +568,16 @@ export async function exportView(view, options) {
   if (options.searchCondition && !!options.exportData) {
     const message = view.__searchConditionText__;
 
-    options.documentTitle = {
-      message,
-      visible: true,
-      spaceTop: 0,
-      spaceBottom: 0,
-      height: 100,
-      styleName: 'documentStyle',
-    };
+    if (message !== '') {
+      options.documentTitle = {
+        message,
+        visible: true,
+        spaceTop: 0,
+        spaceBottom: 0,
+        height: 100,
+        styleName: 'documentStyle',
+      };
+    }
   }
   const shouldClone = !!options.exportData;
 
