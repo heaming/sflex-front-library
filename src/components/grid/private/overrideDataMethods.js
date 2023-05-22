@@ -56,8 +56,12 @@ export function overrideSetFields(data) {
 
 function setSearchConditionMessage(view) {
   // 검색조건 메세지 세팅
-  let message = '[검색조건]\n';
   const formItems = document.querySelectorAll('.kw-search .kw-form-item');
+  if (formItems.length === 0) {
+    view.__searchConditionText__ = '';
+    return;
+  }
+  let message = '[검색조건]\n';
   formItems.forEach((formItem) => {
     const label = formItem.querySelector('.kw-label-content__label').innerHTML;
 
