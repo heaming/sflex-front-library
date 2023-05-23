@@ -129,6 +129,29 @@ export default {
   },
 
   actions: {
+    /**
+     * TODO: 삭제요망 임시 세션변경임.
+     */
+    async fetchLoginInfoImsi({ commit }) {
+      const accessToken = localStorage.getItem(consts.LOCAL_STORAGE_ACCESS_TOKEN) || null;
+      const response = await http.post('/sflex/common/common/login-info-imsi', null, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+
+      const loginInfo = response.data;
+      const { userInfo, lastLoginInfo, configs, notices, linkPages } = loginInfo;
+
+      userInfo.dateFormat ||= consts.DEFAULT_DATE_FORMAT;
+      userInfo.timeFormat ||= consts.DEFAULT_TIME_FORMAT;
+      userInfo.datetimeFormat = `${userInfo.dateFormat} ${userInfo.timeFormat}`;
+
+      commit('setLoginInfo', { accessToken, userInfo, lastLoginInfo });
+      commit('setConfigs', configs);
+      commit('setNotices', notices);
+      commit('setLinkPages', linkPages);
+
+      return loginInfo;
+    },
     async fetchLoginInfo({ commit }) {
       const accessToken = localStorage.getItem(consts.LOCAL_STORAGE_ACCESS_TOKEN) || null;
       const response = await http.post('/sflex/common/common/login-info', null, {
