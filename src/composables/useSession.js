@@ -23,7 +23,7 @@ export default () => {
   }
 
   async function fetchLoginInfo() {
-    const { userInfo } = await store.dispatch('meta/fetchLoginInfoImsi');
+    const { userInfo } = await store.dispatch('meta/fetchLoginInfo');
     const { langId } = userInfo;
 
     i18n.locale.value = langId;
