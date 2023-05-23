@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { mobileUtil } from '~kw-lib';
+import { closeWaffleApp } from '../../utils/mobile';
 import useBookmark from './private/useBookmark';
 import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
 
@@ -86,8 +86,7 @@ export default {
 
   setup() {
     function onClickClose() {
-      console.log(useHeaderMeta().portalId, useHeaderMeta().tenantId);
-      mobileUtil.closeWaffleApp();
+      closeWaffleApp();
     }
     return {
       onClickClose,
