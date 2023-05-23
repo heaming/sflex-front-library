@@ -13,8 +13,17 @@ export default () => {
   const store = useStore();
   const i18n = useI18n();
 
+  async function fetchLoginInfoImsi() {
+    const { userInfo } = await store.dispatch('meta/fetchLoginInfoImsi');
+    const { langId } = userInfo;
+
+    i18n.locale.value = langId;
+    Quasar.locale = langId;
+    dayjs.locale(langId);
+  }
+
   async function fetchLoginInfo() {
-    const { userInfo } = await store.dispatch('meta/fetchLoginInfo');
+    const { userInfo } = await store.dispatch('meta/fetchLoginInfoImsi');
     const { langId } = userInfo;
 
     i18n.locale.value = langId;
@@ -59,7 +68,22 @@ export default () => {
   //     await http.post('/sflex/common/common/push-users', data);
   //   }
   // }
-
+  /**
+   * TODO: 삭제
+   */
+  async function initSessionImsi() {
+    try {
+      loadSpinner(true);
+      await fetchLoginInfoImsi();
+      await Promise.all([
+        fetchMetas(),
+        fetchLangs(),
+        // saveDeviceTokenIfNeeded(),
+      ]);
+    } finally {
+      loadSpinner(false);
+    }
+  }
   async function initSession() {
     try {
       loadSpinner(true);
@@ -116,5 +140,6 @@ export default () => {
     isReady,
     login,
     logout,
+    initSessionImsi,
   };
 };
