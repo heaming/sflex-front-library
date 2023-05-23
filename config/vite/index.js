@@ -51,7 +51,7 @@ exports.defineConfig = (config) => {
     ];
 
     return {
-      base: mode === 'prd' ? config.base : '/',
+      base: config.base,
       plugins: [
         vue({
           template: { transformAssetUrls },
