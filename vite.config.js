@@ -6,10 +6,13 @@ import eslint from 'vite-plugin-eslint';
 import autoImport from 'unplugin-auto-import/vite';
 import visualizer from 'rollup-plugin-visualizer';
 
+import env from './src/consts/private/env';
+
 export default defineConfig(({ mode }) => {
   const openVisualizer = mode === 'visualizer';
 
   return {
+    base: env.VITE_CDN_ORIGIN,
     alias: {
       '@assets': resolve(__dirname, './dev/src/assets'),
     },
