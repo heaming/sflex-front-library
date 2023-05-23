@@ -7,6 +7,7 @@ const { default: visualizer } = require('rollup-plugin-visualizer');
 const autoImport = require('unplugin-auto-import/vite');
 
 const isInternalContext = require('../utils/isInternalContext');
+const env = require('../../src/consts/private/env');
 const loadEnv = require('./loadEnv');
 const loadConfigAlias = require('./loadConfigAlias');
 const loadPages = require('./loadPages');
@@ -26,7 +27,7 @@ const normalizeConfig = (config = {}) => ({
   buildSourcemap: config.buildSourcemap === true,
   optimizeDepsInclude: config.optimizeDepsInclude || [],
   rollupOptions: config.rollupOptions || {},
-  base: config.base || '/',
+  base: env.VITE_CDN_ORIGIN || '/',
 });
 
 exports.defineConfig = (config) => {
