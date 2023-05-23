@@ -26,6 +26,7 @@ const normalizeConfig = (config = {}) => ({
   buildSourcemap: config.buildSourcemap === true,
   optimizeDepsInclude: config.optimizeDepsInclude || [],
   rollupOptions: config.rollupOptions || {},
+  base: config.base || '/',
 });
 
 exports.defineConfig = (config) => {
@@ -50,6 +51,7 @@ exports.defineConfig = (config) => {
     ];
 
     return {
+      base: config.base,
       plugins: [
         vue({
           template: { transformAssetUrls },
