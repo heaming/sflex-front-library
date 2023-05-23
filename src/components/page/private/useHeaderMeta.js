@@ -1,4 +1,4 @@
-import { useMeta } from '~kw-lib';
+import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
 
 export const useHeaderMetaProps = {
