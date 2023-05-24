@@ -19,7 +19,7 @@
 
       &.q-btn {
         // this one break size props of kw-btn like dense
-        @include kw-btn-height-modifier(7px 11px, 20px, 14px, 400);
+        @include kw-btn-height-modifier(7px 10px, 20px, 14px, 400);
 
         .q-btn__content {
           // this one break align props.
@@ -30,7 +30,7 @@
       &--outlined {
         &.q-hoverable:hover {
           color: $black1;
-          font-weight: bold;
+          font-weight: 700;
         }
       }
     }
@@ -48,5 +48,12 @@
     // svg {
     //   stroke: currentcolor; // it works after svg fixed.
     // }
+  }
+}
+
+// setting-chip action menu
+.chip-actions-menu {
+  .kw-btn-dropdown__dropdown-box {
+    min-width: 70px;
   }
 }

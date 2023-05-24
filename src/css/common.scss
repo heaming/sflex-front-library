@@ -825,7 +825,8 @@ $unit: px;
     color: $error;
   }
 
-  &.rg-header-cell {
+  &.rg-header-cell,
+  &.rg-header-group-cell {
     &::after {
       display: none;
     }
