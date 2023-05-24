@@ -432,16 +432,13 @@ body:not(.mobile) :not(.web-tab-view__header) {
 .tab_tooltip.kw-tooltip {
   &.q-tooltip {
     padding: 8px;
-    font-size: 12px;
-    font-weight: 500;
+    height: 28px;
     color: #fff;
     background: $black2;
     border: none;
     border-radius: 0;
-    height: 28px;
-    line-height: 1;
-    padding-top: 7px;
-    padding-bottom: 7px;
     box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
+
+    @include typo("caption");
   }
 }
