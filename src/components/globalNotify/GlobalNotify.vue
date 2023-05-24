@@ -110,8 +110,8 @@ export default {
 
         if (popups.length > 0) {
           offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 140;
-          offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left;
-          offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left;
+          offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
+          offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
         } else if (platform.is.mobile) {
           offsetLeft = DEFAULT_PADDING_MOBILE;
           offsetTop = DEFAULT_OFFSET_TOP_MOBILE;

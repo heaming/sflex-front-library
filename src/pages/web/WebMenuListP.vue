@@ -306,7 +306,7 @@ function setMenuGroups() {
 function createHierarchyData(appMenus, key) {
   return appMenus
     .filter((v) => {
-      if (key !== 'ROOT') return key.endsWith(v.parentsMenuUid) && reSearchTexts.value.every((text) => v.menuName.indexOf(text) >= 0);
+      if (key !== 'ROOT') return key.endsWith(v.parentsMenuUid) && reSearchTexts.value.every((text) => v.menuName.toLowerCase().indexOf(text.toLowerCase()) >= 0);
       return v.menuLevel === 0;
     })
     .reduce((a, v) => {
@@ -350,7 +350,8 @@ function getHighlightedMenuName(menuName) {
   let highlightedMenuName = menuName;
   reSearchTexts.value.forEach((text) => {
     const regExp = new RegExp(text, 'gi');
-    highlightedMenuName = highlightedMenuName.replace(regExp, `<span class="kw-fc--primary">${text}</span>`);
+    const matched = highlightedMenuName.match(regExp);
+    highlightedMenuName = highlightedMenuName.replace(regExp, `<span class="kw-fc--primary">${matched[0]}</span>`);
   });
   return highlightedMenuName;
 }
