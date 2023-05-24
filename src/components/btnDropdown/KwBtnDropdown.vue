@@ -4,7 +4,7 @@
     ref="btnRef"
     :model-value="modelValue"
     :dropdown-icon="dropdownIcon"
-    :content-class="'kw-btn-dropdown__content'"
+    :content-class="computedContentClass"
     :cover="cover"
     :persistent="persistent"
     :no-route-dismiss="noRouteDismiss"
@@ -96,6 +96,8 @@ export default {
     menuSelf: { type: String, default: 'top end' },
     menuOffset: { type: Array, default: () => [0, 4] },
     noIconAnimation: { type: Boolean, default: false },
+    contentClass: { type: String, default: undefined,
+    },
   },
 
   emits: [
@@ -107,7 +109,7 @@ export default {
     'show',
   ],
 
-  setup() {
+  setup(props) {
     const btnRef = ref();
 
     function click(evt) {
@@ -123,12 +125,21 @@ export default {
       ...buttonClass.value,
     }));
 
+    const computedContentClass = computed(() => {
+      let classes = 'kw-btn-dropdown__content';
+      if (props.contentClass) {
+        classes += ` ${props.contentClass}`;
+      }
+      return classes;
+    });
+
     return {
       ...usePermissions(),
       buttonDropdownClass,
       buttonStyles,
       buttonStyleProps,
       styleClassAttrs,
+      computedContentClass,
       btnRef,
       click,
     };
