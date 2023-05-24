@@ -45,9 +45,9 @@ const availablePresets = {
     filled: true,
   },
   gridAction: {
-    color: 'bg-box',
+    color: 'bg-white',
     textColor: 'black2',
-    borderColor: 'line-line',
+    borderColor: 'line-stroke',
     outlined: true,
     dense: true,
   },

@@ -40,6 +40,21 @@
       </div>
     </div>
 
+    <!-- WAPPLE 인 경우에만 X버튼 뜨도록 설정 -->
+    <div
+      v-if="portalId === 'MBL_DEF' && tenantId === 'TNT_EDU'"
+      class="kw-page-mobile-header__etc"
+    >
+      <kw-icon
+        class="kw-popup__header-close"
+        size="24px"
+        name="close_24"
+        clickable
+        @mousedown.stop
+        @touchstart.stop
+        @click="onClickClose"
+      />
+    </div>
     <div
       v-if="$slots.etc"
       class="kw-page-mobile-header__etc"
@@ -58,6 +73,7 @@
 </template>
 
 <script>
+import { closeWaffleApp } from '../../utils/mobile';
 import useBookmark from './private/useBookmark';
 import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
 
@@ -69,7 +85,11 @@ export default {
   },
 
   setup() {
+    function onClickClose() {
+      closeWaffleApp();
+    }
     return {
+      onClickClose,
       ...useBookmark(),
       ...useHeaderMeta(),
     };

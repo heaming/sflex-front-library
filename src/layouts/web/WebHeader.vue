@@ -37,6 +37,7 @@
 
       <div class="web-header__tools">
         <kw-input
+          ref="menuSearchRef"
           v-model.trim="searchText"
           class="web-header__search"
           placeholder="메뉴검색"
@@ -46,58 +47,75 @@
           dense
           :on-click-icon="() => openMenuSearchPopup()"
         />
-
-        <kw-icon
-          class="web-header__icon"
-          name="alert_off_24"
-          clickable
-        />
-        <kw-menu
-          class="web-header__dropdown w400 h344"
-          fit
-          :offset="[135,-2]"
-        >
-          <div class="px16">
-            <kw-list
-              :items="items"
-              separator
-              item-padding="12px 0"
-              clickable
-              item-key="id"
-              class="kw-list-alert"
-            >
-              <template #item="{ item }">
-                <kw-item-section
-                  side
-                  top
-                >
-                  <kw-icon :name="item.selected ? 'alert_on' : 'alert_outline' " />
-                </kw-item-section>
-                <kw-item-section>
-                  <kw-item-label
-                    lines="1"
-                    class="kw-font-pt14"
+        <div>
+          <kw-btn
+            icon="alert_off_24"
+            borderless
+            style="font-size: 24px;"
+            class="alert-btn"
+          >
+            <q-badge
+              rounded
+              floating
+              color="primary"
+              :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
+              class="alert-badge"
+            />
+          </kw-btn>
+          <kw-menu
+            v-if="alarms.length > 0"
+            ref="alarmRef"
+            target=".alert-btn"
+            class="web-header__dropdown w400 h344"
+            fit
+            :offset="[0,3]"
+          >
+            <div class="px16">
+              <kw-list
+                :items="alarms"
+                separator
+                item-padding="12px 0"
+                clickable
+                item-key="alarmId"
+                class="kw-list-alert"
+                @click-item="readAlarm"
+              >
+                <template #item="{ item }">
+                  <kw-item-section
+                    side
+                    top
                   >
-                    {{ item.content }}
-                    <kw-tooltip
-                      class="alert_tooltip"
-                      anchor="bottom start"
-                      self="top start"
-                      :offset="[-1, -1]"
+                    <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
+                  </kw-item-section>
+                  <kw-item-section>
+                    <kw-item-label
+                      lines="1"
+                      class="kw-font-pt14"
                     >
-                      {{ item.content }}
-                    </kw-tooltip>
-                  </kw-item-label>
-                  <kw-item-label>
-                    <p class="kw-fc--black3 kw-font-pt14 mt4">
-                      {{ item.date }}
-                    </p>
-                  </kw-item-label>
-                </kw-item-section>
-              </template>
-            </kw-list>
-          </div>
-        </kw-menu>
+                      {{ item.alarmMsg }}
+                      <kw-tooltip
+                        class="alert_tooltip"
+                        anchor="bottom start"
+                        self="top start"
+                        :offset="[-1, -1]"
+                      >
+                        {{ item.alarmMsg }}
+                      </kw-tooltip>
+                    </kw-item-label>
+                    <kw-item-label>
+                      <p class="kw-fc--black3 kw-font-pt14 mt4">
+                        {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
+                      </p>
+                    </kw-item-label>
+                  </kw-item-section>
+                </template>
+              </kw-list>
+            </div>
+          </kw-menu>
+          <kw-tooltip v-else>
+            알림이 없습니다.
+          </kw-tooltip>
+        </div>
         <div>
           <kw-icon
             class="web-header__icon"
@@ -140,6 +158,7 @@
             name="profile_none"
             size="32px"
             clickable
+            @click="openUserInfoPopup"
           />
         </div>
         <div
@@ -161,8 +180,10 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
+import useAlarm from '../../composables/private/useAlarm';
 import useGlobal from '../../composables/useGlobal';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
@@ -173,15 +194,6 @@ import store from '../../store';
 const searchText = ref('');
 const totalMenu = ref(false);
 const gnbMenu = ref(false);
-const items = ref([
-  { id: '1', selected: true, date: '2023-05-11 15:30PM', content: '[판매] 비정도영업 조치결과 신청 승인완료 되었습니다.' },
-  { id: '2', selected: false, date: '2023-05-11 15:30PM', content: '[조직] 조직 화상 교사에서 등록 승인 요청건이 있습니다.' },
-  { id: '3', selected: false, date: '2023-05-11 15:30PM', content: '[판매] 비정도영업 조치결과 신청 승인완료 되었습니다.' },
-  { id: '4', selected: false, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
-  { id: '5', selected: true, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
-  { id: '6', selected: true, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
-  { id: '7', selected: true, date: '2023-05-11 15:30PM', content: '[입출금] 환불신청 접수 되었습니다. 확인해주세요. 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수 환불신청 접수 되었습니다. 환불신청 접수환불신청 접수환불신청 접수환불신청 접수' },
-]);
 export default {
   name: 'WebHeader',
   components: { WebTotalMenuP, WebGnbMenuP },
@@ -191,7 +203,10 @@ export default {
     const { notify } = useGlobal();
     const { t } = useI18n();
     const { getters, commit } = useStore();
-
+    const { readAlarm } = useAlarm();
+    const alarms = computed(() => getters['meta/getAlarms']);
+    const menuSearchRef = ref();
+    dayjs.locale('en');
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
       totalMenu.value = true;
@@ -260,6 +275,7 @@ export default {
     async function openMenuSearchPopup() {
       if (searchText.value.length <= 0) {
         notify(t('MSG_ALT_SRCH_INPUT'));
+        menuSearchRef.value?.focus();
         return;
       }
 
@@ -269,6 +285,12 @@ export default {
       });
 
       if (result) push({ name: payload.menuUid });
+    }
+
+    async function openUserInfoPopup() {
+      await modal({
+        component: () => import('../../pages/web/WebUserInfoP.vue'),
+      });
     }
 
     onMounted(() => {
@@ -286,12 +308,16 @@ export default {
       openGnbMenu,
       searchText,
       totalMenu,
-      items,
       gnbMenu,
       getSelectedKey,
       getActiveClass,
       closeTotalMenuP,
       closeGnbMenu,
+      openUserInfoPopup,
+      readAlarm,
+      dayjs,
+      alarms,
+      menuSearchRef,
     };
   },
 };

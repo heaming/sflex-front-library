@@ -1,3 +1,4 @@
+import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
 
 export const useHeaderMetaProps = {
@@ -14,6 +15,7 @@ export default () => {
   const title = computed(() => props.title || meta.menuName);
   const isSubPage = computed(() => meta.pageUseCode === 'S');
   const portalId = computed(() => meta.portalId);
+  const { tenantId } = useMeta().getUserInfo();
   const pageNoticeCntn = ref(null);
   async function getPageNotice() {
     if (meta.pageId) {
@@ -29,6 +31,7 @@ export default () => {
     pageUseIsSub: isSubPage,
     noMenuPage: meta.noMenuPage,
     portalId,
+    tenantId,
     pageNoticeCntn,
   };
 };

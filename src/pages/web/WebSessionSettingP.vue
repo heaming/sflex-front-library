@@ -92,7 +92,7 @@ import consts from '../../consts';
 import { useSession } from '../../index';
 
 const {
-  isReady,
+  initSessionImsi,
 } = useSession();
 const { ok } = useModal();
 const userInfoForSetting = ref(cloneDeep(useMeta().getUserInfo()));
@@ -105,7 +105,7 @@ async function onClickSave() {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
 
-  await isReady();
+  await initSessionImsi();
   ok();
   await notify('세션변경이 완료되었습니다.');
 }

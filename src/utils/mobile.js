@@ -14,6 +14,7 @@ const NativePlugin = {
   Status: 'StatusPlugin',
   Util: 'UtilPlugin',
   Call: 'CallPlugin',
+  Android: 'Android',
 };
 
 function callEvent(resolve, reject) {
@@ -221,4 +222,26 @@ export function getGPS() {
 // only Android
 export function getCallLog() {
   return callMethod(NativePlugin.Call, 'getCallLog', {});
+}
+
+/**
+ * Wapple
+ */
+function closeAndroidApp() {
+  if (NativePlugin.Android) {
+    callMethod(NativePlugin.Android, 'close(false)');
+  }
+}
+
+function closeIOSApp() {
+  window.open('', '_self').close();
+}
+
+// edu waffle 앱 종료
+export function closeWaffleApp() {
+  if (platform.is.android) {
+    closeAndroidApp();
+  } else if (platform.is.ios) {
+    closeIOSApp();
+  }
 }

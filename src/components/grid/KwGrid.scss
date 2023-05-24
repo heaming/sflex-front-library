@@ -933,6 +933,22 @@
       content: none;
     }
   }
+
+  .kw-table__subtotal-row {
+    td {
+      background: rgba($primary, 5%);
+      font-weight: 500;
+      border-color: #ddd;
+    }
+  }
+
+  .kw-table__total-row {
+    td {
+      background: rgba($primary, 20%);
+      font-weight: 700;
+      border-color: #ddd;
+    }
+  }
 }
 
 .grid-blank {

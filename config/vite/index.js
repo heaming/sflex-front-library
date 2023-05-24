@@ -50,6 +50,7 @@ exports.defineConfig = (config) => {
     ];
 
     return {
+      base: loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN || '/',
       plugins: [
         vue({
           template: { transformAssetUrls },
