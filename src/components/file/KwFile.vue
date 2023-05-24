@@ -295,6 +295,7 @@
             v-if="accept.split(', ').length > 3"
             anchor="bottom start"
             self="top left"
+            class="file_tooltip"
           >
             {{ accept }}
           </kw-tooltip>
