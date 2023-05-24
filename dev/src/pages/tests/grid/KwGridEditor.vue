@@ -137,6 +137,25 @@ export default {
           },
         ];
 
+        const layout = [
+          'text',
+          'number',
+          'multiline',
+          'list',
+          {
+            direction: 'horizontal',
+            items: [
+              'check',
+              'date',
+            ],
+            hideChildHeaders: true,
+            header: {
+              text: 'test',
+              styleName: 'essential',
+            },
+          },
+        ];
+        gridView.setColumnLayout(layout);
         gridData.setFields(fields);
         gridView.setColumns(columns);
         // gridView.editOptions.editable = false;

@@ -195,6 +195,8 @@ export function overrideOnCurrentChanging(view) {
   */
 export function overrideOnSortingChanged(view) {
   wrapEvent(view, onSortingChanged, (g) => {
+    // 정렬시 list type인 경우 안펼쳐지도록 세팅.
+    view.showEditor(false);
     if (hasOriginal(g, onSortingChanged)) {
       execOriginal(g, onSortingChanged, g);
     }
