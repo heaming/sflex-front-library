@@ -10,7 +10,11 @@
     @include typo("dense", 400);
 
     &.kw-tooptip--small {
-      padding: 6px 8px;
+      padding: 8px !important;
+      max-width: 458px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1;
     }
   }
 }
