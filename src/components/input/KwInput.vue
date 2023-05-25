@@ -262,7 +262,7 @@ export default {
           if (newVal?.length <= 9) return '##-###-#####';
           return '##-####-####';
         }
-        if (newVal?.length <= 9) return '####-#####';
+        if (newVal?.length <= 9) return '####-#######';
 
         if (!props.unmaskedValue) {
           if (newVal?.length <= 12) return '###-###-#####';
