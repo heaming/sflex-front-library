@@ -327,7 +327,7 @@ body.q-body--prevent-scroll__header {
 
 .alert_tooltip.kw-tooltip {
   &.q-tooltip {
-    padding: 8px !important;
+    padding: 8px 6px !important;
     max-width: 458px;
 
     @include typo("caption");

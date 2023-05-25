@@ -8,5 +8,9 @@
     color: $bg-white;
 
     @include typo("dense", 400);
+
+    &.kw-tooptip--small {
+      padding: 6px 8px;
+    }
   }
 }
