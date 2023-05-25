@@ -55,6 +55,7 @@
             class="alert-btn"
           >
             <q-badge
+              v-if="alarms?.length > 0"
               rounded
               floating
               color="primary"
