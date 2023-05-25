@@ -299,6 +299,7 @@ body.q-body--prevent-scroll__header {
     padding: 8px;
     font-size: 12px;
     font-weight: 500;
+    line-height: 1;
     color: $black1;
     background: #fff;
     border: 1px solid $line-line;
@@ -309,18 +310,18 @@ body.q-body--prevent-scroll__header {
 
 .grey_tooltip.kw-tooltip {
   &.q-tooltip {
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding: 8px;
     margin-top: -2px;
     height: 28px;
     left: 70px !important;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
     color: #fff;
     background: $black2;
     border: none;
     border-radius: 0;
     box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
-
-    @include typo("caption");
   }
 }
 
@@ -328,8 +329,9 @@ body.q-body--prevent-scroll__header {
   &.q-tooltip {
     padding: 8px !important;
     max-width: 458px;
-
-    @include typo("caption");
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
   }
 }
 
