@@ -229,7 +229,7 @@ export function getCallLog() {
  */
 function closeAndroidApp() {
   if (NativePlugin.Android) {
-    callMethod(NativePlugin.Android, 'close(false)');
+    window.Android.close(false);
   }
 }
 
