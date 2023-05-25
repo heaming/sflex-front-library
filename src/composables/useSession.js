@@ -50,7 +50,7 @@ export default () => {
     });
 
     const localeMessages = response.data
-      .reduce((a, e) => { a[e.multiLanguageId] = e.multiLanguageContent; return a; }, {});
+      .reduce((a, e) => { a[e.id] = e.text; return a; }, {});
 
     i18n.mergeLocaleMessage(locale, localeMessages);
   }
