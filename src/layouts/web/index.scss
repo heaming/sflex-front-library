@@ -327,10 +327,11 @@ body.q-body--prevent-scroll__header {
 
 .alert_tooltip.kw-tooltip {
   &.q-tooltip {
-    padding: 8px 6px !important;
+    padding: 8px !important;
     max-width: 458px;
-
-    @include typo("caption");
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
   }
 }
 
