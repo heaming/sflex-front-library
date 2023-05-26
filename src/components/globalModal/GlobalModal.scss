@@ -2,6 +2,12 @@
   .q-dialog__backdrop {
     background: transparent;
   }
+
+  &:has(.dialog-with__backdrop) {
+    .q-dialog__backdrop {
+      background: rgb(0 0 0 / 70%);
+    }
+  }
 }
 
 body.desktop,
