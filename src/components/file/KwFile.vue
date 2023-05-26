@@ -577,9 +577,9 @@ export default {
   props: {
     // customize props
     fileUidMode: { type: Boolean, default: false },
-    reversible: { type: Boolean, default: false },
+    reversible: { type: Boolean, default: true },
     revertIcon: { type: String, default: 'clear' },
-    removable: { type: Boolean, default: undefined },
+    removable: { type: Boolean, default: true },
     removeIcon: { type: String, default: 'clear' },
     undeletePossible: { type: Boolean, default: undefined },
     undeleteIcon: { type: String, default: 'clear' },
@@ -675,8 +675,8 @@ export default {
         update: editable && props.updatable,
         manualUpdate: editable && props.updatable && props.instanceUpdate !== true,
         retry: editable && props.updatable && props.retryPossible,
-        revert: editable && props.reversible,
-        remove: editable && (props.reversible || props.removable),
+        revert: editable && props.reversible && props.removable,
+        remove: editable && (props.reversible && props.removable),
         undelete: editable && (props.reversible || props.undeletePossible),
         download: props.disable !== true && !!props.downloadable,
       };
