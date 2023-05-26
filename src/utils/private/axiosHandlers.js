@@ -86,7 +86,12 @@ async function handleServerFailureSessionExpired(response) {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
       localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, result.payload);
       await store.dispatch('meta/changeAccessToken', result.payload);
-      await notify('login 되었습니다. 다시 시도해주세요');
+      // 현재 메인이면 reload시킨다.
+      if (window.location.href.length === window.location.href.indexOf('/#/') + 3) {
+        window.location.reload();
+      } else {
+        notify('login 되었습니다. 다시 시도해주세요');
+      }
     } else {
       await alert('login 안됨');
     }
