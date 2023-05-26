@@ -74,6 +74,7 @@ async function handleServerFailureSessionExpired(response) {
 
   if (diff >= 8) {
     await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
+    // TODO sso logout 페이지로 보내야한다.
     localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
     window.location.replace(SESSION_EXPIRED_REPLACE_URL);
   } else {
