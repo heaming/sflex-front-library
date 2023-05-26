@@ -376,23 +376,23 @@
                 :tooltip="file.type"
                 :name="getExtensionIcon(file)"
               />
-              <span
+              <p
                 class="kw-file-item__name"
+                @click="onClickToggleFile(fileKeys[idx])"
               >
-                <!-- <div>
+                <span class="ellipsis kw-file-item__name-txt">
                   {{ file.name.substring(0, file.name.lastIndexOf('.')) }}
-                </div>
-                <div>
+                  <kw-tooltip
+                    anchor="center middle"
+                    show-when-ellipsised
+                  >
+                    {{ file.name }}
+                  </kw-tooltip>
+                </span>
+                <span class="kw-file-item__name-ext">
                   {{ `.${file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length).toLowerCase()}` }}
-                </div> -->
-                {{ file.name }}
-                <kw-tooltip
-                  anchor="center middle"
-                  show-when-ellipsised
-                >
-                  {{ file.name }}
-                </kw-tooltip>
-              </span>
+                </span>
+              </p>
               <span
                 class="kw-file-item__size"
               > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
