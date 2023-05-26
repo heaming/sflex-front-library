@@ -353,6 +353,7 @@
     color: $black1;
     text-decoration: underline;
     cursor: pointer;
+    text-underline-offset: 3px;
   }
 
   &.rg-button-disabled .rg-button-renderer-button {

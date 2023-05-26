@@ -460,19 +460,6 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="reversible && isReversible(file) && !fileUidMode"
-                class="kw-file-item__remove"
-                :icon="revertIcon"
-                borderless
-                @click.prevent="revertFile(file)"
-              >
-                <kw-tooltip
-                  anchor="bottom middle"
-                >
-                  {{ 'clear' }}
-                </kw-tooltip>
-              </kw-btn>
-              <kw-btn
                 v-if="previewable"
                 class="kw-file-item__preview"
                 :icon="previewIcon"
@@ -485,7 +472,20 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="fileUidMode"
+                v-if="isReversible(file) && !fileUidMode"
+                class="kw-file-item__remove"
+                :icon="revertIcon"
+                borderless
+                @click.prevent="revertFile(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'clear' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-else-if="fileUidMode"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -498,7 +498,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!reversible && removable && isRemovable(file) && !fileUidMode"
+                v-else-if="isRemovable(file) && !fileUidMode"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -577,7 +577,7 @@ export default {
   props: {
     // customize props
     fileUidMode: { type: Boolean, default: false },
-    reversible: { type: Boolean, default: true },
+    reversible: { type: Boolean, default: false },
     revertIcon: { type: String, default: 'clear' },
     removable: { type: Boolean, default: undefined },
     removeIcon: { type: String, default: 'clear' },
