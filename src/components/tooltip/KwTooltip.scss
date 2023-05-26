@@ -8,9 +8,14 @@
     color: $bg-white;
 
     @include typo("dense", 400);
+  }
+}
 
-    &.kw-tooptip--small {
-      padding: 6px 8px;
-    }
+.ellipsis_tooltip.kw-tooltip {
+  &.q-tooltip {
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
   }
 }

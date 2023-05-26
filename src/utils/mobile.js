@@ -241,7 +241,7 @@ function closeIOSApp() {
 export function closeWaffleApp() {
   if (platform.is.android) {
     closeAndroidApp();
-  } else if (platform.is.ios) {
+  } else if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
     closeIOSApp();
   }
 }
