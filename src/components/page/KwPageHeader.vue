@@ -35,7 +35,7 @@
 
         <!-- 활성화 시 notice_on -->
         <kw-icon
-          :name="showPageNotice ? 'notice_on' : 'notice_off'"
+          :name="showPageNotice && pageNoticeCntn ? 'notice_on' : 'notice_off'"
           clickable
           @click="showPageNotice = true"
         >
