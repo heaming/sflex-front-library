@@ -57,6 +57,9 @@ export default {
   }),
 
   mutations: {
+    setAccessToken(state, accessToken) {
+      state.accessToken = accessToken;
+    },
     setLoginInfo(state, { accessToken, userInfo, lastLoginInfo }) {
       state.isAuthenticated = true;
       state.accessToken = accessToken;
@@ -235,6 +238,10 @@ export default {
     async fetchAlarms({ commit }) {
       const res = await http.get('/sflex/common/common/alarm');
       commit('setAlarms', res.data);
+    },
+
+    async changeAccessToken({ commit }, data) {
+      commit('setAccessToken', data);
     },
   },
 };
