@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { filter, find, some, map } from 'lodash-es';
+import CryptoJS from 'crypto-js';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
 import { localStorage } from '../../plugins/storage';
@@ -65,7 +66,12 @@ export default {
       state.accessToken = accessToken;
       state.userInfo = Object.freeze(userInfo);
       state.lastLoginInfo = Object.freeze(lastLoginInfo);
-      localStorage.set('userInfo', userInfo);
+      // ENC
+      const reLoginInfo = `${userInfo.tenantId}|${userInfo.portalId}|${userInfo.loginId}`;
+      const iv = CryptoJS.enc.Hex.parse('');
+      const key = CryptoJS.enc.Utf8.parse('KSTATION-ENC-AES-256-2023-195817');
+      const cipher = CryptoJS.AES.encrypt(reLoginInfo, key, { iv });
+      localStorage.set('reLoginInfo', cipher.toString());
     },
     setConfigs(state, configs) {
       state.configs = Object.freeze(configs);
