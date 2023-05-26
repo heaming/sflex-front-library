@@ -35,16 +35,21 @@
 <script setup>
 // eslint-disable-next-line import/no-cycle
 import { http } from '../../plugins/http';
-import store from '../../store';
 import env from '../../consts/private/env';
 import useModal from '../../composables/useModal';
+import { localStorage } from '../../plugins/storage';
+import consts from '../../consts';
 
 const { ok } = useModal();
 const password = ref('');
-const userInfo = store.getters['meta/getUserInfo'];
+const userInfo = localStorage.getItem('userInfo');
 console.log(userInfo);
 async function reLogin() {
-  const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: password.value });
+  const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: password.value })
+    .catch(() => {
+      localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+      window.location.reload();
+    });
   ok(res.data);
 }
 </script>

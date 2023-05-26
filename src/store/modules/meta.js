@@ -65,6 +65,7 @@ export default {
       state.accessToken = accessToken;
       state.userInfo = Object.freeze(userInfo);
       state.lastLoginInfo = Object.freeze(lastLoginInfo);
+      localStorage.set('userInfo', userInfo);
     },
     setConfigs(state, configs) {
       state.configs = Object.freeze(configs);
