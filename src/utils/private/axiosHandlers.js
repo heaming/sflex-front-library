@@ -1,11 +1,14 @@
 import { AxiosError } from 'axios';
 import { omitBy, isNil } from 'lodash-es';
+import dayjs from 'dayjs';
 import consts from '../../consts';
 import env from '../../consts/private/env';
 import store from '../../store';
 import { loadSpinner } from '../../plugins/loading';
 import { localStorage } from '../../plugins/storage';
 import { alert } from '../../plugins/dialog';
+import { modal } from '../../plugins/modal';
+import { notify } from '../../plugins/notify';
 import i18n from '../../i18n';
 import { blobToData, isServerError, showStackTraceLog } from './axiosShared';
 
@@ -47,6 +50,8 @@ export function handleSuccess(response) {
   if (config?.spinner) {
     loadSpinner(false);
   }
+  const lastTransactionTime = dayjs().format('YYYYMMDDHHmmss');
+  localStorage.set('lastTransactionTime', lastTransactionTime);
 
   return response;
 }
@@ -57,10 +62,40 @@ export function handleSuccess(response) {
 const SESSION_EXPIRED_REPLACE_URL = env.VITE_LOGIN_URL || window.location.pathname;
 const ENABLE_STACK_TRACE_LOG = env.DEV || env.MODE === 'dev' || env.MODE === 'qa';
 
-async function handleServerFailureSessionExpired() {
-  await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
-  localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-  window.location.replace(SESSION_EXPIRED_REPLACE_URL);
+async function handleServerFailureSessionExpired(response) {
+  const { config } = response;
+
+  if (config?.spinner) {
+    loadSpinner(false);
+  }
+  const now = dayjs();
+  const lastTransactionTime = dayjs(localStorage.getItem('lastTransactionTime'), 'YYYYMMDDHHmmss');
+  const diff = now.diff(lastTransactionTime, 'h', true);
+
+  if (diff >= 8) {
+    await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
+    // TODO sso logout 페이지로 보내야한다.
+    localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+    window.location.replace(SESSION_EXPIRED_REPLACE_URL);
+  } else {
+    // 8시간이 안지났으면 그냥 비번묻는 로그인창이 뜬다.
+    const result = await modal({
+      component: () => import('../../pages/web/WebReLoginP.vue'),
+    });
+    if (result.payload) {
+      localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+      localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, result.payload);
+      await store.dispatch('meta/changeAccessToken', result.payload);
+      // 현재 메인이면 reload시킨다.
+      if (window.location.href.length === window.location.href.indexOf('/#/') + 3) {
+        window.location.reload();
+      } else {
+        notify('login 되었습니다. 다시 시도해주세요');
+      }
+    } else {
+      await alert('login 안됨');
+    }
+  }
 }
 
 async function handleServerFailureBiz(response) {
@@ -91,7 +126,7 @@ async function handleServerFailure(response) {
 
   switch (data.errorType) {
     case consts.HTTP_ERROR_SESSION_EXPIRED:
-      await handleServerFailureSessionExpired(); break;
+      await handleServerFailureSessionExpired(response); break;
     case consts.HTTP_ERROR_BIZ:
       await handleServerFailureBiz(response); break;
     default:
