@@ -254,6 +254,12 @@ body.desktop {
         min-height: 36px;
       }
     }
+
+    &.kw-popup--window-consult .kw-tab.q-tab {
+      width: auto;
+      min-width: auto;
+      max-width: none;
+    }
   }
 }
 
