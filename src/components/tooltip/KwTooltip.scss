@@ -10,3 +10,12 @@
     @include typo("dense", 400);
   }
 }
+
+.ellipsis_tooltip.kw-tooltip {
+  &.q-tooltip {
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+  }
+}

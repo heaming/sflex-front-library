@@ -55,6 +55,7 @@
             class="alert-btn"
           >
             <q-badge
+              v-if="alarms?.length > 0"
               rounded
               floating
               color="primary"
@@ -97,7 +98,7 @@
                         class="alert_tooltip"
                         anchor="bottom start"
                         self="top start"
-                        :offset="[-1, -1]"
+                        :offset="[-8, 0]"
                       >
                         {{ item.alarmMsg }}
                       </kw-tooltip>

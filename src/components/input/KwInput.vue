@@ -34,7 +34,7 @@
     no-error-icon
     clear-icon="clear"
     @focus="onFocus"
-    @blur="onBlur"
+    @blur="onBlurInput"
     @keydown="onKeydownInput"
     @clear="onClearInput"
     @change="onChangeInput"
@@ -262,7 +262,7 @@ export default {
           if (newVal?.length <= 9) return '##-###-#####';
           return '##-####-####';
         }
-        if (newVal?.length <= 9) return '####-#####';
+        if (newVal?.length <= 9) return '####-#######';
 
         if (!props.unmaskedValue) {
           if (newVal?.length <= 12) return '###-###-#####';
@@ -350,7 +350,9 @@ export default {
 
       if (val) {
         // min, max
-        val = Math.min(Math.max(val, min.value), max.value).toString();
+        // update 할 때마다 min, max값을 비교해주면 입력 중일때도 값이 자동비교가 되기 때문에 주석처리.
+        // ex. min이 100일때, 999를 입력하는 도중에 100이 되어버림
+        // val = Math.min(Math.max(val, min.value), max.value).toString();
 
         // maxlength
         if (props.maxlength) {
@@ -430,6 +432,13 @@ export default {
       inputRef.value.select();
     }
 
+    function onBlurInput() {
+      props.onBlur?.();
+      if (props.type === 'number') {
+        value.value = Math.min(Math.max(value.value, min.value), max.value).toString();
+      }
+    }
+
     return {
       ...useInheritAttrs(),
       ...useFieldStyle(),
@@ -447,6 +456,7 @@ export default {
       computedReverseFillMask,
       sanitize,
       computedUnmaskedValue,
+      onBlurInput,
     };
   },
 };

@@ -57,11 +57,20 @@ export default {
   }),
 
   mutations: {
+    setAccessToken(state, accessToken) {
+      state.accessToken = accessToken;
+    },
     setLoginInfo(state, { accessToken, userInfo, lastLoginInfo }) {
       state.isAuthenticated = true;
       state.accessToken = accessToken;
       state.userInfo = Object.freeze(userInfo);
       state.lastLoginInfo = Object.freeze(lastLoginInfo);
+      // ENC
+      // const reLoginInfo = `${userInfo.tenantId}|${userInfo.portalId}|${userInfo.loginId}`;
+      // const iv = CryptoJS.enc.Hex.parse('');
+      // const key = CryptoJS.enc.Utf8.parse('KSTATION-ENC-AES-256-2023-195817');
+      // const cipher = CryptoJS.AES.encrypt(reLoginInfo, key, { iv });
+      localStorage.set('reLoginInfo', userInfo);
     },
     setConfigs(state, configs) {
       state.configs = Object.freeze(configs);
@@ -235,6 +244,10 @@ export default {
     async fetchAlarms({ commit }) {
       const res = await http.get('/sflex/common/common/alarm');
       commit('setAlarms', res.data);
+    },
+
+    async changeAccessToken({ commit }, data) {
+      commit('setAccessToken', data);
     },
   },
 };

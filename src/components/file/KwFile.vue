@@ -295,6 +295,7 @@
             v-if="accept.split(', ').length > 3"
             anchor="bottom start"
             self="top left"
+            class="file_tooltip"
           >
             {{ accept }}
           </kw-tooltip>
@@ -375,23 +376,23 @@
                 :tooltip="file.type"
                 :name="getExtensionIcon(file)"
               />
-              <span
+              <p
                 class="kw-file-item__name"
+                @click="onClickToggleFile(fileKeys[idx])"
               >
-                <!-- <div>
+                <span class="ellipsis kw-file-item__name-txt">
                   {{ file.name.substring(0, file.name.lastIndexOf('.')) }}
-                </div>
-                <div>
+                  <kw-tooltip
+                    anchor="center middle"
+                    show-when-ellipsised
+                  >
+                    {{ file.name }}
+                  </kw-tooltip>
+                </span>
+                <span class="kw-file-item__name-ext">
                   {{ `.${file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length).toLowerCase()}` }}
-                </div> -->
-                {{ file.name }}
-                <kw-tooltip
-                  anchor="center middle"
-                  show-when-ellipsised
-                >
-                  {{ file.name }}
-                </kw-tooltip>
-              </span>
+                </span>
+              </p>
               <span
                 class="kw-file-item__size"
               > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
@@ -459,19 +460,6 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="reversible && isReversible(file) && !fileUidMode"
-                class="kw-file-item__remove"
-                :icon="revertIcon"
-                borderless
-                @click.prevent="revertFile(file)"
-              >
-                <kw-tooltip
-                  anchor="bottom middle"
-                >
-                  {{ 'clear' }}
-                </kw-tooltip>
-              </kw-btn>
-              <kw-btn
                 v-if="previewable"
                 class="kw-file-item__preview"
                 :icon="previewIcon"
@@ -484,7 +472,20 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="fileUidMode"
+                v-if="isReversible(file) && !fileUidMode"
+                class="kw-file-item__remove"
+                :icon="revertIcon"
+                borderless
+                @click.prevent="revertFile(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'clear' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-else-if="fileUidMode"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -497,7 +498,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="!reversible && removable && isRemovable(file) && !fileUidMode"
+                v-else-if="isRemovable(file) && !fileUidMode"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -578,7 +579,7 @@ export default {
     fileUidMode: { type: Boolean, default: false },
     reversible: { type: Boolean, default: true },
     revertIcon: { type: String, default: 'clear' },
-    removable: { type: Boolean, default: undefined },
+    removable: { type: Boolean, default: true },
     removeIcon: { type: String, default: 'clear' },
     undeletePossible: { type: Boolean, default: undefined },
     undeleteIcon: { type: String, default: 'clear' },
@@ -674,8 +675,8 @@ export default {
         update: editable && props.updatable,
         manualUpdate: editable && props.updatable && props.instanceUpdate !== true,
         retry: editable && props.updatable && props.retryPossible,
-        revert: editable && props.reversible,
-        remove: editable && (props.reversible || props.removable),
+        revert: editable && props.reversible && props.removable,
+        remove: editable && (props.reversible && props.removable),
         undelete: editable && (props.reversible || props.undeletePossible),
         download: props.disable !== true && !!props.downloadable,
       };
@@ -739,7 +740,7 @@ export default {
     const acceptHint = computed(() => {
       if (!props.accept) { return; }
       const acceptFiles = props.accept.split(', ');
-      const acceptFilesText = acceptFiles.length > 3 ? `${acceptFiles.slice(0, 3).join(', ')}, ...` : props.accept;
+      const acceptFilesText = acceptFiles.length > 3 ? `${acceptFiles.slice(0, 3).join(', ')}, ···` : props.accept;
       return `${t('MSG_TXT_ULD_PSB_FILE', '업로드 가능 파일')} : ${acceptFilesText}`;
     });
 

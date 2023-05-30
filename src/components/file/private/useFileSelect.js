@@ -82,6 +82,12 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
     clearSelected();
   };
 
+  function onClickToggleFile(fileKey) {
+    const index = selectedFileKeys.value.findIndex((selectedKey) => selectedKey === fileKey);
+    if (index >= 0) selectedFileKeys.value.splice(index, 1);
+    else selectedFileKeys.value.push(fileKey);
+  }
+
   const computedSelectable = computed(() => props.selectable ?? (props.multiple && ables.value.add));
 
   return {
@@ -96,5 +102,6 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
     revertSelected,
     removeSelected,
     undeleteSelected,
+    onClickToggleFile,
   };
 };
