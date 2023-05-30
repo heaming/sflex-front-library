@@ -397,7 +397,7 @@ body.mobile:not(.tablet) {
 // }
 
 // ellipsis 커스텀
-body:not(.mobile) :not(.web-tab-view__header) :not(.kw-popup--window-consult) {
+body:not(.mobile) :not(.web-tab-view__header) {
   .kw-tab.q-tab {
     min-width: 180px;
     max-width: 180px;
@@ -422,8 +422,7 @@ body:not(.mobile) :not(.web-tab-view__header) :not(.kw-popup--window-consult) {
   }
 
   .kw-tabs--dense .kw-tab.q-tab {
-    min-width: 140px;
-    max-width: 140px;
+    width: 140px;
 
     .kw-tab__content {
       line-height: 34px;
