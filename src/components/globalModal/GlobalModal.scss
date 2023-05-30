@@ -243,10 +243,7 @@ body.desktop {
     .kw-tab__content {
       min-height: 36px;
       height: 36px;
-
-      & > .q-tab__label {
-        font-size: 14px !important;
-      }
+      font-size: 14px !important;
     }
 
     .kw-tab {
