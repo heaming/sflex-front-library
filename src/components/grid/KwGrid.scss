@@ -1158,3 +1158,36 @@ tr.rg-focused-row.rg-rowgroup-footer {
 .rg-rowbarcontainer .rg-table tr td.rg-rowindicator-editing {
   background: url("~@assets/icons/write.svg") no-repeat center;
 }
+
+// 썸네일 사이즈
+@for $size from 10 through 300 {
+  .rg-thumb-#{$size}--square {
+    .rg-renderer.rg-image-renderer {
+      width: #{$size} + $unit;
+      height: #{$size} + $unit;
+      margin: 0 auto;
+      padding: 0 !important;
+      text-align: center;
+
+      img {
+        margin: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .rg-thumb-#{$size}--rounded {
+    .rg-renderer.rg-image-renderer {
+      width: #{$size} + $unit;
+      height: #{$size} + $unit;
+      border-radius: 50%;
+      margin: 0 auto;
+      padding: 0 !important;
+      text-align: center;
+
+      img {
+        margin: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
