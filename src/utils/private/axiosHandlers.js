@@ -69,10 +69,11 @@ async function handleServerFailureSessionExpired(response) {
     loadSpinner(false);
   }
   const now = dayjs();
-  const lastTransactionTime = dayjs(localStorage.getItem('lastTransactionTime'), 'YYYYMMDDHHmmss');
+  const reLoginInfoStr = localStorage.getItem('reLoginInfo');
+  const lastTransactionTimeStr = localStorage.getItem('lastTransactionTime');
+  const lastTransactionTime = dayjs(lastTransactionTimeStr, 'YYYYMMDDHHmmss');
   const diff = now.diff(lastTransactionTime, 'h', true);
-
-  if (diff >= 8) {
+  if (lastTransactionTimeStr === null || reLoginInfoStr === null || diff >= 8) {
     await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
     // TODO sso logout 페이지로 보내야한다.
     localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);

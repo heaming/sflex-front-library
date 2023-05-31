@@ -723,7 +723,10 @@ export default {
       if (typeof props.rejectMessage === 'string') {
         return props.rejectMessage;
       }
-      return `${failedPropValidation} : ${file.name}`;
+      if (failedPropValidation === 'accept') {
+        return t('MSG_ALT_CHK_PRHB_EXTS');
+      }
+      return `${failedPropValidation} validation error : ${file.name}`;
     };
 
     const onRejected = (rejectedEntries) => {
