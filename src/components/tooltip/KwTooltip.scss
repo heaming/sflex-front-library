@@ -19,3 +19,12 @@
     line-height: 1;
   }
 }
+
+body.mobile:not(.tablet) {
+  .kw-tooltip {
+    &.q-tooltip {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+  }
+}
