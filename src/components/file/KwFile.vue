@@ -676,9 +676,9 @@ export default {
         manualUpdate: editable && props.updatable && props.instanceUpdate !== true,
         retry: editable && props.updatable && props.retryPossible,
         revert: editable && props.reversible && props.removable,
-        remove: editable && (props.reversible && props.removable) && props.modelValue.length > 0,
+        remove: editable && (props.reversible && props.removable) && innerValue.value.length > 0,
         undelete: editable && (props.reversible || props.undeletePossible),
-        download: props.disable !== true && !!props.downloadable && props.modelValue.length > 0,
+        download: props.disable !== true && !!props.downloadable && innerValue.value.length > 0,
       };
     });
 
