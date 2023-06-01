@@ -472,7 +472,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="isReversible(file) && !fileUidMode && 1===2"
+                v-if="isReversible(file) && !fileUidMode && !multiple"
                 class="kw-file-item__remove"
                 :icon="revertIcon"
                 borderless
@@ -485,7 +485,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-else-if="fileUidMode && 1===2"
+                v-else-if="fileUidMode && !multiple"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -498,7 +498,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-else-if="isRemovable(file) && !fileUidMode && 1===2"
+                v-else-if="isRemovable(file) && !fileUidMode && !multiple"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
