@@ -419,18 +419,6 @@
                 class="kw-file-item__error-text"
               >Fail</span>
               <kw-btn
-                v-if="computedIsDownloadable(file) && downloadIcon"
-                :icon="downloadIcon"
-                borderless
-                @click.prevent="downloadFile(file)"
-              >
-                <kw-tooltip
-                  anchor="bottom middle"
-                >
-                  {{ 'download' }}
-                </kw-tooltip>
-              </kw-btn>
-              <kw-btn
                 v-if="updatable && !(instanceUpdate === true) && (isUpdatable(file) || isUpdating(file))"
                 :icon="updateIcon"
                 :disable="isUpdating(file)"
@@ -472,7 +460,19 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="isReversible(file) && !fileUidMode"
+                v-if="computedIsDownloadable(file) && downloadIcon"
+                :icon="downloadIcon"
+                borderless
+                @click.prevent="downloadFile(file)"
+              >
+                <kw-tooltip
+                  anchor="bottom middle"
+                >
+                  {{ 'download' }}
+                </kw-tooltip>
+              </kw-btn>
+              <kw-btn
+                v-if="isReversible(file) && !fileUidMode && !multiple"
                 class="kw-file-item__remove"
                 :icon="revertIcon"
                 borderless
@@ -485,7 +485,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-else-if="fileUidMode"
+                v-else-if="fileUidMode && !multiple"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -498,7 +498,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-else-if="isRemovable(file) && !fileUidMode"
+                v-else-if="isRemovable(file) && !fileUidMode && !multiple"
                 class="kw-file-item__remove"
                 :icon="removeIcon"
                 borderless
@@ -676,9 +676,9 @@ export default {
         manualUpdate: editable && props.updatable && props.instanceUpdate !== true,
         retry: editable && props.updatable && props.retryPossible,
         revert: editable && props.reversible && props.removable,
-        remove: editable && (props.reversible && props.removable),
+        remove: editable && (props.reversible && props.removable) && innerValue.value.length > 0,
         undelete: editable && (props.reversible || props.undeletePossible),
-        download: props.disable !== true && !!props.downloadable,
+        download: props.disable !== true && !!props.downloadable && innerValue.value.length > 0,
       };
     });
 
