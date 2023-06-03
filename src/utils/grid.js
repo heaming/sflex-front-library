@@ -494,6 +494,32 @@ export async function validate(view, options = {}) {
   return valid;
 }
 
+export function editColumnValidateRules(view, { targetColumn = undefined, targetRule = null, newRule = null, action = 'delete' }) {
+  if (!targetColumn || !targetRule) return;
+  const column = _find(view.__columns__, { name: targetColumn }) || null;
+  if (!column) return;
+
+  const rules = column.rules.split('|');
+  const targetRuleIndex = rules.findIndex((rule) => rule === targetRule || rule.indexOf(targetRule) >= 0);
+  switch (action) {
+    case 'edit':
+    case 'delete': {
+      if (targetRule === 'all') {
+        column.rules = null;
+        return;
+      }
+      if (targetRuleIndex >= 0) rules.splice(targetRuleIndex, 1);
+      if (action === 'edit' && newRule) rules.push(newRule);
+      break;
+    }
+    case 'add': {
+      if (targetRuleIndex >= 0) return; // 같은 룰이 이미 있으면 추가는 안되게끔
+      rules.push(targetRule);
+    }
+  }
+  column.rules = rules.join('|');
+}
+
 export function getValidationErrors(view) {
   return view.__validationErrors__ || [];
 }
