@@ -1191,3 +1191,28 @@ tr.rg-focused-row.rg-rowgroup-footer {
     }
   }
 }
+
+// header summary 버튼화
+.rg-summary-button {
+  .rg-header-summary-renderer {
+    width: auto;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 5px 7px;
+
+    // padding: 0;
+    border-radius: 0;
+    cursor: pointer;
+    border: 1px solid $primary;
+    color: $primary;
+    background: rgba($primary, 0.08);
+
+    &:hover {
+      background: rgba($primary, 0.18);
+    }
+
+    &:active {
+      background: rgba($primary, 0.28);
+    }
+  }
+}
