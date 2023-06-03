@@ -1195,10 +1195,12 @@ tr.rg-focused-row.rg-rowgroup-footer {
 // header summary 버튼화
 .rg-summary-button {
   .rg-header-summary-renderer {
-    width: auto;
+    display: inline;
     font-size: 14px;
     line-height: 20px;
     padding: 5px 7px;
+    margin-left: auto;
+    margin-right: auto;
 
     // padding: 0;
     border-radius: 0;
