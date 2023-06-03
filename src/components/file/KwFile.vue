@@ -724,9 +724,9 @@ export default {
         return props.rejectMessage;
       }
       if (failedPropValidation === 'accept') {
-        return t('MSG_ALT_CHK_PRHB_EXTS');
+        return t('MSG_ALT_FORB_EXTS', [file.name]);
       }
-      return `${failedPropValidation} validation error : ${file.name}`;
+      return t('MSG_ALT_FORB_EXTS', [file.name]);
     };
 
     const onRejected = (rejectedEntries) => {
