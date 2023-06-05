@@ -294,17 +294,18 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
 
 export async function insertRowAndFocus(view, dataRow, rowValue, column, shouldCheck = false) {
   const data = view.getDataSource();
-  const inserted = data.insertRow(dataRow, rowValue);
+  const row = view.getDataRow(dataRow);
+  const inserted = data.insertRow(row, rowValue);
 
   if (inserted) {
     const shouldFocus = column !== false;
 
     if (shouldFocus) {
-      await focusCellInput(view, dataRow, column);
+      await focusCellInput(view, row, column);
     }
     if (shouldCheck) {
       const exclusive = view.checkBar.exclusive === true;
-      view.checkRow(dataRow, true, exclusive, true);
+      view.checkRow(row, true, exclusive, true);
     }
   }
 
