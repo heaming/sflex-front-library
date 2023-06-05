@@ -53,7 +53,7 @@ export default {
     const vm = getCurrentInstance();
 
     const getParentEl = () => vm.proxy.$el.parentElement;
-    const isEllipsised = () => getParentEl().scrollWidth > getParentEl().offsetWidth;
+    const isEllipsised = () => getParentEl()?.scrollWidth > getParentEl()?.offsetWidth;
     const isShowable = () => (props.showWhenEllipsised ? isEllipsised() : true);
 
     const value = ref(false);
