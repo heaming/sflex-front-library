@@ -1,7 +1,11 @@
 <template>
   <q-page-container class="tablet-stack-view">
+    <router-view
+      v-if="isRouteView"
+    />
     <kw-observer
       v-for="stackView of stackViews"
+      v-else
       :key="stackView.key"
       :ref="(vm) => stackView.observerVm = vm"
     >
@@ -33,8 +37,11 @@ export default {
   components: { LoadFailedView },
 
   setup() {
+    const { currentRoute } = useRouter();
+    const isRouteView = computed(() => currentRoute.value.meta.menuUid === undefined);
     return {
       ...useStackView(),
+      isRouteView,
     };
   },
 };
