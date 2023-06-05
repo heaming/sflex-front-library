@@ -8,6 +8,7 @@ export { default as validate } from './validate';
 export * from './globImportUtils';
 
 // Layouts
+export * from './layouts/common';
 export * from './layouts/dev';
 export * from './layouts/mobile';
 export * from './layouts/tablet';
