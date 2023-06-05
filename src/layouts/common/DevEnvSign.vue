@@ -3,7 +3,7 @@
     <div class="dev-env-area">
       <div class="dev-env-text-area">
         <div class="dev-env-text">
-          {{ isLocal ? 'LOCAL' : MODE.toUpperCase() }}
+          {{ isLocal ? 'LOCAL' : mode.toUpperCase() }}
         </div>
       </div>
     </div>
@@ -14,15 +14,15 @@
 
 export default {
   name: 'DevEnvSign',
-
-  setup() {
-    const { MODE } = import.meta.env;
-    const isPrd = MODE === 'prd' || MODE === 'production';
+  props: {
+    mode: { type: String, default: 'LOCAL' },
+  },
+  setup(props) {
+    const isPrd = props.mode.toLowerCase() === 'prd' || props.mode.toLowerCase() === 'production';
     const isLocal = window.location.host.startsWith('localhost:');
     return {
       isPrd,
       isLocal,
-      MODE,
     };
   },
 };
