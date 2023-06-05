@@ -22,13 +22,14 @@
 
     <q-page-container>
       <router-view />
+      <dev-env-sign />
     </q-page-container>
   </dev-layout>
 </template>
 
 <script setup>
 import {
-  DevLayout, DevHeader, DevLeftDrawer,
+  DevLayout, DevHeader, DevLeftDrawer, DevEnvSign,
 } from '~kw-lib';
 
 const { commit } = useStore();
