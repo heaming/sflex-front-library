@@ -11,7 +11,7 @@
     >
       <kw-form-row>
         <kw-form-item label="로그인 계정">
-          <p>{{ `${userInfo.departmentName}(${userInfo.careerLevelName})` }}</p>
+          <p>{{ `${userInfo.loginId}` }}</p>
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
@@ -27,11 +27,6 @@
       <kw-form-row>
         <kw-form-item label="부서">
           <p>{{ userInfo.departmentName }}</p>
-        </kw-form-item>
-      </kw-form-row>
-      <kw-form-row>
-        <kw-form-item label="직책">
-          <p>{{ userInfo.careerLevelName }}</p>
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
