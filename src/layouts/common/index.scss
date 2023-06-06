@@ -1,3 +1,4 @@
+// PC
 body:not(.mobile) {
   .dev-env-area {
     transform: skew(135deg);
@@ -27,7 +28,13 @@ body:not(.mobile) {
   }
 }
 
+// MOBILE
 body.mobile:not(.tablet) {
+  // 로그인 화면은 footer가 없으므로
+  .mobile-login .dev-env-area {
+    bottom: 0 !important;
+  }
+
   .dev-env-area {
     transform: skew(135deg);
     width: 50px;
@@ -57,6 +64,7 @@ body.mobile:not(.tablet) {
   }
 }
 
+// TABLET
 body.mobile.tablet {
   .dev-env-area {
     transform: skew(135deg);
