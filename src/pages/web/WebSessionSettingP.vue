@@ -20,13 +20,18 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
-        <kw-form-item label="부서코드">
+        <kw-form-item label="조직유형코드">
+          <kw-input v-model="userInfoForSetting.ogTpCd" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="조직코드">
           <kw-input v-model="userInfoForSetting.departmentId" />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
-        <kw-form-item label="부서명">
-          <kw-input v-model="userInfoForSetting.departmentName" />
+        <kw-form-item label="조직ID">
+          <kw-input v-model="userInfoForSetting.ogId" />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
@@ -43,11 +48,6 @@
             v-model="userInfoForSetting.careerLevelName"
             placeholder="변경된 값은 저장 되나, 보여지지는 않습니다. (고객사 요청)"
           />
-        </kw-form-item>
-      </kw-form-row>
-      <kw-form-row>
-        <kw-form-item label="조직유형코드">
-          <kw-input v-model="userInfoForSetting.ogTpCd" />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
