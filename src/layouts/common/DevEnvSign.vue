@@ -1,8 +1,8 @@
 <template>
   <div v-if="!isPrd">
-    <div class="dev-env-area">
-      <div class="dev-env-text-area">
-        <div class="dev-env-text">
+    <div :class="`${devEnv.toLowerCase()}-env-area`">
+      <div :class="`${devEnv.toLowerCase()}-env-area__text`">
+        <div :class="`${devEnv.toLowerCase()}-env-area__text-area`">
           {{ isLocal ? 'LOCAL' : mode.toUpperCase() }}
         </div>
       </div>
@@ -20,9 +20,11 @@ export default {
   setup(props) {
     const isPrd = props.mode.toLowerCase() === 'prd' || props.mode.toLowerCase() === 'production';
     const isLocal = window.location.host.startsWith('localhost:');
+    const devEnv = computed(() => (isLocal ? 'LOCAL' : props.mode.toUpperCase()));
     return {
       isPrd,
       isLocal,
+      devEnv,
     };
   },
 };
