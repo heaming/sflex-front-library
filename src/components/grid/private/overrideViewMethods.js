@@ -222,7 +222,7 @@ function setColumnRenderer(column, { dataType }) {
     default: {
       if (dataType === ValueType.NUMBER) {
         defaultsDeep(column, {
-          numberFormat: '#,##0.######',
+          numberFormat: '###,###,##0',
         });
       } else if (column.datetimeFormat) {
         column.datetimeFormat = getSessionDatetimeFormat(column.datetimeFormat);
