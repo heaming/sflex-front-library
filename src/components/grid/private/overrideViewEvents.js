@@ -82,7 +82,7 @@ export function overrideOnShowTooltip(view) {
     tempSpan.append(`${originalResult || value}`);
     document.body.append(tempSpan);
     const doc = document.getElementById('tempSpan');
-    const textWidth = doc.offsetWidth ?? doc.clientWidth;
+    const textWidth = doc?.offsetWidth ?? doc?.clientWidth;
     document.body.removeChild(tempSpan);
 
     const res = `<div class="${alignStyle} rg-tooltip__custom"`

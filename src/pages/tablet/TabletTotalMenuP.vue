@@ -72,6 +72,7 @@
                 borderless
                 label="로그아웃"
                 class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+                @click="logout"
               />
             </kw-menu>
           </span>
@@ -178,11 +179,14 @@ import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
+import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
+
+const { logout } = useSession();
 
 const apps = readonly(getters['meta/getApps']);
 const alarms = computed(() => getters['meta/getAlarms']);
