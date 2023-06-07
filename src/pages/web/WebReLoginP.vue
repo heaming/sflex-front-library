@@ -2,7 +2,7 @@
   <kw-popup
     class="dialog-with__backdrop"
     size="md"
-    title="세션이 잠금처리되었습니다. 재 로그인 해주세요 비번 testtest"
+    title="세션이 잠금처리되었습니다. 재 로그인 해주세요"
   >
     <kw-form
       ref="frmMainRef"
