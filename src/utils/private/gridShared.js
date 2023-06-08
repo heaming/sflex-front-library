@@ -188,7 +188,12 @@ export function getOutsideEditorElements(view) {
   const { delegate } = view._view;
   const cellEditors = delegate._cellEditors;
   return Object.values(cellEditors)
-    .map((e) => e._editor).filter((e) => !!e);
+    .map((e) => {
+      if (e._line) return e._line._element;
+      if (e._list) return e._list._element;
+      if (e._number) return e._number._element;
+      return e._editor;
+    }).filter((e) => !!e);
 }
 
 export function objectValueCallback(ds, values) {
