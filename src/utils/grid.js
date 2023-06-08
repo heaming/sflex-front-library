@@ -295,7 +295,9 @@ export async function confirmDeleteCheckedRows(view, isIncludeCreated = false) {
 export async function insertRowAndFocus(view, dataRow, rowValue, column, shouldCheck = false) {
   const data = view.getDataSource();
   const { itemIndex } = view.getCurrent();
-  const row = dataRow === 0 ? view.getDataRow(0) : view.getDataRow(itemIndex);
+  let row;
+  if (view.getCurrent().dataRow < 0) row = 0;
+  else row = dataRow === 0 && dataRow !== view.getCurrent().dataRow ? view.getDataRow(0) : view.getDataRow(itemIndex);
   const inserted = data.insertRow(row, rowValue);
 
   if (inserted) {
