@@ -32,6 +32,7 @@
           :class="$g.platform.is.mobile ? 'w64' : 'w90'"
           secondary
           dense
+          :disable="disable"
           type="reset"
         />
         <kw-btn
@@ -43,6 +44,7 @@
           border-color="secondary"
           text-color="bg-white"
           dense
+          :disable="disable"
           type="submit"
         />
       </slot>
@@ -108,6 +110,10 @@ export default {
     ignoreOnReset: {
       type: Boolean,
       default: true,
+    },
+    disable: {
+      type: Boolean,
+      default: false,
     },
   },
 
