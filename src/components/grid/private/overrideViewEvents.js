@@ -290,9 +290,14 @@ export function overrideOnCellItemClicked(view) {
       const dp = g.getDataSource();
       const dataRow = dp.getOutputRow({}, index.dataRow);
 
+      let attachDocumentId;
+      if (dataRow[editor.attachDocumentId]?.__atthDocumentId) {
+        attachDocumentId = dataRow[editor.attachDocumentId]?.__atthDocumentId;
+      } else if (typeof dataRow[editor.attachDocumentId] === 'string') attachDocumentId = dataRow[editor.attachDocumentId];
+      else attachDocumentId = editor.attachDocumentId;
+
       const componentProps = {
-        attachDocumentId: dataRow[editor.attachDocumentId]?.__atthDocumentId
-          || dataRow[editor.attachDocumentId] || editor.attachDocumentId,
+        attachDocumentId,
         attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
         fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
         fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
