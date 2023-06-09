@@ -1,0 +1,15 @@
+body.mobile:not(.tablet) {
+  .global-bottom-sheet {
+    .q-dialog__backdrop {
+      background: rgb(0 0 0 / 60%);
+    }
+
+    &__inner {
+      position: absolute;
+      bottom: 0;
+      width: 280px;
+      border: none;
+      box-shadow: none !important;
+    }
+  }
+}

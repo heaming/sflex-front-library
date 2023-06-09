@@ -1155,7 +1155,8 @@ tr.rg-focused-row.rg-rowgroup-footer {
   }
 }
 
-.rg-rowbarcontainer .rg-table tr td.rg-rowindicator-editing {
+.rg-rowbarcontainer .rg-table tr td.rg-rowindicator-editing,
+.rg-rowbarcontainer .rg-table tr td.rg-rowindicator-editing:hover {
   background: url("~@assets/icons/write.svg") no-repeat center;
 }
 

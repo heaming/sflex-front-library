@@ -73,9 +73,10 @@
         :class="{'kw-select__placeholder': !selectedText && !!placeholder}"
       >{{ selectedText || placeholder }}
         <kw-tooltip
-          anchor="center middle"
-          :offset="[0, 3]"
-          show-when-ellipsised
+          anchor="bottom left"
+          self="top left"
+          :offset="[0, 0]"
+          class="ellipsis_tooltip shrinked_tooltip"
         >
           {{ selectedText || placeholder }}
         </kw-tooltip>
@@ -198,7 +199,7 @@
           @click.capture.stop.prevent="toggleHint"
         >
           <kw-tooltip
-            v-model="showingHint"
+            :model-value="true"
             :no-parent-event="$g.platform.is.mobile"
             :offset="[0, 3]"
           >
