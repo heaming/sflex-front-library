@@ -38,6 +38,41 @@
             class="ml20"
             @click="openSetSessionP"
           /><!-- 클릭시 버텀시트 활성 -->
+          <!-- <kw-menu
+            class="mb10 w154 py8 px16"
+            anchor="bottom left"
+            self="top middle"
+            behavior="dialog"
+            fit
+            :offset="[30, 5]"
+          >
+            <kw-btn
+              borderless
+              label="비밀번호 변경"
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+            />
+            <kw-btn
+              borderless
+              label="개인 홈 설정"
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+            />
+            <kw-btn
+              borderless
+              label="모바일프린터 초기화"
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+            />
+            <kw-btn
+              borderless
+              label="공문조회"
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+            />
+            <kw-btn
+              borderless
+              label="로그아웃"
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+              @click="logout"
+            />
+          </kw-menu> -->
         </div>
       </div>
       <div class="gnb_menu_mobile--body">
@@ -142,6 +177,7 @@ import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
 import { modal } from '../../plugins/modal';
+import { bottomSheet } from '../../plugins/bottomSheet';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
@@ -330,8 +366,18 @@ async function onClickEditAndComplete(depth3Menu) {
 }
 
 async function openSetSessionP() {
-  modal({
-    component: () => import('../web/WebSessionSettingP.vue'),
+  // modal({
+  //   component: () => import('../web/WebSessionSettingP.vue'),
+  // });
+  // bottomSheet
+  await bottomSheet({
+    items: [
+      { value: 'test1', label: 'test1' },
+      { value: 'test2', label: 'test2' },
+      { value: 'test3', label: 'test3' },
+      { value: 'test3', label: 'test3' },
+      { value: 'test3', label: 'test3' },
+    ],
   });
 }
 

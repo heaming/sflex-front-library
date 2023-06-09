@@ -22,6 +22,7 @@ export { default as useModal } from './composables/useModal';
 export { default as useSession } from './composables/useSession';
 
 // Plugins
+export * from './plugins/bottomSheet';
 export * from './plugins/cookies';
 export * from './plugins/dialog';
 export * from './plugins/http';

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import drag from 'v-drag';
+import bottomSheet from './plugins/bottomSheet';
 import cookies from './plugins/cookies';
 import dialog from './plugins/dialog';
 import http from './plugins/http';
@@ -12,6 +13,7 @@ import storage from './plugins/storage';
 
 const autoInstalledPlugins = [
   cookies,
+  bottomSheet,
   dialog,
   http,
   loading,

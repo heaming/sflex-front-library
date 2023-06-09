@@ -2,7 +2,6 @@ import { PageContextKey } from '../consts/private/symbols';
 import { hasPermissionKeyInPage } from '../directives/permission';
 
 export default () => {
-  console.log('build test');
   const pageCtx = inject(PageContextKey, null);
   const { getters } = useStore();
 
