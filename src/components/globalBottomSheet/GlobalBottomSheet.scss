@@ -1,15 +1,89 @@
 body.mobile:not(.tablet) {
   .global-bottom-sheet {
+    $root: ".global-bottom-sheet";
+
     .q-dialog__backdrop {
       background: rgb(0 0 0 / 60%);
     }
 
     &__inner {
       position: absolute;
+      left: 0;
+      right: 0;
       bottom: 0;
-      width: 280px;
+      max-height: calc(100vh - 80px);
       border: none;
+      border-radius: 16px 16px 0 0;
       box-shadow: none !important;
+    }
+
+    &__header {
+      position: sticky;
+      top: 0;
+      right: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      padding: 20px 20px 24px !important;
+      border-radius: 16px 16px 0 0;
+      background: #fff;
+      z-index: 1;
+
+      > h1 {
+        flex: 1;
+
+        @include typo("body",700);
+
+        text-align: left;
+      }
+    }
+
+    &__close-btn {
+      margin-left: auto;
+    }
+
+    &__content {
+      padding-bottom: 16px !important;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 48px;
+
+      > div {
+        // text
+        @include typo("dense");
+      }
+
+      &--selected {
+        color: $primary;
+        background: rgba(47 138 243 / 5%) url(~@assets/icons/dialog_checked_on.svg) no-repeat right 20px center;
+        background-size: 24px auto;
+      }
+    }
+
+    &__app-version {
+      display: table;
+      padding: 0 20px 16px !important;
+      width: 100%;
+
+      @include typo("caption");
+
+      color: $black3;
+
+      > div {
+        height: 48px;
+        vertical-align: middle;
+        display: table-cell;
+      }
+    }
+
+    &:has(.global-bottom-sheet__app-version) {
+      #{$root}__content {
+        padding-bottom: 0 !important;
+      }
     }
   }
 }

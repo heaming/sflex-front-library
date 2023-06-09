@@ -13,13 +13,12 @@
   >
     <q-card
       class="global-bottom-sheet__inner"
-      square
     >
       <q-card-section class="global-bottom-sheet__header">
         <!-- 제목 영역 -->
-        <div>
+        <h1>
           제목
-        </div>
+        </h1>
         <kw-icon
           class="global-bottom-sheet__close-btn"
           size="24px"
@@ -34,7 +33,9 @@
         <div
           v-for="(item, index) in items"
           :key="index"
+          class="global-bottom-sheet__item global-bottom-sheet__item--selected"
         >
+          <!-- to.개발 선택 된 요소일 경우 클래스 추가 global-bottom-sheet__item--selected -->
           <div @click="onClick(true)">
             {{ item.label }}
           </div>
