@@ -3,6 +3,7 @@ body {
   .dev-env-area,
   .qa-env-area,
   .local-env-area {
+    pointer-events: none;
     transform: skew(135deg);
     width: 100px;
     height: 200px;
