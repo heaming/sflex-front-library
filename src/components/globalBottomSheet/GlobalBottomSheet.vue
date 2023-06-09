@@ -15,15 +15,10 @@
       class="global-bottom-sheet__inner"
       square
     >
-      <q-card-section class="global-bottom-sheet__content">
-        <div
-          v-if="activeDialog.icon"
-          class="bottom-sheet-icon"
-        >
-          <kw-icon
-            :name="activeDialog.icon"
-            size="24px"
-          />
+      <q-card-section class="global-bottom-sheet__header">
+        <!-- 제목 영역 -->
+        <div>
+          제목
         </div>
         <kw-icon
           class="global-bottom-sheet__close-btn"
@@ -33,6 +28,8 @@
           @touchstart.stop
           @click="onClick(false)"
         />
+      </q-card-section>
+      <q-card-section class="global-bottom-sheet__content">
         <!-- 데이터 영역 -->
         <div
           v-for="(item, index) in items"
@@ -43,6 +40,11 @@
           </div>
         </div>
         <!-- 데이터 영역 -->
+        <!-- 앱 버전 영역 -->
+        <!--  -->
+      </q-card-section>
+      <q-card-section class="global-bottom-sheet__app-version">
+        <div>앱 버전: 1.0.0</div>
       </q-card-section>
     </q-card>
   </q-dialog>
