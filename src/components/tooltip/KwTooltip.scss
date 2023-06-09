@@ -28,3 +28,7 @@ body.mobile:not(.tablet) {
     }
   }
 }
+
+.shrinked_tooltip.kw-tooltip {
+  max-width: 600px;
+}

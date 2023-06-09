@@ -18,3 +18,4 @@ export const GlobalDialogVmKey = Symbol.for('__GlobalDialogVmKey__');
 export const GlobalLoadingVmKey = Symbol.for('__GlobalLoadingVmKey__');
 export const GlobalModalVmKey = Symbol.for('__GlobalModalVmKey__');
 export const GlobalNotifyVmKey = Symbol.for('__GlobalNotifyVmKey__');
+export const GlobalBottomSheetVmKey = Symbol.for('__GlobalBottomSheetVmKey__');
