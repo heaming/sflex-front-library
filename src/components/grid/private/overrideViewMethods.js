@@ -22,11 +22,15 @@ const firstOptionLabels = {
   select: ['MSG_TXT_SEL', null, '선택'],
 };
 
-function setColumnDefault(column) {
+function setColumnDefault(column, field) {
   // filter
   defaultsDeep(column, {
     autoFilter: true,
   });
+
+  if (field?.dataType === 'number') {
+    defaultsDeep(column, { numberFormat: '#,##0' });
+  }
 }
 
 function setColumnHeader(column) {
