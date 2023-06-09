@@ -94,7 +94,7 @@ async function handleServerFailureSessionExpired(response) {
         notify('login 되었습니다. 다시 시도해주세요');
       }
     } else {
-      await alert('login 안됨');
+      await alert('로그인에 실패하였습니다.');
     }
   }
 }
