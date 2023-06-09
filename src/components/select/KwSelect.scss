@@ -102,6 +102,12 @@ body.mobile:not(.tablet) {
     .q-field {
       display: none;
     }
+
+    .q-select--single + .kw-select-options {
+      .q-virtual-scroll__content {
+        padding-bottom: 16px;
+      }
+    }
   }
 
   .q-dialog {
