@@ -27,6 +27,7 @@
 
 <script>
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import i18n from '../../i18n';
 
 export default {
@@ -41,12 +42,21 @@ export default {
       type: Boolean,
       default: true,
     },
+    minTime: {
+      type: String,
+      default: '0000',
+    },
+    maxTime: {
+      type: String,
+      default: '2359',
+    },
   },
   emits: [
     'update:modelValue',
   ],
 
   setup(props, { emit }) {
+    dayjs.locale('ko');
     const meridiems = ['오전', '오후'].map((value) => ({ value, label: i18n.t(`MSG_TXT_${value}`, null, value) }));
     const hours = [...Array(12).keys()].map((v) => v + 1).map((value) => ({ value, label: value }));
     const minutes = [...Array(60).keys()].map((value) => ({ value, label: value }));
@@ -62,9 +72,18 @@ export default {
 
       if (date.isValid()) {
         const meridiem = date.format('A');
-        const hour12 = (date.hour() % 12) || 12;
-        const minute = date.minute();
+        let hour12 = (date.hour() % 12) || 12;
+        let minute = date.minute();
         const shouldChange = [meridiem, hour12, minute].some((v, i) => v !== innerValue[i]);
+        const newTime = `${date.hour()}${date.minute()}`;
+
+        if (props.minTime > newTime) {
+          hour12 = props.minTime.substr(0, 2);
+          minute = props.minTime.substr(2, 4);
+        } else if (props.maxTime < newTime) {
+          hour12 = props.maxTime.substr(0, 2);
+          minute = props.maxTime.substr(2, 4);
+        }
 
         if (shouldChange) {
           innerValue[0] = meridiem;

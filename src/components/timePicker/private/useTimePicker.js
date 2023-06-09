@@ -30,6 +30,14 @@ export const useTimePickerProps = {
     type: String,
     default: i18n.t('MSG_TXT_INP_TIME', null, '시간 입력'),
   },
+  minTime: {
+    type: String,
+    default: '0000',
+  },
+  maxTime: {
+    type: String,
+    default: '2359',
+  },
 };
 
 export const useTimePickerEmits = [
@@ -67,6 +75,13 @@ export default () => {
     );
 
     if (date.isValid()) {
+      if (props.minTime > val) {
+        inputValue.value = props.minTime;
+      } else if (props.maxTime < val) {
+        inputValue.value = props.maxTime;
+      } else {
+        inputValue.value = date.format('hhmm');
+      }
       inputValue.value = date.format('hhmm');
       inputMeridiem.value = date.format('A');
     } else {
@@ -98,10 +113,12 @@ export default () => {
   }
 
   async function onChangeTime(e) {
-    timeValue.value = e;
+    if (props.minTime > e) timeValue.value = props.minTime;
+    else if (props.maxTime < e) timeValue.value = props.maxTime;
+    else timeValue.value = e;
 
     if (platform.is.mobile === false) {
-      value.value = e;
+      value.value = timeValue.value;
       await nextTick();
 
       const el = inputRef.value.getNativeElement();
