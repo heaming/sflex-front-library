@@ -37,6 +37,8 @@
       <time-scroll-picker
         :model-value="timeValue"
         :unmasked-value="unmaskedValue"
+        :min-time="minTime"
+        :max-time="maxTime"
         @update:model-value="onChangeTime"
       />
 
