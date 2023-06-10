@@ -36,43 +36,8 @@
             icon="setting_24"
             style="font-size: 24px;"
             class="ml20"
-            @click="openSetSessionP"
-          /><!-- 클릭시 버텀시트 활성 -->
-          <!-- <kw-menu
-            class="mb10 w154 py8 px16"
-            anchor="bottom left"
-            self="top middle"
-            behavior="dialog"
-            fit
-            :offset="[30, 5]"
-          >
-            <kw-btn
-              borderless
-              label="비밀번호 변경"
-              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-            />
-            <kw-btn
-              borderless
-              label="개인 홈 설정"
-              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-            />
-            <kw-btn
-              borderless
-              label="모바일프린터 초기화"
-              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-            />
-            <kw-btn
-              borderless
-              label="공문조회"
-              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-            />
-            <kw-btn
-              borderless
-              label="로그아웃"
-              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              @click="logout"
-            />
-          </kw-menu> -->
+            @click="openBottomSheet"
+          />
         </div>
       </div>
       <div class="gnb_menu_mobile--body">
@@ -176,12 +141,14 @@ import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
+import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
 import { bottomSheet } from '../../plugins/bottomSheet';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
+const { logout } = useSession();
 
 const apps = readonly(getters['meta/getApps']);
 const router = useRouter();
@@ -365,20 +332,26 @@ async function onClickEditAndComplete(depth3Menu) {
   depth3Menu.editable = !depth3Menu.editable;
 }
 
-async function openSetSessionP() {
+async function openBottomSheet() {
   // modal({
   //   component: () => import('../web/WebSessionSettingP.vue'),
   // });
   // bottomSheet
-  await bottomSheet({
+  const res = await bottomSheet({
     items: [
-      { value: 'test1', label: 'test1' },
-      { value: 'test2', label: 'test2' },
-      { value: 'test3', label: 'test3' },
-      { value: 'test3', label: 'test3' },
-      { value: 'test3', label: 'test3' },
+      { value: 'changePassword', label: '비밀번호 변경' },
+      { value: 'homeSetting', label: '개인 홈 설정' },
+      { value: 'mobilePrinterInit', label: '모바일프린터 초기화' },
+      { value: 'searchLetter', label: '공문조회' },
+      { value: 'logout', label: '로그아웃' },
     ],
   });
+  if (res?.result) {
+    switch (res.payload?.value) {
+      case 'logout': logout();
+        break;
+    }
+  }
 }
 
 async function openUserInfoPopup() {
