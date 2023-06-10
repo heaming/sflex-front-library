@@ -1219,3 +1219,7 @@ tr.rg-focused-row.rg-rowgroup-footer {
     }
   }
 }
+
+.hide-row-indicator > div {
+  display: none;
+}
