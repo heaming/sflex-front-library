@@ -26,6 +26,7 @@ const normalizeConfig = (config = {}) => ({
   buildSourcemap: config.buildSourcemap === true,
   optimizeDepsInclude: config.optimizeDepsInclude || [],
   rollupOptions: config.rollupOptions || {},
+  plugins: config.plugins || [],
 });
 
 exports.defineConfig = (config) => {
@@ -93,6 +94,8 @@ exports.defineConfig = (config) => {
 
         // load entry points
         loadPages(pluginArgs),
+
+        ...config.plugins,
 
         config.openVisualizer && visualizer({
           filename: 'dist/visualizer/index.html',

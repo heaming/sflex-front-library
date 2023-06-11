@@ -13,13 +13,12 @@
   >
     <q-card
       class="global-bottom-sheet__inner"
-      square
     >
       <q-card-section class="global-bottom-sheet__header">
         <!-- 제목 영역 -->
-        <div>
+        <h1>
           제목
-        </div>
+        </h1>
         <kw-icon
           class="global-bottom-sheet__close-btn"
           size="24px"
@@ -34,8 +33,11 @@
         <div
           v-for="(item, index) in items"
           :key="index"
+          class="global-bottom-sheet__item"
+          :class="{'global-bottom-sheet__item--selected': item === selected || item.value === selected }"
         >
-          <div @click="onClick(true)">
+          <!-- to.개발 선택 된 요소일 경우 클래스 추가 global-bottom-sheet__item--selected -->
+          <div @click="onClick(true, item)">
             {{ item.label }}
           </div>
         </div>
@@ -63,7 +65,9 @@ const {
 
 export default {
   name: 'GlobalBottomSheet',
-
+  props: {
+    selected: { type: [Array, Object, String], default: null },
+  },
   setup() {
     const vm = getCurrentInstance();
 
@@ -85,11 +89,11 @@ export default {
       unregisterGlobalVm(GlobalBottomSheetVmKey);
     });
 
-    async function onClick(result) {
+    async function onClick(result, payload = null) {
       if (isActive.value) {
         const { resolve } = activeDialog.value;
 
-        resolve({ result });
+        resolve({ result, payload });
         removeGlobalData(activeDialog.value);
       }
     }

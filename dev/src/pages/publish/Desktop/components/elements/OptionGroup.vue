@@ -101,6 +101,48 @@
         />
       </q-card>
     </div>
+    <div class="kw-guide-section">
+      <h3 class="kw-guide-title">
+        kw-option-group--vertical
+      </h3>
+      <p class="kw-guide-description">
+        위아래 간격 20px
+      </p>
+      <q-card>
+        <div class="kw-guide-example">
+          <div class="border-box">
+            <kw-option-group
+              :model-value="[]"
+              type="checkbox"
+              class="kw-option-group--vertical"
+              :options="[
+                '이솝극장 철학동화(450,000원)',
+                '이솝극장 철학동화(250,000원)',
+                '이솝극장 철학동화(100,000원)',
+                '이솝극장 철학동화(0원)',
+              ]"
+            />
+          </div>
+          <div class="border-box mt20">
+            <kw-option-group
+              :model-value="[]"
+              type="radio"
+              class="kw-option-group--vertical"
+              :options="[
+                '이솝극장 철학동화(450,000원)',
+                '이솝극장 철학동화(250,000원)',
+                '이솝극장 철학동화(100,000원)',
+                '이솝극장 철학동화(0원)',
+              ]"
+            />
+          </div>
+        </div>
+        <guide-code-view
+          :code-value="testCode02"
+          lang="vue"
+        />
+      </q-card>
+    </div>
   </kw-page>
 </template>
 <script setup>
@@ -182,11 +224,43 @@ const testCode = `
   </kw-form-row>
 </kw-form>
 `;
+const testCode02 = `
+<div class="border-box">
+  <kw-option-group
+    :model-value="[]"
+    type="checkbox"
+    class="kw-option-group--vertical"
+    :options="[
+      '이솝극장 철학동화(450,000원)',
+      '이솝극장 철학동화(250,000원)',
+      '이솝극장 철학동화(100,000원)',
+      '이솝극장 철학동화(0원)',
+    ]"
+  />
+</div>
+<div class="border-box mt20">
+  <kw-option-group
+    :model-value="[]"
+    type="radio"
+    class="kw-option-group--vertical"
+    :options="[
+      '이솝극장 철학동화(450,000원)',
+      '이솝극장 철학동화(250,000원)',
+      '이솝극장 철학동화(100,000원)',
+      '이솝극장 철학동화(0원)',
+    ]"
+  />
+</div>
+`;
 
 const guideHistory = [
   {
     timestamp: '2022.09.07',
     text: 'Add option group multi',
+  },
+  {
+    timestamp: '2023.06.01',
+    text: 'kw-option-group--vertical',
   },
 ];
 </script>

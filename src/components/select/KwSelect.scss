@@ -95,12 +95,18 @@ body.mobile:not(.tablet) {
     bottom: 0;
     width: 100vw !important;
     max-width: 100vw !important;
-    max-height: calc(100vh - 108px);
+    max-height: calc(100vh - 80px);
     border-radius: 16px 16px 0 0;
     box-shadow: none;
 
     .q-field {
       display: none;
+    }
+
+    .q-select--single + .kw-select-options {
+      .q-virtual-scroll__content {
+        padding-bottom: 16px;
+      }
     }
   }
 
