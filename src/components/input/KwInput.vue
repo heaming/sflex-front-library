@@ -395,7 +395,7 @@ export default {
 
       if (props.mask === 'telephone') {
         const telephoneNumber = val.split('-');
-        if (computedMask.value === '####-#####') {
+        if (computedMask.value === '####-#######') {
           emit('update:telNo0', telephoneNumber[0]);
           emit('update:telNo1', undefined);
           emit('update:telNo2', telephoneNumber[1]);
