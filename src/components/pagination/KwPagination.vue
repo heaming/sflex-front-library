@@ -4,7 +4,7 @@
     class="kw-pagination justify-center"
     :model-value="pageIndex"
     :max="max"
-    :max-pages="10"
+    :max-pages="9"
     :disable="computedDisabled"
     unelevated
     direction-links
