@@ -213,6 +213,7 @@
       &__main {
         font-weight: 400;
         line-height: 1em;
+        max-width: calc(100% - 88px);
       }
 
       &--selected {
@@ -235,12 +236,13 @@
         }
       }
 
+      &__aside {
+        margin-left: auto;
+      }
+
       // + .kw-file-item {
       //   margin-top: $-kw-file-item-gap;
       // }
-      &__aside {
-        margin-left: min(20px);
-      }
     }
 
     &.kw-field {
@@ -404,6 +406,7 @@
   &__icon {
     display: none;
     padding-right: 4px;
+    flex: 0 0 auto;
 
     // font-size: 18px;
   }
@@ -413,21 +416,16 @@
     display: flex;
     flex-flow: row nowrap;
     min-width: 100px;
-    flex: 1 1 100px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     align-items: center;
-    max-width: calc(100% - 90px);
+    max-width: calc(100% - 64px);
   }
 
   &__name {
     display: flex;
     flex-direction: row;
+    min-width: 40px;
 
     @include typo("body",500);
-
-    max-width: calc(100% - 150px);
 
     & ~ span:is(.kw-file-item__size) {
       margin-left: 8px;
@@ -436,12 +434,10 @@
 
   // 확장자명
   &__name-ext {
-    flex-shrink: 0;
-    display: block;
+    flex: 0 0 auto;
   }
 
   &__append {
-    // width: TBD when use scroll horizontal;
     overflow: hidden;
     flex: none;
     display: flex;
@@ -478,12 +474,12 @@
 
   &__aside { // you should notice this one's width set by props.
     // width: TBD when use scroll horizontal;
+    margin-left: auto;
     flex: none;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
-    margin-left: auto;
     flex-shrink: 0;
 
     .kw-btn {
@@ -555,6 +551,16 @@ body.mobile:not(.tablet) {
             }
           }
         }
+      }
+    }
+
+    .kw-file-item {
+      &__main {
+        max-width: calc(100% - 40px);
+      }
+
+      &__aside {
+        margin-left: 0;
       }
     }
   }

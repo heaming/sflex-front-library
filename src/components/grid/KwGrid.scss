@@ -81,7 +81,7 @@
 
   & > input {
     background-color: initial;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .rg-btdate-editor {
@@ -293,7 +293,7 @@
 
     &:not(.rg-data-readonly-cell) {
       .rg-renderer {
-        font-weight: 700;
+        font-weight: 500;
       }
     }
   }

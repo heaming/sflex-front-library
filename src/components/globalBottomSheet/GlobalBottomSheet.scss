@@ -11,6 +11,7 @@ body.mobile:not(.tablet) {
       left: 0;
       right: 0;
       bottom: 0;
+      max-width: initial;
       max-height: calc(100vh - 80px);
       border: none;
       border-radius: 16px 16px 0 0;
