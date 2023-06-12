@@ -742,9 +742,7 @@ export default {
     // placeholder
     const acceptHint = computed(() => {
       if (!props.accept) { return; }
-      const acceptFiles = props.accept.split(', ');
-      const acceptFilesText = acceptFiles.length > 3 ? `${acceptFiles.slice(0, 3).join(', ')}, ···` : props.accept;
-      return `${t('MSG_TXT_ULD_PSB_FILE', '업로드 가능 파일')} : ${acceptFilesText}`;
+      return `${t('MSG_TXT_ULD_PSB_FILE', '업로드 가능 파일')} : ${props.accept}`;
     });
 
     const computedPlaceholder = computed(() => {
