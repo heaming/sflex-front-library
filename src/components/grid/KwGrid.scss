@@ -230,7 +230,7 @@
     background-color: $bg-box;
 
     span {
-      font-weight: 700;
+      font-weight: 500;
       color: $black1;
     }
   }
@@ -293,7 +293,7 @@
 
     &:not(.rg-data-readonly-cell) {
       .rg-renderer {
-        font-weight: 700;
+        font-weight: 500;
       }
     }
   }
