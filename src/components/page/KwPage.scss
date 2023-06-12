@@ -308,6 +308,20 @@ body.mobile:not(.tablet) {
         font-weight: 400;
         flex: 1;
       }
+
+      .kw-btn--color-primary + .kw-btn--color-primary {
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background-color: #2a7bd9;
+        }
+      }
     }
   }
 
