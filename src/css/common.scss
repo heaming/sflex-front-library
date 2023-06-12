@@ -917,15 +917,14 @@ $unit: px;
   }
 }
 
-.border-box--two-column {
-  padding-top: 30px;
+.border-box--three-column {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 30px;
-  column-gap: 40px;
+  gap: 20px;
+  padding-top: 30px;
 
   .border-box {
-    width: calc((100% - 40px) / 2);
+    width: calc((100% - 40px) / 3);
   }
 }
 
