@@ -229,6 +229,10 @@ body.tablet .kw-popup {
   }
 }
 
+body.tablet .kw-popup .kw-popup__content {
+  max-height: calc(100vh - 195px);
+}
+
 body.mobile:not(.tablet) {
   // .q-card__section--vert {
   //   padding: initial;
