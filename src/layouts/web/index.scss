@@ -722,6 +722,10 @@ body.q-body--prevent-scroll__header {
   $tabs-view-bg-color: #dedfe0;
   $tabs-view-active-bg-color: #f4f5f6;
 
+  &__panel {
+    outline: none;
+  }
+
   &__header {
     padding: 0 40px !important;
     height: 40px;

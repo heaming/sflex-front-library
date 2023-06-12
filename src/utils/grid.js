@@ -552,6 +552,7 @@ const normalizeExportOptions = (options = {}) => ({
   treeKey: options.treeKey,
   searchCondition: options.searchCondition !== false,
   allColumns: options.allColumns === true,
+  hideColumns: options.hideColumns || [],
 });
 
 function exportGrid(view, options, onProgress, onComplete) {
@@ -592,7 +593,12 @@ export async function exportView(view, options) {
     const columns = view.getColumns();
     options.exportLayout.forEach((layout) => {
       layout.width = getLayoutWidthByColumn(layout, columns);
-      if (!options.allColumns) layout.visible = columns.find((col) => col._name === layout.column)?.visible;
+      if (!options.allColumns) {
+        layout.visible = columns.find((col) => col._name === layout.column)?.visible;
+        // allColumns가 아니고, hideColumns 가 있으면 숨김.
+        // allColumns일 경우 hideColumns 무시
+        if (options.hideColumns && options.hideColumns.includes(layout.column)) layout.visible = false;
+      }
     });
   }
   if (options.searchCondition && !!options.exportData) {
