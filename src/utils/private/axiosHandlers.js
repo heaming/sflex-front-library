@@ -34,6 +34,7 @@ export function handleConfig(config) {
   if (isAuthenticated) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
+  config.headers['Cache-control'] = 'no-cache';
 
   // FIXME : 테스트용
   config.headers['Access-Control-Allow-Origin'] = '*';
@@ -46,6 +47,7 @@ export function handleConfig(config) {
   */
 export function handleSuccess(response) {
   const { config } = response;
+  response.headers['Cache-control'] = 'no-cache';
 
   if (config?.spinner) {
     loadSpinner(false);
