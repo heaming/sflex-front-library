@@ -1,5 +1,5 @@
 <template>
-  <kw-page>
+  <kw-page no-header>
     <div
       class="column"
       style="position: absolute;left: 0;right: 0;bottom: 0;top: 0;"
@@ -33,6 +33,7 @@
               text-color="black2"
               label="이전화면"
               class="mt20"
+              @click="onClickGoBack"
             />
           </div>
         </div>
@@ -50,9 +51,15 @@ export default {
   setup() {
     const { locale } = useI18n();
     const isLocaleKo = computed(() => locale.value === consts.LOCALE_KO);
+    const router = useRouter();
+
+    function onClickGoBack() {
+      router.go(-1);
+    }
 
     return {
       isLocaleKo,
+      onClickGoBack,
     };
   },
 };

@@ -1,5 +1,8 @@
 <template>
-  <kw-page class="column">
+  <kw-page
+    class="column"
+    no-header
+  >
     <q-card
       class="col row justify-center items-center h500"
       flat
