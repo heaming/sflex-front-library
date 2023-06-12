@@ -5,6 +5,7 @@
     :mini-width="40"
     :width="62"
     side="left"
+    behavior="desktop"
     dark
     persistent
     show-if-above
