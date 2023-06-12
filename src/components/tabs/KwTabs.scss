@@ -444,3 +444,7 @@ body:not(.mobile) :not(.web-tab-view__header) {
     box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
   }
 }
+
+.q-panels > div {
+  outline: none;
+}
