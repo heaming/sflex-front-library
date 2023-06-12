@@ -70,6 +70,12 @@
               />
               <kw-btn
                 borderless
+                label="세션 변경"
+                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+                @click="openSessionSettingP"
+              />
+              <kw-btn
+                borderless
                 label="로그아웃"
                 class="block kw-font-pt14 mt2 mb2 pt2 pb2"
                 @click="logout"
@@ -356,6 +362,12 @@ function createSortable() {
       handle: '.handle',
     }),
   );
+}
+
+async function openSessionSettingP() {
+  modal({
+    component: () => import('../web/WebSessionSettingP.vue'),
+  });
 }
 
 async function onClickEditAndComplete(depth3Menu) {
