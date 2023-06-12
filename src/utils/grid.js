@@ -552,6 +552,7 @@ const normalizeExportOptions = (options = {}) => ({
   treeKey: options.treeKey,
   searchCondition: options.searchCondition !== false,
   allColumns: options.allColumns === true,
+  hideColumns: options.hideColumns || [],
 });
 
 function exportGrid(view, options, onProgress, onComplete) {
@@ -593,6 +594,7 @@ export async function exportView(view, options) {
     options.exportLayout.forEach((layout) => {
       layout.width = getLayoutWidthByColumn(layout, columns);
       if (!options.allColumns) layout.visible = columns.find((col) => col._name === layout.column)?.visible;
+      if (options.hideColumns && options.hideColumns.includes(layout.column)) layout.visible = false;
     });
   }
   if (options.searchCondition && !!options.exportData) {
