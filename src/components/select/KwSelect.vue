@@ -345,6 +345,9 @@ export default {
     function onPopup(show) {
       innerValue.value = show
         ? cloneDeep(value.value) : undefined;
+      if (!props?.options || props?.options?.length <= 0) {
+        inputRef.value.hidePopup();
+      }
     }
 
     function onConfirm() {
