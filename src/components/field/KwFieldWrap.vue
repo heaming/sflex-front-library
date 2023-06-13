@@ -79,6 +79,7 @@
               anchor="center middle"
               :offset="[0, 3]"
               show-when-ellipsised
+              class="ellipsis_tooltip"
             >
               {{ computedErrorMessage }}
             </kw-tooltip>
