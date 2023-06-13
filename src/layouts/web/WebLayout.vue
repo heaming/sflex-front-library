@@ -29,7 +29,6 @@ export default {
     const { currentRoute } = useRouter();
 
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
-    console.log(env.VITE_HTTP_ORIGIN, env.VITE_HTTP_CUST_ORIGIN);
     const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN;
     const { applicationId, menuUid } = currentRoute.value.meta;
 
