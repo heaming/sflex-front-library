@@ -5,7 +5,7 @@
       style="position: absolute;left: 0;right: 0;bottom: 0;top: 0;"
     >
       <q-card
-        class="col row justify-center items-center h500"
+        class="col row justify-center items-center"
         flat
         square
       >
