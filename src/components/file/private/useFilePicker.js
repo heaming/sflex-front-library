@@ -48,6 +48,8 @@ export default (ref, ables) => {
     if (typeof props.pickBtn === 'string') {
       return props.pickBtn;
     }
+    if (ref?.value?.multiple) return t('MSG_BTN_SCH_FILE', '파일찾기');
+
     return isEmpty(ref?.value?.modelValue) ? t('MSG_BTN_SCH_FILE', '파일찾기') : t('MSG_BTN_MOD_FILE', '파일수정');
   });
 
