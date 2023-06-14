@@ -74,7 +74,8 @@ exports.defineConfig = (config) => {
         addQueryPlugin([
           '/assets/app.js',
           '/assets/plugin-vue_export-helper.js',
-          loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN || '/assets/' || 'plugin-vue_export-helper.js',
+          `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}/assets/plugin-vue_export-helper.js`,
+          `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}/assets/app.js`,
         ]),
         vue({
           template: { transformAssetUrls },
