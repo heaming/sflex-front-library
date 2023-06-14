@@ -23,6 +23,7 @@
       :outlined="outlined"
       :autofocus="autofocus"
       hide-bottom-space
+      :select-date="fromSelectDate"
       @update:model-value="onChangeDate($event, 0)"
     />
     <span>~</span>
@@ -42,6 +43,7 @@
       :borderless="borderless"
       :outlined="outlined"
       hide-bottom-space
+      :select-date="toSelectDate"
       @update:model-value="onChangeDate($event, 1)"
     />
   </kw-field-wrap>
@@ -138,6 +140,14 @@ export default {
     autofocus: {
       type: Boolean,
       default: false,
+    },
+    toSelectDate: {
+      type: String,
+      default: undefined,
+    },
+    fromSelectDate: {
+      type: String,
+      default: undefined,
     },
   },
 

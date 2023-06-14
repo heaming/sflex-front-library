@@ -43,6 +43,7 @@
         :max-date="maxDate"
         :disable="disable"
         :before-show="beforeShow"
+        :select-date="selectDate"
         @update:model-value="onChangeDate"
       />
       <template
@@ -175,6 +176,10 @@ export default {
     placeholder: {
       type: String,
       default: i18n.t('MSG_TXT_INP_DATE', null, '날짜 입력'),
+    },
+    selectDate: {
+      type: String,
+      default: undefined,
     },
   },
 
