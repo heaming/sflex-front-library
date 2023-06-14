@@ -90,7 +90,7 @@
 
       .kw-checkbox,
       .kw-radio {
-        min-height: 24px; // title 과 line-height가 맞지않아 추가
+        min-height: 25px; // title 과 line-height가 맞지않아 추가
       }
     }
 
@@ -147,10 +147,14 @@ body.mobile {
               padding-left: $-kw-item-section-side-padding-left;
             }
           }
+        }
+      }
 
+      &.kw-expansion-item {
+        .kw-item__section.q-item__section {
           &:has(.q-expansion-item__toggle-icon) {
             padding-right: 0;
-            padding-left: $-kw-item-section-side-padding-left;
+            padding-left: 8px;
           }
         }
       }

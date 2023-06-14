@@ -30,6 +30,7 @@ export default {
   MSG_VAL_REQUIRED: 'The {0} field is required.',
   MSG_VAL_URL: 'The {0} field is not a valid URL.',
   MSG_VAL_TELEPHONE: 'The {0} field is not a invalid telephone format.',
+  MSG_VAL_FAILED_FILE: 'The {0} field may only contain valid files.',
 
   // HTTP
   MSG_ALT_ERR_CONTACT_ADMIN: 'Error has occurred. Contact administrator.',

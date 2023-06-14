@@ -75,11 +75,8 @@
                 {{ `${$t('MSG_TXT_COM_TOT', null, 'Total')} ` }}
                 <b>{{ `${files.length}` }}</b>
               </span>
-              <span
-                v-if="computedCounter"
-                class="kw-file__header-counter"
-              >
-                {{ `(${computedCounter})` }}
+              <span class="kw-file__header-selected">
+                {{ `(${selectedFileKeys.length} / ${files.length})` }}
               </span>
             </div>
             <div class="kw-file__multiple-action">
@@ -89,7 +86,7 @@
                 no-wrap
                 @click="pickFiles"
               />
-              <kw-btn
+              <!-- <kw-btn
                 v-if="showUpdateBtn"
                 no-wrap
                 dense
@@ -116,7 +113,7 @@
                 dense
                 :label="revertAllBtnLabel"
                 @click="revertAll"
-              />
+              /> -->
               <kw-btn
                 v-if="showRemoveBtn"
                 no-wrap
@@ -124,14 +121,14 @@
                 :label="removeBtnLabel"
                 @click="removeSelected"
               />
-              <kw-btn
+              <!-- <kw-btn
                 v-if="showRemoveAllBtn"
                 no-wrap
                 dense
                 :label="removeAllBtnLabel"
                 @click="removeAll"
-              />
-              <kw-btn
+              /> -->
+              <!-- <kw-btn
                 v-if="showUndeleteBtn"
                 no-wrap
                 dense
@@ -144,7 +141,7 @@
                 dense
                 :label="undeleteAllBtnLabel"
                 @click="undeleteAll"
-              />
+              /> -->
               <kw-btn
                 v-if="showDownloadBtn"
                 no-wrap
@@ -152,17 +149,25 @@
                 :label="downloadBtnLabel"
                 @click="downloadSelected"
               />
-              <kw-btn
+              <!-- <kw-btn
                 v-if="showDownloadAllBtn"
                 no-wrap
                 dense
                 :label="downloadAllBtnLabel"
                 @click="() => downloadAll(false)"
-              />
+              /> -->
               <slot
                 :ref="fileRef"
                 name="header-action"
               />
+            </div>
+            <div class="kw-file__header-size">
+              <span
+                v-if="computedCounter"
+                class="kw-file__header-counter"
+              >
+                {{ `(${computedCounter})` }}
+              </span>
             </div>
           </div>
 
@@ -228,7 +233,7 @@
       #append
     >
       <div
-        v-if="showAppendCounter"
+        v-if="showAppendCounter && !$g.platform.is.mobile"
         class="kw-file-item__size"
       >
         {{ computedCounter }}
@@ -290,7 +295,16 @@
     >
       <slot name="hint">
         <template v-if="acceptHint">
-          {{ acceptHint }}
+          <span class="kw-file__ext-area">
+            {{ acceptHint }}
+          </span>
+          <span
+            v-if="$g.platform.is.mobile && !multiple"
+            class="kw-file__size-area"
+          >
+            {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
+          </span>
+
           <kw-tooltip
             v-if="accept.split(', ').length > 3"
             anchor="bottom start"
@@ -394,6 +408,7 @@
                 </span>
               </p>
               <span
+                v-if="!$g.platform.is.mobile"
                 class="kw-file-item__size"
               > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
               </span>
@@ -418,7 +433,7 @@
                 v-if="isRetryPossible(file)"
                 class="kw-file-item__error-text"
               >Fail</span>
-              <kw-btn
+              <!-- <kw-btn
                 v-if="updatable && !(instanceUpdate === true) && (isUpdatable(file) || isUpdating(file))"
                 :icon="updateIcon"
                 :disable="isUpdating(file)"
@@ -431,7 +446,7 @@
                 >
                   {{ 'update' }}
                 </kw-tooltip>
-              </kw-btn>
+              </kw-btn> -->
               <kw-btn
                 v-if="retryPossible && isRetryPossible(file)"
                 :icon="retryIcon"
@@ -448,7 +463,7 @@
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="previewable"
+                v-if="isPreviewable(file)"
                 class="kw-file-item__preview"
                 :icon="previewIcon"
                 borderless
@@ -456,11 +471,11 @@
                 <kw-tooltip
                   anchor="bottom middle"
                 >
-                  {{ 'preview (개발중)' }}
+                  {{ 'preview' }}
                 </kw-tooltip>
               </kw-btn>
               <kw-btn
-                v-if="computedIsDownloadable(file) && downloadIcon"
+                v-if="computedIsDownloadable(file) && downloadIcon && $g.platform.is.desktop"
                 :icon="downloadIcon"
                 borderless
                 @click.prevent="downloadFile(file)"
@@ -679,6 +694,7 @@ export default {
         remove: editable && (props.reversible && props.removable) && innerValue.value.length > 0,
         undelete: editable && (props.reversible || props.undeletePossible),
         download: props.disable !== true && !!props.downloadable && innerValue.value.length > 0,
+        preview: props.previewable,
       };
     });
 
@@ -742,7 +758,7 @@ export default {
     // placeholder
     const acceptHint = computed(() => {
       if (!props.accept) { return; }
-      return `${t('MSG_TXT_ULD_PSB_FILE', '업로드 가능 파일')} : ${props.accept}`;
+      return `${t('MSG_TXT_EXTS', '확장자')} : ${props.accept}`;
     });
 
     const computedPlaceholder = computed(() => {
