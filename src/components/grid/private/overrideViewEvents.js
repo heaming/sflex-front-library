@@ -314,16 +314,33 @@ export function overrideOnCellItemClicked(view) {
 
       if (result.result) {
         if (result.payload?.isModified) {
-          const data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
-          data.files = result.payload.files;
-          data.__isModified = true;
+          let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
+          if (data) {
+            data.files = result.payload.files;
+            data.__isModified = true;
+          } else {
+            // 신규 추가된 행은 undefined이다
+            data = {
+              files: result.payload.files,
+              __isModified: true,
+              __atthDocumentId: componentProps.attachDocumentId,
+            };
+          }
           dp.setValue(index.dataRow, index.fieldName, data);
         }
 
         if (result.payload?.initFiles) {
-          const data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
-          data.files = null;
-          data.__isModified = false;
+          let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
+          if (data) {
+            data.files = null;
+            data.__isModified = false;
+          } else {
+            data = {
+              files: null,
+              __isModified: false,
+              __atthDocumentId: componentProps.attachDocumentId,
+            };
+          }
           dp.setValue(index.dataRow, index.fieldName, data);
         }
       }
