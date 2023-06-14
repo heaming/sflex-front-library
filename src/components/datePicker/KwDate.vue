@@ -64,6 +64,10 @@ export default {
       type: Function,
       default: undefined,
     },
+    selectDate: {
+      type: String,
+      default: undefined,
+    },
   },
 
   emits: ['update:modelValue'],
@@ -78,7 +82,9 @@ export default {
 
     function updateDate(val) {
       if (!val) {
-        el.datepicker('update', null);
+        if (!props.selectDate) {
+          el.datepicker('update', null);
+        } else { el.datepicker('update', props.selectDate); }
       } else {
         const formatValue = formatDate(date.extractDate(val, valueFormat.value), 'YYYY-MM-DD');
         el.datepicker('update', formatValue);
