@@ -75,11 +75,8 @@
                 {{ `${$t('MSG_TXT_COM_TOT', null, 'Total')} ` }}
                 <b>{{ `${files.length}` }}</b>
               </span>
-              <span
-                v-if="computedCounter"
-                class="kw-file__header-counter"
-              >
-                {{ `(${computedCounter})` }}
+              <span class="kw-file__header-selected">
+                {{ `(${selectedFileKeys.length} / ${files.length})` }}
               </span>
             </div>
             <div class="kw-file__multiple-action">
@@ -163,6 +160,14 @@
                 :ref="fileRef"
                 name="header-action"
               />
+            </div>
+            <div class="kw-file__header-size">
+              <span
+                v-if="computedCounter"
+                class="kw-file__header-counter"
+              >
+                {{ `(${computedCounter})` }}
+              </span>
             </div>
           </div>
 
