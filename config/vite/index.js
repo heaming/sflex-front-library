@@ -131,6 +131,7 @@ exports.defineConfig = (config) => {
       build: {
         sourcemap: config.buildSourcemap,
         rollupOptions: config.rollupOptions,
+        assetsInlineLimit: 0,
       },
 
       optimizeDeps: {

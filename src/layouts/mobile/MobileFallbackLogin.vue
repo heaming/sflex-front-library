@@ -1,5 +1,8 @@
 <template>
-  <div class="window-height row justify-center items-center bg-blue-grey-1">
+  <div
+    v-if="useBackdoorLogin"
+    class="window-height row justify-center items-center bg-blue-grey-1"
+  >
     <q-card
       style="width: 320px; padding: 20px 40px 30px;"
       bordered
@@ -43,6 +46,7 @@
 <script>
 import { alert } from '../../plugins/dialog';
 import useSession from '../../composables/useSession';
+import env from '../../consts/private/env';
 
 export default {
   name: 'MobileFallbackLogin',
@@ -58,6 +62,8 @@ export default {
   },
 
   setup(props) {
+    // VITE_LOGIN_URL 이 있고, healthCheck 해서 결과가 안좋으면 backdoorLogin 사용.
+    const useBackdoorLogin = !env.VITE_LOGIN_URL;
     const tenantId = toRaw(props.tenantId);
     const portalId = toRaw(props.portalId);
 
@@ -80,6 +86,7 @@ export default {
 
     return {
       onSubmit,
+      useBackdoorLogin,
     };
   },
 };
