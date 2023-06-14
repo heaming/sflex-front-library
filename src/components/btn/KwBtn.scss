@@ -145,6 +145,7 @@
 
   &--underline {
     text-decoration: underline;
+    text-underline-offset: 3px;
 
     &.q-btn {
       @include kw-btn-height-modifier(0, 1em, inherit, inherit);
