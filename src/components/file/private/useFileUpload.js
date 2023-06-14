@@ -1,5 +1,6 @@
 import { differenceBy, intersectionBy, isEqual } from 'lodash-es';
 import { download, downloadBlob, upload } from '../../../utils/file';
+import { platform } from '../../../plugins/platform';
 
 const INSTANT_UPDATE_ALL = true;
 const INSTANT_UPLOAD = 'upload';
@@ -297,7 +298,12 @@ export default (values, options, ables, selectCtx) => {
 
     uploadings.value = rawUploadings;
     values.value = rawUploadings
-      .filter((uploading) => uploading.state !== REMOVED)
+      .filter((uploading) => {
+        if (platform.is.mobile) {
+          return uploading.state !== REMOVED && uploading.state !== FAIL_TO_UPLOAD;
+        }
+        return uploading.state !== REMOVED;
+      })
       .map((uploading) => (uploading.file));
   }
 
@@ -305,7 +311,12 @@ export default (values, options, ables, selectCtx) => {
     get() {
       track();
       return uploadings.value
-        .filter((uploading) => uploading.state !== REMOVED)
+        .filter((uploading) => {
+          if (platform.is.mobile) {
+            return uploading.state !== REMOVED && uploading.state !== FAIL_TO_UPLOAD;
+          }
+          return uploading.state !== REMOVED;
+        })
         .map((uploading) => (uploading.file.dummy ? uploading.file : uploading.file.nativeFile));
     },
     async set(newFiles) {
@@ -521,6 +532,12 @@ export default (values, options, ables, selectCtx) => {
       .map((uploading) => uploading.file);
   }
 
+  function isPreviewable(file) {
+    if (!ables.value.preview) { return false; }
+    const uploading = file instanceof Uploading ? file : findUploading(file);
+    return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state);
+  }
+
   return {
     files: fileLikes,
     uploadings,
@@ -545,5 +562,6 @@ export default (values, options, ables, selectCtx) => {
     retryUpdateFile,
     getUploadedFiles,
     isUpdating,
+    isPreviewable,
   };
 };
