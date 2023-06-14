@@ -164,6 +164,14 @@
                 name="header-action"
               />
             </div>
+            <div class="kw-file__header-size">
+              <span
+                v-if="computedCounter"
+                class="kw-file__header-counter"
+              >
+                {{ `${computedCounter}` }}
+              </span>
+            </div>
           </div>
 
           <div
@@ -288,26 +296,33 @@
       v-if="$slots.hint || acceptHint"
       #hint
     >
-      <slot name="hint">
-        <template v-if="acceptHint">
-          <span class="kw-file__ext-area">
-            {{ acceptHint }}
-          </span>
-          <span
-            v-if="$g.platform.is.mobile && !multiple"
-            class="kw-file__size-area"
+      <slot
+        name="hint"
+      >
+        <template
+          v-if="acceptHint"
+        >
+          <div
+            class="kw-file__bottom-area"
           >
-            {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
-          </span>
-
-          <kw-tooltip
-            v-if="accept.split(', ').length > 3"
-            anchor="bottom start"
-            self="top left"
-            class="file_tooltip"
-          >
-            {{ accept }}
-          </kw-tooltip>
+            <span class="kw-file__ext-area">
+              {{ acceptHint }}
+            </span>
+            <span
+              v-if="$g.platform.is.mobile && !multiple"
+              class="kw-file__size-area"
+            >
+              {{ `${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter}` }}
+            </span>
+            <kw-tooltip
+              v-if="accept.split(', ').length > 3"
+              anchor="bottom start"
+              self="top left"
+              class="file_tooltip"
+            >
+              {{ accept }}
+            </kw-tooltip>
+          </div>
         </template>
       </slot>
     </template>
@@ -385,7 +400,7 @@
                 :tooltip="file.type"
                 :name="getExtensionIcon(file)"
               />
-              <p
+              <div
                 class="kw-file-item__name"
                 @click="onClickToggleFile(fileKeys[idx])"
               >
@@ -401,11 +416,11 @@
                 <span class="kw-file-item__name-ext">
                   {{ `.${file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length).toLowerCase()}` }}
                 </span>
-              </p>
+              </div>
               <span
                 v-if="!$g.platform.is.mobile"
                 class="kw-file-item__size"
-              > {{ `(${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter})` }}
+              > {{ `${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter}` }}
               </span>
             </div>
             <div
