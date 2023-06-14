@@ -147,10 +147,14 @@ body.mobile {
               padding-left: $-kw-item-section-side-padding-left;
             }
           }
+        }
+      }
 
+      &.kw-expansion-item {
+        .kw-item__section.q-item__section {
           &:has(.q-expansion-item__toggle-icon) {
             padding-right: 0;
-            padding-left: $-kw-item-section-side-padding-left;
+            padding-left: 8px;
           }
         }
       }
