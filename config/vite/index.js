@@ -41,7 +41,8 @@ function addQueryPlugin() {
       // eslint-disable-next-line no-restricted-syntax
       for (const file of jsFiles) {
         const regex = new RegExp(`<link rel="modulepreload" href="/assets/${file}">`, 'g');
-        const replacement = `<link rel="modulepreload" href="/assets/${file}?v=1">`; // 여기에서 쿼리 문자열을 추가 또는 수정
+        const time = Date.now();
+        const replacement = `<link rel="modulepreload" href="/assets/${file}?v=${time}">`; // 여기에서 쿼리 문자열을 추가 또는 수정
         html = html.replace(regex, replacement);
       }
 
