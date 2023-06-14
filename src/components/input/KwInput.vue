@@ -148,6 +148,7 @@
 </template>
 
 <script>
+import { isEmpty } from 'lodash-es';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
@@ -423,8 +424,10 @@ export default {
       }
 
       if (props.mask === 'telephone' && !props.modelValue) {
-        const val = [props.telNo0, props.telNo1, props.telNo2].join('-');
-        onUpdateTextValue(val);
+        if (!(isEmpty(props.telNo0) && isEmpty(props.telNo1) && isEmpty(props.telNo2))) {
+          const val = [props.telNo0, props.telNo1, props.telNo2].join('-');
+          onUpdateTextValue(val);
+        }
       }
     });
 
