@@ -29,20 +29,16 @@ const normalizeConfig = (config = {}) => ({
   plugins: config.plugins || [],
 });
 
-function addQueryPlugin() {
+function addQueryPlugin(jsUrls) {
   return {
     name: 'add-query-plugin',
     transformIndexHtml(html) {
-      const jsFiles = [
-        'plugin-vue_export-helper.js', // preload되는 JavaScript 파일 이름들을 여기에 추가
-      ];
-
       // JavaScript 파일에 쿼리 문자열 추가
       // eslint-disable-next-line no-restricted-syntax
-      for (const file of jsFiles) {
-        const regex = new RegExp(`<link rel="modulepreload" href="/assets/${file}">`, 'g');
+      for (const url of jsUrls) {
+        const regex = new RegExp(`<link rel="modulepreload" href="${url}">`, 'g');
         const time = Date.now();
-        const replacement = `<link rel="modulepreload" href="/assets/${file}?v=${time}">`; // 여기에서 쿼리 문자열을 추가 또는 수정
+        const replacement = `<link rel="modulepreload" href="${url}?v=${time}">`; // 여기에서 쿼리 문자열을 추가 또는 수정
         html = html.replace(regex, replacement);
       }
 
@@ -75,7 +71,12 @@ exports.defineConfig = (config) => {
     return {
       base: loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN || '/',
       plugins: [
-        addQueryPlugin(),
+        addQueryPlugin([
+          '/assets/app.js',
+          '/assets/plugin-vue_export-helper.js',
+          `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}/assets/plugin-vue_export-helper.js`,
+          `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}/assets/app.js`,
+        ]),
         vue({
           template: { transformAssetUrls },
         }),
