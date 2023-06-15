@@ -2,7 +2,7 @@
   $-kw-file-header-height: 36px;
   $-kw-file-border-size: 1px;
   $-kw-file-header-border: $-kw-file-border-size solid $line-stroke;
-  $-kw-file-header-background-color: $bg-box;
+  $-kw-file-header-background-color: #f8f8f8;
   $-kw-file-dnd-hint-height: 30px; // FIXME: 임의값
 
   &.kw-field {
@@ -92,15 +92,35 @@
 
   &__header-total,
   &__header-total-count,
-  &__header-counter {
+  &__header-counter,
+  &__header-selected {
     @include typo("dense", 400);
 
     line-height: 1.5rem;
     color: $black3;
 
     > b {
-      color: $black1; // 위에서 이상한 스타일이 내려와요.
+      color: $black1;
+      font-weight: 700;
     }
+  }
+
+  &__header-selected {
+    margin-left: 4px;
+  }
+
+  &__multiple-action {
+    display: inline-flex;
+    margin-left: 8px;
+    gap: 4px;
+
+    > .kw-btn {
+      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px, null, true);
+    }
+  }
+
+  &__header-size {
+    margin-left: auto;
   }
 
   &__header-counter {
@@ -108,16 +128,6 @@
       display: inline-block;
       content: " ";
       width: 4px;
-    }
-  }
-
-  &__multiple-action {
-    display: inline-flex;
-    margin-left: 16px;
-    gap: 4px;
-
-    > .kw-btn {
-      @include kw-btn-height-modifier-by-font-type(24px, "caption", 8px, null, true);
     }
   }
 
@@ -203,7 +213,7 @@
 
     .kw-file-item {
       min-height: $-kw-file-item-height-use-header;
-      padding: 0 12px;
+      padding: 0 16px;
       column-gap: 0;
 
       &__icon {
@@ -213,7 +223,8 @@
       &__main {
         font-weight: 400;
         line-height: 1em;
-        max-width: calc(100% - 88px);
+
+        // max-width: calc(100% - 88px);
       }
 
       &--selected {
@@ -237,7 +248,7 @@
       }
 
       &__aside {
-        margin-left: auto;
+        margin-left: 20px;
       }
 
       // + .kw-file-item {
@@ -415,9 +426,11 @@
     // width: TBD when use scroll horizontal;
     display: flex;
     flex-flow: row nowrap;
+    flex: 1 1 100px;
     min-width: 100px;
     align-items: center;
-    max-width: calc(100% - 64px);
+
+    // max-width: calc(100% - 64px);
   }
 
   &__name {
@@ -450,6 +463,8 @@
   }
 
   &__error-text {
+    margin-right: -4px;
+
     @include typo("caption");
 
     color: $error;
@@ -474,7 +489,6 @@
 
   &__aside { // you should notice this one's width set by props.
     // width: TBD when use scroll horizontal;
-    margin-left: auto;
     flex: none;
     display: flex;
     justify-content: flex-end;
@@ -482,7 +496,7 @@
     gap: 8px;
     flex-shrink: 0;
 
-    .kw-btn {
+    .kw-btn:not(.kw-file-item__retry-btn) {
       font-size: 16px !important;
     }
 
@@ -509,60 +523,70 @@
 
 body.mobile:not(.tablet) {
   .kw-file {
-    $-kw-file-mobile-header-height: 46px;
-    $-kw-file-mobile-header-background-color: $bg-box;
+    // $-kw-file-mobile-header-height: 46px;
+    // $-kw-file-mobile-header-background-color: $bg-box;
 
-    &__header {
-      height: $-kw-file-mobile-header-height;
+    // &__header {
+    //   height: $-kw-file-mobile-header-height;
+    // }
+
+    &__bottom-area {
+      display: flex;
+      column-gap: 8px;
+      width: 100%;
+
+      @include typo("dense",400);
+
+      color: $placeholder;
     }
 
-    &--use-header {
-      .kw-file__header-container {
-        height: $-kw-file-mobile-header-height;
-        background-color: $-kw-file-mobile-header-background-color;
-      }
-
-      .kw-file__placeholder {
-        border-top: 1px solid $line-stroke;
-        top: $-kw-file-mobile-header-height;
-        background-color: $-kw-file-mobile-header-background-color;
-      }
-
-      .kw-file__prepend-native {
-        border-bottom: 0;
-      }
-
-      &.kw-field {
-        &.q-field {
-          .q-field__control {
-            padding-left: 0;
-            padding-right: 0;
-
-            &:hover::before {
-              border-color: $line-stroke;
-            }
-          }
-
-          &--standard {
-            .q-field__control {
-              &::before {
-                border-bottom: 0;
-              }
-            }
-          }
-        }
-      }
+    &__ext-area {
+      flex: 1 1 100px;
+      word-break: break-all;
     }
 
-    .kw-file-item {
-      &__main {
-        max-width: calc(100% - 40px);
-      }
-
-      &__aside {
-        margin-left: 0;
-      }
+    &__size-area {
+      flex: 0 0 120px;
+      text-align: right;
     }
+
+    // &--use-header {
+    //   .kw-file__header-container {
+    //     height: $-kw-file-mobile-header-height;
+    //     background-color: $-kw-file-mobile-header-background-color;
+    //   }
+
+    //   .kw-file__placeholder {
+    //     border-top: 1px solid $line-stroke;
+    //     top: $-kw-file-mobile-header-height;
+    //     background-color: $-kw-file-mobile-header-background-color;
+    //   }
+
+    //   .kw-file__prepend-native {
+    //     border-bottom: 0;
+    //   }
+
+    //   &.kw-field {
+    //     &.q-field {
+    //       .q-field__control {
+    //         padding-left: 0;
+    //         padding-right: 0;
+
+    //         &:hover::before {
+    //           border-color: $line-stroke;
+    //         }
+    //       }
+
+    //       &--standard {
+    //         .q-field__control {
+    //           &::before {
+    //             border-bottom: 0;
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 
