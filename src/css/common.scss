@@ -847,32 +847,32 @@ $unit: px;
 // override quasar common classes
 .q-placeholder {
   &::-webkit-input-placeholder {
-    color: $placeholder;
-    font-weight: normal;
+    color: $placeholder !important;
+    font-weight: 400 !important;
     opacity: 1;
   }
 
   &::-moz-placeholder {
-    color: $placeholder;
-    font-weight: normal;
+    color: $placeholder !important;
+    font-weight: 400 !important;
     opacity: 1;
   }
 
   &:-ms-input-placeholder {
     color: $placeholder !important;
-    font-weight: normal;
-    opacity: 1 !important;
+    font-weight: 400 !important;
+    opacity: 1;
   }
 
   &::-ms-input-placeholder {
-    color: $placeholder;
-    font-weight: normal;
+    color: $placeholder !important;
+    font-weight: 400 !important;
     opacity: 1;
   }
 
   &::placeholder {
-    color: $placeholder;
-    font-weight: normal;
+    color: $placeholder !important;
+    font-weight: 400 !important;
     opacity: 1;
   }
 }
