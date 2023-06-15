@@ -23,9 +23,10 @@
 body.mobile:not(.tablet) {
   .kw-tooltip {
     &.q-tooltip {
-      padding: 8px 20px; // 모바일 tooltip 양 측면 padding 20px로 수정
+      padding: 8px 12px; // 모바일 tooltip 양 측면 padding 20px로 수정
       font-size: 13px;
-      max-width: 100% !important; // 최대 100%
+      left: 20px !important;
+      right: 20px !important;
 
       div {
         word-wrap: break-word; // 툴팁 길면 두줄 이상으로
