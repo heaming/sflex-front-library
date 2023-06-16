@@ -211,6 +211,13 @@
       background-color: $-kw-file-header-background-color;
     }
 
+    // aside 영역 추후에 필요시 마진 조정 필요
+    .kw-file__header {
+      .kw-file-item__aside {
+        margin-left: 0;
+      }
+    }
+
     .kw-file-item {
       min-height: $-kw-file-item-height-use-header;
       padding: 0 16px;
