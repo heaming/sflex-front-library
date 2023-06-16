@@ -20,6 +20,18 @@
   }
 }
 
+body:not(.mobile) {
+  .shrinked_tooltip.kw-tooltip {
+    max-width: 600px;
+  }
+
+  .kw-tooltip {
+    &.q-tooltip {
+      max-width: 600px;
+    }
+  }
+}
+
 body.mobile:not(.tablet) {
   .kw-tooltip {
     &.q-tooltip {
@@ -33,8 +45,4 @@ body.mobile:not(.tablet) {
       }
     }
   }
-}
-
-.shrinked_tooltip.kw-tooltip {
-  max-width: 600px;
 }
