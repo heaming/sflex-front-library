@@ -77,9 +77,11 @@ export default {
       val = parseInt(val, 10);
 
       if (await confirmIfTargetsModified?.()) {
-        emit('update:pageIndex', 1);
-        emit('update:pageSize', val, 10);
-        emit('change', 1, val);
+        if (props.totalCount && props.totalCount >= 1) {
+          emit('update:pageIndex', 1);
+          emit('update:pageSize', val, 10);
+          emit('change', 1, val);
+        }
       }
     }
 
