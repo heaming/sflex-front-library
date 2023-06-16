@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash-es';
 import { uid } from 'quasar';
 import dayjs from 'dayjs';
 import consts from '../consts';
@@ -55,4 +56,37 @@ export function getDatetimeFormat(value, format = 'YYYYMMDDHHmmss') {
 export function getTimeFormat(value, format = 'HHmmss') {
   const timeFormat = store.getters['meta/getUserInfo'].timeFormat || consts.DEFAULT_TIME_FORMAT;
   return value ? dayjs(value, format).format(timeFormat) : '';
+}
+
+export function escapeSpecialCharacters(value) {
+  let text = cloneDeep(value);
+  text = text.replace(/\\/gi, '\\\\');
+  text = text.replace(/\[/gi, '\\[');
+  text = text.replace(/\]/gi, '\\]');
+  text = text.replace(/\{/gi, '\\{');
+  text = text.replace(/\}/gi, '\\}');
+  text = text.replace(/\//gi, '\\/');
+  text = text.replace(/\(/gi, '\\(');
+  text = text.replace(/\)/gi, '\\)');
+  text = text.replace(/\./gi, '\\.');
+  text = text.replace(/\?/gi, '\\?');
+  text = text.replace(/\|/gi, '\\|');
+  text = text.replace(/\*/gi, '\\*');
+  text = text.replace(/\^/gi, '\\^');
+  text = text.replace(/\+/gi, '\\+');
+  text = text.replace(/\$/gi, '\\$');
+
+  // 아래 특수문자는 차후 수정
+  // text = text.replace(/-/gi, '\\-');
+  // text = text.replace(/#/gi, '\\#');
+  // text = text.replace(/'/gi, '\\\'');
+  // text = text.replace(/"/gi, '\\"');
+  // text = text.replace(/,/gi, '\\,');
+  // text = text.replace(/,/gi, '\\,');
+  // text = text.replace(/,/gi, '\\,');
+  // text = text.replace(/,/gi, '\\,');
+  // text = text.replace(/,/gi, '\\,');
+  // text = text.replace(/,/gi, '\\,');
+
+  return text;
 }
