@@ -32,15 +32,15 @@
         </div>
       </div>
     </div>
-    <div class="row items-center mt10">
-      <p class="kw-font-pt18 text-weight-medium">
+    <div class="row items-center">
+      <p class="text-weight-medium">
         최근 메뉴명 검색어
         <span>(<span class="kw-fc--primary">{{ recentKeywords.length }}</span>건)</span>
       </p>
       <kw-icon
         :tooltip="t('MSG_TXT_RECENT_MENU_SRCH_TOOLTIP')"
-        name="info_24"
-        class="ml4 kw-font-pt24"
+        name="info"
+        class="ml4 kw-font-pt16"
       />
     </div>
     <div class="recent-keywords">
