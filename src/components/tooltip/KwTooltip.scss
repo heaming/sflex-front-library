@@ -20,18 +20,6 @@
   }
 }
 
-body:not(.mobile) {
-  .shrinked_tooltip.kw-tooltip {
-    max-width: 600px;
-  }
-
-  .kw-tooltip {
-    &.q-tooltip {
-      max-width: 600px;
-    }
-  }
-}
-
 body.mobile:not(.tablet) {
   .kw-tooltip {
     &.q-tooltip {
@@ -45,4 +33,9 @@ body.mobile:not(.tablet) {
       }
     }
   }
+}
+
+// select 내 툴팁 PC 말줄임
+.shrinked_tooltip.kw-tooltip {
+  max-width: 600px;
 }
