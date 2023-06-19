@@ -2,7 +2,6 @@
   <div class="kw-sign">
     <div class="kw-sign__canvas-area">
       <canvas
-        id="drawCanvas"
         ref="canvas"
         :width="computedWidth"
         :height="computedHeight"
@@ -49,21 +48,20 @@ export default {
   },
 
   setup(props) {
-    let canvas;
+    const canvas = ref();
     let ctx;
     const isSignExist = ref(false);
 
     function setBackground() {
       ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, canvas.value.width, canvas.value.height);
     }
     function getSignData(type = 'image/png') {
-      return canvas.toDataURL(type);
+      return canvas.value.toDataURL(type);
     }
 
     async function initDraw() {
-      canvas = document.getElementById('drawCanvas');
-      ctx = canvas.getContext('2d');
+      ctx = canvas.value.getContext('2d');
       setBackground();
       ctx.fillStyle = '#ffffff';
       const mouse = {
@@ -83,7 +81,7 @@ export default {
         } else if (ev.targetTouches[0] || ev.targetTouches[0].pageX === 0) { // 핸드폰
           let left = 0;
           let top = 0;
-          let elem = canvas;
+          let elem = canvas.value;
 
           while (elem) {
             left += parseInt(elem.offsetLeft, 10);
@@ -97,7 +95,7 @@ export default {
       }
       let started = false;
 
-      canvas.onmousemove = function onMouseMove(e) {
+      canvas.value.onmousemove = function onMouseMove(e) {
         setMousePosition(e);
         if (started) {
           ctx.lineTo(mouse.x, mouse.y);
@@ -105,7 +103,7 @@ export default {
         }
       };
 
-      canvas.onmousedown = function onMouseDown(e) {
+      canvas.value.onmousedown = function onMouseDown(e) {
         setMousePosition(e);
         ctx.beginPath();
         ctx.moveTo(mouse.x, mouse.y);
@@ -113,7 +111,7 @@ export default {
         isSignExist.value = true;
       };
 
-      canvas.onmouseup = function onMouseUp() {
+      canvas.value.onmouseup = function onMouseUp() {
         if (started) {
           started = false;
         }
@@ -132,7 +130,7 @@ export default {
       image.src = props.recentSignSrc;
       image.crossOrigin = 'Anonymous';
       image.onload = () => {
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.value.width, canvas.value.height);
         isSignExist.value = true;
       };
     }
@@ -142,14 +140,14 @@ export default {
       image.src = props.oriSignSrc;
       image.crossOrigin = 'Anonymous';
       image.onload = () => {
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.value.width, canvas.value.height);
         isSignExist.value = true;
       };
     }
 
     function downSign() {
       const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
+      link.href = canvas.value.toDataURL('image/png');
       link.target = '_blank';
       link.download = 'test.png';
       link.click();
@@ -175,6 +173,7 @@ export default {
     });
 
     return {
+      canvas,
       downSign,
       reset,
       recentSign,
