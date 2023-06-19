@@ -43,18 +43,18 @@ export function getUid(prefix) {
   return prefix ? `${prefix}-${id}` : id;
 }
 
-export function getDateFormat(value, format = 'YYYYMMDD') {
-  const dateFormat = store.getters['meta/getUserInfo'].dateFormat || consts.DEFAULT_DATE_FORMAT;
+export function getDateFormat(value, format = 'YYYYMMDD', customFormat = undefined) {
+  const dateFormat = customFormat || store.getters['meta/getUserInfo'].dateFormat || consts.DEFAULT_DATE_FORMAT;
   return value ? dayjs(value, format).format(dateFormat) : '';
 }
 
-export function getDatetimeFormat(value, format = 'YYYYMMDDHHmmss') {
-  const datetimeFormat = store.getters['meta/getUserInfo'].datetimeFormat || consts.DEFAULT_DATETIME_FORMAT;
+export function getDatetimeFormat(value, format = 'YYYYMMDDHHmmss', customFormat = undefined) {
+  const datetimeFormat = customFormat || store.getters['meta/getUserInfo'].datetimeFormat || consts.DEFAULT_DATETIME_FORMAT;
   return value ? dayjs(value, format).format(datetimeFormat) : '';
 }
 
-export function getTimeFormat(value, format = 'HHmmss') {
-  const timeFormat = store.getters['meta/getUserInfo'].timeFormat || consts.DEFAULT_TIME_FORMAT;
+export function getTimeFormat(value, format = 'HHmmss', customFormat = undefined) {
+  const timeFormat = customFormat || store.getters['meta/getUserInfo'].timeFormat || consts.DEFAULT_TIME_FORMAT;
   return value ? dayjs(value, format).format(timeFormat) : '';
 }
 
