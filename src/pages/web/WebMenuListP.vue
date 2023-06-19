@@ -32,15 +32,15 @@
         </div>
       </div>
     </div>
-    <div class="row items-center mt10">
-      <p class="kw-font-pt18 text-weight-medium">
+    <div class="row items-center">
+      <p class="text-weight-medium">
         최근 메뉴명 검색어
         <span>(<span class="kw-fc--primary">{{ recentKeywords.length }}</span>건)</span>
       </p>
       <kw-icon
         :tooltip="t('MSG_TXT_RECENT_MENU_SRCH_TOOLTIP')"
-        name="info_24"
-        class="ml4 kw-font-pt24"
+        name="info"
+        class="ml4 kw-font-pt16"
       />
     </div>
     <div class="recent-keywords">
@@ -195,6 +195,7 @@ import { localStorage } from '../../plugins/storage';
 import { sanitize } from '../../plugins/sanitize';
 import consts from '../../consts';
 import { http } from '../../plugins/http';
+import { escapeSpecialCharacters } from '../../utils/string';
 
 const { t } = useI18n();
 
@@ -306,7 +307,7 @@ function setMenuGroups() {
 function createHierarchyData(appMenus, key) {
   return appMenus
     .filter((v) => {
-      if (key !== 'ROOT') return key.endsWith(v.parentsMenuUid) && reSearchTexts.value.every((text) => v.menuName.toLowerCase().indexOf(text.toLowerCase()) >= 0);
+      if (key !== 'ROOT') return key.endsWith(v.parentsMenuUid) && reSearchTexts.value.every((text) => v.menuName.toLowerCase().replace(/\s/g, '').indexOf(text.toLowerCase().replace(/\s/g, '')) >= 0);
       return v.menuLevel === 0;
     })
     .reduce((a, v) => {
@@ -349,9 +350,23 @@ watch(currentMenuKey, () => {
 function getHighlightedMenuName(menuName) {
   let highlightedMenuName = menuName;
   reSearchTexts.value.forEach((text) => {
-    const regExp = new RegExp(text, 'gi');
-    const matched = highlightedMenuName.match(regExp);
-    highlightedMenuName = highlightedMenuName.replace(regExp, `<span class="kw-fc--primary">${matched[0]}</span>`);
+    const withoutSpaceText = text.replace(/\s/g, '');
+    const withoutSpace = highlightedMenuName.replace(/\s/g, '');
+
+    const isExist = withoutSpace.indexOf(withoutSpaceText);
+    if (isExist >= 0) {
+      const startIndex = highlightedMenuName.indexOf(text.substr(0, 1));
+      const endIndex = highlightedMenuName.indexOf(text.substr(-1), startIndex);
+
+      let target = highlightedMenuName.substring(startIndex, endIndex + 1);
+
+      target = escapeSpecialCharacters(target);
+
+      const regExp = new RegExp(target, 'gi');
+      const matched = highlightedMenuName.match(regExp);
+
+      highlightedMenuName = highlightedMenuName.replace(regExp, `<span class="kw-fc--primary">${matched[0]}</span>`);
+    }
   });
   return highlightedMenuName;
 }
