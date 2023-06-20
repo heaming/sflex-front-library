@@ -4,6 +4,8 @@
 }
 
 .kw-tab-panel {
+  outline: none;
+
   &--disabled::before {
     position: absolute;
     content: "";

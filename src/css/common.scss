@@ -870,6 +870,24 @@ $unit: px;
     opacity: 1;
   }
 
+  &::-webkit-textarea-placeholder {
+    color: $placeholder !important;
+    font-weight: 400 !important;
+    opacity: 1;
+  }
+
+  &:-ms-textarea-placeholder {
+    color: $placeholder !important;
+    font-weight: 400 !important;
+    opacity: 1;
+  }
+
+  &::-ms-textarea-placeholder {
+    color: $placeholder !important;
+    font-weight: 400 !important;
+    opacity: 1;
+  }
+
   &::placeholder {
     color: $placeholder !important;
     font-weight: 400 !important;
