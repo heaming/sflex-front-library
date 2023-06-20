@@ -361,7 +361,7 @@ export function overrideOnCellClicked(view) {
   wrapEvent(view, onCellClicked, async (g, clickData) => {
     let preventCheck;
     if (hasOriginal(g, onCellClicked)) {
-      preventCheck = execOriginal(g, onCellClicked, g, clickData);
+      preventCheck = await execOriginal(g, onCellClicked, g, clickData);
     }
 
     if (preventCheck !== false && g.checkBar.visible && g.isCheckableOfRow(clickData.dataRow)) {

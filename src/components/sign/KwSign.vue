@@ -1,5 +1,8 @@
 <template>
-  <div class="kw-sign">
+  <div
+    ref="kwSignRef"
+    class="kw-sign"
+  >
     <div class="kw-sign__canvas-area">
       <canvas
         ref="canvas"
@@ -49,6 +52,7 @@ export default {
 
   setup(props) {
     const canvas = ref();
+    const kwSignRef = ref();
     let ctx;
     const isSignExist = ref(false);
 
@@ -59,63 +63,77 @@ export default {
     function getSignData(type = 'image/png') {
       return canvas.value.toDataURL(type);
     }
+    const mouse = ref({
+      x: 0,
+      y: 0,
+      startX: 0,
+      startY: 0,
+    });
 
     async function initDraw() {
       ctx = canvas.value.getContext('2d');
       setBackground();
       ctx.fillStyle = '#ffffff';
-      const mouse = {
-        x: 0,
-        y: 0,
-        startX: 0,
-        startY: 0,
-      };
 
       function setMousePosition(ev) {
         if (ev.layerX || ev.layerX === 0) { // Firefox 브라우저
-          mouse.x = ev.offsetX;
-          mouse.y = ev.offsetY;
+          mouse.value.x = ev.offsetX;
+          mouse.value.y = ev.offsetY;
         } else if (ev.offsetX || ev.offsetX === 0) { // Opera 브라우저
-          mouse.x = ev.offsetX;
-          mouse.y = ev.offsetY;
+          mouse.value.x = ev.offsetX;
+          mouse.value.y = ev.offsetY;
         } else if (ev.targetTouches[0] || ev.targetTouches[0].pageX === 0) { // 핸드폰
-          let left = 0;
-          let top = 0;
-          let elem = canvas.value;
-
-          while (elem) {
-            left += parseInt(elem.offsetLeft, 10);
-            top += parseInt(elem.offsetTop, 10);
-            elem = elem.offsetParent;
-          }
-
-          mouse.x = ev.targetTouches[0].pageX - left;
-          mouse.y = ev.targetTouches[0].pageY - top;
+          const boundingRect = ev.target.getBoundingClientRect();
+          mouse.value.x = ev.targetTouches[0].clientX - boundingRect.x;
+          mouse.value.y = ev.targetTouches[0].clientY - boundingRect.y;
         }
       }
       let started = false;
 
-      canvas.value.onmousemove = function onMouseMove(e) {
+      function onMouseMove(e) {
         setMousePosition(e);
         if (started) {
-          ctx.lineTo(mouse.x, mouse.y);
+          ctx.lineTo(mouse.value.x, mouse.value.y);
           ctx.stroke();
+          mouse.value.startX = mouse.value.x;
+          mouse.value.startY = mouse.value.y;
         }
-      };
+      }
 
-      canvas.value.onmousedown = function onMouseDown(e) {
+      function onMouseDown(e) {
+        e.preventDefault();
         setMousePosition(e);
         ctx.beginPath();
-        ctx.moveTo(mouse.x, mouse.y);
+        ctx.moveTo(mouse.value.x, mouse.value.y);
         started = true;
         isSignExist.value = true;
-      };
+        mouse.value.startX = mouse.value.x;
+        mouse.value.startY = mouse.value.y;
+      }
 
-      canvas.value.onmouseup = function onMouseUp() {
+      function onMouseUp() {
         if (started) {
           started = false;
+          ctx.beginPath();
+          ctx.arc(mouse.value.startX, mouse.value.startY, ctx.lineWidth / 2, 0, 2 * Math.PI);
+          ctx.fillStyle = ctx.strokeStyle;
+          ctx.fill();
         }
-      };
+      }
+
+      canvas.value.onmousemove = onMouseMove;
+
+      canvas.value.onmousedown = onMouseDown;
+
+      canvas.value.onmouseup = onMouseUp;
+
+      // canvas.value.touchstart = onMouseDown;
+      // canvas.value.touchend = onMouseUp;
+      // canvas.value.touchmove = onMouseMove;
+
+      canvas.value.addEventListener('touchmove', (e) => onMouseMove(e, false), false);
+      canvas.value.addEventListener('touchstart', (e) => onMouseDown(e, false), false);
+      canvas.value.addEventListener('touchend', (e) => onMouseUp(e, false), false);
     }
 
     function reset() {
@@ -173,7 +191,9 @@ export default {
     });
 
     return {
+      mouse,
       canvas,
+      kwSignRef,
       downSign,
       reset,
       recentSign,
