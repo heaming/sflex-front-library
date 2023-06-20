@@ -33,9 +33,11 @@ export default (DataClass, ViewClass) => {
 
   let data = null;
   let view = null;
-
-  onMounted(async () => {
+  async function createGrid() {
     try {
+      data?.clearRows();
+      view?.destroy();
+      data?.destroy();
       view = new ViewClass(containerRef.value);
     } catch (e) {
       warn(`KwGrid/KwTreeGrid: invalid realgrid license (${window.realGrid2Lic})`);
@@ -69,6 +71,11 @@ export default (DataClass, ViewClass) => {
     setTimeout(() => {
       view.__originalLayouts__ = view.saveColumnLayout();
     });
+  }
+
+  onMounted(async () => {
+    await createGrid();
+    view.__initFunction__ = createGrid;
   });
 
   onBeforeUnmount(() => {
