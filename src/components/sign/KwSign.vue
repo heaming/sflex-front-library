@@ -83,23 +83,9 @@ export default {
           mouse.value.x = ev.offsetX;
           mouse.value.y = ev.offsetY;
         } else if (ev.targetTouches[0] || ev.targetTouches[0].pageX === 0) { // 핸드폰
-          let left = 0;
-          let top = 0;
-          // let elem = canvas.value;
-          // console.log(ev.targetTouches[0][])
-          left = ev.targetTouches[0].clientX - kwSignRef.value.offsetLeft;
-          top = ev.targetTouches[0].clientY - (ev.targetTouches[0].screenY - ev.targetTouches[0].clientY);
-          // console.log('mob', ev.targetTouches[0], elem.offsetTop, document.documentElement.scrollTop);
-          // while (elem) {
-          //   console.log('mouse', left, top);
-          //   left += parseInt(elem.offsetLeft, 10);
-          //   top += parseInt(elem.offsetTop, 10);
-          //   elem = elem.offsetParent;
-          // }
-          mouse.value.x = left;
-          mouse.value.y = top;
-          // mouse.value.x = ev.targetTouches[0].pageX - left;
-          // mouse.value.y = ev.targetTouches[0].pageY - top;
+          const boundingRect = ev.target.getBoundingClientRect();
+          mouse.value.x = ev.targetTouches[0].clientX - boundingRect.x;
+          mouse.value.y = ev.targetTouches[0].clientY - boundingRect.y;
         }
       }
       let started = false;
