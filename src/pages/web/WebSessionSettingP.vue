@@ -56,7 +56,7 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
-        <kw-form-item label="기본권한코드">
+        <kw-form-item label="대표권한그룹">
           <kw-input v-model="userInfoForSetting.baseRleCd" />
         </kw-form-item>
       </kw-form-row>
