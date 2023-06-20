@@ -588,6 +588,7 @@ import useFileDownload, {
 import { stopAndPrevent } from '../../utils/private/event';
 import { DenseContextKey } from '../../consts/private/symbols';
 import { modal } from '../../plugins/modal';
+import { platform } from '../../plugins/platform';
 
 const UPDATE_AVAILABLE_OPTIONS = [true, false, 'remove', 'upload'];
 const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
@@ -765,7 +766,7 @@ export default {
     // placeholder
     const acceptHint = computed(() => {
       if (!props.accept) { return; }
-      return `${t('MSG_TXT_EXTS', '확장자')} : ${props.accept}`;
+      return `${platform.is.mobile ? t('MSG_TXT_EXTS') : t('MSG_TXT_ULD_PSB_FILE')} : ${props.accept}`;
     });
 
     const computedPlaceholder = computed(() => {
