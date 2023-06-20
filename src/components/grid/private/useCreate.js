@@ -71,11 +71,17 @@ export default (DataClass, ViewClass) => {
     setTimeout(() => {
       view.__originalLayouts__ = view.saveColumnLayout();
     });
+    /* eslint-disable no-use-before-define */
+    registerGridInitFunction(view);
+    /* eslint-enable no-use-before-define */
+  }
+
+  function registerGridInitFunction(gridView) {
+    gridView.__initFunction__ = createGrid;
   }
 
   onMounted(async () => {
     await createGrid();
-    view.__initFunction__ = createGrid;
   });
 
   onBeforeUnmount(() => {
