@@ -700,3 +700,7 @@ export function expand(view, dataRow, isExpandDescendants = false) {
 
   view.setCurrent({ dataRow });
 }
+
+export function reCreateGrid(view) {
+  view?.__initFunction__?.();
+}
