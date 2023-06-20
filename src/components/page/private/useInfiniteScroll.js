@@ -60,8 +60,7 @@ export default () => {
     }
 
     const el = newEl ? newEl.$el : scrollTarget.value.$el ?? scrollTarget.value;
-
-    const isOnBottom = evt.direction === 'down' && evt.position.top === el.scrollHeight - el.clientHeight;
+    const isOnBottom = evt.direction === 'down' && Math.ceil(evt.position.top) === el.scrollHeight - el.clientHeight;
     if (isOnBottom) {
       deobuncedFetch.value();
     }
