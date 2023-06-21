@@ -190,6 +190,11 @@ body.tablet .kw-popup {
         content: none;
       }
     }
+
+    .font-center {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   &--no-title {
@@ -325,6 +330,11 @@ body.mobile:not(.tablet) {
             width: 1px;
             background-color: #2a7bd9;
           }
+        }
+
+        .font-center {
+          margin-left: auto;
+          margin-right: auto;
         }
       }
 
