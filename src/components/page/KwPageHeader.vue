@@ -94,7 +94,7 @@
         <!-- eslint-disable vue/no-v-html -->
         <div
           class="notice-popup__body"
-          v-html="sanitize(pageNoticeCntn)"
+          v-html="sanitize(pageNoticeCntn, { ADD_ATTR: ['target']})"
         />
         <!-- eslint-enable vue/no-v-html -->
       </div>
