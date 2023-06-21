@@ -474,6 +474,7 @@
                 class="kw-file-item__preview"
                 :icon="previewIcon"
                 borderless
+                @click.prevent="previewFile(file)"
               >
                 <kw-tooltip
                   anchor="bottom middle"
@@ -587,11 +588,9 @@ import useFileDownload, {
 } from './private/useFileDownload';
 import { stopAndPrevent } from '../../utils/private/event';
 import { DenseContextKey } from '../../consts/private/symbols';
-import { modal } from '../../plugins/modal';
 import { platform } from '../../plugins/platform';
 
 const UPDATE_AVAILABLE_OPTIONS = [true, false, 'remove', 'upload'];
-const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
 
 export default {
   name: 'KwFile',
@@ -661,6 +660,7 @@ export default {
   emits: [
     'update:modelValue',
     'rejected',
+    'preview',
     ...useFileDownloadEmits,
     ...useFileHeaderEmits,
     ...useFilePickerEmits,
@@ -868,13 +868,8 @@ export default {
       return 'file';
     };
 
-    const isFile = (file) => IMAGE_EXTENSION.includes(file.attachFile?.fileExtensionName.toLowerCase());
-
-    async function openImagePreview(file) {
-      await modal({
-        component: 'ZwcmzImagePreviewP',
-        componentProps: { images: [file.attachFile.fileUid] },
-      });
+    function previewFile(file) {
+      emit('preview', { file, platform });
     }
 
     return {
@@ -902,8 +897,7 @@ export default {
       acceptHint,
       onDragOver,
       onDragLeave,
-      isFile,
-      openImagePreview,
+      previewFile,
       isModified,
     };
   },
