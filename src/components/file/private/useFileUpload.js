@@ -26,6 +26,8 @@ const AVAILABLE_STATES = {
   [ERROR]: [REMOVED],
 };
 
+const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
+
 const privateKeyField = Symbol('FILE_LIKE_KEY');
 
 export const generateFileLikeKey = (fileLike) => {
@@ -535,7 +537,8 @@ export default (values, options, ables, selectCtx) => {
   function isPreviewable(file) {
     if (!ables.value.preview) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
-    return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state);
+    return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state)
+        && (IMAGE_EXTENSION.includes(file?.attachFile?.fileExtensionName) || file?.type?.startsWith('image'));
   }
 
   return {
