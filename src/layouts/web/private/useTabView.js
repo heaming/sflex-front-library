@@ -1,4 +1,4 @@
-import { last, filter, find, findIndex, map } from 'lodash-es';
+import { last, filter, find, findIndex, map, cloneDeep } from 'lodash-es';
 import consts from '../../../consts';
 import env from '../../../consts/private/env';
 import { confirm } from '../../../plugins/dialog';
@@ -77,7 +77,6 @@ export default () => {
 
     window.removeEventListener('beforeunload', preventReload);
     window.addEventListener('beforeunload', preventReload);
-
     return tabViews[index - 1];
   }
 
@@ -96,7 +95,8 @@ export default () => {
 
   async function select(key, param = null) {
     try {
-      await router.push({ name: key, state: { stateParam: param } });
+      if (param) await router.push({ name: key, state: { stateParam: param } });
+      else await router.push({ name: key });
     } catch (e) {
       // ignore
     }
@@ -280,7 +280,11 @@ export default () => {
         }
         const tabView = tabViews.find((v) => v.key === to.name);
         if (tabView !== undefined) {
-          tabView.componentProps = params;
+          const { componentProps } = tabView;
+          const obj = {
+            ...componentProps, ...params,
+          };
+          tabView.componentProps = cloneDeep(obj);
         }
       }
     },
