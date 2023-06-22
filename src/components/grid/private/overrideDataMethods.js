@@ -67,7 +67,11 @@ function setSearchConditionMessage(view) {
 
   let message = '[검색조건]\n';
   formItems.forEach((formItem) => {
-    const label = formItem.querySelector('.kw-label-content__label').innerHTML;
+    let label;
+    // label이 있는경우
+    if (formItem.querySelector('.kw-label-content__label')) {
+      label = formItem.querySelector('.kw-label-content__label').innerHTML;
+    }
 
     const values = formItem.querySelectorAll('input:not(.hidden)');
     let value = '';
@@ -101,7 +105,11 @@ function setSearchConditionMessage(view) {
         });
       }
     }
-    message += `${label} : ${value}  \n`;
+    if (label) {
+      message += `${label} : ${value}  \n`;
+    } else {
+      message += `${value}  \n`;
+    }
   });
 
   view.__searchConditionText__ = message;
