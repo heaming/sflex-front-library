@@ -48,13 +48,13 @@ export default (app) => {
 
   // override icon mapping
   const { $q } = app.config.globalProperties;
-  // const defaultViewBox = '0 0 24 24';
+  const defaultViewBox = '0 0 24 24';
   $q.iconMapFn = (s) => {
-    const [def] = s.split('|');
-    // const [def, viewBox = defaultViewBox] = s.split('|');
-    const icon = icons[def] ? `img:${icons[def]}` : 'none';
+    // const [def] = s.split('|');
+    const [def, viewBox = defaultViewBox] = s.split('|');
+    // const icon = icons[def] ? `img:${icons[def]}` : 'none';
     // console.log(icon);
-    // const icon = icons[def] ? `svguse:${icons[def]}#${def}|${viewBox}` : 'none';
+    const icon = icons[def] ? `svguse:${icons[def]}#${def}|${viewBox}` : 'none';
     return { icon };
   };
 };
