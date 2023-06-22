@@ -567,7 +567,9 @@
       v-if="$g.platform.is.mobile && (label || $slots.label)"
       #label
     >
-      {{ label ?? label }}
+      <span :class="{ 'kw-file--required': required }">
+        {{ label ?? label }}
+      </span>
     </template>
   </q-file>
 </template>
@@ -655,6 +657,7 @@ export default {
     inputStyle: { type: [Array, String, Object], default: undefined },
     previewIcon: { type: String, default: 'viewer' },
     previewable: { type: Boolean, default: true },
+    required: { type: Boolean, default: false },
   },
 
   emits: [
