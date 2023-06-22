@@ -63,14 +63,28 @@ export default defineConfig(({ mode }) => {
     },
 
     build: {
-      lib: {
-        entry: resolve(__dirname, 'src/index.js'),
-        name: 'KwLib',
-        formats: ['es'],
-        fileName: 'index',
-      },
+      // lib: {
+      //   entry: resolve(__dirname, 'src/index.js'),
+      //   name: 'KwLib',
+      //   formats: ['es'],
+      //   fileName: 'index',
+      // },
 
       rollupOptions: {
+        input: {
+          index: resolve(__dirname, 'src/index.js'),
+        },
+        output: {
+          entryFileNames: '[name].js', // 라이브러리 번들 파일 이름
+          chunkFileNames: 'chunks/[name]-[hash].js', // 청크 파일 이름
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          manualChunks(id) {
+            // 이미지 파일을 별도의 청크로 분리
+            if (/\.(png|jpe?g|gif|svg)$/.test(id)) {
+              return 'images';
+            }
+          },
+        },
         // make sure to externalize deps that shouldn't be bundled
         // into your library
         external: [
