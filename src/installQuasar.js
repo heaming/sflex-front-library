@@ -55,6 +55,6 @@ export default (app) => {
     const icon = icons[def] ? `img:${icons[def]}` : 'none';
     console.log(icon);
     // const icon = icons[def] ? `svguse:${icons[def]}#${def}|${viewBox}` : 'none';
-    // return { icon };
+    return { icon };
   };
 };
