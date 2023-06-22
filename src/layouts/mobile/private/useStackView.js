@@ -1,4 +1,5 @@
-import { last, findIndex, map } from 'lodash-es';
+import { last, findIndex, map, cloneDeep } from 'lodash-es';
+import consts from '../../../consts';
 
 export default () => {
   const router = useRouter();
@@ -26,24 +27,48 @@ export default () => {
   const removeAfterEach = router.afterEach((to, from, failure) => {
     if (failure) return;
 
+    const { params } = to;
+    Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
+
     if (isMenu(to)) {
       if (to.meta.pageUseCode === 'N') {
         // if main page then clear all stack
         stackViews.splice(0);
+        add(to);
       } else {
         // clear all stack after current stack
         const key = selectedKey.value;
         const index = findIndex(stackViews, { key });
-        if (index >= 0) stackViews.splice(index);
+        if (index >= 0) {
+          stackViews.splice(index + 1); // 뒤로가기 일 시, 원래 있던 화면을 삭제한다
+          const { componentProps } = stackViews[index];
+          const obj = {
+            ...componentProps, ...params,
+          };
+          stackViews[index].componentProps = cloneDeep(obj);
+        } else add(to); // 새로운 서브페이지 이동 시, 페이지를 stackView에 추가한다
       }
-
-      add(to);
     }
   });
 
   if (isMenu(router.currentRoute.value)) {
     add(router.currentRoute.value);
   }
+
+  router.back = async (params = null) => {
+    const now = stackViews.findIndex((stackView) => stackView.key === selectedKey.value);
+    const target = now < 0 ? consts.ROUTE_HOME_NAME : stackViews[now - 1];
+
+    const param = {
+      closed: true,
+      currTimestamp: new Date().getTime(), // watch로 잡을 때, 값이 변하지 않아 watch 이벤트가 발생하지 않을 수 있는 현상 방지 용도
+      ...params,
+    };
+
+    if (target) {
+      router.push({ name: target.key, state: { stateParam: param } });
+    }
+  };
 
   function throwIfInvalidRoute(to, from) {
     const pageUseIsSub = to.meta.pageUseCode === 'S';
