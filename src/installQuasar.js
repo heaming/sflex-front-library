@@ -20,7 +20,7 @@ function loadIcons() {
 
     const name = matched.pop();
     // icons[name] = imported[key].default;
-    icons[name] = `/src/assets/${name}.svg`;
+    icons[name] = `/assets/${name}.svg`;
 
     return icons;
   }, {});
