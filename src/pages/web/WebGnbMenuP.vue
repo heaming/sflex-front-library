@@ -1,4 +1,11 @@
 <template>
+  <!-- gnbMenuP mouseleave시 꺼지는 동작 추후 추가예정 -->
+  <!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
+  <!-- <div
+    class="gnb_depth_menu"
+    @mouseleave="closeGnb"
+  > -->
+  <!-- eslint-enable vuejs-accessibility/mouse-events-have-key-events -->
   <div
     class="gnb_depth_menu"
   >
@@ -65,6 +72,11 @@ const appMenu = ref({});
 const emit = defineEmits([
   'closeGnbMenu',
 ]);
+
+// GNB - mouseleave 시 꺼지도록
+// function closeGnb() {
+//   emit('closeGnbMenu');
+// }
 
 function createHierarchyData(menus, key) {
   return menus
