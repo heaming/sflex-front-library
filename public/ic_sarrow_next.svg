@@ -1,0 +1,11 @@
+<svg id="arrow_right" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="keyline_24px" data-name="keyline/24px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(-4 0)">
+    <path id="패스_202519" data-name="패스 202519" d="M18280.215-3412.96l-8,8,8,8" transform="translate(18289.215 -3392.96) rotate(180)" fill="none" stroke="#222" stroke-width="1.5"/>
+    <line id="선_3166" data-name="선 3166" y2="16" transform="translate(22.001 20) rotate(180)" fill="none" stroke="#222" stroke-width="1.5"/>
+  </g>
+</svg>

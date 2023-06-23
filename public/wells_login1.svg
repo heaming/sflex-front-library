@@ -1,0 +1,12 @@
+<svg id="wells_login1" data-name="login_partner_01(36)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path data-name="36x36" style="fill:none" d="M0 0h36v36H0z"/>
+    <g data-name="그룹 153036">
+        <path data-name="패스 210465" d="M10.946 0a10.923 10.923 0 0 1 10.945 10.9v11.847H0V10.9A10.923 10.923 0 0 1 10.946 0z" transform="translate(4 6)" style="fill:#3890f6"/>
+        <path data-name="패스 210459" d="M-3 0h13.891L8.36 6H-.469z" transform="translate(11 4)" style="fill:#3890f6"/>
+        <path data-name="패스 210460" d="M.336-6.546v.978H1.6l.978 4.235h1.39l1.079-4.234H6.18l1.056 4.235h1.4L9.6-5.567h1.223v-.978H9.81l.824-3.6H9.36l-.772 3.6H7.159l-.9-3.6H5.1l-.927 3.6H2.756L2-10.15H.542l.824 3.6zm3.051 2.974-.425-2h.965l-.5 2zm4.518 0-.5-2h.965l-.425 2zm-2.3-4.2h.035l.309 1.223h-.657z" transform="translate(9.664 23.15)" style="fill:#fff"/>
+    </g>
+    <g transform="translate(-64 8)">
+        <circle data-name="타원 5243" cx="7" cy="7" r="7" transform="translate(81 8.284)" style="fill:#ff8f1f"/>
+        <rect data-name="사각형 151709" width="3" height="8" rx="1.5" transform="rotate(-45 69.765 -98.382)" style="fill:#ff8f1f"/>
+    </g>
+</svg>

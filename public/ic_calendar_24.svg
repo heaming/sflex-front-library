@@ -1,0 +1,26 @@
+<svg id="calendar" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="keyline_24px" data-name="keyline/24px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(3.953 4)">
+    <g id="사각형_151162" data-name="사각형 151162" transform="translate(-1.953 1)" fill="none" stroke="#222" stroke-width="1.5">
+      <rect width="20" height="16" stroke="none"/>
+      <rect x="0.75" y="0.75" width="18.5" height="14.5" fill="none"/>
+    </g>
+    <rect id="사각형_151176" data-name="사각형 151176" width="17" height="1.5" transform="translate(-1.953 5)" fill="#222"/>
+    <g id="그룹_147437" data-name="그룹 147437" transform="translate(0 -0.016)">
+      <path id="패스_210107" data-name="패스 210107" d="M0,0H1.5V3H0Z" transform="translate(3.047 -0.984)" fill="#222"/>
+      <rect id="사각형_151178" data-name="사각형 151178" width="1.5" height="3" transform="translate(11.547 -0.984)" fill="#222"/>
+    </g>
+    <g id="그룹_147438" data-name="그룹 147438" transform="translate(2)">
+      <rect id="사각형_151179" data-name="사각형 151179" width="2" height="2" transform="translate(1.045 8)" fill="#222"/>
+      <rect id="사각형_151481" data-name="사각형 151481" width="2" height="2" transform="translate(1.045 12)" fill="#222"/>
+      <rect id="사각형_151477" data-name="사각형 151477" width="2" height="2" transform="translate(5.045 8)" fill="#222"/>
+      <rect id="사각형_151480" data-name="사각형 151480" width="2" height="2" transform="translate(5.045 12)" fill="#222"/>
+      <rect id="사각형_151478" data-name="사각형 151478" width="2" height="2" transform="translate(9.045 8)" fill="#222"/>
+      <rect id="사각형_151479" data-name="사각형 151479" width="2" height="2" transform="translate(9.045 12)" fill="#222"/>
+    </g>
+  </g>
+</svg>
