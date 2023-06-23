@@ -1,9 +1,0 @@
-<svg data-name="clock(h16)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-    <g data-name="info_default(h16)">
-        <g data-name="타원 5062" style="stroke:#222;stroke-width:1.5px;fill:none">
-            <circle cx="8" cy="8" r="8" style="stroke:none"/>
-            <circle cx="8" cy="8" r="7.25" style="fill:none"/>
-        </g>
-    </g>
-    <path data-name="패스 210112" d="m5.166 6.6 2.941 3.517 3.253-2.73" transform="rotate(40 10.463 8.7)" style="stroke:#222;stroke-width:1.5px;fill:none"/>
-</svg>
