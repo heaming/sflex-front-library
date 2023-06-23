@@ -72,7 +72,7 @@
           >
             <div class="ellipsis shrink">
               <span class="kw-file__header-total">
-                {{ `${$t('MSG_TXT_COM_TOT', null, 'Total')} ` }}
+                {{ 'Total ' }}
                 <b>{{ `${files.length}` }}</b>
               </span>
               <span class="kw-file__header-selected">

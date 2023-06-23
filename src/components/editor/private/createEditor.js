@@ -23,7 +23,7 @@ const { create } = SunEditor.init({
   maxHeight: null,
   minWidth: null,
   maxWidth: null,
-  popupDisplay: 'full', // 이미지 삽입과 같은 내부 popup 의 position
+  popupDisplay: 'local', // 이미지 삽입과 같은 내부 popup 의 position
   // endregion
 
   // region [Layout]
@@ -45,16 +45,17 @@ const { create } = SunEditor.init({
   buttonList: [
     // ['undo', 'redo'],
     ['font', 'fontSize'],
-    ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+    ['bold', 'underline', 'italic', 'strike'],
+    // ['subscript', 'superscript'],
     ['fontColor', 'hiliteColor'], // , 'textStyle'
     // ['removeFormat'],
     // '/', // Line break
-    ['outdent', 'indent'],
+    // ['outdent', 'indent'],
     ['align', 'list', 'lineHeight'],
     // ['table', 'link', 'image', 'video'],
     ['table', 'image', 'link'],
-    ['fullScreen', 'showBlocks', 'codeView'],
-    // ['preview', 'print'],
+    // ['fullScreen', 'showBlocks'],
+    ['codeView', 'preview', 'print'],
     // ['save', 'template'],
   ],
   // endregion
