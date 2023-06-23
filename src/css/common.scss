@@ -1310,6 +1310,7 @@ body.mobile {
 .blue-line-link {
   color: $primary;
   text-decoration: underline;
+  text-underline-position: from-font;
 
   &:visited,
   &:hover,
