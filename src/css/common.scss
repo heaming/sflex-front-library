@@ -1310,6 +1310,7 @@ body.mobile {
 .blue-line-link {
   color: $primary;
   text-decoration: underline;
+  text-underline-position: from-font;
 
   &:visited,
   &:hover,
@@ -1323,25 +1324,45 @@ body.mobile {
 .equal_division {
   &--2 {
     label {
-      width: calc(50% - 8px);
+      width: calc((100% - 8px) / 2);
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
   &--3 {
     label {
-      width: calc(33.33% - 8px);
+      width: calc((100% - 16px) / 3);
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
   &--4 {
     label {
-      width: calc(25% - 8px);
+      width: calc((100% - 24px) / 4);
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
   &--5 {
     label {
-      width: calc(20% - 8px);
+      width: calc((100% - 32px) / 5);
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
