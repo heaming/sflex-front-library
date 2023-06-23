@@ -1,0 +1,7 @@
+<svg data-name="bookmark_default(h16)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path d="M0 0h16v16H0z" style="fill:none" data-name="keyline/16px"/>
+    <g data-name="패스 210110" style="fill:none">
+        <path d="m7 0 2.345 4.345 4.655 1-3.206 3.69.532 4.965L7 11.934 2.674 14l.532-4.965L0 5.348l4.655-1z" style="stroke:none" transform="translate(1 1)"/>
+        <path d="M7 3.158 5.647 5.666l-2.85.614 1.97 2.265-.316 2.944L7 10.272l2.549 1.217-.316-2.944 1.97-2.265-2.85-.614L7 3.158M7 0l2.345 4.345L14 5.348l-3.206 3.687.532 4.965L7 11.934 2.674 14l.532-4.965L0 5.348l4.655-1.003L7 0z" style="fill:#222;stroke:none" transform="translate(1 1)"/>
+    </g>
+</svg>
