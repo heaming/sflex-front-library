@@ -23,7 +23,7 @@ const { create } = SunEditor.init({
   maxHeight: null,
   minWidth: null,
   maxWidth: null,
-  popupDisplay: 'local', // 이미지 삽입과 같은 내부 popup 의 position
+  popupDisplay: 'full', // 이미지 삽입과 같은 내부 popup 의 position
   // endregion
 
   // region [Layout]
