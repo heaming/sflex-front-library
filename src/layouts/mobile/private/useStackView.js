@@ -17,7 +17,7 @@ export default () => {
     const index = stackViews.push({
       key: to.name,
       component: last(to.matched).components.default,
-      componentProps: params,
+      componentProps: { ...params, isBackPage: false },
     });
 
     return stackViews[index - 1];
@@ -42,9 +42,10 @@ export default () => {
         if (index >= 0) {
           stackViews.splice(index + 1); // 뒤로가기 일 시, 원래 있던 화면을 삭제한다
           const { componentProps } = stackViews[index];
-          const obj = {
-            ...componentProps, ...params,
-          };
+          let obj;
+          if (componentProps.isBackPage) obj = { ...params, ...componentProps, isBackPage: false };
+          else obj = { ...componentProps, ...params, isBackPage: false };
+
           stackViews[index].componentProps = cloneDeep(obj);
         } else add(to); // 새로운 서브페이지 이동 시, 페이지를 stackView에 추가한다
       }
@@ -55,18 +56,24 @@ export default () => {
     add(router.currentRoute.value);
   }
 
-  router.back = async (params = null) => {
+  router.close = async (params = null) => {
     const now = stackViews.findIndex((stackView) => stackView.key === selectedKey.value);
     const target = now < 0 ? consts.ROUTE_HOME_NAME : stackViews[now - 1];
 
     const param = {
       closed: true,
       currTimestamp: new Date().getTime(), // watch로 잡을 때, 값이 변하지 않아 watch 이벤트가 발생하지 않을 수 있는 현상 방지 용도
+      isBackPage: true,
       ...params,
     };
 
     if (target) {
-      router.push({ name: target.key, state: { stateParam: param } });
+      const { componentProps } = target;
+      const obj = {
+        ...componentProps, ...param,
+      };
+      target.componentProps = cloneDeep(obj);
+      router.go(-1);
     }
   };
 

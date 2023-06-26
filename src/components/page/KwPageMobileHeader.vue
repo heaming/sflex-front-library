@@ -5,7 +5,7 @@
       class="kw-page-mobile-header__back-btn"
       icon="arrow_left_24"
       borderless
-      @click="$router.back()"
+      @click="$router.close()"
     />
     <h1 class="kw-page-mobile-header__title">
       <template v-if="pageTitle">
