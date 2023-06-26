@@ -45,16 +45,17 @@ const { create } = SunEditor.init({
   buttonList: [
     // ['undo', 'redo'],
     ['font', 'fontSize'],
-    ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+    ['bold', 'underline', 'italic', 'strike'],
+    // ['subscript', 'superscript'],
     ['fontColor', 'hiliteColor'], // , 'textStyle'
     // ['removeFormat'],
     // '/', // Line break
-    ['outdent', 'indent'],
+    // ['outdent', 'indent'],
     ['align', 'list', 'lineHeight'],
     // ['table', 'link', 'image', 'video'],
     ['table', 'image', 'link'],
-    ['fullScreen', 'showBlocks', 'codeView'],
-    // ['preview', 'print'],
+    // ['fullScreen', 'showBlocks'],
+    ['codeView', 'preview', 'print'],
     // ['save', 'template'],
   ],
   // endregion
