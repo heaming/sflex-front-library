@@ -2,6 +2,7 @@
   <q-input
     ref="inputRef"
     v-model="inputValue"
+    v-scroll="onScroll"
     :prefix="inputPrefix"
     v-bind="fieldStyleProps"
     :class="fieldClasses"

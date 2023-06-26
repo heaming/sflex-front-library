@@ -1,7 +1,7 @@
 <template>
   <div
     class="kw-scroll-picker"
-    @wheel.passive="onWheel"
+    @wheel="onWheel"
   >
     <q-list
       class="kw-scroll-picker__options"
