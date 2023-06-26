@@ -3,7 +3,7 @@ dist
 .vite
 *.local
 yarn.lock
-
+test/*
 # Logs
 logs
 *.log

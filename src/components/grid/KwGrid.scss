@@ -589,6 +589,16 @@
   border: 0;
   border-top: 1px solid $black1;
 
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #eee;
+  }
+
   * {
     font-family: "Noto Sans KR", sans-serif;
     font-size: 14px;
