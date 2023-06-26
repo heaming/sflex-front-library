@@ -2,6 +2,7 @@
   <q-input
     ref="inputRef"
     v-model="inputValue"
+    v-scroll="onScroll"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-field kw-date-picker"
     :class="datePickerClass"
@@ -336,6 +337,10 @@ export default {
       inputRef.value?.focus();
     }
 
+    function onScroll() {
+      isExpanded.value = false;
+    }
+
     return {
       ...useInheritAttrs(),
       ...useFieldStyle(),
@@ -356,6 +361,7 @@ export default {
       showingHint,
       toggleHint,
       sanitize,
+      onScroll,
     };
   },
 };
