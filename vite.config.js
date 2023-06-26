@@ -73,9 +73,6 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        output: {
-          assetFileNames: () => 'assets/[name][extname]',
-        },
         external: [
           '@vee-validate',
           '@videojs-player/vue',
