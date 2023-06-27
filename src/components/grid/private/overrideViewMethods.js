@@ -256,7 +256,7 @@ function setColumnEditor(column, { dataType }) {
     case 'file':
       defaultsDeep(column, {
         editable: false,
-        objectCallback: () => '',
+        objectCallback: (fieldName, dataRow, value) => value.__numberOfFiles ?? '',
       });
       break;
     case 'number':

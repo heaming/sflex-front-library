@@ -209,6 +209,7 @@ export function objectValueCallback(ds, values) {
         objData[fieldData.objectKey] = null;
         objData.__atthDocumentId = values[fName];
         objData.__isModified = false;
+        objData.__numberOfFiles = values.numberOfFiles;
         row[i] = objData;
       } else if (values[fName] || fieldData?.dataType === 'number') {
         row[i] = values[fName];
