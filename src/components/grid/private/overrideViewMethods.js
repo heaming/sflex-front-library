@@ -151,7 +151,22 @@ function setColumnRenderer(column, { dataType }) {
     const styleNames = column.styleName.split(' ');
     styleNames.push('rg-file-button');
     column.styleName = styleNames.join(' ');
-    column.renderer = { type: 'button', hideWhenEmpty: false };
+    column.renderer = {
+      type: 'html',
+      hideWhenEmpty: false,
+      callback: (grid, cell) => {
+        const value = cell?.value?.__numberOfFiles;
+        let res = '<div class="rg-html-renderer">'
+        + '<button type="button" tabindex="-1" class="rg-button-renderer-button">';
+        const badge = '<div class="q-badge flex inline items-center no-wrap q-badge--single-line bg-primary'
+        + 'q-badge--floating q-badge--rounded alert-badge grid-badge" role="status" aria-label="2">'
+        + `${value}</div>`;
+        if (value && value !== '0') res += badge;
+        res += '</button></div>';
+
+        return res;
+      },
+    };
   }
 
   defaultsDeep(column, {
