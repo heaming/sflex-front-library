@@ -200,6 +200,10 @@ export default () => {
     removeClickOutside(clickOutsideProps);
   });
 
+  function onScroll() {
+    isExpanded.value = false;
+  }
+
   return {
     showing,
     fieldClasses,
@@ -216,7 +220,7 @@ export default () => {
     onChangeInput,
     onChangeTime,
     onConfirm,
-
+    onScroll,
     showingHint,
     toggleHint,
   };

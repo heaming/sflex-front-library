@@ -2,6 +2,7 @@
 <template>
   <q-select
     ref="inputRef"
+    v-scroll="onScroll"
     :model-value="computedValue"
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-select"
@@ -150,7 +151,6 @@
       </q-item>
       <q-separator v-if="opt[optionSeparator]" />
     </template>
-
     <!-- after-options -->
     <template
       v-if="$g.platform.is.mobile && multiple"
@@ -365,7 +365,9 @@ export default {
         inputRef.value.hidePopup();
       }
     }
-
+    function onScroll() {
+      inputRef.value.hidePopup();
+    }
     return {
       ...useInheritAttrs(),
       ...useFieldStyle(),
@@ -386,6 +388,7 @@ export default {
       toggleHint,
       handlePan,
       sanitize,
+      onScroll,
     };
   },
 };
