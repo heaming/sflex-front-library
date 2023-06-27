@@ -123,6 +123,14 @@ body.desktop {
           padding: 6px 0;
           gap: 20px;
 
+          &:first-child {
+            padding-top: 0;
+          }
+
+          &:last-child {
+            padding-bottom: 0;
+          }
+
           .kw-form-item {
             min-height: 32px;
 
@@ -166,6 +174,14 @@ body.desktop {
           gap: 20px;
           padding: 1px 0;
           min-height: 24px !important;
+
+          &:first-child {
+            padding-top: 0;
+          }
+
+          &:last-child {
+            padding-bottom: 0;
+          }
 
           &--cols-3 {
             .kw-form-item {
