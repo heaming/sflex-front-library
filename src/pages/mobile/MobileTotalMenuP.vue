@@ -26,7 +26,7 @@
               v-if="alarms?.length > 0"
               rounded
               floating
-              color="primary"
+              color="error"
               :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
               class="alert-badge"
             />
