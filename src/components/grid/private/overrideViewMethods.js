@@ -158,7 +158,7 @@ function setColumnRenderer(column, { dataType }) {
         const value = cell?.value?.__numberOfFiles;
         let res = '<div class="rg-html-renderer">'
         + '<button type="button" tabindex="-1" class="rg-button-renderer-button">';
-        const badge = '<div class="q-badge flex inline items-center no-wrap q-badge--single-line bg-primary'
+        const badge = '<div class="q-badge flex inline items-center no-wrap q-badge--single-line'
         + 'q-badge--floating q-badge--rounded alert-badge grid-badge" role="status" aria-label="2">'
         + `${value}</div>`;
         if (value && value !== '0') res += badge;
