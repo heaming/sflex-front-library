@@ -278,6 +278,15 @@
                 />
               </kw-form-item>
             </kw-form-row>
+            <kw-form-row>
+              <kw-form-item label="search(readonly)">
+                <kw-input readonly />
+                <kw-btn
+                  secondary
+                  icon="search"
+                />
+              </kw-form-item>
+            </kw-form-row>
           </kw-form>
         </div>
         <guide-code-view
@@ -552,6 +561,12 @@ const searchInput = `
   icon="search"
   clearable
 />
+<!-- readonly일 경우  -->
+<kw-input />
+  <kw-btn
+    secondary
+    icon="search"
+  />
 `;
 
 const textarea = `
@@ -617,6 +632,10 @@ const nolabelCode = `
 `;
 
 const guideHistory = [
+  {
+    timestamp: '2023.06.28',
+    text: 'search input의 Readonly 일 경우 추가',
+  },
   {
     timestamp: '2023.01.02',
     text: 'no more use div.row.items-center for hypen type',
