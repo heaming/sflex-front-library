@@ -53,7 +53,7 @@ export default () => {
     if (idx) {
       const el = window.$(`.drawer-menu__tree .q-tree__node--parent:nth-child(${idx})`);
       const scrollEl = window.$('.kw-scroll-area__client .q-scrollarea__container');
-      scrollEl[0]?.scrollTo({ top: el[0]?.offsetTop });
+      scrollEl[0]?.scrollTo({ top: el[0]?.offsetTop, behavior: 'smooth' });
     }
   }
 
