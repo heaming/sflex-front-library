@@ -199,6 +199,7 @@ const iconList2 = [
   'warning_24',
   'write_24',
   'qrcode_24',
+  'support_24',
 ];
 
 const visuals = [
