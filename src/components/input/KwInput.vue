@@ -248,7 +248,7 @@ export default {
 
     const inputCounter = computed(() => {
       if (props.counter === true && props.maxlength > 0) {
-        return `${getNumberWithComma(getByte(value.value ?? ''))} / ${getNumberWithComma(props.maxlength)}`;
+        return `${getNumberWithComma(getByte(value.value ?? ''))} / ${getNumberWithComma(props.maxlength)}Byte`;
       }
     });
 
