@@ -35,6 +35,38 @@
             />
           </kw-btn>
           <!-- 아이콘명은 그대로 두고 알림이 있을 시 클래스 : alert_on, 없을 시 클래스 : alert_off -->
+          <kw-btn
+            borderless
+            class="report-icon ml20"
+            style="font-size: 24px;"
+            icon="support_24"
+            clickable
+          />
+          <kw-menu
+            ref="supportRef"
+            class="mb10 w154 py8 px16"
+            anchor="bottom middle"
+            self="top middle"
+            target=".report-icon"
+            :offset="[30, 5]"
+          >
+            <kw-btn
+              v-close-popup
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+              borderless
+              grow
+              :label="$t('MSG_TIT_NOTICE')"
+              @click="goToNoticePage"
+            />
+            <kw-btn
+              v-close-popup
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+              borderless
+              grow
+              label="FAQ"
+              @click="goToFaqPage"
+            />
+          </kw-menu>
           <span>
             <kw-btn
               borderless
@@ -393,6 +425,14 @@ async function openAlarmListPopup() {
   await modal({
     component: () => import('./TabletAlarmListP.vue'),
   });
+}
+
+function goToNoticePage() {
+  router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
+}
+
+function goToFaqPage() {
+  router.push({ name: 'MNU-0A1047EE-4E13-8EFC-F434-68E24FE2CEDD' });
 }
 
 onMounted(() => {
