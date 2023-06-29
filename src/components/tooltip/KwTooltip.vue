@@ -15,6 +15,7 @@
     :offset="offset"
     :transition-duration="0"
     @update:model-value="onUpdateValue"
+    @before-show="$emit('beforeShow', $event)"
   >
     <slot />
   </q-tooltip>
@@ -47,6 +48,7 @@ export default {
 
   emits: [
     'update:modelValue',
+    'beforeShow',
   ],
 
   setup(props, { emit }) {

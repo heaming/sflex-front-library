@@ -33,10 +33,17 @@
           </kw-btn>
           <kw-btn
             borderless
+            icon="support_24"
+            style="font-size: 24px;"
+            class="ml20"
+            @click="openSupportBottomSheet"
+          />
+          <kw-btn
+            borderless
             icon="setting_24"
             style="font-size: 24px;"
             class="ml20"
-            @click="openBottomSheet"
+            @click="openUserInfoBottomSheet"
           />
         </div>
       </div>
@@ -149,6 +156,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
 const { logout } = useSession();
+const { t } = useI18n();
 
 const apps = readonly(getters['meta/getApps']);
 const router = useRouter();
@@ -338,8 +346,26 @@ async function openSessionSettingP() {
   });
 }
 
-async function openBottomSheet() {
+async function openSupportBottomSheet() {
   const res = await bottomSheet({
+    title: '업무지원',
+    items: [
+      { value: 'notice', label: t('MSG_TIT_NOTICE') },
+      { value: 'faq', label: 'FAQ' },
+    ],
+  });
+  if (res?.result) {
+    switch (res.payload?.value) {
+      case 'notice': router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
+        break;
+      case 'faq': router.push({ name: 'MNU-0A1047EE-4E13-8EFC-F434-68E24FE2CEDD' });
+    }
+  }
+}
+
+async function openUserInfoBottomSheet() {
+  const res = await bottomSheet({
+    title: '개인설정',
     items: [
       { value: 'changePassword', label: '비밀번호 변경' },
       { value: 'homeSetting', label: '개인 홈 설정' },
