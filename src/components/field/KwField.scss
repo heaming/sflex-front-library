@@ -738,5 +738,10 @@ body.mobile:not(.tablet) {
         }
       }
     }
+
+    &.kw-date-range-picker .kw-field-wrap__label span {
+      padding: 0;
+      color: $black2;
+    }
   }
 }
