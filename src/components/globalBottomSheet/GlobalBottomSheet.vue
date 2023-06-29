@@ -17,7 +17,7 @@
       <q-card-section class="global-bottom-sheet__header">
         <!-- 제목 영역 -->
         <h1>
-          제목
+          {{ title }}
         </h1>
         <kw-icon
           class="global-bottom-sheet__close-btn"
@@ -74,6 +74,7 @@ export default {
     const dialogs = shallowRef([]);
     const activeDialog = computed(() => dialogs.value[0]);
     const items = computed(() => dialogs.value[0]?.items);
+    const title = computed(() => dialogs.value[0]?.title);
     const isActive = computed(() => dialogs.value.length > 0);
     watch(isActive, async (val) => {
       if (val) {
@@ -104,6 +105,7 @@ export default {
       isActive,
       onClick,
       items,
+      title,
     };
   },
 };
