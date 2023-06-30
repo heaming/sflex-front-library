@@ -105,6 +105,17 @@ export async function download(fileInfo, targetPath = targetPaths[0]) {
   downloadBlob(response.data, params.originalFileName);
 }
 
+export async function downloadAll(files, targetPath = targetPaths[0]) {
+  throwIfIsInvalidTargetPath(targetPath);
+  const attachFiles = files.map((file) => normalizeDownloadRequest(file.serverFile));
+  const response = await http.post(`/sflex/common/common/file/${targetPath}/download-all`, attachFiles, {
+    responseType: 'blob',
+  });
+
+  const fileName = `${attachFiles[0].originalFileName}.zip`;
+  downloadBlob(response.data, fileName);
+}
+
 export async function readExcel(file, columns = [], header = 1) {
   const [, extension] = file.name.match(/\.(\w+)$/) || [];
 
