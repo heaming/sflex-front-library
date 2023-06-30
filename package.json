@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.760",
+  "version": "0.1.762",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build-dev": "npm run -w dev build",
-    "build-lib": "vite build",
+    "build-lib": "vite build --logLevel=error",
     "lint": "eslint --ext .js,.jsx,.vue . --fix && stylelint **/*.{css,scss,vue} --fix",
     "lint-staged": "lint-staged",
     "mtest": "npm run -w mtest serve -- --host",
