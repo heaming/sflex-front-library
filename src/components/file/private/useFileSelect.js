@@ -1,6 +1,7 @@
 import { intersection } from 'lodash-es';
 import { generateFileLikeKey } from './useFileUpload';
 import { notify } from '../../../plugins/notify';
+import { downloadAll } from '../../../utils/file';
 
 export const useFileSelectProps = {
   selectable: { type: Boolean, default: undefined },
@@ -49,9 +50,11 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
   const downloadSelected = () => {
     if (empty.value) {
       notify(t('MSG_ALT_NOT_SELECTED_FILE', '선택된 파일이 없습니다.'));
+      return;
     }
     if (!ables.value?.download) { return; }
-    selectedFiles.value.forEach(downloadFile);
+    if (selectedFiles.value.length <= 1) selectedFiles.value.forEach(downloadFile);
+    else downloadAll(selectedFiles.value);
     clearSelected();
   };
 
@@ -88,7 +91,8 @@ export default ({ files, updateFile, downloadFile, revertFile, removeFile, undel
     else selectedFileKeys.value.push(fileKey);
   }
 
-  const computedSelectable = computed(() => props.selectable ?? (props.multiple && ables.value.add));
+  const computedSelectable = computed(() => props.selectable
+    ?? (props.multiple && (ables.value.remove || ables.value.download)));
 
   return {
     computedSelectable,
