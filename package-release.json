@@ -1,0 +1,125 @@
+{
+  "name": "kw-lib",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "main": "dist/index.es.js",
+  "types": "types/index.d.ts",
+  "workspaces": [
+    "dev",
+    "test",
+    "mtest"
+  ],
+  "scripts": {
+    "build-dev": "npm run -w dev build",
+    "build-lib": "vite build --logLevel=error",
+    "lint": "eslint --ext .js,.jsx,.vue . --fix && stylelint **/*.{css,scss,vue} --fix",
+    "lint-staged": "lint-staged",
+    "mtest": "npm run -w mtest serve -- --host",
+    "prepare": "husky install",
+    "prettier": "prettier --write **/*.ts **/*.html",
+    "preview": "npm run -w dev preview",
+    "serve": "npm run -w dev serve -- --host",
+    "sort-package-json": "sort-package-json package.json dev/package.json",
+    "test": "npm run -w test serve -- --host"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,scss,vue}": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.{ts,tsx,html}": [
+      "prettier --write",
+      "git add"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@babel/core": "7.19.3",
+    "@babel/eslint-parser": "7.19.1",
+    "@babel/preset-env": "7.19.4",
+    "@intlify/vite-plugin-vue-i18n": "3.4.0",
+    "@quasar/vite-plugin": "1.2.3",
+    "@types/lodash-es": "4.17.6",
+    "@types/node": "18.11.12",
+    "@vee-validate/rules": "4.7.0",
+    "@videojs-player/vue": "1.0.0",
+    "@vitejs/plugin-vue": "2.3.4",
+    "axios": "0.27.2",
+    "axios-jsonp": "1.0.4",
+    "bootstrap-datepicker": "1.9.0",
+    "chart.js": "3.9.1",
+    "chartjs-plugin-datalabels": "2.1.0",
+    "crypto-js": "4.1.1",
+    "dayjs": "1.11.5",
+    "dompurify": "2.4.0",
+    "eslint": "8.25.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-import-resolver-node": "0.3.6",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-vue": "8.7.1",
+    "eslint-plugin-vuejs-accessibility": "1.2.0",
+    "fast-deep-equal": "3.1.3",
+    "fast-glob": "3.2.12",
+    "gsap": "3.11.4",
+    "html2pdf.js": "0.9.3",
+    "jquery": "3.6.1",
+    "jszip": "3.10.1",
+    "klona": "2.0.5",
+    "lodash": "4.17.21",
+    "lodash-es": "4.17.21",
+    "postcss-html": "1.5.0",
+    "qs": "6.11.0",
+    "quasar": "2.10.2",
+    "realgrid": "2.6.1",
+    "rollup-plugin-visualizer": "5.8.2",
+    "sass": "1.32.0",
+    "shelljs": "0.8.5",
+    "sortablejs": "1.15.0",
+    "stylelint": "14.13.0",
+    "stylelint-config-standard": "25.0.0",
+    "stylelint-config-standard-scss": "3.0.0",
+    "stylelint-order": "5.0.0",
+    "suneditor": "2.44.10",
+    "unplugin-auto-import": "0.8.8",
+    "v-drag": "3.0.9",
+    "v-network-graph": "0.9.1",
+    "v3-infinite-loading": "1.2.2",
+    "vee-validate": "4.7.0",
+    "video.js": "7.20.3",
+    "videojs-landscape-fullscreen": "11.1111.0",
+    "viewerjs": "1.11.3",
+    "vite": "2.9.15",
+    "vite-plugin-eslint": "1.8.1",
+    "vite-plugin-html-template": "1.1.5",
+    "vite-plugin-mock": "2.9.8",
+    "vite-plugin-mpa": "1.1.4",
+    "vite-svg-loader": "4.0.0",
+    "vue": "3.2.47",
+    "vue-chartjs": "4.1.2",
+    "vue-highlight-code": "0.1.16",
+    "vue-i18n": "9.2.2",
+    "vue-router": "4.1.5",
+    "vuex": "4.0.2"
+  },
+  "devDependencies": {
+    "highlight.js": "11.6.0",
+    "husky": "8.0.1",
+    "lint-staged": "12.5.0",
+    "prettier": "2.7.1",
+    "sort-package-json": "1.57.0"
+  },
+  "peerDependencies": {
+    "quasar": "2.10.2"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.kyowon.co.kr/repository/npm-hosted-sflex-releases/"
+  }
+}
