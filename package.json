@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build-dev": "npm run -w dev build",
-    "build-lib": "vite build",
+    "build-lib": "vite build --logLevel=error",
     "lint": "eslint --ext .js,.jsx,.vue . --fix && stylelint **/*.{css,scss,vue} --fix",
     "lint-staged": "lint-staged",
     "mtest": "npm run -w mtest serve -- --host",
