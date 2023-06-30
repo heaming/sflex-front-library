@@ -113,9 +113,18 @@
               </kw-list>
             </div>
           </kw-menu>
-          <kw-tooltip v-else>
-            알림이 없습니다.
-          </kw-tooltip>
+          <kw-menu
+            v-else
+            class="w400 h344"
+          >
+            <div
+              class="row items-center justify-center full-height"
+            >
+              <p class="kw-fc--black3 kw-font-pt14">
+                신규 알림메세지가 없습니다.
+              </p>
+            </div>
+          </kw-menu>
         </div>
         <div>
           <kw-icon
