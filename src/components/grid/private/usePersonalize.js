@@ -33,10 +33,11 @@ export default () => {
       view.__ignoreOnColumnPropertyChanged__ = true;
 
       try {
-        const { layouts, columns } = localStorage.getItem(storageLayoutsKey);
+        const { layouts, columns, fixedOptions } = localStorage.getItem(storageLayoutsKey);
 
         if (layouts) {
           view.setColumnLayout(layouts);
+          view.setFixedOptions(fixedOptions);
 
           columns.forEach((e) => {
             view.setColumnProperty(e.name, 'visible', e.visible === true);

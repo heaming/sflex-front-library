@@ -128,15 +128,81 @@
         </div>
         <div>
           <kw-icon
-            class="web-header__icon"
-            name="setting_24"
+            class="web-header__icon report-icon"
+            name="support_24"
             clickable
           />
           <kw-menu
+            ref="supportRef"
             class="web-header__dropdown"
             anchor="bottom middle"
             self="top middle"
+            target=".report-icon"
+            @before-show="beforeSupportMenuShow"
           >
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              :label="$t('MSG_TIT_NOTICE')"
+              @click="goToNoticePage"
+            />
+            <kw-btn
+              v-if="isEdu"
+              v-close-popup
+              borderless
+              grow
+              :label="$t('MSG_BTN_EDUC_MTR')"
+              @click="goToEduMaterialPage"
+            />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              label="FAQ"
+              @click="goToFaqPage"
+            />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              :label="$t('MSG_BTN_SMS_HIST')"
+              @click="goToSmsSendHistoryPage"
+            />
+          </kw-menu>
+          <kw-tooltip
+            ref="supportTooltipRef"
+            v-model="showSupportTooltip"
+            @before-show="beforeSupportTooltipShow"
+          >
+            업무지원
+          </kw-tooltip>
+        </div>
+        <div
+          class=""
+          style="border-radius: 70%;overflow: hidden;"
+        >
+          <kw-icon
+            class="profile_user"
+            name="profile_none"
+            size="32px"
+            clickable
+          />
+          <kw-menu
+            ref="userInfoMenuRef"
+            class="web-header__dropdown"
+            anchor="bottom middle"
+            self="top middle"
+            target=".profile_user"
+            @before-show="beforeUserInfoMenuShow"
+          >
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              label="사용자정보"
+              @click="openUserInfoPopup"
+            />
             <kw-btn
               v-close-popup
               borderless
@@ -159,17 +225,13 @@
               @click="logout"
             />
           </kw-menu>
-        </div>
-        <div
-          class=""
-          style="border-radius: 70%;overflow: hidden;"
-        >
-          <kw-icon
-            name="profile_none"
-            size="32px"
-            clickable
-            @click="openUserInfoPopup"
-          />
+          <kw-tooltip
+            ref="userInfoTooltipRef"
+            v-model="showUserInfoTooltip"
+            @before-show="beforeUserInfoTooltipShow"
+          >
+            개인설정
+          </kw-tooltip>
         </div>
         <div
           class="web-header__separator"
@@ -195,6 +257,7 @@ import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
 import useAlarm from '../../composables/private/useAlarm';
 import useGlobal from '../../composables/useGlobal';
+import useMeta from '../../composables/useMeta';
 import consts from '../../consts';
 import { modal } from '../../plugins/modal';
 import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
@@ -208,6 +271,12 @@ export default {
   name: 'WebHeader',
   components: { WebTotalMenuP, WebGnbMenuP },
   setup() {
+    const showSupportTooltip = ref(false);
+    const supportRef = ref();
+    const supportTooltipRef = ref();
+    const showUserInfoTooltip = ref(false);
+    const userInfoMenuRef = ref();
+    const userInfoTooltipRef = ref();
     const { push } = useRouter();
     const { logout } = useSession();
     const { notify } = useGlobal();
@@ -216,6 +285,13 @@ export default {
     const { readAlarm } = useAlarm();
     const alarms = computed(() => getters['meta/getAlarms']);
     const menuSearchRef = ref();
+    const router = useRouter();
+
+    const isEdu = computed(() => {
+      const { tenantId } = useMeta().getUserInfo();
+      return tenantId === 'TNT_EDU';
+    });
+
     dayjs.locale('en');
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
@@ -307,6 +383,38 @@ export default {
       getActiveClass();
     });
 
+    function beforeSupportMenuShow() {
+      showSupportTooltip.value = false;
+    }
+
+    function beforeSupportTooltipShow() {
+      if (supportRef.value.showing) showSupportTooltip.value = false;
+    }
+
+    function beforeUserInfoMenuShow() {
+      showUserInfoTooltip.value = false;
+    }
+
+    function beforeUserInfoTooltipShow() {
+      if (userInfoMenuRef.value.showing) showUserInfoTooltip.value = false;
+    }
+
+    function goToNoticePage() {
+      router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
+    }
+
+    function goToEduMaterialPage() {
+      // TODO: 교육자료 페이지 없는듯
+      // router.push({name: ''})
+    }
+
+    function goToFaqPage() {
+      router.push({ name: 'MNU-0A1047EE-4E13-8EFC-F434-68E24FE2CEDD' });
+    }
+
+    function goToSmsSendHistoryPage() {
+      router.push({ name: 'MNU-7C508A53-7E5D-416B-8C38-148AE2B9835E' });
+    }
     return {
       ...useHeaderApp(),
       logout,
@@ -328,6 +436,21 @@ export default {
       dayjs,
       alarms,
       menuSearchRef,
+      showSupportTooltip,
+      supportRef,
+      supportTooltipRef,
+      beforeSupportMenuShow,
+      beforeSupportTooltipShow,
+      showUserInfoTooltip,
+      userInfoMenuRef,
+      userInfoTooltipRef,
+      beforeUserInfoMenuShow,
+      beforeUserInfoTooltipShow,
+      isEdu,
+      goToNoticePage,
+      goToEduMaterialPage,
+      goToFaqPage,
+      goToSmsSendHistoryPage,
     };
   },
 };

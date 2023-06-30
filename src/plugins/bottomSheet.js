@@ -3,6 +3,7 @@ import { addGlobalData } from '../utils/private/globalData';
 import { defineGetters } from '../utils/private/globalProperty';
 
 const normalizeOptions = (options = {}) => ({
+  title: options.title,
   items: options.items,
   refocus: options.refocus !== false,
 });
