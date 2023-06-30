@@ -61,6 +61,13 @@
           </kw-list>
         </kw-menu>
       </kw-item>
+      <kw-item clickable>
+        <kw-item-section>
+          <div @click="onClickFixGrid">
+            {{ isFixed() }}
+          </div>
+        </kw-item-section>
+      </kw-item>
       <kw-item
         v-if="canPersonalize"
         clickable
@@ -124,6 +131,22 @@ export default {
 
     let view;
 
+    const displayIndex = computed(() => {
+      if (view) {
+        const { column } = view.__contextMenuClickData__ || view.getCurrent();
+        return view.getColumns().find((col) => col.fieldName === column || col.name === column)?.displayIndex;
+      }
+      return 0;
+    });
+
+    function isFixed() {
+      if (view) {
+        const { colCount } = view.getFixedOptions();
+        return colCount === 0 ? '틀 고정' : '틀 고정 해제';
+      }
+      return '틀 고정';
+    }
+
     function setView(_view) {
       isReady.value = true;
       view = _view;
@@ -179,7 +202,8 @@ export default {
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
       const gridName = view.__gridName__;
       const layouts = view.saveColumnLayout();
-      const viewOptions = view.header.visible ? recursiveCreateViewOptions(layouts) : [];
+      const { colCount } = view.getFixedOptions();
+      const viewOptions = view.header.visible ? recursiveCreateViewOptions(layouts.slice(colCount)) : [];
       storageKey = createUniqueId(gridName); // use name props in useObserverChildProps
       storageLayoutsKey = `${storageKey}__layouts`;
 
@@ -191,7 +215,6 @@ export default {
 
     function beforeShow() {
       if (view.isEditing()) view.commit();
-      console.log(view);
       canPersonalize.value = !!view.__gridName__;
       updateContextConfig();
       addClickOutside(clickOutsideProps);
@@ -225,24 +248,29 @@ export default {
     }
 
     function onClickSaveLayouts() {
-      console.log(storageLayoutsKey);
       if (view) {
         const layouts = view.saveColumnLayout();
         const columns = view.getColumns().map((e) => pick(e, ['name', 'visible']));
-        localStorage.set(storageLayoutsKey, { layouts, columns });
+        const fixedOptions = view.getFixedOptions();
+        localStorage.set(storageLayoutsKey, { layouts, columns, fixedOptions });
         notify('개인화 저장이 완료되었습니다.');
         menuRefs.value[0]?.hide();
       }
     }
 
     function onClickInitLayouts() {
-      console.log(storageLayoutsKey);
       if (view) {
         initLayouts();
         localStorage.remove(storageLayoutsKey);
         notify('개인화가 초기화되었습니다.');
         menuRefs.value[0]?.hide();
       }
+    }
+
+    function onClickFixGrid() {
+      const { colCount } = view.getFixedOptions();
+      view.setFixedOptions({ colCount: colCount !== 0 ? 0 : displayIndex.value + 1, resizable: true });
+      menuRefs.value[0]?.hide();
     }
 
     return {
@@ -257,6 +285,9 @@ export default {
       onClickInitLayouts,
       initLayouts,
       canPersonalize,
+      displayIndex,
+      onClickFixGrid,
+      isFixed,
     };
   },
 };
