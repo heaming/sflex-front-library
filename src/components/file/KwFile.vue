@@ -708,7 +708,6 @@ export default {
         preview: props.previewable,
       };
     });
-
     const uploadOptions = computed(() => ({
       instanceUpdate: props.instanceUpdate,
       upload: props.upload,
