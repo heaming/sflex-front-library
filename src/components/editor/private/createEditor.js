@@ -44,7 +44,8 @@ const { create } = SunEditor.init({
   mode: 'classic', // classic, inline, balloon, balloon-always
   buttonList: [
     // ['undo', 'redo'],
-    ['font', 'fontSize'],
+    // ['font', 'fontSize'],
+    ['fontSize'],
     ['bold', 'underline', 'italic', 'strike'],
     // ['subscript', 'superscript'],
     ['fontColor', 'hiliteColor'], // , 'textStyle'
