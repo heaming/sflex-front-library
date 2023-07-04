@@ -1,21 +1,17 @@
 <template>
-  <div
-    class="kw-high-code kw-guide-code active"
-  >
-    <high-code
-      :code-value="codeValue"
-      :lang="lang"
-      theme="light"
-      width="100%"
-      :height="height"
-      :max-height="maxHeight"
-    />
-  </div>
+  <high-code
+    ref="highCodeRef"
+    :code-value="codeValue"
+    :lang="lang"
+    theme="light"
+    width="100%"
+    :height="height"
+    :max-height="maxHeight"
+  />
 </template>
 
 <script>
 import { HighCode } from 'vue-highlight-code';
-import 'vue-highlight-code/dist/style.css';
 
 export default {
   name: 'KwHighCode',
@@ -40,7 +36,9 @@ export default {
     },
   },
   setup() {
+    const highCodeRef = ref();
     return {
+      highCodeRef,
     };
   },
 };
