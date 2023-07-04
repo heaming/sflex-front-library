@@ -62,7 +62,8 @@ export default {
   },
 
   setup(props) {
-    const useBackdoorLogin = !!env.VITE_LOGIN_URL || env.DEV || env.LOCAL;
+    const useBackdoorLogin = !!env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL;
+    console.log(useBackdoorLogin, env);
     const tenantId = toRaw(props.tenantId);
     const portalId = toRaw(props.portalId);
 
