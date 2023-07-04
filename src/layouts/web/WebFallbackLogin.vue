@@ -62,8 +62,8 @@ export default {
   },
 
   setup(props) {
-    // VITE_LOGIN_URL 이 있고, healthCheck 해서 결과가 안좋으면 backdoorLogin 사용.
     const useBackdoorLogin = !env.VITE_LOGIN_URL;
+    console.log(useBackdoorLogin, env);
     const tenantId = toRaw(props.tenantId);
     const portalId = toRaw(props.portalId);
 
