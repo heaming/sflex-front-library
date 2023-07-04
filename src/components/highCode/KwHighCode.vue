@@ -1,44 +1,15 @@
 <template>
-  <div>
-    <div
-      v-if="button"
-      class="kw-high-code kw-guide-codeButton"
-    >
-      <button @click="active = !active">
-        <span v-if="!active">
-          Show code &darr;
-        </span>
-        <span v-else>
-          Hide code &uarr;
-        </span>
-      </button>
-    </div>
-    <div
-      class="kw-high-code kw-guide-code"
-      :class="{'active': active || !button}"
-    >
-      <template v-if="multi">
-        <HighCode
-          v-for="(code,index) in codeValue"
-          :key="index"
-          :code-value="code"
-          :lang="lang[index]"
-          theme="light"
-          width="100%"
-          height="auto"
-          :class="!index[0] ? 'mt30' : ''"
-        />
-      </template>
-      <template v-else>
-        <HighCode
-          :code-value="codeValue"
-          :lang="lang"
-          theme="light"
-          width="100%"
-          height="auto"
-        />
-      </template>
-    </div>
+  <div
+    class="kw-high-code kw-guide-code active"
+  >
+    <high-code
+      :code-value="codeValue"
+      :lang="lang"
+      theme="light"
+      width="100%"
+      :height="height"
+      :max-height="maxHeight"
+    />
   </div>
 </template>
 
@@ -51,10 +22,6 @@ export default {
   components: { HighCode },
   inheritAttrs: false,
   props: {
-    multi: {
-      type: Boolean,
-      default: false,
-    },
     lang: {
       type: [String, Array],
       default: null,
@@ -63,15 +30,17 @@ export default {
       type: [String, Array],
       default: null,
     },
-    button: {
-      type: Boolean,
-      default: false,
+    height: {
+      type: String,
+      default: 'auto',
+    },
+    maxHeight: {
+      type: String,
+      default: 'auto',
     },
   },
   setup() {
-    const active = ref(false);
     return {
-      active,
     };
   },
 };
