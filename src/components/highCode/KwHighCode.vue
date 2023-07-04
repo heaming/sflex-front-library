@@ -49,6 +49,7 @@ import 'vue-highlight-code/dist/style.css';
 export default {
   name: 'KwHighCode',
   components: { HighCode },
+  inheritAttrs: false,
   props: {
     multi: {
       type: Boolean,
