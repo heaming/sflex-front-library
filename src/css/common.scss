@@ -1435,8 +1435,27 @@ body.mobile {
   .kw-popup__action,
   .kw-menu-dialog__header,
   .kw-menu-dialog__content,
-  .kw-menu-dialog__action {
+  .kw-menu-dialog__action,
+  .mobile-footer {
     zoom: 1.5;
+  }
+
+  body.mobile:not(.tablet) .main-menu-modal .fixed-full {
+    bottom: 90px !important;
+  }
+
+  .q-page-container.mobile-stack-view {
+    padding-bottom: 90px !important;
+  }
+
+  .gnb_menu_mobile--nav {
+    height: calc(66.6666vh - 115px);
+  }
+
+  body.mobile:not(.tablet) .dev-env-area,
+  body.mobile:not(.tablet) .qa-env-area,
+  body.mobile:not(.tablet) .local-env-area {
+    bottom: 90px !important;
   }
 
   body.mobile:not(.tablet) .q-select__dialog {
@@ -1457,7 +1476,7 @@ body.mobile {
   }
 
   .gnb_menu_mobile--ul-depth1 {
-    height: calc(66.6666vh - 55px) !important;
+    height: calc(66.6666vh - 115px) !important;
 
     & > li.lastTarget {
       height: calc(66.6666vh - 135px) !important;
