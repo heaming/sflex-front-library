@@ -7,7 +7,7 @@
     v-bind="{...styleClassAttrs, ...fieldStyleProps}"
     class="kw-select"
     :class="fieldClass"
-    popup-content-class="kw-select-options"
+    :popup-content-class="computedPopupContentClass"
     :label="$g.platform.is.mobile ? label : undefined"
     :error="invalid"
     :options="normalizedOptions"
@@ -33,7 +33,7 @@
     no-error-icon
     :dropdown-icon="dropdownIcon"
     :hide-dropdown-icon="hideDropdownIcon"
-    :behavior="$g.platform.is.mobile ? 'dialog' : undefined"
+    :behavior="computedBehavior"
     :transition-show="$g.platform.is.mobile ? 'jump-up' : undefined"
     :transition-hide="$g.platform.is.mobile ? 'jump-down' : undefined"
     clear-icon="clear"
@@ -86,7 +86,7 @@
 
     <!--before-options -->
     <template
-      v-if="$g.platform.is.mobile || multiple"
+      v-if="($g.platform.is.mobile || multiple) && ($g.platform.is.mobile && !behavior)"
       #before-options
     >
       <div
@@ -233,6 +233,7 @@ import useFieldStyle, { useFieldStyleProps } from '../../composables/private/use
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
 import i18n from '../../i18n';
 import { sanitize } from '../../plugins/sanitize';
+import { platform } from '../../plugins/platform';
 
 export default {
   name: 'KwSelect',
@@ -265,6 +266,7 @@ export default {
     placeholder: { type: String, default: i18n.t('MSG_TXT_SEL', null, '선택') },
     tabindex: { type: [Number, String], default: undefined },
     onFilter: { type: Function, default: undefined },
+    behavior: { type: String, default: undefined },
   },
 
   emits: [
@@ -330,6 +332,16 @@ export default {
 
     const computedUseInput = computed(() => props.useInput && !props.multiple);
 
+    const computedBehavior = computed(() => {
+      if (props.behavior) return props.behavior;
+      return platform.is.mobile ? 'dialog' : undefined;
+    });
+
+    const computedPopupContentClass = computed(() => {
+      if (platform.is.mobile && props.behavior) return 'kw-select-options mobile-behavior';
+      return 'kw-select-options';
+    });
+
     const selectedText = computed(() => {
       if (computedUseInput.value) return null;
 
@@ -383,6 +395,8 @@ export default {
       onPopup,
       onConfirm,
       computedUseInput,
+      computedBehavior,
+      computedPopupContentClass,
       selectedText,
       showingHint,
       toggleHint,
