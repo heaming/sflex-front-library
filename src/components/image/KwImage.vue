@@ -2,7 +2,7 @@
   <img
     v-if="fileUid"
     :alt="fileUid"
-    :src="fileImageSrc"
+    :src="imgSrcByFileUid"
     :width="width"
     :height="height"
   >
@@ -152,20 +152,21 @@ export default {
     ]);
 
     const imgSrc = (src) => (imgCtx.getImageSourceUrl(src) ? imgCtx.getImageSourceUrl(src) : src);
-    const fileImageSrc = ref('');
-    onMounted(async () => {
+    const imgSrcByFileUid = ref();
+
+    watch(props, async () => {
       if (props.fileUid) {
         const src = await getImageSrcFromFile(props.fileUid);
-        fileImageSrc.value = src;
+        imgSrcByFileUid.value = src;
       }
-    });
+    }, { deep: true, immediate: true });
 
     return {
       ...useInheritAttrs(),
       ...useImage,
       imageClass,
       imgSrc,
-      fileImageSrc,
+      imgSrcByFileUid,
     };
   },
 };
