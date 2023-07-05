@@ -1424,3 +1424,43 @@ body.mobile {
 .web-tab-view__panels.q-panel-parent:has(.call-center) {
   overflow: unset !important;
 }
+
+// tablet 임시 css. 실제 tablet 개발 완료되면 삭제해도 무방
+.temp_tablet {
+  .kw-page-mobile-header,
+  .kw-page__content,
+  .kw-page__action,
+  .kw-popup__header,
+  .kw-popup__content,
+  .kw-popup__action,
+  .kw-menu-dialog__header,
+  .kw-menu-dialog__content,
+  .kw-menu-dialog__action {
+    zoom: 1.5;
+  }
+
+  body.mobile:not(.tablet) .q-select__dialog {
+    zoom: 1.5;
+    width: 100% !important;
+  }
+
+  .kw-sign {
+    zoom: 0.6666;
+  }
+
+  .scoped-confirmation {
+    zoom: 0.6666;
+
+    .kw-sign {
+      zoom: 1;
+    }
+  }
+
+  .gnb_menu_mobile--ul-depth1 {
+    height: calc(66.6666vh - 55px) !important;
+
+    & > li.lastTarget {
+      height: calc(66.6666vh - 135px) !important;
+    }
+  }
+}
