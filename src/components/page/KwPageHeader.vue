@@ -37,7 +37,7 @@
         <kw-icon
           :name="showPageNotice && pageNoticeCntn ? 'notice_on' : 'notice_off'"
           clickable
-          @click="showPageNotice = true"
+          @click="showPageNotice = !showPageNotice"
         >
           {{ $t('MSG_TXT_BIZ_NOTICE') }}
         </kw-icon>
