@@ -19,6 +19,7 @@ export * from './field';
 export * from './file';
 export * from './form';
 export * from './grid';
+export * from './highCode';
 export * from './icon';
 export * from './image';
 export * from './imagePreview';

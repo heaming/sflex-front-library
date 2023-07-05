@@ -104,8 +104,11 @@ export default () => {
     if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
       await initSession();
       await routerIsReady();
-    } else if (env.VITE_LOGIN_URL) {
-      locationReplace(env.VITE_LOGIN_URL); // redirect to sso
+    } else if (env.VITE_LOGIN_URL && window.location.origin !== env.VITE_HTTP_CUST_ORIGIN) {
+      const res = await http.get(env.VITE_SSO_HEALTH_CHECK_URL);
+      if (res.data) {
+        locationReplace(env.VITE_LOGIN_URL); // redirect to sso
+      }
     }
   }
 
