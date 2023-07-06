@@ -22,42 +22,38 @@
 import { modal } from '../../plugins/modal';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
 import { GlobalModalVmKey } from '../../consts/private/symbols';
-import useLeftDrawerExpand from '../../composables/private/useLeftDrawerExpand';
 
 export default {
   name: 'MobileEduFooter',
 
   setup() {
-    const { setExpanded } = useLeftDrawerExpand();
-    const { getters } = useStore();
-    const isExpanded = computed(() => getters['app/getLeftDrawerExpanded']);
     const { t } = useI18n();
-    const curr = ref(0);
+    const curr = ref(-1);
     const footerMenus = ref([
-      { icon: 'menu_24', label: t('MSG_TXT_WK_LIST') },
+      { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
       { icon: 'mob_menu', label: t('MSG_BTN_ALL_VIEW'), component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue') },
     ]);
 
     async function openMenu(menu, idx) {
-      curr.value = idx;
-
       const globalModals = getGlobalData(GlobalModalVmKey);
       if (globalModals.length > 0) {
         const mainMenuModals = globalModals.filter((globalModal) => globalModal.dialogProps.class === 'main-menu-modal');
         mainMenuModals.forEach((mainMenuModal) => removeGlobalData(mainMenuModal.uid));
+        if (curr.value === idx) {
+          curr.value = -1;
+          return;
+        }
       }
 
+      curr.value = idx;
       if (menu.component) {
         await modal({
           component: menu.component,
           dialogProps: { maximized: true, class: 'main-menu-modal' },
         });
 
-        return;
-      }
-      if (idx === 0) {
-        setExpanded(!isExpanded.value);
+        curr.value = -1;
       }
     }
 
