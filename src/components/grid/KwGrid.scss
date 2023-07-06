@@ -545,29 +545,23 @@
       background: url(~@assets/icons/search.svg) no-repeat center !important;
       background-size: 16px !important;
     }
-  }
 
-  &.rg-button-icon--search__box {
-    .rg-cell-buttons {
-      width: 25px !important;
-      height: 25px !important;
-      background-color: white;
-      border: 1px solid black;
-      top: 9px !important;
-    }
+    &.boxed-icon {
+      .rg-cell-buttons {
+        width: 25px !important;
+        height: 25px !important;
+        background-color: white;
+        border: 1px solid black;
+        top: 9px !important;
+      }
 
-    .rg-button-action {
-      background: url(~@assets/icons/search.svg) no-repeat center !important;
-      background-size: 16px !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  &.rg-button-disabled {
-    .rg-button-action {
-      cursor: not-allowed !important;
+      .rg-button-action {
+        background: url(~@assets/icons/search.svg) no-repeat center !important;
+        background-size: 16px !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }
