@@ -1426,7 +1426,7 @@ body.mobile {
 }
 
 // tablet 임시 css. 실제 tablet 개발 완료되면 삭제해도 무방
-.temp_tablet {
+body.mobile.temp_tablet {
   .kw-page-mobile-header,
   .kw-page__content,
   .kw-page__action,
@@ -1458,7 +1458,7 @@ body.mobile {
     bottom: 90px !important;
   }
 
-  .q-select__dialog {
+  .q-dialog .q-select__dialog {
     zoom: 1.5;
     width: 100% !important;
   }
@@ -1484,7 +1484,7 @@ body.mobile {
   }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 700px) and (max-width: 1023px) {
   body.mobile.d-pub {
     .kw-page-mobile-header,
     .kw-page__content,
