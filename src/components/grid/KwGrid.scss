@@ -548,11 +548,11 @@
 
     &.boxed-icon {
       .rg-cell-buttons {
-        width: 25px !important;
-        height: 25px !important;
+        width: 32px !important;
+        height: 32px !important;
         background-color: white;
         border: 1px solid black;
-        top: 9px !important;
+        top: 5px !important;
       }
 
       .rg-button-action {
@@ -561,6 +561,26 @@
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%);
+      }
+
+      &-disable {
+        .rg-cell-buttons {
+          width: 32px !important;
+          height: 32px !important;
+          background-color: #eee;
+          border: 1px solid black;
+          top: 5px !important;
+          cursor: not-allowed;
+        }
+
+        .rg-button-action {
+          background: url(~@assets/icons/search.svg) no-repeat center !important;
+          background-size: 16px !important;
+          top: 50% !important;
+          left: 50% !important;
+          transform: translate(-50%, -50%);
+          cursor: not-allowed;
+        }
       }
     }
   }
