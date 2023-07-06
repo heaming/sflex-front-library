@@ -1484,7 +1484,7 @@ body.mobile {
   }
 }
 
-.mobile:has(.dev-layout) {
+.mobile.d-pub {
   .kw-page-mobile-header,
   .kw-page__content,
   .kw-page__action,
