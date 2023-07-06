@@ -1436,11 +1436,12 @@ body.mobile.temp_tablet {
   .kw-menu-dialog__header,
   .kw-menu-dialog__content,
   .kw-menu-dialog__action,
-  .mobile-footer {
+  .mobile-footer,
+  .global-bottom-sheet__inner {
     zoom: 1.5;
   }
 
-  .main-menu-modal .fixed-full {
+  .main-menu-modal.q-dialog .fixed-full {
     bottom: 90px !important;
   }
 
