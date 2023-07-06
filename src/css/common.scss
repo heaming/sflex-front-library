@@ -1485,7 +1485,7 @@ body.mobile {
 }
 
 @media (min-width: 700px) {
-  body.mobile.d-pub:not(.tablet) {
+  body.mobile.d-pub {
     .kw-page-mobile-header,
     .kw-page__content,
     .kw-page__action,
@@ -1503,7 +1503,7 @@ body.mobile {
       height: calc(66.6666vh - 115px);
     }
 
-    .q-select__dialog {
+    .q-dialog .q-select__dialog {
       zoom: 1.5;
       width: 100% !important;
     }
