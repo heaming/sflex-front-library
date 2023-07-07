@@ -12,6 +12,7 @@ const onShowTooltip = 'onShowTooltip';
 const onShowHeaderTooltip = 'onShowHeaderTooltip';
 const onMouseUp = 'onMouseUp'; // custom
 const onCurrentChanging = 'onCurrentChanging';
+const onSorting = 'onSorting';
 const onSortingChanged = 'onSortingChanged';
 const onLayoutPropertyChanged = 'onLayoutPropertyChanged';
 const onColumnPropertyChanged = 'onColumnPropertyChanged';
@@ -191,7 +192,19 @@ export function overrideOnCurrentChanging(view) {
     }
   });
 }
-
+/*
+  정렬시 정렬한 필드로 focus 이동
+ */
+export function overrideOnSorting(view) {
+  // console.log(view, fields, directions);
+  wrapEvent(view, onSorting, (g, fields, directions) => {
+    // sorting 한 field를 포커싱
+    g.setCurrent({ itemIdndex: g.getCurrent().itemIndex, fieldIndex: fields[fields.length - 1] });
+    if (hasOriginal(g, onSorting)) {
+      execOriginal(g, onSorting, g, fields, directions);
+    }
+  });
+}
 /*
   정렬했음을 알리는 콜백
   */
