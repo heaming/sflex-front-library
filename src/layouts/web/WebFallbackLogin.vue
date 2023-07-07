@@ -64,9 +64,9 @@ export default {
 
   setup(props) {
     let useBackdoorLogin = !env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL;
-    http.get(env.VITE_SSO_HEALTH_CHECK_URL).then(({ res }) => {
+    http.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
       // res.data 가 false가 올리는 없지만 일단 냄겨둔다.
-      if (!res.data) {
+      if (!res?.data) {
         useBackdoorLogin = true;
       }
     }).catch(() => {

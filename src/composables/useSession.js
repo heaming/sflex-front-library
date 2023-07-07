@@ -105,7 +105,7 @@ export default () => {
       await initSession();
       await routerIsReady();
     } else if (env.VITE_LOGIN_URL && window.location.origin !== env.VITE_HTTP_CUST_ORIGIN) {
-      await http.get(env.VITE_SSO_HEALTH_CHECK_URL).then(({ res }) => {
+      await http.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
         if (res?.data) {
           locationReplace(env.VITE_LOGIN_URL); // redirect to sso
         }
