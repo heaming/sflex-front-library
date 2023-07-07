@@ -69,6 +69,7 @@ export default {
         useBackdoorLogin = true;
       }
     }).catch(() => {
+      console.log('sso 에러로 백도어페이지 보여줌.');
       // 에러일 경우는 true
       useBackdoorLogin = true;
     });
