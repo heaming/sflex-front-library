@@ -1338,15 +1338,15 @@ body.mobile {
 
 // mobile,tablet underline
 .blue-line-link {
-  color: $primary;
-  text-decoration: underline;
-  text-underline-position: from-font;
+  color: $primary !important;
+  text-decoration: underline !important;
+  text-underline-position: from-font !important;
 
   &:visited,
   &:hover,
   &:focus,
   &:visited {
-    color: $primary;
+    color: $primary !important;
   }
 }
 
@@ -1436,11 +1436,12 @@ body.mobile.temp_tablet {
   .kw-menu-dialog__header,
   .kw-menu-dialog__content,
   .kw-menu-dialog__action,
-  .mobile-footer {
+  .mobile-footer,
+  .global-bottom-sheet__inner {
     zoom: 1.5;
   }
 
-  .main-menu-modal .fixed-full {
+  .main-menu-modal.q-dialog .fixed-full {
     bottom: 90px !important;
   }
 
