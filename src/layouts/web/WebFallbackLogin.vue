@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { alert } from '../../plugins/dialog';
 import useSession from '../../composables/useSession';
 import env from '../../consts/private/env';
@@ -62,8 +63,16 @@ export default {
   },
 
   setup(props) {
-    const useBackdoorLogin = !!env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL;
-    console.log(useBackdoorLogin, env);
+    let useBackdoorLogin = !env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL;
+    axios.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
+      if (!res?.data) {
+        useBackdoorLogin = true;
+      }
+    }).catch(() => {
+      console.log('sso 에러로 백도어페이지 보여줌.');
+      // 에러일 경우는 true
+      useBackdoorLogin = true;
+    });
     const tenantId = toRaw(props.tenantId);
     const portalId = toRaw(props.portalId);
 

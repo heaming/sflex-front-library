@@ -1,6 +1,7 @@
 import { Quasar } from 'quasar';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import axios from 'axios';
 import consts from '../consts';
 import env from '../consts/private/env';
 import { http } from '../plugins/http';
@@ -105,10 +106,14 @@ export default () => {
       await initSession();
       await routerIsReady();
     } else if (env.VITE_LOGIN_URL && window.location.origin !== env.VITE_HTTP_CUST_ORIGIN) {
-      const res = await http.get(env.VITE_SSO_HEALTH_CHECK_URL);
-      if (res.data) {
-        locationReplace(env.VITE_LOGIN_URL); // redirect to sso
-      }
+      axios.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
+        if (res?.data) {
+          locationReplace(env.VITE_LOGIN_URL); // redirect to sso
+        }
+      }).catch((err) => {
+        console.log('sso 에러로 자체 로그인 진입');
+        console.log(err);
+      });
     }
   }
 
