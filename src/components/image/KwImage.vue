@@ -17,7 +17,7 @@
     :no-native-menu="noNativeMenu"
     :no-transition="noTransition"
     :alt="alt"
-    :src="imgSrc(src)"
+    :src="computedImgSrc"
     :srcset="srcset"
     :sizes="sizes"
     :placeholder-src="placeholderSrc"
@@ -151,7 +151,11 @@ export default {
       props.disable && 'disabled',
     ]);
 
-    const imgSrc = (src) => (imgCtx.getImageSourceUrl(src) ? imgCtx.getImageSourceUrl(src) : src);
+    const computedImgSrc = computed(() => {
+      if (props.src) return imgCtx.getImageSourceUrl(props.src) ? imgCtx.getImageSourceUrl(props.src) : props.src;
+      return null;
+    });
+
     const imgSrcByFileUid = ref();
 
     watch(props, async () => {
@@ -165,7 +169,7 @@ export default {
       ...useInheritAttrs(),
       ...useImage,
       imageClass,
-      imgSrc,
+      computedImgSrc,
       imgSrcByFileUid,
     };
   },
