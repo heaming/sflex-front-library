@@ -266,13 +266,10 @@ body.desktop {
     .kw-tab {
       &.q-tab {
         min-height: 36px;
+        width: auto !important;
+        min-width: auto !important;
+        max-width: none !important;
       }
-    }
-
-    & .kw-tab.q-tab {
-      width: auto;
-      min-width: auto;
-      max-width: none;
     }
   }
 }
