@@ -50,9 +50,9 @@
     </div>
     <kw-btn-dropdown
       v-if="$slots.more"
-      class="kw-page-mobile-header__more"
+      class="kw-page-mobile-header__more kw-font-pt24"
       borderless
-      dropdown-icon="more"
+      dropdown-icon="more_24"
     >
       <slot name="more" />
     </kw-btn-dropdown>
