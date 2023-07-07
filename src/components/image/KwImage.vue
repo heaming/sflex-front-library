@@ -17,7 +17,7 @@
     :no-native-menu="noNativeMenu"
     :no-transition="noTransition"
     :alt="alt"
-    :src="computedImgSrc"
+    :src="imgSrc"
     :srcset="srcset"
     :sizes="sizes"
     :placeholder-src="placeholderSrc"
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { isEmpty } from 'lodash-es';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useImage from '../../composables/private/useImage';
 import { getImageSrcFromFile } from '../../utils/file';
@@ -151,25 +152,25 @@ export default {
       props.disable && 'disabled',
     ]);
 
-    const computedImgSrc = computed(() => {
-      if (props.src) return imgCtx.getImageSourceUrl(props.src) ? imgCtx.getImageSourceUrl(props.src) : props.src;
-      return null;
-    });
-
+    const imgSrc = ref(null);
     const imgSrcByFileUid = ref();
 
     watch(props, async () => {
-      if (props.fileUid) {
+      if (!isEmpty(props.fileUid)) {
         const src = await getImageSrcFromFile(props.fileUid);
         imgSrcByFileUid.value = src;
-      }
+      } else imgSrcByFileUid.value = null;
+
+      if (!isEmpty(props.src)) {
+        imgSrc.value = imgCtx.getImageSourceUrl(props.src) ? imgCtx.getImageSourceUrl(props.src) : props.src;
+      } else imgSrc.value = null;
     }, { deep: true, immediate: true });
 
     return {
       ...useInheritAttrs(),
       ...useImage,
       imageClass,
-      computedImgSrc,
+      imgSrc,
       imgSrcByFileUid,
     };
   },
