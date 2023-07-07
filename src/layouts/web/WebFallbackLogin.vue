@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { http } from '../../plugins/http';
+import axios from 'axios';
 import { alert } from '../../plugins/dialog';
 import useSession from '../../composables/useSession';
 import env from '../../consts/private/env';
@@ -64,8 +64,7 @@ export default {
 
   setup(props) {
     let useBackdoorLogin = !env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL;
-    http.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
-      // res.data 가 false가 올리는 없지만 일단 냄겨둔다.
+    axios.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
       if (!res?.data) {
         useBackdoorLogin = true;
       }
