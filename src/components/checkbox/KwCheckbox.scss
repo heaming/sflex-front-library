@@ -34,8 +34,8 @@
 
     &__inner {
       font-size: $-kw-checkbox-icon-size;
-      width: $-kw-checkbox-line-height;
-      min-width: $-kw-checkbox-line-height;
+      width: $-kw-checkbox-icon-size;
+      min-width: $-kw-checkbox-icon-size;
       height: $-kw-checkbox-line-height;
       color: inherit;
 
@@ -136,8 +136,8 @@
     &--dense {
       .q-checkbox__inner {
         font-size: $-kw-checkbox-icon-size-dense;
-        width: $-kw-checkbox-line-height-dense;
-        min-width: $-kw-checkbox-line-height-dense;
+        width: $-kw-checkbox-icon-size-dense;
+        min-width: $-kw-checkbox-icon-size-dense;
         height: $-kw-checkbox-line-height-dense;
 
         &--truthy,
