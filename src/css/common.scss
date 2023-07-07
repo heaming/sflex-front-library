@@ -1338,15 +1338,15 @@ body.mobile {
 
 // mobile,tablet underline
 .blue-line-link {
-  color: $primary;
-  text-decoration: underline;
-  text-underline-position: from-font;
+  color: $primary !important;
+  text-decoration: underline !important;
+  text-underline-position: from-font !important;
 
   &:visited,
   &:hover,
   &:focus,
   &:visited {
-    color: $primary;
+    color: $primary !important;
   }
 }
 
@@ -1423,4 +1423,110 @@ body.mobile {
 
 .web-tab-view__panels.q-panel-parent:has(.call-center) {
   overflow: unset !important;
+}
+
+// tablet 임시 css. 실제 tablet 개발 완료되면 삭제해도 무방
+body.mobile.temp_tablet {
+  .kw-page-mobile-header,
+  .kw-page__content,
+  .kw-page__action,
+  .kw-popup__header,
+  .kw-popup__content,
+  .kw-popup__action,
+  .kw-menu-dialog__header,
+  .kw-menu-dialog__content,
+  .kw-menu-dialog__action,
+  .mobile-footer,
+  .global-bottom-sheet__inner {
+    zoom: 1.5;
+  }
+
+  .main-menu-modal.q-dialog .fixed-full {
+    bottom: 90px !important;
+  }
+
+  .q-page-container.mobile-stack-view {
+    padding-bottom: 90px !important;
+  }
+
+  .gnb_menu_mobile--nav {
+    height: calc(66.6666vh - 115px);
+  }
+
+  .dev-env-area,
+  .qa-env-area,
+  .local-env-area {
+    bottom: 90px !important;
+  }
+
+  .q-dialog .q-select__dialog {
+    zoom: 1.5;
+    width: 100% !important;
+  }
+
+  .kw-sign {
+    zoom: 0.6666;
+  }
+
+  .scoped-confirmation {
+    zoom: 0.6666;
+
+    .kw-sign {
+      zoom: 1;
+    }
+  }
+
+  .gnb_menu_mobile--ul-depth1 {
+    height: calc(66.6666vh - 115px) !important;
+
+    & > li.lastTarget {
+      height: calc(66.6666vh - 135px) !important;
+    }
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  body.mobile.d-pub {
+    .kw-page-mobile-header,
+    .kw-page__content,
+    .kw-page__action,
+    .kw-popup__header,
+    .kw-popup__content,
+    .kw-popup__action,
+    .kw-menu-dialog__header,
+    .kw-menu-dialog__content,
+    .kw-menu-dialog__action,
+    .mobile-footer {
+      zoom: 1.5;
+    }
+
+    .gnb_menu_mobile--nav {
+      height: calc(66.6666vh - 115px);
+    }
+
+    .q-dialog .q-select__dialog {
+      zoom: 1.5;
+      width: 100% !important;
+    }
+
+    .kw-sign {
+      zoom: 0.6666;
+    }
+
+    .scoped-confirmation {
+      zoom: 0.6666;
+
+      .kw-sign {
+        zoom: 1;
+      }
+    }
+
+    .gnb_menu_mobile--ul-depth1 {
+      height: calc(66.6666vh - 115px) !important;
+
+      & > li.lastTarget {
+        height: calc(66.6666vh - 135px) !important;
+      }
+    }
+  }
 }

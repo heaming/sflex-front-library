@@ -12,6 +12,7 @@
       @resize="onResize"
     />
     <context-menu
+      v-if="needContextMenu"
       ref="contextMenuRef"
     />
   </div>
@@ -27,6 +28,7 @@ export default {
   components: { ContextMenu },
 
   props: {
+    needContextMenu: { type: Boolean, default: true },
     ...useCreateProps,
   },
 

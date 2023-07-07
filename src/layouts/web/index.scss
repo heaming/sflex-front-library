@@ -527,7 +527,9 @@ body.q-body--prevent-scroll__header {
       > p {
         text-align: center;
         white-space: pre;
-        color: $black2;
+        color: $black3;
+
+        @include typo("dense",400);
       }
     }
 

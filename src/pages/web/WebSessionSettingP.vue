@@ -25,6 +25,11 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
+        <kw-form-item label="조직유형코드 대상 코드 (hr1)">
+          <kw-input v-model="userInfoForSetting.wkOjOgTpCd" />
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
         <kw-form-item label="조직코드">
           <kw-input v-model="userInfoForSetting.departmentId" />
         </kw-form-item>
