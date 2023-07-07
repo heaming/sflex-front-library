@@ -13,7 +13,7 @@
       </template>
     </h1>
     <div
-      v-if="portalId && portalId !== 'NO_SESSION'"
+      v-if="portalId && portalId !== 'NO_SESSION' && !pageUseIsSub"
       class="kw-page-mobile-header__tools"
     >
       <div class="kw-page-mobile-header__bookmark">
@@ -40,6 +40,23 @@
       </div>
     </div>
 
+    <div class="q-space" />
+
+    <div
+      v-if="$slots.etc"
+      class="kw-page-mobile-header__etc"
+    >
+      <slot name="etc" />
+    </div>
+    <kw-btn-dropdown
+      v-if="$slots.more"
+      class="kw-page-mobile-header__more"
+      borderless
+      dropdown-icon="more"
+    >
+      <slot name="more" />
+    </kw-btn-dropdown>
+
     <!-- WAPPLE 인 경우에만 X버튼 뜨도록 설정 -->
     <div
       v-if="portalId === 'MBL_DEF' && tenantId === 'TNT_EDU'"
@@ -55,20 +72,6 @@
         @click="onClickClose"
       />
     </div>
-    <div
-      v-if="$slots.etc"
-      class="kw-page-mobile-header__etc"
-    >
-      <slot name="etc" />
-    </div>
-    <kw-btn-dropdown
-      v-if="$slots.more"
-      class="kw-page-mobile-header__more"
-      borderless
-      dropdown-icon="more"
-    >
-      <slot name="more" />
-    </kw-btn-dropdown>
   </div>
 </template>
 
