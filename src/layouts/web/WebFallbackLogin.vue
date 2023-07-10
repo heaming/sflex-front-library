@@ -63,15 +63,16 @@ export default {
   },
 
   setup(props) {
-    let useBackdoorLogin = !env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL;
-    axios.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
+    const useBackdoorLogin = ref(!env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL);
+
+    axios.get(`${env.VITE_SSO_HEALTH_CHECK_URL}`).then((res) => {
       if (!res?.data) {
-        useBackdoorLogin = true;
+        useBackdoorLogin.value = true;
       }
     }).catch(() => {
       console.log('sso 에러로 백도어페이지 보여줌.');
       // 에러일 경우는 true
-      useBackdoorLogin = true;
+      useBackdoorLogin.value = true;
     });
     const tenantId = toRaw(props.tenantId);
     const portalId = toRaw(props.portalId);
@@ -92,6 +93,10 @@ export default {
         }
       }
     }
+
+    onMounted(() => {
+      console.log(useBackdoorLogin.value);
+    });
 
     return {
       onSubmit,
