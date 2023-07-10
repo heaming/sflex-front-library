@@ -23,7 +23,7 @@ function print(printContents) {
   document.body.removeChild(printDiv);
 }
 export function printElement(elementRef) {
-  print(elementRef.value.$el.innerHTML);
+  print(elementRef.value.$el?.innerHTML ?? elementRef.value.innerHTML);
 }
 
 export function printElementsByClassName(className) {
