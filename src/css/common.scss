@@ -1530,3 +1530,11 @@ body.mobile.temp_tablet {
     }
   }
 }
+
+// print 영역 관련 css
+.agreement-body {
+  @media print {
+    // 팝업
+    @include print-css("popup");
+  }
+}
