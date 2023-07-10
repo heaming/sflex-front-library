@@ -1,1 +1,14 @@
 @import "vue-highlight-code/dist/style.css";
+
+.kw-high-code {
+  .code_header {
+    min-height: 30px !important;
+  }
+
+  .code_area {
+    pre {
+      white-space: pre-wrap;
+      overflow-y: auto !important;
+    }
+  }
+}

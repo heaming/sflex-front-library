@@ -1,10 +1,12 @@
 <template>
   <high-code
     ref="highCodeRef"
+    class="kw-high-code"
     :code-value="codeValue"
     :lang="lang"
     theme="light"
-    width="100%"
+    :width="width"
+    :max-width="maxWidth"
     :height="height"
     :max-height="maxHeight"
   />
@@ -31,6 +33,14 @@ export default {
       default: 'auto',
     },
     maxHeight: {
+      type: String,
+      default: 'auto',
+    },
+    width: {
+      type: String,
+      default: 'auto',
+    },
+    maxWidth: {
       type: String,
       default: 'auto',
     },
