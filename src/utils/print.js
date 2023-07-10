@@ -30,3 +30,10 @@ export function printElementsByClassName(className) {
   const el = document.getElementsByClassName(className)[0];
   print(el.innerHTML);
 }
+
+export function printAddClassBody(addClassName) {
+  const el = document.querySelector('body');
+  el.classList.add(addClassName);
+  window.print();
+  el.classList.remove(addClassName);
+}
