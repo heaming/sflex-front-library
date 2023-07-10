@@ -1533,53 +1533,8 @@ body.mobile.temp_tablet {
 
 // print 영역 관련 css
 .agreement-body {
-  @page {
-    size: 210mm 297mm; /* A4 */
-    margin: 0;
-  }
-
   @media print {
     // 팝업
     @include print-css("popup");
-
-    html,
-    body {
-      position: relative;
-      margin: 0;
-      padding: 0;
-      page-break-after: avoid;
-      page-break-before: avoid;
-    }
-
-    body,
-    .scoped-print-area { margin-top: -1px; } /* 서브픽셀 해결1 */
-
-    .scoped-print-area:first-child {
-      page-break-before: auto;
-      page-break-inside: avoid;
-    }
-
-    .scoped-print-area {
-      overflow: hidden;
-      position: relative;
-      padding: 25mm;
-      width: 210mm;
-      height: 297mm; /* 서브픽셀 해결1 사용시 */
-      height: calc(297mm - 1px); /* 서브픽셀 해결2 - IE는 미지원 */
-      page-break-before: always;
-
-      > .scoped-bg { /* img를 .scoped-print-area안에 꽉차게 */
-        position: absolute;
-        top: 11mm;
-        left: 10mm;
-        right: 12mm;
-        bottom: 0;
-
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
   }
 }
