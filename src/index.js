@@ -36,6 +36,7 @@ export * as cti from './plugins/cti';
 
 // Utils
 export * from './globalUtils';
+export * as printUtil from './utils/print';
 export * as codeUtil from './utils/code';
 export * as fileUtil from './utils/file';
 export * as gridUtil from './utils/grid';
