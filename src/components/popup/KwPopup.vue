@@ -44,7 +44,7 @@
     </q-card-section>
     <q-card-section
       ref="scrollTarget"
-      class="kw-popup__content"
+      class="kw-popup__content scroll"
     >
       <slot />
       <q-scroll-observer
