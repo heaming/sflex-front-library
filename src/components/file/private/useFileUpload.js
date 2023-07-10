@@ -538,7 +538,7 @@ export default (values, options, ables, selectCtx) => {
     if (!ables.value.preview) { return false; }
     const uploading = file instanceof Uploading ? file : findUploading(file);
     return [STATE.UPLOAD, STATE.UPLOADED].includes(uploading?.state)
-        && (IMAGE_EXTENSION.includes(file?.attachFile?.fileExtensionName.toLowerCase()) || file?.type?.startsWith('image'));
+        && (IMAGE_EXTENSION.includes(file?.attachFile?.fileExtensionName?.toLowerCase()) || file?.type?.startsWith('image'));
   }
 
   return {
