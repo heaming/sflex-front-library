@@ -172,7 +172,7 @@ export async function waitUntilShowEditor(view, dropdown = false) {
     const column = view.columnByName(index.column);
 
     if (isCellEditable(view, column, index)) {
-      if (column.editor?.type) view.showEditor(dropdown);
+      if (column.button !== 'action') view.showEditor(dropdown);
 
       await timeout();
 
