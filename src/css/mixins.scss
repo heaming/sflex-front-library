@@ -714,3 +714,28 @@
     }
   }
 }
+
+@mixin print-css($page) {
+  @if $page == "popup" {
+    .kw-popup__header,
+    .kw-action--top {
+      display: none;
+    }
+
+    &.desktop .kw-popup--no-action .kw-popup__content,
+    .q-dialog__inner--minimized {
+      padding: 0;
+      max-height: unset;
+      display: block;
+    }
+
+    .q-dialog__inner {
+      display: block;
+    }
+
+    &.desktop .kw-popup.q-card {
+      border: 0;
+      box-shadow: none;
+    }
+  }
+}
