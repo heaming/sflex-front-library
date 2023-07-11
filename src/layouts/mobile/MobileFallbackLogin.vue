@@ -11,7 +11,7 @@
       <kw-form @submit="onSubmit">
         <q-card-section>
           <kw-input
-            model-value="admin.base"
+            model-value=""
             type="text"
             name="loginId"
             label="ID"
@@ -20,7 +20,7 @@
           />
           <br>
           <kw-input
-            model-value="testtest"
+            model-value=""
             type="password"
             name="password"
             label="Password"
