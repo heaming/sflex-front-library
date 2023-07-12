@@ -999,6 +999,7 @@ body.q-body--prevent-scroll__header {
   &_el {
     background: #fff;
     padding: 24px;
+    overflow: hidden; // 영역 외 항목들은 숨기기
 
     &_1by1 {
       width: 454px;
