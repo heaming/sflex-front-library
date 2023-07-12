@@ -11,7 +11,7 @@
       <kw-form @submit="onSubmit">
         <q-card-section>
           <kw-input
-            model-value="admin.base"
+            model-value=""
             type="text"
             name="loginId"
             label="ID"
@@ -20,7 +20,7 @@
           />
           <br>
           <kw-input
-            model-value="testtest"
+            model-value=""
             type="password"
             name="password"
             label="Password"
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { alert } from '../../plugins/dialog';
 import useSession from '../../composables/useSession';
 import env from '../../consts/private/env';
@@ -62,8 +63,17 @@ export default {
   },
 
   setup(props) {
-    // VITE_LOGIN_URL 이 있고, healthCheck 해서 결과가 안좋으면 backdoorLogin 사용.
-    const useBackdoorLogin = !env.VITE_LOGIN_URL;
+    const useBackdoorLogin = ref(!env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL);
+
+    axios.get(`${env.VITE_SSO_HEALTH_CHECK_URL}`).then((res) => {
+      if (!res?.data) {
+        useBackdoorLogin.value = true;
+      }
+    }).catch(() => {
+      console.log('sso 에러로 백도어페이지 보여줌.');
+      // 에러일 경우는 true
+      useBackdoorLogin.value = true;
+    });
     const tenantId = toRaw(props.tenantId);
     const portalId = toRaw(props.portalId);
 
