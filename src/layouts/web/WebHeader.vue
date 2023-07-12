@@ -128,8 +128,9 @@
             <div
               class="row items-center justify-center full-height"
             >
-              <p class="kw-fc--black3 kw-font-pt14">
-                신규 알림메세지가 없습니다.
+              <p class="kw-fc--black3 kw-font-pt14 text-center">
+                알림 메세지가 없습니다.<br>
+                (보관기간: 30일)
               </p>
             </div>
           </kw-menu>
@@ -292,7 +293,6 @@ export default {
     const { getters, commit } = useStore();
     const { readAlarm } = useAlarm();
     const alarms = computed(() => getters['meta/getAlarms']);
-
     const menuSearchRef = ref();
     const router = useRouter();
     const alarmRef = ref();
