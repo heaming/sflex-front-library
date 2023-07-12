@@ -14,18 +14,13 @@
       @click-item="readAlarm"
     >
       <template #item="{ item }">
-        <kw-item-section
-          top
-          side
-        >
-          <kw-icon
-            :name="item.readYn === 'N' ? 'alert_on_24' : 'alert_off_24' "
-            size="24px"
-          />
-        </kw-item-section>
         <kw-item-section>
-          <kw-item-label>
-            <p class="kw-font-dense">
+          <kw-item-label class="row items-center">
+            <kw-icon
+              :name="item.readYn === 'N' ? 'alert_on_24' : 'alert_outline' "
+              :class="item.readYn === 'Y' ? 'text-disabled' : ''"
+            />
+            <p class="kw-fc--black3 kw-font-pt14 ml4">
               {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
             </p>
           </kw-item-label>
@@ -42,8 +37,16 @@
         </kw-item-section>
       </template>
     </kw-list>
-    <div v-else>
-      알림이 없습니다.
+    <div
+      v-else
+      class="tablet-content-center"
+    >
+      <p
+        class="kw-fc--black3"
+      >
+        알림 메세지가 없습니다.<br>
+        (보관기간: 30일)
+      </p>
     </div>
   </kw-popup>
 </template>
@@ -55,6 +58,7 @@ import useAlarm from '../../composables/private/useAlarm';
 const { getters } = useStore();
 const alarms = computed(() => getters['meta/getAlarms']);
 const { readAlarm } = useAlarm();
+
 </script>
 
 <style scoped lang="scss">
@@ -68,4 +72,15 @@ const { readAlarm } = useAlarm();
   padding-right: 8px !important;
 }
 
+.tablet-content-center {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+::v-deep(.kw-popup__content) {
+  max-height: unset !important;
+}
 </style>

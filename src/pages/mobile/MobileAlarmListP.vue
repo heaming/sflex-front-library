@@ -13,7 +13,10 @@
         <template #item="{ item }">
           <kw-item-section>
             <kw-item-label class="row items-center">
-              <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
+              <kw-icon
+                :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' "
+                :class="item.readYn === 'Y' ? 'text-disabled' : ''"
+              />
               <p class="kw-fc--black3 kw-font-pt14 ml4">
                 {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
               </p>
@@ -31,8 +34,16 @@
           </kw-item-section>
         </template>
       </kw-list>
-      <div v-else>
-        알림이 없습니다.
+      <div
+        v-else
+        class="mobile-content-center"
+      >
+        <p
+          class="kw-fc--black3"
+        >
+          알림 메세지가 없습니다.<br>
+          (보관기간: 30일)
+        </p>
       </div>
     </div>
   </kw-popup>
@@ -47,3 +58,13 @@ const alarms = computed(() => getters['meta/getAlarms']);
 const { readAlarm } = useAlarm();
 
 </script>
+<style scoped lang="scss">
+.mobile-content-center {
+  min-height: calc(100vh - 85px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+</style>
