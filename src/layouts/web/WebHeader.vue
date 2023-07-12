@@ -87,20 +87,22 @@
                     side
                     top
                   >
-                    <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
+                    <kw-icon
+                      :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline'"
+                      :class="item.readYn === 'Y' ? 'text-disabled' : ''"
+                    />
                     <kw-item-label>
-                      <span class="kw-fc--black3 kw-font-pt14 mt4 ml12">
+                      <span class="kw-fc--black3 kw-font-pt14 mt4 ml4">
                         {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
                       </span>
                     </kw-item-label>
                   </kw-item-section>
-                  <kw-item-section>
+                  <kw-item-section class="mt8">
                     <kw-item-label
-                      lines="1"
+                      lines="2"
                       class="kw-font-pt14 alarm-msg"
                       :class="
                         { 'text-underline': item.linkUrl,
-                          'text-primary': item.linkUrl && item.readYn === 'N',
                           'text-disabled': item.readYn === 'Y' }"
                     >
                       {{ item.alarmMsg }}
@@ -109,6 +111,7 @@
                         anchor="bottom start"
                         self="top start"
                         :offset="[-8, 0]"
+                        style="line-height: 20px;"
                       >
                         {{ item.alarmMsg }}
                       </kw-tooltip>
@@ -120,7 +123,7 @@
           </kw-menu>
           <kw-menu
             v-else
-            class="w400 h344"
+            class="w400 h400"
           >
             <div
               class="row items-center justify-center full-height"
@@ -289,6 +292,7 @@ export default {
     const { getters, commit } = useStore();
     const { readAlarm } = useAlarm();
     const alarms = computed(() => getters['meta/getAlarms']);
+
     const menuSearchRef = ref();
     const router = useRouter();
     const alarmRef = ref();
