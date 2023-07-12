@@ -20,7 +20,11 @@
             </kw-item-label>
             <kw-item-label
               lines="2"
-              class="kw-font-body mt8"
+              class="kw-font-body mt8 alarm-msg"
+              :class="
+                { 'text-underline': item.linkUrl,
+                  'text-primary': item.linkUrl && item.readYn === 'N',
+                  'text-disabled': item.readYn === 'Y' }"
             >
               {{ item.alarmMsg }}
             </kw-item-label>

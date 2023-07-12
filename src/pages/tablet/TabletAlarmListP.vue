@@ -1,7 +1,11 @@
 <template>
-  <kw-popup title="알림">
+  <kw-popup
+    title="알림"
+    size="full"
+  >
     <kw-list
       v-if="alarms.length > 0"
+      class="kw-alarm-list__tablet"
       :items="alarms"
       separator
       item-padding
@@ -27,7 +31,11 @@
           </kw-item-label>
           <kw-item-label
             lines="1"
-            class="kw-font-body mt8"
+            class="kw-font-body mt8 alarm-msg"
+            :class="
+              { 'text-underline': item.linkUrl,
+                'text-primary': item.linkUrl && item.readYn === 'N',
+                'text-disabled': item.readYn === 'Y' }"
           >
             {{ item.alarmMsg }}
           </kw-item-label>

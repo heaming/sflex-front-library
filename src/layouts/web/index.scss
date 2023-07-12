@@ -158,12 +158,27 @@ body.q-body--prevent-scroll__header {
 
     .kw-list-alert {
       &.kw-list {
+        .kw-item {
+          display: block;
+        }
+
         .kw-item__section.q-item__section--side {
           padding-right: 4px;
+          flex-direction: row;
         }
 
         .kw-font-pt14 {
           line-height: 1.43 !important;
+
+          &.alarm-msg {
+            white-space: pre-line;
+            display: -webkit-box;  /* stylelint-disable-line */
+            word-wrap: break-word;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
         }
       }
     }

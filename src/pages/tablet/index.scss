@@ -96,3 +96,15 @@
   background: $primary;
   border-radius: 50%;
 }
+
+.kw-alarm-list__tablet {
+  .alarm-msg {
+    white-space: pre-line;
+    display: -webkit-box;  /* stylelint-disable-line */
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
