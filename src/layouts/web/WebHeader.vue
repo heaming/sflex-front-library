@@ -67,7 +67,7 @@
             v-if="alarms.length > 0"
             ref="alarmRef"
             target=".alert-btn"
-            class="web-header__dropdown w400 h344"
+            class="web-header__dropdown w400 h400"
             fit
             :offset="[0,3]"
           >
@@ -79,19 +79,29 @@
                 clickable
                 item-key="alarmId"
                 class="kw-list-alert"
-                @click-item="readAlarm"
+                @click-item="onClickReadItem"
               >
                 <template #item="{ item }">
                   <kw-item-section
+                    class="row"
                     side
                     top
                   >
                     <kw-icon :name="item.readYn === 'N' ? 'alert_on' : 'alert_outline' " />
+                    <kw-item-label>
+                      <span class="kw-fc--black3 kw-font-pt14 mt4 ml12">
+                        {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
+                      </span>
+                    </kw-item-label>
                   </kw-item-section>
                   <kw-item-section>
                     <kw-item-label
                       lines="1"
-                      class="kw-font-pt14"
+                      class="kw-font-pt14 alarm-msg"
+                      :class="
+                        { 'text-underline': item.linkUrl,
+                          'text-primary': item.linkUrl && item.readYn === 'N',
+                          'text-disabled': item.readYn === 'Y' }"
                     >
                       {{ item.alarmMsg }}
                       <kw-tooltip
@@ -102,11 +112,6 @@
                       >
                         {{ item.alarmMsg }}
                       </kw-tooltip>
-                    </kw-item-label>
-                    <kw-item-label>
-                      <p class="kw-fc--black3 kw-font-pt14 mt4">
-                        {{ dayjs(item.fnlMdfcDtm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD hh:mm A') }}
-                      </p>
                     </kw-item-label>
                   </kw-item-section>
                 </template>
@@ -286,7 +291,7 @@ export default {
     const alarms = computed(() => getters['meta/getAlarms']);
     const menuSearchRef = ref();
     const router = useRouter();
-
+    const alarmRef = ref();
     const isEdu = computed(() => {
       const { tenantId } = useMeta().getUserInfo();
       return tenantId === 'TNT_EDU';
@@ -415,6 +420,12 @@ export default {
     function goToSmsSendHistoryPage() {
       router.push({ name: 'MNU-7C508A53-7E5D-416B-8C38-148AE2B9835E' });
     }
+
+    function onClickReadItem(item) {
+      if (item.value.linkUrl) alarmRef.value.hide();
+      readAlarm(item);
+    }
+
     return {
       ...useHeaderApp(),
       logout,
@@ -451,6 +462,8 @@ export default {
       goToEduMaterialPage,
       goToFaqPage,
       goToSmsSendHistoryPage,
+      onClickReadItem,
+      alarmRef,
     };
   },
 };
