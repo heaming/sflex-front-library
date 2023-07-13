@@ -117,6 +117,62 @@
         </kw-form-item>
       </kw-form-row>
     </kw-form>
+
+    <div class="w1000">
+      <!-- file-comp html -->
+      <div class="file-comp">
+        <div class="file-comp__header">
+          <span>Total</span>
+          <b>5</b>
+          <span>(0 / 0)</span>
+        </div>
+        <kw-scroll-area
+          visible
+          max-height="152px"
+        >
+          <ul class="file-comp__contents">
+            <li
+              v-for="i in 7"
+              :key="i"
+              class="file-comp__file-item"
+            >
+              <div
+                class="file-comp__text-area"
+              >
+                <q-icon
+                  name="excel"
+                />
+                <!-- name: (기본)'file' / (확장자별)'imgpreview''pdf'-->
+                <div class="file-comp__file-txt">
+                  <p>
+                    파일이름파일이름파일이름파일이름파일이름파일이름파일이름파일이름
+                  </p>
+                  <span>.xlsx</span>
+                </div>
+                <span class="file-comp__file-size">(530KB)</span>
+              </div>
+              <div class="file-comp__button-area">
+                <q-btn
+                  padding="none"
+                  icon="viewer"
+                  fab
+                  unelevated
+                  :ripple="false"
+                />
+                <q-btn
+                  padding="none"
+                  icon="file_download"
+                  fab
+                  unelevated
+                  :ripple="false"
+                />
+              </div>
+            </li>
+          </ul>
+        </kw-scroll-area>
+      </div>
+      <!-- //file-comp html -->
+    </div>
   </div>
 </template>
 
@@ -254,3 +310,118 @@ function singleOpenFileInfo() {
   }
 }
 </style>
+
+<!-- file-comp style -->
+<style lang="scss">
+.file-comp {
+  width: 100%;
+  font-family: "Noto Sans KR", sans-serif !important;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  .kw-scroll-area__client .q-scrollarea__content {
+    min-width: unset !important;
+  }
+
+  &__header {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    height: 36px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f8f8;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #777;
+
+    b {
+      margin: 0 2px;
+      font-weight: 700;
+      color: #222;
+    }
+  }
+
+  &__contents {
+    position: relative;
+    padding: 8px 0;
+  }
+
+  &__file-item {
+    padding: 4px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    column-gap: 20px;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &__text-area {
+    flex: 1 1 100px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #777;
+    min-width: 0;
+
+    .q-icon {
+      flex-shrink: 0;
+      display: inline-flex;
+    }
+  }
+
+  &__file-txt {
+    flex-shrink: 1;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    min-width: 0;
+
+    p {
+      flex: 1 1 50px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    span {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__file-size {
+    margin-left: 4px;
+    flex-shrink: 0;
+  }
+
+  &__button-area {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    .q-btn {
+      width: 16px;
+      height: 16px;
+
+      .q-icon {
+        font-size: 16px;
+      }
+
+      &:hover {
+        .q-focus-helper {
+          background: #fff !important;
+          opacity: 0 !important;
+        }
+      }
+    }
+  }
+}
+</style>
+<!--// file-comp style -->
