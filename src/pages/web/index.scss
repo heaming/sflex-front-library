@@ -228,10 +228,11 @@
 
 .gnb_menu {
   width: 100%;
-  min-width: 1656px;
-  position: absolute;
+  min-width: 1024px;
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   height: 100vh;
   overflow: auto;
   background: #fff;
@@ -324,13 +325,18 @@
       height: 70px;
     }
 
+    li {
+      min-width: 0;
+    }
+
     & > li {
       display: flex;
       padding: 40px 40px 0;
       border-bottom: 1px solid $line-line;
 
       &.lastTarget {
-        height: calc(100vh - 170px);
+        height: auto;
+        min-height: calc(100vh - 170px);
       }
     }
   }
@@ -423,6 +429,7 @@
         color: $black2;
         text-decoration: none;
         word-break: keep-all;
+        max-width: 100%;
       }
 
       &:hover a {
@@ -432,11 +439,16 @@
   }
 
   &--closer {
-    position: absolute;
+    position: fixed;
     right: 34px;
     top: 32px;
     z-index: 20;
   }
+}
+
+.scrollpanels-content {
+  min-width: 1656px;
+  overflow: visible !important;
 }
 
 // gnb depth 메뉴
