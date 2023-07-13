@@ -49,8 +49,19 @@
                 >
                   <a
                     href="javascript:;"
+                    class="ellipsis"
                     @click="handleUpdateSelected(menu.menuUid)"
-                  >{{ menu.menuName }}</a>
+                  >{{ menu.menuName }}
+                    <kw-tooltip
+                      show-when-ellipsised
+                      :offset="[-20, 7]"
+                      anchor="bottom start"
+                      self="center start"
+                      class="tab_tooltip"
+                    >
+                      {{ menu.menuName }}
+                    </kw-tooltip>
+                  </a>
                 </li>
               </ul>
             </li>
