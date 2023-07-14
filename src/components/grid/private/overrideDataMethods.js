@@ -121,7 +121,7 @@ function hideRowIndicator() {
   if (findIndicator.length <= 0) {
     setTimeout(() => {
       hideRowIndicator();
-    }, 20);
+    }, 30);
   } else {
     window.$('.rg-rowbarcontainer thead tr th:nth-child(2)').css('display', 'none');
     window.$('.rg-rowbarcontainer tbody tr td.rg-rowindicator-cell').css('display', 'none');
@@ -156,7 +156,7 @@ export function overrideSetRows(data, vm) {
       if (view.rowIndicator.keepInvisible) {
         hideRowIndicator();
       }
-    });
+    }, 30);
   });
 }
 
@@ -175,7 +175,7 @@ export function overrideAddRows(data, vm) {
       if (view.rowIndicator.keepInvisible) {
         hideRowIndicator();
       }
-    });
+    }, 30);
   });
 }
 
@@ -189,7 +189,7 @@ export function overrideInsertRow(data, vm) {
       if (view.rowIndicator.keepInvisible) {
         hideRowIndicator();
       }
-    });
+    }, 30);
   });
 }
 
