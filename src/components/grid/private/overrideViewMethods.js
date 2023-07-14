@@ -148,6 +148,7 @@ function setColumnRenderer(column, { dataType }) {
   }
 
   if (column.editor?.type === 'file') {
+    if (column.editor.hideWhenEmpty === true) return;
     const styleNames = column.styleName.split(' ');
     styleNames.push('rg-file-button');
     column.styleName = styleNames.join(' ');
