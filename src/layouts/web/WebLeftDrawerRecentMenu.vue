@@ -131,6 +131,10 @@ export default {
       return http.delete('/sflex/common/common/portal/recent-menus', { data: deleteMenus });
     }
 
+    function deleteRecentMenu(menuLogDate, menuUid) {
+      return http.delete(`/sflex/common/common/portal/recent-menu/${menuLogDate}/${menuUid}`);
+    }
+
     async function onClickDeleteAll() {
       if (!await confirm(t('MSG_ALT_WANT_DEL'))) return;
 
@@ -144,7 +148,7 @@ export default {
     async function onClickDelete({ menuLogDate, menuUid }) {
       if (!await confirm(t('MSG_ALT_WANT_DEL'))) return;
 
-      await deleteRecentMenus([{ menuLogDate, menuUid }]);
+      await deleteRecentMenu(menuLogDate, menuUid);
       await dispatch('meta/fetchRecentMenus');
 
       notify(t('MSG_ALT_DELETED'));
