@@ -3,8 +3,7 @@
     v-if="fileUid"
     :alt="fileUid"
     :src="imgSrcByFileUid"
-    :width="width"
-    :height="height"
+    :style="computedWidthHeight"
   >
   <q-img
     v-else
@@ -155,6 +154,8 @@ export default {
     const imgSrc = ref(null);
     const imgSrcByFileUid = ref();
 
+    const computedWidthHeight = computed(() => ({ width: props.width, height: props.height }));
+
     watch(props, async () => {
       if (!isEmpty(props.fileUid)) {
         const src = await getImageSrcFromFile(props.fileUid);
@@ -172,6 +173,7 @@ export default {
       imageClass,
       imgSrc,
       imgSrcByFileUid,
+      computedWidthHeight,
     };
   },
 };
