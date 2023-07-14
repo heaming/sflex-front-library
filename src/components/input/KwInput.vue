@@ -263,6 +263,12 @@ export default {
           if (newVal?.length <= 9) return '##-###-#####';
           return '##-####-####';
         }
+
+        if (newVal?.startsWith('0504') || newVal?.startsWith('0505')) {
+          if (newVal?.length <= 13) return '####-###-#####';
+          return '####-####-####';
+        }
+
         if (newVal?.length <= 9) return '####-#######';
 
         if (!props.unmaskedValue) {

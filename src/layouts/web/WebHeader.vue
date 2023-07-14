@@ -59,7 +59,8 @@
               rounded
               floating
               color="error"
-              :label="Math.min(alarms?.filter((alarm) => alarm.readYn === 'N').length, 99)"
+              :label="alarms?.filter((alarm) => alarm.readYn === 'N').length > 99
+                ? '99+' : alarms?.filter((alarm) => alarm.readYn === 'N').length"
               class="alert-badge"
             />
           </kw-btn>
@@ -70,6 +71,7 @@
             class="web-header__dropdown w400 h400"
             fit
             :offset="[0,3]"
+            @before-hide="beforeHideReadAllNotice"
           >
             <div class="px16">
               <kw-list
@@ -291,7 +293,7 @@ export default {
     const { notify } = useGlobal();
     const { t } = useI18n();
     const { getters, commit } = useStore();
-    const { readAlarm } = useAlarm();
+    const { readAlarm, readAllAlarm } = useAlarm();
     const alarms = computed(() => getters['meta/getAlarms']);
     const menuSearchRef = ref();
     const router = useRouter();
@@ -413,8 +415,7 @@ export default {
     }
 
     function goToEduMaterialPage() {
-      // TODO: 교육자료 페이지 없는듯
-      // router.push({name: ''})
+      router.push('/kportal-edu-material-mgt');
     }
 
     function goToFaqPage() {
@@ -428,6 +429,14 @@ export default {
     function onClickReadItem(item) {
       if (item.value.linkUrl) alarmRef.value.hide();
       readAlarm(item);
+    }
+
+    function beforeHideReadAllNotice() {
+      const noUrlAlarms = alarms.value.filter((alarm) => !alarm.linkUrl && alarm.readYn === 'N');
+      if (noUrlAlarms.length > 0) {
+        const ids = noUrlAlarms.map((alarm) => alarm.alarmId);
+        readAllAlarm(ids);
+      }
     }
 
     return {
@@ -468,6 +477,7 @@ export default {
       goToSmsSendHistoryPage,
       onClickReadItem,
       alarmRef,
+      beforeHideReadAllNotice,
     };
   },
 };

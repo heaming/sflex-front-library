@@ -219,13 +219,14 @@ import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
 import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
+import useAlarm from '../../composables/private/useAlarm';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
 
 const { logout } = useSession();
-
+const { readAllAlarm } = useAlarm();
 const apps = readonly(getters['meta/getApps']);
 const alarms = computed(() => getters['meta/getAlarms']);
 const router = useRouter();
@@ -425,6 +426,12 @@ async function openAlarmListPopup() {
   await modal({
     component: () => import('./TabletAlarmListP.vue'),
   });
+
+  const noUrlAlarms = alarms.value.filter((alarm) => !alarm.linkUrl && alarm.readYn === 'N');
+  if (noUrlAlarms.length > 0) {
+    const ids = noUrlAlarms.map((alarm) => alarm.alarmId);
+    readAllAlarm(ids);
+  }
 }
 
 function goToNoticePage() {
