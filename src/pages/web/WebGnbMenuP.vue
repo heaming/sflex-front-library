@@ -91,9 +91,9 @@ function createHierarchyData(menus, key) {
 async function fetchMenus() {
   const apps = getters['meta/getApps'];
   const app = apps.find((a) => a.applicationId === props.appKey);
-  const menuPageRes = getters['meta/getTotalMenus'];
+  const menuPageRes = getters['meta/getMenus'];
 
-  const menus = menuPageRes.data.filter((v) => v.applicationId === app.applicationId);
+  const menus = menuPageRes.filter((v) => v.applicationId === app.applicationId);
   const hierarchyData = {
     key: 'ROOT',
     portalId: app.portalId,

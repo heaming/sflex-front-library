@@ -48,9 +48,26 @@
                   :key="m_idx"
                 >
                   <a
+                    v-if="!!menu.hasRole"
                     href="javascript:;"
                     class="ellipsis"
                     @click="handleUpdateSelected(menu.menuUid)"
+                  >{{ menu.menuName }}
+                    <kw-tooltip
+                      show-when-ellipsised
+                      :offset="[-20, 7]"
+                      anchor="bottom start"
+                      self="center start"
+                      class="tab_tooltip"
+                    >
+                      {{ menu.menuName }}
+                    </kw-tooltip>
+                  </a>
+                  <a
+                    v-if="!menu.hasRole"
+                    href="javascript:;"
+                    style="color: #dedede;cursor: default;"
+                    class="ellipsis"
                   >{{ menu.menuName }}
                     <kw-tooltip
                       show-when-ellipsised
