@@ -515,12 +515,15 @@ export function overrideOnGetEditValue(view) {
     if (type === 'telephone') {
       const temp = value.split('-');
       value = temp.join('');
-      const regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+      const regex = /^\d{2,4}-\d{3,4}-\d{4}$/;
       const corpNumberRegex = /^\d{4}-\d{4}$/;
       if (value?.startsWith('02')) {
         value = value.replace(/-/gi, '');
         if (value?.length <= 9) value = value.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
         else value = value.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+      } else if (value?.startsWith('0504') || value?.startsWith('0505')) { // WEBFAX
+        if (value?.length <= 11) value = value.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
+        else value = value.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
       } else if (value?.length === 8) value = value.replace(/(\d{4})(\d{4})/, '$1-$2');
       else if (value?.length <= 10) value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       else value = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');

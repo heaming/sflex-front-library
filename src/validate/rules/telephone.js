@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash-es';
 
-const regex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+const regex = /^\d{2,4}-\d{3,4}-\d{4}$/;
 const corpNumberRegex = /^\d{4}-\d{4}$/;
 export default {
   validator: (value) => {
@@ -11,8 +11,12 @@ export default {
 
     const { length } = stringValue;
     let formatNum;
-    if (length === 11) formatNum = stringValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-    else if (length === 8) formatNum = stringValue.replace(/(\d{4})(\d{4})/, '$1-$2'); // 업체번호?
+    if (stringValue?.startsWith('0504') || stringValue?.startsWith('0505')) { // WEBFAX
+      if (stringValue?.length <= 11) formatNum = stringValue.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
+      else formatNum = stringValue.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
+    } else if (length === 11) {
+      formatNum = stringValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    } else if (length === 8) formatNum = stringValue.replace(/(\d{4})(\d{4})/, '$1-$2'); // 업체번호?
     else if (stringValue.startsWith('02')) {
       if (length <= 9) formatNum = stringValue.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
       else formatNum = stringValue.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
