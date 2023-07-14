@@ -6,6 +6,7 @@ import pascalCase from './private/pascalCase';
 const path = window.location.hash.split('?')[0];
 const name = `${pascalCase(path)}P`;
 const openedPopups = {};
+const openedPopupKeys = {};
 
 let globalMessageEvent;
 let globalCloseEvent;
@@ -13,6 +14,14 @@ let globalCloseEvent;
 function registerMessageEvent() {
   globalMessageEvent = (e) => {
     const { pid, result, payload, shouldPostMessage } = e.data;
+
+    // windowKey부터 있으면 삭제
+    if (pid && openedPopupKeys[pid]) {
+      // 삭제로직 추가.
+      // eslint-disable-next-line no-eval
+      eval(`delete window.${openedPopupKeys[pid]}`);
+      delete openedPopupKeys[pid];
+    }
     if (pid && openedPopups[pid] && shouldPostMessage) {
       const resolve = openedPopups[pid];
       delete openedPopups[pid];
@@ -34,12 +43,15 @@ function registerMessageEvent() {
   window.addEventListener('message', globalMessageEvent, false);
 }
 
-function registerOpenedPopup(pid, resolve) {
+function registerOpenedPopup(pid, resolve, windowKey = null) {
   if (!globalMessageEvent) {
     registerMessageEvent();
   }
 
   openedPopups[pid] = resolve;
+  if (windowKey) {
+    openedPopupKeys[pid] = windowKey;
+  }
 }
 
 function calculateCenterTopLeft(width, height) {
@@ -87,39 +99,11 @@ function parseFeatures(windowFeatures) {
   return parsedFeatures;
 }
 
-export async function open(url, windowFeatures, params = null) {
-  return new Promise((resolve, reject) => {
-    const {
-      origin,
-      pathname,
-      search,
-      hash,
-    } = new URL(url, /^https?:\/\//.test(url) ? undefined : window.location.origin);
-
-    const pid = uid();
-    let urlWithUid;
-    if (params && typeof params === 'object') {
-      let paramUrl = '';
-      Object.keys(params).forEach((key) => {
-        paramUrl += `&${key}=${params[key]}`;
-      });
-      urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${paramUrl.trim().length > 0 ? paramUrl : ''}${hash}`;
-    } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
-
-    openURL(urlWithUid, () => {
-      reject(
-        new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
-      );
-    }, parseFeatures(windowFeatures));
-
-    registerOpenedPopup(pid, resolve);
-  });
-}
-
 function close(result, payload, forceClose = true) {
   const pid = new URLSearchParams(window.location.search).get('pid');
   const isExternallyAccessible = store.getters['meta/getPage'](name)?.pageExtAccYn === 'Y';
   const targetOrigin = isExternallyAccessible ? '*' : undefined;
+
   window.opener?.postMessage({
     pid, result, payload,
   }, targetOrigin);
@@ -140,6 +124,50 @@ export function registerCloseEvent() {
   };
 
   window.addEventListener('beforeunload', globalCloseEvent, false);
+}
+
+export async function open(url, windowFeatures, params = null, windowKey = null) {
+  return new Promise((resolve, reject) => {
+    const {
+      origin,
+      pathname,
+      search,
+      hash,
+    } = new URL(url, /^https?:\/\//.test(url) ? undefined : window.location.origin);
+
+    const pid = uid();
+    let urlWithUid;
+    if (params && typeof params === 'object') {
+      let paramUrl = '';
+      Object.keys(params).forEach((key) => {
+        paramUrl += `&${key}=${params[key]}`;
+      });
+      urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${paramUrl.trim().length > 0 ? paramUrl : ''}${hash}`;
+    } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
+
+    if (windowKey) {
+      // eslint-disable-next-line no-eval
+      if (eval(`window.${windowKey}`)) {
+        // eslint-disable-next-line no-eval
+        eval(`window.${windowKey}.focus();`);
+      } else {
+        // eslint-disable-next-line no-eval
+        eval(`window.${windowKey}= openURL(urlWithUid, () => {
+          reject(
+            new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
+          );
+        }, parseFeatures(windowFeatures));`);
+      }
+    } else {
+      openURL(urlWithUid, () => {
+        reject(
+          new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
+        );
+      }, parseFeatures(windowFeatures));
+    }
+
+    registerOpenedPopup(pid, resolve, windowKey);
+  });
 }
 
 export function ok(payload) {
