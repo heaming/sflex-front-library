@@ -402,19 +402,10 @@ function setColumnStyleCallback(column) {
   }
 }
 
-// function setRowIndicatorStyleCallback(view, data) {
-//   view.rowIndicator.cellStyleCallback = (g, type, index) => {
-//     if (type === 'indicator' && data.getRowState(vindex) === 'created') {
-//       return 'hide-row-indicator';
-//     }
-//   };
-// }
-
 function normalizeColumn(column, view) {
   const normalizedColumn = cloneDeep(column);
   const data = view.getDataSource();
   const field = data.fieldByName(column.fieldName);
-
   setColumnDefault(normalizedColumn, field);
   setColumnHeader(normalizedColumn, field);
   setColumnOptions(normalizedColumn, field);
@@ -423,7 +414,7 @@ function normalizeColumn(column, view) {
   setColumnEditor(normalizedColumn, field);
   setColumnCellButton(normalizedColumn, field);
   setColumnStyleCallback(normalizedColumn, field);
-  // setRowIndicatorStyleCallback(view, data);
+
   return normalizedColumn;
 }
 
