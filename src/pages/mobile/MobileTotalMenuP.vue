@@ -151,12 +151,15 @@ import useModal from '../../composables/useModal';
 import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
 import { bottomSheet } from '../../plugins/bottomSheet';
+import useAlarm from '../../composables/private/useAlarm';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
 const { getters, dispatch } = useStore();
 const { logout } = useSession();
 const { t } = useI18n();
+
+const { readAllAlarm } = useAlarm();
 
 const apps = readonly(getters['meta/getApps']);
 const router = useRouter();
@@ -395,6 +398,12 @@ async function openAlarmListPopup() {
   await modal({
     component: () => import('./MobileAlarmListP.vue'),
   });
+
+  const noUrlAlarms = alarms.value.filter((alarm) => !alarm.linkUrl && alarm.readYn === 'N');
+  if (noUrlAlarms.length > 0) {
+    const ids = noUrlAlarms.map((alarm) => alarm.alarmId);
+    readAllAlarm(ids);
+  }
 }
 
 onMounted(() => {
