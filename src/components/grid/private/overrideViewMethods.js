@@ -149,9 +149,6 @@ function setColumnRenderer(column, { dataType }) {
 
   if (column.editor?.type === 'file') {
     const styleNames = column.styleName.split(' ');
-    if (column.editor.hideWhenEmpty === true) {
-      styleNames.push('rg-file-hide-button');
-    }
     styleNames.push('rg-file-button');
     column.styleName = styleNames.join(' ');
     column.renderer = {
