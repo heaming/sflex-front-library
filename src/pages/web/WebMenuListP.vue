@@ -356,9 +356,25 @@ function getHighlightedMenuName(menuName) {
     const isExist = withoutSpace.indexOf(withoutSpaceText);
     if (isExist >= 0) {
       const startIndex = highlightedMenuName.indexOf(text.substr(0, 1));
-      const endIndex = highlightedMenuName.indexOf(text.substr(-1), startIndex);
-
-      let target = highlightedMenuName.substring(startIndex, endIndex + 1);
+      const endIndex = highlightedMenuName.lastIndexOf(text.substr(-1));
+      let newStartIndex;
+      let newEndIndex;
+      let testString;
+      let flag = false;
+      for (let i = startIndex; i < highlightedMenuName.length; i += 1) {
+        for (let j = endIndex + 1; j >= i; j -= 1) {
+          testString = highlightedMenuName.substring(i, j);
+          testString = testString.replace(/\s/g, '');
+          if (testString === withoutSpaceText) {
+            newStartIndex = i;
+            newEndIndex = j;
+            flag = true;
+            break;
+          }
+        }
+        if (flag) break;
+      }
+      let target = highlightedMenuName.substring(newStartIndex, newEndIndex);
 
       target = escapeSpecialCharacters(target);
 
