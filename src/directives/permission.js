@@ -25,7 +25,11 @@ function getPermissionKeys(permissionValue) {
   let currentValue = permissionValue;
   PERMISSON_VALUES.forEach((v, i) => {
     currentValue -= v;
-    if (currentValue >= 0) permissionKeys.push(PERMISSON_KEYS[i]);
+    if (currentValue >= 0) {
+      permissionKeys.push(PERMISSON_KEYS[i]);
+    } else {
+      currentValue += v;
+    }
   });
   return permissionKeys;
 }
