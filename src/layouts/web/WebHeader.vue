@@ -229,6 +229,14 @@
               @click="openSetSessionP"
             />
             <kw-btn
+              v-if="isEdu || isWells"
+              v-close-popup
+              borderless
+              grow
+              label="(임시) 유저변경"
+              @click="openSessionChangeP"
+            />
+            <kw-btn
               v-close-popup
               borderless
               grow
@@ -299,8 +307,12 @@ export default {
     const router = useRouter();
     const alarmRef = ref();
     const isEdu = computed(() => {
-      const { tenantId } = useMeta().getUserInfo();
-      return tenantId === 'TNT_EDU';
+      const { tenantId, portalId } = useMeta().getUserInfo();
+      return tenantId === 'TNT_EDU' && portalId === 'WEB_DEF';
+    });
+    const isWells = computed(() => {
+      const { tenantId, portalId } = useMeta().getUserInfo();
+      return tenantId === 'TNT_WELLS' && portalId === 'WEB_DEF';
     });
 
     dayjs.locale('en');
@@ -317,6 +329,12 @@ export default {
     async function openSetSessionP() {
       modal({
         component: () => import('../../pages/web/WebSessionSettingP.vue'),
+      });
+    }
+
+    async function openSessionChangeP() {
+      modal({
+        component: () => import('../../pages/web/WebSessionChangeP.vue'),
       });
     }
     function goToHome() {
@@ -445,6 +463,7 @@ export default {
       goToHome,
       openHomeMgtPopup,
       openSetSessionP,
+      openSessionChangeP,
       openTotalMenuP,
       openMenuSearchPopup,
       openGnbMenu,
@@ -471,6 +490,7 @@ export default {
       beforeUserInfoMenuShow,
       beforeUserInfoTooltipShow,
       isEdu,
+      isWells,
       goToNoticePage,
       goToEduMaterialPage,
       goToFaqPage,
