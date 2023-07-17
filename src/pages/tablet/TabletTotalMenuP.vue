@@ -219,7 +219,7 @@ import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
 import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
-import useAlarm from '../../composables/private/useAlarm';
+import useAlarm from '../../components/page/private/useAlarm';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();

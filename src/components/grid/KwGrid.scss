@@ -502,6 +502,20 @@
   background-size: 18px !important;
 }
 
+.rg-check-renderer__option span {
+  width: 18px !important;
+  height: 18px !important;
+  background: url(~@assets/images/checkbox_off.svg) no-repeat center !important;
+  background-size: 18px !important;
+}
+
+.rg-check-renderer__option--selected span {
+  width: 18px !important;
+  height: 18px !important;
+  background: url(~@assets/images/checkbox_on.svg) no-repeat center !important;
+  background-size: 18px !important;
+}
+
 .rg-button-list {
   width: 16px !important;
   height: 16px !important;
@@ -890,6 +904,33 @@
 
     &--selected span {
       background: url(~@assets/images/radio_on.svg) no-repeat center;
+    }
+  }
+}
+
+.rg-check-renderer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  &__option {
+    line-height: 18px;
+
+    span {
+      display: inline-block;
+      margin-right: 4px;
+      inset: 1px;
+      width: 18px;
+      height: 18px;
+      border: none;
+      border-radius: 0;
+      background: url(~@assets/images/checkbox_off.svg) no-repeat center;
+      background-size: 18px;
+      color: transparent;
+    }
+
+    &--selected span {
+      background: url(~@assets/images/checkbox_on.svg) no-repeat center;
     }
   }
 }

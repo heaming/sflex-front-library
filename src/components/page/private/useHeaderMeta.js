@@ -17,6 +17,8 @@ export default () => {
   const portalId = computed(() => meta.portalId);
   const { tenantId } = useMeta().getUserInfo();
   const pageNoticeCntn = ref(null);
+  const pageManual = ref(null);
+
   async function getPageNotice() {
     if (meta.pageId) {
       const res = await http.get(`/sflex/common/common/page-notices/page/${meta.pageId}`);
@@ -24,8 +26,15 @@ export default () => {
     }
   }
 
-  getPageNotice();
+  async function getPageManual() {
+    if (meta.pageId) {
+      const res = await http.get(`/sflex/common/common/pages/${meta.pageId}/manuals`);
+      if (res.data) pageManual.value = res.data;
+    }
+  }
 
+  getPageNotice();
+  getPageManual();
   return {
     pageTitle: title,
     pageUseIsSub: isSubPage,
