@@ -53,7 +53,7 @@
 
 <script setup>
 import dayjs from 'dayjs';
-import useAlarm from '../../composables/private/useAlarm';
+import useAlarm from '../../components/page/private/useAlarm';
 
 const { getters } = useStore();
 const alarms = computed(() => getters['meta/getAlarms']);

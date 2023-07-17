@@ -137,7 +137,7 @@ export function isCellEditable(view, column, index) {
     return false;
   }
 
-  if (['check', 'radio'].includes(renderer?.type)) {
+  if (['check', 'radio', 'checkList'].includes(renderer?.type)) {
     return renderer.editable !== false
       && view.onCellEditable(view, index) !== false;
   }

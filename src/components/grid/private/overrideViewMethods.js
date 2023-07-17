@@ -212,6 +212,7 @@ function setColumnRenderer(column, { dataType }) {
 
       break;
     }
+    case 'checkList':
     case 'radio': {
       defaultsDeep(column, {
         editable: false,
