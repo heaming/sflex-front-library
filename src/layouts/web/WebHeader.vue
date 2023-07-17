@@ -240,6 +240,13 @@
               v-close-popup
               borderless
               grow
+              label="(임시) 권한 적용 끄기"
+              @click="onClickAuthOff"
+            />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
               :label="$t('MSG_TXT_LOGOUT')"
               @click="logout"
             />
@@ -272,6 +279,7 @@
 
 <script>
 import dayjs from 'dayjs';
+import { http } from '../../plugins/http';
 import useSession from '../../composables/useSession';
 import useHeaderApp from '../../composables/private/useHeaderApp';
 import useAlarm from '../../components/page/private/useAlarm';
@@ -282,6 +290,7 @@ import { modal } from '../../plugins/modal';
 import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
 import WebGnbMenuP from '../../pages/web/WebGnbMenuP.vue';
 import store from '../../store';
+import { localStorage } from '../../plugins/storage';
 
 const searchText = ref('');
 const totalMenu = ref(false);
@@ -335,6 +344,13 @@ export default {
     async function openSessionChangeP() {
       modal({
         component: () => import('../../pages/web/WebSessionChangeP.vue'),
+      });
+    }
+
+    async function onClickAuthOff() {
+      const accessToken = localStorage.getItem(consts.LOCAL_STORAGE_ACCESS_TOKEN) || null;
+      await http.post('/sflex/common/common/set-auth-off', {}, {
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
     }
     function goToHome() {
@@ -464,6 +480,7 @@ export default {
       openHomeMgtPopup,
       openSetSessionP,
       openSessionChangeP,
+      onClickAuthOff,
       openTotalMenuP,
       openMenuSearchPopup,
       openGnbMenu,
