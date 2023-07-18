@@ -19,6 +19,7 @@ const onColumnPropertyChanged = 'onColumnPropertyChanged';
 const onCellItemClickable = 'onCellItemClickable'; // custom
 const onCellItemClicked = 'onCellItemClicked';
 const onCellClicked = 'onCellClicked';
+const onCellDblClicked = 'onCellDblClicked';
 const onCellButtonClicked = 'onCellButtonClicked';
 const onCellEditable = 'onCellEditable'; // custom
 const onShowEditor = 'onShowEditor';
@@ -390,6 +391,15 @@ export function overrideOnCellClicked(view) {
       }
       isChecked = false;
       g.setCurrent({ itemIndex: clickData.itemIndex });
+    }
+  });
+}
+
+export function overrideOnCellDblClicked(view) {
+  wrapEvent(view, onCellDblClicked, async (g, clickData) => {
+    if (clickData.cellType === 'header') return;
+    if (hasOriginal(g, onCellDblClicked)) {
+      await execOriginal(g, onCellDblClicked, g, clickData);
     }
   });
 }
