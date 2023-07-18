@@ -131,14 +131,6 @@ export default {
 
     let view;
 
-    const displayIndex = computed(() => {
-      if (view) {
-        const { column } = view.__contextMenuClickData__ || view.getCurrent();
-        return view.getColumns().find((col) => col.fieldName === column || col.name === column)?.displayIndex;
-      }
-      return 0;
-    });
-
     function isFixed() {
       if (view) {
         const { colCount } = view.getFixedOptions();
@@ -269,7 +261,11 @@ export default {
 
     function onClickFixGrid() {
       const { colCount } = view.getFixedOptions();
-      view.setFixedOptions({ colCount: colCount !== 0 ? 0 : displayIndex.value + 1, resizable: true });
+
+      const { column } = view.__contextMenuClickData__ || view.getCurrent();
+      const displayIdx = view.getColumns().find((col) => col.fieldName === column || col.name === column)?.displayIndex;
+
+      view.setFixedOptions({ colCount: colCount !== 0 ? 0 : displayIdx + 1, resizable: true });
       menuRefs.value[0]?.hide();
     }
 
@@ -285,7 +281,6 @@ export default {
       onClickInitLayouts,
       initLayouts,
       canPersonalize,
-      displayIndex,
       onClickFixGrid,
       isFixed,
     };
