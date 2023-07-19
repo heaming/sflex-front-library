@@ -126,6 +126,7 @@ const iconList1 = [
   'price',
   'print',
   'report',
+  'report_on',
   'retry',
   'save',
   'search',

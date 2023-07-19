@@ -1,0 +1,21 @@
+<svg id="report_on" data-name="report_on(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <path id="bounding-box" d="M0,0H16V16H0Z" fill="none"/>
+  </g>
+  <g id="icon" transform="translate(1.953 5)">
+    <g id="page" transform="translate(1.046 -4)">
+      <path id="패스_210507" data-name="패스 210507" d="M0,0H12l0,9.707L8.453,14H0Z" transform="translate(-0.999 0.002)" fill="#ff8f1f"/>
+      <line id="선_3174" data-name="선 3174" transform="translate(9.501 12.5)" fill="none" stroke="#707070" stroke-width="1"/>
+      <g id="패스_210125" data-name="패스 210125" transform="translate(6.252 8.271)" fill="none">
+        <path d="M-.251.229h5v1.5h-5Z" stroke="none"/>
+        <path d="M -0.2509770393371582 0.22900390625 L 4.7490234375 0.22900390625 L 4.7490234375 1.72900390625 L -0.2509770393371582 1.72900390625 L -0.2509770393371582 0.22900390625 Z" stroke="none" fill="#fff"/>
+      </g>
+      <g id="패스_210508" data-name="패스 210508" transform="translate(7.73 8.751) rotate(90)" fill="none">
+        <path d="M-.251.229h5.5v1.5h-5.5Z" stroke="none"/>
+        <path d="M -0.2509760856628418 0.22900390625 L 5.2490234375 0.22900390625 L 5.2490234375 1.72900390625 L -0.2509760856628418 1.72900390625 L -0.2509760856628418 0.22900390625 Z" stroke="none" fill="#fff"/>
+      </g>
+    </g>
+    <rect id="사각형_151176" data-name="사각형 151176" width="6" height="1.5" transform="translate(3.047 -1)" fill="#fff"/>
+    <rect id="사각형_151610" data-name="사각형 151610" width="4" height="1.5" transform="translate(3.047 1.5)" fill="#fff"/>
+  </g>
+</svg>
