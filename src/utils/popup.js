@@ -137,27 +137,33 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
 
     const pid = uid();
     let urlWithUid;
+    let paramUrl = '';
     if (params && typeof params === 'object') {
-      let paramUrl = '';
       Object.keys(params).forEach((key) => {
         paramUrl += `&${key}=${params[key]}`;
       });
       urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${paramUrl.trim().length > 0 ? paramUrl : ''}${hash}`;
     } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
-
     if (windowKey) {
-      // eslint-disable-next-line no-eval
+      /* eslint-disable no-eval */
       if (eval(`window.${windowKey}`)) {
-        // eslint-disable-next-line no-eval
-        eval(`window.${windowKey}.focus();`);
+        // url 이 같은지를 확인
+        if (eval(`window.${windowKey}_url`) === (origin + paramUrl)) {
+          eval(`window.${windowKey}.focus();`);
+        } else {
+          eval(`window.${windowKey}_url = origin + paramUrl`);
+          eval(`window.${windowKey}.location.href = urlWithUid`);
+          eval(`window.${windowKey}.focus();`);
+        }
       } else {
-        // eslint-disable-next-line no-eval
+        eval(`window.${windowKey}_url = origin + paramUrl`);
         eval(`window.${windowKey}= openURL(urlWithUid, () => {
           reject(
             new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
           );
         }, parseFeatures(windowFeatures));`);
       }
+      /* eslint-enable */
     } else {
       openURL(urlWithUid, () => {
         reject(
