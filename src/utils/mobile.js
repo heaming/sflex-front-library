@@ -24,7 +24,7 @@ function callEvent(resolve, reject) {
         code, data, message,
       } = JSON.parse(response);
 
-      if (code !== 200) {
+      if (code !== 200 && code !== 400) { // 400 : cancel
         await alert(message);
         reject(new Error(message));
       } else {
