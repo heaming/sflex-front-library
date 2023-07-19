@@ -271,7 +271,9 @@ async function updateBookmark(isCreate, menu) {
 
 function moveToPage(menu) {
   ok();
-  router.push({ name: menu.menuUid });
+  const isHome = router.currentRoute.value.name === 'Home' || router.currentRoute.value.fullPath === '/';
+  if (isHome) router.push({ name: menu.menuUid });
+  else router.replace({ name: menu.menuUid });
 }
 
 function setActive(navLinks, link) {
