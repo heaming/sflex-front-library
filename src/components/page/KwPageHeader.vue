@@ -118,6 +118,7 @@ import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
 import env from '../../consts/private/env';
 import { modal } from '../../plugins/modal';
+import { http } from '../../plugins/http';
 
 export default {
   name: 'KwPageHeader',
@@ -139,8 +140,11 @@ export default {
     const showPageNotice = ref(true);
     const showPageManual = ref(false);
     const { pageManual } = useHeaderMeta();
+
     async function onClickOpenManual() {
       if (isEmpty(pageManual.value)) return;
+
+      await http.put(`/sflex/common/common/manuals/${pageManual.value.docId}/read`);
 
       showPageManual.value = true;
       await modal({
