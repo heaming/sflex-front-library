@@ -43,9 +43,9 @@
         </kw-icon>
 
         <kw-icon
-          v-if="true"
-          name="report"
+          :name="showPageManual ? 'report_on' : 'report'"
           clickable
+          @click="onClickOpenManual"
         >
           {{ $t('MSG_TXT_MANU') }}
         </kw-icon>
@@ -110,12 +110,14 @@
 </template>
 
 <script>
+import { isEmpty } from 'lodash-es';
 import { sanitize } from '../../plugins/sanitize';
 import useBookmark from './private/useBookmark';
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
 import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
 import env from '../../consts/private/env';
+import { modal } from '../../plugins/modal';
 
 export default {
   name: 'KwPageHeader',
@@ -135,6 +137,19 @@ export default {
 
   async setup() {
     const showPageNotice = ref(true);
+    const showPageManual = ref(false);
+    const { pageManual } = useHeaderMeta();
+    async function onClickOpenManual() {
+      if (isEmpty(pageManual.value)) return;
+
+      showPageManual.value = true;
+      await modal({
+        component: 'ZwcmzPageManualDtlP',
+        componentProps: { manual: pageManual.value },
+      });
+      showPageManual.value = false;
+    }
+
     return {
       ...useBookmark(),
       ...useBreadcrumbNavigation(),
@@ -142,7 +157,9 @@ export default {
       ...useHeaderMeta(),
       env,
       showPageNotice,
+      showPageManual,
       sanitize,
+      onClickOpenManual,
     };
   },
 };

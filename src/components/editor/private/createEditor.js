@@ -1,7 +1,7 @@
 import SunEditor from 'suneditor';
 import { ko } from 'suneditor/src/lang';
 import {
-  blockquote, align, font, fontSize, fontColor, table,
+  blockquote, align, font, fontSize, fontColor, table, hiliteColor,
   formatBlock, lineHeight, template, link, image, list,
 } from 'suneditor/src/plugins';
 
@@ -108,6 +108,7 @@ const { create } = SunEditor.init({
     font,
     fontSize,
     fontColor,
+    hiliteColor,
     table,
     formatBlock,
     lineHeight,
