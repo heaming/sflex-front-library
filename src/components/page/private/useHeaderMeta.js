@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash-es';
 import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
 
@@ -23,13 +24,15 @@ export default () => {
     if (meta.pageId) {
       const res = await http.get(`/sflex/common/common/page-notices/page/${meta.pageId}`);
       if (res.data) pageNoticeCntn.value = res.data.noticeCntn;
+      else pageNoticeCntn.value = null;
     }
   }
 
   async function getPageManual() {
     if (meta.pageId) {
-      const res = await http.get(`/sflex/common/common/pages/${meta.pageId}/manuals`);
-      if (res.data) pageManual.value = res.data;
+      const res = await http.get(`/sflex/common/common/pages/${meta.pageId}/using-manual`);
+      if (!isEmpty(res.data)) pageManual.value = res.data;
+      else pageManual.value = null;
     }
   }
 
@@ -42,5 +45,6 @@ export default () => {
     portalId,
     tenantId,
     pageNoticeCntn,
+    pageManual,
   };
 };
