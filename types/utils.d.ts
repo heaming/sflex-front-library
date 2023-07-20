@@ -116,6 +116,7 @@ export const fileUtil: FileUtil;
 // Grid
 import { GridView, TreeView, GridExportOptions, DataValues, LocalDataProvider, LocalTreeDataProvider, RowState } from 'realgrid';
 import { convertBlobToFile } from '../src/utils/file';
+import { registerWindowKeyEvent } from '../src/utils/popup';
 
 type CellValue = any;
 type RowValue = Record<string, CellValue>;
@@ -666,6 +667,11 @@ interface PopupUtil {
    * @param windowFeatures 팝업 옵션
    */
   open(url: string, windowFeatures?: WindowFeatures): Promise<boolean>;
+
+  /**
+   * 열린 팝업에서 호출하는 함수로, 부모창에게 현재 창을 전달한다. (reload시 window사라짐 방지)
+   */
+  registerWindowKeyEvent(): void;
 
   /**
    * 열린 팝업에서 호출하는 함수로, `beforeunload`를 등록한다.
