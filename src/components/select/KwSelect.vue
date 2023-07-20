@@ -86,11 +86,11 @@
 
     <!--before-options -->
     <template
-      v-if="($g.platform.is.mobile || multiple) && ($g.platform.is.mobile && !behavior)"
+      v-if="($g.platform.is.mobile || multiple)"
       #before-options
     >
       <div
-        v-if="$g.platform.is.mobile"
+        v-if="$g.platform.is.mobile && !behavior"
         class="kw-select-options__header"
       >
         <h1>{{ placeholder }}</h1>
