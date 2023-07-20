@@ -119,7 +119,9 @@ function close(result, payload, forceClose = true) {
 }
 
 export function registerWindowKeyEvent() {
-  window.opener.updateChildWindowReference(window);
+  if (window.opener.updateChildWindowReference) {
+    window.opener.updateChildWindowReference(window);
+  }
 }
 
 export function registerCloseEvent() {
