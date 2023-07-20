@@ -346,6 +346,16 @@
   &.form-border {
     border: none !important;
   }
+
+  // popup 안에서 search-form 인접 할 때
+  &.search-border {
+    padding: 24px 40px 0 !important;
+
+    &::before {
+      left: 40px !important;
+      right: 40px !important;
+    }
+  }
 }
 
 body.mobile:not(.tablet) {
