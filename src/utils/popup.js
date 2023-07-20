@@ -118,6 +118,10 @@ function close(result, payload, forceClose = true) {
   }
 }
 
+export function registerWindowKeyEvent() {
+  window.opener.updateChildWindowReference(window);
+}
+
 export function registerCloseEvent() {
   globalCloseEvent = () => {
     close(false, undefined, false);
@@ -138,6 +142,7 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
     const pid = uid();
     let urlWithUid;
     let paramUrl = '';
+    let needRegist = true;
     if (params && typeof params === 'object') {
       Object.keys(params).forEach((key) => {
         paramUrl += `&${key}=${params[key]}`;
@@ -146,11 +151,22 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
     } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
     if (windowKey) {
       /* eslint-disable no-eval */
+      window.updateChildWindowReference = function (childWindow) {
+        console.log(childWindow);
+        eval(`window.${windowKey} = childWindow`);
+      };
       if (eval(`window.${windowKey}`)) {
         // url 이 같은지를 확인
         if (eval(`window.${windowKey}_url`) === (origin + paramUrl)) {
           eval(`window.${windowKey}.focus();`);
+          needRegist = false;
         } else {
+          // 떠있던 화면의 pid를 가져와서 popups[pid] 로 검색해서 팝업을 삭제해 줌.
+          const childPid = eval(`new URLSearchParams(window.${windowKey}.location.search).get('pid')`);
+          if (childPid && openedPopups[childPid]) {
+            delete openedPopups[childPid];
+          }
+
           eval(`window.${windowKey}_url = origin + paramUrl`);
           eval(`window.${windowKey}.location.href = urlWithUid`);
           eval(`window.${windowKey}.focus();`);
@@ -171,8 +187,9 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
         );
       }, parseFeatures(windowFeatures));
     }
-
-    registerOpenedPopup(pid, resolve, windowKey);
+    if (needRegist) {
+      registerOpenedPopup(pid, resolve, windowKey);
+    }
   });
 }
 
