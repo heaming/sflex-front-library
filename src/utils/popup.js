@@ -159,36 +159,34 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
       urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${paramUrl.trim().length > 0 ? paramUrl : ''}${hash}`;
     } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
     if (windowKey) {
-      /* eslint-disable no-eval */
       window.updateChildWindowReference = function (childWindow) {
         console.log(childWindow);
-        eval(`window.${windowKey} = childWindow`);
+        window[windowKey] = childWindow;
       };
-      if (eval(`window.${windowKey}`)) {
+      if (window[windowKey]) {
         // url 이 같은지를 확인
-        if (eval(`window.${windowKey}_url`) === (origin + paramUrl)) {
-          eval(`window.${windowKey}.focus();`);
+        if (window[`${windowKey}_url`] === (origin + paramUrl)) {
+          window[windowKey].focus();
           needRegist = false;
         } else {
           // 떠있던 화면의 pid를 가져와서 popups[pid] 로 검색해서 팝업을 삭제해 줌.
-          const childPid = eval(`new URLSearchParams(window.${windowKey}.location.search).get('pid')`);
+          const childPid = new URLSearchParams(window[windowKey].location.search).get('pid');
           if (childPid && openedPopups[childPid]) {
             delete openedPopups[childPid];
           }
 
-          eval(`window.${windowKey}_url = origin + paramUrl`);
-          eval(`window.${windowKey}.location.href = urlWithUid`);
-          eval(`window.${windowKey}.focus();`);
+          window[`${windowKey}_url`] = origin + paramUrl;
+          window[windowKey].location.href = urlWithUid;
+          window[windowKey].focus();
         }
       } else {
-        eval(`window.${windowKey}_url = origin + paramUrl`);
-        eval(`window.${windowKey}= openURL(urlWithUid, () => {
+        window[`${windowKey}_url`] = origin + paramUrl;
+        window[windowKey] = openURL(urlWithUid, () => {
           reject(
             new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
           );
-        }, parseFeatures(windowFeatures));`);
+        }, parseFeatures(windowFeatures));
       }
-      /* eslint-enable */
     } else {
       openURL(urlWithUid, () => {
         reject(
