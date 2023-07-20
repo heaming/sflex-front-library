@@ -8,6 +8,7 @@
       :width="303"
       show-if-above
       bordered
+      behavior="desktop"
     >
       <div class="web-left-drawer__mini">
         <kw-btn
