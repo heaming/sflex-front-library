@@ -134,6 +134,11 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
   return new Promise((resolve, reject) => {
     // 부모창으로 세팅
     window.name = 'ky_parent';
+    /**
+     * 자식창에서 부모창 focus 주고 싶을때
+     * var test = window.open('', 'ky_parent');
+     * test.focus();
+     */
     const {
       origin,
       pathname,
