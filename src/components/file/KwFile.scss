@@ -23,6 +23,17 @@
           min-height: $kw-field-height-dense;
         }
       }
+
+      &--readonly {
+        .q-field__control {
+          background-color: transparent;
+        }
+
+        .q-field__input,
+        .q-field__native {
+          color: $black1;
+        }
+      }
     }
   }
 
