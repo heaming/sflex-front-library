@@ -132,6 +132,8 @@ export function registerCloseEvent() {
 
 export async function open(url, windowFeatures, params = null, windowKey = null) {
   return new Promise((resolve, reject) => {
+    // 부모창으로 세팅
+    window.name = 'ky_parent';
     const {
       origin,
       pathname,
