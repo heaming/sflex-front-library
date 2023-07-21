@@ -175,6 +175,13 @@
     }
   }
 
+  // kwMobileHeader 오른쪽에 로고
+  &__logo {
+    width: 100px;
+    height: 100px;
+    background: url(~@assets/images/logo_kyowon.svg) no-repeat center center;
+  }
+
   &__close {
     margin-left: 8px;
     color: $black1;
