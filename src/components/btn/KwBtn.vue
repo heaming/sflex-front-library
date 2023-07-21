@@ -4,6 +4,7 @@
     ref="btnRef"
     v-bind="{...styleClassAttrs, ...buttonStyleProps}"
     :class="buttonClass"
+    class="shrink-off"
     :style="buttonStyles"
     no-caps
     unelevated
