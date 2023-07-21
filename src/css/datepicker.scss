@@ -35,7 +35,8 @@
 
       &.prev {
         position: absolute;
-        top: 1px;
+
+        // top: 1px;
         left: 50%;
         transform: translateX(calc(-50% - 80px));
         background: url(~@assets/images/ic_arrow_left.svg) no-repeat center 14px;
@@ -50,7 +51,8 @@
 
       &.next {
         position: absolute;
-        top: 1px;
+
+        // top: 1px;
         right: 50%;
         transform: translateX(calc(50% + 80px));
         background: url(~@assets/images/ic_arrow_right.svg) no-repeat center 14px;
