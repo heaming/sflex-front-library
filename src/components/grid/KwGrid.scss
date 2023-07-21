@@ -942,6 +942,16 @@
   border-top: 1px solid $black1;
   border-spacing: 0;
   text-align: center;
+  table-layout: fixed;
+
+  // ios chrome에서 table width값 적용이 안되서 추가
+  caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    font-size: 0;
+    overflow: hidden;
+  }
 
   thead tr {
     th {

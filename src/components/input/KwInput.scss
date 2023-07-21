@@ -104,6 +104,13 @@
       }
        */
     }
+
+    // make clearbutton only show focused state
+    &:not(.q-field--focused) {
+      .q-field__focusable-action {
+        display: none;
+      }
+    }
   }
 
   .no-pointer-events.q-field__label {
