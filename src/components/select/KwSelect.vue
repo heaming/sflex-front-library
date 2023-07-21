@@ -29,7 +29,7 @@
     :autofocus="autofocus"
     :placeholder="computedUseInput ? placeholder : undefined"
     :tabindex="tabindex"
-    :clearable="clearable"
+    :clearable="false"
     no-error-icon
     :dropdown-icon="dropdownIcon"
     :hide-dropdown-icon="hideDropdownIcon"
