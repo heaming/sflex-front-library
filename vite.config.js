@@ -90,6 +90,7 @@ export default defineConfig(({ mode }) => {
           'klona',
           'lodash-es',
           'qs',
+          'proj',
           // 'quasar',
           // 'quasar/lang/en-US',
           // 'quasar/lang/ko-KR',
