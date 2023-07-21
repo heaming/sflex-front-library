@@ -56,7 +56,11 @@
     >
       <slot name="more" />
     </kw-btn-dropdown>
-
+    <!-- nosession 일 경우 오른쪽에 교원 로고 띄우기 -->
+    <div
+      v-if="portalId && portalId === 'NO_SESSION'"
+      class="kw-page-mobile-header__logo"
+    />
     <!-- WAPPLE 인 경우에만 X버튼 뜨도록 설정 -->
     <div
       v-if="portalId === 'MBL_DEF' && tenantId === 'TNT_EDU'"
