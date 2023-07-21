@@ -10,6 +10,7 @@ import notify from './plugins/notify';
 import platform from './plugins/platform';
 import sanitize from './plugins/sanitize';
 import storage from './plugins/storage';
+import proj4 from './plugins/proj4';
 
 const autoInstalledPlugins = [
   cookies,
@@ -20,6 +21,7 @@ const autoInstalledPlugins = [
   modal,
   notify,
   platform,
+  proj4,
   sanitize,
   storage,
   drag,
