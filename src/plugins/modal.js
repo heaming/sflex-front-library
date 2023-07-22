@@ -15,6 +15,7 @@ const normalizeOptions = (options) => ({
   dialogProps: options.dialogProps || {},
   window: options.window === true,
   redirect: options.redirect === true,
+  windowFeatures: options.windowFeatures,
 });
 
 function openWindow(options) {
@@ -29,7 +30,7 @@ function openWindow(options) {
   const routeQuery = new URLSearchParams(options.componentProps);
   const url = `${env.VITE_ENTRY_POPUP_PATHNAME}#${search}/${kebabCased}?${routeQuery}`;
 
-  return open(url);
+  return open(url, options.windowFeatures);
 }
 
 async function openModal(options) {
