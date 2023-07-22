@@ -390,7 +390,12 @@ export default {
       });
       ev.target.classList.add('web-header__link--active');
       getSelectedKey.value = key;
-      document.querySelector('body').classList.add('q-body--prevent-scroll__header');
+      const body = document.querySelector('body');
+      body.classList.add('q-body--prevent-scroll__header');
+
+      const bodyScrollHeight = body.scrollHeight;
+      const windowHeight = window.innerHeight;
+      if (bodyScrollHeight > windowHeight) body.classList.add('kw-body--force-scrollbar-y');
       gnbMenu.value = true;
     }
 
@@ -400,6 +405,7 @@ export default {
         item.classList.remove('web-header__link--active');
       });
       document.querySelector('body').classList.remove('q-body--prevent-scroll__header');
+      document.querySelector('body').classList.remove('kw-body--force-scrollbar-y');
       getActiveClass();
     }
 

@@ -30,6 +30,12 @@ body.q-body--prevent-scroll__header {
   }
 }
 
+// 모달 띄울때 scrollbar 보여지면서 막기
+.q-body--force-scrollbar-y,
+.kw-body--force-scrollbar-y {
+  overflow-y: scroll !important;
+}
+
 // mobile
 .mobile {
   &:not(.tablet) {
