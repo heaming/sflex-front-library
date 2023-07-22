@@ -33,11 +33,13 @@ export default () => {
       const res = await http.get(`/sflex/common/common/pages/${meta.pageId}/using-manual`);
       if (!isEmpty(res.data)) pageManual.value = res.data;
       else pageManual.value = null;
+
+      return pageManual.value;
     }
+    return null;
   }
 
   getPageNotice();
-  getPageManual();
   return {
     pageTitle: title,
     pageUseIsSub: isSubPage,
@@ -46,5 +48,6 @@ export default () => {
     tenantId,
     pageNoticeCntn,
     pageManual,
+    getPageManual,
   };
 };

@@ -118,7 +118,7 @@ import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
 import env from '../../consts/private/env';
 import { modal } from '../../plugins/modal';
-import { http } from '../../plugins/http';
+import { alert } from '../../plugins/dialog';
 
 export default {
   name: 'KwPageHeader',
@@ -139,17 +139,19 @@ export default {
   async setup() {
     const showPageNotice = ref(true);
     const showPageManual = ref(false);
-    const { pageManual } = useHeaderMeta();
-
+    const { getPageManual } = useHeaderMeta();
+    const { t } = useI18n();
     async function onClickOpenManual() {
-      if (isEmpty(pageManual.value)) return;
-
-      await http.put(`/sflex/common/common/manuals/${pageManual.value.docId}/read`);
+      const manual = await getPageManual();
+      if (isEmpty(manual)) {
+        await alert(t('MSG_ALT_NO_MANUAL_PAGE'), { refocus: false });
+        return;
+      }
 
       showPageManual.value = true;
       await modal({
         component: 'ZwcmzPageManualDtlP',
-        componentProps: { manual: pageManual.value },
+        componentProps: { manual },
       });
       showPageManual.value = false;
     }
