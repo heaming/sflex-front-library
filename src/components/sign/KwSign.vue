@@ -44,7 +44,7 @@ export default {
   name: 'KwSign',
   props: {
     needRecentSign: { type: Boolean, default: true },
-    recentSignSrc: { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg/2338px-%ED%97%88%EA%B2%BD%EC%98%81%EC%84%9C%EB%AA%85.jpg' },
+    recentSignSrc: { type: String, default: '' },
     oriSignSrc: { type: String, default: '' },
     width: { type: [String, Number], default: undefined },
     height: { type: [String, Number], default: undefined },
