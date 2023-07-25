@@ -1,0 +1,392 @@
+// start dashboard style
+.dashboard {
+  width: 1840px;
+  flex: auto;
+
+  &_summary {
+    display: flex;
+    background: $secondary;
+    height: 64px;
+    padding: 16px 0 14px 24px;
+
+    & > * {
+      color: #fff;
+    }
+
+    .greetings {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 32px;
+      padding-right: 20px;
+
+      span {
+        font-weight: 500;
+      }
+    }
+
+    &_counter {
+      display: flex;
+
+      h5 {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 32px;
+        padding-right: 16px;
+        margin: 0;
+      }
+
+      dl {
+        display: flex;
+        margin: 0;
+
+        dt {
+          font-size: 16px;
+          font-weight: 300 !important;
+          line-height: 32px;
+          padding-right: 4px;
+          opacity: 0.7;
+        }
+
+        dd {
+          width: auto;
+          margin: 0;
+          line-height: 32px;
+          font-size: 22px;
+          font-weight: 500 !important;
+
+          & + dt {
+            padding-left: 16px;
+          }
+        }
+      }
+    }
+
+    .kw-btn-toggle {
+      margin-right: 20px;
+
+      * {
+        color: #fff !important;
+        background: none !important;
+
+        &::before {
+          display: none;
+        }
+
+        &::after {
+          border-color: #fff !important;
+        }
+      }
+
+      [aria-pressed="false"] {
+        opacity: 0.4;
+      }
+
+      .kw-btn.q-btn--dense {
+        padding: 6px 14px !important;
+      }
+    }
+  }
+
+  &_wrap {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 346px;
+    grid-template-columns: repeat(4, 454px);
+    gap: 8px;
+
+    // padding-bottom: 60px;
+    padding-bottom: 70px;
+    margin: 8px 0 0;
+    width: max-content;
+    min-height: calc(100vh - 168px);
+  }
+
+  &_el {
+    background: #fff;
+    padding: 24px;
+    overflow: hidden; // 영역 외 항목들은 숨기기
+
+    &_1by1 {
+      width: 454px;
+      height: 346px;
+      grid-area: auto / auto / span 1 / span 1;
+    }
+
+    &_1by2 {
+      width: 454px;
+      height: 700px; // 346 * 2 + 8
+      grid-area: auto / auto / span 2 / span 1;
+    }
+
+    &_2by1 {
+      width: 916px; // 454 * 2 + 8
+      height: 346px;
+      grid-area: auto / auto / span 1 / span 2;
+    }
+
+    &_2by2 {
+      width: 916px; // 454 *2 + 8
+      height: 700px; // 346 * 2 + 8
+      grid-area: auto / auto / span 2 / span 2;
+    }
+
+    // line-height
+    .kw-font-pt20 {
+      line-height: 1.813rem !important;
+    }
+
+    .kw-font-pt14 {
+      line-height: 1.25rem !important;
+    }
+
+    // simple table
+    .kw-table--normal tbody tr td {
+      padding: 10px 4px;
+    }
+  }
+}
+
+.main_footer {
+  // margin: 0 -40px -30px;
+  margin: 0;
+  position: absolute;
+  bottom: -12px;
+  left: -40px;
+  right: -40px;
+  height: 70px;
+  padding: 11px 40px;
+  background: #fff;
+  display: flex;
+
+  img {
+    width: 86px;
+  }
+
+  & > div {
+    padding-left: 58px;
+
+    & > span {
+      display: inline-block;
+      position: relative;
+      font-size: 14px;
+      padding: 0 8px;
+      line-height: 20px;
+      color: $black2;
+      vertical-align: top;
+
+      & + span::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 1px;
+        height: 12px;
+        background: $line-line;
+      }
+    }
+  }
+
+  .family-site {
+    margin-left: auto;
+  }
+}
+
+.organization-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  li {
+    width: calc((100% /2) - 4px);
+    padding: 12px 16px;
+    min-height: 79px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: $bg-box;
+  }
+
+  &-left {
+    flex-grow: 0;
+    text-align: left;
+    max-width: 90px;
+    word-break: keep-all;
+
+    span {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      color: $black3;
+    }
+  }
+
+  &-right {
+    flex-grow: 0;
+    text-align: right;
+
+    span {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      color: $black3;
+    }
+  }
+
+  &-title {
+    color: $black1;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  &-number {
+    font-size: 18px;
+    color: $black1;
+    font-weight: 700;
+    line-height: 1.625rem;
+  }
+}
+
+.net-increase-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $bg-box;
+    width: calc((100% /2) - 4px);
+    min-height: 46px;
+    padding: 8px 12px;
+
+    .kw-font-pt18 {
+      line-height: 1.625rem !important;
+    }
+
+    &--column {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .kw-font-pt18 {
+        margin-left: auto;
+        margin-top: 2px;
+      }
+    }
+  }
+}
+
+.progressbar {
+  position: relative;
+  width: 115px;
+  height: 6px;
+  background: $line-line;
+
+  span {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    background: $primary;
+  }
+}
+
+// card 1
+.current-states {
+  margin-top: 6px;
+
+  &__total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 16px;
+
+    li {
+      width: 116px;
+      text-align: right;
+    }
+  }
+}
+
+.states-details {
+  margin-top: 4px;
+
+  li {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.43;
+  }
+
+  &__main-item {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__children {
+    width: 100%;
+
+    > li {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      color: $black3;
+    }
+  }
+}
+
+.states-amount {
+  display: flex;
+  column-gap: 16px;
+  text-align: right;
+
+  li {
+    width: 116px;
+  }
+}
+
+.info-list {
+  display: flex;
+  column-gap: 8px;
+
+  li {
+    font-size: 14px;
+    line-height: 1.43;
+    color: $black2;
+
+    &:not(:first-of-type) {
+      position: relative;
+      padding-left: 8px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 12px;
+        background-color: #ddd;
+      }
+    }
+  }
+}
+
+.kw-list.q-list--separator {
+  &.kw-list--card {
+    > .q-item-type + .q-item-type {
+      border-color: $line-bg;
+    }
+
+    .q-item-type:first-of-type {
+      padding-top: 0;
+    }
+
+    .q-item-type:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// end dashboard style
