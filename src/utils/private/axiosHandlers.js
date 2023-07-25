@@ -62,6 +62,14 @@ export function handleSuccess(response) {
 const SESSION_EXPIRED_REPLACE_URL = env.VITE_LOGIN_URL || window.location.pathname;
 const ENABLE_STACK_TRACE_LOG = env.DEV || env.MODE === 'dev' || env.MODE === 'qa';
 
+async function handleServerFailureSessionDuplicated() {
+  localStorage.remove('reLoginInfo');
+  localStorage.remove('lastTransactionTime');
+  localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+  await alert(i18n.t('MSG_ALT_ERR_DUPLICATE_SESSION'), { icon: 'warning_24' });
+  window.location.replace(SESSION_EXPIRED_REPLACE_URL);
+}
+
 async function handleServerFailureSessionExpired(response) {
   const { config } = response;
 
@@ -74,9 +82,10 @@ async function handleServerFailureSessionExpired(response) {
   const lastTransactionTime = dayjs(lastTransactionTimeStr, 'YYYYMMDDHHmmss');
   const diff = now.diff(lastTransactionTime, 'h', true);
   if (lastTransactionTimeStr === null || reLoginInfoStr === null || diff >= 8) {
-    await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'));
-    // TODO sso logout 페이지로 보내야한다.
     localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+    localStorage.remove('reLoginInfo');
+    localStorage.remove('lastTransactionTime');
+    await alert(i18n.t('MSG_ALT_ERR_SESSION_EXPIRED'), { icon: 'warning_24' });
     window.location.replace(SESSION_EXPIRED_REPLACE_URL);
   } else {
     // 8시간이 안지났으면 그냥 비번묻는 로그인창이 뜬다.
@@ -85,6 +94,8 @@ async function handleServerFailureSessionExpired(response) {
     });
     if (result.payload) {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+      localStorage.remove('reLoginInfo');
+      localStorage.remove('lastTransactionTime');
       localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, result.payload);
       await store.dispatch('meta/changeAccessToken', result.payload);
       // 현재 메인이면 reload시킨다.
@@ -94,7 +105,11 @@ async function handleServerFailureSessionExpired(response) {
         notify('login 되었습니다. 다시 시도해주세요');
       }
     } else {
+      localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+      localStorage.remove('reLoginInfo');
+      localStorage.remove('lastTransactionTime');
       await alert('로그인에 실패하였습니다.');
+      window.location.reload();
     }
   }
 }
@@ -126,6 +141,8 @@ async function handleServerFailure(response) {
   const { data } = response;
 
   switch (data.errorType) {
+    case consts.HTTP_ERROR_SESSION_DUPLICATION:
+      await handleServerFailureSessionDuplicated(response); break;
     case consts.HTTP_ERROR_SESSION_EXPIRED:
       await handleServerFailureSessionExpired(response); break;
     case consts.HTTP_ERROR_BIZ:
