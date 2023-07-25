@@ -9,6 +9,7 @@ import { localStorage } from '../../plugins/storage';
 import { alert } from '../../plugins/dialog';
 import { modal } from '../../plugins/modal';
 import { notify } from '../../plugins/notify';
+import { platform } from '../../plugins/platform';
 import i18n from '../../i18n';
 import { blobToData, isServerError, showStackTraceLog } from './axiosShared';
 
@@ -89,9 +90,20 @@ async function handleServerFailureSessionExpired(response) {
     window.location.replace(SESSION_EXPIRED_REPLACE_URL);
   } else {
     // 8시간이 안지났으면 그냥 비번묻는 로그인창이 뜬다.
-    const result = await modal({
-      component: () => import('../../pages/web/WebReLoginP.vue'),
-    });
+    let result;
+    if (platform.is.mobile) {
+      result = await modal({
+        component: () => import('../../pages/web/WebReLoginP.vue'),
+      });
+    } else if (platform.is.tablet) {
+      result = await modal({
+        component: () => import('../../pages/web/WebReLoginP.vue'),
+      });
+    } else {
+      result = await modal({
+        component: () => import('../../pages/web/WebReLoginP.vue'),
+      });
+    }
     if (result.payload) {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
       localStorage.remove('reLoginInfo');

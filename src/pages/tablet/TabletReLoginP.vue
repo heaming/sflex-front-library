@@ -47,8 +47,6 @@
 </template>
 
 <script setup>
-// import CryptoJS from 'crypto-js';
-// eslint-disable-next-line import/no-cycle
 import { http } from '../../plugins/http';
 import env from '../../consts/private/env';
 import useModal from '../../composables/useModal';
@@ -58,18 +56,6 @@ import consts from '../../consts';
 const { ok } = useModal();
 const password = ref('');
 
-// const reLoginInfo = localStorage.getItem('reLoginInfo');
-// const iv = CryptoJS.enc.Hex.parse('');
-// const key = CryptoJS.enc.Utf8.parse('KSTATION-ENC-AES-256-2023-195817');
-// const byte = CryptoJS.AES.decrypt(reLoginInfo, key, { iv });
-//
-// const decStr = byte.toString(CryptoJS.enc.Utf8);
-// const arr = decStr.split('|');
-// const userInfo = {
-//   tenantId: arr[0],
-//   portalId: arr[1],
-//   loginId: arr[2],
-// };
 const userInfo = localStorage.getItem('reLoginInfo');
 
 console.log(userInfo);
