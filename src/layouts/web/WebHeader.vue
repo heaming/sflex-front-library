@@ -403,25 +403,27 @@ export default {
       gnbMenu.value = true;
     }
     function closeGnbMenu() {
-      gnbMenu.value = false;
-      document.querySelectorAll('.web-header__link').forEach((item) => {
-        item.classList.remove('web-header__link--active');
-      });
-      const body = document.querySelector('body');
-      body.classList.remove('q-body--prevent-scroll__header');
-      body.classList.remove('kw-body--force-scrollbar-y');
+      if (gnbMenu.value) {
+        gnbMenu.value = false;
+        document.querySelectorAll('.web-header__link').forEach((item) => {
+          item.classList.remove('web-header__link--active');
+        });
+        const body = document.querySelector('body');
+        body.classList.remove('q-body--prevent-scroll__header');
+        body.classList.remove('kw-body--force-scrollbar-y');
 
-      // 메뉴 닫힐 때 맨 위로 스크롤되서, 다시 현재 위치로 스크롤하는 로직 추가
-      let top = body.style?.top?.split('px')[0];
-      let left = body.style?.left?.split('px')[0];
-      if (isEmpty(top)) top = 0;
-      if (isEmpty(left)) left = 0;
-      top *= -1;
-      left *= -1;
-      window.scrollTo(left, top);
-      body.style.top = '';
-      body.style.left = '';
-      getActiveClass();
+        // 메뉴 닫힐 때 맨 위로 스크롤되서, 다시 현재 위치로 스크롤하는 로직 추가
+        let top = body.style?.top?.split('px')[0];
+        let left = body.style?.left?.split('px')[0];
+        if (isEmpty(top)) top = 0;
+        if (isEmpty(left)) left = 0;
+        top *= -1;
+        left *= -1;
+        window.scrollTo(left, top);
+        body.style.top = '';
+        body.style.left = '';
+        getActiveClass();
+      }
     }
 
     async function openMenuSearchPopup() {
