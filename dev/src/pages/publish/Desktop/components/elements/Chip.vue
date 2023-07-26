@@ -124,6 +124,13 @@
             text-color="black-btn-line"
             class="ma2"
           />
+          <kw-chip
+            label="마일리지"
+            color="bg-red-opacity"
+            text-color="error"
+            square
+            class="ma2"
+          />
         </div>
         <guide-code-view
           :code-value="chipCode"
@@ -196,6 +203,14 @@ const chipCode = `
   label="마일리지"
   color="bg-grey-opacity"
   text-color="black-btn-line"
+  square
+  class="ma2"
+/>
+
+<kw-chip
+  label="마일리지"
+  color="bg-red-opacity"
+  text-color="error"
   square
   class="ma2"
 />
