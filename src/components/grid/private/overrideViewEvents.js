@@ -312,6 +312,11 @@ export function overrideOnCellItemClicked(view) {
       } else if (typeof dataRow[editor.attachDocumentId] === 'string') attachDocumentId = dataRow[editor.attachDocumentId];
       else attachDocumentId = editor.attachDocumentId;
 
+      let editable;
+      if (typeof editor.editable === 'boolean') editable = editor.editable;
+      else if (typeof editor.editable === 'string') editable = dataRow[editor.editable];
+      else editable = false;
+
       const componentProps = {
         attachDocumentId,
         attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
@@ -319,7 +324,7 @@ export function overrideOnCellItemClicked(view) {
         fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
         multiple: dataRow[editor.multiple] ?? editor.multiple,
         downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
-        editable: dataRow[editor.editable] ?? editor.editable,
+        editable,
         existFiles: dataRow[index.column]?.files,
       };
 
