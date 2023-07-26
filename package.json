@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.867",
+  "version": "0.1.868",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
