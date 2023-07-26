@@ -4,12 +4,15 @@ import { http } from '../plugins/http';
 import { getComponentName } from '../utils/private/vm';
 
 const cachedDataService = {};
+let getters;
 
 async function request(pageId, method, ...args) {
+  const isCommonPage = getters['meta/getPage'](pageId)?.isCommonPage;
+
   const config = args.pop() || {};
   config.headers ||= {};
   config.headers[consts.HTTP_HEADER_PAGE_ID] = pageId;
-
+  config.headers[consts.HTTP_HEADER_IS_COMMON_PAGE] = isCommonPage;
   const response = method
     ? await http[method](...args, config) : await http(config);
 
@@ -48,7 +51,7 @@ export default (pageId) => {
   pageId ||= inject(PageContextKey, {}).pageId;
 
   if (!pageId) {
-    const { getters } = useStore();
+    getters = useStore().getters;
     const vm = getCurrentInstance();
     const vmComponentName = getComponentName(vm);
 
