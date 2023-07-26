@@ -445,6 +445,10 @@
     }
   }
 
+  &__tab-inner {
+    padding-right: 10px;
+  }
+
   &__totals {
     display: flex;
     flex-flow: row wrap;
@@ -655,11 +659,15 @@
     margin-top: 16px;
 
     .q-item-type:first-of-type {
-      padding-top: 0;
+      padding-top: 0 !important;
     }
 
     .q-item-type:last-of-type {
-      padding-bottom: 0;
+      padding-bottom: 0 !important;
+    }
+
+    .info-list {
+      margin-top: 2px;
     }
   }
 }
