@@ -222,6 +222,14 @@
               @click="openHomeMgtPopup"
             />
             <kw-btn
+              v-if="ccpsInfoList && ccpsInfoList.length > 0"
+              v-close-popup
+              borderless
+              grow
+              :label="$t('MSG_BTN_CHANGE_SESSION')"
+              @click="openChangeCcpsSession"
+            />
+            <kw-btn
               v-close-popup
               borderless
               grow
@@ -316,14 +324,9 @@ export default {
     const menuSearchRef = ref();
     const router = useRouter();
     const alarmRef = ref();
-    const isEdu = computed(() => {
-      const { tenantId, portalId } = useMeta().getUserInfo();
-      return tenantId === 'TNT_EDU' && portalId === 'WEB_DEF';
-    });
-    const isWells = computed(() => {
-      const { tenantId, portalId } = useMeta().getUserInfo();
-      return tenantId === 'TNT_WELLS' && portalId === 'WEB_DEF';
-    });
+    const { tenantId, portalId, ccpsInfoList } = useMeta().getUserInfo();
+    const isEdu = computed(() => tenantId === 'TNT_EDU' && portalId === 'WEB_DEF');
+    const isWells = computed(() => tenantId === 'TNT_WELLS' && portalId === 'WEB_DEF');
 
     dayjs.locale('en');
     async function openTotalMenuP() {
@@ -346,6 +349,16 @@ export default {
       modal({
         component: () => import('../../pages/web/WebSessionChangeP.vue'),
       });
+    }
+
+    async function openChangeCcpsSession() {
+      const res = await modal({
+        component: () => import('../../pages/web/WebCcpsSessionChangeP.vue'),
+      });
+      console.log(res);
+      if (res.result) {
+        window.location.reload();
+      }
     }
 
     async function onClickAuthOff() {
@@ -397,11 +410,13 @@ export default {
       body.style.top = `-${window.scrollY}px`;
       body.style.left = `-${window.scrollX}px`;
       body.classList.add('q-body--prevent-scroll__header');
+
       const bodyScrollHeight = body.scrollHeight;
       const windowHeight = window.innerHeight;
       if (bodyScrollHeight > windowHeight) body.classList.add('kw-body--force-scrollbar-y');
       gnbMenu.value = true;
     }
+
     function closeGnbMenu() {
       if (gnbMenu.value) {
         gnbMenu.value = false;
@@ -503,6 +518,8 @@ export default {
       openHomeMgtPopup,
       openSetSessionP,
       openSessionChangeP,
+      ccpsInfoList,
+      openChangeCcpsSession,
       onClickAuthOff,
       openTotalMenuP,
       openMenuSearchPopup,
