@@ -47,6 +47,7 @@
 </template>
 
 <script setup>
+// eslint-disable-next-line import/no-cycle
 import { http } from '../../plugins/http';
 import env from '../../consts/private/env';
 import useModal from '../../composables/useModal';
