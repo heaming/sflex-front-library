@@ -93,11 +93,11 @@ async function handleServerFailureSessionExpired(response) {
     let result;
     if (platform.is.mobile) {
       result = await modal({
-        component: () => import('../../pages/web/WebReLoginP.vue'),
+        component: () => import('../../pages/mobile/MobileReLoginP.vue'),
       });
     } else if (platform.is.tablet) {
       result = await modal({
-        component: () => import('../../pages/web/WebReLoginP.vue'),
+        component: () => import('../../pages/tablet/TabletReLoginP.vue'),
       });
     } else {
       result = await modal({

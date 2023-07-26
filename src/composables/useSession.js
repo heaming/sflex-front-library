@@ -148,6 +148,7 @@ export default () => {
     isReady,
     login,
     logout,
+    initSession,
     initSessionImsi,
   };
 };
