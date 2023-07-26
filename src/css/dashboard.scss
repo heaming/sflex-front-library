@@ -589,6 +589,10 @@
 // 프로모션 현황
 .promotion-status {
   .kw-list {
+    margin-top: 15px;
+    width: 406px;
+    padding-right: 10px;
+
     .kw-item-type {
       &:first-child {
         padding-top: 0 !important;
