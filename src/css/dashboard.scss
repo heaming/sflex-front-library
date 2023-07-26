@@ -555,10 +555,10 @@
 
   &-list {
     display: flex;
+    margin-top: 12px;
   }
 
   &-item {
-    margin-top: 12px;
     width: calc(100% / 3);
     text-align: center;
     padding: 15px 0;
