@@ -37,6 +37,7 @@ $bg-blue: #73c4fa;
 $text-blue: #54bbff;
 $text-green: #26bf8c;
 $bg-green: #26bf8c10;
+$bg-grey-opacity: #cccccc20;
 
 // override quasar color-palette
 // see https://quasar.dev/style/color-palette#introduction
@@ -99,6 +100,7 @@ $semantic-colors: (
   bg-blue: $bg-green,
   text-green: $text-green,
   text-blue: $text-blue,
+  bg-grey-opacity: $bg-grey-opacity,
 );
 $button-border-radius: 0;
 $button-padding: 8px 20px 8px 20px;
