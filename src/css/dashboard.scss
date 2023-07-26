@@ -373,22 +373,6 @@
   }
 }
 
-.kw-list.q-list--separator {
-  &.kw-list--card {
-    > .q-item-type + .q-item-type {
-      border-color: $line-bg;
-    }
-
-    .q-item-type:first-of-type {
-      padding-top: 0;
-    }
-
-    .q-item-type:last-of-type {
-      padding-bottom: 0;
-    }
-  }
-}
-
 // 카드 타이틀
 .home-card-title.kw-btn--borderless.q-btn {
   font-size: 20px;
@@ -451,6 +435,7 @@
       .kw-tab.kw-tab--active {
         border-color: $primary !important;
         background-color: #fff !important;
+        border-width: 2px;
 
         .kw-tab__content {
           font-weight: 500;
@@ -525,7 +510,7 @@
 }
 
 // 인정실적 현황 > 목표설정 팝업
-.setting-amount-popup.kw-popup {
+.setting-amount-popup.kw-popup.kw-popup--sm {
   width: 360px;
   max-width: 360px !important;
   min-width: 360px !important;
@@ -646,6 +631,36 @@
 
   .kw-popup__header-close {
     top: 20px !important;
+  }
+}
+
+// 예상 수수료 현황
+.estimated-commission {
+  position: relative;
+
+  &__notification {
+    position: absolute;
+    right: 97px;
+    top: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: $primary;
+    font-weight: 400;
+  }
+}
+
+// 공지사항 + 교육자료 리스트
+.card-list-wrap {
+  .kw-list.kw-list--card {
+    margin-top: 16px;
+
+    .q-item-type:first-of-type {
+      padding-top: 0;
+    }
+
+    .q-item-type:last-of-type {
+      padding-bottom: 0;
+    }
   }
 }
 

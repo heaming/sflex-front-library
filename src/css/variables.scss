@@ -32,6 +32,12 @@ $bg-box: #f5f5f5;
 $bg-body: #f3f4f5;
 $bg-orange: #ff8f1f;
 
+// chip color
+$bg-blue: #73c4fa;
+$text-blue: #54bbff;
+$text-green: #26bf8c;
+$bg-green: #26bf8c10;
+
 // override quasar color-palette
 // see https://quasar.dev/style/color-palette#introduction
 
@@ -89,6 +95,10 @@ $semantic-colors: (
   warning :$warning,
   bg-grid :$bg-grid,
   bg-orange :$bg-orange,
+  bg-green: $bg-green,
+  bg-blue: $bg-green,
+  text-green: $text-green,
+  text-blue: $text-blue,
 );
 $button-border-radius: 0;
 $button-padding: 8px 20px 8px 20px;
