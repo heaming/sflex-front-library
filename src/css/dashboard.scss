@@ -548,41 +548,6 @@
   }
 }
 
-// 프로모션 현황
-.promotion-status {
-  ::v-deep(.kw-list) {
-    .kw-item-type {
-      &:first-child {
-        padding-top: 0 !important;
-      }
-
-      &:last-child {
-        padding-bottom: 0 !important;
-      }
-    }
-  }
-
-  &-chips {
-    display: flex;
-    gap: 0 4px;
-  }
-
-  &-title {
-    padding-top: 4px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: $black1;
-  }
-
-  &-text {
-    font-weight: 400;
-    font-size: 14px;
-    color: $black2;
-    line-height: 20px;
-  }
-}
-
 // 환불 요청 현황
 
 .refund-status {
@@ -629,6 +594,58 @@
       line-height: 26px;
       margin-top: 4px;
     }
+  }
+}
+
+// 프로모션 현황
+.promotion-status {
+  .kw-list {
+    .kw-item-type {
+      &:first-child {
+        padding-top: 0 !important;
+      }
+
+      &:last-child {
+        padding-bottom: 0 !important;
+      }
+    }
+  }
+
+  &-chips {
+    display: flex;
+    gap: 0 4px;
+  }
+
+  &-title {
+    padding-top: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: $black1;
+  }
+
+  &-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: $black2;
+    line-height: 20px;
+  }
+}
+
+// 프로모션 현황 팝업
+.planner-detail-popup {
+  &-header {
+    margin-top: -10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .kw-popup__header {
+    background: transparent;
+  }
+
+  .kw-popup__header-close {
+    top: 20px !important;
   }
 }
 
