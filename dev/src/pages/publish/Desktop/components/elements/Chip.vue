@@ -117,6 +117,13 @@
             text-color="text-blue"
             class="ma2"
           />
+          <kw-chip
+            label="마일리지"
+            color="bg-grey-opacity"
+            square
+            text-color="black-btn-line"
+            class="ma2"
+          />
         </div>
         <guide-code-view
           :code-value="chipCode"
@@ -171,8 +178,8 @@ const chipCode = `
 <kw-chip
   label="고객"
   color="bg-green"
-  square
   text-color="text-green"
+  square
   class="ma2"
 />
 
@@ -180,8 +187,16 @@ const chipCode = `
 <kw-chip
   label="파트너"
   color="bg-blue"
-  square
   text-color="text-blue"
+  square
+  class="ma2"
+/>
+<!-- bg-grey-opacity #cccccc20 -->
+<kw-chip
+  label="마일리지"
+  color="bg-grey-opacity"
+  text-color="black-btn-line"
+  square
   class="ma2"
 />
 `;
