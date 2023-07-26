@@ -222,7 +222,7 @@
               @click="openHomeMgtPopup"
             />
             <kw-btn
-              v-if="ccpsInfoList.length > 0"
+              v-if="ccpsInfoList && ccpsInfoList.length > 0"
               v-close-popup
               borderless
               grow
