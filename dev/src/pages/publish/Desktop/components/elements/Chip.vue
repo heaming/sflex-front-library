@@ -103,6 +103,20 @@
             text-color="bg-orange"
             class="ma2"
           />
+          <kw-chip
+            label="고객"
+            color="bg-green"
+            square
+            text-color="text-green"
+            class="ma2"
+          />
+          <kw-chip
+            label="파트너"
+            color="bg-blue"
+            square
+            text-color="text-blue"
+            class="ma2"
+          />
         </div>
         <guide-code-view
           :code-value="chipCode"
@@ -151,8 +165,26 @@ const chipCode = `
   text-color="bg-orange"
   class="ma2"
 />
-`;
 
+<!-- bg-blue: #73c4fa text-blue: #54bbff -->
+
+<kw-chip
+  label="고객"
+  color="bg-green"
+  square
+  text-color="text-green"
+  class="ma2"
+/>
+
+<!-- bg-green: #26bf8c10 text-green: #26bf8c -->
+<kw-chip
+  label="파트너"
+  color="bg-blue"
+  square
+  text-color="text-blue"
+  class="ma2"
+/>
+`;
 const guideHistory = [
   {
     timestamp: '2023-01-27',
