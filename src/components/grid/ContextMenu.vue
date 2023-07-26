@@ -263,6 +263,11 @@ export default {
       const { colCount } = view.getFixedOptions();
 
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
+      if (!column) {
+        notify('데이터 영역에서만 틀 고정이 가능합니다.');
+        menuRefs.value[0]?.hide();
+        return;
+      }
       const displayIdx = view.getColumns().find((col) => col.fieldName === column || col.name === column)?.displayIndex;
 
       view.setFixedOptions({ colCount: colCount !== 0 ? 0 : displayIdx + 1, resizable: true });
