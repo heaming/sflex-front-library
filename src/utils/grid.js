@@ -551,6 +551,7 @@ const normalizeExportOptions = (options = {}) => ({
   lookupDisplay: options.lookupDisplay !== false,
   treeKey: options.treeKey,
   searchCondition: options.searchCondition !== false,
+  additionalCondition: options.additionalCondition || undefined,
   allColumns: options.allColumns === true,
   hideColumns: options.hideColumns || [],
 });
@@ -602,7 +603,11 @@ export async function exportView(view, options) {
     });
   }
   if (options.searchCondition && !!options.exportData) {
-    const message = view.__searchConditionText__;
+    let message = view.__searchConditionText__;
+
+    if (options.additionalCondition) {
+      message += options.additionalCondition;
+    }
 
     if (message !== '') {
       options.documentTitle = {
