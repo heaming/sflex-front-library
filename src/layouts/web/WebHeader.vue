@@ -407,13 +407,15 @@ export default {
       const body = document.querySelector('body');
 
       // 메뉴 열릴 때 맨 위로 스크롤되서, 다시 현재 위치로 스크롤하는 css 추가
-      body.style.top = `-${window.scrollY}px`;
-      body.style.left = `-${window.scrollX}px`;
-      body.classList.add('q-body--prevent-scroll__header');
+      if (!gnbMenu.value) {
+        body.style.top = `-${window.scrollY}px`;
+        body.style.left = `-${window.scrollX}px`;
+        body.classList.add('q-body--prevent-scroll__header');
 
-      const bodyScrollHeight = body.scrollHeight;
-      const windowHeight = window.innerHeight;
-      if (bodyScrollHeight > windowHeight) body.classList.add('kw-body--force-scrollbar-y');
+        const bodyScrollHeight = body.scrollHeight;
+        const windowHeight = window.innerHeight;
+        if (bodyScrollHeight > windowHeight) body.classList.add('kw-body--force-scrollbar-y');
+      }
       gnbMenu.value = true;
     }
 
