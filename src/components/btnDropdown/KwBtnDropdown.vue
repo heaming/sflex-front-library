@@ -1,6 +1,5 @@
 <template>
   <q-btn-dropdown
-    v-if="!isDestroyed"
     ref="btnRef"
     :model-value="modelValue"
     :dropdown-icon="dropdownIcon"
@@ -31,7 +30,7 @@
     :align="align"
     :stack="stack"
     :stretch="stretch"
-    :disable="disable"
+    :disable="disable || isDestroyed"
     :no-wrap="noWrap"
     @update:model-value="$emit('update:modelValue', $event)"
     @click="$emit('click', $event)"
