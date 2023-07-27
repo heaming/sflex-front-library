@@ -11,6 +11,14 @@ body.desktop .web-layout:has(.dashboard) {
   margin: 0 auto;
   flex: auto;
 
+  &.dashboard--fixed {
+    .dashboard_summary {
+      .greetings {
+        width: 438px;
+      }
+    }
+  }
+
   &_summary {
     display: flex;
     background: $secondary;
@@ -51,7 +59,7 @@ body.desktop .web-layout:has(.dashboard) {
           font-size: 16px;
           font-weight: 300 !important;
           line-height: 32px;
-          padding-right: 4px;
+          padding-right: 6px;
           opacity: 0.7;
         }
 
