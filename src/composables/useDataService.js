@@ -7,7 +7,7 @@ const cachedDataService = {};
 let getters;
 
 async function request(pageId, method, ...args) {
-  const isCommonPage = getters['meta/getPage'](pageId)?.isCommonPage;
+  const isCommonPage = getters && pageId ? getters['meta/getPage'](pageId)?.isCommonPage : null;
 
   const config = args.pop() || {};
   config.headers ||= {};

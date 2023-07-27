@@ -1,6 +1,14 @@
 // start dashboard style
+body.desktop .web-layout:has(.dashboard) {
+  & > .web-header,
+  & > .q-page-container {
+    min-width: 1920px;
+  }
+}
+
 .dashboard {
   width: 1840px;
+  margin: 0 auto;
   flex: auto;
 
   &_summary {
@@ -149,45 +157,51 @@
 .main_footer {
   // margin: 0 -40px -30px;
   margin: 0;
-  position: absolute;
-  bottom: -12px;
-  left: -40px;
-  right: -40px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 70px;
   padding: 11px 40px;
   background: #fff;
-  display: flex;
+  border-top: 1px solid #f3f4f5;
 
-  img {
-    width: 86px;
-  }
+  .main_footer_wrap {
+    width: 1840px;
+    margin: 0 auto;
+    display: flex;
 
-  & > div {
-    padding-left: 58px;
+    img {
+      width: 86px;
+    }
 
-    & > span {
-      display: inline-block;
-      position: relative;
-      font-size: 14px;
-      padding: 0 8px;
-      line-height: 20px;
-      color: $black2;
-      vertical-align: top;
+    & > div {
+      padding-left: 58px;
 
-      & + span::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 4px;
-        width: 1px;
-        height: 12px;
-        background: $line-line;
+      & > span {
+        display: inline-block;
+        position: relative;
+        font-size: 14px;
+        padding: 0 8px;
+        line-height: 20px;
+        color: $black2;
+        vertical-align: top;
+
+        & + span::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 4px;
+          width: 1px;
+          height: 12px;
+          background: $line-line;
+        }
       }
     }
-  }
 
-  .family-site {
-    margin-left: auto;
+    .family-site {
+      margin-left: auto;
+    }
   }
 }
 

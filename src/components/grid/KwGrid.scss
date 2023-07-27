@@ -35,7 +35,7 @@
   background-color: inherit;
 }
 
-.rg-rowbarcontainer .rg-table tr td {
+.rg-table tr td {
   &.rg-rowindicator-focus {
     background-color: #f6f6f8;
   }
@@ -49,15 +49,21 @@
   }
 }
 
+.rg-grid:has(.rg-merged-cell) {
+  .rg-rowbarcontainer .rg-row-bar td:first-child {
+    border-left: none;
+  }
+
+  &:has(td.rg-merged-cell) td {
+    border-left: 1px solid $line-bg;
+  }
+}
+
 .rg-data-row {
   &.rg-focused-row {
     .rg-data-cell {
       background-color: rgba($primary, 0.1) !important;
     }
-  }
-
-  &:has(td.rg-merged-cell) td {
-    border-left: 1px solid $line-bg;
   }
 }
 
@@ -1186,9 +1192,9 @@
   }
 }
 
-.rg-data-row td:first-child:is(.rg-merged-cell) {
-  border-left: 0;
-}
+// .rg-data-row td:first-child:is(.rg-merged-cell) {
+//   border-left: 0;
+// }
 
 .kw-grid__context-menu {
   max-width: 500px !important; // 화면 끝에서 호출 시 글자가 짤리는 현상 방지
