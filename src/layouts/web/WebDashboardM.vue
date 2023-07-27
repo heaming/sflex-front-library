@@ -1,5 +1,8 @@
 <template>
-  <kw-page class="py12">
+  <kw-page
+    class="py12"
+    style="margin: 0 auto;"
+  >
     <div class="relative-position">
       <div class="dashboard">
         <div class="dashboard_summary dashboard_summary_type1">
