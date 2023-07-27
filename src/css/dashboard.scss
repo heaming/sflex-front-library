@@ -374,11 +374,14 @@
 }
 
 // 카드 타이틀
-.home-card-title.kw-btn--borderless.q-btn {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.813rem;
-  color: $black1;
+.home-card-title {
+  &,
+  &.kw-btn--borderless.q-btn {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.813rem;
+    color: $black1;
+  }
 }
 
 // 인정실적 현황
