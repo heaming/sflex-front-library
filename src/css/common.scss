@@ -1537,3 +1537,47 @@ body.mobile.temp_tablet {
   // 팝업
   @include print-css("popup");
 }
+
+.material-box {
+  padding: 16px;
+  border: 1px solid $line-line;
+
+  & + .material-box {
+    margin-top: 8px;
+  }
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-title {
+    max-width: calc(100% - 28px);
+
+    p {
+      display: inline;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-number {
+    font-size: 14px;
+    line-height: 1.375rem;
+    margin-top: 8px;
+  }
+
+  &-status {
+    display: flex;
+    font-size: 14px;
+    line-height: 1.375rem;
+    color: $black3;
+    margin-top: 4px;
+  }
+}
