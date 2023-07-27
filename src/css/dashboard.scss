@@ -346,33 +346,6 @@
   }
 }
 
-.info-list {
-  display: flex;
-  column-gap: 8px;
-
-  li {
-    font-size: 14px;
-    line-height: 1.43;
-    color: $black2;
-
-    &:not(:first-of-type) {
-      position: relative;
-      padding-left: 8px;
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 1px;
-        height: 12px;
-        background-color: #ddd;
-      }
-    }
-  }
-}
-
 // 카드 타이틀
 .home-card-title {
   &,
@@ -675,6 +648,37 @@
 
     .info-list {
       margin-top: 2px;
+    }
+  }
+}
+
+// 아이템 정보리스트
+.info-list {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+
+  li {
+    align-self: center;
+    font-size: 14px;
+    line-height: 1.43;
+    font-weight: 400;
+    color: $black2;
+
+    &:not(:first-of-type) {
+      position: relative;
+      padding-left: 8px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 12px;
+        background-color: #ddd;
+      }
     }
   }
 }
