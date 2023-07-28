@@ -385,10 +385,12 @@ body.desktop .web-layout:has(.dashboard) {
 
   &__chart {
     margin-top: 16px;
+    padding-right: 24px;
   }
 
   &__chart-info {
     margin-top: -4px;
+    padding-right: 24px;
     display: flex;
     flex-flow: row nowrap;
     column-gap: 3px;
