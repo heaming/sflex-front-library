@@ -31,24 +31,22 @@ export default () => {
     Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
 
     if (isMenu(to)) {
-      if (to.meta.pageUseCode === 'N') {
+      const key = selectedKey.value;
+      const index = findIndex(stackViews, { key });
+      if (to.meta.pageUseCode === 'N' && index < 0) { // 메인인데 이전 스택에 없었으면 전체 삭제후 추가
         // if main page then clear all stack
         stackViews.splice(0);
         add(to);
-      } else {
+      } else if (index >= 0) { // 메인이거나 서브인데, 이전 스택에 있었으면 componentProps 업데이트해줌
         // clear all stack after current stack
-        const key = selectedKey.value;
-        const index = findIndex(stackViews, { key });
-        if (index >= 0) {
-          stackViews.splice(index + 1); // 뒤로가기 일 시, 원래 있던 화면을 삭제한다
-          const { componentProps } = stackViews[index];
-          let obj;
-          if (componentProps.isBackPage) obj = { ...params, ...componentProps, isBackPage: false };
-          else obj = { ...componentProps, ...params, isBackPage: false };
+        stackViews.splice(index + 1); // 뒤로가기 일 시, 원래 있던 화면을 삭제한다
+        const { componentProps } = stackViews[index];
+        let obj;
+        if (componentProps.isBackPage) obj = { ...params, ...componentProps, isBackPage: false };
+        else obj = { ...componentProps, ...params, isBackPage: false };
 
-          stackViews[index].componentProps = cloneDeep(obj);
-        } else add(to); // 새로운 서브페이지 이동 시, 페이지를 stackView에 추가한다
-      }
+        stackViews[index].componentProps = cloneDeep(obj);
+      } else add(to); // 새로운 서브페이지 이동 시, 페이지를 stackView에 추가한다
     }
   });
 
@@ -59,7 +57,6 @@ export default () => {
   router.close = async (params = null) => {
     const now = stackViews.findIndex((stackView) => stackView.key === selectedKey.value);
     const target = now < 0 ? consts.ROUTE_HOME_NAME : stackViews[now - 1];
-
     const param = {
       closed: true,
       currTimestamp: new Date().getTime(), // watch로 잡을 때, 값이 변하지 않아 watch 이벤트가 발생하지 않을 수 있는 현상 방지 용도
