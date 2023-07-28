@@ -508,6 +508,11 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
+// 내부 엘리멘트 생성
+.dashboard_el .result-status__tab-area {
+  padding-right: 0;
+}
+
 // 인정실적 현황 > 목표설정 팝업
 .setting-amount-popup.kw-popup.kw-popup--sm {
   width: 360px;
