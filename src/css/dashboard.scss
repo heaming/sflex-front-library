@@ -381,16 +381,12 @@ body.desktop .web-layout:has(.dashboard) {
 
 // 인정실적 현황
 .result-status {
-  padding-right: 0;
-
   &__chart {
     margin-top: 16px;
-    padding-right: 24px;
   }
 
   &__chart-info {
     margin-top: -4px;
-    padding-right: 24px;
     display: flex;
     flex-flow: row nowrap;
     column-gap: 3px;
@@ -406,7 +402,6 @@ body.desktop .web-layout:has(.dashboard) {
   }
 
   &__tab-area {
-    padding-right: 24px;
     margin-top: 28px;
 
     .kw-tabs {
