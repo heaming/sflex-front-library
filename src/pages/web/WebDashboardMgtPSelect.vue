@@ -7,15 +7,18 @@
           :key="card.homeCardId"
           :class="getClass(card)"
         >
-          <div class="dashboard-select__item-content">
-            <span>
+          <div
+            class="dashboard-select__item-content"
+            :style="card.imgSrc ? `background: url('${card.imgSrc}') no-repeat center!important;` : ''"
+          >
+            <!-- <span>
               {{ card.homeCardSizeTypeName }}
-            </span>
+            </span> -->
           </div>
 
           <div class="dashboard-select__item-title">
             <span>
-              {{ card.homeCardName }}
+              {{ card.homeCardName + ` (${card.homeCardSizeTypeName})` }}
             </span>
             <kw-btn
               dense
