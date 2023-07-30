@@ -1,5 +1,6 @@
 <template>
   <q-btn
+    v-if="!isDestroyed"
     ref="btnRef"
     v-bind="{...styleClassAttrs, ...buttonStyleProps}"
     :class="buttonClass"
@@ -16,7 +17,7 @@
     :tabindex="tabindex"
     :align="align"
     :stack="stack"
-    :disable="disable || isDestroyed"
+    :disable="disable"
     :no-wrap="noWrap"
     :to="to"
     :replace="replace"
