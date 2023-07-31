@@ -70,7 +70,7 @@ export default {
 
   setup() {
     const btnRef = ref();
-    const hasPermession = ref(true);
+    const hasPermission = ref(true);
 
     function click(evt) {
       btnRef.value.click(evt);
@@ -82,7 +82,7 @@ export default {
       ...usePermissions(),
       ...useBtnStyle(),
       styleClassAttrs,
-      hasPermession,
+      hasPermission,
       btnRef,
       click,
     };

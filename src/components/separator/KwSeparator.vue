@@ -1,5 +1,6 @@
 <template>
   <q-separator
+    v-if="!isDestroyed"
     class="kw-separator"
     v-bind="{...styleClassAttrs, ...computedProps}"
   />
@@ -7,6 +8,7 @@
 
 <script>
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import usePermissions from '../../composables/private/usePermissions';
 
 const availablePresets = {
   default: {
@@ -54,6 +56,7 @@ export default {
     }));
 
     return {
+      ...usePermissions(),
       ...useInheritAttrs(),
       computedProps,
     };

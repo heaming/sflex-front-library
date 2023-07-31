@@ -9,7 +9,7 @@ export function getComponentName(vmOrComponents) {
 }
 
 export function getVm(vnode) {
-  return vnode.ref.i;
+  return vnode.ref?.i || vnode.ctx;
 }
 
 export function injectPageContext(vnodeOrVm) {
