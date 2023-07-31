@@ -455,7 +455,10 @@ export default {
         componentProps: { searchText: searchText.value },
       });
 
-      if (result) push({ name: payload.menuUid });
+      if (result) {
+        await push({ name: payload.menuUid });
+        commit('app/setLeftExist', true);
+      }
     }
 
     async function openUserInfoPopup() {

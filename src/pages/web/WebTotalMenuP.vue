@@ -125,6 +125,7 @@ async function handleUpdateSelected(menuUid) {
   try {
     await push({ name: menuUid });
     commit('app/setSelectedGlobalMenuKey', menuUid || null);
+    commit('app/setLeftExist', true);
     emit('closeTot');
   } catch (e) {
     if (isNavigationFailure(e, 1)) { // matcher not found..
