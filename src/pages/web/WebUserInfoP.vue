@@ -30,6 +30,11 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
+        <kw-form-item label="직책">
+          <p>{{ userInfo.rsbNm }}</p>
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
         <kw-form-item label="이메일">
           <p>{{ userInfo.email }}</p>
         </kw-form-item>
@@ -46,6 +51,18 @@
               mask="telephone"
               dense
               rules="required|telephone"
+            />
+          </p>
+        </kw-form-item>
+      </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="작업대상 조직유형">
+          <p>
+            <kw-select
+              v-model="userInfo.wkOjOgTpCd"
+              :options="codes"
+              dense
+              :disable="!userInfo.selableOgTpCd"
             />
           </p>
         </kw-form-item>
@@ -73,23 +90,27 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import useModal from '../../composables/useModal';
+import useMeta from '../../composables/useMeta';
 import { http } from '../../plugins/http';
+import { getCodes } from '../../utils/code';
 
 const { cancel, ok } = useModal();
-const { getters, dispatch } = useStore();
+const { dispatch } = useStore();
 
-const user = getters['meta/getUserInfo'];
-const userInfo = cloneDeep(user);
+const { getUserInfo } = useMeta();
+
+const userInfo = computed(() => cloneDeep(getUserInfo()));
 const frmMainRef = ref();
 
+const codes = await getCodes('OG_TP_CD').catch(() => {});
+
 async function onClickConfirm() {
-  if (await !frmMainRef.value?.isModified) {
-    ok();
-    return;
-  }
+  if (await frmMainRef.value?.alertIfIsNotModified()) return;
   if (!await frmMainRef.value.validate()) return;
-  await http.put('/sflex/common/common/user-basics/update-cellphone', userInfo);
+
+  await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
   await dispatch('meta/fetchLoginInfo');
+  await http.post('/sflex/common/common/set-session-data', userInfo.value);
   ok();
 }
 
