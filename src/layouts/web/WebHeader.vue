@@ -459,9 +459,11 @@ export default {
     }
 
     async function openUserInfoPopup() {
-      await modal({
+      const res = await modal({
         component: () => import('../../pages/web/WebUserInfoP.vue'),
       });
+
+      if (res.result) notify('변경되었습니다.');
     }
 
     onMounted(() => {
