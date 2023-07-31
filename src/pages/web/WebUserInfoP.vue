@@ -62,7 +62,7 @@
               v-model="userInfo.wkOjOgTpCd"
               :options="codes"
               dense
-              :disable="selableOgTpCds?.length < 2"
+              :disable="codes?.length < 2"
             />
           </p>
         </kw-form-item>
@@ -102,7 +102,7 @@ const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 const frmMainRef = ref();
 
-const selableOgTpCds = computed(() => userInfo.value?.selableOgTpCd.split(','));
+const selableOgTpCds = computed(() => userInfo.value?.selableOgTpCd?.split(','));
 const codes = ref([]);
 await getCodes('OG_TP_CD').then((res) => {
   if (selableOgTpCds.value?.length > 0) {

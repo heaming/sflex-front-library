@@ -20,6 +20,12 @@
             @click.stop="onClickDelete(card)"
           />
           {{ card.homeCardName }}
+          <img
+            v-if="card.imgSrc"
+            :src="card.imgSrc"
+            :alt="card.homeCardName"
+            style="width: 100%; height: 100%;"
+          >
         </div>
       </transition-group>
     </kw-scroll-area>
@@ -54,7 +60,6 @@ const getStyle = (card) => {
     height: `${322 * row - 20}px`,
     gridRow: `auto/span ${row}`,
     gridColumn: `auto/span ${column}`,
-    background: card.imgSrc ? `url('${card.imgSrc}') no-repeat center !important` : '',
   };
 };
 
