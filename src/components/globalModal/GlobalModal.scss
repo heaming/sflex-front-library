@@ -252,7 +252,10 @@ body.desktop {
 
         .kw-field-wrap.kw-field-wrap--auto-height {
           &,
-          & > .kw-field-wrap__control { height: 32px !important; }
+          & > .kw-field-wrap__control {
+            min-height: 32px !important;
+            height: 32px;
+          }
         }
       }
     }
