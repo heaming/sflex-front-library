@@ -9,8 +9,13 @@
         >
           <div
             class="dashboard-select__item-content"
-            :style="card.imgSrc ? `background: url('${card.imgSrc}') no-repeat center!important;` : ''"
           >
+            <img
+              v-if="card.imgSrc"
+              :src="card.imgSrc"
+              :alt="card.homeCardName"
+              style="width: 100%; height: 100%;"
+            >
             <!-- <span>
               {{ card.homeCardSizeTypeName }}
             </span> -->
