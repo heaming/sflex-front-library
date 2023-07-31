@@ -57,7 +57,7 @@
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
 
-const { getters, commit } = useStore();
+const { getters } = useStore();
 const { push } = useRouter();
 const { t } = useI18n();
 
@@ -110,8 +110,6 @@ await fetchMenus();
 async function handleUpdateSelected(menuUid) {
   try {
     await push({ name: menuUid });
-    commit('app/setSelectedGlobalMenuKey', menuUid || null);
-    commit('app/setLeftExist', true);
     emit('closeGnbMenu');
   } catch (e) {
     if (isNavigationFailure(e, 1)) { // matcher not found..

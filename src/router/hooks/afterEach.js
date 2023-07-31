@@ -58,6 +58,9 @@ function setSelectedGlobalKeys(to) {
     const menuPaths = store.getters['meta/getMenuPaths'](menuKey);
     const matched = find(menuPaths, { menuLevel: 1 });
     menuKey = matched.key;
+  } else if (to.fullPath !== '/') {
+    // 페이지로 이동 뒤에는 lnb를 보여준다. (홈만 제외)
+    store.commit('app/setLeftExist', true);
   }
 
   if (appKey) store.commit('app/setSelectedGlobalAppKey', appKey);

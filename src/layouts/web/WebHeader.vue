@@ -457,7 +457,6 @@ export default {
 
       if (result) {
         await push({ name: payload.menuUid });
-        commit('app/setLeftExist', true);
       }
     }
 
