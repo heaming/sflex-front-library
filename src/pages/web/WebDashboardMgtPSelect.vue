@@ -16,14 +16,11 @@
               :alt="card.homeCardName"
               style="width: 100%; height: 100%;"
             >
-            <!-- <span>
-              {{ card.homeCardSizeTypeName }}
-            </span> -->
           </div>
 
           <div class="dashboard-select__item-title">
             <span>
-              {{ card.homeCardName + ` (${card.homeCardSizeTypeName})` }}
+              {{ card.homeCardName }}
             </span>
             <kw-btn
               dense
