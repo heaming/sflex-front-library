@@ -19,7 +19,6 @@
             clickable
             @click.stop="onClickDelete(card)"
           />
-          {{ card.homeCardName }}
           <img
             v-if="card.imgSrc"
             :src="card.imgSrc"
