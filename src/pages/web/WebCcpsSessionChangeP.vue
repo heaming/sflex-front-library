@@ -6,7 +6,7 @@
     <kw-form cols="1">
       <kw-form-row>
         <kw-form-item label="로그인 계정">
-          <p>강남총괄단(총괄단장)</p>
+          <p>{{ myCcpsInfo.ccpsNm }}</p>
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
@@ -14,7 +14,7 @@
           <kw-select
             v-model="selectedCcps"
             class="kw-select--rows-per-page"
-            :options="ccpsInfoList"
+            :options="ccpsCandList"
             option-value="userId"
             option-label="ccpsNm"
           />
@@ -57,7 +57,11 @@ import useSession from '../../composables/useSession';
 import { confirm } from '../../plugins/dialog';
 
 const { ok, cancel } = useModal();
-const { ccpsInfoList } = useMeta().getUserInfo();
+const { ccpsInfoList, userId } = await useMeta().getUserInfo();
+const ccpsCandList = ref([]);
+const myCcpsInfo = ref({});
+ccpsCandList.value = ccpsInfoList.filter((item) => item.userId !== userId);
+myCcpsInfo.value = ccpsInfoList.find((item) => item.userId === userId);
 const { t } = useI18n();
 const selectedCcps = ref('');
 
