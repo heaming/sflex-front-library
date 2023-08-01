@@ -29,9 +29,10 @@ import useDense, { useDenseProps } from '../../composables/private/useDense';
 
 const mobilePreset = {
   // align: 'justify',
-  activeLine: false,
-  activeColor: 'white',
-  activeBgColor: 'secondary',
+  bgColor: 'white',
+  activeLine: 'mobile',
+  activeColor: 'secondary',
+  activeBgColor: 'white',
 };
 
 const densePreset = {

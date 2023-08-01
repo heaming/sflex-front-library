@@ -1,8 +1,23 @@
 // start dashboard style
+body.desktop .web-layout:has(.dashboard) {
+  & > .web-header,
+  & > .q-page-container {
+    min-width: 1920px;
+  }
+}
+
 .dashboard {
   width: 1840px;
   margin: 0 auto;
   flex: auto;
+
+  &.dashboard--fixed {
+    .dashboard_summary {
+      .greetings {
+        width: 438px;
+      }
+    }
+  }
 
   &_summary {
     display: flex;
@@ -44,7 +59,7 @@
           font-size: 16px;
           font-weight: 300 !important;
           line-height: 32px;
-          padding-right: 4px;
+          padding-right: 6px;
           opacity: 0.7;
         }
 
@@ -157,6 +172,7 @@
   height: 70px;
   padding: 11px 40px;
   background: #fff;
+  border-top: 1px solid #f3f4f5;
 
   .main_footer_wrap {
     width: 1840px;
@@ -365,8 +381,6 @@
 
 // 인정실적 현황
 .result-status {
-  padding-right: 0;
-
   &__chart {
     margin-top: 16px;
   }
@@ -388,8 +402,7 @@
   }
 
   &__tab-area {
-    padding-right: 24px;
-    margin-top: 20px;
+    margin-top: 28px;
 
     .kw-tabs {
       .kw-tabs__content {
@@ -476,7 +489,7 @@
       }
 
       &:not(:first-of-type) {
-        margin-top: 4px;
+        margin-top: 8px;
       }
     }
   }
@@ -493,6 +506,11 @@
       width: 110px;
     }
   }
+}
+
+// 내부 엘리멘트 생성
+.dashboard_el .result-status__tab-area {
+  padding-right: 0;
 }
 
 // 인정실적 현황 > 목표설정 팝업
@@ -630,8 +648,8 @@
 
   &__notification {
     position: absolute;
-    right: 97px;
-    top: 20px;
+    right: 72px;
+    top: -4px;
     font-size: 14px;
     line-height: 20px;
     color: $primary;

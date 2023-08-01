@@ -455,7 +455,9 @@ export default {
         componentProps: { searchText: searchText.value },
       });
 
-      if (result) push({ name: payload.menuUid });
+      if (result) {
+        await push({ name: payload.menuUid });
+      }
     }
 
     async function openUserInfoPopup() {

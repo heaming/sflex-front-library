@@ -1,5 +1,6 @@
 <template>
   <q-btn
+    v-if="!isDestroyed"
     ref="btnRef"
     v-bind="{...styleClassAttrs, ...buttonStyleProps}"
     :class="buttonClass"
@@ -16,7 +17,7 @@
     :tabindex="tabindex"
     :align="align"
     :stack="stack"
-    :disable="disable || isDestroyed"
+    :disable="disable"
     :no-wrap="noWrap"
     :to="to"
     :replace="replace"
@@ -69,7 +70,7 @@ export default {
 
   setup() {
     const btnRef = ref();
-    const hasPermession = ref(true);
+    const hasPermission = ref(true);
 
     function click(evt) {
       btnRef.value.click(evt);
@@ -81,7 +82,7 @@ export default {
       ...usePermissions(),
       ...useBtnStyle(),
       styleClassAttrs,
-      hasPermession,
+      hasPermission,
       btnRef,
       click,
     };
