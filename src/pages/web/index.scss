@@ -91,7 +91,9 @@
   &__inner {
     position: relative;
     display: flex;
-    height: 585px; // 홈카드 최대 높이 수정 (한 화면 show)
+
+    // height: 585px; // 홈카드 최대 높이 수정 (한 화면 show)
+    height: 612px; // 홈카드 최대 높이 수정 (한 화면 show)
   }
 
   &__select {
@@ -182,7 +184,9 @@
         padding-bottom: 60px;
         margin: 30px auto 0;
         width: max-content;
-        min-height: 585px;
+        min-height: 572px;
+        position: relative;
+        z-index: 4;
       }
 
       &__item {
@@ -222,22 +226,39 @@
       }
 
       &__guide {
+        padding-bottom: 20px;
         position: absolute;
-        left: 10px;
-        right: 10px;
-        bottom: 313px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 612px;
+        background: transparent;
+
+        // left: 10px;
+        // right: 10px;
+        // bottom: 313px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         gap: 0; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
-        font-size: 12px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
+        font-size: 14px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
         color: $placeholder;
 
+        p {
+          padding-bottom: 12px;
+          position: relative;
+          z-index: 5;
+        }
+
         &::after {
-          content: "";
-          width: 100%;
+          padding-right: 24px;
+          align-self: flex-start;
+          width: calc(100% - 24px);
           border-top: 1.5px dashed $placeholder;
+          content: "";
+          position: relative;
+          z-index: 5;
         }
       }
     }
