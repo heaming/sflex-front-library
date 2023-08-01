@@ -91,7 +91,7 @@
   &__inner {
     position: relative;
     display: flex;
-    height: 715px;
+    height: 585px; // 홈카드 최대 높이 수정 (한 화면 show)
   }
 
   &__select {
@@ -171,7 +171,7 @@
       &__item-container {
         display: grid;
         grid-auto-flow: row;
-        grid-template-rows: 302px;
+        grid-template-rows: 251px; // 홈카드 카드 높이 수정
         grid-template-columns: repeat(4, 302px);
         gap: 20px;
         padding-bottom: 60px;
@@ -218,13 +218,13 @@
         position: absolute;
         left: 10px;
         right: 10px;
-        bottom: 20px;
+        bottom: 313px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 8px;
-        font-size: 14px;
+        gap: 0; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
+        font-size: 12px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
         color: $placeholder;
 
         &::after {
