@@ -15,7 +15,7 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
-        <kw-form-item label="이름">
+        <kw-form-item label="성명">
           <p>{{ userInfo.userName }}</p>
         </kw-form-item>
       </kw-form-row>
@@ -68,9 +68,6 @@
         </kw-form-item>
       </kw-form-row>
     </kw-form>
-    <ul class="kw-notification mt20">
-      <li>접속 중인 로그인 계정을 변경하실 경우, 확인 중인 업무화면 탭이 모두 종료됩니다.</li>
-    </ul>
     <template #action>
       <kw-btn
         negative
@@ -79,7 +76,7 @@
       />
       <kw-btn
         primary
-        label="확인"
+        label="저장"
         @click="onClickConfirm"
       />
     </template>
