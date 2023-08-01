@@ -10,12 +10,12 @@ export default () => {
   const router = useRouter();
   const store = useStore();
 
-  const tabViews = shallowReactive([]);
-  const tabs = computed(() => filter(tabViews, { parentsKey: false }));
+  const tabViews = ref([]);
+  const tabs = computed(() => filter(tabViews.value, { parentsKey: false }));
   const selectedKey = computed(() => router.currentRoute.value.name);
 
   function recursiveGetChildren(key) {
-    const children = filter(tabViews, { parentsKey: key });
+    const children = filter(tabViews.value, { parentsKey: key });
     const childrenWithSiblings = [];
     children.forEach((child) => {
       childrenWithSiblings.push(child);
@@ -25,8 +25,8 @@ export default () => {
   }
 
   function recursiveGetParents(key) {
-    const parentsKey = find(tabViews, { key })?.parentsKey;
-    const matchedParents = filter(tabViews, { key: parentsKey });
+    const parentsKey = find(tabViews.value, { key })?.parentsKey;
+    const matchedParents = filter(tabViews.value, { key: parentsKey });
     const parentsWithSiblings = [];
     matchedParents.forEach((parent) => {
       parentsWithSiblings.push(parent);
@@ -36,13 +36,13 @@ export default () => {
   }
 
   function getChildren(key, iteratee = (e) => e) {
-    const matched = find(tabViews, { key });
+    const matched = find(tabViews.value, { key });
     const children = matched ? [matched, ...recursiveGetChildren(key)] : [];
     return map(children, iteratee);
   }
 
   function getParents(key, iteratee = (e) => e) {
-    const matched = find(tabViews, { key });
+    const matched = find(tabViews.value, { key });
     const parents = matched ? [matched, ...recursiveGetParents(key)] : [];
     return map(parents, iteratee);
   }
@@ -67,17 +67,18 @@ export default () => {
 
     Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
 
-    const index = tabViews.push({
+    const index = tabViews.value.push({
       key: name,
       label: meta.menuName,
       parentsKey: meta.pageUseCode === 'S' ? meta.parentsMenuUid : false,
       component: last(matched).components.default,
       componentProps: params,
+      refresh: 1,
     });
 
     window.removeEventListener('beforeunload', preventReload);
     window.addEventListener('beforeunload', preventReload);
-    return tabViews[index - 1];
+    return tabViews.value[index - 1];
   }
 
   function remove(key) {
@@ -85,10 +86,10 @@ export default () => {
 
     while (keys.length) {
       const _key = keys.pop();
-      const index = findIndex(tabViews, { key: _key });
-      tabViews.splice(index, 1);
+      const index = findIndex(tabViews.value, { key: _key });
+      tabViews.value.splice(index, 1);
     }
-    if (tabViews.length === 0) {
+    if (tabViews.value.length === 0) {
       window.removeEventListener('beforeunload', preventReload);
     }
   }
@@ -103,16 +104,16 @@ export default () => {
   }
 
   function getClosestKey(key) {
-    const index = findIndex(tabViews, { key });
-    const lastIndex = tabViews.length - 1;
+    const index = findIndex(tabViews.value, { key });
+    const lastIndex = tabViews.value.length - 1;
     const parents = getParents(key);
     const me = find(parents, (parent) => parent.key === key);
-    const parentKeyIndex = findIndex(tabViews, (tabView) => tabView.key === me?.parentsKey);
+    const parentKeyIndex = findIndex(tabViews.value, (tabView) => tabView.key === me?.parentsKey);
     const closestIndex = index === lastIndex ? index - 1 : index + 1;
     let result;
-    if (parentKeyIndex >= 0) result = tabViews[parentKeyIndex].key;
-    else if (tabViews[closestIndex]?.parentsKey) result = getClosestKey(tabViews[closestIndex]?.key);
-    else result = tabViews[closestIndex]?.key;
+    if (parentKeyIndex >= 0) result = tabViews.value[parentKeyIndex].key;
+    else if (tabViews.value[closestIndex]?.parentsKey) result = getClosestKey(tabViews.value[closestIndex]?.key);
+    else result = tabViews.value[closestIndex]?.key;
     return result;
   }
 
@@ -135,12 +136,12 @@ export default () => {
   }
 
   function closeByIndex(index, force, autoSelect) {
-    const { key } = tabViews[index];
+    const { key } = tabViews.value[index];
     return close(key, force, autoSelect);
   }
 
   const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getNoMenuPage'](to.meta.pageId) !== undefined;
-  const isDuplicated = (to) => tabViews.some((v) => v.key === to.name);
+  const isDuplicated = (to) => tabViews.value.some((v) => v.key === to.name);
 
   const isAncestor = (from, to) => {
     let parentUid = from.meta?.parentsMenuUid;
@@ -149,7 +150,7 @@ export default () => {
       if (parentUid === ancestorUid) {
         return true;
       }
-      const matched = find(tabViews, { key: parentUid });
+      const matched = find(tabViews.value, { key: parentUid });
       if (!matched) break;
       parentUid = matched.parentsKey;
     }
@@ -160,12 +161,12 @@ export default () => {
     let parentsKey = to.name;
 
     while (parentsKey) {
-      const matched = find(tabViews, { parentsKey });
+      const matched = find(tabViews.value, { parentsKey });
       if (matched) {
-        const delIndex = findIndex(tabViews, { parentsKey });
+        const delIndex = findIndex(tabViews.value, { parentsKey });
         parentsKey = matched.key;
         if (delIndex > 0) {
-          tabViews.splice(delIndex, 1);
+          tabViews.value.splice(delIndex, 1);
         }
       } else {
         break;
@@ -192,7 +193,7 @@ export default () => {
 
       const isSiblings = to.meta.parentsMenuUid === from.meta.parentsMenuUid;
 
-      const isAlreadyExists = findIndex(tabViews, { key: toMenuUid }) > -1;
+      const isAlreadyExists = findIndex(tabViews.value, { key: toMenuUid }) > -1;
 
       if (!toIsParents && !fromIsParents && !isSiblings && !isAlreadyExists) {
         throw new Error(`Navigation aborted to ${to.fullPath}, sub route can only routed from it's parents.`);
@@ -211,7 +212,7 @@ export default () => {
       // redirect if subpage is already opened
       if (!isAncestor(from, to)) {
         const parentsKey = to.meta.menuUid;
-        const matched = find(tabViews, { parentsKey });
+        const matched = find(tabViews.value, { parentsKey });
         if (matched && matched.key !== from.name) {
           from.meta.redirectedFrom = to;
           next({ name: matched.key });
@@ -273,12 +274,12 @@ export default () => {
         if (to.meta.pageUseCode === 'S'
             && to.meta.parentsMenuUid === from.meta.parentsMenuUid
             && to.name !== from.name) {
-          const delIndex = findIndex(tabViews, { key: from.name });
+          const delIndex = findIndex(tabViews.value, { key: from.name });
           if (delIndex > 0) {
-            tabViews.splice(delIndex, 1);
+            tabViews.value.splice(delIndex, 1);
           }
         }
-        const tabView = tabViews.find((v) => v.key === to.name);
+        const tabView = tabViews.value.find((v) => v.key === to.name);
         if (tabView !== undefined) {
           const { componentProps } = tabView;
           const obj = {
@@ -341,7 +342,7 @@ export default () => {
     const forceCloseAllTab = await confirmIsModified(key) === true;
     if (forceCloseAllTab) {
       children.forEach(async (child) => {
-        await close(child.key, true, true, tabViews.length < 1);
+        await close(child.key, true, true, tabViews.value.length < 1);
       });
     }
   }

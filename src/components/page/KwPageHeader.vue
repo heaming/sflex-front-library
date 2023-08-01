@@ -59,6 +59,14 @@
           {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
         </kw-icon>
 
+        <kw-icon
+          name="retry"
+          clickable
+          @click="reloadPage"
+        >
+          {{ '새로고침' }}
+        </kw-icon>
+
         <span
           v-if="!env.isServer"
           style="color: transparent;"
@@ -135,8 +143,8 @@ export default {
       default: undefined,
     },
   },
-
-  async setup() {
+  emits: ['reload-page'],
+  async setup(props, { emit }) {
     const showPageNotice = ref(true);
     const showPageManual = ref(false);
     const { getPageManual } = useHeaderMeta();
@@ -156,6 +164,10 @@ export default {
       showPageManual.value = false;
     }
 
+    function reloadPage() {
+      emit('reload-page');
+    }
+
     return {
       ...useBookmark(),
       ...useBreadcrumbNavigation(),
@@ -166,6 +178,7 @@ export default {
       showPageManual,
       sanitize,
       onClickOpenManual,
+      reloadPage,
     };
   },
 };

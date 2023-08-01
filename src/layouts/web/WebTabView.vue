@@ -55,6 +55,8 @@
               <component
                 :is="tabView.component"
                 v-bind="tabView.componentProps"
+                :key="`${tabView.component.__name}_${tabView.refresh}`"
+                @slot-re-render="refreshView(tabView)"
               />
             </template>
             <template #error>
@@ -85,10 +87,13 @@ export default {
   setup() {
     const { currentRoute } = useRouter();
     const isRouteView = computed(() => currentRoute.value.meta.menuUid === undefined);
-
+    function refreshView(view) {
+      view.refresh += 1;
+    }
     return {
       ...useTabView(),
       isRouteView,
+      refreshView,
     };
   },
 };
