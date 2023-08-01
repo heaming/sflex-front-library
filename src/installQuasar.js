@@ -22,8 +22,8 @@ function loadIcons() {
     const name = matched.pop();
     if (env.LOCAL) {
       icons[name] = imported[key].default;
-    } else if (env.VITE_CDN_ORIGIN) {
-      icons[name] = `${env.VITE_CDN_ORIGIN}/assets/${name}.svg`;
+    // } else if (env.VITE_CDN_ORIGIN) {
+    //   icons[name] = `${env.VITE_CDN_ORIGIN}/assets/${name}.svg`;
     } else {
       icons[name] = `/assets/${name}.svg`;
     }
