@@ -29,7 +29,7 @@
         </div>
       </transition-group>
       <div class="dashboard-drag__guide">
-        <p>{{ $t('MSG_TXT_HCARD_GUIDE') }}</p>
+        {{ $t('MSG_TXT_HCARD_GUIDE') }}
       </div>
     </kw-scroll-area>
   </div>
