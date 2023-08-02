@@ -7,7 +7,17 @@
           :key="card.homeCardId"
           :class="getClass(card)"
         >
-          <div class="dashboard-select__item-content">
+          <div
+            class="dashboard-select__item-content"
+          >
+            <q-img
+              v-if="false"
+              :src="card.imgSrc"
+              :alt="card.homeCardName"
+              style="width: 100%; height: 100%;"
+              fit="contain"
+              :ratio="16/9"
+            />
             <span>
               {{ card.homeCardSizeTypeName }}
             </span>

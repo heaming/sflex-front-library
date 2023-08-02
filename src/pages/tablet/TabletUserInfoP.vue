@@ -14,7 +14,7 @@
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
-        <kw-form-item label="이름">
+        <kw-form-item label="성명">
           <p>{{ userInfo.userName }}</p>
         </kw-form-item>
       </kw-form-row>
@@ -52,10 +52,19 @@
           />
         </kw-form-item>
       </kw-form-row>
+      <kw-form-row>
+        <kw-form-item label="작업대상 조직유형">
+          <p>
+            <kw-select
+              v-model="userInfo.wkOjOgTpCd"
+              :options="codes"
+              dense
+              :disable="codes?.length < 2"
+            />
+          </p>
+        </kw-form-item>
+      </kw-form-row>
     </kw-form>
-    <ul class="kw-notification mt20">
-      <li>접속 중인 로그인 계정을 변경하실 경우, 확인 중인 화면이 새로고침 됩니다.</li>
-    </ul>
     <template #action>
       <kw-btn
         negative
@@ -64,7 +73,7 @@
       />
       <kw-btn
         primary
-        label="확인"
+        label="저장"
         @click="onClickConfirm"
       />
     </template>
@@ -74,23 +83,33 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import useModal from '../../composables/useModal';
+import useMeta from '../../composables/useMeta';
 import { http } from '../../plugins/http';
+import { getCodes } from '../../utils/code';
 
 const { cancel, ok } = useModal();
-const { getters, dispatch } = useStore();
+const { dispatch } = useStore();
 
-const user = getters['meta/getUserInfo'];
-const userInfo = cloneDeep(user);
+const { getUserInfo } = useMeta();
+
+const userInfo = computed(() => cloneDeep(getUserInfo()));
 const frmMainRef = ref();
 
-async function onClickConfirm() {
-  if (await !frmMainRef.value?.isModified) {
-    ok();
-    return;
+const selableOgTpCds = computed(() => userInfo.value?.selableOgTpCd?.split(','));
+const codes = ref([]);
+await getCodes('OG_TP_CD').then((res) => {
+  if (selableOgTpCds.value?.length > 0) {
+    codes.value = res.filter((x) => selableOgTpCds.value.includes(x.codeId));
   }
+}).catch(() => {});
+
+async function onClickConfirm() {
+  if (await frmMainRef.value?.alertIfIsNotModified()) return;
   if (!await frmMainRef.value.validate()) return;
-  await http.put('/sflex/common/common/user-basics/update-cellphone', userInfo);
+
+  await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
   await dispatch('meta/fetchLoginInfo');
+  await http.post('/sflex/common/common/set-session-data', userInfo.value);
   ok();
 }
 

@@ -455,13 +455,17 @@ export default {
         componentProps: { searchText: searchText.value },
       });
 
-      if (result) push({ name: payload.menuUid });
+      if (result) {
+        await push({ name: payload.menuUid });
+      }
     }
 
     async function openUserInfoPopup() {
-      await modal({
+      const res = await modal({
         component: () => import('../../pages/web/WebUserInfoP.vue'),
       });
+
+      if (res.result) notify('변경되었습니다.');
     }
 
     onMounted(() => {

@@ -12,6 +12,7 @@
         class="kw-page__header"
         :title="title"
         :page-source="pageCtx.pageDestinationValue"
+        @reload-page="reloadPage"
       />
       <kw-page-mobile-header
         v-else
@@ -74,6 +75,7 @@
 
 <script>
 import usePage from '../../composables/private/usePage';
+import { loadSpinner } from '../../plugins/loading';
 import useObserver, { useObserverProps } from '../../composables/private/useObserver';
 import usePageSearch from '../../composables/private/usePageSearch';
 import usePageUniqueId from '../../composables/private/usePageUniqueId';
@@ -89,8 +91,8 @@ export default {
     title: { type: String, default: undefined },
     noHeader: { type: Boolean, default: false },
   },
-
-  setup() {
+  emits: ['slot-re-render'],
+  setup(props, { emit }) {
     const pageCtx = usePage();
     usePageSearch();
     usePageUniqueId();
@@ -101,11 +103,20 @@ export default {
       return { 'min-height': `${height - (offset + additionalOffset)}px` };
     };
 
+    function reloadPage() {
+      loadSpinner(true);
+      setTimeout(() => {
+        loadSpinner(false);
+        emit('slot-re-render');
+      }, 150);
+    }
+
     return {
       ...useObserver(),
       ...useInfiniteScroll(),
       styleFn,
       pageCtx,
+      reloadPage,
     };
   },
 };

@@ -15,18 +15,23 @@
           class="dashboard-drag__item"
         >
           <kw-icon
-            name="close"
+            name="close_24"
+            size="24px"
             clickable
             @click.stop="onClickDelete(card)"
           />
-          {{ card.homeCardName }}
+          <img
+            v-if="card.imgSrc"
+            :src="card.imgSrc"
+            :alt="card.homeCardName"
+            style="width: 100%; height: 100%;"
+          >
         </div>
       </transition-group>
+      <div class="dashboard-drag__guide">
+        {{ $t('MSG_TXT_HCARD_GUIDE') }}
+      </div>
     </kw-scroll-area>
-
-    <div class="dashboard-drag__guide">
-      {{ $t('MSG_TXT_HCARD_GUIDE') }}
-    </div>
   </div>
 </template>
 
@@ -49,10 +54,9 @@ const containerRef = ref();
 const getStyle = (card) => {
   const sizeTypeCodeSplited = card.homeCardSizeTypeCode.split('');
   const [column, row] = sizeTypeCodeSplited.map((e) => parseInt(e, 10));
-
   return {
-    width: `${322 * column - 20}px`,
-    height: `${322 * row - 20}px`,
+    width: `${302 * column + 20 * (column - 1)}px`,
+    height: `${251 * row + 20 * (row - 1)}px`,
     gridRow: `auto/span ${row}`,
     gridColumn: `auto/span ${column}`,
   };

@@ -91,7 +91,9 @@
   &__inner {
     position: relative;
     display: flex;
-    height: 715px;
+
+    // height: 585px; // 홈카드 최대 높이 수정 (한 화면 show)
+    height: 612px; // 홈카드 최대 높이 수정 (한 화면 show)
   }
 
   &__select {
@@ -117,24 +119,30 @@
             display: block;
             width: 100%;
             height: 100%;
-            background: rgb(47 138 243 / 60%) no-repeat center center;
-            background-image: url(~@assets/icons/check_24.svg);
-            background-size: 30px;
+            position: absolute; // 홈카드 관련 선택표시 수정 (왼쪽영역)
+            top: 0; // 홈카드 관련 선택표시 수정 (왼쪽영역)
+            background: url(~@assets/images/home-card_selected.png) no-repeat center center;
+            background-size: cover;
           }
         }
       }
 
       &__item-content {
+        padding: 12px 0;
         position: relative;
         width: 100%;
         height: 114px;
-        background: rgba($placeholder, 20%);
+        background: #fff;
+        border: 1px solid $line-stroke;
 
         > span {
           position: absolute;
           top: 10px;
           right: 10px;
-          font-size: 12px;
+
+          @include typo("caption",500);
+
+          color: $black2;
         }
       }
 
@@ -142,10 +150,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 10px;
+        margin-top: 8px;
 
         > span {
           font-size: 14px;
+          font-weight: 500;
           color: $black1;
         }
 
@@ -169,31 +178,33 @@
       &__item-container {
         display: grid;
         grid-auto-flow: row;
-        grid-template-rows: 302px;
+        grid-template-rows: 251px; // 홈카드 카드 높이 수정
         grid-template-columns: repeat(4, 302px);
         gap: 20px;
         padding-bottom: 60px;
         margin: 30px auto 0;
         width: max-content;
-        min-height: 685px;
+        min-height: 572px;
       }
 
       &__item {
         position: relative;
-        padding: 36px 0 0;
+        padding: 20px 0 0; // 홈카드 관련 이미지영역 수정 (오른쪽영역) -> 상단 영역 추가
         border: 1px solid $line-stroke;
         background: $bg-white;
 
         &.sortable-ghost {
-          border: 1px dashed $placeholder;
-          background: rgba($placeholder, 20%);
+          // border: 1px dashed $placeholder;
+          // background: rgba($placeholder, 20%);
+          border: 1px solid $black1;
+          box-shadow: 2px 10px 15px 0 rgb(0 0 0 / 6%);
         }
 
         > .kw-icon {
+          // close icon
           position: absolute;
-          top: 17px;
-          right: 17px;
-          font-size: 16px;
+          top: 12px;
+          right: 12px;
         }
 
         &--enter-from {
@@ -213,23 +224,28 @@
       }
 
       &__guide {
+        padding-bottom: 12px;
         position: absolute;
-        left: 10px;
-        right: 10px;
-        bottom: 20px;
+        left: 0;
+        right: 24px;
+        top: 560px;
+
+        // bottom: 32px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
+        // height: 612px;
+        background: transparent;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        gap: 8px;
-        font-size: 14px;
+        gap: 0; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
+        font-size: 14px; // 홈카드 가이드 (한 화면 show) 텍스트 최대한 보이게
         color: $placeholder;
+        border-bottom: 1.5px dashed $placeholder;
 
-        &::after {
-          content: "";
-          width: 100%;
-          border-top: 1.5px dashed $placeholder;
-        }
+        // &::after {
+        //   width: 100%;
+        //   content: "";
+        // }
       }
     }
   }
