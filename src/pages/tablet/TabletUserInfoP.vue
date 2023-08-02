@@ -54,14 +54,12 @@
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="작업대상 조직유형">
-          <p>
-            <kw-select
-              v-model="userInfo.wkOjOgTpCd"
-              :options="codes"
-              dense
-              :disable="codes?.length < 2"
-            />
-          </p>
+          <kw-select
+            v-model="userInfo.wkOjOgTpCd"
+            :options="codes"
+            dense
+            :disable="codes?.length < 2"
+          />
         </kw-form-item>
       </kw-form-row>
     </kw-form>
