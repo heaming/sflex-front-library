@@ -472,6 +472,21 @@
       }
     }
   }
+
+  &.rg-button-disabled {
+    label {
+      cursor: not-allowed;
+      color: $placeholder;
+      border-color: $line-stroke !important;
+      background-color: $line-bg;
+    }
+
+    .rg-radio-renderer__option--selected {
+      label {
+        background-color: $line-line;
+      }
+    }
+  }
 }
 
 .rg-check-renderer-unchecked,
