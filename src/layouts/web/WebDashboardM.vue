@@ -10,8 +10,10 @@
             <span>김길동 국장님</span>, 좋은 하루 보내세요.
           </p>
           <kw-btn-toggle
-            v-model="area"
-            :options="['총괄', '지역']"
+            v-model="areaType"
+            :options="[{'cd':'G', 'nm':'총괄'}, {'cd':'R', 'nm':'지역'}]"
+            option-label="nm"
+            option-value="cd"
             dense
             gap="0px"
           />
@@ -35,11 +37,11 @@
             <h5>고객현황</h5>
             <dl>
               <dt>유입</dt>
-              <dd>22,377</dd>
+              <dd>2,377</dd>
               <dt>이달</dt>
-              <dd>32,540</dd>
+              <dd>2,540</dd>
               <dt>총인원수</dt>
-              <dd>52,540</dd>
+              <dd>2,540</dd>
             </dl>
           </div>
           <kw-separator
@@ -66,8 +68,10 @@
             color="bg-white"
           />
           <kw-btn-toggle
-            v-model="gap"
-            :options="['일간', '월간']"
+            v-model="periodType"
+            :options="[{'cd':'D', 'nm':'일간'}, {'cd':'M', 'nm':'월간'}]"
+            option-label="nm"
+            option-value="cd"
             dense
             gap="0px"
           />
@@ -82,7 +86,11 @@
               :class="`dashboard_el_`
                 + `${userCard.homeCardSizeTypeName.split('X')[0]}by${userCard.homeCardSizeTypeName.split('X')[1]}`"
             >
-              <component :is="userCard.component" />
+              <component
+                :is="userCard.component"
+                :period-type="periodType"
+                :area-type="areaType"
+              />
             </div>
           </template>
         </div>
@@ -104,8 +112,8 @@ const props = defineProps({
   },
 });
 
-const area = ref('총괄');
-const gap = ref('일간');
+const areaType = ref('G');
+const periodType = ref('D');
 
 const userCards = shallowRef([]);
 async function fetchUserCards() {

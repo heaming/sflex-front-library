@@ -59,13 +59,13 @@
           {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
         </kw-icon>
 
-        <kw-icon
+        <!-- <kw-icon
           name="retry"
           clickable
           @click="reloadPage"
         >
           {{ '새로고침' }}
-        </kw-icon>
+        </kw-icon> -->
 
         <span
           v-if="!env.isServer"

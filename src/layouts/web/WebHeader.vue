@@ -6,6 +6,9 @@
           name="logo"
           :go-to-home="goToHome"
         />
+        <kw-tooltip>
+          홈으로 이동
+        </kw-tooltip>
       </div>
 
       <kw-click-outside
@@ -63,6 +66,9 @@
                 ? '99+' : alarms?.filter((alarm) => alarm.readYn === 'N').length"
               class="alert-badge"
             />
+            <kw-tooltip>
+              알림
+            </kw-tooltip>
           </kw-btn>
           <kw-menu
             v-if="alarms.length > 0"
@@ -274,6 +280,8 @@
           class="web-header__icon"
           name="gnb_menu"
           clickable
+          tooltip="전체메뉴"
+          :tooltip-offset="[0, 18]"
           @click="openTotalMenuP"
         />
         <web-total-menu-p
