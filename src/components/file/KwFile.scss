@@ -136,7 +136,7 @@
 
   &__header-counter {
     &::before {
-      display: inline-block;
+      display: block; // safari 호환성 문제로 수정
       content: " ";
       width: 4px;
     }
