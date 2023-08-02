@@ -32,18 +32,16 @@
           mask="telephone"
           dense
           rules="required|telephone"
-          class="mt12"
+          class="pt12"
         />
-        <kw-form-item label="작업대상 조직유형">
-          <p>
-            <kw-select
-              v-model="userInfo.wkOjOgTpCd"
-              :options="codes"
-              dense
-              :disable="codes?.length < 2"
-            />
-          </p>
-        </kw-form-item>
+        <kw-select
+          v-model="userInfo.wkOjOgTpCd"
+          :options="codes"
+          dense
+          label="작업대상 조직유형"
+          class="pt12"
+          :disable="codes?.length < 2"
+        />
       </kw-form>
     </div>
 
