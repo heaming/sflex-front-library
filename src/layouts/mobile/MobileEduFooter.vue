@@ -30,7 +30,6 @@ export default {
     const { t } = useI18n();
     const curr = ref(-1);
     const footerMenus = ref([
-      { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
       { icon: 'mob_menu', label: t('MSG_BTN_ALL_VIEW'), component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue') },
     ]);

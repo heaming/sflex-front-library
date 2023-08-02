@@ -41,30 +41,26 @@
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="휴대전화번호">
-          <p>
-            <kw-input
-              v-model="userInfo.cellphone"
-              v-model:telNo0="userInfo.cellPhoneLocataTelNumber"
-              v-model:telNo1="userInfo.mexnoGbencr"
-              v-model:telNo2="userInfo.cellPhoneIndividualTelNumber"
-              label="휴대전화번호"
-              mask="telephone"
-              dense
-              rules="required|telephone"
-            />
-          </p>
+          <kw-input
+            v-model="userInfo.cellphone"
+            v-model:telNo0="userInfo.cellPhoneLocataTelNumber"
+            v-model:telNo1="userInfo.mexnoGbencr"
+            v-model:telNo2="userInfo.cellPhoneIndividualTelNumber"
+            label="휴대전화번호"
+            mask="telephone"
+            dense
+            rules="required|telephone"
+          />
         </kw-form-item>
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="작업대상 조직유형">
-          <p>
-            <kw-select
-              v-model="userInfo.wkOjOgTpCd"
-              :options="codes"
-              dense
-              :disable="codes?.length < 2"
-            />
-          </p>
+          <kw-select
+            v-model="userInfo.wkOjOgTpCd"
+            :options="codes"
+            dense
+            :disable="codes?.length < 2"
+          />
         </kw-form-item>
       </kw-form-row>
     </kw-form>
