@@ -1,4 +1,5 @@
 /* eslint-disable no-bitwise */
+import { isEmpty } from 'lodash-es';
 import { FormExpandableContextKey } from '../../consts/private/symbols';
 
 export const useFormExpandableProps = {
@@ -72,7 +73,11 @@ export default () => {
       let i = props.defaultVisibleRows;
       for (i; i < registeredCount.value; i += 1) {
         const rowItems = registeredList[i].slots.default();
-        const shouldExpand = rowItems.some((rowItem) => rowItem.props?.required);
+        const shouldExpand = rowItems.some((rowItem) => {
+          const haveDefaultValue = rowItem.children?.default().some((child) => !isEmpty(child.props?.modelValue) || !isEmpty(child.props?.['model-value']));
+          return rowItem.props?.required || haveDefaultValue;
+        });
+
         if (shouldExpand) {
           toggleExpand(true);
           break;
