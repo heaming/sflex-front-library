@@ -6,6 +6,10 @@ export const useFormExpandableProps = {
     type: Number,
     default: 2,
   },
+  expandWhenMounted: {
+    type: Boolean,
+    default: true,
+  },
 };
 
 export default () => {
@@ -61,6 +65,25 @@ export default () => {
     isExpanded.value = val ?? !isExpanded.value;
     updateExpand();
   }
+
+  // 필수처리된 item들이 hidden Row에 있을 경우 펼쳐진 상태로.
+  function expandWhenRequiredItemsInHiddenRows() {
+    if (isExpandable.value) {
+      let i = props.defaultVisibleRows;
+      for (i; i < registeredCount.value; i += 1) {
+        const rowItems = registeredList[i].slots.default();
+        const shouldExpand = rowItems.some((rowItem) => rowItem.props?.required);
+        if (shouldExpand) {
+          toggleExpand(true);
+          break;
+        }
+      }
+    }
+  }
+
+  onMounted(() => {
+    if (props.expandWhenMounted) expandWhenRequiredItemsInHiddenRows();
+  });
 
   return {
     isExpandable,
