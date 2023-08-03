@@ -99,8 +99,13 @@ export default {
 
     const styleFn = (offset, height) => {
       const el = document.querySelector('.web-tab-view > .web-tab-view__header');
+      const tempTablet = document.querySelector('.temp_tablet');
+      let addTempTabletHeight = 0;
+      if (tempTablet) {
+        addTempTabletHeight = 30;
+      }
       const additionalOffset = el?.clientHeight || 0;
-      return { 'min-height': `${height - (offset + additionalOffset)}px` };
+      return { 'min-height': `${height - (offset + additionalOffset + addTempTabletHeight)}px` };
     };
 
     function reloadPage() {
