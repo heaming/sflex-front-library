@@ -41,7 +41,7 @@ function initGrd(data, view) {
       fieldName: 'ToggleBtn2',
     },
     {
-      fieldName: '공백3',
+      fieldName: 'ToggleBtnDisabled',
     },
     {
       fieldName: '공백4',
@@ -75,7 +75,13 @@ function initGrd(data, view) {
       styleName: 'rg-button-toggle',
     },
     {
-      fieldName: '공백3',
+      fieldName: 'ToggleBtnDisabled',
+      renderer: {
+        type: 'radio',
+        editable: false,
+      },
+      options: ['있다', '없다'].map((v) => ({ codeId: v, codeName: v })),
+      styleName: 'rg-button-toggle rg-button-disabled',
     },
     {
       fieldName: '공백4',
@@ -97,7 +103,7 @@ function initGrd(data, view) {
 
   data.setRows([
     {
-      ToggleBtn1: '있다', ToggleBtn2: '없다', 공백3: '', 공백4: '', 공백5: '', 공백6: '', 공백7: '',
+      ToggleBtn1: '있다', ToggleBtn2: '없다', ToggleBtnDisabled: '있다', 공백4: '', 공백5: '', 공백6: '', 공백7: '',
     },
   ]);
 }
@@ -119,7 +125,7 @@ function initGrd(data, view) {
       fieldName: 'ToggleBtn2',
     },
     {
-      fieldName: '공백3',
+      fieldName: 'ToggleBtnDisabled',
     },
     {
       fieldName: '공백4',
@@ -153,7 +159,13 @@ function initGrd(data, view) {
       styleName: 'rg-button-toggle',
     },
     {
-      fieldName: '공백3',
+      fieldName: 'ToggleBtnDisabled',
+      renderer: {
+        type: 'radio',
+        editable: false,
+      },
+      options: ['있다', '없다'].map((v) => ({ codeId: v, codeName: v })),
+      styleName: 'rg-button-toggle rg-button-disabled',
     },
     {
       fieldName: '공백4',
@@ -175,7 +187,7 @@ function initGrd(data, view) {
 
   data.setRows([
     {
-      ToggleBtn1: '있다', ToggleBtn2: '없다', 공백3: '', 공백4: '', 공백5: '', 공백6: '', 공백7: '',
+      ToggleBtn1: '있다', ToggleBtn2: '없다', ToggleBtnDisabled: '있다', 공백4: '', 공백5: '', 공백6: '', 공백7: '',
     },
   ]);
 }
