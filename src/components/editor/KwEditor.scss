@@ -12,7 +12,9 @@
       }
 
       .q-field__control-container {
-        z-index: 10000;
+        z-index: 2900;
+
+        // gnb가 z-index: 3000
       }
     }
   }
