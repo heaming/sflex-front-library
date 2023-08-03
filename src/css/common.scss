@@ -904,6 +904,10 @@ $unit: px;
   }
 }
 
+textarea::placeholder {
+  font-size: 16px !important;
+}
+
 .kw-auth-wrap {
   padding: 30px 40px 40px;
   background-color: $bg-white;
