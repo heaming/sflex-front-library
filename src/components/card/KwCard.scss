@@ -3,7 +3,7 @@
     box-shadow: none;
     border-radius: 0;
     border: 1px solid $line-line;
-    padding: 30px;
+    padding: 24px; // 모든  card padding 30 -> 24px 로 변경
     width: calc((100% - 80px) / 4);
   }
 
