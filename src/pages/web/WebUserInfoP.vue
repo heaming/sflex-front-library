@@ -1,13 +1,12 @@
 <template>
   <!-- rev:230517 전면수정 -->
   <kw-popup
-    size="md"
+    size="sm"
     title="사용자정보"
   >
     <kw-form
       ref="frmMainRef"
       :cols="1"
-      dense
     >
       <kw-form-row>
         <kw-form-item label="로그인 계정">
@@ -41,15 +40,11 @@
       </kw-form-row>
       <kw-form-row>
         <kw-form-item label="휴대전화번호">
-          <kw-input
-            v-model="userInfo.cellphone"
-            v-model:telNo0="userInfo.cellPhoneLocataTelNumber"
-            v-model:telNo1="userInfo.mexnoGbencr"
-            v-model:telNo2="userInfo.cellPhoneIndividualTelNumber"
+          <telephone-number
+            v-model:tel-no1="telephone.telNo1"
+            v-model:tel-no2="telephone.telNo2"
+            v-model:tel-no3="telephone.telNo3"
             label="휴대전화번호"
-            mask="telephone"
-            dense
-            rules="required|telephone"
           />
         </kw-form-item>
       </kw-form-row>
@@ -58,7 +53,6 @@
           <kw-select
             v-model="userInfo.wkOjOgTpCd"
             :options="codes"
-            dense
             :disable="codes?.length < 2"
           />
         </kw-form-item>
@@ -82,6 +76,7 @@
 
 <script setup>
 import { cloneDeep } from 'lodash-es';
+import TelephoneNumber from '../component/TelephoneNumber.vue';
 import useModal from '../../composables/useModal';
 import useMeta from '../../composables/useMeta';
 import { http } from '../../plugins/http';
@@ -94,7 +89,12 @@ const { getUserInfo } = useMeta();
 
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 const frmMainRef = ref();
-
+const userInfoPhone = computed(() => userInfo.value.cellphone.split('-'));
+const telephone = ref({
+  telNo1: userInfoPhone.value[0],
+  telNo2: userInfoPhone.value[1],
+  telNo3: userInfoPhone.value[2],
+});
 const selableOgTpCds = computed(() => userInfo.value?.selableOgTpCd?.split(','));
 const codes = ref([]);
 await getCodes('OG_TP_CD').then((res) => {
@@ -107,6 +107,9 @@ async function onClickConfirm() {
   if (await frmMainRef.value?.alertIfIsNotModified()) return;
   if (!await frmMainRef.value.validate()) return;
 
+  userInfo.value.cellPhoneLocataTelNumber = telephone.value.telNo1;
+  userInfo.value.mexnoGbencr = telephone.value.telNo2;
+  userInfo.value.cellPhoneIndividualTelNumber = telephone.value.telNo3;
   await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
   await dispatch('meta/fetchLoginInfo');
   await http.post('/sflex/common/common/set-session-data', userInfo.value);
