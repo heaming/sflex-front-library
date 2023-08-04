@@ -898,3 +898,11 @@ body.q-body--prevent-scroll__header {
     }
   }
 }
+
+.header-tooltip {
+  top: 66px !important; // webHeader 아이콘들 (홈, 알림, 전체메뉴 등) 툴팁 높이가 안맞아서 강제로 맞춤
+}
+
+.page-header-tooltip {
+  top: 180px !important; // kwPageHeader 아이콘들 (즐겨찾기, 공지사항 등) 툴팁 높이가 안맞아서 강제로 맞춤
+}

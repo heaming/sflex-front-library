@@ -6,18 +6,39 @@
     :name="name"
     :size="size"
     :color="color"
-    @click="!disable && onClick?.($event)"
+    @click="onClickIcon"
   >
-    <kw-tooltip
-      v-if="hasContent"
-      :anchor="tooltipAnchor"
-      :self="tooltipSelf"
-      :offset="tooltipOffset"
+    <kw-click-outside
+      @click-outside="showingHint = false"
     >
-      <slot>
-        {{ tooltip }}
-      </slot>
-    </kw-tooltip>
+      <template v-if="$g.platform.is.desktop">
+        <kw-tooltip
+          v-if="hasContent"
+          :anchor="tooltipAnchor"
+          :self="tooltipSelf"
+          :class="tooltipClass"
+          :offset="tooltipOffset"
+        >
+          <slot>
+            {{ tooltip }}
+          </slot>
+        </kw-tooltip>
+      </template>
+      <template v-else>
+        <kw-tooltip
+          v-if="hasContent"
+          v-model="showingHint"
+          :anchor="tooltipAnchor"
+          :self="tooltipSelf"
+          :class="tooltipClass"
+          :offset="tooltipOffset"
+        >
+          <slot>
+            {{ tooltip }}
+          </slot>
+        </kw-tooltip>
+      </template>
+    </kw-click-outside>
   </q-icon>
 </template>
 
@@ -67,6 +88,10 @@ export default {
       // eslint-disable-next-line vue/require-valid-default-prop
       default: [0, 3],
     },
+    tooltipClass: {
+      type: String,
+      default: undefined,
+    },
     onClick: {
       type: Function,
       default: undefined,
@@ -81,11 +106,20 @@ export default {
 
     const slots = useSlots();
     const hasContent = computed(() => !isNil(props.tooltip || slots.default));
+    const showingHint = ref(false);
+    function onClickIcon(e) {
+      if (!props.disable && props.onClick) {
+        props.onClick(e);
+      }
+      showingHint.value = !showingHint.value;
+    }
 
     return {
       ...useInheritAttrs(),
       iconClass,
       hasContent,
+      showingHint,
+      onClickIcon,
     };
   },
 };
