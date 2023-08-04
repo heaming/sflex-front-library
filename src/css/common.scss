@@ -1382,6 +1382,11 @@ body.mobile {
   }
 }
 
+// select 등비로 만들어주는 css
+.kw-search .kw-form-item__field label.kw-select {
+  width: 1px;
+}
+
 // 조직도 트리 관련 h3 마진영역수정
 
 .w451 {
