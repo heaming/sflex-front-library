@@ -6,7 +6,9 @@
           name="logo"
           :go-to-home="goToHome"
         />
-        <kw-tooltip>
+        <kw-tooltip
+          class="header-tooltip"
+        >
           홈으로 이동
         </kw-tooltip>
       </div>
@@ -66,7 +68,9 @@
                 ? '99+' : alarms?.filter((alarm) => alarm.readYn === 'N').length"
               class="alert-badge"
             />
-            <kw-tooltip>
+            <kw-tooltip
+              class="header-tooltip"
+            >
               알림
             </kw-tooltip>
           </kw-btn>
@@ -115,7 +119,7 @@
                     >
                       {{ item.alarmMsg }}
                       <kw-tooltip
-                        class="alert_tooltip"
+                        class="alert_tooltip header-tooltip"
                         anchor="bottom start"
                         self="top start"
                         :offset="[-8, 0]"
@@ -190,6 +194,7 @@
           <kw-tooltip
             ref="supportTooltipRef"
             v-model="showSupportTooltip"
+            class="header-tooltip"
             @before-show="beforeSupportTooltipShow"
           >
             업무지원
@@ -268,6 +273,7 @@
           <kw-tooltip
             ref="userInfoTooltipRef"
             v-model="showUserInfoTooltip"
+            class="header-tooltip"
             @before-show="beforeUserInfoTooltipShow"
           >
             개인설정
@@ -281,7 +287,7 @@
           name="gnb_menu"
           clickable
           tooltip="전체메뉴"
-          :tooltip-offset="[0, 18]"
+          tooltip-class="header-tooltip"
           @click="openTotalMenuP"
         />
         <web-total-menu-p

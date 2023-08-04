@@ -28,7 +28,7 @@
           unchecked-icon="bookmark_outline"
           @update:model-value="updateBookmark"
         >
-          <kw-tooltip>
+          <kw-tooltip class="page-header-tooltip">
             {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
           </kw-tooltip>
         </kw-checkbox>
@@ -37,6 +37,7 @@
         <kw-icon
           :name="showPageNotice && pageNoticeCntn ? 'notice_on' : 'notice_off'"
           clickable
+          tooltip-class="page-header-tooltip"
           @click="showPageNotice = !showPageNotice"
         >
           {{ $t('MSG_TXT_BIZ_NOTICE') }}
@@ -45,6 +46,7 @@
         <kw-icon
           :name="showPageManual ? 'report_on' : 'report'"
           clickable
+          tooltip-class="page-header-tooltip"
           @click="onClickOpenManual"
         >
           {{ $t('MSG_TXT_MANU') }}
@@ -54,6 +56,7 @@
           v-if="!isSubPage"
           name="new_window"
           clickable
+          tooltip-class="page-header-tooltip"
           @click="openNewWindow()"
         >
           {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
