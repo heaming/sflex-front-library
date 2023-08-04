@@ -72,9 +72,9 @@ export default () => {
     if (isExpandable.value) {
       let i = props.defaultVisibleRows;
       for (i; i < registeredCount.value; i += 1) {
-        const rowItems = registeredList[i].slots.default();
+        const rowItems = registeredList[i].slots.default?.();
         const shouldExpand = rowItems.some((rowItem) => {
-          const haveDefaultValue = rowItem.children?.default().some((child) => !isEmpty(child.props?.modelValue) || !isEmpty(child.props?.['model-value']));
+          const haveDefaultValue = rowItem.children?.default?.().some((child) => !isEmpty(child.props?.modelValue) || !isEmpty(child.props?.['model-value']));
           return rowItem.props?.required || haveDefaultValue;
         });
 
