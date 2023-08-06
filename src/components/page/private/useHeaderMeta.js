@@ -28,11 +28,19 @@ export default () => {
     }
   }
 
-  async function getPageManual() {
+  async function readPageManual(manualId) {
+    if (manualId) {
+      await http.put(`/sflex/common/common/manuals/${manualId}/read`);
+    }
+  }
+
+  async function getPageManual(readYn = false) {
     if (meta.pageId) {
       const res = await http.get(`/sflex/common/common/pages/${meta.pageId}/using-manual`);
-      if (!isEmpty(res.data)) pageManual.value = res.data;
-      else pageManual.value = null;
+      if (!isEmpty(res.data)) {
+        pageManual.value = res.data;
+        if (readYn) readPageManual(pageManual.value.docId);
+      } else pageManual.value = null;
 
       return pageManual.value;
     }
@@ -40,6 +48,7 @@ export default () => {
   }
 
   getPageNotice();
+  getPageManual();
   return {
     pageTitle: title,
     pageUseIsSub: isSubPage,
