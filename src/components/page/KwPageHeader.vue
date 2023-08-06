@@ -38,7 +38,6 @@
           :name="showPageNotice && pageNoticeCntn ? 'notice_on' : 'notice_off'"
           clickable
           tooltip-class="page-header-tooltip"
-          @click="showPageNotice = !showPageNotice"
         >
           {{ $t('MSG_TXT_BIZ_NOTICE') }}
         </kw-icon>
@@ -46,6 +45,7 @@
         <kw-icon
           :name="showPageManual ? 'report_on' : 'report'"
           clickable
+          :disable="!pageManual"
           tooltip-class="page-header-tooltip"
           @click="onClickOpenManual"
         >
@@ -121,7 +121,6 @@
 </template>
 
 <script>
-import { isEmpty } from 'lodash-es';
 import { sanitize } from '../../plugins/sanitize';
 import useBookmark from './private/useBookmark';
 import useBreadcrumbNavigation, { useBreadcrumbNavigationProps } from './private/useBreadcrumbNavigation';
@@ -129,7 +128,6 @@ import useNewWindow from './private/useNewWindow';
 import useHeaderMeta from './private/useHeaderMeta';
 import env from '../../consts/private/env';
 import { modal } from '../../plugins/modal';
-import { alert } from '../../plugins/dialog';
 
 export default {
   name: 'KwPageHeader',
@@ -149,22 +147,15 @@ export default {
   emits: ['reload-page'],
   async setup(props, { emit }) {
     const showPageNotice = ref(true);
-    const showPageManual = ref(false);
-    const { getPageManual } = useHeaderMeta();
-    const { t } = useI18n();
+    const { getPageManual, pageManual } = useHeaderMeta();
     async function onClickOpenManual() {
-      const manual = await getPageManual();
-      if (isEmpty(manual)) {
-        await alert(t('MSG_ALT_NO_MANUAL_PAGE'), { refocus: false });
-        return;
-      }
+      if (!pageManual) return;
+      const manual = await getPageManual(true);
 
-      showPageManual.value = true;
       await modal({
         component: 'ZwcmzPageManualDtlP',
         componentProps: { manual },
       });
-      showPageManual.value = false;
     }
 
     function reloadPage() {
@@ -178,10 +169,10 @@ export default {
       ...useHeaderMeta(),
       env,
       showPageNotice,
-      showPageManual,
       sanitize,
       onClickOpenManual,
       reloadPage,
+      pageManual,
     };
   },
 };
