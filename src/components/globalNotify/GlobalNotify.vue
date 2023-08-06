@@ -36,12 +36,10 @@ const {
   DIALOG_TRANSITION_DURATION,
 } = libConfig;
 
-const DEFAULT_PADDING_LEFT_WITH_DRAWER = 343;
-const DEFAULT_PADDING_LEFT_NO_DRAWER = 80;
-const DEFAULT_PADDING_RIGHT = 40;
+const DEFAULT_PADDING_LEFT = 150;
+const DEFAULT_PADDING_RIGHT = 150;
 const DEFAULT_OFFSET_TOP = 0;
 const DEFAULT_OFFSET_TOP_POPUP = -110;
-const DEFAULT_PADDING_LEFT_POPUP = 40;
 
 const DEFAULT_PADDING_MOBILE = 0;
 const DEFAULT_OFFSET_TOP_MOBILE = -125;
@@ -69,7 +67,7 @@ export default {
     const isPending = ref(false);
     const isActive = computed(() => !isPending.value && notifications.value.length > 0);
     const popupOffsetTop = ref(`${DEFAULT_OFFSET_TOP}`);
-    const popupPaddingLeft = ref(`${DEFAULT_PADDING_LEFT_WITH_DRAWER}px`);
+    const popupPaddingLeft = ref(`${DEFAULT_PADDING_LEFT}px`);
     const popupPaddingRight = ref(`${DEFAULT_PADDING_RIGHT}px`);
     async function pending() {
       isPending.value = true;
@@ -120,12 +118,12 @@ export default {
               offsetLeft = DEFAULT_PADDING_MOBILE;
               offsetRight = DEFAULT_PADDING_MOBILE;
             } else {
-              offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 140;
+              offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 195;
               offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
               offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
             }
           } else {
-            offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 140;
+            offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 195;
             offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
             offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
           }
@@ -138,11 +136,11 @@ export default {
           offsetTop = DEFAULT_OFFSET_TOP_TABLET;
           offsetRight = DEFAULT_PADDING_RIGHT_TABLET;
         } else if (isPopup) {
-          offsetLeft = DEFAULT_PADDING_LEFT_POPUP;
+          offsetLeft = DEFAULT_PADDING_LEFT;
           offsetTop = DEFAULT_OFFSET_TOP_POPUP;
           offsetRight = DEFAULT_PADDING_RIGHT;
         } else {
-          offsetLeft = isLeftExpanded.value ? DEFAULT_PADDING_LEFT_WITH_DRAWER : DEFAULT_PADDING_LEFT_NO_DRAWER;
+          offsetLeft = DEFAULT_PADDING_LEFT;
           offsetTop = DEFAULT_OFFSET_TOP;
           offsetRight = DEFAULT_PADDING_RIGHT;
         }
