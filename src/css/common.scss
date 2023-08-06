@@ -904,6 +904,10 @@ $unit: px;
   }
 }
 
+textarea::placeholder {
+  font-size: 16px !important;
+}
+
 .kw-auth-wrap {
   padding: 30px 40px 40px;
   background-color: $bg-white;
@@ -989,7 +993,7 @@ $unit: px;
 
   &-number {
     display: block;
-    padding-top: 8px;
+    padding-top: 4px; // 8px -> 4px 조절
     font-size: 16px;
     font-weight: 500;
     font-stretch: normal;
@@ -1376,6 +1380,11 @@ body.mobile {
       width: calc((100% - 32px) / 5);
     }
   }
+}
+
+// select 등비로 만들어주는 css
+.kw-search .kw-form-item__field label.kw-select {
+  width: 1px;
 }
 
 // 조직도 트리 관련 h3 마진영역수정

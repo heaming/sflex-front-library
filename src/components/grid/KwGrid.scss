@@ -472,6 +472,21 @@
       }
     }
   }
+
+  &.rg-button-disabled {
+    label {
+      cursor: not-allowed;
+      color: $placeholder;
+      border-color: $line-stroke !important;
+      background-color: $line-bg;
+    }
+
+    .rg-radio-renderer__option--selected {
+      label {
+        background-color: $line-line;
+      }
+    }
+  }
 }
 
 .rg-check-renderer-unchecked,
@@ -1340,3 +1355,15 @@ tr.rg-focused-row.rg-rowgroup-footer {
 // .hide-row-indicator > div {
 //   display: none;
 // }
+
+// 헤더 언더라인 높이 보정
+.rg-vscrollbar {
+  z-index: 1;
+}
+
+.rg-selection-handleleft-handle,
+.rg-selection-handletop-handle,
+.rg-selection-handleright-handle,
+.rg-selection-handlebottom-handle {
+  display: none !important;
+}

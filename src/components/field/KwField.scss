@@ -127,6 +127,7 @@
       .q-field__suffix,
       .q-field__input {
         color: $kw-field-color-disable;
+        -webkit-text-fill-color: $kw-field-color-disable;
       }
 
       .q-field__marginal {
