@@ -866,6 +866,10 @@
   .rg-changed-marker {
     display: none !important;
   }
+
+  &.multiline {
+    white-space: pre-line;
+  }
 }
 
 .rg-updated-row {
