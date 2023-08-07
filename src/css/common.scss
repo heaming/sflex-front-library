@@ -238,116 +238,118 @@ p {
 }
 
 // tab in tabs with search...
-.kw-page__content-container,
-.kw-popup__content {
-  // first tabs in page with search.
-  > .kw-tabs:first-child {
-    border-top: 1px solid $line-line; // imitate search box border
-    border-left: 1px solid $line-line; // imitate search box border
-    border-right: 1px solid $line-line; // imitate search box border
-    box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%); // imitate search box border
-
-    + .kw-tab-panels .kw-tab-panel {
-      > .kw-search:first-child {
-        border-top: 0;
-      }
-
-      // tab in tab... with search
-      > .kw-tabs:first-child {
-        border-left: 1px solid $line-line; // imitate search box border
-        border-right: 1px solid $line-line; // imitate search box border
-        box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%); // imitate search box border
-
-        @include kw-tabs-padding(20px 40px 0 40px, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
-
-        // region can be replaced by using `activeLine` props in kw-tabs
-        &::before {
-          border: none;
-        } // endregion
-
-        // region can be replaced by using `inactive-*` in kw-tabs
-        .kw-tabs__content {
-          background-color: $bg-white;
-          color: $black3;
-        }// endregion
-
-        // region can be replaced by using `dense` props in kw-tabs
-        &.q-tabs {
-          .q-tab {
-            min-height: $kw-tabs-arrow-height-dense;
-
-            &--full {
-              min-height: $kw-tabs-arrow-height-dense;
-            }
-          }
-
-          .q-tabs__arrow {
-            $-arrow-padding: (($kw-tabs-arrow-height-dense - 18px) / 2) (($kw-tabs-arrow-width-dense - 18px) / 2);
-
-            min-width: $kw-tabs-arrow-width-dense;
-
-            &.q-icon {
-              > svg {
-                padding: $-arrow-padding;
-              }
-            }
-
-            &--left {
-              &.q-tabs__arrow--faded {
-                &.q-icon {
-                  > svg {
-                    padding-right: at($-arrow-padding, 4) + 1px;
-                  }
-                }
-              }
-            }
-
-            &--right {
-              &.q-tabs__arrow--faded {
-                &.q-icon {
-                  > svg {
-                    padding-right: at($-arrow-padding, 2) + 1px;
-                  }
-                }
-              }
-            }
-          }
-        }// endregion
-
-        .kw-tab {
-          // region can be replaced by using `dense` props in kw-tabs
-          &.q-tab {
-            padding: $kw-tab-padding-dense;
-          }
-
-          &::after {
-            @include typo("dense", 500);
-          }
-
-          .kw-tab__content {
-            > .q-tab__label {
-              @include typo("dense", 400);
-            }
-          }// endregion
-
-          // region can be replaced by using `*border*`, `activeLine` props in kw-tabs
-          $-custom-border: 1px solid $line-line;
-          $-custom-active-border: 1px solid $line-line;
-
-          @include kw-tab-border($-custom-border);
-          @include kw-tab-active-border($-custom-active-border);// endregion
-
-          // region can be replaced by using `active-*` props in kw-tabs
-          &--active {
-            background: $secondary;
-            color: $bg-white;
-          }// endregion
-        }
-      }
+body:not(.mobile) {
+  .kw-page__content-container,
+  .kw-popup__content {
+    // first tabs in page with search.
+    > .kw-tabs:first-child {
+      border-top: 1px solid $line-line; // imitate search box border
+      border-left: 1px solid $line-line; // imitate search box border
+      border-right: 1px solid $line-line; // imitate search box border
+      box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%); // imitate search box border
 
       + .kw-tab-panels .kw-tab-panel {
         > .kw-search:first-child {
           border-top: 0;
+        }
+
+        // tab in tab... with search
+        > .kw-tabs:first-child {
+          border-left: 1px solid $line-line; // imitate search box border
+          border-right: 1px solid $line-line; // imitate search box border
+          box-shadow: 2px 2px 6px 0 rgb(0 0 0 / 6%); // imitate search box border
+
+          @include kw-tabs-padding(20px 40px 0 40px, $kw-tabs-arrow-width-dense, $kw-tabs-arrow-height-dense);
+
+          // region can be replaced by using `activeLine` props in kw-tabs
+          &::before {
+            border: none;
+          } // endregion
+
+          // region can be replaced by using `inactive-*` in kw-tabs
+          .kw-tabs__content {
+            background-color: $bg-white;
+            color: $black3;
+          }// endregion
+
+          // region can be replaced by using `dense` props in kw-tabs
+          &.q-tabs {
+            .q-tab {
+              min-height: $kw-tabs-arrow-height-dense;
+
+              &--full {
+                min-height: $kw-tabs-arrow-height-dense;
+              }
+            }
+
+            .q-tabs__arrow {
+              $-arrow-padding: (($kw-tabs-arrow-height-dense - 18px) / 2) (($kw-tabs-arrow-width-dense - 18px) / 2);
+
+              min-width: $kw-tabs-arrow-width-dense;
+
+              &.q-icon {
+                > svg {
+                  padding: $-arrow-padding;
+                }
+              }
+
+              &--left {
+                &.q-tabs__arrow--faded {
+                  &.q-icon {
+                    > svg {
+                      padding-right: at($-arrow-padding, 4) + 1px;
+                    }
+                  }
+                }
+              }
+
+              &--right {
+                &.q-tabs__arrow--faded {
+                  &.q-icon {
+                    > svg {
+                      padding-right: at($-arrow-padding, 2) + 1px;
+                    }
+                  }
+                }
+              }
+            }
+          }// endregion
+
+          .kw-tab {
+            // region can be replaced by using `dense` props in kw-tabs
+            &.q-tab {
+              padding: $kw-tab-padding-dense;
+            }
+
+            &::after {
+              @include typo("dense", 500);
+            }
+
+            .kw-tab__content {
+              > .q-tab__label {
+                @include typo("dense", 400);
+              }
+            }// endregion
+
+            // region can be replaced by using `*border*`, `activeLine` props in kw-tabs
+            $-custom-border: 1px solid $line-line;
+            $-custom-active-border: 1px solid $line-line;
+
+            @include kw-tab-border($-custom-border);
+            @include kw-tab-active-border($-custom-active-border);// endregion
+
+            // region can be replaced by using `active-*` props in kw-tabs
+            &--active {
+              background: $secondary;
+              color: $bg-white;
+            }// endregion
+          }
+        }
+
+        + .kw-tab-panels .kw-tab-panel {
+          > .kw-search:first-child {
+            border-top: 0;
+          }
         }
       }
     }
