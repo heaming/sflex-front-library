@@ -42,7 +42,6 @@ let isChecked = false;
 export function overrideOnShowTooltip(view) {
   wrapEvent(view, onShowTooltip, (g, index, value) => {
     let originalResult;
-
     if (hasOriginal(g, onShowTooltip)) {
       originalResult = execOriginal(g, onShowTooltip, g, index, value);
     }
@@ -61,7 +60,7 @@ export function overrideOnShowTooltip(view) {
 
     if (renderer?.type === 'image' && value.startsWith('data:image')) return;
 
-    const cell = g.getCellBounds(index.itemIndex, index.column);
+    const cell = g?.getCellBounds(index.itemIndex, index.column);
     let alignStyle;
     const alignArr = ['text-left', 'text-center', 'text-right'];
     if (styleName) {
