@@ -35,17 +35,20 @@
 
         <!-- 활성화 시 notice_on -->
         <kw-icon
-          :name="showPageNotice && pageNoticeCntn ? 'notice_on' : 'notice_off'"
-          clickable
+          name="notice_off"
+          :clickable="pageNoticeCntn"
+          :disable="!pageNoticeCntn"
+          :style="{ opacity: pageNoticeCntn ? 1 : 0.4 }"
           tooltip-class="page-header-tooltip"
         >
           {{ $t('MSG_TXT_BIZ_NOTICE') }}
         </kw-icon>
 
         <kw-icon
-          :name="showPageManual ? 'report_on' : 'report'"
-          clickable
+          name="report"
+          :clickable="pageManual"
           :disable="!pageManual"
+          :style="{ opacity: pageManual ? 1 : 0.4 }"
           tooltip-class="page-header-tooltip"
           @click="onClickOpenManual"
         >
