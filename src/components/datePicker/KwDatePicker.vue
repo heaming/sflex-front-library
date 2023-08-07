@@ -45,6 +45,7 @@
         :disable="disable"
         :before-show="beforeShow"
         :select-date="selectDate"
+        :default-view-date="defaultViewDate"
         @update:model-value="onChangeDate"
       />
       <template
@@ -180,6 +181,10 @@ export default {
     },
     selectDate: {
       type: String,
+      default: undefined,
+    },
+    defaultViewDate: {
+      type: Object,
       default: undefined,
     },
   },

@@ -18,6 +18,7 @@
       <kw-separator />
       <kw-date-picker
         v-bind="bindingProps"
+        :default-view-date="{year: 2021, month: 1, day: 1}"
       />
     </guide-section>
     <guide-section
@@ -32,6 +33,7 @@
       <kw-separator />
       <kw-date-range-picker
         v-bind="bindingProps2"
+        :default-view-date="{year: '2021', month: '1', day: '1'}"
       />
     </guide-section>
     <guide-section

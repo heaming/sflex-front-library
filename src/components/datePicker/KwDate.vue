@@ -17,6 +17,7 @@
 
 <script>
 import { date } from 'quasar';
+import { cloneDeep } from 'lodash-es';
 
 const viewValues = [0, 1, 2];
 const viewFormats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
@@ -66,6 +67,10 @@ export default {
     },
     selectDate: {
       type: String,
+      default: undefined,
+    },
+    defaultViewDate: {
+      type: Object,
       default: undefined,
     },
   },
@@ -149,6 +154,14 @@ export default {
       }
       if (isViewEnabled(2)) {
         options.beforeShowYear = createBeforeShow(2);
+      }
+
+      if (props.defaultViewDate) {
+        const defualtViewDate = cloneDeep(props.defaultViewDate);
+        if (props.defaultViewDate?.month > 0) {
+          defualtViewDate.month = props.defaultViewDate.month - 1;
+        }
+        options.defaultViewDate = defualtViewDate;
       }
 
       el = window.$(containerRef.value);
