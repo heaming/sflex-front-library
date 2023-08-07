@@ -238,7 +238,8 @@ p {
 }
 
 // tab in tabs with search...
-body:not(.mobile) {
+body.desktop,
+body.tablet {
   .kw-page__content-container,
   .kw-popup__content {
     // first tabs in page with search.
