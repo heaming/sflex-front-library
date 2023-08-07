@@ -60,7 +60,7 @@ export function overrideOnShowTooltip(view) {
 
     if (renderer?.type === 'image' && value.startsWith('data:image')) return;
 
-    const cell = g?.getCellBounds(index.itemIndex, index.column).catch(() => {});
+    const cell = g?.getCellBounds(index.itemIndex, index.column);
     let alignStyle;
     const alignArr = ['text-left', 'text-center', 'text-right'];
     if (styleName) {
