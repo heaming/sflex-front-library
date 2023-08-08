@@ -38,7 +38,7 @@
           name="notice_off"
           :clickable="pageNoticeCntn"
           :disable="!pageNoticeCntn"
-          :style="{ opacity: pageNoticeCntn ? 1 : 0.4 }"
+          :style="{ opacity: pageNoticeCntn ? '1 !important' : '0.2 !important' }"
           tooltip-class="page-header-tooltip"
         >
           {{ $t('MSG_TXT_BIZ_NOTICE') }}
@@ -48,7 +48,7 @@
           name="report"
           :clickable="pageManual"
           :disable="!pageManual"
-          :style="{ opacity: pageManual ? 1 : 0.4 }"
+          :style="{ opacity: pageManual ? '1 !important' : '0.2 !important' }"
           tooltip-class="page-header-tooltip"
           @click="onClickOpenManual"
         >
