@@ -178,7 +178,7 @@ async function getIndexData() {
 }
 
 async function getDataAll() {
-  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId)) {
+  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_EDU') {
     try {
       const [meeting, customer, index] = await Promise.all(
         [getMeetingAttendData(), getCustomerData(), getIndexData()],
