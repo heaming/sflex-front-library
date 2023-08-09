@@ -7,7 +7,7 @@
       <div class="dashboard dashboard--fixed">
         <div class="dashboard_summary dashboard_summary_type1">
           <p class="greetings">
-            <span>김길동 국장님</span>, 좋은 하루 보내세요.
+            <span>{{ `${userInfo.userName} ${userInfo.rsbNm ?? ''}님` }}</span>, 좋은 하루 보내세요.
           </p>
           <div class="dashboard_summary_counter">
             <h5>미팅참석현황</h5>
