@@ -173,7 +173,7 @@ async function getCustomerData() {
 }
 
 async function getIndexData() {
-  const resp = await http.get(`/sms/edu/customer/common/homcards/status/${periodType.value}`);
+  const resp = await http.get(`/sms/edu/customer/common/homecards/status/${periodType.value}`);
   return resp.data;
 }
 
