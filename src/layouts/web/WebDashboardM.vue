@@ -177,9 +177,9 @@ async function getDataAll() {
       const [meeting, customer, index] = await Promise.all(
         [getMeetingAttendData(), getCustomerData(), getIndexData()],
       );
-      topBarData.value.meeting = meeting;
-      topBarData.value.customer = customer;
-      topBarData.value.index = index;
+      topBarData.value.meeting = meeting.body ?? {};
+      topBarData.value.customer = customer ?? {};
+      topBarData.value.index = index ?? {};
     } catch (e) {
       topBarData.value.meeting = {};
       topBarData.value.customer = {};
