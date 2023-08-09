@@ -76,13 +76,19 @@ export default {
       ctx.fillStyle = '#ffffff';
 
       function setMousePosition(ev) {
-        if (ev.layerX || ev.layerX === 0) { // Firefox 브라우저
-          mouse.value.x = ev.offsetX;
-          mouse.value.y = ev.offsetY;
+        if (ev.layerX || ev.layerX === 0) {
+          if (ev.targetTouches[0]) { // ios 핸드폰
+            const boundingRect = ev.target.getBoundingClientRect();
+            mouse.value.x = ev.targetTouches[0].clientX - boundingRect.x;
+            mouse.value.y = ev.targetTouches[0].clientY - boundingRect.y;
+          } else { // Firefox 브라우저
+            mouse.value.x = ev.offsetX;
+            mouse.value.y = ev.offsetY;
+          }
         } else if (ev.offsetX || ev.offsetX === 0) { // Opera 브라우저
           mouse.value.x = ev.offsetX;
           mouse.value.y = ev.offsetY;
-        } else if (ev.targetTouches[0] || ev.targetTouches[0].pageX === 0) { // 핸드폰
+        } else if (ev.targetTouches[0] || ev.targetTouches[0].pageX === 0) { // 안드로이드 핸드폰
           const boundingRect = ev.target.getBoundingClientRect();
           mouse.value.x = ev.targetTouches[0].clientX - boundingRect.x;
           mouse.value.y = ev.targetTouches[0].clientY - boundingRect.y;
@@ -137,7 +143,7 @@ export default {
     }
 
     function reset() {
-      ctx.reset();
+      ctx.clearRect(0, 0, ctx.width, ctx.height);
       isSignExist.value = false;
       setBackground();
     }
