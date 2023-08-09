@@ -11,7 +11,7 @@
             class="dashboard-select__item-content"
           >
             <q-img
-              v-if="false"
+              v-if="card.imgSrc"
               :src="card.imgSrc"
               :alt="card.homeCardName"
               style="width: 100%; height: 100%;"
