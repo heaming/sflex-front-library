@@ -7,7 +7,10 @@
       <div class="dashboard dashboard--fixed">
         <div class="dashboard_summary dashboard_summary_type1">
           <p class="greetings">
-            <span>{{ `${userInfo.userName} ${userInfo.rsbNm ?? ''}님` }}</span>, 좋은 하루 보내세요.
+            <span>{{ `${userInfo.userName} ${userInfo.rsbNm
+              ? userInfo.rsbNm.endsWith('님')
+                ? userInfo.rsbNm.slice(0, -1) : userInfo.rsbNm
+              : ''}님` }}</span>, 좋은 하루 보내세요.
           </p>
           <div class="dashboard_summary_counter">
             <h5>미팅참석현황</h5>
@@ -177,9 +180,9 @@ async function getDataAll() {
       const [meeting, customer, index] = await Promise.all(
         [getMeetingAttendData(), getCustomerData(), getIndexData()],
       );
-      topBarData.value.meeting = meeting;
-      topBarData.value.customer = customer;
-      topBarData.value.index = index;
+      topBarData.value.meeting = meeting.body ?? {};
+      topBarData.value.customer = customer ?? {};
+      topBarData.value.index = index ?? {};
     } catch (e) {
       topBarData.value.meeting = {};
       topBarData.value.customer = {};
