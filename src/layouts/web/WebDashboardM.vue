@@ -9,21 +9,13 @@
           <p class="greetings">
             <span>김길동 국장님</span>, 좋은 하루 보내세요.
           </p>
-          <kw-btn-toggle
-            v-model="areaType"
-            :options="[{'cd':'G', 'nm':'총괄'}, {'cd':'R', 'nm':'지역'}]"
-            option-label="nm"
-            option-value="cd"
-            dense
-            gap="0px"
-          />
           <div class="dashboard_summary_counter">
-            <h5>출근현황</h5>
+            <h5>미팅참석현황</h5>
             <dl>
               <dt>어제</dt>
-              <dd>2,377</dd>
+              <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
               <dt>오늘</dt>
-              <dd>3,540</dd>
+              <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
             </dl>
           </div>
           <kw-separator
@@ -37,11 +29,11 @@
             <h5>고객현황</h5>
             <dl>
               <dt>유입</dt>
-              <dd>2,377</dd>
+              <dd>{{ topBarData.customer.cstIn ?? 0 }}</dd>
               <dt>이달</dt>
-              <dd>2,540</dd>
+              <dd>{{ topBarData.customer.cstOut ?? 0 }}</dd>
               <dt>총인원수</dt>
-              <dd>2,540</dd>
+              <dd>{{ topBarData.customer.cstTot ?? 0 }}</dd>
             </dl>
           </div>
           <kw-separator
@@ -55,9 +47,9 @@
             <h5>주요지표(실적/지평)</h5>
             <dl>
               <dt>진단검사</dt>
-              <dd>120/219</dd>
+              <dd>{{ `${topBarData.index.dgnsCnt ?? 0}/${topBarData.index.dgnsAvg ?? 0}` }}</dd>
               <dt>무료체험</dt>
-              <dd>342/450</dd>
+              <dd>{{ `${topBarData.index.smartCnt ?? 0}/${topBarData.index.smartAvg ?? 0}` }}</dd>
             </dl>
           </div>
           <kw-separator
@@ -100,7 +92,9 @@
   </kw-page>
 </template>
 <script setup>
+import { cloneDeep } from 'lodash-es';
 import { http } from '../../plugins/http';
+import useMeta from '../../composables/useMeta';
 import WebFooter from './WebFooter.vue';
 
 const { getters, commit } = useStore();
@@ -114,6 +108,15 @@ const props = defineProps({
 
 const areaType = ref('G');
 const periodType = ref('D');
+
+const { getUserInfo } = useMeta();
+const userInfo = computed(() => cloneDeep(getUserInfo()));
+
+const topBarData = ref({
+  meeting: {},
+  customer: {},
+  index: {},
+});
 
 const userCards = shallowRef([]);
 async function fetchUserCards() {
@@ -134,15 +137,69 @@ async function fetchUserCards() {
 }
 await fetchUserCards();
 
-function getDashboardClass(card) {
-  const sizeType = card.homeCardSizeTypeName;
-  return `dashboard_el dashboard_el_${sizeType.replaceAll('X', 'by')}`;
-}
-console.log(getDashboardClass);
+// function getDashboardClass(card) {
+//   const sizeType = card.homeCardSizeTypeName;
+//   return `dashboard_el dashboard_el_${sizeType.replaceAll('X', 'by')}`;
+// }
+// console.log(getDashboardClass)?;
+
 watch(() => getters['app/getUserHomecardChanged'], async (newVal) => {
   if (newVal) {
     await fetchUserCards();
   }
+});
+
+async function getMeetingAttendData() {
+  const params = {
+    body: {
+      AGRG_YM: '201802',
+      OG_TP_CD: userInfo.value.ogTpCd,
+      PRTNR_NO: userInfo.value.loginId,
+    },
+    header: {},
+  };
+  const resp = await http.post('/interface/sms/common/competence/mcby-prtnr-metg-agrg', params);
+  return resp.data;
+}
+
+async function getCustomerData() {
+  const params = {
+    dayOrMonth: periodType.value === 'M' ? 'MONTH' : 'DAY',
+    ogCd: userInfo.value.ogCd,
+    ogTpCd: userInfo.value.ogTpCd,
+  };
+  const resp = await http.get('/sms/edu/contract/orderstatus/customer-status', { params });
+  return resp.data;
+}
+
+async function getIndexData() {
+  const resp = await http.get(`/sms/edu/customer/common/homecards/status/${periodType.value}`);
+  return resp.data;
+}
+
+async function getDataAll() {
+  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_EDU') {
+    try {
+      const [meeting, customer, index] = await Promise.all(
+        [getMeetingAttendData(), getCustomerData(), getIndexData()],
+      );
+      topBarData.value.meeting = meeting;
+      topBarData.value.customer = customer;
+      topBarData.value.index = index;
+    } catch (e) {
+      topBarData.value.meeting = {};
+      topBarData.value.customer = {};
+      topBarData.value.index = {};
+    }
+  }
+}
+
+watch(periodType, () => {
+  getDataAll();
+});
+
+onMounted(async () => {
+  await getDataAll();
 });
 
 </script>
