@@ -77,7 +77,7 @@ export default {
 
       function setMousePosition(ev) {
         if (ev.layerX || ev.layerX === 0) {
-          if (ev.targetTouches[0]) { // ios 핸드폰
+          if (ev.targetTouches?.[0]) { // ios 핸드폰
             const boundingRect = ev.target.getBoundingClientRect();
             mouse.value.x = ev.targetTouches[0].clientX - boundingRect.x;
             mouse.value.y = ev.targetTouches[0].clientY - boundingRect.y;
