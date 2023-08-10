@@ -54,7 +54,7 @@ const viewConfig = {
     fitStyle: GridFitStyle.FILL,
     rowChangeDelay: 100,
     hintDelay: 100,
-    // fitStyleIncludeFixed: true,
+    fitStyleIncludeFixed: true,
   },
   editOptions: {
     editable: false,

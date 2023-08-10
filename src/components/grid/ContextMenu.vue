@@ -258,19 +258,32 @@ export default {
         menuRefs.value[0]?.hide();
       }
     }
+    function getIndex(arr, idx = 0) {
+      const { length } = arr;
+      let res = 0;
+      for (let i = 0; i < length; i += 1) {
+        if (arr[i].items) {
+          res = getIndex(arr[i].items, idx === 0 ? i : idx);
+          if (res !== 0) return res;
+        } else {
+          const { column } = view.__contextMenuClickData__ || view.getCurrent();
+          if (column === arr[i].column) return idx === 0 ? i : idx;
+        }
+      }
+      return res;
+    }
 
     function onClickFixGrid() {
       const { colCount } = view.getFixedOptions();
 
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
+      const idx = getIndex(view.saveColumnLayout());
       if (!column) {
         notify('데이터 영역에서만 틀 고정이 가능합니다.');
         menuRefs.value[0]?.hide();
         return;
       }
-      const displayIdx = view.getColumns().find((col) => col.fieldName === column || col.name === column)?.displayIndex;
-
-      view.setFixedOptions({ colCount: colCount !== 0 ? 0 : displayIdx + 1, resizable: true });
+      view.setFixedOptions({ colCount: colCount !== 0 ? 0 : idx + 1, resizable: true });
       menuRefs.value[0]?.hide();
     }
 
