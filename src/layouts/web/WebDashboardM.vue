@@ -4,17 +4,20 @@
     style="margin: 0 auto;"
   >
     <div class="relative-position">
-      <div class="dashboard">
+      <div class="dashboard dashboard--fixed">
         <div class="dashboard_summary dashboard_summary_type1">
           <p class="greetings">
-            <span>김길동 국장님</span>, 좋은 하루 보내세요.
+            <span>{{ `${userInfo.userName} ${userInfo.rsbNm
+              ? userInfo.rsbNm.endsWith('님')
+                ? userInfo.rsbNm.slice(0, -1) : userInfo.rsbNm
+              : ''}님` }}</span>, 좋은 하루 보내세요.
           </p>
           <div class="dashboard_summary_counter">
             <h5>미팅참석현황</h5>
             <dl>
-              <dt>어제</dt>
-              <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
-              <dt>오늘</dt>
+              <!-- <dt>어제</dt>
+              <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd> -->
+              <dt>{{ periodType === 'D' ? '오늘' : '당월' }}</dt>
               <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
             </dl>
           </div>
@@ -44,21 +47,14 @@
             color="bg-white"
           />
           <div class="dashboard_summary_counter">
-            <h5>주요지표(실적/지평)</h5>
+            <h5>주요지표(실적)</h5>
             <dl>
               <dt>진단검사</dt>
-              <dd>{{ `${topBarData.index.dgnsCnt ?? 0}/${topBarData.index.dgnsAvg ?? 0}` }}</dd>
+              <dd>{{ topBarData.index.dgnsCnt ?? 0 }}</dd>
               <dt>무료체험</dt>
-              <dd>{{ `${topBarData.index.smartCnt ?? 0}/${topBarData.index.smartAvg ?? 0}` }}</dd>
+              <dd>{{ topBarData.index.smartCnt ?? 0 }}</dd>
             </dl>
           </div>
-          <kw-separator
-            vertical
-            inset
-            spaced="20px"
-            style="opacity: 0.2;"
-            color="bg-white"
-          />
           <kw-btn-toggle
             v-model="periodType"
             :options="[{'cd':'D', 'nm':'일간'}, {'cd':'M', 'nm':'월간'}]"
@@ -66,6 +62,7 @@
             option-value="cd"
             dense
             gap="0px"
+            class="ml16"
           />
         </div>
         <div class="dashboard_wrap">
@@ -183,9 +180,9 @@ async function getDataAll() {
       const [meeting, customer, index] = await Promise.all(
         [getMeetingAttendData(), getCustomerData(), getIndexData()],
       );
-      topBarData.value.meeting = meeting;
-      topBarData.value.customer = customer;
-      topBarData.value.index = index;
+      topBarData.value.meeting = meeting.body ?? {};
+      topBarData.value.customer = customer ?? {};
+      topBarData.value.index = index ?? {};
     } catch (e) {
       topBarData.value.meeting = {};
       topBarData.value.customer = {};

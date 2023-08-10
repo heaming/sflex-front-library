@@ -2,7 +2,11 @@
 body.desktop .web-layout:has(.dashboard) {
   & > .web-header,
   & > .q-page-container {
-    min-width: 1920px;
+    min-width: 1840px;
+
+    .kw-page {
+      padding: 30px 0;
+    }
   }
 }
 
@@ -106,7 +110,7 @@ body.desktop .web-layout:has(.dashboard) {
   &_wrap {
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 346px;
+    grid-template-rows: 343px;
     grid-template-columns: repeat(4, 454px);
     gap: 8px;
 
@@ -119,12 +123,12 @@ body.desktop .web-layout:has(.dashboard) {
 
   &_el {
     background: #fff;
-    padding: 24px;
+    padding: 22px 24px 23px;
     overflow: hidden; // 영역 외 항목들은 숨기기
 
     &_1by1 {
       width: 454px;
-      height: 346px;
+      height: 343px;
       grid-area: auto / auto / span 1 / span 1;
     }
 
@@ -136,7 +140,7 @@ body.desktop .web-layout:has(.dashboard) {
 
     &_2by1 {
       width: 916px; // 454 * 2 + 8
-      height: 346px;
+      height: 343px;
       grid-area: auto / auto / span 1 / span 2;
     }
 
@@ -469,10 +473,14 @@ body.desktop .web-layout:has(.dashboard) {
         }
       }
     }
+
+    .kw-tab-panels {
+      margin-right: -20px;
+    }
   }
 
   &__tab-inner {
-    padding-right: 10px;
+    padding-right: 20px;
   }
 
   &__totals {
@@ -619,10 +627,12 @@ body.desktop .web-layout:has(.dashboard) {
 
 // 프로모션 현황
 .promotion-status {
+  margin-right: -20px;
+
   .kw-list {
     margin-top: 15px;
     width: 406px;
-    padding-right: 10px;
+    padding-right: 20px;
 
     .kw-item-type {
       &:first-child {
