@@ -25,15 +25,13 @@
           checked-icon="bookmark_on"
           unchecked-icon="bookmark_outline"
           @update:model-value="updateBookmark"
-        >
-          <kw-tooltip>
-            {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
-          </kw-tooltip>
-        </kw-checkbox>
+        />
         <kw-icon
-          v-if="true"
           name="report"
-          clickable
+          :clickable="pageManual"
+          :disable="!pageManual"
+          :style="{ opacity: pageManual ? '1 !important' : '0.3 !important' }"
+          @click="onClickOpenManual"
         >
           {{ $t('MSG_TXT_MANU') }}
         </kw-icon>
@@ -83,6 +81,7 @@
 import { closeWaffleApp } from '../../utils/mobile';
 import useBookmark from './private/useBookmark';
 import useHeaderMeta, { useHeaderMetaProps } from './private/useHeaderMeta';
+import { modal } from '../../plugins/modal';
 
 export default {
   name: 'KwPageMobileHeader',
@@ -95,10 +94,23 @@ export default {
     function onClickClose() {
       closeWaffleApp();
     }
+    const { getPageManual, pageManual } = useHeaderMeta();
+    async function onClickOpenManual() {
+      if (!pageManual) return;
+      const manual = await getPageManual(true);
+
+      await modal({
+        component: 'ZmcmxPageManualDtlP',
+        componentProps: { manual },
+      });
+    }
+
     return {
       onClickClose,
       ...useBookmark(),
       ...useHeaderMeta(),
+      onClickOpenManual,
+      pageManual,
     };
   },
 };
