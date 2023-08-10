@@ -212,6 +212,7 @@ const visuals = [
   'visual_online',
   'visual_payment',
   'visual_partner',
+  'cellphone_blue',
 ];
 const guideHistory = [
   {
