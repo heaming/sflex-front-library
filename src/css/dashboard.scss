@@ -386,7 +386,7 @@ body.desktop .web-layout:has(.dashboard) {
 // 인정실적 현황
 .result-status {
   &__chart {
-    margin-top: 16px;
+    margin-top: 12px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -437,7 +437,7 @@ body.desktop .web-layout:has(.dashboard) {
   }
 
   &__tab-area {
-    margin-top: 28px;
+    margin-top: 20px;
 
     .kw-tabs {
       .kw-tabs__content {
@@ -528,7 +528,7 @@ body.desktop .web-layout:has(.dashboard) {
       }
 
       &:not(:first-of-type) {
-        margin-top: 8px;
+        margin-top: 4px;
       }
     }
   }
