@@ -17,7 +17,7 @@
             <dl>
               <!-- <dt>어제</dt>
               <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd> -->
-              <dt>{{ periodType === 'D' ? '오늘' : '당월' }}</dt>
+              <dt>{{ dayjs().month() + '월' }}</dt>
               <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
             </dl>
           </div>
@@ -33,7 +33,7 @@
             <dl>
               <dt>유입</dt>
               <dd>{{ topBarData.customer.cstIn ?? 0 }}</dd>
-              <dt>이달</dt>
+              <dt>이탈</dt>
               <dd>{{ topBarData.customer.cstOut ?? 0 }}</dd>
               <dt>총인원수</dt>
               <dd>{{ topBarData.customer.cstTot ?? 0 }}</dd>
@@ -90,6 +90,7 @@
 </template>
 <script setup>
 import { cloneDeep } from 'lodash-es';
+import dayjs from 'dayjs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import WebFooter from './WebFooter.vue';
@@ -149,7 +150,7 @@ watch(() => getters['app/getUserHomecardChanged'], async (newVal) => {
 async function getMeetingAttendData() {
   const params = {
     body: {
-      AGRG_YM: '201802',
+      AGRG_YM: dayjs().format('YYYYMM'),
       OG_TP_CD: userInfo.value.ogTpCd,
       PRTNR_NO: userInfo.value.loginId,
     },
@@ -161,7 +162,7 @@ async function getMeetingAttendData() {
 
 async function getCustomerData() {
   const params = {
-    dayOrMonth: periodType.value === 'M' ? 'MONTH' : 'DAY',
+    dayOrMonth: 'MONTH',
     ogCd: userInfo.value.ogCd,
     ogTpCd: userInfo.value.ogTpCd,
   };
