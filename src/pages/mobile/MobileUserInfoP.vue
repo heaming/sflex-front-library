@@ -6,7 +6,7 @@
         :cols="1"
       >
         <kw-form-item label="로그인 계정">
-          <p>{{ `${userInfo.departmentName}(${userInfo.careerLevelName})` }}</p>
+          <p>{{ userInfo.loginId }}</p>
         </kw-form-item>
         <kw-form-item label="성명">
           <p>{{ userInfo.userName }}</p>
@@ -23,14 +23,17 @@
         <kw-form-item label="이메일">
           <p>{{ userInfo.email }}</p>
         </kw-form-item>
-        <telephone-number
-          v-model:tel-no1="telephone.telNo1"
-          v-model:tel-no2="telephone.telNo2"
-          v-model:tel-no3="telephone.telNo3"
-          show-label
-          label="휴대번호"
-          class="pt5"
-        />
+
+        <kw-form-item no-label>
+          <kw-input
+            v-model="userInfo.cellphone"
+            label="휴대전화번호"
+            mask="telephone"
+            dense
+            rules="required|telephone"
+          />
+        </kw-form-item>
+
         <kw-select
           v-model="userInfo.wkOjOgTpCd"
           :options="codes"
@@ -60,7 +63,6 @@
 
 <script setup>
 import { cloneDeep } from 'lodash-es';
-import TelephoneNumber from '../component/TelephoneNumber.vue';
 import useModal from '../../composables/useModal';
 import useMeta from '../../composables/useMeta';
 import { http } from '../../plugins/http';
@@ -77,13 +79,6 @@ const frmMainRef = ref();
 const selableOgTpCds = computed(() => userInfo.value?.selableOgTpCd?.split(','));
 const codes = ref([]);
 
-const userInfoPhone = computed(() => userInfo.value.cellphone.split('-'));
-const telephone = ref({
-  telNo1: userInfoPhone.value[0],
-  telNo2: userInfoPhone.value[1],
-  telNo3: userInfoPhone.value[2],
-});
-
 await getCodes('OG_TP_CD').then((res) => {
   if (selableOgTpCds.value?.length > 0) {
     codes.value = res.filter((x) => selableOgTpCds.value.includes(x.codeId));
@@ -94,9 +89,10 @@ async function onClickConfirm() {
   if (await frmMainRef.value?.alertIfIsNotModified()) return;
   if (!await frmMainRef.value.validate()) return;
 
-  userInfo.value.cellPhoneLocataTelNumber = telephone.value.telNo1;
-  userInfo.value.mexnoGbencr = telephone.value.telNo2;
-  userInfo.value.cellPhoneIndividualTelNumber = telephone.value.telNo3;
+  const phone = userInfo.value.cellphone.split('-');
+  userInfo.value.cellPhoneLocataTelNumber = phone[0];
+  userInfo.value.mexnoGbencr = phone[1];
+  userInfo.value.cellPhoneIndividualTelNumber = phone[2];
   await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
   await dispatch('meta/fetchLoginInfo');
   await http.post('/sflex/common/common/set-session-data', userInfo.value);
