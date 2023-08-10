@@ -6,7 +6,8 @@
     transition-show="fade"
     transition-hide="fade"
     seamless
-    :style="{'top': popupOffsetTop, 'padding-left': popupPaddingLeft, 'padding-right': popupPaddingRight }"
+    :style="{'top': popupOffsetTop, 'padding-left': popupPaddingLeft,
+             'padding-right': popupPaddingRight, 'bottom': popupOffsetBottom }"
     no-focus
     no-refocus
   >
@@ -38,15 +39,15 @@ const {
 
 const DEFAULT_PADDING_LEFT = 150;
 const DEFAULT_PADDING_RIGHT = 150;
-const DEFAULT_OFFSET_TOP = 0;
-const DEFAULT_OFFSET_TOP_POPUP = -110;
+const DEFAULT_OFFSET_TOP = 187;
+const DEFAULT_OFFSET_TOP_POPUP = 76;
 
-const DEFAULT_PADDING_MOBILE = 0;
-const DEFAULT_OFFSET_TOP_MOBILE = -125;
+const DEFAULT_PADDING_MOBILE = 8;
+const DEFAULT_OFFSET_BOTTOM_MOBILE = 68;
 
 const DEFAULT_PADDING_LEFT_TABLET = 30;
-const DEFAULT_PADDING_RIGHT_TABLET = 92;
-const DEFAULT_OFFSET_TOP_TABLET = -110;
+const DEFAULT_PADDING_RIGHT_TABLET = 109;
+const DEFAULT_OFFSET_TOP_TABLET = 75;
 
 export default {
   name: 'GlobalNotify',
@@ -69,6 +70,7 @@ export default {
     const popupOffsetTop = ref(`${DEFAULT_OFFSET_TOP}`);
     const popupPaddingLeft = ref(`${DEFAULT_PADDING_LEFT}px`);
     const popupPaddingRight = ref(`${DEFAULT_PADDING_RIGHT}px`);
+    const popupOffsetBottom = ref(`${0}px`);
     async function pending() {
       isPending.value = true;
       await timeout();
@@ -104,38 +106,24 @@ export default {
         let offsetTop;
         let offsetLeft;
         let offsetRight;
+        let offsetBottom;
         const isPopup = window.location.pathname.indexOf('/popup') >= 0;
 
-        if (popups.length > 0) {
-          const noHeaderPopup = !window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset();
-          if (noHeaderPopup) {
-            if (platform.is.tablet) {
-              offsetTop = window.$('div.kw-popup > div.kw-popup__content').eq(popups.length - 1).offset().top - 122;
-              offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left - 32;
-              offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
-            } else if (platform.is.mobile) {
-              offsetTop = window.$('div.kw-popup > div.kw-popup__content').eq(popups.length - 1).offset().top - 126;
-              offsetLeft = DEFAULT_PADDING_MOBILE;
-              offsetRight = DEFAULT_PADDING_MOBILE;
-            } else {
-              offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 195;
-              offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
-              offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
-            }
+        if (popups.length > 0) { // 모달이 띄워져있을경우
+          if (platform.is.tablet) {
+            offsetTop = window.$('div.kw-popup').eq(popups.length - 1).offset().top + 15;
+            offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left - 32; // 태블릿은 왼쪽 바 width만큼 빼야한다.
+            offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
           } else {
-            offsetTop = window.$('h1.kw-popup__header-title').eq(popups.length - 1).offset().top - 195;
+            offsetTop = window.$('div.kw-popup').eq(popups.length - 1).offset().top + 15;
             offsetLeft = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
             offsetRight = window.$('div.kw-popup').eq(popups.length - 1).offset().left + 30;
           }
-        } else if (platform.is.mobile) {
-          offsetLeft = DEFAULT_PADDING_MOBILE;
-          offsetTop = DEFAULT_OFFSET_TOP_MOBILE;
-          offsetRight = DEFAULT_PADDING_MOBILE;
         } else if (platform.is.tablet) {
           offsetLeft = DEFAULT_PADDING_LEFT_TABLET;
           offsetTop = DEFAULT_OFFSET_TOP_TABLET;
           offsetRight = DEFAULT_PADDING_RIGHT_TABLET;
-        } else if (isPopup) {
+        } else if (isPopup) { // 윈도우팝업일 경우
           offsetLeft = DEFAULT_PADDING_LEFT;
           offsetTop = DEFAULT_OFFSET_TOP_POPUP;
           offsetRight = DEFAULT_PADDING_RIGHT;
@@ -144,10 +132,18 @@ export default {
           offsetTop = DEFAULT_OFFSET_TOP;
           offsetRight = DEFAULT_PADDING_RIGHT;
         }
-        popupOffsetTop.value = `${offsetTop}px`;
+
+        if (platform.is.mobile) { // 모바일은 무조건 하단
+          offsetLeft = DEFAULT_PADDING_MOBILE;
+          offsetRight = DEFAULT_PADDING_MOBILE;
+          offsetBottom = DEFAULT_OFFSET_BOTTOM_MOBILE;
+          offsetTop = undefined;
+        }
+
+        popupOffsetTop.value = offsetTop ? `${offsetTop}px` : 'unset!important';
         popupPaddingLeft.value = `${offsetLeft}px`;
         popupPaddingRight.value = `${offsetRight}px`;
-
+        popupOffsetBottom.value = `${offsetBottom ?? 0}px`;
         notification.timeout = setTimeout(() => {
           close(notification);
         }, libConfig.NOTIFY_TIMEOUT);
@@ -171,6 +167,7 @@ export default {
       activeNotification,
       isActive,
       popupOffsetTop,
+      popupOffsetBottom,
       popupPaddingLeft,
       popupPaddingRight,
     };
