@@ -29,7 +29,7 @@ export default {
   MSG_VAL_REGEX: '{0} 항목은 형식에 맞지 않습니다.',
   MSG_VAL_REQUIRED: '{0} 은(는) 필수 입력 항목입니다.',
   MSG_VAL_URL: '{0} 항목은 유효한 URL이 아닙니다.',
-  MSG_VAL_TELEPHONE: '{0} 항목은 유효한 전화번호 형식이 아닙니다.',
+  MSG_VAL_TELEPHONE: '휴대전화번호 입력 형식에 맞지 않습니다.',
   MSG_VAL_FAILED_FILE: '{0} 항목은 유효한 파일만 포함해야 합니다.',
 
   // HTTP
