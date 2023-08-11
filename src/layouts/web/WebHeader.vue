@@ -141,8 +141,7 @@
               class="row items-center justify-center full-height"
             >
               <p class="kw-fc--black3 kw-font-pt14 text-center">
-                알림 메세지가 없습니다.<br>
-                (보관기간: 30일)
+                알림 메세지가 없습니다.
               </p>
             </div>
           </kw-menu>
