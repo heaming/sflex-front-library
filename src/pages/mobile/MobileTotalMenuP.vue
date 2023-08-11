@@ -119,7 +119,7 @@
                     {{ depth3Menu.menuName }}
                   </a>
                   <kw-checkbox
-                    v-if="!depth2Menu.editable && depth3Menu.menuUid && depth3Menu.pageId"
+                    v-if="!depth2Menu.editable && depth3Menu.menuUid && depth3Menu.pageId && depth3Menu.hasRole"
                     :model-value="isBookmarkedPage(depth3Menu.menuUid, depth3Menu.pageId)"
                     :true-value="true"
                     :false-value="false"
@@ -214,6 +214,7 @@ const bookmarks = computed(() => ({
           ...bookmark,
           menuName: bookmark.bookmarkName,
           editable: false,
+          hasRole: 'Y',
         })).sort((a, b) => a.arrayalOrder - b.arrayalOrder),
       editable: false,
     },
