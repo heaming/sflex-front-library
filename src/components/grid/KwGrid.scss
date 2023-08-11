@@ -656,15 +656,15 @@
   border: 0;
   border-top: 1px solid $black1;
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #eee;
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   height: 1px;
+  //   background: #eee;
+  // }
 
   * {
     font-family: "Noto Sans KR", sans-serif;
@@ -781,6 +781,10 @@
       background: url(~@assets/icons/grid_scroll_arrow_left.svg) center center no-repeat;
       border: none;
     }
+  }
+
+  .rg-scroll-left {
+    transform: translateY(-1px);
   }
 
   .rg-header-renderer {
@@ -1371,3 +1375,46 @@ tr.rg-focused-row.rg-rowgroup-footer {
 .rg-selection-handlebottom-handle {
   display: none !important;
 }
+
+.rg-hscrollbar {
+  transform: translateY(-1px);
+}
+
+// 열고정시 가로 스크롤바 색상 변경
+.rg-container:has(.rg-fixed-row-bar) {
+  height: calc(100% + 3px);
+}
+
+.rg-container:has(.rg-fixed-body) {
+  .rg-hscrollbar {
+    .rg-scrolltrack {
+      background: #c0dcfc;
+    }
+
+    .rg-scrollthumb {
+      background: #6dadf6;
+    }
+
+    .rg-scroll-left {
+      background-image: url(~@assets/icons/grid_scroll_arrow_left_fixed.svg);
+
+      &:hover {
+        background-image: url(~@assets/icons/grid_scroll_arrow_left_fixed.svg);
+      }
+    }
+
+    .rg-scroll-right {
+      background-image: url(~@assets/icons/grid_scroll_arrow_left_fixed.svg);
+      transform: rotate(180deg);
+
+      &:hover {
+        background-image: url(~@assets/icons/grid_scroll_arrow_left_fixed.svg);
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+// 백 : #c0dcfc
+// 화살표 : #6fa7e6
+// 바 : #6dadf6
