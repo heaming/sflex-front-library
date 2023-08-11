@@ -59,8 +59,13 @@ export function overrideOnShowTooltip(view) {
     }
 
     if (renderer?.type === 'image' && value.startsWith('data:image')) return;
+    let cell;
+    try {
+      cell = g?.getCellBounds(index.itemIndex, index.column);
+    } catch (e) {
+      cell = undefined;
+    }
 
-    const cell = g?.getCellBounds(index.itemIndex, index.column);
     let alignStyle;
     const alignArr = ['text-left', 'text-center', 'text-right'];
     if (styleName) {
@@ -89,7 +94,7 @@ export function overrideOnShowTooltip(view) {
     document.body.removeChild(tempSpan);
 
     const res = `<div class="${alignStyle} rg-tooltip__custom"`
-      + `style="min-width: ${cell?.width < 100 ? 100 : cell?.width}px;`
+      + `style="min-width: ${cell?.width >= 100 ? cell?.width : 100}px;`
       + `${cell?.width && textWidth > cell?.width ? 'max-width: 400px; word-wrap: break-word;' : ''}`
       + `padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">` // DIV 설정
       + `<span class="rg-tooltip__custom__span" ${textWidth > cell?.width ? 'style="display: block; white-space: break-spaces;"' : ''}>${originalResult || value}</span>`
