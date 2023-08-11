@@ -284,7 +284,7 @@ export default {
         return;
       }
 
-      if (idx + 1 === view.saveColumnLayout().length) {
+      if (colCount === 0 && idx + 1 === view.saveColumnLayout().length) {
         notify('마지막 컬럼은 틀 고정을 할 수 없습니다.');
         menuRefs.value[0]?.hide();
         return;
