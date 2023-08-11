@@ -105,8 +105,16 @@
                   :data-id="depth3Idx"
                 >
                   <a
-                    href="#"
+                    v-if="!!depth3Menu.hasRole"
+                    href="javascript:;"
                     @click.prevent="moveToPage(depth3Menu)"
+                  >
+                    {{ depth3Menu.menuName }}
+                  </a>
+                  <a
+                    v-if="!depth3Menu.hasRole"
+                    href="javascript:;"
+                    style="color: #dedede;cursor: default;"
                   >
                     {{ depth3Menu.menuName }}
                   </a>
