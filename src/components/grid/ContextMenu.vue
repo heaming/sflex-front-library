@@ -278,8 +278,15 @@ export default {
 
       const { column } = view.__contextMenuClickData__ || view.getCurrent();
       const idx = getIndex(view.saveColumnLayout());
+      console.log(idx, view.saveColumnLayout());
       if (!column) {
         notify('데이터 영역에서만 틀 고정이 가능합니다.');
+        menuRefs.value[0]?.hide();
+        return;
+      }
+
+      if (idx + 1 === view.saveColumnLayout().length) {
+        notify('마지막 컬럼은 틀 고정을 할 수 없습니다.');
         menuRefs.value[0]?.hide();
         return;
       }
