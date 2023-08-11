@@ -1385,7 +1385,7 @@ tr.rg-focused-row.rg-rowgroup-footer {
   height: calc(100% + 3px);
 }
 
-.rg-container:has(.rg-fixed-body) {
+.rg-container:has(.rg-fixed-body:not([style*="display: none"])) {
   .rg-hscrollbar {
     .rg-scrolltrack {
       background: #c0dcfc;
