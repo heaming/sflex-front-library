@@ -37,9 +37,8 @@ const {
   DIALOG_TRANSITION_DURATION,
 } = libConfig;
 
-const DEFAULT_PADDING_LEFT = 150;
-const DEFAULT_PADDING_RIGHT = 150;
-const DEFAULT_OFFSET_TOP = 187;
+const DEFAULT_PADDING = 80;
+const DEFAULT_OFFSET_TOP = 82;
 const DEFAULT_OFFSET_TOP_POPUP = 76;
 
 const DEFAULT_PADDING_MOBILE = 8;
@@ -68,8 +67,8 @@ export default {
     const isPending = ref(false);
     const isActive = computed(() => !isPending.value && notifications.value.length > 0);
     const popupOffsetTop = ref(`${DEFAULT_OFFSET_TOP}`);
-    const popupPaddingLeft = ref(`${DEFAULT_PADDING_LEFT}px`);
-    const popupPaddingRight = ref(`${DEFAULT_PADDING_RIGHT}px`);
+    const popupPaddingLeft = ref(`${DEFAULT_PADDING}px`);
+    const popupPaddingRight = ref(`${DEFAULT_PADDING}px`);
     const popupOffsetBottom = ref(`${0}px`);
     async function pending() {
       isPending.value = true;
@@ -124,13 +123,13 @@ export default {
           offsetTop = DEFAULT_OFFSET_TOP_TABLET;
           offsetRight = DEFAULT_PADDING_RIGHT_TABLET;
         } else if (isPopup) { // 윈도우팝업일 경우
-          offsetLeft = DEFAULT_PADDING_LEFT;
+          offsetLeft = DEFAULT_PADDING;
           offsetTop = DEFAULT_OFFSET_TOP_POPUP;
-          offsetRight = DEFAULT_PADDING_RIGHT;
+          offsetRight = DEFAULT_PADDING;
         } else {
-          offsetLeft = DEFAULT_PADDING_LEFT;
+          offsetLeft = DEFAULT_PADDING;
           offsetTop = DEFAULT_OFFSET_TOP;
-          offsetRight = DEFAULT_PADDING_RIGHT;
+          offsetRight = DEFAULT_PADDING;
         }
 
         if (platform.is.mobile) { // 모바일은 무조건 하단
