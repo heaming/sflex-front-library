@@ -41,6 +41,14 @@
   }
 }
 
+.q-transition--fade-enter-active {
+  opacity: 0 !important;
+}
+
+.q-transition--fade-leave-active {
+  opacity: 0 !important;
+}
+
 .kw-select-options {
   @include native-scrollbar(overlay, auto);
 
