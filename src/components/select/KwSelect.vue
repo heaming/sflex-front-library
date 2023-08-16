@@ -36,6 +36,7 @@
     :behavior="computedBehavior"
     :transition-show="$g.platform.is.mobile ? 'jump-up' : undefined"
     :transition-hide="$g.platform.is.mobile ? 'jump-down' : undefined"
+    :transition-duration="transitionDuration"
     clear-icon="clear"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
@@ -267,6 +268,7 @@ export default {
     tabindex: { type: [Number, String], default: undefined },
     onFilter: { type: Function, default: undefined },
     behavior: { type: String, default: undefined },
+    transitionDuration: { type: Number, default: 300 },
   },
 
   emits: [
