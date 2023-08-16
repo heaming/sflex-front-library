@@ -36,7 +36,7 @@
     :behavior="computedBehavior"
     :transition-show="$g.platform.is.mobile ? 'jump-up' : undefined"
     :transition-hide="$g.platform.is.mobile ? 'jump-down' : undefined"
-    :transition-duration="transitionDuration"
+    :transition-duration="100"
     clear-icon="clear"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
@@ -382,6 +382,7 @@ export default {
     function onScroll() {
       inputRef.value.hidePopup();
     }
+
     return {
       ...useInheritAttrs(),
       ...useFieldStyle(),
