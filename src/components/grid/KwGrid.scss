@@ -194,7 +194,7 @@
 
 .rg-dropdownlist {
   z-index: 6000 !important;
-  margin-top: -8px;
+  margin-top: -5px;
   background: initial;
   box-shadow: none;
   border: 0;
@@ -206,20 +206,44 @@
     padding-right: 27px !important;
   }
 
+  &::before {
+    content: "";
+    display: block;
+    position: sticky;
+    top: 0;
+    right: -14px;
+    left: 7px;
+    height: 1px;
+    background: $line-stroke;
+    z-index: 100;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: sticky;
+    bottom: 0;
+    right: -14px;
+    left: 7px;
+    height: 1px;
+    background: $line-stroke;
+    z-index: 100;
+  }
+
   .rg-dropdown-item {
-    height: 34px;
+    height: 34.5px;
     padding: 0 9px !important;
     background-color: #fff;
     font-size: 14px;
     border-left: 1px solid $line-stroke;
 
-    &:first-child {
-      border-top: 1px solid $line-stroke;
-    }
+    // &:first-child {
+    //   border-top: 1px solid $line-stroke;
+    // }
 
-    &:last-child {
-      border-bottom: 1px solid $line-stroke;
-    }
+    // &:last-child {
+    //   border-bottom: 1px solid $line-stroke;
+    // }
 
     &:hover {
       background-color: $bg-box;
