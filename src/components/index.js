@@ -13,6 +13,7 @@ export * from './checkbox';
 export * from './chip';
 export * from './clickOutside';
 export * from './datePicker';
+export * from './drawingCanvas';
 export * from './editor';
 export * from './expansionItem';
 export * from './field';
