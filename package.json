@@ -1,6 +1,6 @@
 {
   "name": "kw-lib",
-  "version": "0.1.966",
+  "version": "0.1.973",
   "license": "UNLICENSED",
   "main": "dist/index.es.js",
   "types": "types/index.d.ts",
@@ -105,6 +105,7 @@
     "vite-svg-loader": "^4.0.0",
     "vue": "^3.2.25",
     "vue-chartjs": "^4.1.1",
+    "vue-drawing-canvas": "^1.0.14",
     "vue-highlight-code": "^0.1.16",
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.15",

@@ -432,6 +432,13 @@ export default {
       gnbMenu.value = true;
     }
 
+    function makeBoldApplicationText(ev) {
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--bold');
+      });
+      ev.target.classList.add('web-header__link--bold');
+    }
+
     function closeGnbMenu() {
       if (gnbMenu.value) {
         gnbMenu.value = false;
@@ -543,6 +550,7 @@ export default {
       openTotalMenuP,
       openMenuSearchPopup,
       openGnbMenu,
+      makeBoldApplicationText,
       searchText,
       totalMenu,
       gnbMenu,

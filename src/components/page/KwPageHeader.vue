@@ -10,6 +10,7 @@
           size="24px"
           name="arrow_left_breadcrumbs_24"
           clickable
+          tooltip-class="page-header-tooltip"
           @click="$router.close()"
         >
           {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}

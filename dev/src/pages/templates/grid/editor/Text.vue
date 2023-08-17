@@ -12,7 +12,7 @@
       </kw-action-bar>
       <kw-grid
         ref="grdRef"
-        :visible-rows="3"
+        :visible-rows="6"
         @init="initGrd"
       />
 
@@ -95,6 +95,8 @@ function initGrd(data, view) {
   view.checkBar.visible = true;
   view.rowIndicator.visible = true;
 
+  view.setCheckableCallback((dataSource, item) => item.dataRow % 2 === 0);
+
   view.onCellItemClicked = async () => {
     await modal({
       component: async () => await import('../../../publish/Mobile/temporary/PopupSample01.vue'),
@@ -102,6 +104,24 @@ function initGrd(data, view) {
   };
 
   data.setRows([
+    {
+      text01: '기본 텍스트 필드 입니다',
+      text02: '중앙 정렬 입니다. 사용 가능 클래스: text-left, text-center, text-right',
+      text03: '100Byte까지 입력 가능합니다. 한글은 3Byte 입니다.',
+      text04: '멀티라인으로 입력이 가능한 컬럼, \n줄바꿈이 가능합니다',
+    },
+    {
+      text01: '기본 텍스트 필드 입니다',
+      text02: '중앙 정렬 입니다.',
+      text03: '한글은 3Byte 입니다.',
+      text04: '줄바꿈이 가능합니다 \n줄바꿈이 가능합니다',
+    },
+    {
+      text01: '기본 텍스트 필드 입니다',
+      text02: '중앙 정렬 입니다.',
+      text03: '일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼',
+      text04: '줄바꿈이 가능합니다 \n줄바꿈이 가능합니다',
+    },
     {
       text01: '기본 텍스트 필드 입니다',
       text02: '중앙 정렬 입니다. 사용 가능 클래스: text-left, text-center, text-right',
