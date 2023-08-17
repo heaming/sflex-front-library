@@ -22,7 +22,7 @@
         color="error"
         :label="0"
         class="alert-badge"
-        style="top: 5px; right: 27px;"
+        style="top: 8px;right: calc(50% - 12px);"
       />
     </kw-btn>
   </q-footer>
