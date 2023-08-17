@@ -656,15 +656,21 @@
   border: 0;
   border-top: 1px solid $black1;
 
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 0;
-  //   right: 0;
-  //   height: 1px;
-  //   background: #eee;
-  // }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #eee;
+  }
+
+  &:has(.rg-vscrollbar) {
+    &::after {
+      right: 14px;
+    }
+  }
 
   * {
     font-family: "Noto Sans KR", sans-serif;
@@ -783,9 +789,9 @@
     }
   }
 
-  .rg-scroll-left {
-    transform: translateY(-1px);
-  }
+  // .rg-scroll-left {
+  //   transform: translateY(-1px);
+  // }
 
   .rg-header-renderer {
     margin-right: 0 !important;
@@ -1413,6 +1419,10 @@ tr.rg-focused-row.rg-rowgroup-footer {
         transform: rotate(180deg);
       }
     }
+  }
+
+  .rg-grid::after {
+    background: #c0dcfc;
   }
 }
 
