@@ -14,7 +14,17 @@
       class="menu_icon"
       :class="{ 'curr': curr === footerIdx }"
       @click="openMenu(footerMenu, footerIdx)"
-    />
+    >
+      <q-badge
+        v-if="footerMenu.icon === 'mob_basket'"
+        rounded
+        floating
+        color="error"
+        :label="0"
+        class="alert-badge"
+        style="top: 5px; right: 27px;"
+      />
+    </kw-btn>
   </q-footer>
 </template>
 
