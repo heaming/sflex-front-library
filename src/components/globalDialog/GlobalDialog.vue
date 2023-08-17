@@ -24,6 +24,7 @@
           />
         </div>
         <kw-icon
+          v-if="$g.platform.is.desktop"
           class="global-dialog__close-btn"
           size="24px"
           name="close_24"
