@@ -383,10 +383,10 @@ body.mobile:not(.tablet) {
       }
     }
 
-    & > div:not(.notice-popup__body),
-    & > div.notice-popup__body > div {
-      margin-bottom: 8px;
-    }
+    // & > div:not(.notice-popup__body),
+    // & > div.notice-popup__body > div {
+    //   margin-bottom: 8px;
+    // }
 
     * {
       color: $bg-white !important;
