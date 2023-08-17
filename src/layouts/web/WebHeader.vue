@@ -24,9 +24,8 @@
             <a
               :id="'header_' + key"
               class="web-header__link"
-              @click.prevent="openGnbMenu(key, $event)"
-              @focus="makeBoldApplicationText($event)"
-              @mouseover="makeBoldApplicationText($event)"
+              @mouseover="openGnbMenu(key, $event)"
+              @focus="openGnbMenu(key)"
             >
               {{ label }}
             </a>
