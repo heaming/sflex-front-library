@@ -40,10 +40,10 @@ export default (files) => {
     }
     if (props.maxTotalSize) {
       const maxTotalSizeString = fileSizeToString(props.maxTotalSize);
-      let totalSizeString = fileSizeToString(totalSizeInt);
-      if (maxTotalSizeString.at(-2) === totalSizeString.at(-2)) {
-        totalSizeString = totalSizeString.replace(/\D*$/g, '');
-      }
+      const totalSizeString = fileSizeToString(totalSizeInt);
+      // if (maxTotalSizeString.at(-2) === totalSizeString.at(-2)) {
+      // totalSizeString = totalSizeString.replace(/\D*$/g, '');
+      // }
       counters.push(`${totalSizeString} / ${maxTotalSizeString}`);
     }
     return counters.join(' | ');
