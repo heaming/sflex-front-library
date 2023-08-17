@@ -112,6 +112,10 @@ body.q-body--prevent-scroll__header {
         transition: all 0.3s;
       }
     }
+
+    &--bold {
+      font-weight: 700;
+    }
   }
 
   &__tools {
