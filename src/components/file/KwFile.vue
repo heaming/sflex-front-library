@@ -675,7 +675,7 @@ export default {
     const fileRef = ref();
 
     const fieldCtx = useField();
-    const { value, invalid, resetValidation, isModified } = fieldCtx;
+    const { value, isModified } = fieldCtx;
 
     const innerValue = computed({
       get: () => {
@@ -854,11 +854,12 @@ export default {
     const { preventIfClick } = filePickCtx;
 
     const onClick = async (evt) => {
-      if (invalid.value) {
-        evt.preventDefault();
-        await resetValidation();
-        return;
-      }
+      // 에러 난 상태에서도 파일첨부 가능하도록
+      // if (invalid.value) {
+      // evt.preventDefault();
+      // await resetValidation();
+      // return;
+      // }
       preventIfClick(evt);
     };
 
