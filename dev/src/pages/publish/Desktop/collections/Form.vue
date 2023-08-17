@@ -622,6 +622,24 @@
                 />
               </kw-form-item>
             </kw-form-row>
+            <kw-form-row>
+              <kw-form-item>
+                <kw-field-wrap>
+                  <kw-select
+                    :model-value="[]"
+                    :options="['직접입력', 'B', 'C', 'D']"
+                    class="w130 mr8"
+                  />
+                  <kw-input class="w100" />
+                  <span>-</span>
+                  <kw-input class="w100" />
+                  <span>-</span>
+                  <kw-input class="w100" />
+                  <span>-</span>
+                  <kw-input class="w100" />
+                </kw-field-wrap>
+              </kw-form-item>
+            </kw-form-row>
           </kw-form>
         </div>
 
