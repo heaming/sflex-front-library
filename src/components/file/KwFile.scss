@@ -611,6 +611,7 @@ body.mobile:not(.tablet) {
 .file_tooltip.kw-tooltip {
   &.q-tooltip {
     padding: 8px;
+    max-width: 600px !important;
     min-height: 28px;
     font-size: 12px;
     font-weight: 400;
@@ -620,5 +621,6 @@ body.mobile:not(.tablet) {
     border: none;
     border-radius: 0;
     box-shadow: 4px 5px 5px 0 rgb(0 0 0 / 6%);
+    word-break: break-all;
   }
 }

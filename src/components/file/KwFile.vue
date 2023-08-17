@@ -302,8 +302,22 @@
           <div
             class="kw-file__bottom-area"
           >
-            <span class="kw-file__ext-area">
+            <span
+              class="kw-file__ext-area"
+              :style="!$g.platform.is.mobile ? 'display:inline-block' : ''"
+              :class="!$g.platform.is.mobile ? 'ellipsis' : ''"
+            >
               {{ acceptHint }}
+              <kw-tooltip
+                v-if="!$g.platform.is.mobile"
+                show-when-ellipsised
+                anchor="bottom start"
+                self="top left"
+                class="file_tooltip"
+                :offset="[-12, 5]"
+              >
+                {{ accept }}
+              </kw-tooltip>
             </span>
             <span
               v-if="$g.platform.is.mobile && !multiple"
