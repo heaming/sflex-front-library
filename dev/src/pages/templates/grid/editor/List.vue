@@ -39,6 +39,18 @@ function initGrd(data, view) {
     { codeId: 'B', codeName: 'Name of B' },
     { codeId: 'C', codeName: 'Name of C' },
     { codeId: 'D', codeName: 'Name of D' },
+    { codeId: 'E', codeName: 'Name of E' },
+    { codeId: 'F', codeName: 'Name of F' },
+    { codeId: 'G', codeName: 'Name of G' },
+    { codeId: 'H', codeName: 'Name of H' },
+    { codeId: 'I', codeName: 'Name of I' },
+    { codeId: 'J', codeName: 'Name of J' },
+    { codeId: 'K', codeName: 'Name of K' },
+    { codeId: 'L', codeName: 'Name of L' },
+    { codeId: 'M', codeName: 'Name of M' },
+    { codeId: 'N', codeName: 'Name of N' },
+    { codeId: 'O', codeName: 'Name of O' },
+    { codeId: 'P', codeName: 'Name of P' },
   ];
 
   const fields = [
