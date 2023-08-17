@@ -24,8 +24,9 @@
             <a
               :id="'header_' + key"
               class="web-header__link"
-              @mouseover="openGnbMenu(key, $event)"
-              @focus="openGnbMenu(key)"
+              @click.prevent="openGnbMenu(key, $event)"
+              @focus="makeBoldApplicationText($event)"
+              @mouseover="makeBoldApplicationText($event)"
             >
               {{ label }}
             </a>
@@ -432,6 +433,13 @@ export default {
       gnbMenu.value = true;
     }
 
+    function makeBoldApplicationText(ev) {
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--bold');
+      });
+      ev.target.classList.add('web-header__link--bold');
+    }
+
     function closeGnbMenu() {
       if (gnbMenu.value) {
         gnbMenu.value = false;
@@ -543,6 +551,7 @@ export default {
       openTotalMenuP,
       openMenuSearchPopup,
       openGnbMenu,
+      makeBoldApplicationText,
       searchText,
       totalMenu,
       gnbMenu,
