@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { isEmpty } from 'lodash-es';
 import { modal } from '../../plugins/modal';
 import { getPreference } from '../../utils/mobile';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
@@ -94,22 +95,29 @@ export default {
         // 메뉴가 있을때만 이동
         if (targetMenu) {
           const { pageUseCode } = targetMenu.meta;
-          const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO').value ?? '';
-          const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD').value ?? '';
+          const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO');
+          const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD');
+          let svpdCstSvAsnNo;
+          let svpdDetailMenuCd;
+          if (isEmpty(SVPD_CST_SV_ASN_NO)) svpdCstSvAsnNo = '';
+          else svpdCstSvAsnNo = SVPD_CST_SV_ASN_NO.value;
+          if (isEmpty(SVPD_DETAIL_MENU_CD)) svpdDetailMenuCd = '';
+          else svpdDetailMenuCd = SVPD_DETAIL_MENU_CD.value;
+
           if (pageUseCode === 'S') {
             const path = findMainMenu(targetMenu.meta.parentsMenuUid);
 
             if (path) {
               router.push({
                 path,
-                state: { stateParam: { recentWorkYn: 'Y', SVPD_CST_SV_ASN_NO, SVPD_DETAIL_MENU_CD } },
+                state: { stateParam: { recentWorkYn: 'Y', svpdCstSvAsnNo, svpdDetailMenuCd } },
               });
             }
           } else if (pageUseCode === 'N') {
             const { path } = targetMenu;
             router.push({
               path,
-              state: { stateParam: { recentWorkYn: 'Y', SVPD_CST_SV_ASN_NO, SVPD_DETAIL_MENU_CD } },
+              state: { stateParam: { recentWorkYn: 'Y', svpdCstSvAsnNo, svpdDetailMenuCd } },
             });
           }
         }
