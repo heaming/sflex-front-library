@@ -94,8 +94,8 @@ export default {
         // 메뉴가 있을때만 이동
         if (targetMenu) {
           const { pageUseCode } = targetMenu.meta;
-          const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO') ?? '';
-          const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD') ?? '';
+          const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO').value ?? '';
+          const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD').value ?? '';
           if (pageUseCode === 'S') {
             const name = findMainMenu(targetMenu.meta.parentsMenuUid);
 
