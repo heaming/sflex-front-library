@@ -40,7 +40,7 @@ export default () => {
       store.dispatch('meta/fetchMenus'),
       store.dispatch('meta/fetchBookmarks'),
       store.dispatch('meta/fetchAlarms'),
-      userInfo.portalId.startsWith('MBL') || userInfo.portalId.startsWith('TBL')
+      userInfo.tenantId === 'TNT_WELLS' && (userInfo.portalId.startsWith('MBL') || userInfo.portalId.startsWith('TBL'))
         ? store.dispatch('meta/fetchBaskets') : '',
     ]);
   }

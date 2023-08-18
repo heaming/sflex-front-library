@@ -118,7 +118,7 @@ export function openBarcodeReader() {
   */
 // 앱 저장소에 키값으로 값 저장
 export function setPreference(key, value) {
-  return callMethod(NativePlugin.Pref, 'setPreference', { key, value });
+  return callMethod(NativePlugin.Pref, 'setPreference', { key: value });
 }
 
 // 앱 저장소에서 키값으로 값 읽기
