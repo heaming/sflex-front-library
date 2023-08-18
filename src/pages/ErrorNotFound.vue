@@ -45,7 +45,7 @@
       </p>
       <kw-btn
         primary
-        to="/"
+        :to="existsPage ? router.go(-1) : '/'"
         class="scoped-error--btn"
         label="이전페이지로 이동"
       />
