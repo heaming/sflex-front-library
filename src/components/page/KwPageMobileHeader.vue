@@ -28,6 +28,7 @@
         />
         <kw-icon
           name="report"
+          class="ml9"
           :clickable="pageManual"
           :disable="!pageManual"
           :style="{ opacity: pageManual ? '1 !important' : '0.3 !important' }"
