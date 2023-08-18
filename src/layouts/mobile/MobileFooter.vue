@@ -16,11 +16,11 @@
       @click="openMenu(footerMenu, footerIdx)"
     >
       <q-badge
-        v-if="footerMenu.icon === 'mob_basket'"
+        v-if="footerMenu.icon === 'mob_basket' && basketSize !== 0"
         rounded
         floating
         color="error"
-        :label="0"
+        :label="basketSize"
         class="alert-badge"
         style="top: 8px;right: calc(50% - 12px);"
       />
@@ -41,14 +41,17 @@ export default {
   setup() {
     const { getters } = useStore();
     const { userId } = getters['meta/getUserInfo'];
-    const { push } = useRouter();
+    const router = useRouter();
     const { t } = useI18n();
     const curr = ref(-1);
+
+    const basketSize = computed(() => getters['meta/getBaskets']);
+
     const footerMenus = ref([
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
       { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
       { icon: 'mob_recently', label: t('MSG_TXT_RECENT_WORK') },
-      { icon: 'mob_basket', label: t('MSG_TXT_STLM_BASKET'), component: async () => await import('../../pages/mobile/MobileTotalMenuTestP.vue') },
+      { icon: 'mob_basket', label: t('MSG_TXT_STLM_BASKET') },
       { icon: 'mob_menu', label: t('MSG_BTN_ALL_VIEW'), component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue') },
     ]);
 
@@ -76,7 +79,14 @@ export default {
 
       if (idx === 2 && userId) { // 최근 메뉴 라우팅
         const name = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
-        push({ name });
+        router.push({ name });
+      }
+
+      if (idx === 3) {
+        const routerList = router.getRoutes();
+        const name = routerList.find((route) => route.meta.pageName === 'WmsnbServiceSettlementMgtM')?.name;
+        if (name) router.push({ name });
+        else curr.value = -1;
       }
     }
 
@@ -84,6 +94,7 @@ export default {
       openMenu,
       footerMenus,
       curr,
+      basketSize,
     };
   },
 };

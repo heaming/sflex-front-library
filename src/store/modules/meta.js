@@ -54,6 +54,7 @@ export default {
     recentMenus: [],
     isLocatedFromHistory: false,
     alarms: [],
+    baskets: 0,
   }),
 
   mutations: {
@@ -108,6 +109,9 @@ export default {
     setAlarms(state, alarms) {
       state.alarms = Object.freeze(alarms);
     },
+    setBaskets(state, baskets) {
+      state.baskets = baskets;
+    },
   },
 
   getters: {
@@ -135,6 +139,7 @@ export default {
     getRecentMenus: (state) => state.recentMenus,
     getIsLocatedFromHistory: (state) => state.isLocatedFromHistory,
     getAlarms: (state) => state.alarms,
+    getBaskets: (state) => state.baskets,
   },
 
   actions: {
@@ -248,6 +253,11 @@ export default {
 
     async changeAccessToken({ commit }, data) {
       commit('setAccessToken', data);
+    },
+    async fetchBaskets({ commit }) {
+      const res = await http.get('/psm/wells/service/service-settlements').catch(() => {});
+      if (res?.data) commit('setBaskets', res?.data?.length);
+      else commit('setBaskets', 0);
     },
   },
 };
