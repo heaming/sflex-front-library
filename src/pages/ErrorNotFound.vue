@@ -45,9 +45,9 @@
       </p>
       <kw-btn
         primary
-        :to="existsPage ? goBack : '/'"
         class="scoped-error--btn"
         label="이전페이지로 이동"
+        @click="goBack"
       />
     </div>
   </div>
@@ -104,7 +104,11 @@ function recursiveBuildPath(app, menu) {
 }
 
 function goBack() {
-  router.go(-1);
+  if (existsPage) {
+    router.go(-1);
+  } else {
+    router.replace('/');
+  }
 }
 
 function makePath(app) {
