@@ -46,6 +46,7 @@ export default {
     const curr = ref(-1);
 
     const basketSize = computed(() => getters['meta/getBaskets']);
+    const routerList = router.getRoutes();
 
     const footerMenus = ref([
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
@@ -54,6 +55,15 @@ export default {
       { icon: 'mob_basket', label: t('MSG_TXT_STLM_BASKET') },
       { icon: 'mob_menu', label: t('MSG_BTN_ALL_VIEW'), component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue') },
     ]);
+
+    function findMainMenu(fromMenuUid) {
+      if (fromMenuUid) {
+        const parent = routerList.find((menu) => menu.meta.menuUid === fromMenuUid);
+        if (parent.meta.pageUseCode === 'N') return parent.meta.menuUid;
+        if (parent.meta.pageUseCode === 'S') return findMainMenu(parent.meta.menuUid);
+      }
+      return null;
+    }
 
     async function openMenu(menu, idx) {
       const globalModals = getGlobalData(GlobalModalVmKey);
@@ -78,12 +88,34 @@ export default {
       }
 
       if (idx === 2 && userId) { // 최근 메뉴 라우팅
-        const name = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
-        router.push({ name });
+        const menuUid = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
+        const targetMenu = routerList.find((route) => route.meta.menuUid === menuUid);
+
+        // 메뉴가 있을때만 이동
+        if (targetMenu) {
+          const { pageUseCode } = targetMenu.meta;
+          const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO') ?? '';
+          const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD') ?? '';
+          if (pageUseCode === 'S') {
+            const name = findMainMenu(targetMenu.meta.parentsMenuUid);
+
+            if (name) {
+              router.push({
+                name,
+                state: { stateParam: { recentWorkYn: 'Y', SVPD_CST_SV_ASN_NO, SVPD_DETAIL_MENU_CD } },
+              });
+            }
+          } else if (pageUseCode === 'N') {
+            const name = targetMenu.meta.menuUid;
+            router.push({
+              name,
+              state: { stateParam: { recentWorkYn: 'Y', SVPD_CST_SV_ASN_NO, SVPD_DETAIL_MENU_CD } },
+            });
+          }
+        }
       }
 
       if (idx === 3) {
-        const routerList = router.getRoutes();
         const name = routerList.find((route) => route.meta.pageName === 'WmsnbServiceSettlementMgtM')?.name;
         if (name) router.push({ name });
         else curr.value = -1;
