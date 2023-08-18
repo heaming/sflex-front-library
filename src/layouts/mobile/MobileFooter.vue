@@ -59,7 +59,7 @@ export default {
     function findMainMenu(fromMenuUid) {
       if (fromMenuUid) {
         const parent = routerList.find((menu) => menu.meta.menuUid === fromMenuUid);
-        if (parent.meta.pageUseCode === 'N') return parent.meta.menuUid;
+        if (parent.meta.pageUseCode === 'N') return parent.path;
         if (parent.meta.pageUseCode === 'S') return findMainMenu(parent.meta.menuUid);
       }
       return null;
@@ -97,18 +97,18 @@ export default {
           const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO').value ?? '';
           const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD').value ?? '';
           if (pageUseCode === 'S') {
-            const name = findMainMenu(targetMenu.meta.parentsMenuUid);
+            const path = findMainMenu(targetMenu.meta.parentsMenuUid);
 
-            if (name) {
+            if (path) {
               router.push({
-                name,
+                path,
                 state: { stateParam: { recentWorkYn: 'Y', SVPD_CST_SV_ASN_NO, SVPD_DETAIL_MENU_CD } },
               });
             }
           } else if (pageUseCode === 'N') {
-            const name = targetMenu.meta.menuUid;
+            const { path } = targetMenu;
             router.push({
-              name,
+              path,
               state: { stateParam: { recentWorkYn: 'Y', SVPD_CST_SV_ASN_NO, SVPD_DETAIL_MENU_CD } },
             });
           }
