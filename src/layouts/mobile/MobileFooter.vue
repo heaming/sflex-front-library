@@ -59,9 +59,9 @@ export default {
 
     function findMainMenu(fromMenuUid) {
       if (fromMenuUid) {
-        const parent = routerList.find((menu) => menu.meta.menuUid === fromMenuUid);
-        if (parent.meta.pageUseCode === 'N') return parent.path;
-        if (parent.meta.pageUseCode === 'S') return findMainMenu(parent.meta.menuUid);
+        const now = routerList.find((menu) => menu.meta.menuUid === fromMenuUid);
+        if (now.meta.pageUseCode === 'N') return now;
+        if (now.meta.pageUseCode === 'S') return findMainMenu(now.meta.parentsMenuUid);
       }
       return null;
     }
@@ -90,11 +90,12 @@ export default {
 
       if (idx === 2 && userId) { // 최근 메뉴 라우팅
         const menuUid = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
-        const targetMenu = routerList.find((route) => route.meta.menuUid === menuUid);
+        const targetMenu = findMainMenu(menuUid);
+        const mainOfCurrentMenu = findMainMenu(router.currentRoute?.value?.meta?.menuUid);
+        if (targetMenu?.meta?.menuUid === mainOfCurrentMenu?.meta?.menuUid) return;
 
         // 메뉴가 있을때만 이동
         if (targetMenu) {
-          const { pageUseCode } = targetMenu.meta;
           const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO');
           const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD');
           let svpdCstSvAsnNo;
@@ -104,22 +105,11 @@ export default {
           if (isEmpty(SVPD_DETAIL_MENU_CD)) svpdDetailMenuCd = '';
           else svpdDetailMenuCd = SVPD_DETAIL_MENU_CD.value;
 
-          if (pageUseCode === 'S') {
-            const path = findMainMenu(targetMenu.meta.parentsMenuUid);
-
-            if (path) {
-              router.push({
-                path,
-                state: { stateParam: { recentWorkYn: 'Y', svpdCstSvAsnNo, svpdDetailMenuCd } },
-              });
-            }
-          } else if (pageUseCode === 'N') {
-            const { path } = targetMenu;
-            router.push({
-              path,
-              state: { stateParam: { recentWorkYn: 'Y', svpdCstSvAsnNo, svpdDetailMenuCd } },
-            });
-          }
+          const { path } = targetMenu;
+          router.push({
+            path,
+            state: { stateParam: { recentWorkYn: 'Y', svpdCstSvAsnNo, svpdDetailMenuCd } },
+          });
         }
       }
 
