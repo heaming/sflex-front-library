@@ -6,7 +6,6 @@ const setFields = 'setFields';
 const addField = 'addField';
 const setRows = 'setRows';
 const addRows = 'addRows';
-const insertRow = 'insertRow';
 const removeRow = 'removeRow';
 const removeRows = 'removeRows';
 const destroy = 'destroy';
@@ -116,18 +115,6 @@ function setSearchConditionMessage(view) {
   view.__searchConditionText__ = message;
 }
 
-function hideRowIndicator() {
-  const findIndicator = window.$('.rg-rowbarcontainer thead tr th:nth-child(2)');
-  if (findIndicator.length <= 0) {
-    setTimeout(() => {
-      hideRowIndicator();
-    }, 30);
-  } else {
-    window.$('.rg-rowbarcontainer thead tr th:nth-child(2)').css('display', 'none');
-    window.$('.rg-rowbarcontainer tbody tr td.rg-rowindicator-cell').css('display', 'none');
-  }
-}
-
 /*
   데이터 셋을 채운다
   */
@@ -151,12 +138,6 @@ export function overrideSetRows(data, vm) {
     }
 
     setSearchConditionMessage(view);
-
-    setTimeout(() => {
-      if (view.rowIndicator.keepInvisible) {
-        hideRowIndicator();
-      }
-    }, 30);
   });
 }
 
@@ -170,26 +151,6 @@ export function overrideAddRows(data, vm) {
     const view = vm.proxy.getView();
 
     setSearchConditionMessage(view);
-
-    setTimeout(() => {
-      if (view.rowIndicator.keepInvisible) {
-        hideRowIndicator();
-      }
-    }, 30);
-  });
-}
-
-export function overrideInsertRow(data, vm) {
-  wrapMethod(data, insertRow, (...args) => {
-    execOriginal(data, insertRow, ...args);
-
-    const view = vm.proxy.getView();
-
-    setTimeout(() => {
-      if (view.rowIndicator.keepInvisible) {
-        hideRowIndicator();
-      }
-    }, 30);
   });
 }
 
