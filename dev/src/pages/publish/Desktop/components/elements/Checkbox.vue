@@ -187,7 +187,7 @@
             <kw-form-row>
               <kw-form-item label="Checkbox">
                 <kw-field
-                  :model-value="[]"
+                  :model-value="['Y']"
                 >
                   <template #default="{ field }">
                     <kw-checkbox

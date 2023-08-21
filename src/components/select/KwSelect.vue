@@ -145,7 +145,7 @@
           />
         </q-item-section>
         <q-item-section>
-          <q-item-label>
+          <q-item-label :class="!$g.platform.is.mobile && selected ? 'text-weight-bold kw-fc--black1': '' ">
             {{ opt[optionLabel] }}
           </q-item-label>
         </q-item-section>
