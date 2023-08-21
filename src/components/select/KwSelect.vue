@@ -145,7 +145,7 @@
           />
         </q-item-section>
         <q-item-section>
-          <q-item-label>
+          <q-item-label :class="selected ? 'text-weight-bold': '' ">
             {{ opt[optionLabel] }}
           </q-item-label>
         </q-item-section>
