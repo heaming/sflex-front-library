@@ -75,11 +75,10 @@ export default {
 
     async function onUpdateValue(val) {
       val = parseInt(val, 10);
-
+      emit('update:pageSize', val, 10); // model-value 업데이트는 해줘야 하기 때문에, 무조건 업데이트
       if (await confirmIfTargetsModified?.()) {
         if (props.totalCount && props.totalCount >= 1) {
           emit('update:pageIndex', 1);
-          emit('update:pageSize', val, 10);
           emit('change', 1, val);
         }
       }

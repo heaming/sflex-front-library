@@ -33,11 +33,15 @@ export default () => {
   }
 
   async function fetchMetas() {
+    const { userInfo } = await store.dispatch('meta/fetchLoginInfo');
+
     await Promise.all([
       store.dispatch('meta/fetchApps'),
       store.dispatch('meta/fetchMenus'),
       store.dispatch('meta/fetchBookmarks'),
       store.dispatch('meta/fetchAlarms'),
+      userInfo.tenantId === 'TNT_WELLS' && (userInfo.portalId.startsWith('MBL') || userInfo.portalId.startsWith('TBL'))
+        ? store.dispatch('meta/fetchBaskets') : '',
     ]);
   }
 

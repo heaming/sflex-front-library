@@ -26,7 +26,16 @@
           y="0"
         >!</tspan></text>
       </svg>
-      <h1 class="scoped-error--h1">
+      <h1
+        v-if="existsPage"
+        class="scoped-error--h1"
+      >
+        해당 페이지에 권한이 없습니다.
+      </h1>
+      <h1
+        v-else
+        class="scoped-error--h1"
+      >
         페이지를 찾을 수 없습니다.
       </h1>
       <p class="scoped-error--p">
@@ -36,14 +45,88 @@
       </p>
       <kw-btn
         primary
-        to="/"
         class="scoped-error--btn"
         label="이전페이지로 이동"
+        @click="goBack"
       />
     </div>
   </div>
 </template>
 
 <script setup>
+import { filter, find, kebabCase } from 'lodash-es';
+import store from '../store';
+
+const router = useRouter();
+let existsPage = false;
+
+const currentPath = router.currentRoute.value.path;
+const { getters } = useStore();
+const apps = store.getters['meta/getApps'];
+function recursiveBuildPath(app, menu) {
+  const paths = [];
+
+  const { folderYn, pageDestinationValue } = menu;
+  const menuIsPage = folderYn === 'N' && !!pageDestinationValue;
+
+  if (menuIsPage) {
+    const name = pageDestinationValue;
+
+    paths.push(
+      kebabCase(name.substring(0, name.length - 1)),
+    );
+
+    const { pageTypeCode, pageId, linkPageId } = menu;
+
+    if (pageTypeCode === 'L') {
+      const linkPage = store.getters['meta/getLinkPage'](pageId, linkPageId);
+      const linkParams = (linkPage?.pageParameter || []);
+
+      paths.push(
+        ...linkParams.map((e) => kebabCase(e.pageParameterValue)),
+      );
+    }
+  }
+
+  const menuUid = menu.parentsMenuUid;
+  const menuLevel = menu.menuLevel - 1;
+  const matched = find(store.getters['meta/getMenus'], { menuUid, menuLevel });
+
+  if (matched !== undefined) {
+    paths.unshift(
+      ...recursiveBuildPath(app, matched),
+    );
+  } else {
+    paths.unshift('', app.applicationUrl.toLowerCase());
+  }
+
+  return paths;
+}
+
+function goBack() {
+  if (existsPage) {
+    router.go(-1);
+  } else {
+    router.replace('/');
+  }
+}
+
+function makePath(app) {
+  const menus = getters['meta/getTotalMenus'].data;
+  const { applicationId } = app;
+  const targets = filter(menus, { applicationId });
+
+  targets.forEach((menu) => {
+    const existPath = recursiveBuildPath(app, menu).join('/');
+    if (currentPath === existPath) {
+      existsPage = true;
+    }
+  });
+}
+
+apps.forEach((app) => {
+  makePath(app);
+});
+
 //
 </script>

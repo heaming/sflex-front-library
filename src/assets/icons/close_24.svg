@@ -1,5 +1,10 @@
-<svg id="close_24" data-name="close_24" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
-    <path d="M0 0h24v24H0z" style="fill:none" data-name="keyline/24px"/>
-    <path data-name="선 2820" transform="translate(5 5)" style="stroke:#222;stroke-width:1.5px;fill:none" d="M0 14 14 0"/>
-    <path data-name="선 2821" transform="translate(5 5)" style="stroke:#222;stroke-width:1.5px;fill:none" d="M14 14 0 0"/>
+<svg id="close_24" data-name="close(h24)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <g id="keyline_24px" data-name="keyline/24px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(-1800.044 -371.065)">
+    <path id="합치기_465" data-name="합치기 465" d="M2780.575,15879.657l-6.471,6.471-1.06-1.061,6.471-6.471-6.471-6.471,1.06-1.061,6.471,6.471,6.471-6.471,1.061,1.061-6.471,6.471,6.471,6.471-1.061,1.061Z" transform="translate(-968.529 -15495.53)" fill="#222"/>
+  </g>
 </svg>

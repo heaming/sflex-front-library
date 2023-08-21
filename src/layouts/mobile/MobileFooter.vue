@@ -16,11 +16,11 @@
       @click="openMenu(footerMenu, footerIdx)"
     >
       <q-badge
-        v-if="footerMenu.icon === 'mob_basket'"
+        v-if="footerMenu.icon === 'mob_basket' && basketSize !== 0"
         rounded
         floating
         color="error"
-        :label="0"
+        :label="basketSize"
         class="alert-badge"
         style="top: 8px;right: calc(50% - 12px);"
       />
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { isEmpty } from 'lodash-es';
 import { modal } from '../../plugins/modal';
 import { getPreference } from '../../utils/mobile';
 import { getGlobalData, removeGlobalData } from '../../utils/private/globalData';
@@ -41,16 +42,29 @@ export default {
   setup() {
     const { getters } = useStore();
     const { userId } = getters['meta/getUserInfo'];
-    const { push } = useRouter();
+    const router = useRouter();
     const { t } = useI18n();
     const curr = ref(-1);
+
+    const basketSize = computed(() => getters['meta/getBaskets']);
+    const routerList = router.getRoutes();
+
     const footerMenus = ref([
       { icon: 'mob_home', label: t('MSG_TXT_HOME') },
       { icon: 'mob_task', label: t('MSG_TXT_WK_LIST') },
       { icon: 'mob_recently', label: t('MSG_TXT_RECENT_WORK') },
-      { icon: 'mob_basket', label: t('MSG_TXT_STLM_BASKET'), component: async () => await import('../../pages/mobile/MobileTotalMenuTestP.vue') },
+      { icon: 'mob_basket', label: t('MSG_TXT_STLM_BASKET') },
       { icon: 'mob_menu', label: t('MSG_BTN_ALL_VIEW'), component: async () => await import('../../pages/mobile/MobileTotalMenuP.vue') },
     ]);
+
+    function findMainMenu(fromMenuUid) {
+      if (fromMenuUid) {
+        const now = routerList.find((menu) => menu.meta.menuUid === fromMenuUid);
+        if (now.meta.pageUseCode === 'N') return now;
+        if (now.meta.pageUseCode === 'S') return findMainMenu(now.meta.parentsMenuUid);
+      }
+      return null;
+    }
 
     async function openMenu(menu, idx) {
       const globalModals = getGlobalData(GlobalModalVmKey);
@@ -75,8 +89,34 @@ export default {
       }
 
       if (idx === 2 && userId) { // 최근 메뉴 라우팅
-        const name = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
-        push({ name });
+        const menuUid = (await getPreference(`${consts.MENU_RECENT_WORK_PREFIX}${userId.toUpperCase()}`)).value;
+        const targetMenu = findMainMenu(menuUid);
+        const mainOfCurrentMenu = findMainMenu(router.currentRoute?.value?.meta?.menuUid);
+        if (targetMenu?.meta?.menuUid === mainOfCurrentMenu?.meta?.menuUid) return;
+
+        // 메뉴가 있을때만 이동
+        if (targetMenu) {
+          const SVPD_CST_SV_ASN_NO = await getPreference('SVPD_CST_SV_ASN_NO');
+          const SVPD_DETAIL_MENU_CD = await getPreference('SVPD_DETAIL_MENU_CD');
+          let svpdCstSvAsnNo;
+          let svpdDetailMenuCd;
+          if (isEmpty(SVPD_CST_SV_ASN_NO)) svpdCstSvAsnNo = '';
+          else svpdCstSvAsnNo = SVPD_CST_SV_ASN_NO.value;
+          if (isEmpty(SVPD_DETAIL_MENU_CD)) svpdDetailMenuCd = '';
+          else svpdDetailMenuCd = SVPD_DETAIL_MENU_CD.value;
+
+          const { path } = targetMenu;
+          router.push({
+            path,
+            state: { stateParam: { recentWorkYn: 'Y', svpdCstSvAsnNo, svpdDetailMenuCd } },
+          });
+        }
+      }
+
+      if (idx === 3) {
+        const name = routerList.find((route) => route.meta.pageName === 'WmsnbServiceSettlementMgtM')?.name;
+        if (name) router.push({ name });
+        else curr.value = -1;
       }
     }
 
@@ -84,6 +124,7 @@ export default {
       openMenu,
       footerMenus,
       curr,
+      basketSize,
     };
   },
 };

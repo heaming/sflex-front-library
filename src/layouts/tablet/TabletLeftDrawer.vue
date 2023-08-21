@@ -36,7 +36,17 @@
           class="menu_icon"
           :class="{ 'curr': menu.icon === curr }"
           @click="openMenu(menu)"
-        />
+        >
+          <q-badge
+            v-if="footerMenu.icon === 'tablet_basket' && basketSize !== 0"
+            rounded
+            floating
+            color="error"
+            :label="basketSize"
+            class="alert-badge"
+            style="top: 8px;right: calc(50% - 12px);"
+          />
+        </kw-btn>
       </div>
     </div>
   </q-drawer>
@@ -51,10 +61,14 @@ import { GlobalModalVmKey } from '../../consts/private/symbols';
 export default {
   name: 'TabletLeftDrawer',
   setup() {
+    const { getters } = useStore();
     const curr = ref(0);
+    const router = useRouter();
     const leftDrawerTopMenus = ref([
       { icon: 'tablet_home' },
     ]);
+
+    const basketSize = computed(() => getters['meta/getBaskets']);
 
     const leftDrawerBottomMenus = ref([
       { icon: 'tablet_menu', component: async () => await import('../../pages/tablet/TabletTotalMenuP.vue') },
@@ -84,6 +98,13 @@ export default {
 
         curr.value = -1;
       }
+
+      if (curr.value === 3) {
+        const routerList = router.getRoutes();
+        const name = routerList.find((route) => route.meta.pageName === 'WmsnbServiceSettlementMgtM')?.name;
+        if (name) router.push({ name });
+        else curr.value = -1;
+      }
     }
 
     return {
@@ -92,6 +113,7 @@ export default {
       leftDrawerTopMenus,
       leftDrawerBottomMenus,
       curr,
+      basketSize,
     };
   },
 };
