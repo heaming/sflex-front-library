@@ -247,9 +247,15 @@
 
     &:hover {
       background-color: $bg-box;
+      font-weight: 700;
+
+      span {
+        color: $black1 !important;
+      }
     }
 
     span {
+      color: $black2;
       line-height: 34px;
       display: inline-block;
       font-family: "Noto Sans KR", sans-serif;
@@ -523,6 +529,11 @@
   height: 18px;
   background: url(~@assets/images/checkbox_off.svg) no-repeat center;
   background-size: 18px;
+
+  &.disabled {
+    background: url(~@assets/images/checkbox_disable.svg) no-repeat center;
+    background-size: 18px;
+  }
 }
 
 .rg-check-renderer-checked,
@@ -533,6 +544,11 @@
   height: 18px;
   background: url(~@assets/images/checkbox_on.svg) no-repeat center;
   background-size: 18px;
+
+  &.disabled {
+    background: url(~@assets/images/checkbox_selected_disable.svg) no-repeat center;
+    background-size: 18px;
+  }
 }
 
 .rg-radio-renderer__option span {
