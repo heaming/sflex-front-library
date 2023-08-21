@@ -186,6 +186,55 @@
               </tr>
             </tbody>
           </table>
+
+          <p class="my20">
+            데이터가 없을 경우 (5줄)
+          </p>
+          <table class="kw-table--normal mt20">
+            <colgroup>
+              <col style="width: 25%;">
+              <col style="width: 25%;">
+              <col style="width: 25%;">
+              <col style="width: 25%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>
+                  계좌상태
+                </th>
+                <th class="essential">
+                  오류번호
+                </th>
+                <th>오류명</th>
+                <th>청구여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  colspan="4"
+                  rowspan="10"
+                  class="kw-table-no-date"
+                >
+                  <p>
+                    데이터가 없습니다
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td />
+              </tr>
+              <tr>
+                <td />
+              </tr>
+              <tr>
+                <td />
+              </tr>
+              <tr>
+                <td />
+              </tr>
+            </tbody>
+          </table>
         </div>
         <guide-code-view
           :code-value="testCode"
@@ -669,6 +718,53 @@ const testCode = `
     <tr>
       <td>00</td>
       <td>그외 오류건</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 데이터 없을 경우 -->
+<table class="kw-table--normal mt20">
+  <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>
+        계좌상태
+      </th>
+      <th class="essential">
+        오류번호
+      </th>
+      <th>오류명</th>
+      <th>청구여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td
+        colspan="4"
+        rowspan="5"
+        class="kw-table-no-date"
+      >
+        <p>
+          데이터가 없습니다
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td />
     </tr>
   </tbody>
 </table>
