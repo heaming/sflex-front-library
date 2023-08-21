@@ -98,6 +98,7 @@ body.q-body--prevent-scroll__header {
 
     &--active {
       font-weight: 700;
+      color: $black1;
 
       &::after {
         width: 100%;
