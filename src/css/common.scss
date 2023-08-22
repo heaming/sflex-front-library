@@ -606,6 +606,12 @@ $unit: px;
   }
 }
 
+@for $toppo from -1500 through 1500 {
+  .top#{$toppo} {
+    top: #{$toppo} + $unit !important;
+  }
+}
+
 @include color-based(".kw-fc--", $semantic-colors) using ($color) {
   color: $color !important;
 }
