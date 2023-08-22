@@ -333,6 +333,7 @@ export function reset(view) {
   const deletedRows = data.getStateRows(RowState.DELETED);
 
   data.removeRows(createdRows);
+
   data.setRowStates(deletedRows, RowState.UPDATED);
   data.restoreUpdatedRows();
 
