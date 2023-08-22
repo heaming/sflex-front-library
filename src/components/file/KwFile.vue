@@ -878,11 +878,15 @@ export default {
     };
 
     const getExtensionIcon = (file) => {
+      const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
+      const EXCEL_EXTENSION = ['xlsx', 'xls'];
+
       if (file.type.indexOf('video/') === 0) return 'movie';
-      if (file.type.indexOf('image/') === 0) return 'imgpreview';
+      if (file.type.indexOf('image/') === 0 || IMAGE_EXTENSION.includes(file.attachFile?.fileExtensionName)) return 'imgpreview';
       if (file.type.indexOf('audio/') === 0) return 'audio';
-      if (file.type.indexOf('pdf') > -1) return 'pdf';
-      if (file.type.indexOf('xml') > -1) return 'excel';
+      if (file.type.indexOf('pdf') > -1 || file.attachFile?.fileExtensionName === 'pdf') return 'pdf';
+      if (file.type.indexOf('excel') > -1 || file.type.indexOf('xls') > -1
+        || file.type.indexOf('spreadsheet') > -1 || EXCEL_EXTENSION.includes(file.attachFile?.fileExtensionName)) return 'excel';
       return 'file';
     };
 

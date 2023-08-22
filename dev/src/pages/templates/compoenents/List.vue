@@ -126,9 +126,9 @@
           checkbox
           select-align="center"
         >
-          <template #item="{item}">
+          <template #item="{item, index}">
             <kw-item-section>
-              {{ item }}
+              {{ `index:  ${index}, ` }} {{ item }}
             </kw-item-section>
           </template>
           <template #expansion>

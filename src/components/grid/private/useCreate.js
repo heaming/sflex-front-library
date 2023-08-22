@@ -34,18 +34,6 @@ export default (DataClass, ViewClass) => {
   let data = null;
   let view = null;
 
-  function hideRowIndicator() {
-    const findHead = window.$('.rg-head thead tr th:nth-child(2)');
-    if (findHead.length <= 0) {
-      setTimeout(() => {
-        hideRowIndicator();
-      }, 20);
-    } else {
-      window.$('.rg-head thead tr th:nth-child(2)').css('display', 'none');
-      window.$('.rg-head tbody tr td.rg-rowindicator-head').css('display', 'none');
-    }
-  }
-
   async function createGrid() {
     try {
       data?.clearRows();
@@ -83,9 +71,6 @@ export default (DataClass, ViewClass) => {
     vm.proxy.applySavedLayouts?.();
     setTimeout(() => {
       view.__originalLayouts__ = view.saveColumnLayout();
-      if (view.rowIndicator.keepInvisible) {
-        hideRowIndicator();
-      }
     });
     /* eslint-disable no-use-before-define */
     registerGridInitFunction(view);

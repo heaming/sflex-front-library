@@ -111,6 +111,7 @@
                 <slot
                   name="item"
                   :item="item.value"
+                  :index="index"
                 >
                   <kw-item-section>
                     {{ item.key }}
@@ -123,6 +124,7 @@
             <slot
               name="expansion"
               :item="item.value"
+              :index="index"
             >
               <kw-item>
                 {{ item.expansion }}
@@ -179,6 +181,7 @@
               <slot
                 name="item"
                 :item="item.value"
+                :index="index"
               >
                 <kw-item-section>
                   {{ item.key }}
