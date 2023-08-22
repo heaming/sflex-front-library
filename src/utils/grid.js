@@ -646,7 +646,8 @@ export async function exportView(view, options) {
   const onComplete = async () => {
     await timeout();
 
-    if (shouldClone) {
+    // FIXME : 테스트용 임시
+    if (shouldClone && 1 === 2) {
       destroyCloneView(view);
     }
     await timeout(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
