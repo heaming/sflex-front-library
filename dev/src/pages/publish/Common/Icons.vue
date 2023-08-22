@@ -154,6 +154,8 @@ const iconList1 = [
   'redo',
   'qrcode',
   'viewer',
+  'word',
+  'powerpoint',
 ];
 const iconList2 = [
   'add_list_24',
