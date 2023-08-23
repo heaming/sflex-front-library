@@ -161,6 +161,7 @@
                 name="header-action"
               />
             </div>
+            <div class="q-space" />
             <div class="kw-file__header-size">
               <span
                 v-if="computedCounter"
