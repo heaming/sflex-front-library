@@ -82,7 +82,6 @@ export default () => {
       } else {
         inputValue.value = date.format('hhmm');
       }
-      inputValue.value = date.format('hhmm');
       inputMeridiem.value = date.format('A');
     } else {
       inputValue.value = null;
