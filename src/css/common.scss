@@ -606,6 +606,12 @@ $unit: px;
   }
 }
 
+@for $toppo from -1500 through 1500 {
+  .top#{$toppo} {
+    top: #{$toppo} + $unit !important;
+  }
+}
+
 @include color-based(".kw-fc--", $semantic-colors) using ($color) {
   color: $color !important;
 }
@@ -1540,6 +1546,10 @@ body.mobile.temp_tablet {
       & > li.lastTarget {
         height: calc(66.6666vh - 135px) !important;
       }
+    }
+
+    &:not(.native-mobile) .q-select__dialog {
+      max-height: calc(100vh - 500px) !important;
     }
   }
 }

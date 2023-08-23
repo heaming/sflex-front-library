@@ -161,6 +161,7 @@
                 name="header-action"
               />
             </div>
+            <div class="q-space" />
             <div class="kw-file__header-size">
               <span
                 v-if="computedCounter"
@@ -880,13 +881,17 @@ export default {
     const getExtensionIcon = (file) => {
       const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
       const EXCEL_EXTENSION = ['xlsx', 'xls'];
+      const PPT_EXTENSION = ['pptx', 'ppt'];
+      const DOC_EXTENSION = ['docx', 'doc'];
 
-      if (file.type.indexOf('video/') === 0) return 'movie';
-      if (file.type.indexOf('image/') === 0 || IMAGE_EXTENSION.includes(file.attachFile?.fileExtensionName)) return 'imgpreview';
-      if (file.type.indexOf('audio/') === 0) return 'audio';
-      if (file.type.indexOf('pdf') > -1 || file.attachFile?.fileExtensionName === 'pdf') return 'pdf';
+      if (file.type.indexOf('image/') === 0 || IMAGE_EXTENSION.includes(file.attachFile?.fileExtensionName?.toLowerCase())) return 'imgpreview';
+      if (file.type.indexOf('pdf') > -1 || file.attachFile?.fileExtensionName?.toLowerCase() === 'pdf') return 'pdf';
       if (file.type.indexOf('excel') > -1 || file.type.indexOf('xls') > -1
-        || file.type.indexOf('spreadsheet') > -1 || EXCEL_EXTENSION.includes(file.attachFile?.fileExtensionName)) return 'excel';
+        || file.type.indexOf('spreadsheet') > -1 || EXCEL_EXTENSION.includes(file.attachFile?.fileExtensionName?.toLowerCase())) return 'excel';
+      if (file.type.indexOf('powerpoint') > -1 || file.type.indexOf('presentation') > -1
+        || PPT_EXTENSION.includes(file.attachFile?.fileExtensionName?.toLowerCase())) return 'powerpoint';
+      if (file.type.indexOf('msword') > -1 || file.type.indexOf('wordprocessing') > -1
+        || DOC_EXTENSION.includes(file.attachFile?.fileExtensionName?.toLowerCase())) return 'word';
       return 'file';
     };
 
