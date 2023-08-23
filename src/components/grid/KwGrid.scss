@@ -708,6 +708,10 @@
     background: #eee;
   }
 
+  &:has(.rg-hscrollbar)::after {
+    bottom: 1px;
+  }
+
   &:has(.rg-vscrollbar:not([style*="display: none"])) {
     &::after {
       right: 14px;
