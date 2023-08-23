@@ -1549,7 +1549,7 @@ body.mobile.temp_tablet {
     }
 
     &:not(.native-mobile) .q-select__dialog {
-      max-height: calc(100vh - 400px) !important;
+      max-height: calc(100vh - 500px) !important;
     }
   }
 }
