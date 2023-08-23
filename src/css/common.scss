@@ -1547,6 +1547,10 @@ body.mobile.temp_tablet {
         height: calc(66.6666vh - 135px) !important;
       }
     }
+
+    &:not(.native-mobile) .q-select__dialog {
+      max-height: calc(100vh - 400px) !important;
+    }
   }
 }
 
