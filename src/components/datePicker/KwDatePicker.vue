@@ -15,7 +15,7 @@
     :autofocus="autofocus"
     :placeholder="placeholder"
     no-error-icon
-    @click="setExpanded()"
+    @click="$g.platform.is.mobile ? undefined : setExpanded()"
     @change="onChangeInput"
   >
     <template #append>
