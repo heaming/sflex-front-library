@@ -27,6 +27,10 @@
   text-align: left !important;
 }
 
+.rg-header {
+  background: #f8f8f8 !important;
+}
+
 .rg-header-focus {
   background-color: inherit;
 }
@@ -772,7 +776,7 @@
     }
 
     &:last-child {
-      border-right: none;
+      border-right: none !important;
     }
   }
 
