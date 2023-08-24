@@ -1502,6 +1502,10 @@ body.mobile.temp_tablet {
       height: calc(66.6666vh - 135px) !important;
     }
   }
+
+  &:not(.native-mobile) .q-select__dialog {
+    max-height: calc(66.6666vh - 200px) !important;
+  }
 }
 
 @media (min-width: 700px) and (max-width: 1023px) {
