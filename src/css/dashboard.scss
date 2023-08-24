@@ -46,6 +46,7 @@ body.desktop .web-layout:has(.dashboard) {
 
     &_counter {
       display: flex;
+      align-items: center;
 
       h5 {
         font-size: 16px;
@@ -53,6 +54,10 @@ body.desktop .web-layout:has(.dashboard) {
         line-height: 32px;
         padding-right: 16px;
         margin: 0;
+
+        & + .kw-field-wrap:has(.kw-btn-toggle) {
+          margin-left: 4px;
+        }
       }
 
       dl {
@@ -81,8 +86,20 @@ body.desktop .web-layout:has(.dashboard) {
       }
     }
 
+    .kw-field-wrap:has(.kw-btn-toggle) {
+      height: 24px;
+
+      .kw-field-wrap__control {
+        min-height: inherit;
+
+        &-container {
+          height: inherit;
+        }
+      }
+    }
+
     .kw-btn-toggle {
-      margin-right: 20px;
+      margin-right: 16px;
 
       * {
         color: #fff !important;
@@ -102,7 +119,10 @@ body.desktop .web-layout:has(.dashboard) {
       }
 
       .kw-btn.q-btn--dense {
-        padding: 6px 14px !important;
+        padding: 0 8px !important;
+        font-size: 12px;
+        line-height: 17px;
+        min-height: 24px !important;
       }
     }
   }
