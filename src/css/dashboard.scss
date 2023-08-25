@@ -405,6 +405,10 @@ body.desktop .web-layout:has(.dashboard) {
     line-height: 1.813rem;
     color: $black1;
   }
+
+  &h3 {
+    margin: 0;
+  }
 }
 
 // 인정실적 현황
