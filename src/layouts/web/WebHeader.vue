@@ -155,8 +155,9 @@
           <kw-menu
             ref="supportRef"
             class="web-header__dropdown"
-            anchor="bottom middle"
-            self="top middle"
+            anchor="bottom end"
+            self="top end"
+            :offset="[0, 2]"
             target=".report-icon"
             @before-show="beforeSupportMenuShow"
           >
@@ -164,6 +165,7 @@
               v-close-popup
               borderless
               grow
+              icon="notice_off"
               :label="$t('MSG_TIT_NOTICE')"
               @click="goToNoticePage"
             />
@@ -172,6 +174,7 @@
               v-close-popup
               borderless
               grow
+              icon="report"
               :label="$t('MSG_BTN_EDUC_MTR')"
               @click="goToEduMaterialPage"
             />
@@ -180,12 +183,14 @@
               borderless
               grow
               label="FAQ"
+              icon="sms"
               @click="goToFaqPage"
             />
             <kw-btn
               v-close-popup
               borderless
               grow
+              icon="call"
               :label="$t('MSG_BTN_SMS_HIST')"
               @click="goToSmsSendHistoryPage"
             />
@@ -212,8 +217,9 @@
           <kw-menu
             ref="userInfoMenuRef"
             class="web-header__dropdown"
-            anchor="bottom middle"
-            self="top middle"
+            anchor="bottom end"
+            self="top end"
+            :offset="[0, 2]"
             target=".profile_user"
             @before-show="beforeUserInfoMenuShow"
           >
@@ -221,6 +227,7 @@
               v-close-popup
               borderless
               grow
+              icon="user"
               label="사용자정보"
               @click="openUserInfoPopup"
             />
@@ -228,6 +235,14 @@
               v-close-popup
               borderless
               grow
+              icon="change_user"
+              label="로그인 계정전환"
+            />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
+              icon="go_home"
               :label="$t('MSG_TIT_HOME_MGT')"
               @click="openHomeMgtPopup"
             />
@@ -265,6 +280,7 @@
               v-close-popup
               borderless
               grow
+              icon="logout"
               :label="$t('MSG_TXT_LOGOUT')"
               @click="logout"
             />
