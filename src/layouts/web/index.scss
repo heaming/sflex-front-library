@@ -121,7 +121,7 @@ body.q-body--prevent-scroll__header {
 
   &__tools {
     display: flex;
-    justify-content: between;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
   }
@@ -149,6 +149,10 @@ body.q-body--prevent-scroll__header {
       height: 32px !important;
 
       .q-icon {
+        &.q-field__focusable-action {
+          font-size: 16px;
+        }
+
         font-size: 24px;
         opacity: 1 !important;
       }
