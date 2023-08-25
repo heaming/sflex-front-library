@@ -1,0 +1,13 @@
+<svg id="logout" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="icon" transform="translate(1.999)">
+    <g id="keyline_16px" data-name="keyline/16px" transform="translate(-1.999)">
+      <path id="bounding-box" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+    <g id="page" transform="translate(-0.499 1.5)">
+      <path id="합치기_461" data-name="합치기 461" d="M9316.5,168.5v-12h7.5V158h-6v9h6v1.5Z" transform="translate(-9316 -156)" fill="#222"/>
+      <g id="그룹_149097" data-name="그룹 149097" transform="translate(4.659 3.138)">
+        <path id="합치기_462" data-name="합치기 462" d="M9315.651,159.363l1.721-1.721h-5.533v-1.5h5.527l-1.715-1.716,1.061-1.061,3.531,3.53-.529.528-3,3Z" transform="translate(-9311.841 -153.576)" fill="#222"/>
+      </g>
+    </g>
+  </g>
+</svg>
