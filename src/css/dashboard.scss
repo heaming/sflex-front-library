@@ -260,14 +260,16 @@ body.desktop .web-layout:has(.dashboard) {
   &-left {
     flex-grow: 0;
     text-align: left;
-    max-width: 90px;
+    min-width: 79px;
     word-break: keep-all;
 
     span {
-      display: block;
-      margin-top: 2px;
-      font-size: 12px;
+      display: inline-block;
+      margin-left: 0;
+      font-size: 16px;
       color: $black3;
+      height: 24px;
+      vertical-align: bottom;
     }
   }
 
@@ -287,6 +289,7 @@ body.desktop .web-layout:has(.dashboard) {
     color: $black1;
     font-weight: 500;
     line-height: 1.5;
+    display: inline-block;
   }
 
   &-number {
@@ -304,26 +307,41 @@ body.desktop .web-layout:has(.dashboard) {
   flex-wrap: wrap;
 
   &-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $bg-box;
     width: calc((100% /2) - 4px);
-    min-height: 46px;
-    padding: 8px 12px;
+    min-height: 36px;
+    max-height: 36px;
+    padding: 6px 12px;
+    word-break: keep-all;
+    background: $bg-box;
 
-    .kw-font-pt18 {
-      line-height: 1.625rem !important;
+    &:first-of-type,
+    &:last-of-type {
+      width: 100%;
     }
+  }
 
-    &--column {
-      flex-direction: column;
-      align-items: flex-start;
+  &-number {
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    text-align: right;
+    line-height: 26px;
+  }
 
-      .kw-font-pt18 {
-        margin-left: auto;
-        margin-top: 2px;
-      }
+  &-title {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: $black1;
+
+    span.kw-icon {
+      display: inline-block;
+      margin-left: 0;
+      font-size: 16px;
+      height: 24px;
+      color: #777;
+      vertical-align: text-bottom;
     }
   }
 }
