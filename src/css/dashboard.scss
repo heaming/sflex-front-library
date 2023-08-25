@@ -79,6 +79,10 @@ body.desktop .web-layout:has(.dashboard) {
           font-size: 22px;
           font-weight: 500 !important;
 
+          span {
+            font-size: 16px;
+          }
+
           & + dt {
             padding-left: 16px;
           }
