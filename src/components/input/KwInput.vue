@@ -393,7 +393,9 @@ export default {
         // maxlength
         if (props.maxlength) {
           if (props.mask === 'number') {
-            hasComma.value = Math.floor(val.length / 3);
+            const share = Math.floor(val.length / 3);
+            const remainder = val.length % 3;
+            hasComma.value = remainder === 0 ? share - 1 : share;
             val = getMaxByteString(val, props.maxlength + hasComma.value);
           } else val = getMaxByteString(val, props.maxlength);
         }
