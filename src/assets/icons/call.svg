@@ -1,0 +1,11 @@
+<svg id="call" data-name="call(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px" transform="translate(0 0.001)">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" transform="translate(0 -0.001)" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(-1 1.033)">
+    <path id="선_3157" data-name="선 3157" d="M3,.75H0V-.75H3Z" transform="translate(7.5 3)" fill="#222"/>
+    <path id="사각형_151471" data-name="사각형 151471" d="M1.5,1.5v11h7V1.5h-7M0,0H10V14H0Z" transform="translate(4)" fill="#222"/>
+  </g>
+</svg>

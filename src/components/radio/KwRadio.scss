@@ -74,7 +74,8 @@
           font-weight: 400;
 
           &:hover {
-            color: $black1;
+            // color: $black1;
+            // 디자인 가이드에 없으므로 제거
           }
         }
       }
