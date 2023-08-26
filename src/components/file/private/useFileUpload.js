@@ -94,7 +94,7 @@ function Uploading(fileLike, options) {
   };
   const targetedDownload = async () => {
     const { serverFile } = file;
-    return await download(serverFile, targetPath);
+    return await download(serverFile, targetPath, file);
   };
   const uploadFunction = options.upload ?? targetedUpload;
   const downloadFunction = options.download ?? targetedDownload;
