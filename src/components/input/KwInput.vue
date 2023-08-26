@@ -31,6 +31,7 @@
     :step="step"
     :input-class="computedInputClass"
     :input-style="inputStyle"
+    :maxlength="computedMaxLength"
     no-error-icon
     clear-icon="clear"
     @focus="onFocus"
@@ -252,6 +253,13 @@ export default {
       }
     });
 
+    const hasComma = ref(0);
+
+    const computedMaxLength = computed(() => {
+      if (props.maxlength && props.mask !== 'number') return props.maxlength;
+      return props.maxlength + hasComma.value;
+    });
+
     const computedMask = computed(() => {
       const newVal = inputRef?.value?.modelValue;
       if (props.mask === 'telephone') {
@@ -280,7 +288,7 @@ export default {
       }
 
       if (props.mask === 'number') {
-        return '###,###,###,###,###';
+        return '###,###,###,###,###,###,###,###';
       }
 
       return props.mask;
@@ -384,7 +392,10 @@ export default {
 
         // maxlength
         if (props.maxlength) {
-          val = getMaxByteString(val, props.maxlength);
+          if (props.mask === 'number') {
+            hasComma.value = Math.floor(val.length / 3);
+            val = getMaxByteString(val, props.maxlength + hasComma.value);
+          } else val = getMaxByteString(val, props.maxlength);
         }
 
         // convert case
@@ -393,7 +404,7 @@ export default {
         } else if (props.lowerCase) {
           val = val.toLowerCase();
         }
-      }
+      } else hasComma.value = 0;
 
       const el = inputRef.value.getNativeElement();
 
@@ -466,6 +477,7 @@ export default {
       sanitize,
       computedUnmaskedValue,
       onBlurInput,
+      computedMaxLength,
     };
   },
 };
