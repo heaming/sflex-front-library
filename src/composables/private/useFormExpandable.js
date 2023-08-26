@@ -72,7 +72,7 @@ export default () => {
       let i = props.defaultVisibleRows;
       for (i; i < registeredCount.value; i += 1) {
         const rowItems = registeredList[i].slots.default?.();
-        const shouldExpand = rowItems.some((rowItem) => rowItem.props?.required);
+        const shouldExpand = rowItems.some((rowItem) => rowItem.props?.required || rowItem.props?.required === '');
 
         if (shouldExpand) {
           toggleExpand(true);
