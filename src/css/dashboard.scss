@@ -263,8 +263,9 @@ body.desktop .web-layout:has(.dashboard) {
     min-width: 79px;
     word-break: keep-all;
 
-    span {
+    .kw-icon {
       display: inline-block;
+      margin-top: 0;
       margin-left: 0;
       font-size: 16px;
       color: $black3;
@@ -290,6 +291,7 @@ body.desktop .web-layout:has(.dashboard) {
     font-weight: 500;
     line-height: 1.5;
     display: inline-block;
+    width: 80px;
   }
 
   &-number {
@@ -307,12 +309,15 @@ body.desktop .web-layout:has(.dashboard) {
   flex-wrap: wrap;
 
   &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $bg-box;
     width: calc((100% /2) - 4px);
     min-height: 36px;
     max-height: 36px;
     padding: 6px 12px;
     word-break: keep-all;
-    background: $bg-box;
 
     &:first-of-type,
     &:last-of-type {
@@ -335,8 +340,9 @@ body.desktop .web-layout:has(.dashboard) {
     font-weight: 500;
     color: $black1;
 
-    span.kw-icon {
+    .kw-icon {
       display: inline-block;
+      margin-top: 0;
       margin-left: 0;
       font-size: 16px;
       height: 24px;
