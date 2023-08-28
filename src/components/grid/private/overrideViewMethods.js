@@ -157,7 +157,7 @@ function setColumnRenderer(column, { dataType }) {
       callback: (grid, cell) => {
         const value = cell?.value?.__numberOfFiles;
         if (!value || value < 1) { // 없을 때
-          const res = '<div class="rg-html-renderer__no-file">'
+          const res = '<div class="rg-button-default">'
                     + '<button type="button" tabindex="-1" class="rg-button-renderer-button">'
                     + '파일찾기</button></div>';
           return res;
