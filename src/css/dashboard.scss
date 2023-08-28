@@ -79,6 +79,10 @@ body.desktop .web-layout:has(.dashboard) {
           font-size: 22px;
           font-weight: 500 !important;
 
+          span {
+            font-size: 16px;
+          }
+
           & + dt {
             padding-left: 16px;
           }
@@ -256,14 +260,17 @@ body.desktop .web-layout:has(.dashboard) {
   &-left {
     flex-grow: 0;
     text-align: left;
-    max-width: 90px;
+    min-width: 79px;
     word-break: keep-all;
 
-    span {
-      display: block;
-      margin-top: 2px;
-      font-size: 12px;
+    .kw-icon {
+      display: inline-block;
+      margin-top: 0;
+      margin-left: 0;
+      font-size: 16px;
       color: $black3;
+      height: 24px;
+      vertical-align: bottom;
     }
   }
 
@@ -283,6 +290,8 @@ body.desktop .web-layout:has(.dashboard) {
     color: $black1;
     font-weight: 500;
     line-height: 1.5;
+    display: inline-block;
+    width: 80px;
   }
 
   &-number {
@@ -305,21 +314,85 @@ body.desktop .web-layout:has(.dashboard) {
     align-items: center;
     background: $bg-box;
     width: calc((100% /2) - 4px);
-    min-height: 46px;
-    padding: 8px 12px;
+    min-height: 36px;
+    max-height: 36px;
+    padding: 6px 12px;
+    word-break: keep-all;
 
-    .kw-font-pt18 {
-      line-height: 1.625rem !important;
+    &:first-of-type,
+    &:last-of-type {
+      width: 100%;
     }
+  }
 
-    &--column {
-      flex-direction: column;
-      align-items: flex-start;
+  &-number {
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    text-align: right;
+    line-height: 26px;
+  }
 
-      .kw-font-pt18 {
-        margin-left: auto;
-        margin-top: 2px;
-      }
+  &-title {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: $black1;
+
+    .kw-icon {
+      display: inline-block;
+      margin-top: 0;
+      margin-left: 0;
+      font-size: 16px;
+      height: 24px;
+      color: #777;
+      vertical-align: text-bottom;
+    }
+  }
+}
+
+.count-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $bg-box;
+    width: calc((100% /2) - 4px);
+    min-height: 68px;
+    max-height: 68px;
+    padding: 0 12px;
+    word-break: keep-all;
+  }
+
+  &-number {
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    text-align: right;
+    line-height: 26px;
+  }
+
+  &-title {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: $black1;
+
+    .kw-icon {
+      display: inline-block;
+      margin-top: 0;
+      margin-left: 0;
+      font-size: 16px;
+      height: 24px;
+      color: #777;
+      vertical-align: text-bottom;
     }
   }
 }
@@ -401,10 +474,57 @@ body.desktop .web-layout:has(.dashboard) {
     line-height: 1.813rem;
     color: $black1;
   }
+
+  &h3 {
+    margin: 0;
+  }
+}
+
+// 카드 타이틀 wrap
+.home-card-title-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  .home-card-title {
+    margin: 0;
+  }
+}
+
+// 카드내 토글버튼
+
+.home-card-toggle-btn.kw-field-wrap {
+  height: 24px;
+
+  .kw-field-wrap__control {
+    min-height: 24px;
+  }
+
+  .kw-btn.q-btn--dense {
+    padding: 0 8px !important;
+    font-size: 12px;
+    line-height: 17px;
+    min-height: 24px !important;
+  }
+
+  .kw-btn-toggle {
+    .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+      &::after {
+        border-color: $secondary !important;
+      }
+
+      .q-btn__content {
+        color: $secondary !important;
+      }
+    }
+  }
 }
 
 // 인정실적 현황
 .result-status {
+  $self: &;
+
   &__chart {
     margin-top: 12px;
     display: flex;
@@ -565,6 +685,18 @@ body.desktop .web-layout:has(.dashboard) {
       width: 110px;
     }
   }
+
+  // 채널별 판매실적 W-SS-U-1101M01
+  &--channel {
+
+    #{$self}__scroll-wrap {
+      margin-right: -20px;
+    }
+    #{$self}__totals li,
+    #{$self}__product-amounts p {
+      width: 70px;
+    }
+  }
 }
 
 // 내부 엘리멘트 생성
@@ -599,6 +731,8 @@ body.desktop .web-layout:has(.dashboard) {
 // 환불 요청 현황
 
 .refund-status {
+  $self: &;
+
   &-title {
     display: flex;
     justify-content: space-between;
@@ -621,13 +755,16 @@ body.desktop .web-layout:has(.dashboard) {
     width: calc(100% / 3);
     text-align: center;
     padding: 15px 0;
+    border-right: 1px solid $bg-box;
+    flex-grow: 1;
 
     &:first-child {
       background: $bg-box;
+      border-right: 0;
     }
 
     &:last-child {
-      border-left: 1px solid $bg-box;
+      border-right: 0;
     }
 
     p {
@@ -641,6 +778,47 @@ body.desktop .web-layout:has(.dashboard) {
       font-weight: 700;
       line-height: 26px;
       margin-top: 4px;
+    }
+  }
+
+  // 조직현황 W-OG-U-1101M01
+  &--group {
+    #{$self}-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #{$self}__total-text {
+      font-size: 20px;
+      line-height: 1.875rem;
+      font-weight: 500;
+
+      p {
+        margin-right: 8px;
+        display: inline-block;
+        color: $black1;
+      }
+
+      span {
+        color: $primary;
+        font-weight: 700;
+
+        b {
+          display: inline-block;
+          vertical-align: text-bottom;
+          font-size: 24px;
+        }
+      }
+    }
+    #{$self}-list + #{$self}-list {
+      margin-top: 20px;
+    }
+    #{$self}-item {
+      padding: 21px 0;
+
+      p {
+        color: $black2;
+      }
     }
   }
 }
@@ -763,6 +941,32 @@ body.desktop .web-layout:has(.dashboard) {
         width: 1px;
         height: 12px;
         background-color: #ddd;
+      }
+    }
+  }
+}
+
+// 상품군별 판매실적 W-SS-U-1102M01
+.product-sales-result {
+  &__chart-text {
+    margin-top: 16px;
+    font-size: 20px;
+    line-height: 1.875rem;
+    font-weight: 500;
+
+    p {
+      margin-right: 8px;
+      display: inline-block;
+    }
+
+    span {
+      color: $primary;
+      font-weight: 700;
+
+      b {
+        display: inline-block;
+        vertical-align: text-bottom;
+        font-size: 24px;
       }
     }
   }

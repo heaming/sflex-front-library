@@ -330,6 +330,12 @@ body.mobile:not(.tablet) {
           background-color: #2a7bd9;
         }
       }
+
+      .kw-btn--color-primary.disabled + .kw-btn--color-primary.disabled {
+        &::after {
+          background-color: $line-stroke;
+        }
+      }
     }
   }
 

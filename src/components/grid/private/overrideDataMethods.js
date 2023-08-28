@@ -1,6 +1,7 @@
 import { cloneDeep, defaultsDeep, map } from 'lodash-es';
 import { LocalTreeDataProvider, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
+import { http } from '../../../plugins/http';
 
 const setFields = 'setFields';
 const addField = 'addField';
@@ -121,10 +122,24 @@ function setSearchConditionMessage(view) {
 export function overrideSetRows(data, vm) {
   const isTreeGrid = data instanceof LocalTreeDataProvider;
 
-  wrapMethod(data, setRows, (...args) => {
-    data.clearRows();
-    execOriginal(data, setRows, ...args);
+  wrapMethod(data, setRows, async (...args) => {
+    const arr = [...args];
 
+    const arrData = arr?.[0];
+    const atthIdx = Object.keys(arrData?.[0]).findIndex((x) => x === 'atthDocId');
+    if (atthIdx > -1) {
+      const promisedRows = await Promise.all(arr?.[0].map(async (x) => {
+        if (!x.atthDocId) return { ...x };
+        const res = await http.get(`sflex/common/common/attach-files/${x.atthDocId}`);
+        return { ...x, numberOfFiles: res.data?.length };
+      }));
+
+      data.clearRows();
+      execOriginal(data, setRows, promisedRows);
+    } else {
+      data.clearRows();
+      execOriginal(data, setRows, ...args);
+    }
     const view = vm.proxy.getView();
     const shouldUncheck = view.checkBar.visible && view.checkBar.syncHeadCheck;
 

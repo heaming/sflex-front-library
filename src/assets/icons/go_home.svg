@@ -1,0 +1,9 @@
+<svg id="go_home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="icon" transform="translate(2.999 0.873)">
+    <g id="keyline_16px" data-name="keyline/16px" transform="translate(-2.999 -0.873)">
+      <path id="bounding-box" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+    <path id="패스_210161" data-name="패스 210161" d="M5-.126.5,3.572v6.86h9V3.572L5-.126M5-2.067l6,4.931v9.069H-1V2.863Z" transform="translate(0.001 2.194)" fill="#222"/>
+    <path id="선_3262" data-name="선 3262" d="M.75,2.5H-.75V0H.75Z" transform="translate(5.001 8.127)" fill="#222"/>
+  </g>
+</svg>

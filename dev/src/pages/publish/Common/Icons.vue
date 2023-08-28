@@ -156,6 +156,11 @@ const iconList1 = [
   'viewer',
   'word',
   'powerpoint',
+  'call',
+  'user',
+  'go_home',
+  'change_user',
+  'logout',
 ];
 const iconList2 = [
   'add_list_24',

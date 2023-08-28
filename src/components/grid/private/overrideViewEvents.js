@@ -320,7 +320,6 @@ export function overrideOnCellItemClicked(view) {
       if (typeof editor.editable === 'boolean') editable = editor.editable;
       else if (typeof editor.editable === 'string') editable = dataRow[editor.editable];
       else editable = false;
-
       const componentProps = {
         attachDocumentId,
         attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
@@ -343,12 +342,14 @@ export function overrideOnCellItemClicked(view) {
           if (data) {
             data.files = result.payload.files;
             data.__isModified = true;
+            data.__numberOfFiles = `${result.payload.files.length}`;
           } else {
             // 신규 추가된 행은 undefined이다
             data = {
               files: result.payload.files,
               __isModified: true,
               __atthDocumentId: componentProps.attachDocumentId,
+              __numberOfFiles: `${result.payload.files.length}`,
             };
           }
           dp.setValue(index.dataRow, index.fieldName, data);
@@ -359,11 +360,13 @@ export function overrideOnCellItemClicked(view) {
           if (data) {
             data.files = null;
             data.__isModified = false;
+            data.__numberOfFiles = `${result.payload.files.length}`;
           } else {
             data = {
               files: null,
               __isModified: false,
               __atthDocumentId: componentProps.attachDocumentId,
+              __numberOfFiles: `${result.payload.files.length}`,
             };
           }
           dp.setValue(index.dataRow, index.fieldName, data);

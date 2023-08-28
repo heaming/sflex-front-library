@@ -27,6 +27,10 @@
   text-align: left !important;
 }
 
+.rg-header {
+  background: #f8f8f8 !important;
+}
+
 .rg-header-focus {
   background-color: inherit;
 }
@@ -772,7 +776,7 @@
     }
 
     &:last-child {
-      border-right: none;
+      border-right: none !important;
     }
   }
 
@@ -1338,7 +1342,7 @@ tr.rg-focused-row.rg-rowgroup-footer {
     .rg-button-renderer-button {
       background: none !important;
       width: 100%;
-      height: 25px;
+      height: 35px;
       border: none;
 
       .grid-badge {
