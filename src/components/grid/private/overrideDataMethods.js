@@ -126,19 +126,24 @@ export function overrideSetRows(data, vm) {
     const arr = [...args];
 
     const arrData = arr?.[0];
-    const atthIdx = Object.keys(arrData?.[0]).findIndex((x) => x === 'atthDocId');
-    if (atthIdx > -1) {
-      const promisedRows = await Promise.all(arr?.[0].map(async (x) => {
-        if (!x.atthDocId) return { ...x };
-        const res = await http.get(`sflex/common/common/attach-files/${x.atthDocId}`);
-        return { ...x, numberOfFiles: res.data?.length };
-      }));
-
-      data.clearRows();
-      execOriginal(data, setRows, promisedRows);
-    } else {
+    if (!arrData?.[0]) {
       data.clearRows();
       execOriginal(data, setRows, ...args);
+    } else {
+      const atthIdx = Object.keys(arrData?.[0]).findIndex((x) => x === 'atthDocId');
+      if (atthIdx > -1) {
+        const promisedRows = await Promise.all(arr?.[0].map(async (x) => {
+          if (!x.atthDocId) return { ...x };
+          const res = await http.get(`sflex/common/common/attach-files/${x.atthDocId}`);
+          return { ...x, numberOfFiles: res.data?.length };
+        }));
+
+        data.clearRows();
+        execOriginal(data, setRows, promisedRows);
+      } else {
+        data.clearRows();
+        execOriginal(data, setRows, ...args);
+      }
     }
     const view = vm.proxy.getView();
     const shouldUncheck = view.checkBar.visible && view.checkBar.syncHeadCheck;
