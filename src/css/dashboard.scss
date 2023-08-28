@@ -710,13 +710,15 @@ body.desktop .web-layout:has(.dashboard) {
     width: calc(100% / 3);
     text-align: center;
     padding: 15px 0;
+    border-right: 1px solid $bg-box;
 
     &:first-child {
       background: $bg-box;
+      border-right: 0;
     }
 
-    &:nth-child(n+1):not(:last-child) {
-      border-left: 1px solid $bg-box;
+    &:last-child {
+      border-right: 0;
     }
 
     p {
