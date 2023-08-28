@@ -756,6 +756,7 @@ body.desktop .web-layout:has(.dashboard) {
     text-align: center;
     padding: 15px 0;
     border-right: 1px solid $bg-box;
+    flex-grow: 1;
 
     &:first-child {
       background: $bg-box;
