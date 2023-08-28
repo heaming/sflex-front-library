@@ -30,7 +30,6 @@ const viewConfig = {
     width: 50,
     useImages: true,
     footText: '',
-    syncHeadCheck: true,
   },
   rowIndicator: {
     visible: false,
