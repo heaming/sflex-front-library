@@ -214,7 +214,7 @@ export default {
     // customize props
     icon: { type: String, default: undefined },
     disableIcon: { type: Boolean, default: false },
-    maxlength: { type: [Number, String], default: 0 },
+    maxlength: { type: [Number, String], default: undefined },
     counter: { type: Boolean, default: false },
     upperCase: { type: Boolean, default: false },
     lowerCase: { type: Boolean, default: false },
@@ -257,6 +257,7 @@ export default {
 
     const computedMaxLength = computed(() => {
       if (props.maxlength && props.mask !== 'number') return props.maxlength;
+      if (props.maxlength === undefined) return undefined;
       return props.maxlength + hasComma.value;
     });
 
