@@ -156,12 +156,22 @@ function setColumnRenderer(column, { dataType }) {
       hideWhenEmpty: false,
       callback: (grid, cell) => {
         const value = cell?.value?.__numberOfFiles;
+        if (!value || value < 1) { // 없을 때
+          const res = '<div class="rg-html-renderer__no-file">'
+                    + '<button type="button" tabindex="-1" class="rg-button-renderer-button">'
+                    + '파일찾기</button></div>';
+          return res;
+        }
+
         let res = '<div class="rg-html-renderer">'
-        + '<button type="button" tabindex="-1" class="rg-button-renderer-button">';
-        const badge = '<div class="q-badge flex inline items-center no-wrap q-badge--single-line'
-        + 'q-badge--floating q-badge--rounded alert-badge grid-badge" role="status" aria-label="2">'
-        + `${value}</div>`;
-        if (value && value !== '0') res += badge;
+          + '<button type="button" tabindex="-1" class="rg-button-renderer-button">';
+        if (value && value !== '0') {
+          const badge = '<div class="q-badge flex inline items-center no-wrap q-badge--single-line'
+          + 'q-badge--floating q-badge--rounded alert-badge grid-badge" role="status" aria-label="2">'
+          + `${value > 99 ? '99+' : value}</div>`;
+          res += badge;
+        }
+
         res += '</button></div>';
 
         return res;
