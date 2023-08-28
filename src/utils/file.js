@@ -1,4 +1,5 @@
 import { mapKeys } from 'lodash-es';
+import * as JSZip from 'jszip';
 import { http } from '../plugins/http';
 
 const targetPaths = ['temp', 'storage', 'export'];
@@ -93,27 +94,59 @@ export async function getImageSrcFromNativeFile(nativeFile) {
   });
 }
 
-export async function download(fileInfo, targetPath = targetPaths[0]) {
+/* eslint-disable default-param-last */
+export async function download(fileInfo, targetPath = targetPaths[0], file) {
   throwIfIsInvalidTargetPath(targetPath);
   const params = normalizeDownloadRequest(fileInfo);
+  if (params.fileUid) {
+    const response = await http.get(`/sflex/common/common/file/${targetPath}/download`, {
+      params,
+      responseType: 'blob',
+    });
 
-  const response = await http.get(`/sflex/common/common/file/${targetPath}/download`, {
-    params,
-    responseType: 'blob',
-  });
-
-  downloadBlob(response.data, params.originalFileName);
+    downloadBlob(response.data, params.originalFileName);
+  } else if (file?.nativeFile) {
+    // fileUid가 없는, 업로드된 파일도 다운로드
+    const fileToBlob = new Blob([file?.nativeFile]);
+    downloadBlob(fileToBlob, fileInfo.originalFileName);
+  }
 }
+/* eslint-enable default-param-last */
 
 export async function downloadAll(files, targetPath = targetPaths[0]) {
   throwIfIsInvalidTargetPath(targetPath);
-  const attachFiles = files.map((file) => normalizeDownloadRequest(file.serverFile));
+
+  const attachFiles = files.filter((x) => x.attachFile?.fileUid)
+    .map((file) => normalizeDownloadRequest(file.serverFile));
+
+  const uploadedFiles = files.filter((x) => !x.attachFile?.fileUid);
+
   const response = await http.post(`/sflex/common/common/file/${targetPath}/download-all`, attachFiles, {
     responseType: 'blob',
   });
 
-  const fileName = `${attachFiles[0].originalFileName}.zip`;
-  downloadBlob(response.data, fileName);
+  if (uploadedFiles.length <= 0) {
+    const fileName = `${attachFiles[0].originalFileName}.zip`;
+    downloadBlob(response.data, fileName);
+    return;
+  }
+
+  // 만약 fileUid가 없는, 업로드된 파일이 있다면
+  // 이미 다운받은 파일들로 이루어진 압축 파일을 풀어서
+  // 거기에 파일을 추가한다.
+  const extractZip = new JSZip();
+
+  const blobToFile = new File([response.data], 'file.zip');
+  await extractZip.loadAsync(blobToFile);
+
+  uploadedFiles.forEach((x) => {
+    extractZip.file(x.name, x);
+  });
+
+  const fileName = attachFiles[0]?.originalFileName ?? uploadedFiles?.[0].name;
+  extractZip.generateAsync({ type: 'blob' }).then((res) => {
+    downloadBlob(res, `${fileName}.zip`);
+  });
 }
 
 export async function readExcel(file, columns = [], header = 1) {
