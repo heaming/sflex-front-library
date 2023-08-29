@@ -880,7 +880,7 @@ export default {
 
     const getExtensionIcon = (file) => {
       const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
-      const EXCEL_EXTENSION = ['xlsx', 'xls'];
+      const EXCEL_EXTENSION = ['xlsx', 'xls', 'xlsm'];
       const PPT_EXTENSION = ['pptx', 'ppt'];
       const DOC_EXTENSION = ['docx', 'doc'];
 

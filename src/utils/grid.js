@@ -246,6 +246,7 @@ export function deleteSelectedRows(view, isIncludeCreated = false) {
     .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
 
   view.getDataSource().removeRows(selectedRows);
+  view.checkRows(selectedRows, false);
   return deletedRowValues;
 }
 
@@ -272,6 +273,7 @@ export function deleteCheckedRows(view, isIncludeCreated = false) {
     .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
 
   view.getDataSource().removeRows(checkedRows);
+  view.checkRows(checkedRows, false);
   return deletedRowValues;
 }
 
@@ -333,7 +335,7 @@ export function reset(view) {
   const deletedRows = data.getStateRows(RowState.DELETED);
 
   data.removeRows(createdRows);
-
+  view.checkRows(createdRows, false);
   data.setRowStates(deletedRows, RowState.UPDATED);
   data.restoreUpdatedRows();
 

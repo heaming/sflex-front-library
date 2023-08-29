@@ -337,19 +337,25 @@ export function overrideOnCellItemClicked(view) {
       });
 
       if (result.result) {
+        let fileCount;
+        if (componentProps.multiple === false) {
+          if (result.payload?.files) fileCount = 1;
+          else fileCount = 0;
+        } else fileCount = result.payload?.files?.length;
+
         if (result.payload?.isModified) {
           let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
           if (data) {
             data.files = result.payload.files;
             data.__isModified = true;
-            data.__numberOfFiles = `${result.payload.files.length}`;
+            data.__numberOfFiles = `${fileCount ?? 0}`;
           } else {
             // 신규 추가된 행은 undefined이다
             data = {
               files: result.payload.files,
               __isModified: true,
               __atthDocumentId: componentProps.attachDocumentId,
-              __numberOfFiles: `${result.payload.files.length}`,
+              __numberOfFiles: `${fileCount ?? 0}`,
             };
           }
           dp.setValue(index.dataRow, index.fieldName, data);
@@ -360,13 +366,13 @@ export function overrideOnCellItemClicked(view) {
           if (data) {
             data.files = null;
             data.__isModified = false;
-            data.__numberOfFiles = `${result.payload.files.length}`;
+            data.__numberOfFiles = `${fileCount ?? 0}`;
           } else {
             data = {
               files: null,
               __isModified: false,
               __atthDocumentId: componentProps.attachDocumentId,
-              __numberOfFiles: `${result.payload.files.length}`,
+              __numberOfFiles: `${fileCount ?? 0}`,
             };
           }
           dp.setValue(index.dataRow, index.fieldName, data);
