@@ -820,8 +820,8 @@ body.q-body--prevent-scroll__header {
       }
 
       &.q-tab--custom-active {
-        border-left: 1px solid #e3e4e6;
-        border-right: 1px solid #e3e4e6;
+        // border-left: 1px solid #e3e4e6; // 탭 활성화될 시 크기조정이 되는 현상이 있어서 삭제. 230829
+        // border-right: 1px solid #e3e4e6; // 탭 활성화될 시 크기조정이 되는 현상이 있어서 삭제. 230829
 
         &:hover::after {
           display: none !important;
