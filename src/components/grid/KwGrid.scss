@@ -1366,6 +1366,8 @@ tr.rg-focused-row.rg-rowgroup-footer {
   background: url("~@assets/icons/write.svg") no-repeat center;
 }
 
+$unit: px;
+
 // 썸네일 사이즈
 @for $size from 10 through 300 {
   .rg-thumb-#{$size}--square {
@@ -1401,6 +1403,7 @@ tr.rg-focused-row.rg-rowgroup-footer {
   }
 }
 
+$primary: #2f8af3; // Primary
 // header summary 버튼화
 .rg-summary-button {
   .rg-header-summary-renderer {
