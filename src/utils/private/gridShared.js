@@ -96,7 +96,9 @@ export async function syncHeadCheckIfAble(view) {
   const isSyncable = header.visible
     && checkBar.visible && checkBar.showAll && !checkBar.exclusive;
 
-  view.checkBar.syncHeadCheck = true;
+  if (isSyncable) {
+    view.checkBar.syncHeadCheck = true;
+  }
 
   return isSyncable;
 }
