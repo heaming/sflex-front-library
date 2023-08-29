@@ -12,6 +12,9 @@ import { notify } from '../../plugins/notify';
 import { platform } from '../../plugins/platform';
 import i18n from '../../i18n';
 import { blobToData, isServerError, showStackTraceLog } from './axiosShared';
+import { closeWaffleApp } from '../mobile';
+
+const isWaple = computed(() => env.VITE_TENANT_ID === 'TNT_EDU' && env.VITE_PORTAL_ID === 'MBL_DEF');
 
 /*
   Request
@@ -73,10 +76,19 @@ async function handleServerFailureSessionDuplicated() {
 
 async function handleServerFailureSessionExpired(response) {
   const { config } = response;
-
   if (config?.spinner) {
     loadSpinner(false);
   }
+
+  // EDU WAPLE 일 경우
+  if (isWaple) {
+    localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+    localStorage.remove('reLoginInfo');
+    localStorage.remove('lastTransactionTime');
+    closeWaffleApp();
+    // return;
+  }
+
   const now = dayjs();
   const reLoginInfoStr = localStorage.getItem('reLoginInfo');
   const lastTransactionTimeStr = localStorage.getItem('lastTransactionTime');
