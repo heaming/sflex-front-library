@@ -712,7 +712,7 @@
     background: #eee;
   }
 
-  &:has(.rg-hscrollbar)::after {
+  &:has(.rg-hscrollbar:not([style*="display: none"]))::after {
     bottom: 1px;
   }
 
