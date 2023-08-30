@@ -88,6 +88,21 @@ body.tablet {
       // .kw-separator + .kw-tabs {
       //   padding: 0 0 30px;
       // }
+
+      // 1500px 케이스 추가
+      &.kw-popup--3xl {
+        .kw-popup__header {
+          width: 1500px !important;
+        }
+
+        .kw-popup__content {
+          width: 1500px !important;
+        }
+
+        .kw-popup__action {
+          width: 1500px !important;
+        }
+      }
     }
   }
 }

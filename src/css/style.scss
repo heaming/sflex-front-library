@@ -1,6 +1,8 @@
 // 파일첨부 미리보기
 .preview-attach {
   width: 100%;
+  min-height: 250px;
+  box-sizing: border-box;
   border: 1px solid $line-stroke;
 
   &__top {
@@ -32,6 +34,14 @@
     list-style: none;
 
     @include typo("dense");
+
+    > li {
+      min-height: 22px;
+
+      &:first-of-type {
+        word-break: break-all;
+      }
+    }
   }
 }
 
