@@ -27,12 +27,9 @@ export default {
   setup() {
     const { getters, commit } = useStore();
     const { currentRoute } = useRouter();
-    const user = getters['meta/getUserInfo'];
 
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
-    const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN || user.userId === 'anonymous';
-    console.log('test HERE &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
-    console.log(user.userId);
+    const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN;
 
     const { applicationId, menuUid } = currentRoute.value.meta;
 
