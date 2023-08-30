@@ -36,6 +36,7 @@
 import createEditor from './private/createEditor';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 import useField, { useFieldProps } from '../../composables/private/useField';
+import { sanitize } from '../../plugins/sanitize';
 
 export default {
   name: 'KwEditor',
@@ -97,12 +98,12 @@ export default {
       });
 
       editor.onChange = (contents) => {
-        value.value = isEmptyContents(contents) ? '' : contents;
+        value.value = isEmptyContents(contents) ? '' : sanitize(contents);
       };
 
       watch(value, (val) => {
         if (editor.getContents() !== val) {
-          editor.setContents(val);
+          editor.setContents(sanitize(val));
         }
       });
 
@@ -129,6 +130,7 @@ export default {
       focus,
       blur,
       getEditor,
+      sanitize,
     };
   },
 };

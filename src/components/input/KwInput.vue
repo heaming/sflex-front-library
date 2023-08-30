@@ -247,18 +247,25 @@ export default {
       return classes;
     });
 
-    const inputCounter = computed(() => {
-      if (props.counter === true && props.maxlength > 0) {
-        return `${getNumberWithComma(getByte(value.value ?? ''))} / ${getNumberWithComma(props.maxlength)}Byte`;
-      }
+    const hasComma = ref(0);
+    const hasHyphen = ref(0);
+    const computedMaxLength = computed(() => {
+      if (props.maxlength === undefined) return undefined;
+      if (props.maxlength && props.mask === 'number') return Number(props.maxlength) + Number(hasComma.value);
+      if (props.maxlength && props.mask === 'telephone') return Number(props.maxlength) + Number(hasHyphen.value);
+      return props.maxlength;
     });
 
-    const hasComma = ref(0);
+    const inputCounter = computed(() => {
+      if (props.counter === true && props.maxlength > 0) {
+        // TODO 마스킹 있을때, unmaskedValue = false인 상황에서 unmaskedValue 를 구할 수 있어야 함.
+        let currentByte;
+        if (hasComma.value > 0) currentByte = getByte(value.value ?? '') - hasComma.value;
+        else if (hasHyphen.value > 0) currentByte = getByte(value.value ?? '') - hasHyphen.value;
+        else currentByte = getByte(value.value ?? '');
 
-    const computedMaxLength = computed(() => {
-      if (props.maxlength && props.mask !== 'number') return props.maxlength;
-      if (props.maxlength === undefined) return undefined;
-      return props.maxlength + hasComma.value;
+        return `${getNumberWithComma(currentByte)} / ${getNumberWithComma(props.maxlength)}Byte`;
+      }
     });
 
     const computedMask = computed(() => {
@@ -384,7 +391,6 @@ export default {
 
     function onUpdateTextValue(val) {
       val ||= clearValue.value;
-
       if (val) {
         // regex
         if (regex.value?.test(val) === false) {
@@ -398,6 +404,9 @@ export default {
             const remainder = val.length % 3;
             hasComma.value = remainder === 0 ? share - 1 : share;
             val = getMaxByteString(val, props.maxlength + hasComma.value);
+          } else if (props.mask === 'telephone') {
+            hasHyphen.value = val.split('-').length - 1;
+            val = getMaxByteString(val, props.maxlength + hasHyphen.value);
           } else val = getMaxByteString(val, props.maxlength);
         }
 
@@ -407,13 +416,15 @@ export default {
         } else if (props.lowerCase) {
           val = val.toLowerCase();
         }
-      } else hasComma.value = 0;
+      } else {
+        hasComma.value = 0;
+        hasHyphen.value = 0;
+      }
 
       const el = inputRef.value.getNativeElement();
 
       el.value = val;
       value.value = val;
-
       if (props.mask === 'telephone') {
         const telephoneNumber = val.split('-');
         if (computedMask.value === '####-#######') {
