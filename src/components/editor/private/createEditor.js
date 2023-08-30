@@ -4,6 +4,7 @@ import {
   blockquote, align, font, fontSize, fontColor, table, hiliteColor,
   formatBlock, lineHeight, template, link, image, list,
 } from 'suneditor/src/plugins';
+import { sanitize } from '../../../plugins/sanitize';
 
 const { create } = SunEditor.init({
   // region [value]
@@ -143,6 +144,7 @@ const { create } = SunEditor.init({
   //   console.log(contents, isChanged);
   // },
   // endregion
+  previewTemplate: `${sanitize('{{ contents }}')}`,
 });
 
 export default create;
