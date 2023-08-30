@@ -41,14 +41,15 @@ export default (to, from, next) => {
       if (window.location.pathname.indexOf('/popup') < 0
           && window.location.pathname.indexOf('/mobile') < 0
           && window.location.pathname.indexOf('/tablet') < 0) {
-        next(false);
+        // next(false);
       } else if (to.path === '/') {
-        next(false);
+        // next(false);
       }
     }
 
     // 미인증 세션의 경우 홈화면으로의 이동은 막는다.
     const user = store.getters['meta/getUserInfo'];
+    console.log(user);
     if (user.userId === 'anonymous') {
       console.log(window.location.origin, window.location.pathname, from, to);
       if (to.path === '/') {
