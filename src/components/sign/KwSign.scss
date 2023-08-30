@@ -1,5 +1,5 @@
 .kw-sign {
-  width: 300px;
+  // width: 300px;
 
   &__canvas-area {
     position: relative;
@@ -30,14 +30,14 @@
   }
 }
 
-body.mobile {
-  .kw-sign {
-    width: 536px;
-  }
-}
+// body.mobile {
+//   .kw-sign {
+//     // width: 536px;
+//   }
+// }
 
-body.mobile:not(.tablet) {
-  .kw-sign {
-    width: 320px;
-  }
-}
+// body.mobile:not(.tablet) {
+//   .kw-sign {
+//     // width: 320px;
+//   }
+// }

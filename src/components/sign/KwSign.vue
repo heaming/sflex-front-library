@@ -48,6 +48,7 @@ export default {
     oriSignSrc: { type: String, default: '' },
     width: { type: [String, Number], default: undefined },
     height: { type: [String, Number], default: undefined },
+    fullWidth: { type: Boolean, default: false },
   },
 
   setup(props) {
@@ -180,6 +181,7 @@ export default {
     const computedWidth = computed(() => {
       if (props.width) return props.width;
       if (platform.is.desktop) return 300;
+      if (platform.is.mobile && props.fullWidth) return window.screen.width;
       if (platform.is.mobile) return 320;
       if (platform.is.tablet) return 536;
     });
