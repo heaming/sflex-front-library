@@ -6,9 +6,7 @@
           name="logo"
           :go-to-home="goToHome"
         />
-        <kw-tooltip
-          class="header-tooltip"
-        >
+        <kw-tooltip :offset="[0,2]">
           홈으로 이동
         </kw-tooltip>
       </div>
@@ -57,7 +55,7 @@
             icon="alert_off_24"
             borderless
             style="font-size: 24px;"
-            class="alert-btn"
+            class="alert-btn h32"
           >
             <q-badge
               v-if="alarms?.length > 0"
@@ -68,9 +66,7 @@
                 ? '99+' : alarms?.filter((alarm) => alarm.readYn === 'N').length"
               class="alert-badge"
             />
-            <kw-tooltip
-              class="header-tooltip"
-            >
+            <kw-tooltip :offset="[0,3]">
               알림
             </kw-tooltip>
           </kw-btn>
@@ -119,10 +115,10 @@
                     >
                       {{ item.alarmMsg }}
                       <kw-tooltip
-                        class="alert_tooltip header-tooltip"
+                        class="alert_tooltip"
                         anchor="bottom start"
                         self="top start"
-                        :offset="[-8, 0]"
+                        :offset="[0,3]"
                         style="line-height: 20px;"
                       >
                         {{ item.alarmMsg }}
@@ -148,8 +144,11 @@
         </div>
         <div>
           <kw-icon
-            class="web-header__icon report-icon"
+            class="web-header__icon report-icon h32"
             name="support_24"
+            size="32px"
+            style="font-size: 24px;"
+            tooltip="업무지원"
             clickable
           />
           <kw-menu
@@ -157,7 +156,6 @@
             class="web-header__dropdown"
             anchor="bottom end"
             self="top end"
-            :offset="[0, 2]"
             target=".report-icon"
             @before-show="beforeSupportMenuShow"
           >
@@ -195,14 +193,6 @@
               @click="goToSmsSendHistoryPage"
             />
           </kw-menu>
-          <kw-tooltip
-            ref="supportTooltipRef"
-            v-model="showSupportTooltip"
-            class="header-tooltip"
-            @before-show="beforeSupportTooltipShow"
-          >
-            업무지원
-          </kw-tooltip>
         </div>
         <div
           class=""
@@ -212,6 +202,7 @@
             class="profile_user"
             name="profile_none"
             size="32px"
+            tooltip="개인설정"
             clickable
           />
           <kw-menu
@@ -219,7 +210,6 @@
             class="web-header__dropdown"
             anchor="bottom end"
             self="top end"
-            :offset="[0, 2]"
             target=".profile_user"
             @before-show="beforeUserInfoMenuShow"
           >
@@ -285,26 +275,21 @@
               @click="logout"
             />
           </kw-menu>
-          <kw-tooltip
-            ref="userInfoTooltipRef"
-            v-model="showUserInfoTooltip"
-            class="header-tooltip"
-            @before-show="beforeUserInfoTooltipShow"
-          >
-            개인설정
-          </kw-tooltip>
         </div>
         <div
           class="web-header__separator"
         />
-        <kw-icon
-          class="web-header__icon"
-          name="gnb_menu"
-          clickable
-          tooltip="전체메뉴"
-          tooltip-class="header-tooltip"
-          @click="openTotalMenuP"
-        />
+        <div>
+          <kw-icon
+            class="web-header__icon h32"
+            size="32px"
+            name="gnb_menu"
+            clickable
+            style="font-size: 24px;"
+            tooltip="전체메뉴"
+            @click="openTotalMenuP"
+          />
+        </div>
         <web-total-menu-p
           v-if="totalMenu"
           @close-tot="closeTotalMenuP"

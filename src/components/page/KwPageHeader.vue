@@ -10,7 +10,7 @@
           size="24px"
           name="arrow_left_breadcrumbs_24"
           clickable
-          tooltip-class="page-header-tooltip"
+          class="h32"
           @click="$router.close()"
         >
           {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
@@ -27,9 +27,10 @@
           :false-value="false"
           checked-icon="bookmark_on"
           unchecked-icon="bookmark_outline"
+          class="h32"
           @update:model-value="updateBookmark"
         >
-          <kw-tooltip class="page-header-tooltip">
+          <kw-tooltip :offset="[0, 3]">
             {{ $t('MSG_TXT_BKMK', null, '즐겨찾기') }}
           </kw-tooltip>
         </kw-checkbox>
@@ -39,8 +40,8 @@
           name="notice_off"
           :clickable="pageNoticeCntn"
           :disable="!pageNoticeCntn"
+          class="h32"
           :style="{ opacity: pageNoticeCntn ? '1 !important' : '0.3 !important' }"
-          tooltip-class="page-header-tooltip"
         >
           {{ $t('MSG_TXT_BIZ_NOTICE') }}
         </kw-icon>
@@ -49,8 +50,8 @@
           name="report"
           :clickable="pageManual"
           :disable="!pageManual"
+          class="h32"
           :style="{ opacity: pageManual ? '1 !important' : '0.3 !important' }"
-          tooltip-class="page-header-tooltip"
           @click="onClickOpenManual"
         >
           {{ $t('MSG_TXT_MANU') }}
@@ -60,7 +61,7 @@
           v-if="!isSubPage"
           name="new_window"
           clickable
-          tooltip-class="page-header-tooltip"
+          class="h32"
           @click="openNewWindow()"
         >
           {{ $t('MSG_TXT_NEW_WINDOW', null, '새창으로 보기') }}
