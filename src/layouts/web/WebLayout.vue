@@ -27,9 +27,11 @@ export default {
   setup() {
     const { getters, commit } = useStore();
     const { currentRoute } = useRouter();
+    const user = getters['meta/getUserInfo'];
 
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
-    const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN;
+    const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN || user.userId === 'anonymous';
+
     const { applicationId, menuUid } = currentRoute.value.meta;
 
     // commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
