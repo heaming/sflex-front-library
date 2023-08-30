@@ -150,6 +150,7 @@ function setColumnRenderer(column, { dataType }) {
   if (column.editor?.type === 'file') {
     const styleNames = column.styleName.split(' ');
     styleNames.push('rg-file-button');
+    styleNames.push('text-center');
     column.styleName = styleNames.join(' ');
     column.renderer = {
       type: 'html',
@@ -282,7 +283,7 @@ function setColumnEditor(column, { dataType }) {
     case 'file':
       defaultsDeep(column, {
         editable: false,
-        objectCallback: (fieldName, dataRow, value) => value.__numberOfFiles ?? '',
+        objectCallback: (fieldName, dataRow, value) => (value.__numberOfFiles && value.__numberOfFiles > 0 ? '첨부파일' : '파일찾기'),
       });
       break;
     case 'number':
