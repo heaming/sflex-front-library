@@ -29,17 +29,17 @@ const normalizeConfig = (config = {}) => ({
   plugins: config.plugins || [],
 });
 
-function addQueryPlugin(urls, cdnUrl) {
+function removeCdnUrl(urls, cdnUrl) {
   return {
     name: 'add-query-plugin',
     transformIndexHtml(html) {
       // grid.css 파일에 쿼리 문자열 추가
       // eslint-disable-next-line no-restricted-syntax
       for (const url of urls) {
-        const regex = new RegExp(`<link rel="modulepreload" href="${url}\\.[a-fA-F0-9]{6}\\.js">`, 'g');
+        const regex = new RegExp(`<link rel="stylesheet" href="${url}\\.[a-fA-F0-9]{6}\\.css">`, 'g');
         const match = html.match(regex);
         if (match) {
-          const replacement = match[0].replace(cdnUrl, '/');
+          const replacement = match[0].replace(cdnUrl, '');
           html = html.replace(regex, replacement);
         }
       }
@@ -73,11 +73,7 @@ exports.defineConfig = (config) => {
     return {
       base: loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN || '/',
       plugins: [
-        addQueryPlugin([
-          // '/assets/app.js',
-          // '/assets/plugin-vue_export-helper.js',
-          // `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}
-          // /assets/plugin-vue_export-helper.js`,
+        removeCdnUrl([
           `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}/assets/grid`,
         ], loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN || '/'),
         vue({
