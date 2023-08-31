@@ -42,17 +42,34 @@ import { getGlobalData, removeGlobalData } from '../../utils/private/globalData'
 import { GlobalModalVmKey } from '../../consts/private/symbols';
 import consts from '../../consts';
 
+// ROLE 출처 : https://kyowon.atlassian.net/wiki/spaces/ForKUS/pages/168263832/95.
+
 const MANAGER_PLANNER = [
-  'ROL_W3010', // 매니저
-  'ROL_W6020', // 매니저
-  'ROL_W1620', // M사업팀
-  'ROL_W1610', // P사업팀
-  'ROL_W2010', // 플래너
+  'ROL_W1020', // 본사 영업부
+  'ROL_W1030', // 본사 영업부
+  'ROL_W2010', // P조직 플래너
+  'ROL_W2020', // P조직 영업부
+  'ROL_W2030', // P조직 영업부
+  'ROL_W2040', // P조직 영업부
+  'ROL_W2050', // P조직 영업부
+  'ROL_W2060', // P조직 영업부
+  'ROL_W3010', // M조직 플래너
+  'ROL_W3020', // M조직 영업부
+  'ROL_W3030', // M조직 영업부
+  'ROL_W3040', // M조직 영업부
+  'ROL_W3050', // M조직 영업부
+  'ROL_W3060', // M조직 영업부
+  'ROL_W5110', // B2B 영업부
+  'ROL_W5210', // 온라인총판 영업부
 ];
 
 const ENGINEER_HOMEMASTER = [
+  'ROL_W4010', // 홈마스터 - 엔지니어
+  'ROL_W4020', // 홈마스터 - 엔지니어
+  'ROL_W6010', // 엔지니어
+  'ROL_W6020', // 엔지니어
+  'ROL_W6030', // 엔지니어
   'ROL_W6040', // 엔지니어
-  'ROL_W4010', // 홈마스터
 ];
 
 export default {
