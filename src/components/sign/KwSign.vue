@@ -180,7 +180,10 @@ export default {
     }
 
     const computedWidth = computed(() => {
-      if (props.width) return props.width?.split('px')[0];
+      if (props.width) {
+        if (typeof props.width === 'string') return props.width?.split('px')[0];
+        return props.width;
+      }
       if (platform.is.desktop) return 300;
       if (platform.is.mobile && props.fullWidth) return window.screen.width;
       if (platform.is.mobile) return 320;
@@ -188,7 +191,10 @@ export default {
     });
 
     const computedHeight = computed(() => {
-      if (props.height) return props.height?.split('px')[0];
+      if (props.height) {
+        if (typeof props.height === 'string') return props.height?.split('px')[0];
+        return props.height;
+      }
       if (platform.is.desktop) return 150;
       if (platform.is.mobile) return 180;
       if (platform.is.tablet) return 300;
