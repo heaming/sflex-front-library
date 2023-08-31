@@ -2,6 +2,7 @@
   <div
     ref="kwSignRef"
     class="kw-sign"
+    :class="`w${computedWidth}`"
   >
     <div class="kw-sign__canvas-area">
       <canvas
@@ -179,7 +180,7 @@ export default {
     }
 
     const computedWidth = computed(() => {
-      if (props.width) return props.width;
+      if (props.width) return props.width?.split('px')[0];
       if (platform.is.desktop) return 300;
       if (platform.is.mobile && props.fullWidth) return window.screen.width;
       if (platform.is.mobile) return 320;
@@ -187,7 +188,7 @@ export default {
     });
 
     const computedHeight = computed(() => {
-      if (props.height) return props.height;
+      if (props.height) return props.height?.split('px')[0];
       if (platform.is.desktop) return 150;
       if (platform.is.mobile) return 180;
       if (platform.is.tablet) return 300;

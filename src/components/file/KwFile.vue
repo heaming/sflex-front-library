@@ -78,6 +78,12 @@
               <span class="kw-file__header-selected">
                 {{ `(${selectedFileKeys.length} / ${files.length})` }}
               </span>
+              <kw-tooltip
+                :offset="[0, 3]"
+                show-when-ellipsised
+              >
+                {{ `Total ${files.length} (${selectedFileKeys.length} / ${files.length})` }}
+              </kw-tooltip>
             </div>
             <div class="kw-file__multiple-action">
               <kw-btn
@@ -169,6 +175,12 @@
               >
                 {{ `${computedCounter}` }}
               </span>
+              <kw-tooltip
+                :offset="[0, 3]"
+                show-when-ellipsised
+              >
+                {{ `${computedCounter}` }}
+              </kw-tooltip>
             </div>
           </div>
 
@@ -326,14 +338,6 @@
             >
               {{ `${multiple || !computedCounter ? fileSizeToString(file.size) : computedCounter}` }}
             </span>
-            <kw-tooltip
-              v-if="accept.split(', ').length > 3"
-              anchor="bottom start"
-              self="top left"
-              class="file_tooltip"
-            >
-              {{ accept }}
-            </kw-tooltip>
           </div>
         </template>
       </slot>
