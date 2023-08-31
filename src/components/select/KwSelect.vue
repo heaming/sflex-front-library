@@ -78,6 +78,7 @@
           anchor="bottom left"
           self="top left"
           :offset="[0, 0]"
+          show-when-ellipsised
           class="ellipsis_tooltip shrinked_tooltip"
         >
           {{ selectedText || placeholder }}
