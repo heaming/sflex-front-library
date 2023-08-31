@@ -18,7 +18,7 @@
           <p>{{ userInfo.departmentName }}</p>
         </kw-form-item>
         <kw-form-item label="직책">
-          <p>{{ userInfo.careerLevelName }}</p>
+          <p>{{ userInfo.rsbNm }}</p>
         </kw-form-item>
         <kw-form-item label="이메일">
           <p>{{ userInfo.email }}</p>

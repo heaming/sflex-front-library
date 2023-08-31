@@ -1,24 +1,54 @@
 <template>
-  <q-tooltip
-    class="kw-tooltip"
-    v-bind="styleClassAttrs"
-    :model-value="value"
-    :scroll-target="scrollTarget"
-    :target="target"
-    :delay="delay"
-    :hide-delay="hideDelay"
-    :no-parent-event="noParentEvent"
-    :max-height="maxHeight"
-    :max-width="maxWidth"
-    :anchor="anchor"
-    :self="self"
-    :offset="offset"
-    :transition-duration="0"
-    @update:model-value="onUpdateValue"
-    @before-show="$emit('beforeShow', $event)"
-  >
-    <slot />
-  </q-tooltip>
+  <!-- 모바일, 태블릿용 -> 탭 시 나오게 변경 -->
+  <template v-if="!$g.platform.is.desktop">
+    <div v-touch-hold="emitTouchHoldEvent">
+      <q-tooltip
+        class="kw-tooltip"
+        v-bind="styleClassAttrs"
+        :model-value="value"
+        :scroll-target="scrollTarget"
+        :target="target"
+        :delay="delay"
+        :hide-delay="hideDelay"
+        :no-parent-event="noParentEvent"
+        :max-height="maxHeight"
+        :max-width="maxWidth"
+        :anchor="anchor"
+        :self="self"
+        :offset="offset"
+        :transition-duration="0"
+        @touchstart.stop
+        @mousedown.stop
+        @update:model-value="onUpdateValue"
+        @before-show="$emit('beforeShow', $event)"
+      >
+        <slot />
+      </q-tooltip>
+    </div>
+  </template>
+  <!-- PC용 -> 그대로 -->
+  <template v-else>
+    <q-tooltip
+      class="kw-tooltip"
+      v-bind="styleClassAttrs"
+      :model-value="value"
+      :scroll-target="scrollTarget"
+      :target="target"
+      :delay="delay"
+      :hide-delay="hideDelay"
+      :no-parent-event="noParentEvent"
+      :max-height="maxHeight"
+      :max-width="maxWidth"
+      :anchor="anchor"
+      :self="self"
+      :offset="offset"
+      :transition-duration="0"
+      @update:model-value="onUpdateValue"
+      @before-show="$emit('beforeShow', $event)"
+    >
+      <slot />
+    </q-tooltip>
+  </template>
 </template>
 
 <script>
@@ -49,6 +79,7 @@ export default {
   emits: [
     'update:modelValue',
     'beforeShow',
+    'touchStart',
   ],
 
   setup(props, { emit }) {
@@ -66,11 +97,14 @@ export default {
 
     watch(value, (val) => emit('update:modelValue', val));
     watch(() => props.modelValue, onUpdateValue);
-
+    function emitTouchHoldEvent(e) {
+      emit('touchStart', e);
+    }
     return {
       ...useInheritAttrs(),
       value,
       onUpdateValue,
+      emitTouchHoldEvent,
     };
   },
 };

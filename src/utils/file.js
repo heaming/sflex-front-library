@@ -1,5 +1,4 @@
 import { mapKeys } from 'lodash-es';
-import * as JSZip from 'jszip';
 import { http } from '../plugins/http';
 
 const targetPaths = ['temp', 'storage', 'export'];
@@ -134,7 +133,7 @@ export async function downloadAll(files, targetPath = targetPaths[0]) {
   // 만약 fileUid가 없는, 업로드된 파일이 있다면
   // 이미 다운받은 파일들로 이루어진 압축 파일을 풀어서
   // 거기에 파일을 추가한다.
-  const extractZip = new JSZip();
+  const extractZip = new window.JSZip();
 
   const blobToFile = new File([response.data], 'file.zip');
   await extractZip.loadAsync(blobToFile);
