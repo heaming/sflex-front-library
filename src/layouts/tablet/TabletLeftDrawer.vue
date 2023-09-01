@@ -38,7 +38,7 @@
           @click="openMenu(menu)"
         >
           <q-badge
-            v-if="footerMenu.icon === 'tablet_basket' && basketSize !== 0"
+            v-if="menu.icon === 'tablet_basket' && basketSize !== 0"
             rounded
             floating
             color="error"
