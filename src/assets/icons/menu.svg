@@ -1,0 +1,12 @@
+<svg id="menu" data-name="edit(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <g id="bounding-box">
+      <path id="shape" d="M0,0H16V16H0Z" fill="none"/>
+    </g>
+  </g>
+  <g id="icon" transform="translate(1 1)">
+    <line id="선_3264" data-name="선 3264" x2="13" transform="translate(0.5 2.5)" fill="none" stroke="#999" stroke-width="1.5"/>
+    <line id="선_3265" data-name="선 3265" x2="13" transform="translate(0.5 7)" fill="none" stroke="#999" stroke-width="1.5"/>
+    <path id="패스_210187" data-name="패스 210187" d="M0,0H13" transform="translate(0.5 11.5)" fill="none" stroke="#999" stroke-width="1.5"/>
+  </g>
+</svg>
