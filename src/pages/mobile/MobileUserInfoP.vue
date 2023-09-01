@@ -26,7 +26,7 @@
 
         <kw-form-item no-label>
           <kw-input
-            v-model="userInfo.cellphone"
+            v-model="cellphone"
             label="휴대전화번호"
             mask="telephone"
             dense
@@ -79,6 +79,8 @@ const frmMainRef = ref();
 const selableOgTpCds = computed(() => userInfo.value?.selableOgTpCd?.split(','));
 const codes = ref([]);
 
+const cellphone = ref(userInfo.value.cellphone ?? '');
+
 await getCodes('OG_TP_CD').then((res) => {
   if (selableOgTpCds.value?.length > 0) {
     codes.value = res.filter((x) => selableOgTpCds.value.includes(x.codeId));
@@ -89,13 +91,16 @@ async function onClickConfirm() {
   if (await frmMainRef.value?.alertIfIsNotModified()) return;
   if (!await frmMainRef.value.validate()) return;
 
-  const phone = userInfo.value.cellphone.split('-');
+  const phone = cellphone.value.split('-');
   userInfo.value.cellPhoneLocataTelNumber = phone[0];
   userInfo.value.mexnoGbencr = phone[1];
   userInfo.value.cellPhoneIndividualTelNumber = phone[2];
+
+  userInfo.value.cellphone = cellphone.value;
+
   await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
-  await dispatch('meta/fetchLoginInfo');
   await http.post('/sflex/common/common/set-session-data', userInfo.value);
+  await dispatch('meta/fetchLoginInfo');
   ok();
 }
 
