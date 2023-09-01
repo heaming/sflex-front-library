@@ -114,3 +114,7 @@ body.mobile:not(.tablet) {
     }
   }
 }
+
+body.mobile:not(.tablet) .main-menu-modal .kw-popup.q-card.mobile .kw-popup__content {
+  height: 100%;
+}
