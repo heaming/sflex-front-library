@@ -530,8 +530,8 @@
   .rg-button-renderer-button {
     border: 1px solid $black-btn-line;
     color: $black2;
-    background: $bg-white url(~@assets/icons/report.svg) 8px center no-repeat;
-    background-size: 16px;
+    background: $bg-white url(~@assets/icons/report.svg) 8px 7px no-repeat;
+    background-size: 16px auto;
     padding-left: 28px;
 
     &:hover {
