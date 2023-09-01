@@ -65,6 +65,7 @@ import { isEmpty } from 'lodash-es';
 import { http } from '../../plugins/http';
 import useModal from '../../composables/useModal';
 import { alert } from '../../plugins/dialog';
+import { notify } from '../../plugins/notify';
 import { validate } from '../../index';
 
 const { ok } = useModal();
@@ -91,9 +92,7 @@ const validateNewPassword = async (val, options) => {
   errors.push(
     ...(await validate(val, 'required', options)).errors,
   );
-  console.log(errors);
 
-  console.log(passwordPolicy.value);
   // 비밀번호 길이제한 체크
   if (passwordPolicy.value.pwSizeYn === 'Y') {
     if (Number(passwordPolicy.value.pwSizeMax) < Number(passwordInfo.value.newPassword)) {
@@ -110,7 +109,7 @@ const validateNewPasswordConfirm = async (val, options) => {
     ...(await validate(val, 'required', options)).errors,
   );
   if (passwordInfo.value.newPassword !== passwordInfo.value.newPasswordConfirm) {
-    errors.push('비번이 똑같아야지!');
+    errors.push('비밀번호를 다시 확인하세요.');
   }
 
   return errors[0] || true;
@@ -124,13 +123,14 @@ async function onClickConfirm() {
     alert(t('MSG_ALT_INP_NEW_PW'));
     return;
   } if (passwordInfo.value.newPassword !== passwordInfo.value.newPasswordConfirm) {
-    alert('비번이 똑같아야지!');
+    alert('비밀번호를 다시 확인하세요.');
     return;
   }
 
   const res = await http.post('/sflex/common/common/password/change', { ...passwordInfo.value });
-  if (res.result) {
-    console.log(res.data);
+  if (res) {
+    ok();
+    notify('비밀번호 변경이 완료되었습니다.');
   }
 }
 

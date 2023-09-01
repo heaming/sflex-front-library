@@ -248,6 +248,13 @@
               v-close-popup
               borderless
               grow
+              :label="$t('MSG_TIT_PW_CHG')"
+              @click="openPasswordChange"
+            />
+            <kw-btn
+              v-close-popup
+              borderless
+              grow
               label="(임시) 세션변경"
               @click="openSetSessionP"
             />
@@ -372,6 +379,15 @@ export default {
       console.log(res);
       if (res.result) {
         window.location.reload();
+      }
+    }
+
+    async function openPasswordChange() {
+      const res = await modal({
+        component: () => import('../../pages/web/WebPasswordChangeP.vue'),
+      });
+      if (res.result) {
+        notify(t('MSG_ALT_NEW_PW_SET'));
       }
     }
 
@@ -547,6 +563,7 @@ export default {
       openSessionChangeP,
       ccpsInfoList,
       openChangeCcpsSession,
+      openPasswordChange,
       onClickAuthOff,
       openTotalMenuP,
       openMenuSearchPopup,

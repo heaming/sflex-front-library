@@ -224,6 +224,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
+import useGlobal from '../../composables/useGlobal';
 import useModal from '../../composables/useModal';
 import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
@@ -235,6 +236,7 @@ const { getters, dispatch } = useStore();
 
 const { logout } = useSession();
 const { readAllAlarm } = useAlarm();
+const { notify } = useGlobal();
 const apps = readonly(getters['meta/getApps']);
 const alarms = computed(() => getters['meta/getAlarms']);
 const router = useRouter();
@@ -427,9 +429,11 @@ async function onClickEditAndComplete(depth3Menu) {
 }
 
 async function openUserInfoPopup() {
-  await modal({
+  const res = await modal({
     component: () => import('./TabletUserInfoP.vue'),
   });
+
+  if (res.result) notify('변경되었습니다.');
 }
 
 async function openAlarmListPopup() {

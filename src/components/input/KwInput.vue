@@ -251,8 +251,8 @@ export default {
     const hasHyphen = ref(0);
     const computedMaxLength = computed(() => {
       if (props.maxlength === undefined) return undefined;
-      if (props.maxlength && props.mask === 'number') return Number(props.maxlength) + Number(hasComma.value);
-      if (props.maxlength && props.mask === 'telephone') return Number(props.maxlength) + Number(hasHyphen.value);
+      if (props.maxlength && (props.mask === 'number' || props.mask?.indexOf(',') > -1)) return Number(props.maxlength) + Number(hasComma.value);
+      if (props.maxlength && (props.mask === 'telephone' || props.mask?.indexOf('-') > -1)) return Number(props.maxlength) + Number(hasHyphen.value);
       return props.maxlength;
     });
 
@@ -260,7 +260,7 @@ export default {
       if (props.counter === true && props.maxlength > 0) {
         // TODO 마스킹 있을때, unmaskedValue = false인 상황에서 unmaskedValue 를 구할 수 있어야 함.
         let currentByte;
-        if (hasComma.value > 0) currentByte = getByte(value.value ?? '') - hasComma.value;
+        if (hasComma.value > 0) currentByte = getByte(value.value ?? '');
         else if (hasHyphen.value > 0) currentByte = getByte(value.value ?? '') - hasHyphen.value;
         else currentByte = getByte(value.value ?? '');
 
@@ -399,12 +399,12 @@ export default {
 
         // maxlength
         if (props.maxlength) {
-          if (props.mask === 'number') {
+          if (props.mask === 'number' || (props.mask && props.mask.indexOf(',') > -1)) {
             const share = Math.floor(val.length / 3);
             const remainder = val.length % 3;
             hasComma.value = remainder === 0 ? share - 1 : share;
             val = getMaxByteString(val, props.maxlength + hasComma.value);
-          } else if (props.mask === 'telephone') {
+          } else if (props.mask === 'telephone' || (props.mask && props.mask.indexOf('-') > -1)) {
             hasHyphen.value = val.split('-').length - 1;
             val = getMaxByteString(val, props.maxlength + hasHyphen.value);
           } else val = getMaxByteString(val, props.maxlength);
