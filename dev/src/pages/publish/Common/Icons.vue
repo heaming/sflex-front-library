@@ -116,6 +116,7 @@ const iconList1 = [
   'info',
   'imgpreview',
   'list',
+  'menu',
   'minus',
   'more',
   'new_window',
