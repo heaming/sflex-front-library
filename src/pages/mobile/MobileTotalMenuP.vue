@@ -156,6 +156,7 @@ import Sortable from 'sortablejs';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import useModal from '../../composables/useModal';
+import useGlobal from '../../composables/useGlobal';
 import useSession from '../../composables/useSession';
 import { modal } from '../../plugins/modal';
 import { bottomSheet } from '../../plugins/bottomSheet';
@@ -168,6 +169,7 @@ const { logout } = useSession();
 const { t } = useI18n();
 
 const { readAllAlarm } = useAlarm();
+const { notify } = useGlobal();
 
 const apps = readonly(getters['meta/getApps']);
 const router = useRouter();
@@ -399,9 +401,11 @@ async function openUserInfoBottomSheet() {
 }
 
 async function openUserInfoPopup() {
-  await modal({
+  const res = await modal({
     component: () => import('./MobileUserInfoP.vue'),
   });
+
+  if (res.result) notify('변경되었습니다.');
 }
 
 async function openAlarmListPopup() {
