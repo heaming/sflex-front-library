@@ -73,7 +73,7 @@ export default {
     maxWidth: { type: String, default: undefined },
     anchor: { type: String, default: undefined },
     self: { type: String, default: undefined },
-    offset: { type: Array, default: undefined },
+    offset: { type: Array, default: () => [0, 3] },
   },
 
   emits: [
