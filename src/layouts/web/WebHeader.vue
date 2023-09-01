@@ -244,7 +244,6 @@
               :label="$t('MSG_BTN_CHANGE_SESSION')"
               @click="openChangeCcpsSession"
             />
-            />
             <kw-btn
               v-close-popup
               borderless
