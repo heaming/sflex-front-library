@@ -123,6 +123,7 @@
                     :model-value="isBookmarkedPage(depth3Menu.menuUid, depth3Menu.pageId)"
                     :true-value="true"
                     :false-value="false"
+                    style="width: 16px; height: 16px;"
                     checked-icon="bookmark_on"
                     unchecked-icon="bookmark_off"
                     @update:model-value="(val) => updateBookmark(val, depth3Menu)"
