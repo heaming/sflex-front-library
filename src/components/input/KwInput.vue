@@ -20,7 +20,6 @@
     :unmasked-value="computedUnmaskedValue"
     :prefix="prefix"
     :suffix="suffix"
-    :clearable="type !== 'textarea' && clearable"
     :color="color"
     :bg-color="bgColor"
     :autofocus="autofocus"
@@ -33,11 +32,9 @@
     :input-style="inputStyle"
     :maxlength="computedMaxLength"
     no-error-icon
-    clear-icon="clear"
     @focus="onFocus"
     @blur="onBlurInput"
     @keydown="onKeydownInput"
-    @clear="onClearInput"
     @change="onChangeInput"
     @update:model-value="onUpdateValue"
   >
@@ -59,15 +56,26 @@
 
     <!-- append -->
     <template
-      v-if="icon || $slots.append"
+      v-if="icon || (type !== 'textarea' && clearable) || $slots.append"
       #append
     >
+      <!-- kwInput clear 아이콘을 kwInput 내부에 직접 구현하면서 추가. 230902 -->
+      <kw-icon
+        v-if="type !== 'textarea' && clearable"
+        :tabindex="-1"
+        name="clear"
+        class="clear-icon"
+        size="16px"
+        clickable
+        @click="() => onClearInput(value)"
+      />
       <kw-icon
         v-if="icon"
         :tabindex="-1"
         :name="icon"
         :disable="disable || disableIcon"
         clickable
+        class="click-icon"
         @click="onClickIcon?.()"
       />
       <slot name="append" />
@@ -347,11 +355,6 @@ export default {
 
     const clearValue = computed(() => (props.type === 'number' && isModifiersNumber ? null : ''));
 
-    function onClearInput(val) {
-      props.onClear?.(val);
-      props.onChange?.(clearValue.value);
-    }
-
     function onChangeInput(val) {
       if (isModifiersTrim) {
         value.value = props.modelValue;
@@ -446,6 +449,12 @@ export default {
         default:
           return onUpdateTextValue(val);
       }
+    }
+
+    function onClearInput(val) {
+      props.onClear?.(val);
+      props.onChange?.(clearValue.value);
+      onUpdateValue(clearValue.value);
     }
 
     onMounted(() => {
