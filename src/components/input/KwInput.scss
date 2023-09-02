@@ -107,7 +107,8 @@
 
     // make clearbutton only show focused state
     &:not(.q-field--focused) {
-      .q-field__focusable-action {
+      .q-field__focusable-action,
+      .clear-icon { // kwInput clear 아이콘을 kwInput 내부에 직접 구현하면서 추가. 230902
         display: none;
       }
     }

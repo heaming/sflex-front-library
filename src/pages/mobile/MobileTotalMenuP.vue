@@ -107,7 +107,7 @@
                   <a
                     v-if="!!depth3Menu.hasRole"
                     href="javascript:;"
-                    @click.prevent="moveToPage(depth3Menu)"
+                    @click.prevent="depth2Menu.editable ? '' : moveToPage(depth3Menu)"
                   >
                     {{ depth3Menu.menuName }}
                   </a>
@@ -123,6 +123,7 @@
                     :model-value="isBookmarkedPage(depth3Menu.menuUid, depth3Menu.pageId)"
                     :true-value="true"
                     :false-value="false"
+                    style="width: 16px; height: 16px;"
                     checked-icon="bookmark_on"
                     unchecked-icon="bookmark_off"
                     @update:model-value="(val) => updateBookmark(val, depth3Menu)"
@@ -136,6 +137,7 @@
                     borderless
                     class="handle kw-font-pt16"
                     icon="menu"
+                    @click.stop.prevent
                   />
                 </li>
               </ul>
@@ -339,7 +341,7 @@ function createSortable() {
     new Sortable(target, {
       dataIdAttr: 'data-id',
       animation: 150,
-      handle: '.handle',
+      swapThreshold: 0.65,
     }),
   );
 }
