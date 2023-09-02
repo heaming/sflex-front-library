@@ -34,7 +34,7 @@
 
     .q-item {
       position: absolute;
-      width: 100%;
+      width: calc(100% + 1px);
       min-height: initial;
       font-size: 14px;
       font-weight: 500;
@@ -43,6 +43,10 @@
       &__label {
         text-align: center;
         user-select: none;
+        font-size: 14px;
+        color: $black1;
+        font-weight: 400;
+        margin-left: -1px;
       }
 
       .q-focus-helper {
@@ -86,7 +90,7 @@
       position: absolute;
       width: 80%;
       height: 100%;
-      border: 1px solid $line-bg;
+      border: 1px solid $line-stroke;
     }
 
     > .q-icon {
@@ -95,11 +99,11 @@
       cursor: pointer;
 
       &:nth-child(1) {
-        top: -16px;
+        top: -20px;
       }
 
       &:nth-child(2) {
-        bottom: -16px;
+        bottom: -20px;
       }
     }
   }
@@ -119,4 +123,10 @@
       background: initial;
     }
   }
+}
+
+.timepicker_colon {
+  vertical-align: middle;
+  color: $placeholder;
+  font-size: 14px;
 }

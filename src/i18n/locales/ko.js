@@ -35,5 +35,5 @@ export default {
   // HTTP
   MSG_ALT_ERR_CONTACT_ADMIN: '오류가 발생하였습니다. 관리자에게 문의하세요.',
   MSG_ALT_ERR_TIMEOUT: '서버 요청 시간을 초과하였습니다.',
-  MSG_ALT_ERR_SESSION_EXPIRED: '세션이 만료되었습니다. 다시 로그인 해주세요.',
+  MSG_ALT_ERR_SESSION_EXPIRED: '안전한 서비스 이용을 위하여 장시간 미사용 시\n 연결이 종료됩니다.\n다시 로그인 해주세요.',
 };

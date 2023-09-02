@@ -134,8 +134,8 @@
                   <kw-btn
                     v-else-if="depth2Menu.editable"
                     borderless
-                    class="handle"
-                    icon="menu_24"
+                    class="handle kw-font-pt16"
+                    icon="menu"
                   />
                 </li>
               </ul>

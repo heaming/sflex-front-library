@@ -34,6 +34,7 @@ export default (to, from, next) => {
     } else {
       modals.forEach((modal) => removeGlobalData(modal.uid));
     }
+
     // 고객용 도메인인 경우/popup /mobile이 아니거나 홈화면으로의 이동은 막는다.
     if (env.VITE_HTTP_CUST_ORIGIN === window.location.origin) {
       console.log(env.VITE_HTTP_CUST_ORIGIN, window.location.origin, window.location.pathname, from, to);
@@ -45,6 +46,17 @@ export default (to, from, next) => {
         // next(false);
       }
     }
+
+    // 미인증 세션의 경우 홈화면으로의 이동은 막는다.
+    const user = store.getters['meta/getUserInfo'];
+    console.log(user);
+    if (user.userId === 'anonymous') {
+      console.log(window.location.origin, window.location.pathname, from, to);
+      if (to.path === '/') {
+        next(false);
+      }
+    }
+
     if (isEmpty(INITIAL_LOCATION)) {
       Object.assign(
         INITIAL_LOCATION,

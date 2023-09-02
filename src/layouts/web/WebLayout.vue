@@ -30,6 +30,7 @@ export default {
 
     const isAuthenticated = computed(() => getters['meta/isAuthenticated']);
     const isCustDomain = window.location.origin === env.VITE_HTTP_CUST_ORIGIN;
+
     const { applicationId, menuUid } = currentRoute.value.meta;
 
     // commit('app/setSelectedGlobalAppKey', applicationId || firstApplicationId || null);
