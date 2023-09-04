@@ -7,9 +7,9 @@
       <div class="dashboard dashboard--fixed">
         <div class="dashboard_summary dashboard_summary_type1">
           <p class="greetings">
-            <span>{{ `${userInfo.userName} ${userInfo.rsbNm
+            <span>{{ `${userInfo.userName}${userInfo.rsbNm
               ? userInfo.rsbNm.endsWith('님')
-                ? userInfo.rsbNm.slice(0, -1) : userInfo.rsbNm
+                ? ` ${userInfo.rsbNm.slice(0, -1)}` : ` ${userInfo.rsbNm}`
               : ''}님` }}</span>, 좋은 하루 보내세요.
           </p>
           <div class="dashboard_summary_counter">
@@ -17,7 +17,7 @@
             <dl>
               <!-- <dt>어제</dt>
               <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd> -->
-              <dt>{{ dayjs().month() + '월' }}</dt>
+              <dt>{{ (dayjs().month() + 1) + '월' }}</dt>
               <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
             </dl>
           </div>
@@ -25,7 +25,7 @@
             vertical
             inset
             spaced="20px"
-            style="opacity: 0.2;"
+            style="opacity: 0.5;"
             color="bg-white"
           />
           <div class="dashboard_summary_counter">
@@ -43,11 +43,19 @@
             vertical
             inset
             spaced="20px"
-            style="opacity: 0.2;"
+            style="opacity: 0.5;"
             color="bg-white"
           />
           <div class="dashboard_summary_counter">
             <h5>주요지표(실적)</h5>
+            <kw-btn-toggle
+              v-model="periodType"
+              :options="[{'cd':'D', 'nm':'일간'}, {'cd':'M', 'nm':'월간'}]"
+              option-label="nm"
+              option-value="cd"
+              dense
+              gap="0px"
+            />
             <dl>
               <dt>진단검사</dt>
               <dd>{{ topBarData.index.dgnsCnt ?? 0 }}</dd>
@@ -55,15 +63,6 @@
               <dd>{{ topBarData.index.smartCnt ?? 0 }}</dd>
             </dl>
           </div>
-          <kw-btn-toggle
-            v-model="periodType"
-            :options="[{'cd':'D', 'nm':'일간'}, {'cd':'M', 'nm':'월간'}]"
-            option-label="nm"
-            option-value="cd"
-            dense
-            gap="0px"
-            class="ml16"
-          />
         </div>
         <div class="dashboard_wrap">
           <template
