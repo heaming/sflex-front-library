@@ -158,6 +158,7 @@ function setColumnRenderer(column, { dataType }) {
       callback: (grid, cell) => {
         const value = cell?.value?.__numberOfFiles;
         if (!value || value < 1) { // 없을 때
+          if (column.editor.hideWhenEmpty) return '';
           const res = '<div class="rg-button-default">'
                     + '<button type="button" tabindex="-1" class="rg-button-renderer-button">'
                     + '파일찾기</button></div>';
@@ -283,7 +284,12 @@ function setColumnEditor(column, { dataType }) {
     case 'file':
       defaultsDeep(column, {
         editable: false,
-        objectCallback: (fieldName, dataRow, value) => (value.__numberOfFiles && value.__numberOfFiles > 0 ? '첨부파일' : '파일찾기'),
+        objectCallback: (fieldName, dataRow, value) => {
+          if (editor.hideWhenEmpty) {
+            return value.__numberOfFiles && value.__numberOfFiles > 0 ? '첨부파일' : '';
+          }
+          return value.__numberOfFiles && value.__numberOfFiles > 0 ? '첨부파일' : '파일찾기';
+        },
       });
       break;
     case 'number':
