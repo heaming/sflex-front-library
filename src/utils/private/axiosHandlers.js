@@ -82,6 +82,7 @@ async function handleServerFailureSessionExpired(response) {
 
   // EDU WAPLE 일 경우
   if (isWaple) {
+    alert('test 001alert');
     localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
     localStorage.remove('reLoginInfo');
     localStorage.remove('lastTransactionTime');
