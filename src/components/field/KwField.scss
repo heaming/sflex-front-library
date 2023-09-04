@@ -32,6 +32,12 @@
       & + .q-field__append {
         padding-left: 8px;
       }
+
+      // kwInput clear 아이콘을 kwInput 내부에 직접 구현하면서 추가. 230902
+      .click-icon {
+        margin: 0;
+        padding-left: 8px;
+      }
     }
 
     &__inner {
