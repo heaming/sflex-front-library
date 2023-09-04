@@ -82,11 +82,12 @@ export function calcViewHeight(view, rows) {
   const { _container } = view._container;
   const { borderTopWidth } = getComputedStyle(_container);
 
+  const newBorderTopWidth = borderTopWidth?.split('px')?.[0];
   return layoutManager.headerBounds.height
         + layoutManager.footerBounds.height
         + (layoutManager.hscrollBar ? layoutManager.scrollBarHeight : 0)
         + layoutManager.minItemHeight * rows
-        + Math.ceil(parseFloat(borderTopWidth, 10));
+        + Math.ceil(parseFloat(newBorderTopWidth || 0, 10));
 }
 
 export async function syncHeadCheckIfAble(view) {
