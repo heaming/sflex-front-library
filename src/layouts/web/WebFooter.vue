@@ -50,7 +50,7 @@ export default {
       quickLinks.value = res.data;
     }
     function goQuickLink(link) {
-      window.location.href = link;
+      window.open(link);
     }
     return {
       showing,
