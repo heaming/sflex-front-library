@@ -72,7 +72,8 @@ const userInfo = {
 };
 
 async function reLogin() {
-  const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: password.value })
+  const passwordEnc = CryptoJS.AES.encrypt(password.value, key, { iv });
+  const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: passwordEnc.toString() })
     .catch(() => {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
       window.location.reload();
