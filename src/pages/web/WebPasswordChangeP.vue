@@ -48,6 +48,7 @@
       <kw-btn
         negative
         label="취소"
+        @click="cancel"
       />
       <kw-btn
         primary
@@ -68,7 +69,7 @@ import { alert } from '../../plugins/dialog';
 import { notify } from '../../plugins/notify';
 import { validate } from '../../index';
 
-const { ok } = useModal();
+const { ok, cancel } = useModal();
 const { t } = useI18n();
 
 const passwordPolicy = ref(null);

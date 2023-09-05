@@ -526,7 +526,7 @@ export default {
     }
 
     function goToNoticePage() {
-      router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
+      router.push('/kportal-notice-mgt');
     }
 
     function goToEduMaterialPage() {
@@ -534,11 +534,11 @@ export default {
     }
 
     function goToFaqPage() {
-      router.push({ name: 'MNU-0A1047EE-4E13-8EFC-F434-68E24FE2CEDD' });
+      router.push('/zwclb-faq-list');
     }
 
     function goToSmsSendHistoryPage() {
-      router.push({ name: 'MNU-7C508A53-7E5D-416B-8C38-148AE2B9835E' });
+      router.push('/zwcmz-sms-send-list');
     }
 
     function onClickReadItem(item) {
