@@ -203,7 +203,7 @@
                   <kw-btn
                     v-else-if="depth2Menu.editable"
                     borderless
-                    class="handle"
+                    class="handle h24 w24"
                     icon="menu_24"
                   />
                 </li>
