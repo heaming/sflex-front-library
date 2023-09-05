@@ -52,9 +52,11 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { isEmpty } from 'lodash-es';
+import CryptoJS from 'crypto-js';
 import { http } from '../../plugins/http';
 import useModal from '../../composables/useModal';
 import { alert } from '../../plugins/dialog';
+import consts from '../../consts';
 
 const { ok, cancel } = useModal();
 const { t } = useI18n();
@@ -69,7 +71,11 @@ async function onClickConfirm() {
     return;
   }
 
-  const res = await http.post('/sflex/common/common/password/check', { ...passwordInfo.value });
+  const iv = CryptoJS.enc.Hex.parse('');
+  const key = CryptoJS.enc.Utf8.parse(consts.CRYPT_AES_ENC_KEY);
+  const cipher = CryptoJS.AES.encrypt(passwordInfo.value.password, key, { iv });
+  const params = { password: cipher.toString() };
+  const res = await http.post('/sflex/common/common/password/check', { ...params });
   if (res) {
     ok();
   }
