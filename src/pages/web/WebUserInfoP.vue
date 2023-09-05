@@ -112,7 +112,6 @@ async function onClickConfirm() {
     component: () => import('../component/PasswordCheckP.vue'),
   });
 
-  console.log(res);
   if (res.result) {
     userInfo.value.cellPhoneLocataTelNumber = telephone.value.telNo1;
     userInfo.value.mexnoGbencr = telephone.value.telNo2;
