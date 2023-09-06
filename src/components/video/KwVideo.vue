@@ -30,7 +30,6 @@ export default {
     return {
       initVideo(event) {
         const player = videojs.getPlayer(event.target);
-        console.log(player);
         player.landscapeFullscreen();
       },
     };

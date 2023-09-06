@@ -159,8 +159,7 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
       urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${paramUrl.trim().length > 0 ? paramUrl : ''}${hash}`;
     } else urlWithUid = `${origin}${pathname}${search}${search ? '&' : '?'}pid=${pid}${hash}`;
     if (windowKey) {
-      window.updateChildWindowReference = function (childWindow) {
-        console.log(childWindow);
+      window.updateChildWindowReference = (childWindow) => {
         window[windowKey] = childWindow;
       };
       if (window[windowKey]) {

@@ -206,7 +206,6 @@ export default {
 
       if (isConfirmed) {
         const { pageId, menuUid } = node;
-        console.log(node);
         await http.delete('/sflex/common/common/bookmarks', { params: { pageId, menuUid } });
         await dispatch('meta/fetchBookmarks');
       }
