@@ -39,6 +39,7 @@
 </template>
 
 <script setup>
+import CryptoJS from 'crypto-js';
 // eslint-disable-next-line import/no-cycle
 import { http } from '../../plugins/http';
 import env from '../../consts/private/env';
@@ -49,10 +50,22 @@ import consts from '../../consts';
 const { ok } = useModal();
 const password = ref('');
 
-const userInfo = localStorage.getItem('reLoginInfo');
+const reLoginInfo = localStorage.getItem('reLoginInfo');
+const iv = CryptoJS.enc.Hex.parse('');
+const key = CryptoJS.enc.Utf8.parse(consts.CRYPT_AES_ENC_KEY);
+const byte = CryptoJS.AES.decrypt(reLoginInfo, key, { iv });
+
+const decStr = byte.toString(CryptoJS.enc.Utf8);
+const arr = decStr.split('|');
+const userInfo = {
+  tenantId: arr[0],
+  portalId: arr[1],
+  loginId: arr[2],
+};
 
 async function reLogin() {
-  const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: password.value })
+  const passwordEnc = CryptoJS.AES.encrypt(password.value, key, { iv });
+  const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: passwordEnc.toString() })
     .catch(() => {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
       window.location.reload();
