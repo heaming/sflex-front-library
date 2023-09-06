@@ -67,10 +67,11 @@ import useModal from '../../composables/useModal';
 import useMeta from '../../composables/useMeta';
 import { http } from '../../plugins/http';
 import { getCodes } from '../../utils/code';
+import useGlobal from '../../composables/useGlobal';
 
 const { cancel, ok } = useModal();
 const { dispatch } = useStore();
-
+const { modal } = useGlobal();
 const { getUserInfo } = useMeta();
 
 const userInfo = computed(() => cloneDeep(getUserInfo()));
@@ -91,17 +92,23 @@ async function onClickConfirm() {
   if (await frmMainRef.value?.alertIfIsNotModified()) return;
   if (!await frmMainRef.value.validate()) return;
 
-  const phone = cellphone.value.split('-');
-  userInfo.value.cellPhoneLocataTelNumber = phone[0];
-  userInfo.value.mexnoGbencr = phone[1];
-  userInfo.value.cellPhoneIndividualTelNumber = phone[2];
+  const res = await modal({
+    component: () => import('../component/PasswordCheckP.vue'),
+  });
 
-  userInfo.value.cellphone = cellphone.value;
+  if (res.result) {
+    const phone = cellphone.value.split('-');
+    userInfo.value.cellPhoneLocataTelNumber = phone[0];
+    userInfo.value.mexnoGbencr = phone[1];
+    userInfo.value.cellPhoneIndividualTelNumber = phone[2];
 
-  await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
-  await http.post('/sflex/common/common/set-session-data', userInfo.value);
-  await dispatch('meta/fetchLoginInfo');
-  ok();
+    userInfo.value.cellphone = cellphone.value;
+
+    await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
+    await http.post('/sflex/common/common/set-session-data', userInfo.value);
+    await dispatch('meta/fetchLoginInfo');
+    ok();
+  }
 }
 
 onMounted(() => {
