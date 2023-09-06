@@ -376,7 +376,6 @@ export default {
       const res = await modal({
         component: () => import('../../pages/web/WebCcpsSessionChangeP.vue'),
       });
-      console.log(res);
       if (res.result) {
         window.location.reload();
       }

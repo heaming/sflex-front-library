@@ -565,7 +565,7 @@ export default {
       computedItemClass,
       computedExpandIcon,
       computedExpandIconClass: computedExpandSideSectionClass,
-      onBlur: () => { console.log('blur'); },
+      onBlur: () => { },
       onUpdateShowing,
       showing,
       dialogClass,

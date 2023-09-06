@@ -59,8 +59,6 @@ const password = ref('');
 
 const userInfo = localStorage.getItem('reLoginInfo');
 
-console.log(userInfo);
-
 async function reLogin() {
   const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: password.value })
     .catch(() => {
