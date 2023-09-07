@@ -119,7 +119,7 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>
+            <q-item-label :class="!$g.platform.is.mobile && selectedAll ? 'text-weight-bold kw-fc--black1': '' ">
               {{ $t('MSG_TXT_ALL', null, '전체') }}
             </q-item-label>
           </q-item-section>
