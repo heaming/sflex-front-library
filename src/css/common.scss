@@ -395,7 +395,7 @@ body.tablet {
 
 .grid-horizontal-wrap {
   display: flex;
-  gap: 20px;
+  gap: 40px;
   justify-content: space-between;
 
   &__section {
@@ -1313,7 +1313,7 @@ body.mobile {
   }
 }
 
-// 삳단 상태박스 (ex:W-MP-U-0124M01)
+// 상단 상태박스 (ex:W-MP-U-0124M01)
 .state-boxes {
   $self: &;
 
@@ -1341,6 +1341,7 @@ body.mobile {
     font-weight: bold;
     line-height: 26px;
     text-decoration: underline;
+    color: $primary;
   }
 
   &--quarter {
@@ -1611,4 +1612,8 @@ body.mobile.temp_tablet {
     color: $black3;
     margin-top: 4px;
   }
+}
+
+.text-break-all {
+  word-break: break-all;
 }
