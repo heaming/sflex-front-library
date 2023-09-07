@@ -45,7 +45,6 @@ export default {
     let pageInfo = deepCopy(props.pageInfo);
 
     const load = async ($state) => {
-      console.log('loading...');
       try {
         emit('loadData', pageInfo, (res) => {
           const response = res;

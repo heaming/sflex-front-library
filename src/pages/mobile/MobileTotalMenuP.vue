@@ -123,7 +123,6 @@
                     :model-value="isBookmarkedPage(depth3Menu.menuUid, depth3Menu.pageId)"
                     :true-value="true"
                     :false-value="false"
-                    style="width: 16px; height: 16px;"
                     checked-icon="bookmark_on"
                     unchecked-icon="bookmark_off"
                     @update:model-value="(val) => updateBookmark(val, depth3Menu)"
@@ -135,7 +134,7 @@
                   <kw-btn
                     v-else-if="depth2Menu.editable"
                     borderless
-                    class="handle kw-font-pt16"
+                    class="handle kw-font-pt16 h24 w24"
                     icon="menu"
                     @click.stop.prevent
                   />

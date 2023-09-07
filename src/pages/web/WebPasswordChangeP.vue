@@ -48,6 +48,7 @@
       <kw-btn
         negative
         label="취소"
+        @click="cancel"
       />
       <kw-btn
         primary
@@ -62,13 +63,15 @@
 // eslint-disable-next-line import/no-cycle
 import { useI18n } from 'vue-i18n';
 import { isEmpty } from 'lodash-es';
+import CryptoJS from 'crypto-js';
 import { http } from '../../plugins/http';
 import useModal from '../../composables/useModal';
 import { alert } from '../../plugins/dialog';
 import { notify } from '../../plugins/notify';
 import { validate } from '../../index';
+import consts from '../../consts';
 
-const { ok } = useModal();
+const { ok, cancel } = useModal();
 const { t } = useI18n();
 
 const passwordPolicy = ref(null);
@@ -80,11 +83,8 @@ const passwordInfo = ref({
 
 });
 
-console.log(ok);
-
 async function getPasswordPolicy() {
   const res = await http.get('/sflex/common/common/password/policy');
-  console.log(res);
   passwordPolicy.value = res.data;
 }
 const validateNewPassword = async (val, options) => {
@@ -127,7 +127,19 @@ async function onClickConfirm() {
     return;
   }
 
-  const res = await http.post('/sflex/common/common/password/change', { ...passwordInfo.value });
+  const iv = CryptoJS.enc.Hex.parse('');
+  const key = CryptoJS.enc.Utf8.parse(consts.CRYPT_AES_ENC_KEY);
+  const currentPasswordCipher = CryptoJS.AES.encrypt(passwordInfo.value.currentPassword, key, { iv });
+  const newPasswordCipher = CryptoJS.AES.encrypt(passwordInfo.value.newPassword, key, { iv });
+  const newPasswordConfirmCipher = CryptoJS.AES.encrypt(passwordInfo.value.newPasswordConfirm, key, { iv });
+
+  const encryptedPasswordInfo = {
+    currentPassword: currentPasswordCipher.toString(),
+    newPassword: newPasswordCipher.toString(),
+    newPasswordConfirm: newPasswordConfirmCipher.toString(),
+  };
+
+  const res = await http.post('/sflex/common/common/password/change', { ...encryptedPasswordInfo });
   if (res) {
     ok();
     notify('비밀번호 변경이 완료되었습니다.');
