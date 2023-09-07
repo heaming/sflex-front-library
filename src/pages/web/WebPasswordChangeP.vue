@@ -83,11 +83,8 @@ const passwordInfo = ref({
 
 });
 
-console.log(ok);
-
 async function getPasswordPolicy() {
   const res = await http.get('/sflex/common/common/password/policy');
-  console.log(res);
   passwordPolicy.value = res.data;
 }
 const validateNewPassword = async (val, options) => {

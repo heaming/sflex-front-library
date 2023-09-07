@@ -36,7 +36,6 @@ export default {
 
   setup() {
     async function openSetSessionP() {
-      console.log('openSetSession');
       modal({
         component: () => import('../../pages/web/WebSessionSettingP.vue'),
       });

@@ -141,7 +141,6 @@ export default {
     let syncInProgress = false;
     watch(() => [props.telNo2, props.telNo3], ([telNo2, telNo3]) => {
       if (!syncInProgress) {
-        console.log('wow');
         const val = `${telNo2 ?? ''}-${telNo3 ?? ''}`;
         inputValue.value = val === '-' ? '' : val;
       }

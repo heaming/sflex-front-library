@@ -72,8 +72,6 @@ const userInfo = {
 };
 // const userInfo = localStorage.getItem('reLoginInfo');
 
-console.log(userInfo);
-
 async function reLogin() {
   const passwordEnc = CryptoJS.AES.encrypt(password.value, key, { iv });
   const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: passwordEnc.toString() })
