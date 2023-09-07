@@ -142,7 +142,7 @@
     }
 
     &.today {
-      background-color: rgba($primary, 0.1);
+      background-color: rgba($primary, 0.1) !important;
       border: 2px solid #fff !important;
 
       &:hover,

@@ -107,6 +107,14 @@
       flex: 1 1 calc(100% / 3 - 30px);
     }
   }
+
+  & + .kw-tabs {
+    padding-top: 40px;
+
+    & + .kw-tab-panels .q-panel .kw-tab-panel .result-area {
+      padding-top: 0;
+    }
+  }
 }
 
 body.mobile {
