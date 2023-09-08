@@ -95,13 +95,13 @@ export async function getImageData() {
   */
 // 카메라 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openCamera() {
-  if (getOsTypeCode() === 'I') return await callMethod(NativePlugin.Photo, 'openCamera');
+  if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) return await callMethod(NativePlugin.Photo, 'openCamera');
   return getImageData();
 }
 
 // 사진첩 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openPhotoGallery() {
-  if (getOsTypeCode() === 'I') return await callMethod(NativePlugin.Photo, 'openPhotoGallery');
+  if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) return await callMethod(NativePlugin.Photo, 'openPhotoGallery');
   return getImageData();
 }
 
