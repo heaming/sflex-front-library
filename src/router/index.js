@@ -35,6 +35,11 @@ function addRoutes(routes) {
       path: '/:catchAll(.*)*',
       component: () => import('../pages/ErrorNotFound.vue'),
     },
+    {
+      name: 'NeedSession',
+      path: '/need-session',
+      component: () => import('../pages/NeedSession.vue'),
+    },
   ], 'name');
 
   mergedRoutes.forEach((e) => {
