@@ -48,9 +48,22 @@ export default (to, from, next) => {
 
     // 미인증 세션의 경우 홈화면으로의 이동은 막는다.
     const user = store.getters['meta/getUserInfo'];
-    if (user.userId === 'anonymous') {
+    if (user.userId === 'anonymous' || user.portalId === 'NO_SESSION') {
       if (to.path === '/') {
         next(false);
+        return;
+      }
+
+      if (to.name === 'ErrorNotFound') {
+        next();
+        return;
+      }
+
+      if (window.location.pathname.indexOf('/popup') < 0
+        && window.location.pathname.indexOf('/mobile') < 0
+        && window.location.pathname.indexOf('/tablet') < 0) {
+        next({ name: 'ErrorNotFound' });
+        return;
       }
     }
 
@@ -60,7 +73,7 @@ export default (to, from, next) => {
         pick(to, ['path', 'query']),
       );
       next('/');
-    } else if (to.meta.pageUseCode === 'S' && from.fullPath === '/') {
+    } else if (to.meta?.pageUseCode === 'S' && from.fullPath === '/') {
       const targetPath = recursiveGetParentPath(to.meta.menuUid);
       const splitedPath = to.fullPath.split(`/${targetPath}`);
       window.history.replaceState({}, '');
