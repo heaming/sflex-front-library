@@ -49,7 +49,7 @@ export default (to, from, next) => {
     // 미인증 세션의 경우 홈화면으로의 이동은 막는다.
     const user = store.getters['meta/getUserInfo'];
     if (user.userId === 'anonymous' || user.portalId === 'NO_SESSION') {
-      if (to.path === '/') {
+      if (to.name === 'Home') {
         next(false);
         return;
       }
