@@ -95,13 +95,21 @@ export async function getImageData() {
   */
 // 카메라 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openCamera() {
-  if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) return await callMethod(NativePlugin.Photo, 'openCamera');
+  if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
+    const result = await callMethod(NativePlugin.Photo, 'openCamera');
+    console.log('opencamera', result);
+    return result;
+  }
   return getImageData();
 }
 
 // 사진첩 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openPhotoGallery() {
-  if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) return await callMethod(NativePlugin.Photo, 'openPhotoGallery');
+  if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
+    const result = await callMethod(NativePlugin.Photo, 'openPhotoGallery');
+    console.log('openPhoto', result);
+    return result;
+  }
   return getImageData();
 }
 
