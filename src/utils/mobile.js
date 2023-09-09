@@ -97,7 +97,6 @@ export async function getImageData() {
 export async function openCamera() {
   if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
     const result = await callMethod(NativePlugin.Photo, 'openCamera');
-    console.log('mobile, camera res', result, result?.imageData);
     return result?.imageData;
   }
   return getImageData();
@@ -107,7 +106,6 @@ export async function openCamera() {
 export async function openPhotoGallery() {
   if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
     const result = await callMethod(NativePlugin.Photo, 'openPhotoGallery');
-    console.log('mobile, gallery res', result, result?.imageData);
     return result?.imageData;
   }
   return getImageData();
