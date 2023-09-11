@@ -100,8 +100,8 @@ export async function openCamera() {
     console.log('openCamera callMethod result', decodeURIComponent(result?.imageData));
     return decodeURIComponent(result?.imageData);
   }
-  console.log('openCamera getImageData result', getImageData());
-  return getImageData();
+  console.log('openCamera getImageData result', await getImageData());
+  return await getImageData();
 }
 
 // 사진첩 열기 (실제 웹에서 input type의 스크립트로 처리함)
@@ -111,8 +111,8 @@ export async function openPhotoGallery() {
     console.log('openPhotoGallery callMethod result', decodeURIComponent(result?.imageData));
     return decodeURIComponent(result?.imageData);
   }
-  console.log('openPhotoGallery getImageData result', getImageData());
-  return getImageData();
+  console.log('openPhotoGallery getImageData result', await getImageData());
+  return await getImageData();
 }
 
 /*
