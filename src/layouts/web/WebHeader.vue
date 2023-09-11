@@ -533,7 +533,7 @@ export default {
     }
 
     function goToFaqPage() {
-      router.push('/zwclb-faq-list');
+      router.push('/zwclb-faq-list-for-user');
     }
 
     function goToSmsSendHistoryPage() {

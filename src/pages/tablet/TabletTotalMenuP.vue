@@ -454,7 +454,7 @@ function goToNoticePage() {
 }
 
 function goToFaqPage() {
-  router.push({ name: 'MNU-0A1047EE-4E13-8EFC-F434-68E24FE2CEDD' });
+  router.push('/ztclb-faq-list-for-user');
 }
 
 onMounted(() => {
