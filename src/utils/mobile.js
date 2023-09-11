@@ -95,9 +95,8 @@ export async function getImageData() {
   */
 // 카메라 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openCamera() {
+  const result = await callMethod(NativePlugin.Photo, 'openCamera');
   if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
-    const result = await callMethod(NativePlugin.Photo, 'openCamera');
-    console.log('openCamera callMethod result', decodeURIComponent(result?.imageData));
     return decodeURIComponent(result?.imageData);
   }
   console.log('openCamera getImageData result', await getImageData());
@@ -106,9 +105,8 @@ export async function openCamera() {
 
 // 사진첩 열기 (실제 웹에서 input type의 스크립트로 처리함)
 export async function openPhotoGallery() {
+  const result = await callMethod(NativePlugin.Photo, 'openPhotoGallery');
   if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
-    const result = await callMethod(NativePlugin.Photo, 'openPhotoGallery');
-    console.log('openPhotoGallery callMethod result', decodeURIComponent(result?.imageData));
     return decodeURIComponent(result?.imageData);
   }
   console.log('openPhotoGallery getImageData result', await getImageData());
