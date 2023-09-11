@@ -13,7 +13,6 @@ export default () => {
     const { params } = to;
 
     Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
-
     const index = stackViews.push({
       key: to.name,
       component: last(to.matched).components.default,
@@ -23,13 +22,12 @@ export default () => {
     return stackViews[index - 1];
   }
 
-  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getNoMenuPage'](to.meta.pageId) !== undefined;
   const removeAfterEach = router.afterEach((to, from, failure) => {
     if (failure) return;
 
     const { params } = to;
     Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
-
     if (isMenu(to)) {
       const key = selectedKey.value;
       const index = findIndex(stackViews, { key });
@@ -47,7 +45,7 @@ export default () => {
 
         stackViews[index].componentProps = cloneDeep(obj);
       } else add(to); // 새로운 서브페이지 이동 시, 페이지를 stackView에 추가한다
-    }
+    } else add(to);
   });
 
   if (isMenu(router.currentRoute.value)) {

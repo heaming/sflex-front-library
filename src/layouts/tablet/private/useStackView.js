@@ -23,7 +23,7 @@ export default () => {
     return stackViews[index - 1];
   }
 
-  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined;
+  const isMenu = (to) => store.getters['meta/getMenu'](to.meta.menuUid) !== undefined || store.getters['meta/getNoMenuPage'](to.meta.pageId) !== undefined;
   const removeAfterEach = router.afterEach((to, from, failure) => {
     if (failure) return;
 

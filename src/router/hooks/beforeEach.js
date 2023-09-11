@@ -31,9 +31,10 @@ export default (to, from, next) => {
     if (isLocatedFromHistory) {
       store.dispatch('meta/fetchLocatedFromHistory', false);
       next(false);
-    } else {
-      modals.forEach((modal) => removeGlobalData(modal.uid));
+      return;
     }
+
+    modals.forEach((modal) => removeGlobalData(modal.uid));
 
     // 고객용 도메인인 경우/popup /mobile이 아니거나 홈화면으로의 이동은 막는다.
     if (env.VITE_HTTP_CUST_ORIGIN === window.location.origin) {
