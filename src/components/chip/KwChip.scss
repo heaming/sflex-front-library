@@ -25,6 +25,15 @@
 
     .q-chip__icon {
       font-size: 1em;
+
+      &--remove {
+        color: $placeholder;
+        opacity: 1;
+
+        &:hover {
+          color: $black2;
+        }
+      }
     }
 
     // &.kw-chip--icon-only {
@@ -39,7 +48,6 @@
     //     }
     //   }
     // }
-
     & + h2 {
       padding-top: 8px;
     }
