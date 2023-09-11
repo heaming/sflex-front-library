@@ -5,6 +5,7 @@ import {
   formatBlock, lineHeight, template, link, image, list,
 } from 'suneditor/src/plugins';
 import { sanitize } from '../../../plugins/sanitize';
+import { platform } from '../../../plugins/platform';
 
 const { create } = SunEditor.init({
   // region [value]
@@ -57,7 +58,7 @@ const { create } = SunEditor.init({
     // ['table', 'link', 'image', 'video'],
     ['table', 'image', 'link'],
     // ['fullScreen', 'showBlocks'],
-    ['codeView', 'preview', 'print'],
+    platform.is.desktop ? ['codeView', 'preview', 'print'] : '',
     // ['save', 'template'],
   ],
   // endregion
