@@ -375,7 +375,7 @@ async function openSupportBottomSheet() {
     switch (res.payload?.value) {
       case 'notice': router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
         break;
-      case 'faq': router.push({ name: 'MNU-0A1047EE-4E13-8EFC-F434-68E24FE2CEDD' });
+      case 'faq': router.push('/zmclb-faq-list-for-user');
     }
   }
 }

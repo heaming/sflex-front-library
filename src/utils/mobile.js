@@ -99,7 +99,6 @@ export async function openCamera() {
   if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
     return decodeURIComponent(result?.imageData);
   }
-  console.log('openCamera getImageData result', await getImageData());
   return await getImageData();
 }
 
@@ -109,7 +108,6 @@ export async function openPhotoGallery() {
   if (platform.is.ios || platform.is.iphone || platform.is.ipad || platform.is.safari) {
     return decodeURIComponent(result?.imageData);
   }
-  console.log('openPhotoGallery getImageData result', await getImageData());
   return await getImageData();
 }
 
