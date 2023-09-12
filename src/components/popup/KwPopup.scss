@@ -65,7 +65,7 @@ body.tablet .kw-popup {
     .kw-popup__content {
       // max-height: 100% !important;
       height: calc(100vh - 8px);
-      max-height: calc(100vh - 8px);
+      max-height: calc(100vh - 8px) !important; // 태블릿 팝업에서의 높이 조정
     }
   }
 
