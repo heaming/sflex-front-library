@@ -45,9 +45,11 @@
 
 <script>
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import { alert } from '../../plugins/dialog';
 import useSession from '../../composables/useSession';
 import env from '../../consts/private/env';
+import consts from '../../consts';
 
 export default {
   name: 'TabletFallbackLogin',
@@ -80,6 +82,10 @@ export default {
     const { login } = useSession();
 
     async function onSubmit(formValues) {
+      const iv = CryptoJS.enc.Hex.parse('');
+      const key = CryptoJS.enc.Utf8.parse(consts.CRYPT_AES_ENC_KEY);
+      const cipher = CryptoJS.AES.encrypt(formValues.password, key, { iv });
+      formValues.password = cipher.toString();
       try {
         await login({
           tenantId,
