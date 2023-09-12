@@ -450,7 +450,7 @@ async function openAlarmListPopup() {
 }
 
 function goToNoticePage() {
-  router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
+  router.push('/kportal-notice-tablet-mgt');
 }
 
 function goToFaqPage() {

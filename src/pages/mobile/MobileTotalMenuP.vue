@@ -373,7 +373,7 @@ async function openSupportBottomSheet() {
   });
   if (res?.result) {
     switch (res.payload?.value) {
-      case 'notice': router.push({ name: 'MNU-E94DFC64-9A3B-2F62-A913-0587B1142B5D' });
+      case 'notice': router.push('/kportal-notice-mobile-mgt');
         break;
       case 'faq': router.push('/zmclb-faq-list-for-user');
     }
