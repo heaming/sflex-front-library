@@ -770,6 +770,7 @@ body.desktop .web-layout:has(.dashboard) {
     p {
       font-size: 14px;
       line-height: 20px;
+      color: $black2;
     }
 
     span {
@@ -815,10 +816,17 @@ body.desktop .web-layout:has(.dashboard) {
     }
     #{$self}-item {
       padding: 21px 0;
+    }
+  }
 
-      p {
-        color: $black2;
-      }
+  // 지국 계약 현황 E-SS-U-1301M01
+  &--branch {
+    #{$self}-item {
+      padding: 6px 0;
+    }
+
+    #{$self}-title {
+      margin-top: 16px;
     }
   }
 }
