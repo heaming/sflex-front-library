@@ -82,12 +82,12 @@ async function handleServerFailureSessionExpired(response) {
 
   // EDU WAPLE 일 경우
   if (isWaple.value) {
-    alert('test 001alert');
+    alert('화면 로딩에 문제가 발생했습니다. 창을 닫고 다시 시도 해주세요.');
     localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
     localStorage.remove('reLoginInfo');
     localStorage.remove('lastTransactionTime');
     closeWaffleApp();
-    // return;
+    return;
   }
 
   const now = dayjs();
