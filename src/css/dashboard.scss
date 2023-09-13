@@ -1025,86 +1025,88 @@ body.desktop .web-layout:has(.dashboard) {
       background: $line-bg url(~@assets/icons/grid_scroll_arrow_up.svg) no-repeat center;
     }
   }
+}
 
-  .planner-status-expansion {
-    $self: &;
+.planner-status-expansion {
+  $accordion: &;
 
+  overflow-x: hidden;
+
+  .kw-item__section.q-item__section--main ~ .q-item__section--side {
+    padding-left: 0;
+    width: 50px;
+    align-items: center;
+  }
+
+  .q-expansion-item--expanded {
+    #{$accordion}__header {
+      background-color: rgba($primary, 0.2);
+    }
+  }
+
+  &__header {
+    border-bottom: 1px solid #eee;
+
+    .kw-item__section {
+      padding: 0 4px;
+      height: 42px;
+      flex: none;
+      text-align: center;
+    }
+
+    .kw-item__label > span {
+      font-size: 14px;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
+  .q-expansion-item__content {
+    padding: 12px 26px 10px;
+    background-color: rgba($primary, 0.03);
     overflow-x: hidden;
+  }
 
-    .kw-item__section.q-item__section--main ~ .q-item__section--side {
-      padding-left: 0;
-      width: 50px;
-      align-items: center;
-    }
+  &__table {
+    margin: 0 -6px;
+    border-spacing: 0;
+    table-layout: fixed;
 
-    .q-expansion-item--expanded {
-      #{$self}__header {
-        background-color: rgba($primary, 0.2);
+    thead {
+      th {
+        border-bottom: 1px solid #ddd;
+        padding: 0 6px 8px;
+        font-size: 14px;
+        font-weight: 500;
       }
     }
 
-    &__header {
-      border-bottom: 1px solid #ddd;
-
-      .kw-item__section {
-        padding: 0 4px;
-        height: 42px;
-        flex: none;
-        text-align: center;
-      }
-
-      .kw-item__label > span {
+    tbody {
+      tr td {
+        padding: 2px 4px;
         font-size: 14px;
         font-weight: 400;
-        text-overflow: ellipsis;
+        line-height: 20px;
         overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
-      }
-    }
 
-    .q-expansion-item__content {
-      padding: 12px 26px 10px;
-      background-color: rgba($primary, 0.03);
-      overflow-x: hidden;
-    }
-
-    &__table {
-      margin: 0 -6px;
-      border-spacing: 0;
-      table-layout: fixed;
-
-      thead {
-        th {
-          border-bottom: 1px solid #ddd;
-          padding: 0 6px 8px;
-          font-size: 14px;
-          font-weight: 500;
+        p.text-underline {
+          cursor: pointer;
         }
       }
 
-      tbody {
-        tr td {
-          padding: 2px 4px;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 20px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-
-          p.text-underline {
-            cursor: pointer;
-          }
-        }
-
-        tr:first-of-type {
-          td {
-            padding-top: 6px;
-          }
+      tr:first-of-type {
+        td {
+          padding-top: 6px;
         }
       }
     }
   }
 }
+
+// //플래너 실정현황 E-CO-U-1301M01
 
 // end dashboard style
