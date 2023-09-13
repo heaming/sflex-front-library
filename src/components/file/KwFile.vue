@@ -595,6 +595,7 @@
 
 <script>
 import { alert } from '../../plugins/dialog';
+import useMeta from '../../composables/useMeta';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
@@ -677,6 +678,7 @@ export default {
     previewIcon: { type: String, default: 'viewer' },
     previewable: { type: Boolean, default: true },
     required: { type: Boolean, default: false },
+    extCode: { type: String, default: 'ALL' },
   },
 
   emits: [
@@ -692,6 +694,7 @@ export default {
     const { t } = useI18n();
 
     const fileRef = ref();
+    const { getConfigDescription } = useMeta();
 
     const fieldCtx = useField();
     const { value, isModified } = fieldCtx;
@@ -788,7 +791,7 @@ export default {
     // placeholder
     const acceptHint = computed(() => {
       if (!props.accept) { return; }
-      return `${platform.is.mobile ? t('MSG_TXT_EXTS') : t('MSG_TXT_ULD_PSB_FILE')} : ${props.accept}`;
+      return `${platform.is.mobile ? t('MSG_TXT_EXTS') : t('MSG_TXT_ULD_PSB_FILE')} : ${getConfigDescription(`CFG_CMD_ATTH_PSBL_EXTS_${props.extCode ?? 'ALL'}`) ?? props.accept}`;
     });
 
     const computedPlaceholder = computed(() => {
