@@ -17,6 +17,10 @@ export default () => {
     return getters['meta/getConfig'](configurationId)?.configurationValue ?? fallbackValue;
   }
 
+  function getConfigDescription(configurationId, fallbackValue) {
+    return getters['meta/getConfig'](configurationId)?.configurationDescription ?? fallbackValue;
+  }
+
   function hasPermission(permissionKey) {
     return hasPermissionKeyInPage(permissionKey, pageCtx);
   }
@@ -30,6 +34,7 @@ export default () => {
     getUserInfo,
     getPageInfo,
     getConfig,
+    getConfigDescription,
     hasPermission,
     hasRoleNickName,
   };
