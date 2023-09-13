@@ -761,6 +761,10 @@ body.desktop .web-layout:has(.dashboard) {
     &:first-child {
       background: $bg-box;
       border-right: 0;
+
+      & > span {
+        font-weight: 700;
+      }
     }
 
     &:last-child {
@@ -776,7 +780,7 @@ body.desktop .web-layout:has(.dashboard) {
     span {
       display: block;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 26px;
       margin-top: 4px;
     }
