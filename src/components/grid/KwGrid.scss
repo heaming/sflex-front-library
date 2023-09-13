@@ -910,6 +910,14 @@
 
   .rg-header-renderer > span:first-child {
     position: relative;
+
+    &:has(.rg-header-cell__hint) {
+      padding-right: 18px;
+
+      .rg-header-cell__hint {
+        right: 0;
+      }
+    }
   }
 
   &.rg-header-cell--required > .rg-header-renderer > span:first-child::after {
