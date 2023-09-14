@@ -254,8 +254,15 @@ export async function cloneView(view, options) {
 
   await timeout();
   if (isGridView && view.isGrouped()) {
+    let isSorted = null;
+    const sortedFields = view.getSortedFields();
+    const groupFields = view.getGroupFields();
+    if (sortedFields && sortedFields.length > 0) {
+      isSorted = sortedFields.find((x) => (
+        x.orgFieldName?.toLowerCase() === view.getDataSource()?.getFieldName(groupFields?.[0])?.toLowerCase()));
+    }
     copyView.setRowGroup(cloneDeep(view.getRowGroup()));
-    copyView.groupBy(cloneDeep(view.getGroupFields()));
+    copyView.groupBy(cloneDeep(view.getGroupFields()), isSorted !== null);
   }
 
   return copyView;
