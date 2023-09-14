@@ -1,7 +1,34 @@
 <template>
   <!-- 모바일, 태블릿용 -> 탭 시 나오게 변경 -->
-  <template v-if="!$g.platform.is.desktop">
-    <div v-touch-hold="emitTouchHoldEvent">
+  <kw-click-outside @click-outside="value = false">
+    <template v-if="!$g.platform.is.desktop">
+      <div v-touch-hold="emitTouchHoldEvent">
+        <q-tooltip
+          class="kw-tooltip"
+          v-bind="styleClassAttrs"
+          :model-value="value"
+          :scroll-target="scrollTarget"
+          :target="target"
+          :delay="delay"
+          :hide-delay="hideDelay"
+          :no-parent-event="noParentEvent"
+          :max-height="maxHeight"
+          :max-width="maxWidth"
+          :anchor="anchor"
+          :self="self"
+          :offset="offset"
+          :transition-duration="0"
+          @touchstart.stop
+          @mousedown.stop
+          @update:model-value="onUpdateValue"
+          @before-show="$emit('beforeShow', $event)"
+        >
+          <slot />
+        </q-tooltip>
+      </div>
+    </template>
+    <!-- PC용 -> 그대로 -->
+    <template v-else>
       <q-tooltip
         class="kw-tooltip"
         v-bind="styleClassAttrs"
@@ -17,41 +44,17 @@
         :self="self"
         :offset="offset"
         :transition-duration="0"
-        @touchstart.stop
-        @mousedown.stop
         @update:model-value="onUpdateValue"
         @before-show="$emit('beforeShow', $event)"
       >
         <slot />
       </q-tooltip>
-    </div>
-  </template>
-  <!-- PC용 -> 그대로 -->
-  <template v-else>
-    <q-tooltip
-      class="kw-tooltip"
-      v-bind="styleClassAttrs"
-      :model-value="value"
-      :scroll-target="scrollTarget"
-      :target="target"
-      :delay="delay"
-      :hide-delay="hideDelay"
-      :no-parent-event="noParentEvent"
-      :max-height="maxHeight"
-      :max-width="maxWidth"
-      :anchor="anchor"
-      :self="self"
-      :offset="offset"
-      :transition-duration="0"
-      @update:model-value="onUpdateValue"
-      @before-show="$emit('beforeShow', $event)"
-    >
-      <slot />
-    </q-tooltip>
-  </template>
+    </template>
+  </kw-click-outside>
 </template>
 
 <script>
+import { cloneDeep } from 'lodash-es';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
 
 export default {
@@ -74,6 +77,7 @@ export default {
     anchor: { type: String, default: undefined },
     self: { type: String, default: undefined },
     offset: { type: Array, default: () => [0, 3] },
+    multiline: { type: Number, default: 0 },
   },
 
   emits: [
@@ -82,12 +86,32 @@ export default {
     'touchStart',
   ],
 
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const vm = getCurrentInstance();
 
     const getParentEl = () => vm.proxy.$el.parentElement;
     const isEllipsised = () => getParentEl()?.scrollWidth > getParentEl()?.offsetWidth;
-    const isShowable = () => (props.showWhenEllipsised ? isEllipsised() : true);
+    const isMultilineEllipsised = () => {
+      const tempDiv = document.createElement('div');
+      tempDiv.setAttribute('id', 'tempDiv');
+      tempDiv.style.visibility = 'hidden';
+      tempDiv.style.whiteSpace = 'nowrap';
+      tempDiv.style.wordBreak = 'break-word';
+      tempDiv.append(cloneDeep(slots.default?.()?.[0]?.children));
+      document.body.append(tempDiv);
+
+      console.log(tempDiv.scrollWidth, tempDiv.offsetWidth);
+      const result = tempDiv.scrollWidth > tempDiv.offsetWidth * (props.multiline ?? 1);
+      document.body.removeChild(tempDiv);
+
+      return result;
+    };
+
+    const isShowable = () => {
+      if (props.showWhenEllipsised) return isEllipsised();
+      if (props.multiline > 1) return isMultilineEllipsised();
+      return true;
+    };
 
     const value = ref(false);
 
