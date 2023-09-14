@@ -1149,4 +1149,223 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
+// W-SV-U-1303M01 캘린더 현황
+
+.calendar-status {
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.813rem;
+    color: $black1;
+    text-align: center;
+  }
+
+  &__legends {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row nowrap;
+    column-gap: 12px;
+  }
+
+  &__legend-item {
+    position: relative;
+    padding-left: 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #777;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+    }
+
+    &.off {
+      &::before {
+        background-color: #ed1941;
+      }
+    }
+
+    &.on {
+      &::before {
+        background-color: #2f8af3;
+      }
+    }
+
+    &.remarks {
+      &::before {
+        background-color: #999;
+      }
+    }
+
+    &.assign {
+      &::before {
+        background-color: #26bf8c;
+      }
+    }
+
+    &.not-assign {
+      &::before {
+        background-color: #666;
+      }
+    }
+  }
+
+  &__calendar {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 12px;
+  }
+}
+
+.home-calendar-day {
+  display: flex;
+  width: 100%;
+
+  li {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    background-color: $bg-box;
+    border-right: 1px solid $line-bg;
+    border-left: 1px solid $line-bg;
+
+    &:not(:first-child) {
+      border-left: none;
+    }
+
+    &:first-child {
+      color: $error;
+    }
+  }
+}
+
+.home-calendar-weeks {
+  width: 100%;
+
+  &__week {
+    display: flex;
+    border-left: 1px solid $line-bg;
+  }
+
+  &__day {
+    width: calc(100% / 7);
+    padding: 5px 12px;
+    border-bottom: 1px solid $line-bg;
+    border-right: 1px solid $line-bg;
+    text-align: right;
+
+    // cursor: pointer;
+
+    &.opacity {
+      // cursor: not-allowed;
+
+      > * {
+        opacity: 0.3;
+      }
+    }
+
+    &.holiday {
+      .home-calendar-weeks__num {
+        color: $error;
+      }
+    }
+
+    &.today {
+      .home-calendar-weeks__num {
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 28px;
+          height: 28px;
+          border-radius: 100%;
+          background-color: rgba($primary, 0.1);
+        }
+      }
+    }
+  }
+
+  &__num {
+    display: inline-block;
+    width: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  &__infos {
+    display: grid;
+    grid-template-rows: repeat(3, 20px);
+    row-gap: 6px;
+  }
+
+  &__info {
+    width: inherit;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 0;
+
+    .kw-font--14 {
+      max-width: 99px;
+      color: $black2;
+      height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+        width: 4px;
+        height: 20px;
+      }
+    }
+
+    &.assign {
+      .kw-font--14::before {
+        background-color: #26bfbf;
+      }
+    }
+
+    &.not-assign {
+      .kw-font--14::before {
+        background-color: #666;
+      }
+    }
+
+    &.off {
+      .kw-font--14::before {
+        background-color: $error;
+      }
+    }
+
+    &.on {
+      .kw-font--14::before {
+        background-color: $primary;
+      }
+    }
+
+    &.remarks {
+      .kw-font--14::before {
+        background-color: $placeholder;
+      }
+    }
+  }
+}
+
 // end dashboard style
