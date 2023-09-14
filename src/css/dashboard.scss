@@ -50,7 +50,7 @@ body.desktop .web-layout:has(.dashboard) {
 
       h5 {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 32px;
         padding-right: 16px;
         margin: 0;
@@ -357,6 +357,7 @@ body.desktop .web-layout:has(.dashboard) {
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+  height: calc(100% - 77px);
 
   &-item {
     display: flex;
@@ -365,7 +366,7 @@ body.desktop .web-layout:has(.dashboard) {
     background: $bg-box;
     width: calc((100% /2) - 4px);
     min-height: 68px;
-    max-height: 68px;
+    max-height: calc((100% - 8px) / 2);
     padding: 0 12px;
     word-break: keep-all;
   }
@@ -703,6 +704,17 @@ body.desktop .web-layout:has(.dashboard) {
     #{$self}__scroll-wrap {
       margin-right: -20px;
     }
+    #{$self}__totals li,
+    #{$self}__product-amounts p {
+      width: 70px;
+    }
+  }
+
+  &--organization {
+    #{$self}__scroll-wrap {
+      margin-right: -20px;
+    }
+
     #{$self}__totals li,
     #{$self}__product-amounts p {
       width: 70px;
@@ -1369,3 +1381,8 @@ body.desktop .web-layout:has(.dashboard) {
 }
 
 // end dashboard style
+
+// 가동인원
+.persons-status {
+  height: 100%;
+}

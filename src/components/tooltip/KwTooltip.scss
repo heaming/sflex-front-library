@@ -27,6 +27,7 @@ body.mobile:not(.tablet) {
       font-size: 13px;
       left: 20px !important;
       right: 20px !important;
+      word-break: break-all;
 
       div {
         word-wrap: break-word; // 툴팁 길면 두줄 이상으로
