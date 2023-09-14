@@ -5,7 +5,7 @@ import {
 } from 'lodash-es';
 import { date } from 'quasar';
 import { RowState, TreeView, ExportTarget, ExportType } from 'realgrid';
-import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, isCellEditable } from './private/gridShared';
+import { waitUntilShowEditor, createCellIndexByDataColumn, cloneView, destroyCloneView, isCellEditable } from './private/gridShared';
 import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { notify } from '../plugins/notify';
@@ -649,9 +649,9 @@ export async function exportView(view, options) {
   const onComplete = async () => {
     await timeout();
 
-    // if (shouldClone) {
-    //   destroyCloneView(view);
-    // }
+    if (shouldClone) {
+      destroyCloneView(view);
+    }
     await timeout(libConfig.LOADING_PROGRESS_ANIMATION_SPEED);
   };
 
