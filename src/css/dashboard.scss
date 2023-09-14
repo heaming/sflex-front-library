@@ -469,14 +469,11 @@ body.desktop .web-layout:has(.dashboard) {
 .home-card-title {
   &,
   &.kw-btn--borderless.q-btn {
+    margin: 0;
     font-size: 20px;
     font-weight: 700;
     line-height: 1.813rem;
     color: $black1;
-  }
-
-  &h3 {
-    margin: 0;
   }
 }
 
@@ -487,8 +484,22 @@ body.desktop .web-layout:has(.dashboard) {
   justify-content: space-between;
   align-items: center;
 
-  .home-card-title {
-    margin: 0;
+  .home-card-select {
+    &.kw-select.q-select {
+      align-self: flex-start;
+
+      .q-select__dropdown-icon {
+        color: #777;
+      }
+
+      .q-field__marginal,
+      .q-field__control,
+      .q-field__native {
+        color: #777 !important;
+        min-height: 20px;
+        font-weight: 400;
+      }
+    }
   }
 }
 
@@ -969,6 +980,12 @@ body.desktop .web-layout:has(.dashboard) {
     p {
       margin-right: 8px;
       display: inline-block;
+      font-weight: 500;
+
+      &.ml4 {
+        margin-right: 0;
+        color: $primary;
+      }
     }
 
     span {
@@ -984,7 +1001,7 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-// 플래너 실정현황 E-CO-U-1301M01
+// 플래너 실적현황 E-CO-U-1301M01
 .planner-status {
   &__table {
     margin-top: 16px;
@@ -1107,6 +1124,29 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-// //플래너 실정현황 E-CO-U-1301M01
+// //플래너 실적현황 E-CO-U-1301M01
+
+// 처리현황 W-SV-U-1301M01
+// .process-status {
+
+// }
+
+// 모바일 해피콜현황 W-SV-U-1302M01
+.happycall-status {
+  .home-card-title-wrap {
+    .kw-select.q-select {
+      align-self: flex-start;
+
+      .q-select__dropdown-icon {
+        color: #777;
+      }
+
+      .q-field__native {
+        color: #777 !important;
+        font-weight: 400;
+      }
+    }
+  }
+}
 
 // end dashboard style
