@@ -182,6 +182,10 @@ export default {
         if (name) router.push({ name });
         else curr.value = -1;
       }
+
+      if (menu.icon === 'write_24') {
+        if (router.currentRoute?.value?.fullPath !== '/mobile/wmcta-contract-registration-type-select') router.push('/mobile/wmcta-contract-registration-type-select');
+      }
     }
 
     return {
