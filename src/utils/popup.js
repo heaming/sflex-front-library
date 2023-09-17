@@ -114,7 +114,19 @@ function close(result, payload, forceClose = true) {
       globalCloseEvent = null;
     }
 
-    window.close();
+    // 카카오일때 따로 닫는 로직 추가.
+    const ua = window.navigator.userAgent;
+    const kakao = 'KAKAOTALK';
+    // await alert(ua);
+    if (Platform.is.ios && ua.indexOf(kakao) > -1 && !window.opener) {
+      // 아이폰
+      window.location.href = 'kakaoweb://closeBrowser';
+    } else if (Platform.is.android && ua.indexOf(kakao) > -1 && !window.opener) {
+      // 안드로이드
+      window.location.href = 'kakaotalk://inappbrowser/close';
+    } else {
+      window.close();
+    }
   }
 }
 
