@@ -90,7 +90,7 @@ export function rebuildRoutes(router) {
       const pageInfo = noMenuPage[0];
       router.addRoute({
         ...route,
-        name: pageInfo.pageName ? pageInfo.pageName : pageInfo.pageId,
+        name: pageInfo.pageId,
         path: `/${kebabCase(pageInfo.pageDestinationValue.substring(0, pageInfo.pageDestinationValue.length - 1))}`,
         meta: {
           requiresAuth: true,

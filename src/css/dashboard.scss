@@ -50,14 +50,14 @@ body.desktop .web-layout:has(.dashboard) {
 
       h5 {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 32px;
-        padding-right: 16px;
+        padding-right: 20px;
         margin: 0;
 
-        & + .kw-field-wrap:has(.kw-btn-toggle) {
-          margin-left: 4px;
-        }
+        // & + .kw-field-wrap:has(.kw-btn-toggle) {
+        //   margin-left: 4px;
+        // }
       }
 
       dl {
@@ -357,6 +357,7 @@ body.desktop .web-layout:has(.dashboard) {
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+  height: calc(100% - 77px);
 
   &-item {
     display: flex;
@@ -365,7 +366,7 @@ body.desktop .web-layout:has(.dashboard) {
     background: $bg-box;
     width: calc((100% /2) - 4px);
     min-height: 68px;
-    max-height: 68px;
+    max-height: calc((100% - 8px) / 2);
     padding: 0 12px;
     word-break: keep-all;
   }
@@ -469,14 +470,11 @@ body.desktop .web-layout:has(.dashboard) {
 .home-card-title {
   &,
   &.kw-btn--borderless.q-btn {
+    margin: 0;
     font-size: 20px;
     font-weight: 700;
     line-height: 1.813rem;
     color: $black1;
-  }
-
-  &h3 {
-    margin: 0;
   }
 }
 
@@ -487,8 +485,22 @@ body.desktop .web-layout:has(.dashboard) {
   justify-content: space-between;
   align-items: center;
 
-  .home-card-title {
-    margin: 0;
+  .home-card-select {
+    &.kw-select.q-select {
+      align-self: flex-start;
+
+      .q-select__dropdown-icon {
+        color: #777;
+      }
+
+      .q-field__marginal,
+      .q-field__control,
+      .q-field__native {
+        color: #777 !important;
+        min-height: 20px;
+        font-weight: 400;
+      }
+    }
   }
 }
 
@@ -692,6 +704,17 @@ body.desktop .web-layout:has(.dashboard) {
     #{$self}__scroll-wrap {
       margin-right: -20px;
     }
+    #{$self}__totals li,
+    #{$self}__product-amounts p {
+      width: 70px;
+    }
+  }
+
+  &--organization {
+    #{$self}__scroll-wrap {
+      margin-right: -20px;
+    }
+
     #{$self}__totals li,
     #{$self}__product-amounts p {
       width: 70px;
@@ -969,6 +992,12 @@ body.desktop .web-layout:has(.dashboard) {
     p {
       margin-right: 8px;
       display: inline-block;
+      font-weight: 500;
+
+      &.ml4 {
+        margin-right: 0;
+        color: $primary;
+      }
     }
 
     span {
@@ -984,7 +1013,7 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-// 플래너 실정현황 E-CO-U-1301M01
+// 플래너 실적현황 E-CO-U-1301M01
 .planner-status {
   &__table {
     margin-top: 16px;
@@ -1107,6 +1136,253 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-// //플래너 실정현황 E-CO-U-1301M01
+// //플래너 실적현황 E-CO-U-1301M01
+
+// 처리현황 W-SV-U-1301M01
+// .process-status {
+
+// }
+
+// 모바일 해피콜현황 W-SV-U-1302M01
+.happycall-status {
+  .home-card-title-wrap {
+    .kw-select.q-select {
+      align-self: flex-start;
+
+      .q-select__dropdown-icon {
+        color: #777;
+      }
+
+      .q-field__native {
+        color: #777 !important;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+// W-SV-U-1303M01 캘린더 현황
+
+.calendar-status {
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.813rem;
+    color: $black1;
+    text-align: center;
+  }
+
+  &__legends {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row nowrap;
+    column-gap: 12px;
+  }
+
+  &__legend-item {
+    position: relative;
+    padding-left: 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #777;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+    }
+
+    &.off {
+      &::before {
+        background-color: #ed1941;
+      }
+    }
+
+    &.on {
+      &::before {
+        background-color: #2f8af3;
+      }
+    }
+
+    &.remarks {
+      &::before {
+        background-color: #999;
+      }
+    }
+
+    &.assign {
+      &::before {
+        background-color: #26bf8c;
+      }
+    }
+
+    &.not-assign {
+      &::before {
+        background-color: #666;
+      }
+    }
+  }
+
+  &__calendar {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 12px;
+  }
+}
+
+.home-calendar-day {
+  display: flex;
+  width: 100%;
+
+  li {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    background-color: $bg-box;
+    border-right: 1px solid $line-bg;
+    border-left: 1px solid $line-bg;
+
+    &:not(:first-child) {
+      border-left: none;
+    }
+
+    &:first-child {
+      color: $error;
+    }
+  }
+}
+
+.home-calendar-weeks {
+  width: 100%;
+
+  &__week {
+    display: flex;
+    border-left: 1px solid $line-bg;
+  }
+
+  &__day {
+    width: calc(100% / 7);
+    padding: 5px 12px;
+    border-bottom: 1px solid $line-bg;
+    border-right: 1px solid $line-bg;
+    text-align: right;
+
+    // cursor: pointer;
+
+    &.opacity {
+      // cursor: not-allowed;
+
+      > * {
+        opacity: 0.3;
+      }
+    }
+
+    &.holiday {
+      .home-calendar-weeks__num {
+        color: $error;
+      }
+    }
+
+    &.today {
+      .home-calendar-weeks__num {
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 28px;
+          height: 28px;
+          border-radius: 100%;
+          background-color: rgba($primary, 0.1);
+        }
+      }
+    }
+  }
+
+  &__num {
+    display: inline-block;
+    width: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  &__infos {
+    display: grid;
+    grid-template-rows: repeat(3, 20px);
+    row-gap: 6px;
+  }
+
+  &__info {
+    width: inherit;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 0;
+
+    .kw-font--14 {
+      max-width: 99px;
+      color: $black2;
+      height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+        width: 4px;
+        height: 20px;
+      }
+    }
+
+    &.assign {
+      .kw-font--14::before {
+        background-color: #26bfbf;
+      }
+    }
+
+    &.not-assign {
+      .kw-font--14::before {
+        background-color: #666;
+      }
+    }
+
+    &.off {
+      .kw-font--14::before {
+        background-color: $error;
+      }
+    }
+
+    &.on {
+      .kw-font--14::before {
+        background-color: $primary;
+      }
+    }
+
+    &.remarks {
+      .kw-font--14::before {
+        background-color: $placeholder;
+      }
+    }
+  }
+}
+
+// 가동인원
+.persons-status {
+  height: 100%;
+}
 
 // end dashboard style
