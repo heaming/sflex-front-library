@@ -1,0 +1,16 @@
+
+<svg id="chip_plus" data-name="chip_plus(h16)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g id="keyline_16px" data-name="keyline/16px">
+    <path id="bounding-box" d="M0,0H16V16H0Z" fill="none"/>
+  </g>
+  <g id="icon" transform="translate(0.023 -0.237)">
+    <g id="타원_5062" data-name="타원 5062" transform="translate(0.977 1.237)" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="7" cy="7" r="7" stroke="none"/>
+      <circle cx="7" cy="7" r="6.25" fill="none"/>
+    </g>
+    <g id="icon-2" data-name="icon" transform="translate(-1799.568 -371.239)">
+      <line id="선_3168" data-name="선 3168" y2="7" transform="translate(1807.545 375.975)" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <line id="선_3169" data-name="선 3169" x2="7" transform="translate(1804.045 379.476)" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>
