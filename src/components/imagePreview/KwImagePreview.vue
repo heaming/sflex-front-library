@@ -2,14 +2,26 @@
   <div
     class="gallery_area"
   >
-    <kw-icon
-      name="arrow_left"
+    <q-btn
+      class="prev-arrow"
+      icon="arrow_left_24"
       clickable
+      unelevated
+      borderless
+      :disable="viewer?.index === 0"
       @click="rotateImage(-1)"
     />
     <div
       id="gallery-container"
     >
+      <div class="gallery-caption">
+        <p>
+          {{ imgs[viewer?.index]?.file?.fileName }}
+          <kw-tooltip show-when-ellipsised>
+            {{ imgs[viewer?.index]?.file?.fileName }}
+          </kw-tooltip>
+        </p>
+      </div>
       <div id="gallery">
         <ul class="pictures">
           <li
@@ -26,9 +38,13 @@
         </ul>
       </div>
     </div>
-    <kw-icon
-      name="arrow_right"
+    <q-btn
+      class="next-arrow"
+      icon="arrow_right_24"
       clickable
+      unelevated
+      borderless
+      :disable="viewer?.index === imgs.length - 1"
       @click="rotateImage(1)"
     />
   </div>
