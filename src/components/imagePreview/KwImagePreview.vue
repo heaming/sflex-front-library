@@ -15,9 +15,12 @@
       id="gallery-container"
     >
       <div class="gallery-caption">
-        <p>
+        <p @click="showTooltip = !showTooltip">
           {{ imgs[viewer?.index]?.file?.fileName }}
-          <kw-tooltip show-when-ellipsised>
+          <kw-tooltip
+            v-model="showTooltip"
+            show-when-ellipsised
+          >
             {{ imgs[viewer?.index]?.file?.fileName }}
           </kw-tooltip>
         </p>
@@ -63,7 +66,7 @@ export default {
   setup(props, { emit }) {
     const viewer = ref();
     const imgs = ref([]);
-
+    const showTooltip = ref(false);
     async function initImages() {
       const promises = props.images.map(async (image) => {
         const temp = {};
@@ -102,6 +105,8 @@ export default {
         transition: false,
         container: '#gallery_container',
         fullscreen: false,
+        toggleOnDblclick: false,
+        slideOnTouch: false,
       });
 
       viewer?.value?.show();
@@ -135,6 +140,7 @@ export default {
       viewer,
       imgs,
       rotateImage,
+      showTooltip,
     };
   },
 };
