@@ -165,7 +165,7 @@ import useAlarm from '../../components/page/private/useAlarm';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
-const { getters, dispatch } = useStore();
+const { getters, dispatch, commit } = useStore();
 const { logout } = useSession();
 const { t } = useI18n();
 
@@ -380,6 +380,16 @@ async function openSupportBottomSheet() {
   }
 }
 
+async function openHomeMgtPopup() {
+  const res = await modal({
+    component: () => import('./MobileDashboardMgtP.vue'),
+  });
+
+  if (res.result) {
+    commit('app/setUserHomecardChanged', true);
+  }
+}
+
 async function openUserInfoBottomSheet() {
   const res = await bottomSheet({
     title: '개인설정',
@@ -397,6 +407,8 @@ async function openUserInfoBottomSheet() {
       case 'logout': logout();
         break;
       case 'sessionChange': openSessionSettingP();
+        break;
+      case 'homeSetting': openHomeMgtPopup();
     }
   }
 }
