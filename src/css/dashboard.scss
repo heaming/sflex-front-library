@@ -10,19 +10,24 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-body.tablet .tablet-layout:has(.dashboard) {
-  .kw-page-mobile-header {
-    display: none;
-  }
+body.tablet {
+  .tablet-layout,
+  .dev-layout {
+    &:has(.dashboard) {
+      .kw-page-mobile-header {
+        display: none;
+      }
 
-  & > .q-page-container {
-    min-width: 1212px;
-  }
+      & > .q-page-container {
+        min-width: 1212px;
+      }
 
-  .kw-page__content {
-    padding: 0 0 30px;
-    margin-bottom: 0;
-    background-color: transparent;
+      .kw-page__content {
+        padding: 0 0 30px;
+        margin-bottom: 0;
+        background-color: transparent;
+      }
+    }
   }
 }
 
