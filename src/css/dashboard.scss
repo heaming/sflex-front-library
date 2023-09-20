@@ -480,9 +480,9 @@ body.tablet .tablet-layout:has(.dashboard) {
   &,
   &.kw-btn--borderless.q-btn {
     margin: 0;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.813rem;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 1.813rem !important;
     color: $black1;
   }
 }
