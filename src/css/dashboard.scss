@@ -485,9 +485,9 @@ body.tablet {
   &,
   &.kw-btn--borderless.q-btn {
     margin: 0;
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    line-height: 1.813rem !important;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.813rem;
     color: $black1;
   }
 }
@@ -1483,6 +1483,20 @@ body.tablet {
     margin-left: 4px;
     font-size: 10px;
     font-weight: 700;
+  }
+}
+
+// 대시보드 모바일
+body.mobile {
+  .home-card-title {
+    &,
+    &.kw-btn--borderless.q-btn {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.75rem;
+      color: $black1;
+    }
   }
 }
 
