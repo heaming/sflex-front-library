@@ -10,19 +10,24 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-body.tablet .tablet-layout:has(.dashboard) {
-  .kw-page-mobile-header {
-    display: none;
-  }
+body.tablet {
+  .tablet-layout,
+  .dev-layout {
+    &:has(.dashboard) {
+      .kw-page-mobile-header {
+        display: none;
+      }
 
-  & > .q-page-container {
-    min-width: 1212px;
-  }
+      & > .q-page-container {
+        min-width: 1212px;
+      }
 
-  .kw-page__content {
-    padding: 0 0 30px;
-    margin-bottom: 0;
-    background-color: transparent;
+      .kw-page__content {
+        padding: 0 0 30px;
+        margin-bottom: 0;
+        background-color: transparent;
+      }
+    }
   }
 }
 
@@ -492,7 +497,7 @@ body.tablet .tablet-layout:has(.dashboard) {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
   .home-card-select {
     &.kw-select.q-select {
@@ -522,7 +527,7 @@ body.tablet .tablet-layout:has(.dashboard) {
     min-height: 24px;
   }
 
-  .kw-btn.q-btn--dense {
+  .kw-btn.q-btn--dense:not(.kw-btn--toggle-text-color-primary) {
     padding: 0 8px !important;
     font-size: 12px;
     line-height: 17px;
@@ -530,6 +535,8 @@ body.tablet .tablet-layout:has(.dashboard) {
   }
 
   .kw-btn-toggle {
+    @include kw-btn-height-modifier($button-dense-padding, $kw-field-line-height-dense, $kw-field-font-size-dense, $button-font-weight);
+
     .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
       &::after {
         border-color: $secondary !important;
@@ -1418,7 +1425,7 @@ body.tablet {
     &_wrap {
       grid-template-rows: 315px;
       grid-template-columns: repeat(3, 390px);
-      gap: 20px;
+      gap: 20px 21px;
       margin: 20px 0 0;
       padding-bottom: 0;
     }
@@ -1449,6 +1456,37 @@ body.tablet {
   }
 }
 
+// W-MT-U-1001M02 수수료현황
+.tab-commission {
+  &__text-wrap {
+    margin-top: 16px;
+
+    p.kw-fc--primary {
+      font-size: 20px;
+      font-weight: 700;
+
+      > span {
+        font-size: 16px;
+      }
+    }
+
+    p.kw-font-dense {
+      margin-top: 2px;
+    }
+  }
+}
+
+//  W-MT-U-1001M07 알려줌
+.zoom-badge {
+  &.q-badge {
+    padding: 1px 3px;
+    margin-left: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+}
+
+// 대시보드 모바일
 body.mobile {
   .home-card-title {
     &,
