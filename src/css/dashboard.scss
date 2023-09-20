@@ -497,7 +497,7 @@ body.tablet {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
   .home-card-select {
     &.kw-select.q-select {
@@ -1423,7 +1423,7 @@ body.tablet {
     &_wrap {
       grid-template-rows: 315px;
       grid-template-columns: repeat(3, 390px);
-      gap: 20px;
+      gap: 20px 21px;
       margin: 20px 0 0;
       padding-bottom: 0;
     }
@@ -1451,6 +1451,36 @@ body.tablet {
         height: 650px; // 315 * 2 + 20
       }
     }
+  }
+}
+
+// W-MT-U-1001M02 수수료현황
+.tab-commission {
+  &__text-wrap {
+    margin-top: 16px;
+
+    p.kw-fc--primary {
+      font-size: 20px;
+      font-weight: 700;
+
+      > span {
+        font-size: 16px;
+      }
+    }
+
+    p.kw-font-dense {
+      margin-top: 2px;
+    }
+  }
+}
+
+//  W-MT-U-1001M07 알려줌
+.zoom-badge {
+  &.q-badge {
+    padding: 1px 3px;
+    margin-left: 4px;
+    font-size: 10px;
+    font-weight: 700;
   }
 }
 
