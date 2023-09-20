@@ -103,11 +103,11 @@ export async function download(fileInfo, targetPath = targetPaths[0], file) {
       responseType: 'blob',
     });
 
-    downloadBlob(response.data, params.originalFileName);
+    downloadBlob(response.data, fileInfo?.fileName ?? params.originalFileName);
   } else if (file?.nativeFile) {
     // fileUid가 없는, 업로드된 파일도 다운로드
     const fileToBlob = new Blob([file?.nativeFile]);
-    downloadBlob(fileToBlob, fileInfo.originalFileName);
+    downloadBlob(fileToBlob, fileInfo?.fileName ?? fileInfo.originalFileName);
   }
 }
 /* eslint-enable default-param-last */

@@ -2,14 +2,29 @@
   <div
     class="gallery_area"
   >
-    <kw-icon
-      name="arrow_left"
+    <q-btn
+      class="prev-arrow"
+      icon="arrow_left_24"
       clickable
+      unelevated
+      borderless
+      :disable="viewer?.index === 0"
       @click="rotateImage(-1)"
     />
     <div
       id="gallery-container"
     >
+      <div class="gallery-caption">
+        <p @click="showTooltip = !showTooltip">
+          {{ imgs[viewer?.index]?.file?.fileName }}
+          <kw-tooltip
+            v-model="showTooltip"
+            show-when-ellipsised
+          >
+            {{ imgs[viewer?.index]?.file?.fileName }}
+          </kw-tooltip>
+        </p>
+      </div>
       <div id="gallery">
         <ul class="pictures">
           <li
@@ -26,9 +41,13 @@
         </ul>
       </div>
     </div>
-    <kw-icon
-      name="arrow_right"
+    <q-btn
+      class="next-arrow"
+      icon="arrow_right_24"
       clickable
+      unelevated
+      borderless
+      :disable="viewer?.index === imgs.length - 1"
       @click="rotateImage(1)"
     />
   </div>
@@ -47,7 +66,7 @@ export default {
   setup(props, { emit }) {
     const viewer = ref();
     const imgs = ref([]);
-
+    const showTooltip = ref(false);
     async function initImages() {
       const promises = props.images.map(async (image) => {
         const temp = {};
@@ -86,6 +105,8 @@ export default {
         transition: false,
         container: '#gallery_container',
         fullscreen: false,
+        toggleOnDblclick: false,
+        slideOnTouch: false,
       });
 
       viewer?.value?.show();
@@ -119,6 +140,7 @@ export default {
       viewer,
       imgs,
       rotateImage,
+      showTooltip,
     };
   },
 };
