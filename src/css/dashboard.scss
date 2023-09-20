@@ -1397,7 +1397,8 @@ body.tablet {
 }
 
 // 가동인원
-.persons-status {
+.persons-status,
+.paid-status {
   height: 100%;
 }
 
@@ -1453,6 +1454,10 @@ body.tablet {
         height: 650px; // 315 * 2 + 20
       }
     }
+  }
+
+  .count-status-number {
+    font-size: 20px;
   }
 }
 
