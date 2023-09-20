@@ -480,9 +480,9 @@ body.tablet .tablet-layout:has(.dashboard) {
   &,
   &.kw-btn--borderless.q-btn {
     margin: 0;
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    line-height: 1.813rem !important;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.813rem;
     color: $black1;
   }
 }
@@ -1445,6 +1445,19 @@ body.tablet {
         width: 800px; // 390 *2 + 20
         height: 650px; // 315 * 2 + 20
       }
+    }
+  }
+}
+
+body.mobile {
+  .home-card-title {
+    &,
+    &.kw-btn--borderless.q-btn {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.75rem;
+      color: $black1;
     }
   }
 }
