@@ -460,7 +460,7 @@ function goToFaqPage() {
 
 async function openHomeMgtPopup() {
   const res = await modal({
-    component: () => import('../web/WebDashboardMgtP.vue'),
+    component: () => import('./TabletDashboardMgtP.vue'),
   });
 
   if (res.result) {
