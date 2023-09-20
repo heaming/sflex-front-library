@@ -89,6 +89,7 @@
                 borderless
                 label="개인 홈 설정"
                 class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+                @click="openHomeMgtPopup"
               />
               <kw-btn
                 borderless
@@ -232,7 +233,7 @@ import useAlarm from '../../components/page/private/useAlarm';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const userInfo = useMeta().getUserInfo();
-const { getters, dispatch } = useStore();
+const { getters, dispatch, commit } = useStore();
 
 const { logout } = useSession();
 const { readAllAlarm } = useAlarm();
@@ -455,6 +456,16 @@ function goToNoticePage() {
 
 function goToFaqPage() {
   router.push('/ztclb-faq-list-for-user');
+}
+
+async function openHomeMgtPopup() {
+  const res = await modal({
+    component: () => import('../web/WebDashboardMgtP.vue'),
+  });
+
+  if (res.result) {
+    commit('app/setUserHomecardChanged', true);
+  }
 }
 
 onMounted(() => {
