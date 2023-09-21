@@ -1456,8 +1456,16 @@ body.tablet {
     }
   }
 
+  .count-status {
+    height: calc(100% - 51px);
+  }
+
   .count-status-number {
     font-size: 20px;
+  }
+
+  .card-list-wrap .kw-list.kw-list--card .info-list {
+    margin-top: 0;
   }
 }
 
