@@ -1511,6 +1511,99 @@ body.mobile {
       color: $black1;
     }
   }
+
+  .dashboard-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &__item {
+      width: calc((100% - 8px) / 2);
+      padding: 12px;
+      border: 1px solid #eee;
+    }
+
+    &__bottom {
+      text-align: right;
+    }
+
+    .status-number {
+      &__item {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        p {
+          margin-right: 4px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          color: $black1;
+        }
+
+        span {
+          width: 57px;
+          display: inline-block;
+          font-size: 24px;
+          font-weight: 700;
+          color: $black1;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  .materials-management {
+    .dashboard-box {
+      &__item {
+        height: 144px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .monthly-commission {
+    &__text {
+      padding-top: 20px;
+    }
+
+    &__price {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 30px;
+      color: $primary;
+
+      span {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+      }
+    }
+
+    &_explain {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 20px;
+      color: $black1;
+    }
+  }
+
+  // 자재현황
+  .material-status {
+    &__btn {
+      width: calc(50% - 4px);
+
+      .q-btn__content {
+        justify-content: space-between;
+
+        .block {
+          width: calc(100% - 18px);
+        }
+      }
+    }
+  }
 }
 
 // end dashboard style
