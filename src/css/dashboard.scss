@@ -54,7 +54,7 @@ body.tablet {
       line-height: 32px;
 
       span {
-        font-weight: 500;
+        font-weight: 700;
       }
     }
 
@@ -535,8 +535,6 @@ body.tablet {
   }
 
   .kw-btn-toggle {
-    @include kw-btn-height-modifier($button-dense-padding, $kw-field-line-height-dense, $kw-field-font-size-dense, $button-font-weight);
-
     .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
       &::after {
         border-color: $secondary !important;
@@ -1472,7 +1470,11 @@ body.tablet {
 // W-MT-U-1001M02 수수료현황
 .tab-commission {
   &__text-wrap {
-    margin-top: 16px;
+    margin-top: 10px;
+
+    .kw-font-dense {
+      line-height: 20px;
+    }
 
     p.kw-fc--primary {
       font-size: 20px;
@@ -1496,6 +1498,98 @@ body.tablet {
     margin-left: 4px;
     font-size: 10px;
     font-weight: 700;
+  }
+}
+
+// W-MT-U-1001M03 태블릿 계약현황
+.card-list-wrap {
+  &--tab-approval {
+    .kw-list--card {
+      .kw-list__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// W-MT-U-2001M02 태블릿 배정현황
+.tab-assign-status {
+  $root: &;
+
+  height: 100%;
+
+  &__box-area {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: calc(100% - 42px);
+  }
+
+  &__box-wrap {
+    display: flex;
+    gap: 8px;
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
+
+  &__box {
+    flex: 1 1 40%;
+    padding: 12px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    border: 1px solid #eee;
+
+    &--primary {
+      flex-basis: 133px;
+      flex-shrink: 0;
+      border: 0;
+      background-color: $primary;
+      #{$root}__box-title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        color: $bg-white;
+      }
+      #{$root}__box-count {
+        font-size: 20px;
+        color: rgba($bg-white, 0.7);
+
+        b {
+          font-size: 32px;
+          font-weight: 500;
+          color: rgba($bg-white, 1);
+        }
+      }
+    }
+  }
+
+  &__box-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__box-count {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #999;
+    text-align: right;
+
+    b {
+      font-size: 24px;
+      line-height: 35px;
+      font-weight: 700;
+      color: #222;
+    }
   }
 }
 
