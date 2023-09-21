@@ -65,7 +65,7 @@ export default {
   },
 
   setup(props) {
-    const useBackdoorLogin = ref(!env.VITE_LOGIN_URL || env.DEV || env.MODE === 'dev' || env.LOCAL);
+    const useBackdoorLogin = ref(!env.VITE_LOGIN_URL || env.LOCAL);
 
     axios.get(`${env.VITE_SSO_HEALTH_CHECK_URL}`).then((res) => {
       if (!res?.data) {
