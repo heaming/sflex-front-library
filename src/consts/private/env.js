@@ -3,7 +3,6 @@ const env = __VUE_IMPORT_META_ENV__;
 
 const isLocal = window.location.host.startsWith('localhost:');
 const isServer = env.PROD && !isLocal;
-const httpOrigin = isServer ? window.location.origin : env.VITE_HTTP_ORIGIN;
 
 export default {
   ...env,
@@ -23,11 +22,11 @@ export default {
   VITE_LOGIN_URL: isLocal ? undefined : env.VITE_LOGIN_URL,
   VITE_LOGOUT_URL: isLocal ? undefined : env.VITE_LOGOUT_URL,
 
-  VITE_HTTP_ORIGIN: httpOrigin,
+  VITE_HTTP_ORIGIN: isServer ? window.location.origin : env.VITE_HTTP_ORIGIN,
   VITE_HTTP_API_VERSION_PREFIX: env.VITE_HTTP_API_VERSION_PREFIX,
   VITE_HTTP_TIMEOUT: parseInt(env.VITE_HTTP_TIMEOUT, 10),
   VITE_HTTP_CUST_ORIGIN: env.VITE_HTTP_CUST_ORIGIN,
-  VITE_SSO_HEALTH_CHECK_URL: httpOrigin + env.VITE_SSO_HEALTH_CHECK_URL,
+  VITE_SSO_HEALTH_CHECK_URL: window.location.origin + env.VITE_SSO_HEALTH_CHECK_URL,
 
   VITE_CDN_ORIGIN: env.VITE_CDN_ORIGIN || null,
   VITE_AES_ENC_KEY: env.VITE_AES_ENC_KEY || null,
