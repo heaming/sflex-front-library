@@ -54,7 +54,7 @@ body.tablet {
       line-height: 32px;
 
       span {
-        font-weight: 500;
+        font-weight: 700;
       }
     }
 
@@ -535,8 +535,6 @@ body.tablet {
   }
 
   .kw-btn-toggle {
-    @include kw-btn-height-modifier($button-dense-padding, $kw-field-line-height-dense, $kw-field-font-size-dense, $button-font-weight);
-
     .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
       &::after {
         border-color: $secondary !important;
@@ -1456,15 +1454,27 @@ body.tablet {
     }
   }
 
+  .count-status {
+    height: calc(100% - 51px);
+  }
+
   .count-status-number {
     font-size: 20px;
+  }
+
+  .card-list-wrap .kw-list.kw-list--card .info-list {
+    margin-top: 0;
   }
 }
 
 // W-MT-U-1001M02 수수료현황
 .tab-commission {
   &__text-wrap {
-    margin-top: 16px;
+    margin-top: 10px;
+
+    .kw-font-dense {
+      line-height: 20px;
+    }
 
     p.kw-fc--primary {
       font-size: 20px;
@@ -1491,16 +1501,201 @@ body.tablet {
   }
 }
 
+// W-MT-U-1001M03 태블릿 계약현황
+.card-list-wrap {
+  &--tab-approval {
+    .kw-list--card {
+      .kw-list__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// W-MT-U-2001M02 태블릿 배정현황
+.tab-assign-status {
+  $root: &;
+
+  height: 100%;
+
+  &__box-area {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: calc(100% - 42px);
+  }
+
+  &__box-wrap {
+    display: flex;
+    gap: 8px;
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
+
+  &__box {
+    flex: 1 1 40%;
+    padding: 12px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    border: 1px solid #eee;
+
+    &--primary {
+      flex-basis: 133px;
+      flex-shrink: 0;
+      border: 0;
+      background-color: $primary;
+      #{$root}__box-title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        color: $bg-white;
+      }
+      #{$root}__box-count {
+        font-size: 20px;
+        color: rgba($bg-white, 0.7);
+
+        b {
+          font-size: 32px;
+          font-weight: 500;
+          color: rgba($bg-white, 1);
+        }
+      }
+    }
+  }
+
+  &__box-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__box-count {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #999;
+    text-align: right;
+
+    b {
+      font-size: 24px;
+      line-height: 35px;
+      font-weight: 700;
+      color: #222;
+    }
+  }
+}
+
 // 대시보드 모바일
 body.mobile {
   .home-card-title {
     &,
     &.kw-btn--borderless.q-btn {
       margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.75rem;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      line-height: 1.75rem !important;
       color: $black1;
+    }
+  }
+
+  .dashboard-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &__item {
+      width: calc((100% - 8px) / 2);
+      padding: 12px;
+      border: 1px solid #eee;
+    }
+
+    &__bottom {
+      text-align: right;
+    }
+
+    .status-number {
+      &__item {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        p {
+          margin-right: 4px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          color: $black1;
+        }
+
+        span {
+          width: 57px;
+          display: inline-block;
+          font-size: 24px;
+          font-weight: 700;
+          color: $black1;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  .materials-management {
+    .dashboard-box {
+      &__item {
+        height: 144px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .monthly-commission {
+    &__text {
+      padding-top: 20px;
+    }
+
+    &__price {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 30px;
+      color: $primary;
+
+      span {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+      }
+    }
+
+    &_explain {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 20px;
+      color: $black1;
+    }
+  }
+
+  // 자재현황
+  .material-status {
+    &__btn {
+      width: calc(50% - 4px);
+
+      .q-btn__content {
+        justify-content: space-between;
+
+        .block {
+          width: calc(100% - 18px);
+        }
+      }
     }
   }
 }
