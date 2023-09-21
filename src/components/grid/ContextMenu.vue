@@ -218,6 +218,7 @@ export default {
 
     function onClickViewOption(opt) {
       view.setColumnProperty(opt.column, 'visible', !opt.visible);
+      view.layoutByColumn(opt.column).visible = !view.layoutByColumn(opt.column).visible;
       updateContextConfig();
     }
 
