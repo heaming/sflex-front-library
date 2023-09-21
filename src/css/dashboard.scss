@@ -1755,6 +1755,23 @@ body.mobile {
   .today-status {
     margin-top: 12px;
     padding: 0 20px;
+
+    &__bottom {
+      width: 100%;
+      padding: 16px 0;
+      border-bottom: 1px solid $line-bg;
+    }
+
+    &__btn {
+      width: 100%;
+
+      .q-btn__content {
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+      }
+    }
   }
 
   .primary-box {
