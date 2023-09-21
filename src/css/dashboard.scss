@@ -519,29 +519,46 @@ body.tablet {
 }
 
 // 카드내 토글버튼
+body.desktop {
+  .home-card-toggle-btn.kw-field-wrap {
+    height: 24px;
 
-.home-card-toggle-btn.kw-field-wrap {
-  height: 24px;
+    .kw-field-wrap__control {
+      min-height: 24px;
+    }
 
-  .kw-field-wrap__control {
-    min-height: 24px;
-  }
+    .kw-btn.q-btn--dense {
+      padding: 0 8px !important;
+      font-size: 12px;
+      line-height: 17px;
+      min-height: 24px !important;
+    }
 
-  .kw-btn.q-btn--dense:not(.kw-btn--toggle-text-color-primary) {
-    padding: 0 8px !important;
-    font-size: 12px;
-    line-height: 17px;
-    min-height: 24px !important;
-  }
+    .kw-btn-toggle {
+      .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+        &::after {
+          border-color: $secondary !important;
+        }
 
-  .kw-btn-toggle {
-    .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
-      &::after {
-        border-color: $secondary !important;
+        .q-btn__content {
+          color: $secondary !important;
+        }
       }
+    }
+  }
+}
 
-      .q-btn__content {
-        color: $secondary !important;
+body.tablet {
+  .home-card-toggle-btn.kw-field-wrap {
+    .kw-btn-toggle {
+      .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+        &::after {
+          border-color: $secondary !important;
+        }
+
+        .q-btn__content {
+          color: $secondary !important;
+        }
       }
     }
   }
@@ -1473,7 +1490,7 @@ body.tablet {
     margin-top: 10px;
 
     .kw-font-dense {
-      line-height: 20px;
+      line-height: 20px !important;
     }
 
     p.kw-fc--primary {
