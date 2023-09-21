@@ -1650,6 +1650,16 @@ body.mobile {
     }
   }
 
+  .dashboard_summary {
+    padding: 18px 16px;
+    display: flex;
+    justify-content: space-between;
+
+    .greetings {
+      width: auto;
+    }
+  }
+
   .dashboard-box {
     display: flex;
     flex-wrap: wrap;
