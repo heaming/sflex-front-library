@@ -10,6 +10,7 @@ const openedPopupKeys = {};
 
 let globalMessageEvent;
 let globalCloseEvent;
+let globalUnloadEvent;
 
 function registerMessageEvent() {
   globalMessageEvent = (e) => {
@@ -141,6 +142,7 @@ export function registerCloseEvent() {
     close(false, undefined, false);
   };
 
+  window.removeEventListener('unload', globalUnloadEvent);
   window.addEventListener('beforeunload', globalCloseEvent, false);
 }
 
@@ -197,6 +199,15 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
             new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
           );
         }, parseFeatures(windowFeatures));
+        // 화면을 바로 닫을 때(마운트전) 문제생기는것 해결.
+        globalUnloadEvent = () => {
+          const windowKeyUrl = window[windowKey]?.location.href;
+          if (window[windowKey] && windowKeyUrl.indexOf(pid) > -1) {
+            delete window[windowKey];
+            delete openedPopupKeys[pid];
+          }
+        };
+        window[windowKey].addEventListener('unload', globalUnloadEvent);
       }
     } else {
       openURL(urlWithUid, () => {
