@@ -1582,24 +1582,6 @@ body.mobile {
     }
   }
 
-  .dashboard_summary {
-    padding: 20px 20px 0;
-    height: initial;
-    background: transparent;
-
-    &__inner {
-      width: 100%;
-      padding: 18px 16px;
-      display: flex;
-      justify-content: space-between;
-      background: $secondary;
-    }
-
-    .greetings {
-      width: auto;
-    }
-  }
-
   .dashboard-box {
     display: flex;
     flex-wrap: wrap;
@@ -1776,10 +1758,11 @@ body.mobile {
   }
 
   .primary-box {
-    padding: 10px 16px;
+    padding: 0 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
     background: $primary;
     color: $bg-white;
 
@@ -1794,9 +1777,47 @@ body.mobile {
       font-size: 32px;
       line-height: 40px;
     }
+
+    &__amount {
+      font-size: 16px;
+      font-weight: 500;
+
+      span {
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
+
+    &__placeholder {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba($bg-white, 0.7);
+    }
   }
 
   &:not(.tablet) {
+    .dashboard_summary {
+      padding: 20px 20px 0;
+      height: initial;
+      background: transparent;
+
+      &__inner {
+        width: 100%;
+        padding: 18px 16px;
+        display: flex;
+        justify-content: space-between;
+        background: $secondary;
+      }
+
+      .greetings {
+        width: auto;
+      }
+
+      & + .dashboard-mobile--el {
+        padding-top: 12px;
+      }
+    }
+
     // 공지사항 & zoom
     .card-list-wrap {
       .kw-list.kw-list--card {
