@@ -519,29 +519,46 @@ body.tablet {
 }
 
 // 카드내 토글버튼
+body.desktop {
+  .home-card-toggle-btn.kw-field-wrap {
+    height: 24px;
 
-.home-card-toggle-btn.kw-field-wrap {
-  height: 24px;
+    .kw-field-wrap__control {
+      min-height: 24px;
+    }
 
-  .kw-field-wrap__control {
-    min-height: 24px;
-  }
+    .kw-btn.q-btn--dense {
+      padding: 0 8px !important;
+      font-size: 12px;
+      line-height: 17px;
+      min-height: 24px !important;
+    }
 
-  .kw-btn.q-btn--dense:not(.kw-btn--toggle-text-color-primary) {
-    padding: 0 8px !important;
-    font-size: 12px;
-    line-height: 17px;
-    min-height: 24px !important;
-  }
+    .kw-btn-toggle {
+      .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+        &::after {
+          border-color: $secondary !important;
+        }
 
-  .kw-btn-toggle {
-    .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
-      &::after {
-        border-color: $secondary !important;
+        .q-btn__content {
+          color: $secondary !important;
+        }
       }
+    }
+  }
+}
 
-      .q-btn__content {
-        color: $secondary !important;
+body.tablet {
+  .home-card-toggle-btn.kw-field-wrap {
+    .kw-btn-toggle {
+      .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+        &::after {
+          border-color: $secondary !important;
+        }
+
+        .q-btn__content {
+          color: $secondary !important;
+        }
       }
     }
   }
@@ -1465,130 +1482,157 @@ body.tablet {
   .card-list-wrap .kw-list.kw-list--card .info-list {
     margin-top: 0;
   }
-}
 
-// W-MT-U-1001M02 수수료현황
-.tab-commission {
-  &__text-wrap {
-    margin-top: 10px;
+  // W-MT-U-1001M02 수수료현황
+  .tab-commission {
+    &__text-wrap {
+      margin-top: 10px;
 
-    .kw-font-dense {
-      line-height: 20px;
-    }
-
-    p.kw-fc--primary {
-      font-size: 20px;
-      font-weight: 700;
-
-      > span {
-        font-size: 16px;
+      .kw-font-dense {
+        line-height: 20px !important;
       }
-    }
 
-    p.kw-font-dense {
-      margin-top: 2px;
-    }
-  }
-}
-
-//  W-MT-U-1001M07 알려줌
-.zoom-badge {
-  &.q-badge {
-    padding: 1px 3px;
-    margin-left: 4px;
-    font-size: 10px;
-    font-weight: 700;
-  }
-}
-
-// W-MT-U-1001M03 태블릿 계약현황
-.card-list-wrap {
-  &--tab-approval {
-    .kw-list--card {
-      .kw-list__title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: 500;
-      }
-    }
-  }
-}
-
-// W-MT-U-2001M02 태블릿 배정현황
-.tab-assign-status {
-  $root: &;
-
-  height: 100%;
-
-  &__box-area {
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
-    flex-flow: row nowrap;
-    align-items: stretch;
-    height: calc(100% - 42px);
-  }
-
-  &__box-wrap {
-    display: flex;
-    gap: 8px;
-    flex-flow: row wrap;
-    align-items: stretch;
-  }
-
-  &__box {
-    flex: 1 1 40%;
-    padding: 12px;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-between;
-    border: 1px solid #eee;
-
-    &--primary {
-      flex-basis: 133px;
-      flex-shrink: 0;
-      border: 0;
-      background-color: $primary;
-      #{$root}__box-title {
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 24px;
-        color: $bg-white;
-      }
-      #{$root}__box-count {
+      p.kw-fc--primary {
         font-size: 20px;
-        color: rgba($bg-white, 0.7);
+        font-weight: 700;
 
-        b {
-          font-size: 32px;
+        > span {
+          font-size: 16px;
+        }
+      }
+
+      p.kw-font-dense {
+        margin-top: 2px;
+      }
+    }
+  }
+
+  //  W-MT-U-1001M07 알려줌
+  .zoom-badge {
+    &.q-badge {
+      padding: 1px 3px;
+      margin-left: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+  }
+
+  // W-MT-U-1001M03 태블릿 계약현황
+  .card-list-wrap {
+    &--tab-approval {
+      .kw-list--card {
+        .kw-list__title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 14px;
+          line-height: 20px;
           font-weight: 500;
-          color: rgba($bg-white, 1);
         }
       }
     }
   }
 
-  &__box-title {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
+  // W-MT-U-2001M02 태블릿 배정현황
+  .tab-assign-status {
+    $root: &;
+
+    height: 100%;
+
+    &__box-area {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-flow: row nowrap;
+      align-items: stretch;
+      height: calc(100% - 42px);
+    }
+
+    &__box-wrap {
+      display: flex;
+      gap: 8px;
+      flex-flow: row wrap;
+      align-items: stretch;
+    }
+
+    &__box {
+      flex: 1 1 40%;
+      padding: 12px;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      border: 1px solid #eee;
+
+      &--primary {
+        flex-basis: 133px;
+        flex-shrink: 0;
+        border: 0;
+        background-color: $primary;
+        #{$root}__box-title {
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 24px;
+          color: $bg-white;
+        }
+        #{$root}__box-count {
+          font-size: 20px;
+          color: rgba($bg-white, 0.7);
+
+          b {
+            font-size: 32px;
+            font-weight: 500;
+            color: rgba($bg-white, 1);
+          }
+        }
+      }
+    }
+
+    &__box-title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+
+    &__box-count {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #999;
+      text-align: right;
+
+      b {
+        font-size: 24px;
+        line-height: 35px;
+        font-weight: 700;
+        color: #222;
+      }
+    }
   }
 
-  &__box-count {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #999;
-    text-align: right;
+  // W-MT-U-1001M04 태블릿 자재관리
+  .tab-product-management {
+    .dashboard-box {
+      .kw-font-body {
+        line-height: 20px !important;
+      }
 
-    b {
-      font-size: 24px;
-      line-height: 35px;
-      font-weight: 700;
-      color: #222;
+      .status-number__item {
+        font-size: 16px;
+
+        span {
+          width: 53px;
+          margin-left: 16px;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+
+      &__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 112px;
+      }
     }
   }
 }
@@ -1601,7 +1645,7 @@ body.mobile {
       margin: 0;
       font-size: 18px !important;
       font-weight: 700 !important;
-      line-height: 1.75rem !important;
+      line-height: 1.625rem !important;
       color: $black1;
     }
   }
@@ -1694,6 +1738,33 @@ body.mobile {
 
         .block {
           width: calc(100% - 18px);
+        }
+      }
+    }
+  }
+
+  &:not(.tablet) {
+    // 공지사항 & zoom
+    .card-list-wrap {
+      .kw-list.kw-list--card {
+        margin-top: 20px;
+      }
+
+      &--zoom {
+        .kw-list.kw-list--card .kw-chip.q-chip {
+          padding: 0 3px;
+        }
+      }
+    }
+
+    // W-MP-U-2001M04 유샹서비스 청구현황
+    .paid-status {
+      .count-status {
+        gap: 12px;
+
+        &-item {
+          min-height: 60px;
+          max-height: 60px;
         }
       }
     }
