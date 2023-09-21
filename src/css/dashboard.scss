@@ -1651,9 +1651,17 @@ body.mobile {
   }
 
   .dashboard_summary {
-    padding: 18px 16px;
-    display: flex;
-    justify-content: space-between;
+    padding: 20px 20px 0;
+    height: initial;
+    background: transparent;
+
+    &__inner {
+      width: 100%;
+      padding: 18px 16px;
+      display: flex;
+      justify-content: space-between;
+      background: $secondary;
+    }
 
     .greetings {
       width: auto;
@@ -1751,6 +1759,32 @@ body.mobile {
           width: calc(100% - 18px);
         }
       }
+    }
+  }
+
+  .today-status {
+    margin-top: 12px;
+    padding: 0 20px;
+  }
+
+  .primary-box {
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $primary;
+    color: $bg-white;
+
+    &__number {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+    }
+
+    &__current-number {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
     }
   }
 
