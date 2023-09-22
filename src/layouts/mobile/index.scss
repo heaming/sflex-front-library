@@ -191,6 +191,7 @@ body.mobile:not(.tablet) .main-menu-modal .fixed-full {
 
       & > .on-left {
         margin-right: 0;
+        color: black; // write_24.svg 가 mobileFooter에서 보이지 않아 임시수정
 
         & + span {
           color: $black1;
