@@ -108,3 +108,39 @@
     overflow: hidden;
   }
 }
+
+body.tablet {
+  .web-dashboard-mgt {
+    max-height: calc(100vh - 50px) !important;
+
+    &__inner {
+      height: 564px; // 홈카드 최대 높이 수정 (한 화면 show)
+    }
+
+    &__select {
+      width: 272px;
+    }
+
+    &__drag {
+      .dashboard-drag {
+        &__item-container {
+          grid-template-rows: 242px; // 홈카드 카드 높이 수정
+          grid-template-columns: repeat(3, 276px);
+          padding-bottom: 30px;
+          min-height: 474px;
+        }
+
+        &__item {
+          padding: 20px 0;
+
+          > .kw-icon {
+            // close icon
+            position: absolute;
+            top: 6px;
+            right: 6px;
+          }
+        }
+      }
+    }
+  }
+}
