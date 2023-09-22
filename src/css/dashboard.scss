@@ -1705,6 +1705,13 @@ body.mobile:not(.tablet) {
   .dashboard-box {
     &__item {
       display: inline-block;
+      height: initial;
+    }
+
+    &__bottom {
+      .kw-fc--primary {
+        font-weight: 400 !important;
+      }
     }
 
     .status-number {
@@ -1892,6 +1899,9 @@ body.mobile:not(.tablet) {
     &__box--primary {
       flex-basis: 104px;
       flex-grow: 0;
+      #{$root}__box-title {
+        font-weight: 700;
+      }
       #{$root}__box-count b {
         vertical-align: -4px;
       }
