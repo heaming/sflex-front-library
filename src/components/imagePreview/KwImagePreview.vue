@@ -61,6 +61,7 @@ export default {
   name: 'KwImagePreview',
   props: {
     images: { type: Array, default: () => [] },
+    currIdx: { type: Number, default: 0 },
   },
   emits: ['update:image-index'],
   setup(props, { emit }) {
@@ -110,6 +111,7 @@ export default {
       });
 
       viewer?.value?.show();
+      viewer?.value?.view(props.currIdx);
     }
 
     onMounted(async () => {
