@@ -28,9 +28,9 @@
           >
         </div>
       </transition-group>
-      <div class="dashboard-drag__guide">
+      <!-- <div class="dashboard-drag__guide">
         {{ $t('MSG_TXT_HCARD_GUIDE') }}
-      </div>
+      </div> -->
     </kw-scroll-area>
   </div>
 </template>
@@ -55,8 +55,8 @@ const getStyle = (card) => {
   const sizeTypeCodeSplited = card.homeCardSizeTypeCode.split('');
   const [column, row] = sizeTypeCodeSplited.map((e) => parseInt(e, 10));
   return {
-    width: `${302 * column + 20 * (column - 1)}px`,
-    height: `${251 * row + 20 * (row - 1)}px`,
+    width: `${276 * column + 20 * (column - 1)}px`,
+    height: `${242 * row + 20 * (row - 1)}px`,
     gridRow: `auto/span ${row}`,
     gridColumn: `auto/span ${column}`,
   };

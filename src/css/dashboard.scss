@@ -1535,51 +1535,6 @@ body.mobile {
     }
   }
 
-  .dashboard-box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    .kw-font-body {
-      line-height: 20px !important;
-    }
-
-    &__item {
-      width: calc((100% - 8px) / 2);
-      padding: 12px;
-      border: 1px solid #eee;
-    }
-
-    &__bottom {
-      text-align: right;
-    }
-
-    .status-number {
-      &__item {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        p {
-          margin-right: 4px;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 20px;
-          color: $black1;
-        }
-
-        span {
-          width: 57px;
-          display: inline-block;
-          font-size: 24px;
-          font-weight: 700;
-          color: $black1;
-          line-height: 30px;
-        }
-      }
-    }
-  }
-
   // W-MT-U-1001M02 수수료현황
   .tab-commission {
     &__text-wrap {
@@ -1748,12 +1703,15 @@ body.mobile:not(.tablet) {
   }
 
   .dashboard-box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
     &__item {
       display: inline-block;
+      height: initial;
+    }
+
+    &__bottom {
+      .kw-fc--primary {
+        font-weight: 400 !important;
+      }
     }
 
     .status-number {
@@ -1817,7 +1775,7 @@ body.mobile:not(.tablet) {
 
     &__bottom {
       width: 100%;
-      padding: 16px 0;
+      padding: 16px 14px;
       border-bottom: 1px solid $line-bg;
     }
 
@@ -1842,10 +1800,19 @@ body.mobile:not(.tablet) {
     background: $primary;
     color: $bg-white;
 
+    >span {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
     &__number {
       font-size: 20px;
       font-weight: 400;
       line-height: 30px;
+
+      span.opacity {
+        color: rgb(255 255 255 / 70%);
+      }
     }
 
     &__current-number {
@@ -1936,6 +1903,9 @@ body.mobile:not(.tablet) {
     &__box--primary {
       flex-basis: 104px;
       flex-grow: 0;
+      #{$root}__box-title {
+        font-weight: 700;
+      }
       #{$root}__box-count b {
         vertical-align: -4px;
       }
