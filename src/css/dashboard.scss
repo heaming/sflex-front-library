@@ -1775,7 +1775,7 @@ body.mobile:not(.tablet) {
 
     &__bottom {
       width: 100%;
-      padding: 16px 0;
+      padding: 16px 14px;
       border-bottom: 1px solid $line-bg;
     }
 
@@ -1800,7 +1800,7 @@ body.mobile:not(.tablet) {
     background: $primary;
     color: $bg-white;
 
-    > span {
+    >span {
       font-size: 16px;
       font-weight: 700;
     }
@@ -1809,6 +1809,10 @@ body.mobile:not(.tablet) {
       font-size: 20px;
       font-weight: 400;
       line-height: 30px;
+
+      span.opacity {
+        color: rgb(255 255 255 / 70%);
+      }
     }
 
     &__current-number {
