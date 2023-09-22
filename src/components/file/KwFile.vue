@@ -493,7 +493,7 @@
                 class="kw-file-item__preview"
                 :icon="previewIcon"
                 borderless
-                @click.prevent="previewFile(file)"
+                @click.prevent="previewFile(idx)"
               >
                 <kw-tooltip
                   anchor="bottom middle"
@@ -902,8 +902,8 @@ export default {
       return 'file';
     };
 
-    function previewFile(file) {
-      emit('preview', { file, platform });
+    function previewFile(idx) {
+      emit('preview', { idx, platform });
     }
 
     return {
