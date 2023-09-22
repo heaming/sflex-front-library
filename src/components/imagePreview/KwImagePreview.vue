@@ -108,6 +108,7 @@ export default {
         fullscreen: false,
         toggleOnDblclick: false,
         slideOnTouch: false,
+        initialCoverage: 1,
       });
 
       viewer?.value?.show();
