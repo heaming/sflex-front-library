@@ -1,4 +1,4 @@
-import { cloneDeep, defaultsDeep, map } from 'lodash-es';
+import { cloneDeep, defaultsDeep, isEmpty, map } from 'lodash-es';
 import { LocalTreeDataProvider, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
 
@@ -6,6 +6,9 @@ const setFields = 'setFields';
 const addField = 'addField';
 const setRows = 'setRows';
 const addRows = 'addRows';
+const addRow = 'addRow';
+const insertRow = 'insertRow';
+const insertRows = 'insertRows';
 const removeRow = 'removeRow';
 const removeRows = 'removeRows';
 const destroy = 'destroy';
@@ -165,11 +168,105 @@ export function overrideSetRows(data, vm) {
   */
 export function overrideAddRows(data, vm) {
   wrapMethod(data, addRows, (...args) => {
-    execOriginal(data, addRows, ...args);
+    const arr = [...args];
+
+    const arrData = arr?.[0];
+    if (!arrData?.[0]) {
+      execOriginal(data, addRows, ...args);
+    } else {
+      const atthIdx = Object.keys(arrData?.[0]).filter((x) => x.endsWith('atthDocId') || x.endsWith('AtthDocId'));
+      if (atthIdx && atthIdx.length > 0) {
+        atthIdx.forEach((x) => {
+          const newField = `${x}NumberOfFiles`;
+          const isExist = data.fieldByName(newField);
+          if (!isExist) data.addField({ fieldName: newField, dataType: 'number' });
+        });
+        execOriginal(data, addRows, ...args);
+      } else {
+        execOriginal(data, addRows, ...args);
+      }
+    }
 
     const view = vm.proxy.getView();
 
     setSearchConditionMessage(view);
+  });
+}
+
+/*
+  데이터 셋을 추가한다.
+*/
+export function overrideAddRow(data) {
+  wrapMethod(data, addRow, (...args) => {
+    const arr = [...args];
+    const arrData = arr?.[0];
+    if (!arrData || isEmpty(arrData)) {
+      execOriginal(data, addRow, ...args);
+    } else {
+      const atthIdx = Object.keys(arrData).filter((x) => x.endsWith('atthDocId') || x.endsWith('AtthDocId'));
+      if (atthIdx && atthIdx.length > 0) {
+        atthIdx.forEach((x) => {
+          const newField = `${x}NumberOfFiles`;
+          const isExist = data.fieldByName(newField);
+          if (!isExist) data.addField({ fieldName: newField, dataType: 'number' });
+        });
+        execOriginal(data, addRow, ...args);
+      } else {
+        execOriginal(data, addRow, ...args);
+      }
+    }
+  });
+}
+
+/*
+  데이터 셋을 추가한다.
+*/
+export function overrideInsertRow(data) {
+  wrapMethod(data, insertRow, (...args) => {
+    const arr = [...args];
+
+    const arrData = arr?.[1];
+    if (!arrData || isEmpty(arrData)) {
+      execOriginal(data, insertRow, ...args);
+    } else {
+      const atthIdx = Object.keys(arrData).filter((x) => x.endsWith('atthDocId') || x.endsWith('AtthDocId'));
+      if (atthIdx && atthIdx.length > 0) {
+        atthIdx.forEach((x) => {
+          const newField = `${x}NumberOfFiles`;
+          const isExist = data.fieldByName(newField);
+          if (!isExist) data.addField({ fieldName: newField, dataType: 'number' });
+        });
+        execOriginal(data, insertRow, ...args);
+      } else {
+        execOriginal(data, insertRow, ...args);
+      }
+    }
+  });
+}
+
+/*
+  데이터 셋을 추가한다.
+  */
+export function overrideInsertRows(data) {
+  wrapMethod(data, insertRows, (...args) => {
+    const arr = [...args];
+
+    const arrData = arr?.[1];
+    if (!arrData?.[0]) {
+      execOriginal(data, insertRows, ...args);
+    } else {
+      const atthIdx = Object.keys(arrData?.[0]).filter((x) => x.endsWith('atthDocId') || x.endsWith('AtthDocId'));
+      if (atthIdx && atthIdx.length > 0) {
+        atthIdx.forEach((x) => {
+          const newField = `${x}NumberOfFiles`;
+          const isExist = data.fieldByName(newField);
+          if (!isExist) data.addField({ fieldName: newField, dataType: 'number' });
+        });
+        execOriginal(data, insertRows, ...args);
+      } else {
+        execOriginal(data, insertRows, ...args);
+      }
+    }
   });
 }
 
