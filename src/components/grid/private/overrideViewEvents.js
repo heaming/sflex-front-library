@@ -1,5 +1,5 @@
 import { ValueType } from 'realgrid';
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, isEmpty } from 'lodash-es';
 import { wrapEvent, hasOriginal, execOriginal } from './overrideWrap';
 import { sanitize } from '../../../plugins/sanitize';
 import { modal } from '../../../plugins/modal';
@@ -339,7 +339,7 @@ export function overrideOnCellItemClicked(view) {
       if (result.result) {
         let fileCount;
         if (componentProps.multiple === false) {
-          if (result.payload?.files) fileCount = 1;
+          if (!isEmpty(result.payload?.files)) fileCount = 1;
           else fileCount = 0;
         } else fileCount = result.payload?.files?.length;
 
