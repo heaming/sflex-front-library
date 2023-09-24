@@ -1,7 +1,6 @@
 import { cloneDeep, defaultsDeep, map } from 'lodash-es';
 import { LocalTreeDataProvider, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
-import { http } from '../../../plugins/http';
 
 const setFields = 'setFields';
 const addField = 'addField';
@@ -130,16 +129,16 @@ export function overrideSetRows(data, vm) {
       data.clearRows();
       execOriginal(data, setRows, ...args);
     } else {
-      const atthIdx = Object.keys(arrData?.[0]).findIndex((x) => x === 'atthDocId');
-      if (atthIdx > -1) {
-        const promisedRows = await Promise.all(arr?.[0].map(async (x) => {
-          if (!x.atthDocId) return { ...x };
-          const res = await http.get(`sflex/common/common/attach-files/${x.atthDocId}`);
-          return { ...x, numberOfFiles: res.data?.length };
-        }));
+      const atthIdx = Object.keys(arrData?.[0]).filter((x) => x.endsWith('atthDocId') || x.endsWith('AtthDocId'));
+      if (atthIdx && atthIdx.length > 0) {
+        atthIdx.forEach((x) => {
+          const newField = `${x}NumberOfFiles`;
+          const isExist = data.fieldByName(newField);
+          if (!isExist) data.addField({ fieldName: newField, dataType: 'number' });
+        });
 
         data.clearRows();
-        execOriginal(data, setRows, promisedRows);
+        execOriginal(data, setRows, ...args);
       } else {
         data.clearRows();
         execOriginal(data, setRows, ...args);
