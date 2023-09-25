@@ -84,22 +84,13 @@
                 borderless
                 label="비밀번호 변경"
                 class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+                @click="openPasswordChangePopup"
               />
               <kw-btn
                 borderless
                 label="개인 홈 설정"
                 class="block kw-font-pt14 mt2 mb2 pt2 pb2"
                 @click="openHomeMgtPopup"
-              />
-              <kw-btn
-                borderless
-                label="모바일프린터 초기화"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
-              />
-              <kw-btn
-                borderless
-                label="공문조회"
-                class="block kw-font-pt14 mt2 mb2 pt2 pb2"
               />
               <kw-btn
                 borderless
@@ -414,6 +405,12 @@ function createSortable() {
 async function openSessionSettingP() {
   modal({
     component: () => import('../web/WebSessionSettingP.vue'),
+  });
+}
+
+async function openPasswordChangePopup() {
+  await modal({
+    component: () => import('./TabletPasswordChangeP.vue'),
   });
 }
 
