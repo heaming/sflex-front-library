@@ -60,17 +60,18 @@ export function getTimeFormat(value, format = 'HHmmss', customFormat = undefined
 
 export function makeFormattedPhoneNumber(value) {
   let formatNum = null;
-  const { length } = value;
-  if (value?.startsWith('0504') || value?.startsWith('0505')) { // WEBFAX
-    if (value?.length <= 11) formatNum = value.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
-    else formatNum = value.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
+  const exceptHyphen = value.replace('-', '');
+  const { length } = exceptHyphen;
+  if (exceptHyphen?.startsWith('0504') || exceptHyphen?.startsWith('0505')) { // WEBFAX
+    if (exceptHyphen?.length <= 11) formatNum = exceptHyphen.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
+    else formatNum = exceptHyphen.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
   } else if (length === 11) {
-    formatNum = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-  } else if (length === 8) formatNum = value.replace(/(\d{4})(\d{4})/, '$1-$2'); // 업체번호?
-  else if (value.startsWith('02')) {
-    if (length <= 9) formatNum = value.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
-    else formatNum = value.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-  } else formatNum = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+    formatNum = exceptHyphen.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+  } else if (length === 8) formatNum = exceptHyphen.replace(/(\d{4})(\d{4})/, '$1-$2'); // 업체번호?
+  else if (exceptHyphen.startsWith('02')) {
+    if (length <= 9) formatNum = exceptHyphen.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+    else formatNum = exceptHyphen.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+  } else formatNum = exceptHyphen.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
 
   return formatNum;
 }
