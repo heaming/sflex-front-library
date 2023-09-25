@@ -82,15 +82,19 @@ export default {
     const { login } = useSession();
 
     async function onSubmit(formValues) {
+      const { loginId } = formValues;
+      let { password } = formValues;
+
       const iv = CryptoJS.enc.Hex.parse('');
       const key = CryptoJS.enc.Utf8.parse(consts.CRYPT_AES_ENC_KEY);
-      const cipher = CryptoJS.AES.encrypt(formValues.password, key, { iv });
-      formValues.password = cipher.toString();
+      const cipher = CryptoJS.AES.encrypt(password, key, { iv });
+      password = cipher.toString();
       try {
         await login({
           tenantId,
           portalId,
-          ...formValues,
+          loginId,
+          password,
         });
       } catch (e) {
         if (e.response) {
