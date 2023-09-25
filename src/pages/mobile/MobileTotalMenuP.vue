@@ -363,6 +363,12 @@ async function openSessionSettingP() {
   });
 }
 
+async function openChangePassword() {
+  modal({
+    component: () => import('./MobilePasswordChangeP.vue'),
+  });
+}
+
 async function openSupportBottomSheet() {
   const res = await bottomSheet({
     title: '업무지원',
@@ -409,6 +415,8 @@ async function openUserInfoBottomSheet() {
       case 'sessionChange': openSessionSettingP();
         break;
       case 'homeSetting': openHomeMgtPopup();
+        break;
+      case 'changePassword': openChangePassword();
     }
   }
 }
