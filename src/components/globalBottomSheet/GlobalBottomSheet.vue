@@ -45,9 +45,11 @@
         <!-- 앱 버전 영역 -->
         <!--  -->
       </q-card-section>
+      <!--
       <q-card-section class="global-bottom-sheet__app-version">
         <div>앱 버전: 1.0.0</div>
       </q-card-section>
+      -->
     </q-card>
   </q-dialog>
 </template>
