@@ -1,7 +1,7 @@
 <template>
   <kw-popup
     class="web-dashboard-mgt"
-    size="4xl"
+    size="2xl"
     :title="$t('MSG_TIT_HOME_MGT')"
     @before-close="onBeforeClose"
   >
@@ -17,6 +17,10 @@
     </div>
 
     <template #action>
+      <kw-btn
+        negative
+        label="취소"
+      />
       <kw-btn
         secondary
         :label="$t('MSG_BTN_INTL')"

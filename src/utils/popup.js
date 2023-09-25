@@ -10,6 +10,7 @@ const openedPopupKeys = {};
 
 let globalMessageEvent;
 let globalCloseEvent;
+let globalUnloadEvent;
 
 function registerMessageEvent() {
   globalMessageEvent = (e) => {
@@ -114,7 +115,19 @@ function close(result, payload, forceClose = true) {
       globalCloseEvent = null;
     }
 
-    window.close();
+    // 카카오일때 따로 닫는 로직 추가.
+    const ua = window.navigator.userAgent;
+    const kakao = 'KAKAOTALK';
+    // await alert(ua);
+    if (Platform.is.ios && ua.indexOf(kakao) > -1 && !window.opener) {
+      // 아이폰
+      window.location.href = 'kakaoweb://closeBrowser';
+    } else if (Platform.is.android && ua.indexOf(kakao) > -1 && !window.opener) {
+      // 안드로이드
+      window.location.href = 'kakaotalk://inappbrowser/close';
+    } else {
+      window.close();
+    }
   }
 }
 
@@ -129,6 +142,7 @@ export function registerCloseEvent() {
     close(false, undefined, false);
   };
 
+  window.removeEventListener('unload', globalUnloadEvent);
   window.addEventListener('beforeunload', globalCloseEvent, false);
 }
 
@@ -185,6 +199,15 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
             new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
           );
         }, parseFeatures(windowFeatures));
+        // 화면을 바로 닫을 때(마운트전) 문제생기는것 해결.
+        globalUnloadEvent = () => {
+          const windowKeyUrl = window[windowKey]?.location.href;
+          if (window[windowKey] && windowKeyUrl.indexOf(pid) > -1) {
+            delete window[windowKey];
+            delete openedPopupKeys[pid];
+          }
+        };
+        window[windowKey].addEventListener('unload', globalUnloadEvent);
       }
     } else {
       openURL(urlWithUid, () => {

@@ -10,18 +10,31 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
+body.tablet {
+  .tablet-layout,
+  .dev-layout {
+    &:has(.dashboard) {
+      .kw-page-mobile-header {
+        display: none;
+      }
+
+      & > .q-page-container {
+        min-width: 1212px;
+      }
+
+      .kw-page__content {
+        padding: 0 0 30px;
+        margin-bottom: 0;
+        background-color: transparent;
+      }
+    }
+  }
+}
+
 .dashboard {
   width: 1840px;
   margin: 0 auto;
   flex: auto;
-
-  &.dashboard--fixed {
-    .dashboard_summary {
-      .greetings {
-        width: 438px;
-      }
-    }
-  }
 
   &_summary {
     display: flex;
@@ -34,13 +47,14 @@ body.desktop .web-layout:has(.dashboard) {
     }
 
     .greetings {
+      padding-right: 8px;
+      width: 438px;
       font-size: 16px;
       font-weight: 400;
       line-height: 32px;
-      padding-right: 20px;
 
       span {
-        font-weight: 500;
+        font-weight: 700;
       }
     }
 
@@ -50,14 +64,14 @@ body.desktop .web-layout:has(.dashboard) {
 
       h5 {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 32px;
-        padding-right: 16px;
+        padding-right: 20px;
         margin: 0;
 
-        & + .kw-field-wrap:has(.kw-btn-toggle) {
-          margin-left: 4px;
-        }
+        // & + .kw-field-wrap:has(.kw-btn-toggle) {
+        //   margin-left: 4px;
+        // }
       }
 
       dl {
@@ -66,7 +80,7 @@ body.desktop .web-layout:has(.dashboard) {
 
         dt {
           font-size: 16px;
-          font-weight: 300 !important;
+          font-weight: 400 !important;
           line-height: 32px;
           padding-right: 6px;
           opacity: 0.7;
@@ -357,6 +371,7 @@ body.desktop .web-layout:has(.dashboard) {
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+  height: calc(100% - 77px);
 
   &-item {
     display: flex;
@@ -365,7 +380,7 @@ body.desktop .web-layout:has(.dashboard) {
     background: $bg-box;
     width: calc((100% /2) - 4px);
     min-height: 68px;
-    max-height: 68px;
+    max-height: calc((100% - 8px) / 2);
     padding: 0 12px;
     word-break: keep-all;
   }
@@ -469,14 +484,11 @@ body.desktop .web-layout:has(.dashboard) {
 .home-card-title {
   &,
   &.kw-btn--borderless.q-btn {
+    margin: 0;
     font-size: 20px;
     font-weight: 700;
     line-height: 1.813rem;
     color: $black1;
-  }
-
-  &h3 {
-    margin: 0;
   }
 }
 
@@ -485,37 +497,68 @@ body.desktop .web-layout:has(.dashboard) {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
-  .home-card-title {
-    margin: 0;
+  .home-card-select {
+    &.kw-select.q-select {
+      align-self: flex-start;
+
+      .q-select__dropdown-icon {
+        color: #777;
+      }
+
+      .q-field__marginal,
+      .q-field__control,
+      .q-field__native {
+        color: #777 !important;
+        min-height: 20px;
+        font-weight: 400;
+      }
+    }
   }
 }
 
 // 카드내 토글버튼
+body.desktop {
+  .home-card-toggle-btn.kw-field-wrap {
+    height: 24px;
 
-.home-card-toggle-btn.kw-field-wrap {
-  height: 24px;
+    .kw-field-wrap__control {
+      min-height: 24px;
+    }
 
-  .kw-field-wrap__control {
-    min-height: 24px;
-  }
+    .kw-btn.q-btn--dense {
+      padding: 0 8px !important;
+      font-size: 12px;
+      line-height: 17px;
+      min-height: 24px !important;
+    }
 
-  .kw-btn.q-btn--dense {
-    padding: 0 8px !important;
-    font-size: 12px;
-    line-height: 17px;
-    min-height: 24px !important;
-  }
+    .kw-btn-toggle {
+      .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+        &::after {
+          border-color: $secondary !important;
+        }
 
-  .kw-btn-toggle {
-    .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
-      &::after {
-        border-color: $secondary !important;
+        .q-btn__content {
+          color: $secondary !important;
+        }
       }
+    }
+  }
+}
 
-      .q-btn__content {
-        color: $secondary !important;
+body.tablet {
+  .home-card-toggle-btn.kw-field-wrap {
+    .kw-btn-toggle {
+      .kw-btn--toggle-border-color-primary[aria-pressed="true"] {
+        &::after {
+          border-color: $secondary !important;
+        }
+
+        .q-btn__content {
+          color: $secondary !important;
+        }
       }
     }
   }
@@ -692,6 +735,17 @@ body.desktop .web-layout:has(.dashboard) {
     #{$self}__scroll-wrap {
       margin-right: -20px;
     }
+    #{$self}__totals li,
+    #{$self}__product-amounts p {
+      width: 70px;
+    }
+  }
+
+  &--organization {
+    #{$self}__scroll-wrap {
+      margin-right: -20px;
+    }
+
     #{$self}__totals li,
     #{$self}__product-amounts p {
       width: 70px;
@@ -969,6 +1023,12 @@ body.desktop .web-layout:has(.dashboard) {
     p {
       margin-right: 8px;
       display: inline-block;
+      font-weight: 500;
+
+      &.ml4 {
+        margin-right: 0;
+        color: $primary;
+      }
     }
 
     span {
@@ -984,7 +1044,7 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-// 플래너 실정현황 E-CO-U-1301M01
+// 플래너 실적현황 E-CO-U-1301M01
 .planner-status {
   &__table {
     margin-top: 16px;
@@ -1107,6 +1167,777 @@ body.desktop .web-layout:has(.dashboard) {
   }
 }
 
-// //플래너 실정현황 E-CO-U-1301M01
+// //플래너 실적현황 E-CO-U-1301M01
+
+// 처리현황 W-SV-U-1301M01
+// .process-status {
+
+// }
+
+// 모바일 해피콜현황 W-SV-U-1302M01
+.happycall-status {
+  .home-card-title-wrap {
+    .kw-select.q-select {
+      align-self: flex-start;
+
+      .q-select__dropdown-icon {
+        color: #777;
+      }
+
+      .q-field__native {
+        color: #777 !important;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+// W-SV-U-1303M01 캘린더 현황
+
+.calendar-status {
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.813rem;
+    color: $black1;
+    text-align: center;
+  }
+
+  &__legends {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row nowrap;
+    column-gap: 12px;
+  }
+
+  &__legend-item {
+    position: relative;
+    padding-left: 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #777;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+    }
+
+    &.off {
+      &::before {
+        background-color: #ed1941;
+      }
+    }
+
+    &.on {
+      &::before {
+        background-color: #2f8af3;
+      }
+    }
+
+    &.remarks {
+      &::before {
+        background-color: #999;
+      }
+    }
+
+    &.assign {
+      &::before {
+        background-color: #26bf8c;
+      }
+    }
+
+    &.not-assign {
+      &::before {
+        background-color: #666;
+      }
+    }
+  }
+
+  &__calendar {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 12px;
+  }
+}
+
+.home-calendar-day {
+  display: flex;
+  width: 100%;
+
+  li {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    background-color: $bg-box;
+    border-right: 1px solid $line-bg;
+    border-left: 1px solid $line-bg;
+
+    &:not(:first-child) {
+      border-left: none;
+    }
+
+    &:first-child {
+      color: $error;
+    }
+  }
+}
+
+.home-calendar-weeks {
+  width: 100%;
+
+  &__week {
+    display: flex;
+    border-left: 1px solid $line-bg;
+  }
+
+  &__day {
+    width: calc(100% / 7);
+    padding: 5px 12px;
+    border-bottom: 1px solid $line-bg;
+    border-right: 1px solid $line-bg;
+    text-align: right;
+
+    // cursor: pointer;
+
+    &.opacity {
+      // cursor: not-allowed;
+
+      > * {
+        opacity: 0.3;
+      }
+    }
+
+    &.holiday {
+      .home-calendar-weeks__num {
+        color: $error;
+      }
+    }
+
+    &.today {
+      .home-calendar-weeks__num {
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 28px;
+          height: 28px;
+          border-radius: 100%;
+          background-color: rgba($primary, 0.1);
+        }
+      }
+    }
+  }
+
+  &__num {
+    display: inline-block;
+    width: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  &__infos {
+    display: grid;
+    grid-template-rows: repeat(3, 20px);
+    row-gap: 6px;
+  }
+
+  &__info {
+    width: inherit;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 0;
+
+    .kw-font--14 {
+      max-width: 99px;
+      color: $black2;
+      height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+        width: 4px;
+        height: 20px;
+      }
+    }
+
+    &.assign {
+      .kw-font--14::before {
+        background-color: #26bfbf;
+      }
+    }
+
+    &.not-assign {
+      .kw-font--14::before {
+        background-color: #666;
+      }
+    }
+
+    &.off {
+      .kw-font--14::before {
+        background-color: $error;
+      }
+    }
+
+    &.on {
+      .kw-font--14::before {
+        background-color: $primary;
+      }
+    }
+
+    &.remarks {
+      .kw-font--14::before {
+        background-color: $placeholder;
+      }
+    }
+  }
+}
+
+// 가동인원
+.persons-status,
+.paid-status {
+  height: 100%;
+}
+
+// tablet
+body.mobile {
+  .dashboard {
+    width: 1212px;
+
+    &_summary {
+      padding: 18px 20px;
+      height: 70px;
+
+      .greetings {
+        width: initial;
+        padding-right: 30px;
+      }
+
+      &_counter {
+        dl dd + dt {
+          padding-left: 20px;
+        }
+      }
+    }
+
+    &_wrap {
+      grid-template-rows: 315px;
+      grid-template-columns: repeat(3, 390px);
+      gap: 20px 21px;
+      margin: 20px 0 0;
+      padding-bottom: 0;
+    }
+
+    &_el {
+      padding: 18px 20px 20px;
+
+      &_1by1 {
+        width: 390px;
+        height: 315px;
+      }
+
+      &_1by2 {
+        width: 390px;
+        height: 650px; // 315 * 2 + 20
+      }
+
+      &_2by1 {
+        width: 800px; // 390 * 2 + 20
+        height: 315px;
+      }
+
+      &_2by2 {
+        width: 800px; // 390 *2 + 20
+        height: 650px; // 315 * 2 + 20
+      }
+    }
+  }
+
+  .count-status {
+    height: calc(100% - 51px);
+  }
+
+  .count-status-number {
+    font-size: 20px;
+  }
+
+  .card-list-wrap .kw-list.kw-list--card .info-list {
+    margin-top: 0;
+  }
+
+  .dashboard-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &__item {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: calc((100% - 8px) / 2);
+      height: 112px;
+      border: 1px solid #eee;
+    }
+
+    &__top {
+      .kw-btn.q-btn .on-right {
+        margin-left: 0;
+      }
+    }
+
+    &__bottom {
+      text-align: right;
+    }
+
+    .status-number {
+      &__item {
+        font-size: 16px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        p {
+          margin-right: 16px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          color: $black1;
+        }
+
+        span {
+          width: 53px;
+          display: inline-block;
+          font-size: 16px;
+          font-weight: 700;
+          color: $black1;
+          line-height: 24px;
+        }
+      }
+    }
+
+    .kw-font-body {
+      line-height: 20px !important;
+    }
+  }
+
+  // W-MT-U-1001M02 수수료현황
+  .tab-commission {
+    &__text-wrap {
+      margin-top: 10px;
+
+      .kw-font-dense {
+        line-height: 20px !important;
+      }
+
+      p.kw-fc--primary {
+        font-size: 20px;
+        font-weight: 700;
+
+        > span {
+          font-size: 16px;
+        }
+      }
+
+      p.kw-font-dense {
+        margin-top: 2px;
+      }
+    }
+  }
+
+  //  W-MT-U-1001M07 알려줌
+  .zoom-badge {
+    &.q-badge {
+      padding: 1px 3px;
+      margin-left: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+  }
+
+  // W-MT-U-1001M03 태블릿 계약현황
+  .card-list-wrap {
+    &--tab-approval {
+      .kw-list--card {
+        .kw-list__title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // 배정현황 W-MT-U-2001M02
+  .assign-status {
+    $root: ".assign-status";
+
+    height: 100%;
+
+    &__box-area {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-flow: row nowrap;
+      align-items: stretch;
+      height: calc(100% - 42px);
+    }
+
+    &__box-wrap {
+      display: flex;
+      gap: 8px;
+      flex-flow: row wrap;
+      align-items: stretch;
+    }
+
+    &__box {
+      flex: 1 1 40%;
+      padding: 12px;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      border: 1px solid #eee;
+
+      &--primary {
+        flex-basis: 133px;
+        flex-shrink: 0;
+        border: 0;
+        background-color: $primary;
+        #{$root}__box-title {
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 24px;
+          color: $bg-white;
+        }
+        #{$root}__box-count {
+          font-size: 20px;
+          color: rgba($bg-white, 0.7);
+
+          b {
+            font-size: 32px;
+            font-weight: 500;
+            color: rgba($bg-white, 1);
+          }
+        }
+      }
+    }
+
+    &__box-title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+
+    &__box-count {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #999;
+      text-align: right;
+
+      b {
+        margin-right: 2px;
+        font-size: 24px;
+        line-height: 35px;
+        font-weight: 700;
+        color: #222;
+      }
+
+      span {
+        margin-left: 2px;
+      }
+    }
+  }
+}
+
+// 대시보드 모바일
+body.mobile:not(.tablet) {
+  .home-card-title {
+    &,
+    &.kw-btn--borderless.q-btn {
+      margin: 0;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      line-height: 1.625rem !important;
+      color: $black1;
+    }
+  }
+
+  .dashboard_summary {
+    padding: 20px 20px 0;
+    height: initial;
+    background: transparent;
+
+    &__inner {
+      width: 100%;
+      padding: 18px 16px;
+      display: flex;
+      justify-content: space-between;
+      background: $secondary;
+    }
+
+    .greetings {
+      width: auto;
+    }
+
+    & + .dashboard-mobile--el {
+      padding-top: 12px;
+    }
+  }
+
+  .dashboard-box {
+    &__item {
+      display: inline-block;
+      height: initial;
+    }
+
+    &__bottom {
+      .kw-fc--primary {
+        font-weight: 400 !important;
+      }
+    }
+
+    .status-number {
+      &__item {
+        p {
+          margin-right: 4px;
+        }
+
+        span {
+          width: 57px;
+          font-size: 24px;
+          line-height: 30px;
+        }
+      }
+    }
+
+    .line-height20 {
+      line-height: 20px !important;
+    }
+
+    .kw-font-body {
+      line-height: 24px !important;
+    }
+  }
+
+  .monthly-commission {
+    &__text {
+      padding-top: 20px;
+    }
+
+    &__price {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 30px;
+      color: $primary;
+
+      span {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+      }
+    }
+
+    &_explain {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 20px;
+      color: $black1;
+    }
+  }
+
+  // 자재현황
+  .material-status {
+    &__btn {
+      width: calc(50% - 4px);
+
+      .q-btn__content {
+        justify-content: space-between;
+
+        .block {
+          width: calc(100% - 18px);
+        }
+      }
+    }
+  }
+
+  .today-status {
+    margin-top: 12px;
+    padding: 0 20px;
+
+    &__bottom {
+      width: 100%;
+      padding: 16px 14px;
+      border-bottom: 1px solid $line-bg;
+    }
+
+    &__btn {
+      width: 100%;
+
+      .q-btn__content {
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .primary-box {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background: $primary;
+    color: $bg-white;
+
+    >span {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    &__number {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+
+      span.opacity {
+        color: rgb(255 255 255 / 70%);
+      }
+    }
+
+    &__current-number {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    &__amount {
+      font-size: 16px;
+      font-weight: 500;
+
+      span {
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
+
+    &__placeholder {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba($bg-white, 0.7);
+    }
+  }
+
+  // 자재현황
+  .materials-management,
+  .material-status {
+    .dashboard-box {
+      &__item {
+        height: 144px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  // 공지사항 & zoom
+  .card-list-wrap {
+    .kw-list.kw-list--card {
+      margin-top: 20px;
+    }
+
+    &--zoom {
+      .kw-list.kw-list--card .kw-chip.q-chip {
+        padding: 0 3px;
+      }
+    }
+  }
+
+  // W-MP-U-2001M04 유샹서비스 청구현황
+  .paid-status {
+    .count-status {
+      gap: 12px;
+
+      &-item {
+        padding: 0 16px;
+        min-height: 60px;
+        max-height: 60px;
+      }
+
+      &-number {
+        font-size: 16px;
+        font-weight: 500;
+
+        b {
+          margin-right: 2px;
+          font-size: 20px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  // 배정현황 W-MP-U-2001M02
+  .assign-status {
+    $root: ".assign-status";
+
+    &__box-area {
+      height: 230px;
+    }
+
+    &__box-wrap {
+      flex: auto;
+    }
+
+    &__box--primary {
+      flex-basis: 104px;
+      flex-grow: 0;
+      #{$root}__box-title {
+        font-weight: 700;
+      }
+      #{$root}__box-count b {
+        vertical-align: -4px;
+      }
+    }
+
+    &__box-title {
+      font-weight: 400;
+    }
+
+    &__box-count {
+      b {
+        margin-right: 4px;
+      }
+
+      span {
+        margin-left: 4px;
+      }
+    }
+  }
+}
 
 // end dashboard style

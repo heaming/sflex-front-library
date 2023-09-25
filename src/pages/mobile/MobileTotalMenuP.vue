@@ -363,6 +363,12 @@ async function openSessionSettingP() {
   });
 }
 
+async function openChangePassword() {
+  modal({
+    component: () => import('./MobilePasswordChangeP.vue'),
+  });
+}
+
 async function openSupportBottomSheet() {
   const res = await bottomSheet({
     title: '업무지원',
@@ -396,8 +402,6 @@ async function openUserInfoBottomSheet() {
     items: [
       { value: 'changePassword', label: '비밀번호 변경' },
       { value: 'homeSetting', label: '개인 홈 설정' },
-      { value: 'mobilePrinterInit', label: '모바일프린터 초기화' },
-      { value: 'searchLetter', label: '공문조회' },
       { value: 'sessionChange', label: '세션 변경' },
       { value: 'logout', label: '로그아웃' },
     ],
@@ -409,6 +413,8 @@ async function openUserInfoBottomSheet() {
       case 'sessionChange': openSessionSettingP();
         break;
       case 'homeSetting': openHomeMgtPopup();
+        break;
+      case 'changePassword': openChangePassword();
     }
   }
 }

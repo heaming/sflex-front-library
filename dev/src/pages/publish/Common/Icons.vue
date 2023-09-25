@@ -100,6 +100,7 @@ const iconList1 = [
   'camera',
   'checked',
   'checked_stepper',
+  'chip_plus',
   'clear',
   'clock',
   'close',
