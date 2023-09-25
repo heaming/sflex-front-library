@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <q-select
+    v-if="!isDestroyed"
     ref="inputRef"
     v-scroll="onScroll"
     :model-value="computedValue"
@@ -230,6 +231,7 @@
 <script>
 import { cloneDeep } from 'lodash-es';
 import useInheritAttrs from '../../composables/private/useInheritAttrs';
+import usePermissions from '../../composables/private/usePermissions';
 import useField, { useFieldProps } from '../../composables/private/useField';
 import useFieldStyle, { useFieldStyleProps } from '../../composables/private/useFieldStyle';
 import useOptions, { useOptionsProps } from '../../composables/private/useOptions';
@@ -385,6 +387,7 @@ export default {
     }
 
     return {
+      ...usePermissions(),
       ...useInheritAttrs(),
       ...useFieldStyle(),
       ...fieldCtx,
