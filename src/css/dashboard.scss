@@ -37,10 +37,11 @@ body.tablet {
   flex: auto;
 
   &_summary {
-    display: flex;
-    background: $secondary;
-    height: 64px;
     padding: 16px 0 14px 24px;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    background: $secondary;
 
     & > * {
       color: #fff;
@@ -514,6 +515,13 @@ body.tablet {
         min-height: 20px;
         font-weight: 400;
       }
+    }
+  }
+
+  .home-card-title {
+    &,
+    &.kw-btn--borderless.q-btn {
+      align-self: flex-start;
     }
   }
 }
