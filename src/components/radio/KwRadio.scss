@@ -219,5 +219,7 @@ body.desktop {
 .address-item {
   .q-radio__label {
     width: 100% !important; // 주소정보조회 팝업에서 width 100% 요청
+    flex-grow: 1; // 주소정보조회 팝업 -> 텍스트 ellipsis 될시 width가 늘어나서 조정
+    max-width: calc(100% - 22px); // 주소정보조회 팝업 -> 텍스트 ellipsis 될시 width가 늘어나서 조정
   }
 }
