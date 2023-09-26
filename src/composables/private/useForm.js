@@ -138,7 +138,7 @@ export default () => {
     if (invalid && shouldFocus) {
       const { ctx } = registeredList[invalidIndex];
       ctx.focus();
-
+      ctx.el?.value?.scrollIntoView({ block: 'center', inline: 'nearest' });
       if (alertMessage) {
         await alert(ctx.invalidMessage.value);
       }

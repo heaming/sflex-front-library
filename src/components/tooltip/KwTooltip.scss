@@ -39,4 +39,5 @@ body.mobile:not(.tablet) {
 // select 내 툴팁 PC 말줄임
 .shrinked_tooltip.kw-tooltip {
   max-width: 600px;
+  word-wrap: break-word; // 툴팁 길면 두줄 이상으로
 }
