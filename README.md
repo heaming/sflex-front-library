@@ -69,7 +69,7 @@ code --install-extension jasonnutter.search-node-modules
 code --install-extension wayou.vscode-todo-highlight
 code --install-extension vscode-icons-team.vscode-icons
 ```
-### Install git
+### Install Git
 - https://github.com/git-for-windows/git/releases/download/v2.37.0.windows.1/Git-2.37.0-64-bit.exe
 - Set configuration
 ``` bash
