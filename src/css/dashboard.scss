@@ -1734,7 +1734,7 @@ body.mobile:not(.tablet) {
   }
 
   .mobile-home-bottom-sheet {
-    $self: &;
+    $self: ".mobile-home-bottom-sheet";
 
     position: fixed;
     width: 100%;
