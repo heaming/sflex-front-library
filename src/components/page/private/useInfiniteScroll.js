@@ -30,6 +30,7 @@ export default () => {
   const scrollTarget = ref();
   const containerRef = ref();
   const loadIndex = ref(props.initialLoadIndex);
+  const showFloatingBtn = ref(false);
 
   async function fetch() {
     if (infiniteIsEnabled.value === false || isFetching.value === true) {
@@ -55,15 +56,24 @@ export default () => {
   });
 
   function onScroll(evt, newEl = null) {
+    const el = newEl ? newEl.$el ?? newEl : scrollTarget.value.$el ?? scrollTarget.value;
+
+    if (el?.scrollTop !== 0) showFloatingBtn.value = true;
+    else showFloatingBtn.value = false;
+
     if (infiniteIsEnabled.value === false || isFetching.value === true) {
       return;
     }
 
-    const el = newEl ? newEl.$el : scrollTarget.value.$el ?? scrollTarget.value;
     const isOnBottom = evt.direction === 'down' && Math.ceil(evt.position.top) >= el.scrollHeight - el.clientHeight;
     if (isOnBottom) {
       deobuncedFetch.value();
     }
+  }
+
+  function moveToPageTop(evt, newEl = null) {
+    const el = newEl ? newEl.$el ?? newEl : scrollTarget.value.$el ?? scrollTarget.value;
+    el?.scrollTo(0, 0);
   }
 
   async function mountedFunc() {
@@ -120,5 +130,7 @@ export default () => {
     stopLoad,
     startLoad,
     containerRef,
+    showFloatingBtn,
+    moveToPageTop,
   };
 };
