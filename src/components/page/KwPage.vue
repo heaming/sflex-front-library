@@ -52,10 +52,24 @@
         <slot />
       </div>
       <q-scroll-observer
-        v-if="infiniteIsEnabled"
+        v-if="infiniteIsEnabled || !$g.platform.is.desktop"
         :scroll-target="scrollTarget"
-        @scroll="onScroll"
+        @scroll="(evt) => onScroll(evt)"
       />
+      <q-page-sticky
+        v-if="showFloatingBtn && !$g.platform.is.desktop"
+        position="bottom-right"
+        :offset="[18, 18]"
+        style="z-index: 150;"
+      >
+        <q-btn
+          fab
+          color="primary"
+          icon="up"
+          padding="sm"
+          @click="(evt) => moveToPageTop(evt)"
+        />
+      </q-page-sticky>
     </div>
 
     <div
