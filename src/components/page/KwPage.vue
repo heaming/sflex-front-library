@@ -56,20 +56,22 @@
         :scroll-target="scrollTarget"
         @scroll="(evt) => onScroll(evt)"
       />
-      <q-page-sticky
-        v-if="showFloatingBtn && !$g.platform.is.desktop"
-        position="bottom-right"
-        :offset="[18, 18]"
-        style="z-index: 150;"
-      >
-        <q-btn
-          fab
-          color="primary"
-          icon="up"
-          padding="sm"
-          @click="(evt) => moveToPageTop(evt)"
-        />
-      </q-page-sticky>
+      <transition name="fade">
+        <q-page-sticky
+          v-if="showFloatingBtn && !$g.platform.is.desktop"
+          position="bottom-right"
+          :offset="[18, 18]"
+          style="z-index: 150;"
+        >
+          <q-btn
+            fab
+            class="top_btn"
+            icon="top_btn"
+            label="TOP"
+            @click="(evt) => moveToPageTop(evt)"
+          />
+        </q-page-sticky>
+      </transition>
     </div>
 
     <div
