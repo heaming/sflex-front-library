@@ -18,10 +18,6 @@
 
     <template #action>
       <kw-btn
-        negative
-        label="취소"
-      />
-      <kw-btn
         secondary
         :label="$t('MSG_BTN_INTL')"
         @click="onClickReset"
