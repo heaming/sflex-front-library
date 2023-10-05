@@ -179,7 +179,6 @@ async function handleServerFailure(response) {
 
 export async function handleFailure(error) {
   const { config, response, request } = error;
-  console.log(error);
 
   if (config?.spinner) {
     loadSpinner(false);
