@@ -207,6 +207,12 @@ export async function handleFailure(error) {
     }
   }
 
+  // Gateway timeout 처리
+  if (response?.status === 504) {
+    await alert(i18n.t('MSG_ALT_ERR_TIMEOUT'));
+    throw error;
+  }
+
   await alert(i18n.t('MSG_ALT_ERR_CONTACT_ADMIN'));
   throw error;
 }
