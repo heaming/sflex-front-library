@@ -73,7 +73,7 @@ export default () => {
 
   function moveToPageTop(evt, newEl = null) {
     const el = newEl ? newEl.$el ?? newEl : scrollTarget.value.$el ?? scrollTarget.value;
-    el?.scrollTo(0, 0);
+    el?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
 
   async function mountedFunc() {
