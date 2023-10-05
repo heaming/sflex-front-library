@@ -1617,3 +1617,54 @@ body.mobile.temp_tablet {
 .text-break-all {
   word-break: break-all !important;
 }
+
+// 모바일 top버튼
+.q-btn.top_btn.q-btn--fab {
+  color: $black3;
+  font-size: 12px;
+  border: 1px solid $line-line;
+  background: #fff;
+  padding: 0 10px;
+  min-width: 52px;
+  min-height: 52px;
+  z-index: 100;
+
+  &::before {
+    box-shadow: 0 3px 6px rgb(0 0 0 / 8%);
+  }
+
+  .q-btn__content {
+    display: block !important;
+  }
+
+  .q-icon.on-left {
+    margin: 8px -6px -8px 1px;
+  }
+
+  .block {
+    padding-left: 1px;
+  }
+
+  .q-card__section > & {
+    bottom: 10px;
+  }
+}
+
+.kw-page__content > .q-page-sticky--shrink {
+  margin-bottom: 28px !important;
+}
+
+.q-page-sticky--shrink.fade-enter-active,
+.q-page-sticky--shrink.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.q-page-sticky--shrink.fade-enter,
+.q-page-sticky--shrink.fade-leave-to {
+  opacity: 0;
+}
+
+.q-page-sticky--shrink.fade-enter-to {
+  transition: opacity 0.5s;
+  opacity: 1;
+}

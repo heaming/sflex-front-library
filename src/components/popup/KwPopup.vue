@@ -53,20 +53,22 @@
         @scroll="(evt) => onScroll(evt, $g.platform.is.mobile ? containerRef : scrollTarget)"
       />
     </q-card-section>
-    <q-card-section
-      v-if="showFloatingBtn && !$g.platform.is.desktop"
-      ref="floatingBtnRef"
-      style="position: sticky; bottom: 78px; text-align: right;"
-    >
-      <q-btn
-        fab
-        color="primary"
-        icon="up"
-        padding="sm"
-        style="right: 18px;"
-        @click="(evt) => moveToPageTop(evt, containerRef)"
-      />
-    </q-card-section>
+    <transition name="fade">
+      <q-card-section
+        v-if="showFloatingBtn && !$g.platform.is.desktop"
+        ref="floatingBtnRef"
+        style="position: sticky; bottom: 78px; text-align: right;"
+      >
+        <q-btn
+          fab
+          class="top_btn"
+          icon="top_btn"
+          label="TOP"
+          style="right: 18px;"
+          @click="(evt) => moveToPageTop(evt, containerRef)"
+        />
+      </q-card-section>
+    </transition>
     <q-card-section
       v-if="$slots.action"
       class="kw-popup__action"
