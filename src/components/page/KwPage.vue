@@ -61,7 +61,7 @@
           v-if="showFloatingBtn && !$g.platform.is.desktop"
           position="bottom-right"
           :offset="[18, 18]"
-          style="z-index: 150;"
+          style="z-index: 1500;"
         >
           <q-btn
             fab

@@ -1,5 +1,5 @@
 <template>
-  <div class="web-dashboard-mgt__drag dashboard-drag">
+  <div class="mobile-dashboard-mgt__drag dashboard-drag">
     <kw-scroll-area>
       <transition-group
         ref="containerRef"
@@ -11,26 +11,17 @@
           v-for="card of userCards"
           :key="card.homeCardId"
           :data-key="card.homeCardId"
-          :style="getStyle(card)"
           class="dashboard-drag__item"
         >
+          {{ card.homeCardName }}
           <kw-icon
             name="close_24"
             size="24px"
             clickable
             @click.stop="onClickDelete(card)"
           />
-          <img
-            v-if="card.imgSrc"
-            :src="card.imgSrc"
-            :alt="card.homeCardName"
-            style="width: 100%; height: 100%;"
-          >
         </div>
       </transition-group>
-      <div class="dashboard-drag__guide">
-        {{ $t('MSG_TXT_HCARD_GUIDE') }}
-      </div>
     </kw-scroll-area>
   </div>
 </template>
@@ -51,16 +42,6 @@ const emit = defineEmits([
 ]);
 
 const containerRef = ref();
-const getStyle = (card) => {
-  const sizeTypeCodeSplited = card.homeCardSizeTypeCode.split('');
-  const [column, row] = sizeTypeCodeSplited.map((e) => parseInt(e, 10));
-  return {
-    width: `${302 * column + 20 * (column - 1)}px`,
-    height: `${251 * row + 20 * (row - 1)}px`,
-    gridRow: `auto/span ${row}`,
-    gridColumn: `auto/span ${column}`,
-  };
-};
 
 function onClickDelete({ homeCardId }) {
   const copyUserCards = [...props.userCards];
