@@ -66,6 +66,14 @@
               label="FAQ"
               @click="goToFaqPage"
             />
+            <kw-btn
+              v-close-popup
+              class="block kw-font-pt14 mt2 mb2 pt2 pb2"
+              borderless
+              grow
+              label="오픈소스 라이센스"
+              @click="openOpensourceLicPopup"
+            />
           </kw-menu>
           <span>
             <kw-btn
@@ -453,6 +461,12 @@ function goToNoticePage() {
 
 function goToFaqPage() {
   router.push('/ztclb-faq-list-for-user');
+}
+
+async function openOpensourceLicPopup() {
+  await modal({
+    component: () => import('../component/OpensourceLicenseP.vue'),
+  });
 }
 
 async function openHomeMgtPopup() {

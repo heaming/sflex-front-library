@@ -57,15 +57,16 @@
       <q-card-section
         v-if="showFloatingBtn && !$g.platform.is.desktop"
         ref="floatingBtnRef"
-        style="position: sticky; bottom: 78px; text-align: right;"
+        style="position: sticky; text-align: right;  z-index: 10000;"
+        :style="{ 'bottom': $g.platform.is.mobile ? '78px' : '0px' }"
       >
         <q-btn
           fab
           class="top_btn"
           icon="top_btn"
           label="TOP"
-          style="right: 18px;"
-          @click="(evt) => moveToPageTop(evt, containerRef)"
+          style="right: 18px; z-index: 10000;"
+          @click="(evt) => moveToPageTop(evt, $g.platform.is.mobile ? containerRef : scrollTarget)"
         />
       </q-card-section>
     </transition>
