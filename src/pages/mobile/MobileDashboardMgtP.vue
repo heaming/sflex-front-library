@@ -1,11 +1,11 @@
 <template>
   <kw-popup
-    class="web-dashboard-mgt"
+    class="mobile-dashboard-mgt"
     size="4xl"
     :title="$t('MSG_TIT_HOME_MGT')"
     @before-close="onBeforeClose"
   >
-    <div class="web-dashboard-mgt__inner">
+    <div class="mobile-dashboard-mgt__inner">
       <mobile-dashboard-mgt-p-select
         v-model:user-cards="userCards"
         :auth-cards="authCards"
@@ -36,13 +36,13 @@ import { cloneDeep, isEqual } from 'lodash-es';
 import { http } from '../../plugins/http';
 import { alert, confirm } from '../../plugins/dialog';
 import { notify } from '../../plugins/notify';
-import useModal from '../../composables/useModal';
+// import useModal from '../../composables/useModal';
 
 import MobileDashboardMgtPSelect from './MobileDashboardMgtPSelect.vue';
 import MobileDashboardMgtPDrag from './MobileDashboardMgtPDrag.vue';
 
 const { t } = useI18n();
-const { ok } = useModal();
+// const { ok } = useModal();
 
 const dragRef = ref();
 
@@ -87,11 +87,12 @@ async function onClickSave() {
     return;
   }
 
-  const saveUserCards = dragRef.value.getSaveUserCards();
-  await http.post('/sflex/common/common/user-homecards', saveUserCards);
+  notify('개발중입니다.');
+  // const saveUserCards = dragRef.value.getSaveUserCards();
+  // await http.post('/sflex/common/common/user-homecards', saveUserCards);
 
-  ok();
-  notify(t('MSG_ALT_SAVE_DATA'));
+  // ok();
+  // notify(t('MSG_ALT_SAVE_DATA'));
 }
 
 </script>

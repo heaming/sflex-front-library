@@ -116,6 +116,142 @@
   }
 }
 
+.mobile-dashboard-mgt {
+  .kw-popup__content {
+    padding-top: 20px !important;
+  }
+
+  &__inner {
+    position: relative;
+  }
+
+  &__select {
+    .dashboard-select {
+      &__item-container {
+        padding: 0 20px 30px;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 15px;
+      }
+
+      &__item {
+        position: relative;
+      }
+
+      &__item--selected {
+        .dashboard-select__item-content {
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute; // 홈카드 관련 선택표시 수정 (왼쪽영역)
+            top: 0; // 홈카드 관련 선택표시 수정 (왼쪽영역)
+            background: url(~@assets/images/home-card_selected.png) no-repeat center center;
+            background-size: cover;
+          }
+        }
+      }
+
+      &__item-content {
+        padding: 12px 0;
+        position: relative;
+        width: 220px;
+        height: 114px;
+        background: #fff;
+        border: 1px solid $line-stroke;
+
+        > span {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+
+          @include typo("caption",500);
+
+          color: $black2;
+        }
+      }
+
+      &__item-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+
+        > span {
+          font-size: 14px;
+          font-weight: 500;
+          color: $black1;
+        }
+
+        > .kw-btn {
+          padding: 4px 8px;
+          min-height: 24px;
+          max-height: 24px;
+          font-size: 12px;
+          line-height: 12px;
+        }
+      }
+    }
+  }
+
+  &__drag {
+    position: relative;
+    flex: 1;
+    background: $line-bg;
+    height: calc(100vh - 317px);
+    overflow: scroll;
+
+    .dashboard-drag {
+      &__item-container {
+        margin: 15px auto 0;
+        width: 100%;
+      }
+
+      &__item {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px 0 20px 20px;
+        border: 1px solid $line-stroke;
+        background: $bg-white;
+        width: calc(100% - 40px);
+        margin-bottom: 15px;
+        font-size: 14px;
+        font-weight: 700;
+
+        &.sortable-ghost {
+          border: 1px solid $black1;
+          box-shadow: 2px 10px 15px 0 rgb(0 0 0 / 6%);
+        }
+
+        > .kw-icon {
+          // close icon
+          position: absolute;
+          top: 19px;
+          right: 12px;
+        }
+
+        &--enter-from {
+          opacity: 0;
+          transform: scale(0);
+        }
+
+        &--move,
+        &--enter-active {
+          transition: all 0.3s;
+        }
+
+        &--leave-active {
+          position: absolute;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
 .alert_on::after {
   content: "";
   display: block;

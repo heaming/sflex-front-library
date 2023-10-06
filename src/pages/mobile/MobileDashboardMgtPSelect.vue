@@ -1,5 +1,5 @@
 <template>
-  <div class="web-dashboard-mgt__select dashboard-select">
+  <div class="mobile-dashboard-mgt__select dashboard-select">
     <kw-scroll-area>
       <div class="dashboard-select__item-container">
         <div
