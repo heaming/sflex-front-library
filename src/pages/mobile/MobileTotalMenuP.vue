@@ -375,6 +375,7 @@ async function openSupportBottomSheet() {
     items: [
       { value: 'notice', label: t('MSG_TIT_NOTICE') },
       { value: 'faq', label: 'FAQ' },
+      { value: 'osLic', label: '오픈소스 라이센스' },
     ],
   });
   if (res?.result) {
@@ -382,6 +383,10 @@ async function openSupportBottomSheet() {
       case 'notice': router.push('/kportal-notice-mobile-mgt');
         break;
       case 'faq': router.push('/zmclb-faq-list-for-user');
+        break;
+      case 'osLic': await modal({
+        component: () => import('../component/OpensourceLicenseP.vue'),
+      });
     }
   }
 }
