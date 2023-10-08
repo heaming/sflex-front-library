@@ -6,7 +6,7 @@
         style="line-height: 1 !important; margin-bottom: 0 !important;"
       >
         <img
-          src="~~@assets/images/kstation_wells.svg"
+          src="../../assets/images/kstation_wells.svg"
           class="w100"
           alt="kstation"
         >
