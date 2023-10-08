@@ -77,27 +77,13 @@ defineExpose({
     const el = containerRef.value.$el;
     const children = [...el.children];
 
-    const computedStyle = getComputedStyle(el);
-    const rowGap = parseInt(computedStyle.rowGap, 10);
-    const rowHeight = parseInt(computedStyle.gridTemplateRows, 10);
-    const columnGap = parseInt(computedStyle.columnGap, 10);
-    const columnWidth = parseInt(computedStyle.gridTemplateColumns, 10);
-
-    const {
-      x: baseX,
-      y: baseY,
-    } = el.getBoundingClientRect();
-
-    return children.map((e) => {
+    return children.map((e, i) => {
       const homeCardId = e.getAttribute('data-key');
-      const { x, y } = e.getBoundingClientRect();
-      const rowPosition = Math.round((y - baseY) / (rowHeight + rowGap)) + 1;
-      const columnPosition = Math.round((x - baseX) / (columnWidth + columnGap)) + 1;
 
       return {
         homeCardId,
-        rowPosition,
-        columnPosition,
+        rowPosition: i + 1,
+        columnPosition: 1,
       };
     });
   },
