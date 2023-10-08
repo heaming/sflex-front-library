@@ -13,7 +13,6 @@
             :src="tenantLogoUrl"
             :alt="tenantLogoAlt"
             style="width: 180px;"
-            @click="goToHome()"
           >
         </div>
         <div
