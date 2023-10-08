@@ -4,6 +4,7 @@ import MobileLeftDrawer from './MobileLeftDrawer.vue';
 import MobileEduFooter from './MobileEduFooter.vue';
 import MobileStackView from './MobileStackView.vue';
 import MobileFallbackLogin from './MobileFallbackLogin.vue';
+import MobileDashboardM from './MobileDashboardM.vue';
 
 export {
   MobileLayout,
@@ -12,4 +13,5 @@ export {
   MobileFallbackLogin,
   MobileEduFooter,
   MobileLeftDrawer,
+  MobileDashboardM,
 };

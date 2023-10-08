@@ -37,6 +37,7 @@ import { http } from '../../plugins/http';
 import { alert, confirm } from '../../plugins/dialog';
 import { notify } from '../../plugins/notify';
 import useModal from '../../composables/useModal';
+import useMeta from '../../composables/useMeta';
 
 import WebDashboardMgtPSelect from './WebDashboardMgtPSelect.vue';
 import WebDashboardMgtPDrag from './WebDashboardMgtPDrag.vue';
@@ -50,9 +51,34 @@ let initialUserCards;
 const userCards = shallowRef([]);
 const authCards = shallowRef([]);
 
+const { getUserInfo } = useMeta();
+const userInfo = computed(() => getUserInfo());
+
+const shouldAddKportalComponent = computed(() => {
+  if (userInfo.value.tenantId === 'TNT_EDU' && userInfo.value.baseRleCd?.startsWith('E')) return 'EDU';
+  if (userInfo.value.tenantId === 'TNT_WELLS' && userInfo.value.baseRleCd?.startsWith('W2')) return 'WELLS';
+  if (userInfo.value.tenantId === 'TNT_WELLS' && !userInfo.value.baseRleCd?.startsWith('W2') && userInfo.value.baseRleCd?.startsWith('W')) return 'WELLS';
+  return null;
+});
+
+function filterCard(cards) {
+  if (!cards || cards.length < 1) return cards;
+  if (shouldAddKportalComponent.value === 'WELLS') {
+    const newCards = cards.filter((x) => x.pageId !== 'HCD_EDU_MATERIALS');
+    return newCards;
+  }
+  if (!shouldAddKportalComponent.value) {
+    const newCards = cards.filter((x) => x.pageId !== 'HCD_EDU_MATERIALS' && x.pageId !== 'HCD_NOTICE');
+    return newCards;
+  }
+
+  return cards;
+}
+
 async function fetchAuthCards() {
   const response = await http.get('/sflex/common/common/user-homecards/auth');
-  authCards.value = response.data;
+  const filteredCards = filterCard(response.data);
+  authCards.value = filteredCards;
 }
 
 async function fetchUserCards() {

@@ -125,7 +125,7 @@ async function fetchUserCards() {
   const modules = props.importedComponents;
   userCards.value.forEach((item) => {
     modules.forEach((module) => {
-      if (module.key.indexOf(item.pageId) > -1) {
+      if (module.key.indexOf(item.pageId) > -1 && module.key.split('.vue')[0].endsWith(item.pageId)) {
         item.component = module.component;
       }
     });
