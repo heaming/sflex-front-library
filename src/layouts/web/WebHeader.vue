@@ -252,6 +252,7 @@
               @click="openPasswordChange"
             />
             <kw-btn
+              v-if="isDev"
               v-close-popup
               borderless
               grow
@@ -259,7 +260,7 @@
               @click="openSetSessionP"
             />
             <kw-btn
-              v-if="isEdu || isWells"
+              v-if="(isEdu || isWells) && isDev"
               v-close-popup
               borderless
               grow
@@ -267,6 +268,7 @@
               @click="openSessionChangeP"
             />
             <kw-btn
+              v-if="isDev"
               v-close-popup
               borderless
               grow
@@ -321,6 +323,7 @@ import WebTotalMenuP from '../../pages/web/WebTotalMenuP.vue';
 import WebGnbMenuP from '../../pages/web/WebGnbMenuP.vue';
 import store from '../../store';
 import { localStorage } from '../../plugins/storage';
+import env from '../../consts/private/env';
 
 const searchText = ref('');
 const totalMenu = ref(false);
@@ -346,6 +349,7 @@ export default {
     const router = useRouter();
     const alarmRef = ref();
     const { tenantId, portalId, ccpsInfoList } = useMeta().getUserInfo();
+    const isDev = computed(() => env.MODE === 'dev' || env.MODE === 'local');
     const isEdu = computed(() => tenantId === 'TNT_EDU' && portalId === 'WEB_DEF');
     const isWells = computed(() => tenantId === 'TNT_WELLS' && portalId === 'WEB_DEF');
 
@@ -590,6 +594,7 @@ export default {
       userInfoTooltipRef,
       beforeUserInfoMenuShow,
       beforeUserInfoTooltipShow,
+      isDev,
       isEdu,
       isWells,
       goToNoticePage,
