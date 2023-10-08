@@ -103,9 +103,9 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import dayjs from 'dayjs';
-import logoStandard from '~@assets/images/kstation_standard.svg';
-import logoEdu from '~@assets/images/kstation_edu.svg';
-import logoWells from '~@assets/images/kstation_wells.svg';
+import logoStandard from '../../assets/images/kstation_standard.svg';
+import logoEdu from '../../assets/images/kstation_edu.svg';
+import logoWells from '../../assets/images/kstation_wells.svg';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import WebFooter from './WebFooter.vue';
