@@ -109,6 +109,7 @@ import logoWells from '~@assets/images/kstation_wells.svg';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import WebFooter from './WebFooter.vue';
+import env from '../../consts/private/env';
 
 const tenantPrefix = 'TNT_';
 const tenantLogoUrls = {
@@ -117,10 +118,9 @@ const tenantLogoUrls = {
   wells: logoWells,
 };
 
-const tenant = window.location.hostname.match(/^(\w-)?(\w{2,})-afm/)?.[2].toLowerCase();
-
-const tenantId = tenant && `${tenantPrefix}${tenant}`.toUpperCase();
+const tenantId = env.VITE_TENANT_ID;
 console.log(tenantId);
+const tenant = tenantId.replace(tenantPrefix).toLowerCase();
 const tenantLogoUrl = tenantLogoUrls[tenant] || tenantLogoUrls.standard;
 const tenantLogoAlt = tenant ? `K-Station ${tenant}` : 'K-Station';
 
