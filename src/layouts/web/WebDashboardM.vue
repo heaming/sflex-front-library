@@ -120,7 +120,7 @@ const tenantLogoUrls = {
 
 const tenantId = env.VITE_TENANT_ID;
 console.log(tenantId);
-const tenant = tenantId.replace(tenantPrefix).toLowerCase();
+const tenant = tenantId.replace(tenantPrefix, '').toLowerCase();
 const tenantLogoUrl = tenantLogoUrls[tenant] || tenantLogoUrls.standard;
 const tenantLogoAlt = tenant ? `K-Station ${tenant}` : 'K-Station';
 
