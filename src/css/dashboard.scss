@@ -36,6 +36,19 @@ body.tablet {
   margin: 0 auto;
   flex: auto;
 
+  .no-item {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   &_summary {
     padding: 16px 0 14px 24px;
     display: flex;

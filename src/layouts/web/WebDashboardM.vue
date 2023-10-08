@@ -5,7 +5,21 @@
   >
     <div class="relative-position">
       <div class="dashboard dashboard--fixed">
-        <div class="dashboard_summary dashboard_summary_type1">
+        <div
+          v-if="!hasDashboardItem"
+          class="no-item"
+        >
+          <img
+            :src="tenantLogoUrl"
+            :alt="tenantLogoAlt"
+            style="width: 180px;"
+            @click="goToHome()"
+          >
+        </div>
+        <div
+          v-if="hasDashboardItem"
+          class="dashboard_summary dashboard_summary_type1"
+        >
           <p class="greetings">
             <span>{{ `${userInfo.userName}${userInfo.rsbNm
               ? userInfo.rsbNm.endsWith('님')
@@ -90,9 +104,26 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import dayjs from 'dayjs';
+import logoStandard from '~@assets/images/kstation_standard.svg';
+import logoEdu from '~@assets/images/kstation_edu.svg';
+import logoWells from '~@assets/images/kstation_wells.svg';
 import { http } from '../../plugins/http';
 import useMeta from '../../composables/useMeta';
 import WebFooter from './WebFooter.vue';
+
+const tenantPrefix = 'TNT_';
+const tenantLogoUrls = {
+  standard: logoStandard,
+  edu: logoEdu,
+  wells: logoWells,
+};
+
+const tenant = window.location.hostname.match(/^(\w-)?(\w{2,})-afm/)?.[2].toLowerCase();
+
+const tenantId = tenant && `${tenantPrefix}${tenant}`.toUpperCase();
+console.log(tenantId);
+const tenantLogoUrl = tenantLogoUrls[tenant] || tenantLogoUrls.standard;
+const tenantLogoAlt = tenant ? `K-Station ${tenant}` : 'K-Station';
 
 const { getters, commit } = useStore();
 
@@ -105,6 +136,7 @@ const props = defineProps({
 
 const areaType = ref('G');
 const periodType = ref('D');
+const hasDashboardItem = ref(false);
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
@@ -125,11 +157,15 @@ async function fetchUserCards() {
   const modules = props.importedComponents;
   userCards.value.forEach((item) => {
     modules.forEach((module) => {
-      if (module.key.indexOf(item.pageId) > -1 && module.key.split('.vue')[0].endsWith(item.pageId)) {
+      if (module.key.indexOf(item.pageId) > -1) {
         item.component = module.component;
       }
     });
   });
+
+  if (userCards.value.length > 0) {
+    hasDashboardItem.value = true;
+  }
   commit('app/setUserHomecardChanged', false);
 }
 await fetchUserCards();
