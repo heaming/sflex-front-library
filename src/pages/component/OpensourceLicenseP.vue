@@ -7,7 +7,7 @@
     <div class="pa20">
       <p>
         The following sets forth attribution notices for third party software that may be contained in portions of this product.<br>
-        If you have any questions, please contact<br>&lt;담당메일주소 or 연락처(전화번호)&gt;
+        If you have any questions, please contact<br>&lt;wells@kyowon.co.kr&gt;
       </p>
     </div>
     <kw-separator divider />

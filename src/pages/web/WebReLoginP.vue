@@ -1,3 +1,17 @@
+<!----
+****************************************************************************************************
+* 프로그램 개요
+****************************************************************************************************
+1. 모듈 : 공통
+2. 프로그램 ID : WebReLoginP
+3. 작성자 : mingyu03.kim
+4. 작성일 : 2023.10.10
+****************************************************************************************************
+* 프로그램 설명
+****************************************************************************************************
+- PC 화면에서 일정 시간동안 작업이 없을 경우 나타나는, 세션 만료 표시 및 재로그인 모달
+****************************************************************************************************
+--->
 <template>
   <kw-popup
     size="sm"
@@ -71,19 +85,23 @@ const userInfo = {
   loginId: arr[2],
 };
 // const userInfo = localStorage.getItem('reLoginInfo');
+const errorCount = ref(0);
+
+async function cancelLogin() {
+  localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+  window.location.reload();
+}
 
 async function reLogin() {
   const passwordEnc = CryptoJS.AES.encrypt(password.value, key, { iv });
   const res = await http.post(`${env.VITE_HTTP_ORIGIN}/certification/re-login`, { ...userInfo, password: passwordEnc.toString() })
     .catch(() => {
-      localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-      window.location.reload();
+      errorCount.value += 1;
+      if (errorCount.value === 5) {
+        cancelLogin();
+      }
     });
   ok(res.data);
-}
-
-async function cancelLogin() {
-  localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-  window.location.reload();
+  errorCount.value = 0;
 }
 </script>
