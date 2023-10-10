@@ -1,3 +1,18 @@
+<!----
+****************************************************************************************************
+* 프로그램 개요
+****************************************************************************************************
+1. 모듈 : 공통
+2. 프로그램 ID : WebDashboardMgtP 홈화면 개인설정 관리 (홈카드)
+3. 작성자 : mingyu03.kim
+4. 작성일 : 2023.10.10
+****************************************************************************************************
+* 프로그램 설명
+****************************************************************************************************
+- PC의 메인 홈 화면에 나타낼 홈 카드들을 추가하고, 삭제하고, 위치를 수정하는 기능
+- WebDashboardMgtPSelect (왼쪽 선택영역), WebDashboardMgtPDrag (오른쪽 위치조정 영역) 로 이루어져 있음
+****************************************************************************************************
+--->
 <template>
   <kw-popup
     class="web-dashboard-mgt"
@@ -38,7 +53,6 @@ import { alert, confirm } from '../../plugins/dialog';
 import { notify } from '../../plugins/notify';
 import useModal from '../../composables/useModal';
 import useMeta from '../../composables/useMeta';
-
 import WebDashboardMgtPSelect from './WebDashboardMgtPSelect.vue';
 import WebDashboardMgtPDrag from './WebDashboardMgtPDrag.vue';
 
