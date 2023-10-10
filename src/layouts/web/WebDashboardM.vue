@@ -164,6 +164,8 @@ async function fetchUserCards() {
 
   if (userCards.value.length > 0) {
     hasDashboardItem.value = true;
+  } else {
+    hasDashboardItem.value = false;
   }
   commit('app/setUserHomecardChanged', false);
 }
