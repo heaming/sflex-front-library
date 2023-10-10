@@ -76,7 +76,7 @@
         </kw-icon> -->
 
         <span
-          v-if="!env.isServer"
+          v-if="isDev"
           style="color: transparent;"
         >
           {{ pageSource }}
@@ -151,6 +151,7 @@ export default {
   },
   emits: ['reload-page'],
   async setup(props, { emit }) {
+    const isDev = computed(() => env.MODE === 'dev' || env.MODE === 'local');
     const showPageNotice = ref(true);
     const { getPageManual, pageManual } = useHeaderMeta();
     async function onClickOpenManual() {
@@ -172,7 +173,7 @@ export default {
       ...useBreadcrumbNavigation(),
       ...useNewWindow(),
       ...useHeaderMeta(),
-      env,
+      isDev,
       showPageNotice,
       sanitize,
       onClickOpenManual,

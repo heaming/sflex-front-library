@@ -133,7 +133,7 @@ const tenantLogoUrls = {
 };
 
 const tenantId = env.VITE_TENANT_ID;
-const tenant = tenantId.replace(tenantPrefix).toLowerCase();
+const tenant = tenantId.replace(tenantPrefix, '').toLowerCase();
 const tenantLogoUrl = tenantLogoUrls[tenant] || tenantLogoUrls.standard;
 const tenantLogoAlt = tenant ? `K-Station ${tenant}` : 'K-Station';
 
@@ -177,6 +177,8 @@ async function fetchUserCards() {
 
   if (userCards.value.length > 0) {
     hasDashboardItem.value = true;
+  } else {
+    hasDashboardItem.value = false;
   }
   commit('app/setUserHomecardChanged', false);
 }
