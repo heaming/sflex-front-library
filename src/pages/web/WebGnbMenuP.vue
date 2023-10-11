@@ -13,13 +13,6 @@
 ****************************************************************************************************
 --->
 <template>
-  <!-- gnbMenuP mouseleave시 꺼지는 동작 추후 추가예정 -->
-  <!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
-  <!-- <div
-    class="gnb_depth_menu"
-    @mouseleave="closeGnb"
-  > -->
-  <!-- eslint-enable vuejs-accessibility/mouse-events-have-key-events -->
   <div
     class="gnb_depth_menu"
   >
@@ -87,11 +80,6 @@ const emit = defineEmits([
   'closeGnbMenu',
 ]);
 
-// GNB - mouseleave 시 꺼지도록
-// function closeGnb() {
-//   emit('closeGnbMenu');
-// }
-
 function createHierarchyData(menus, key) {
   return menus
     .filter((v) => (key !== 'ROOT' ? key.endsWith(v.parentsMenuUid) : v.menuLevel === 0))
@@ -123,7 +111,7 @@ await fetchMenus();
 
 async function handleUpdateSelected(menuUid) {
   try {
-    await push({ name: menuUid });
+    push({ name: menuUid });
     emit('closeGnbMenu');
   } catch (e) {
     if (isNavigationFailure(e, 1)) { // matcher not found..

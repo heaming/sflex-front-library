@@ -1,5 +1,9 @@
 <template>
-  <q-header class="web-header">
+  <!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
+  <q-header
+    class="web-header"
+    @mouseleave="restoreHoverHeader()"
+  >
     <q-toolbar class="full-width">
       <div class="web-header__logo">
         <slot
@@ -14,7 +18,9 @@
       <kw-click-outside
         @click-outside="closeGnbMenu"
       >
-        <div class="web-header__apps">
+        <div
+          class="web-header__apps"
+        >
           <template
             v-for="{key, label} of apps"
             :key="key"
@@ -22,8 +28,9 @@
             <a
               :id="'header_' + key"
               class="web-header__link"
-              @mouseover="openGnbMenu(key, $event)"
-              @focus="openGnbMenu(key)"
+              @focus="hoverHeader(key, $event)"
+              @mouseover="hoverHeader(key, $event)"
+              @click="openGnbMenu(key, $event)"
             >
               {{ label }}
             </a>
@@ -431,34 +438,6 @@ export default {
     });
 
     const getSelectedKey = ref('');
-    function openGnbMenu(key, ev) {
-      document.querySelectorAll('.web-header__link').forEach((item) => {
-        item.classList.remove('web-header__link--active');
-      });
-      ev.target.classList.add('web-header__link--active');
-      getSelectedKey.value = key;
-      const body = document.querySelector('body');
-
-      // 메뉴 열릴 때 맨 위로 스크롤되서, 다시 현재 위치로 스크롤하는 css 추가
-      if (!gnbMenu.value) {
-        body.style.top = `-${window.scrollY}px`;
-        body.style.left = `-${window.scrollX}px`;
-        body.classList.add('q-body--prevent-scroll__header');
-
-        const bodyScrollHeight = body.scrollHeight;
-        const windowHeight = window.innerHeight;
-        if (bodyScrollHeight > windowHeight) body.classList.add('kw-body--force-scrollbar-y');
-      }
-      gnbMenu.value = true;
-    }
-
-    function makeBoldApplicationText(ev) {
-      document.querySelectorAll('.web-header__link').forEach((item) => {
-        item.classList.remove('web-header__link--bold');
-      });
-      ev.target.classList.add('web-header__link--bold');
-    }
-
     function closeGnbMenu() {
       if (gnbMenu.value) {
         gnbMenu.value = false;
@@ -479,6 +458,48 @@ export default {
         window.scrollTo(left, top);
         body.style.top = '';
         body.style.left = '';
+        getActiveClass();
+      }
+    }
+
+    function openGnbMenu(key, ev) {
+      if (key === getSelectedKey.value && gnbMenu.value) {
+        closeGnbMenu();
+        return;
+      }
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--active');
+      });
+      ev.target.classList.add('web-header__link--active');
+      getSelectedKey.value = key;
+      const body = document.querySelector('body');
+
+      // 메뉴 열릴 때 맨 위로 스크롤되서, 다시 현재 위치로 스크롤하는 css 추가
+      if (!gnbMenu.value) {
+        body.style.top = `-${window.scrollY}px`;
+        body.style.left = `-${window.scrollX}px`;
+        body.classList.add('q-body--prevent-scroll__header');
+
+        const bodyScrollHeight = body.scrollHeight;
+        const windowHeight = window.innerHeight;
+        if (bodyScrollHeight > windowHeight) body.classList.add('kw-body--force-scrollbar-y');
+      }
+      gnbMenu.value = true;
+    }
+
+    function hoverHeader(key, ev) {
+      document.querySelectorAll('.web-header__link').forEach((item) => {
+        item.classList.remove('web-header__link--active');
+      });
+      ev.target.classList.add('web-header__link--active');
+      getSelectedKey.value = key;
+    }
+
+    function restoreHoverHeader() {
+      if (!gnbMenu.value) {
+        document.querySelectorAll('.web-header__link').forEach((item) => {
+          item.classList.remove('web-header__link--active');
+        });
         getActiveClass();
       }
     }
@@ -571,7 +592,6 @@ export default {
       openTotalMenuP,
       openMenuSearchPopup,
       openGnbMenu,
-      makeBoldApplicationText,
       searchText,
       totalMenu,
       gnbMenu,
@@ -604,6 +624,8 @@ export default {
       onClickReadItem,
       alarmRef,
       beforeHideReadAllNotice,
+      hoverHeader,
+      restoreHoverHeader,
     };
   },
 };
