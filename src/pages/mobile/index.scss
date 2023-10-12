@@ -128,7 +128,7 @@
   &__select {
     .dashboard-select {
       &__item-container {
-        padding: 0 20px 30px;
+        padding: 0 20px 20px;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
@@ -155,21 +155,23 @@
       }
 
       &__item-content {
-        padding: 12px 0;
+        padding: 0;
         position: relative;
-        width: 220px;
-        height: 114px;
+        width: 152px;
+        height: 96px;
         background: #fff;
         border: 1px solid $line-stroke;
 
         > span {
-          position: absolute;
-          top: 10px;
-          right: 10px;
+          display: none;
 
-          @include typo("caption",500);
+          // position: absolute;
+          // top: 10px;
+          // right: 10px;
 
-          color: $black2;
+          // @include typo("caption",500);
+
+          // color: $black2;
         }
       }
 
@@ -180,17 +182,19 @@
         margin-top: 8px;
 
         > span {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 500;
           color: $black1;
+          line-height: 15px;
         }
 
         > .kw-btn {
-          padding: 4px 8px;
-          min-height: 24px;
-          max-height: 24px;
-          font-size: 12px;
-          line-height: 12px;
+          padding: 0 !important;
+          min-height: 24px !important;
+          max-height: 24px !important;
+          width: 38px !important;
+          font-size: 12px !important;
+          line-height: 12px !important;
         }
       }
     }
@@ -200,7 +204,7 @@
     position: relative;
     flex: 1;
     background: $line-bg;
-    height: calc(100vh - 317px);
+    height: calc(100vh - 283px);
     overflow: scroll;
 
     .dashboard-drag {
