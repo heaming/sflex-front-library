@@ -104,6 +104,7 @@ export default defineConfig(({ mode }) => {
           'viewerjs',
           'video.js',
           'videojs-landscape-fullscreen',
+          'vue3-pdf-app',
           'vue',
           'vue-chartjs',
           'vue-i18n',
