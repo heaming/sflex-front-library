@@ -24,7 +24,6 @@ export * from './highCode';
 export * from './icon';
 export * from './image';
 export * from './imagePreview';
-export * from './pdfPreview';
 export * from './infiniteScroll';
 export * from './input';
 export * from './item';
