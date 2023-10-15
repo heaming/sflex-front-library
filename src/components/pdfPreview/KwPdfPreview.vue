@@ -9,9 +9,9 @@
     :config="config"
     :id-config="idConfig"
     :style="{ 'height': $g.platform.is.desktop ? 'calc(100vh - 320px)' : 'calc(100vh - 55px)' }"
-    @after-created="onAfterCreated()"
-    @open="onOpenPdf()"
-    @paged-rendered="onPageRendered()"
+    @after-created="onAfterCreated?.()"
+    @open="onOpenPdf?.()"
+    @paged-rendered="onPageRendered?.()"
   />
 </template>
 
