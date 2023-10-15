@@ -109,6 +109,7 @@
     "vue-highlight-code": "^0.1.16",
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.15",
+    "vue3-pdf-app": "^1.0.3",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
