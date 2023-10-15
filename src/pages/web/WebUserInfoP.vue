@@ -134,7 +134,7 @@ async function onClickConfirm() {
     userInfo.value.cellphone = [telephone.value.telNo1, telephone.value.telNo2, telephone.value.telNo3].join('-');
 
     await http.put('/sflex/common/common/user-basics/update/session', userInfo.value);
-    await http.post('/sflex/common/common/phone-and-work-org', userInfo.value);
+    await http.post('/sflex/common/common/set-session-data', userInfo.value);
     await dispatch('meta/fetchLoginInfo');
     ok();
   }
