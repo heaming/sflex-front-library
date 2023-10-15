@@ -1963,10 +1963,15 @@ body.mobile:not(.tablet) {
   .material-status {
     .dashboard-box {
       &__item {
-        height: 144px;
+        height: auto;
+        min-height: 144px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+      }
+
+      &__top {
+        padding-bottom: 10px;
       }
     }
   }
