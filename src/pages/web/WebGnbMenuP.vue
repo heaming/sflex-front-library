@@ -63,6 +63,7 @@
 <script setup>
 import { isNavigationFailure } from 'vue-router';
 import { alert } from '../../plugins/dialog';
+import env from '../../consts/private/env';
 
 const { getters } = useStore();
 const { push } = useRouter();
@@ -86,7 +87,16 @@ function createHierarchyData(menus, key) {
     .reduce((a, v) => {
       v.key = `${key}.${v.menuUid}`;
       v.children = createHierarchyData(menus, v.key);
-      a.push(v); return a;
+      if (env.MODE === 'dev' || env.DEV) {
+        if (v.folderYn === 'Y' && v.children.length === 0) {
+        // do something
+        } else {
+          a.push(v);
+        }
+      } else {
+        a.push(v);
+      }
+      return a;
     }, []);
 }
 
@@ -111,7 +121,7 @@ await fetchMenus();
 
 async function handleUpdateSelected(menuUid) {
   try {
-    push({ name: menuUid });
+    await push({ name: menuUid });
     emit('closeGnbMenu');
   } catch (e) {
     if (isNavigationFailure(e, 1)) { // matcher not found..

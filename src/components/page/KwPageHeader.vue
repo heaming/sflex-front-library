@@ -151,7 +151,7 @@ export default {
   },
   emits: ['reload-page'],
   async setup(props, { emit }) {
-    const isDev = computed(() => env.MODE === 'dev' || env.MODE === 'local');
+    const isDev = computed(() => env.MODE === 'dev' || env.DEV);
     const showPageNotice = ref(true);
     const { getPageManual, pageManual } = useHeaderMeta();
     async function onClickOpenManual() {

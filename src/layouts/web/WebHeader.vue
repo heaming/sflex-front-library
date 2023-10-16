@@ -356,7 +356,7 @@ export default {
     const router = useRouter();
     const alarmRef = ref();
     const { tenantId, portalId, ccpsInfoList } = useMeta().getUserInfo();
-    const isDev = computed(() => env.MODE === 'dev' || env.MODE === 'local');
+    const isDev = computed(() => env.MODE === 'dev' || env.DEV);
     const isEdu = computed(() => tenantId === 'TNT_EDU' && portalId === 'WEB_DEF');
     const isWells = computed(() => tenantId === 'TNT_WELLS' && portalId === 'WEB_DEF');
 
