@@ -1,12 +1,45 @@
 import { alert } from '../../plugins/dialog';
+import env from '../../consts/private/env';
 
 export default () => {
   const { getters, commit } = useStore();
   const { isNavigationFailure, push } = useRouter();
   const { t } = useI18n();
 
-  const apps = readonly(getters['app/getGlobalApps']);
+  let apps = getters['app/getGlobalApps'];
   const selectedKey = computed(() => getters['app/getSelectedGlobalAppKey']);
+  function createHierarchyData(menus, key) {
+    return menus
+      .filter((v) => (key !== 'ROOT' ? key.endsWith(v.parentsMenuUid) : v.menuLevel === 0))
+      .reduce((a, v) => {
+        v.key = `${key}.${v.menuUid}`;
+        v.children = createHierarchyData(menus, v.key);
+        if (v.folderYn === 'Y' && v.children.length === 0) {
+        // do something
+        } else {
+          a.push(v);
+        }
+        return a;
+      }, []);
+  }
+  if (env.MODE === 'dev' || env.DEV) {
+    apps = apps.filter((app) => {
+      const menuPageRes = getters['meta/getMenus'];
+
+      const menus = menuPageRes.filter((v) => v.applicationId === app.key);
+      // console.log(menus);
+      const hierarchyData = {
+        key: 'ROOT',
+        portalId: app.portalId,
+        applicationId: app.key,
+        menuLevel: -1,
+        menuName: app.applicationName,
+        folderYn: 'Y',
+        children: createHierarchyData(menus, 'ROOT'),
+      };
+      return hierarchyData.children.length > 0;
+    });
+  }
 
   const isSelected = (appKey) => appKey === selectedKey.value;
 
