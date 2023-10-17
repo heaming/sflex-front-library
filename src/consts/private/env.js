@@ -12,6 +12,7 @@ export default {
 
   LOCAL: isLocal,
   SERVER: isServer,
+  IS_LIBRARY: env.VITE_IS_LIBRARY,
   TEST: __VUE_TEST_APP__ === true,
 
   VITE_ENTRY_POPUP_PATHNAME: env.VITE_POPUP_PATHNAME || '/popup',

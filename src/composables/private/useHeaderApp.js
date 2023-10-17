@@ -22,7 +22,7 @@ export default () => {
         return a;
       }, []);
   }
-  if (env.MODE === 'dev' || env.DEV) {
+  if ((env.MODE === 'dev' || env.DEV) && !env.IS_LIBRARY) {
     apps = apps.filter((app) => {
       const menuPageRes = getters['meta/getMenus'];
 
