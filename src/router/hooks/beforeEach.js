@@ -53,7 +53,7 @@ export default (to, from, next) => {
       console.log('to :::::::::', to);
       console.log('from :::::::::', from);
       console.log('window.location :::::::::', window.location.pathname);
-      if (to.name === 'Home') {
+      if (to.name === 'Home' && from.name !== undefined) {
         console.log('to name is Home');
         next(false);
         return;
