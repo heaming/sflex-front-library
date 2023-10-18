@@ -79,6 +79,7 @@ export default (to, from, next) => {
         INITIAL_LOCATION,
         pick(to, ['path', 'query']),
       );
+      console.log('init location', INITIAL_LOCATION);
       next('/');
     } else if (to.meta?.pageUseCode === 'S' && from.fullPath === '/') {
       const targetPath = recursiveGetParentPath(to.meta.menuUid);
@@ -88,6 +89,7 @@ export default (to, from, next) => {
     } else {
       to.meta.redirectedFrom = undefined;
       to.meta.logging = false;
+      console.log('next?', INITIAL_LOCATION);
       next();
     }
   });
