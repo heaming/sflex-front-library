@@ -112,6 +112,7 @@ const viewConfig = {
     convertLookupLabel: true,
     enableAppend: false,
     numberChars: () => [','],
+    eventEachRow: true,
   },
 
   treeOptions: {

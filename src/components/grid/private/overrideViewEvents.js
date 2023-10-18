@@ -27,6 +27,7 @@ const onValidate = 'onValidate'; // custom
 const onEditChange = 'onEditChange';
 const onGetEditValue = 'onGetEditValue';
 const onCellPasting = 'onCellPasting';
+const onEditRowPasted = 'onEditRowPasted';
 const onTopIndexChanged = 'onTopIndexChanged';
 const onScrollToBottom = 'onScrollToBottom';
 const onContextMenuPopup = 'onContextMenuPopup';
@@ -584,6 +585,23 @@ export function overrideOnGetEditValue(view) {
 
     if (hasOriginal(g, onGetEditValue)) {
       execOriginal(g, onGetEditValue, g, index, editResult);
+    }
+  });
+}
+
+/*
+  붙여넣을때 콜백 (콤보형인 경우 콤보의 label을 비교해서 같은게 있으면 해당하는 value를 넣어준다.)
+  */
+export function overrideOnEditRowPasted(view) {
+  wrapEvent(view, onEditRowPasted, (g, index, row, fields, oldValues, newValues) => {
+    fields.forEach((field) => {
+      if (view.getColumn(field).editor.type === 'list') {
+        const idx = view.getColumn(field).labels.findIndex((item) => item === newValues[field]);
+        view.setValue(row, field, view.getColumn(field).values[idx]);
+      }
+    });
+    if (hasOriginal(g, onEditRowPasted)) {
+      return execOriginal(g, onEditRowPasted, g, index, fields, oldValues, newValues);
     }
   });
 }
