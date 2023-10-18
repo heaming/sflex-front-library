@@ -106,10 +106,13 @@ export default () => {
   const locationReplace = (url = window.location.pathname) => window.location.replace(url);
 
   async function isReady() {
+    console.log('isReady');
     if (localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN)) {
+      console.log('has access token ???', localStorage.has(consts.LOCAL_STORAGE_ACCESS_TOKEN));
       await initSession();
       await routerIsReady();
     } else if (env.VITE_LOGIN_URL && window.location.origin !== env.VITE_HTTP_CUST_ORIGIN) {
+      console.log('login url ??');
       axios.get(env.VITE_SSO_HEALTH_CHECK_URL).then((res) => {
         if (res?.data) {
           locationReplace(env.VITE_LOGIN_URL); // redirect to sso
