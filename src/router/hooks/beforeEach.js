@@ -48,31 +48,31 @@ export default (to, from, next) => {
     }
 
     // 미인증 세션의 경우 홈화면으로의 이동은 막는다.
-    const user = store.getters['meta/getUserInfo'];
-    if (user.userId === 'anonymous' || user.portalId === 'NO_SESSION') {
-      console.log('to :::::::::', to);
-      console.log('from :::::::::', from);
-      console.log('window.location :::::::::', window.location.pathname);
-      if (to.name === 'Home' && from.name !== undefined) {
-        console.log('to name is Home');
-        next(false);
-        return;
-      }
+    // const user = store.getters['meta/getUserInfo'];
+    // if (user.userId === 'anonymous' || user.portalId === 'NO_SESSION') {
+    //   console.log('to :::::::::', to);
+    //   console.log('from :::::::::', from);
+    //   console.log('window.location :::::::::', window.location.pathname);
+    //   if (to.name === 'Home' && from.name !== undefined) {
+    //     console.log('to name is Home');
+    //     next(false);
+    //     return;
+    //   }
 
-      if (to.name === 'ErrorNotFound') {
-        console.log('to name is ErrorNotFound');
-        next();
-        return;
-      }
+    //   if (to.name === 'ErrorNotFound') {
+    //     console.log('to name is ErrorNotFound');
+    //     next();
+    //     return;
+    //   }
 
-      if (window.location.pathname.indexOf('/popup') < 0
-        && window.location.pathname.indexOf('/mobile') < 0
-        && window.location.pathname.indexOf('/tablet') < 0) {
-        console.log('window location pathname is not popup, mobile, tablet');
-        next({ name: 'ErrorNotFound' });
-        return;
-      }
-    }
+    //   if (window.location.pathname.indexOf('/popup') < 0
+    //     && window.location.pathname.indexOf('/mobile') < 0
+    //     && window.location.pathname.indexOf('/tablet') < 0) {
+    //     console.log('window location pathname is not popup, mobile, tablet');
+    //     next({ name: 'ErrorNotFound' });
+    //     return;
+    //   }
+    // }
 
     if (isEmpty(INITIAL_LOCATION)) {
       Object.assign(
