@@ -47,7 +47,7 @@ export default (to, from, next) => {
       }
     }
 
-    // 미인증 세션의 경우 홈화면으로의 이동은 막는다.
+    // 미인증 세션의 경우 홈화면으로의 이동은 막는다. --> 사파리에서 미인증 세션 동작 이상현상으로 삭제
     // const user = store.getters['meta/getUserInfo'];
     // if (user.userId === 'anonymous' || user.portalId === 'NO_SESSION') {
     //   console.log('to :::::::::', to);
@@ -79,7 +79,6 @@ export default (to, from, next) => {
         INITIAL_LOCATION,
         pick(to, ['path', 'query']),
       );
-      console.log('init location', INITIAL_LOCATION);
       next('/');
     } else if (to.meta?.pageUseCode === 'S' && from.fullPath === '/') {
       const targetPath = recursiveGetParentPath(to.meta.menuUid);
@@ -89,7 +88,6 @@ export default (to, from, next) => {
     } else {
       to.meta.redirectedFrom = undefined;
       to.meta.logging = false;
-      console.log('next?', INITIAL_LOCATION);
       next();
     }
   });
