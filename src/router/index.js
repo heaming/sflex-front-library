@@ -59,9 +59,10 @@ export function installRouter(app, { routes }) {
 
 export async function isReady() {
   rebuildRoutes(router);
-
+  console.log('rebuildRouter');
   try {
     await router.isReady();
+    console.log('router is Ready');
     await router.replace(INITIAL_LOCATION);
   } catch (e) {
     // ignore
