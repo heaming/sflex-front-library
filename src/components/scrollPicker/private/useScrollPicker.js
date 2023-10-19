@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
-import { findIndex } from 'lodash-es';
+import { findIndex, throttle } from 'lodash-es';
 import { createAnimateCanceledError, isAnimateCanceledError } from './animateCancel';
-import { stopAndPrevent } from '../../../utils/private/event';
+// import { stopAndPrevent } from '../../../utils/private/event';
 import { normalizeArrayIndex } from '../../../utils/private/normalize';
 
 const { max, min, abs, round, floor, PI } = Math;
@@ -135,14 +135,15 @@ export default () => {
   const lastAnimationFrameId = ref(null);
   const requestingAnimationFrame = computed(() => lastAnimationFrameId.value !== null);
 
-  function rotate(rotationOffset) {
+  function rotate(rotationOffset, offsetY) {
     if (requestingAnimationFrame.value) return;
 
     rotation.value += rotationOffset;
 
     const direction = rotationOffset < 0 ? DIRECTION.UP : DIRECTION.DOWN;
     const indexOffset = round(abs(rotation.value) / itemAngle) * direction;
-    const index = selectedIndex.value + indexOffset;
+    console.log('offsetY', offsetY);
+    const index = selectedIndex.value + (offsetY ? round((offsetY * -1) / 100) : indexOffset);
     const normalizedIndex = infinite ? normalizeArrayIndex(items, index) : min(max(index, 0), items.length - 1);
     const { value } = items[normalizedIndex];
 
@@ -246,18 +247,15 @@ export default () => {
     scrollTo(option.value);
   }
 
-  function onWheel(evt) {
+  const onWheel = throttle(({ evt, ...newInfo }) => {
     if (props.disable === true) return;
 
-    stopAndPrevent(evt);
-
-    const direction = evt.deltaY < 0 ? DIRECTION.UP : DIRECTION.DOWN;
+    const direction = newInfo.direction === 'down' ? DIRECTION.UP : DIRECTION.DOWN;
     const rotationOffset = itemAngle * direction;
-
     cancelAnimate();
-    rotate(rotationOffset);
+    rotate(rotationOffset, newInfo.offset.y);
     updateValue();
-  }
+  }, 100, { trailing: true });
 
   return {
     items,
