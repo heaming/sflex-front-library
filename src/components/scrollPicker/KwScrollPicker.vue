@@ -1,7 +1,7 @@
 <template>
   <div
+    v-touch-pan.vertical.prevent.mouse="onWheel"
     class="kw-scroll-picker"
-    @wheel="onWheel"
   >
     <q-list
       class="kw-scroll-picker__options"
