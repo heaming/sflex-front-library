@@ -93,6 +93,14 @@ function setSearchConditionMessage(view) {
       }
     });
 
+    // checkBox 인경우
+    const checkboxes = formItem.querySelectorAll('.q-checkbox');
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.getAttribute('aria-checked') === 'true') {
+        value = checkbox.getAttribute('aria-label');
+      }
+    });
+
     // value가 없는경우 disable (혹은 readonly)된 콤보 필드일수도 있다.
     if (value === '') {
       let disableField = formItem.querySelector('.q-field--disabled');
