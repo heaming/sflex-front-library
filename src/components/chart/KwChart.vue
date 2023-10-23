@@ -124,13 +124,18 @@ export default {
       return merge(typeOptions, props.options);
     });
 
+    const chartData = computed(() => {
+      const propsData = cloneDeep(props.data);
+      return {
+        labels: defaultLabels,
+        ...propsData,
+      };
+    });
+
     return {
       chartRef,
       chartCompo: compoMap[props.type],
-      chartData: {
-        labels: defaultLabels,
-        ...props.data,
-      },
+      chartData,
       chartOptions,
     };
   },
