@@ -31,6 +31,7 @@
     :input-class="computedInputClass"
     :input-style="inputStyle"
     :maxlength="computedMaxLength"
+    :autocomplete="autocomplete"
     no-error-icon
     @focus="onFocus"
     @blur="onBlurInput"
@@ -236,6 +237,7 @@ export default {
     telNo0: { type: [String, Number], default: '' },
     telNo1: { type: [String, Number], default: '' },
     telNo2: { type: [String, Number], default: '' },
+    autocomplete: { type: String, default: '' },
   },
 
   emits: [
