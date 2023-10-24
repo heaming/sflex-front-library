@@ -1711,6 +1711,10 @@ body.mobile:not(.tablet) {
     &--el {
       padding: 20px;
 
+      & .kw-page .dashboard-mobile--el {
+        padding: 0 20px;
+      }
+
       &::after {
         width: calc(100% + 40px);
         height: 8px;
