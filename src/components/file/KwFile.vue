@@ -153,7 +153,7 @@
                 no-wrap
                 dense
                 :label="downloadBtnLabel"
-                @click="downloadSelected"
+                @click="downloadSelectedAll(selectedFiles)"
               />
               <!-- <kw-btn
                 v-if="showDownloadAllBtn"
