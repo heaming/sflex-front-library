@@ -95,9 +95,13 @@ function setSearchConditionMessage(view) {
 
     // checkBox 인경우
     const checkboxes = formItem.querySelectorAll('.q-checkbox');
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach((checkbox, i) => {
       if (checkbox.getAttribute('aria-checked') === 'true') {
-        value = checkbox.getAttribute('aria-label');
+        if (i === 0) {
+          value = checkbox.getAttribute('aria-label');
+        } else {
+          value += ` | ${checkbox.getAttribute('aria-label')}`;
+        }
       }
     });
 
