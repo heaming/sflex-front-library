@@ -1159,6 +1159,8 @@
   background-clip: padding-box;
   border: 1px solid rgb(0 0 0 / 20%);
   outline: 0;
+  max-height: 52vh;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 509px) {
