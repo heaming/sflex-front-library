@@ -89,7 +89,8 @@ function setSearchConditionMessage(view) {
     const radios = formItem.querySelectorAll('.q-radio');
     radios.forEach((radio) => {
       if (radio.getAttribute('aria-checked') === 'true') {
-        value = radio.getAttribute('aria-label');
+        if (isEmpty(value)) value = radio.getAttribute('aria-label');
+        else value += ` | ${radio.getAttribute('aria-label')}`;
       }
     });
 
@@ -98,7 +99,8 @@ function setSearchConditionMessage(view) {
     checkboxes.forEach((checkbox, i) => {
       if (checkbox.getAttribute('aria-checked') === 'true') {
         if (i === 0) {
-          value = checkbox.getAttribute('aria-label');
+          if (isEmpty(value)) value = checkbox.getAttribute('aria-label');
+          else value += ` | ${checkbox.getAttribute('aria-label')}`;
         } else {
           value += ` | ${checkbox.getAttribute('aria-label')}`;
         }
