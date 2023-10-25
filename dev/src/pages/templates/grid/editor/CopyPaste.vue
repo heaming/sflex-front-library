@@ -84,8 +84,8 @@ function initGrd(data, view) {
       fieldName: 'list01',
       header: '일반 리스트',
       options,
-      optionValue: 'value',
-      optionLabel: 'label',
+      optionValue: 'codeId',
+      optionLabel: 'codeName',
       editor: { type: 'list' },
     },
     {
@@ -93,11 +93,11 @@ function initGrd(data, view) {
       header: 'displayCallback 리스트',
       options,
       editor: { type: 'list' },
-      displayCallback(g, index, value) {
-        const { values, labels } = g.columnByName(index.column);
-        const i = values.findIndex((v) => v === value);
-        return i > -1 ? ` [${values[i]}] ${labels[i]}` : '';
-      },
+      // displayCallback(g, index, value) {
+      //   const { values, labels } = g.columnByName(index.column);
+      //   const i = values.findIndex((v) => v === value);
+      //   return i > -1 ? ` [${values[i]}] ${labels[i]}` : '';
+      // },
     },
   ];
 
