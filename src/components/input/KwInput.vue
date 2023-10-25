@@ -175,6 +175,7 @@ const NAMED_REGEX = {
   alpha_spaces: /^[A-Z\s]*$/i,
   alpha_underscore: /^[0-9A-Z_]*$/i,
   alpha_hangul: /^[A-Z가-힣ㄱ-ㅎ]*$/i,
+  alpha_num_hangul: /^[0-9A-Z가-힣ㄱ-ㅎ]*$/i,
   hangul: /^[가-힣ㄱ-ㅎ]*$/i,
   num: /^[0-9]*$/i,
 };
