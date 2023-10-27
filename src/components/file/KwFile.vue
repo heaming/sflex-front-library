@@ -24,7 +24,7 @@
     :max-file-size="maxFileSize"
     :max-files="maxFiles"
     :max-total-size="maxTotalSize"
-    :filter="filter"
+    :filter="filterFiles"
     :append="append"
     :display-value="displayValue"
     :tabindex="tabindex"
@@ -775,6 +775,11 @@ export default {
       if (failedPropValidation === 'accept') {
         return t('MSG_ALT_FORB_EXTS', [file.name]);
       }
+
+      if (failedPropValidation === 'filter') {
+        return t('MSG_ALT_TOO_LONG_FILE', [file.name]);
+      }
+
       return `${failedPropValidation} validation error : ${file.name}`;
     };
 
@@ -906,6 +911,11 @@ export default {
       emit('preview', { idx, platform });
     }
 
+    function filterFiles(fileList) {
+      if (props.filter) return props.filter?.();
+      return fileList.filter((x) => x.name?.length <= 125 || x.value?.name?.length <= 125);
+    }
+
     return {
       ...useInheritAttrs(),
       ...fieldCtx,
@@ -933,6 +943,7 @@ export default {
       onDragLeave,
       previewFile,
       isModified,
+      filterFiles,
     };
   },
 };
