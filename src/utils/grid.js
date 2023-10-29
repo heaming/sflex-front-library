@@ -599,8 +599,8 @@ function getLayoutWidthByColumn(layout, columns) {
 }
 
 function getAlign(column) {
-  if (column.styleName.indexOf('text-right') >= 0) return 'right';
-  if (column.styleName.indexOf('text-left') >= 0) return 'left';
+  if (column?.styleName?.indexOf('text-right') >= 0) return 'right';
+  if (column?.styleName?.indexOf('text-left') >= 0) return 'left';
   return 'center';
 }
 
