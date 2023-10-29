@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+/* eslint-disable */
 import {
   omit, keyBy,
   every as _every, filter as _filter, find as _find, forEach as _forEach, map as _map, reduce as _reduce, some as _some,
@@ -10,6 +10,8 @@ import libConfig from '../consts/private/libConfig';
 import { alert, confirm } from '../plugins/dialog';
 import { notify } from '../plugins/notify';
 import { loadProgress } from '../plugins/loading';
+import { http } from '../plugins/http';
+import { downloadBlob } from './file';
 import _validate from '../validate';
 import i18n from '../i18n';
 import { timeout } from './private/tick';
@@ -594,6 +596,37 @@ function getLayoutWidthByColumn(layout, columns) {
     width = column._width + 15;
   }
   return width;
+}
+
+function getAlign(column) {
+  if (column.styleName.indexOf('text-right') >= 0) return 'right';
+  if (column.styleName.indexOf('text-left') >= 0) return 'left';
+  return 'center';
+}
+
+export async function exportBulkView(view, options = null) {
+  if (!options || !options.url) {
+    notify('option을 확인해주세요.');
+    return;
+  }
+
+  const columns = view.getColumns().map((x) => {
+    return {
+      value: x.name,
+      text: x.displayText,
+      width: x.displayWidth,
+      align: getAlign(x),
+    };
+  });
+
+  options.columns ??= columns;
+  options.searchCondition ??= view?.__searchConditionText__;
+  const { data } = await http.post('/sflex/common/common/bulk-download', options, {
+    timeout: 10 * 60 * 1000,
+    responseType: 'blob',
+  });
+
+  downloadBlob(data, 'test.xlsx');
 }
 
 export async function exportView(view, options) {
