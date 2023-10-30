@@ -198,14 +198,16 @@ watch(() => getters['app/getUserHomecardChanged'], async (newVal) => {
 
 async function getMeetingAttendData() {
   const params = {
-    body: {
-      AGRG_YM: dayjs().format('YYYYMM'),
-      OG_TP_CD: userInfo.value.ogTpCd,
-      PRTNR_NO: userInfo.value.loginId,
-    },
-    header: {},
+    agrgYm: dayjs().format('YYYYMM'),
+    metgPrscDt: dayjs().format('YYYYMMDD'),
+    ogTpCd: userInfo.value.ogTpCd,
+    prtnrNo: userInfo.value.loginId,
   };
-  const resp = await http.post('/interface/sms/common/competence/mcby-prtnr-metg-agrg', params);
+  let url;
+  if (periodType.value === 'D') url = '/sms/common/competence/month-partner-meeting/day';
+  else url = '/sms/common/competence/month-partner-meeting';
+
+  const resp = await http.get(url, { params });
   return resp.data;
 }
 
