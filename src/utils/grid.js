@@ -621,12 +621,14 @@ export async function exportBulkView(view, options = null) {
 
   options.columns ??= columns;
   options.searchCondition ??= view?.__searchConditionText__;
-  const { data } = await http.post('/sflex/common/common/bulk-download', options, {
+  options.fileName ??= 'excel_' + date.formatDate(new Date(), 'YYYYMMDDHHmmss');
+
+  const { data } = await http.post(options.url, options, {
     timeout: 10 * 60 * 1000,
     responseType: 'blob',
   });
 
-  downloadBlob(data, 'test.xlsx');
+  downloadBlob(data, options.fileName + '.xlsx');
 }
 
 export async function exportView(view, options) {
