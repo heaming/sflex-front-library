@@ -201,7 +201,7 @@ async function getMeetingAttendData() {
     agrgYm: dayjs().format('YYYYMM'),
     metgPrscDt: dayjs().format('YYYYMMDD'),
     ogTpCd: userInfo.value.ogTpCd,
-    prtnrNo: userInfo.value.loginId,
+    prtnrNo: userInfo.value.employeeIDNumber,
   };
   let url;
   if (periodType.value === 'D') url = '/sms/common/competence/month-partner-meeting/day';
