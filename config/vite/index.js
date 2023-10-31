@@ -49,6 +49,24 @@ function removeCdnUrl(urls, cdnUrl) {
   };
 }
 
+function attachCrossOrigin(cdnUrl) {
+  return {
+    name: 'add-query-plugin',
+    transformIndexHtml(html) {
+      // grid.css 파일에 쿼리 문자열 추가
+      // eslint-disable-next-line no-restricted-syntax
+      const regex = new RegExp(`<link rel="stylesheet" href="${cdnUrl}/assets/.*\\.css">`, 'g');
+      const match = html.match(regex);
+      if (match) {
+        const replacement = match[0].replace('css">', 'css" crossorigin>');
+        html = html.replace(regex, replacement);
+      }
+
+      return html;
+    },
+  };
+}
+
 exports.defineConfig = (config) => {
   config = normalizeConfig(config);
 
@@ -76,6 +94,8 @@ exports.defineConfig = (config) => {
         removeCdnUrl([
           `${loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN}/assets/grid`,
         ], loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN || '/'),
+
+        attachCrossOrigin(loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN),
         vue({
           template: { transformAssetUrls },
         }),
