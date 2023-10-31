@@ -360,6 +360,16 @@ export default {
     const isEdu = computed(() => tenantId === 'TNT_EDU' && portalId === 'WEB_DEF');
     const isWells = computed(() => tenantId === 'TNT_WELLS' && portalId === 'WEB_DEF');
 
+    // alarm중에 바로 켜져야하는 건이 있으면 바로켜준다.
+    function onClickReadItem(item) {
+      if (item.value.linkUrl) alarmRef.value.hide();
+      readAlarm(item.value);
+    }
+    const directAlarms = alarms.value.filter((alarm) => alarm.windowPopupYn === 'Y' && alarm.directPopupYn === 'Y');
+    if (directAlarms.length > 0) {
+      directAlarms.map((alarm) => readAlarm(alarm));
+    }
+
     dayjs.locale('en');
     async function openTotalMenuP() {
       document.querySelector('body').classList.add('q-body--prevent-scroll');
@@ -563,11 +573,6 @@ export default {
 
     function goToSmsSendHistoryPage() {
       router.push('/zwcmz-sms-send-list');
-    }
-
-    function onClickReadItem(item) {
-      if (item.value.linkUrl) alarmRef.value.hide();
-      readAlarm(item);
     }
 
     function beforeHideReadAllNotice() {

@@ -5,10 +5,10 @@ export default () => {
   const { push } = useRouter();
   const { dispatch } = useStore();
   async function readAlarm(alarm) {
-    const { linkUrl, readYn, windowPopupYn } = alarm.value;
+    const { linkUrl, readYn, windowPopupYn } = alarm;
 
     if (readYn === 'N') {
-      await http.put(`/sflex/common/common/alarm/read/${alarm.value.alarmId}`);
+      await http.put(`/sflex/common/common/alarm/read/${alarm.alarmId}`);
       await dispatch('meta/fetchAlarms');
     }
     if (linkUrl) {
