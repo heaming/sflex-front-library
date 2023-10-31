@@ -606,6 +606,12 @@ $unit: px;
   }
 }
 
+.width100 {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
 @for $toppo from -1500 through 1500 {
   .top#{$toppo} {
     top: #{$toppo} + $unit !important;
