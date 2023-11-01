@@ -1,3 +1,7 @@
+.q-btn::before {
+  position: relative !important;
+}
+
 .kw-btn {
   $-kw-btn-padding: $button-padding;
   $-kw-btn-line-height: $button-line-height;
