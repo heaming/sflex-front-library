@@ -1,5 +1,6 @@
 import { Platform, openURL, uid } from 'quasar';
 import { isEmpty } from 'lodash-es';
+import { alert } from '../plugins/dialog';
 import store from '../store';
 import pascalCase from './private/pascalCase';
 
@@ -212,6 +213,7 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
     } else {
       openURL(urlWithUid, () => {
         reject(
+          alert('브라우저 보안으로 팝업이 차단되었습니다. 팝업 허용을 해주세요.'),
           new Error('pop-up open failed, check whether your browser blocks pop-ups.'),
         );
       }, parseFeatures(windowFeatures));

@@ -1,6 +1,5 @@
 import { http } from '../../../plugins/http';
 import { open } from '../../../utils/popup';
-import { alert } from '../../../plugins/dialog';
 
 export default () => {
   const { push } = useRouter();
@@ -14,13 +13,7 @@ export default () => {
     }
     if (linkUrl) {
       if (windowPopupYn === 'Y') {
-        const rtn = open(linkUrl);
-        console.log('useAlarm Test :::: ');
-        console.log(rtn);
-        console.log(typeof rtn);
-        if (rtn === null || typeof rtn === 'undefined') {
-          alert('브라우저 보안으로 팝업이 차단되었습니다. 팝업 허용을 해주세요.');
-        }
+        open(linkUrl);
       } else {
         push(linkUrl);
       }
