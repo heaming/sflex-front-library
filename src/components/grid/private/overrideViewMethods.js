@@ -295,7 +295,7 @@ function setColumnEditor(column, { dataType }, provider) {
           const isDisable = row[editor.disable] ?? editor.disable;
 
           if (isDisable) {
-            return isEmpty(editor.disableMessage.trim()) ? '사용할 수 없습니다.' : editor.disableMessage.trim();
+            return isEmpty(editor.disableMessage?.trim()) ? '사용할 수 없습니다.' : editor.disableMessage?.trim();
           }
 
           if (editor.hideWhenEmpty) {
