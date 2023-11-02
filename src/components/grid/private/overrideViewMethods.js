@@ -1,4 +1,4 @@
-import { cloneDeep, defaultsDeep, map, merge } from 'lodash-es';
+import { cloneDeep, defaultsDeep, map, merge, isEmpty } from 'lodash-es';
 import dayjs from 'dayjs';
 import { ButtonVisibility, ValueType } from 'realgrid';
 import { wrapMethod, execOriginal } from './overrideWrap';
@@ -149,6 +149,7 @@ function setColumnRenderer(column, { dataType }) {
 
   if (column.editor?.type === 'file') {
     const styleNames = column.styleName.split(' ');
+    const { editor } = column;
     styleNames.push('rg-file-button');
     styleNames.push('text-center');
     column.styleName = styleNames.join(' ');
@@ -156,16 +157,21 @@ function setColumnRenderer(column, { dataType }) {
       type: 'html',
       hideWhenEmpty: false,
       callback: (grid, cell) => {
+        const dp = grid.getDataSource();
+        const row = dp.getOutputRow({}, cell.index.dataRow);
+
+        const isDisable = row[editor.disable] ?? editor.disable;
+
         const value = cell?.value?.__numberOfFiles;
         if (!value || value < 1) { // 없을 때
           if (column.editor.hideWhenEmpty) return '';
-          const res = '<div class="rg-button-default">'
+          const res = `<div class="rg-button-default ${isDisable ? 'rg-disabled-column' : ''}">`
                     + '<button type="button" tabindex="-1" class="rg-button-renderer-button">'
                     + '파일찾기</button></div>';
           return res;
         }
 
-        let res = '<div class="rg-html-renderer">'
+        let res = `<div class="rg-html-renderer ${isDisable ? 'rg-disabled-column' : ''}">`
           + '<button type="button" tabindex="-1" class="rg-button-renderer-button">';
         if (value && value !== '0') {
           const badge = '<div class="q-badge flex inline items-center no-wrap q-badge--single-line'
@@ -278,13 +284,20 @@ function setColumnRenderer(column, { dataType }) {
   }
 }
 
-function setColumnEditor(column, { dataType }) {
+function setColumnEditor(column, { dataType }, provider) {
   const { editor } = column;
   switch (editor?.type) {
     case 'file':
       defaultsDeep(column, {
         editable: false,
         objectCallback: (fieldName, dataRow, value) => {
+          const row = provider.getOutputRow({}, dataRow);
+          const isDisable = row[editor.disable] ?? editor.disable;
+
+          if (isDisable) {
+            return isEmpty(editor.disableMessage.trim()) ? '사용할 수 없습니다.' : editor.disableMessage.trim();
+          }
+
           if (editor.hideWhenEmpty) {
             return value.__numberOfFiles && value.__numberOfFiles > 0 ? '첨부파일' : '';
           }
@@ -429,7 +442,7 @@ function normalizeColumn(column, view) {
   setColumnOptions(normalizedColumn, field);
   setColumnStyleName(normalizedColumn, field);
   setColumnRenderer(normalizedColumn, field);
-  setColumnEditor(normalizedColumn, field);
+  setColumnEditor(normalizedColumn, field, data);
   setColumnCellButton(normalizedColumn, field);
   setColumnStyleCallback(normalizedColumn, field);
 
