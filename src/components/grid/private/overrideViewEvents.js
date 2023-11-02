@@ -310,72 +310,75 @@ export function overrideOnCellItemClicked(view) {
       const dp = g.getDataSource();
       const dataRow = dp.getOutputRow({}, index.dataRow);
 
-      let attachDocumentId;
-      if (dataRow[editor.attachDocumentId]?.__atthDocumentId) {
-        attachDocumentId = dataRow[editor.attachDocumentId]?.__atthDocumentId;
-      } else if (typeof dataRow[editor.attachDocumentId] === 'string') attachDocumentId = dataRow[editor.attachDocumentId];
-      else attachDocumentId = editor.attachDocumentId;
+      const isDisable = dataRow[editor.disable] ?? editor.disable;
+      if (!isDisable) {
+        let attachDocumentId;
+        if (dataRow[editor.attachDocumentId]?.__atthDocumentId) {
+          attachDocumentId = dataRow[editor.attachDocumentId]?.__atthDocumentId;
+        } else if (typeof dataRow[editor.attachDocumentId] === 'string') attachDocumentId = dataRow[editor.attachDocumentId];
+        else attachDocumentId = editor.attachDocumentId;
 
-      let editable;
-      if (typeof editor.editable === 'boolean') editable = editor.editable;
-      else if (typeof editor.editable === 'string') editable = dataRow[editor.editable];
-      else editable = false;
-      const componentProps = {
-        attachDocumentId,
-        attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
-        fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
-        fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
-        multiple: dataRow[editor.multiple] ?? editor.multiple,
-        downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
-        editable,
-        existFiles: dataRow[index.column]?.files,
-      };
+        let editable;
+        if (typeof editor.editable === 'boolean') editable = editor.editable;
+        else if (typeof editor.editable === 'string') editable = dataRow[editor.editable];
+        else editable = false;
+        const componentProps = {
+          attachDocumentId,
+          attachGroupId: dataRow[editor.attachGroupId] ?? editor.attachGroupId,
+          fileUid: dataRow[editor.fileUid] ?? editor.fileUid,
+          fileUidMode: dataRow[editor.fileUidMode] ?? editor.fileUidMode,
+          multiple: dataRow[editor.multiple] ?? editor.multiple,
+          downloadable: dataRow[editor.downloadable] ?? editor.downloadable,
+          editable,
+          existFiles: dataRow[index.column]?.files,
+        };
 
-      const result = await modal({
-        component: 'ZwcmzAttachFileMgtP',
-        componentProps,
-      });
+        const result = await modal({
+          component: 'ZwcmzAttachFileMgtP',
+          componentProps,
+        });
 
-      if (result.result) {
-        let fileCount;
-        if (componentProps.multiple === false) {
-          if (!isEmpty(result.payload?.files)) fileCount = 1;
-          else fileCount = 0;
-        } else fileCount = result.payload?.files?.length;
+        if (result.result) {
+          let fileCount;
+          if (componentProps.multiple === false) {
+            if (!isEmpty(result.payload?.files)) fileCount = 1;
+            else fileCount = 0;
+          } else fileCount = result.payload?.files?.length;
 
-        if (result.payload?.isModified) {
-          let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
-          if (data) {
-            data.files = result.payload.files;
-            data.__isModified = true;
-            data.__numberOfFiles = `${fileCount ?? 0}`;
-          } else {
-            // 신규 추가된 행은 undefined이다
-            data = {
-              files: result.payload.files,
-              __isModified: true,
-              __atthDocumentId: componentProps.attachDocumentId,
-              __numberOfFiles: `${fileCount ?? 0}`,
-            };
+          if (result.payload?.isModified) {
+            let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
+            if (data) {
+              data.files = result.payload.files;
+              data.__isModified = true;
+              data.__numberOfFiles = `${fileCount ?? 0}`;
+            } else {
+              // 신규 추가된 행은 undefined이다
+              data = {
+                files: result.payload.files,
+                __isModified: true,
+                __atthDocumentId: componentProps.attachDocumentId,
+                __numberOfFiles: `${fileCount ?? 0}`,
+              };
+            }
+            dp.setValue(index.dataRow, index.fieldName, data);
           }
-          dp.setValue(index.dataRow, index.fieldName, data);
-        }
 
-        if (result.payload?.initFiles) {
-          let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
-          if (data) {
-            data.files = null;
-            data.__isModified = false;
-            data.__numberOfFiles = `${fileCount ?? 0}`;
-          } else {
-            data = {
-              files: null,
-              __isModified: false,
-              __atthDocumentId: componentProps.attachDocumentId,
-              __numberOfFiles: `${fileCount ?? 0}`,
-            };
+          if (result.payload?.initFiles) {
+            let data = cloneDeep(dp.getValue(index.dataRow, index.fieldName));
+            if (data) {
+              data.files = null;
+              data.__isModified = false;
+              data.__numberOfFiles = `${fileCount ?? 0}`;
+            } else {
+              data = {
+                files: null,
+                __isModified: false,
+                __atthDocumentId: componentProps.attachDocumentId,
+                __numberOfFiles: `${fileCount ?? 0}`,
+              };
+            }
+            dp.setValue(index.dataRow, index.fieldName, data);
           }
-          dp.setValue(index.dataRow, index.fieldName, data);
         }
       }
     }

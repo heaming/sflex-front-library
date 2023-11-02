@@ -525,6 +525,15 @@
   }
 }
 
+.rg-disabled-column {
+  opacity: 0.3;
+  cursor: not-allowed;
+
+  .rg-button-renderer-button {
+    cursor: not-allowed;
+  }
+}
+
 // 양식 보기 아이콘
 .rg-button-report {
   .rg-button-renderer-button {
