@@ -656,6 +656,13 @@
   }
 
   &.rg-button-icon--search {
+    &.rg-button-disabled {
+      .rg-button-action {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+    }
+
     .rg-button-action {
       background: url(~@assets/icons/search.svg) no-repeat center !important;
       background-size: 16px !important;
