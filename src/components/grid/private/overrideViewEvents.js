@@ -311,7 +311,7 @@ export function overrideOnCellItemClicked(view) {
       const dp = g.getDataSource();
       const dataRow = dp.getOutputRow({}, index.dataRow);
 
-      const isDisable = dataRow[editor.disable] ?? editor.disable;
+      const isDisable = dataRow?.[editor.disable] ?? editor.disable === true;
       if (!isDisable) {
         let attachDocumentId;
         if (dataRow[editor.attachDocumentId]?.__atthDocumentId) {
