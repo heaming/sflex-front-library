@@ -160,7 +160,7 @@ function setColumnRenderer(column, { dataType }) {
         const dp = grid.getDataSource();
         const row = dp.getOutputRow({}, cell.index.dataRow);
 
-        const isDisable = row[editor.disable] ?? editor.disable;
+        const isDisable = row?.[editor.disable] ?? editor.disable === true;
 
         const value = cell?.value?.__numberOfFiles;
         if (!value || value < 1) { // 없을 때
@@ -291,9 +291,14 @@ function setColumnEditor(column, { dataType }, provider) {
       defaultsDeep(column, {
         editable: false,
         objectCallback: (fieldName, dataRow, value) => {
-          const row = provider.getOutputRow({}, dataRow);
-          const isDisable = row[editor.disable] ?? editor.disable;
+          let row;
+          try {
+            row = provider.getOutputRow({}, dataRow);
+          } catch (e) {
+            // ignore
+          }
 
+          const isDisable = row?.[editor.disable] ?? editor.disable === true;
           if (isDisable) {
             return isEmpty(editor.disableMessage?.trim()) ? '사용할 수 없습니다.' : editor.disableMessage?.trim();
           }
