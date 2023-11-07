@@ -549,7 +549,7 @@ const normalizeExportOptions = (options = {}) => ({
   footer: options.footer || 'default',
   header: options.header || 'default',
   headerSummary: options.headerSummary || 'default',
-  fileName: options.fileName?.replace(/\.\w+$/, '') || 'export',
+  fileName: options.fileName?.replace(/\./gi, ' ') || 'export',
   timePostfix: options.timePostfix === true,
   exportLayout: options.exportLayout,
   exportData: options.exportData,
