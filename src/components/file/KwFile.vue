@@ -780,11 +780,29 @@ export default {
         return t('MSG_ALT_TOO_LONG_FILE', [file.name]);
       }
 
+      if (failedPropValidation === 'max-total-size') {
+        return t('MSG_ALT_MAX_TOT_FILE_SIZE');
+      }
+
+      if (failedPropValidation === 'max-file-size') {
+        return t('MSG_ALT_MAX_FILE_SIZE', [file.name]);
+      }
+
       return `${failedPropValidation} validation error : ${file.name}`;
     };
 
     const onRejected = (rejectedEntries) => {
-      const rejectMessage = rejectedEntries.map(getRejectMessage).join('\n');
+      const rejectMessages = rejectedEntries.map(getRejectMessage);
+      let rejectMessage;
+      if (rejectMessages.includes(t('MSG_ALT_MAX_TOT_FILE_SIZE'))) {
+        const newMessages = [];
+        newMessages.push(t('MSG_ALT_MAX_TOT_FILE_SIZE'));
+        rejectMessages.forEach((m) => {
+          if (m !== t('MSG_ALT_MAX_TOT_FILE_SIZE')) newMessages.push(m);
+        });
+        rejectMessage = newMessages.join('\n\n');
+      } else rejectMessage = rejectMessages.join('\n\n');
+
       emit('rejected', rejectMessage, rejectedEntries);
       alert(rejectMessage);
     };
