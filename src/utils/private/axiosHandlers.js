@@ -162,7 +162,8 @@ async function handleServerFailureDefault(response) {
   }
 }
 
-async function handleServerFailure(response) {
+async function handleServerFailure(error) {
+  const { config, response } = error;
   const { data } = response;
 
   switch (data.errorType) {
@@ -173,6 +174,9 @@ async function handleServerFailure(response) {
     case consts.HTTP_ERROR_BIZ:
       await handleServerFailureBiz(response); break;
     default:
+      if (config?.skipServerFailureDefault) {
+        throw error;
+      }
       await handleServerFailureDefault(response);
   }
 }
@@ -182,9 +186,6 @@ export async function handleFailure(error) {
 
   if (config?.spinner) {
     loadSpinner(false);
-  }
-  if (config?.skipInterceptors) {
-    throw error;
   }
 
   if (response) {
@@ -197,7 +198,7 @@ export async function handleFailure(error) {
     }
 
     if (isServerError(response)) {
-      await handleServerFailure(response);
+      await handleServerFailure(error);
       throw error;
     }
   } else if (request) {
