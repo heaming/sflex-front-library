@@ -781,7 +781,7 @@ export default {
       }
 
       if (failedPropValidation === 'max-total-size') {
-        return t('MSG_ALT_MAX_TOT_FILE_SIZE');
+        return t('MSG_ALT_MAX_TOT_FILE_SIZE', [file.name]);
       }
 
       if (failedPropValidation === 'max-file-size') {
@@ -794,11 +794,12 @@ export default {
     const onRejected = (rejectedEntries) => {
       const rejectMessages = rejectedEntries.map(getRejectMessage);
       let rejectMessage;
-      if (rejectMessages.includes(t('MSG_ALT_MAX_TOT_FILE_SIZE'))) {
+      const idx = rejectMessages.findIndex((x) => x.startsWith(t('MSG_ALT_MAX_TOT_FILE_SIZE')));
+      if (idx > -1) {
         const newMessages = [];
-        newMessages.push(t('MSG_ALT_MAX_TOT_FILE_SIZE'));
+        newMessages.push(rejectMessages[idx]);
         rejectMessages.forEach((m) => {
-          if (m !== t('MSG_ALT_MAX_TOT_FILE_SIZE')) newMessages.push(m);
+          if (!m.startsWith(t('MSG_ALT_MAX_TOT_FILE_SIZE'))) newMessages.push(m);
         });
         rejectMessage = newMessages.join('\n\n');
       } else rejectMessage = rejectMessages.join('\n\n');
