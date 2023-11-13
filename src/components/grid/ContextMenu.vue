@@ -120,6 +120,8 @@ import { addClickOutside, removeClickOutside } from '../../utils/private/clickOu
 import { localStorage } from '../../plugins/storage';
 import { PageUniqueIdContextKey } from '../../consts/private/symbols';
 import { notify } from '../../plugins/notify';
+import { alert } from '../../plugins/dialog';
+import i18n from '../../i18n';
 
 export default {
   name: 'ContextMenu',
@@ -217,6 +219,12 @@ export default {
     }
 
     function onClickViewOption(opt) {
+      const visibleProps = contextConfig.value.viewOptions.filter((item) => item.visible === true);
+      if (visibleProps.length === 1 && opt.visible) {
+        alert(i18n.t('MSG_ALT_CHK_MIN_SELT', ['1', i18n.t('MSG_TXT_COL')]));
+        return;
+      }
+
       view.setColumnProperty(opt.column, 'visible', !opt.visible);
       view.layoutByColumn(opt.column).visible = !view.layoutByColumn(opt.column).visible;
       updateContextConfig();
