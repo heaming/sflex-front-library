@@ -1,7 +1,7 @@
 <template>
   <kw-field-wrap
     ref="inputRef"
-    v-bind="{...styleClassAttrs, ...fieldWrapProps}"
+    v-bind="{ ...styleClassAttrs, ...fieldWrapProps }"
     :error="invalid"
     :error-message="invalidMessage"
     @focus="$emit('focus')"
@@ -28,7 +28,58 @@
       :ripple="false"
       @update:model-value="value = $event"
       @click.native="onClick"
-    />
+    >
+      <template
+        v-if="showTooltip && styledOptions[0]"
+        #slot0
+      >
+        <kw-tooltip
+          class="tab_tooltip"
+        >
+          {{ styledOptions[0].slotText }}
+        </kw-tooltip>
+      </template>
+      <template
+        v-if="showTooltip && styledOptions[1]"
+        #slot1
+      >
+        <kw-tooltip
+          class="tab_tooltip"
+        >
+          {{ styledOptions[1].slotText }}
+        </kw-tooltip>
+      </template>
+      <template
+        v-if="showTooltip && styledOptions[2]"
+        #slot2
+      >
+        <kw-tooltip
+          class="tab_tooltip"
+        >
+          {{ styledOptions[2].slotText }}
+        </kw-tooltip>
+      </template>
+      <template
+        v-if="showTooltip && styledOptions[3]"
+        #slot3
+      >
+        <kw-tooltip
+          class="tab_tooltip"
+        >
+          {{ styledOptions[3].slotText }}
+        </kw-tooltip>
+      </template>
+      <template
+        v-if="showTooltip && styledOptions[4]"
+        #slot4
+      >
+        <kw-tooltip
+          class="tab_tooltip"
+        >
+          {{ styledOptions[4].slotText }}
+        </kw-tooltip>
+      </template>
+    </q-btn-toggle>
     <!-- eslint-enable vue/no-deprecated-v-on-native-modifier -->
   </kw-field-wrap>
 </template>
@@ -44,7 +95,6 @@ import useFieldWrap, { useFieldWrapProps } from '../../composables/private/useFi
 export default {
   name: 'KwBtnToggle',
   inheritAttrs: false,
-
   props: {
     // customize props
     ...useFieldProps,
@@ -63,6 +113,7 @@ export default {
       type: [String, Number, Boolean],
       default: undefined,
     },
+    showTooltip: { type: Boolean, default: false },
 
     // fall through props
     disable: { type: Boolean, default: false },
@@ -93,9 +144,15 @@ export default {
       const classes = {
         ...buttonClass.value,
       };
-      if (props.toggleColor) { classes[`kw-btn--toggle-color-${props.toggleColor}`] = true; }
-      if (props.toggleTextColor) { classes[`kw-btn--toggle-text-color-${props.toggleTextColor}`] = true; }
-      if (props.toggleBorderColor) { classes[`kw-btn--toggle-border-color-${props.toggleBorderColor}`] = true; }
+      if (props.toggleColor) {
+        classes[`kw-btn--toggle-color-${props.toggleColor}`] = true;
+      }
+      if (props.toggleTextColor) {
+        classes[`kw-btn--toggle-text-color-${props.toggleTextColor}`] = true;
+      }
+      if (props.toggleBorderColor) {
+        classes[`kw-btn--toggle-border-color-${props.toggleBorderColor}`] = true;
+      }
       return classes;
     });
 
@@ -107,8 +164,12 @@ export default {
         'kw-btn-toggle': true,
         ...stretchClass.value,
       };
-      if (props.gap) { classes['kw-btn-toggle--spaced'] = true; }
-      if (props.btnWrap) { classes['kw-btn-group--wrap'] = true; }
+      if (props.gap) {
+        classes['kw-btn-toggle--spaced'] = true;
+      }
+      if (props.btnWrap) {
+        classes['kw-btn-group--wrap'] = true;
+      }
       return classes;
     });
 
@@ -118,11 +179,14 @@ export default {
       return styles;
     });
 
-    const assignOptionStyle = (v) => ({
+    const assignOptionStyle = (v, idx) => ({
       ...v,
       class: toggleButtonClass.value,
       style: buttonStyles.value,
+      slot: `slot${idx}`,
+      slotText: v.tooltipText ? v.tooltipText : v.label,
     });
+
     const styledOptions = computed(() => normalizedOptions.value.map(assignOptionStyle));
 
     return {
