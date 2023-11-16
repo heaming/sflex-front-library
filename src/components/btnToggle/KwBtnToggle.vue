@@ -184,7 +184,7 @@ export default {
       class: toggleButtonClass.value,
       style: buttonStyles.value,
       slot: `slot${idx}`,
-      slotText: v.slotText ? v.slotText : v.label,
+      slotText: v.tooltipText ? v.tooltipText : v.label,
     });
 
     const styledOptions = computed(() => normalizedOptions.value.map(assignOptionStyle));
