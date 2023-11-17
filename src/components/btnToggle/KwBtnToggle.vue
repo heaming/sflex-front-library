@@ -33,9 +33,7 @@
         v-if="showTooltip && styledOptions[0]"
         #slot0
       >
-        <kw-tooltip
-          class="tab_tooltip"
-        >
+        <kw-tooltip>
           {{ styledOptions[0].slotText }}
         </kw-tooltip>
       </template>
@@ -43,9 +41,7 @@
         v-if="showTooltip && styledOptions[1]"
         #slot1
       >
-        <kw-tooltip
-          class="tab_tooltip"
-        >
+        <kw-tooltip>
           {{ styledOptions[1].slotText }}
         </kw-tooltip>
       </template>
@@ -53,9 +49,7 @@
         v-if="showTooltip && styledOptions[2]"
         #slot2
       >
-        <kw-tooltip
-          class="tab_tooltip"
-        >
+        <kw-tooltip>
           {{ styledOptions[2].slotText }}
         </kw-tooltip>
       </template>
@@ -63,9 +57,7 @@
         v-if="showTooltip && styledOptions[3]"
         #slot3
       >
-        <kw-tooltip
-          class="tab_tooltip"
-        >
+        <kw-tooltip>
           {{ styledOptions[3].slotText }}
         </kw-tooltip>
       </template>
@@ -73,9 +65,7 @@
         v-if="showTooltip && styledOptions[4]"
         #slot4
       >
-        <kw-tooltip
-          class="tab_tooltip"
-        >
+        <kw-tooltip>
           {{ styledOptions[4].slotText }}
         </kw-tooltip>
       </template>
