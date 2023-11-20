@@ -60,6 +60,7 @@
             v-model:tel-no2="telephone.telNo2"
             v-model:tel-no3="telephone.telNo3"
             label="휴대전화번호"
+            readonly
           />
         </kw-form-item>
       </kw-form-row>
