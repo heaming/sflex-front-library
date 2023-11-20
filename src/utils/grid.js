@@ -616,6 +616,7 @@ export async function exportBulkView(view, options = null) {
       text: x.displayText,
       width: x.displayWidth,
       align: getAlign(x),
+      valueType: x.valueType ?? 'text',
     };
   });
 
