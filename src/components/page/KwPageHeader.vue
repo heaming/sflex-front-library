@@ -11,7 +11,7 @@
           name="arrow_left_breadcrumbs_24"
           clickable
           class="h32"
-          @click="$router.close()"
+          @click="$router.close ? $router.close() : $router.go(-1)"
         >
           {{ $t('MSG_BTN_BACK', null, '뒤로가기') }}
         </kw-icon>
@@ -135,6 +135,7 @@ import env from '../../consts/private/env';
 import { modal } from '../../plugins/modal';
 
 export default {
+
   name: 'KwPageHeader',
 
   props: {
