@@ -103,9 +103,16 @@
             >
               <component
                 :is="userCard.component"
+                v-if="userCard.authYn === 'Y'"
                 :period-type="periodType"
                 :area-type="areaType"
               />
+              <div
+                v-else
+                style="height: 100%;display: flex;align-items: center;justify-content: center;"
+              >
+                해당 홈카드에 권한이 없습니다.<br>홈 화면 개인 설정에서 변경 부탁드립니다.
+              </div>
             </div>
           </template>
         </div>
