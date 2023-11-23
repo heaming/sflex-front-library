@@ -175,6 +175,12 @@ exports.defineConfig = (config) => {
         sourcemap: config.buildSourcemap,
         rollupOptions: config.rollupOptions,
         assetsInlineLimit: 0,
+        minify: 'terser',
+        terserOptions: {
+          compress: {
+            drop_console: !!loadEnv(pluginArgs)?.config()?.define?.__VUE_IMPORT_META_ENV__?.VITE_CDN_ORIGIN,
+          },
+        },
 
       },
 
