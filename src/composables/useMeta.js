@@ -4,7 +4,7 @@ import { hasPermissionKeyInPage } from '../directives/permission';
 export default () => {
   const pageCtx = inject(PageContextKey, null);
   const { getters } = useStore();
-
+  const router = useRouter();
   function getUserInfo() {
     return getters['meta/getUserInfo'];
   }
@@ -22,7 +22,8 @@ export default () => {
   }
 
   function hasPermission(permissionKey) {
-    return hasPermissionKeyInPage(permissionKey, pageCtx);
+    const newPageCtx = getters['meta/getPage'](router.currentRoute.value.meta.pageId);
+    return hasPermissionKeyInPage(permissionKey, pageCtx ?? newPageCtx);
   }
 
   function hasRoleNickName(roleNickName) {
