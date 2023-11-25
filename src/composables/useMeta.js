@@ -22,7 +22,7 @@ export default () => {
   }
 
   function hasPermission(permissionKey) {
-    const newPageCtx = getters['meta/getPage'](router.currentRoute.value.meta.pageId);
+    const newPageCtx = getters['meta/getPage'](router?.currentRoute?.value?.meta?.pageId);
     return hasPermissionKeyInPage(permissionKey, pageCtx ?? newPageCtx);
   }
 
