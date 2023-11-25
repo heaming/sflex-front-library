@@ -29,68 +29,34 @@
             style="width: 180px;"
           >
         </div>
-        <div
-          v-if="hasDashboardItem"
-          class="dashboard_summary dashboard_summary_type1"
-        >
-          <p class="greetings">
-            <span>{{ `${userInfo.userName}${userInfo.rsbNm
-              ? userInfo.rsbNm.endsWith('님')
-                ? ` ${userInfo.rsbNm.slice(0, -1)}` : ` ${userInfo.rsbNm}`
-              : ''}님` }}</span>, 좋은 하루 보내세요.
-          </p>
-          <div class="dashboard_summary_counter">
-            <h5>미팅참석현황</h5>
-            <dl>
-              <!-- <dt>어제</dt>
-              <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd> -->
-              <dt>{{ (dayjs().month() + 1) + '월' }}</dt>
-              <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd>
-            </dl>
-          </div>
-          <kw-separator
-            vertical
-            inset
-            spaced="20px"
-            style="opacity: 0.5;"
-            color="bg-white"
-          />
-          <div class="dashboard_summary_counter">
-            <h5>고객현황</h5>
-            <dl>
-              <dt>유입</dt>
-              <dd>{{ topBarData.customer.cstIn ?? 0 }}</dd>
-              <dt>이탈</dt>
-              <dd>{{ topBarData.customer.cstOut ?? 0 }}</dd>
-              <dt>총인원수</dt>
-              <dd>{{ topBarData.customer.cstTot ?? 0 }}</dd>
-            </dl>
-          </div>
-          <kw-separator
-            vertical
-            inset
-            spaced="20px"
-            style="opacity: 0.5;"
-            color="bg-white"
-          />
-          <div class="dashboard_summary_counter">
-            <h5>주요지표(실적)</h5>
-            <kw-btn-toggle
-              v-model="periodType"
-              :options="[{'cd':'D', 'nm':'일간'}, {'cd':'M', 'nm':'월간'}]"
-              option-label="nm"
-              option-value="cd"
-              dense
-              gap="0px"
-            />
-            <dl>
-              <dt>진단검사</dt>
-              <dd>{{ topBarData.index.dgnsCnt ?? 0 }}</dd>
-              <dt>무료체험</dt>
-              <dd>{{ topBarData.index.smartCnt ?? 0 }}</dd>
-            </dl>
-          </div>
-        </div>
+        <!-- EDU 센터장 -->
+        <template v-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.EDU_CENTER_LEADER">
+          <edu-center-leader-header />
+        </template>
+        <!-- EDU 지국장 -->
+        <template v-else-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.EDU_DISTRICT_MANAGER">
+          <edu-district-manager-header />
+        </template>
+        <!-- EDU 매니저/플래너 -->
+        <template v-else-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.EDU_MANAGER">
+          <edu-manager-header />
+        </template>
+        <!-- WELLS 영업부 -->
+        <template v-else-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.WELLS_BUSINESS_DEPARTMENT">
+          <wells-business-department-header />
+        </template>
+        <!-- WELLS 엔지니어 -->
+        <template v-else-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.WELLS_ENGINEER">
+          <wells-engineer-header />
+        </template>
+        <!-- WELLS 본사 -->
+        <template v-else-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.WELLS_HEAD_OFFICE">
+          <wells-head-office-header />
+        </template>
+        <!-- 공통 헤더? -->
+        <template v-else-if="hasDashboardItem && hcdHeaderType === hcdHeaderTypes.COMMON">
+          <common-header />
+        </template>
         <div class="dashboard_wrap">
           <template
             v-for="(userCard, idx) in userCards"
@@ -116,7 +82,13 @@
 </template>
 <script setup>
 import { cloneDeep } from 'lodash-es';
-import dayjs from 'dayjs';
+import EduCenterLeaderHeader from './dashboardHeader/EduCenterLeaderHeader.vue';
+import EduDistrictManagerHeader from './dashboardHeader/EduDistrictManagerHeader.vue';
+import EduManagerHeader from './dashboardHeader/EduManagerHeader.vue';
+import WellsBusinessDepartmentHeader from './dashboardHeader/WellsBusinessDepartmentHeader.vue';
+import WellsEngineerHeader from './dashboardHeader/WellsEngineerHeader.vue';
+import WellsHeadOfficeHeader from './dashboardHeader/WellsHeadOfficeHeader.vue';
+import CommonHeader from './dashboardHeader/CommonHeader.vue';
 import logoStandard from '../../assets/images/kstation_standard.svg';
 import logoEdu from '../../assets/images/kstation_edu.svg';
 import logoWells from '../../assets/images/kstation_wells.svg';
@@ -153,11 +125,18 @@ const hasDashboardItem = ref(false);
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 
-const topBarData = ref({
-  meeting: {},
-  customer: {},
-  index: {},
+const hcdHeaderTypes = ref({
+  EDU_CENTER_LEADER: 'HE100', // EDU 센터장
+  EDU_DISTRICT_MANAGER: 'HE200', // EDU 지국장
+  EDU_MANAGER: 'HE300', // EDU 선생님 (매니저)
+  WELLS_BUSINESS_DEPARTMENT: 'HW100', // WELLS 영업부
+  WELLS_PLANNER: 'HW200', // WELLS 플래너 (모바일만?)
+  WELLS_ENGINEER: 'HW300', // WELLS 엔지니어
+  WELLS_HEAD_OFFICE: 'HW400', // WELLS 본사
+  COMMON: 'HG100',
 });
+
+const hcdHeaderType = computed(() => userInfo?.value?.hcdCd);
 
 const userCards = shallowRef([]);
 async function fetchUserCards() {
@@ -184,71 +163,10 @@ async function fetchUserCards() {
 }
 await fetchUserCards();
 
-// function getDashboardClass(card) {
-//   const sizeType = card.homeCardSizeTypeName;
-//   return `dashboard_el dashboard_el_${sizeType.replaceAll('X', 'by')}`;
-// }
-// console.log(getDashboardClass)?;
-
 watch(() => getters['app/getUserHomecardChanged'], async (newVal) => {
   if (newVal) {
     await fetchUserCards();
   }
-});
-
-async function getMeetingAttendData() {
-  const params = {
-    agrgYm: dayjs().format('YYYYMM'),
-    metgPrscDt: dayjs().format('YYYYMMDD'),
-    ogTpCd: userInfo.value.ogTpCd,
-    prtnrNo: userInfo.value.employeeIDNumber,
-  };
-  let url;
-  if (periodType.value === 'D') url = '/sms/common/competence/month-partner-meeting/day';
-  else url = '/sms/common/competence/month-partner-meeting';
-
-  const resp = await http.get(url, { params });
-  return resp.data;
-}
-
-async function getCustomerData() {
-  const params = {
-    dayOrMonth: 'MONTH',
-    ogCd: userInfo.value.ogCd,
-    ogTpCd: userInfo.value.ogTpCd,
-  };
-  const resp = await http.get('/sms/edu/contract/orderstatus/customer-status', { params });
-  return resp.data;
-}
-
-async function getIndexData() {
-  const resp = await http.get(`/sms/edu/customer/common/homecards/status/${periodType.value}`);
-  return resp.data;
-}
-
-async function getDataAll() {
-  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_EDU') {
-    try {
-      const [meeting, customer, index] = await Promise.all(
-        [getMeetingAttendData(), getCustomerData(), getIndexData()],
-      );
-      topBarData.value.meeting = meeting.body ?? {};
-      topBarData.value.customer = customer ?? {};
-      topBarData.value.index = index ?? {};
-    } catch (e) {
-      topBarData.value.meeting = {};
-      topBarData.value.customer = {};
-      topBarData.value.index = {};
-    }
-  }
-}
-
-watch(periodType, () => {
-  getDataAll();
-});
-
-onMounted(async () => {
-  await getDataAll();
 });
 
 </script>

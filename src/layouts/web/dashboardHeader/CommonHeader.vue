@@ -3,13 +3,13 @@
 * 프로그램 개요
 ****************************************************************************************************
 1. 모듈 : 공통
-2. 프로그램 ID : WellsBusinessDepartmentHeader - 홈카드 화면의 Wells 영업부 헤더
+2. 프로그램 ID : CommonHeader - 홈카드 화면의 공통 헤더
 3. 작성자 : mingyu03.kim
 4. 작성일 : 2023.10.10
 ****************************************************************************************************
 * 프로그램 설명
 ****************************************************************************************************
-- 접속 시 홈 카드 영역의 헤더를 보여준다. (WELLS 영업부)
+- 접속 시 홈 화면에, 로그인 계정에 설정된 홈카드들을 보여주는 화면
 ****************************************************************************************************
 --->
 <template>
@@ -21,49 +21,8 @@
         ? userInfo.rsbNm.endsWith('님')
           ? ` ${userInfo.rsbNm.slice(0, -1)}` : ` ${userInfo.rsbNm}`
         : ''}님` }}</span>, 좋은 하루 보내세요.
-      <span style="color: #2f3c73;">WELLS 영업부</span>
+      <span style="color: #2f3c73;">공통</span>
     </p>
-    <div class="dashboard_summary_counter">
-      <h5>판매</h5>
-      <kw-btn-toggle
-        v-model="sales"
-        :options="['계약', '매출']"
-        dense
-        gap="0px"
-      />
-      <dl>
-        <dt>일계/누계(설치율)</dt>
-        <dd>0/0<span>(0%)</span></dd>
-      </dl>
-    </div>
-    <kw-separator
-      vertical
-      inset
-      spaced="20px"
-      style="opacity: 0.5;"
-      color="bg-white"
-    />
-    <div class="dashboard_summary_counter">
-      <h5>조직</h5>
-      <dl>
-        <dt>가동(등록)</dt>
-        <dd>0<span>(0)</span></dd>
-      </dl>
-    </div>
-    <kw-separator
-      vertical
-      inset
-      spaced="20px"
-      style="opacity: 0.5;"
-      color="bg-white"
-    />
-    <div class="dashboard_summary_counter">
-      <h5>서비스(BS)</h5>
-      <dl>
-        <dt>관리/방문/완료(처리율)</dt>
-        <dd>0/0/0<span>(0%)</span></dd>
-      </dl>
-    </div>
   </div>
 </template>
 <script setup>
@@ -74,5 +33,3 @@ const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 
 </script>
-<style scoped lang="scss">
-</style>
