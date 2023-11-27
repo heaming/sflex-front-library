@@ -27,9 +27,12 @@
       <h5>판매</h5>
       <kw-btn-toggle
         v-model="sales"
-        :options="['계약', '매출']"
+        :options="[
+          { codeName: '계약', codeId: 'contract'},
+          { codeName: '매출', codeId: 'sales', disable: true}]"
         dense
         gap="0px"
+        class="sales_btn"
       />
       <dl>
         <dt>목표/실적(달성율)</dt>
@@ -60,6 +63,7 @@ import useMeta from '../../../composables/useMeta';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
+const sales = ref('contract');
 
 </script>
 <style scoped lang="scss">
