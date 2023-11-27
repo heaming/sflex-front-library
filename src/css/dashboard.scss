@@ -76,6 +76,14 @@ body.tablet {
       display: flex;
       align-items: center;
 
+      .sales_btn {
+        .kw-btn-toggle.q-btn-toggle .kw-btn--outlined.q-btn[aria-pressed="false"].disabled {
+          background: none !important;
+          background-color: none !important;
+          opacity: 0.3 !important;
+        }
+      }
+
       h5 {
         font-size: 16px;
         font-weight: 400;
