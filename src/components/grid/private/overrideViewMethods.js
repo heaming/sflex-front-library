@@ -269,12 +269,27 @@ function setColumnRenderer(column, { dataType }) {
             ...(column.datetimeFormat === 'yyyy-MM-dd' ? {
               displayCallback: (g, i, v) => {
                 if (v) {
-                  if (v?.length >= 9) return dayjs(v, 'YYYYMMDDHH24MISS').format('YYYY-MM-DD');
+                  if (v?.length >= 9) return dayjs(v, 'YYYYMMDDHHmmss').format('YYYY-MM-DD');
                   return dayjs(v, 'YYYYMMDD').format('YYYY-MM-DD');
                 }
                 return v;
               },
-            } : { textFormat: getTextDatetimeFormat(column.datetimeFormat) }),
+            } : {
+              // yyyy-MM-dd 형식이 아닌, yyyy-MM 같은 경우일 때 ?
+              displayCallback: (g, i, v) => {
+                if (v) {
+                  const splited = column.datetimeFormat.split(' ');
+                  let format;
+                  if (splited.length > 1) { // HHmmss 부분 있을때 ?
+                    format = dayjs(v, 'YYYYMMDDHHmmss').format(`${splited[0].toUpperCase()} ${splited[1]}`);
+                  } else {
+                    format = dayjs(v, 'YYYYMMDDHHmmss').format(`${splited[0].toUpperCase()}`);
+                  }
+                  return format;
+                }
+                return v;
+              },
+            }),
           });
         }
       }
