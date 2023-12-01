@@ -268,9 +268,12 @@ function setColumnRenderer(column, { dataType }) {
           defaultsDeep(column, {
             ...(column.datetimeFormat === 'yyyy-MM-dd' ? {
               displayCallback: (g, i, v) => {
+                let format;
                 if (v) {
-                  if (v?.length >= 9) return dayjs(v, 'YYYYMMDDHHmmss').format('YYYY-MM-DD');
-                  return dayjs(v, 'YYYYMMDD').format('YYYY-MM-DD');
+                  if (v?.length >= 9) format = dayjs(v, 'YYYYMMDDHHmmss');
+                  else format = dayjs(v, 'YYYYMMDD');
+
+                  if (format && format.isValid()) return format.format('YYYY-MM-DD');
                 }
                 return v;
               },
@@ -279,13 +282,12 @@ function setColumnRenderer(column, { dataType }) {
               displayCallback: (g, i, v) => {
                 if (v) {
                   const splited = column.datetimeFormat.split(' ');
-                  let format;
-                  if (splited.length > 1) { // HHmmss 부분 있을때 ?
-                    format = dayjs(v, 'YYYYMMDDHHmmss').format(`${splited[0].toUpperCase()} ${splited[1]}`);
-                  } else {
-                    format = dayjs(v, 'YYYYMMDDHHmmss').format(`${splited[0].toUpperCase()}`);
+                  const format = dayjs(v, 'YYYYMMDDHHmmss');
+                  if (format && format.isValid()) {
+                    // HHmmss 부분 있을때 ?
+                    if (splited.length > 1) return format.format(`${splited[0].toUpperCase()} ${splited[1]}`);
+                    return format.format(`${splited[0].toUpperCase()}`);
                   }
-                  return format;
                 }
                 return v;
               },
