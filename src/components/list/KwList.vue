@@ -385,7 +385,7 @@ export default {
     };
 
     watch(multipleSelect, () => updateSelected(props.selected));
-    watch(() => props.selected, updateSelected, { immediate: true });
+    watch(() => props.selected, updateSelected, { immediate: true, deep: true });
 
     // counter
     const totalCountWithComma = computed(() => (
@@ -543,6 +543,18 @@ export default {
 
     provide(ListContextKey, listProvideContext);
 
+    function toggleSelect(key) {
+      const item = props.items.find((x) => x[props.itemKey] === key);
+      if (item) {
+        const existIdx = innerSelected.value.indexOf(item[props.itemKey]);
+        if (existIdx >= 0) {
+          if (multipleSelect.value) innerSelected.value.splice(existIdx, 1); // 이미 값이 있으면서 다중선택일 경우 => 체크해제
+        } else if (multipleSelect.value) innerSelected.value.push(item[props.itemKey]); // 값은 없지만 다중선택일 경우 => 체크
+        else innerSelected.value = item[props.itemKey]; // 값도 없으며, 다중선택도 아닐 경우 해당 값으로 체크 (라디오)
+        emitUpdateSelected();
+      }
+    }
+
     return {
       listClass,
       innerSelected,
@@ -571,6 +583,7 @@ export default {
       dialogClass,
       onClickOption,
       isShowBottomSheet,
+      toggleSelect,
     };
   },
 };
