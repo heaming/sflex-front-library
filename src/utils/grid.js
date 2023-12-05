@@ -632,6 +632,31 @@ export async function exportBulkView(view, options = null) {
   downloadBlob(data, options.fileName + '.xlsx');
 }
 
+export async function exportBulkViewByCsv(view, options = null) {
+  if (!options || !options.url) {
+    notify('option을 확인해주세요.');
+    return;
+  }
+
+  const columns = view.getColumns().map((x) => {
+    return {
+      value: x.name,
+      text: x.displayText,
+    };
+  });
+
+  options.columns ??= columns;
+  options.searchCondition ??= view?.__searchConditionText__;
+  options.fileName ??= 'csv_' + date.formatDate(new Date(), 'YYYYMMDDHHmmss');
+
+  const { data } = await http.post(options.url, options, {
+    timeout: 10 * 60 * 1000,
+    responseType: 'blob',
+  });
+
+  downloadBlob(data, options.fileName + '.csv');
+}
+
 export async function exportView(view, options) {
   options = normalizeExportOptions(options);
   if (!options.exportLayout) {
