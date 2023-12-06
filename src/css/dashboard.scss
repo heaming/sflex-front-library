@@ -1379,9 +1379,23 @@ body.tablet {
   }
 
   &__infos {
-    display: grid;
-    grid-template-rows: repeat(3, 20px);
-    row-gap: 6px;
+    &__6 {
+      display: grid;
+      grid-template-rows: repeat(3, 15px);
+      row-gap: 6px;
+    }
+
+    &__5 {
+      display: grid;
+      grid-template-rows: repeat(3, 20px);
+      row-gap: 6px;
+    }
+
+    &__4 {
+      display: grid;
+      grid-template-rows: repeat(3, 30px);
+      row-gap: 6px;
+    }
   }
 
   &__info {
@@ -1408,32 +1422,55 @@ body.tablet {
       }
     }
 
+    .kw-font--12 {
+      max-width: 99px;
+      color: $black2;
+      height: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+        width: 4px;
+        height: 15px;
+      }
+    }
+
     &.assign {
-      .kw-font--14::before {
+      .kw-font--14::before,
+      .kw-font--12::before {
         background-color: #26bfbf;
       }
     }
 
     &.not-assign {
-      .kw-font--14::before {
+      .kw-font--14::before,
+      .kw-font--12::before {
         background-color: #666;
       }
     }
 
     &.off {
-      .kw-font--14::before {
+      .kw-font--14::before,
+      .kw-font--12::before {
         background-color: $error;
       }
     }
 
     &.on {
-      .kw-font--14::before {
+      .kw-font--14::before,
+      .kw-font--12::before {
         background-color: $primary;
       }
     }
 
     &.remarks {
-      .kw-font--14::before {
+      .kw-font--14::before,
+      .kw-font--12::before {
         background-color: $placeholder;
       }
     }
