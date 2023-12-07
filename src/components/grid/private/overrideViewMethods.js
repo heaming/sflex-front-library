@@ -265,33 +265,21 @@ function setColumnRenderer(column, { dataType }) {
       } else if (column.datetimeFormat) {
         column.datetimeFormat = getSessionDatetimeFormat(column.datetimeFormat);
         if (dataType === ValueType.TEXT) {
-          defaultsDeep(column, {
-            ...(column.datetimeFormat === 'yyyy-MM-dd' ? {
-              displayCallback: (g, i, v) => {
-                let format;
-                if (v) {
-                  if (v?.length >= 9) format = dayjs(v, 'YYYYMMDDHHmmss');
-                  else format = dayjs(v, 'YYYYMMDD');
+          defaultsDeep(column, column.datetimeFormat === 'yyyy-MM-dd' ? {
+            displayCallback: (g, i, v) => {
+              let format;
+              if (v) {
+                if (v?.length >= 9) format = dayjs(v, 'YYYYMMDDHHmmss');
+                else format = dayjs(v, 'YYYYMMDD');
 
-                  if (format && format.isValid()) return format.format('YYYY-MM-DD');
-                }
-                return v;
-              },
-            } : {
-              // yyyy-MM-dd 형식이 아닌, yyyy-MM 같은 경우일 때 ?
-              displayCallback: (g, i, v) => {
-                if (v) {
-                  const splited = column.datetimeFormat.split(' ');
-                  const format = dayjs(v, 'YYYYMMDDHHmmss');
-                  if (format && format.isValid()) {
-                    // HHmmss 부분 있을때 ?
-                    if (splited.length > 1) return format.format(`${splited[0].toUpperCase()} ${splited[1]}`);
-                    return format.format(`${splited[0].toUpperCase()}`);
-                  }
-                }
-                return v;
-              },
-            }),
+                if (format && format.isValid()) return format.format('YYYY-MM-DD');
+              }
+              return v;
+            },
+            textFormat: '',
+          } : {
+            textFormat: getTextDatetimeFormat(column.datetimeFormat),
+            displayCallback: () => {},
           });
         }
       }
