@@ -3,7 +3,7 @@ import { Quasar } from 'quasar';
 import langKo from 'quasar/lang/ko-KR';
 import langEn from 'quasar/lang/en-US';
 import consts from './consts';
-import env from './consts/private/env';
+// import env from './consts/private/env';
 
 function loadIcons() {
   const imported = import.meta.globEager('./assets/icons/*.svg');
@@ -20,13 +20,13 @@ function loadIcons() {
     }
 
     const name = matched.pop();
-    if (env.LOCAL) {
-      icons[name] = imported[key].default;
+    // if (env.LOCAL) {
+    //   icons[name] = imported[key].default;
     // } else if (env.VITE_CDN_ORIGIN) {
     //   icons[name] = `${env.VITE_CDN_ORIGIN}/assets/${name}.svg`;
-    } else {
-      icons[name] = `/assets/${name}.svg`;
-    }
+    // } else {
+    icons[name] = `/assets/${name}.svg`;
+    // }
 
     return icons;
   }, {});
