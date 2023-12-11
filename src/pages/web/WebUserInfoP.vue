@@ -109,8 +109,12 @@ const canChangePhoneNumber = computed(() => {
   let rtn = false;
   if (userInfo.value.tenantId === 'TNT_BASE' || userInfo.value.tenantId === 'TNT_EDU') {
     rtn = true;
-  } else if (userInfo.value.tenantId === 'TNT_WELLS' && ['W02', 'W03', 'W05'].includes(userInfo.value.ogTpCd)) {
-    rtn = true;
+  } else if (userInfo.value.tenantId === 'TNT_WELLS') {
+    if (['W02', 'W03', 'W05'].includes(userInfo.value.ogTpCd)) {
+      rtn = false;
+    } else {
+      rtn = true;
+    }
   }
   return rtn;
 });
