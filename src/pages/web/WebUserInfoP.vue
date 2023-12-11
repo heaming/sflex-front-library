@@ -60,7 +60,7 @@
             v-model:tel-no2="telephone.telNo2"
             v-model:tel-no3="telephone.telNo3"
             label="휴대전화번호"
-            readonly
+            :readonly="!canChangePhoneNumber"
           />
         </kw-form-item>
       </kw-form-row>
@@ -105,6 +105,15 @@ const { modal } = useGlobal();
 const { getUserInfo } = useMeta();
 
 const userInfo = computed(() => cloneDeep(getUserInfo()));
+const canChangePhoneNumber = computed(() => {
+  let rtn = false;
+  if (userInfo.value.tenantId === 'TNT_BASE' || userInfo.value.tenantId === 'TNT_EDU') {
+    rtn = true;
+  } else if (userInfo.value.tenantId === 'TNT_WELLS' && ['W02', 'W03', 'W05'].includes(userInfo.value.ogTpCd)) {
+    rtn = true;
+  }
+  return rtn;
+});
 const frmMainRef = ref();
 const userInfoPhone = computed(() => userInfo.value.cellphone.split('-'));
 const telephone = ref({
