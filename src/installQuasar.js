@@ -21,7 +21,8 @@ function loadIcons() {
 
     const name = matched.pop();
     if (env.LOCAL) {
-      icons[name] = imported[key].default;
+      icons[name] = `/node_modules/kw-lib/src/assets/icons/${name}.svg`;
+      // icons[name] = imported[key].default;
     // } else if (env.VITE_CDN_ORIGIN) {
     //   icons[name] = `${env.VITE_CDN_ORIGIN}/assets/${name}.svg`;
     } else {
