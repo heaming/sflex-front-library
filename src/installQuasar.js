@@ -23,7 +23,7 @@ function loadIcons() {
     const name = matched.pop();
     if (env.LOCAL) { // chrome 버전업되면서 브라우저보안으로 data:image 가 막혀서 상대경로로 불러준다.
       // sflex-front-library 용
-      if (String(imported[key].default).indexOf('@fs')) {
+      if (String(imported[key].default).indexOf('@fs') > -1) {
         icons[name] = imported[key].default;
       } else { // 다른 노드모듈로 불러오는 프로젝트 용
         icons[name] = `/node_modules/kw-lib/src/assets/icons/${name}.svg`;
