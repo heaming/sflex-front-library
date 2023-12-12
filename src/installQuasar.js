@@ -13,8 +13,6 @@ function loadIcons() {
 
   return keys.reduce((icons, key) => {
     const matched = key.match(/\/([-\w]+)\.svg$/);
-    warn(`test "${key}"`);
-    warn(imported[key].default);
     if (!matched) {
       warn(`Invalid icon file, could not parse "${key}"`);
       return;
