@@ -107,12 +107,7 @@ async function getMeetingAttendData() {
 }
 
 async function getCustomerData() {
-  const params = {
-    dayOrMonth: 'MONTH',
-    ogCd: userInfo.value.ogCd,
-    ogTpCd: userInfo.value.ogTpCd,
-  };
-  const resp = await http.get('/sms/edu/contract/orderstatus/customer-status', { params });
+  const resp = await http.get('/sms/edu/contract/homecard/customer-status');
   return resp.data;
 }
 

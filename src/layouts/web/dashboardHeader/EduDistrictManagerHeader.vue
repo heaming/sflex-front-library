@@ -45,11 +45,11 @@
       <h5>고객현황</h5>
       <dl>
         <dt>유입</dt>
-        <dd>0</dd>
+        <dd>{{ topBarData.customer.cstIn ?? 0 }}</dd>
         <dt>이탈</dt>
-        <dd>0</dd>
+        <dd>{{ topBarData.customer.cstOut ?? 0 }}</dd>
         <dt>총인원수</dt>
-        <dd>0</dd>
+        <dd>{{ topBarData.customer.cstTot ?? 0 }}</dd>
       </dl>
     </div>
     <kw-separator
@@ -79,10 +79,36 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import useMeta from '../../../composables/useMeta';
+import { http } from '../../../plugins/http';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 
+const topBarData = ref({
+  customer: {},
+});
+
+async function getCustomerData() {
+  const resp = await http.get('/sms/edu/contract/homecard/customer-status');
+  return resp.data;
+}
+
+async function getDataAll() {
+  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_EDU') {
+    try {
+      const [customer] = await Promise.all(
+        [getCustomerData()],
+      );
+      topBarData.value.customer = customer ?? {};
+    } catch (e) {
+      topBarData.value.customer = {};
+    }
+  }
+}
+
+onMounted(() => {
+  getDataAll();
+});
 </script>
 <style scoped lang="scss">
 </style>
