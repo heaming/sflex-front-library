@@ -26,7 +26,7 @@
     <div class="dashboard_summary_counter">
       <h5>판매</h5>
       <kw-btn-toggle
-        v-model="sales"
+        v-model="salesOrContract"
         :options="[
           { codeName: '계약', codeId: 'contract'},
           { codeName: '매출', codeId: 'sales', disable: true}]"
@@ -36,9 +36,23 @@
       />
       <dl>
         <dt>목표/실적(달성율)</dt>
-        <dd>0/0<span>(%)</span></dd>
+        <template v-if="salesOrContract === 'contract'">
+          <dd>
+            {{ `${topBarData.sales.contractRes?.orgTgrCnt ?? 0}/` +
+              `${topBarData.sales.contractRes?.orgSumAckmtPerfCnt ?? 0}` }}
+            <span>({{ topBarData.sales.contractRes?.achvRate ?? 0 }}%)</span>
+          </dd>
+        </template>
+        <template v-else>
+          {{ `${topBarData.sales.salesRes?.orgTgrCnt ?? 0}/` +
+            `${topBarData.sales.salesRes?.orgSumAckmtPerfCnt ?? 0}` }}
+          <span>({{ topBarData.sales.salesRes?.achvRate ?? 0 }}%)</span>
+        </template>
         <dt>신규율/재렌탈율</dt>
-        <dd>0%/0%</dd>
+        <dd>
+          {{ `${topBarData.newAndReRental.newCntrCustRate ?? 0}%/` +
+            `${topBarData.newAndReRental.renewRentlCntrRate ?? 0}%` }}
+        </dd>
       </dl>
     </div>
     <kw-separator
@@ -60,10 +74,47 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import useMeta from '../../../composables/useMeta';
+import { http } from '../../../plugins/http';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
-const sales = ref('contract');
+const salesOrContract = ref('contract');
+
+const topBarData = ref({
+  sales: {},
+  newAndReRental: {},
+});
+
+async function getSalesPurposeAndPerformance() {
+  // 판매목표/실적
+  const resp = await http.get('/sms/wells/contract/homecard/channel-contract-amt');
+  return resp.data;
+}
+
+async function getNewAndReRental() {
+  // 신규/재렌탈율
+  const resp = await http.get('/sms/wells/contract/homecard/total-new-rerental');
+  return resp.data;
+}
+
+async function getDataAll() {
+  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_WELLS') {
+    try {
+      const [sales, newAndReRental] = await Promise.all(
+        [getSalesPurposeAndPerformance(), getNewAndReRental()],
+      );
+      topBarData.value.sales = sales ?? {};
+      topBarData.value.newAndReRental = newAndReRental ?? {};
+    } catch (e) {
+      topBarData.value.sales = {};
+      topBarData.value.newAndReRental = {};
+    }
+  }
+}
+
+onMounted(() => {
+  getDataAll();
+});
 
 </script>
 <style scoped lang="scss">
