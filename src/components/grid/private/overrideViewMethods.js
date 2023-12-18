@@ -587,5 +587,6 @@ export function overrideDestory(view) {
     delete view.__validationErrors__;
     delete view.__treeKey__;
     delete view.__searchConditionText__;
+    delete view.__searchBoxClass__;
   });
 }
