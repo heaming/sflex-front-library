@@ -59,9 +59,18 @@ export function overrideSetFields(data) {
 
 function setSearchConditionMessage(view) {
   // 검색조건 메세지 세팅
-  let formItems = document.querySelectorAll('.kw-popup .kw-search .kw-form-item');
+  let formItems;
+  if (view.__searchBoxClass__) {
+    formItems = document.querySelectorAll(`.kw-popup .kw-search.${view.__searchBoxClass__} .kw-form-item`);
+  } else {
+    formItems = document.querySelectorAll('.kw-popup .kw-search .kw-form-item');
+  }
   if (formItems.length === 0) {
-    formItems = document.querySelectorAll('.kw-search .kw-form-item');
+    if (view.__searchBoxClass__) {
+      formItems = document.querySelectorAll(`.kw-search.${view.__searchBoxClass__} .kw-form-item`);
+    } else {
+      formItems = document.querySelectorAll('.kw-search .kw-form-item');
+    }
   }
   if (formItems.length === 0) {
     view.__searchConditionText__ = '';
