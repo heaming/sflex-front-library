@@ -176,8 +176,8 @@ export default {
       }
 
       if (menu.icon === 'mob_task') { // 작업목록
-        if (footerByRoles.value === 'MANAGER') pageName = 'WmsnbAsWorkListM';
-        else pageName = 'WmsnbRegularVisitWorkListM';
+        if (footerByRoles.value === 'MANAGER') pageName = 'WmsnbRegularVisitWorkListM';
+        else pageName = 'WmsnbAsWorkListM';
         const name = routerList.find((route) => route.meta.pageName === pageName)?.name;
         if (name) router.push({ name });
         else curr.value = -1;
