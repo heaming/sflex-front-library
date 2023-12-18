@@ -45,22 +45,22 @@ import consts from '../../consts';
 // ROLE 출처 : https://kyowon.atlassian.net/wiki/spaces/ForKUS/pages/168263832/95.
 
 const MANAGER_PLANNER = [
-  'ROL_W1020', // 본사 영업부
-  'ROL_W1030', // 본사 영업부
-  'ROL_W2010', // P조직 플래너
-  'ROL_W2020', // P조직 영업부
-  'ROL_W2030', // P조직 영업부
-  'ROL_W2040', // P조직 영업부
-  'ROL_W2050', // P조직 영업부
-  'ROL_W2060', // P조직 영업부
+  // 'ROL_W1020', // 본사 영업부
+  // 'ROL_W1030', // 본사 영업부
+  // 'ROL_W2010', // P조직 플래너
+  // 'ROL_W2020', // P조직 영업부
+  // 'ROL_W2030', // P조직 영업부
+  // 'ROL_W2040', // P조직 영업부
+  // 'ROL_W2050', // P조직 영업부
+  // 'ROL_W2060', // P조직 영업부
   'ROL_W3010', // M조직 플래너
   'ROL_W3020', // M조직 영업부
   'ROL_W3030', // M조직 영업부
   'ROL_W3040', // M조직 영업부
   'ROL_W3050', // M조직 영업부
   'ROL_W3060', // M조직 영업부
-  'ROL_W5110', // B2B 영업부
-  'ROL_W5210', // 온라인총판 영업부
+  // 'ROL_W5110', // B2B 영업부
+  // 'ROL_W5210', // 온라인총판 영업부
 ];
 
 const ENGINEER_HOMEMASTER = [
