@@ -433,6 +433,29 @@ function overrideStyleCallback(styleCallback, isGlobal = false) {
     }
 
     originalResult.styleName = classes.join(' ').trim();
+
+    // 전화번호 마스킹 - setRows 할 때는 overrideViewEvents의 overrideOnGetEditValue가 먹히지 않아서
+    // 부득이하게 styleCallback에서 수행한다.
+    if (column.editor?.type === 'telephone') {
+      let { value } = model;
+      const temp = value.split('-');
+      value = temp.join('');
+
+      let textFormat;
+      if (value?.startsWith('02')) {
+        if (value?.length <= 9) textFormat = '([0-9]{2})([0-9]{3})([0-9]{4});$1-$2-$3';
+        else textFormat = '([0-9]{2})([0-9]{4})([0-9]{4});$1-$2-$3';
+      } else if (value?.startsWith('0504') || value?.startsWith('0505')) { // WEBFAX
+        if (value?.length <= 11) textFormat = '([0-9]{4})([0-9]{3})([0-9]{4});$1-$2-$3';
+        else textFormat = '([0-9]{4})([0-9]{4})([0-9]{4});$1-$2-$3';
+      } else if (value?.length === 8) textFormat = '([0-9]{4})([0-9]{4});$1-$2';
+      else if (value?.length <= 10) textFormat = '([0-9]{3})([0-9]{3})([0-9]{4});$1-$2-$3';
+      else {
+        textFormat = '([0-9]{3})([0-9]{4})([0-9]{4});$1-$2-$3';
+      }
+      if (textFormat) originalResult.textFormat = textFormat;
+    }
+
     return originalResult;
   };
 }
