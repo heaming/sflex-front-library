@@ -44,9 +44,11 @@
           </dd>
         </template>
         <template v-else>
-          {{ `${getNumberWithComma(topBarData.sales.salesRes?.orgTgrCnt) ?? 0}/` +
-            `${getNumberWithComma(topBarData.sales.salesRes?.orgSumAckmtPerfCnt) ?? 0}` }}
-          <span>({{ Math.round(Number(topBarData.sales.salesRes?.achvRate ?? 0)) ?? 0 }}%)</span>
+          <dd>
+            {{ `${getNumberWithComma(topBarData.sales.salesRes?.orgTgrCnt) ?? 0}/` +
+              `${getNumberWithComma(topBarData.sales.salesRes?.orgSumAckmtPerfCnt) ?? 0}` }}
+            <span>({{ Math.round(Number(topBarData.sales.salesRes?.achvRate ?? 0)) ?? 0 }}%)</span>
+          </dd>
         </template>
         <dt>신규율/재렌탈율</dt>
         <dd>

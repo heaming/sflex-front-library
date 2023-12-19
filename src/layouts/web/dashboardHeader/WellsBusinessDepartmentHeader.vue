@@ -26,14 +26,29 @@
     <div class="dashboard_summary_counter">
       <h5>판매</h5>
       <kw-btn-toggle
-        v-model="sales"
-        :options="['계약', '매출']"
+        v-model="salesOrContract"
+        :options="[
+          { codeName: '계약', codeId: 'contract'},
+          { codeName: '매출', codeId: 'sales' }]"
         dense
         gap="0px"
       />
       <dl>
-        <dt>일계/누계(설치율)</dt>
-        <dd>0/0<span>(0%)</span></dd>
+        <dt>일계/누계(달성률)</dt>
+        <template v-if="salesOrContract === 'contract'">
+          <dd>
+            {{ `${getNumberWithComma(topBarData.sales.contractRes?.orgTgrCnt) ?? 0}/` +
+              `${getNumberWithComma(topBarData.sales.contractRes?.orgSumAckmtPerfCnt) ?? 0}` }}
+            <span>({{ Math.round(Number(topBarData.sales.contractRes?.achvRate ?? 0)) ?? 0 }}%)</span>
+          </dd>
+        </template>
+        <template v-else>
+          <dd>
+            {{ `${getNumberWithComma(topBarData.sales.salesRes?.orgTgrCnt) ?? 0}/` +
+              `${getNumberWithComma(topBarData.sales.salesRes?.orgSumAckmtPerfCnt) ?? 0}` }}
+            <span>({{ Math.round(Number(topBarData.sales.salesRes?.achvRate ?? 0)) ?? 0 }}%)</span>
+          </dd>
+        </template>
       </dl>
     </div>
     <kw-separator
@@ -47,7 +62,10 @@
       <h5>조직</h5>
       <dl>
         <dt>가동(등록)</dt>
-        <dd>0<span>(0)</span></dd>
+        <dd>
+          {{ getNumberWithComma(topBarData.org.prtnrSaleCnt) ?? 0 }}
+          <span>({{ getNumberWithComma(topBarData.org.prtnr1nmnCnt) ?? 0 }})</span>
+        </dd>
       </dl>
     </div>
     <kw-separator
@@ -69,9 +87,48 @@
 <script setup>
 import { cloneDeep } from 'lodash-es';
 import useMeta from '../../../composables/useMeta';
+import { http } from '../../../plugins/http';
+import { getNumberWithComma } from '../../../utils/string';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
+const salesOrContract = ref('contract');
+
+const topBarData = ref({
+  sales: {},
+  org: {},
+});
+
+async function getSalesPurposeAndPerformance() {
+  // 판매목표/실적
+  const resp = await http.get('/sms/wells/contract/homecard/channel-contract-amt');
+  return resp.data;
+}
+
+async function getOrgMonthlyOperationData() {
+  // 조직 월별 가동현황
+  const resp = await http.get('/sms/common/orgs/home-cards/org-month-optn');
+  return resp.data;
+}
+
+async function getDataAll() {
+  if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_WELLS') {
+    try {
+      const [sales, org] = await Promise.all(
+        [getSalesPurposeAndPerformance(), getOrgMonthlyOperationData()],
+      );
+      topBarData.value.sales = sales ?? {};
+      topBarData.value.org = org ?? {};
+    } catch (e) {
+      topBarData.value.sales = {};
+      topBarData.value.org = {};
+    }
+  }
+}
+
+onMounted(() => {
+  getDataAll();
+});
 
 </script>
 <style scoped lang="scss">
