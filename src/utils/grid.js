@@ -610,7 +610,7 @@ export async function exportBulkView(view, options = null) {
     return;
   }
 
-  const columns = view.getColumns().map((x) => {
+  let columns = view.getColumns().map((x) => {
     return {
       value: x.name,
       text: x.displayText,
@@ -619,6 +619,7 @@ export async function exportBulkView(view, options = null) {
       valueType: x.valueType ?? 'text',
     };
   });
+  columns = columns.filter((item) => !options.hideColumns?.includes(item.value))
 
   options.columns ??= columns;
   options.searchCondition ??= view?.__searchConditionText__;
@@ -638,12 +639,14 @@ export async function exportBulkViewByCsv(view, options = null) {
     return;
   }
 
-  const columns = view.getColumns().map((x) => {
+  let columns = view.getColumns().map((x) => {
     return {
       value: x.name,
       text: x.displayText,
     };
   });
+
+  columns = columns.filter((item) => !options.hideColumns?.includes(item.value))
 
   options.columns ??= columns;
   options.searchCondition ??= view?.__searchConditionText__;
