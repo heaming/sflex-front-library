@@ -619,6 +619,7 @@ export async function exportBulkView(view, options = null) {
       valueType: x.valueType ?? 'text',
     };
   });
+  //hide column 지우기
   columns = columns.filter((item) => !options.hideColumns?.includes(item.value))
 
   options.columns ??= columns;
