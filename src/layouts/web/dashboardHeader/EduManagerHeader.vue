@@ -29,7 +29,7 @@
         <!-- <dt>어제</dt>
               <dd>{{ topBarData.meeting.metgPrscDc ?? 0 }}</dd> -->
         <dt>{{ (dayjs().month() + 1) + '월' }}</dt>
-        <dd>{{ topBarData.meeting.METG_PRSC_DC ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.meeting.METG_PRSC_DC) ?? 0 }}</dd>
       </dl>
     </div>
     <kw-separator
@@ -43,11 +43,11 @@
       <h5>고객현황</h5>
       <dl>
         <dt>유입</dt>
-        <dd>{{ topBarData.customer.cstIn ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.customer.cstIn) ?? 0 }}</dd>
         <dt>이탈</dt>
-        <dd>{{ topBarData.customer.cstOut ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.customer.cstOut) ?? 0 }}</dd>
         <dt>총인원수</dt>
-        <dd>{{ topBarData.customer.cstTot ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.customer.cstTot) ?? 0 }}</dd>
       </dl>
     </div>
     <kw-separator
@@ -72,9 +72,9 @@
       />
       <dl>
         <dt>진단검사</dt>
-        <dd>{{ topBarData.index.dgnsCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.index.dgnsCnt) ?? 0 }}</dd>
         <dt>무료체험</dt>
-        <dd>{{ topBarData.index.smartCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.index.smartCnt) ?? 0 }}</dd>
       </dl>
     </div>
   </div>
@@ -84,6 +84,7 @@ import { cloneDeep } from 'lodash-es';
 import dayjs from 'dayjs';
 import { http } from '../../../plugins/http';
 import useMeta from '../../../composables/useMeta';
+import { getNumberWithComma } from '../../../utils/string';
 
 const prdType = ref('D');
 
