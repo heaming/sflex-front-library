@@ -28,6 +28,7 @@ export function isOverByte(s, maxBytes = 0, bytesPerKoChar = 3) {
 }
 
 export function getNumberWithComma(s, decimalLimit = -1) {
+  if (!s) return s;
   const x = s.toString().split('.');
   x[0] = x[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 

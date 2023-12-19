@@ -45,11 +45,11 @@
       <h5>고객현황</h5>
       <dl>
         <dt>유입</dt>
-        <dd>{{ topBarData.customer.cstIn ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.customer.cstIn) ?? 0 }}</dd>
         <dt>이탈</dt>
-        <dd>{{ topBarData.customer.cstOut ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.customer.cstOut) ?? 0 }}</dd>
         <dt>총인원수</dt>
-        <dd>{{ topBarData.customer.cstTot ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(topBarData.customer.cstTot) ?? 0 }}</dd>
       </dl>
     </div>
     <kw-separator
@@ -80,6 +80,7 @@
 import { cloneDeep } from 'lodash-es';
 import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
+import { getNumberWithComma } from '../../../utils/string';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));

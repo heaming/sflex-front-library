@@ -29,7 +29,7 @@
         v-model="salesOrContract"
         :options="[
           { codeName: '계약', codeId: 'contract'},
-          { codeName: '매출', codeId: 'sales', disable: true}]"
+          { codeName: '매출', codeId: 'sales' }]"
         dense
         gap="0px"
         class="sales_btn"
@@ -38,20 +38,20 @@
         <dt>목표/실적(달성율)</dt>
         <template v-if="salesOrContract === 'contract'">
           <dd>
-            {{ `${topBarData.sales.contractRes?.orgTgrCnt ?? 0}/` +
-              `${topBarData.sales.contractRes?.orgSumAckmtPerfCnt ?? 0}` }}
-            <span>({{ topBarData.sales.contractRes?.achvRate ?? 0 }}%)</span>
+            {{ `${getNumberWithComma(topBarData.sales.contractRes?.orgTgrCnt) ?? 0}/` +
+              `${getNumberWithComma(topBarData.sales.contractRes?.orgSumAckmtPerfCnt) ?? 0}` }}
+            <span>({{ Math.round(Number(topBarData.sales.contractRes?.achvRate ?? 0)) ?? 0 }}%)</span>
           </dd>
         </template>
         <template v-else>
-          {{ `${topBarData.sales.salesRes?.orgTgrCnt ?? 0}/` +
-            `${topBarData.sales.salesRes?.orgSumAckmtPerfCnt ?? 0}` }}
-          <span>({{ topBarData.sales.salesRes?.achvRate ?? 0 }}%)</span>
+          {{ `${getNumberWithComma(topBarData.sales.salesRes?.orgTgrCnt) ?? 0}/` +
+            `${getNumberWithComma(topBarData.sales.salesRes?.orgSumAckmtPerfCnt) ?? 0}` }}
+          <span>({{ Math.round(Number(topBarData.sales.salesRes?.achvRate ?? 0)) ?? 0 }}%)</span>
         </template>
         <dt>신규율/재렌탈율</dt>
         <dd>
-          {{ `${topBarData.newAndReRental.newCntrCustRate ?? 0}%/` +
-            `${topBarData.newAndReRental.renewRentlCntrRate ?? 0}%` }}
+          {{ `${Math.round(Number(topBarData.newAndReRental.newCntrCustRate ?? 0)) ?? 0}%/` +
+            `${Math.round(Number(topBarData.newAndReRental.renewRentlCntrRate ?? 0)) ?? 0}%` }}
         </dd>
       </dl>
     </div>
@@ -75,6 +75,7 @@
 import { cloneDeep } from 'lodash-es';
 import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
+import { getNumberWithComma } from '../../../utils/string';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
