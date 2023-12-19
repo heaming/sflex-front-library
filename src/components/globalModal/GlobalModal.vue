@@ -56,6 +56,7 @@ export default {
       unregisterGlobalVm(GlobalModalVmKey);
     });
 
+    // hash 에서 파라미터가 있는지 파악해보기.
     let urlSearchParams = new URLSearchParams(new URL(window.location.href).search);
     if (urlSearchParams.size === 0) {
       const { hash } = window.location;
