@@ -45,8 +45,8 @@ import consts from '../../consts';
 // ROLE 출처 : https://kyowon.atlassian.net/wiki/spaces/ForKUS/pages/168263832/95.
 
 const MANAGER_PLANNER = [
-  // 'ROL_W1020', // 본사 영업부
-  // 'ROL_W1030', // 본사 영업부
+  'ROL_W1020', // 업무담당(BM은 별도 조직)
+  'ROL_W1030', // 영업지원매니저
   // 'ROL_W2010', // P조직 플래너
   // 'ROL_W2020', // P조직 영업부
   // 'ROL_W2030', // P조직 영업부
