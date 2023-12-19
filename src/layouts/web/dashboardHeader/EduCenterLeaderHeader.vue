@@ -62,16 +62,27 @@
     <div class="dashboard_summary_counter">
       <h5>주요지표(실적/지평)</h5>
       <kw-btn-toggle
-        v-model="gap"
-        :options="['일간', '월간']"
+        v-model="prdType"
+        :options="[
+          {'cd':'D', 'nm':'일간'},
+          {'cd':'M', 'nm':'월간'}
+        ]"
+        option-label="nm"
+        option-value="cd"
         dense
         gap="0px"
       />
       <dl>
         <dt>진단검사</dt>
-        <dd>0/0</dd>
+        <dd>
+          {{ `${getNumberWithComma(topBarData.index.dgnsCnt) ?? 0}/` +
+            `${getNumberWithComma(topBarData.index.dgnsAvg) ?? 0}` }}
+        </dd>
         <dt>무료체험</dt>
-        <dd>0/0</dd>
+        <dd>
+          {{ `${getNumberWithComma(topBarData.index.smartCnt) ?? 0}/` +
+            `${getNumberWithComma(topBarData.index.smartAvg) ?? 0}` }}
+        </dd>
       </dl>
     </div>
   </div>
@@ -82,11 +93,14 @@ import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
 import { getNumberWithComma } from '../../../utils/string';
 
+const prdType = ref('D');
+
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 
 const topBarData = ref({
   customer: {},
+  index: {},
 });
 
 async function getCustomerData() {
@@ -94,18 +108,29 @@ async function getCustomerData() {
   return resp.data;
 }
 
+async function getIndexData() {
+  const resp = await http.get(`/sms/edu/customer/common/homecards/status/${prdType.value}`);
+  return resp.data;
+}
+
 async function getDataAll() {
   if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_EDU') {
     try {
-      const [customer] = await Promise.all(
-        [getCustomerData()],
+      const [customer, index] = await Promise.all(
+        [getCustomerData(), getIndexData()],
       );
       topBarData.value.customer = customer ?? {};
+      topBarData.value.index = index ?? {};
     } catch (e) {
       topBarData.value.customer = {};
+      topBarData.value.index = {};
     }
   }
 }
+
+watch(prdType, () => {
+  getDataAll();
+});
 
 onMounted(() => {
   getDataAll();
