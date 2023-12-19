@@ -56,7 +56,13 @@ export default {
       unregisterGlobalVm(GlobalModalVmKey);
     });
 
-    const urlSearchParams = new URLSearchParams(new URL(window.location.href).search);
+    let urlSearchParams = new URLSearchParams(new URL(window.location.href).search);
+    if (urlSearchParams.size === 0) {
+      const { hash } = window.location;
+      if (hash.length > 0) {
+        urlSearchParams = new URLSearchParams(hash.substring(hash.indexOf('?') + 1, 1000));
+      }
+    }
     const isModalPopup = urlSearchParams?.get('modal-popup') === 'true';
 
     const getDialogProps = (dialogProps) => ({
