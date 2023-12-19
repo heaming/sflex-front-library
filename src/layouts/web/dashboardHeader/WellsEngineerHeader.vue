@@ -27,13 +27,13 @@
       <h5>오늘일정</h5>
       <dl>
         <dt>오늘</dt>
-        <dd>{{ data.todayCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.todayCnt) ?? 0 }}</dd>
         <dt>설치</dt>
-        <dd>{{ data.todayIstCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.todayIstCnt) ?? 0 }}</dd>
         <dt>A/S</dt>
-        <dd>{{ data.todayAsCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.todayAsCnt) ?? 0 }}</dd>
         <dt>B/S</dt>
-        <dd>{{ data.todayBsCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.todayBsCnt) ?? 0 }}</dd>
       </dl>
     </div>
     <kw-separator
@@ -47,13 +47,13 @@
       <h5>내일일정</h5>
       <dl>
         <dt>내일</dt>
-        <dd>{{ data.tommrCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.tommrCnt) ?? 0 }}</dd>
         <dt>설치</dt>
-        <dd>{{ data.tommrIstCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.tommrIstCnt) ?? 0 }}</dd>
         <dt>A/S</dt>
-        <dd>{{ data.tommrAsCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.tommrAsCnt) ?? 0 }}</dd>
         <dt>B/S</dt>
-        <dd>{{ data.tommrBsCnt ?? 0 }}</dd>
+        <dd>{{ getNumberWithComma(data.tommrBsCnt) ?? 0 }}</dd>
       </dl>
     </div>
     <div class="q-space" />
@@ -70,6 +70,7 @@
 import { cloneDeep } from 'lodash-es';
 import { http } from '../../../plugins/http';
 import useMeta from '../../../composables/useMeta';
+import { getNumberWithComma } from '../../../utils/string';
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
