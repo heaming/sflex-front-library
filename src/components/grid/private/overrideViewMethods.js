@@ -51,6 +51,7 @@ function setColumnHeader(column) {
   }
 
   column.header.template = sanitize(column.header.template);
+
   column.header.styleName = headerClass.join(' ').trim();
 }
 
