@@ -438,8 +438,8 @@ function overrideStyleCallback(styleCallback, isGlobal = false) {
     // 부득이하게 styleCallback에서 수행한다.
     if (column.editor?.type === 'telephone') {
       let { value } = model;
-      const temp = value.split('-');
-      value = temp.join('');
+      const temp = value?.split('-');
+      value = temp?.join('');
 
       let textFormat;
       if (value?.startsWith('02')) {
