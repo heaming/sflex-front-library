@@ -296,7 +296,8 @@ body.mobile:not(.tablet) {
 
       #{$this}__content {
         min-height: calc(100% - 115px);
-        max-height: calc(100% - 115px);
+
+        // max-height: calc(100% - 115px);
       }
 
       #{$this}__action {
