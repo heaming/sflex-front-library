@@ -598,9 +598,9 @@ export function overrideOnGetEditValue(view) {
 export function overrideOnEditRowPasted(view) {
   wrapEvent(view, onEditRowPasted, (g, index, row, fields, oldValues, newValues) => {
     fields.forEach((field) => {
-      if (view.getColumn(field).editor?.type === 'list') {
-        const idx = view.getColumn(field).labels.findIndex((item) => item === newValues[field]);
-        view.setValue(row, field, view.getColumn(field).values[idx]);
+      if (g.columnByField(field).editor?.type === 'list') {
+        const idx = g.columnByField(field).labels.findIndex((item) => item === newValues[field]);
+        view.setValue(row, field, g.columnByField(field).values[idx]);
       }
     });
     if (hasOriginal(g, onEditRowPasted)) {
