@@ -228,13 +228,13 @@
               label="사용자정보"
               @click="openUserInfoPopup"
             />
-            <kw-btn
-              v-close-popup
-              borderless
-              grow
-              icon="change_user"
-              label="로그인 계정전환"
-            />
+            <!--            <kw-btn-->
+            <!--              v-close-popup-->
+            <!--              borderless-->
+            <!--              grow-->
+            <!--              icon="change_user"-->
+            <!--              label="로그인 계정전환"-->
+            <!--            />-->
             <kw-btn
               v-close-popup
               borderless
