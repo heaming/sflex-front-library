@@ -177,12 +177,14 @@ export default {
       return layouts.reduce((options, layout) => {
         if (layout.column) {
           const { name, header, visible } = view.columnByName(layout.column);
-
-          options.push({
-            column: name,
-            label: header.text || name,
-            visible,
-          });
+          // 이미 visible : false로 지정된 컬럼은 보여주지 않는다.
+          if (view.columnByName(layout.column)?.layout?.vindex > -1) {
+            options.push({
+              column: name,
+              label: header.text || name,
+              visible,
+            });
+          }
         } else if (layout.items) {
           options.push(
             ...recursiveCreateViewOptions(layout.items),
@@ -198,6 +200,7 @@ export default {
       const layouts = view.saveColumnLayout();
       const { colCount } = view.getFixedOptions();
       const viewOptions = view.header.visible ? recursiveCreateViewOptions(layouts.slice(colCount)) : [];
+      console.log(viewOptions);
       storageKey = createUniqueId(gridName); // use name props in useObserverChildProps
       storageLayoutsKey = `${storageKey}__layouts`;
 
@@ -208,6 +211,7 @@ export default {
     }
 
     function beforeShow() {
+      console.log(view);
       if (view.isEditing()) view.commit();
       canPersonalize.value = !!view.__gridName__;
       updateContextConfig();
