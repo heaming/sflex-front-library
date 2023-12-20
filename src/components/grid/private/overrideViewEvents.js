@@ -32,6 +32,7 @@ const onTopIndexChanged = 'onTopIndexChanged';
 const onScrollToBottom = 'onScrollToBottom';
 const onContextMenuPopup = 'onContextMenuPopup';
 const onItemChecked = 'onItemChecked';
+const onKeydown = 'onKeyDown';
 const dataDropOptionsDragCallback = 'dataDropOptions._dragCallback';
 const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
 const dataDropOptionsDropCallback = 'dataDropOptions._callback';
@@ -709,6 +710,31 @@ export function overrideOnScrollToBottom(view) {
 export function overrideOnContextMenuPopup(view) {
   wrapEvent(view, onContextMenuPopup, (g, x, y, _clickData) => {
     view.__contextMenuClickData__ = { ..._clickData };
+  });
+}
+
+/*
+  그리드 keydown 시 발생
+*/
+export function overrideOnKeydown(view) {
+  wrapEvent(view, onKeydown, (g, keyEvent) => {
+    const itemCount = view.getItemCount();
+    const col = view.getDisplayColumns();
+    // 전체선택 Ctrl+A
+    if (keyEvent.ctrlKey === true && keyEvent.code === 'KeyA') {
+      view.clearCurrent();
+      const sel = {
+        style: 'block',
+        startItem: 0,
+        startColumn: col[0].name,
+        endItem: itemCount,
+        endColumn: col[col.length - 1].name,
+      };
+      view.setSelection(sel);
+    }
+    if (hasOriginal(view, onKeydown)) {
+      execOriginal(g, onKeydown, g, keyEvent);
+    }
   });
 }
 
