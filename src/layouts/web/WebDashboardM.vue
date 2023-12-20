@@ -149,6 +149,8 @@ const userCards = shallowRef([]);
 async function fetchUserCards() {
   const response = await http.get('/sflex/common/common/user-homecards');
 
+  userCards.value = [];
+  await nextTick();
   userCards.value = response.data.sort((a, b) => (a.rowPosition === b.rowPosition
     ? (a.columnPosition - b.columnPosition) : (a.rowPosition - b.rowPosition)));
 
