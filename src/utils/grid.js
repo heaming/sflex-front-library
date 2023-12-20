@@ -617,6 +617,7 @@ export async function exportBulkView(view, options = null) {
       width: x.displayWidth,
       align: getAlign(x),
       valueType: x.valueType ?? 'text',
+      codeMap: x._lookupMap
     };
   });
   //hide column 지우기
