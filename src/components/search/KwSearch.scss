@@ -18,6 +18,10 @@
   // override kw-form
   &.kw-form {
     .kw-form-row {
+      &.no-show {
+        display: none;
+      }
+
       @include kw-row($-kw-search-row-height, $-kw-search-row-gap, $-kw-search-row-padding);
     }
 
