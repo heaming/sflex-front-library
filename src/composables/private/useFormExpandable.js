@@ -21,15 +21,20 @@ export default () => {
   const isExpandable = computed(() => registeredCount.value > props.defaultVisibleRows);
   const isExpanded = ref(false);
 
-  async function updateExpand() {
-    registeredCount.value = registeredList.length;
-    registeredList.forEach((vm, i) => {
-      vm.proxy.toggleShowing(
-        !isExpandable.value
+  async function updateExpand(forceExpand = false) {
+    let count = 0;
+    if (forceExpand) isExpanded.value = true;
+    registeredList.forEach((vm) => {
+      if (vm.proxy.$el.style.display !== 'none') {
+        vm.proxy.toggleShowing(
+          !isExpandable.value
         || isExpanded.value
-        || i < props.defaultVisibleRows,
-      );
+        || count < props.defaultVisibleRows,
+        );
+        count++;
+      }
     });
+    registeredCount.value = count;
   }
 
   function registerExpandableChild(vm) {
@@ -37,6 +42,9 @@ export default () => {
     registeredList.sort((n, o) => {
       const node = n.proxy.$el;
       const otherNode = o.proxy.$el;
+      if (node.style.display !== 'none' && otherNode.style.display === 'none') {
+        return -1;
+      }
       const relativePosition = node.compareDocumentPosition(otherNode);
       const isOtherNodeFollowing = relativePosition & Node.DOCUMENT_POSITION_FOLLOWING;
 
@@ -90,5 +98,6 @@ export default () => {
     isExpandable,
     isExpanded,
     toggleExpand,
+    updateExpand,
   };
 };
