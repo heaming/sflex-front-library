@@ -1,7 +1,7 @@
 <template>
   <div
     class="kw-form-row"
-    :class="{rowClass : true, 'no-show' : !showing }"
+    :class="[rowClass, { 'no-show' : !showing, 'showing': showing }]"
   >
     <slot />
   </div>
