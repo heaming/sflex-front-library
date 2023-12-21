@@ -156,7 +156,7 @@
                       <a
                         href="javascript:;"
                         class="bread-crumb__depth"
-                        :style="menu.hasRole ? 'color: #dedede;cursor: default;' : ''"
+                        :style="!menu.hasRole ? 'color: #dedede;cursor: default;' : ''"
                         @click="moveToMenu(menu)"
                         v-html="sanitize(getHighlightedMenuName(menu.menuName))"
                       />
