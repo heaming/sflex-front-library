@@ -154,15 +154,16 @@
                       </p>
                       <!-- eslint-disable vue/no-v-html -->
                       <a
-                        href="#"
+                        href="javascript:;"
                         class="bread-crumb__depth"
+                        :style="menu.hasRole ? 'color: #dedede;cursor: default;' : ''"
                         @click="moveToMenu(menu)"
                         v-html="sanitize(getHighlightedMenuName(menu.menuName))"
                       />
                       <!-- eslint-enable vue/no-v-html -->
                     </div>
                     <kw-checkbox
-                      v-if="menu.menuUid && menu.pageId"
+                      v-if="menu.menuUid && menu.pageId && menu.hasRole"
                       :model-value="isBookmarkedPage(menu.menuUid, menu.pageId)"
                       :true-value="true"
                       :false-value="false"
@@ -418,7 +419,11 @@ async function onClickRecentKeyword(keyword) {
 }
 
 function moveToMenu(menu) {
-  ok(menu);
+  if (menu.hasRole) {
+    ok(menu);
+  } else {
+    alert(t('MSG_ALT_NO_AUTH'));
+  }
 }
 
 async function onClickSearch() {
