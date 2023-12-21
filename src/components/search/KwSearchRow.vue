@@ -1,8 +1,7 @@
 <template>
   <div
-    v-show="showing"
     class="kw-form-row"
-    :class="rowClass"
+    :class="{rowClass : true, 'no-show' : !showing }"
   >
     <slot />
   </div>
