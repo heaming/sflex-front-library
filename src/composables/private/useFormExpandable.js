@@ -21,11 +21,16 @@ export default () => {
   const isExpandable = computed(() => registeredCount.value > props.defaultVisibleRows);
   const isExpanded = ref(false);
 
-  async function updateExpand(forceExpand = false) {
+  async function updateExpand(forceFold = false) {
     let count = 0;
-    if (forceExpand) isExpanded.value = true;
+    if (forceFold) isExpanded.value = false;
+    registeredCount.value = registeredList.filter((vm) => vm.proxy.$el.style.display !== 'none').length;
     registeredList.forEach((vm) => {
+      vm.proxy.$el.classList.remove('first-row');
       if (vm.proxy.$el.style.display !== 'none') {
+        if (count === 0) {
+          vm.proxy.$el.classList.add('first-row');
+        }
         vm.proxy.toggleShowing(
           !isExpandable.value
         || isExpanded.value
@@ -34,7 +39,6 @@ export default () => {
         count++;
       }
     });
-    registeredCount.value = count;
   }
 
   function registerExpandableChild(vm) {

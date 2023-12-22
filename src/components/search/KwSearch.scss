@@ -44,6 +44,11 @@
         padding-top: 0;
         min-height: $kw-field-line-height;
       }
+
+      .kw-form-row.first-row {
+        padding-top: 0;
+        min-height: $kw-field-line-height;
+      }
     }
   }
 
