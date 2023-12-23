@@ -68,7 +68,12 @@
       <h5>계정</h5>
       <dl>
         <dt>누적/순증/순수이탈률</dt>
-        <dd>0/0/0%</dd>
+        <dd>
+          {{ `${getNumberWithComma(topBarData.account.sumAllAgrgCnt) ?? 0}/` +
+            `${getNumberWithComma(topBarData.account.sumSumMmAgrgCnt) ?? 0}/` +
+            `${topBarData.account.etExitRate ?? 0}%`
+          }}
+        </dd>
       </dl>
     </div>
   </div>
@@ -86,6 +91,7 @@ const salesOrContract = ref('contract');
 const topBarData = ref({
   sales: {},
   newAndReRental: {},
+  account: {},
 });
 
 async function getSalesPurposeAndPerformance() {
@@ -100,17 +106,25 @@ async function getNewAndReRental() {
   return resp.data;
 }
 
+async function getAccount() {
+  // 신규/재렌탈율
+  const resp = await http.get('/sms/wells/closing/product-account/home-card/acc-ninc/percentage');
+  return resp.data;
+}
+
 async function getDataAll() {
   if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_WELLS') {
     try {
-      const [sales, newAndReRental] = await Promise.all(
-        [getSalesPurposeAndPerformance(), getNewAndReRental()],
+      const [sales, newAndReRental, account] = await Promise.all(
+        [getSalesPurposeAndPerformance(), getNewAndReRental(), getAccount()],
       );
       topBarData.value.sales = sales ?? {};
       topBarData.value.newAndReRental = newAndReRental ?? {};
+      topBarData.value.account = account ?? {};
     } catch (e) {
       topBarData.value.sales = {};
       topBarData.value.newAndReRental = {};
+      topBarData.value.account = {};
     }
   }
 }

@@ -79,7 +79,12 @@
       <h5>서비스(BS)</h5>
       <dl>
         <dt>관리/방문/완료(처리율)</dt>
-        <dd>0/0/0<span>(0%)</span></dd>
+        <dd>
+          {{ `${getNumberWithComma(topBarData.bs.totalCnt) ?? 0}/` +
+            `${getNumberWithComma(topBarData.bs.incompleteCnt) ?? 0}/` +
+            `${getNumberWithComma(topBarData.bs.completeCnt) ?? 0}`
+          }}<span> ({{ topBarData.bs.completeRate ?? '0%' }})</span>
+        </dd>
       </dl>
     </div>
   </div>
@@ -97,6 +102,7 @@ const salesOrContract = ref('contract');
 const topBarData = ref({
   sales: {},
   org: {},
+  bs: {},
 });
 
 async function getSalesPurposeAndPerformance() {
@@ -111,17 +117,25 @@ async function getOrgMonthlyOperationData() {
   return resp.data;
 }
 
+async function getBsProcess() {
+  // 조직 월별 가동현황
+  const resp = await http.get('/sms/wells/service/bs-process-status');
+  return resp.data;
+}
+
 async function getDataAll() {
   if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_WELLS') {
     try {
-      const [sales, org] = await Promise.all(
-        [getSalesPurposeAndPerformance(), getOrgMonthlyOperationData()],
+      const [sales, org, bs] = await Promise.all(
+        [getSalesPurposeAndPerformance(), getOrgMonthlyOperationData(), getBsProcess()],
       );
       topBarData.value.sales = sales ?? {};
       topBarData.value.org = org ?? {};
+      topBarData.value.bs = bs ?? {};
     } catch (e) {
       topBarData.value.sales = {};
       topBarData.value.org = {};
+      topBarData.value.bs = {};
     }
   }
 }
