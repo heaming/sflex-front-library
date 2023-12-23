@@ -27,11 +27,11 @@
       <h5>미팅참석현황</h5>
       <dl>
         <dt>어제</dt>
-        <dd>0</dd>
+        <dd>{{ getNumberWithComma(topBarData.yesterdayMeeting.cnt) ?? 0 }}</dd>
       </dl>
       <dl class="ml16">
         <dt>오늘</dt>
-        <dd>0</dd>
+        <dd>{{ getNumberWithComma(topBarData.todayMeeting.cnt) ?? 0 }}</dd>
       </dl>
     </div>
     <kw-separator
@@ -89,6 +89,7 @@
 </template>
 <script setup>
 import { cloneDeep } from 'lodash-es';
+import dayjs from 'dayjs';
 import useMeta from '../../../composables/useMeta';
 import { http } from '../../../plugins/http';
 import { getNumberWithComma } from '../../../utils/string';
@@ -99,9 +100,35 @@ const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
 
 const topBarData = ref({
+  todayMeeting: {},
+  yesterdayMeeting: {},
   customer: {},
   index: {},
 });
+
+async function getTodayMeetingAttendData() {
+  const params = {
+    metgSchdYmd: dayjs().format('YYYYMMDD'), // 기준일자
+    inqrDv: userInfo.value.ogTpCd === 'HR1' ? '1' : '2', // 조회구분
+    ogTpCd: userInfo.value.ogTpCd, // 조직유형
+    prtnrNo: userInfo.value.employeeIDNumber, // 파트너 번호
+    lorOgIncYn: 'Y', // 하위조직 포함여부
+  };
+  const resp = await http.get('/sms/edu/competence/meeting-home-card', { params });
+  return resp.data;
+}
+
+async function getYesterdayMeetingAttendData() {
+  const params = {
+    metgSchdYmd: dayjs().add(-1, 'd').format('YYYYMMDD'),
+    inqrDv: userInfo.value.ogTpCd === 'HR1' ? '1' : '2', // 조회구분
+    ogTpCd: userInfo.value.ogTpCd, // 조직유형
+    prtnrNo: userInfo.value.employeeIDNumber, // 파트너 번호
+    lorOgIncYn: 'Y', // 하위조직 포함여부
+  };
+  const resp = await http.get('/sms/edu/competence/meeting-home-card', { params });
+  return resp.data;
+}
 
 async function getCustomerData() {
   const resp = await http.get('/sms/edu/contract/homecard/customer-status');
@@ -116,12 +143,16 @@ async function getIndexData() {
 async function getDataAll() {
   if (['WEB_DEF', 'MBL_DEF', 'TBL_DEF'].includes(userInfo.value.portalId) && userInfo.value.tenantId === 'TNT_EDU') {
     try {
-      const [customer, index] = await Promise.all(
-        [getCustomerData(), getIndexData()],
+      const [todayMeeting, yesterdayMeeting, customer, index] = await Promise.all(
+        [getTodayMeetingAttendData(), getYesterdayMeetingAttendData(), getCustomerData(), getIndexData()],
       );
+      topBarData.value.todayMeeting = todayMeeting ?? {};
+      topBarData.value.yesterdayMeeting = yesterdayMeeting ?? {};
       topBarData.value.customer = customer ?? {};
       topBarData.value.index = index ?? {};
     } catch (e) {
+      topBarData.value.todayMeeting = {};
+      topBarData.value.yesterdayMeeting = {};
       topBarData.value.customer = {};
       topBarData.value.index = {};
     }
