@@ -18,6 +18,7 @@
       text-color="not-use"
       :dense="fieldWrapProps.dense"
       :disable="disable"
+      :readonly="readonly"
       :stack="stack"
       :no-wrap="noWrap"
       :stretch="stretch"
@@ -107,6 +108,7 @@ export default {
 
     // fall through props
     disable: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
     stack: { type: Boolean, default: false },
     noWrap: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
