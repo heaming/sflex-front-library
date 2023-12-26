@@ -559,6 +559,7 @@ const normalizeExportOptions = (options = {}) => ({
   additionalCondition: options.additionalCondition || undefined,
   allColumns: options.allColumns === true,
   hideColumns: options.hideColumns || [],
+  forceSetSearchCondition: options.forceSetSearchCondition === true,  // 어쩔수 없는 상황에서 페이징 사용하지 않은 그리드에서 검색조건 필요시 활용
 });
 
 function exportGrid(view, options, onProgress, onComplete) {
@@ -682,7 +683,7 @@ export async function exportView(view, options) {
       }
     });
   }
-  if (options.searchCondition && !!options.exportData) {
+  if ((options.searchCondition && !!options.exportData) || options.forceSetSearchCondition) {// 어쩔수 없는 상황에서 페이징 사용하지 않은 그리드에서 검색조건 필요시 활용
     let message = view.__searchConditionText__;
 
     if (options.additionalCondition) {
