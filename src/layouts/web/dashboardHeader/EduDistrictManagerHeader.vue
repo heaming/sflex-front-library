@@ -103,7 +103,7 @@ const topBarData = ref({
 async function getTodayMeetingAttendData() {
   const params = {
     metgSchdYmd: dayjs().format('YYYYMMDD'), // 기준일자
-    inqrDv: userInfo.value.ogTpCd === 'HR1' ? '1' : '2', // 조회구분
+    inqrDv: '2', // 조회구분
     ogTpCd: userInfo.value.ogTpCd, // 조직유형
     prtnrNo: userInfo.value.employeeIDNumber, // 파트너 번호
     lorOgIncYn: 'Y', // 하위조직 포함여부
@@ -115,7 +115,7 @@ async function getTodayMeetingAttendData() {
 async function getYesterdayMeetingAttendData() {
   const params = {
     metgSchdYmd: dayjs().add(-1, 'd').format('YYYYMMDD'),
-    inqrDv: userInfo.value.ogTpCd === 'HR1' ? '1' : '2', // 조회구분
+    inqrDv: '2', // 조회구분
     ogTpCd: userInfo.value.ogTpCd, // 조직유형
     prtnrNo: userInfo.value.employeeIDNumber, // 파트너 번호
     lorOgIncYn: 'Y', // 하위조직 포함여부
