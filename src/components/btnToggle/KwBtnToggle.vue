@@ -12,7 +12,7 @@
       :class="toggleClass"
       :style="toggleStyle"
       :options="styledOptions"
-      toggle-color="not-use"
+      toggle-color="selected"
       toggle-text-color="not-use"
       color="not-use"
       text-color="not-use"
