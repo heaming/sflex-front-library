@@ -38,15 +38,13 @@
       &--filled,
       &--outlined {
         @include color-based("&.kw-btn--toggle-color-", $semantic-colors) using ($color) {
-          &[aria-pressed="true"],
-          &.bg-selected {
+          &[aria-pressed="true"] {
             background-color: $color;
           }
         }
 
         @include color-based("&.kw-btn--toggle-text-color-", $semantic-colors) using ($color) {
-          &[aria-pressed="true"],
-          &.bg-selected {
+          &[aria-pressed="true"] {
             .q-btn__content {
               color: $color;
             }
@@ -54,8 +52,7 @@
         }
 
         @include color-based("&.kw-btn--toggle-border-color-", $semantic-colors) using ($color) {
-          &[aria-pressed="true"],
-          &.bg-selected {
+          &[aria-pressed="true"] {
             &::after {
               border-color: $color;
             }
