@@ -101,12 +101,15 @@
               >
                 <li
                   v-for="(depth3Menu, depth3Idx) in depth2Menu.children"
+                  :id="`menu__${depth3Menu.menuUid}`"
                   :key="depth3Idx"
                   :data-id="depth3Idx"
+                  :class="{ 'selected-menu': depth3Menu.menuUid === selectedGlobalMenuKey }"
                 >
                   <a
                     v-if="!!depth3Menu.hasRole"
                     href="javascript:;"
+                    :class="{ 'selected-menu__name': depth3Menu.menuUid === selectedGlobalMenuKey }"
                     @click.prevent="depth2Menu.editable ? '' : moveToPage(depth3Menu)"
                   >
                     {{ depth3Menu.menuName }}
@@ -114,6 +117,7 @@
                   <a
                     v-if="!depth3Menu.hasRole"
                     href="javascript:;"
+                    :class="{ 'selected-menu__name': depth3Menu.menuUid === selectedGlobalMenuKey }"
                     style="color: #dedede;cursor: default;"
                   >
                     {{ depth3Menu.menuName }}
@@ -181,6 +185,8 @@ const currIdx = ref(0);
 const sortable = ref([]);
 const totalMenus = ref([]);
 const menus = getters['meta/getTotalMenus'];
+
+const selectedGlobalMenuKey = computed(() => getters['app/getSelectedGlobalMenuKey']);
 
 const isBookmarkedPage = computed(() => (
   (menuUid, pageId) => getters['meta/isBookmarked'](menuUid, pageId)
@@ -315,7 +321,7 @@ function makeScroll(navLinks) {
     btn.addEventListener('click', (evt) => {
       evt.preventDefault();
       gsap.to('.gnb_menu_mobile--ul-depth1', {
-        duration: 1,
+        duration: 0.5,
         scrollTo: { y: linkST.start, offsetY: 10 },
       });
     });
@@ -450,6 +456,13 @@ onMounted(() => {
     await fetchMenus();
     const navLinks = computed(() => gsap.utils.toArray('.mobile-menu__nav-item'));
     makeScroll(navLinks);
+    if (selectedGlobalMenuKey.value) {
+      // 선택된 메뉴 키 (현재 페이지의 키)가 있다면 해당 메뉴까지 스크롤한다.
+      gsap?.to('.gnb_menu_mobile--ul-depth1', {
+        duration: 0,
+        scrollTo: { y: `#menu__${selectedGlobalMenuKey.value}`, offsetY: 10 },
+      });
+    }
   }, 50);
 });
 

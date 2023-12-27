@@ -89,10 +89,19 @@
 
     li {
       line-height: 24px;
-      padding: 8px 0;
+      padding: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      &.selected-menu {
+        background: rgb(47 138 243 / 15%) !important;
+
+        a.selected-menu__name {
+          color: #2f8af3 !important;
+          font-weight: 700 !important;
+        }
+      }
 
       a {
         font-size: 14px;
