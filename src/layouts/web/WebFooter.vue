@@ -6,9 +6,9 @@
         alt="Kyowon logo"
       >
       <div>
-        <span>대표자 : 장평순</span>
+        <span>대표자 : {{ ceoName }}</span>
         <span>서울특별시 중구 을지로51(을지로2가6번지)</span>
-        <span>사업자등록번호 : 101-81-39767</span>
+        <span>사업자등록번호 : {{ regNumber }}</span>
         <span>통신판매업 신고 : 제 2016-서울중구-0988호</span>
         <br>
         <span>COPYRIGHT© KYOWON, ALL RIGHTS RESERVED.</span>
@@ -35,6 +35,7 @@
 <script>
 import consts from '../../consts';
 import { http } from '../../plugins/http';
+import env from '../../consts/private/env';
 
 export default {
   name: 'WebFooter',
@@ -44,6 +45,13 @@ export default {
     const showing = computed(() => currentRoute.value.name === consts.ROUTE_HOME_NAME);
     const quickLinks = ref([]);
     const selectedLink = ref(null);
+
+    const ceoName = ref('장평순');
+    const regNumber = ref('101-81-39767');
+    if (env.VITE_TENANT_ID === 'TNT_EDU') {
+      ceoName.value = '이진성';
+      regNumber.value = '496-86-02009';
+    }
 
     const res = await http.get('/sflex/common/common/quick-links');
     if (res) {
@@ -57,6 +65,8 @@ export default {
       quickLinks,
       goQuickLink,
       selectedLink,
+      ceoName,
+      regNumber,
     };
   },
 };
