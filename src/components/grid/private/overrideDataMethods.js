@@ -105,11 +105,17 @@ function setSearchConditionMessage(view) {
 
     // checkBox 인경우
     const checkboxes = formItem.querySelectorAll('.q-checkbox');
+    let oneCheckBoxValue = 'N';
     checkboxes.forEach((checkbox, i) => {
       if (checkbox.getAttribute('aria-checked') === 'true') {
+        oneCheckBoxValue = 'Y';
         if (i === 0) {
-          if (isEmpty(value)) value = checkbox.getAttribute('aria-label');
-          else value += ` | ${checkbox.getAttribute('aria-label')}`;
+          let checkboxLabel = checkbox.getAttribute('aria-label');
+          if (checkboxLabel === null) {
+            checkboxLabel = '';
+          }
+          if (isEmpty(value)) value = checkboxLabel;
+          else value += ` | ${checkboxLabel}`;
         } else {
           value += ` | ${checkbox.getAttribute('aria-label')}`;
         }
@@ -118,6 +124,10 @@ function setSearchConditionMessage(view) {
 
     // value가 없는경우 disable (혹은 readonly)된 콤보 필드일수도 있다.
     if (value === '') {
+      // 체크박스가 1개만 있고, label 이 없는 경우는 Y/N 으로 표시해준다.
+      if (checkboxes.length === 1) {
+        value += oneCheckBoxValue;
+      }
       let disableField = formItem.querySelector('.q-field--disabled');
       if (!disableField) disableField = formItem.querySelector('.q-field--readonly');
       if (disableField) {
