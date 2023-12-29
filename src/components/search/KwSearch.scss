@@ -137,6 +137,10 @@ body.mobile {
     &.kw-form {
       .kw-form-row {
         @include kw-row($-kw-search-row-height, $-kw-search-row-gap, $-kw-search-row-padding);
+
+        &.no-show {
+          display: none;
+        }
       }
 
       .kw-form-item {
@@ -169,6 +173,10 @@ body.mobile:not(.tablet) {
     &.kw-form {
       .kw-form-row {
         @include kw-row($-kw-search-row-height, $-kw-search-row-gap, $-kw-search-row-padding);
+
+        &.no-show {
+          display: none;
+        }
       }
 
       .kw-form-item {
