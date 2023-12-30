@@ -38,6 +38,16 @@ const dataDropOptionsLabelCallback = 'dataDropOptions._labelCallback';
 const dataDropOptionsDropCallback = 'dataDropOptions._callback';
 
 let isChecked = false;
+
+/*
+  그리드의 셀 내부 데이터가 < 나 > 가 들어가면, 이 값을 툴팁으로 표현할 때 HTML 태그로 인식해버리는 문제가 있다.
+  따라서 <, >를 escape 처리한다.
+  escape처리할 문자가 더 있으면 해당 return값에 .replace 방식으로 더 추가해주면 된다.
+*/
+function escapeString(val) {
+  return val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 /*
   데이터 셀의 툴팁이 표시되었음을 알리는 콜백
   */
@@ -99,7 +109,7 @@ export function overrideOnShowTooltip(view) {
       + `style="min-width: ${cell?.width >= 100 ? cell?.width : 100}px;`
       + `${cell?.width && textWidth > cell?.width ? 'max-width: 400px; word-wrap: break-word;' : ''}`
       + `padding-right: ${alignStyle === 'text-right' ? 19 : 12}px;">` // DIV 설정
-      + `<span class="rg-tooltip__custom__span" ${textWidth > cell?.width ? 'style="display: block; white-space: break-spaces;"' : ''}>${originalResult || value}</span>`
+      + `<span class="rg-tooltip__custom__span" ${textWidth > cell?.width ? 'style="display: block; white-space: break-spaces;"' : ''}>${escapeString(originalResult ?? value)}</span>`
       + '</div>';
     return sanitize(res);
   });
