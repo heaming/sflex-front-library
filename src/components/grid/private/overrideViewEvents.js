@@ -45,6 +45,7 @@ let isChecked = false;
   escape처리할 문자가 더 있으면 해당 return값에 .replace 방식으로 더 추가해주면 된다.
 */
 function escapeString(val) {
+  if (!val || val.trim().length <= 0) return '';
   return val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
