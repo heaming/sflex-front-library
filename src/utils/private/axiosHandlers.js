@@ -119,7 +119,7 @@ async function handleServerFailureSessionExpired(response) {
     }
     if (result.payload) {
       localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-      localStorage.remove('reLoginInfo');
+      // localStorage.remove('reLoginInfo');
       localStorage.remove('lastTransactionTime');
       localStorage.set(consts.LOCAL_STORAGE_ACCESS_TOKEN, result.payload);
       await store.dispatch('meta/changeAccessToken', result.payload);
