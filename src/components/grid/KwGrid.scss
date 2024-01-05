@@ -396,6 +396,8 @@
     text-decoration: underline;
     cursor: pointer;
     text-underline-offset: 3px;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   &.rg-button-disabled .rg-button-renderer-button {
