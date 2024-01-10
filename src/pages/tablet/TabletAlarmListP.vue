@@ -11,7 +11,7 @@
       item-padding
       clickable
       item-key="alarmId"
-      @click-item="readAlarm"
+      @click-item="(alarm) => readAlarm(alarm.value)"
     >
       <template #item="{ item }">
         <kw-item-section>
