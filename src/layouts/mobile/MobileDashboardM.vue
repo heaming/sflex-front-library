@@ -32,7 +32,7 @@
         >
           <component
             :is="userCard.component"
-            v-if="userCard.authYn === 'N'"
+            v-if="userCard.authYn === 'Y'"
           />
           <div
             v-else
