@@ -54,6 +54,11 @@ function escapeString(val) {
   */
 export function overrideOnShowTooltip(view) {
   wrapEvent(view, onShowTooltip, (g, index, value) => {
+    // tooltip 이 뜨기전 routing 이 되어버린 경우는 툴팁을 띄우지 않는다.
+    if (view === null) {
+      console.log('view is null... maybe already move page.');
+      return false;
+    }
     let originalResult;
     if (hasOriginal(g, onShowTooltip)) {
       originalResult = execOriginal(g, onShowTooltip, g, index, value);
