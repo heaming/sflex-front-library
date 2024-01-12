@@ -1,5 +1,6 @@
 <template>
   <q-tabs
+    v-if="rendered"
     :class="tabsClass"
     v-bind="styleProps"
     :model-value="modelValue"
@@ -153,12 +154,18 @@ export default {
       activeColor: props.activeColor ?? stylePreset.value?.activeColor,
     }));
 
+    const rendered = ref(false);
+    // kw-tab 관련, 퀘이사 콘솔오류 대처.
+    // kw-page-header와의 시점 차이로 발생하는 듯 함
+    setTimeout(() => { rendered.value = true; }, 0);
+
     return {
       tabsClass,
       computedDense,
       computedContentClass,
       computedActiveClass,
       styleProps,
+      rendered,
     };
   },
 };

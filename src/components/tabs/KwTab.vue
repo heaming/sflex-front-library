@@ -1,5 +1,6 @@
 <template>
   <q-tab
+    v-if="rendered"
     v-bind="styleClassAttrs"
     :class="tabClass"
     :content-class="computedContentClass"
@@ -77,10 +78,16 @@ export default {
       return classes;
     });
 
+    const rendered = ref(false);
+    // kw-tab 관련, 퀘이사 콘솔오류 대처.
+    // kw-page-header와의 시점 차이로 발생하는 듯 함
+    setTimeout(() => { rendered.value = true; }, 0);
+
     return {
       ...useInheritAttrs(),
       tabClass,
       computedContentClass,
+      rendered,
     };
   },
 };

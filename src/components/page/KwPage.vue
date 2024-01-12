@@ -4,7 +4,7 @@
     :style-fn="styleFn"
   >
     <slot
-      v-if="!noHeader && rendered"
+      v-if="!noHeader"
       name="header"
     >
       <kw-page-header
@@ -110,7 +110,6 @@ export default {
   emits: ['slot-re-render'],
   setup(props, { emit }) {
     const pageCtx = usePage();
-    const rendered = ref(false);
     usePageSearch();
     usePageUniqueId();
 
@@ -133,17 +132,12 @@ export default {
       }, 150);
     }
 
-    // kw-tab 관련, 퀘이사 콘솔오류 대처.
-    // kw-page-header와의 시점 차이로 발생하는 듯 함
-    setTimeout(() => { rendered.value = true; }, 0);
-
     return {
       ...useObserver(),
       ...useInfiniteScroll(),
       styleFn,
       pageCtx,
       reloadPage,
-      rendered,
     };
   },
 };
