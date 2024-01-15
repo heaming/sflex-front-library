@@ -376,6 +376,13 @@ export function confirmIfIsModified(view, message) {
   return !isModified(view) || confirm(message || i18n.t('MSG_ALT_CHG_CNTN'));
 }
 
+export function resetAllFilters(view) {
+  const columns = view?.getColumns();
+  columns?.forEach((x) => {
+    view?.activateAllColumnFilters(x, false);
+  });
+}
+
 /*
   Validation
  */
