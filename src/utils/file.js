@@ -65,13 +65,19 @@ export async function upload(file, targetPath = targetPaths[0]) {
   return normalizeUploadResponse(response.data);
 }
 
-export async function getImageSrcFromFile(fileUid) {
+export async function getImageSrcFromFile(fileUid, silent = false) {
   const params = normalizeDownloadRequest({ fileUid });
-
+  let isError = false;
   const response = await http.get('/sflex/common/common/file/storage/download', {
     params,
     responseType: 'blob',
+    silent,
+  }).catch(() => {
+    isError = true;
   });
+
+  if (isError) return false;
+
   const imageBlob = new Blob([response.data], { type: 'image/png' });
   const reader = new FileReader();
   return new Promise((resolve) => {

@@ -55,7 +55,9 @@
 
 <script>
 import Viewer from 'viewerjs';
+import dummyImg from '~@assets/images/img_dummy.png';
 import { getImageSrcFromFile } from '../../utils/file';
+import useGlobal from '../../composables/useGlobal';
 
 export default {
   name: 'KwImagePreview',
@@ -68,12 +70,19 @@ export default {
     const viewer = ref();
     const imgs = ref([]);
     const showTooltip = ref(false);
+    const errorImgCnt = ref(0);
+    const { alert } = useGlobal();
     async function initImages() {
+      errorImgCnt.value = 0;
       const promises = props.images.map(async (image) => {
         const temp = {};
         if (image.fileUid) {
           temp.file = image;
-          temp.src = await getImageSrcFromFile(image.fileUid);
+          const res = await getImageSrcFromFile(image.fileUid, true);
+          if (res === false) {
+            errorImgCnt.value++;
+            temp.src = dummyImg;
+          } else temp.src = res;
         } else {
           temp.file = image;
           temp.src = URL.createObjectURL(image.file.nativeFile);
@@ -85,6 +94,10 @@ export default {
 
       const tempIdx = props.images.map((image) => image.fileUid);
       imgs.value.sort((a, b) => tempIdx.indexOf(a.file.fileUid) - tempIdx.indexOf(b.file.fileUid));
+
+      if (errorImgCnt.value > 0) {
+        alert('일부 파일이 존재하지 않아,\n기본 이미지 파일로 대체되었습니다.');
+      }
     }
 
     function rotateImage(number) {
