@@ -55,7 +55,7 @@
 
 <script>
 import Viewer from 'viewerjs';
-import dummyImg from '~@assets/images/img_dummy.png';
+import dummyImg from './img_dummy.png';
 import { getImageSrcFromFile } from '../../utils/file';
 import useGlobal from '../../composables/useGlobal';
 
