@@ -247,8 +247,8 @@ export function deleteSelectedRows(view, isIncludeCreated = false) {
   const deletedRowValues = getRowValues(view, selectedRows)
     .filter((v) => isIncludeCreated || v.rowState !== RowState.CREATED);
 
-  view.getDataSource().removeRows(selectedRows);
   view.checkRows(selectedRows, false);
+  view.getDataSource().removeRows(selectedRows);
   return deletedRowValues;
 }
 
