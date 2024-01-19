@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 import { AxiosError } from 'axios';
 import { omitBy, isNil } from 'lodash-es';
 import dayjs from 'dayjs';
@@ -92,6 +93,20 @@ async function handleServerFailureSessionExpired(response) {
 
   const now = dayjs();
   const reLoginInfoStr = localStorage.getItem('reLoginInfo');
+
+  const iv = CryptoJS.enc.Hex.parse('');
+  const key = CryptoJS.enc.Utf8.parse(consts.CRYPT_AES_ENC_KEY);
+  const byte = CryptoJS.AES.decrypt(reLoginInfoStr, key, { iv });
+
+  const decStr = byte.toString(CryptoJS.enc.Utf8);
+  const arr = decStr.split('|');
+
+  // anonymous 로그인일 경우는 메일페이지 (csed 등인 경우는 CustDomainError 로 )로 보낸다.
+  if (arr[2] === 'anonymous') {
+    localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
+    window.location.href = window.location.origin;
+  }
+
   const lastTransactionTimeStr = localStorage.getItem('lastTransactionTime');
   const lastTransactionTime = dayjs(lastTransactionTimeStr, 'YYYYMMDDHHmmss');
   const diff = now.diff(lastTransactionTime, 'h', true);

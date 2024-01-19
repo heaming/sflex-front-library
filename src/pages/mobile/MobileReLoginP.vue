@@ -57,11 +57,6 @@ const byte = CryptoJS.AES.decrypt(reLoginInfo, key, { iv });
 
 const decStr = byte.toString(CryptoJS.enc.Utf8);
 const arr = decStr.split('|');
-
-if (arr[2] === 'anonymous') {
-  localStorage.remove(consts.LOCAL_STORAGE_ACCESS_TOKEN);
-  window.location.href = window.location.origin;
-}
 const userInfo = {
   tenantId: arr[0],
   portalId: arr[1],
