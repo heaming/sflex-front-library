@@ -16,7 +16,7 @@
 //
 </script>
 
-<style>
+<style lang="scss" scoped>
 @media screen and (max-width: 500px) {
   .text-h2 {
     font-size: 1.5rem !important;
