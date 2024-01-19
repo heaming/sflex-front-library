@@ -15,3 +15,15 @@
 <script setup>
 //
 </script>
+
+<style>
+@media screen and (max-width: 500px) {
+  .text-h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .text-h3 {
+    font-size: 1rem !important;
+  }
+}
+</style>
