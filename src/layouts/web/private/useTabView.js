@@ -62,13 +62,14 @@ export default () => {
 
   function add(to) {
     const {
-      name, meta, matched, params,
+      name, meta, matched, params, path,
     } = to;
 
     Object.assign(params, Object.freeze(router.options?.history?.state?.stateParam));
 
     const index = tabViews.value.push({
       key: name,
+      path,
       label: meta.menuName,
       parentsKey: meta.pageUseCode === 'S' ? meta.parentsMenuUid : false,
       component: last(matched).components.default,
@@ -336,6 +337,16 @@ export default () => {
       await select(key);
     }
   }
+
+  router.closeTab = async (path) => {
+    const menuKey = find(tabViews.value, { path })?.key;
+    if (menuKey) {
+      const children = getChildren(menuKey);
+      children.forEach(async (child) => {
+        await close(child.key, true, true, tabViews.value.length < 1);
+      });
+    }
+  };
 
   async function onClose(key) {
     const children = getChildren(key);
