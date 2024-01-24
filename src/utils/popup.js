@@ -106,9 +106,10 @@ function close(result, payload, forceClose = true) {
   const pid = new URLSearchParams(window.location.search).get('pid');
   const isExternallyAccessible = store.getters['meta/getPage'](name)?.pageExtAccYn === 'Y';
   const targetOrigin = isExternallyAccessible ? '*' : undefined;
+  const shouldPostMessage = true;
 
   window.opener?.postMessage({
-    pid, result, payload,
+    pid, result, payload, shouldPostMessage,
   }, targetOrigin);
 
   if (forceClose) {
