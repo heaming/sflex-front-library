@@ -102,11 +102,10 @@ function parseFeatures(windowFeatures) {
   return parsedFeatures;
 }
 
-function close(result, payload, forceClose = true) {
+function close(result, payload, forceClose = true, shouldPostMessage = false) {
   const pid = new URLSearchParams(window.location.search).get('pid');
   const isExternallyAccessible = store.getters['meta/getPage'](name)?.pageExtAccYn === 'Y';
   const targetOrigin = isExternallyAccessible ? '*' : undefined;
-  const shouldPostMessage = true;
 
   window.opener?.postMessage({
     pid, result, payload, shouldPostMessage,
@@ -227,9 +226,9 @@ export async function open(url, windowFeatures, params = null, windowKey = null)
 }
 
 export function ok(payload) {
-  close(true, payload);
+  close(true, payload, true, true);
 }
 
 export function cancel(payload) {
-  close(false, payload);
+  close(false, payload, true, false);
 }
