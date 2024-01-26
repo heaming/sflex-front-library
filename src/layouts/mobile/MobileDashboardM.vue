@@ -35,7 +35,9 @@
           />
         </div>
       </template>
+      <!-- 수수료는 나중에 개발예정 -->
       <div
+        v-if="false"
         class="mobile-home-bottom-sheet"
         :class="{active : bottomActive === true}"
       >
@@ -63,7 +65,9 @@
           여기는 내용<br>여기는 내용<br>여기는 내용<br>여기는 내용<br>
         </div>
       </div>
+      <!-- 수수료는 나중에 개발예정 -->
       <div
+        v-if="false"
         class="mobile-home-bottom-sheet--dimmed"
         :class="{active : bottomActive === true}"
         @click="bottomActive = !bottomActive"
@@ -88,6 +92,9 @@ const props = defineProps({
 
 const { getUserInfo } = useMeta();
 const userInfo = computed(() => cloneDeep(getUserInfo()));
+
+// const isWellsManager = computed(() => userInf
+// o?.value?.tenantId === 'TNT_WELLS' && userInfo?.value?.hcdCd === 'HW200');
 
 const userCards = shallowRef([]);
 async function fetchUserCards() {
