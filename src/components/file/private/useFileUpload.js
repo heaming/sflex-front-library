@@ -31,7 +31,7 @@ const IMAGE_EXTENSION = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
 const privateKeyField = Symbol('FILE_LIKE_KEY');
 
 export const generateFileLikeKey = (fileLike) => {
-  if (Object.hasOwn(fileLike, privateKeyField)) { return fileLike[privateKeyField]; }
+  if (Object.prototype.hasOwnProperty.call(fileLike, privateKeyField)) { return fileLike[privateKeyField]; }
   const isNative = fileLike instanceof File;
   return (isNative
     ? fileLike.webkitRelativePath + (fileLike.lastModified || new Date().getTime()) + fileLike.name + fileLike.size
@@ -51,7 +51,7 @@ const removeDuplicate = (fileLikes) => {
 };
 
 const normalizeFileLike = (fileLike = {}) => {
-  if (Object.hasOwn(fileLike, privateKeyField)) {
+  if (Object.prototype.hasOwnProperty.call(fileLike, privateKeyField)) {
     return fileLike;
   }
   if (fileLike instanceof File) {

@@ -122,6 +122,7 @@ export default {
         toggleOnDblclick: false,
         slideOnTouch: false,
         initialCoverage: 1,
+        className: 'mt40',
       });
 
       viewer?.value?.show();
