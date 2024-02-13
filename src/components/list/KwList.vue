@@ -67,6 +67,7 @@
           :disable="disable"
           :dense="dense"
           :group="group"
+          :default-opened="defaultOpened"
           :padding-target="paddingTarget"
           :expand-icon-class="computedExpandIconClass"
           :expand-icon="computedExpandIcon"
@@ -299,6 +300,7 @@ export default {
     dialogTitle: { type: String, default: undefined },
     dialogOptionLabel: { type: String, default: 'label' },
     dialogOptionValue: { type: String, default: 'value' },
+    defaultOpened: { type: Boolean, default: false },
   },
   emits: ['update:selected', 'click-item', 'click-option'],
   setup(props, {
