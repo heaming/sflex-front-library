@@ -635,7 +635,7 @@ export async function exportBulkView(view, options = null) {
   options.fileName ??= 'excel_' + date.formatDate(new Date(), 'YYYYMMDDHHmmss');
   options.noRowNumber ??= 'N';
   const { data } = await http.post(options.url, options, {
-    timeout: 10 * 60 * 1000,
+    timeout: (typeof options.timeout === 'number' && options.timeout >= 0) ? options.timeout : 10 * 60 * 1000,
     responseType: 'blob',
   });
 
@@ -662,7 +662,7 @@ export async function exportBulkViewByCsv(view, options = null) {
   options.fileName ??= 'csv_' + date.formatDate(new Date(), 'YYYYMMDDHHmmss');
   options.noRowNumber ??= 'N';
   const { data } = await http.post(options.url, options, {
-    timeout: 10 * 60 * 1000,
+    timeout: (typeof options.timeout === 'number' && options.timeout >= 0) ? options.timeout : 10 * 60 * 1000,
     responseType: 'blob',
   });
 
