@@ -335,7 +335,7 @@ export default {
       inputRef.value.updateInputValue(val, noFilter);
     }
 
-    const computedUseInput = computed(() => props.useInput && !props.multiple);
+    const computedUseInput = computed(() => props.useInput);
 
     const computedBehavior = computed(() => {
       if (props.behavior) return props.behavior;
